@@ -115,5 +115,4 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-grails.assets.excludes = ["mixins/*.scss"]
+grails.resources.resourceLocatorEnabled = false

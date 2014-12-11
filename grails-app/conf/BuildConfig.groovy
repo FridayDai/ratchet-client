@@ -14,7 +14,8 @@ grails.project.fork = [
     // configure settings for the test-app JVM, uses the daemon by default
     test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
     // configure settings for the run-app JVM
-    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+//    run: false,
+//    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the run-war JVM
     war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the Console UI JVM
@@ -52,7 +53,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
-        compile 'org.jruby:jruby-complete:1.7.11'
+//        compile 'org.jruby:jruby-complete:1.7.11'
     }
 
     plugins {
@@ -64,12 +65,14 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
         compile ':cdn-asset-pipeline:0.3.5'
-
+//        compile ":sass-asset-pipeline:1.9.2"
         compile ":rest-client-builder:1.0.3"
+        compile ":compass-sass:0.7"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
-        runtime ":jquery:1.11.1"
+        runtime ':resources:1.2.13'
+        //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
