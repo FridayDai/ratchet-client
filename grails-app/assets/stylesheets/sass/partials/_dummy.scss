@@ -1,0 +1,15 @@
+h1 {
+  text-align: center;
+}
+
+.logout {
+  text-align: center;
+
+  .btn_logout {
+    display: block;
+    border: 1px solid;
+    width: 100px;
+    text-decoration: none;
+    margin-left: 45%;
+  }
+}
