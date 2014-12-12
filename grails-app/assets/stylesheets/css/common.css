@@ -1,4 +1,2 @@
-/* line 1, ../sass/pages/_login.scss */
-p { font-size: 12px; font-family: "andale mono", "lucida console", monospace; font-weight: 200; }
-/* line 5, ../sass/pages/_home.scss */
-p a { font-weight: 300; font-style: inherit; }
+/* line 24, ../sass/partials/_base.scss */
+a { font-size: 12px; }
