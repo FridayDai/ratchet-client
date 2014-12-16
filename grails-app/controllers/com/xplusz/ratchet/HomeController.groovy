@@ -1,7 +1,8 @@
 package com.xplusz.ratchet
 
-class HomeController {
+class HomeController extends AbstractController {
 
+    def beforeInterceptor = [action: this.&auth]
     def index() {
         render view: '/pages/home'
     }
