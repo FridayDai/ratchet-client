@@ -1,13 +1,30 @@
 class UrlMappings {
 
 	static mappings = {
+        "/"(controller: "authentication", action: "index")
+        "/login"(view:'/pages/login')
+        "/home"(controller: 'home', action: 'index')
+
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
             }
         }
 
-        "/"(controller: "login", action: "login")
+        "/auth"(controller: "authentication") {
+            action = [POST: 'login']
+        }
+
+        "/logout"(controller: "authentication") {
+            action = [GET: 'logout']
+        }
+
+        "/"(controller: "index", action: "index")
+
+//
+//        "/health_check"(controller: "health")
+
+//        "/"(view:"/pages/login")
         "500"(view:'/pages/error')
 	}
 }

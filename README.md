@@ -25,7 +25,7 @@ ratchet-v2-provider-desktop
        echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
        source ~/.bash_profile
 
-       # Install Ruby 2.1.3 and set it as the default version
+       # Install JRuby 1.7.9 and set it as the default version
        rbenv install jruby 1.7.9
        rbenv global jruby 1.7.9
 

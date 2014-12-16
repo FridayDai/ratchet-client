@@ -1,9 +1,17 @@
-p{
-  font-size: 12px;
-  font-family: "andale mono", "lucida console", monospace;
-  font-weight: 200;
-  a{
-    font-weight: 300;
-    font-style: inherit;
+.home{
+  padding-top: 50px;
+  .welcome_title{
+    text-align: center;
+  }
+  .logout {
+    padding-top: 10px;
+    text-align: center;
+    .btn_logout {
+      display: block;
+      border: 1px solid;
+      width: 100px;
+      text-decoration: none;
+      margin-left: 45%;
+    }
   }
 }

@@ -17,9 +17,14 @@
 
     <h1>This is Login Page</h1>
 
-    <g:form class="form">
+    <g:form class="form" controller="authentication">
         <div class="login">
-            <input name="email" type="text" class="form-control" placeholder="Email"/>
+            <g:if test="${errorMessage}">
+                <p>${errorMessage}</p>
+            </g:if>
+        </div>
+        <div class="login">
+            <input name="username" type="text" class="form-control" placeholder="Username"/>
         </div>
 
         <div class="login">
@@ -27,7 +32,7 @@
         </div>
 
         <div class="login">
-            <g:actionSubmit class="btn_submit" id='btn_login' value="Log In" action="logout"/>
+            <g:actionSubmit class="btn_submit" id='btn_login' value="Log In" action="login"/>
         </div>
     </g:form>
 

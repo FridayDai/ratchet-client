@@ -1,4 +1,8 @@
 /* line 1, ../../sass/partials/_home.scss */
-p { font-size: 12px; font-family: "andale mono", "lucida console", monospace; font-weight: 200; }
-/* line 5, ../../sass/partials/_home.scss */
-p a { font-weight: 300; font-style: inherit; }
+.home { padding-top: 50px; }
+/* line 3, ../../sass/partials/_home.scss */
+.home .welcome_title { text-align: center; }
+/* line 6, ../../sass/partials/_home.scss */
+.home .logout { padding-top: 10px; text-align: center; }
+/* line 9, ../../sass/partials/_home.scss */
+.home .logout .btn_logout { display: block; border: 1px solid; width: 100px; text-decoration: none; margin-left: 45%; }

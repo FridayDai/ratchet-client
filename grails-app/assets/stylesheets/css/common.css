@@ -1,2 +1,30 @@
-/* line 24, ../sass/partials/_base.scss */
-a { font-size: 12px; }
+/* line 5, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font: inherit; font-size: 100%; vertical-align: baseline; }
+
+/* line 22, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html { line-height: 1; }
+
+/* line 24, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+ol, ul { list-style: none; }
+
+/* line 26, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* line 28, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; }
+
+/* line 30, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q, blockquote { quotes: none; }
+/* line 103, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after { content: ""; content: none; }
+
+/* line 32, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+a img { border: none; }
+
+/* line 116, ../../../../../../.rbenv/versions/jruby-1.7.9/lib/ruby/gems/shared/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary { display: block; }
+
+/* line 27, ../sass/partials/_base.scss */
+html, body { min-width: 320px; font: 14px "sans-serif"; letter-spacing: .5px; }
+/* line 31, ../sass/partials/_base.scss */
+html ::selection, body ::selection { color: white; background: #a9a9a9; }

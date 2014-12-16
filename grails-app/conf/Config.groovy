@@ -116,3 +116,9 @@ log4j.main = {
            'net.sf.ehcache.hibernate'
 }
 grails.resources.resourceLocatorEnabled = false
+grails.plugin.cookiesession.enabled = true
+grails.plugin.cookiesession.id = "ratchet-session"
+grails.plugin.cookiesession.timeout = 60
+grails.plugin.cookiesession.hmac.id = "grails-session-hmac"
+grails.plugin.cookiesession.hmac.algorithm = "HmacSHA1"
+grails.plugin.cookiesession.hmac.secret = "ratchetByXplusz".bytes.encodeBase64(false).toString()
