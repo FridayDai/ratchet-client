@@ -22,7 +22,14 @@ $fixed-line-height: $base-line-height;
 $header-font-weight: $bold;
 
 // Colors
-$base-color-lightGrey: #a9a9a9;
+$base-color-lightGrey: #F2F2F2;
+$base-color-midGrey: #808080;
+$base-color-darkGrey: #333333;
+
+$base-color-lightBlue: #7FC7D1;
+$base-color-midBlue: #47B1C1;
+$base-color-darkBlue: #08567F;
+
 
 html, body {
   min-width: 320px;
@@ -30,6 +37,6 @@ html, body {
   letter-spacing: .5px;
   ::selection {
     color: white;
-    background: $base-color-lightGrey;
+    background: $base-color-midBlue;
   }
 }

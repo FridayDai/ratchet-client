@@ -48,7 +48,7 @@ class AuthenticationController extends AbstractController {
                 render(view: '/pages/login', model: [errorMsg: resp.errorMessage])
             }
         }else{
-            def errorMessage = "please input your username and password"
+            def errorMessage = message(code:"security.errors.login.missParams")
             render(view: '/pages/login', model: [errorMsg: errorMessage])
         }
     }

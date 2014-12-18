@@ -15,8 +15,6 @@
 
     <body>
 
-    <h1>This is Login Page</h1>
-
     <g:form class="form" controller="authentication" method="post" action="login">
         <div class="login">
             <g:if test="${errorMsg}">

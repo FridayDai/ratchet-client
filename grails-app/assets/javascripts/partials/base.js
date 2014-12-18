@@ -5,18 +5,26 @@
 (function ($, undefined) {
     'use strict';
     var RC = window.RC = window.RC || {};
-    $.extend(RC, {
-        windowWidth: $(window).width(),
-        windowHeight: $(window).height(),
-        documentWidth: $(document).width(),
-        documentHeight: $(document).height()
-    });
+
+    function getWindowSize() {
+        var windowEI = $(window),
+            documentEI = $(document);
+        return {
+            windowWidth: windowEI.width(),
+            windowHeight: windowEI.height(),
+            documentWidth: documentEI.width(),
+            documentHeight: documentEI.height()
+        }
+    }
+
+    // Set window and document width and height in RC namespace.
+    $.extend(RC, getWindowSize());
+
     $(window).on('resize', function () {
-        RC.windowWidth = $(window).width();
-        RC.windowHeight = $(window).height();
-        RC.documentWidth = $(document).width();
-        RC.documentHeight = $(document).height();
+        // Set window and document width and height in RC namespace when window resize.
+        $.extend(RC, getWindowSize());
     });
+
     var share = {
         /**
          * share data api
