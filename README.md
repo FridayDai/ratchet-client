@@ -51,7 +51,8 @@ ratchet-v2-provider-desktop
 ## Run
  - Start
     ```bash
-       $ gvm install grails
+       bower install
+       gvm install grails
     ```
         
 

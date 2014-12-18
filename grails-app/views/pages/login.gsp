@@ -17,10 +17,10 @@
 
     <h1>This is Login Page</h1>
 
-    <g:form class="form" controller="authentication">
+    <g:form class="form" controller="authentication" method="post" action="login">
         <div class="login">
-            <g:if test="${errorMessage}">
-                <p>${errorMessage}</p>
+            <g:if test="${errorMsg}">
+                <p>${errorMsg}</p>
             </g:if>
         </div>
         <div class="login">
@@ -32,7 +32,7 @@
         </div>
 
         <div class="login">
-            <g:actionSubmit class="btn_submit" id='btn_login' value="Log In" action="login"/>
+            <input type="submit" class="btn_submit" id='btn_login' value="Log In" >
         </div>
     </g:form>
 
