@@ -50,9 +50,9 @@ ratchet-v2-provider-desktop
  
 ## Run
  - Start
-    ```bash
-       bower install
-       gvm install grails
-    ```
+ ```bash
+    bower install
+    gvm install grails
+ ```
         
 
