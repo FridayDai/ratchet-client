@@ -7,9 +7,9 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
+if (System.properties["${appName}.config.location"]) {
+    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
+}
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
@@ -123,6 +123,12 @@ grails.plugin.cookiesession.hmac.id = "grails-session-hmac"
 grails.plugin.cookiesession.hmac.algorithm = "HmacSHA1"
 grails.plugin.cookiesession.hmac.secret = "ratchetByXplusz".bytes.encodeBase64(false).toString()
 
-ratchetv2.server.base.url = "http://localhost:8090"
-ratchetv2.server.login.url = "${ratchetv2.server.base.url}/login"
-ratchetv2.server.logout.url = "${ratchetv2.server.base.url}/logout"
+// locations to search for config files that get merged into the main config;
+// config files can be ConfigSlurper scripts, Java properties files, or classes
+// in the classpath in ConfigSlurper format
+String defaultOverrideLocation = "classpath:resources/noredist/override.properties"
+String systemOverrideLocation = System.getProperty("override")
+String overrideLocation = systemOverrideLocation ? "file:${systemOverrideLocation}" : defaultOverrideLocation
+grails.config.locations = [
+        overrideLocation
+]
