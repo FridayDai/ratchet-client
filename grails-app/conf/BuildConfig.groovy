@@ -3,8 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-grails.project.target.level = 1.6
-grails.project.source.level = 1.6
+grails.project.target.level = 1.8
+grails.project.source.level = 1.8
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -53,6 +53,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+        compile "com.mashape.unirest:unirest-java:1.3.27"
 //        compile 'org.jruby:jruby-complete:1.7.11'
     }
 
@@ -63,15 +64,16 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
-        compile ":asset-pipeline:1.9.9"
-        compile ':cdn-asset-pipeline:0.3.5'
+        compile ':asset-pipeline:1.9.4'
+        compile ":cdn-asset-pipeline:0.2.2"
 //        compile ":sass-asset-pipeline:1.9.2"
-        compile ":rest-client-builder:1.0.3"
+//        compile ":rest-client-builder:1.0.3"
         compile ":compass-sass:0.7"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ':resources:1.2.13'
+        compile ":cookie-session:0.1.2"
         //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities

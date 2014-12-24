@@ -1,0 +1,17 @@
+.home {
+  padding-top: 50px;
+  .welcome_title {
+    text-align: center;
+  }
+  .logout {
+    padding-top: 10px;
+    text-align: center;
+    .btn_logout {
+      display: block;
+      border: 1px solid;
+      width: 100px;
+      text-decoration: none;
+      margin-left: 45%;
+    }
+  }
+}
