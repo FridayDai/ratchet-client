@@ -35,3 +35,5 @@
 /wrapper
 .DS_Store
 .sass-cache
+grails-app/assets/javascripts/libs
+grails-app/assets/stylesheets/css

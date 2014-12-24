@@ -2,16 +2,16 @@
 @import "compass/layout";
 @import "compass/utilities";
 @import "compass/typography";
+@import "compass/reset";
+
 // Font weights
 $light: 100;
 $regular: 400;
 $bold: 600;
 
 // Base Font
-$base-font-family: sans-serif;
-$base-font-weight: $regular;
-$base-font-size: 13px;
 $base-line-height: 1.4;
+$base-font-utility: 14px "sans-serif";
 
 // Fixed Font
 $fixed-font-family: monospace;
@@ -21,6 +21,22 @@ $fixed-line-height: $base-line-height;
 // Headings
 $header-font-weight: $bold;
 
-a{
-  font-size: 12px;
+// Colors
+$base-color-lightGrey: #F2F2F2;
+$base-color-midGrey: #808080;
+$base-color-darkGrey: #333333;
+
+$base-color-lightBlue: #7FC7D1;
+$base-color-midBlue: #47B1C1;
+$base-color-darkBlue: #08567F;
+
+
+html, body {
+  min-width: 320px;
+  font: $base-font-utility;
+  letter-spacing: .5px;
+  ::selection {
+    color: white;
+    background: $base-color-midBlue;
+  }
 }

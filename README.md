@@ -2,25 +2,47 @@ ratchet-v2-provider-desktop
 ===========================
 ## Dependencies
 
- 1. JDK 1.7+
- 2. Grails 2.4.4
+1. Install **JDK1.8**
 
-  - Install **gvm**  Go to [gvm home page](http://gvmtool.net/)
-  - Install **grails**
-    ```bash
-       $ gvm install grails
+2. Install **gvm**
+
+	```
+    curl -s get.gvmtool.net | bash
     ```
- 3. Install Homebrew
- 
-    - Open Terminal and run the following command:
-    ```bash
-       ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'
+3. Install **grails**
+
+	```
+	gvm install grails 2.4.4
+	```
+
+
+## Compass Optional
+
+#### (You should choose one of them)
+
+1. Install **compass-sass plugin** (**option one**)
+
+	- Add plugins in buildConfig.groovy(**Already add**)
+
+	```
+   		compile ":compass-sass:0.7"
+        runtime ":resources:1.2.13"
     ```
- 4. Install Ruby 
-    
-   - Now that we have Homebrew installed, we can use it to install Ruby.We're going to use rbenv to install and manage our Ruby versions.To do this, run the following commands in your Terminal:
-    ```bash
+
+	- Install **Homebrew**
+
+    ```
+    ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'
+    ```
+	- Install **Ruby**
+
+  		 - Now that we have Homebrew installed, we can use it to install Ruby.
+   		 We're going to use rbenv to install and manage our Ruby versions.
+   		 To do this, run the following commands in your Terminal:
+
+    ```
        brew install rbenv ruby-build
+
        # Add rbenv to bash so that it loads every time you open a terminal
        echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
        source ~/.bash_profile
@@ -30,28 +52,63 @@ ratchet-v2-provider-desktop
        rbenv global jruby 1.7.9
 
        ruby -v
-       # jruby 1.7.9
+       # jruby-1.7.9
     ```
- 5. Install Compass
-   - After that, we can install compass.
-   ```bash
-      gem update --system
-      gem install compass
+	 - Install **Compass**
+
    ```
- 6. Setup JRuby Path
-   - Setting up the ruby environment for compass-sass plugin
-   ```bash
+   		gem update --system
+   		gem install compass
+   ```
+
+	- Setup **JRuby** Path
+  		 - Set up the ruby environment for compass-sass plugin
+
+  	 ```
       cd /etc
       sudo vim launchd.conf
       # added the following line to it
-      setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin: your JRuby path
+      setenv PATH /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:your-JRuby-Path
       # restarted your machine so that the new launchd config would take effect
-   ```
- 
-## Run
- - Start
-    ```bash
-       $ gvm install grails
-    ```
-        
+  	 ```
 
+2. Not Install **compass-sass plugin** (**option two**)
+
+	- remove plugins in buildConfig.groovy
+
+	```
+   		//compile ":compass-sass:0.7"
+        //runtime ":resources:1.2.13"
+    ```
+
+     - Install **Compass**
+
+   ```
+   		gem update --system
+   		gem install compass
+   ```
+
+
+## Synchronize Grails Settings
+
+
+1. If you **use jRuby**
+
+	```
+        bower install
+        grails run-app
+    ```
+
+
+2. If you **don't use jRuby**
+
+
+	```
+        cd /ratchet-v2-admin-portal/grails-app/assets/stylesheets
+        compass watch
+    ```
+
+	```
+        bower install
+        grails run-app
+    ```

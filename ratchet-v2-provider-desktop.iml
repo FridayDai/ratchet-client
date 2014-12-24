@@ -58,21 +58,6 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="hibernate" name="Hibernate2">
-      <configuration>
-        <datasource-map />
-        <naming-strategy-map />
-        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/target/work/plugins/hibernate4-4.3.6.1/src/java/hibernate.cfg.xml" />
-        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/target/work/resources/hibernate.cfg.xml" />
-      </configuration>
-    </facet>
-    <facet type="Spring" name="Spring2">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/web-app/WEB-INF/applicationContext.xml</file>
-        </fileset>
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -80,13 +65,13 @@
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/taglib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/grails-app/utils" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-build-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-classes" />
@@ -130,16 +115,19 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-el/7.0.55/tomcat-embed-el-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-jasper/7.0.55/tomcat-embed-jasper-7.0.55.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/tomcat-catalina-ant/7.0.55/tomcat-catalina-ant-7.0.55.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.2/httpcore-4.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/bertramlabs/plugins/karman-aws-groovy/0.4.0/karman-aws-groovy-0.4.0.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/bertramlabs/plugins/karman-core/0.5.1/karman-core-0.5.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.6/joda-time-2.6.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.1.1/jackson-annotations-2.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.1.1/jackson-databind-2.1.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.1.1/jackson-core-2.1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.2/httpclient-4.2.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk/1.7.7/aws-java-sdk-1.7.7.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk/1.7.1/aws-java-sdk-1.7.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/json/json/20140107/json-20140107.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpmime/4.3.6/httpmime-4.3.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore-nio/4.3.2/httpcore-nio-4.3.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpasyncclient/4.0.2/httpasyncclient-4.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.3.3/httpcore-4.3.3.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.3.6/httpclient-4.3.6.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/mashape/unirest/unirest-java/1.3.27/unirest-java-1.3.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
