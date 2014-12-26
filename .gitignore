@@ -27,6 +27,8 @@
 # "temporary" build files
 /target
 
+# node module
+/node_modules
 
 .idea/
 *.iml
