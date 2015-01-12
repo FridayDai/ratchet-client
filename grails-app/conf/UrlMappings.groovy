@@ -1,43 +1,24 @@
 class UrlMappings {
 
-	static mappings = {
-//        "/"(controller: "authentication", action: "index")
-//        "/login"(view:'/pages/login')
-//        "/home"(controller: 'home', action: 'index')
-//
-//        "/$controller/$action?/$id?(.$format)?"{
-//            constraints {
-//                // apply constraints here
-//            }
-//        }
-//
-//        "/auth"(controller: "authentication") {
-//            action = [POST: 'login']
-//        }
-//
-//        "/logout"(controller: "authentication") {
-//            action = [GET: 'logout']
-//        }
-//
-//        "/"(controller: "index", action: "index")
-//
-////
-////        "/health_check"(controller: "health")
-//
-////        "/"(view:"/pages/login")
-//        "500"(view:'/pages/error')
-        "/$controller/$action?/$id?(.$format)?"{
+    static mappings = {
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
         }
 
         "/"(controller: "home", action: "index")
-
         "/login"(controller: "authentication", action: "login")
-        "/logout"(controller: "authentication",action: 'logout')
+        "/logout"(controller: "authentication", action: 'logout')
+        "/providers"(controller: "providers", action: "index")
+        "/getProvider"(controller: "home", action: "getProvider")
+        "/tools"(controller: "tools", action: "index")
+        "/practice"(controller: "practice", action: "index")
+        "/treatments"(controller: "treatments", action: "index")
+        "/library"(controller: "library", action: "index")
+        "/accounts"(controller: "accounts", action: "index")
+        "500"(view: '/pages/error')
 
-
-        "500"(view:'/pages/error')
-	}
+        "/providers/detail"(controller: "providers",action: "detail")
+    }
 }

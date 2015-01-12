@@ -1,0 +1,79 @@
+.ui-size {
+    padding-top: 10px;
+    width: 450px !important;
+}
+
+.ui-widget-header {
+    padding: 20px 0 0 30px;
+
+    .ui-dialog-title {
+        font-weight: bolder;
+    }
+}
+
+//.ui-dialog {
+//    background: #ffffff;
+//}
+
+.ui-dialog-content {
+    height: auto !important;
+}
+
+.ui-icon-show {
+    background: url('../../../images/exclamation.png') no-repeat 0 0;
+    background-size: cover;
+    height: 20px;
+    margin: auto;
+    width: 10px;
+}
+
+.ui-icon-closethick {
+    display: none;
+}
+
+.window-warning-title {
+    font-weight: bolder;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.window-warning {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ui-button {
+    background: none;
+    height: 35px;
+    margin: 0 0 20px 50px;
+    width: 120px;
+
+    .ui-button-text {
+        font-weight: bolder;
+    }
+
+    .ui-icon-add {
+        background: url('../../../images/exclamation.png') no-repeat 0 0;
+        background-size: cover;
+        height: 15px;
+        margin-top: -1px;
+        position: absolute;
+        width: 15px;
+    }
+}
+
+.btn-position {
+    margin: 0 0 20px 90px;
+}
+
+.btn-cancel {
+    margin-left: 20px;
+}
+
+.ui-dialog-buttonpane {
+    margin-top: 20px;
+}
+
+.ui-dialog-titlebar-close {
+    display: none;
+}

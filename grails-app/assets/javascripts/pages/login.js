@@ -1,19 +1,23 @@
-/**
- * Created by sid on 12/12/14.
- */
-;
 (function ($, undefined) {
     'use strict';
-    var login = RC.pages.login = RC.pages.login || {};
+    //var login = RC.pages.login = RC.pages.login || {};
 
-    function _init(){
-        RC.common.progress(true);
+    var secondsValue = $("#error_login").attr("rateLimit");
+
+    function _forbidLogin() {
+        $("#btn_login").attr("disabled", "disabled");
     }
-    $.extend(login, {
-        init : function(){
-            _init();
-        }
-    });
-})(jQuery);
 
-//RC.pages.login.init();
+    function _allowLogin() {
+        $("#btn_login").removeAttr("disabled");
+    }
+
+    if (secondsValue) {
+        var milliseconds = secondsValue * 1000;
+        _forbidLogin();
+
+        setTimeout(_allowLogin, milliseconds);
+        $("#error_login").attr("rateLimit", "");
+    }
+
+})(jQuery);
