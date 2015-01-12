@@ -8,7 +8,9 @@
     "iterator": true,
     "latedef": true,
     "globals": {
-        "jQuery": false
+        "jQuery": false,
+        "RC": true,
+        "_": false
     },
     "maxparams": 4,
     "maxdepth": 4,

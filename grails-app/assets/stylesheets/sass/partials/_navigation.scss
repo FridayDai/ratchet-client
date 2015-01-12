@@ -1,9 +1,130 @@
-.nav{
-  position: fixed;
-  left: 0;
-  top: 50px;
-  width: 130px;
-  height: auto;
-  min-height: 910px;
-  background-color: $base-color-darkGrey;
+.nav {
+    background-color: $base-color-dark-grey;
+    height: auto;
+    left: 0;
+    min-height: 910px;
+    position: fixed;
+    top: 50px;
+    width: 130px;
+    z-index: 999;
+
+    .list {
+        height: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
 }
+
+.nav-li {
+    height: 83px;
+    position: relative;
+
+    a {
+        color: $base-color-mid-grey;
+        height: 100%;
+        width: 100%;
+    }
+
+    .ui-icon {
+        height: 30px;
+        margin: auto;
+        margin-bottom: 10px;
+        margin-top: 15px;
+        width: 30px;
+    }
+
+    .icon-provider {
+        background: url('../../../images/provider.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-tool {
+        background: url('../../../images/tool.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-practice {
+        background: url('../../../images/best_practice.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-treatment {
+        background: url('../../../images/treatment.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-library {
+        background: url('../../../images/library.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-account {
+        background: url('../../../images/account.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    &:hover,
+    &:focus,
+    &.active {
+        background: url('../../../images/nav_background.png') no-repeat 0 0;
+        background-size: cover;
+        color: $base-color-white;
+        height: 83px;
+
+        a {
+            color: $base-color-white;
+        }
+
+        .icon-provider {
+            background: url('../../../images/provider_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-tool {
+            background: url('../../../images/tool_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-practice {
+            background: url('../../../images/best_practice_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-treatment {
+            background: url('../../../images/treatment_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-library {
+            background: url('../../../images/library_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-account {
+            background: url('../../../images/account_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        &:before {
+            border: solid 6px transparent;
+            border-right-color: #fff;
+            content: '';
+            margin-left: -6px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+        }
+    }
+
+    &:after {
+        bottom: -10px;
+        content: url('../../../images/underline.png');
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+}
+
+

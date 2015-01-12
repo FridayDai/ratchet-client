@@ -1,5 +1,93 @@
-.header{
-  height: 50px;
-  width: 100%;
-  background-color: $base-color-lightGrey;
+.header {
+    background-color: $base-color-light-grey;
+    border-bottom: 1px solid $base-color-mid-grey;
+    height: 50px;
+    left: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.toolbar {
+    min-height: 50px;
+    min-width: 480px;
+
+    .logo {
+        color: $base-color-dark-blue;
+        height: 35px;
+        margin-left: 15px;
+        margin-top: 15px;
+        position: relative;
+
+        img {
+            height: 20px;
+            width: 16px;
+        }
+
+        .name {
+            font-size: 18px;
+            left: 25px;
+            position: absolute;
+            top: 0;
+        }
+
+        .part {
+            font: message-box;
+            font-size: 18px;
+            left: 115px;
+            position: absolute;
+            top: 3px;
+        }
+    }
+}
+
+.login-info {
+    width: 170px;
+
+    .set-block {
+        float: left;
+        height: 50px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        width: 50px;
+
+        &:before {
+            content: url('../../../images/vertical_line.png');
+            height: 49px;
+            left: 0;
+            position: absolute;
+            top: 0;
+        }
+
+        &:after {
+            content: url('../../../images/vertical_line.png');
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .icon-set {
+            background: url('../../../images/setting.png') no-repeat 0 0;
+            background-size: cover;
+            border: 0;
+            height: 20px;
+            margin-top: 6px;
+            width: 10px;
+        }
+    }
+
+    .profile {
+        float: right;
+        margin-top: 10px;
+        width: 120px;
+
+
+        li {
+            padding-right: 15px;
+            text-align: right;
+        }
+    }
 }
