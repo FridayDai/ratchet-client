@@ -13,7 +13,7 @@ class PatientController extends BaseController {
     }
 
     def getPatients() {
-        def data = patientService.loadPatients()
+        def data = patientService.loadPatients(params)
         render data as JSON
     }
 

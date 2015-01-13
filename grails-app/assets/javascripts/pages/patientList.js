@@ -9,10 +9,6 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 400
-                },
-                waringArguments: {
-                    title: RC.constants.warningTipTitle,
-                    message: RC.constants.warningTip
                 }
             },
             urls: {
@@ -29,13 +25,19 @@
      */
     function _initTable(data) {
         provideTable = $("#patientsTable").DataTable({
-            //paging: true,
-            //searching: true,
-            //ordering: true,
-            pageLength: 2,
+            paging: true,
+            searching: true,
+            ordering: true,
+            pageLength: 5,
             info: false,
             bLengthChange: false,
-            data: data,
+            "processing": true,
+            "serverSide": true,
+            ajax: $.fn.dataTable.pipeline({
+                url: opts.urls.query,
+                pages: 1, // number of pages to cache
+                data: data
+            }),
             columns: [
                 {data: "emid"},
                 {data: "firstName"},
@@ -58,16 +60,9 @@
      * @private
      */
     function _loadData() {
-        $.ajax({
-            dataType: 'json',
-            url: opts.urls.query
-        })
-            .done(function (data) {
-                provideData = data;
-                _initTable(provideData);
-            })
-            .fail(function () {
-            });
+        var data;
+        _initTable(data);
+
     }
 
     /**
@@ -93,15 +88,15 @@
             "id": id
         }).draw();
 
-        provideData.push({
-            "emid": emid,
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "phoneNumber": phoneNumber,
-            "treatments": treatments,
-            "id": id
-        });
+        //provideData.push({
+        //    "emid": emid,
+        //    "firstName": firstName,
+        //    "lastName": lastName,
+        //    "email": email,
+        //    "phoneNumber": phoneNumber,
+        //    "treatments": treatments,
+        //    "id": id
+        //});
 
     }
 
@@ -122,17 +117,17 @@
 
     }
 
-    /**
-     * remove a row
-     * @param dataId
-     * @param tr
-     * @private
-     */
-    function _remove(dataId, tr) {
-        var rowData = _.findWhere(provideData, {id: dataId});
-        provideData = _.without(provideData, rowData);
-        tr.remove().draw();
-    }
+    ///**
+    // * remove a row
+    // * @param dataId
+    // * @param tr
+    // * @private
+    // */
+    //function _remove(dataId, tr) {
+    //    var rowData = _.findWhere(provideData, {id: dataId});
+    //    provideData = _.without(provideData, rowData);
+    //    tr.remove().draw();
+    //}
 
     /**
      * set validate
@@ -199,25 +194,29 @@
         });
     }
 
-    /**
-     * bind remove event
-     * @private
-     */
-    function _bindRemoveEvent() {
-        // Delete a record
-        $('#provideTable').on('click', 'a.editor_remove', function (e) {
-            e.preventDefault();
+    ///**
+    // * bind remove event
+    // * @private
+    // */
+    //function _bindRemoveEvent() {
+    //    // Delete a record
+    //    $('#provideTable').on('click', 'a.editor_remove', function (e) {
+    //        e.preventDefault();
+    //
+    //        var dataId = $(this).data('id').toString();
+    //        var tr = provideTable.row($(this).closest('tr'));
+    //
+    //        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+    //            element: $(".warn"),
+    //            closeCallback: function () {
+    //                _remove(dataId, tr);
+    //            }
+    //        }));
+    //    });
+    //}
 
-            var dataId = $(this).data('id').toString();
-            var tr = provideTable.row($(this).closest('tr'));
+    function _dataTablePagination() {
 
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-                element: $(".warn"),
-                closeCallback: function () {
-                    _remove(dataId, tr);
-                }
-            }));
-        });
     }
 
     /**
@@ -225,12 +224,11 @@
      * @private
      */
     function _init() {
-
+        _dataTablePagination();
         _loadData();
         _setValidate();
         _bindAddEvent();
         _bindModifyEvent();
-        _bindRemoveEvent();
     }
 
     _init();
