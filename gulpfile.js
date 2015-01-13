@@ -4,7 +4,8 @@ var paths = {
     sass: ['./grails-app/assets/stylesheets/**/*.scss'],
     js: [
         './grails-app/assets/javascripts/**/*.js',
-        '!./grails-app/assets/javascripts/libs/**/*.js'
+        '!./grails-app/assets/javascripts/libs/**/*.js',
+        '!./grails-app/assets/javascripts/bower_components/**/*.js'
     ]
 };
 

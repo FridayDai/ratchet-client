@@ -11,7 +11,7 @@
     <body>
     <div class="content">
         <a href="#" id="add-provider" class="btn add-provider">Add Provider</a>
-        %{--<a href="providers/detail">View</a>--}%
+        %{--<a href="patient/patientActivity">View</a>--}%
 
         <div class="provider-list-table">
             <table id="provideTable" class="display">
