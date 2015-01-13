@@ -7,16 +7,20 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: "home", action: "index")
+        // Login and Logout
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
-        "/providers"(controller: "providers", action: "index")
-        "/getProvider"(controller: "home", action: "getProvider")
-        "/tools"(controller: "tools", action: "index")
-        "/practice"(controller: "practice", action: "index")
-        "/treatments"(controller: "treatments", action: "index")
-        "/library"(controller: "library", action: "index")
+
+        // Home
+        "/"(controller: "home", action: "index")
+
+        // Patients
+        "/getPatients"(controller: "patient", action: "getPatients")
+
+        // Accounts
         "/accounts"(controller: "accounts", action: "index")
+
+        // Error
         "500"(view: '/pages/error')
 
         "/patient/patientActivity"(controller: "patient", action: "showActivity")

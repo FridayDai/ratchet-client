@@ -1,0 +1,14 @@
+@import '../partials/common';
+@import '../partials/table';
+@import '../partials/form';
+@import '../partials/dialog';
+
+.inline {
+    display: inline-block;
+}
+
+.add-patient {
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+}

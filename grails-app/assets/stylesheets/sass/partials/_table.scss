@@ -1,9 +1,24 @@
 .dataTable {
     width: 100%;
 
-    thead tr {
-        background-color: $base-color-lighter-grey;
-        border-bottom: 3px solid $border-color-primary;
+    thead {
+
+        tr {
+            background-color: $base-color-lighter-grey;
+            border-bottom: 3px solid $border-color-primary;
+        }
+
+        .sorting {
+            background: url("../../../images/dataTable/sort_both.png") no-repeat center right;
+        }
+
+        .sorting_asc {
+            background: url("../../../images/dataTable/sort_asc.png") no-repeat center right;
+        }
+
+        .sorting_desc {
+            background: url("../../../images/dataTable/sort_desc.png") no-repeat center right;
+        }
 
     }
 
@@ -32,3 +47,32 @@
     }
 
 }
+
+.dataTables_wrapper {
+
+    .dataTables_paginate {
+        float: right;
+        text-align: right;
+        padding-top: 0.25em;
+        cursor: default;
+        color: $base-color-middle-grey ;
+        border: 1px solid transparent;
+        background: transparent;
+        box-shadow: none;
+
+        .paginate_button {
+            box-sizing: border-box;
+            display: inline-block;
+            min-width: 1.5em;
+            padding: 0.5em 1em;
+            margin-left: 2px;
+            text-align: center;
+            text-decoration: none !important;
+            cursor: pointer;
+            color: $base-color-middle-grey;
+            border: 1px solid transparent;
+        }
+    }
+}
+
+
