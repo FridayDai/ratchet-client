@@ -7,12 +7,12 @@ class UrlMappings {
             }
         }
 
-        // Login and Logout
+        "/"(controller: "home", action: "index")
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 
         // Home
-        "/"(controller: "home", action: "index")
+        "/providers"(controller: "providers", action: "index")
         "/getProvider"(controller: "home", action: "getProvider")
 
         // Patients
@@ -22,10 +22,10 @@ class UrlMappings {
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
-
-        // Error
+        "/patientDetail"(controller: "patientDetail", action: "index")
+        "/patientOverview"(controller: "patientDetail", action: "overview")
         "500"(view: '/pages/error')
-
+        "/providers/detail"(controller: "providers",action: "detail")
 
     }
 }

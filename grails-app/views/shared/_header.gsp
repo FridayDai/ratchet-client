@@ -6,7 +6,7 @@
 
                 <p class="name">RATCHET</p>
 
-                <p class="part">ADMIN</p>
+                <p class="part">PROVIDER</p>
             </a>
         </div>
 

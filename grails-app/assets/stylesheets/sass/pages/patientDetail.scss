@@ -1,0 +1,60 @@
+@import '../partials/common';
+@import '../partials/tab';
+
+.patient-info {
+    position: relative;
+    padding: 10px;
+
+    .btn-edit {
+        position: absolute;
+        right: 20px;
+        top: 0;
+    }
+}
+
+.patient-tab {
+    border: 1px solid $base-color-medium-grey;
+}
+.overview-content {
+    width: 100%;
+    min-width: 600px;
+
+    .outcome-graph {
+        width: 70%;
+
+        .graph {
+            margin-top: 10px;
+            border: 1px solid $base-color-medium-grey;
+            min-height: 640px;
+        }
+    }
+    .activity-task {
+        width: 25%;
+        margin-left: 20px;
+        .activity {
+            margin-top: 10px;
+            min-height: 300px;
+            width: 100%;
+            border: 1px solid $base-color-medium-grey;
+            margin-bottom: 10px;
+        }
+
+        .task {
+            min-height: 300px;
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid $base-color-medium-grey;
+        }
+    }
+
+    &:before {
+        display: table;
+        content: " ";
+    }
+
+    &:after {
+        display: table;
+        content: " ";
+        clear: both;
+    }
+}

@@ -4,10 +4,10 @@
             <g:else>class="nav-li"</g:else>>
             <g:link controller="home" action="index">
                 <div class="ui-icon icon-provider"></div>
-                <span>PROVIDERS</span>
+                <span>HOME</span>
             </g:link>
         </li>
-        <li <g:if test="${controllerName == 'patient'}">class="nav-li active"</g:if><g:else>class="nav-li"</g:else>>
+        <li <g:if test="${controllerName == 'patient' || controllerName == 'patientDetail'}">class="nav-li active"</g:if><g:else>class="nav-li"</g:else>>
             <g:link controller="patient" action="index">
                 <div class="ui-icon icon-tool"></div>
                 <span>PATIENTS</span>
