@@ -7,19 +7,25 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: "home", action: "index")
+        // Login and Logout
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
-        "/providers"(controller: "providers", action: "index")
-        "/getProvider"(controller: "home", action: "getProvider")
-        "/tools"(controller: "tools", action: "index")
-        "/practice"(controller: "practice", action: "index")
-        "/treatments"(controller: "treatments", action: "index")
-        "/library"(controller: "library", action: "index")
-        "/accounts"(controller: "accounts", action: "index")
-        "500"(view: '/pages/error')
 
+        // Home
+        "/"(controller: "home", action: "index")
+        "/getProvider"(controller: "home", action: "getProvider")
+
+        // Patients
+        "/getPatients"(controller: "patient", action: "getPatients")
         "/patient/patientActivity"(controller: "patient", action: "showActivity")
         "/getActivities"(controller: "patient", action: "getActivities")
+
+        // Accounts
+        "/accounts"(controller: "accounts", action: "index")
+
+        // Error
+        "500"(view: '/pages/error')
+
+
     }
 }

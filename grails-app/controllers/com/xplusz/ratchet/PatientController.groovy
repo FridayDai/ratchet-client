@@ -4,6 +4,20 @@ import grails.converters.JSON
 
 class PatientController extends BaseController {
 
+    //    def beforeInterceptor = [action: this.&auth]
+
+    def patientService
+
+    def index() {
+        render view: '/patient/patientList'
+    }
+
+    def getPatients() {
+        def data = patientService.loadPatients(params)
+        render data as JSON
+    }
+
+
     def showActivity() {
         render view: "/patient/patientActivity"
     }
@@ -78,4 +92,5 @@ class PatientController extends BaseController {
         map.put("data", data)
         render map as JSON
     }
+
 }
