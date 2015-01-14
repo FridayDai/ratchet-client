@@ -31,7 +31,7 @@
             pageLength: 5,
             info: false,
             bLengthChange: false,
-            "processing": true,
+            //"processing": true,
             "serverSide": true,
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -117,18 +117,6 @@
 
     }
 
-    ///**
-    // * remove a row
-    // * @param dataId
-    // * @param tr
-    // * @private
-    // */
-    //function _remove(dataId, tr) {
-    //    var rowData = _.findWhere(provideData, {id: dataId});
-    //    provideData = _.without(provideData, rowData);
-    //    tr.remove().draw();
-    //}
-
     /**
      * set validate
      * @private
@@ -194,37 +182,11 @@
         });
     }
 
-    ///**
-    // * bind remove event
-    // * @private
-    // */
-    //function _bindRemoveEvent() {
-    //    // Delete a record
-    //    $('#provideTable').on('click', 'a.editor_remove', function (e) {
-    //        e.preventDefault();
-    //
-    //        var dataId = $(this).data('id').toString();
-    //        var tr = provideTable.row($(this).closest('tr'));
-    //
-    //        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-    //            element: $(".warn"),
-    //            closeCallback: function () {
-    //                _remove(dataId, tr);
-    //            }
-    //        }));
-    //    });
-    //}
-
-    function _dataTablePagination() {
-
-    }
-
     /**
      * Provider page Initialization
      * @private
      */
     function _init() {
-        _dataTablePagination();
         _loadData();
         _setValidate();
         _bindAddEvent();

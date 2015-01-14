@@ -13,9 +13,12 @@ class UrlMappings {
 
         // Home
         "/"(controller: "home", action: "index")
+        "/getProvider"(controller: "home", action: "getProvider")
 
         // Patients
         "/getPatients"(controller: "patient", action: "getPatients")
+        "/patient/patientActivity"(controller: "patient", action: "showActivity")
+        "/getActivities"(controller: "patient", action: "getActivities")
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
@@ -23,7 +26,6 @@ class UrlMappings {
         // Error
         "500"(view: '/pages/error')
 
-        "/patient/patientActivity"(controller: "patient", action: "showActivity")
-        "/getActivities"(controller: "patient", action: "getActivities")
+
     }
 }
