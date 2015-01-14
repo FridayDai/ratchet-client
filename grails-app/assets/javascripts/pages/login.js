@@ -2,14 +2,14 @@
     'use strict';
     //var login = RC.pages.login = RC.pages.login || {};
 
-    var secondsValue = $("#error_login").attr("rateLimit");
+    var secondsValue = $("#error-login").attr("rateLimit");
 
     function _forbidLogin() {
-        $("#btn_login").attr("disabled", "disabled");
+        $("#btnLogin").attr("disabled", "disabled");
     }
 
     function _allowLogin() {
-        $("#btn_login").removeAttr("disabled");
+        $("#btnLogin").removeAttr("disabled");
     }
 
     if (secondsValue) {
@@ -17,7 +17,7 @@
         _forbidLogin();
 
         setTimeout(_allowLogin, milliseconds);
-        $("#error_login").attr("rateLimit", "");
+        $("#errorLogin").attr("rateLimit", "");
     }
 
 })(jQuery);

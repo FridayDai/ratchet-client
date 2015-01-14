@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="patientDetailBundle"/>
-<g:set var="cssPath" value="patientDetail"/>
+<g:set var="scriptPath" value="patientTreatmentBundle"/>
+<g:set var="cssPath" value="patientTreatment"/>
 <g:applyLayout name="main">
     <html>
     <head>
@@ -20,16 +20,16 @@
         <div id="tabs" class="patient-tab">
             <ul>
                 <li>
-                    <g:link controller="patientDetail" action="overview">Overview</g:link>
+                    <g:link controller="patientOverview" action="index">Overview</g:link>
                 </li>
                 <li>
-                    <g:link controller="patientDetail" action="activity">Activity</g:link>
+                    <g:link controller="patientActivity" action="index">Activity</g:link>
                 </li>
                 <li>
-                    <g:link controller="patientDetail" action="task">Task</g:link>
+                    <g:link controller="patientTask" action="index">Task</g:link>
                 </li>
                 <li>
-                    <g:link controller="patientDetail" action="team">Team</g:link>
+                    <g:link controller="patientTeam" action="index">Team</g:link>
                 </li>
             </ul>
 

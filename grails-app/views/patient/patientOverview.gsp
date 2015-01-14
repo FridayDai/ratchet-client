@@ -1,4 +1,4 @@
-<div class="overview-content">
+<div class="overview-content clear">
     <div class="outcome-graph pull-left">
         <label>Outcome Graph</label>
         <div class="graph">

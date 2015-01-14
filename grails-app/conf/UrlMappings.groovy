@@ -17,13 +17,15 @@ class UrlMappings {
 
         // Patients
         "/getPatients"(controller: "patient", action: "getPatients")
-        "/patient/patientActivity"(controller: "patient", action: "showActivity")
+        "/patientActivity"(controller: "patientActivity", action: "index")
         "/getActivities"(controller: "patient", action: "getActivities")
+        "/patientDetail"(controller: "patientTreatment", action: "index")
+        "/patientOverview"(controller: "patientOverview", action: "index")
+        "/patientTask"(controller: "patientOverview", action: "index")
+        "/patientTeam"(controller: "patientTeam", action: "index")
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
-        "/patientDetail"(controller: "patientDetail", action: "index")
-        "/patientOverview"(controller: "patientDetail", action: "overview")
         "500"(view: '/pages/error')
         "/providers/detail"(controller: "providers",action: "detail")
 

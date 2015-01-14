@@ -23,7 +23,6 @@
             searching: false,
             ordering: true,
             info: false,
-            "processing": true,
             "serverSide": true,
             "ajax": $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -93,6 +92,7 @@
         _loadData();
         _changeSelectLevel();
         _changeSelectBy();
+        //_initSelect();
     }
 
     _init();

@@ -7,7 +7,7 @@
                 <span>HOME</span>
             </g:link>
         </li>
-        <li <g:if test="${controllerName == 'patient' || controllerName == 'patientDetail'}">class="nav-li active"</g:if><g:else>class="nav-li"</g:else>>
+        <li <g:if test="${controllerName == 'patient' || controllerName == 'patientTreatment'}">class="nav-li active"</g:if><g:else>class="nav-li"</g:else>>
             <g:link controller="patient" action="index">
                 <div class="ui-icon icon-tool"></div>
                 <span>PATIENTS</span>

@@ -1,9 +1,12 @@
 @import '../partials/common';
+@import '../partials/table';
+@import '../partials/form';
+@import '../partials/dialog';
 @import '../partials/tab';
 
 .patient-info {
-    position: relative;
     padding: 10px;
+    position: relative;
 
     .btn-edit {
         position: absolute;
@@ -15,46 +18,38 @@
 .patient-tab {
     border: 1px solid $base-color-medium-grey;
 }
+
 .overview-content {
-    width: 100%;
     min-width: 600px;
+    width: 100%;
 
     .outcome-graph {
         width: 70%;
 
         .graph {
-            margin-top: 10px;
             border: 1px solid $base-color-medium-grey;
+            margin-top: 10px;
             min-height: 640px;
         }
     }
+
     .activity-task {
-        width: 25%;
         margin-left: 20px;
+        width: 25%;
+
         .activity {
+            border: 1px solid $base-color-medium-grey;
+            margin-bottom: 10px;
             margin-top: 10px;
             min-height: 300px;
             width: 100%;
-            border: 1px solid $base-color-medium-grey;
-            margin-bottom: 10px;
         }
 
         .task {
+            border: 1px solid $base-color-medium-grey;
+            margin-top: 10px;
             min-height: 300px;
             width: 100%;
-            margin-top: 10px;
-            border: 1px solid $base-color-medium-grey;
         }
-    }
-
-    &:before {
-        display: table;
-        content: " ";
-    }
-
-    &:after {
-        display: table;
-        content: " ";
-        clear: both;
     }
 }
