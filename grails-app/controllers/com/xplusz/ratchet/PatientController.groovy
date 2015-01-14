@@ -17,6 +17,11 @@ class PatientController extends BaseController {
         render data as JSON
     }
 
+
+    def showActivity() {
+        render view: "/patient/patientTeam"
+    }
+
     def getActivities() {
         def selectLevel = params?.selectLevel
         def selectBy = params?.selectBy
