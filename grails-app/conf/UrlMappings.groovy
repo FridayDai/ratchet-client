@@ -19,6 +19,7 @@ class UrlMappings {
         "/accounts"(controller: "accounts", action: "index")
         "500"(view: '/pages/error')
 
-        "/providers/detail"(controller: "providers",action: "detail")
+        "/patient/patientActivity"(controller: "patient", action: "showActivity")
+        "/getActivities"(controller: "patient", action: "getActivities")
     }
 }
