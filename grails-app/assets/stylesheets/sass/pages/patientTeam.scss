@@ -2,3 +2,124 @@
 @import '../partials/table';
 @import '../partials/form';
 @import '../partials/dialog';
+
+.inner-header {
+    height: 45px;
+    background: #808080;
+
+    p {
+        display: inline;
+
+    }
+
+    .btn-position {
+        background: none;
+        margin-left: 80%;
+        width: 120px;
+    }
+}
+
+.inner-body {
+    border: 1px solid $base-color-mid-blue;
+    height: 400px;
+    //    height:40%;
+    width: 100%;
+    background: $base-color-grey;
+
+    .detail-info {
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 20px;
+        width: 30%;
+        min-width: 320px;
+        background: $base-color-white;
+
+        .status {
+            text-align: center;
+            height: 20px;
+            padding-top: 5px;
+        }
+
+        .active-status {
+            background: $btn-color-green;
+
+        }
+
+        .invited-status {
+            background: $base-color-darker-grey;
+        }
+
+        .div-margin {
+            margin-left: 10%;
+        }
+    }
+}
+
+.head-content {
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    .div-space {
+        margin-bottom: 20px;
+
+        .p-id {
+            color: $base-color-grey;
+        }
+
+        .p-name {
+            color: $base-color-mider-blue;
+        }
+
+        .p-role {
+            color: $base-blue-color;
+        }
+
+        .p-email {
+            color: $base-bluer-color;
+        }
+    }
+}
+
+.middle-content {
+    margin-bottom: 20px;
+
+    p {
+        margin-left: 5%;
+        margin-right: 5%;
+        color: $base-color-grey;
+    }
+}
+
+.bottom-content {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+
+    .btn-make-primary {
+        border-bottom: 1px solid;
+        color: $base-color-grey;
+    }
+
+    .icon-edit {
+        background: url('../../../images/edit.png') no-repeat 0 0;
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 35px;
+        top: -5px;
+    }
+
+    .icon-remove {
+        background: url('../../../images/dustbin.png') no-repeat 0 0;
+        background-size: cover;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top: -5px;
+    }
+}
+
+

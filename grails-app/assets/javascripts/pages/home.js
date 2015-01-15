@@ -46,7 +46,7 @@
                 {
                     data: function (source) {
                         return '<a  href="" data-id ="' + source.id + '" class="editor_edit">Edit</a>'
-                            + '&nbsp;&nbsp;<a href="" data-id ="' + source.id + '" class="editor_remove">Remove</a>';
+                            + '&nbsp;&nbsp;<a href="" data-id ="' + source.id + '" class="editor_remove">Delete</a>';
                     },
                     className: "center"
                 }
