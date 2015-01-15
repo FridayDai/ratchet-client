@@ -14,7 +14,7 @@
 
     <g:form class="form" controller="authentication" method="post" action="login">
         <g:if test="${errorMsg}">
-            <p class="error" id="error_login" rateLimit="${rateLimit}">${errorMsg}</p>
+            <p class="error" id="errorLogin" rateLimit="${rateLimit}">${errorMsg}</p>
         </g:if>
         <div class="login">
             <input name="email" type="text" class="form-control" placeholder="Email"/>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="login">
-            <input type="submit" class="btn-submit" id='btn_login' value="Log In"/>
+            <input type="submit" class="btn-submit" id='btnLogin' value="Log In"/>
         </div>
     </g:form>
 

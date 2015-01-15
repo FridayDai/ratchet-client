@@ -5,23 +5,21 @@
 
 .home {
     padding-top: 50px;
-    .welcome_title {
+
+    .welcome-title {
         text-align: center;
     }
+
     .logout {
         padding-top: 10px;
         text-align: center;
-        .btn_logout {
-            display: block;
+
+        .btn-logout {
             border: 1px solid;
-            width: 100px;
-            text-decoration: none;
+            display: block;
             margin-left: 45%;
+            text-decoration: none;
+            width: 100px;
         }
     }
-}
-
-.content {
-    margin-left: 20px;
-    margin-top: 30px;
 }

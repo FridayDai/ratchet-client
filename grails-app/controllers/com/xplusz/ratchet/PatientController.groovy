@@ -17,11 +17,6 @@ class PatientController extends BaseController {
         render data as JSON
     }
 
-
-    def showActivity() {
-        render view: "/patient/patientActivity"
-    }
-
     def getActivities() {
         def selectLevel = params?.selectLevel
         def selectBy = params?.selectBy
@@ -30,12 +25,7 @@ class PatientController extends BaseController {
         def order = params?.order
         def columns = params?.columns
         def search = params?.search
-        def map = [:]
-        map.put(start, start)
-        map.put(length, length)
-        map.put(order, order)
-        map.put(columns, columns)
-        map.put(search, search)
+
         def data
         if (selectLevel == "all") {
             if (selectBy == "all") {
@@ -89,6 +79,13 @@ class PatientController extends BaseController {
             def activity2 = new Activity("002", "Task 'SDM' is sent to patient", "Normal", "Ratchet", "Jan 7 2015, 8:13:00 AM")
             data = [activity1, activity2]
         }
+        def map = [:]
+        map.put(start, start)
+        map.put(length, length)
+        map.put(order, order)
+        map.put(columns, columns)
+        map.put(search, search)
+
         map.put("data", data)
         render map as JSON
     }
