@@ -1,0 +1,48 @@
+//use in dropdown list
+
+.btn-dropdown {
+    position: relative;
+}
+
+.dropdown-list {
+    background-color: $base-color-white;
+    border: 1px solid $base-color-light-blue;
+    border-radius: 4px;
+    display: none;
+    font-size: 14px;
+    list-style: none;
+    margin: 2px 0 0;
+    min-width: 120px;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    z-index: 1000;
+
+    li {
+        padding: 4px 12px;
+    }
+
+}
+
+.caret {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid;
+    display: inline-block;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    width: 0;
+
+}
+
+.divider {
+    background-color: $base-color-light-blue;
+    height: 1px;
+    margin: 9px 8px;
+    overflow: hidden;
+    padding: 0;
+}
+
+
+// use in dropdown list
