@@ -54,10 +54,10 @@
 
     function _initAddTab() {
         $( "#addTab").button().click(function() {
-            $(".form")[0].reset();
+            $(".treatment-form")[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".form"),
+                element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
                         tabTitle = $( "#name" );

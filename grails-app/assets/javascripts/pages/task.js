@@ -85,10 +85,10 @@
     function _addTask() {
         $("#add-task").on("click", function (e) {
             e.preventDefault();
-            $(".form")[0].reset();
+            $(".task-form")[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".form"),
+                element: $(".task-form"),
                 okCallback: function () {
                     if ($("#task-form").valid()) {
                         _add();
@@ -216,9 +216,12 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.noteFormArguments, {
                 element: $(".note-form"),
                 okCallback: function () {
-                    var textarea = this.element.find('textarea').val();
-                    noteContent.html("<p>" + textarea + "</p>");
-                    return true;
+                    if($("textarea").valid()){
+                        var textarea = this.element.find('textarea').val();
+                        noteContent.html("<p>" + textarea + "</p>");
+                        return true;
+                    }
+
                 },
                 cancelCallback: function () {
 

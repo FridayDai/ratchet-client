@@ -31,7 +31,7 @@
 
         </div>
     </div>
-    <g:form class="form ui-hidden" id="treatment-form" name="treatment-form">
+    <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
         <div class="form-group">
             <input id="name" name="name" type="text" class="input-group" placeholder="Name" required/>
         </div>

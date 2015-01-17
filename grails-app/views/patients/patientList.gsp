@@ -13,7 +13,6 @@
         <h3 class="inline">patient</h3>
         <a href="#" id="add-patient" class="btn add-patient">New Patient</a>
         %{--<a href="providers/detail">View</a>--}%
-        <a href="/treatment/task">Task</a>
 
 
         <div class="provider-list-table">

@@ -191,7 +191,7 @@
     </div>
 
 
-    <g:form class="form ui-hidden" id="task-form" name="task-form">
+    <g:form class="task-form ui-hidden" id="task-form" name="task-form">
 
     %{--<div class="form-group">--}%
     %{--<input id="provider" name="provider" type="text" class="input-group" placeholder="Provider" required/>--}%
@@ -307,8 +307,8 @@
     </g:form>
 
     <g:form class="note-form ui-hidden" id="task-form" name="task-form">
-        <div class="content">
-            <textarea rows="5" cols="20" class="text-area-form">
+        <div class="form-group form-content">
+            <textarea rows="5" cols="20" class="text-area-form required">
             </textarea>
         </div>
     </g:form>
