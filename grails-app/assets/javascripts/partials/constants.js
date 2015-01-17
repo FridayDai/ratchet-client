@@ -10,6 +10,9 @@
         //CONFIRM
         confirmTitle: "Add a new Provider",
         confirmPatientTitle: "Add a new Patient",
+        confirmTeamTitle: "Add a new Team Member",
+        confirmGiverTitle: "Invite a new Care Giver",
+        editGiverTitle: "Edit a Care Giver",
         confirmContent: "",
         loadingContent: "This is loading content",
 

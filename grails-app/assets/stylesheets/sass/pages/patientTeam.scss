@@ -1,0 +1,130 @@
+@import '../partials/common';
+@import '../partials/table';
+@import '../partials/form';
+@import '../partials/dialog';
+
+.inner-header {
+    background: #808080;
+    height: 30px;
+    padding-top: 10px;
+    position: relative;
+
+    p {
+        display: inline;
+        margin-left: 20px;
+    }
+
+    .btn-position {
+        background: none;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        width: 120px;
+    }
+}
+
+.inner-body {
+    background: $base-color-grey;
+    border: 1px solid $base-color-mid-blue;
+    height: 400px;
+    overflow-y: auto;
+    width: 100%;
+
+    .detail-info {
+        background: $base-color-white;
+        display: inline-block;
+        margin-bottom: 50px;
+        margin-left: 20px;
+        margin-top: 20px;
+        min-width: 320px;
+        width: 30%;
+
+        .status {
+            height: 20px;
+            padding-top: 5px;
+            text-align: center;
+        }
+
+        .active-status {
+            background: $btn-color-green;
+
+        }
+
+        .invited-status {
+            background: $btn-color-primary;
+        }
+
+        .div-margin {
+            margin-left: 10%;
+        }
+    }
+}
+
+.head-content {
+    margin-left: 35%;
+    margin-right: 25%;
+    margin-top: 20px;
+
+    .div-space {
+        margin-bottom: 20px;
+
+        .p-id {
+            color: $base-color-grey;
+        }
+
+        .p-name {
+            color: $base-color-mider-blue;
+        }
+
+        .p-role {
+            color: $base-blue-color;
+        }
+
+        .p-email {
+            color: $base-bluer-color;
+        }
+    }
+}
+
+.middle-content {
+    margin-bottom: 20px;
+
+    p {
+        color: $base-color-grey;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+.bottom-content {
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
+
+    .btn-make-primary {
+        border-bottom: 1px solid;
+        color: $base-color-grey;
+    }
+
+    .icon-edit {
+        background: url('../../../images/edit.png') no-repeat 0 0;
+        background-size: cover;
+        height: 20px;
+        position: absolute;
+        right: 35px;
+        top: -5px;
+        width: 20px;
+    }
+
+    .icon-remove {
+        background: url('../../../images/dustbin.png') no-repeat 0 0;
+        background-size: cover;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top: -5px;
+        width: 20px;
+    }
+}
+
+

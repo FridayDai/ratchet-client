@@ -18,11 +18,16 @@ class UrlMappings {
         // Patients
         "/getPatients"(controller: "patient", action: "getPatients")
         "/patientActivity"(controller: "patientActivity", action: "index")
+        "/patient/patientActivity"(controller: "patient", action: "showActivity")
+        "/patient/patientTeam"(controller: "patient", action: "showActivity")
         "/getActivities"(controller: "patient", action: "getActivities")
         "/patientDetail"(controller: "patientTreatment", action: "index")
         "/patientOverview"(controller: "patientOverview", action: "index")
         "/patientTask"(controller: "patientOverview", action: "index")
         "/patientTeam"(controller: "patientTeam", action: "index")
+        "/patient/patientTeam"(controller: "patient", action: "showActivity")
+        "/getCareTeam"(controller: "patient",action: "getCareTeam")
+        "/getCareGiver"(controller: "patient",action: "getCareGiver")
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
