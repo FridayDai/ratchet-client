@@ -1,10 +1,10 @@
-<g:set var="scriptPath" value="patientActivityBundle"/>
-<g:set var="cssPath" value="patientActivity"/>
-<g:applyLayout name="main">
-    <html>
-    <head>
-        <title>Welcome to ratchet</title>
-    </head>
+%{--<g:set var="scriptPath" value="patientActivityBundle"/>--}%
+%{--<g:set var="cssPath" value="patientActivity"/>--}%
+%{--<g:applyLayout name="main">--}%
+    %{--<html>--}%
+    %{--<head>--}%
+        %{--<title>Welcome to ratchet</title>--}%
+    %{--</head>--}%
 
 <div class="clear">
     <div class="search">

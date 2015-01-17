@@ -1,6 +1,8 @@
 (function ($, undefined) {
     'use strict';
 
+    var team = RC.pages.team = RC.pages.team || {};
+
     //Define provider page global variables
     var opts = {
         defaultConfirmArguments: {
@@ -127,5 +129,10 @@
         _EditCareGiver();
     }
 
-    _init();
+    $.extend(team, {
+        init: function(){
+            _init();
+        }
+    });
+
 })(jQuery);

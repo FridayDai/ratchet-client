@@ -34,8 +34,16 @@
             },
             load: function(event, ui) {
                 var type = ui.tab.data("type");
-                if(type && type=="Activity"){
-                    RC.pages.activity.init(ui.panel.find("#activityTable"));
+                if(type){
+                    switch (type) {
+                        case "Activity":
+                            RC.pages.activity.init(ui.panel.find("#activityTable"));
+                            break;
+                        case "Team":
+                            RC.pages.team.init();
+                            break;
+                    }
+
                 }
 
             }

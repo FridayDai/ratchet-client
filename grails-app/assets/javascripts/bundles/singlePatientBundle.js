@@ -3,5 +3,6 @@
  */
 //= require share/share
 //= require ../pages/patientActivity
+//= require ../pages/patientTeam
 //= require ../pages/patientTreatment
 //= require ../pages/singlePatient

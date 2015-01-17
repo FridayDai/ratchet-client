@@ -1,12 +1,12 @@
-<g:set var="scriptPath" value="patientTeamBundle"/>
-<g:set var="cssPath" value="patientTeam"/>
-<g:applyLayout name="main">
-    <html>
-    <head>
-        <title>Welcome to ratchet</title>
-    </head>
+%{--<g:set var="scriptPath" value="patientTeamBundle"/>--}%
+%{--<g:set var="cssPath" value="patientTeam"/>--}%
+%{--<g:applyLayout name="main">--}%
+    %{--<html>--}%
+    %{--<head>--}%
+        %{--<title>Welcome to ratchet</title>--}%
+    %{--</head>--}%
 
-    <body>
+    %{--<body>--}%
 
     <div class="content">
         <div class="care-team-content">
@@ -167,6 +167,6 @@
 
         </g:form>
 
-    </body>
-    </html>
-</g:applyLayout>
+    %{--</body>--}%
+    %{--</html>--}%
+%{--</g:applyLayout>--}%

@@ -12,7 +12,7 @@
             <li>
                 <g:link controller="patientTask" action="index">Task</g:link>
             </li>
-            <li>
+            <li data-type="Team">
                 <g:link controller="patientTeam" action="index">Team</g:link>
             </li>
         </ul>
