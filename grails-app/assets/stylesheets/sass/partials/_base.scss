@@ -55,8 +55,9 @@ a {
 
 .btn,
 .ui-button {
+    background-color: $base-color-white;
     background-image: none;
-    border: 1px solid;
+    border: 1px $base-color-light-blue solid;
     border-radius: 4px;
     cursor: pointer;
     display: inline-block;
@@ -66,7 +67,6 @@ a {
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-    width: 95px;
 
     &:hover,
     &:focus {

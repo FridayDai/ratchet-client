@@ -1,0 +1,158 @@
+@import '../partials/common';
+@import '../partials/form';
+@import '../partials/dialog';
+@import '../partials/dropdown';
+@import '../partials/datatimepicker';
+
+h4,
+h5 {
+    color: $base-color-mid-grey;
+}
+
+p {
+    color: $base-color-middle-grey;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.tasks-list {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.task-row {
+    //    border: 1px $border-color-light-blue solid;
+    border-radius: 4px;
+}
+
+.text-area-form {
+    width: 100%;
+}
+
+.box-item {
+    border: 2px solid;
+    display: inline-block;
+    margin-right: 10px;
+    width: 300px;
+
+    .item-header {
+        border-bottom: 2px $base-color-mid-grey solid;
+        height: 40px;
+    }
+
+    .item-left {
+        border-right: 1px $base-color-grey solid;
+        width: 20%;
+
+        li {
+            border-bottom: 1px $base-color-grey solid;
+            height: 54px;
+        }
+
+        .item-datetime {
+            height: 108px;
+        }
+    }
+
+    .item-right {
+        height: 275px;
+        width: 79%;
+
+        .right-one {
+            height: 54px;
+
+        }
+
+        .right-two {
+            height: 108px;
+        }
+
+    }
+
+    .a-remove {
+        cursor: pointer;
+    }
+
+}
+
+.btn-right {
+    float: right;
+}
+
+.task-header {
+    height: 30px;
+    padding-right: 20px;
+}
+
+.form-box {
+    border: 2px solid;
+    display: inline-block;
+    width: 300px;
+
+    .box-header {
+        background-color: $base-color-grey;
+        height: 54px;
+        width: 100%;
+
+        .header-left {
+            float: left;
+            height: 100%;
+            width: 25%;
+        }
+
+        .header-middle {
+            float: left;
+            height: 100%;
+            padding-left: 4px;
+            width: 60%;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+    }
+
+    .box-content {
+        padding: 4px 6px;
+    }
+
+}
+
+.bg-color-change {
+    background-color: $base-color-mid-grey;
+
+    &.background-sdm {
+        background-color: $base-color-green;
+    }
+
+    &.background-basic {
+        background-color: $base-color-yellow-darker;
+    }
+
+    &.background-outcome {
+        background-color: $base-color-mid-blue;
+    }
+
+}
+
+.border-color-change {
+    border-color: $base-color-mid-grey;
+
+    &.sdm {
+        border-color: $base-color-green;
+    }
+
+    &.basic {
+        border-color: $base-color-yellow-darker;
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+    }
+}
+
+
+

@@ -29,6 +29,9 @@ class UrlMappings {
         "/getCareTeam"(controller: "patient",action: "getCareTeam")
         "/getCareGiver"(controller: "patient",action: "getCareGiver")
 
+        // treatment
+        "/treatment/task"(controller: "treatment", action: "getTasks")
+
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
         "500"(view: '/pages/error')
