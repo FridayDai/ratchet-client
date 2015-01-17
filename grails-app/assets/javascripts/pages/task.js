@@ -8,8 +8,15 @@
                 title: RC.constants.confirmTaskTitle,
                 content: RC.constants.confirmContent,
                 height: 200,
-                width: 960
-            }, waringArguments: {
+                width: 980
+            },
+            noteFormArguments: {
+                title: RC.constants.confirmNoteTitle,
+                content: RC.constants.confirmContent,
+                height: 200,
+                width: 400
+            },
+            waringArguments: {
                 title: RC.constants.warningTipTitle,
                 message: RC.constants.warningTip
             }
@@ -195,11 +202,41 @@
         //})
     }
 
+    /*
+     * edit note
+     */
+    function _editNote() {
+        $(".item-note").on("click", function (e) {
+            e.preventDefault();
+            $(".note-form")[0].reset();
+            var noteContent = $(this).parent().next();
+
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.noteFormArguments, {
+                element: $(".note-form"),
+                okCallback: function () {
+                    var textarea = this.element.find('textarea').val();
+                    noteContent.html("<p>"+ textarea +"</p>");
+                    return true;
+                },
+                cancelCallback: function () {
+
+                }
+
+            }));
+        });
+    }
+
+    function _initDatePicker() {
+        $('.datetime-picker').datepicker();
+    }
+
     function _init() {
+        _initDatePicker();
         _initBoxColor();
         _clickFormBox();
         _addTask();
         _removeTask();
+        _editNote();
 
     }
 

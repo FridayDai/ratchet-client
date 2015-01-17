@@ -11,6 +11,7 @@
         confirmTitle: "Add a new Provider",
         confirmPatientTitle: "Add a new Patient",
         confirmTaskTitle: "Add Task",
+        confirmNoteTitle: "Edit Note",
         confirmTeamTitle: "Add a new Team Member",
         confirmGiverTitle: "Invite a new Care Giver",
         editGiverTitle: "Edit a Care Giver",

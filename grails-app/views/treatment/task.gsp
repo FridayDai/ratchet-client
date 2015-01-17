@@ -47,7 +47,10 @@
                             <ul>
                                 <li class="item-left-li bg-color-change">${task?.type}</li>
                                 <li>${task?.status}</li>
-                                <li class="item-datetime">Due Date</li>
+                                <li class="item-datetime">
+                                    Due Date
+                                    <input class="datetime-picker" data-id="${task?.id}"/>
+                                </li>
                                 <li>Share</li>
                             </ul>
 
@@ -61,7 +64,8 @@
                             </div>
 
                             <div class="right-three">
-                                <h5>Note</h5>
+                                <h5>Note<span class="item-note">edit</span></h5>
+                                <div class="note-content"></div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +90,10 @@
                             <ul>
                                 <li class="item-left-li bg-color-change">${task?.type}</li>
                                 <li>${task?.status}</li>
-                                <li class="item-datetime">Due Date</li>
+                                <li class="item-datetime">
+                                    Due Date
+                                    <input class="datetime-picker" data-id="${task?.id}"/>
+                                </li>
                                 <li>Share</li>
                             </ul>
 
@@ -100,7 +107,7 @@
                             </div>
 
                             <div class="right-three">
-                                <h5>Note</h5>
+                                <h5>Note<span class="item-note">edit</span></h5>
                             </div>
                         </div>
                     </div>
@@ -126,7 +133,10 @@
                             <ul>
                                 <li class="item-left-li bg-color-change">${task?.type}</li>
                                 <li>${task?.status}</li>
-                                <li class="item-datetime">Due Date</li>
+                                <li class="item-datetime">
+                                    Due Date
+                                    <input class="datetime-picker" data-id="${task?.id}"/>
+                                </li>
                                 <li>Share</li>
                             </ul>
 
@@ -140,7 +150,7 @@
                             </div>
 
                             <div class="right-three">
-                                <h5>Note</h5>
+                                <h5>Note<span class="item-note">edit</span></h5>
                             </div>
                         </div>
                     </div>
@@ -166,7 +176,10 @@
                             <ul>
                                 <li class="item-left-li bg-color-change">${task?.type}</li>
                                 <li>${task?.status}</li>
-                                <li class="item-datetime">Due Date</li>
+                                <li class="item-datetime">
+                                    Due Date
+                                    <input class="datetime-picker" data-id="${task?.id}"/>
+                                </li>
                                 <li>Share</li>
                             </ul>
 
@@ -180,7 +193,7 @@
                             </div>
 
                             <div class="right-three">
-                                <h5>Note</h5>
+                                <h5>Note<span class="item-note">edit</span></h5>
                             </div>
                         </div>
                     </div>
@@ -302,6 +315,13 @@
 
             </div>
 
+        </g:form>
+
+        <g:form class="note-form ui-hidden" id="task-form" name="task-form">
+            <div class="content">
+                <textarea rows="5" cols="20" class="text-area-form">
+                </textarea>
+            </div>
         </g:form>
 
     </div>
