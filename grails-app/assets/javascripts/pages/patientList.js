@@ -47,7 +47,7 @@
                 {
                     data: function (source) {
                         return '<label class="tr-label"> ' + source.treatments + '</label>'
-                            + '&nbsp;&nbsp;<a href="" data-id ="' + source.id + '" class="editor_edit">Edit</a>';
+                            + '&nbsp;&nbsp;<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
                     }
                 }
             ]

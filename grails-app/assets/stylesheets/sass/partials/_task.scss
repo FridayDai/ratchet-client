@@ -1,22 +1,3 @@
-@import '../partials/common';
-@import '../partials/form';
-@import '../partials/dialog';
-@import '../partials/dropdown';
-@import '../partials/datatimepicker';
-
-h4,
-h5 {
-    color: $base-color-mid-grey;
-}
-
-p {
-    color: $base-color-middle-grey;
-}
-
-.inline {
-    display: inline-block;
-}
-
 .tasks-list {
     margin-bottom: 30px;
     margin-top: 10px;
@@ -153,6 +134,3 @@ p {
         border-color: $base-color-mid-blue;
     }
 }
-
-
-

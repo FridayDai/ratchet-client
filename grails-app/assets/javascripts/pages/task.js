@@ -1,6 +1,8 @@
 (function ($, undefined) {
     'use strict';
 
+    var task = RC.pages.task = RC.pages.task || {};
+
 //Define task page global variables
     var opts = {
         defaultConfirmArguments: {
@@ -215,7 +217,7 @@
                 element: $(".note-form"),
                 okCallback: function () {
                     var textarea = this.element.find('textarea').val();
-                    noteContent.html("<p>"+ textarea +"</p>");
+                    noteContent.html("<p>" + textarea + "</p>");
                     return true;
                 },
                 cancelCallback: function () {
@@ -240,7 +242,11 @@
 
     }
 
-    _init();
+    $.extend(task, {
+        init: function () {
+            _init();
+        }
+    });
 
-})
-(jQuery);
+
+})(jQuery);

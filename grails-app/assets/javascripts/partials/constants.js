@@ -25,6 +25,7 @@
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
 
-
+        //ERROR
+        errorMessage :"Couldn't load this tab. We'll try to fix this as soon as possible."
     });
 })(jQuery);

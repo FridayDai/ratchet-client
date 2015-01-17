@@ -1,9 +1,3 @@
-@import '../partials/common';
-@import '../partials/table';
-@import '../partials/form';
-@import '../partials/dialog';
-@import '../partials/tab';
-
 .patient-info {
     padding: 10px;
     position: relative;
@@ -52,4 +46,10 @@
             width: 100%;
         }
     }
+}
+
+.add-tab{
+    position: absolute;
+    right: 0;
+    z-index: 999;
 }

@@ -16,21 +16,21 @@ class UrlMappings {
         "/getProvider"(controller: "home", action: "getProvider")
 
         // Patients
-        "/getPatients"(controller: "patient", action: "getPatients")
-        "/patientActivity"(controller: "patientActivity", action: "index")
-        "/patient/patientActivity"(controller: "patient", action: "showActivity")
-        "/patient/patientTeam"(controller: "patient", action: "showActivity")
-        "/getActivities"(controller: "patient", action: "getActivities")
-        "/patientDetail"(controller: "patientTreatment", action: "index")
-        "/patientOverview"(controller: "patientOverview", action: "index")
-        "/patientTask"(controller: "patientOverview", action: "index")
-        "/patientTeam"(controller: "patientTeam", action: "index")
-        "/patient/patientTeam"(controller: "patient", action: "showActivity")
-        "/getCareTeam"(controller: "patient",action: "getCareTeam")
-        "/getCareGiver"(controller: "patient",action: "getCareGiver")
+        "/getPatients"(controller: "patients", action: "getPatients")
+        "/activity"(controller: "activity", action: "index")
+        "/patient/patientActivity"(controller: "patients", action: "showActivity")
+        "/getActivities"(controller: "patients", action: "getActivities")
+        "/singlePatient"(controller: "singlePatient", action: "index")
+        "/overview"(controller: "overview", action: "index")
+        "/task"(controller: "overview", action: "index")
+        "/team"(controller: "team", action: "index")
+        "/patient/patientTeam"(controller: "patients", action: "showActivity")
+        "/getCareTeam"(controller: "patients",action: "getCareTeam")
+        "/getCareGiver"(controller: "patients",action: "getCareGiver")
 
         // treatment
         "/treatment/task"(controller: "treatment", action: "getTasks")
+        "/treatment"(controller: "treatment", action: "index")
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
