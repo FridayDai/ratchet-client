@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <g:set var="scriptPath" value="singlePatientBundle"/>
-<g:set var="cssPath" value="patientTreatment"/>
+<g:set var="cssPath" value="treatment"/>
 <g:applyLayout name="main">
     <html>
     <head>
@@ -18,13 +18,13 @@
             <a class="btn-edit">Edit</a>
         </div>
         <div id="tabs" class="patient-tab">
-            <button id="add_tab" class="add-tab">Add Treatment</button>
+            <button id="addTab" class="add-tab">Add Treatment</button>
             <ul class="tab-treatment">
                 <li>
-                    <g:link controller="patientTreatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>
+                    <g:link controller="treatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>
                 </li>
                 <li>
-                    <g:link controller="patientTreatment" action="index" data-id="sub2">Total Knee Replacement</g:link>
+                    <g:link controller="treatment" action="index" data-id="sub2">Total Knee Replacement</g:link>
                 </li>
 
             </ul>

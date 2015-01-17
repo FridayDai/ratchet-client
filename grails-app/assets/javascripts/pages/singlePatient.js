@@ -39,7 +39,7 @@
 
     function _addTab() {
         var label = tabTitle.val(),
-            li = $( tabTemplate.replace( /#\{href\}/g, "/patientTreatment/index" ).replace( /#\{label\}/g, label ) );
+            li = $( tabTemplate.replace( /#\{href\}/g, "/treatment/index" ).replace( /#\{label\}/g, label ) );
         tabs.find( ".tab-treatment" ).append( li );
         tabs.tabs( "refresh" );
     }
@@ -53,7 +53,7 @@
     }
 
     function _initAddTab() {
-        $( "#add_tab").button().click(function() {
+        $( "#addTab").button().click(function() {
             $(".form")[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {

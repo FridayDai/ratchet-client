@@ -18,6 +18,18 @@ body {
         color: $base-color-white;
     }
 }
+h4,
+h5 {
+    color: $base-color-mid-grey;
+}
+
+p {
+    color: $base-color-middle-grey;
+}
+
+.inline {
+    display: inline-block;
+}
 
 .pull-left {
     float: left !important;
