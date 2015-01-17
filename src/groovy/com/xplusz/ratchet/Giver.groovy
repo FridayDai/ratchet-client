@@ -4,22 +4,16 @@ package com.xplusz.ratchet
 public class Giver {
     String id
     String emid
-    String image
-    String firstName
-    String lastName
+    String name
     String email
-    String phoneNumber
     String relationship
     String status
 
-    def Giver(id, emid, image, firstName, lastName, email, phoneNumber, relationship,status) {
+    def Giver(id, emid, name, email, relationship, status) {
         this.id = id
         this.emid = emid
-        this.image = image
-        this.firstName = firstName
-        this.lastName = lastName
+        this.name = name
         this.email = email
-        this.phoneNumber = phoneNumber
         this.relationship = relationship
         this.status = status
     }

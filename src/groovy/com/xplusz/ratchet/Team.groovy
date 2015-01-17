@@ -4,21 +4,17 @@ package com.xplusz.ratchet
 public class Team {
     String id
     String emid
-    String image
-    String firstName
-    String lastName
+    String name
     String email
-    String phoneNumber
     String role
+    String description
 
-    def Team(id, emid, image, firstName, lastName, email, phoneNumber, role) {
+    def Team(id, emid, name, email, role, description) {
         this.id = id
         this.emid = emid
-        this.image = image
-        this.firstName = firstName
-        this.lastName = lastName
+        this.name = name
         this.email = email
-        this.phoneNumber = phoneNumber
         this.role = role
+        this.description = description
     }
 }

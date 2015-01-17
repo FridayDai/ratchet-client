@@ -112,16 +112,22 @@ class PatientService {
 
 
     def loadCareTeam() {
-        def team1 = new Team("001", "33091234", "image1", "John", "Smith", "john@gmail.com", "544-4847-9794", "Surgeon")
-        def team2 = new Team("002", "33091235", "image2", "Sid", "Smith", "john@gmail.com", "544-4847-9794", "Surgeon")
-        def data = [team1,team2]
-        return data
+        def team = []
+        def team1 = new Team("001", "33091234", "John Smith", "john@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
+        def team2 = new Team("002", "33091235", "Sid Smith", "Sid@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
+        def team3 = new Team("003", "33091236", "Colin Smith", "Colin@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
+        team.add(team1)
+        team.add(team2)
+        team.add(team3)
+        return team
     }
 
     def loadCareGiver() {
-        def giver1 = new Giver("003", "33091234", "image1", "John", "Smith", "john@gmail.com", "544-4847-9794", "Spouse","invited")
-        def giver2 = new Giver("004", "33091235", "image2", "Sid", "Smith", "john@gmail.com", "544-4847-9794", "Parent","active")
-        def data = [giver1,giver2]
-        return data
+        def giver = []
+        def giver1 = new Giver("003", "33091234", "John Smith", "john@gmail.com", "Sibling", "ACTIVE")
+        def giver2 = new Giver("004", "33091235", "Sid Smith", "sid@gmail.com", "Spouse", "INVITED")
+        giver.add(giver1)
+        giver.add(giver2)
+        return giver
     }
 }

@@ -19,21 +19,13 @@ class PatientController extends BaseController {
 
 
     def showActivity() {
-        render view: "/patient/patientTeam"
+        def teamData = patientService.loadCareTeam()
+        def giverData = patientService.loadCareGiver()
+        render(view: "/patient/patientTeam", model: [teams: teamData, givers: giverData])
     }
 
     def getActivities() {
         def data = patientService.loadActivities(params)
-        render data as JSON
-    }
-
-    def getCareTeam(){
-        def data = patientService.loadCareTeam()
-        render data as JSON
-    }
-
-    def getCareGiver(){
-        def data = patientService.loadCareGiver()
         render data as JSON
     }
 }

@@ -4,40 +4,45 @@
 @import '../partials/dialog';
 
 .inner-header {
-    height: 45px;
     background: #808080;
+    height: 30px;
+    padding-top: 10px;
+    position: relative;
 
     p {
         display: inline;
-
+        margin-left: 20px;
     }
 
     .btn-position {
         background: none;
-        margin-left: 80%;
+        position: absolute;
+        right: 20px;
+        top: 10px;
         width: 120px;
     }
 }
 
 .inner-body {
+    background: $base-color-grey;
     border: 1px solid $base-color-mid-blue;
     height: 400px;
-    //    height:40%;
+    overflow-y: auto;
     width: 100%;
-    background: $base-color-grey;
 
     .detail-info {
+        background: $base-color-white;
         display: inline-block;
+        margin-bottom: 50px;
         margin-left: 20px;
         margin-top: 20px;
-        width: 30%;
         min-width: 320px;
-        background: $base-color-white;
+        width: 30%;
 
         .status {
-            text-align: center;
             height: 20px;
             padding-top: 5px;
+            text-align: center;
         }
 
         .active-status {
@@ -46,7 +51,7 @@
         }
 
         .invited-status {
-            background: $base-color-darker-grey;
+            background: $btn-color-primary;
         }
 
         .div-margin {
@@ -56,9 +61,9 @@
 }
 
 .head-content {
-    margin-top: 20px;
-    margin-left: 25%;
+    margin-left: 35%;
     margin-right: 25%;
+    margin-top: 20px;
 
     .div-space {
         margin-bottom: 20px;
@@ -85,16 +90,16 @@
     margin-bottom: 20px;
 
     p {
+        color: $base-color-grey;
         margin-left: 5%;
         margin-right: 5%;
-        color: $base-color-grey;
     }
 }
 
 .bottom-content {
-    text-align: center;
     margin-bottom: 20px;
     position: relative;
+    text-align: center;
 
     .btn-make-primary {
         border-bottom: 1px solid;
@@ -104,21 +109,21 @@
     .icon-edit {
         background: url('../../../images/edit.png') no-repeat 0 0;
         background-size: cover;
-        width: 20px;
         height: 20px;
         position: absolute;
         right: 35px;
         top: -5px;
+        width: 20px;
     }
 
     .icon-remove {
         background: url('../../../images/dustbin.png') no-repeat 0 0;
         background-size: cover;
-        width: 20px;
         height: 20px;
         position: absolute;
         right: 10px;
         top: -5px;
+        width: 20px;
     }
 }
 
