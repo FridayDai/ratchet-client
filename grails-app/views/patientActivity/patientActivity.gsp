@@ -24,7 +24,7 @@
     </div>
 
     <div class="activity-list-table">
-        <table id="activityTable" class="display">
+        <table id="activityTable" class="display activityTable">
             <thead>
             <tr>
                 <th>Description</th>
@@ -37,4 +37,3 @@
     </div>
 </div>
 
-<asset:javascript src="pages/patientActivity"/>

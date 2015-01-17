@@ -3,7 +3,7 @@ package com.xplusz.ratchet
 class PatientTreatmentController {
 
     def index() {
-        render view: '/patient/patientTreatment'
+        render view: '/patientTreatment/patientTreatment'
     }
 
     def overview(){

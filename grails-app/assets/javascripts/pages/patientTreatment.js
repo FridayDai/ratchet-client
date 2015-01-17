@@ -1,6 +1,6 @@
 (function ($, undefined) {
     'use strict';
-
+    var treatment = RC.pages.treatment = RC.pages.treatment || {};
     //Define provider page global variables
     var opts = {
             defaultConfirmArguments: {
@@ -25,20 +25,28 @@
      * page Initialization
      * @private
      */
-    function _init() {
-
-        $("#tabs").tabs({
+    function _init(element) {
+        $(element).tabs({
             beforeLoad: function( event, ui ) {
                 ui.jqXHR.error(function() {
-                    ui.panel.html(
-                        "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                        "If this wouldn't be a demo." );
+                    ui.panel.html(RC.constants.errorMessage);
                 });
+            },
+            load: function(event, ui) {
+                var type = ui.tab.data("type");
+                if(type && type=="Activity"){
+                    RC.pages.activity.init(ui.panel.find("#activityTable"));
+                }
+
             }
         });
     }
 
-    _init();
+    $.extend(treatment, {
+        init: function(element){
+            _init(element);
+        }
+    });
 
 })
 (jQuery);

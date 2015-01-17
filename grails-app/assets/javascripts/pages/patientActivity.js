@@ -1,6 +1,8 @@
 (function ($, undefined) {
     'use strict';
 
+    var activity = RC.pages.activity = RC.pages.activity || {};
+
     //Define provider page global variables
     var opts = {
             urls: {
@@ -14,11 +16,11 @@
      * @param data
      * @private
      */
-    function _initTable(data) {
+    function _initTable(element, data) {
         //before reload dataTable, destroy the last dataTable
-        $("#activityTable").dataTable().fnDestroy();
+        $(element).dataTable().fnDestroy();
 
-        activityTable = $('#activityTable').dataTable({
+        activityTable = $(element).dataTable({
             bLengthChange: false,
             searching: false,
             ordering: true,
@@ -44,11 +46,11 @@
      * @params selectBy
      * @private
      */
-    function _loadData(selectLevel, selectBy) {
+    function _loadData(element ,selectLevel, selectBy) {
         var data = {};
         data.selectLevel = selectLevel || 'all';
         data.selectBy = selectBy || 'all';
-        _initTable(data);
+        _initTable(element, data);
     }
 
     /**
@@ -64,11 +66,11 @@
      * change seleceLevel value
      * @private
      */
-    function _changeSelectLevel() {
+    function _changeSelectLevel(element) {
         $("#activities").change(function () {
             var selectLevel = $(this).val();
             var selectBy = $("#organization").val();
-            _loadData(selectLevel, selectBy);
+            _loadData(element, selectLevel, selectBy);
         });
     }
 
@@ -76,11 +78,11 @@
      * change selectBy value
      * @private
      */
-    function _changeSelectBy() {
+    function _changeSelectBy(element) {
         $("#organization").change(function () {
             var selectLevel = $("#activities").val();
             var selectBy = $(this).val();
-            _loadData(selectLevel, selectBy);
+            _loadData(element, selectLevel, selectBy);
         });
     }
 
@@ -88,12 +90,17 @@
      * Provider page Initialization
      * @private
      */
-    function _init() {
-        _loadData();
-        _changeSelectLevel();
-        _changeSelectBy();
+    function _init(element) {
+        _loadData(element);
+        _changeSelectLevel(element);
+        _changeSelectBy(element);
         //_initSelect();
     }
 
-    _init();
+    $.extend(activity, {
+        init: function(element){
+            _init(element);
+        }
+    });
+
 })(jQuery);

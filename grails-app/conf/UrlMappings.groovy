@@ -21,7 +21,7 @@ class UrlMappings {
         "/patient/patientActivity"(controller: "patient", action: "showActivity")
         "/patient/patientTeam"(controller: "patient", action: "showActivity")
         "/getActivities"(controller: "patient", action: "getActivities")
-        "/patientDetail"(controller: "patientTreatment", action: "index")
+        "/singlePatient"(controller: "singlePatient", action: "index")
         "/patientOverview"(controller: "patientOverview", action: "index")
         "/patientTask"(controller: "patientOverview", action: "index")
         "/patientTeam"(controller: "patientTeam", action: "index")

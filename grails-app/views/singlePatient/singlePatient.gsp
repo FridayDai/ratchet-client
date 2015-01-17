@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="patientTreatmentBundle"/>
+<g:set var="scriptPath" value="singlePatientBundle"/>
 <g:set var="cssPath" value="patientTreatment"/>
 <g:applyLayout name="main">
     <html>
@@ -18,23 +18,24 @@
             <a class="btn-edit">Edit</a>
         </div>
         <div id="tabs" class="patient-tab">
-            <ul>
+            <button id="add_tab" class="add-tab">Add Treatment</button>
+            <ul class="tab-treatment">
                 <li>
-                    <g:link controller="patientOverview" action="index">Overview</g:link>
+                    <g:link controller="patientTreatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>
                 </li>
                 <li>
-                    <g:link controller="patientActivity" action="index">Activity</g:link>
+                    <g:link controller="patientTreatment" action="index" data-id="sub2">Total Knee Replacement</g:link>
                 </li>
-                <li>
-                    <g:link controller="patientTask" action="index">Task</g:link>
-                </li>
-                <li>
-                    <g:link controller="patientTeam" action="index">Team</g:link>
-                </li>
+
             </ul>
 
         </div>
     </div>
+    <g:form class="form ui-hidden" id="treatment-form" name="treatment-form">
+        <div class="form-group">
+            <input id="name" name="name" type="text" class="input-group" placeholder="Name" required/>
+        </div>
+    </g:form>
     </body>
     </html>
 </g:applyLayout>
