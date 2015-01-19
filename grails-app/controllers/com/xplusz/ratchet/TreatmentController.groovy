@@ -31,7 +31,6 @@ class TreatmentController extends BaseController {
             if (task.status == "complete") {
                 taskCompleted.add(task)
             }
-
         }
         render view: 'task', model: [taskOverdue: taskOverdue, taskNew: taskNew, taskFuture: taskFuture, taskCompleted: taskCompleted]
     }
