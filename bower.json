@@ -14,7 +14,8 @@
       "underscore": "1.7.0",
       "jquery-ui": "1.11.2",
       "jquery-validation": "1.13.1",
-      "DataTables": "1.10.4"
+      "DataTables": "1.10.4",
+      "datetimepicker":"2.0.0"
   }
 
 }

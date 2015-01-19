@@ -226,6 +226,12 @@
         _bindAddEvent();
         _bindModifyEvent();
         _bindRemoveEvent();
+        $('#datetimepicker').datetimepicker({
+            allowTimes:[
+                '12:00', '13:00', '15:00',
+                '17:00', '17:05', '17:20', '19:00', '20:00'
+            ]
+        });
     }
 
     _init();

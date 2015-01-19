@@ -83,6 +83,9 @@
                         case "Team":
                             RC.pages.team.init();
                             break;
+                        case "Overview":
+                            RC.pages.overview.init();
+                            break;
                     }
                 }
             }
