@@ -29,7 +29,7 @@ class UrlMappings {
         "/getCareGiver"(controller: "patients",action: "getCareGiver")
 
         // treatment
-        "/treatment/task"(controller: "treatment", action: "getTasks")
+        "/treatment/task"(controller: "task", action: "getTasks")
         "/treatment"(controller: "treatment", action: "index")
 
         // Accounts

@@ -254,15 +254,15 @@
                             (confirmFormArguments.cancelCallback)(e);
                         }
                         dialog.dialog("close");
-
-                        var elementList = $(confirmFormArguments.element).find("input");
-                        $.each(elementList, function (index, element) {
-                            RC.common.hideErrorTip(element);
-                        });
                     }
                 },
                 close: function () {
-                    //form.reset();
+
+                    var elementList = $(confirmFormArguments.element).find(".form-group").children();
+                    $.each(elementList, function (index, element) {
+                        RC.common.hideErrorTip(element);
+                    });
+                    confirmFormArguments.element[0].reset();
                 }
             });
             $container.removeClass('ui-hidden');
