@@ -40,7 +40,7 @@
                         <div class="bottom-content">
                             <a href="#" class="btn-make-primary">Make PRIMARY</a>
 
-                            <a href="#" id="remove-care-team" class="btn-remove" value="${team.id}">
+                            <a href="#" id="remove-care-team" class="btn-remove-team" value="${team.id}">
                                 <div class="icon-remove"></div>
                             </a>
                         </div>
@@ -88,7 +88,7 @@
                             <a href="#" id="edit-care-giver" class="btn-edit" data-id="${giver.id}">
                                 <div class="icon-edit"></div>
                             </a>
-                            <a href="#" id="remove-care-giver" class="btn-remove">
+                            <a href="#" id="remove-care-giver" class="btn-remove-giver">
                                 <div class="icon-remove"></div>
                             </a>
                         </div>

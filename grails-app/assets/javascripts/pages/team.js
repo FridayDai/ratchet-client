@@ -12,6 +12,7 @@
                 height: 200,
                 width: 400
             },
+
             confirmGiverFormArguments: {
                 title: RC.constants.confirmGiverTitle,
                 content: RC.constants.confirmContent,
@@ -25,8 +26,14 @@
                 height: 200,
                 width: 400
             },
-            waringArguments: {
-                title: RC.constants.warningTipTitle,
+
+            deleteTeamWaringArguments: {
+                title: RC.constants.deleteTeamWaringTitle,
+                message: RC.constants.warningTip
+            },
+
+            deleteGiverWaringArguments: {
+                title: RC.constants.deleteGiverWaringTitle,
                 message: RC.constants.warningTip
             }
         },
@@ -45,11 +52,12 @@
         // new a record
         $("#add-member").on("click", function (e) {
             e.preventDefault();
+            $(".addTeamForm")[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTeamFormArguments, {
                 element: $(".addTeamForm"),
                 okCallback: function () {
-                    if ($("#add-team-form").valid()) {
+                    if ($(".addTeamForm").valid()) {
                         //_add();
                         return true;
                     }
@@ -67,24 +75,46 @@
         // new a record
         $("#invite-giver").on("click", function (e) {
             e.preventDefault();
+            $(".inviteGiverForm")[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: $(".inviteGiverForm"),
                 okCallback: function () {
-                    alert("No");
+                    if ($(".inviteGiverForm").valid()) {
+                        //_add();
+                        return true;
+                    }
+                    return false;
                 }
             }));
         });
     }
 
     /**
-     * remove care event
+     * remove care team event
      * @private
      */
-    function _removeCare() {
-        $(".btn-remove").on("click", function () {
+    function _removeCareTeam() {
+        $(".btn-remove-team").on("click", function () {
             var parent = $(this).parent().parent();
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
+                element: $(".warn"),
+                closeCallback: function () {
+                    alert('ok');
+                    parent.remove();
+                }
+            }));
+        });
+    }
+
+    /**
+     * remove care giver event
+     * @private
+     */
+    function _removeCareGiver() {
+        $(".btn-remove-giver").on("click", function () {
+            var parent = $(this).parent().parent();
+            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
                     alert('ok');
@@ -119,18 +149,35 @@
     }
 
     /**
+     * set validate
+     * @private
+     */
+    //function _setValidate() {
+    //    $("#add-team-form").validate({
+    //            messages: {
+    //                provider: RC.constants.waringMessageProvider,
+    //                agent: RC.constants.waringMessageAgent,
+    //                email: RC.constants.waringMessageEmail
+    //            }
+    //        }
+    //    );
+    //}
+
+    /**
      * patientTeam page Initialization
      * @private
      */
     function _init() {
         _bindAddTeamEvent();
         _bindInviteGiverEvent();
-        _removeCare();
+        _removeCareTeam();
+        _removeCareGiver();
         _EditCareGiver();
+        //_setValidate();
     }
 
     $.extend(team, {
-        init: function(){
+        init: function () {
             _init();
         }
     });

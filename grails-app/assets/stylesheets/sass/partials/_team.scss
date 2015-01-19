@@ -1,5 +1,5 @@
 .inner-header {
-    background: #808080;
+    background: $base-color-whiter;
     height: 30px;
     padding-top: 10px;
     position: relative;
@@ -11,10 +11,20 @@
 
     .btn-position {
         background: none;
+        border: none;
+        border-bottom: 1px solid $base-blue-color;
         position: absolute;
         right: 20px;
         top: 10px;
-        width: 120px;
+        color: $base-blue-color;
+        padding-bottom: initial;
+        cursor: pointer;
+
+        &:before {
+            content: "+";
+            position: relative;
+            right: 5px;
+        }
     }
 }
 
@@ -29,12 +39,17 @@
         background: $base-color-white;
         display: inline-block;
         margin-bottom: 50px;
-        margin-left: 20px;
+        margin-left: 25px;
         margin-top: 20px;
+        margin-right: 20px;
         min-width: 320px;
         width: 30%;
+        @include border-radius(5px);
 
         .status {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: $base-color-white;
             height: 20px;
             padding-top: 5px;
             text-align: center;
@@ -98,7 +113,8 @@
 
     .btn-make-primary {
         border-bottom: 1px solid;
-        color: $base-color-grey;
+        color: $base-color-middle-grey;
+        font-size: 10px;
     }
 
     .icon-edit {
