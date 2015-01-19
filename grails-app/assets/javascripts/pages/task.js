@@ -237,7 +237,7 @@
 
     function _init() {
         _initDatePicker();
-        _initBoxColor();
+        //_initBoxColor();
         _clickFormBox();
         _addTask();
         _removeTask();

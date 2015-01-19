@@ -16,6 +16,7 @@
     width: 100%;
 }
 
+// box item for task
 .box-item {
     border: 2px solid;
     display: inline-block;
@@ -58,6 +59,44 @@
 
     .a-remove {
         cursor: pointer;
+    }
+
+    // change color according to status
+    &.SDM {
+        border-color: $base-color-green;
+
+        .item-header {
+            border-color: $base-color-green;
+        }
+
+        .item-left-li {
+            background-color: $base-color-green;
+        }
+
+    }
+
+    &.basic {
+        border-color: $base-color-yellow-darker;
+
+        .item-header {
+            border-color: $base-color-yellow-darker;
+        }
+
+        .item-left-li {
+            background-color: $base-color-yellow-darker;
+        }
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+
+        .item-header {
+            border-color: $base-color-mid-blue;
+        }
+
+        .item-left-li {
+            background-color: $base-color-mid-blue;
+        }
     }
 
 }
