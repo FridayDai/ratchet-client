@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="header-right inline">
-                        <g:checkBox name="checkbox1" value="" checked="false"/>
+                        <input type="radio" name="task-template" value="" checked="false"/>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
                     </div>
 
                     <div class="header-right inline">
-                        <g:checkBox name="checkbox1" value="" checked="false"/>
+                        <input type="radio" name="task-template" value="" checked="false"/>
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="header-right inline">
-                        <g:checkBox name="checkbox1" value="" checked="false"/>
+                        <input type="radio" name="task-template" value="" checked="false"/>
                     </div>
                 </div>
 
@@ -123,14 +123,14 @@
             <div>
                 <h4>When should John Smith receive this?</h4>
 
-                <div class="checkbox">
+                <div class="radio-box">
                     <label>
                         <input type="radio" name="time" value="1"/>
                         Now
                     </label>
                 </div>
 
-                <div class="checkbox">
+                <div class="radio-box">
                     <label>
                         <input type="radio" name="time" value="2">
                         A time related to the surgery date
@@ -142,14 +142,14 @@
             <div>
                 <h4>Should care team be notified if John Smith didn't complete this task?</h4>
 
-                <div class="checkbox">
+                <div class="radio-box">
                     <label>
                         <input type="radio" name="remind" value="1"/>
                         Yes
                     </label>
                 </div>
 
-                <div class="checkbox">
+                <div class="radio-box">
                     <label>
                         <input type="radio" name="remind" value="2">
                         No, it doesn't matter
@@ -162,11 +162,11 @@
 
     </g:form>
 
-    <g:form class="note-form ui-hidden" id="task-form" name="task-form">
-        <div class="form-group form-content">
-            <textarea rows="5" cols="20" class="text-area-form required">
-            </textarea>
-        </div>
-    </g:form>
+    %{--<g:form class="note-form ui-hidden" id="task-form" name="task-form">--}%
+        %{--<div class="form-group form-content">--}%
+            %{--<textarea rows="5" cols="20" class="text-area-form required">--}%
+            %{--</textarea>--}%
+        %{--</div>--}%
+    %{--</g:form>--}%
 
 </div>

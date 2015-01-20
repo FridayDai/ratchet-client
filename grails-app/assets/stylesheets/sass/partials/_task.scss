@@ -13,92 +13,7 @@
 }
 
 .text-area-form {
-    width: 100%;
-}
-
-// box item for task
-.box-item {
-    border: 2px solid;
-    display: inline-block;
-    margin-right: 10px;
-    width: 300px;
-
-    .item-header {
-        border-bottom: 2px $base-color-mid-grey solid;
-        height: 40px;
-    }
-
-    .item-left {
-        border-right: 1px $base-color-grey solid;
-        width: 20%;
-
-        li {
-            border-bottom: 1px $base-color-grey solid;
-            height: 54px;
-        }
-
-        .item-datetime {
-            height: 108px;
-        }
-    }
-
-    .item-right {
-        height: 275px;
-        width: 79%;
-
-        .right-one {
-            height: 54px;
-
-        }
-
-        .right-two {
-            height: 108px;
-        }
-
-    }
-
-    .a-remove {
-        cursor: pointer;
-    }
-
-    // change color according to status
-    &.SDM {
-        border-color: $base-color-green;
-
-        .item-header {
-            border-color: $base-color-green;
-        }
-
-        .item-left-li {
-            background-color: $base-color-green;
-        }
-
-    }
-
-    &.basic {
-        border-color: $base-color-yellow-darker;
-
-        .item-header {
-            border-color: $base-color-yellow-darker;
-        }
-
-        .item-left-li {
-            background-color: $base-color-yellow-darker;
-        }
-    }
-
-    &.outcome {
-        border-color: $base-color-mid-blue;
-
-        .item-header {
-            border-color: $base-color-mid-blue;
-        }
-
-        .item-left-li {
-            background-color: $base-color-mid-blue;
-        }
-    }
-
+    width: 95%;
 }
 
 .btn-right {
@@ -110,6 +25,195 @@
     padding-right: 20px;
 }
 
+.box-icon {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+}
+
+// box item for task
+.box-item {
+    border: 2px $base-color-mid-grey solid;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 340px;
+
+    .item-header {
+        border-bottom: 2px $base-color-mid-grey solid;
+        height: 30px;
+        padding: 4px 6px;
+
+        p {
+            padding: 6px;
+        }
+    }
+
+    .item-left {
+        border-right: 1px $base-color-grey solid;
+        width: 22%;
+
+        li {
+            border-bottom: 1px $base-color-grey solid;
+            height: 50px;
+            padding-top: 8px;
+            text-align: center;
+        }
+
+        .icon-type {
+            &.sdm {
+                background: url('../../../images/patients/sdm_task.png') no-repeat 0 0;
+            }
+
+            &.basic {
+                background: url('../../../images/patients/basic_task.png') no-repeat 0 0;
+            }
+
+            &.outcome {
+                background: url('../../../images/patients/outcome_task.png') no-repeat 0 0;
+            }
+        }
+
+        .item-datetime {
+            height: 98px;
+        }
+
+        .item-left-one {
+            background-color: $base-color-medium-grey;
+            color: $base-color-white;
+        }
+
+        .item-left-two {
+            font-weight: bold;
+            line-height: 42px;
+        }
+
+        .item-left-four {
+            color: $btn-color-primary;
+        }
+
+    }
+
+    .item-right {
+        height: 275px;
+        width: 77%;
+
+        .right-one {
+            height: 58px;
+
+        }
+
+        .h-color {
+            color: $base-color-darker-blue;
+        }
+
+        .right-two {
+            height: 116px;
+        }
+
+        .right-three {
+            height: 108px;
+            width: 264px;
+
+            .bullet {
+                padding-top: 2px;
+            }
+        }
+
+        .note-bg{
+            background-color: $base-color-lightest-blue;
+        }
+
+        .note-bg-edit {
+            background-color: $base-color-lightest-grey;
+        }
+
+        .item-note {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+        }
+
+        textarea {
+            display: none;
+        }
+
+    }
+
+    .a-remove {
+        cursor: pointer;
+    }
+
+    .bullet {
+        padding-top: 10px;
+        padding-left: 6px;
+    }
+
+    .overdue {
+        color: $base-color-error;
+    }
+
+    .new {
+        color: $base-color-green;
+    }
+
+    .complete, {
+        color: $base-color-mid-grey;
+    }
+
+    // change background and color according to status
+    &.sdm {
+        border-color: $base-color-green;
+
+        .item-header {
+            border-color: $base-color-green;
+        }
+
+        .item-left-one {
+            background-color: $base-color-green;
+        }
+
+//        .icon-type {
+//            background: url('../../../images/patients/sdm_task.png') no-repeat 0 0;
+//        }
+
+    }
+
+    &.basic {
+        border-color: $base-color-yellow-darker;
+
+        .item-header {
+            border-color: $base-color-yellow-darker;
+        }
+
+        .item-left-one {
+            background-color: $base-color-yellow-darker;
+        }
+
+//        .icon-type {
+//            background: url('../../../images/patients/basic_task.png') no-repeat 0 0;
+//        }
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+
+        .item-header {
+            border-color: $base-color-mid-blue;
+        }
+
+        .item-left-one {
+            background-color: $base-color-mid-blue;
+        }
+
+//        .icon-type {
+//            background: url('../../../images/patients/outcome_task.png') no-repeat 0 0;
+//        }
+    }
+
+}
+
+// all change in the form box
 .form-box {
     border: 2px solid;
     display: inline-block;
@@ -177,3 +281,33 @@
         border-color: $base-color-mid-blue;
     }
 }
+
+
+
+
+//may be can remove to common css
+.icon-dustbin {
+    background: url('../../../images/patients/dustbin.png') no-repeat 0 0;
+}
+
+.icon-calender {
+    background: url('../../../images/patients/calender.png') no-repeat 0 0;
+}
+
+.icon-share {
+    background: url('../../../images/patients/share.png') no-repeat 0 0;
+}
+
+.icon-note {
+    background: url('../../../images/patients/note.png') no-repeat 0 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+
