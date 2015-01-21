@@ -10,20 +10,36 @@
 
         <div class="item-left pull-left">
             <ul>
-                <li class="item-left-one">
+                <li class="item-left-one item-left-li">
                     <div class="box-icon icon-type ${task?.type}"></div>
                     <span class="uppercase">${task?.type}</span>
                 </li>
-                <li class="item-left-two capitalize ${task?.status}">${task?.status}</li>
-                <li class="item-datetime">
+                <li class="item-left-two item-left-li capitalize ${task?.status}">${task?.status}</li>
+                <li class="item-datetime item-left-li">
                     Due Date
                     <input class="datetime-picker" data-id="${task?.id}"/>
 
                     <div class="box-icon icon-calender"></div>
                 </li>
-                <li class="item-left-four">
+                <li class="item-left-four item-left-li btn-dropdown">
                     <div class="box-icon icon-share"></div>
-                    Share
+                    share
+                    <ul class="dropdown-list ">
+                        <li><a>Copy</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Via Message</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Via Email</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Print</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Notify</a></li>
+                    </ul>
+
                 </li>
             </ul>
         </div>
@@ -44,11 +60,17 @@
             </div>
 
             <div class="right-three">
-                <h5>Note
-                    <div class="item-note icon-note"></div>
-                </h5>
+                <div class="bullet">
+                    <h5>Note:
+                        <div class="item-note icon-note"></div>
+                    </h5>
 
-                <div class="note-content"></div>
+                    <div class="note-content">
+                        <p class="note-p">do you want to edit me ?</p>
+                        <textarea rows="5" cols="20" class="text-area-form required">
+                        </textarea>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -66,20 +88,36 @@
 
         <div class="item-left pull-left">
             <ul>
-                <li class="item-left-one">
+                <li class="item-left-one item-left-li">
                     <div class="box-icon icon-type ${task?.type}"></div>
                     <span class="uppercase">${task?.type}</span>
                 </li>
-                <li class="item-left-two capitalize ${task?.status}">${task?.status}</li>
-                <li class="item-datetime">
+                <li class="item-left-two item-left-li capitalize ${task?.status}">${task?.status}</li>
+                <li class="item-datetime item-left-li">
                     Due Date
                     <input class="datetime-picker" data-id="${task?.id}"/>
 
                     <div class="box-icon icon-calender"></div>
                 </li>
-                <li class="item-left-four">
+                <li class="item-left-four item-left-li btn-dropdown">
                     <div class="box-icon icon-share"></div>
-                    Share
+                    share
+                    <ul class="dropdown-list ">
+                        <li><a>Copy</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Via Message</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Via Email</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Print</a></li>
+
+                        <div class="divider"></div>
+                        <li><a>Notify</a></li>
+                    </ul>
+
                 </li>
             </ul>
         </div>
@@ -101,12 +139,12 @@
 
             <div class="right-three note-bg">
                 <div class="bullet">
-                    <h5>Note
+                    <h5 class="note-color">Note:
                         <div class="item-note icon-note"></div>
                     </h5>
 
                     <div class="note-content">
-                        <p class="note-p">do you want to edit me ?</p>
+                        <p class="note-p  note-color">do you want to edit me ?</p>
                         <textarea rows="5" cols="20" class="text-area-form required">
                         </textarea>
                     </div>

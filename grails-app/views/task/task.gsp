@@ -1,11 +1,11 @@
 <div class="content">
 
     <div class="task-header">
-        <button id="add-task" class="btn btn-right">+ Add Task</button>
+        <a id="add-task" class="btn btn-right">+ Add Task</a>
     </div>
 
     <div class="tasks-list">
-        <h4>Overdued Tasks:</h4>
+        <h4 class="overdue">Overdued Tasks:</h4>
 
         <div class="task-row">
             <g:each in="${taskOverdue}" var="task">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4>New Tasks:</h4>
+        <h4 class="new">New Tasks:</h4>
 
         <div class="task-row">
             <g:each in="${taskNew}" var="task">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4>Future Tasks:</h4>
+        <h4 class="future">Future Tasks:</h4>
 
         <div class="task-row">
             <g:each in="${taskFuture}" var="task">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4>Completed Tasks:</h4>
+        <h4 class="complete">Completed Tasks:</h4>
 
         <div class="task-row">
             <g:each in="${taskCompleted}" var="task">
@@ -54,22 +54,22 @@
     %{--</div>--}%
         <div class="divider"></div>
 
-        <div class="content">
+        <div class="task-content-up">
             <h4>Select a task from the list:</h4>
 
-            <div class="form-box border-color-change" value="SDM">
+            <div class="form-box border-color-change" value="sdm">
                 <div class="box-header">
                     <div class="header-left bg-color-change inline">
-                        %{--<asset:image src=""/>SDM--}%
-                        <span>SDM</span>
+                        <div class="box-icon icon-type sdm"></div>
+                        <span class="uppercase">sdm</span>
                     </div>
 
                     <div class="header-middle inline">
-                        <h5>Total Knee Replacement knowledge</h5>
+                        <h5 class="color-change">Total Knee Replacement knowledge</h5>
                     </div>
 
-                    <div class="header-right inline">
-                        <input type="radio" name="task-template" value="" checked="false"/>
+                    <div class="form-group header-right inline">
+                        <input type="radio" class="box-radio" name="task-template"/>
                     </div>
                 </div>
 
@@ -81,16 +81,16 @@
             <div class="form-box border-color-change" value="basic">
                 <div class="box-header">
                     <div class="header-left bg-color-change inline">
-                        %{--<asset:image src=""/>SDM--}%
-                        <span>BASIC</span>
+                        <div class="box-icon icon-type basic"></div>
+                        <span class="uppercase">basic</span>
                     </div>
 
                     <div class="header-middle inline">
-                        <h5>Pre Qualification</h5>
+                        <h5 class="color-change">Pre Qualification</h5>
                     </div>
 
-                    <div class="header-right inline">
-                        <input type="radio" name="task-template" value="" checked="false"/>
+                    <div class="form-group header-right inline">
+                        <input type="radio" class="box-radio" name="task-template"/>
                     </div>
                 </div>
 
@@ -102,24 +102,27 @@
             <div class="form-box border-color-change" value="outcome">
                 <div class="box-header">
                     <div class="header-left bg-color-change inline">
-                        %{--<asset:image src=""/>SDM--}%
-                        <span>OUTCOME</span>
+                        <div class="box-icon icon-type outcome"></div>
+                        <span class="uppercase">outcome</span>
                     </div>
 
                     <div class="header-middle inline">
-                        <h5>Knee Injury and Ostearthritis Outcome</h5>
+                        <h5 class="color-change">Knee Injury and Ostearthritis Outcome</h5>
                     </div>
 
-                    <div class="header-right inline">
-                        <input type="radio" name="task-template" value="" checked="false"/>
+                    <div class="form-group header-right inline">
+                        <input type="radio" class="box-radio" name="task-template"/>
                     </div>
                 </div>
 
                 <div class="box-content">
                     <p>Please read the following to have an understanding about Total Knee Replacement operation</p>
                 </div>
-            </div>
 
+            </div>
+        </div>
+
+        <div class="content">
             <div>
                 <h4>When should John Smith receive this?</h4>
 
@@ -143,9 +146,22 @@
                 <h4>Should care team be notified if John Smith didn't complete this task?</h4>
 
                 <div class="radio-box">
-                    <label>
+                    <label class="label-notify">
                         <input type="radio" name="remind" value="1"/>
                         Yes
+                    </label>
+                    <label>
+                        Remind us if it's not completed in:
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                        days
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                        hours upon receiving
                     </label>
                 </div>
 
@@ -157,16 +173,8 @@
                 </div>
 
             </div>
-
         </div>
 
     </g:form>
-
-    %{--<g:form class="note-form ui-hidden" id="task-form" name="task-form">--}%
-        %{--<div class="form-group form-content">--}%
-            %{--<textarea rows="5" cols="20" class="text-area-form required">--}%
-            %{--</textarea>--}%
-        %{--</div>--}%
-    %{--</g:form>--}%
 
 </div>

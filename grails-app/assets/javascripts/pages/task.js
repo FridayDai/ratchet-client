@@ -24,15 +24,10 @@
      */
     function _addTask() {
 
-        //$("input:radio").click(function(e) {
-        //    e.preventDefault();
-        //    e.stopPropagation();
-        //});
-
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
-            $(document.body).unbind("click");
+            //$(document.body).unbind("click");
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
@@ -78,48 +73,6 @@
     /*
      * edit note
      */
-    function _editNote() {
-        var noteContent = null;
-        var IsEditing = false;
-        $(".item-note").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if(!IsEditing){
-                noteContent = $(this).parent().next(".note-content");
-                IsEditing = _showNote(noteContent);
-            }
-
-        });
-
-        $(".note-p").dblclick(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if(!IsEditing){
-                noteContent = $(this).parent(".note-content");
-                IsEditing = _showNote(noteContent);
-            }
-        });
-
-        $(document.body).click( function(e) {
-            e.preventDefault();
-            if (noteContent){
-                IsEditing = _saveNote(noteContent);
-                noteContent = null;
-            }
-
-        });
-
-        $(".text-area-form").on("click", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-
-    }
-
-    function _bindDocument(){
-
-    }
-
     function _showNote(content) {
         var p = content.find("p");
         var value = p.text();
@@ -139,9 +92,82 @@
         return false;
     }
 
+    function _editNote() {
+        var noteContent = null;
+        var IsEditing = false;
+
+        $(".item-note").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!IsEditing) {
+                noteContent = $(this).parent().next(".note-content");
+                IsEditing = _showNote(noteContent);
+                _finishEdit();
+            }
+
+        });
+
+        $(".note-p").dblclick(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!IsEditing) {
+                noteContent = $(this).parent(".note-content");
+                IsEditing = _showNote(noteContent);
+                _finishEdit();
+            }
+        });
 
 
+        $(".text-area-form").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
 
+        function _finishEdit() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (noteContent) {
+                    IsEditing = _saveNote(noteContent);
+                    noteContent = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        }
+    }
+
+    /*
+     * for dropdownList
+     */
+    function _initDropdownList() {
+        var dropdownList;
+
+        $('.btn-dropdown').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dropdownList) {
+                //before new a dropdownList, we need to hide the old one
+                dropdownList.hide();
+            }
+            dropdownList = $(this).find(".dropdown-list");
+            dropdownList.show();
+            _closeDropdown();
+
+        });
+
+        function _closeDropdown() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (dropdownList) {
+                    dropdownList.hide();
+                    dropdownList = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        }
+
+    }
 
     /*
      * for form
@@ -149,79 +175,63 @@
     function _blurFormBox(element) {
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
-        if (type === "SDM") {
-            element.removeClass("sdm");
-            headerLeft.removeClass("background-sdm");
-            return;
-        }
-        if (type === "basic") {
-            element.removeClass("basic");
-            headerLeft.removeClass("background-basic");
-            return;
-        }
-        if (type === "outcome") {
-            element.removeClass("outcome");
-            headerLeft.removeClass("background-outcome");
+        var changeColor = element.find(".header-middle .color-change");
+
+        if (changeColor.hasClass('active-color')) {
+            changeColor.removeClass('active-color');
         }
 
-
+        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+            element.removeClass(type);
+            headerLeft.removeClass(type);
+        }
     }
 
     function _activeFormBox(element) {
 
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
+        var changeColor = element.find(".header-middle .color-change");
 
-        if (type === "SDM") {
-            element.addClass("sdm");
-            headerLeft.addClass("background-sdm");
-            return;
+        if (!changeColor.hasClass('active-color')) {
+            changeColor.addClass('active-color');
         }
-        if (type === "basic") {
-            element.addClass("basic");
-            headerLeft.addClass("background-basic");
-            return;
-        }
-        if (type === "outcome") {
-            element.addClass("outcome");
-            headerLeft.addClass("background-outcome");
+
+        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+            element.addClass(type);
+            headerLeft.addClass(type);
         }
     }
 
 
     function _clickFormBox() {
 
-
-
-
-        $('.form-box').click(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        $('.form-box').click(function () {
             var $this = $(this);
-            //var checkbox = $this.find(':checkbox');
-            //if (checkbox.prop('checked')) {
-            //    checkbox.prop('checked', false);
-            //    _blurFormBox($this);
-            //} else {
-            //    checkbox.prop('checked', true);
-            //    _activeFormBox($this);
-            //}
+            var radio = $this.find(':radio');
+
+            $("input:radio[name=task-template]").each(function () {
+                _blurFormBox($(this).closest(".form-box"));
+                this.checked = false;
+            });
+
+            _activeFormBox($(this));
+            radio.prop('checked', true);
+
         });
 
+        $('.box-radio').click(function (e) {
+            e.stopPropagation();
 
-        //$('.form-box .header-right :checkbox').change(function() {
-        //    var parent = $(this).closest(".form-box");
-        //
-        //    if($(this).prop('checked')) {
-        //        _activeFormBox(parent);
-        //    }
-        //    else {
-        //        _blurFormBox(parent);
-        //    }
-        //
-        //})
+            $("input:radio[name=task-template]").each(function () {
+                _blurFormBox($(this).closest(".form-box"));
+            });
+
+            _activeFormBox($(this).closest(".form-box"));
+
+        });
+
     }
-
 
 
     function _initDatePicker() {
@@ -230,10 +240,12 @@
 
     function _init() {
         _initDatePicker();
+        _initDropdownList();
         _clickFormBox();
         _addTask();
         _removeTask();
         _editNote();
+
 
     }
 
