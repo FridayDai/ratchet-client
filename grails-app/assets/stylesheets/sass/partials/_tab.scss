@@ -1,17 +1,13 @@
 .ui-tabs {
-    padding: .2em;
     position: relative;
 
     .ui-tabs-nav {
         margin: 0;
-        padding: .2em .2em 0;
 
         li {
             border-bottom-width: 0;
             float: left;
             list-style: none;
-            margin: 1px .2em 0 0;
-            padding: 0;
             position: relative;
             top: 0;
             white-space: nowrap;
@@ -24,7 +20,7 @@
 
         .ui-tabs-anchor {
             float: left;
-            padding: .5em 1em;
+            padding: 0 10px;
             text-decoration: none;
         }
     }
@@ -33,7 +29,6 @@
         background: none;
         border-width: 0;
         display: block;
-        padding: 1em 1.4em;
     }
 }
 
@@ -47,10 +42,49 @@
     cursor: pointer;
 }
 
-.ui-state-active {
-    background-color: $base-color-light-grey;
+.tab-treatment {
+    .ui-corner-top {
+        .ui-tabs-anchor {
+            background: $base-dark-grey-color;
+            color: $base-color-medium-grey;
+            padding: .5em 1em;
+        }
+    }
+}
 
-    a {
-        color: $base-color-white;
+.tab-treatment {
+    border-top: 1px solid $base-light-grey-color;
+    padding: 0;
+
+    .ui-state-active {
+        .ui-tabs-anchor {
+            background: $base-color-black;
+            color: $base-color-white;
+            padding: .5em 1em;
+        }
+    }
+}
+
+.tab-list {
+    background: $base-color-black;
+    padding: 0;
+
+    li {
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+        a {
+            border-right: 1px solid $btn-color-primary;
+            color: $base-color-green;
+            padding: 0 10px;
+        }
+    }
+}
+
+.tab-list {
+    .ui-state-active {
+        a {
+            color: $base-color-yellow;
+        }
     }
 }

@@ -2,7 +2,7 @@
 <div class="content">
 
     <div id="subTabs" class="patient-tab sub-tabs">
-        <ul>
+        <ul class="tab-list">
             <li>
                 <g:link controller="overview" action="index">Overview</g:link>
             </li>

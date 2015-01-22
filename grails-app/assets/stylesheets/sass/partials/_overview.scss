@@ -1,5 +1,32 @@
+.content-head {
+    background: $base-color-grey;
+    border-bottom: 1px solid $btn-color-primary;
+    display: block;
+    height: 50px;
+
+    .icon-back {
+        background: url('../../../images/patients/arrow.png') no-repeat 0 0;
+        background-size: cover;
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 4px;
+        position: absolute;
+        width: 25px;
+    }
+
+    p {
+        border-left: 1px solid $btn-color-primary;
+        font-size: large;
+        height: 36px;
+        margin-left: 55px;
+        margin-top: -18px;
+        padding-left: 20px;
+        padding-top: 15px;
+    }
+}
+
 .patient-info {
-    padding: 10px;
+    padding: 20px 40px;
     position: relative;
 
     .btn-edit {
@@ -7,10 +34,56 @@
         right: 20px;
         top: 0;
     }
+
+    .patient-inner-info {
+        border-right: 1px solid $base-light-grey-color;
+        padding: 20px;
+        width: 180px;
+
+        .div-space {
+            margin-top: 10px;
+        }
+
+        .color {
+            color: $base-color-middle-grey;
+        }
+
+        .name-info {
+            font-size: x-large;
+        }
+    }
+
+    .icon-edit {
+        background: url('../../../images/edit.png') no-repeat 0 0;
+        background-size: cover;
+        height: 20px;
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        width: 20px;
+    }
 }
 
-.patient-tab {
-    border: 1px solid $base-color-medium-grey;
+.patient-right-info {
+    left: 300px;
+    position: absolute;
+    top: 20px;
+
+    .email-info {
+        &:before {
+            content: url('../../../images/patients/email.png');
+            left: -7px;
+            position: absolute;
+        }
+    }
+
+    .phone-info {
+        &:before {
+            content: url('../../../images/patients/phone.png');
+            left: -7px;
+            position: absolute;
+        }
+    }
 }
 
 .overview-content {
@@ -18,10 +91,11 @@
     width: 100%;
 
     .outcome-graph {
+        margin-top: 10px;
         width: 70%;
 
         .graph {
-            border: 1px solid $base-color-medium-grey;
+            border-top: 1px solid $base-light-blue-color;
             margin-top: 10px;
             min-height: 640px;
         }
@@ -32,24 +106,157 @@
         width: 25%;
 
         .activity {
-            border: 1px solid $base-color-medium-grey;
+            border-top: 1px solid $base-light-blue-color;
+            height: 400px;
             margin-bottom: 10px;
-            margin-top: 10px;
-            min-height: 300px;
+            overflow-y: auto;
             width: 100%;
         }
 
         .task {
-            border: 1px solid $base-color-medium-grey;
-            margin-top: 10px;
-            min-height: 300px;
+            border-top: 1px solid $base-light-blue-color;
+            height: 150px;
             width: 100%;
         }
     }
 }
 
 .add-tab {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid $base-blue-color;
+    border-radius: 0;
+    color: $base-blue-color;
+    margin-top: -20px;
+    padding-top: 20px;
     position: absolute;
-    right: 0;
-    z-index: 999;
+    right: 20px;
+    top: 10px;
+    width: 85px;
+
+    &:before {
+        content: '+';
+        position: relative;
+        right: 5px;
+    }
+
+    .ui-button-text {
+        color: $base-blue-color;
+        font-size: smaller;
+    }
+
+    &:hover,
+    &:focus {
+        background: transparent;
+        border-bottom: 1px solid $base-blue-color;
+        color: $base-blue-color;
+
+        .ui-button-text {
+            color: $base-blue-color;
+        }
+    }
+}
+
+.pull-left {
+    margin-left: 10px;
+
+    label {
+        color: $base-darker-grey-color;
+    }
+
+    .lbl-outcome {
+        padding: 5px;
+    }
+
+    .right-header {
+        padding: 10px 5px;
+        position: relative;
+
+        .icon-refresh {
+            background: url('../../../images/patients/refresh.png') no-repeat 0 0;
+            background-size: cover;
+            height: 15px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 15px;
+        }
+    }
+}
+
+.activity-content {
+    @include border-radius(5px);
+    border: 1px solid $btn-color-primary;
+    margin-top: 20px;
+    padding: 5px 20px 20px;
+
+    li {
+        margin-top: 10px;
+    }
+
+    .li-content {
+        @include border-radius(5px);
+        color: $base-color-white;
+        padding: 0 5px;
+    }
+
+    .title-task {
+        background: $base-blue-color;
+        width: 37px;
+    }
+
+    .title-reminder {
+        background: $base-color-red;
+        width: 75px;
+    }
+
+    .title-initiate {
+        background: $base-color-dark-yellow;
+        width: 62px;
+    }
+
+    .li-last-update {
+        font-size: x-small;
+    }
+}
+
+.triangle {
+    margin-left: 10px;
+    position: relative;
+    top: 10px;
+
+    .triangle-icon {
+        border-style: solid;
+        border-width: 5px 5px 0;
+        display: block;
+        height: 0;
+        position: absolute;
+        width: 0;
+    }
+
+    .triangle-icon-down {
+        border-color: $base-light-blue-color transparent transparent;
+        left: 0;
+        top: 0;
+    }
+
+    .triangle-icon-upper {
+        border-color: $base-color-white transparent transparent;
+        left: -5px;
+        top: -7px;
+    }
+}
+
+.right-header {
+    &:hover {
+        background: $base-dark-blue-color;
+
+        label {
+            color: $base-color-white;
+        }
+
+        .triangle-icon {
+            border-color: $base-dark-blue-color transparent transparent transparent;
+        }
+    }
 }

@@ -113,9 +113,9 @@
                        required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group select-group">
                 <label for="roles">Role:</label>
-                <select name="roles" id="roles">
+                <select name="roles" id="roles" class="select-body">
                     <option selected="selected">Surgeon</option>
                     <option>Nurse</option>
                 </select>
@@ -142,9 +142,9 @@
                        required/>
             </div>
 
-            <div class="form-group">
+            <div class="form-group select-group">
                 <label for="relationship">Relationship:</label>
-                <select name="relationship" id="relationship">
+                <select name="relationship" id="relationship" class="select-body">
                     <option selected="selected">Spouse</option>
                     <option>Sibling</option>
                     <option>Children</option>

@@ -15,6 +15,7 @@
         confirmTeamTitle: "Add a new Team Member",
         confirmGiverTitle: "Invite a new Care Giver",
         editGiverTitle: "Edit a Care Giver",
+        editPatientTitle:"Edit a patient",
         confirmContent: "",
         loadingContent: "This is loading content",
 

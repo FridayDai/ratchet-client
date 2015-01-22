@@ -149,21 +149,6 @@
     }
 
     /**
-     * set validate
-     * @private
-     */
-    //function _setValidate() {
-    //    $("#add-team-form").validate({
-    //            messages: {
-    //                provider: RC.constants.waringMessageProvider,
-    //                agent: RC.constants.waringMessageAgent,
-    //                email: RC.constants.waringMessageEmail
-    //            }
-    //        }
-    //    );
-    //}
-
-    /**
      * patientTeam page Initialization
      * @private
      */
@@ -173,7 +158,6 @@
         _removeCareTeam();
         _removeCareGiver();
         _EditCareGiver();
-        //_setValidate();
     }
 
     $.extend(team, {

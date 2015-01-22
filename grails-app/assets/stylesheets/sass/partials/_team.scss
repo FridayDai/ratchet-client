@@ -11,17 +11,17 @@
 
     .btn-position {
         background: none;
-        border: none;
+        border: 0;
         border-bottom: 1px solid $base-blue-color;
+        color: $base-blue-color;
+        cursor: pointer;
+        padding-bottom: initial;
         position: absolute;
         right: 20px;
         top: 10px;
-        color: $base-blue-color;
-        padding-bottom: initial;
-        cursor: pointer;
 
         &:before {
-            content: "+";
+            content: '+';
             position: relative;
             right: 5px;
         }
@@ -36,15 +36,15 @@
     width: 100%;
 
     .detail-info {
+        @include border-radius(5px);
         background: $base-color-white;
         display: inline-block;
         margin-bottom: 50px;
         margin-left: 25px;
-        margin-top: 20px;
         margin-right: 20px;
+        margin-top: 20px;
         min-width: 320px;
         width: 30%;
-        @include border-radius(5px);
 
         .status {
             border-top-left-radius: 5px;
@@ -79,7 +79,7 @@
         margin-bottom: 20px;
 
         .p-id {
-            color: $base-color-grey;
+            color: $base-grey-color;
         }
 
         .p-name {
@@ -100,7 +100,7 @@
     margin-bottom: 20px;
 
     p {
-        color: $base-color-grey;
+        color: $base-grey-color;
         margin-left: 5%;
         margin-right: 5%;
     }
