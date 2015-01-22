@@ -4,7 +4,6 @@
 }
 
 .task-row {
-    //    border: 1px $border-color-light-blue solid;
     border-radius: 4px;
 }
 
@@ -13,92 +12,7 @@
 }
 
 .text-area-form {
-    width: 100%;
-}
-
-// box item for task
-.box-item {
-    border: 2px solid;
-    display: inline-block;
-    margin-right: 10px;
-    width: 300px;
-
-    .item-header {
-        border-bottom: 2px $base-color-mid-grey solid;
-        height: 40px;
-    }
-
-    .item-left {
-        border-right: 1px $base-color-grey solid;
-        width: 20%;
-
-        li {
-            border-bottom: 1px $base-color-grey solid;
-            height: 54px;
-        }
-
-        .item-datetime {
-            height: 108px;
-        }
-    }
-
-    .item-right {
-        height: 275px;
-        width: 79%;
-
-        .right-one {
-            height: 54px;
-
-        }
-
-        .right-two {
-            height: 108px;
-        }
-
-    }
-
-    .a-remove {
-        cursor: pointer;
-    }
-
-    // change color according to status
-    &.SDM {
-        border-color: $base-color-green;
-
-        .item-header {
-            border-color: $base-color-green;
-        }
-
-        .item-left-li {
-            background-color: $base-color-green;
-        }
-
-    }
-
-    &.basic {
-        border-color: $base-color-yellow-darker;
-
-        .item-header {
-            border-color: $base-color-yellow-darker;
-        }
-
-        .item-left-li {
-            background-color: $base-color-yellow-darker;
-        }
-    }
-
-    &.outcome {
-        border-color: $base-color-mid-blue;
-
-        .item-header {
-            border-color: $base-color-mid-blue;
-        }
-
-        .item-left-li {
-            background-color: $base-color-mid-blue;
-        }
-    }
-
+    width: 95%;
 }
 
 .btn-right {
@@ -110,6 +24,203 @@
     padding-right: 20px;
 }
 
+.bullet {
+    padding-left: 12px;
+    padding-top: 10px;
+
+}
+
+.box-icon {
+    height: 30px;
+    margin: 0 auto;
+    width: 30px;
+}
+
+.datetime-picker {
+    border-style: none;
+    height: 50px;
+    width: 50px;
+}
+
+.overdue {
+    color: $base-color-error;
+}
+
+.new {
+    color: $base-color-green;
+}
+
+.complete,
+.future {
+    color: $base-color-mid-grey;
+}
+
+.icon-type {
+    &.sdm {
+        background: url('../../../images/patients/sdm_task.png') no-repeat 0 0;
+    }
+
+    &.basic {
+        background: url('../../../images/patients/basic_task.png') no-repeat 0 0;
+    }
+
+    &.outcome {
+        background: url('../../../images/patients/outcome_task.png') no-repeat 0 0;
+    }
+}
+
+// box item for task
+.box-item {
+    border: 2px $base-color-mid-grey solid;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 340px;
+
+    .item-header {
+        border-bottom: 2px $base-color-mid-grey solid;
+        height: 30px;
+        padding: 4px 6px;
+
+        p {
+            padding: 6px;
+        }
+    }
+
+    .item-left {
+        border-right: 1px $base-color-grey solid;
+        width: 22%;
+
+        .item-left-li {
+            border-bottom: 1px $base-color-grey solid;
+            height: 50px;
+            padding-top: 8px;
+            text-align: center;
+        }
+
+        .item-datetime {
+            height: 98px;
+        }
+
+        .item-left-one {
+            background-color: $base-color-medium-grey;
+            color: $base-color-white;
+        }
+
+        .item-left-two {
+            font-weight: bold;
+            line-height: 42px;
+        }
+
+        .item-left-four {
+            color: $btn-color-primary;
+        }
+
+    }
+
+    .dropdown-list {
+        left: 76px;
+        top: -1px;
+
+        li {
+            padding: 0 12px;
+        }
+    }
+
+    .item-right {
+        height: 275px;
+        width: 77%;
+
+        .right-one {
+            height: 58px;
+
+        }
+
+        .h-color {
+            color: $base-color-darker-blue;
+        }
+
+        .right-two {
+            height: 116px;
+        }
+
+        .note-color {
+            color: $base-color-blue-dark;
+        }
+
+        .note-bg {
+            background-color: $base-color-lightest-blue;
+        }
+
+        .note-bg-edit {
+            background-color: $base-color-lightest-grey;
+        }
+
+        .item-note {
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+        }
+
+        textarea {
+            display: none;
+        }
+
+    }
+
+    .right-three {
+        height: 108px;
+        width: 264px;
+
+        .bullet {
+            padding-top: 2px;
+        }
+    }
+
+    .a-remove {
+        cursor: pointer;
+    }
+
+    // change background and color according to status
+    &.basic {
+        border-color: $base-color-green;
+
+        .item-header {
+            border-color: $base-color-green;
+        }
+
+        .item-left-one {
+            background-color: $base-color-green;
+        }
+    }
+
+    &.sdm {
+        border-color: $base-color-yellow-darker;
+
+        .item-header {
+            border-color: $base-color-yellow-darker;
+        }
+
+        .item-left-one {
+            background-color: $base-color-yellow-darker;
+        }
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+
+        .item-header {
+            border-color: $base-color-mid-blue;
+        }
+
+        .item-left-one {
+            background-color: $base-color-mid-blue;
+        }
+    }
+
+}
+
+// all change in the form box
 .form-box {
     border: 2px solid;
     display: inline-block;
@@ -121,8 +232,10 @@
         width: 100%;
 
         .header-left {
+            color: $base-color-white;
             float: left;
             height: 100%;
+            text-align: center;
             width: 25%;
         }
 
@@ -140,23 +253,47 @@
     }
 
     .box-content {
-        padding: 4px 6px;
+        padding: 12px 10px;
     }
+
+}
+
+// for task form
+.task-form {
+
+    .divider {
+        margin-bottom: 0;
+    }
+
+    .label-notify {
+        padding-right: 40px;
+    }
+
+    .radio-box {
+        color: $base-color-blue-grey;
+        margin: 6px 0;
+    }
+}
+
+.task-content-up {
+    background-color: $base-color-light-grey;
+    padding: 20px;
+    padding-bottom: 40px;
 
 }
 
 .bg-color-change {
     background-color: $base-color-mid-grey;
 
-    &.background-sdm {
-        background-color: $base-color-green;
-    }
-
-    &.background-basic {
+    &.sdm {
         background-color: $base-color-yellow-darker;
     }
 
-    &.background-outcome {
+    &.basic {
+        background-color: $base-color-green;
+    }
+
+    &.outcome {
         background-color: $base-color-mid-blue;
     }
 
@@ -166,14 +303,49 @@
     border-color: $base-color-mid-grey;
 
     &.sdm {
-        border-color: $base-color-green;
+        border-color: $base-color-yellow-darker;
     }
 
     &.basic {
-        border-color: $base-color-yellow-darker;
+        border-color: $base-color-green;
     }
 
     &.outcome {
         border-color: $base-color-mid-blue;
     }
 }
+
+.color-change {
+    color: $base-color-mid-grey;
+
+    &.active-color {
+        color: $base-color-darker-blue;
+    }
+}
+
+//may be can remove to common css
+.icon-dustbin {
+    background: url('../../../images/patients/dustbin.png') no-repeat 0 0;
+}
+
+.icon-calender {
+    background: url('../../../images/patients/calender.png') no-repeat 0 0;
+}
+
+.icon-share {
+    background: url('../../../images/patients/share.png') no-repeat 0 0;
+}
+
+.icon-note {
+    background: url('../../../images/patients/note.png') no-repeat 0 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+

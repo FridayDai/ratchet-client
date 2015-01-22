@@ -3,7 +3,7 @@
 
     var task = RC.pages.task = RC.pages.task || {};
 
-//Define task page global variables
+    //Define task page global variables
     var opts = {
         defaultConfirmArguments: {
             confirmFormArguments: {
@@ -12,81 +12,22 @@
                 height: 200,
                 width: 980
             },
-            noteFormArguments: {
-                title: RC.constants.confirmNoteTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 400
-            },
             waringArguments: {
                 title: RC.constants.warningTipTitle,
                 message: RC.constants.warningTip
             }
-
         }
     };
-
-    /*
-     * init page color
-     */
-
-    function _initBoxColor() {
-        $(".box-item").each(function () {
-            var $this = $(this);
-            var $header = $this.find('.item-header');
-            var $bgType = $this.find('.item-left-li');
-            var type = $(this).attr("value");
-            var hasClass = $this.hasClass('SDM') || $this.hasClass('basic') || $this.hasClass('outcome');
-
-            if ($this.attr('status') === "complete" || hasClass) {
-                return;
-            }
-
-            _changeBorderColor(type, $this, $header);
-            _changeBgColor(type, $bgType);
-
-        });
-    }
-
-    function _changeBorderColor(type, that, header) {
-
-        if (type === "SDM") {
-            that.addClass("sdm");
-            header.addClass("sdm");
-            return;
-        }
-        if (type === "basic") {
-            that.addClass("basic");
-            header.addClass("basic");
-        }
-        else {
-            that.addClass("outcome");
-            header.addClass("outcome");
-        }
-    }
-
-    function _changeBgColor(type, bgType) {
-
-        if (type === "SDM") {
-            bgType.addClass("background-sdm");
-            return;
-        }
-        if (type === "basic") {
-            bgType.addClass("background-basic");
-        }
-        else {
-            bgType.addClass("background-outcome");
-        }
-    }
 
     /*
      * add task
      */
     function _addTask() {
+
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
-
+            //$(document.body).unbind("click");
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
@@ -114,7 +55,6 @@
     /*
      * remove task
      */
-
     function _removeTask() {
         $('.a-remove').click(function () {
             var $this = $(this);
@@ -131,47 +71,135 @@
     }
 
     /*
+     * edit note
+     */
+    function _showNote(content) {
+        var p = content.find("p");
+        var value = p.text();
+        p.hide();
+        content.parent().removeClass('note-bg').addClass('note-bg-edit');
+        content.find("textarea").val(value).show();
+        return true;
+
+    }
+
+    function _saveNote(content) {
+        var textarea = content.find("textarea");
+        var value = textarea.val();
+        textarea.hide();
+        content.parent().removeClass('note-bg-edit').addClass('note-bg');
+        content.find("p").text(value).show();
+        return false;
+    }
+
+    function _editNote() {
+        var noteContent = null;
+        var IsEditing = false;
+
+        $(".item-note").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!IsEditing) {
+                noteContent = $(this).parent().next(".note-content");
+                IsEditing = _showNote(noteContent);
+                _finishEdit();
+            }
+
+        });
+
+        $(".note-p").dblclick(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!IsEditing) {
+                noteContent = $(this).parent(".note-content");
+                IsEditing = _showNote(noteContent);
+                _finishEdit();
+            }
+        });
+
+
+        $(".text-area-form").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        function _finishEdit() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (noteContent) {
+                    IsEditing = _saveNote(noteContent);
+                    noteContent = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        }
+    }
+
+    /*
+     * for dropdownList
+     */
+    function _initDropdownList() {
+        var dropdownList;
+
+        $('.btn-dropdown').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (dropdownList) {
+                //before new a dropdownList, we need to hide the old one
+                dropdownList.hide();
+            }
+            dropdownList = $(this).find(".dropdown-list");
+            dropdownList.show();
+            _closeDropdown();
+
+        });
+
+        function _closeDropdown() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (dropdownList) {
+                    dropdownList.hide();
+                    dropdownList = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        }
+
+    }
+
+    /*
      * for form
      */
     function _blurFormBox(element) {
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
-        if (type === "SDM") {
-            element.removeClass("sdm");
-            headerLeft.removeClass("background-sdm");
-            return;
-        }
-        if (type === "basic") {
-            element.removeClass("basic");
-            headerLeft.removeClass("background-basic");
-            return;
-        }
-        if (type === "outcome") {
-            element.removeClass("outcome");
-            headerLeft.removeClass("background-outcome");
+        var changeColor = element.find(".header-middle .color-change");
+
+        if (changeColor.hasClass('active-color')) {
+            changeColor.removeClass('active-color');
         }
 
-
+        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+            element.removeClass(type);
+            headerLeft.removeClass(type);
+        }
     }
 
     function _activeFormBox(element) {
 
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
+        var changeColor = element.find(".header-middle .color-change");
 
-        if (type === "SDM") {
-            element.addClass("sdm");
-            headerLeft.addClass("background-sdm");
-            return;
+        if (!changeColor.hasClass('active-color')) {
+            changeColor.addClass('active-color');
         }
-        if (type === "basic") {
-            element.addClass("basic");
-            headerLeft.addClass("background-basic");
-            return;
-        }
-        if (type === "outcome") {
-            element.addClass("outcome");
-            headerLeft.addClass("background-outcome");
+
+        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+            element.addClass(type);
+            headerLeft.addClass(type);
         }
     }
 
@@ -180,56 +208,31 @@
 
         $('.form-box').click(function () {
             var $this = $(this);
-            var checkbox = $this.find(':checkbox');
-            if (checkbox.prop('checked')) {
-                checkbox.prop('checked', false);
-                _blurFormBox($this);
-            } else {
-                checkbox.prop('checked', true);
-                _activeFormBox($this);
-            }
+            var radio = $this.find(':radio');
+
+            $("input:radio[name=task-template]").each(function () {
+                _blurFormBox($(this).closest(".form-box"));
+                this.checked = false;
+            });
+
+            _activeFormBox($(this));
+            radio.prop('checked', true);
+
         });
 
+        $('.box-radio').click(function (e) {
+            e.stopPropagation();
 
-        //$('.form-box .header-right :checkbox').change(function() {
-        //    var parent = $(this).closest(".form-box");
-        //
-        //    if($(this).prop('checked')) {
-        //        _activeFormBox(parent);
-        //    }
-        //    else {
-        //        _blurFormBox(parent);
-        //    }
-        //
-        //})
-    }
+            $("input:radio[name=task-template]").each(function () {
+                _blurFormBox($(this).closest(".form-box"));
+            });
 
-    /*
-     * edit note
-     */
-    function _editNote() {
-        $(".item-note").on("click", function (e) {
-            e.preventDefault();
-            $(".note-form")[0].reset();
-            var noteContent = $(this).parent().next();
+            _activeFormBox($(this).closest(".form-box"));
 
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.noteFormArguments, {
-                element: $(".note-form"),
-                okCallback: function () {
-                    if($("textarea").valid()){
-                        var textarea = this.element.find('textarea').val();
-                        noteContent.html("<p>" + textarea + "</p>");
-                        return true;
-                    }
-
-                },
-                cancelCallback: function () {
-
-                }
-
-            }));
         });
+
     }
+
 
     function _initDatePicker() {
         $('.datetime-picker').datepicker();
@@ -237,11 +240,12 @@
 
     function _init() {
         _initDatePicker();
-        //_initBoxColor();
+        _initDropdownList();
         _clickFormBox();
         _addTask();
         _removeTask();
         _editNote();
+
 
     }
 
