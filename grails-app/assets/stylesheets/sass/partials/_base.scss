@@ -5,6 +5,22 @@
 @import 'compass/reset';
 @import 'compass/css3';
 
+<<<<<<< HEAD
+=======
+
+@font-face {
+    font-family: 'fontello';
+    src: url('../../../fonts/fontello.eot');
+    src: url('../../../fonts/fontello.eot?#iefix') format('embedded-opentype'),
+    url('../../../fonts/fontello.woff') format('woff'),
+    url('../../../fonts/fontello.ttf') format('truetype'),
+    url('../../../fonts/fontello.svg?#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+>>>>>>> add timepicker
 html,
 body {
     font: $base-font-utility;
@@ -200,96 +216,6 @@ a {
     color: $base-color-mid-grey;
 }
 
-.ui-tooltip {
-    @include box-shadow($base-color-error-border 0 0 5px);
-    background: $base-color-error;
-    border: 0;
-    border-radius: 4px;
-    color: $base-color-white;
-    max-width: 300px;
-    opacity: 1;
-    padding: 0;
-    position: absolute;
-    z-index: 9999;
-}
-
-.ui-tooltip-content {
-    padding: 6px 10px;
-    position: relative;
-
-    &:after {
-        border-style: solid;
-        content: '';
-        display: block;
-        position: absolute;
-        width: 0;
-    }
-}
-
-.error-msg-right {
-    .ui-tooltip-content {
-        &:after {
-            border-color: transparent $base-color-error;
-            border-width: 10px 10px 10px 0;
-            left: -10px;
-            top: 5px;
-        }
-    }
-}
-
-.error-msg-left {
-    .ui-tooltip-content {
-        &:after {
-            border-color: transparent $base-color-error;
-            border-width: 10px 0 10px 10px;
-            right: -10px;
-            top: 5px;
-        }
-    }
-}
-
-.error-msg-top {
-    .ui-tooltip-content {
-        &:after {
-            border-color: $base-color-error transparent;
-            border-width: 10px 10px 0;
-            bottom: -10px;
-            left: 45%;
-        }
-    }
-}
-
-.error-msg-bottom {
-    .ui-tooltip-content {
-        &:after {
-            border-color: $base-color-error transparent;
-            border-width: 0 10px 10px;
-            left: 72px;
-            top: -10px;
-        }
-    }
-}
-
-.accordion-inner-body {
-    border-bottom: 1px solid $base-color-medium-grey;
-}
-
-.accordion-title {
-    color: $base-color-medium-grey;
-
-    &:before {
-        border: solid 5px $base-color-medium-grey;
-    }
-}
-
-.accordion-title-change {
-    color: $base-color-dark-blue;
-
-    &:before {
-        border: solid 5px $base-color-medium-blue;
-    }
-}
-
 .treatment-id {
     color: $base-color-medium-grey;
 }
@@ -333,16 +259,13 @@ a {
     }
 }
 
-.ui-helper-hidden-accessible {
-    display: none;
-}
-
 .content {
     //    margin-left: 20px;
     //    margin-right: 20px;
     //    margin-top: 30px;
 }
 
+<<<<<<< HEAD
 .ui-helper-hidden {
     display: none;
 }
@@ -398,6 +321,8 @@ a {
     z-index: 100;
 }
 
+=======
+>>>>>>> add timepicker
 .clear {
     &:before {
         content: ' ';

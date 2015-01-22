@@ -57,7 +57,7 @@
         </g:form>
 
     </div>
-    <input id="datetimepicker" type="text" >
+    <input id="selectTreatment" type="text" width="260">
     </body>
     </html>
 </g:applyLayout>

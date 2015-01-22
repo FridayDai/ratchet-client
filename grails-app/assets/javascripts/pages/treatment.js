@@ -84,7 +84,7 @@
                             RC.pages.team.init();
                             break;
                         case "Overview":
-                            RC.pages.overview.init();
+                            RC.pages.overview.init(ui.panel);
                             break;
                     }
                 }
