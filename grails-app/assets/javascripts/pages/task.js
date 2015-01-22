@@ -235,7 +235,15 @@
 
 
     function _initDatePicker() {
-        $('.datetime-picker').datepicker();
+        $('.datetime-picker').datetimepicker({
+            controlType: 'input',
+            showOn: "button",
+            buttonImage: "../../assets/patients/calender.png",
+            buttonImageOnly: true,
+            onClose: function( selectedDate ) {
+                $(this).parent().find('.datetime-picker-label').text(selectedDate);
+            }
+        });
     }
 
     function _init() {
@@ -245,8 +253,6 @@
         _addTask();
         _removeTask();
         _editNote();
-
-
     }
 
     $.extend(task, {

@@ -215,6 +215,32 @@
         });
     }
 
+    function _initSelect2() {
+        $('#selectTreatment').select2({
+            tags: true,
+            ajax: {
+                url: opts.urls.query,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
+    }
     /**
      * Provider page Initialization
      * @private
@@ -226,6 +252,8 @@
         _bindAddEvent();
         _bindModifyEvent();
         _bindRemoveEvent();
+        _initSelect2();
+
     }
 
     _init();

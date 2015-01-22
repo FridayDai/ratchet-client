@@ -17,9 +17,9 @@
                 <li class="item-left-two item-left-li capitalize ${task?.status}">${task?.status}</li>
                 <li class="item-datetime item-left-li">
                     Due Date
-                    <input class="datetime-picker" data-id="${task?.id}"/>
-
-                    <div class="box-icon icon-calender"></div>
+                    <label class="datetime-picker-label"></label>
+                    <input type="hidden" class="datetime-picker" data-id="${task?.id}"/>
+                    %{--<div class="box-icon icon-calender"></div>--}%
                 </li>
                 <li class="item-left-four item-left-li btn-dropdown">
                     <div class="box-icon icon-share"></div>
@@ -95,9 +95,11 @@
                 <li class="item-left-two item-left-li capitalize ${task?.status}">${task?.status}</li>
                 <li class="item-datetime item-left-li">
                     Due Date
-                    <input class="datetime-picker" data-id="${task?.id}"/>
+                    <label class="datetime-picker-label"></label>
+                    <input type="hidden" class="datetime-picker" data-id="${task?.id}"/>
 
-                    <div class="box-icon icon-calender"></div>
+
+                    %{--<div class="box-icon icon-calender"></div>--}%
                 </li>
                 <li class="item-left-four item-left-li btn-dropdown">
                     <div class="box-icon icon-share"></div>

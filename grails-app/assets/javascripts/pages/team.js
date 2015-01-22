@@ -100,7 +100,6 @@
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
-                    alert('ok');
                     parent.remove();
                 }
             }));
@@ -117,7 +116,6 @@
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
-                    alert('ok');
                     parent.remove();
                 }
             }));
@@ -142,7 +140,6 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: $(".inviteGiverForm"),
                 okCallback: function () {
-                    alert('ok');
                 }
             }));
         });

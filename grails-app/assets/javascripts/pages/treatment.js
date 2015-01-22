@@ -37,7 +37,6 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
-                    alert('ok');
                 }
             }));
         });
@@ -82,6 +81,9 @@
                             break;
                         case "Team":
                             RC.pages.team.init();
+                            break;
+                        case "Overview":
+                            RC.pages.overview.init(ui.panel);
                             break;
                     }
                 }

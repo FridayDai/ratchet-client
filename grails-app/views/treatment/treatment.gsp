@@ -3,7 +3,7 @@
 
     <div id="subTabs" class="patient-tab sub-tabs">
         <ul class="tab-list">
-            <li>
+            <li data-type="Overview">
                 <g:link controller="overview" action="index">Overview</g:link>
             </li>
             <li data-type="Activity">

@@ -5,6 +5,7 @@ $bold: 600;
 
 // Base Font
 $base-font-utility: 14px 'sans-serif';
+$base-font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
 
 // Fixed Font
 $fixed-font-family: monospace;
@@ -16,6 +17,7 @@ $header-font-weight: $bold;
 // Colors
 $base-color-white: #fff;
 $base-color-whiter: #fcfcfc;
+$base-color-black: #000;
 
 $base-color-grey: #e6e6e6;
 $base-color-light-grey: #f2f2f2;
@@ -44,10 +46,12 @@ $base-color-blue-dark: #007286;
 $base-blue-color: #34c2d1;
 $base-bluer-color: #71aeb4;
 $base-color-bluer: #72b0b5;
+
 $base-dark-blue-color: #748993;
 $base-darker-blue-color: #10197b;
 $base-light-blue-color: #adcfd8;
 
+$base-color-timepicker-header:#dde9f2;
 
 $btn-color-green: #b1c66b;
 

@@ -43,20 +43,20 @@
 }
 
 .tab-treatment {
+    border-top: 1px solid $base-light-grey-color;
+    padding: 0;
+
     .ui-corner-top {
+
         .ui-tabs-anchor {
             background: $base-dark-grey-color;
             color: $base-color-medium-grey;
             padding: .5em 1em;
         }
     }
-}
-
-.tab-treatment {
-    border-top: 1px solid $base-light-grey-color;
-    padding: 0;
 
     .ui-state-active {
+
         .ui-tabs-anchor {
             background: $base-color-black;
             color: $base-color-white;
@@ -79,12 +79,11 @@
             padding: 0 10px;
         }
     }
-}
 
-.tab-list {
     .ui-state-active {
         a {
             color: $base-color-yellow;
         }
     }
 }
+

@@ -10,6 +10,7 @@
 
     <body>
     <div class="content">
+
         <a href="#" id="add-provider" class="btn add-provider">Add Provider</a>
         %{--<a href="patient/patientTeam">View</a>--}%
 
@@ -56,6 +57,7 @@
         </g:form>
 
     </div>
+    <input id="selectTreatment" type="text" width="260">
     </body>
     </html>
 </g:applyLayout>
