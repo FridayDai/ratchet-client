@@ -47,7 +47,7 @@
                 {
                     data: function (source) {
                         return '<label class="tr-label"> ' + source.treatments + '</label>'
-                            + '&nbsp;&nbsp;<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
+                                + '&nbsp;&nbsp;<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
                     }
                 }
             ]
@@ -114,7 +114,6 @@
         d.agent = agent;
         d.email = email;
         provideTable.row(cell).data(d).draw();
-
     }
 
     /**
