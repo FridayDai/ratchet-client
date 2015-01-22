@@ -5,7 +5,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4 class="overdue">Overdued Tasks:</h4>
+        <h4 class="overdue">OVERDUE</h4>
 
         <div class="task-row">
             <g:each in="${taskOverdue}" var="task">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4 class="new">New Tasks:</h4>
+        <h4 class="new">NEW</h4>
 
         <div class="task-row">
             <g:each in="${taskNew}" var="task">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4 class="future">Future Tasks:</h4>
+        <h4 class="future">FUTURE</h4>
 
         <div class="task-row">
             <g:each in="${taskFuture}" var="task">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="tasks-list">
-        <h4 class="complete">Completed Tasks:</h4>
+        <h4 class="complete">COMPLETE</h4>
 
         <div class="task-row">
             <g:each in="${taskCompleted}" var="task">
@@ -49,9 +49,6 @@
 
     <g:form class="task-form ui-hidden" id="task-form" name="task-form">
 
-    %{--<div class="form-group">--}%
-    %{--<input id="provider" name="provider" type="text" class="input-group" placeholder="Provider" required/>--}%
-    %{--</div>--}%
         <div class="divider"></div>
 
         <div class="task-content-up">
@@ -65,7 +62,9 @@
                     </div>
 
                     <div class="header-middle inline">
-                        <h5 class="color-change">Total Knee Replacement knowledge</h5>
+                        <div class="bullet">
+                            <h5 class="color-change">Total Knee Replacement knowledge</h5>
+                        </div>
                     </div>
 
                     <div class="form-group header-right inline">
@@ -86,7 +85,9 @@
                     </div>
 
                     <div class="header-middle inline">
-                        <h5 class="color-change">Pre Qualification</h5>
+                        <div class="bullet">
+                            <h5 class="color-change">Pre Qualification</h5>
+                        </div>
                     </div>
 
                     <div class="form-group header-right inline">
@@ -107,7 +108,9 @@
                     </div>
 
                     <div class="header-middle inline">
-                        <h5 class="color-change">Knee Injury and Ostearthritis Outcome</h5>
+                        <div class="bullet">
+                            <h5 class="color-change">Knee Injury and Ostearthritis Outcome</h5>
+                        </div>
                     </div>
 
                     <div class="form-group header-right inline">

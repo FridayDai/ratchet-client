@@ -24,10 +24,22 @@
     padding-right: 20px;
 }
 
+.bullet {
+    padding-left: 12px;
+    padding-top: 10px;
+
+}
+
 .box-icon {
     height: 30px;
     margin: 0 auto;
     width: 30px;
+}
+
+.datetime-picker {
+    border-style: none;
+    height: 50px;
+    width: 50px;
 }
 
 .overdue {
@@ -104,7 +116,6 @@
             color: $btn-color-primary;
         }
 
-
     }
 
     .dropdown-list {
@@ -170,14 +181,8 @@
         cursor: pointer;
     }
 
-    .bullet {
-        padding-left: 12px;
-        padding-top: 10px;
-
-    }
-
     // change background and color according to status
-    &.sdm {
+    &.basic {
         border-color: $base-color-green;
 
         .item-header {
@@ -189,7 +194,7 @@
         }
     }
 
-    &.basic {
+    &.sdm {
         border-color: $base-color-yellow-darker;
 
         .item-header {
@@ -248,7 +253,7 @@
     }
 
     .box-content {
-        padding: 4px 6px;
+        padding: 12px 10px;
     }
 
 }
@@ -281,11 +286,11 @@
     background-color: $base-color-mid-grey;
 
     &.sdm {
-        background-color: $base-color-green;
+        background-color: $base-color-yellow-darker;
     }
 
     &.basic {
-        background-color: $base-color-yellow-darker;
+        background-color: $base-color-green;
     }
 
     &.outcome {
@@ -298,11 +303,11 @@
     border-color: $base-color-mid-grey;
 
     &.sdm {
-        border-color: $base-color-green;
+        border-color: $base-color-yellow-darker;
     }
 
     &.basic {
-        border-color: $base-color-yellow-darker;
+        border-color: $base-color-green;
     }
 
     &.outcome {
