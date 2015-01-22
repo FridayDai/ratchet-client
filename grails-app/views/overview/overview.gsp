@@ -1,5 +1,5 @@
 <div class="overview-content clear">
-    <div class="outcome-graph pull-left">
+    <div class="outcome-graph pull-left inner-content">
         <div class="left-header">
             <label class="lbl-outcome">Outcome</label>
 
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="activity-task pull-left">
+    <div class="activity-task pull-left inner-content">
         <div class="right-header">
             <label>Activities</label>
 
