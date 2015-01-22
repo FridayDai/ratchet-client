@@ -1,6 +1,7 @@
 .tasks-list {
     margin-bottom: 30px;
     margin-top: 10px;
+    padding-left: 30px;
 }
 
 .task-row {
@@ -183,14 +184,14 @@
 
     // change background and color according to status
     &.basic {
-        border-color: $base-color-green;
+        border-color: $base-color-green-primary;
 
         .item-header {
-            border-color: $base-color-green;
+            border-color: $base-color-green-primary;
         }
 
         .item-left-one {
-            background-color: $base-color-green;
+            background-color: $base-color-green-primary;
         }
     }
 
@@ -290,7 +291,7 @@
     }
 
     &.basic {
-        background-color: $base-color-green;
+        background-color: $base-color-green-primary;
     }
 
     &.outcome {
@@ -307,7 +308,7 @@
     }
 
     &.basic {
-        border-color: $base-color-green;
+        border-color: $base-color-green-primary;
     }
 
     &.outcome {

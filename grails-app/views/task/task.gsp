@@ -1,4 +1,4 @@
-<div class="content">
+<div>
 
     <div class="task-header">
         <a id="add-task" class="btn btn-right">+ Add Task</a>
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <div class="content">
+        <div class="form-content">
             <div>
                 <h4>When should John Smith receive this?</h4>
 
