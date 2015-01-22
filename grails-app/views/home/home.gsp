@@ -9,55 +9,68 @@
     </head>
 
     <body>
-    <div class="content">
 
-        <a href="#" id="add-provider" class="btn add-provider">Add Provider</a>
-        %{--<a href="patient/patientTeam">View</a>--}%
+    <div class="home-content clear">
+        <div class="report-content pull-left inner-content">
+            <div class="inner-header">Reports</div>
 
-        <div class="provider-list-table">
-            <table id="provideTable" class="display">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Provider</th>
-                    <th>Agent</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                %{--<tbody>--}%
-                %{--<tr>--}%
-                %{--<th>1</th>--}%
-                %{--<th>222</th>--}%
-                %{--<th>3333</th>--}%
-                %{--<th>44444</th>--}%
-                %{--<th>555555</th>--}%
-                %{--</tr>--}%
-                %{--</tbody>--}%
+            <div class="report-chart">
 
-            </table>
+            </div>
         </div>
 
-        <g:form class="form ui-hidden" id="table-form" name="table-form">
+        <div class="activity-task pull-left inner-content">
+            <div class="inner-header">Activities</div>
 
-            <div class="form-group">
-                <input id="provider" name="provider" type="text" class="input-group" placeholder="Provider" required/>
+
+            <div class="activity">
+
+                <ul class="activity-content">
+                    <li class="li-last-update">ID:12345678</li>
+                    <li>
+                        <div class="color">
+                            Title
+                        </div>
+
+                        <div class="color">
+                            111111111111
+                        </div>
+                    </li>
+                    <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
+                </ul>
+
+                <ul class="activity-content">
+                    <li class="li-last-update">ID:12345678</li>
+                    <li>
+                        <div class="color">
+                            Title
+                        </div>
+
+                        <div class="color">
+                            111111111111
+                        </div>
+                    </li>
+                    <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
+                </ul>
+
+                <ul class="activity-content">
+                    <li class="li-last-update">ID:12345678</li>
+                    <li>
+                        <div class="color">
+                            Title
+                        </div>
+
+                        <div class="color">
+                            111111111111
+                        </div>
+                    </li>
+                    <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
+                </ul>
+
             </div>
-            <div class="form-group">
-                <input id="agent" name="agent" type="text" class="input-group" placeholder="Agent" required/>
-            </div>
-            <div class="form-group">
-                <input id="email" name="email" type="email" class="input-group" placeholder="Email" required/>
-            </div>
-
-        </g:form>
-
-        <g:form class="warn ui-hidden">
-
-        </g:form>
-
+        </div>
     </div>
-    <input id="selectTreatment" type="text" width="260">
+
     </body>
     </html>
 </g:applyLayout>

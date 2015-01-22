@@ -4,28 +4,58 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.home {
-    padding-top: 50px;
+.home-content {
+    height: 100%;
+    width: 100%;
 
-    .welcome-title {
-        text-align: center;
+    .report-content {
+        width: 70%;
+
+        .report-chart {
+            min-height: 640px;
+        }
     }
 
-    .logout {
-        padding-top: 10px;
-        text-align: center;
+    .activity-task {
+        border-left: 1px solid $base-dark-blue-color;
+        width: 29.7%;
+        height: 910px;
 
-        .btn-logout {
-            border: 1px solid;
-            display: block;
-            margin-left: 45%;
-            text-decoration: none;
-            width: 100px;
+        .activity {
+            margin-bottom: 10px;
+            min-height: 640px;
+            width: 100%;
         }
+    }
+
+    .inner-header {
+        background: $base-color-grey;
+        border-bottom: 1px solid $base-dark-blue-color;
+        padding: 17px;
     }
 }
 
-//.content {
-//    margin-left: 20px;
-//    margin-top: 30px;
-//}
+.activity-content {
+    border-bottom: 1px solid $base-dark-blue-color;
+    margin: 10px;
+    padding: 5px 20px 20px;
+
+    li {
+        margin-top: 10px;
+
+        .color {
+            color: $base-color-light-black;
+        }
+    }
+
+    .li-content {
+        @include border-radius(5px);
+        background: $base-blue-color;
+        color: $base-color-white;
+        padding: 0 5px;
+    }
+
+    .li-last-update {
+        font-size: x-small;
+    }
+}

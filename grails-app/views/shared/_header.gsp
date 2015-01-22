@@ -2,11 +2,7 @@
     <div class="toolbar">
         <div class="pull-left">
             <a href="/ratchet-v2-admin-portal/" class="logo">
-                <img src="${assetPath(src: 'logo.png')}">
-
-                <p class="name">RATCHET</p>
-
-                <p class="part">PROVIDER</p>
+                <img src="${assetPath(src: 'patients/client_logo.png')}">
             </a>
         </div>
 
