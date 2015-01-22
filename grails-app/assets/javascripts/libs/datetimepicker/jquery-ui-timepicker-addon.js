@@ -367,8 +367,8 @@
             // Prevent displaying twice
             if ($dp.find("div.ui-timepicker-div").length === 0 && o.showTimepicker) {
                 var noDisplay = ' style="display:none;"',
-                    html = '<div class="ui-timepicker-div clear' + (o.isRTL ? ' ui-timepicker-rtl' : '') + '"><dl>' + '<dt class="ui_tpicker_time_label"' + ((o.showTime) ? '' : noDisplay) + '>' + o.timeText + '</dt>' +
-                        '<dd class="ui_tpicker_time"' + ((o.showTime) ? '' : noDisplay) + '></dd>';
+                    html = '<div class="ui-timepicker-div clear' + (o.isRTL ? ' ui-timepicker-rtl' : '') + '"><dl>' + '<dt class="ui-tpicker-time-label"' + ((o.showTime) ? '' : noDisplay) + '>' + o.timeText + '</dt>' +
+                        '<dd class="ui-tpicker-time"' + ((o.showTime) ? '' : noDisplay) + '></dd>';
 
                 // Create the markup
                 for (i = 0, l = this.units.length; i < l; i++) {
@@ -409,11 +409,11 @@
 
                 // Timezone
                 var showTz = o.showTimezone !== null ? o.showTimezone : this.support.timezone;
-                html += '<dt class="ui_tpicker_timezone_label"' + (showTz ? '' : noDisplay) + '>' + o.timezoneText + '</dt>';
-                html += '<dd class="ui_tpicker_timezone" ' + (showTz ? '' : noDisplay) + '></dd>';
+                html += '<dt class="ui-tpicker-timezone-label"' + (showTz ? '' : noDisplay) + '>' + o.timezoneText + '</dt>';
+                html += '<dd class="ui-tpicker-timezone" ' + (showTz ? '' : noDisplay) + '></dd>';
 
                 // Create the elements from string
-                html += '<dd class ="ui_tpicker_am"><div class="ui_tpicker_am_content">AM</div></dd></dl></div>';
+                html += '<dd class ="ui-tpicker-am"><div class="ui-tpicker-am-content">AM</div></dd></dl></div>';
                 var $tp = $(html);
 
                 // if we only want time picker...
@@ -471,7 +471,7 @@
                 } // end for loop
 
                 // Add timezone options
-                this.timezone_select = $tp.find('.ui_tpicker_timezone').append('<select></select>').find("select");
+                this.timezone_select = $tp.find('.ui-tpicker-timezone').append('<select></select>').find("select");
                 $.fn.append.apply(this.timezone_select,
                     $.map(o.timezoneList, function (val, idx) {
                         return $("<option />").val(typeof val === "object" ? val.value : val).text(typeof val === "object" ? val.label : val);
@@ -504,7 +504,7 @@
                     $dp.append($tp);
                 }
 
-                this.$timeObj = $tp.find('.ui_tpicker_time');
+                this.$timeObj = $tp.find('.ui-tpicker-time');
 
                 if (this.inst !== null) {
                     var timeDefined = this.timeDefined;

@@ -37,7 +37,6 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
-                    alert('ok');
                 }
             }));
         });
