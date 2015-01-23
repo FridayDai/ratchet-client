@@ -60,7 +60,7 @@
             </div>
 
             <div class="right-three">
-                <div class="bullet">
+                <div class="bullet note-container">
                     <h5>Note:
                         <div class="item-note icon-note"></div>
                     </h5>
@@ -95,7 +95,7 @@
                 <li class="item-left-two item-left-li capitalize ${task?.status}">${task?.status}</li>
                 <li class="item-datetime item-left-li">
                     Due Date
-                    <label class="datetime-picker-label"></label>
+                    <label class="datetime-picker-label datetime-color"></label>
                     <input type="hidden" class="datetime-picker" data-id="${task?.id}"/>
 
 
@@ -139,8 +139,8 @@
                 </div>
             </div>
 
-            <div class="right-three note-bg">
-                <div class="bullet">
+            <div class="right-three">
+                <div class="bullet note-container note-bg">
                     <h5 class="note-color">Note:
                         <div class="item-note icon-note"></div>
                     </h5>

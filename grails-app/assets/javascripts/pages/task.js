@@ -19,9 +19,9 @@
         }
     };
 
-    var IsEditing = false;
-    var noteContent = null;
-    var dropdownList;
+    var IsEditing = false; // Private variables for note
+    var noteContent = null; // Private variables for note
+    var dropdownList; // Private variables for dropdownList
 
     /**
      * add task
@@ -208,7 +208,7 @@
             changeColor.removeClass('active-color');
         }
 
-        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
             element.removeClass(type);
             headerLeft.removeClass(type);
         }
@@ -229,7 +229,7 @@
             changeColor.addClass('active-color');
         }
 
-        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
             element.addClass(type);
             headerLeft.addClass(type);
         }
@@ -268,7 +268,10 @@
 
     }
 
-
+    /**
+     * DATETIMEPICKER, init dateTimePicker
+     * @private
+     */
     function _initDatePicker() {
         $('.datetime-picker').datetimepicker({
             controlType: 'input',
@@ -281,6 +284,10 @@
         });
     }
 
+    /**
+     * init for task page
+     * @private
+     */
     function _init() {
         _initDatePicker();
         _initDropdownList();
