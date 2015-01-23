@@ -19,15 +19,19 @@
         }
     };
 
-    /*
+    var IsEditing = false; // Private variables for note
+    var noteContent = null; // Private variables for note
+    var dropdownList; // Private variables for dropdownList
+
+    /**
      * add task
+     * @private
      */
     function _addTask() {
 
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
-            //$(document.body).unbind("click");
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
@@ -52,8 +56,9 @@
 
     }
 
-    /*
+    /**
      * remove task
+     * @private
      */
     function _removeTask() {
         $('.a-remove').click(function () {
@@ -70,8 +75,11 @@
         });
     }
 
-    /*
-     * edit note
+    /**
+     * NOTE, show textarea for note
+     * @param content
+     * @returns {boolean}
+     * @private
      */
     function _showNote(content) {
         var p = content.find("p");
@@ -83,6 +91,12 @@
 
     }
 
+    /**
+     * NOTE, save textarea content and hide textarea for note
+     * @param content
+     * @returns {boolean}
+     * @private
+     */
     function _saveNote(content) {
         var textarea = content.find("textarea");
         var value = textarea.val();
@@ -92,9 +106,27 @@
         return false;
     }
 
+    /**
+     * NOTE, when complete the edit, the function will be use
+     * @private
+     */
+    function _finishEdit() {
+        $(document.body).click(function (e) {
+            e.preventDefault();
+            if (noteContent) {
+                IsEditing = _saveNote(noteContent);
+                noteContent = null;
+                $(document.body).unbind("click");
+            }
+        });
+    }
+
+    /**
+     * NOTE, the main function of note
+     * @private
+     */
+
     function _editNote() {
-        var noteContent = null;
-        var IsEditing = false;
 
         $(".item-note").on("click", function (e) {
             e.preventDefault();
@@ -117,34 +149,40 @@
             }
         });
 
-
         $(".text-area-form").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
         });
 
-        function _finishEdit() {
-            $(document.body).click(function (e) {
-                e.preventDefault();
-                if (noteContent) {
-                    IsEditing = _saveNote(noteContent);
-                    noteContent = null;
-                    $(document.body).unbind("click");
-                }
-
-            });
-        }
     }
 
-    /*
-     * for dropdownList
+    /**
+     * DROPDOWN, clear the dropdown
+     * @private
+     */
+
+    function _closeDropdown() {
+        $(document.body).click(function (e) {
+            e.preventDefault();
+            if (dropdownList) {
+                dropdownList.hide();
+                dropdownList = null;
+                $(document.body).unbind("click");
+            }
+
+        });
+    }
+
+    /**
+     * DROPDOWN, dropdown main function to init this
+     * @private
      */
     function _initDropdownList() {
-        var dropdownList;
 
         $('.btn-dropdown').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
+            $(this).trigger('focus');
             if (dropdownList) {
                 //before new a dropdownList, we need to hide the old one
                 dropdownList.hide();
@@ -152,25 +190,14 @@
             dropdownList = $(this).find(".dropdown-list");
             dropdownList.show();
             _closeDropdown();
-
         });
-
-        function _closeDropdown() {
-            $(document.body).click(function (e) {
-                e.preventDefault();
-                if (dropdownList) {
-                    dropdownList.hide();
-                    dropdownList = null;
-                    $(document.body).unbind("click");
-                }
-
-            });
-        }
-
     }
 
-    /*
-     * for form
+
+    /**
+     * TASK FORM BOX, blur the form box color
+     * @param element
+     * @private
      */
     function _blurFormBox(element) {
         var type = element.attr("value");
@@ -181,12 +208,17 @@
             changeColor.removeClass('active-color');
         }
 
-        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
             element.removeClass(type);
             headerLeft.removeClass(type);
         }
     }
 
+    /**
+     * TASK FORM BOX, active the form box color
+     * @param element
+     * @private
+     */
     function _activeFormBox(element) {
 
         var type = element.attr("value");
@@ -197,13 +229,16 @@
             changeColor.addClass('active-color');
         }
 
-        if (["sdm", "basic", "outcome"].indexOf(type) !== -1) {
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
             element.addClass(type);
             headerLeft.addClass(type);
         }
     }
 
-
+    /**
+     * TASK FORM BOX, init the form box when click
+     * @private
+     */
     function _clickFormBox() {
 
         $('.form-box').click(function () {
@@ -233,7 +268,10 @@
 
     }
 
-
+    /**
+     * DATETIMEPICKER, init dateTimePicker
+     * @private
+     */
     function _initDatePicker() {
         $('.datetime-picker').datetimepicker({
             controlType: 'input',
@@ -246,6 +284,10 @@
         });
     }
 
+    /**
+     * init for task page
+     * @private
+     */
     function _init() {
         _initDatePicker();
         _initDropdownList();

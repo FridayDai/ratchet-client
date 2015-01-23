@@ -13,6 +13,7 @@
 }
 
 .text-area-form {
+    height: 73px;
     width: 95%;
 }
 
@@ -37,6 +38,21 @@
     width: 30px;
 }
 
+.datetime-picker-label {
+    color: $base-color-mid-grey;
+    display: block;
+    font-size: 9pt;
+    height: 30px;
+    padding: 8px 2px;
+    width: 72px;
+
+    &.datetime-color {
+        color: $base-color-mid-blue;
+    }
+}
+
+
+
 .datetime-picker {
     border-style: none;
     height: 50px;
@@ -48,7 +64,7 @@
 }
 
 .new {
-    color: $base-color-green;
+    color: $base-color-green-primary;
 }
 
 .complete,
@@ -76,7 +92,7 @@
     display: inline-block;
     margin-bottom: 10px;
     margin-right: 10px;
-    width: 340px;
+    width: 370px;
 
     .item-header {
         border-bottom: 2px $base-color-mid-grey solid;
@@ -94,12 +110,13 @@
 
         .item-left-li {
             border-bottom: 1px $base-color-grey solid;
-            height: 50px;
+            height: 60px;
             padding-top: 8px;
             text-align: center;
         }
 
         .item-datetime {
+            color: $base-color-medium-grey;
             height: 98px;
         }
 
@@ -133,7 +150,7 @@
         width: 77%;
 
         .right-one {
-            height: 58px;
+            height: 68px;
 
         }
 
@@ -142,7 +159,11 @@
         }
 
         .right-two {
-            height: 116px;
+            height: 126px;
+        }
+
+        .note-container {
+            height: 99%;
         }
 
         .note-color {
@@ -151,6 +172,7 @@
 
         .note-bg {
             background-color: $base-color-lightest-blue;
+
         }
 
         .note-bg-edit {
@@ -170,8 +192,8 @@
     }
 
     .right-three {
-        height: 108px;
-        width: 264px;
+        height: 117px;
+        width: 286px;
 
         .bullet {
             padding-top: 2px;
@@ -225,6 +247,8 @@
 .form-box {
     border: 2px solid;
     display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
     width: 300px;
 
     .box-header {
