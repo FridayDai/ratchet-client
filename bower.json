@@ -15,7 +15,8 @@
       "jquery-ui": "1.11.2",
       "jquery-validation": "1.13.1",
       "DataTables": "1.10.4",
-      "select2": "3.5.2"
+      "select2": "3.5.2",
+      "d3":"v3.5.3"
   }
 
 }
