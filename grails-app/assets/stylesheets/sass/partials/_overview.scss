@@ -121,42 +121,6 @@
     }
 }
 
-.add-tab {
-    background: none;
-    border: 0;
-    border-bottom: 1px solid $base-blue-color;
-    border-radius: 0;
-    color: $base-blue-color;
-    margin-top: -20px;
-    padding-top: 20px;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    width: 85px;
-
-    &:before {
-        content: '+';
-        position: relative;
-        right: 5px;
-    }
-
-    .ui-button-text {
-        color: $base-blue-color;
-        font-size: smaller;
-    }
-
-    &:hover,
-    &:focus {
-        background: transparent;
-        border-bottom: 1px solid $base-blue-color;
-        color: $base-blue-color;
-
-        .ui-button-text {
-            color: $base-blue-color;
-        }
-    }
-}
-
 .inner-content {
     margin-left: 10px;
 
@@ -260,3 +224,6 @@
         }
     }
 }
+
+
+

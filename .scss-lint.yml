@@ -1,3 +1,6 @@
 linters:
   Indentation:
     width: 4
+
+PropertySortOrder:
+    enabled: false

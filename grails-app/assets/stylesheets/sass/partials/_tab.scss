@@ -20,7 +20,6 @@
 
         .ui-tabs-anchor {
             float: left;
-            padding: 0 10px;
             text-decoration: none;
         }
     }
@@ -51,39 +50,101 @@
         .ui-tabs-anchor {
             background: $base-dark-grey-color;
             color: $base-color-medium-grey;
-            padding: .5em 1em;
+            padding: 1em;
         }
     }
 
     .ui-state-active {
 
         .ui-tabs-anchor {
-            background: $base-color-black;
+            background: $base-black-color;
             color: $base-color-white;
-            padding: .5em 1em;
+            padding: 1em;
         }
     }
 }
 
-.tab-list {
-    background: $base-color-black;
-    padding: 0;
+.content {
+    .patient-tab {
+        border: 0;
+        padding: 0;
+        position: relative;
 
-    li {
-        padding-bottom: 10px;
-        padding-top: 10px;
+        .add-tab {
+            border: 0;
+            border-bottom: 1px solid $base-blue-color;
+            border-radius: 0;
+            color: $base-blue-color;
+            padding: 0;
+            position: absolute;
+            right: 0;
 
-        a {
-            border-right: 1px solid $btn-color-primary;
-            color: $base-color-green;
-            padding: 0 10px;
+            &:before {
+                content: '+';
+                position: relative;
+                right: 55px;
+                top: 15px;
+            }
+
+            .ui-button-text {
+                color: $base-blue-color;
+                font-size: smaller;
+                padding: 0;
+            }
+
+            &:hover,
+            &:focus {
+                background: transparent;
+                border-bottom: 1px solid $base-blue-color;
+                color: $base-blue-color;
+
+                .ui-button-text {
+                    color: $base-blue-color;
+                }
+            }
         }
-    }
 
-    .ui-state-active {
-        a {
-            color: $base-color-yellow;
+        .tab-treatment {
+            background: none;
+            border: 0;
+            border-top: 1px solid $base-light-grey-color;
+            padding: 0;
+
+            li {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .tab-list {
+            background: $base-black-color;
+            border: 0;
+            padding: 0;
+
+            li {
+                background: $base-black-color;
+                padding: 10px 0;
+
+                a {
+                    border-right: 1px solid $btn-color-primary;
+                    color: $base-color-green;
+                    padding: 0 10px;
+                }
+            }
+
+            .ui-state-active {
+                a {
+                    color: $base-color-yellow;
+                }
+            }
+
+            .ui-tabs-anchor {
+                background: $base-black-color;
+            }
+        }
+
+        .ui-tabs-panel {
+            padding: 0;
         }
     }
 }
-

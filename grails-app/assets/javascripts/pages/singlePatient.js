@@ -4,8 +4,8 @@
     //Define provider page global variables
     var opts = {
             defaultConfirmArguments: {
-                confirmFormArguments: {
-                    title: RC.constants.confirmTitle,
+                confirmTreatmentFormArguments: {
+                    title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 400
@@ -26,12 +26,12 @@
     function _initTab() {
         tabTemplate = "<li><a href='#{href}'>#{label}</a></li>";
         tabs = $("#tabs").tabs({
-            beforeLoad: function( event, ui ) {
-                ui.jqXHR.error(function() {
+            beforeLoad: function (event, ui) {
+                ui.jqXHR.error(function () {
                     ui.panel.html(RC.constants.errorMessage);
                 });
             },
-            load: function(event, ui) {
+            load: function (event, ui) {
                 RC.pages.treatment.init(ui.panel.find("#subTabs"));
             }
         });
@@ -39,9 +39,9 @@
 
     function _addTab() {
         var label = tabTitle.val(),
-            li = $( tabTemplate.replace( /#\{href\}/g, "/treatment/index" ).replace( /#\{label\}/g, label ) );
-        tabs.find( ".tab-treatment" ).append( li );
-        tabs.tabs( "refresh" );
+            li = $(tabTemplate.replace(/#\{href\}/g, "/treatment/index").replace(/#\{label\}/g, label));
+        tabs.find(".tab-treatment").append(li);
+        tabs.tabs("refresh");
     }
 
     /**
@@ -53,14 +53,14 @@
     }
 
     function _initAddTab() {
-        $( "#addTab").button().click(function() {
+        $("#addTab").button().click(function () {
             $(".treatment-form")[0].reset();
 
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
-                        tabTitle = $( "#name" );
+                        tabTitle = $("#name");
                         _addTab();
                         return true;
                     }
@@ -69,6 +69,7 @@
             }));
         });
     }
+
     /**
      * page Initialization
      * @private

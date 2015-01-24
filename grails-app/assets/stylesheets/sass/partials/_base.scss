@@ -5,7 +5,6 @@
 @import 'compass/reset';
 @import 'compass/css3';
 
-
 @font-face {
     font-family: 'fontello';
     src: url('../../../fonts/fontello.eot');
@@ -143,7 +142,6 @@ a {
 
 .inner-head {
     background-color: darken($base-color-light-grey, 0%);
-    //    border-bottom: 2px solid $base-color-mid-grey;
 
     .btn-invite {
         background-color: darken($base-color-white, 0%);
@@ -189,8 +187,7 @@ a {
         color: $btn-color-primary;
     }
 
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: darken($base-color-light-blue, 10%);
         border: 0;
 
@@ -253,12 +250,6 @@ a {
             color: $base-color-bluer;
         }
     }
-}
-
-.content {
-    //    margin-left: 20px;
-    //    margin-right: 20px;
-    //    margin-top: 30px;
 }
 
 .clear {
