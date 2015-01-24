@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="patientListBundle"/>
-<g:set var="cssPath" value="patientList"/>
+<g:set var="scriptPath" value="accountsBundle"/>
+<g:set var="cssPath" value="accounts"/>
 <g:applyLayout name="main">
     <html>
     <head>
@@ -10,13 +10,11 @@
 
     <body>
     <div class="content">
-        <h3 class="inline">Accounts</h3>
-        <a href="#" id="add-patient" class="btn add-patient">New Account</a>
-        %{--<a href="providers/detail">View</a>--}%
+        <h3>Accounts</h3>
+        <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
 
-
-        <div class="provider-list-table">
-            <table id="patientsTable" class="display">
+        <div class="table-group">
+            <table id="accountsTable" class="display accounts-table">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -32,30 +30,61 @@
             </table>
         </div>
 
-        <g:form class="form ui-hidden" id="table-form" name="table-form">
+        <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <input id="emid" name="emid" type="text" class="input-group" placeholder="ID" required/>
-            </div>
-            <div class="form-group">
-                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
-            </div>
-            <div class="form-group">
-                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
-            </div>
-            <div class="form-group">
-                <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
-            </div>
-            <div class="form-group">
-                <input id="phoneNumber" name="phoneNumber" type="text" class="input-group" placeholder="Phone Number" required/>
-            </div>
-            <div class="form-group">
-                <input id="treatments" name="treatments" type="text" class="input-group" placeholder="Treatments" required/>
+                <label>
+                    <input type="checkbox"/>
+                    Dr.
+                </label>
             </div>
 
-        </g:form>
 
-        <g:form class="warn ui-hidden">
+            <div class="form-group">
+                <label>
+                    * First Name:
+                    <input id="firstName" name="firstName" type="text" class="" placeholder="First Name" required/>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    * Last Name:
+                    <input id="lastName" name="lastName" type="text" class="" placeholder="Last Name" required/>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    * Email Address:
+                    <input id="email" name="email" type="email" class="" placeholder="Email Address" required/>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    * Role:
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    * Group:
+                    <label>
+                        <input type="checkbox" name="group">
+                        Patient Management
+                    </label>
+                </div>
+                <label>
+                    <input type="checkbox" name="group">
+                    Account Management
+                </label>
+            </div>
 
         </g:form>
 

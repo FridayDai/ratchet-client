@@ -34,6 +34,8 @@ class UrlMappings {
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
+        "/getAccounts"(controller: "accounts", action: "getAllAccounts")
+        "/singleAccount"(controller: "accounts", action: "getAccount")
         "500"(view: '/pages/error')
         "/providers/detail"(controller: "providers",action: "detail")
 
