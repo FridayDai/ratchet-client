@@ -4,8 +4,8 @@
     thead {
 
         tr {
-            background-color: $base-color-lighter-grey;
             border-bottom: 3px solid $border-color-primary;
+            background-color: $base-color-lighter-grey;
         }
 
         .sorting {
@@ -23,9 +23,9 @@
     }
 
     th {
+        width: 23%;
         color: $base-color-mid-grey;
         font-weight: $bold;
-        width: 23%;
 
         &:first-child {
             width: 8%;
@@ -33,9 +33,9 @@
     }
 
     tr {
+        height: 40px;
         border-bottom: 1px solid $border-color-primary;
         color: $base-color-middle-grey;
-        height: 40px;
 
         a {
             text-decoration: underline;
@@ -51,27 +51,26 @@
 .dataTables_wrapper {
 
     .dataTables_paginate {
-        background: transparent;
-        border: 1px solid transparent;
-        box-shadow: none;
-        color: $base-color-middle-grey;
-        cursor: default;
         float: right;
         padding-top: .25em;
+        border: 1px solid transparent;
+        color: $base-color-middle-grey;
+        background: transparent;
         text-align: right;
+        box-shadow: none;
+        cursor: default;
 
         .paginate_button {
-            border: 1px solid transparent;
-            box-sizing: border-box;
-            color: $base-color-middle-grey;
-            cursor: pointer;
             display: inline-block;
-            margin-left: 2px;
+            box-sizing: border-box;
             min-width: 1.5em;
+            margin-left: 2px;
             padding: .5em 1em;
+            border: 1px solid transparent;
+            color: $base-color-middle-grey;
             text-align: center;
             text-decoration: none !important;
-
+            cursor: pointer;
         }
     }
 }

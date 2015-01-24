@@ -1,44 +1,44 @@
 .content-head {
-    background: $base-color-grey;
-    border-bottom: 1px solid $btn-color-primary;
     display: block;
     height: 50px;
+    border-bottom: 1px solid $btn-color-primary;
+    background: $base-color-grey;
 
     .icon-back {
-        background: url('../../../images/patients/arrow.png') no-repeat 0 0;
-        background-size: cover;
-        height: 20px;
-        margin-left: 10px;
-        margin-top: 4px;
         position: absolute;
         width: 25px;
+        height: 20px;
+        margin-top: 4px;
+        margin-left: 10px;
+        background: url('../../../images/patients/arrow.png') no-repeat 0 0;
+        background-size: cover;
     }
 
     p {
+        height: 36px;
+        margin-top: -18px;
+        margin-left: 55px;
+        padding-top: 15px;
+        padding-left: 20px;
         border-left: 1px solid $btn-color-primary;
         font-size: large;
-        height: 36px;
-        margin-left: 55px;
-        margin-top: -18px;
-        padding-left: 20px;
-        padding-top: 15px;
     }
 }
 
 .patient-info {
-    padding: 20px 40px;
     position: relative;
+    padding: 20px 40px;
 
     .btn-edit {
         position: absolute;
-        right: 20px;
         top: 0;
+        right: 20px;
     }
 
     .patient-inner-info {
-        border-right: 1px solid $base-light-grey-color;
-        padding: 20px;
         width: 180px;
+        padding: 20px;
+        border-right: 1px solid $base-light-grey-color;
 
         .div-space {
             margin-top: 10px;
@@ -54,105 +54,69 @@
     }
 
     .icon-edit {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+        width: 20px;
+        height: 20px;
         background: url('../../../images/edit.png') no-repeat 0 0;
         background-size: cover;
-        height: 20px;
-        position: absolute;
-        right: 20px;
-        top: 40px;
-        width: 20px;
     }
 }
 
 .patient-right-info {
-    left: 300px;
     position: absolute;
     top: 20px;
+    left: 300px;
 
     .email-info {
         &:before {
-            content: url('../../../images/patients/email.png');
-            left: -7px;
             position: absolute;
+            left: -7px;
+            content: url('../../../images/patients/email.png');
         }
     }
 
     .phone-info {
         &:before {
-            content: url('../../../images/patients/phone.png');
-            left: -7px;
             position: absolute;
+            left: -7px;
+            content: url('../../../images/patients/phone.png');
         }
     }
 }
 
 .overview-content {
-    min-width: 600px;
     width: 100%;
+    min-width: 600px;
 
     .outcome-graph {
-        margin-top: 10px;
         width: 70%;
+        margin-top: 10px;
 
         .graph {
-            border-top: 1px solid $base-light-blue-color;
-            margin-top: 10px;
             min-height: 640px;
+            margin-top: 10px;
+            border-top: 1px solid $base-light-blue-color;
         }
     }
 
     .activity-task {
-        margin-left: 20px;
         width: 25%;
+        margin-left: 20px;
 
         .activity {
-            border-top: 1px solid $base-light-blue-color;
-            height: 400px;
-            margin-bottom: 10px;
             overflow-y: auto;
             width: 100%;
+            height: 400px;
+            margin-bottom: 10px;
+            border-top: 1px solid $base-light-blue-color;
         }
 
         .task {
-            border-top: 1px solid $base-light-blue-color;
-            height: 150px;
             width: 100%;
-        }
-    }
-}
-
-.add-tab {
-    background: none;
-    border: 0;
-    border-bottom: 1px solid $base-blue-color;
-    border-radius: 0;
-    color: $base-blue-color;
-    margin-top: -20px;
-    padding-top: 20px;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    width: 85px;
-
-    &:before {
-        content: '+';
-        position: relative;
-        right: 5px;
-    }
-
-    .ui-button-text {
-        color: $base-blue-color;
-        font-size: smaller;
-    }
-
-    &:hover,
-    &:focus {
-        background: transparent;
-        border-bottom: 1px solid $base-blue-color;
-        color: $base-blue-color;
-
-        .ui-button-text {
-            color: $base-blue-color;
+            height: 150px;
+            border-top: 1px solid $base-light-blue-color;
         }
     }
 }
@@ -169,26 +133,26 @@
     }
 
     .right-header {
-        padding: 10px 5px;
         position: relative;
+        padding: 10px 5px;
 
         .icon-refresh {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 15px;
+            height: 15px;
             background: url('../../../images/patients/refresh.png') no-repeat 0 0;
             background-size: cover;
-            height: 15px;
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            width: 15px;
         }
     }
 }
 
 .activity-content {
     @include border-radius(5px);
-    border: 1px solid $btn-color-primary;
     margin-top: 20px;
     padding: 5px 20px 20px;
+    border: 1px solid $btn-color-primary;
 
     li {
         margin-top: 10px;
@@ -196,23 +160,23 @@
 
     .li-content {
         @include border-radius(5px);
-        color: $base-color-white;
         padding: 0 5px;
+        color: $base-color-white;
     }
 
     .title-task {
-        background: $base-blue-color;
         width: 37px;
+        background: $base-blue-color;
     }
 
     .title-reminder {
-        background: $base-color-red;
         width: 75px;
+        background: $base-color-red;
     }
 
     .title-initiate {
-        background: $base-color-dark-yellow;
         width: 62px;
+        background: $base-color-dark-yellow;
     }
 
     .li-last-update {
@@ -221,29 +185,29 @@
 }
 
 .triangle {
-    margin-left: 10px;
     position: relative;
     top: 10px;
+    margin-left: 10px;
 
     .triangle-icon {
-        border-style: solid;
-        border-width: 5px 5px 0;
-        display: block;
-        height: 0;
         position: absolute;
+        display: block;
         width: 0;
+        height: 0;
+        border-width: 5px 5px 0;
+        border-style: solid;
     }
 
     .triangle-icon-down {
-        border-color: $base-light-blue-color transparent transparent;
-        left: 0;
         top: 0;
+        left: 0;
+        border-color: $base-light-blue-color transparent transparent;
     }
 
     .triangle-icon-upper {
-        border-color: $base-color-white transparent transparent;
-        left: -5px;
         top: -7px;
+        left: -5px;
+        border-color: $base-color-white transparent transparent;
     }
 }
 
@@ -260,3 +224,6 @@
         }
     }
 }
+
+
+

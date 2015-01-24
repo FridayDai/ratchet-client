@@ -95,7 +95,8 @@
      * @private
      */
     function _removeCareTeam() {
-        $(".btn-remove-team").on("click", function () {
+        $(".btn-remove-team").on("click", function (e) {
+            e.preventDefault();
             var parent = $(this).parent().parent();
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
                 element: $(".warn"),
@@ -111,7 +112,8 @@
      * @private
      */
     function _removeCareGiver() {
-        $(".btn-remove-giver").on("click", function () {
+        $(".btn-remove-giver").on("click", function (e) {
+            e.preventDefault();
             var parent = $(this).parent().parent();
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
