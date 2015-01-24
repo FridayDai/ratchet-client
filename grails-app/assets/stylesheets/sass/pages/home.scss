@@ -5,8 +5,8 @@
 @import '../partials/timepicker';
 
 .home-content {
-    height: 100%;
     width: 100%;
+    height: 100%;
 
     .report-content {
         width: 70%;
@@ -17,28 +17,28 @@
     }
 
     .activity-task {
-        border-left: 1px solid $base-dark-blue-color;
-        height: 910px;
         width: 29.7%;
+        height: 910px;
+        border-left: 1px solid $base-dark-blue-color;
 
         .activity {
-            margin-bottom: 10px;
-            min-height: 640px;
             width: 100%;
+            min-height: 640px;
+            margin-bottom: 10px;
         }
     }
 
     .inner-header {
-        background: $base-color-grey;
-        border-bottom: 1px solid $base-dark-blue-color;
         padding: 17px;
+        border-bottom: 1px solid $base-dark-blue-color;
+        background: $base-color-grey;
     }
 }
 
 .activity-content {
-    border-bottom: 1px solid $base-dark-blue-color;
     margin: 10px;
     padding: 5px 20px 20px;
+    border-bottom: 1px solid $base-dark-blue-color;
 
     li {
         margin-top: 10px;
@@ -50,9 +50,9 @@
 
     .li-content {
         @include border-radius(5px);
-        background: $base-blue-color;
-        color: $base-color-white;
         padding: 0 5px;
+        color: $base-color-white;
+        background: $base-blue-color;
     }
 
     .li-last-update {

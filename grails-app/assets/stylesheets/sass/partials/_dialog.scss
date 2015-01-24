@@ -1,13 +1,13 @@
 .ui-size {
-    padding-top: 10px;
     width: 450px !important;
+    padding-top: 10px;
 }
 
 .ui-dialog {
     .ui-dialog-titlebar {
-        background: none;
-        border: 0;
         padding: 20px 0 0 30px;
+        border: 0;
+        background: none;
 
         .ui-dialog-title {
             font-weight: bolder;
@@ -15,23 +15,22 @@
     }
 
     .ui-dialog-buttonpane {
-        border: 0;
         margin-right: 35px;
+        border: 0;
 
         button {
             margin: .5em 1.5em .5em 0;
 
             &:hover {
-                background: $base-color-mid-blue;
                 color: $base-color-white;
+                background: $base-color-mid-blue;
             }
         }
 
         .ui-state-focus {
-
-            background: none;
-            color: #000;
             z-index: 9999;
+            color: #000;
+            background: none;
         }
 
         .btn-cancel {
@@ -40,11 +39,11 @@
     }
 
     .ui-icon-show {
-        background: url('../../../images/exclamation.png') no-repeat 0 0;
-        background-size: cover;
+        width: 10px;
         height: 20px;
         margin: auto;
-        width: 10px;
+        background: url('../../../images/exclamation.png') no-repeat 0 0;
+        background-size: cover;
     }
 }
 
@@ -58,23 +57,13 @@
     height: auto !important;
 }
 
-//.ui-dialog {
-//    .ui-icon-show {
-//        background: url('../../../images/exclamation.png') no-repeat 0 0;
-//        background-size: cover;
-//        height: 20px;
-//        margin: auto;
-//        width: 10px;
-//    }
-//}
-
 .ui-icon-closethick {
     display: none;
 }
 
 .window-warning-title {
-    font-weight: bolder;
     margin-top: 20px;
+    font-weight: bolder;
     text-align: center;
 }
 
@@ -84,21 +73,21 @@
 }
 
 .ui-button {
-    background: none;
-    height: 35px;
     width: 120px;
+    height: 35px;
+    background: none;
 
     .ui-button-text {
         font-weight: bolder;
     }
 
     .ui-icon-add {
-        background: url('../../../images/exclamation.png') no-repeat 0 0;
-        background-size: cover;
-        height: 15px;
-        margin-top: -1px;
         position: absolute;
         width: 15px;
+        height: 15px;
+        margin-top: -1px;
+        background: url('../../../images/exclamation.png') no-repeat 0 0;
+        background-size: cover;
     }
 }
 

@@ -18,13 +18,13 @@
 
 html,
 body {
+    min-width: 320px;
     font: $base-font-utility;
     letter-spacing: .5px;
-    min-width: 320px;
 
     ::selection {
-        background: $base-color-mid-blue;
         color: $base-color-white;
+        background: $base-color-mid-blue;
     }
 }
 
@@ -59,14 +59,14 @@ p {
 }
 
 div {
-    border: 0;
     display: block;
+    border: 0;
 }
 
 a {
-    background: transparent;
-    color: $base-color-light-blue;
     display: inline-block;
+    color: $base-color-light-blue;
+    background: transparent;
     font: $base-font-utility;
     text-decoration: none;
 
@@ -77,23 +77,23 @@ a {
 
 .btn,
 .ui-button {
-    background-color: $base-color-white;
-    background-image: none;
-    border: 1px $base-color-light-blue solid;
-    border-radius: 4px;
-    cursor: pointer;
     display: inline-block;
-    font-weight: normal;
     margin-bottom: 0;
     padding: 6px 12px;
-    text-align: center;
-    vertical-align: middle;
+    border: 1px $base-color-light-blue solid;
+    border-radius: 4px;
     white-space: nowrap;
+    background-color: $base-color-white;
+    background-image: none;
+    font-weight: normal;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
 
     &:hover,
     &:focus {
-        background-color: darken($base-color-light-blue, 10%);
         color: $base-color-white;
+        background-color: darken($base-color-light-blue, 10%);
     }
 
     &.primary {
@@ -101,8 +101,8 @@ a {
 
         &:hover,
         &:focus {
-            background-color: darken($btn-color-primary, 10%);
             color: $base-color-white;
+            background-color: darken($btn-color-primary, 10%);
         }
     }
 
@@ -126,8 +126,8 @@ a {
     }
 
     .btn-add {
-        background-color: $base-color-white;
         border: 1px solid $base-color-dark-blue;
+        background-color: $base-color-white;
     }
 }
 
@@ -188,8 +188,8 @@ a {
     }
 
     &:hover {
-        background-color: darken($base-color-light-blue, 10%);
         border: 0;
+        background-color: darken($base-color-light-blue, 10%);
 
         .ui-button-text {
             color: $base-color-white;
@@ -254,13 +254,13 @@ a {
 
 .clear {
     &:before {
-        content: ' ';
         display: table;
+        content: ' ';
     }
 
     &:after {
+        display: table;
         clear: both;
         content: ' ';
-        display: table;
     }
 }
