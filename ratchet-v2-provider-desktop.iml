@@ -137,5 +137,6 @@
     <orderEntry type="module" module-name="ratchet-v2-provider-desktop-grailsPlugins" />
     <orderEntry type="library" name="grails-2.4.4" level="application" />
     <orderEntry type="library" name="compass-library" level="project" />
+    <orderEntry type="library" name="ratchet-v2-provider-desktop node_modules" level="project" />
   </component>
 </module>

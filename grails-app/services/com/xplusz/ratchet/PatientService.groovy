@@ -1,38 +1,82 @@
 package com.xplusz.ratchet
 
+import com.mashape.unirest.http.Unirest
+import exceptions.AccountValidationException
+import grails.converters.JSON
+
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+
 
 class PatientService {
+    /** dependency injection for grailsApplication */
+    def grailsApplication
 
-    def loadPatients(params) {
+    def messageSource
+
+    def addPatients(HttpServletRequest request, HttpServletResponse response, params) {
+        def email = params?.email
+        def firstName = params?.firstName
+        def lastName = params?.lastName
+        def phoneNumber = params?.phoneNumber
+        def profilePhoto = params?.profilePhoto
+        def patientId = params?.patientId
+        def treatmentId = params?.treatmentId
+        def surgeryTime = params?.surgeryTime
+        def primaryStaffId = params?.primaryStaffId
+        def staffIds = params.staffIds
+
+        def url = grailsApplication.config.ratchetv2.server.patients.url + "" + patientId + "/records/"
+        def resp = Unirest.post(url)
+                .field("email", email)
+                .field("firstName", firstName)
+                .field("lastName", lastName)
+                .field("phoneNumber", phoneNumber)
+                .field("profilePhoto", profilePhoto)
+                .field("clientId", request.session.clientId)
+                .field("treatmentId", treatmentId)
+                .field("surgeryTime", surgeryTime)
+                .field("primaryStaffId", primaryStaffId)
+                .field("staffIds", staffIds)
+                .asString()
+
+        if (resp.status == 201) {
+            return true
+        }
+
+    }
+
+    def loadPatients(HttpServletRequest request, HttpServletResponse response, params) {
+
+
         def start = params?.start
         def length = params?.length
         def order = params?.order
         def columns = params?.columns
         def search = params?.search
+        def draw = params?.draw
 
-//        def map = new HashMap<String,Object>()
-        def map = [:]
+        def url = grailsApplication.config.ratchetv2.server.patients.url
+        def resp = Unirest.get(url)
+                .queryString("max", length)
+                .queryString("offset", draw-1)
+                .queryString("clientId", request.session.clientId)
+                .asString()
 
-        map.put(start, start)
-        map.put(length, length)
-        map.put(order, order)
-        map.put(columns, columns)
-        map.put(search, search)
+        def result = JSON.parse(resp.body)
 
-        def patient1 = new Patient("001", "33091234", "John", "Smith", "john@gmail.com", "544-4847-9794", "Rotator Cuff Essential")
-        def patient2 = new Patient("002", "32980987", "Julia", "Roberts", "julia@gmail.com", "514-4855-9784", "Rotator Cuff Vanilla")
-        def patient3 = new Patient("003", "32980111", "Jany1", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient4 = new Patient("004", "32980122", "Jany2", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient5 = new Patient("005", "32980133", "Jany3", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient6 = new Patient("006", "32980144", "Jany4", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient7 = new Patient("007", "32980155", "Jany5", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient8 = new Patient("008", "32980166", "Jany6", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient9 = new Patient("009", "32980177", "Jany7", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
-        def patient10 = new Patient("010", "32980188", "Jany8", "Roby", "jany@gmail.com", "514-4855-1264", "Rotator Cuff Vanilla")
+        if (resp.status == 200) {
+            def map = [:]
 
-        def data = [patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10]
-        map.put("data", data)
-        return map
+            map.put(start, start)
+            map.put(length, length)
+            map.put(order, order)
+            map.put(columns, columns)
+            map.put(search, search)
+            map.put(draw, draw)
+            map.put("data", result.items)
+            return map
+        }
     }
 
 

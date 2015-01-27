@@ -1,0 +1,24 @@
+.axis {
+    line,
+    path {
+        fill: none;
+        stroke: $base-color-white;
+        shape-rendering: crispEdges;
+    }
+
+    text {
+        stroke: $base-color-white;
+        font-size: 11px;
+        font-family: sans-serif;
+    }
+
+}
+
+.chart {
+    background-color: $chart-color-background;
+
+    circle {
+        fill: #46c2d1;
+        stroke: #46c2d1;
+    }
+}

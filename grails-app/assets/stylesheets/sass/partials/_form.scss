@@ -5,7 +5,34 @@
         width: 330px;
         height: 35px;
         margin-top: 20px;
-        padding-left: 10px;
         border: 0;
+    }
+
+    .multi-select {
+        width: 330px;
+        height: auto;
+        margin-top: 20px;
+        border: 0;
+    }
+
+    .select2-container {
+        padding-left: 0;
+
+        .select2-choice {
+            height: 35px;
+        }
+    }
+
+    .select2-container-multi {
+
+        .select2-choice {
+            height: 35px;
+        }
+    }
+
+    .select2-search-field {
+        input {
+            height: 24px;
+        }
     }
 }
