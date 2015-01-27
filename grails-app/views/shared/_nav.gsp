@@ -13,7 +13,7 @@
         </li>
         <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
             <g:else>class="nav-li"</g:else>>
-            <g:link controller="patients" action="index">
+            <g:link controller="patients">
                 <div class="ui-icon icon-patient"></div>
 
                 <div class="patient">PATIENTS</div>

@@ -38,7 +38,8 @@
             }
         },
         urls: {
-            query: "{0}/getPatients".format(RC.constants.baseUrl)
+            query: "{0}/getPatients".format(RC.constants.baseUrl),
+            addCareTeam: "{0}/addCareTeam".format(RC.constants.baseUrl)
         }
 
     };
@@ -58,12 +59,30 @@
                 element: $(".addTeamForm"),
                 okCallback: function () {
                     if ($(".addTeamForm").valid()) {
+                        var emid = $("#team-emid").val();
+                        var name = $("#team-name").val();
+                        var email = $("#team-email").val();
+                        var role = $("#roles").val();
+                        var des = $("#team-des").val();
+                        _addTeamMember(emid, name, email, role, des);
                         //_add();
                         return true;
                     }
                     return false;
                 }
             }));
+        });
+    }
+
+    function _addTeamMember(emid, name, email, role, des) {
+        $.ajax({
+            url: opts.urls.addCareTeam,
+            type: 'POST',
+            data: {emid: emid, name: name, email: email, role: role, des: des},
+            dataType: 'json'
+            //success:function(data){
+            //    $('#nav-username').empty().append(data.username);
+            //}
         });
     }
 

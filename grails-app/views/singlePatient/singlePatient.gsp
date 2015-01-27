@@ -20,33 +20,48 @@
 
         <div class="patient-info">
             <div class="patient-left-info patient-inner-info">
-                <div class="id-info color" value="33091234">ID: 33091234</div>
+                <div class="id-info color" value="${patientInfo.id}">ID: ${patientInfo.id}</div>
 
-                <div class="name-info div-space color" value="John Smith">John Smith</div>
+                <div class="name-info first-name-info div-space color"
+                     value="${patientInfo.firstName}">${patientInfo.firstName}</div>
+
+                <div class="name-info last-name-info div-space color"
+                     value="${patientInfo.lastName}">${patientInfo.lastName}</div>
+
             </div>
 
             <div class="patient-right-info patient-inner-info">
-                <div class="email-info color" value="john@gmail.com">Email:john@gmail.com</div>
+                <div class="color email">Email:</div>
 
-                <div class="phone-info div-space color" value="56930333012">Phone:569-3033-3012</div>
+                <div class="email-info color email" value="${patientInfo.email}">${patientInfo.email}</div>
+
+                <div class="color phone">Phone:</div>
+
+                <div class="phone-info div-space color phone"
+                     value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
             </div>
 
             <a href="#" class="btn-edit-patient">
                 <div class="icon-edit"></div>
             </a>
 
-            %{--<a class="btn-edit">Edit</a>--}%
+            <input type="hidden" name="clientId" value="${patientInfo.client.id}"/>
         </div>
 
         <div id="tabs" class="patient-tab">
             <button id="addTab" class="add-tab">Add Treatment</button>
             <ul class="tab-treatment">
-                <li>
-                    <g:link controller="treatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>
-                </li>
-                <li>
-                    <g:link controller="treatment" action="index" data-id="sub2">Total Knee Replacement</g:link>
-                </li>
+                <g:each in="${medicalRecords}" var="medicalRecord" status="i">
+                    <li>
+                        <g:link controller="treatment" action="index" data-id="sub${i}">${medicalRecord.title}</g:link>
+                    </li>
+                </g:each>
+                %{--<li>--}%
+                    %{--<g:link controller="treatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>--}%
+                %{--</li>--}%
+                %{--<li>--}%
+                    %{--<g:link controller="treatment" action="index" data-id="sub2">Total Knee Replacement</g:link>--}%
+                %{--</li>--}%
 
             </ul>
 
@@ -55,11 +70,11 @@
 
     <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
         <div class="form-group">
-            <input id="emid" name="emid" type="text" class="input-group" placeholder="ID" required/>
+            <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
         </div>
 
         <div class="form-group">
-            <input id="name" name="name" type="text" class="input-group" placeholder="Name" required/>
+            <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
         </div>
 
         <div class="form-group">
