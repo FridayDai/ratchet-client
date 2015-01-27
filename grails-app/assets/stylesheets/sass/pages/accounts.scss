@@ -2,6 +2,7 @@
 @import '../partials/table';
 @import '../partials/form';
 @import '../partials/dialog';
+@import '../partials/timepicker';
 
 .table-group {
     width: 100%;
@@ -39,4 +40,44 @@
         padding-left: 10px;
         border: 0;
     }
+}
+
+.accounts-form {
+    .dr {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -20px;
+    }
+
+    .doctor {
+        width: 300px;
+    }
+
+    .first-name {
+        margin-top: 10px;
+    }
+
+    .role {
+        display: inline-block;
+        width: 330px;
+        margin-top: 15px;
+        text-align: left;
+    }
+
+    .group {
+        margin-top: 15px;
+        text-align: left;
+
+        span {
+            display: inline-block;
+            padding-left: 18px;
+        }
+
+        .account-management {
+            display: block;
+            padding-left: 80px;
+        }
+    }
+
+
 }

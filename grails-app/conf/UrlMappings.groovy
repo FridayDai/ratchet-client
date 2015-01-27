@@ -44,8 +44,10 @@ class UrlMappings {
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
-        "/getAccounts"(controller: "accounts", action: "getAllAccounts")
-        "/singleAccount"(controller: "accounts", action: "getAccount")
+        "/getAccounts"(controller: "accounts", action: "getAccounts")
+        "/singleAccount/$id?"(controller: "accounts", action: "getSingleAccount")
+        "/createAccount"(controller: "accounts", action: "createAccount")
+        "/updateAccount/$id?"(controller: "accounts", action: "updateAccount")
 
         //task
         "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")

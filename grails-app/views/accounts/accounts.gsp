@@ -14,14 +14,12 @@
             <label class="title">Accounts</label>
             <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
         </div>
+
         <div class="inner-search">
-            <input type="text" placeholder="Search" class="search-input"/>
-            <label>
-                Patients
-                <input type="search">
-            </label>
+            <input type="text" placeholder="Patient ID, Name" class="search-input"/>
             <a class="btn pull-right" href="#">Search</a>
         </div>
+
         <div class="table-group">
             <table id="accountsTable" class="display accounts-table">
                 <thead>
@@ -32,67 +30,55 @@
                     <th>Email Address</th>
                     <th>Role</th>
                     <th>Groups</th>
-                    <th>Last Update</th>
+                    <th></th>
                 </tr>
                 </thead>
-
             </table>
         </div>
 
         <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <label>
-                    <input type="checkbox"/>
-                    Dr.
-                </label>
-            </div>
-
-
-            <div class="form-group">
-                <label>
-                    * First Name:
-                    <input id="firstName" name="firstName" type="text" class="" placeholder="First Name" required/>
-                </label>
+                <span class="dr">Dr.</span><input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/>
             </div>
 
             <div class="form-group">
-                <label>
-                    * Last Name:
-                    <input id="lastName" name="lastName" type="text" class="" placeholder="Last Name" required/>
-                </label>
+                <input id="firstName" name="firstName" type="text" class="input-group first-name"
+                       placeholder="First Name" required/>
             </div>
 
             <div class="form-group">
-                <label>
-                    * Email Address:
-                    <input id="email" name="email" type="email" class="" placeholder="Email Address" required/>
-                </label>
+                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
             </div>
 
             <div class="form-group">
-                <label>
-                    * Role:
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
+            </div>
+
+            <div class="form-group">
+                <label class="role">
+                    <span>Role:</span>
+                    <select id="type" name="type">
+                        <option value="1">Anesthesiologist</option>
+                        <option value="2">Medical Assistant</option>
+                        <option value="3">Management</option>
+                        <option value="4">Nurse</option>
+                        <option value="5">Physical therapists (PTs)</option>
+                        <option value="6">Primary Physican</option>
+                        <option value="7">Scheduler</option>
+                        <option value="8">Surgeon</option>
                     </select>
                 </label>
             </div>
 
             <div class="form-group">
-                <div>
-                    * Group:
-                    <label>
-                        <input type="checkbox" name="group">
-                        Patient Management
+                <div class="group">
+                    <span>Groups:</span>
+                    <label><input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
                     </label>
+                    <label class="account-management"><input id="accountManagement" name="accountManagement"
+                                                             type="checkbox">Account Management</label>
                 </div>
-                <label>
-                    <input type="checkbox" name="group">
-                    Account Management
-                </label>
             </div>
 
         </g:form>
