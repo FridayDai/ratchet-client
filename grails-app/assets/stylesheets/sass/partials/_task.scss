@@ -17,6 +17,10 @@
     height: 73px;
 }
 
+.display-flex {
+    display: flex;
+}
+
 .btn-right {
     float: right;
 }
@@ -243,6 +247,7 @@
 // all change in the form box
 .form-box {
     display: inline-block;
+    height: 120px;
     width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -294,6 +299,11 @@
     .radio-box {
         margin: 6px 0;
         color: $base-color-blue-grey;
+    }
+
+    .label-height {
+        display: block;
+        height: 25px;
     }
 }
 

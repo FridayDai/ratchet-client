@@ -16,6 +16,9 @@
                 title: RC.constants.warningTipTitle,
                 message: RC.constants.warningTip
             }
+        },
+        urls: {
+            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl)
         }
     };
 
@@ -32,11 +35,14 @@
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
+            var surgeryTime = $(this).data("surgeryTime");
+            var patientId = "x12345";
+            var medicalRecord = 21;//need change
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
                     if ($("#task-form").valid()) {
-                        _add();
+                        _add(surgeryTime, patientId, medicalRecord);
                         return true;
                     }
                     return false;
@@ -52,7 +58,41 @@
         });
     }
 
-    function _add() {
+    /**
+     * add task to medicalRecord
+     * @param patientId
+     * @param medicalRecordId
+     * @private
+     */
+    function _add(surgeryTime, patientId, medicalRecordId) {
+        var toolId = $("input:radio[name=task-template]:checked").val();
+        var relativeInterval = $("#relativeInterval option:selected").val();
+        var status = $("input:radio[name=time]:checked").val();
+        var weeks = $("#receive-week option:selected").text();
+        var days = $("#receive-days option:selected").text();
+        var hours = $("#receive-hours option:selected").text();
+        var minutes = $("#receive-minutes option:selected").text();
+        var remindDays = $("#remind-days option:selected").text();
+        var remindHours = $("#remind-hours option:selected").text();
+        var sendMillionSeconds = 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
+        var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
+        var request = $.ajax({
+            url: opts.urls.query.format(patientId, medicalRecordId),
+            data: {toolId: toolId, status: status, surgeryTime: surgeryTime, sendMillionSeconds: sendMillionSeconds,
+                remindMillionSeconds: remindMillionSeconds}
+        });
+        request.done(function () {
+            _renderNewTask();
+        });
+        request.fail(function () {
+
+        });
+    }
+
+    function _renderNewTask() {
+        var html = '<div></div>';
+
+
 
     }
 
@@ -266,6 +306,17 @@
 
         });
 
+        $("input:radio[name=time]").click(function (e) {
+            e.stopPropagation();
+            var relativeChoices = $('#relative-choices');
+            if($(this).val() === "2") {
+                relativeChoices.hide();
+            }
+            if($(this).val() === "3") {
+                relativeChoices.show();
+            }
+        });
+
     }
 
     /**
@@ -278,7 +329,7 @@
             showOn: "button",
             buttonImage: "../../assets/patients/calender.png",
             buttonImageOnly: true,
-            onClose: function( selectedDate ) {
+            onClose: function (selectedDate) {
                 $(this).parent().find('.datetime-picker-label').text(selectedDate);
             }
         });

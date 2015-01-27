@@ -5,7 +5,6 @@ import grails.converters.JSON
 class HomeController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
-
     def index() {
         render view: '/home/home'
     }
