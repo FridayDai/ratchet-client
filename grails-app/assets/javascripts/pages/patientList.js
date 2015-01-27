@@ -17,9 +17,9 @@
             },
             urls: {
                 query: "{0}/getPatients".format(RC.constants.baseUrl),
-                add:"{0}/addPatient".format(RC.constants.baseUrl),
-                getTreatments:"{0}/getTreatments".format(RC.constants.baseUrl),
-                getStaffs:"{0}/getStaffs".format(RC.constants.baseUrl)
+                add: "{0}/addPatient".format(RC.constants.baseUrl),
+                getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
+                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
             }
         },
         provideTable;
@@ -31,7 +31,7 @@
      */
     function _initTable(data) {
 
-        if(provideTable){
+        if (provideTable) {
             provideTable.destroy();
         }
 
@@ -50,16 +50,18 @@
             }),
             columns: [
                 {data: "id"},
-                {data: function (source) {
-                    return source.firstName+" "+source.lastName;
-                }},
+                {
+                    data: function (source) {
+                        return source.firstName + " " + source.lastName;
+                    }
+                },
                 {data: "email"},
                 {data: "phoneNumber"},
                 {data: "profilePhoto"},
                 {
                     data: function (source) {
-                        return '<label class="tr-label"> ' + source.treatments + '</label>'
-                            + '&nbsp;&nbsp;<a href="/patients/' + source.emid + '"class="editor_edit" data-id ="' + source.id + '">View</a>';
+                        //return '<label class="tr-label"> ' + source.treatments + '</label>'
+                        return '<a href="/patients/' + source.id + '"class="editor_edit" data-id ="' + source.id + '">View</a>';
                     }
                 }
             ]
@@ -73,7 +75,7 @@
      */
     function _loadData() {
         var data = {
-            clientId:1
+            clientId: 1
         };
         _initTable(data);
 
@@ -96,7 +98,7 @@
         var staffArray = staffIds.split(',');
         var staffIdArr = [];
 
-        $.each(staffArray, function(index, item){
+        $.each(staffArray, function (index, item) {
             staffIdArr.push(parseInt(item));
         });
 
@@ -108,13 +110,14 @@
             phoneNumber: phoneNumber,
             profilePhoto: '',
             treatmentId: treatmentId,
-            primaryStaffId:16,
+            primaryStaffId: 16,
             staffIds: staffIds,
             surgeryTime: surgeryTime
         };
 
         return data;
     }
+
     /**
      * data table add a row
      * @private
@@ -243,7 +246,7 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.firstName +" "+item.lastName
+                            'text': item.firstName + " " + item.lastName
                         });
                     });
                     return {
