@@ -11,12 +11,18 @@
                     width: 400
                 }
             },
+            waringArguments: {
+                title: RC.constants.warningTipTitle,
+                message: RC.constants.warningTip
+            },
             urls: {
-                query: "{0}/getPatients".format(RC.constants.baseUrl)
+                query: "{0}/getPatients".format(RC.constants.baseUrl),
+                add:"{0}/addPatient".format(RC.constants.baseUrl),
+                getTreatments:"{0}/getTreatments".format(RC.constants.baseUrl),
+                getStaffs:"{0}/getStaffs".format(RC.constants.baseUrl)
             }
         },
-        provideTable,
-        provideData;
+        provideTable;
 
     /**
      * init table with the data which loaded
@@ -24,30 +30,35 @@
      * @private
      */
     function _initTable(data) {
+
+        if(provideTable){
+            provideTable.destroy();
+        }
+
         provideTable = $("#patientsTable").DataTable({
             paging: true,
-            searching: true,
-            ordering: true,
-            pageLength: 5,
+            searching: false,
+            ordering: false,
+            pageLength: 10,
             info: false,
             bLengthChange: false,
-            //"processing": true,
             "serverSide": true,
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
-                pages: 1, // number of pages to cache
+                pages: 2, // number of pages to cache
                 data: data
             }),
             columns: [
-                {data: "emid"},
-                {data: "firstName"},
-                {data: "lastName"},
+                {data: "id"},
+                {data: function (source) {
+                    return source.firstName+" "+source.lastName;
+                }},
                 {data: "email"},
                 {data: "phoneNumber"},
+                {data: "profilePhoto"},
                 {
                     data: function (source) {
-                        return '<label class="tr-label"> ' + source.treatments + '</label>'
-                                + '&nbsp;&nbsp;<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
+                        return '<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
                     }
                 }
             ]
@@ -60,60 +71,73 @@
      * @private
      */
     function _loadData() {
-        var data;
+        var data = {
+            clientId:1
+        };
         _initTable(data);
 
     }
 
     /**
-     * data table add a row
+     * get add patient data
+     * @returns data
      * @private
      */
-    function _add() {
-        var emid = $("#emid").val();
+    function _getAddData() {
+        var patientId = $("#patientId").val();
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         var phoneNumber = $("#phoneNumber").val();
-        var treatments = $("#treatments").val();
-        var id = Math.floor((Math.random() * 1000) + 1).toString();
+        var treatmentId = $("#selectTreatment").val();
+        var surgeryTime = $("#surgeryTime").val();
+        var staffIds = $("#selectStaffs").val();
+        var staffArray = staffIds.split(',');
+        var staffIdArr = [];
 
-        provideTable.row.add({
-            "emid": emid,
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "phoneNumber": phoneNumber,
-            "treatments": treatments,
-            "id": id
-        }).draw();
+        $.each(staffArray, function(index, item){
+            staffIdArr.push(parseInt(item));
+        });
 
-        //provideData.push({
-        //    "emid": emid,
-        //    "firstName": firstName,
-        //    "lastName": lastName,
-        //    "email": email,
-        //    "phoneNumber": phoneNumber,
-        //    "treatments": treatments,
-        //    "id": id
-        //});
+        var data = {
+            patientId: patientId,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+            profilePhoto: '',
+            treatmentId: treatmentId,
+            primaryStaffId:16,
+            staffIds: staffIds,
+            surgeryTime: surgeryTime
+        };
 
+        return data;
     }
-
     /**
-     * modify data
-     * @param cell
+     * data table add a row
      * @private
      */
-    function _modify(cell) {
-        var d = cell.data();
-        var name = $("#provider").val();
-        var agent = $("#agent").val();
-        var email = $("#email").val();
-        d.name = name;
-        d.agent = agent;
-        d.email = email;
-        provideTable.row(cell).data(d).draw();
+    function _add() {
+
+        var data = _getAddData();
+        $.ajax({
+            url: opts.urls.add,
+            type: "post",
+            data: data,
+            success: function () {
+                _initTable();
+            },
+            error: function () {
+                RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+                    element: $(".warn"),
+                    closeCallback: function () {
+                    }
+                }));
+            }
+        });
+
+
     }
 
     /**
@@ -136,7 +160,6 @@
      * @private
      */
     function _bindAddEvent() {
-        // new a record
         $("#add-patient").on("click", function (e) {
             e.preventDefault();
             $(".form")[0].reset();
@@ -151,33 +174,82 @@
                     return false;
                 }
             }));
+
+            _initSurgeryTime();
+            _initSelectTreatment();
+            _initStaffSelect();
+
         });
     }
 
     /**
-     * bind modify event
+     * init surgery time
      * @private
      */
-    function _bindModifyEvent() {
-        // Edit record
-        $('#provideTable').on('click', 'a.editor_edit', function (e) {
-            e.preventDefault();
+    function _initSurgeryTime() {
+        $("#surgeryTime").datetimepicker({
+            controlType: 'input'
+        });
+    }
 
-            var dataId = $(this).data('id').toString();
-            var rowData = _.findWhere(provideData, {id: dataId});
-            $("#provider").val(rowData.name);
-            $("#agent").val(rowData.agent);
-            $("#email").val(rowData.email);
-
-            var cell = provideTable.row($(this).closest('tr'));
-
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".form"),
-                okCallback: function () {
-                    _modify(cell);
-                    return true;
+    /**
+     * init select treatment
+     * @private
+     */
+    function _initSelectTreatment() {
+        $('#selectTreatment').select2({
+            ajax: {
+                url: opts.urls.getTreatments,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.title
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
                 }
-            }));
+            }
+        });
+    }
+
+    /**
+     * init select staff
+     * @private
+     */
+    function _initStaffSelect() {
+        $('#selectStaffs').select2({
+            tags: true,
+            ajax: {
+                url: opts.urls.getStaffs,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.firstName +" "+item.lastName
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
         });
     }
 
@@ -189,7 +261,6 @@
         _loadData();
         _setValidate();
         _bindAddEvent();
-        _bindModifyEvent();
     }
 
     _init();

@@ -67,7 +67,7 @@
             .append("svg")
             .attr("width", w)
             .attr("height", h)
-            .attr("class", "chart");;
+            .attr("class", "chart");
 
         //Create circles
         svg.selectAll("circle")
@@ -119,7 +119,7 @@
      * patientTeam page Initialization
      * @private
      */
-    function _init(element) {
+    function _init() {
         _initChart();
     }
 

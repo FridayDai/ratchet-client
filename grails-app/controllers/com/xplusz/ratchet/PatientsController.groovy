@@ -4,19 +4,26 @@ import grails.converters.JSON
 
 class PatientsController extends BaseController {
 
-    //    def beforeInterceptor = [action: this.&auth]
+
+    def beforeInterceptor = [action: this.&auth]
 
     def patientService
+
+    static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
 
     def index() {
         render view: '/patients/patientList'
     }
 
     def getPatients() {
-        def data = patientService.loadPatients(params)
-        render data as JSON
+        def resp = patientService.loadPatients(request, response, params)
+        render resp as JSON
     }
 
+    def addPatient() {
+        def resp = patientService.addPatients(request, response, params)
+        render resp as JSON
+    }
 
     def showActivity() {
         def teamData = patientService.loadCareTeam()

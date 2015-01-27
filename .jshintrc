@@ -10,7 +10,8 @@
     "globals": {
         "jQuery": false,
         "RC": true,
-        "_": false
+        "_": false,
+        "d3": false
     },
     "maxparams": 4,
     "maxdepth": 4,
