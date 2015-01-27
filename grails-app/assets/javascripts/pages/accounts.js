@@ -25,7 +25,7 @@
     function _initTable(data) {
         accountTable = $("#accountsTable").DataTable({
             paging: true,
-            searching: true,
+            searching: false,
             ordering: true,
             pageLength: 5,
             info: false,
@@ -66,41 +66,6 @@
     }
 
     /**
-     * data table add a row
-     * @private
-     */
-    function _add() {
-        var emid = $("#emid").val();
-        var firstName = $("#firstName").val();
-        var lastName = $("#lastName").val();
-        var email = $("#email").val();
-        var phoneNumber = $("#phoneNumber").val();
-        var treatments = $("#treatments").val();
-        var id = Math.floor((Math.random() * 1000) + 1).toString();
-
-        provideTable.row.add({
-            "emid": emid,
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "phoneNumber": phoneNumber,
-            "treatments": treatments,
-            "id": id
-        }).draw();
-
-        //provideData.push({
-        //    "emid": emid,
-        //    "firstName": firstName,
-        //    "lastName": lastName,
-        //    "email": email,
-        //    "phoneNumber": phoneNumber,
-        //    "treatments": treatments,
-        //    "id": id
-        //});
-
-    }
-
-    /**
      * set validate
      * @private
      */
@@ -129,7 +94,6 @@
                 element: $(".accounts-form"),
                 okCallback: function () {
                     if ($("#table-form").valid()) {
-                        _add();
                         return true;
                     }
                     return false;

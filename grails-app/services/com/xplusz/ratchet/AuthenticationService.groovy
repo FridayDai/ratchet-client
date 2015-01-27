@@ -59,6 +59,7 @@ class AuthenticationService {
 
         if (resp.status == 200) {
             request.session.token = result.token
+            request.session.clientId = result.clientId
             def data = [
                     authenticated: true,
             ]

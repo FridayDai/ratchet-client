@@ -10,9 +10,18 @@
 
     <body>
     <div class="content">
-        <h3>Accounts</h3>
-        <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
-
+        <div class="inner-header">
+            <label class="title">Accounts</label>
+            <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
+        </div>
+        <div class="inner-search">
+            <input type="text" placeholder="Search" class="search-input"/>
+            <label>
+                Patients
+                <input type="search">
+            </label>
+            <a class="btn pull-right" href="#">Search</a>
+        </div>
         <div class="table-group">
             <table id="accountsTable" class="display accounts-table">
                 <thead>

@@ -1,4 +1,7 @@
 package com.xplusz.ratchet
+
+import com.mashape.unirest.http.Unirest
+
 /**
  * Base Controller.
  */
@@ -10,10 +13,11 @@ class BaseController {
      * @return
      */
     protected auth() {
-        if (!session.uid) {
+        if (!session.token) {
             redirect(uri: "/login")
             return false
         } else {
+            Unirest.setDefaultHeader("X-Auth-Token", session.token)
             return true
         }
     }
