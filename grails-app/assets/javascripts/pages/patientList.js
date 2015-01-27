@@ -58,7 +58,8 @@
                 {data: "profilePhoto"},
                 {
                     data: function (source) {
-                        return '<a href="/singlePatient" data-id ="' + source.id + '" class="editor_edit">View</a>';
+                        return '<label class="tr-label"> ' + source.treatments + '</label>'
+                            + '&nbsp;&nbsp;<a href="/patients/' + source.emid + '"class="editor_edit" data-id ="' + source.id + '">View</a>';
                     }
                 }
             ]

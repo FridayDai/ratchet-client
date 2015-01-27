@@ -49,11 +49,21 @@
         }
 
         .color {
+//            display: inline;
             color: $base-color-middle-grey;
         }
 
         .name-info {
+            display: inline;
             font-size: x-large;
+        }
+
+        .email{
+            display: inline;
+        }
+
+        .phone{
+            display: inline;
         }
     }
 

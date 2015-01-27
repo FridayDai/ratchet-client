@@ -21,7 +21,12 @@ class UrlMappings {
         "/activity"(controller: "activity", action: "index")
         "/patient/patientActivity"(controller: "patients", action: "showActivity")
         "/getActivities"(controller: "patients", action: "getActivities")
-        "/singlePatient"(controller: "singlePatient", action: "index")
+        "/patients"(controller: "patients", action: "index")
+        "/patients/$id?"(controller: "singlePatient", action: "showPatient")
+        "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
+        "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+
+
         "/overview"(controller: "overview", action: "index")
         "/task"(controller: "overview", action: "index")
         "/team"(controller: "team", action: "index")
@@ -39,7 +44,7 @@ class UrlMappings {
         "/getAccounts"(controller: "accounts", action: "getAllAccounts")
         "/singleAccount"(controller: "accounts", action: "getAccount")
         "500"(view: '/pages/error')
-        "/providers/detail"(controller: "providers", action: "detail")
+        "/providers/detail"(controller: "providers",action: "detail")
 
     }
 }

@@ -12,6 +12,11 @@ class TreatmentController extends BaseController {
         render view: '/treatment/treatment'
     }
 
+    def assignTreatment() {
+        def resp = treatmentService.assignTreatmentToPatient(request, response, params)
+
+    }
+
     def getTreatments() {
         def resp = treatmentService.getTreatments(request, response, params)
         render resp as JSON
