@@ -15,7 +15,7 @@
             <div class="inner-header">Reports</div>
 
             <div class="report-chart">
-
+                <div id="charts"></div>
             </div>
         </div>
 
