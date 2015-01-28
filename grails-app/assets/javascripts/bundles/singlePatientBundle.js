@@ -6,6 +6,7 @@
 //= require ../pages/activity
 //= require ../pages/team
 //= require ../pages/task
+//= require ../utility/templates
 //= require ../pages/overview
 //= require ../pages/treatment
 //= require ../pages/singlePatient

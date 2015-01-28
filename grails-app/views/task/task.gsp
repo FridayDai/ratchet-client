@@ -17,9 +17,9 @@
 <div class="tasks-list">
     <h4 class="complete">SENT</h4>
 
-    <div class="task-row">
+    <div class="task-row" id="task-row-sent">
         <g:each in="${sentTasks}" var="task">
-            <g:render template="taskBox" collection="${task}"></g:render>
+            <g:render template="taskBox" model="['task': task]"></g:render>
         </g:each>
 
     </div>
@@ -28,9 +28,9 @@
 <div class="tasks-list">
     <h4 class="new">SCHEDULE</h4>
 
-    <div class="task-row">
+    <div class="task-row" id="task-row-schedule">
         <g:each in="${scheduleTasks}" var="task">
-            <g:render template="taskBox" collection="${task}"></g:render>
+            <g:render template="taskBox" model="['task': task]"></g:render>
         </g:each>
 
     </div>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group header-right inline">
-                    <input type="radio" class="box-radio" name="task-template" value="${tool?.id}"/>
+                    <input type="radio" class="box-radio" name="task-template" data-require-completion="${tool?.requireCompletion}" value="${tool?.id}"/>
                 </div>
             </div>
 
@@ -237,7 +237,7 @@
 
         </div>
 
-        <div>
+        <div id="hide-message" class="visible-hidden">
             <h4>* When should the task be due?</h4>
 
             <div class="radio-box">
@@ -271,3 +271,17 @@
 </g:form>
 
 </div>
+
+%{--used in taskJS for render new task--}%
+<script type="text/html" id="newTaskTemplate">
+<div  class="note-content">
+    <p><%= "hello GSP"%></p>
+    %{--<P class="<%key << "name"%>">KEY</P>--}%
+    <P class="<%= key%>">KEY</P>
+    %{--<P class="<%key << name%>">KEY</P>--}%
+    <p>${"<%= key%>"}</p>
+    <p><!=name !></p>
+    <p class="note-p  note-color"><%= name %></p>
+</div>
+</script>
+

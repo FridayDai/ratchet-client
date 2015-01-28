@@ -1,8 +1,5 @@
 package com.xplusz.ratchet
 
-/**
- * Created by John on 1/28/15.
- */
 class StatusCodeConstants {
 
     //Staff type

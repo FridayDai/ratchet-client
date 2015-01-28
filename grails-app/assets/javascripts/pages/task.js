@@ -42,7 +42,8 @@
                 element: $(".task-form"),
                 okCallback: function () {
                     if ($("#task-form").valid()) {
-                        _add(surgeryTime, patientId, medicalRecord);
+                        _add(patientId, medicalRecord);
+                        //_renderNewTask();
                         return true;
                     }
                     return false;
@@ -64,8 +65,9 @@
      * @param medicalRecordId
      * @private
      */
-    function _add(surgeryTime, patientId, medicalRecordId) {
+    function _add(patientId, medicalRecordId) {
         var toolId = $("input:radio[name=task-template]:checked").val();
+        var requireCompletion = $("input:radio[name=task-template]:checked").data("requireCompletion");
         var relativeInterval = $("#relativeInterval option:selected").val();
         var status = $("input:radio[name=time]:checked").val();
         var weeks = $("#receive-week option:selected").text();
@@ -77,12 +79,17 @@
         var sendMillionSeconds = 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
         var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
         var request = $.ajax({
-            url: opts.urls.query.format(patientId, medicalRecordId),
-            data: {toolId: toolId, status: status, surgeryTime: surgeryTime, sendMillionSeconds: sendMillionSeconds,
-                remindMillionSeconds: remindMillionSeconds}
+            url: opts.urls.query.format(null, patientId, medicalRecordId),
+            data: {
+                toolId: toolId,
+                status: status,
+                requireCompletion: requireCompletion,
+                sendMillionSeconds: sendMillionSeconds,
+                remindMillionSeconds: remindMillionSeconds
+            }
         });
         request.done(function () {
-            _renderNewTask();
+            //_renderNewTask();
         });
         request.fail(function () {
 
@@ -90,8 +97,15 @@
     }
 
     function _renderNewTask() {
-        var html = '<div></div>';
-
+        //var template = _.template($("#newTaskTemplate").html());
+        //var newTask = template({key: 'colin'});
+        //var template = document.getElementById("#newTaskTemplate");
+        var data = {
+            name: "colin",
+            key: "value"
+            };
+        var newTask = tmpl("newTaskTemplate", data);
+        $("#task-row-sent").append(newTask);
 
 
     }
@@ -285,6 +299,14 @@
             var $this = $(this);
             var radio = $this.find(':radio');
 
+            var requireCompletion = radio.data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility","visible");
+            } else {
+                hideMessageArea.css("visibility","hidden");
+            }
+
             $("input:radio[name=task-template]").each(function () {
                 _blurFormBox($(this).closest(".form-box"));
                 this.checked = false;
@@ -297,7 +319,13 @@
 
         $('.box-radio').click(function (e) {
             e.stopPropagation();
-
+            var requireCompletion = $(this).data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility","visible");
+            } else {
+                hideMessageArea.css("visibility","hidden");
+            }
             $("input:radio[name=task-template]").each(function () {
                 _blurFormBox($(this).closest(".form-box"));
             });
@@ -309,10 +337,10 @@
         $("input:radio[name=time]").click(function (e) {
             e.stopPropagation();
             var relativeChoices = $('#relative-choices');
-            if($(this).val() === "2") {
+            if ($(this).val() === "2") {
                 relativeChoices.hide();
             }
-            if($(this).val() === "3") {
+            if ($(this).val() === "3") {
                 relativeChoices.show();
             }
         });
