@@ -264,3 +264,27 @@ a {
         content: ' ';
     }
 }
+
+.msg-process-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #6a6a6a;
+    z-index: 99999;
+    opacity: .3;
+
+    .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        height: 40px;
+        width: 40px;
+        font-size: 40px;
+        color: #3b3b3b;
+        z-index: 999999;
+        background: url('../../../images/loading.gif') no-repeat 0 0;
+        background-size: cover;
+    }
+}

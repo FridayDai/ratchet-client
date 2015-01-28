@@ -44,29 +44,6 @@
             }
         }
     };
-    /**
-     * global ajax set up
-     */
-    $.ajaxSetup({
-        beforeSend: function () {
-
-        },
-        complete: function () {
-
-        },
-        success: function () {
-
-        },
-        global: true,
-        error: function (jqXHR) {
-            if (jqXHR.status === 404) {
-            } else if (jqXHR.status === 403) {
-            } else if (jqXHR.status === 0) {
-            }
-            else {
-            }
-        }
-    });
 
     /**
      * string format

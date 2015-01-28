@@ -5,8 +5,13 @@
     function _init() {
         _setValidator();
         _dataTablePagination();
+        _setGlobalAjax();
     }
 
+    /**
+     * set global validator
+     * @private
+     */
     function _setValidator() {
         $.validator.setDefaults({
             showErrors: function (errorMap, errorList) {
@@ -20,6 +25,38 @@
                 });
             },
             focusInvalid: false
+        });
+    }
+
+    /**
+     * global ajax set up
+     * @private
+     */
+    function _setGlobalAjax() {
+
+        $.ajaxSetup({
+            beforeSend: function () {
+                RC.common.progress(true);
+            },
+            complete: function () {
+                RC.common.progress(false);
+            },
+            success: function () {
+
+            },
+            global: true,
+            error: function (jqXHR) {
+                if (jqXHR.status === 404) {
+
+                } else if (jqXHR.status === 403) {
+
+                } else if (jqXHR.status === 0) {
+
+                }
+                else {
+
+                }
+            }
         });
     }
 
@@ -143,7 +180,13 @@
 
     }
 
-
+    /**
+     * set waring container
+     * @param container
+     * @param warningArguments
+     * @returns {*|HTMLElement}
+     * @private
+     */
     function _setWaringContainer(container, warningArguments) {
         var $container = $(container);
         var containerParent = $container.parent().addClass('ui-size'),
@@ -166,29 +209,18 @@
          * @param hide
          */
         progress: function (hide) {
-            if (window !== window.top) {
-                window.top.RC.common.progress(hide);
-                return;
-            }
             if (hide === undefined || hide === false) {
                 if ($("#msg-process").length > 0) {
                     $("#msg-process").hide();
                 }
             } else {
-                var remain = 1000,
-                    msg = RC.constants.loadingContent;
-                var $msgDiv = $('<div id="msg-process" class="ui-tips ui-tips-center"></div>');
+                var $msgDiv = $('<div id="msg-process" class="msg-process-background ui-tips ui-tips-center"><span class="loading"></span></span></div>');
                 if ($("#msg-process").length > 0) {
                     $msgDiv = $("#msg-process");
                 } else {
                     $(document.body).append($msgDiv);
                 }
-                $msgDiv.html(msg).show();
-                setTimeout(function () {
-                        $msgDiv.hide();
-                        $msgDiv.trigger("timeout");
-                    },
-                    remain);
+                $msgDiv.show();
             }
         },
         /**
