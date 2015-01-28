@@ -56,19 +56,11 @@
                         <g:link controller="treatment" action="index" data-id="sub${i}">${medicalRecord.title}</g:link>
                     </li>
                 </g:each>
-                %{--<li>--}%
-                    %{--<g:link controller="treatment" action="index" data-id="sub1">Rotator Cuff Essential</g:link>--}%
-                %{--</li>--}%
-                %{--<li>--}%
-                    %{--<g:link controller="treatment" action="index" data-id="sub2">Total Knee Replacement</g:link>--}%
-                %{--</li>--}%
-
             </ul>
-
         </div>
     </div>
 
-    <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
+    <g:form class="patient-form ui-hidden" id="patient-form" name="patient-form">
         <div class="form-group">
             <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
         </div>
@@ -84,6 +76,25 @@
         <div class="form-group">
             <input id="phone" name="phone" type="text" class="input-group" placeholder="Phone" required/>
         </div>
+
+    %{--<div class="form-group">--}%
+    %{--<input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time"--}%
+    %{--required/>--}%
+    %{--</div>--}%
+    </g:form>
+
+    <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
+
+        <div class="form-group">
+            <input id="selectTreatment" name="selectTreatment" type="text" class="input-group" placeholder="Treatment"
+                   required/>
+        </div>
+
+        <div class="form-group ">
+            <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Staff"
+                   required/>
+        </div>
+
     </g:form>
 
     </body>
