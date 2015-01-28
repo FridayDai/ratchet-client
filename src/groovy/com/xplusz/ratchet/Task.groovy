@@ -12,4 +12,8 @@ class Task {
         this.type = type
         this.status = status
     }
+
+    public Task() {
+
+    }
 }

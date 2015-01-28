@@ -30,25 +30,25 @@ class MedicalRecordService {
     def assignTaskToMedicalRecord(params) {
         def toolId = params.toolId
         def status = params.status
-        def surgeryTime = params.surgeryTime
+        def requireCompletion = params.requireCompletion
         def sendTime, remindTime
 
-        if (status == 2){
-            sendTime = surgeryTime + params.sendMillionSeconds
+        if (status == 3){
+            sendTime = params.sendMillionSeconds
         } else {
             sendTime = new Date().getTime()
         }
 
-        if (idMessage){
-            remindTime = null
+        if (requireCompletion){
+            remindTime = params.remindMillionSeconds
         }else {
-            remindTime = surgeryTime + params.remindMillionSeconds
+            remindTime = null
         }
 
         def args = [params.patientId, params.medicalRecordId].toArray()
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.assignTask.url, args)
         def resp = Unirest.post(url)
-                .field("toolId", toolId)
+                .field("tool.id", toolId)
                 .field("status", status)
                 .field("sendTime", sendTime)
                 .field("remindTime", remindTime)

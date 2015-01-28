@@ -1,5 +1,8 @@
 package com.xplusz.ratchet
 
+import com.alibaba.fastjson.JSONObject
+
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -9,38 +12,15 @@ class TaskController extends BaseController {
     def medicalRecordService
 
     def index() {
+//        def patientId = params.patientId
+//        def treatmentId = params.treatmentId
+//        def medicalRecordId = params.medicalRecordId
+//        redirect(uri: '/patients/patientId/treatments/treatmentId/medicalRecordId/tasks')
         redirect(uri: '/patients/x12345/treatments/3/21/tasks');
     }
 
-//    def getTasks() {
-//        def tasks = taskService.loadTasks()
-//        def taskOverdue = []
-//        def taskNew = []
-//        def taskFuture = []
-//        def taskCompleted = []
-//        for (task in tasks) {
-//            if (task.status == "overdue") {
-//                taskOverdue.add(task)
-//                continue
-//            }
-//            if (task.status == "new") {
-//                taskNew.add(task)
-//                continue
-//            }
-//            if (task.status == "future") {
-//                taskFuture.add(task)
-//                continue
-//            }
-//            if (task.status == "complete") {
-//                taskCompleted.add(task)
-//            }
-//
-//        }
-//        render view: 'task', model: [taskOverdue: taskOverdue, taskNew: taskNew, taskFuture: taskFuture, taskCompleted: taskCompleted]
-//    }
-
     def getTasksAndTools() {
-        def patientId = params.patientId
+//        def patientId = params.patientId
         def medicalRecordId = params.medicalRecordId
         def treatmentId = params.treatmentId
 
@@ -48,11 +28,9 @@ class TaskController extends BaseController {
         def sentTasks = []
         def scheduleTasks = []
         for (task in tasks) {
-            if (isSent) {
+            if (task?.isSent) {
                 sentTasks.add(task)
-                continue
-            }
-            if (notsent) {
+            } else {
                 scheduleTasks.add(task)
             }
         }
