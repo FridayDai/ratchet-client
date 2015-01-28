@@ -23,7 +23,9 @@
             },
             urls: {
                 query: "{0}/getProvider".format(RC.constants.baseUrl),
-                editPatient: "{0}/clients/".format(RC.constants.baseUrl)
+                editPatient: "{0}/clients/".format(RC.constants.baseUrl),
+                getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
+                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
             }
         },
         tabs,
@@ -53,7 +55,7 @@
      * @private
      */
     function _addTab() {
-        var label = tabTitle.val(),
+        var label = tabTitle,
             li = $(tabTemplate.replace(/#\{href\}/g, "/treatment/index").replace(/#\{label\}/g, label));
         tabs.find(".tab-treatment").append(li);
         tabs.tabs("refresh");
@@ -81,23 +83,36 @@
             var clientId = grandParent.find('input').attr('value');
             var firstName = grandParent.find('.first-name-info').attr('value');
             var lastName = grandParent.find('.last-name-info').attr('value');
-            var email = grandParent.find('.last-name-info').attr('value');
-            var phoneNum = grandParent.find('.last-name-info').attr('value');
+            var email = grandParent.find('.email-info').attr('value');
+            var phoneNum = grandParent.find('.phone-info').attr('value');
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
-                        tabTitle = $("#name");
+                        //tabTitle = $("#selectTreatment");
+
+                        var treatmentId = $("#selectTreatment").val();
+                        var staffIds = $("#selectStaffs").val();
+                        var staffArray = staffIds.split(',');
+                        var staffIdArr = [];
+                        $.each(staffArray, function (index, item) {
+                            staffIdArr.push(parseInt(item));
+                        });
+
                         var assignInfo = {
                             patientId: emid,
                             clientId: clientId,
                             firstName: firstName,
                             lastName: lastName,
                             phoneNum: phoneNum,
-                            email: email
+                            email: email,
+                            treatmentId: treatmentId,
+                            staffIds: staffIds
+                            //surgeryTime: surgeryTime
                         };
                         _assignTreatment(emid, clientId, assignInfo);
-                        _addTab();
+
                         return true;
                     }
                     return false;
@@ -119,14 +134,10 @@
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
-            //success: function (status) {
-            //    if (status.resp === 200) {
-            //        $('.first-name-info').empty().append(firstName);
-            //        $('.last-name-info').empty().append(lastName);
-            //        $('.email-info').empty().append(email);
-            //        $('.phone-info').empty().append(phone);
-            //    }
-            //}
+            success: function (data) {
+                tabTitle = data[0].title;
+                _addTab();
+            }
         });
     }
 
@@ -147,7 +158,7 @@
             $("#phone").val(parent.find('.phone-info').attr('value'));
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
-                    element: $(".treatment-form"),
+                    element: $(".patient-form"),
                     okCallback: function () {
                         var patientInfo = {
                             emid: emid,
@@ -201,6 +212,68 @@
         });
     }
 
+
+    /**
+     * init select treatment
+     * @private
+     */
+    function _initSelectTreatment() {
+        $('#selectTreatment').select2({
+            ajax: {
+                url: opts.urls.getTreatments,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.title
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
+    }
+
+    /**
+     * init select staff
+     * @private
+     */
+    function _initStaffSelect() {
+        $('#selectStaffs').select2({
+            tags: true,
+            ajax: {
+                url: opts.urls.getStaffs,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.firstName + " " + item.lastName
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
+    }
+
     /**
      * page Initialization
      * @private
@@ -212,6 +285,8 @@
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
+        _initSelectTreatment();
+        _initStaffSelect();
     }
 
     _init();

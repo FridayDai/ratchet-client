@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class SinglePatientController extends BaseController {
 
-//    def beforeInterceptor = [action: this.&auth]
+    def beforeInterceptor = [action: this.&auth]
     def singlePatientService
 
     def showPatient() {

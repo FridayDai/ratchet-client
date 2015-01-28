@@ -14,7 +14,8 @@ class TreatmentController extends BaseController {
 
     def assignTreatment() {
         def resp = treatmentService.assignTreatmentToPatient(request, response, params)
-
+        def treatmentInfo = treatmentService.getTreatmentInfo(request,response,params)
+        render treatmentInfo as JSON
     }
 
     def getTreatments() {
