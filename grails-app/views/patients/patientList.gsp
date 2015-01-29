@@ -15,11 +15,19 @@
             <a href="#" id="add-patient" class="add-patient">Add Patient</a>
         </div>
         <div class="inner-search">
-            <input type="text" placeholder="Search" class="search-input"/>
-            <label>
-                Patients
-                <input type="search">
-            </label>
+            <label for="selectPatient" class="lbl-by">PATIENT</label>
+            <select name="selectPatient" id="selectPatient">
+                <option value="all">All Patients</option>
+                <option value="my">My Patients</option>
+            </select>
+
+            <label for="treatmentForSearchPatient" class="lbl-by">TREATMENT</label>
+            <input type="text" class="input-group" name="treatmentForSearchPatient" id="treatmentForSearchPatient"/>
+
+            <label for="selectSurgeon" class="lbl-by">SURGEON</label>
+            <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
+
+            <input type="text" placeholder="Patient ID, Name" class="placeholder">
             <a class="btn pull-right" href="#">Search</a>
         </div>
         <div class="provider-list-table">

@@ -180,9 +180,6 @@
             }));
 
             _initSurgeryTime();
-            _initSelectTreatment();
-            _initStaffSelect();
-
         });
     }
 
@@ -201,7 +198,7 @@
      * @private
      */
     function _initSelectTreatment() {
-        $('#selectTreatment').select2({
+        $('#selectTreatment, #treatmentForSearchPatient').select2({
             ajax: {
                 transport: function(params){
                     params.beforeSend = function(){
@@ -237,35 +234,39 @@
      * @private
      */
     function _initStaffSelect() {
+        var ajax ={
+            transport: function(params){
+                params.beforeSend = function(){
+                    RC.common.progress(false);
+                };
+                return $.ajax(params);
+            },
+            url: opts.urls.getStaffs,
+            cache: "true",
+            data: function (term) {
+                return {
+                    term: term
+                };
+            },
+            results: function (data) {
+                var myResults = [];
+                $.each(data, function (index, item) {
+                    myResults.push({
+                        'id': item.id,
+                        'text': item.firstName + " " + item.lastName
+                    });
+                });
+                return {
+                    results: myResults
+                };
+            }
+        }
+        $('#selectSurgeon').select2({
+            ajax:ajax
+        });
         $('#selectStaffs').select2({
             tags: true,
-            ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
-                        RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getStaffs,
-                cache: "true",
-                data: function (term) {
-                    return {
-                        term: term
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, item) {
-                        myResults.push({
-                            'id': item.id,
-                            'text': item.firstName + " " + item.lastName
-                        });
-                    });
-                    return {
-                        results: myResults
-                    };
-                }
-            }
+            ajax:ajax
         });
     }
 
@@ -277,6 +278,8 @@
         _loadData();
         _setValidate();
         _bindAddEvent();
+        _initSelectTreatment();
+        _initStaffSelect();
     }
 
     _init();

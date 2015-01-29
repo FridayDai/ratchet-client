@@ -20,6 +20,30 @@
 
     <div class="activity-task pull-left inner-content">
         <div class="right-header">
+
+            <label>Overdue Tasks</label>
+
+            <div class="triangle">
+                <span class="triangle-icon triangle-icon-down">
+                    <span class="triangle-icon triangle-icon-upper">
+
+                    </span>
+                </span>
+            </div>
+
+        </div>
+
+        <div class="task">
+            <ul class="activity-content">
+                <g:each in="${overdueTask}" var="task">
+                    <li class="li-content title-task">${task.title}</li>
+                    <li>${task.description}</li>
+                    <li class="li-last-update"><g:formatDate date="${new java.util.Date(task.remindTime)}" format="MMM d, yyyy h:mm:ss a"></g:formatDate></li>
+                </g:each>
+            </ul>
+        </div>
+
+        <div class="right-header">
             <label>Activities</label>
 
             <a href="#" class="btn-remove-giver">
@@ -36,50 +60,15 @@
         </div>
 
         <div class="activity">
-
-            <ul class="activity-content">
-                <li class="li-content title-task">TASK</li>
-                <li>in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.</li>
-                <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
-            </ul>
-
-            <ul class="activity-content">
-                <li class="li-content title-reminder">REMINDER</li>
-                <li>in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.</li>
-                <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
-            </ul>
-
-            <ul class="activity-content">
-                <li class="li-content title-initiate">INITIATE</li>
-                <li>in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.</li>
-                <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
-            </ul>
-
-            <ul class="activity-content">
-                <li class="li-content title-task">TASK</li>
-                <li>in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.</li>
-                <li class="li-last-update">Last update:Dec 01,2014 2:00PM</li>
-            </ul>
-
+            <g:each in="${activityInfo}" var="activity">
+                <ul class="activity-content">
+                    <li>${activity.description}</li>
+                    <li class="li-last-update"><g:formatDate date="${new java.util.Date(activity.dateCreated)}" format="MMM d, yyyy h:mm:ss a"></g:formatDate></li>
+                </ul>
+            </g:each>
         </div>
 
 
-        <div class="right-header">
 
-            <label>Overdue Tasks</label>
-
-            <div class="triangle">
-                <span class="triangle-icon triangle-icon-down">
-                    <span class="triangle-icon triangle-icon-upper">
-
-                    </span>
-                </span>
-            </div>
-
-        </div>
-
-        <div class="task">
-
-        </div>
     </div>
 </div>

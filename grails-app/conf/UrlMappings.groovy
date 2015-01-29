@@ -20,7 +20,6 @@ class UrlMappings {
         "/addPatient"(controller: "patients", action: "addPatient")
         "/activity"(controller: "activity", action: "index")
         "/patient/patientActivity"(controller: "patients", action: "showActivity")
-        "/getActivities"(controller: "patients", action: "getActivities")
         "/patients"(controller: "patients", action: "index")
         "/patients/$id?"(controller: "singlePatient", action: "showPatient")
         "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
@@ -28,6 +27,7 @@ class UrlMappings {
 
 
         "/overview"(controller: "overview", action: "index")
+        "/getActivities"(controller: "overview", action: "getActivities")
         "/task"(controller: "overview", action: "index")
         "/team"(controller: "team", action: "index")
         "/patient/patientTeam"(controller: "patients", action: "showActivity")
