@@ -16,7 +16,9 @@
             <li class="item-left-two item-left-li capitalize ${status}">${status}</li>
             <li class="item-datetime item-left-li">
                 Due Date
-                <label class="datetime-picker-label datetime-color"></label>
+                <label class="datetime-picker-label datetime-color">
+                <g:formatDate date="${sendTime}" format="yyyy-MM-dd HH:mm:ss"></g:formatDate>
+                </label>
                 <input type="hidden" class="datetime-picker" data-id="${id}"/>
 
 
