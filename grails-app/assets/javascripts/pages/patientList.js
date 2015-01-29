@@ -260,10 +260,12 @@
                     results: myResults
                 };
             }
-        }
+        };
+
         $('#selectSurgeon').select2({
             ajax:ajax
         });
+
         $('#selectStaffs').select2({
             tags: true,
             ajax:ajax
