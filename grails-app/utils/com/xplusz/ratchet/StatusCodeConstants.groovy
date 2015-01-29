@@ -22,8 +22,6 @@ class StatusCodeConstants {
     public static final String[] TOOL_TYPE = 
             ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
 
-<<<<<<< HEAD
-=======
     //Account constants
     public static final String[] ACCOUNT_STATUS = ["Uninvited", "Invited", "Activated"]
     public static final String ACCOUNT_DOCTOR = "Dr."
@@ -31,6 +29,4 @@ class StatusCodeConstants {
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"]
     public static final String ACCOUNT_PATIENTS_M = "Patients Management"
     public static final String ACCOUNT_ACCOUNTS_M = "Accounts Management"
-
->>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
 }

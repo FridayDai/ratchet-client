@@ -3,10 +3,7 @@ package com.xplusz.ratchet
 import com.mashape.unirest.http.Unirest
 import exceptions.AccountValidationException
 import grails.converters.JSON
-<<<<<<< HEAD
-=======
 import net.sf.cglib.core.Local
->>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
