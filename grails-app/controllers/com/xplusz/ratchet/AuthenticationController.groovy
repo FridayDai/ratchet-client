@@ -1,6 +1,6 @@
 package com.xplusz.ratchet
 
-import exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.AccountValidationException
 
 /**
  * Authentication controller for login/logout

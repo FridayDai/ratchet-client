@@ -1,7 +1,7 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
-import exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.AccountValidationException
 import grails.converters.JSON
 import grails.transaction.Transactional
 

@@ -50,9 +50,9 @@
                 {data: "lastName"},
                 {data: "email"},
                 {
-                  data: function(source) {
-                      return accountType[source.type-1];
-                  }
+                    data: function(source) {
+                        return accountType[source.type-1];
+                    }
                 },
                 {
                     data: function(source) {
@@ -85,8 +85,6 @@
     }
 
     /**
-<<<<<<< HEAD
-=======
      * prepare data of add account
      * @private
      */
@@ -141,7 +139,6 @@
     }
 
     /**
->>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
      * set validate
      * @private
      */
@@ -170,6 +167,7 @@
                 element: $(".accounts-form"),
                 okCallback: function () {
                     if ($("#table-form").valid()) {
+                        _add();
                         return true;
                     }
                     return false;

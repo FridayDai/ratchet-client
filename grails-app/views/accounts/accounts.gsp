@@ -14,7 +14,6 @@
             <label class="title">Accounts</label>
             <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
         </div>
-<<<<<<< HEAD
         <div class="inner-search">
             <input type="text" placeholder="Search" class="search-input"/>
             <label>
@@ -23,14 +22,6 @@
             </label>
             <a class="btn pull-right" href="#">Search</a>
         </div>
-=======
-
-        <div class="inner-search">
-            <input type="text" placeholder="Patient ID, Name" class="search-input"/>
-            <a class="btn pull-right" href="#">Search</a>
-        </div>
-
->>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
         <div class="table-group">
             <table id="accountsTable" class="display accounts-table">
                 <thead>

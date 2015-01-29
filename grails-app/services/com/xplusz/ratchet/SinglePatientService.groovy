@@ -1,7 +1,6 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
-import exceptions.AccountValidationException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest

@@ -1,4 +1,4 @@
-package exceptions;
+package com.xplusz.ratchet.exceptions;
 
 class AccountValidationException extends Exception {
 

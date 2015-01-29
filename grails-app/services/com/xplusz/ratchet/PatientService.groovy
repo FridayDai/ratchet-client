@@ -1,9 +1,7 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
-import exceptions.AccountValidationException
 import grails.converters.JSON
-import net.sf.cglib.core.Local
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
