@@ -1,4 +1,3 @@
-
 <div class="content">
 
     <div id="subTabs" class="patient-tab sub-tabs">
@@ -13,7 +12,8 @@
                 <g:link controller="task" action="index">Task</g:link>
             </li>
             <li data-type="Team">
-                <g:link controller="team" action="index">Team</g:link>
+                <g:link controller="team" action="showMedicalCares"
+                        params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId]">Team</g:link>
             </li>
         </ul>
 

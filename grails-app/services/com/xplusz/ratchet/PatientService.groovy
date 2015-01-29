@@ -59,7 +59,7 @@ class PatientService {
         def url = grailsApplication.config.ratchetv2.server.patients.url
         def resp = Unirest.get(url)
                 .queryString("max", length)
-                .queryString("offset", draw-1)
+                .queryString("offset", draw - 1)
                 .queryString("clientId", request.session.clientId)
                 .asString()
 
@@ -152,26 +152,5 @@ class PatientService {
         }
         map.put("data", data)
         return map
-    }
-
-
-    def loadCareTeam() {
-        def team = []
-        def team1 = new Team("001", "33091234", "John Smith", "john@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
-        def team2 = new Team("002", "33091235", "Sid Smith", "Sid@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
-        def team3 = new Team("003", "33091236", "Colin Smith", "Colin@gmail.com", "Surgeon", "in August 2004,I left QingDao to BeiJing and worked for a foreign enterprise as a automation software test engineer.")
-        team.add(team1)
-        team.add(team2)
-        team.add(team3)
-        return team
-    }
-
-    def loadCareGiver() {
-        def giver = []
-        def giver1 = new Giver("003", "33091234", "John Smith", "john@gmail.com", "Sibling", "ACTIVE")
-        def giver2 = new Giver("004", "33091235", "Sid Smith", "sid@gmail.com", "Spouse", "INVITED")
-        giver.add(giver1)
-        giver.add(giver2)
-        return giver
     }
 }
