@@ -1,43 +1,58 @@
 class UrlMappings {
 
-	static mappings = {
-//        "/"(controller: "authentication", action: "index")
-//        "/login"(view:'/pages/login')
-//        "/home"(controller: 'home', action: 'index')
-//
-//        "/$controller/$action?/$id?(.$format)?"{
-//            constraints {
-//                // apply constraints here
-//            }
-//        }
-//
-//        "/auth"(controller: "authentication") {
-//            action = [POST: 'login']
-//        }
-//
-//        "/logout"(controller: "authentication") {
-//            action = [GET: 'logout']
-//        }
-//
-//        "/"(controller: "index", action: "index")
-//
-////
-////        "/health_check"(controller: "health")
-//
-////        "/"(view:"/pages/login")
-//        "500"(view:'/pages/error')
-        "/$controller/$action?/$id?(.$format)?"{
+    static mappings = {
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
         }
 
         "/"(controller: "home", action: "index")
-
         "/login"(controller: "authentication", action: "login")
-        "/logout"(controller: "authentication",action: 'logout')
+        "/logout"(controller: "authentication", action: 'logout')
 
+        // Home
+        "/providers"(controller: "providers", action: "index")
+        "/getProvider"(controller: "home", action: "getProvider")
 
-        "500"(view:'/pages/error')
-	}
+        // Patients
+        "/getPatients"(controller: "patients", action: "getPatients")
+        "/addPatient"(controller: "patients", action: "addPatient")
+        "/activity"(controller: "activity", action: "index")
+        "/patient/patientActivity"(controller: "patients", action: "showActivity")
+        "/patients"(controller: "patients", action: "index")
+        "/patients/$id?"(controller: "singlePatient", action: "showPatient")
+        "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
+        "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+        "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
+        "/clients/$clientId?/patients/$patientId?/care_giver/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
+        "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
+        "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
+
+        "/overview"(controller: "overview", action: "index")
+        "/getActivities"(controller: "overview", action: "getActivities")
+        "/task"(controller: "overview", action: "index")
+        "/team"(controller: "team", action: "showMedicalCares")
+        "/patient/patientTeam"(controller: "patients", action: "showActivity")
+        "/getStaffs"(controller: "staff", action: "getStaff")
+        "/getCareGiver"(controller: "patients", action: "getCareGiver")
+
+        // treatment
+        "/treatment/task"(controller: "task", action: "getTasks")
+        "/treatment"(controller: "treatment", action: "index")
+        "/getTreatments"(controller: "treatment", action: "getTreatments")
+
+        // Accounts
+        "/accounts"(controller: "accounts", action: "index")
+        "/getAccounts"(controller: "accounts", action: "getAllAccounts")
+        "/singleAccount"(controller: "accounts", action: "getAccount")
+
+        //task
+        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
+
+        "500"(view: '/pages/error')
+        "/providers/detail"(controller: "providers", action: "detail")
+
+    }
 }

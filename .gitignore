@@ -34,8 +34,7 @@
 *.iml
 .classpath
 .project
-/wrapper
 .DS_Store
 .sass-cache
-grails-app/assets/javascripts/libs
+grails-app/assets/javascripts/bower_components
 grails-app/assets/stylesheets/css

@@ -1,0 +1,243 @@
+.graph {
+    padding: 20px;
+}
+
+.content-head {
+    display: block;
+    height: 50px;
+    border-bottom: 1px solid $btn-color-primary;
+    background: $base-color-grey;
+
+    .icon-back {
+        position: absolute;
+        width: 25px;
+        height: 20px;
+        margin-top: 4px;
+        margin-left: 10px;
+        background: url('../../../images/patients/arrow.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    p {
+        height: 36px;
+        margin-top: -18px;
+        margin-left: 55px;
+        padding-top: 15px;
+        padding-left: 20px;
+        border-left: 1px solid $btn-color-primary;
+        font-size: large;
+    }
+}
+
+.patient-info {
+    position: relative;
+    padding: 20px 40px;
+
+    .btn-edit {
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
+
+    .patient-inner-info {
+        width: 180px;
+        padding: 20px;
+        border-right: 1px solid $base-light-grey-color;
+
+        .div-space {
+            margin-top: 10px;
+        }
+
+        .color {
+            //            display: inline;
+            color: $base-color-middle-grey;
+        }
+
+        .name-info {
+            display: inline;
+            font-size: x-large;
+        }
+
+        .email {
+            display: inline;
+        }
+
+        .phone {
+            display: inline;
+        }
+    }
+
+    .icon-edit {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        background: url('../../../images/edit.png') no-repeat 0 0;
+        background-size: cover;
+    }
+}
+
+.patient-right-info {
+    position: absolute;
+    top: 20px;
+    left: 300px;
+
+    .email-info {
+        &:before {
+            position: absolute;
+            left: -7px;
+            content: url('../../../images/patients/email.png');
+        }
+    }
+
+    .phone-info {
+        &:before {
+            position: absolute;
+            left: -7px;
+            content: url('../../../images/patients/phone.png');
+        }
+    }
+}
+
+.overview-content {
+    width: 100%;
+    min-width: 600px;
+
+    .outcome-graph {
+        width: 70%;
+        margin-top: 10px;
+
+        .graph {
+            min-height: 640px;
+            margin-top: 10px;
+            border-top: 1px solid $base-light-blue-color;
+        }
+    }
+
+    .activity-task {
+        width: 25%;
+        margin-left: 20px;
+
+        .activity {
+            overflow-y: auto;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 10px;
+            border-top: 1px solid $base-light-blue-color;
+        }
+
+        .task {
+            width: 100%;
+            height: 150px;
+            border-top: 1px solid $base-light-blue-color;
+        }
+    }
+}
+
+.inner-content {
+    margin-left: 10px;
+
+    label {
+        color: $base-darker-grey-color;
+    }
+
+    .lbl-outcome {
+        padding: 5px;
+    }
+
+    .right-header {
+        position: relative;
+        padding: 10px 5px;
+
+        .icon-refresh {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 15px;
+            height: 15px;
+            background: url('../../../images/patients/refresh.png') no-repeat 0 0;
+            background-size: cover;
+        }
+    }
+}
+
+.activity-content {
+    @include border-radius(5px);
+    margin-top: 20px;
+    padding: 5px 20px 20px;
+    border: 1px solid $btn-color-primary;
+
+    li {
+        margin-top: 10px;
+    }
+
+    .li-content {
+        @include border-radius(5px);
+        padding: 0 5px;
+        color: $base-color-white;
+    }
+
+    .title-task {
+        width: 37px;
+        background: $base-blue-color;
+    }
+
+    .title-reminder {
+        width: 75px;
+        background: $base-color-red;
+    }
+
+    .title-initiate {
+        width: 62px;
+        background: $base-color-dark-yellow;
+    }
+
+    .li-last-update {
+        font-size: x-small;
+    }
+}
+
+.triangle {
+    position: relative;
+    top: 10px;
+    margin-left: 10px;
+
+    .triangle-icon {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-width: 5px 5px 0;
+        border-style: solid;
+    }
+
+    .triangle-icon-down {
+        top: 0;
+        left: 0;
+        border-color: $base-light-blue-color transparent transparent;
+    }
+
+    .triangle-icon-upper {
+        top: -7px;
+        left: -5px;
+        border-color: $base-color-white transparent transparent;
+    }
+}
+
+.right-header {
+    &:hover {
+        background: $base-dark-blue-color;
+
+        label {
+            color: $base-color-white;
+        }
+
+        .triangle-icon {
+            border-color: $base-dark-blue-color transparent transparent;
+        }
+    }
+}
+
+
+

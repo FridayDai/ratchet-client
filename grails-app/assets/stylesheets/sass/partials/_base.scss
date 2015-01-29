@@ -1,42 +1,295 @@
-@import "compass/support";
-@import "compass/layout";
-@import "compass/utilities";
-@import "compass/typography";
-@import "compass/reset";
+@import 'compass/support';
+@import 'compass/layout';
+@import 'compass/utilities';
+@import 'compass/typography';
+@import 'compass/reset';
+@import 'compass/css3';
 
-// Font weights
-$light: 100;
-$regular: 400;
-$bold: 600;
+@font-face {
+    font-family: 'fontello';
+    src: url('../../../fonts/fontello.eot');
+    src: url('../../../fonts/fontello.eot?#iefix') format('embedded-opentype'),
+    url('../../../fonts/fontello.woff') format('woff'),
+    url('../../../fonts/fontello.ttf') format('truetype'),
+    url('../../../fonts/fontello.svg?#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-// Base Font
-$base-line-height: 1.4;
-$base-font-utility: 14px "sans-serif";
+html,
+body {
+    min-width: 320px;
+    font: $base-font-utility;
+    letter-spacing: .5px;
 
-// Fixed Font
-$fixed-font-family: monospace;
-$fixed-font-size: 85%;
-$fixed-line-height: $base-line-height;
+    ::selection {
+        color: $base-color-white;
+        background: $base-color-mid-blue;
+    }
+}
 
-// Headings
-$header-font-weight: $bold;
+h4,
+h5 {
+    color: $base-color-mid-grey;
+}
 
-// Colors
-$base-color-lightGrey: #F2F2F2;
-$base-color-midGrey: #808080;
-$base-color-darkGrey: #333333;
+p {
+    color: $base-color-middle-grey;
+}
 
-$base-color-lightBlue: #7FC7D1;
-$base-color-midBlue: #47B1C1;
-$base-color-darkBlue: #08567F;
+.inline {
+    display: inline-block;
+}
 
+.pull-left {
+    float: left !important;
+}
 
-html, body {
-  min-width: 320px;
-  font: $base-font-utility;
-  letter-spacing: .5px;
-  ::selection {
-    color: white;
-    background: $base-color-midBlue;
-  }
+.pull-right {
+    float: right !important;
+}
+
+* {
+    outline: none;
+}
+
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
+
+div {
+    display: block;
+    border: 0;
+}
+
+a {
+    display: inline-block;
+    color: $base-color-light-blue;
+    background: transparent;
+    font: $base-font-utility;
+    text-decoration: none;
+
+    &.underline {
+        text-decoration: underline;
+    }
+}
+
+.btn,
+.ui-button {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    border: 1px $base-color-light-blue solid;
+    border-radius: 4px;
+    white-space: nowrap;
+    background-color: $base-color-white;
+    background-image: none;
+    font-weight: normal;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+
+    &:hover,
+    &:focus {
+        color: $base-color-white;
+        background-color: darken($base-color-light-blue, 10%);
+    }
+
+    &.primary {
+        color: $btn-color-primary;
+
+        &:hover,
+        &:focus {
+            color: $base-color-white;
+            background-color: darken($btn-color-primary, 10%);
+        }
+    }
+
+}
+
+.ui-dialog {
+    @include box-shadow($base-color-mid-grey 2px 2px 10px);
+    background: $base-color-white;
+}
+
+.ui-hidden {
+    display: none !important;
+}
+
+.content-left-top {
+    background: $base-color-light-grey;
+    background-color: darken($base-color-light-grey, 0%);
+
+    .provider-name {
+        color: $base-color-blue;
+    }
+
+    .btn-add {
+        border: 1px solid $base-color-dark-blue;
+        background-color: $base-color-white;
+    }
+}
+
+.content-title {
+    background-color: darken($base-color-light-grey, 0%);
+    //    border-bottom: 2px solid $base-color-grey;
+}
+
+.border-color {
+    border-bottom: 2px solid $base-color-grey;
+}
+
+.inner-head {
+    background-color: darken($base-color-light-grey, 0%);
+
+    .btn-invite {
+        background-color: darken($base-color-white, 0%);
+    }
+
+    .btn-add-treatment {
+        background-color: darken($base-color-white, 10%);
+    }
+
+    .p-status {
+        color: $base-color-mid-blue;
+    }
+
+    .btn-border {
+        border: 1px solid $base-color-light-blue;
+    }
+}
+
+.color {
+    color: $base-color-lighter-blue;
+}
+
+.li-color {
+    color: $base-color-mid-grey;
+}
+
+.accordion-li {
+    border-bottom: 1px solid $base-color-light-grey;
+
+    .triangle-right {
+        border-left: 8px solid $base-color-mid-grey;
+    }
+}
+
+.input-group {
+    min-width: 250px;
+    background: $base-color-light-grey;
+}
+
+.ui-button {
+    border: 2px solid $btn-color-primary;
+
+    .ui-button-text {
+        color: $btn-color-primary;
+    }
+
+    &:hover {
+        border: 0;
+        background-color: darken($base-color-light-blue, 10%);
+
+        .ui-button-text {
+            color: $base-color-white;
+        }
+    }
+}
+
+.ui-dialog-title {
+    color: $base-color-blue;
+}
+
+.window-warning-title {
+    color: $base-color-mid-blue;
+}
+
+.window-warning {
+    color: $base-color-mid-grey;
+}
+
+.treatment-id {
+    color: $base-color-medium-grey;
+}
+
+.btn-action {
+    border: 1px solid $base-color-light-blue;
+    color: $base-color-dark-blue;
+}
+
+.inner-content {
+    color: $base-color-medium-grey;
+}
+
+.actions-list {
+    .div-position {
+        border: 1px solid $base-color-light-blue;
+
+        .btn-view {
+            border-bottom: 1px solid $base-color-light-blue;
+        }
+
+        .btn-color {
+            color: $base-color-medium-grey;
+        }
+    }
+
+    &:before {
+        border: solid 5px $base-color-medium-blue;
+    }
+}
+
+.div-tool-list {
+    background: $base-color-lighter-grey;
+
+    .tool-color {
+        color: $base-color-medium-grey;
+
+        .p-color {
+            color: $base-color-bluer;
+        }
+    }
+}
+
+.clear {
+    &:before {
+        display: table;
+        content: ' ';
+    }
+
+    &:after {
+        display: table;
+        clear: both;
+        content: ' ';
+    }
+}
+
+.msg-process-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    background-color: #6a6a6a;
+    opacity: .3;
+
+    .loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 999999;
+        width: 40px;
+        height: 40px;
+        color: #3b3b3b;
+        background: url('../../../images/loading.gif') no-repeat 0 0;
+        background-size: cover;
+        font-size: 40px;
+    }
+}
+
+.select2-container {
+    min-width: 220px;
 }

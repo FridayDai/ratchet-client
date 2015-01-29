@@ -1,0 +1,69 @@
+body .ui-tooltip {
+    @include box-shadow($base-color-error-border 0 0 5px);
+    position: absolute;
+    z-index: 9999;
+    max-width: 300px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    color: $base-color-white;
+    background: $base-color-error;
+    opacity: 1;
+}
+
+.ui-tooltip-content {
+    position: relative;
+    padding: 6px 10px;
+
+    &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        border-style: solid;
+        content: '';
+    }
+}
+
+.error-msg-right {
+    .ui-tooltip-content {
+        &:after {
+            top: 5px;
+            left: -10px;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent $base-color-error;
+        }
+    }
+}
+
+.error-msg-left {
+    .ui-tooltip-content {
+        &:after {
+            top: 5px;
+            right: -10px;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent $base-color-error;
+        }
+    }
+}
+
+.error-msg-top {
+    .ui-tooltip-content {
+        &:after {
+            bottom: -10px;
+            left: 45%;
+            border-width: 10px 10px 0;
+            border-color: $base-color-error transparent;
+        }
+    }
+}
+
+.error-msg-bottom {
+    .ui-tooltip-content {
+        &:after {
+            top: -10px;
+            left: 72px;
+            border-width: 0 10px 10px;
+            border-color: $base-color-error transparent;
+        }
+    }
+}

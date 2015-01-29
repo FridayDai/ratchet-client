@@ -1,1 +1,63 @@
-@import "../partials/home";
+@import '../partials/common';
+@import '../partials/table';
+@import '../partials/form';
+@import '../partials/dialog';
+@import '../partials/timepicker';
+@import '../partials/chart';
+
+.home-content {
+    width: 100%;
+    height: 100%;
+
+    .report-content {
+        width: 70%;
+
+        .report-chart {
+            min-height: 640px;
+            padding: 40px;
+        }
+    }
+
+    .activity-task {
+        width: 29.7%;
+        height: 910px;
+        border-left: 1px solid $base-dark-blue-color;
+
+        .activity {
+            width: 100%;
+            min-height: 640px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .inner-header {
+        padding: 17px;
+        border-bottom: 1px solid $base-dark-blue-color;
+        background: $base-color-grey;
+    }
+}
+
+.activity-content {
+    margin: 10px;
+    padding: 5px 20px 20px;
+    border-bottom: 1px solid $base-dark-blue-color;
+
+    li {
+        margin-top: 10px;
+
+        .color {
+            color: $base-color-light-black;
+        }
+    }
+
+    .li-content {
+        @include border-radius(5px);
+        padding: 0 5px;
+        color: $base-color-white;
+        background: $base-blue-color;
+    }
+
+    .li-last-update {
+        font-size: x-small;
+    }
+}

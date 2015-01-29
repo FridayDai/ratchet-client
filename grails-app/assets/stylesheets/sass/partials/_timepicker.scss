@@ -1,0 +1,340 @@
+.ui-widget {
+    font-size: 1.1em;
+    font-family: $base-font-family;
+
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 1em;
+        font-family: $base-font-family;
+    }
+}
+
+.ui-widget-content {
+    border: 1px solid $border-color-primary;
+    color: $base-color-dark-grey;
+    background: $base-color-white 50% top repeat-x;
+
+    a {
+        color: $base-color-dark-grey;
+    }
+}
+
+.ui-widget-header {
+    border: 1px solid $base-color-timepicker-header;
+    color: $base-color-darker-blue;
+    background: $base-color-timepicker-header 50% 50% repeat-x;
+    font-weight: bold;
+
+    a {
+        color: $base-color-darker-blue;
+    }
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    color: $base-color-medium-grey;
+    font-weight: bold;
+}
+
+.ui-state-default {
+    a {
+        &:link,
+        &visited {
+            color: #1c94c4;
+            text-decoration: none;
+        }
+    }
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+    color: $base-color-darker-blue;
+    background: transparent 50% 50% repeat-x;
+    font-weight: bold;
+}
+
+.ui-state-hover,
+.ui-state-focus {
+
+    a {
+        &:hover,
+        &link,
+        &visited {
+            color: $base-color-darker-blue;
+            text-decoration: none;
+        }
+    }
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+    color: $base-color-black;
+    background: $base-color-white 50% 50% repeat-x;
+    font-weight: bold;
+}
+
+.ui-state-active {
+
+    a {
+        &:link,
+        &visited {
+            color: $base-color-darker-blue;
+            text-decoration: none;
+        }
+    }
+}
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    border: 1px solid $base-color-darker-blue;
+    color: $base-color-white;
+    background: $base-color-darker-blue 50% top repeat-x;
+}
+
+.ui-state-highlight a,
+.ui-widget-content .ui-state-highlight a,
+.ui-widget-header .ui-state-highlight a {
+    color: $base-color-dark-grey;
+}
+
+.ui-state-error,
+.ui-widget-content .ui-state-error,
+.ui-widget-header .ui-state-error {
+    color: $base-color-white;
+    background: $base-color-error 50% 50% repeat;
+}
+
+.ui-state-error a,
+.ui-widget-content .ui-state-error a,
+.ui-widget-header .ui-state-error a {
+    color: $base-color-white;
+}
+
+.ui-state-error-text,
+.ui-widget-content .ui-state-error-text,
+.ui-widget-header .ui-state-error-text {
+    color: $base-color-white;
+}
+
+.ui-priority-primary,
+.ui-widget-content .ui-priority-primary,
+.ui-widget-header .ui-priority-primary {
+    font-weight: bold;
+}
+
+.ui-priority-secondary,
+.ui-widget-content .ui-priority-secondary,
+.ui-widget-header .ui-priority-secondary {
+    filter: Alpha(Opacity=70);
+    opacity: .7;
+    font-weight: normal;
+}
+
+.ui-state-disabled,
+.ui-widget-content .ui-state-disabled,
+.ui-widget-header .ui-state-disabled {
+    background-image: none;
+    filter: Alpha(Opacity=35);
+    opacity: .35;
+}
+
+.ui-state-disabled .ui-icon {
+    filter: Alpha(Opacity=35);
+}
+
+.ui-tpicker-time {
+    display: none;
+}
+
+.ui-timepicker-div {
+    height: 80px;
+    padding: 5px;
+    border-top: 1px solid $base-color-darker-blue;
+
+    .ui-widget-header {
+        margin-bottom: 8px;
+    }
+
+    dl {
+        text-align: left;
+
+        dt {
+            display: none;
+            float: left;
+            clear: left;
+            padding: 0 0 0 5px;
+        }
+
+        dd {
+            float: left;
+            width: 30%;
+        }
+    }
+
+    td {
+        font-size: 90%;
+    }
+}
+
+.ui-tpicker-grid-label {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+.ui-timepicker-rtl {
+    direction: rtl;
+
+    dl {
+        padding: 0 5px 0 0;
+        text-align: right;
+
+        dt {
+            float: right;
+            clear: right;
+        }
+
+        dd {
+            margin: 0 45% 10px 10px;
+        }
+    }
+}
+
+.ui_tpicker_hour_slider,
+.ui_tpicker_minute_slider {
+    position: relative;
+    height: 80px;
+
+    .ui-spinner {
+        position: relative;
+        width: 100%;
+        height: 80px;
+
+        .ui-spinner-button {
+            border: 0;
+            color: $base-color-darker-blue;
+            font-size: 15px;
+        }
+    }
+
+    .ui-spinner-up {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        width: 10px;
+        height: 10px;
+        margin: 0;
+        font-family: 'fontello';
+
+        &:before {
+            content: '\e803';
+        }
+    }
+
+    .ui-spinner-down {
+        position: absolute;
+        top: 55px;
+        left: 15px;
+        width: 10px;
+        height: 10px;
+        margin: 0;
+        font-family: 'fontello';
+
+        &:before {
+            content: '\e800';
+        }
+    }
+
+    .ui-widget-content {
+        border: 0;
+    }
+
+    .ui-timepicker-input {
+        position: absolute;
+        top: 25px;
+        left: 12px;
+        width: 25px;
+        color: $base-color-darker-blue;
+        font-weight: bold;
+        font-size: 22px;
+        text-align: center;
+    }
+}
+
+.ui-tpicker-am {
+    width: 60px;
+    height: 80px;
+
+    .ui-tpicker-am-content {
+        width: 30px;
+        margin: auto;
+        margin-top: 25px;
+        padding: 5px;
+        color: $base-color-white;
+        background-color: $base-color-dark-blue;
+        text-align: center;
+    }
+}
+
+.ui-datepicker {
+    padding: 0;
+
+    table {
+        margin: 0 0 .2em;
+        border-bottom: 1px solid $base-color-darker-blue;
+
+        thead {
+            border-top: 1px solid $base-color-mid-grey;
+            border-bottom: 1px solid $base-color-mid-grey;
+            color: $base-color-darker-blue;
+            background: $base-color-timepicker-header 50% 50% repeat-x;
+        }
+    }
+
+    .ui-datepicker-buttonpane {
+        margin: 0;
+    }
+
+    .ui-datepicker-prev {
+        top: 10px;
+        left: 10px;
+        font-family: 'fontello';
+        cursor: pointer;
+
+        &:before {
+            content: '\e801';
+        }
+    }
+
+    .ui-datepicker-next {
+        top: 10px;
+        right: 10px;
+        font-family: 'fontello';
+        cursor: pointer;
+
+        &:before {
+            content: '\e802';
+        }
+    }
+}
+
+.ui-dot {
+    position: absolute;
+    top: 30px;
+    left: 68px;
+    z-index: 999;
+    color: $base-color-dark-blue;
+    font-size: 20px;
+}
+
+

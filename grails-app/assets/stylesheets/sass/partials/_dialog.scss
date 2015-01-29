@@ -1,0 +1,100 @@
+.ui-size {
+    width: 450px !important;
+    padding-top: 10px;
+}
+
+.ui-dialog {
+    .ui-dialog-titlebar {
+        padding: 20px 0 0 30px;
+        border: 0;
+        background: none;
+
+        .ui-dialog-title {
+            font-weight: bolder;
+        }
+    }
+
+    .ui-dialog-buttonpane {
+        margin-right: 35px;
+        border: 0;
+
+        button {
+            margin: .5em 1.5em .5em 0;
+
+            &:hover {
+                color: $base-color-white;
+                background: $base-color-mid-blue;
+            }
+        }
+
+        .ui-state-focus {
+            z-index: 9999;
+            color: #000;
+            background: none;
+        }
+
+        .btn-cancel {
+            margin-left: 80px;
+        }
+    }
+
+    .ui-icon-show {
+        width: 10px;
+        height: 20px;
+        margin: auto;
+        background: url('../../../images/exclamation.png') no-repeat 0 0;
+        background-size: cover;
+    }
+}
+
+.ui-button-text-only {
+    .ui-button-text {
+        padding: 0;
+    }
+}
+
+.ui-dialog-content {
+    height: auto !important;
+}
+
+.ui-icon-closethick {
+    display: none;
+}
+
+.window-warning-title {
+    margin-top: 20px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.window-warning {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.ui-button {
+    width: 120px;
+    height: 35px;
+    background: none;
+
+    .ui-button-text {
+        font-weight: bolder;
+    }
+
+    .ui-icon-add {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        margin-top: -1px;
+        background: url('../../../images/exclamation.png') no-repeat 0 0;
+        background-size: cover;
+    }
+}
+
+.ui-dialog-buttonpane {
+    margin-top: 20px;
+}
+
+.ui-dialog-titlebar-close {
+    display: none;
+}

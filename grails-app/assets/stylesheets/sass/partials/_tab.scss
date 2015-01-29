@@ -1,0 +1,157 @@
+.ui-tabs {
+    position: relative;
+
+    .ui-tabs-nav {
+        margin: 0;
+
+        li {
+            position: relative;
+            top: 0;
+            float: left;
+            border-bottom-width: 0;
+            white-space: nowrap;
+            list-style: none;
+        }
+
+        .ui-tabs-active {
+            margin-bottom: -1px;
+            padding-bottom: 1px;
+        }
+
+        .ui-tabs-anchor {
+            float: left;
+            text-decoration: none;
+        }
+    }
+
+    .ui-tabs-panel {
+        display: block;
+        border-width: 0;
+        background: none;
+    }
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
+.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor {
+    cursor: text;
+}
+
+.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
+    cursor: pointer;
+}
+
+.tab-treatment {
+    padding: 0;
+    border-top: 1px solid $base-light-grey-color;
+
+    .ui-corner-top {
+
+        .ui-tabs-anchor {
+            padding: 1em;
+            color: $base-color-medium-grey;
+            background: $base-dark-grey-color;
+        }
+    }
+
+    .ui-state-active {
+
+        .ui-tabs-anchor {
+            padding: 1em;
+            color: $base-color-white;
+            background: $base-black-color;
+        }
+    }
+}
+
+.content {
+    .patient-tab {
+        position: relative;
+        padding: 0;
+        border: 0;
+
+        .ui-widget-content {
+
+            a {
+                color: $base-color-light-blue;
+            }
+        }
+
+        .add-tab {
+            position: absolute;
+            right: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            border-bottom: 1px solid $base-blue-color;
+            color: $base-blue-color;
+
+            &:before {
+                position: relative;
+                top: 15px;
+                right: 55px;
+                content: '+';
+            }
+
+            .ui-button-text {
+                padding: 0;
+                color: $base-blue-color;
+                font-size: smaller;
+            }
+
+            &:hover,
+            &:focus {
+                border-bottom: 1px solid $base-blue-color;
+                color: $base-blue-color;
+                background: transparent;
+
+                .ui-button-text {
+                    color: $base-blue-color;
+                }
+            }
+        }
+
+        .tab-treatment {
+            padding: 0;
+            border: 0;
+            border-top: 1px solid $base-light-grey-color;
+            background: none;
+
+            li {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .tab-list {
+            padding: 0;
+            border: 0;
+            background: $base-black-color;
+
+            li {
+                padding: 10px 0;
+                background: $base-black-color;
+
+                a {
+                    padding: 0 10px;
+                    border-right: 1px solid $btn-color-primary;
+                    color: $base-color-green;
+                }
+            }
+
+            .ui-state-active {
+                a {
+                    color: $base-color-yellow;
+                }
+            }
+
+            .ui-tabs-anchor {
+                background: $base-black-color;
+            }
+        }
+
+        .ui-tabs-panel {
+            padding: 0;
+        }
+    }
+}

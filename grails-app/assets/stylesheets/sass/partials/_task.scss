@@ -1,0 +1,397 @@
+.tasks-list {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+
+.task-row {
+    border-radius: 4px;
+}
+
+.form-content {
+    padding: 10px 20px;
+}
+
+.text-area-form {
+    width: 95%;
+    height: 73px;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.btn-right {
+    float: right;
+}
+
+.btn-task {
+    padding: 10px 27px 2px 2px;
+    border: 0;
+    color: $base-color-mid-blue;
+    text-decoration: underline;
+}
+
+.task-header {
+    height: 30px;
+    padding-right: 20px;
+}
+
+.bullet {
+    padding-top: 10px;
+    padding-left: 12px;
+}
+
+.box-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.visible-hidden {
+    visibility: hidden;
+}
+
+.datetime-picker-label {
+    display: block;
+    width: 72px;
+    height: 30px;
+    padding: 8px 2px;
+    color: $base-color-mid-grey;
+    font-size: 9pt;
+
+    &.datetime-color {
+        color: $base-color-mid-blue;
+    }
+}
+
+.datetime-picker {
+    width: 50px;
+    height: 50px;
+    border-style: none;
+}
+
+.overdue {
+    color: $base-color-error;
+}
+
+.new {
+    color: $base-color-green-primary;
+}
+
+.complete,
+.future {
+    color: $base-color-mid-grey;
+}
+
+.icon-type {
+    &.sdm {
+        background: url('../../../images/patients/sdm_task.png') no-repeat 0 0;
+    }
+
+    &.basic {
+        background: url('../../../images/patients/basic_task.png') no-repeat 0 0;
+    }
+
+    &.outcome {
+        background: url('../../../images/patients/outcome_task.png') no-repeat 0 0;
+    }
+}
+
+// box item for task
+.box-item {
+    display: inline-block;
+    width: 370px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 2px $base-color-mid-grey solid;
+
+    .item-header {
+        height: 30px;
+        padding: 4px 6px;
+        border-bottom: 2px $base-color-mid-grey solid;
+
+        p {
+            padding: 6px;
+        }
+    }
+
+    .item-left {
+        width: 22%;
+        border-right: 1px $base-color-grey solid;
+
+        .item-left-li {
+            height: 60px;
+            padding-top: 8px;
+            border-bottom: 1px $base-color-grey solid;
+            text-align: center;
+        }
+
+        .item-datetime {
+            height: 98px;
+            color: $base-color-medium-grey;
+        }
+
+        .item-left-one {
+            color: $base-color-white;
+            background-color: $base-color-medium-grey;
+        }
+
+        .item-left-two {
+            font-weight: bold;
+            line-height: 42px;
+        }
+
+        .item-left-four {
+            color: $btn-color-primary;
+        }
+
+    }
+
+    .dropdown-list {
+        top: -1px;
+        left: 76px;
+
+        li {
+            padding: 0 12px;
+        }
+    }
+
+    .item-right {
+        width: 77%;
+        height: 275px;
+
+        .right-one {
+            height: 68px;
+
+        }
+
+        .h-color {
+            color: $base-color-darker-blue;
+        }
+
+        .right-two {
+            height: 126px;
+        }
+
+        .note-container {
+            height: 99%;
+        }
+
+        .note-color {
+            color: $base-color-blue-dark;
+        }
+
+        .note-bg {
+            background-color: $base-color-lightest-blue;
+
+        }
+
+        .note-bg-edit {
+            background-color: $base-color-lightest-grey;
+        }
+
+        .item-note {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+
+        textarea {
+            display: none;
+        }
+
+    }
+
+    .right-three {
+        width: 286px;
+        height: 117px;
+
+        .bullet {
+            padding-top: 2px;
+        }
+    }
+
+    .a-remove {
+        cursor: pointer;
+    }
+
+    // change background and color according to status
+    &.basic {
+        border-color: $base-color-green-primary;
+
+        .item-header {
+            border-color: $base-color-green-primary;
+        }
+
+        .item-left-one {
+            background-color: $base-color-green-primary;
+        }
+    }
+
+    &.sdm {
+        border-color: $base-color-yellow-darker;
+
+        .item-header {
+            border-color: $base-color-yellow-darker;
+        }
+
+        .item-left-one {
+            background-color: $base-color-yellow-darker;
+        }
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+
+        .item-header {
+            border-color: $base-color-mid-blue;
+        }
+
+        .item-left-one {
+            background-color: $base-color-mid-blue;
+        }
+    }
+
+}
+
+// all change in the form box
+.form-box {
+    display: inline-block;
+    height: 120px;
+    width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 2px solid;
+
+    .box-header {
+        width: 100%;
+        height: 54px;
+        background-color: $base-color-grey;
+
+        .header-left {
+            float: left;
+            width: 25%;
+            height: 100%;
+            color: $base-color-white;
+            text-align: center;
+        }
+
+        .header-middle {
+            float: left;
+            width: 60%;
+            height: 100%;
+            padding-left: 4px;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+    }
+
+    .box-content {
+        padding: 12px 10px;
+    }
+
+}
+
+// for task form
+.task-form {
+
+    .divider {
+        margin-bottom: 0;
+    }
+
+    .label-notify {
+        padding-right: 40px;
+    }
+
+    .radio-box {
+        margin: 6px 0;
+        color: $base-color-blue-grey;
+    }
+
+    .label-height {
+        display: block;
+        height: 25px;
+    }
+}
+
+.task-content-up {
+    padding: 20px;
+    padding-bottom: 40px;
+    background-color: $base-color-light-grey;
+}
+
+.bg-color-change {
+    background-color: $base-color-mid-grey;
+
+    &.sdm {
+        background-color: $base-color-yellow-darker;
+    }
+
+    &.basic {
+        background-color: $base-color-green-primary;
+    }
+
+    &.outcome {
+        background-color: $base-color-mid-blue;
+    }
+
+}
+
+.border-color-change {
+    border-color: $base-color-mid-grey;
+
+    &.sdm {
+        border-color: $base-color-yellow-darker;
+    }
+
+    &.basic {
+        border-color: $base-color-green-primary;
+    }
+
+    &.outcome {
+        border-color: $base-color-mid-blue;
+    }
+}
+
+.color-change {
+    color: $base-color-mid-grey;
+
+    &.active-color {
+        color: $base-color-darker-blue;
+    }
+}
+
+//may be can remove to common css
+.icon-dustbin {
+    background: url('../../../images/patients/dustbin.png') no-repeat 0 0;
+}
+
+.icon-calender {
+    background: url('../../../images/patients/calender.png') no-repeat 0 0;
+}
+
+.icon-share {
+    background: url('../../../images/patients/share.png') no-repeat 0 0;
+}
+
+.icon-note {
+    background: url('../../../images/patients/note.png') no-repeat 0 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.ui-dialog .task-form + .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
+

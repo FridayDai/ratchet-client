@@ -1,9 +1,11 @@
-/**
- * Created by sid on 12/4/14.
- */
-//= require ../../libs/jquery/jquery
-//= require ../../libs/jquery-ui/ui/jquery-ui
-//= require ../../libs/jquery-validation/dist/jquery.validate
-//= require ../../libs/underscore/underscore
+//= require ../../bower_components/jquery/jquery
+//= require ../../bower_components/jquery-ui/jquery-ui
+//= require ../../bower_components/select2/select2
+//= require ../../bower_components/d3/d3
+//= require ../../libs/datetimepicker/jquery-ui-timepicker-addon
+//= require ../../bower_components/jquery-validation/dist/jquery.validate
+//= require ../../bower_components/underscore/underscore
+//= require ../../bower_components/DataTables/media/js/jquery.dataTables
 //= require ../../partials/base
+//= require ../../partials/constants
 //= require ../../partials/common

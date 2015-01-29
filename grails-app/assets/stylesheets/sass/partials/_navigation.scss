@@ -1,9 +1,94 @@
-.nav{
-  position: fixed;
-  left: 0;
-  top: 50px;
-  width: 130px;
-  height: auto;
-  min-height: 910px;
-  background-color: $base-color-darkGrey;
+.nav {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    z-index: 999;
+    width: 150px;
+    height: auto;
+    min-height: 910px;
+    border-right: 1px solid $base-grey;
+    background-color: $base-color-light-grey;
+
+    .list {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+    }
+}
+
+.nav-li {
+    position: relative;
+    height: 50px;
+    border-bottom: 1px solid $base-dark-blue-color;
+
+    a {
+        width: 100%;
+        height: 100%;
+        color: $base-color-mid-grey;
+    }
+
+    .ui-icon {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .home-title {
+        margin-top: 17px;
+    }
+
+    .patient {
+        margin-top: 18px;
+        margin-left: 25px;
+    }
+
+    .account {
+        margin-top: 19px;
+        margin-left: 25px;
+    }
+
+    .icon-home {
+        background: url('../../../images/patients/home.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-patient {
+        background: url('../../../images/patients/patient.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    .icon-account {
+        background: url('../../../images/patients/account.png') no-repeat 0 0;
+        background-size: cover;
+    }
+
+    &:hover,
+    &.active {
+        a {
+            color: $base-darker-blue-color;
+        }
+
+        .icon-home {
+            background: url('../../../images/patients/home_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+
+        .icon-patient {
+            background: url('../../../images/patients/patient_hover.png') no-repeat 0 0;
+            background-size: cover;
+        }
+    }
+}
+
+.li-first-color {
+    background: $base-dark-blue-color;
+
+    .div-calum {
+        padding-top: 15px;
+        color: $base-color-white;
+    }
 }

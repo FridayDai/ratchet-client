@@ -1,7 +1,3 @@
-/**
- * Created by sid on 12/11/14.
- */
-;
 (function ($, undefined) {
     'use strict';
     var RC = window.RC = window.RC || {};
@@ -14,7 +10,7 @@
             windowHeight: windowEI.height(),
             documentWidth: documentEI.width(),
             documentHeight: documentEI.height()
-        }
+        };
     }
 
     // Set window and document width and height in RC namespace.
@@ -33,8 +29,8 @@
          * **/
         data: function (name, value) {
             var top = window.top,
-                cache = top['_CACHE'] || {};
-            top['_CACHE'] = cache;
+                cache = top._CACHE || {};
+            top._CACHE = cache;
             return value !== undefined ? cache[name] = value : cache[name];
         },
         /**
@@ -42,35 +38,12 @@
          * @param {String} the name of remove share data
          * **/
         removeData: function (name) {
-            var cache = window.top['_CACHE'];
+            var cache = window.top._CACHE;
             if (cache && cache[name]) {
                 delete cache[name];
             }
         }
     };
-    /**
-     * global ajax set up
-     */
-    $.ajaxSetup({
-        beforeSend: function () {
-            self.progress(true);
-        },
-        complete: function () {
-            self.progress(false);
-        },
-        success: function () {
-
-        },
-        global: true,
-        error: function (jqXHR, textStatus, errorThrown) {
-            if (jqXHR.status == 404) {
-            } else if (jqXHR.status == 403) {
-            } else if (jqXHR.status == 0) {
-            }
-            else {
-            }
-        }
-    });
 
     /**
      * string format
@@ -90,7 +63,8 @@
             }
         }
         return str;
-    }
+    };
+
     RC.pages = (function (self) {
         return self;
     }({}));
