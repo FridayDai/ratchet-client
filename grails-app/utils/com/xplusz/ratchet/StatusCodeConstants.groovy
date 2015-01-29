@@ -13,4 +13,13 @@ class StatusCodeConstants {
     //CareGiver status
     public static final String[] CAREGIVER_STATUS =
             ["INVITED", "NORMAL", "UNINVITED"]
+    
+    // Task status
+    public static final String[] TASK_STATUS = 
+            ["undefined","overdue", "new", "future", "complete"]
+    
+    // Tool type
+    public static final String[] TOOL_TYPE = 
+            ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
+
 }

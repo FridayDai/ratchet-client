@@ -1,18 +1,8 @@
 <div>
 
     <div class="task-header">
-        <a id="add-task" class="btn btn-right" data-surgeryTime="${surgeryTime}">+ Add Task</a>
+        <button id="add-task" class="btn btn-right btn-task" data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}">+ Add Task</button>
     </div>
-
-%{--<div class="tasks-list">--}%
-%{--<h4 class="overdue">OVERDUE</h4>--}%
-
-%{--<div class="task-row">--}%
-%{--<g:each in="${taskOverdue}" var="task">--}%
-%{--<g:render template="taskBox" collection="${task}"></g:render>--}%
-%{--</g:each>--}%
-%{--</div>--}%
-%{--</div>--}%
 
 <div class="tasks-list">
     <h4 class="complete">SENT</h4>
@@ -35,17 +25,6 @@
 
     </div>
 </div>
-
-%{--<div class="tasks-list">--}%
-%{--<h4 class="complete">COMPLETE</h4>--}%
-
-%{--<div class="task-row">--}%
-%{--<g:each in="${taskCompleted}" var="task">--}%
-%{--<g:render template="taskBox" collection="${task}"></g:render>--}%
-%{--</g:each>--}%
-%{--</div>--}%
-%{--</div>--}%
-
 
 <g:form class="task-form ui-hidden" id="task-form" name="task-form">
 
@@ -75,7 +54,8 @@
                 </div>
 
                 <div class="form-group header-right inline">
-                    <input type="radio" class="box-radio" name="task-template" data-require-completion="${tool?.requireCompletion}" value="${tool?.id}"/>
+                    <input type="radio" class="box-radio" name="task-template"
+                           data-require-completion="${tool?.requireCompletion}" value="${tool?.id}"/>
                 </div>
             </div>
 
@@ -273,15 +253,15 @@
 </div>
 
 %{--used in taskJS for render new task--}%
-<script type="text/html" id="newTaskTemplate">
-<div  class="note-content">
-    <p><%= "hello GSP"%></p>
-    %{--<P class="<%key << "name"%>">KEY</P>--}%
-    <P class="<%= key%>">KEY</P>
-    %{--<P class="<%key << name%>">KEY</P>--}%
-    <p>${"<%= key%>"}</p>
-    <p><!=name !></p>
-    <p class="note-p  note-color"><%= name %></p>
-</div>
-</script>
+%{--<script type="text/html" id="newTaskTemplate">--}%
+%{--<div  class="note-content">--}%
+%{--<p><%= "hello GSP"%></p>--}%
+%{--<P class="<%key << "name"%>">KEY</P>--}%
+%{--<P class="<%= key%>">KEY</P>--}%
+%{--<P class="<%key << name%>">KEY</P>--}%
+%{--<p>${"<%= key%>"}</p>--}%
+%{--<p><!=name !></p>--}%
+%{--<p class="note-p  note-color"><%= name %></p>--}%
+%{--</div>--}%
+%{--</script>--}%
 

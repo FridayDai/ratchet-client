@@ -35,12 +35,16 @@
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
-            var surgeryTime = $(this).data("surgeryTime");
-            var patientId = "x12345";
-            var medicalRecord = 21;//need change
+            var patientId = $(this).data("patientId");
+            var medicalRecord = $(this).data("medicalRecordId");
+            //var patientId = "x12345";
+            //var medicalRecord = 31;//need change
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurFormBox($(this));
+                    });
                     if ($("#task-form").valid()) {
                         _add(patientId, medicalRecord);
                         //_renderNewTask();
@@ -76,7 +80,7 @@
         var minutes = $("#receive-minutes option:selected").text();
         var remindDays = $("#remind-days option:selected").text();
         var remindHours = $("#remind-hours option:selected").text();
-        var sendMillionSeconds = 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
+        var sendMillionSeconds = relativeInterval * 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
         var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
         var request = $.ajax({
             url: opts.urls.query.format(null, patientId, medicalRecordId),
@@ -88,25 +92,21 @@
                 remindMillionSeconds: remindMillionSeconds
             }
         });
-        request.done(function () {
-            //_renderNewTask();
+        request.done(function (data) {
+            _renderNewTask(data, status);
         });
         request.fail(function () {
 
         });
     }
 
-    function _renderNewTask() {
-        //var template = _.template($("#newTaskTemplate").html());
-        //var newTask = template({key: 'colin'});
-        //var template = document.getElementById("#newTaskTemplate");
-        var data = {
-            name: "colin",
-            key: "value"
-            };
-        var newTask = tmpl("newTaskTemplate", data);
-        $("#task-row-sent").append(newTask);
+    function _renderNewTask(taskObject, status) {
 
+        if (status === '2') {
+            $("#task-row-sent").append(taskObject);
+        } else {
+            $("#task-row-schedule").append(taskObject);
+        }
 
     }
 

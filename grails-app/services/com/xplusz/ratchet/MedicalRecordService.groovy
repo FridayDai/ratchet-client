@@ -54,8 +54,9 @@ class MedicalRecordService {
                 .field("remindTime", remindTime)
                 .asString()
 
+        def result = JSON.parse(resp.body)
         if (resp.status == 200) {
-            return true
+            return result
         }
         else {
             return false
