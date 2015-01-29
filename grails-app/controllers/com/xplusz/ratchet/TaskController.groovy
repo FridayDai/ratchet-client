@@ -43,8 +43,9 @@ class TaskController extends BaseController {
         def status = StatusCodeConstants.TASK_STATUS[result.status]
         def description = result.description
         def title = result.title
+        def sendTime = result.sendTime
 
-        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status])
+        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status, sendTime: sendTime])
     }
 
 }
