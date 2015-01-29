@@ -29,6 +29,7 @@ class TeamController extends BaseController {
 
     def addCareTeam() {
         def resp = treatmentService.addCareTeam(request, response, params)
+<<<<<<< HEAD
         def id = resp.id
         def doctor = resp.doctor
         def firstName = resp.firstName
@@ -49,5 +50,13 @@ class TeamController extends BaseController {
         def status = resp.status
 
         render g.render(template: "/team/careGiverTemplate", model: [id: id, relationShip: relationShip, firstName: firstName, lastName: lastName, email: email, status: status])
+=======
+        render resp as JSON
+    }
+
+    def addCareGiver(){
+        def resp = treatmentService.addCareGiver(request, response, params)
+        render resp as JSON
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
     }
 }

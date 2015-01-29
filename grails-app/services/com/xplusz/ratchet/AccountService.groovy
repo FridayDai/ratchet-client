@@ -1,28 +1,90 @@
 package com.xplusz.ratchet
 
+import com.mashape.unirest.http.Unirest
+import exceptions.AccountValidationException
+import grails.converters.JSON
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+
 class AccountService {
 
-    def loadAccounts(params) {
+    def grailsApplication
 
-        def start = params?.start
+    def getAccounts(HttpServletRequest request, HttpServletResponse response, params) {
+        def draw = params?.draw
         def length = params?.length
-        def order = params?.order
-        def columns = params?.columns
-        def search = params?.search
-        def map = [:]
 
-        map.put(start, start)
-        map.put(length, length)
-        map.put(order, order)
-        map.put(columns, columns)
-        map.put(search, search)
+        def url = grailsApplication.config.ratchetv2.server.staffs.url
+        def resp = Unirest.get(url)
+                .queryString("max", length)
+                .queryString("offset", draw-1)
+                .queryString("clientId", request.session.clientId)
+                .asString()
 
-        def account1 = new Account("001", "123098", "Sean", "Adelman", "sean.adelman@gh.com", "surgeon", "Patient Mgt", "Jan 19 2015 8:08")
-        def account2 = new Account("002", "345654", "Sean", "Amann", "sean.aman@gh.com", "surgeon", "Patient Mgt", "Jan 19 2015 8:08")
-        def account3 = new Account("003", "347564", "Wellesley", "Chapman", "well.chapman@gh.com", "Management", "Patient Mgt", "Jan 19 2015 8:08")
+        def result = JSON.parse(resp.body)
 
-        def data = [account1, account2, account3]
-        map.put("data", data)
-        return map
+        if (resp.status == 200) {
+            def map = [:]
+
+            map.put("data", result.items)
+            return map
+        }
+
+        if (resp.status == 400) {
+            return false
+        }
+
+        if (resp.status == 403) {
+            def rateLimit = result?.error?.errorMessage
+            Integer[] args = [rateLimit]
+            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
+            throw new AccountValidationException(errorMessage, rateLimit)
+
+
+        } else {
+            def errorMessage = result?.error?.errorMessage
+            throw new AccountValidationException(errorMessage)
+
+        }
     }
+
+    def getSingleAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
+
+        def url = grailsApplication.config.ratchetv2.server.staffs.url + accountId
+        def resp = Unirest.get(url)
+                .asString()
+        def result = JSON.parse(resp.body)
+
+        if (resp.status == 200) {
+            return result
+        }
+    }
+
+    def createAccount(HttpServletRequest request, HttpServletResponse response, params) {
+        def clientId = params?.clientId
+        def firstName = params?.firstName
+        def lastName = params?.lastName
+        def email = params?.email
+        def type = params?.type
+        def isPatientManagement = params?.isPatientManagement
+        def isAccountManagement = params?.isAccountManagement
+        def isDoctor = params?.isDoctor
+
+        def url = grailsApplication.config.ratchetv2.server.staffs.url
+        def resp = Unirest.post(url)
+                    .field("clientId", clientId)
+                    .field("firstName", firstName)
+                    .field("lastName", lastName)
+                    .field("email", email)
+                    .field("type", type)
+                    .field("patientManagement", isPatientManagement)
+                    .field("accountManagement", isAccountManagement)
+                    .field("doctor", isDoctor)
+                    .asString()
+
+        if(resp.status == 201) {
+            return true
+        }
+    }
+
 }
