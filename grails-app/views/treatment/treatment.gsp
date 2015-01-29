@@ -9,7 +9,8 @@
                 <g:link controller="activity" action="index" params="[patientId: patientId, medicalRecordId: medicalRecordId]">Activity</g:link>
             </li>
             <li data-type="Task">
-                <g:link controller="task" action="index">Task</g:link>
+                <g:link controller="task" action="index"
+                        params="[patientId: patientId, treatmentId: treatmentId, medicalRecordId: medicalRecordId]">Task</g:link>
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="showMedicalCares"

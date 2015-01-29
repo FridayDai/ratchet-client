@@ -16,6 +16,9 @@
                 title: RC.constants.warningTipTitle,
                 message: RC.constants.warningTip
             }
+        },
+        urls: {
+            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl)
         }
     };
 
@@ -32,11 +35,19 @@
         $("#add-task").on("click", function (e) {
             e.preventDefault();
             $(".task-form")[0].reset();
+            var patientId = $(this).data("patientId");
+            var medicalRecord = $(this).data("medicalRecordId");
+            //var patientId = "x12345";
+            //var medicalRecord = 31;//need change
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".task-form"),
                 okCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurFormBox($(this));
+                    });
                     if ($("#task-form").valid()) {
-                        _add();
+                        _add(patientId, medicalRecord);
+                        //_renderNewTask();
                         return true;
                     }
                     return false;
@@ -52,7 +63,50 @@
         });
     }
 
-    function _add() {
+    /**
+     * add task to medicalRecord
+     * @param patientId
+     * @param medicalRecordId
+     * @private
+     */
+    function _add(patientId, medicalRecordId) {
+        var toolId = $("input:radio[name=task-template]:checked").val();
+        var requireCompletion = $("input:radio[name=task-template]:checked").data("requireCompletion");
+        var relativeInterval = $("#relativeInterval option:selected").val();
+        var status = $("input:radio[name=time]:checked").val();
+        var weeks = $("#receive-week option:selected").text();
+        var days = $("#receive-days option:selected").text();
+        var hours = $("#receive-hours option:selected").text();
+        var minutes = $("#receive-minutes option:selected").text();
+        var remindDays = $("#remind-days option:selected").text();
+        var remindHours = $("#remind-hours option:selected").text();
+        var sendMillionSeconds = relativeInterval * 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
+        var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
+        var request = $.ajax({
+            url: opts.urls.query.format(null, patientId, medicalRecordId),
+            data: {
+                toolId: toolId,
+                status: status,
+                requireCompletion: requireCompletion,
+                sendMillionSeconds: sendMillionSeconds,
+                remindMillionSeconds: remindMillionSeconds
+            }
+        });
+        request.done(function (data) {
+            _renderNewTask(data, status);
+        });
+        request.fail(function () {
+
+        });
+    }
+
+    function _renderNewTask(taskObject, status) {
+
+        if (status === '2') {
+            $("#task-row-sent").append(taskObject);
+        } else {
+            $("#task-row-schedule").append(taskObject);
+        }
 
     }
 
@@ -245,6 +299,14 @@
             var $this = $(this);
             var radio = $this.find(':radio');
 
+            var requireCompletion = radio.data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility","visible");
+            } else {
+                hideMessageArea.css("visibility","hidden");
+            }
+
             $("input:radio[name=task-template]").each(function () {
                 _blurFormBox($(this).closest(".form-box"));
                 this.checked = false;
@@ -257,13 +319,30 @@
 
         $('.box-radio').click(function (e) {
             e.stopPropagation();
-
+            var requireCompletion = $(this).data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility","visible");
+            } else {
+                hideMessageArea.css("visibility","hidden");
+            }
             $("input:radio[name=task-template]").each(function () {
                 _blurFormBox($(this).closest(".form-box"));
             });
 
             _activeFormBox($(this).closest(".form-box"));
 
+        });
+
+        $("input:radio[name=time]").click(function (e) {
+            e.stopPropagation();
+            var relativeChoices = $('#relative-choices');
+            if ($(this).val() === "2") {
+                relativeChoices.hide();
+            }
+            if ($(this).val() === "3") {
+                relativeChoices.show();
+            }
         });
 
     }
@@ -278,7 +357,7 @@
             showOn: "button",
             buttonImage: "../../assets/patients/calender.png",
             buttonImageOnly: true,
-            onClose: function( selectedDate ) {
+            onClose: function (selectedDate) {
                 $(this).parent().find('.datetime-picker-label').text(selectedDate);
             }
         });

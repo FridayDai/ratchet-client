@@ -46,6 +46,11 @@ class UrlMappings {
         "/accounts"(controller: "accounts", action: "index")
         "/getAccounts"(controller: "accounts", action: "getAllAccounts")
         "/singleAccount"(controller: "accounts", action: "getAccount")
+
+        //task
+        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
+
         "500"(view: '/pages/error')
         "/providers/detail"(controller: "providers", action: "detail")
 

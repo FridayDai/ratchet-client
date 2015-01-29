@@ -9,11 +9,12 @@ class TreatmentController extends BaseController {
     def treatmentService
 
     def index() {
-        def medicalRecordId = params.medicalRecordId
-        def clientId = params.clientId
         def patientId = params.patientId
-        render(view: '/treatment/treatment',
-                model: [medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        def medicalRecordId = params.medicalRecordId
+        def treatmentId = params.treatmentId
+        def clientId = params.clientId
+        render view: '/treatment/treatment', model: [patientId: patientId, clientId: clientId,  medicalRecordId: medicalRecordId, treatmentId: treatmentId]
+        
     }
 
     def assignTreatment() {

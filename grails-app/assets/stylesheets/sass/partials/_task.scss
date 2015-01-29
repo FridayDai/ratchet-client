@@ -17,8 +17,19 @@
     height: 73px;
 }
 
+.display-flex {
+    display: flex;
+}
+
 .btn-right {
     float: right;
+}
+
+.btn-task {
+    padding: 10px 27px 2px 2px;
+    border: 0;
+    color: $base-color-mid-blue;
+    text-decoration: underline;
 }
 
 .task-header {
@@ -35,6 +46,10 @@
     width: 30px;
     height: 30px;
     margin: 0 auto;
+}
+
+.visible-hidden {
+    visibility: hidden;
 }
 
 .datetime-picker-label {
@@ -243,6 +258,7 @@
 // all change in the form box
 .form-box {
     display: inline-block;
+    height: 120px;
     width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -294,6 +310,11 @@
     .radio-box {
         margin: 6px 0;
         color: $base-color-blue-grey;
+    }
+
+    .label-height {
+        display: block;
+        height: 25px;
     }
 }
 
@@ -369,4 +390,8 @@
     text-transform: capitalize;
 }
 
+.ui-dialog .task-form + .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
 
