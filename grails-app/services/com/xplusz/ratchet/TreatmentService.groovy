@@ -32,21 +32,6 @@ class TreatmentService {
             return result.items
         }
 
-        if (resp.status == 400) {
-            return false
-        }
-
-        if (resp.status == 403) {
-            def rateLimit = result?.error?.errorMessage
-            Integer[] args = [rateLimit]
-            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
-            throw new AccountValidationException(errorMessage, rateLimit)
-
-
-        } else {
-            def errorMessage = result?.error?.errorMessage
-            throw new AccountValidationException(errorMessage)
-        }
     }
 
     def assignTreatmentToPatient(HttpServletRequest request, HttpServletResponse response, params) {

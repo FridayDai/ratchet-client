@@ -178,6 +178,7 @@ a {
 
 .input-group {
     background: $base-color-light-grey;
+    min-width: 250px;
 }
 
 .ui-button {
@@ -287,4 +288,8 @@ a {
         background: url('../../../images/loading.gif') no-repeat 0 0;
         background-size: cover;
     }
+}
+
+.select2-container {
+    min-width: 220px;
 }
