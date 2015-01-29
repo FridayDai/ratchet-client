@@ -24,16 +24,25 @@ class UrlMappings {
         "/patients/$id?"(controller: "singlePatient", action: "showPatient")
         "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
         "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+<<<<<<< HEAD
         "/team"(controller: "team", action: "showMedicalCares")
         "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
+=======
+        "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
+        "/clients/$clientId?/patients/$patientId?/care_giver/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")
         "/task"(controller: "overview", action: "index")
+<<<<<<< HEAD
 
+=======
+        "/team"(controller: "team", action: "showMedicalCares")
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
         "/patient/patientTeam"(controller: "patients", action: "showActivity")
         "/getStaffs"(controller: "staff", action: "getStaff")
         "/getCareGiver"(controller: "patients", action: "getCareGiver")
@@ -45,8 +54,15 @@ class UrlMappings {
 
         // Accounts
         "/accounts"(controller: "accounts", action: "index")
+<<<<<<< HEAD
         "/getAccounts"(controller: "accounts", action: "getAllAccounts")
         "/singleAccount"(controller: "accounts", action: "getAccount")
+=======
+        "/getAccounts"(controller: "accounts", action: "getAccounts")
+        "/singleAccount/$id?"(controller: "accounts", action: "getSingleAccount")
+        "/createAccount"(controller: "accounts", action: "createAccount")
+        "/updateAccount/$id?"(controller: "accounts", action: "updateAccount")
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
 
         //task
         "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")

@@ -1,3 +1,56 @@
 @import '../partials/common';
 @import '../partials/form';
 @import '../partials/dialog';
+@import '../partials/overview';
+@import '../partials/base';
+
+.account-info {
+    margin: 20px 0 0 20px;
+    padding: 20px;
+    color: $base-color-dark-grey;
+
+    .row {
+        margin-top: 20px;
+    }
+
+    .account-top-info {
+        height: 150px;
+        border-bottom: 1px solid $base-color-medium-grey;
+
+        .account-id {
+            color: $base-color-middle-grey;
+        }
+
+        .account-profile {
+            display: inline-block;
+            padding-right: 15px;
+        }
+
+        .account-doctor {
+            font-size: 20px;
+        }
+
+        .account-name {
+            font-size: 20px;
+        }
+
+        .account-email {
+            font-size: 16px;
+            margin-left: 49px;
+        }
+    }
+
+    .account-bottom-info {
+        font-size: 15px;
+        color: $base-color-dark-grey;
+
+        .account-status {
+            margin-top: 50px;
+        }
+
+        span {
+            color: $base-color-middle-grey;
+        }
+    }
+
+}

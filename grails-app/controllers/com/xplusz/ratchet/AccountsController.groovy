@@ -10,12 +10,20 @@ class AccountsController {
         render view: 'accounts'
     }
 
-    def getAllAccounts() {
-        def data = accountService.loadAccounts(params);
-        render data as JSON
+    def getAccounts() {
+        def resp = accountService.getAccounts(request, response, params);
+        render resp as JSON
     }
 
-    def getAccount() {
-        render view: 'singleAccount'
+    def getSingleAccount() {
+        def accountId = params.id
+        def accountInfo = accountService.getSingleAccount(request, response, accountId)
+        render (view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
+
+    def createAccount() {
+        def resp = accountService.createAccount(request, response, params)
+        render resp as JSON
+    }
+
 }

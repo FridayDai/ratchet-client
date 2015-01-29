@@ -115,6 +115,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
+<<<<<<< HEAD
                 .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
                 .field("staffId", params?.staffId)
                 .asString()
@@ -123,6 +124,15 @@ class TreatmentService {
 
         if (resp.status == 200) {
             return result
+=======
+                .field("type",grailsApplication.config.ratchetv2.server.careTeamType )
+                .field("staffId", params?.staffId)
+                .field("primary", params?.isPrimaryCareTeam)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
         }
     }
 
@@ -130,6 +140,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
+<<<<<<< HEAD
                 .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
                 .field("email", params?.email)
                 .field("relationShip", params?.relationship)
@@ -138,6 +149,15 @@ class TreatmentService {
 
         if (resp.status == 200) {
             return result
+=======
+                .field("type",grailsApplication.config.ratchetv2.server.careGiverType )
+                .field("email", params?.email)
+                .field("relationShip", params?.relationship)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
         }
     }
 }

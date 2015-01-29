@@ -65,6 +65,7 @@
                 okCallback: function () {
                     if ($(".addTeamForm").valid()) {
                         var staffId = $("#selectStaff").val();
+<<<<<<< HEAD
                         //var isPrimaryCareTeam;
                         //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
 
@@ -72,6 +73,15 @@
                             medicalRecordId: medicalRecordId,
                             staffId: staffId
                             //isPrimaryCareTeam: isPrimaryCareTeam
+=======
+                        var isPrimaryCareTeam;
+                        $("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
+
+                        var careTeamInfo = {
+                            medicalRecordId: medicalRecordId,
+                            staffId: staffId,
+                            isPrimaryCareTeam: isPrimaryCareTeam
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
                         };
                         _addCareTeam(clientId, patientId, careTeamInfo);
                         return true;
@@ -79,6 +89,17 @@
                     return false;
                 }
             }));
+        });
+    }
+
+    function _addCareTeam(clientId, patientId, careTeamInfo) {
+        $.ajax({
+            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team',
+            type: 'POST',
+            data: careTeamInfo,
+            dataType: 'json'
+            //success: function () {
+            //}
         });
     }
 
@@ -108,7 +129,11 @@
         $("#invite-giver").on("click", function (e) {
             e.preventDefault();
             $(".inviteGiverForm")[0].reset();
+<<<<<<< HEAD
             var grandParent = $(this).parent().parent().parent();
+=======
+            var grandParent = $(this).parent().parent();
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
             var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
             var clientId = grandParent.find('.clientId').attr('value');
             var patientId = grandParent.find('.patientId').attr('value');
@@ -133,6 +158,17 @@
                     return false;
                 }
             }));
+        });
+    }
+
+    function _addCareGiver(clientId, patientId, careGiverInfo) {
+        $.ajax({
+            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver',
+            type: 'POST',
+            data: careGiverInfo,
+            dataType: 'json'
+            //success: function () {
+            //}
         });
     }
 
@@ -174,6 +210,16 @@
         });
     }
 
+    function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
+        $.ajax({
+            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team/' + careTeamId + '/' + medicalRecordId,
+            type: 'DELETE',
+            success: function () {
+                grandParent.remove();
+            }
+        });
+    }
+
     /**
      *
      * @param clientId
@@ -208,9 +254,23 @@
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
+<<<<<<< HEAD
                     _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent);
+=======
+                    _removeTeam(clientId, patientId, careGiverId, medicalRecordId, grandParent);
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
                 }
             }));
+        });
+    }
+
+    function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
+        $.ajax({
+            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver/' + careGiverId + '/' + medicalRecordId,
+            type: 'DELETE',
+            success: function () {
+                grandParent.remove();
+            }
         });
     }
 
@@ -263,12 +323,15 @@
     function _initStaffSelect() {
         $('#selectStaff').select2({
             ajax: {
+<<<<<<< HEAD
                 transport: function (params) {
                     params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
                 },
+=======
+>>>>>>> fcad99ec844203b5d3ab3fadcc62182b05927f48
                 url: opts.urls.getStaffs,
                 cache: "true",
                 data: function (term) {
