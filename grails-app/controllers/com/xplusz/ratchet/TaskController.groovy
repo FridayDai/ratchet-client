@@ -1,8 +1,5 @@
 package com.xplusz.ratchet
 
-import com.alibaba.fastjson.JSONObject
-
-
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -12,15 +9,15 @@ class TaskController extends BaseController {
     def medicalRecordService
 
     def index() {
-//        def patientId = params.patientId
-//        def treatmentId = params.treatmentId
-//        def medicalRecordId = params.medicalRecordId
-//        redirect(uri: '/patients/patientId/treatments/treatmentId/medicalRecordId/tasks')
-        redirect(uri: '/patients/x12345/treatments/3/21/tasks');
+        def patientId = params.patientId
+        def treatmentId = params.treatmentId
+        def medicalRecordId = params.medicalRecordId
+        redirect(uri: '/patients/'+patientId+'/treatments/'+treatmentId+'/'+medicalRecordId+'/tasks')
+//        redirect(uri: '/patients/x12345/treatments/3/31/tasks');
     }
 
     def getTasksAndTools() {
-//        def patientId = params.patientId
+        def patientId = params.patientId
         def medicalRecordId = params.medicalRecordId
         def treatmentId = params.treatmentId
 
@@ -36,11 +33,18 @@ class TaskController extends BaseController {
         }
 
         def tools = toolService.getToolsByTreatment(treatmentId)
-        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks:scheduleTasks, tools: tools]
+        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks:scheduleTasks, tools: tools, patientId: patientId, medicalRecordId: medicalRecordId]
     }
 
     def addTaskToMedicalRecord() {
         def result = medicalRecordService.assignTaskToMedicalRecord(params)
-        return result
+        def id = result.id
+        def toolType = StatusCodeConstants.TOOL_TYPE[result.toolType]
+        def status = StatusCodeConstants.TASK_STATUS[result.status]
+        def description = result.description
+        def title = result.title
+
+        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status])
     }
+
 }

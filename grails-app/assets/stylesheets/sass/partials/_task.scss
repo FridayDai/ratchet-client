@@ -25,6 +25,13 @@
     float: right;
 }
 
+.btn-task {
+    padding: 10px 27px 2px 2px;
+    border: 0;
+    color: $base-color-mid-blue;
+    text-decoration: underline;
+}
+
 .task-header {
     height: 30px;
     padding-right: 20px;
@@ -383,4 +390,8 @@
     text-transform: capitalize;
 }
 
+.ui-dialog .task-form + .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
 
