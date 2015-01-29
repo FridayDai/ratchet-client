@@ -29,11 +29,25 @@ class TeamController extends BaseController {
 
     def addCareTeam() {
         def resp = treatmentService.addCareTeam(request, response, params)
-        render resp as JSON
+        def id = resp.id
+        def doctor = resp.doctor
+        def firstName = resp.firstName
+        def lastName = resp.lastName
+        def email = resp.email
+        def staffType = resp.staffType
+
+        render g.render(template: "/team/careTeamTemplate", model: [id: id, doctor: doctor, firstName: firstName, lastName: lastName, email: email, staffType: staffType])
     }
 
-    def addCareGiver(){
+    def addCareGiver() {
         def resp = treatmentService.addCareGiver(request, response, params)
-        render resp as JSON
+        def id = resp.id
+        def relationShip = resp.relationShip
+        def firstName = resp.firstName
+        def lastName = resp.lastName
+        def email = resp.email
+        def status = resp.status
+
+        render g.render(template: "/team/careGiverTemplate", model: [id: id, relationShip: relationShip, firstName: firstName, lastName: lastName, email: email, status: status])
     }
 }

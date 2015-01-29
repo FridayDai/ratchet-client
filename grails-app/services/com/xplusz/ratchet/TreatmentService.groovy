@@ -115,13 +115,14 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
-                .field("type",grailsApplication.config.ratchetv2.server.careTeamType )
+                .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
                 .field("staffId", params?.staffId)
-                .field("primary", params?.isPrimaryCareTeam)
                 .asString()
 
+        def result = JSON.parse(resp.body)
+
         if (resp.status == 200) {
-            return true
+            return result
         }
     }
 
@@ -129,7 +130,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
-                .field("type",grailsApplication.config.ratchetv2.server.careGiverType )
+                .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
                 .field("email", params?.email)
                 .field("relationShip", params?.relationship)
                 .asString()

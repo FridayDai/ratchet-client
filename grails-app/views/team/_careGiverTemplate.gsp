@@ -1,16 +1,16 @@
 <div class="detail-info">
-    <g:if test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[careGiver.status - 1] == "NORMAL"}">
+    <g:if test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[status - 1] == "NORMAL"}">
         <div class="status active-status">
             ACTIVE
         </div>
     </g:if>
     <g:elseif
-            test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[careGiver.status - 1] == "INVITED"}">
+            test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[status - 1] == "INVITED"}">
         <div class="status active-status">
             INVITED
         </div>
     </g:elseif>
-    <g:else test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[careGiver.status - 1] == "UNINVITED"}">
+    <g:else test="${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_STATUS[status - 1] == "UNINVITED"}">
         <div class="status invited-status">
             UNINVITED
         </div>
@@ -18,9 +18,9 @@
 
     <div class="head-content div-margin">
         <div class="inner-head-content div-space">
-            <p class="p-id" value="${careGiver.id}">ID:${careGiver.id}</p>
+            <p class="p-id" value="${id}">ID:${id}</p>
 
-            <p class="p-name" value="${careGiver.firstName}">Dr.${careGiver.firstName}</p>
+            <p class="p-name">${firstName}${lastName}</p>
         </div>
 
         <input type="hidden" name="medicalRecordId" class="medicalRecordId" value="${medicalRecordId}"/>
@@ -29,14 +29,14 @@
 
         <div class="inner-bottom-content div-space">
             <p class="p-relationship"
-               value="${careGiver.relationShip}">Relationship:${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_RELATION[careGiver.relationShip - 1]}</p>
+               value="${relationShip}">Relationship:${com.xplusz.ratchet.StatusCodeConstants.CAREGIVER_RELATION[relationShip - 1]}</p>
 
-            <p class="p-email" value="${careGiver.email}">${careGiver.email}</p>
+            <p class="p-email" value="${email}">${email}</p>
         </div>
     </div>
 
     <div class="bottom-content">
-        <a href="#" id="edit-care-giver" class="btn-edit" data-id="${careGiver.id}">
+        <a href="#" id="edit-care-giver" class="btn-edit" data-id="${id}">
             <div class="icon-edit"></div>
         </a>
         <a href="#" id="remove-care-giver" class="btn-remove-giver">
