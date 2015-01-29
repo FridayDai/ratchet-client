@@ -24,15 +24,16 @@ class UrlMappings {
         "/patients/$id?"(controller: "singlePatient", action: "showPatient")
         "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
         "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+        "/team"(controller: "team", action: "showMedicalCares")
         "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
-        "/clients/$clientId?/patients/$patientId?/care_giver/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
+        "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")
         "/task"(controller: "overview", action: "index")
-        "/team"(controller: "team", action: "showMedicalCares")
+
         "/patient/patientTeam"(controller: "patients", action: "showActivity")
         "/getStaffs"(controller: "staff", action: "getStaff")
         "/getCareGiver"(controller: "patients", action: "getCareGiver")

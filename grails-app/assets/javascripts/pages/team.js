@@ -65,13 +65,13 @@
                 okCallback: function () {
                     if ($(".addTeamForm").valid()) {
                         var staffId = $("#selectStaff").val();
-                        var isPrimaryCareTeam;
-                        $("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
+                        //var isPrimaryCareTeam;
+                        //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
 
                         var careTeamInfo = {
                             medicalRecordId: medicalRecordId,
-                            staffId: staffId,
-                            isPrimaryCareTeam: isPrimaryCareTeam
+                            staffId: staffId
+                            //isPrimaryCareTeam: isPrimaryCareTeam
                         };
                         _addCareTeam(clientId, patientId, careTeamInfo);
                         return true;
@@ -82,14 +82,20 @@
         });
     }
 
+    /**
+     *
+     * @param clientId
+     * @param patientId
+     * @param careTeamInfo
+     * @private
+     */
     function _addCareTeam(clientId, patientId, careTeamInfo) {
         $.ajax({
             url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team',
             type: 'POST',
-            data: careTeamInfo,
-            dataType: 'json'
-            //success: function () {
-            //}
+            data: careTeamInfo
+        }).done(function (data) {
+            $("#careTeamBody").append(data);
         });
     }
 
@@ -130,14 +136,20 @@
         });
     }
 
+    /**
+     *
+     * @param clientId
+     * @param patientId
+     * @param careGiverInfo
+     * @private
+     */
     function _addCareGiver(clientId, patientId, careGiverInfo) {
         $.ajax({
             url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver',
             type: 'POST',
-            data: careGiverInfo,
-            dataType: 'json'
-            //success: function () {
-            //}
+            data: careGiverInfo
+        }).done(function (data) {
+            $("#careGiverBody").append(data);
         });
     }
 
@@ -162,6 +174,15 @@
         });
     }
 
+    /**
+     *
+     * @param clientId
+     * @param patientId
+     * @param careTeamId
+     * @param medicalRecordId
+     * @param grandParent
+     * @private
+     */
     function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
         $.ajax({
             url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team/' + careTeamId + '/' + medicalRecordId,
@@ -187,12 +208,21 @@
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
-                    _removeTeam(clientId, patientId, careGiverId, medicalRecordId, grandParent);
+                    _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent);
                 }
             }));
         });
     }
 
+    /**
+     *
+     * @param clientId
+     * @param patientId
+     * @param careGiverId
+     * @param medicalRecordId
+     * @param grandParent
+     * @private
+     */
     function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
         $.ajax({
             url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver/' + careGiverId + '/' + medicalRecordId,
@@ -233,6 +263,12 @@
     function _initStaffSelect() {
         $('#selectStaff').select2({
             ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
                 url: opts.urls.getStaffs,
                 cache: "true",
                 data: function (term) {
