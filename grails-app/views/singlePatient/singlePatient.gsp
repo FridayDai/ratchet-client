@@ -53,7 +53,8 @@
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
                     <li>
-                        <g:link controller="treatment" action="index" data-id="sub${i}" params="[patientId:patientInfo.id, medicalRecordId:medicalRecord.id]">${medicalRecord.title}</g:link>
+                        <g:link controller="treatment" action="index" data-id="sub${i}"
+                                params="[medicalRecordId: medicalRecord.id, clientId: patientInfo.client.id, patientId: patientInfo.id]">${medicalRecord.title}</g:link>
                     </li>
                 </g:each>
             </ul>

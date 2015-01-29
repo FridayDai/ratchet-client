@@ -65,4 +65,77 @@ class TreatmentService {
         }
     }
 
+    def getCareTeam(HttpServletRequest request, HttpServletResponse response, medicalRecordId) {
+        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def resp = Unirest.get(url)
+                .queryString("type", grailsApplication.config.ratchetv2.server.careTeamType)
+                .queryString("medicalRecordId", medicalRecordId)
+                .asString()
+        def result = JSON.parse(resp.body)
+
+        if (resp.status == 200) {
+            return result.items
+        }
+    }
+
+    def getCareGiver(HttpServletRequest request, HttpServletResponse response, medicalRecordId) {
+        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def resp = Unirest.get(url)
+                .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
+                .queryString("medicalRecordId", medicalRecordId)
+                .asString()
+        def result = JSON.parse(resp.body)
+
+        if (resp.status == 200) {
+            return result.items
+        }
+    }
+
+    def deleteCareTeam(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = grailsApplication.config.ratchetv2.server.deleteMedicalCares.url + params?.medicalRecordId + '/careteam/' + params?.careTeamId
+        def resp = Unirest.delete(url)
+                .asString()
+
+        if (resp.status == 204) {
+            return true
+        }
+    }
+
+    def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = grailsApplication.config.ratchetv2.server.deleteMedicalCares.url + params?.medicalRecordId + '/caregiver/' + params?.careGiverId
+        def resp = Unirest.delete(url)
+                .asString()
+
+        if (resp.status == 204) {
+            return true
+        }
+    }
+
+    def addCareTeam(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def resp = Unirest.post(url)
+                .field("medicalRecordId", params?.medicalRecordId)
+                .field("type",grailsApplication.config.ratchetv2.server.careTeamType )
+                .field("staffId", params?.staffId)
+                .field("primary", params?.isPrimaryCareTeam)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+    }
+
+    def addCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def resp = Unirest.post(url)
+                .field("medicalRecordId", params?.medicalRecordId)
+                .field("type",grailsApplication.config.ratchetv2.server.careGiverType )
+                .field("email", params?.email)
+                .field("relationShip", params?.relationship)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+    }
 }
