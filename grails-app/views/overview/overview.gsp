@@ -34,13 +34,13 @@
         </div>
 
         <div class="task">
-            <ul class="activity-content">
-                <g:each in="${overdueTask}" var="task">
+            <g:each in="${overdueTask}" var="task">
+                <ul class="activity-content">
                     <li class="li-content title-task">${task.title}</li>
                     <li>${task.description}</li>
                     <li class="li-last-update"><g:formatDate date="${new java.util.Date(task.remindTime)}" format="MMM d, yyyy h:mm:ss a"></g:formatDate></li>
-                </g:each>
-            </ul>
+                </ul>
+            </g:each>
         </div>
 
         <div class="right-header">
