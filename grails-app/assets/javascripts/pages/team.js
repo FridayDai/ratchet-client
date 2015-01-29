@@ -108,7 +108,7 @@
         $("#invite-giver").on("click", function (e) {
             e.preventDefault();
             $(".inviteGiverForm")[0].reset();
-            var grandParent = $(this).parent().parent();
+            var grandParent = $(this).parent().parent().parent();
             var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
             var clientId = grandParent.find('.clientId').attr('value');
             var patientId = grandParent.find('.patientId').attr('value');

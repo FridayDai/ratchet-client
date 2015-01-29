@@ -134,9 +134,10 @@ class TreatmentService {
                 .field("email", params?.email)
                 .field("relationShip", params?.relationship)
                 .asString()
+        def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            return true
+            return result
         }
     }
 }
