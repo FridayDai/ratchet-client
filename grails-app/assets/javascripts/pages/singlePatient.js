@@ -220,6 +220,12 @@
     function _initSelectTreatment() {
         $('#selectTreatment').select2({
             ajax: {
+                transport: function(params){
+                    params.beforeSend = function(){
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
                 url: opts.urls.getTreatments,
                 cache: "true",
                 data: function (term) {
@@ -251,6 +257,12 @@
         $('#selectStaffs').select2({
             tags: true,
             ajax: {
+                transport: function(params){
+                    params.beforeSend = function(){
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
                 url: opts.urls.getStaffs,
                 cache: "true",
                 data: function (term) {

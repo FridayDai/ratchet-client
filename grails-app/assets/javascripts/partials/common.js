@@ -5,8 +5,39 @@
     function _init() {
         _setValidator();
         _dataTablePagination();
+        _setGlobalAjax();
+        _initTimeFormat();
+        $('select').select2();
     }
 
+    function _initTimeFormat() {
+        Date.prototype.format = function(format) {
+            var o = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S": this.getMilliseconds(),
+                "a": this.getHours() > 11 ? "PM" : "AM"
+                };
+            if (/(y+)/.test(format) || /(Y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
+        };
+
+    }
+    /**
+     * set global validator
+     * @private
+     */
     function _setValidator() {
         $.validator.setDefaults({
             showErrors: function (errorMap, errorList) {
@@ -22,6 +53,40 @@
             focusInvalid: false
         });
     }
+
+    /**
+     * global ajax set up
+     * @private
+     */
+    function _setGlobalAjax() {
+
+        $.ajaxSetup({
+            beforeSend: function () {
+                RC.common.progress(true);
+            },
+            complete: function () {
+                RC.common.progress(false);
+            },
+            success: function () {
+
+            },
+            global: true,
+            error: function (jqXHR) {
+                if (jqXHR.status === 404) {
+
+                } else if (jqXHR.status === 403) {
+
+                } else if (jqXHR.status === 0) {
+
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+
 
     /**
      * Pipelining function for DataTables. To be used to the `ajax` option of DataTables
@@ -143,7 +208,13 @@
 
     }
 
-
+    /**
+     * set waring container
+     * @param container
+     * @param warningArguments
+     * @returns {*|HTMLElement}
+     * @private
+     */
     function _setWaringContainer(container, warningArguments) {
         var $container = $(container);
         var containerParent = $container.parent().addClass('ui-size'),
@@ -166,29 +237,18 @@
          * @param hide
          */
         progress: function (hide) {
-            if (window !== window.top) {
-                window.top.RC.common.progress(hide);
-                return;
-            }
             if (hide === undefined || hide === false) {
                 if ($("#msg-process").length > 0) {
                     $("#msg-process").hide();
                 }
             } else {
-                var remain = 1000,
-                    msg = RC.constants.loadingContent;
-                var $msgDiv = $('<div id="msg-process" class="ui-tips ui-tips-center"></div>');
+                var $msgDiv = $('<div id="msg-process" class="msg-process-background ui-tips ui-tips-center"><span class="loading"></span></span></div>');
                 if ($("#msg-process").length > 0) {
                     $msgDiv = $("#msg-process");
                 } else {
                     $(document.body).append($msgDiv);
                 }
-                $msgDiv.html(msg).show();
-                setTimeout(function () {
-                        $msgDiv.hide();
-                        $msgDiv.trigger("timeout");
-                    },
-                    remain);
+                $msgDiv.show();
             }
         },
         /**

@@ -6,7 +6,8 @@
     //Define provider page global variables
     var opts = {
             urls: {
-                query: "{0}/getActivities".format(RC.constants.baseUrl)
+                query: "{0}/getActivities".format(RC.constants.baseUrl),
+                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
             }
         },
         activityTable;
@@ -23,7 +24,7 @@
         activityTable = $(element).dataTable({
             bLengthChange: false,
             searching: false,
-            ordering: true,
+            ordering: false,
             info: false,
             "serverSide": true,
             "ajax": $.fn.dataTable.pipeline({
@@ -33,9 +34,10 @@
             }),
             columns: [
                 {data: "description"},
-                {data: "level"},
-                {data: "organization"},
-                {data: "surgeryDate"}
+                {data: "createdBy"},
+                {data: function(source){
+                    return "Last Update: "+(new Date(source.dateCreated)).format("MMM d, yyyy h:mm:ss a");
+                }}
             ]
         });
     }
@@ -50,6 +52,8 @@
         var data = {};
         data.selectLevel = selectLevel || 'all';
         data.selectBy = selectBy || 'all';
+        data.patientId = $("#patientId").val();
+        data.medicalRecordId = $("#medicalRecordId").val();
         _initTable(element, data);
     }
 
@@ -58,8 +62,35 @@
      * @private
      */
     function _initSelect() {
-        $("#activities").selectmenu();
-        $("#organization").selectmenu();
+        $('#selectStaffs').select2({
+            ajax: {
+                transport: function(params){
+                    params.beforeSend = function(){
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getStaffs,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.firstName + " " + item.lastName
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
     }
 
     /**
@@ -94,7 +125,7 @@
         _loadData(element);
         _changeSelectLevel(element);
         _changeSelectBy(element);
-        //_initSelect();
+        _initSelect();
     }
 
     $.extend(activity, {

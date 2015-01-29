@@ -21,8 +21,10 @@
     background: $table-search-bg-color;
 
     input {
-        width: 300px;
+        min-width: 220px;
         height: 25px;
+        margin-top: 5px;
+        margin-left: 5px;
         padding-left: 10px;
         border: 0;
     }

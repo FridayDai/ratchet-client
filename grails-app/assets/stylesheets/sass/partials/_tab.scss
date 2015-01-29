@@ -70,6 +70,13 @@
         padding: 0;
         border: 0;
 
+        .ui-widget-content {
+
+            a {
+                color: $base-color-light-blue;
+            }
+        }
+
         .add-tab {
             position: absolute;
             right: 0;

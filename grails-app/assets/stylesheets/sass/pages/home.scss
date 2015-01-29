@@ -3,6 +3,7 @@
 @import '../partials/form';
 @import '../partials/dialog';
 @import '../partials/timepicker';
+@import '../partials/chart';
 
 .home-content {
     width: 100%;
@@ -13,6 +14,7 @@
 
         .report-chart {
             min-height: 640px;
+            padding: 40px;
         }
     }
 
