@@ -55,7 +55,7 @@
         $("#add-member").on("click", function (e) {
             e.preventDefault();
             $(".addTeamForm")[0].reset();
-            var grandParent = $(this).parent().parent();
+            var grandParent = $(this).parent();
             var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
             var clientId = grandParent.find('.clientId').attr('value');
             var patientId = grandParent.find('.patientId').attr('value');
@@ -107,6 +107,7 @@
             data: careTeamInfo
         }).done(function (data) {
             $("#careTeamBody").append(data);
+            _removeCareTeam();
         });
     }
 
@@ -119,7 +120,7 @@
         $("#invite-giver").on("click", function (e) {
             e.preventDefault();
             $(".inviteGiverForm")[0].reset();
-            var grandParent = $(this).parent().parent().parent();
+            var grandParent = $(this).parent();
             var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
             var clientId = grandParent.find('.clientId').attr('value');
             var patientId = grandParent.find('.patientId').attr('value');
@@ -172,6 +173,7 @@
             data: careGiverInfo
         }).done(function (data) {
             $("#careGiverBody").append(data);
+            _removeCareGiver();
         });
     }
 

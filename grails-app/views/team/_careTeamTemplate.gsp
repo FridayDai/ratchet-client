@@ -1,7 +1,7 @@
 <div class="detail-info">
     <div class="head-content">
         <div class="inner-head-content div-space">
-            <p class="p-id">ID:${id}</p>
+            <p class="p-id" value="${id}">ID:${id}</p>
 
             <g:if test="${doctor == true}">
                 <p class="p-name">Dr.${firstName}${lastName}</p>

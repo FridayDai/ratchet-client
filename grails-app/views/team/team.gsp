@@ -14,6 +14,9 @@
         <div class="inner-header">
             <p>Care Team</p>
             <button class="btn-add btn-position" id="add-member">Add Member</button>
+            <input type="hidden" name="medicalRecordId" class="medicalRecordId" value="${medicalRecordId}"/>
+            <input type="hidden" name="clientId" class="clientId" value="${clientId}"/>
+            <input type="hidden" name="patientId" class="patientId" value="${patientId}"/>
         </div>
 
         <div class="inner-body" id="careTeamBody">
@@ -70,6 +73,9 @@
         <div class="inner-header">
             <p>Care Giver</p>
             <button class="btn-invite btn-position" id="invite-giver">Invite Care Giver</button>
+            <input type="hidden" name="medicalRecordId" class="medicalRecordId" value="${medicalRecordId}"/>
+            <input type="hidden" name="clientId" class="clientId" value="${clientId}"/>
+            <input type="hidden" name="patientId" class="patientId" value="${patientId}"/>
         </div>
 
         <div class="inner-body" id="careGiverBody">
