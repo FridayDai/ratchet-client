@@ -4,17 +4,8 @@ class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
 
-    def taskService
     def toolService
     def medicalRecordService
-
-    def index() {
-        def patientId = params.patientId
-        def treatmentId = params.treatmentId
-        def medicalRecordId = params.medicalRecordId
-        redirect(uri: '/patients/'+patientId+'/treatments/'+treatmentId+'/'+medicalRecordId+'/tasks')
-//        redirect(uri: '/patients/x12345/treatments/3/31/tasks');
-    }
 
     def getTasksAndTools() {
         def patientId = params.patientId
@@ -38,14 +29,8 @@ class TaskController extends BaseController {
 
     def addTaskToMedicalRecord() {
         def result = medicalRecordService.assignTaskToMedicalRecord(params)
-        def id = result.id
-        def toolType = StatusCodeConstants.TOOL_TYPE[result.toolType]
-        def status = StatusCodeConstants.TASK_STATUS[result.status]
-        def description = result.description
-        def title = result.title
-        def sendTime = result.sendTime
-
-        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status, sendTime: sendTime])
+//        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status, sendTime: sendTime])
+        render (template: "/task/taskBox", model: [task: result])
     }
 
 }

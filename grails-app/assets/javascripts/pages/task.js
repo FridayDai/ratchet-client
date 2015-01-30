@@ -22,9 +22,6 @@
         }
     };
 
-    var IsEditing = false; // Private variables for note
-    var noteContent = null; // Private variables for note
-    var dropdownList; // Private variables for dropdownList
 
     /**
      * add task
@@ -43,7 +40,7 @@
                 element: $(".task-form"),
                 okCallback: function () {
                     $('.form-box').each(function () {
-                        _blurFormBox($(this));
+                        _blurToolBox($(this));
                     });
                     if ($("#task-form").valid()) {
                         _add(patientId, medicalRecord);
@@ -54,7 +51,7 @@
                 },
                 cancelCallback: function () {
                     $('.form-box').each(function () {
-                        _blurFormBox($(this));
+                        _blurToolBox($(this));
                     });
 
                 }
@@ -94,6 +91,7 @@
         });
         request.done(function (data) {
             _renderNewTask(data, status);
+            _init();
         });
         request.fail(function () {
 
@@ -129,123 +127,144 @@
         });
     }
 
-    /**
-     * NOTE, show textarea for note
-     * @param content
-     * @returns {boolean}
-     * @private
-     */
-    function _showNote(content) {
-        var p = content.find("p");
-        var value = p.text();
-        p.hide();
-        content.parent().removeClass('note-bg').addClass('note-bg-edit');
-        content.find("textarea").val(value).show();
-        return true;
-
-    }
 
     /**
-     * NOTE, save textarea content and hide textarea for note
-     * @param content
-     * @returns {boolean}
-     * @private
+     * DROPDOWN, dropdown show and hide
      */
-    function _saveNote(content) {
-        var textarea = content.find("textarea");
-        var value = textarea.val();
-        textarea.hide();
-        content.parent().removeClass('note-bg-edit').addClass('note-bg');
-        content.find("p").text(value).show();
-        return false;
-    }
+    var dropdownMenu = function () {
+
+        var dropdownList; // Private variables for dropdownList
+
+        /**
+         * DROPDOWN, clear the dropdown
+         * @private
+         */
+        function _closeDropdown() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (dropdownList) {
+                    dropdownList.hide();
+                    dropdownList = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        };
+
+        /**
+         * DROPDOWN, dropdown main function to init this
+         * @private
+         */
+        function _initDropdownList() {
+
+            $('.btn-dropdown').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).trigger('focus');
+                if (dropdownList) {
+                    //before new a dropdownList, we need to hide the old one
+                    dropdownList.hide();
+                }
+                dropdownList = $(this).find(".dropdown-list");
+                dropdownList.show();
+                _closeDropdown();
+            });
+        }
+
+        return _initDropdownList();
+    };
 
     /**
-     * NOTE, when complete the edit, the function will be use
-     * @private
+     * NOTE, edit note for task
      */
-    function _finishEdit() {
-        $(document.body).click(function (e) {
-            e.preventDefault();
-            if (noteContent) {
-                IsEditing = _saveNote(noteContent);
-                noteContent = null;
-                $(document.body).unbind("click");
-            }
-        });
-    }
+    var noteEditor = function () {
 
-    /**
-     * NOTE, the main function of note
-     * @private
-     */
+        var IsEditing = false; // Private variables for note
+        var noteContent = null; // Private variables for note
 
-    function _editNote() {
+        /**
+         * NOTE, show textarea for note
+         * @param content
+         * @returns {boolean}
+         * @private
+         */
+        function _showNote(content) {
+            var p = content.find("p");
+            var value = p.text();
+            p.hide();
+            content.parent().removeClass('note-bg').addClass('note-bg-edit');
+            content.find("textarea").val(value).show();
+            return true;
 
-        $(".item-note").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (!IsEditing) {
-                noteContent = $(this).parent().next(".note-content");
-                IsEditing = _showNote(noteContent);
-                _finishEdit();
-            }
+        }
 
-        });
+        /**
+         * NOTE, save textarea content and hide textarea for note
+         * @param content
+         * @returns {boolean}
+         * @private
+         */
+        function _saveNote(content) {
+            var textarea = content.find("textarea");
+            var value = textarea.val();
+            textarea.hide();
+            content.parent().removeClass('note-bg-edit').addClass('note-bg');
+            content.find("p").text(value).show();
+            return false;
+        }
 
-        $(".note-p").dblclick(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (!IsEditing) {
-                noteContent = $(this).parent(".note-content");
-                IsEditing = _showNote(noteContent);
-                _finishEdit();
-            }
-        });
+        /**
+         * NOTE, when complete the edit, the function will be use
+         * @private
+         */
+        function _finishEdit() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (noteContent) {
+                    IsEditing = _saveNote(noteContent);
+                    noteContent = null;
+                    $(document.body).unbind("click");
+                }
+            });
+        }
 
-        $(".text-area-form").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        });
+        /**
+         * NOTE, the main function of note
+         * @private
+         */
 
-    }
+        function _initNoteEditor() {
 
-    /**
-     * DROPDOWN, clear the dropdown
-     * @private
-     */
+            $(".item-note").on("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!IsEditing) {
+                    noteContent = $(this).parent().next(".note-content");
+                    IsEditing = _showNote(noteContent);
+                    _finishEdit();
+                }
 
-    function _closeDropdown() {
-        $(document.body).click(function (e) {
-            e.preventDefault();
-            if (dropdownList) {
-                dropdownList.hide();
-                dropdownList = null;
-                $(document.body).unbind("click");
-            }
+            });
 
-        });
-    }
+            $(".note-p").dblclick(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!IsEditing) {
+                    noteContent = $(this).parent(".note-content");
+                    IsEditing = _showNote(noteContent);
+                    _finishEdit();
+                }
+            });
 
-    /**
-     * DROPDOWN, dropdown main function to init this
-     * @private
-     */
-    function _initDropdownList() {
+            $(".text-area-form").on("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
 
-        $('.btn-dropdown').click(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $(this).trigger('focus');
-            if (dropdownList) {
-                //before new a dropdownList, we need to hide the old one
-                dropdownList.hide();
-            }
-            dropdownList = $(this).find(".dropdown-list");
-            dropdownList.show();
-            _closeDropdown();
-        });
-    }
+        }
+
+        return _initNoteEditor();
+    };
 
 
     /**
@@ -253,7 +272,7 @@
      * @param element
      * @private
      */
-    function _blurFormBox(element) {
+    function _blurToolBox(element) {
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
         var changeColor = element.find(".header-middle .color-change");
@@ -273,7 +292,7 @@
      * @param element
      * @private
      */
-    function _activeFormBox(element) {
+    function _activeToolBox(element) {
 
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
@@ -293,7 +312,7 @@
      * TASK FORM BOX, init the form box when click
      * @private
      */
-    function _clickFormBox() {
+    function _initToolBox() {
 
         $('.form-box').click(function () {
             var $this = $(this);
@@ -302,17 +321,17 @@
             var requireCompletion = radio.data("requireCompletion");
             var hideMessageArea = $("#hide-message");
             if (requireCompletion === true) {
-                hideMessageArea.css("visibility","visible");
+                hideMessageArea.css("visibility", "visible");
             } else {
-                hideMessageArea.css("visibility","hidden");
+                hideMessageArea.css("visibility", "hidden");
             }
 
             $("input:radio[name=task-template]").each(function () {
-                _blurFormBox($(this).closest(".form-box"));
+                _blurToolBox($(this).closest(".form-box"));
                 this.checked = false;
             });
 
-            _activeFormBox($(this));
+            _activeToolBox($(this));
             radio.prop('checked', true);
 
         });
@@ -322,15 +341,15 @@
             var requireCompletion = $(this).data("requireCompletion");
             var hideMessageArea = $("#hide-message");
             if (requireCompletion === true) {
-                hideMessageArea.css("visibility","visible");
+                hideMessageArea.css("visibility", "visible");
             } else {
-                hideMessageArea.css("visibility","hidden");
+                hideMessageArea.css("visibility", "hidden");
             }
             $("input:radio[name=task-template]").each(function () {
-                _blurFormBox($(this).closest(".form-box"));
+                _blurToolBox($(this).closest(".form-box"));
             });
 
-            _activeFormBox($(this).closest(".form-box"));
+            _activeToolBox($(this).closest(".form-box"));
 
         });
 
@@ -368,12 +387,12 @@
      * @private
      */
     function _init() {
-        _initDatePicker();
-        _initDropdownList();
-        _clickFormBox();
         _addTask();
         _removeTask();
-        _editNote();
+        _initToolBox();
+        dropdownMenu();
+        noteEditor();
+        _initDatePicker();
     }
 
     $.extend(task, {

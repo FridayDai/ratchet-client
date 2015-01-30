@@ -12,7 +12,7 @@ class MedicalRecordService {
 
     def showTasksByMedicalRecord(medicalRecordId) {
 
-//        def loadPageDataException = new loadPageDataException()
+//        def resourceAccessException = new ResourceAccessException()
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.tasks.url, medicalRecordId)// need format
         def resp = Unirest.get(url)
                 .asString()
@@ -22,7 +22,7 @@ class MedicalRecordService {
             return result
         }
 //        else {
-//            throw loadPageDataException
+//            throw resourceAccessException
 //        }
 
     }
