@@ -30,6 +30,11 @@
     border: 0;
     color: $base-color-mid-blue;
     text-decoration: underline;
+
+    &:hover {
+        color: #59b7c4;
+        background-color: $base-color-white;
+    }
 }
 
 .task-header {
@@ -258,8 +263,8 @@
 // all change in the form box
 .form-box {
     display: inline-block;
-    height: 120px;
     width: 300px;
+    height: 120px;
     margin-right: 10px;
     margin-bottom: 10px;
     border: 2px solid;
