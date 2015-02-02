@@ -1,14 +1,15 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import grails.converters.JSON
-import grails.transaction.Transactional
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import java.text.MessageFormat
 
-@Transactional
 class TaskService {
 
     /** dependency injection for grailsApplication */
@@ -34,6 +35,26 @@ class TaskService {
         if (resp.status == 200) {
             return result.items
         }
+
+    }
+
+    def sendTaskEmailToPatient(params) throws ApiAjaxAccessException{
+        def args = [params.patientId, params.medicalRecordId, params.taskId].toArray()
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.task.sendEmail.url, args)
+        try {
+            def resp = Unirest.get(url)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                return false
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
+        }
+
 
     }
 }

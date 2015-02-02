@@ -18,46 +18,20 @@
             }
         },
         urls: {
-            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl)
+            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl),
+            email: "{0}/patients/{1}/treatments/{2}/task/{3}/sendMail".format(RC.constants.baseUrl)
         }
     };
 
-
-    /**
-     * add task
-     * @private
-     */
-    function _addTask() {
-
-        $("#add-task").on("click", function (e) {
-            e.preventDefault();
-            $(".task-form")[0].reset();
-            var patientId = $(this).data("patientId");
-            var medicalRecord = $(this).data("medicalRecordId");
-            //var patientId = "x12345";
-            //var medicalRecord = 31;//need change
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".task-form"),
-                okCallback: function () {
-                    $('.form-box').each(function () {
-                        _blurToolBox($(this));
-                    });
-                    if ($("#task-form").valid()) {
-                        _add(patientId, medicalRecord);
-                        //_renderNewTask();
-                        return true;
-                    }
-                    return false;
-                },
-                cancelCallback: function () {
-                    $('.form-box').each(function () {
-                        _blurToolBox($(this));
-                    });
-
+    //add page global value of this page to opts
+    function _addValueToOpts() {
+        _.extend(opts, {
+                params: {
+                    patientId: $("#task-info-hidden").data("patientId"),
+                    medicalRecordId: $("#task-info-hidden").data("medicalRecordId")
                 }
-
-            }));
-        });
+            }
+        );
     }
 
     /**
@@ -93,8 +67,8 @@
             _renderNewTask(data, status);
             _init();
         });
-        request.fail(function () {
-
+        request.fail(function (data) {
+            console.log("failed "+ data +"!");
         });
     }
 
@@ -109,10 +83,66 @@
     }
 
     /**
+     * add task
+     * @private
+     */
+    function _addTask() {
+
+        $("#add-task").on("click", function (e) {
+            e.preventDefault();
+            $(".task-form")[0].reset();
+            //var patientId = $(this).data("patientId");
+            //var medicalRecord = $(this).data("medicalRecordId");
+            var patientId = opts.params.patientId;
+            var medicalRecord = opts.params.medicalRecordId;
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+                element: $(".task-form"),
+                okCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurToolBox($(this));
+                    });
+                    if ($("#task-form").valid()) {
+                        _add(patientId, medicalRecord);
+                        //_renderNewTask();
+                        return true;
+                    }
+                    return false;
+                },
+                cancelCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurToolBox($(this));
+                    });
+
+                }
+
+            }));
+        });
+    }
+
+    /**
      * remove task
      * @private
      */
-    function _removeTask() {
+    //function _removeTask() {
+    //
+    //}
+
+    /**
+     * sendEmail about task to patient
+     */
+    function _sendTaskEmail(taskId) {
+        var request = $.ajax({
+            url: opts.urls.email.format(null, opts.params.patientId, opts.params.medicalRecordId, taskId)
+        });
+        request.done(function () {
+
+        });
+        request.fail(function () {
+
+        });
+    }
+
+    function _initTaskBox() {
         $('.a-remove').click(function () {
             var $this = $(this);
             var taskId = $this.data('id');
@@ -125,8 +155,112 @@
                 }
             }));
         });
+
+        $('.task-email').click(function () {
+            var taskId = $(this).data("taskId");
+            _sendTaskEmail(taskId);
+        });
     }
 
+
+    /**
+     * TASK FORM BOX, blur the form box color
+     * @param element
+     * @private
+     */
+    function _blurToolBox(element) {
+        var type = element.attr("value");
+        var headerLeft = element.find("div").filter(".header-left");
+        var changeColor = element.find(".header-middle .color-change");
+
+        if (changeColor.hasClass('active-color')) {
+            changeColor.removeClass('active-color');
+        }
+
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
+            element.removeClass(type);
+            headerLeft.removeClass(type);
+        }
+    }
+
+    /**
+     * TASK FORM BOX, active the form box color
+     * @param element
+     * @private
+     */
+    function _activeToolBox(element) {
+
+        var type = element.attr("value");
+        var headerLeft = element.find("div").filter(".header-left");
+        var changeColor = element.find(".header-middle .color-change");
+
+        if (!changeColor.hasClass('active-color')) {
+            changeColor.addClass('active-color');
+        }
+
+        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
+            element.addClass(type);
+            headerLeft.addClass(type);
+        }
+    }
+
+    /**
+     * TASK FORM BOX, init the form box when click
+     * @private
+     */
+    function _initToolBox() {
+
+        $('.form-box').click(function () {
+            var $this = $(this);
+            var radio = $this.find(':radio');
+
+            var requireCompletion = radio.data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility", "visible");
+            } else {
+                hideMessageArea.css("visibility", "hidden");
+            }
+
+            $("input:radio[name=task-template]").each(function () {
+                _blurToolBox($(this).closest(".form-box"));
+                this.checked = false;
+            });
+
+            _activeToolBox($(this));
+            radio.prop('checked', true);
+
+        });
+
+        $('.box-radio').click(function (e) {
+            e.stopPropagation();
+            var requireCompletion = $(this).data("requireCompletion");
+            var hideMessageArea = $("#hide-message");
+            if (requireCompletion === true) {
+                hideMessageArea.css("visibility", "visible");
+            } else {
+                hideMessageArea.css("visibility", "hidden");
+            }
+            $("input:radio[name=task-template]").each(function () {
+                _blurToolBox($(this).closest(".form-box"));
+            });
+
+            _activeToolBox($(this).closest(".form-box"));
+
+        });
+
+        $("input:radio[name=time]").click(function (e) {
+            e.stopPropagation();
+            var relativeChoices = $('#relative-choices');
+            if ($(this).val() === "2") {
+                relativeChoices.hide();
+            }
+            if ($(this).val() === "3") {
+                relativeChoices.show();
+            }
+        });
+
+    }
 
     /**
      * DROPDOWN, dropdown show and hide
@@ -149,7 +283,7 @@
                 }
 
             });
-        };
+        }
 
         /**
          * DROPDOWN, dropdown main function to init this
@@ -266,106 +400,6 @@
         return _initNoteEditor();
     };
 
-
-    /**
-     * TASK FORM BOX, blur the form box color
-     * @param element
-     * @private
-     */
-    function _blurToolBox(element) {
-        var type = element.attr("value");
-        var headerLeft = element.find("div").filter(".header-left");
-        var changeColor = element.find(".header-middle .color-change");
-
-        if (changeColor.hasClass('active-color')) {
-            changeColor.removeClass('active-color');
-        }
-
-        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
-            element.removeClass(type);
-            headerLeft.removeClass(type);
-        }
-    }
-
-    /**
-     * TASK FORM BOX, active the form box color
-     * @param element
-     * @private
-     */
-    function _activeToolBox(element) {
-
-        var type = element.attr("value");
-        var headerLeft = element.find("div").filter(".header-left");
-        var changeColor = element.find(".header-middle .color-change");
-
-        if (!changeColor.hasClass('active-color')) {
-            changeColor.addClass('active-color');
-        }
-
-        if ($.inArray(type, ["sdm", "basic", "outcome"]) !== -1) {
-            element.addClass(type);
-            headerLeft.addClass(type);
-        }
-    }
-
-    /**
-     * TASK FORM BOX, init the form box when click
-     * @private
-     */
-    function _initToolBox() {
-
-        $('.form-box').click(function () {
-            var $this = $(this);
-            var radio = $this.find(':radio');
-
-            var requireCompletion = radio.data("requireCompletion");
-            var hideMessageArea = $("#hide-message");
-            if (requireCompletion === true) {
-                hideMessageArea.css("visibility", "visible");
-            } else {
-                hideMessageArea.css("visibility", "hidden");
-            }
-
-            $("input:radio[name=task-template]").each(function () {
-                _blurToolBox($(this).closest(".form-box"));
-                this.checked = false;
-            });
-
-            _activeToolBox($(this));
-            radio.prop('checked', true);
-
-        });
-
-        $('.box-radio').click(function (e) {
-            e.stopPropagation();
-            var requireCompletion = $(this).data("requireCompletion");
-            var hideMessageArea = $("#hide-message");
-            if (requireCompletion === true) {
-                hideMessageArea.css("visibility", "visible");
-            } else {
-                hideMessageArea.css("visibility", "hidden");
-            }
-            $("input:radio[name=task-template]").each(function () {
-                _blurToolBox($(this).closest(".form-box"));
-            });
-
-            _activeToolBox($(this).closest(".form-box"));
-
-        });
-
-        $("input:radio[name=time]").click(function (e) {
-            e.stopPropagation();
-            var relativeChoices = $('#relative-choices');
-            if ($(this).val() === "2") {
-                relativeChoices.hide();
-            }
-            if ($(this).val() === "3") {
-                relativeChoices.show();
-            }
-        });
-
-    }
-
     /**
      * DATETIMEPICKER, init dateTimePicker
      * @private
@@ -387,8 +421,9 @@
      * @private
      */
     function _init() {
+        _addValueToOpts();
         _addTask();
-        _removeTask();
+        _initTaskBox();
         _initToolBox();
         dropdownMenu();
         noteEditor();

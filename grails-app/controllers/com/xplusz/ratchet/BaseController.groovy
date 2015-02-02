@@ -1,6 +1,8 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 
 /**
  * Base Controller.
@@ -20,5 +22,19 @@ class BaseController {
             Unirest.setDefaultHeader("X-Auth-Token", session.token)
             return true
         }
+    }
+
+
+    def handleApiResourceAccessException(ApiResourceAccessException e) {
+        flash.message = e.message
+        render view: '/pages/error503'
+    }
+
+    def handleApiAjaxAccessException(ApiAjaxAccessException e) {
+        render status: '403', model:  e.message
+    }
+
+    def handleException(Exception e) {
+       log.error(e.message)
     }
 }

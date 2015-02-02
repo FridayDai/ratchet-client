@@ -15,6 +15,10 @@ class StatusCodeConstants {
             ["INVITED", "NORMAL", "UNINVITED"]
     
     // Task status
+    public static final Integer TASK_OVERDUE = 1
+    public static final Integer TASK_NEW = 2
+    public static final Integer TASK_FUTURE = 3
+    public static final Integer TASK_COMPLETED = 4
     public static final String[] TASK_STATUS = 
             ["undefined","overdue", "new", "future", "complete"]
     

@@ -4,6 +4,7 @@ class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
 
+    def taskService
     def toolService
     def medicalRecordService
 
@@ -32,5 +33,11 @@ class TaskController extends BaseController {
 //        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status, sendTime: sendTime])
         render (template: "/task/taskBox", model: [task: result])
     }
+
+    def sendTaskEmail() {
+        def result = taskService.sendTaskEmailToPatient(params)
+        render result
+    }
+
 
 }

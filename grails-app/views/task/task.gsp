@@ -1,8 +1,11 @@
 <div>
 
-    <div class="task-header">
-        <button id="add-task" class="btn btn-right btn-task" data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}">+ Add Task</button>
-    </div>
+<g:hiddenField name="task-info-hidden" id="task-info-hidden" data-patient-id="${patientId}"
+               data-medical-record-id="${medicalRecordId}"></g:hiddenField>
+
+<div class="task-header">
+    <button id="add-task" class="btn btn-right btn-task">+ Add Task</button>
+</div>
 
 <div class="tasks-list">
     <h4 class="complete">SENT</h4>
