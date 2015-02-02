@@ -39,8 +39,11 @@
         },
         urls: {
             query: "{0}/getPatients".format(RC.constants.baseUrl),
-            cares: "{0}/clients/".format(RC.constants.baseUrl),
-            getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+            getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
+            addCareTeam: "{0}/clients/{1}/patients/{2}/care_team".format(RC.constants.baseUrl),
+            addCareGiver: "{0}/clients/{1}/patients/{2}/care_giver".format(RC.constants.baseUrl),
+            deleteCareTeam: "{0}/clients/{1}/patients/{2}/care_team/{3}/{4}".format(RC.constants.baseUrl),
+            deleteCareGiver: "{0}/clients/{1}/patients/{2}/care_giver/{3}/{4}".format(RC.constants.baseUrl)
         }
 
     };
@@ -55,10 +58,19 @@
         $("#add-member").on("click", function (e) {
             e.preventDefault();
             $(".addTeamForm")[0].reset();
-            var grandParent = $(this).parent();
-            var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
-            var clientId = grandParent.find('.clientId').attr('value');
-            var patientId = grandParent.find('.patientId').attr('value');
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var clientId = $(this).data("clientId");
+            var patientId = $(this).data("patientId");
+
+            var careTeams = $(this).parent().parent().find(".detail-info");
+            var existCareTeam = [];
+            $.each(careTeams, function (index, item) {
+                existCareTeam.push({
+                    'id': $(item).data("careTeamId")
+                });
+            });
+
+            _initStaffSelect(existCareTeam);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTeamFormArguments, {
                 element: $(".addTeamForm"),
@@ -67,7 +79,6 @@
                         var staffId = $("#selectStaff").val();
                         //var isPrimaryCareTeam;
                         //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
-
                         var careTeamInfo = {
                             medicalRecordId: medicalRecordId,
                             staffId: staffId
@@ -82,17 +93,6 @@
         });
     }
 
-    function _addCareTeam(clientId, patientId, careTeamInfo) {
-        $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team',
-            type: 'POST',
-            data: careTeamInfo,
-            dataType: 'json'
-            //success: function () {
-            //}
-        });
-    }
-
     /**
      *
      * @param clientId
@@ -102,7 +102,7 @@
      */
     function _addCareTeam(clientId, patientId, careTeamInfo) {
         $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team',
+            url: opts.urls.addCareTeam.format(null, clientId, patientId),
             type: 'POST',
             data: careTeamInfo
         }).done(function (data) {
@@ -116,18 +116,17 @@
      * @private
      */
     function _bindInviteGiverEvent() {
-        // new a record
         $("#invite-giver").on("click", function (e) {
             e.preventDefault();
             $(".inviteGiverForm")[0].reset();
-            var grandParent = $(this).parent();
-            var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
-            var clientId = grandParent.find('.clientId').attr('value');
-            var patientId = grandParent.find('.patientId').attr('value');
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var clientId = $(this).data("clientId");
+            var patientId = $(this).data("patientId");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: $(".inviteGiverForm"),
                 okCallback: function () {
+                    //if (_validateInviteGiverForm()) {
                     if ($(".inviteGiverForm").valid()) {
 
                         var email = $("#giver-email").val();
@@ -148,17 +147,6 @@
         });
     }
 
-    function _addCareGiver(clientId, patientId, careGiverInfo) {
-        $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver',
-            type: 'POST',
-            data: careGiverInfo,
-            dataType: 'json'
-            //success: function () {
-            //}
-        });
-    }
-
     /**
      *
      * @param clientId
@@ -168,7 +156,7 @@
      */
     function _addCareGiver(clientId, patientId, careGiverInfo) {
         $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver',
+            url: opts.urls.addCareGiver.format(null, clientId, patientId),
             type: 'POST',
             data: careGiverInfo
         }).done(function (data) {
@@ -184,27 +172,19 @@
     function _removeCareTeam() {
         $(".btn-remove-team").on("click", function (e) {
             e.preventDefault();
+
             var grandParent = $(this).parent().parent();
-            var careTeamId = grandParent.find(".p-id").attr("value");
-            var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
-            var clientId = grandParent.find('.clientId').attr('value');
-            var patientId = grandParent.find('.patientId').attr('value');
+            var careTeamId = $(this).data("careTeamId");
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var clientId = $(this).data("clientId");
+            var patientId = $(this).data("patientId");
+
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
                     _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent);
                 }
             }));
-        });
-    }
-
-    function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
-        $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team/' + careTeamId + '/' + medicalRecordId,
-            type: 'DELETE',
-            success: function () {
-                grandParent.remove();
-            }
         });
     }
 
@@ -219,10 +199,12 @@
      */
     function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
         $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_team/' + careTeamId + '/' + medicalRecordId,
+            url: opts.urls.deleteCareTeam.format(null, clientId, patientId, careTeamId, medicalRecordId),
             type: 'DELETE',
-            success: function () {
-                grandParent.remove();
+            success: function (data) {
+                if (data.resp === true) {
+                    grandParent.remove();
+                }
             }
         });
     }
@@ -234,27 +216,19 @@
     function _removeCareGiver() {
         $(".btn-remove-giver").on("click", function (e) {
             e.preventDefault();
+
             var grandParent = $(this).parent().parent();
-            var careGiverId = grandParent.find(".p-id").attr("value");
-            var medicalRecordId = grandParent.find('.medicalRecordId').attr('value');
-            var clientId = grandParent.find('.clientId').attr('value');
-            var patientId = grandParent.find('.patientId').attr('value');
+            var careGiverId = $(this).data("careGiverId");
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var clientId = $(this).data("clientId");
+            var patientId = $(this).data("patientId");
+
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
                 closeCallback: function () {
                     _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent);
                 }
             }));
-        });
-    }
-
-    function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
-        $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver/' + careGiverId + '/' + medicalRecordId,
-            type: 'DELETE',
-            success: function () {
-                grandParent.remove();
-            }
         });
     }
 
@@ -269,10 +243,12 @@
      */
     function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
         $.ajax({
-            url: opts.urls.cares + clientId + '/patients/' + patientId + '/care_giver/' + careGiverId + '/' + medicalRecordId,
+            url: opts.urls.deleteCareGiver.format(null, clientId, patientId, careGiverId, medicalRecordId),
             type: 'DELETE',
-            success: function () {
-                grandParent.remove();
+            success: function (data) {
+                if (data.resp === true) {
+                    grandParent.remove();
+                }
             }
         });
     }
@@ -281,30 +257,30 @@
      * edit care giver event
      * @private
      */
-    function _EditCareGiver() {
-        // Edit record
-        $('.btn-edit').on('click', function (e) {
-            e.preventDefault();
-
-            var grandParent = $(this).parent().parent();
-            $("#giver-emid").val(grandParent.find('.p-id').attr('value'));
-            $("#giver-name").val(grandParent.find('.p-name').attr('value'));
-            $("#giver-email").val(grandParent.find('.p-email').attr('value'));
-            $("#relationship").val(grandParent.find('.p-relationship').attr('value'));
-
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
-                element: $(".inviteGiverForm"),
-                okCallback: function () {
-                }
-            }));
-        });
-    }
+    //function _EditCareGiver() {
+    //    // Edit record
+    //    $('.btn-edit').on('click', function (e) {
+    //        e.preventDefault();
+    //
+    //        var grandParent = $(this).parent().parent();
+    //        $("#giver-emid").val(grandParent.find('.p-id').attr('value'));
+    //        $("#giver-name").val(grandParent.find('.p-name').attr('value'));
+    //        $("#giver-email").val(grandParent.find('.p-email').attr('value'));
+    //        $("#relationship").val(grandParent.find('.p-relationship').attr('value'));
+    //
+    //        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
+    //            element: $(".inviteGiverForm"),
+    //            okCallback: function () {
+    //            }
+    //        }));
+    //    });
+    //}
 
     /**
      * init select staff
      * @private
      */
-    function _initStaffSelect() {
+    function _initStaffSelect(existCareTeam) {
         $('#selectStaff').select2({
             ajax: {
                 transport: function (params) {
@@ -322,19 +298,58 @@
                 },
                 results: function (data) {
                     var myResults = [];
-                    $.each(data, function (index, item) {
+                    $.each(data, function (index, dataItem) {
                         myResults.push({
-                            'id': item.id,
-                            'text': item.firstName + " " + item.lastName
+                            'id': dataItem.id,
+                            'text': dataItem.firstName + " " + dataItem.lastName
                         });
                     });
-                    return {
-                        results: myResults
-                    };
+
+                    if (existCareTeam) {
+                        var ids = {},
+                            filterResult = [];
+
+                        _.each(existCareTeam, function (careTeam) {
+                            ids[careTeam.id] = true;
+                        });
+
+                        var existResult = _.filter(myResults, function (myResult) {
+                            return ids[myResult.id];
+                        });
+
+                        $.grep(myResults, function (e) {
+                            if ($.inArray(e, existResult) === -1) {
+                                filterResult.push(e);
+                            }
+                        });
+
+                        return {
+                            results: filterResult
+                        };
+                    } else {
+                        return {
+                            results: myResults
+                        };
+                    }
                 }
             }
         });
     }
+
+    //$.validator.setDefaults({
+    //    debug: true,
+    //    success: "valid"
+    //});
+    //function _validateInviteGiverForm() {
+    //    //$(".inviteGiverForm").valid();
+    //    $('#invite-giver-form').validate({
+    //        rules: {
+    //            email: {
+    //                required: true
+    //            }
+    //        }
+    //    });
+    //}
 
     /**
      * patientTeam page Initialization
@@ -345,8 +360,8 @@
         _bindInviteGiverEvent();
         _removeCareTeam();
         _removeCareGiver();
-        _EditCareGiver();
-        _initStaffSelect();
+        //_EditCareGiver();
+        //_initStaffSelect();
     }
 
     $.extend(team, {

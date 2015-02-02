@@ -11,3 +11,19 @@
 @import '../partials/selector';
 @import '../partials/timepicker';
 @import '../partials/chart';
+
+.icon-edit {
+    //    position: absolute;
+    top: -5px;
+    right: 35px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../images/edit.png') no-repeat 0 0;
+    background-size: cover;
+}
+
+.surgery-time-picker {
+    display: block;
+    color: $base-color-mid-blue;
+    font-size: 9pt;
+}

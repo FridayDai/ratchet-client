@@ -12,6 +12,7 @@
     <div class="content">
         <div class="content-head">
             <a href="#" class="btn-back">
+
                 <div class="icon-back"></div>
             </a>
 
@@ -41,7 +42,12 @@
                      value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
             </div>
 
-            <a href="#" class="btn-edit-patient">
+            <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
+               data-client-id="${patientInfo.client.id}"
+               data-first-name="${patientInfo.firstName}"
+               data-last-name="${patientInfo.lastName}"
+               data-email="${patientInfo.email}"
+               data-phone-number="${patientInfo.phoneNumber}">
                 <div class="icon-edit"></div>
             </a>
 
@@ -49,12 +55,19 @@
         </div>
 
         <div id="tabs" class="patient-tab">
-            <button id="addTab" class="add-tab">Add Treatment</button>
+            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}"
+                    data-client-id="${patientInfo.client.id}"
+                    data-first-name="${patientInfo.firstName}"
+                    data-last-name="${patientInfo.lastName}"
+                    data-email="${patientInfo.email}"
+                    data-phone-number="${patientInfo.phoneNumber}">Add Treatment</button>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
                     <li>
-                        <g:link controller="treatment" action="index" data-id="sub${i}" 
-                                params="[patientId: patientInfo.id, clientId: patientInfo.client.id, medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId]">${medicalRecord.title}</g:link>
+                        <g:link controller="treatment" action="index" data-id="sub${i}"
+                                params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
+                                         medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
+                                         surgeryTime    : medicalRecord?.surgeryTime]">${medicalRecord.title}</g:link>
                     </li>
                 </g:each>
             </ul>
@@ -78,10 +91,6 @@
             <input id="phone" name="phone" type="text" class="input-group" placeholder="Phone" required/>
         </div>
 
-    %{--<div class="form-group">--}%
-    %{--<input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time"--}%
-    %{--required/>--}%
-    %{--</div>--}%
     </g:form>
 
     <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
@@ -94,6 +103,10 @@
         <div class="form-group ">
             <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Staff"
                    required/>
+        </div>
+
+        <div class="form-group">
+            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time">
         </div>
 
     </g:form>

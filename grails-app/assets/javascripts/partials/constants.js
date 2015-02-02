@@ -15,9 +15,10 @@
         confirmTeamTitle: "Add a new Team Member",
         confirmGiverTitle: "Invite a new Care Giver",
         confirmAccountTitle: "New Account",
-        confirmTreatmentTitle:"Add a new treatment",
+        confirmTreatmentTitle: "Add a new treatment",
         editGiverTitle: "Edit a Care Giver",
-        editPatientTitle:"Edit a patient",
+        editPatientTitle: "Edit a patient",
+        updateSurgeryTimeTitle: "Edit surgery time",
         confirmContent: "",
         loadingContent: "This is loading content",
 

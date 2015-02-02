@@ -9,12 +9,14 @@ class TreatmentController extends BaseController {
     def treatmentService
 
     def index() {
-        def patientId = params.patientId
-        def medicalRecordId = params.medicalRecordId
-        def treatmentId = params.treatmentId
-        def clientId = params.clientId
-        render view: '/treatment/treatment', model: [patientId: patientId, clientId: clientId,  medicalRecordId: medicalRecordId, treatmentId: treatmentId]
-        
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def treatmentId = params?.treatmentId
+        def clientId = params?.clientId
+        Long surgeryTime = Long.valueOf(params?.surgeryTime)
+        render view: '/treatment/treatment',
+                model: [patientId  : patientId, clientId: clientId, medicalRecordId: medicalRecordId,
+                        treatmentId: treatmentId, surgeryTime: surgeryTime]
     }
 
     def assignTreatment() {
@@ -26,5 +28,11 @@ class TreatmentController extends BaseController {
     def getTreatments() {
         def resp = treatmentService.getTreatments(request, response, params)
         render resp as JSON
+    }
+
+    def updateSurgeryTime() {
+        def resp = treatmentService.updateSurgeryTime(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
     }
 }
