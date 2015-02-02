@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: "home", action: "index")
+        "/"(controller: "patients", action: "index")
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 

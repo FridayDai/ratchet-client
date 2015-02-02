@@ -3,14 +3,14 @@
         <li class="nav-li li-first-color">
             <div class="div-calum">Calum Oliphant</div>
         </li>
-        <li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>
-            <g:else>class="nav-li"</g:else>>
-            <g:link controller="home" action="index">
-                <div class="ui-icon icon-home"></div>
+        %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
+            %{--<g:else>class="nav-li"</g:else>>--}%
+            %{--<g:link controller="home" action="index">--}%
+                %{--<div class="ui-icon icon-home"></div>--}%
 
-                <div class="home-title">HOME</div>
-            </g:link>
-        </li>
+                %{--<div class="home-title">HOME</div>--}%
+            %{--</g:link>--}%
+        %{--</li>--}%
         <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
             <g:else>class="nav-li"</g:else>>
             <g:link controller="patients">

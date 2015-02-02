@@ -14,7 +14,7 @@
 
 
         <div class="graph">
-            <div id="charts"></div>
+            <div class="charts"></div>
         </div>
     </div>
 
