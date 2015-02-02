@@ -1115,11 +1115,11 @@
                 value: function(tp_inst, obj, unit, val){
                     if(unit=="hour" && val>12){
 
-                        $(obj.parent().parent().find('.ui_tpicker_am_content')).text('PM');
+                        $(obj.parent().parent().find('.ui-tpicker-am-content')).text('PM');
 
                     }else if(unit == "hour" && val <=12)
                     {
-                        $(obj.parent().parent().find('.ui_tpicker_am_content')).text('AM');
+                        $(obj.parent().parent().find('.ui-tpicker-am-content')).text('AM');
                     }
                     if(val !== undefined)
                         return obj.find('.ui-timepicker-input').spinner('value', val);

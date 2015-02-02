@@ -7,7 +7,7 @@
      * init overview chart
      * @private
      */
-    function _initChart() {
+    function _initChart(element) {
         //Width and height
         var w = 500;
         var h = 300;
@@ -62,8 +62,9 @@
             .orient("left")
             .ticks(5);
 
+        var chartElement = element.find(".charts");
         //Create SVG element
-        var svg = d3.select("#charts")
+        var svg = d3.select(chartElement.selector)
             .append("svg")
             .attr("width", w)
             .attr("height", h)
@@ -119,8 +120,8 @@
      * patientTeam page Initialization
      * @private
      */
-    function _init() {
-        _initChart();
+    function _init(element) {
+        _initChart(element);
     }
 
     $.extend(overview, {
