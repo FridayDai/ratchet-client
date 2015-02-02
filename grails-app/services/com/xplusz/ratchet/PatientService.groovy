@@ -58,7 +58,7 @@ class PatientService {
         def url = grailsApplication.config.ratchetv2.server.patients.url
         def resp = Unirest.get(url)
                 .queryString("max", length)
-                .queryString("offset", draw - 1)
+                .queryString("offset", start)
                 .queryString("clientId", request.session.clientId)
                 .asString()
 

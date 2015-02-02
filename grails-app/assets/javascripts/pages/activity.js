@@ -36,7 +36,8 @@
                 {data: "description"},
                 {data: "createdBy"},
                 {data: function(source){
-                    return "Last Update: "+(new Date(source.dateCreated)).format("MMM d, yyyy h:mm:ss a");
+                    var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
+                    return "Last Update: "+ formatDate;
                 }}
             ]
         });
@@ -54,6 +55,7 @@
         data.selectBy = selectBy || 'all';
         data.patientId = $("#patientId").val();
         data.medicalRecordId = $("#medicalRecordId").val();
+        data.clientId = $("#clientId").val();
         _initTable(element, data);
     }
 

@@ -40,6 +40,10 @@
                 var surgeryTime = date.getTime();
                 _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate);
             }
+
+
+
+
         });
     }
 

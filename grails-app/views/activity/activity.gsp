@@ -18,5 +18,6 @@
     </div>
     <input id="patientId" type="hidden" value="${patientId}">
     <input id="medicalRecordId" type="hidden" value="${medicalRecordId}">
+    <input id="clientId" type="hidden" value="${clientId}">
 </div>
 
