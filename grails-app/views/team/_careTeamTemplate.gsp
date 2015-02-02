@@ -1,35 +1,46 @@
-<div class="detail-info">
+<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
+
+<div class="detail-info" data-care-team-id="${careTeam.id}">
     <div class="head-content">
         <div class="inner-head-content div-space">
-            <p class="p-id" value="${id}">ID:${id}</p>
+            <p class="p-id">ID:${careTeam.id}</p>
 
-            <g:if test="${doctor == true}">
-                <p class="p-name">Dr.${firstName}${lastName}</p>
+            <g:if test="${careTeam.doctor == true}">
+                <p class="p-name">Dr.${careTeam.firstName}${careTeam.lastName}</p>
             </g:if>
+
             <g:else>
-                <p class="p-name">${firstName}${lastName}</p>
+                <p class="p-name">${careTeam.firstName}${careTeam.lastName}</p>
             </g:else>
 
         </div>
 
-        <input type="hidden" name="medicalRecordId" class="medicalRecordId" value="${medicalRecordId}"/>
-        <input type="hidden" name="clientId" class="clientId" value="${clientId}"/>
-        <input type="hidden" name="patientId" class="patientId" value="${patientId}"/>
-
         <div class="inner-bottom-content div-space">
-            <p class="p-role">${com.xplusz.ratchet.StatusCodeConstants.STAFF_TYPE_LIST[staffType - 1]}</p>
+            <p class="p-role">${StatusCodeConstants.STAFF_TYPE_LIST[careTeam.staffType - 1]}</p>
 
-            <p class="p-email">${email}</p>
+            <p class="p-email">${careTeam.email}</p>
         </div>
 
     </div>
 
     <div class="middle-content">
-        <p>${bio}</p>
+
+        <p>${careTeam.bio}</p>
+
     </div>
 
     <div class="bottom-content">
-        <a href="#" id="remove-care-team" class="btn-remove-team">
+        %{--<g:if test="${careTeam.primary == true}">--}%
+        %{--<a href="#" class="btn-make-primary btn-primary">Make PRIMARY</a>--}%
+        %{--</g:if>--}%
+        %{--<g:else>--}%
+        %{--<a href="#" class="btn-make-primary">Make PRIMARY</a>--}%
+        %{--</g:else>--}%
+        %{--<a href="#" class="btn-make-primary">Make PRIMARY</a>--}%
+
+        <a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="${careTeam.id}"
+           data-medical-record-id="${medicalRecordId}"
+           data-client-id="${clientId}" data-patient-id="${patientId}">
             <div class="icon-remove"></div>
         </a>
     </div>

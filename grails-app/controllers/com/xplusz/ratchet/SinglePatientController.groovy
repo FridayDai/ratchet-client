@@ -8,7 +8,7 @@ class SinglePatientController extends BaseController {
     def singlePatientService
 
     def showPatient() {
-        def patientId = params.id
+        def patientId = params?.id
         def patientInfo = singlePatientService.showSinglePatient(request, response, patientId)
         def medicalRecords = singlePatientService.showMedialRecords(request, response, patientId)
         render(view: '/singlePatient/singlePatient', model: [patientInfo: patientInfo, medicalRecords: medicalRecords])

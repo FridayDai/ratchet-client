@@ -9,3 +9,4 @@
 //= require ../../partials/base
 //= require ../../partials/constants
 //= require ../../partials/common
+//= require ../../bower_components/moment/moment

@@ -358,7 +358,7 @@
             buttonImage: "../../assets/patients/calender.png",
             buttonImageOnly: true,
             onClose: function (selectedDate) {
-                $(this).parent().find('.datetime-picker-label').text(selectedDate);
+                $(this).parent().find('.surgery-time-picker').text(selectedDate);
             }
         });
     }

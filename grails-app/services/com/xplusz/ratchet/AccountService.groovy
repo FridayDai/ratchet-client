@@ -5,6 +5,7 @@ import com.xplusz.ratchet.exceptions.AccountValidationException
 import grails.converters.JSON
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import java.text.MessageFormat
 
 class AccountService {
 
@@ -17,7 +18,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.staffs.url
         def resp = Unirest.get(url)
                 .queryString("max", length)
-                .queryString("offset", draw-1)
+                .queryString("offset", draw - 1)
                 .queryString("clientId", request.session.clientId)
                 .asString()
 
@@ -28,35 +29,23 @@ class AccountService {
 
             map.put("data", result.items)
             return map
-        }
-
-        if (resp.status == 400) {
+        } else {
             return false
         }
 
-        if (resp.status == 403) {
-            def rateLimit = result?.error?.errorMessage
-            Integer[] args = [rateLimit]
-            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
-            throw new AccountValidationException(errorMessage, rateLimit)
-
-
-        } else {
-            def errorMessage = result?.error?.errorMessage
-            throw new AccountValidationException(errorMessage)
-
-        }
     }
 
     def getSingleAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
 
-        def url = grailsApplication.config.ratchetv2.server.staffs.url + accountId
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getAccount.url, accountId)
         def resp = Unirest.get(url)
                 .asString()
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
             return result
+        } else {
+            return false
         }
     }
 
@@ -72,17 +61,17 @@ class AccountService {
 
         def url = grailsApplication.config.ratchetv2.server.staffs.url
         def resp = Unirest.post(url)
-                    .field("clientId", clientId)
-                    .field("firstName", firstName)
-                    .field("lastName", lastName)
-                    .field("email", email)
-                    .field("type", type)
-                    .field("patientManagement", isPatientManagement)
-                    .field("accountManagement", isAccountManagement)
-                    .field("doctor", isDoctor)
-                    .asString()
+                .field("clientId", clientId)
+                .field("firstName", firstName)
+                .field("lastName", lastName)
+                .field("email", email)
+                .field("type", type)
+                .field("patientManagement", isPatientManagement)
+                .field("accountManagement", isAccountManagement)
+                .field("doctor", isDoctor)
+                .asString()
 
-        if(resp.status == 201) {
+        if (resp.status == 201) {
             return true
         }
     }

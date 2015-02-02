@@ -23,9 +23,10 @@
             },
             urls: {
                 query: "{0}/getProvider".format(RC.constants.baseUrl),
-                editPatient: "{0}/clients/".format(RC.constants.baseUrl),
                 getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
+                updatePatient: "{0}/clients/{1}/patients/{2}".format(RC.constants.baseUrl),
+                assignTreatment: "{0}/clients/{1}/patients/{2}/treatments".format(RC.constants.baseUrl)
             }
         },
         tabs,
@@ -61,13 +62,6 @@
         tabs.tabs("refresh");
     }
 
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        $("#treatment-form").validate({});
-    }
 
     /**
      * add treatment to a patient
@@ -76,15 +70,17 @@
     function _addTreatment() {
         $("#addTab").button().click(function (e) {
             e.preventDefault();
-            $(".treatment-form")[0].reset();
 
-            var grandParent = $(this).parent().parent();
-            var emid = grandParent.find('.id-info').attr('value');
-            var clientId = grandParent.find('input').attr('value');
-            var firstName = grandParent.find('.first-name-info').attr('value');
-            var lastName = grandParent.find('.last-name-info').attr('value');
-            var email = grandParent.find('.email-info').attr('value');
-            var phoneNum = grandParent.find('.phone-info').attr('value');
+            $(".treatment-form")[0].reset();
+            var patientId = $(this).data("patientId");
+            var clientId = $(this).data("clientId");
+            var firstName = $(this).data("firstName");
+            var lastName = $(this).data("lastName");
+            var email = $(this).data("email");
+            var phoneNum = $(this).data("phoneNumber");
+
+            _initSurgeryTime();
+            _initSelectTreatment();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
@@ -99,19 +95,21 @@
                         $.each(staffArray, function (index, item) {
                             staffIdArr.push(parseInt(item));
                         });
+                        var date = new Date($("#surgeryTime").val());
+                        var surgeryTime = date.getTime();
 
                         var assignInfo = {
-                            patientId: emid,
+                            patientId: patientId,
                             clientId: clientId,
                             firstName: firstName,
                             lastName: lastName,
                             phoneNum: phoneNum,
                             email: email,
                             treatmentId: treatmentId,
-                            staffIds: staffIds
-                            //surgeryTime: surgeryTime
+                            staffIds: staffIds,
+                            surgeryTime: surgeryTime
                         };
-                        _assignTreatment(emid, clientId, assignInfo);
+                        _assignTreatment(patientId, clientId, assignInfo);
 
                         return true;
                     }
@@ -128,14 +126,14 @@
      * @param assignInfo
      * @private
      */
-    function _assignTreatment(emid, clientId, assignInfo) {
+    function _assignTreatment(patientId, clientId, assignInfo) {
         $.ajax({
-            url: opts.urls.editPatient + clientId + '/patients/' + emid + '/treatments',
+            url: opts.urls.assignTreatment.format(null, clientId, patientId),
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
             success: function (data) {
-                tabTitle = data[0].title;
+                tabTitle = data.title;
                 _addTab();
             }
         });
@@ -149,25 +147,24 @@
         $('.btn-edit-patient').on('click', function (e) {
             e.preventDefault();
 
-            var parent = $(this).parent();
-            var emid = parent.find('.id-info').attr('value');
-            var clientId = parent.find('input').attr('value');
-            $("#firstName").val(parent.find('.first-name-info').attr('value'));
-            $("#lastName").val(parent.find('.last-name-info').attr('value'));
-            $("#email").val(parent.find('.email-info').attr('value'));
-            $("#phone").val(parent.find('.phone-info').attr('value'));
+            var patientId = $(this).data("patientId");
+            var clientId = $(this).data("clientId");
+            $("#firstName").val($(this).data("firstName"));
+            $("#lastName").val($(this).data("lastName"));
+            $("#email").val($(this).data("email"));
+            $("#phone").val($(this).data("phoneNumber"));
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
                         var patientInfo = {
-                            emid: emid,
+                            patientId: patientId,
                             firstName: $("#firstName").val(),
                             lastName: $("#lastName").val(),
                             email: $("#email").val(),
                             phoneNum: $("#phone").val()
                         };
-                        _updatePatient(emid, clientId, patientInfo);
+                        _updatePatient(patientId, clientId, patientInfo);
                         return true;
                     }
                 }
@@ -182,9 +179,9 @@
      * @param patientInfo
      * @private
      */
-    function _updatePatient(emid, clientId, patientInfo) {
+    function _updatePatient(patientId, clientId, patientInfo) {
         $.ajax({
-            url: opts.urls.editPatient + clientId + '/patients/' + emid,
+            url: opts.urls.updatePatient.format(null, clientId, patientId),
             type: 'POST',
             data: patientInfo,
             dataType: 'json',
@@ -220,8 +217,8 @@
     function _initSelectTreatment() {
         $('#selectTreatment').select2({
             ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
@@ -238,7 +235,8 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.title
+                            'text': item.title,
+                            'surgeryTime': item.surgeryTimeRequired
                         });
                     });
                     return {
@@ -257,8 +255,8 @@
         $('#selectStaffs').select2({
             tags: true,
             ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
@@ -287,17 +285,34 @@
     }
 
     /**
+     * init surgery time
+     * @private
+     */
+    function _initSurgeryTime() {
+        $("#surgeryTime").datetimepicker({
+            controlType: 'input'
+        });
+    }
+
+    /**
+     * set validate
+     * @private
+     */
+    function _setValidate() {
+        $("#treatment-form").validate({});
+    }
+
+    /**
      * page Initialization
      * @private
      */
     function _init() {
         _initTab();
         _addTreatment();
-        //_assignTreatment();
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
-        _initSelectTreatment();
+        //_initSelectTreatment();
         _initStaffSelect();
     }
 

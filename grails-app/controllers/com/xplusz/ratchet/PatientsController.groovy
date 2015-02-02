@@ -22,7 +22,8 @@ class PatientsController extends BaseController {
 
     def addPatient() {
         def resp = patientService.addPatients(request, response, params)
-        render resp as JSON
+        def result = [resp: resp]
+        render result as JSON
     }
 
     def showActivity() {
