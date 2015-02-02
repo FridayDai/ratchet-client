@@ -19,6 +19,7 @@
             <li class="item-left-two item-left-li capitalize ${StatusCodeConstants.TASK_STATUS[task?.status]}">${StatusCodeConstants.TASK_STATUS[task?.status]}</li>
             <li class="item-datetime item-left-li">
                 Due Date
+                <label class="task-email" data-task-id="${task?.id}">sendEmail</label>
                 <label class="datetime-picker-label datetime-color">
                     <g:formatDate date="${task.sendTime}" format="yyyy-MM-dd HH:mm:ss"></g:formatDate>
                 </label>

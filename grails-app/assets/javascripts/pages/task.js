@@ -18,8 +18,8 @@
             }
         },
         urls: {
-            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl),
-            email: "{0}/patients/{1}/treatments/{2}/task/{3}/sendMail".format(RC.constants.baseUrl)
+            query: "{0}/clients/{1}/patients/{2}/treatments/{3}/task".format(RC.constants.baseUrl),
+            email: "{0}/clients/{1}patients/{2}/treatments/{3}/task/{4}/sendMail".format(RC.constants.baseUrl)
         }
     };
 
@@ -27,6 +27,7 @@
     function _addValueToOpts() {
         _.extend(opts, {
                 params: {
+                    clientId: $("#task-info-hidden").data("clientId"),
                     patientId: $("#task-info-hidden").data("patientId"),
                     medicalRecordId: $("#task-info-hidden").data("medicalRecordId")
                 }
@@ -40,7 +41,7 @@
      * @param medicalRecordId
      * @private
      */
-    function _add(patientId, medicalRecordId) {
+    function _add(clientId, patientId, medicalRecordId) {
         var toolId = $("input:radio[name=task-template]:checked").val();
         var requireCompletion = $("input:radio[name=task-template]:checked").data("requireCompletion");
         var relativeInterval = $("#relativeInterval option:selected").val();
@@ -54,7 +55,7 @@
         var sendMillionSeconds = relativeInterval * 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
         var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
         var request = $.ajax({
-            url: opts.urls.query.format(null, patientId, medicalRecordId),
+            url: opts.urls.query.format(null, clientId, patientId, medicalRecordId),
             data: {
                 toolId: toolId,
                 status: status,
@@ -93,6 +94,7 @@
             $(".task-form")[0].reset();
             //var patientId = $(this).data("patientId");
             //var medicalRecord = $(this).data("medicalRecordId");
+            var clientId = opts.params.clientId;
             var patientId = opts.params.patientId;
             var medicalRecord = opts.params.medicalRecordId;
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
@@ -102,7 +104,7 @@
                         _blurToolBox($(this));
                     });
                     if ($("#task-form").valid()) {
-                        _add(patientId, medicalRecord);
+                        _add(clientId, patientId, medicalRecord);
                         //_renderNewTask();
                         return true;
                     }
@@ -132,7 +134,7 @@
      */
     function _sendTaskEmail(taskId) {
         var request = $.ajax({
-            url: opts.urls.email.format(null, opts.params.patientId, opts.params.medicalRecordId, taskId)
+            url: opts.urls.email.format(null, opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function () {
 

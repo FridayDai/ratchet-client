@@ -1,6 +1,6 @@
 <div>
 
-<g:hiddenField name="task-info-hidden" id="task-info-hidden" data-patient-id="${patientId}"
+<g:hiddenField name="task-info-hidden" id="task-info-hidden" data-client-id="${clientId}" data-patient-id="${patientId}"
                data-medical-record-id="${medicalRecordId}"></g:hiddenField>
 
 <div class="task-header">

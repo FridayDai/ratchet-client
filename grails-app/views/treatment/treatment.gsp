@@ -7,7 +7,7 @@
                         %{--params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]">Overview</g:link>--}%
             %{--</li>--}%
             <li data-type="Task">
-                <g:link uri="/patients/${patientId}/treatments/${treatmentId}/${medicalRecordId}/tasks">Task</g:link>
+                <g:link uri="/clients/${clientId}/patients/${patientId}/treatments/${treatmentId}/${medicalRecordId}/tasks">Task</g:link>
             </li>
             <li data-type="Activity">
                 <g:link controller="activity" action="index"

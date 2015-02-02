@@ -13,9 +13,10 @@ class MedicalRecordService {
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def showTasksByMedicalRecord(medicalRecordId) throws ApiResourceAccessException {
+    def showTasksByMedicalRecord(clientId, medicalRecordId) throws ApiResourceAccessException {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.tasks.url, medicalRecordId)
+        def args = [clientId, medicalRecordId].toArray()
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.tasks.url, args)
 
         try {
             def resp = Unirest.get(url)
@@ -35,6 +36,10 @@ class MedicalRecordService {
     }
 
     def assignTaskToMedicalRecord(params) throws ApiAjaxAccessException {
+
+        def args = [params.clientId, params.patientId, params.medicalRecordId].toArray()
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.assignTask.url, args)
+
         try {
             def toolId = params.toolId
             def status = params.status
@@ -51,9 +56,6 @@ class MedicalRecordService {
             } else {
                 remindTime = null
             }
-
-            def args = [params.patientId, params.medicalRecordId].toArray()
-            def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.assignTask.url, args)
 
             def resp = Unirest.post(url)
                     .field("tool.id", toolId)

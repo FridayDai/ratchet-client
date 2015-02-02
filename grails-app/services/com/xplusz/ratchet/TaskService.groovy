@@ -3,7 +3,6 @@ package com.xplusz.ratchet
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -39,7 +38,8 @@ class TaskService {
     }
 
     def sendTaskEmailToPatient(params) throws ApiAjaxAccessException{
-        def args = [params.patientId, params.medicalRecordId, params.taskId].toArray()
+
+        def args = [params.clientId, params.patientId, params.medicalRecordId, params.taskId].toArray()
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.task.sendEmail.url, args)
         try {
             def resp = Unirest.get(url)

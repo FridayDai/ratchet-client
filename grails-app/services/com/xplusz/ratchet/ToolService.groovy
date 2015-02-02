@@ -1,7 +1,11 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import grails.converters.JSON
+
+import java.text.MessageFormat
 
 
 class ToolService {
@@ -11,21 +15,20 @@ class ToolService {
 
     def messageSource
 
-    def getToolsByTreatment(treatmentId) {
+    def getToolsByTreatment(treatmentId) throws ApiResourceAccessException {
 
-//        def loadPageDataException = new loadPageDataException()
-        def url = grailsApplication.config.ratchetv2.server.tools.loadToolByTreatment.url
-        def resp = Unirest.get(url)
-                .queryString("treatmentId", treatmentId)
-                .asString()
-        def result = JSON.parse(resp.body)
+        try {
+            def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.tools.loadToolByTreatment.url, treatmentId)
+            def resp = Unirest.get(url)
+                    .asString()
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result
+            if (resp.status == 200) {
+                return result
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
-//        else {
-//            throw loadPageDataException
-//        }
-
     }
 }

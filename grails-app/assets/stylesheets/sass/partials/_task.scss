@@ -25,17 +25,26 @@
     float: right;
 }
 
-.btn-task {
-    padding: 10px 27px 2px 2px;
-    border: 0;
-    color: $base-color-light-blue;
-    text-decoration: underline;
 
-    &:hover {
-        color: #59b7c4;
-        background-color: $base-color-white;
+.ui-tabs-panel {
+    .btn-task {
+        padding: 10px 27px 2px 2px;
+        border: 0;
+        color: $base-color-light-blue;
+        text-decoration: underline;
+
+        &:focus {
+            color: #59b7c4;
+            background-color: $base-color-white;
+        }
+
+        &:hover {
+            color: #59b7c4;
+            background-color: $base-color-white;
+        }
     }
 }
+
 
 .task-header {
     height: 30px;
