@@ -43,14 +43,13 @@
 
 .tab-treatment {
     padding: 0;
-    border-top: 1px solid $base-light-grey-color;
+    border-top: 1px solid $base-color-dark-grey;
 
     .ui-corner-top {
 
         .ui-tabs-anchor {
             padding: 1em;
-            color: $base-color-medium-grey;
-            background: $base-dark-grey-color;
+            color: $base-color-dark-grey;
         }
     }
 
@@ -59,7 +58,7 @@
         .ui-tabs-anchor {
             padding: 1em;
             color: $base-color-white;
-            background: $base-black-color;
+            background: $base-color-dark-grey;
         }
     }
 }
@@ -83,8 +82,8 @@
             padding: 0;
             border: 0;
             border-radius: 0;
-            border-bottom: 1px solid $base-blue-color;
-            color: $base-blue-color;
+            border-bottom: 1px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
 
             &:before {
                 position: relative;
@@ -95,18 +94,18 @@
 
             .ui-button-text {
                 padding: 0;
-                color: $base-blue-color;
+                color: $base-color-dark-grey;
                 font-size: smaller;
             }
 
             &:hover,
             &:focus {
-                border-bottom: 1px solid $base-blue-color;
-                color: $base-blue-color;
+                border-bottom: 1px solid $base-color-dark-grey;
+                color: $base-color-dark-grey;
                 background: transparent;
 
                 .ui-button-text {
-                    color: $base-blue-color;
+                    color: $base-color-dark-grey;
                 }
             }
         }
@@ -114,7 +113,7 @@
         .tab-treatment {
             padding: 0;
             border: 0;
-            border-top: 1px solid $base-light-grey-color;
+            border-top: 1px solid $base-color-dark-grey;
             background: none;
 
             li {
@@ -126,15 +125,15 @@
         .tab-list {
             padding: 0;
             border: 0;
-            background: $base-black-color;
+            background: $base-color-black;
 
             li {
                 padding: 10px 0;
-                background: $base-black-color;
+                background: $base-color-black;
 
                 a {
                     padding: 0 10px;
-                    border-right: 1px solid $btn-color-primary;
+                    border-right: 1px solid $base-color-light-grey;
                     color: $base-color-green;
                 }
             }
@@ -146,7 +145,7 @@
             }
 
             .ui-tabs-anchor {
-                background: $base-black-color;
+                background: $base-color-light-grey;
             }
         }
 

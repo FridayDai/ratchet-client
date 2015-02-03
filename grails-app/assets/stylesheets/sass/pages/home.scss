@@ -21,7 +21,7 @@
     .activity-task {
         width: 29.7%;
         height: 910px;
-        border-left: 1px solid $base-dark-blue-color;
+        border-left: 1px solid $base-color-dark-grey;
 
         .activity {
             width: 100%;
@@ -32,21 +32,21 @@
 
     .inner-header {
         padding: 17px;
-        border-bottom: 1px solid $base-dark-blue-color;
-        background: $base-color-grey;
+        border-bottom: 1px solid $base-color-dark-grey;
+        background: $base-color-mid-grey;
     }
 }
 
 .activity-content {
     margin: 10px;
     padding: 5px 20px 20px;
-    border-bottom: 1px solid $base-dark-blue-color;
+    border-bottom: 1px solid $base-color-dark-grey;
 
     li {
         margin-top: 10px;
 
         .color {
-            color: $base-color-light-black;
+            color: $base-color-light-grey;
         }
     }
 
@@ -54,7 +54,7 @@
         @include border-radius(5px);
         padding: 0 5px;
         color: $base-color-white;
-        background: $base-blue-color;
+        background: $base-color-dark-grey;
     }
 
     .li-last-update {

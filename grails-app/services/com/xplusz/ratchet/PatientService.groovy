@@ -54,12 +54,14 @@ class PatientService {
         def columns = params?.columns
         def search = params?.search
         def draw = params?.draw
+        def patientType = params?.patientType
 
         def url = grailsApplication.config.ratchetv2.server.patients.url
         def resp = Unirest.get(url)
                 .queryString("max", length)
                 .queryString("offset", start)
                 .queryString("clientId", request.session.clientId)
+                .queryString("patientType", patientType)
                 .asString()
 
         def result = JSON.parse(resp.body)

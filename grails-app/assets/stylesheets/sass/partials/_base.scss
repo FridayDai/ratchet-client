@@ -6,12 +6,12 @@
 @import 'compass/css3';
 
 @font-face {
-    font-family: 'fontello';
-    src: url('../../../fonts/fontello.eot');
-    src: url('../../../fonts/fontello.eot?#iefix') format('embedded-opentype'),
-    url('../../../fonts/fontello.woff') format('woff'),
-    url('../../../fonts/fontello.ttf') format('truetype'),
-    url('../../../fonts/fontello.svg?#fontello') format('svg');
+    font-family: 'Ionicons';
+    src:url('../../../fonts/ionicons.eot');
+    src:url('../../../fonts/ionicons.eot?#iefix') format('embedded-opentype'),
+    url('../../../fonts/ionicons.ttf?') format('truetype'),
+    url('../../../fonts/ionicons.woff') format('woff'),
+    url('../../../fonts/ionicons.svg?#Ionicons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,7 +24,7 @@ body {
 
     ::selection {
         color: $base-color-white;
-        background: $base-color-mid-blue;
+        background: $base-color-light-blue;
     }
 }
 
@@ -34,7 +34,7 @@ h5 {
 }
 
 p {
-    color: $base-color-middle-grey;
+    color: $base-color-mid-grey;
 }
 
 .inline {
@@ -65,7 +65,7 @@ div {
 
 a {
     display: inline-block;
-    color: $base-color-light-blue;
+    color: $base-color-dark-grey;
     background: transparent;
     font: $base-font-utility;
     text-decoration: none;
@@ -80,8 +80,7 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 1px $base-color-light-blue solid;
-    border-radius: 4px;
+    border: 1px $base-color-dark-grey solid;
     white-space: nowrap;
     background-color: $base-color-white;
     background-image: none;
@@ -93,16 +92,16 @@ a {
     &:hover,
     &:focus {
         color: $base-color-white;
-        background-color: darken($base-color-light-blue, 10%);
+        background-color: $base-color-dark-grey;
     }
 
     &.primary {
-        color: $btn-color-primary;
+        color: $base-color-dark-grey;
 
         &:hover,
         &:focus {
             color: $base-color-white;
-            background-color: darken($btn-color-primary, 10%);
+            background-color: $base-color-dark-grey;
         }
     }
 
@@ -126,7 +125,7 @@ a {
     }
 
     .btn-add {
-        border: 1px solid $base-color-dark-blue;
+        border: 1px solid $base-color-mid-grey;
         background-color: $base-color-white;
     }
 }
@@ -137,7 +136,7 @@ a {
 }
 
 .border-color {
-    border-bottom: 2px solid $base-color-grey;
+    border-bottom: 2px solid $base-color-light-grey;
 }
 
 .inner-head {
@@ -152,7 +151,7 @@ a {
     }
 
     .p-status {
-        color: $base-color-mid-blue;
+        color: $base-color-light-grey;
     }
 
     .btn-border {
@@ -161,7 +160,7 @@ a {
 }
 
 .color {
-    color: $base-color-lighter-blue;
+    color: $base-color-light-blue;
 }
 
 .li-color {
@@ -178,19 +177,18 @@ a {
 
 .input-group {
     min-width: 250px;
-    background: $base-color-light-grey;
 }
 
 .ui-button {
-    border: 2px solid $btn-color-primary;
+    border: 1px solid $base-color-dark-grey;
 
     .ui-button-text {
-        color: $btn-color-primary;
+        color: $base-color-dark-grey;
     }
 
     &:hover {
         border: 0;
-        background-color: darken($base-color-light-blue, 10%);
+        background-color: darken($base-color-dark-grey, 10%);
 
         .ui-button-text {
             color: $base-color-white;
@@ -199,11 +197,11 @@ a {
 }
 
 .ui-dialog-title {
-    color: $base-color-blue;
+    color: $base-color-dark-grey;
 }
 
 .window-warning-title {
-    color: $base-color-mid-blue;
+    color: $base-color-mid-grey;
 }
 
 .window-warning {
@@ -211,16 +209,16 @@ a {
 }
 
 .treatment-id {
-    color: $base-color-medium-grey;
+    color: $base-color-mid-grey;
 }
 
 .btn-action {
     border: 1px solid $base-color-light-blue;
-    color: $base-color-dark-blue;
+    color: $base-color-mid-grey;
 }
 
 .inner-content {
-    color: $base-color-medium-grey;
+    color: $base-color-mid-grey;
 }
 
 .actions-list {
@@ -232,23 +230,23 @@ a {
         }
 
         .btn-color {
-            color: $base-color-medium-grey;
+            color: $base-color-mid-grey;
         }
     }
 
     &:before {
-        border: solid 5px $base-color-medium-blue;
+        border: solid 5px $base-color-mid-grey;
     }
 }
 
 .div-tool-list {
-    background: $base-color-lighter-grey;
+    background: $base-color-light-grey;
 
     .tool-color {
-        color: $base-color-medium-grey;
+        color: $base-color-light-blue;
 
         .p-color {
-            color: $base-color-bluer;
+            color: $base-color-mid-grey;
         }
     }
 }
@@ -273,7 +271,7 @@ a {
     bottom: 0;
     left: 0;
     z-index: 99999;
-    background-color: #6a6a6a;
+    background-color: $base-color-light-grey;
     opacity: .3;
 
     .loading {
@@ -283,7 +281,6 @@ a {
         z-index: 999999;
         width: 40px;
         height: 40px;
-        color: #3b3b3b;
         background: url('../../../images/loading.gif') no-repeat 0 0;
         background-size: cover;
         font-size: 40px;
