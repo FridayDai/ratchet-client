@@ -21,7 +21,7 @@
 
         <div class="patient-info">
             <div class="patient-left-info patient-inner-info">
-                <div class="id-info color" value="${patientInfo.id}">ID: ${patientInfo.id}</div>
+                ID:<div class="id-info color" value="${patientInfo.patientId}">${patientInfo.patientId}</div>
 
                 <div class="name-info first-name-info div-space color"
                      value="${patientInfo.firstName}">${patientInfo.firstName}</div>
@@ -43,11 +43,7 @@
             </div>
 
             <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-               data-client-id="${patientInfo.client.id}"
-               data-first-name="${patientInfo.firstName}"
-               data-last-name="${patientInfo.lastName}"
-               data-email="${patientInfo.email}"
-               data-phone-number="${patientInfo.phoneNumber}">
+               data-client-id="${patientInfo.client.id}">
                 <div class="icon-edit"></div>
             </a>
 
@@ -55,12 +51,8 @@
         </div>
 
         <div id="tabs" class="patient-tab">
-            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}"
-                    data-client-id="${patientInfo.client.id}"
-                    data-first-name="${patientInfo.firstName}"
-                    data-last-name="${patientInfo.lastName}"
-                    data-email="${patientInfo.email}"
-                    data-phone-number="${patientInfo.phoneNumber}">Add Treatment</button>
+            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}" data-id="${patientInfo.patientId}"
+                    data-client-id="${patientInfo.client.id}">Add Treatment</button>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
                     <li>
@@ -75,6 +67,10 @@
     </div>
 
     <g:form class="patient-form ui-hidden" id="patient-form" name="patient-form">
+        <div class="form-group">
+            <input id="patientId" name="id" type="text" class="input-group" placeholder="ID" required/>
+        </div>
+
         <div class="form-group">
             <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
         </div>
@@ -105,8 +101,9 @@
                    required/>
         </div>
 
-        <div class="form-group">
-            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time">
+        <div class="form-group div-hidden" id="div-surgery-time">
+            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group"
+                   placeholder="Surgery Time">
         </div>
 
     </g:form>

@@ -5,48 +5,184 @@
 
     //Define provider page global variables
     var opts = {
-        defaultConfirmArguments: {
-            confirmTeamFormArguments: {
-                title: RC.constants.confirmTeamTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 400
-            },
+            defaultConfirmArguments: {
+                confirmTeamFormArguments: {
+                    title: RC.constants.confirmTeamTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 400
+                },
 
-            confirmGiverFormArguments: {
-                title: RC.constants.confirmGiverTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 400
-            },
+                confirmGiverFormArguments: {
+                    title: RC.constants.confirmGiverTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 400
+                },
 
-            editGiverFormArguments: {
-                title: RC.constants.editGiverTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 400
-            },
+                editGiverFormArguments: {
+                    title: RC.constants.editGiverTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 400
+                },
 
-            deleteTeamWaringArguments: {
-                title: RC.constants.deleteTeamWaringTitle,
-                message: RC.constants.warningTip
-            },
+                deleteTeamWaringArguments: {
+                    title: RC.constants.deleteTeamWaringTitle,
+                    message: RC.constants.warningTip
+                },
 
-            deleteGiverWaringArguments: {
-                title: RC.constants.deleteGiverWaringTitle,
-                message: RC.constants.warningTip
+                deleteGiverWaringArguments: {
+                    title: RC.constants.deleteGiverWaringTitle,
+                    message: RC.constants.warningTip
+                }
+            },
+            urls: {
+                query: "{0}/getPatients".format(RC.constants.baseUrl),
+                getCareTeam: "{0}/getCareTeam".format(RC.constants.baseUrl),
+                getCareGiver: "{0}/getCareGiver".format(RC.constants.baseUrl),
+                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
+                addCareTeam: "{0}/clients/{1}/patients/{2}/care_team".format(RC.constants.baseUrl),
+                addCareGiver: "{0}/clients/{1}/patients/{2}/care_giver".format(RC.constants.baseUrl),
+                deleteCareTeam: "{0}/clients/{1}/patients/{2}/care_team/{3}/{4}".format(RC.constants.baseUrl),
+                deleteCareGiver: "{0}/clients/{1}/patients/{2}/care_giver/{3}/{4}".format(RC.constants.baseUrl)
             }
         },
-        urls: {
-            query: "{0}/getPatients".format(RC.constants.baseUrl),
-            getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
-            addCareTeam: "{0}/clients/{1}/patients/{2}/care_team".format(RC.constants.baseUrl),
-            addCareGiver: "{0}/clients/{1}/patients/{2}/care_giver".format(RC.constants.baseUrl),
-            deleteCareTeam: "{0}/clients/{1}/patients/{2}/care_team/{3}/{4}".format(RC.constants.baseUrl),
-            deleteCareGiver: "{0}/clients/{1}/patients/{2}/care_giver/{3}/{4}".format(RC.constants.baseUrl)
+        careTeamRole =
+            ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
+        careGiverRelation = ["Spouse", "Parent", "Child", "Friend", "Other"],
+        careGiverStatus = ["INACTIVE", "ACTIVE"],
+        careTeamTable,
+        careGiverTable;
+
+
+    function _initTeamTable(data) {
+
+        if (careTeamTable) {
+            careTeamTable.destroy();
         }
 
-    };
+        careTeamTable = $("#careTeamTable").DataTable({
+            paging: true,
+            searching: false,
+            ordering: false,
+            pageLength: 10,
+            info: false,
+            bLengthChange: false,
+            "serverSide": true,
+            ajax: $.fn.dataTable.pipeline({
+                url: opts.urls.getCareTeam,
+                pages: 2, // number of pages to cache
+                data: data
+            }),
+            columns: [
+                {
+                    data: function (source) {
+                        if (careTeamRole[source.staffType - 1] === "Surgeon") {
+                            return '<div class="bottom-content">' +
+                                '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+                                '</div>';
+                        } else {
+                            return '';
+                        }
+                    }
+                },
+                {
+                    data: "id",
+                    className: "careTeamId"
+                },
+                {data: "firstName"},
+                {data: "lastName"},
+                {
+                    data: function (source) {
+                        return careTeamRole[source.staffType - 1];
+                    }
+                },
+                {data: "email"},
+                {
+                    data: function (source) {
+                        return '<div class="bottom-content">' +
+                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+                            '</div>';
+                    }
+                }
+            ]
+        });
+    }
+
+    //function _addSurgeonLogo(type) {
+    //    if (type === "Nurse") {
+    //        '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>';
+    //    }
+    //}
+
+    function _initGiverTable(data) {
+
+        if (careGiverTable) {
+            careGiverTable.destroy();
+        }
+
+        careGiverTable = $("#careGiverTable").DataTable({
+            paging: true,
+            searching: false,
+            ordering: false,
+            pageLength: 10,
+            info: false,
+            bLengthChange: false,
+            "serverSide": true,
+            ajax: $.fn.dataTable.pipeline({
+                url: opts.urls.getCareGiver,
+                pages: 2, // number of pages to cache
+                data: data
+            }),
+            columns: [
+                {
+                    data: function (source) {
+                        return '<div class="bottom-content">' +
+                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+                            '</div>';
+                    }
+                },
+                {data: "id"},
+                {data: "firstName"},
+                {data: "lastName"},
+                {
+                    data: function (source) {
+                        return careGiverRelation[source.relationShip - 1];
+                    }
+                },
+                //{data: "relationShip"},
+                {data: "email"},
+                {
+                    data: function (source) {
+                        return careGiverStatus[source.status - 1];
+                    }
+                },
+                //{data: "status"},
+                {
+                    data: function (source) {
+                        return '<div class="bottom-content">' +
+                            '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" > <div class="icon-edit"></div> </a>' +
+                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+                            '</div>';
+                    }
+                }
+            ]
+        });
+    }
+
+    /**
+     * load Data from server side
+     * @private
+     */
+    function _loadData() {
+        var medicalRecordId = $("#hidden-medical-record").val();
+        var data = {
+            medicalRecordId: medicalRecordId
+        };
+        _initTeamTable(data);
+        _initGiverTable(data);
+    }
 
 
     /**
@@ -62,11 +198,11 @@
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
 
-            var careTeams = $(this).parent().parent().find(".detail-info");
+            var careTeams = $(this).parents().find("td.careTeamId");
             var existCareTeam = [];
             $.each(careTeams, function (index, item) {
                 existCareTeam.push({
-                    'id': $(item).data("careTeamId")
+                    'id': $(item).text()
                 });
             });
 
@@ -106,8 +242,14 @@
             type: 'POST',
             data: careTeamInfo
         }).done(function (data) {
-            $("#careTeamBody").append(data);
-            _removeCareTeam();
+            if (data.resp === true) {
+                var medicalRecordId = data.medicalRecordId;
+                var ids = {
+                    medicalRecordId: medicalRecordId
+                };
+                _initTeamTable(ids);
+                _removeCareTeam();
+            }
         });
     }
 
@@ -138,7 +280,6 @@
                             relationship: relationship
                         };
                         _addCareGiver(clientId, patientId, careGiverInfo);
-                        //_add();
                         return true;
                     }
                     return false;
@@ -160,24 +301,38 @@
             type: 'POST',
             data: careGiverInfo
         }).done(function (data) {
-            $("#careGiverBody").append(data);
-            _removeCareGiver();
+            if (data.resp === true) {
+                var medicalRecordId = data.medicalRecordId;
+                var ids = {
+                    medicalRecordId: medicalRecordId
+                };
+                _initGiverTable(ids);
+                _removeCareGiver();
+            }
+
+
         });
     }
+
+    //.done(function (data) {
+    //    if (data.resp === true) {
+    //        _initTeamTable();
+    //        _removeCareTeam();
+    //    }
 
     /**
      * remove care team event
      * @private
      */
     function _removeCareTeam() {
-        $(".btn-remove-team").on("click", function (e) {
+        $("#careTeamTable").on("click", "tr .btn-remove-team", function (e) {
             e.preventDefault();
 
-            var grandParent = $(this).parent().parent();
+            var grandParent = $(this).parent().parent().parent();
             var careTeamId = $(this).data("careTeamId");
-            var medicalRecordId = $(this).data("medicalRecordId");
-            var clientId = $(this).data("clientId");
-            var patientId = $(this).data("patientId");
+            var medicalRecordId = $("#hidden-medical-record").val();
+            var clientId = $("#hidden-client-id").val();
+            var patientId = $("#hidden-patient-id").val();
 
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
                 element: $(".warn"),
@@ -214,14 +369,15 @@
      * @private
      */
     function _removeCareGiver() {
-        $(".btn-remove-giver").on("click", function (e) {
+        $("#careGiverTable").on("click", "tr .btn-remove-team", function (e) {
+            //$(".btn-remove-giver").on("click", function (e) {
             e.preventDefault();
 
-            var grandParent = $(this).parent().parent();
+            var grandParent = $(this).parent().parent().parent();
             var careGiverId = $(this).data("careGiverId");
-            var medicalRecordId = $(this).data("medicalRecordId");
-            var clientId = $(this).data("clientId");
-            var patientId = $(this).data("patientId");
+            var medicalRecordId = $("#hidden-medical-record").val();
+            var clientId = $("#hidden-client-id").val();
+            var patientId = $("#hidden-patient-id").val();
 
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
@@ -356,6 +512,7 @@
      * @private
      */
     function _init() {
+        _loadData();
         _bindAddTeamEvent();
         _bindInviteGiverEvent();
         _removeCareTeam();

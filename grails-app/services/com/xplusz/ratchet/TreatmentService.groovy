@@ -38,7 +38,7 @@ class TreatmentService {
 
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatments.url, params?.clientId)
         def resp = Unirest.post(url)
-                .field("patientId", params?.patientId)
+                .field("patientId",params?.id)
                 .field("clientId", params?.clientId)
                 .field("firstName", params?.firstName)
                 .field("lastName", params?.lastName)
@@ -82,7 +82,10 @@ class TreatmentService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            return result.items
+            def map = [:]
+
+            map.put("data", result.items)
+            return map
         } else {
             return false
         }
@@ -98,7 +101,10 @@ class TreatmentService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            return result.items
+            def map = [:]
+
+            map.put("data", result.items)
+            return map
         } else {
             return false
         }
@@ -144,7 +150,7 @@ class TreatmentService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            return result
+            return true
         } else {
             return false
         }
@@ -162,7 +168,7 @@ class TreatmentService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            return result
+            return true
         } else {
             return false
         }

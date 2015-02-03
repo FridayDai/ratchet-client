@@ -40,6 +40,8 @@ class SinglePatientService {
     def updateSinglePatient(HttpServletRequest request, HttpServletResponse response, params) {
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.patient.url, params?.patientId)
         def resp = Unirest.post(url)
+                .field("clientId", params?.clientId)
+                .field("patientId", params?.id)
                 .field("email", params?.email)
                 .field("firstName", params?.firstName)
                 .field("lastName", params?.lastName)

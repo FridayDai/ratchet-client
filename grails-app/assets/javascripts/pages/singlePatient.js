@@ -72,22 +72,23 @@
             e.preventDefault();
 
             $(".treatment-form")[0].reset();
+
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
-            var firstName = $(this).data("firstName");
-            var lastName = $(this).data("lastName");
-            var email = $(this).data("email");
-            var phoneNum = $(this).data("phoneNumber");
+
+            var parent = $(this).parents();
+            var id = parent.find(".id-info").text();
+            var firstName = parent.find(".first-name-info").text();
+            var lastName = parent.find(".last-name-info").text();
+            var email = parent.find(".email-info").text();
+            var phoneNum = parent.find(".phone-info").text();
 
             _initSurgeryTime();
-            _initSelectTreatment();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
-                        //tabTitle = $("#selectTreatment");
-
                         var treatmentId = $("#selectTreatment").val();
                         var staffIds = $("#selectStaffs").val();
                         var staffArray = staffIds.split(',');
@@ -99,6 +100,7 @@
                         var surgeryTime = date.getTime();
 
                         var assignInfo = {
+                            id: id,
                             patientId: patientId,
                             clientId: clientId,
                             firstName: firstName,
@@ -149,16 +151,26 @@
 
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
-            $("#firstName").val($(this).data("firstName"));
-            $("#lastName").val($(this).data("lastName"));
-            $("#email").val($(this).data("email"));
-            $("#phone").val($(this).data("phoneNumber"));
+
+            var parent = $(this).parents();
+            var id = parent.find(".id-info").text();
+            var firstName = parent.find(".first-name-info").text();
+            var lastName = parent.find(".last-name-info").text();
+            var email = parent.find(".email-info").text();
+            var phoneNum = parent.find(".phone-info").text();
+
+            $("#patientId").val(id);
+            $("#firstName").val(firstName);
+            $("#lastName").val(lastName);
+            $("#email").val(email);
+            $("#phone").val(phoneNum);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
                         var patientInfo = {
                             patientId: patientId,
+                            id: $("#patientId").val(),
                             firstName: $("#firstName").val(),
                             lastName: $("#lastName").val(),
                             email: $("#email").val(),
@@ -187,10 +199,16 @@
             dataType: 'json',
             success: function (status) {
                 if (status.resp === 200) {
-                    $('.first-name-info').empty().append(patientInfo.firstName);
-                    $('.last-name-info').empty().append(patientInfo.lastName);
-                    $('.email-info').empty().append(patientInfo.email);
-                    $('.phone-info').empty().append(patientInfo.phoneNum);
+                    $('.id-info').text(patientInfo.id);
+                    $('.first-name-info').text(patientInfo.firstName);
+                    $('.last-name-info').text(patientInfo.lastName);
+                    $('.email-info').text(patientInfo.email);
+                    $('.phone-info').text(patientInfo.phoneNum);
+                    //$('.id-info').empty().append(patientInfo.id);
+                    //$('.first-name-info').empty().append(patientInfo.firstName);
+                    //$('.last-name-info').empty().append(patientInfo.lastName);
+                    //$('.email-info').empty().append(patientInfo.email);
+                    //$('.phone-info').empty().append(patientInfo.phoneNum);
                 }
             }
         });
@@ -215,6 +233,7 @@
      * @private
      */
     function _initSelectTreatment() {
+
         $('#selectTreatment').select2({
             ajax: {
                 transport: function (params) {
@@ -236,13 +255,21 @@
                         myResults.push({
                             'id': item.id,
                             'text': item.title,
-                            'surgeryTime': item.surgeryTimeRequired
+                            'data': item.surgeryTimeRequired
                         });
                     });
                     return {
                         results: myResults
                     };
                 }
+            }
+        });
+
+        $('#selectTreatment').on("change", function (data) {
+            if (data.added.data === true) {
+                $("#div-surgery-time").css("display", "block");
+            } else {
+                $("#div-surgery-time").css("display", "none");
             }
         });
     }
@@ -312,7 +339,7 @@
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
-        //_initSelectTreatment();
+        _initSelectTreatment();
         _initStaffSelect();
     }
 
