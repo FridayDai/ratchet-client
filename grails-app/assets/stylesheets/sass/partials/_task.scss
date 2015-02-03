@@ -25,7 +25,6 @@
     float: right;
 }
 
-
 .ui-tabs-panel {
     .btn-task {
         padding: 10px 27px 2px 2px;
@@ -44,7 +43,6 @@
         }
     }
 }
-
 
 .task-header {
     height: 30px;
@@ -112,21 +110,72 @@
     }
 }
 
+.items-title {
+    padding: 10px 40px;
+}
+
 // box item for task
 .box-item {
     display: inline-block;
-    width: 370px;
+    width: 334px;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 2px $base-color-mid-grey solid;
+    padding: 20px 16px;
+    border: 1px $base-color-mid-grey solid;
 
     .item-header {
-        height: 30px;
-        padding: 4px 6px;
-        border-bottom: 2px $base-color-mid-grey solid;
+        height: 20px;
+    }
+
+    .item-title {
+        height: 50px;
+    }
+
+    .status-background {
+        padding: 2px 4px;
+        color: $base-color-white;
+    }
+
+    .item-datetime {
+        height: 28px;
+        padding: 10px 0;
+    }
+
+    .item-context {
+        height: 63px;
 
         p {
-            padding: 6px;
+            display: -webkit-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: pre-wrap;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    // change background and color according to status
+    &.pending {
+        border-color: $base-color-green-primary;
+
+        .status-background {
+            background-color: $base-color-green-primary;
+        }
+    }
+
+    &.overdue {
+        border-color: $base-color-yellow-darker;
+
+        .status-background {
+            background-color: $base-color-yellow-darker;
+        }
+    }
+
+    &.complete {
+        border-color: $base-color-mid-blue;
+
+        .status-background {
+            background-color: $base-color-mid-blue;
         }
     }
 

@@ -4,22 +4,27 @@
                data-medical-record-id="${medicalRecordId}"></g:hiddenField>
 
 <div class="task-header">
-    <button id="add-task" class="btn btn-right btn-task">+ Add Task</button>
+    %{--<button id="add-task" class="btn btn-right btn-task">+ Add Task</button>--}%
+</div>
+
+<div class="items-title">
+    <h4>SENT ITEMS</h4>
 </div>
 
 <div class="tasks-list">
-    <h4 class="complete">SENT</h4>
-
+    <g:render template="newTaskBox" model="['task': task]"></g:render>
     <div class="task-row" id="task-row-sent">
         <g:each in="${sentTasks}" var="task">
             <g:render template="taskBox" model="['task': task]"></g:render>
         </g:each>
-
     </div>
 </div>
 
+<div class="items-title">
+    <h4>SCHEDULE ITEMS</h4>
+</div>
+
 <div class="tasks-list">
-    <h4 class="new">SCHEDULE</h4>
 
     <div class="task-row" id="task-row-schedule">
         <g:each in="${scheduleTasks}" var="task">
@@ -68,55 +73,6 @@
         </div>
     </g:each>
     </div>
-
-
-%{--<div class="form-box border-color-change" value="basic">--}%
-%{--<div class="box-header">--}%
-%{--<div class="header-left bg-color-change inline">--}%
-%{--<div class="box-icon icon-type basic"></div>--}%
-%{--<span class="uppercase">basic</span>--}%
-%{--</div>--}%
-
-%{--<div class="header-middle inline">--}%
-%{--<div class="bullet">--}%
-%{--<h5 class="color-change">Pre Qualification</h5>--}%
-%{--</div>--}%
-%{--</div>--}%
-
-%{--<div class="form-group header-right inline">--}%
-%{--<input type="radio" class="box-radio" name="task-template"/>--}%
-%{--</div>--}%
-%{--</div>--}%
-
-%{--<div class="box-content">--}%
-%{--<p>Please read the following to have an understanding about Total Knee Replacement operation</p>--}%
-%{--</div>--}%
-%{--</div>--}%
-
-%{--<div class="form-box border-color-change" value="outcome">--}%
-%{--<div class="box-header">--}%
-%{--<div class="header-left bg-color-change inline">--}%
-%{--<div class="box-icon icon-type outcome"></div>--}%
-%{--<span class="uppercase">outcome</span>--}%
-%{--</div>--}%
-
-%{--<div class="header-middle inline">--}%
-%{--<div class="bullet">--}%
-%{--<h5 class="color-change">Knee Injury and Ostearthritis Outcome</h5>--}%
-%{--</div>--}%
-%{--</div>--}%
-
-%{--<div class="form-group header-right inline">--}%
-%{--<input type="radio" class="box-radio" name="task-template"/>--}%
-%{--</div>--}%
-%{--</div>--}%
-
-%{--<div class="box-content">--}%
-%{--<p>Please read the following to have an understanding about Total Knee Replacement operation</p>--}%
-%{--</div>--}%
-
-%{--</div>--}%
-%{--</div>--}%
 
     <div class="form-content">
         <div>

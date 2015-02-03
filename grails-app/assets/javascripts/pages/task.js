@@ -19,7 +19,7 @@
         },
         urls: {
             query: "{0}/clients/{1}/patients/{2}/treatments/{3}/task".format(RC.constants.baseUrl),
-            email: "{0}/clients/{1}patients/{2}/treatments/{3}/task/{4}/sendMail".format(RC.constants.baseUrl)
+            email: "{0}/clients/{1}/patients/{2}/treatments/{3}/task/{4}/sendMail".format(RC.constants.baseUrl)
         }
     };
 
