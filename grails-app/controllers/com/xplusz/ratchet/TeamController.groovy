@@ -8,13 +8,22 @@ class TeamController extends BaseController {
     def treatmentService
 
     def showMedicalCares() {
-        def medicalRecordId = params.medicalRecordId
-        def clientId = params.clientId
-        def patientId = params.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
+        render(view: "/team/team", model: [medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+    }
+
+    def getCareTeam() {
+        def medicalRecordId = params?.medicalRecordId
         def careTeams = treatmentService.getCareTeam(request, response, medicalRecordId)
+        render careTeams as JSON
+    }
+
+    def getCareGiver() {
+        def medicalRecordId = params?.medicalRecordId
         def careGivers = treatmentService.getCareGiver(request, response, medicalRecordId)
-        render(view: "/team/team", model: [careTeams      : careTeams, careGivers: careGivers,
-                                           medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        render careGivers as JSON
     }
 
     def deleteCareTeam() {
@@ -34,8 +43,8 @@ class TeamController extends BaseController {
         def clientId = params?.clientId
         def patientId = params?.patientId
         def resp = treatmentService.addCareTeam(request, response, params)
-        render(template: "/team/careTeamTemplate",
-                model: [careTeam: resp, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        def result = [resp: resp, medicalRecordId: medicalRecordId]
+        render result as JSON
     }
 
     def addCareGiver() {
@@ -43,7 +52,7 @@ class TeamController extends BaseController {
         def clientId = params?.clientId
         def patientId = params?.patientId
         def resp = treatmentService.addCareGiver(request, response, params)
-        render(template: "/team/careGiverTemplate",
-                model: [careGiver: resp, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        def result = [resp: resp, medicalRecordId: medicalRecordId]
+        render result as JSON
     }
 }

@@ -28,6 +28,8 @@ class UrlMappings {
 
 
         "/team"(controller: "team", action: "showMedicalCares")
+        "/getCareTeam"(controller: "team", action: "getCareTeam")
+        "/getCareGiver"(controller: "team", action: "getCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
