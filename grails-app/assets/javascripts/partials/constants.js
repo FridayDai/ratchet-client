@@ -8,7 +8,7 @@
         baseUrl: "http://localhost:8080",
 
         //CONFIRM
-        confirmTitle: "Add a new Provider",
+        confirmTitle: "New Provider",
         confirmPatientTitle: "Add a new Patient",
         confirmTaskTitle: "Add Outcome Task",
         confirmNoteTitle: "Edit Note",

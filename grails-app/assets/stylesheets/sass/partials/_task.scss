@@ -28,7 +28,7 @@
 .btn-task {
     padding: 10px 27px 2px 2px;
     border: 0;
-    color: $base-color-mid-blue;
+    color: $base-color-light-blue;
     text-decoration: underline;
 
     &:hover {
@@ -66,7 +66,7 @@
     font-size: 9pt;
 
     &.datetime-color {
-        color: $base-color-mid-blue;
+        color: $base-color-light-blue;
     }
 }
 
@@ -81,7 +81,7 @@
 }
 
 .new {
-    color: $base-color-green-primary;
+    color: $base-color-green;
 }
 
 .complete,
@@ -123,23 +123,23 @@
 
     .item-left {
         width: 22%;
-        border-right: 1px $base-color-grey solid;
+        border-right: 1px $base-color-light-blue solid;
 
         .item-left-li {
             height: 60px;
             padding-top: 8px;
-            border-bottom: 1px $base-color-grey solid;
+            border-bottom: 1px $base-color-light-blue solid;
             text-align: center;
         }
 
         .item-datetime {
             height: 98px;
-            color: $base-color-medium-grey;
+            color: $base-color-light-blue;
         }
 
         .item-left-one {
             color: $base-color-white;
-            background-color: $base-color-medium-grey;
+            background-color: $base-color-light-blue;
         }
 
         .item-left-two {
@@ -148,7 +148,7 @@
         }
 
         .item-left-four {
-            color: $btn-color-primary;
+            color: $base-color-light-blue;
         }
 
     }
@@ -172,7 +172,7 @@
         }
 
         .h-color {
-            color: $base-color-darker-blue;
+            color: $base-color-dark-grey;
         }
 
         .right-two {
@@ -184,16 +184,16 @@
         }
 
         .note-color {
-            color: $base-color-blue-dark;
+            color: $base-color-dark-grey;
         }
 
         .note-bg {
-            background-color: $base-color-lightest-blue;
+            background-color: $base-color-dark-grey;
 
         }
 
         .note-bg-edit {
-            background-color: $base-color-lightest-grey;
+            background-color: $base-color-dark-grey;
         }
 
         .item-note {
@@ -223,38 +223,38 @@
 
     // change background and color according to status
     &.basic {
-        border-color: $base-color-green-primary;
+        border-color: $base-color-dark-grey;
 
         .item-header {
-            border-color: $base-color-green-primary;
+            border-color: $base-color-dark-grey;
         }
 
         .item-left-one {
-            background-color: $base-color-green-primary;
+            background-color: $base-color-dark-grey;
         }
     }
 
     &.sdm {
-        border-color: $base-color-yellow-darker;
+        border-color: $base-color-dark-grey;
 
         .item-header {
-            border-color: $base-color-yellow-darker;
+            border-color: $base-color-dark-grey;
         }
 
         .item-left-one {
-            background-color: $base-color-yellow-darker;
+            background-color: $base-color-yellow;
         }
     }
 
     &.outcome {
-        border-color: $base-color-mid-blue;
+        border-color: $base-color-dark-grey;
 
         .item-header {
-            border-color: $base-color-mid-blue;
+            border-color: $base-color-dark-grey;
         }
 
         .item-left-one {
-            background-color: $base-color-mid-blue;
+            background-color: $base-color-dark-grey;
         }
     }
 
@@ -272,7 +272,7 @@
     .box-header {
         width: 100%;
         height: 54px;
-        background-color: $base-color-grey;
+        background-color: $base-color-dark-grey;
 
         .header-left {
             float: left;
@@ -314,7 +314,7 @@
 
     .radio-box {
         margin: 6px 0;
-        color: $base-color-blue-grey;
+        color: $base-color-dark-grey;
     }
 
     .label-height {
@@ -333,15 +333,15 @@
     background-color: $base-color-mid-grey;
 
     &.sdm {
-        background-color: $base-color-yellow-darker;
+        background-color: $base-color-yellow;
     }
 
     &.basic {
-        background-color: $base-color-green-primary;
+        background-color: $base-color-green;
     }
 
     &.outcome {
-        background-color: $base-color-mid-blue;
+        background-color: $base-color-blue;
     }
 
 }
@@ -350,15 +350,15 @@
     border-color: $base-color-mid-grey;
 
     &.sdm {
-        border-color: $base-color-yellow-darker;
+        border-color: $base-color-yellow;
     }
 
     &.basic {
-        border-color: $base-color-green-primary;
+        border-color: $base-color-green;
     }
 
     &.outcome {
-        border-color: $base-color-mid-blue;
+        border-color: $base-color-blue;
     }
 }
 
@@ -366,7 +366,7 @@
     color: $base-color-mid-grey;
 
     &.active-color {
-        color: $base-color-darker-blue;
+        color: $base-color-blue;
     }
 }
 

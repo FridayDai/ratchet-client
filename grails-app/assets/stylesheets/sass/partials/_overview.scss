@@ -5,8 +5,8 @@
 .content-head {
     display: block;
     height: 50px;
-    border-bottom: 1px solid $btn-color-primary;
-    background: $base-color-grey;
+    border-bottom: 1px solid $base-color-light-grey;
+    background: $base-color-mid-grey;
 
     .icon-back {
         position: absolute;
@@ -24,7 +24,7 @@
         margin-left: 55px;
         padding-top: 15px;
         padding-left: 20px;
-        border-left: 1px solid $btn-color-primary;
+        border-left: 1px solid $base-color-light-grey;
         font-size: large;
     }
 }
@@ -42,7 +42,7 @@
     .patient-inner-info {
         width: 180px;
         padding: 20px;
-        border-right: 1px solid $base-light-grey-color;
+        border-right: 1px solid $base-color-light-grey;
 
         .div-space {
             margin-top: 10px;
@@ -50,7 +50,7 @@
 
         .color {
             //            display: inline;
-            color: $base-color-middle-grey;
+            color: $base-color-light-grey;
         }
 
         .name-info {
@@ -111,7 +111,7 @@
         .graph {
             min-height: 640px;
             margin-top: 10px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
     }
 
@@ -124,13 +124,13 @@
             width: 100%;
             height: 400px;
             margin-bottom: 10px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
 
         .task {
             width: 100%;
             height: 150px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
     }
 }
@@ -139,7 +139,7 @@
     margin-left: 10px;
 
     label {
-        color: $base-darker-grey-color;
+        color: $base-color-light-grey;
     }
 
     .lbl-outcome {
@@ -166,7 +166,7 @@
     @include border-radius(5px);
     margin-top: 20px;
     padding: 5px 20px 20px;
-    border: 1px solid $btn-color-primary;
+    border: 1px solid $base-color-light-grey;
 
     li {
         margin-top: 10px;
@@ -180,7 +180,7 @@
 
     .title-task {
         width: 37px;
-        background: $base-blue-color;
+        background: $base-color-light-grey;
     }
 
     .title-reminder {
@@ -190,7 +190,7 @@
 
     .title-initiate {
         width: 62px;
-        background: $base-color-dark-yellow;
+        background: $base-color-yellow;
     }
 
     .li-last-update {
@@ -215,7 +215,7 @@
     .triangle-icon-down {
         top: 0;
         left: 0;
-        border-color: $base-light-blue-color transparent transparent;
+        border-color: $base-color-light-grey transparent transparent;
     }
 
     .triangle-icon-upper {
@@ -227,14 +227,14 @@
 
 .right-header {
     &:hover {
-        background: $base-dark-blue-color;
+        background: $base-color-mid-grey;
 
         label {
             color: $base-color-white;
         }
 
         .triangle-icon {
-            border-color: $base-dark-blue-color transparent transparent;
+            border-color: $base-color-mid-grey transparent transparent;
         }
     }
 }

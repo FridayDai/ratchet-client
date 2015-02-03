@@ -74,8 +74,9 @@
      * @private
      */
     function _loadData() {
+        var patientType = $("#selectPatient").val();
         var data = {
-            clientId: 1
+            patientType: parseInt(patientType)
         };
         _initTable(data);
 
@@ -110,7 +111,6 @@
             phoneNumber: phoneNumber,
             profilePhoto: '',
             treatmentId: treatmentId,
-            primaryStaffId: 16,
             staffIds: staffIds,
             surgeryTime: surgeryTime
         };

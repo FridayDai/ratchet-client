@@ -23,7 +23,7 @@
 
             &:hover {
                 color: $base-color-white;
-                background: $base-color-mid-blue;
+                background: $base-color-mid-grey;
             }
         }
 
@@ -78,7 +78,7 @@
     background: none;
 
     .ui-button-text {
-        font-weight: bolder;
+        font-weight: 100;
     }
 
     .ui-icon-add {

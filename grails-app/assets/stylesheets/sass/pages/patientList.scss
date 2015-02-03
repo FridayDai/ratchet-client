@@ -6,20 +6,23 @@
 
 .inner-header {
     padding: 17px;
-    border-bottom: 1px solid $base-dark-blue-color;
-    background: $base-color-grey;
+    border-bottom: 6px solid $base-color-white-grey;
+    height: 55px;
 
     .title {
         width: 80%;
-        color: $base-color-dark-blue;
+        color: $base-color-dark-grey;
         font-size: 16px;
     }
 }
 
 .inner-search {
-    padding: 20px 40px;
-    background: $table-search-bg-color;
 
+    .search-content {
+        margin: 20px 40px;
+        padding: 20px;
+        background-color: $base-color-light-white;
+    }
     input {
         min-width: 220px;
         height: 25px;
@@ -37,4 +40,8 @@
 .add-patient {
     display: inline-block;
     float: right;
+}
+
+.provider-list-table {
+    margin: 40px;
 }

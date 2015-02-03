@@ -3,10 +3,6 @@
 
     thead {
 
-        tr {
-            background-color: $table-header-bg-color;
-        }
-
         .sorting {
             background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
         }
@@ -23,43 +19,34 @@
 
     th {
         width: 23%;
-        color: $base-color-mid-grey;
+        color: $base-color-dark-grey;
         font-weight: $bold;
-
-        &:first-child {
-            padding-left: 20px;
-        }
     }
 
     tr {
         height: 40px;
-        color: $base-color-middle-grey;
+        color: $base-font-color;
 
         a {
             text-decoration: underline;
         }
 
         .tr-label {
-            color: $base-color-mid-blue;
+            color: $base-color-dark-grey;
         }
     }
 
-    td {
+    td, th{
+        border: 1px solid $base-color-white-grey;
+        padding-left: 20px;
         &:first-child {
-            padding-left: 20px;
+            border-left: 0;
         }
 
         &:last-child {
+            border-right: 0;
             padding-right: 20px;
         }
-    }
-
-    .odd {
-        background: $table-odd-color;
-    }
-
-    .even {
-        background: $table-even-color;
     }
 
 }
@@ -74,11 +61,11 @@
         margin-top: 30px;
         padding-top: .25em;
         border: 1px solid transparent;
-        color: $base-color-middle-grey;
+        color: $base-color-light-blue;
         background: transparent;
-        text-align: center;
         box-shadow: none;
         cursor: default;
+        text-align: right;
 
         .paginate_button {
             display: inline-block;
@@ -86,7 +73,7 @@
             min-width: 1.5em;
             margin: 0 5px;
             padding: 6px 12px;
-            border: 1px $base-color-light-blue solid;
+            border: 1px $base-color-dark-grey solid;
             white-space: nowrap;
             background-color: $base-color-white;
             background-image: none;
@@ -99,14 +86,14 @@
             &:hover,
             &:focus {
                 color: $base-color-white;
-                background-color: darken($base-color-light-blue, 10%);
+                background-color: $base-color-dark-grey;
             }
         }
 
         span {
 
             span {
-                color: darken($base-color-light-blue, 10%);
+                color: $base-color-dark-grey;
                 font-size: 40px;
             }
         }
