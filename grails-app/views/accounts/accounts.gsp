@@ -23,12 +23,14 @@
             <table id="accountsTable" class="display accounts-table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email Address</th>
                     <th>Role</th>
                     <th>Groups</th>
+                    <th>Last Update</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -63,7 +65,7 @@
                         <option value="3">Management</option>
                         <option value="4">Nurse</option>
                         <option value="5">Physical therapists (PTs)</option>
-                        <option value="6">Primary Physican</option>
+                        <option value="6">Primary Physician</option>
                         <option value="7">Scheduler</option>
                         <option value="8">Surgeon</option>
                     </select>

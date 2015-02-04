@@ -204,11 +204,6 @@
                     $('.last-name-info').text(patientInfo.lastName);
                     $('.email-info').text(patientInfo.email);
                     $('.phone-info').text(patientInfo.phoneNum);
-                    //$('.id-info').empty().append(patientInfo.id);
-                    //$('.first-name-info').empty().append(patientInfo.firstName);
-                    //$('.last-name-info').empty().append(patientInfo.lastName);
-                    //$('.email-info').empty().append(patientInfo.email);
-                    //$('.phone-info').empty().append(patientInfo.phoneNum);
                 }
             }
         });

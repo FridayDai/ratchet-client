@@ -50,7 +50,6 @@ class AccountService {
     }
 
     def createAccount(HttpServletRequest request, HttpServletResponse response, params) {
-        def clientId = params?.clientId
         def firstName = params?.firstName
         def lastName = params?.lastName
         def email = params?.email
@@ -61,7 +60,7 @@ class AccountService {
 
         def url = grailsApplication.config.ratchetv2.server.staffs.url
         def resp = Unirest.post(url)
-                .field("clientId", clientId)
+                .field("clientId", request.session.clientId)
                 .field("firstName", firstName)
                 .field("lastName", lastName)
                 .field("email", email)
@@ -72,6 +71,35 @@ class AccountService {
                 .asString()
 
         if (resp.status == 201) {
+            return true
+        }
+    }
+
+    def inviteAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.inviteStaff.url, accountId)
+        def resp = Unirest.get(url)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+
+    }
+
+    def updateAccount(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getAccount.url, params?.accountId)
+        def resp = Unirest.post(url)
+                .field("clientId",request.session.clientId)
+                .field("email", params?.email)
+                .field("firstName", params?.firstName)
+                .field("lastName", params?.lastName)
+                .field("type", params?.type)
+                .field("doctor", params?.doctor)
+                .field("patientManagement", params?.patientManagement)
+                .field("accountManagement", params?.accountManagement)
+                .asString()
+
+        if (resp.status == 200) {
             return true
         }
     }

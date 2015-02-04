@@ -16,13 +16,26 @@ class AccountsController {
     }
 
     def getSingleAccount() {
-        def accountId = params.id
+        def accountId = params?.id
         def accountInfo = accountService.getSingleAccount(request, response, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
 
     def createAccount() {
         def resp = accountService.createAccount(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def inviteAccount() {
+        def accountId = params?.accountId
+        def resp = accountService.inviteAccount(request, response, accountId)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def updateAccount() {
+        def resp = accountService.updateAccount(request, response, params)
         def result = [resp: resp]
         render result as JSON
     }
