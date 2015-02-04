@@ -15,8 +15,11 @@
             <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
         </div>
         <div class="inner-search">
-            <div class="search-content">
-                <input type="text" placeholder="Account ID, Name" class="search-input"/>
+            <div class="search-content clear">
+                <div class="filler-content pull-right">
+                    <input type="text" placeholder="Account ID, Name" class="search-input">
+                    <span class="search"></span>
+                </div>
             </div>
         </div>
         <div class="table-group">

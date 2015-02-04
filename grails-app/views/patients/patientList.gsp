@@ -15,7 +15,7 @@
             <a href="#" id="add-patient" class="btn add-patient">Add Patient</a>
         </div>
         <div class="inner-search">
-            <div class="search-content">
+            <div class="search-content clear">
                 <div class="filler-content">
                     <label for="selectPatient">PATIENT</label>
                     <select name="selectPatient" id="selectPatient">
@@ -31,8 +31,9 @@
                     <label for="selectSurgeon">SURGEON</label>
                     <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
                 </div>
-                <div class="filler-content">
-                    <input type="text" placeholder="Patient ID, Name" class="placeholder">
+                <div class="filler-content right-search">
+                    <input type="text" placeholder="Patient ID, Name" class="search-input">
+                    <span class="search"></span>
                 </div>
             </div>
         </div>
@@ -41,10 +42,11 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Address</th>
                     <th>Phone Number</th>
-                    <th>Profile Photo</th>
+                    <th>Last Update</th>
                     <th></th>
                 </tr>
                 </thead>
