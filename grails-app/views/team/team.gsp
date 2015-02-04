@@ -77,6 +77,14 @@
 <g:form class="inviteGiverForm ui-hidden" id="invite-giver-form">
 
     <div class="form-group">
+        <input id="giver-firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
+    </div>
+
+    <div class="form-group">
+        <input id="giver-lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
+    </div>
+
+    <div class="form-group">
         <input id="giver-email" name="email" type="email" class="input-group" placeholder="Email Address"/>
     </div>
 

@@ -55,4 +55,10 @@ class TeamController extends BaseController {
         def result = [resp: resp, medicalRecordId: medicalRecordId]
         render result as JSON
     }
+
+    def updateCareGiver() {
+        def resp = treatmentService.updateCareGiver(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
 }

@@ -38,7 +38,7 @@ class TreatmentService {
 
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatments.url, params?.clientId)
         def resp = Unirest.post(url)
-                .field("patientId",params?.id)
+                .field("patientId", params?.id)
                 .field("clientId", params?.clientId)
                 .field("firstName", params?.firstName)
                 .field("lastName", params?.lastName)
@@ -163,6 +163,8 @@ class TreatmentService {
                 .field("medicalRecordId", params?.medicalRecordId)
                 .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
                 .field("email", params?.email)
+                .field("firstName", params?.firstName)
+                .field("lastName", params?.lastName)
                 .field("relationShip", params?.relationship)
                 .asString()
         def result = JSON.parse(resp.body)
@@ -180,6 +182,22 @@ class TreatmentService {
                 params?.clientId, params?.patientId, params?.medicalRecordId)
         def resp = Unirest.post(url)
                 .field("surgeryTime", params?.surgeryTime)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+    }
+
+    def updateCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
+
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareGiver.url,
+                params?.medicalRecordId, params?.careGiverId)
+        def resp = Unirest.post(url)
+                .field("email", params?.email)
+                .field("firstName", params?.firstName)
+                .field("lastName", params?.lastName)
+                .field("relationShip", params?.relationship)
                 .asString()
 
         if (resp.status == 200) {

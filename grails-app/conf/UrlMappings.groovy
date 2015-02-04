@@ -26,7 +26,7 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
 
-
+        //team
         "/team"(controller: "team", action: "showMedicalCares")
         "/getCareTeam"(controller: "team", action: "getCareTeam")
         "/getCareGiver"(controller: "team", action: "getCareGiver")
@@ -34,6 +34,7 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
+        "/updateCareGiver"(controller: "team", action: "updateCareGiver")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")
@@ -41,7 +42,6 @@ class UrlMappings {
         "/team"(controller: "team", action: "showMedicalCares")
         "/patient/patientTeam"(controller: "patients", action: "showActivity")
         "/getStaffs"(controller: "staff", action: "getStaff")
-        "/getCareGiver"(controller: "patients", action: "getCareGiver")
 
         // treatment
         "/treatment/task"(controller: "task", action: "getTasks")
@@ -54,7 +54,7 @@ class UrlMappings {
         "/singleAccount/$id?"(controller: "accounts", action: "getSingleAccount")
         "/createAccount"(controller: "accounts", action: "createAccount")
         "/updateAccount"(controller: "accounts", action: "updateAccount")
-        "/inviteAccount/$accountId?"(controller: "accounts",action: "inviteAccount")
+        "/inviteAccount/$accountId?"(controller: "accounts", action: "inviteAccount")
 
         //task
         "/clients/$clientId/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
