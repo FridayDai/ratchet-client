@@ -11,28 +11,32 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">Patients</label>
+            <label class="title">PATIENTS</label>
             <a href="#" id="add-patient" class="btn add-patient">Add Patient</a>
         </div>
         <div class="inner-search">
             <div class="search-content">
-                <label for="selectPatient" class="lbl-by">PATIENT</label>
-                <select name="selectPatient" id="selectPatient">
-                    <option value="1" selected>All Patients</option>
-                    <option value="2" >My Patients</option>
-                </select>
-
-                <label for="treatmentForSearchPatient" class="lbl-by">TREATMENT</label>
-                <input type="text" class="input-group" name="treatmentForSearchPatient" id="treatmentForSearchPatient"/>
-
-                <label for="selectSurgeon" class="lbl-by">SURGEON</label>
-                <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
-
-                <input type="text" placeholder="Patient ID, Name" class="placeholder">
-                <a class="btn pull-right" href="#">Search</a>
+                <div class="filler-content">
+                    <label for="selectPatient">PATIENT</label>
+                    <select name="selectPatient" id="selectPatient">
+                        <option value="1" selected>All Patients</option>
+                        <option value="2" >My Patients</option>
+                    </select>
+                </div>
+                <div class="filler-content">
+                    <label for="treatmentForSearchPatient" >TREATMENT</label>
+                    <input type="text" class="input-group" name="treatmentForSearchPatient" id="treatmentForSearchPatient"/>
+                </div>
+                <div class="filler-content">
+                    <label for="selectSurgeon">SURGEON</label>
+                    <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
+                </div>
+                <div class="filler-content">
+                    <input type="text" placeholder="Patient ID, Name" class="placeholder">
+                </div>
             </div>
         </div>
-        <div class="provider-list-table">
+        <div class="table-group">
             <table id="patientsTable" class="display">
                 <thead>
                 <tr>

@@ -11,16 +11,13 @@
     <body>
     <div class="content">
         <div class="inner-header">
-            <label class="title">Accounts</label>
+            <label class="title">ACCOUNTS</label>
             <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
         </div>
         <div class="inner-search">
-            <input type="text" placeholder="Search" class="search-input"/>
-            <label>
-                Patients
-                <input type="search">
-            </label>
-            <a class="btn pull-right" href="#">Search</a>
+            <div class="search-content">
+                <input type="text" placeholder="Account ID, Name" class="search-input"/>
+            </div>
         </div>
         <div class="table-group">
             <table id="accountsTable" class="display accounts-table">

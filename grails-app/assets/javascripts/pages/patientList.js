@@ -38,7 +38,7 @@
         provideTable = $("#patientsTable").DataTable({
             paging: true,
             searching: false,
-            ordering: false,
+            ordering: true,
             pageLength: 10,
             info: false,
             bLengthChange: false,
