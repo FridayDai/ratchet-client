@@ -27,14 +27,8 @@
         height: 40px;
         color: $base-font-color;
 
-        a {
-            text-decoration: underline;
-
-        }
-
         .bottom-content {
             position: relative;
-            //                margin-bottom: 20px;
             text-align: center;
 
             .icon-remove {
@@ -60,6 +54,16 @@
 
         .tr-label {
             color: $base-color-dark-grey;
+        }
+
+        &:hover {
+            background-color: $base-color-white-grey;
+            color: $base-color-dark-grey;
+
+            a {
+                color: $base-color-dark-grey;
+            }
+
         }
     }
 

@@ -43,26 +43,30 @@
             info: false,
             bLengthChange: false,
             "serverSide": true,
+            "bAutoWidth": false,
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache
                 data: data
             }),
             columns: [
-                {data: "id"},
+                {data: "id", width: "10%"},
+                {data: "firstName", width: "10%"},
+                {data: "lastName", width: "10%"},
+                {data: "email", width: "20%"},
+                {data: "phoneNumber", width: "10%"},
                 {
-                    data: function (source) {
-                        return source.firstName + " " + source.lastName;
-                    }
+                    data: function(source) {
+                        var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
+                        return formatDate;
+                    },
+                    width: "20%"
                 },
-                {data: "email"},
-                {data: "phoneNumber"},
-                {data: "profilePhoto"},
                 {
                     data: function (source) {
-                        //return '<label class="tr-label"> ' + source.treatments + '</label>'
-                        return '<a href="/patients/' + source.id + '"class="editor_edit" data-id ="' + source.id + '">View</a>';
-                    }
+                        return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '">View</a>';
+                    },
+                    width: "20%"
                 }
             ]
         });

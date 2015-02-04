@@ -4,20 +4,6 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.table-group {
-    width: 100%;
-}
-
-.accounts-table {
-    th:first-child {
-        width: 10%;
-    }
-
-    th {
-        width: 15%;
-    }
-}
-
 .accounts-form {
     .dr {
         display: inline-block;
