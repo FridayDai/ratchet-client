@@ -73,6 +73,12 @@
         });
     }
 
+    /**
+     * render new task to page
+     * @param taskObject
+     * @param status
+     * @private
+     */
     function _renderNewTask(taskObject, status) {
 
         if (status === '2') {
@@ -129,12 +135,13 @@
             url: opts.urls.email.format(null, opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function (data) {
-            if (data === "true") {
+            var status = element.closest(".box-item").data("status");
+            if (data === "true" && status !== "overdue") {
                 var date = new Date();
                 date = moment(date).format("MMM/DD/YYYY, HH:mm a");
                 var html = "<div class='item-status pending'><label class='uppercase status-background'>pending</label></div>";
                 var target = element.parent().siblings('.show-status').html('').append(html).closest(".box-item");
-                target = target.find('.sent-time').text("Send Time: " +date+ "").closest(".box-item");
+                target = target.find('.sent-time').text("Send Time: " + date + "").closest(".box-item");
                 target.addClass('pending').detach().appendTo($('#task-row-sent'));
             }
         });

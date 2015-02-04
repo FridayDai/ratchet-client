@@ -333,3 +333,14 @@ a {
 .table-group {
     margin: 40px;
 }
+
+.disabled {
+
+    &:hover,
+    &:focus{
+        cursor: default;
+        background-color: transparent !important;
+        box-shadow: none;
+    }
+
+}

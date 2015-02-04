@@ -92,6 +92,10 @@
         padding-top: 14px;
     }
 
+    button {
+        color: $base-color-dark-grey;
+    }
+
     .item-context {
         height: 72px;
 
@@ -103,6 +107,19 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
+    }
+
+    .disabled {
+        border-color: $base-font-color;
+        color: $base-font-color;
+        text-decoration: line-through;
+
+        &:hover,
+        &:focus {
+            border-color: $base-font-color;
+            color: $base-font-color;
+        }
+
     }
 
     // change background and color according to status

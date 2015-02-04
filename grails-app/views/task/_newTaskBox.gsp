@@ -1,5 +1,5 @@
 <%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
-<div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}">
+<div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}" data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <div class="item-header">
         <p>ID: ${task?.id}</p>
@@ -30,7 +30,10 @@
     </div>
 
     <div class="item-notify">
-        <button class="task-email" data-task-id="${task?.id}">Click to notify</button>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <button class="btn task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
+        </g:if>
+        <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
     </div>
 
 </div>
