@@ -56,6 +56,11 @@
         careGiverTable;
 
 
+    /**
+     *
+     * @param data
+     * @private
+     */
     function _initTeamTable(data) {
 
         if (careTeamTable) {
@@ -110,11 +115,11 @@
         });
     }
 
-    //function _addSurgeonLogo(type) {
-    //    if (type === "Nurse") {
-    //        '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>';
-    //    }
-    //}
+    /**
+     *
+     * @param data
+     * @private
+     */
 
     function _initGiverTable(data) {
 
@@ -151,14 +156,12 @@
                         return careGiverRelation[source.relationShip - 1];
                     }
                 },
-                //{data: "relationShip"},
                 {data: "email"},
                 {
                     data: function (source) {
                         return careGiverStatus[source.status - 1];
                     }
                 },
-                //{data: "status"},
                 {
                     data: function (source) {
                         return '<div class="bottom-content">' +
@@ -313,12 +316,6 @@
 
         });
     }
-
-    //.done(function (data) {
-    //    if (data.resp === true) {
-    //        _initTeamTable();
-    //        _removeCareTeam();
-    //    }
 
     /**
      * remove care team event

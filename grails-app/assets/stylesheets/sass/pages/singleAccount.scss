@@ -38,6 +38,17 @@
             margin-left: 49px;
             font-size: 16px;
         }
+
+
+        .icon-edit {
+//            position: absolute;
+            top: -5px;
+            right: 35px;
+            width: 20px;
+            height: 20px;
+            background: url('../../../images/edit.png') no-repeat 0 0;
+            background-size: cover;
+        }
     }
 
     .account-bottom-info {
@@ -54,3 +65,4 @@
     }
 
 }
+
