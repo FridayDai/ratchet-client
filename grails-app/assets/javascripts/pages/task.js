@@ -18,49 +18,21 @@
             }
         },
         urls: {
-            query: "{0}/patients/{1}/treatments/{2}/task".format(RC.constants.baseUrl)
+            query: "{0}/clients/{1}/patients/{2}/treatments/{3}/task".format(RC.constants.baseUrl),
+            email: "{0}/clients/{1}/patients/{2}/treatments/{3}/task/{4}/sendMail".format(RC.constants.baseUrl)
         }
     };
 
-    var IsEditing = false; // Private variables for note
-    var noteContent = null; // Private variables for note
-    var dropdownList; // Private variables for dropdownList
-
-    /**
-     * add task
-     * @private
-     */
-    function _addTask() {
-
-        $("#add-task").on("click", function (e) {
-            e.preventDefault();
-            $(".task-form")[0].reset();
-            var patientId = $(this).data("patientId");
-            var medicalRecord = $(this).data("medicalRecordId");
-            //var patientId = "x12345";
-            //var medicalRecord = 31;//need change
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".task-form"),
-                okCallback: function () {
-                    $('.form-box').each(function () {
-                        _blurFormBox($(this));
-                    });
-                    if ($("#task-form").valid()) {
-                        _add(patientId, medicalRecord);
-                        //_renderNewTask();
-                        return true;
-                    }
-                    return false;
-                },
-                cancelCallback: function () {
-                    $('.form-box').each(function () {
-                        _blurFormBox($(this));
-                    });
-
+    //add page global value of this page to opts
+    function _addValueToOpts() {
+        _.extend(opts, {
+                params: {
+                    clientId: $("#task-info-hidden").data("clientId"),
+                    patientId: $("#task-info-hidden").data("patientId"),
+                    medicalRecordId: $("#task-info-hidden").data("medicalRecordId")
                 }
-
-            }));
-        });
+            }
+        );
     }
 
     /**
@@ -69,7 +41,7 @@
      * @param medicalRecordId
      * @private
      */
-    function _add(patientId, medicalRecordId) {
+    function _add(clientId, patientId, medicalRecordId) {
         var toolId = $("input:radio[name=task-template]:checked").val();
         var requireCompletion = $("input:radio[name=task-template]:checked").data("requireCompletion");
         var relativeInterval = $("#relativeInterval option:selected").val();
@@ -83,7 +55,7 @@
         var sendMillionSeconds = relativeInterval * 60000 * (minutes + 60 * (hours + 24 * (days + 7 * weeks)));
         var remindMillionSeconds = 3600000 * (remindHours + 24 * remindDays);
         var request = $.ajax({
-            url: opts.urls.query.format(null, patientId, medicalRecordId),
+            url: opts.urls.query.format(null, clientId, patientId, medicalRecordId),
             data: {
                 toolId: toolId,
                 status: status,
@@ -94,12 +66,19 @@
         });
         request.done(function (data) {
             _renderNewTask(data, status);
+            _init();
         });
-        request.fail(function () {
-
+        request.fail(function (data) {
+            console.log("failed " + data + "!");
         });
     }
 
+    /**
+     * render new task to page
+     * @param taskObject
+     * @param status
+     * @private
+     */
     function _renderNewTask(taskObject, status) {
 
         if (status === '2') {
@@ -111,139 +90,84 @@
     }
 
     /**
-     * remove task
+     * add task
      * @private
      */
-    function _removeTask() {
-        $('.a-remove').click(function () {
-            var $this = $(this);
-            var taskId = $this.data('id');
+    function _addTask() {
 
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-                element: $(".warn"),
-                closeCallback: function () {
-                    console.log(taskId);
-                    $this.closest('.box-item').remove();
+        $("#add-task").on("click", function (e) {
+            e.preventDefault();
+            $(".task-form")[0].reset();
+            //var patientId = $(this).data("patientId");
+            //var medicalRecord = $(this).data("medicalRecordId");
+            var clientId = opts.params.clientId;
+            var patientId = opts.params.patientId;
+            var medicalRecord = opts.params.medicalRecordId;
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+                element: $(".task-form"),
+                okCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurToolBox($(this));
+                    });
+                    if ($("#task-form").valid()) {
+                        _add(clientId, patientId, medicalRecord);
+                        //_renderNewTask();
+                        return true;
+                    }
+                    return false;
+                },
+                cancelCallback: function () {
+                    $('.form-box').each(function () {
+                        _blurToolBox($(this));
+                    });
+
                 }
+
             }));
         });
     }
 
     /**
-     * NOTE, show textarea for note
-     * @param content
-     * @returns {boolean}
-     * @private
+     * sendEmail about task to patient
      */
-    function _showNote(content) {
-        var p = content.find("p");
-        var value = p.text();
-        p.hide();
-        content.parent().removeClass('note-bg').addClass('note-bg-edit');
-        content.find("textarea").val(value).show();
-        return true;
-
-    }
-
-    /**
-     * NOTE, save textarea content and hide textarea for note
-     * @param content
-     * @returns {boolean}
-     * @private
-     */
-    function _saveNote(content) {
-        var textarea = content.find("textarea");
-        var value = textarea.val();
-        textarea.hide();
-        content.parent().removeClass('note-bg-edit').addClass('note-bg');
-        content.find("p").text(value).show();
-        return false;
-    }
-
-    /**
-     * NOTE, when complete the edit, the function will be use
-     * @private
-     */
-    function _finishEdit() {
-        $(document.body).click(function (e) {
-            e.preventDefault();
-            if (noteContent) {
-                IsEditing = _saveNote(noteContent);
-                noteContent = null;
-                $(document.body).unbind("click");
+    function _sendTaskEmail(element, taskId) {
+        var request = $.ajax({
+            url: opts.urls.email.format(null, opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
+        });
+        request.done(function (data) {
+            var status = element.closest(".box-item").data("status");
+            if (data === "true" && status !== "overdue") {
+                var date = new Date();
+                date = moment(date).format("MMM/DD/YYYY, HH:mm a");
+                var html = "<div class='item-status pending'><label class='uppercase status-background'>pending</label></div>";
+                var target = element.parent().siblings('.show-status').html('').append(html).closest(".box-item");
+                target = target.find('.sent-time').text("Send Time: " + date + "").closest(".box-item");
+                target.addClass('pending').detach().appendTo($('#task-row-sent'));
             }
         });
-    }
-
-    /**
-     * NOTE, the main function of note
-     * @private
-     */
-
-    function _editNote() {
-
-        $(".item-note").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (!IsEditing) {
-                noteContent = $(this).parent().next(".note-content");
-                IsEditing = _showNote(noteContent);
-                _finishEdit();
-            }
-
-        });
-
-        $(".note-p").dblclick(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (!IsEditing) {
-                noteContent = $(this).parent(".note-content");
-                IsEditing = _showNote(noteContent);
-                _finishEdit();
-            }
-        });
-
-        $(".text-area-form").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-
-    }
-
-    /**
-     * DROPDOWN, clear the dropdown
-     * @private
-     */
-
-    function _closeDropdown() {
-        $(document.body).click(function (e) {
-            e.preventDefault();
-            if (dropdownList) {
-                dropdownList.hide();
-                dropdownList = null;
-                $(document.body).unbind("click");
-            }
+        request.fail(function () {
 
         });
     }
 
-    /**
-     * DROPDOWN, dropdown main function to init this
-     * @private
-     */
-    function _initDropdownList() {
+    function _initTaskBox() {
+        //$('.a-remove').click(function () {
+        //    var $this = $(this);
+        //    var taskId = $this.data('id');
+        //
+        //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+        //        element: $(".warn"),
+        //        closeCallback: function () {
+        //            console.log(taskId);
+        //            $this.closest('.box-item').remove();
+        //        }
+        //    }));
+        //});
 
-        $('.btn-dropdown').click(function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $(this).trigger('focus');
-            if (dropdownList) {
-                //before new a dropdownList, we need to hide the old one
-                dropdownList.hide();
-            }
-            dropdownList = $(this).find(".dropdown-list");
-            dropdownList.show();
-            _closeDropdown();
+        $('.task-email').click(function () {
+            var element = $(this);
+            var taskId = element.data("taskId");
+            _sendTaskEmail(element, taskId);
         });
     }
 
@@ -253,7 +177,7 @@
      * @param element
      * @private
      */
-    function _blurFormBox(element) {
+    function _blurToolBox(element) {
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
         var changeColor = element.find(".header-middle .color-change");
@@ -273,7 +197,7 @@
      * @param element
      * @private
      */
-    function _activeFormBox(element) {
+    function _activeToolBox(element) {
 
         var type = element.attr("value");
         var headerLeft = element.find("div").filter(".header-left");
@@ -293,7 +217,7 @@
      * TASK FORM BOX, init the form box when click
      * @private
      */
-    function _clickFormBox() {
+    function _initToolBox() {
 
         $('.form-box').click(function () {
             var $this = $(this);
@@ -302,17 +226,17 @@
             var requireCompletion = radio.data("requireCompletion");
             var hideMessageArea = $("#hide-message");
             if (requireCompletion === true) {
-                hideMessageArea.css("visibility","visible");
+                hideMessageArea.css("visibility", "visible");
             } else {
-                hideMessageArea.css("visibility","hidden");
+                hideMessageArea.css("visibility", "hidden");
             }
 
             $("input:radio[name=task-template]").each(function () {
-                _blurFormBox($(this).closest(".form-box"));
+                _blurToolBox($(this).closest(".form-box"));
                 this.checked = false;
             });
 
-            _activeFormBox($(this));
+            _activeToolBox($(this));
             radio.prop('checked', true);
 
         });
@@ -322,15 +246,15 @@
             var requireCompletion = $(this).data("requireCompletion");
             var hideMessageArea = $("#hide-message");
             if (requireCompletion === true) {
-                hideMessageArea.css("visibility","visible");
+                hideMessageArea.css("visibility", "visible");
             } else {
-                hideMessageArea.css("visibility","hidden");
+                hideMessageArea.css("visibility", "hidden");
             }
             $("input:radio[name=task-template]").each(function () {
-                _blurFormBox($(this).closest(".form-box"));
+                _blurToolBox($(this).closest(".form-box"));
             });
 
-            _activeFormBox($(this).closest(".form-box"));
+            _activeToolBox($(this).closest(".form-box"));
 
         });
 
@@ -346,6 +270,52 @@
         });
 
     }
+
+    /**
+     * DROPDOWN, dropdown show and hide
+     */
+    var dropdownMenu = function () {
+
+        var dropdownList; // Private variables for dropdownList
+
+        /**
+         * DROPDOWN, clear the dropdown
+         * @private
+         */
+        function _closeDropdown() {
+            $(document.body).click(function (e) {
+                e.preventDefault();
+                if (dropdownList) {
+                    dropdownList.hide();
+                    dropdownList = null;
+                    $(document.body).unbind("click");
+                }
+
+            });
+        }
+
+        /**
+         * DROPDOWN, dropdown main function to init this
+         * @private
+         */
+        function _initDropdownList() {
+
+            $('.btn-dropdown').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).trigger('focus');
+                if (dropdownList) {
+                    //before new a dropdownList, we need to hide the old one
+                    dropdownList.hide();
+                }
+                dropdownList = $(this).find(".dropdown-list");
+                dropdownList.show();
+                _closeDropdown();
+            });
+        }
+
+        return _initDropdownList();
+    };
 
     /**
      * DATETIMEPICKER, init dateTimePicker
@@ -368,12 +338,12 @@
      * @private
      */
     function _init() {
-        _initDatePicker();
-        _initDropdownList();
-        _clickFormBox();
+        _addValueToOpts();
         _addTask();
-        _removeTask();
-        _editNote();
+        _initTaskBox();
+        _initToolBox();
+        dropdownMenu();
+        _initDatePicker();
     }
 
     $.extend(task, {
