@@ -3,19 +3,18 @@
 <g:hiddenField name="task-info-hidden" id="task-info-hidden" data-client-id="${clientId}" data-patient-id="${patientId}"
                data-medical-record-id="${medicalRecordId}"></g:hiddenField>
 
-<div class="task-header">
+%{--<div class="task-header">--}%
     %{--<button id="add-task" class="btn btn-right btn-task">+ Add Task</button>--}%
-</div>
+%{--</div>--}%
 
 <div class="items-title">
     <h4>SENT ITEMS</h4>
 </div>
 
-<div class="tasks-list">
-    <g:render template="newTaskBox" model="['task': task]"></g:render>
+<div class="tasks-list list-bottom">
     <div class="task-row" id="task-row-sent">
         <g:each in="${sentTasks}" var="task">
-            <g:render template="taskBox" model="['task': task]"></g:render>
+            <g:render template="newTaskBox" model="['task': task]"></g:render>
         </g:each>
     </div>
 </div>
@@ -25,10 +24,9 @@
 </div>
 
 <div class="tasks-list">
-
     <div class="task-row" id="task-row-schedule">
         <g:each in="${scheduleTasks}" var="task">
-            <g:render template="taskBox" model="['task': task]"></g:render>
+            <g:render template="newTaskBox" model="['task': task]"></g:render>
         </g:each>
 
     </div>

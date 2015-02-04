@@ -69,7 +69,7 @@
             _init();
         });
         request.fail(function (data) {
-            console.log("failed "+ data +"!");
+            console.log("failed " + data + "!");
         });
     }
 
@@ -122,22 +122,21 @@
     }
 
     /**
-     * remove task
-     * @private
-     */
-    //function _removeTask() {
-    //
-    //}
-
-    /**
      * sendEmail about task to patient
      */
-    function _sendTaskEmail(taskId) {
+    function _sendTaskEmail(element, taskId) {
         var request = $.ajax({
             url: opts.urls.email.format(null, opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
-        request.done(function () {
-
+        request.done(function (data) {
+            if (data === "true") {
+                var date = new Date();
+                date = moment(date).format("MMM/DD/YYYY, HH:mm a");
+                var html = "<div class='item-status pending'><label class='uppercase status-background'>pending</label></div>";
+                var target = element.parent().siblings('.show-status').html('').append(html).closest(".box-item");
+                target = target.find('.sent-time').text("Send Time: " +date+ "").closest(".box-item");
+                target.addClass('pending').detach().appendTo($('#task-row-sent'));
+            }
         });
         request.fail(function () {
 
@@ -145,22 +144,23 @@
     }
 
     function _initTaskBox() {
-        $('.a-remove').click(function () {
-            var $this = $(this);
-            var taskId = $this.data('id');
-
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-                element: $(".warn"),
-                closeCallback: function () {
-                    console.log(taskId);
-                    $this.closest('.box-item').remove();
-                }
-            }));
-        });
+        //$('.a-remove').click(function () {
+        //    var $this = $(this);
+        //    var taskId = $this.data('id');
+        //
+        //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+        //        element: $(".warn"),
+        //        closeCallback: function () {
+        //            console.log(taskId);
+        //            $this.closest('.box-item').remove();
+        //        }
+        //    }));
+        //});
 
         $('.task-email').click(function () {
-            var taskId = $(this).data("taskId");
-            _sendTaskEmail(taskId);
+            var element = $(this);
+            var taskId = element.data("taskId");
+            _sendTaskEmail(element, taskId);
         });
     }
 
@@ -311,98 +311,6 @@
     };
 
     /**
-     * NOTE, edit note for task
-     */
-    var noteEditor = function () {
-
-        var IsEditing = false; // Private variables for note
-        var noteContent = null; // Private variables for note
-
-        /**
-         * NOTE, show textarea for note
-         * @param content
-         * @returns {boolean}
-         * @private
-         */
-        function _showNote(content) {
-            var p = content.find("p");
-            var value = p.text();
-            p.hide();
-            content.parent().removeClass('note-bg').addClass('note-bg-edit');
-            content.find("textarea").val(value).show();
-            return true;
-
-        }
-
-        /**
-         * NOTE, save textarea content and hide textarea for note
-         * @param content
-         * @returns {boolean}
-         * @private
-         */
-        function _saveNote(content) {
-            var textarea = content.find("textarea");
-            var value = textarea.val();
-            textarea.hide();
-            content.parent().removeClass('note-bg-edit').addClass('note-bg');
-            content.find("p").text(value).show();
-            return false;
-        }
-
-        /**
-         * NOTE, when complete the edit, the function will be use
-         * @private
-         */
-        function _finishEdit() {
-            $(document.body).click(function (e) {
-                e.preventDefault();
-                if (noteContent) {
-                    IsEditing = _saveNote(noteContent);
-                    noteContent = null;
-                    $(document.body).unbind("click");
-                }
-            });
-        }
-
-        /**
-         * NOTE, the main function of note
-         * @private
-         */
-
-        function _initNoteEditor() {
-
-            $(".item-note").on("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!IsEditing) {
-                    noteContent = $(this).parent().next(".note-content");
-                    IsEditing = _showNote(noteContent);
-                    _finishEdit();
-                }
-
-            });
-
-            $(".note-p").dblclick(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!IsEditing) {
-                    noteContent = $(this).parent(".note-content");
-                    IsEditing = _showNote(noteContent);
-                    _finishEdit();
-                }
-            });
-
-            $(".text-area-form").on("click", function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            });
-
-        }
-
-        return _initNoteEditor();
-    };
-
-    /**
      * DATETIMEPICKER, init dateTimePicker
      * @private
      */
@@ -428,7 +336,6 @@
         _initTaskBox();
         _initToolBox();
         dropdownMenu();
-        noteEditor();
         _initDatePicker();
     }
 
