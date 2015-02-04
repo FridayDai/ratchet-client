@@ -41,6 +41,7 @@
             info: false,
             bLengthChange: false,
             "serverSide": true,
+            "bAutoWidth": false,
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache
@@ -56,16 +57,30 @@
                         } else {
                             return '';
                         }
-                    }
+                    },
+                    width: "5%"
                 },
-                {data: "id"},
-                {data: "firstName"},
-                {data: "lastName"},
-                {data: "email"},
+                {
+                    data: "id",
+                    width: "5%"
+                },
+                {
+                    data: "firstName",
+                    width: "5%"
+                },
+                {
+                    data: "lastName",
+                    width: "5%"
+                },
+                {
+                    data: "email",
+                    width: "10%"
+                },
                 {
                     data: function (source) {
                         return accountType[source.type - 1];
-                    }
+                    },
+                    width: "10%"
                 },
                 {
                     data: function (source) {
@@ -74,19 +89,22 @@
                             patientMgt = source.patientManagement ? groupMgt.push("Patients Mgt") : null;
 
                         return groupMgt.join(', ');
-                    }
+                    },
+                    width: "13%"
                 },
                 {
                     data: function (source) {
                         var lastUpdateTime = new Date(source.lastUpdateDate);
                         var formatTime = moment(lastUpdateTime).format('MMM D, YYYY h:mm:ss a');
                         return formatTime;
-                    }
+                    },
+                    width: "15%"
                 },
                 {
                     data: function (source) {
                         return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="editor_edit">View</a>';
-                    }
+                    },
+                    width: "10%"
                 }
             ]
         });

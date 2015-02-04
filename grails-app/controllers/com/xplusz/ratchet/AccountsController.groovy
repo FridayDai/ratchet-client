@@ -2,7 +2,9 @@ package com.xplusz.ratchet
 
 import grails.converters.JSON
 
-class AccountsController {
+class AccountsController extends BaseController{
+
+    def beforeInterceptor = [action: this.&auth]
 
     def accountService
 
