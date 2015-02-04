@@ -1,8 +1,10 @@
 <div class="clear">
     <div class="inner-search">
-        <label for="selectStaffs" class="lbl-by">By</label>
-        <input name="selectStaffs" id="selectStaffs" class="input-group"/>
-        <a id="searchActivity" class="btn pull-right" href="#">Search</a>
+        <div class="search-content">
+            <label for="selectStaffs" class="lbl-by">By</label>
+            <input name="selectStaffs" id="selectStaffs" class="input-group"/>
+            <a id="searchActivity" class="btn pull-right" href="#">Search</a>
+        </div>
     </div>
 
     <div class="activity-list-table">

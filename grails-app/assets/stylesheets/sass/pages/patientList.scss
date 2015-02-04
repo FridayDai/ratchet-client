@@ -4,35 +4,6 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.inner-header {
-    padding: 17px;
-    border-bottom: 6px solid $base-color-white-grey;
-    height: 55px;
-
-    .title {
-        width: 80%;
-        color: $base-color-dark-grey;
-        font-size: 16px;
-    }
-}
-
-.inner-search {
-
-    .search-content {
-        margin: 20px 40px;
-        padding: 20px;
-        background-color: $base-color-light-white;
-    }
-    input {
-        min-width: 220px;
-        height: 25px;
-        margin-top: 5px;
-        margin-left: 5px;
-        padding-left: 10px;
-        border: 0;
-    }
-}
-
 .inline {
     display: inline-block;
 }
@@ -40,8 +11,13 @@
 .add-patient {
     display: inline-block;
     float: right;
+    font-size: 16px;
+    font-family: 'Ionicons';
+
+    &:before {
+        display: inline-block;
+        margin-right: 10px;
+        content: '\f2c7';
+    }
 }
 
-.provider-list-table {
-    margin: 40px;
-}

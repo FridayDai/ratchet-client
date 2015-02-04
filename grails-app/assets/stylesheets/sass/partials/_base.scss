@@ -7,8 +7,8 @@
 
 @font-face {
     font-family: 'Ionicons';
-    src:url('../../../fonts/ionicons.eot');
-    src:url('../../../fonts/ionicons.eot?#iefix') format('embedded-opentype'),
+    src: url('../../../fonts/ionicons.eot');
+    src: url('../../../fonts/ionicons.eot?#iefix') format('embedded-opentype'),
     url('../../../fonts/ionicons.ttf?') format('truetype'),
     url('../../../fonts/ionicons.woff') format('woff'),
     url('../../../fonts/ionicons.svg?#Ionicons') format('svg');
@@ -289,4 +289,47 @@ a {
 
 .select2-container {
     min-width: 220px;
+}
+
+.filler-content {
+    display: inline-block;
+    max-width: 280px;
+    margin-top: 10px;
+
+    label {
+        width: 100%;
+    }
+}
+
+.inner-header {
+    height: 46px;
+    padding: 22px;
+    border-bottom: 6px solid $base-color-white-grey;
+
+    .title {
+        width: 80%;
+        color: $base-color-dark-grey;
+        font-size: 30px;
+    }
+}
+
+.inner-search {
+
+    .search-content {
+        margin: 20px 40px;
+        padding: 20px;
+        background-color: $base-color-search;
+    }
+
+    input {
+        min-width: 220px;
+        height: 25px;
+        margin-top: 5px;
+        padding-left: 10px;
+        border: 0;
+    }
+}
+
+.table-group {
+    margin: 40px;
 }
