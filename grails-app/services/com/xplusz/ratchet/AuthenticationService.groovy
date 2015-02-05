@@ -58,7 +58,10 @@ class AuthenticationService {
 
         if (resp.status == 200) {
             request.session.token = result.token
+            request.session.accountId = result.id
             request.session.clientId = result.clientId
+            request.session.firstName = result.firstName
+            request.session.lastName = result.lastName
             def data = [
                     authenticated: true,
             ]
@@ -89,8 +92,6 @@ class AuthenticationService {
      * @param response
      */
     def logout(request, response) {
-        def session = request.session
-        def token = session?.token
         /**
          * Call backend logout api
          *
@@ -105,7 +106,6 @@ class AuthenticationService {
 
         def url = grailsApplication.config.ratchetv2.server.logout.url
         def resp = Unirest.get(url)
-                .header("X-Auth-Token", "${token}")
                 .asString()
         if (resp.status != 200) {
             log.warn("No user login in the session.")

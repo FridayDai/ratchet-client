@@ -9,13 +9,20 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 400
-                }
+                },
+                changePasswordFormArguments: {
+                    title: RC.constants.changePasswordTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 400
+                },
             },
             urls: {
                 query: "{0}/getAccounts".format(RC.constants.baseUrl),
                 add: "{0}/createAccount".format(RC.constants.baseUrl),
                 updateAccount: "{0}/updateAccount".format(RC.constants.baseUrl),
-                inviteAccount: "{0}/inviteAccount/{1}".format(RC.constants.baseUrl)
+                inviteAccount: "{0}/inviteAccount/{1}".format(RC.constants.baseUrl),
+                updatePassword: "{0}/updatePassword".format(RC.constants.baseUrl)
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
@@ -178,11 +185,11 @@
 
 
     /**
-     * bind add event
+     * bind add account event
      * @private
      */
     function _bindAddEvent() {
-        // new a record
+
         $("#add-account").on("click", function (e) {
             e.preventDefault();
             $(".accounts-form")[0].reset();
@@ -200,6 +207,10 @@
         });
     }
 
+    /**
+     * invite account again
+     * @private
+     */
     function _inviteAccount() {
         $("#invite-account").on("click", function (e) {
             e.preventDefault();
@@ -217,6 +228,10 @@
         });
     }
 
+    /**
+     * update account
+     * @private
+     */
     function _updateAccount() {
         $("#edit-account").on("click", function (e) {
             e.preventDefault();
@@ -289,6 +304,11 @@
     }
 
 
+    /**
+     * ajax call backend
+     * @param accountInfo
+     * @private
+     */
     function _updateStaff(accountInfo) {
         $.ajax({
             url: opts.urls.updateAccount,
@@ -335,17 +355,50 @@
         );
     }
 
-
     /**
-     * go back to previous page
+     * change account password
      * @private
      */
-    function _goBackToPrePage() {
-        $('.btn-back').on('click', function (e) {
-            e.preventDefault();
+    function _changePassword() {
 
-            parent.history.back();
-            return false;
+        $("#changePassword").on("click", function (e) {
+            e.preventDefault();
+            $(".update-password")[0].reset();
+
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.changePasswordFormArguments, {
+                element: $(".update-password"),
+                okCallback: function () {
+                    if ($("#updatePassword").valid()) {
+
+                        var oldPass = $("#oldPass").val();
+                        var newPass = $("#newPass").val();
+                        var confirmPass = $("#confirmPass").val();
+
+                        var passwords = {
+                            oldPassword: oldPass,
+                            password: newPass,
+                            confirmPassword: confirmPass
+                        };
+
+                        _updatePassword(passwords);
+
+                        return true;
+                    }
+                    return false;
+                }
+            }));
+        });
+    }
+
+    function _updatePassword(passwords) {
+        $.ajax({
+            url: opts.urls.updatePassword,
+            type: "POST",
+            data: passwords,
+            dataType: "json",
+            success: function (data) {
+
+            }
         });
     }
 
@@ -359,6 +412,7 @@
         _bindAddEvent();
         _inviteAccount();
         _updateAccount();
+        _changePassword();
     }
 
     _init();

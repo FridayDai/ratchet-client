@@ -21,6 +21,7 @@
         updateSurgeryTimeTitle: "Edit surgery time",
         confirmContent: "",
         loadingContent: "This is loading content",
+        changePasswordTitle:"CHANGE PASSWORD",
 
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",

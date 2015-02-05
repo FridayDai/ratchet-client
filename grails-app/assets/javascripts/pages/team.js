@@ -435,7 +435,7 @@
             var clientId = $("#hidden-client-id").val();
             var patientId = $("#hidden-patient-id").val();
 
-            var parent = $(this).parents();
+            var parent = $(this).parent().parent().parent();
             var firstName = parent.find("td.firstName").text();
             var lastName = parent.find("td.lastName").text();
             var relationship = parent.find("td.relationship").text();

@@ -42,13 +42,8 @@
                 <div class="lastLoginTime">
                     <span>
                         Last Login:
-                    </span>
-                    <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                  format="MMM d, yyyy h:mm:ss a"/></div>
-
-                <a href="#" id="edit-account" class="btn-edit" data-account-id="${accountInfo.id}">
-                    <div class="icon-edit"></div>
-                </a>
+                    </span><g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
+                                         format="MMM d, yyyy h:mm:ss a"/></div>
             </div>
 
             <div class="account-bottom-info clear">
@@ -87,53 +82,35 @@
                 </div>
             </div>
 
+            <a href="#" id="changePassword" class="btn">Change Password</a>
+
+            <a href="/logout" class="btn-edit-patient">
+                <span class="icon-edit"></span>
+                <span>Log out</span>
+            </a>
+
         </div>
     </div>
 
 
-    <g:form class="update-account-form ui-hidden" id="updateAccount" name="updateAccount">
+    <g:form class="update-password ui-hidden" id="updatePassword" name="updatePassword">
 
         <div class="form-group">
-            <span class="dr">Dr.</span><input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/>
+            <label>OLD PASSWORD</label>
+            <input id="oldPass" name="oldPass" type="password" class="input-group"
+                   placeholder="Enter old password" required/>
         </div>
 
         <div class="form-group">
-            <input id="firstName" name="firstName" type="text" class="input-group first-name"
-                   placeholder="First Name" required/>
+            <label>NEW PASSWORD</label>
+            <input id="newPass" name="newPass" type="password" class="input-group"
+                   placeholder="Enter new password" required/>
         </div>
 
         <div class="form-group">
-            <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
-        </div>
-
-        <div class="form-group">
-            <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" readonly/>
-        </div>
-
-        <div class="form-group">
-            <label class="role">
-                <span>Role:</span>
-                <select id="accountType" name="accountType">
-                    <option value="1">Anesthesiologist</option>
-                    <option value="2">Medical Assistant</option>
-                    <option value="3">Management</option>
-                    <option value="4">Nurse</option>
-                    <option value="5">Physical therapists (PTs)</option>
-                    <option value="6">Primary Physician</option>
-                    <option value="7">Scheduler</option>
-                    <option value="8">Surgeon</option>
-                </select>
-            </label>
-        </div>
-
-        <div class="form-group">
-            <div class="group">
-                <span>Groups:</span>
-                <label><input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
-                </label>
-                <label class="account-management"><input id="accountManagement" name="accountManagement"
-                                                         type="checkbox">Account Management</label>
-            </div>
+            <label>CONFIRM PASSWORD</label>
+            <input id="confirmPass" name="confirmPass" type="password" class="input-group"
+                   placeholder="Enter new password again" required/>
         </div>
 
     </g:form>
