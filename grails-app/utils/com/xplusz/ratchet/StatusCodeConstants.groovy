@@ -3,6 +3,7 @@ package com.xplusz.ratchet
 class StatusCodeConstants {
 
     //Staff type
+    public static final Integer STAFF_TYPE_SURGEON = 8
     public static final String[] STAFF_TYPE_LIST =
             ["ANESTHESIOLOGIST", "MEDICAL ASSISTANT", "MANAGEMENT", "NURSE", "PHYSICAL THERAPISTS", "PRIMARY PHYSICIAN", "SCHEDULER", "SURGEON"]
 

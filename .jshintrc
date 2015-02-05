@@ -11,6 +11,7 @@
         "jQuery": false,
         "RC": true,
         "_": false,
+        "moment": false,
         "d3": false
     },
     "maxparams": 4,

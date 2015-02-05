@@ -12,7 +12,7 @@ class TaskController extends BaseController {
         def clientId = params.clientId
         def patientId = params.patientId
         def medicalRecordId = params.medicalRecordId
-        def treatmentId = params.treatmentId
+//        def treatmentId = params.treatmentId
 
         def tasks = medicalRecordService.showTasksByMedicalRecord(clientId, medicalRecordId)
         def sentTasks = []
@@ -25,13 +25,12 @@ class TaskController extends BaseController {
             }
         }
 
-        def tools = toolService.getToolsByTreatment(treatmentId)
-        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, tools: tools, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
+//        def tools = toolService.getToolsByTreatment(treatmentId)
+        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
     }
 
     def addTaskToMedicalRecord() {
         def result = medicalRecordService.assignTaskToMedicalRecord(params)
-//        render g.render(template: "/task/newTaskBox", model: [id: id, description: description, title: title, toolType: toolType, status: status, sendTime: sendTime])
         render(template: "/task/taskBox", model: [task: result])
     }
 

@@ -25,6 +25,7 @@ class StaffService {
                 .queryString("max", max)
                 .queryString("offset", offset)
                 .queryString("clientId", request.session.clientId)
+                .queryString("type", StatusCodeConstants.STAFF_TYPE_SURGEON)
                 .asString()
 
         def result = JSON.parse(resp.body)
