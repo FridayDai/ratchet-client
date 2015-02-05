@@ -9,7 +9,7 @@
 
         //CONFIRM
         confirmTitle: "New Provider",
-        confirmPatientTitle: "Add a new Patient",
+        confirmPatientTitle: "NEW PATIENT",
         confirmTaskTitle: "Add Outcome Task",
         confirmNoteTitle: "Edit Note",
         confirmTeamTitle: "Add a new Team Member",

@@ -307,11 +307,15 @@ a {
     }
 }
 
+.select2-container-multi.select2-container-active .select2-choices {
+    border: 1px solid $base-color-dark-grey!important;
+}
+
 .select2-dropdown-open,
 .select2-container-active {
     .select2-choice {
         background-color: $base-color-white;
-        border: 1px solid $base-color-dark-grey;
+        border: 1px solid $base-color-dark-grey!important;
     }
 }
 
