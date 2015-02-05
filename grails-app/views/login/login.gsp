@@ -10,24 +10,44 @@
 
     <body>
 
-    %{--<h1>This is Login Page</h1>--}%
+    <div class="site-wrapper">
+        <div class="cover-container">
+            <div class="image-ratchet-health cover-inner-header"></div>
+            <g:form class="form" controller="authentication" method="post" action="login">
 
-    <g:form class="form" controller="authentication" method="post" action="login">
-        <g:if test="${errorMsg}">
-            <p class="error" id="errorLogin" rateLimit="${rateLimit}">${errorMsg}</p>
-        </g:if>
-        <div class="login">
-            <input name="email" type="text" class="form-control" placeholder="Email"/>
-        </div>
+                <div class="form-style-content">
+                    <div class="input-combination">
+                        <div class="align-left">EMAIL ADDRESS</div>
+                        <input name="email" type="text" class="input-control" placeholder="Enter E-mail"/>
+                    </div>
 
-        <div class="login">
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
-        </div>
+                    <div class="input-combination">
+                        <div class="align-left">PASSWORD</div>
+                        <input name="password" type="password" class="input-control" placeholder="Enter Password"/>
+                    </div>
 
-        <div class="login">
-            <input type="submit" class="btn-submit" id='btnLogin' value="Log In"/>
+                    <div class="error-area">
+                        <g:if test="${errorMsg}">
+                            <p class="error" id="errorLogin" rateLimit="${rateLimit}">${errorMsg}</p>
+                        </g:if>
+                    </div>
+
+                    <div class="remember-me">
+                        <label>
+                            <input type="checkbox" class="box-check">
+                            Remember me
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="align-center cover-inner-footer">
+                    <button type="submit" class="btn btn-submit" id='btnLogin'>Log In</button>
+                    <label class="forgot-password">Forgot Password?</label>
+                </div>
+            </g:form>
         </div>
-    </g:form>
+    </div>
 
     </body>
     </html>

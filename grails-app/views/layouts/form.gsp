@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<div class="container">
+<div>
     <g:layoutBody/>
 </div>
 
