@@ -5,13 +5,30 @@
 
 .ui-dialog {
     .ui-dialog-titlebar {
-        padding: 20px 0 0 30px;
+        padding: 20px;
         border: 0;
-        background: none;
+        border-bottom: 10px solid rgba(0, 0, 0, 0.2);
+        background: $base-color-white;
 
         .ui-dialog-title {
-            font-weight: bolder;
+            font-weight: 400;
+            color: $base-font-color;
         }
+
+        .ui-button {
+            border: 0;
+            margin-right: 10px;
+
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+            }
+        }
+    }
+
+    .ui-dialog-content {
+        height: auto!important;
+        background-color: $base-color-white;
     }
 
     .ui-dialog-buttonpane {
@@ -53,9 +70,6 @@
     }
 }
 
-.ui-dialog-content {
-    height: auto !important;
-}
 
 .ui-icon-closethick {
     display: none;
@@ -96,5 +110,11 @@
 }
 
 .ui-dialog-titlebar-close {
-    display: none;
+    font-family: 'Ionicons';
+    display: inline-block;
+
+    &:before {
+        content: '\f2d7';
+        display: inline-block;
+    }
 }
