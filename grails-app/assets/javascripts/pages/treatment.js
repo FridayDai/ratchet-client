@@ -29,7 +29,7 @@
         $('.datetime-picker').datetimepicker({
             controlType: 'input',
             showOn: "button",
-            buttonImage: "../../assets/patients/calender.png",
+            buttonImage: "../../assets/edit.png",
             buttonImageOnly: true,
             onClose: function (selectedDate) {
                 var parent = $(this).parent();
