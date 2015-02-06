@@ -45,7 +45,7 @@ class TreatmentService {
                 .field("phoneNumber", params?.phoneNum)
                 .field("email", params?.email)
                 .field("treatmentId", params?.treatmentId)
-                .field("staffIds", params?.staffIds)
+                .field("surgeonId", params?.staffIds)
                 .field("surgeryTime", params?.surgeryTime)
                 .asString()
 //                .field("primaryStaffId", params?.primaryStaffId)
