@@ -5,9 +5,9 @@
 
 .ui-dialog {
     .ui-dialog-titlebar {
-        padding: 20px;
+        padding: 10px;
         border: 0;
-        border-bottom: 10px solid rgba(0, 0, 0, .2);
+        border-bottom: 5px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
 
         .ui-dialog-title {
@@ -32,7 +32,8 @@
     }
 
     .ui-dialog-buttonpane {
-        margin-right: 35px;
+        margin-top: 0;
+        padding: 0;
         border: 0;
 
         button {
@@ -119,15 +120,35 @@
 }
 
 .form-group {
-    margin-top: 20px;
-    margin-left: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
     text-align: left;
 
     .lbl-group {
         display: table-row-group;
+        font-size: small;
     }
 
     .input-group {
+        height: 25px;
         margin-top: 0;
+        font-size: small;
+    }
+
+    .select2-container {
+        width: 336px;
+        height: 35px;
+        margin-top: 0;
+
+        .select2-choice {
+            height: 31px;
+        }
+    }
+
+    .select2-chosen {
+        margin-top: 5px;
+        margin-left: -5px;
+        font-size: small;
     }
 }
+

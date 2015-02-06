@@ -5,7 +5,6 @@
 .ui-timepicker-div {
     height: 80px;
     padding: 5px;
-    border-top: 1px solid $base-color-light-blue;
 
     .ui-widget-header {
         margin-bottom: 8px;
@@ -81,10 +80,10 @@
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'fontello';
+        font-family: 'Ionicons';
 
         &:before {
-            content: '\e803';
+            content: '\f126';
         }
     }
 
@@ -95,10 +94,10 @@
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'fontello';
+        font-family: 'Ionicons';
 
         &:before {
-            content: '\e800';
+            content: '\f123';
         }
     }
 
@@ -150,27 +149,28 @@
 
     .ui-datepicker-buttonpane {
         margin: 0;
+        display: none;
     }
 
     .ui-datepicker-prev {
         top: 10px;
         left: 10px;
-        font-family: 'fontello';
+        font-family: 'Ionicons';
         cursor: pointer;
 
         &:before {
-            content: '\e801';
+            content: '\f124';
         }
     }
 
     .ui-datepicker-next {
         top: 10px;
         right: 10px;
-        font-family: 'fontello';
+        font-family: 'Ionicons';
         cursor: pointer;
 
         &:before {
-            content: '\e802';
+            content: '\f125';
         }
     }
 }
@@ -184,4 +184,7 @@
     font-size: 20px;
 }
 
+//.ui-widget-content{
+//    border: none;
+//}
 

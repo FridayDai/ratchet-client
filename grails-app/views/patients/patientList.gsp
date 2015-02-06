@@ -116,7 +116,7 @@
                 </label>
             </div>
 
-            <div class="form-group inline">
+            <div class="form-group inline emr-email">
                  <label class="lbl-group">EMAIL ADDRESS</label>
                  <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
             </div>
@@ -124,10 +124,16 @@
 
             <h4>Treatment Info</h4>
 
-            <div class="form-group">
+            <div class="form-group inline">
                 <label class="lbl-group">TREATMENT</label>
                 <input id="selectTreatment" name="selectTreatment" type="text" class="input-group"
                        placeholder="Treatment" required/>
+            </div>
+
+            <div class="form-group inline div-hidden" id="div-surgery-time">
+                <label class="lbl-group">SURGERY TIME</label>
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time"
+                       required/>
             </div>
 
             <div class="form-group ">
@@ -136,11 +142,6 @@
                        required/>
             </div>
 
-            <div class="form-group div-hidden" id="div-surgery-time">
-                <label class="lbl-group">SURGERY TIME</label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time"
-                       required/>
-            </div>
         </g:form>
 
         <g:form class="warn ui-hidden">

@@ -62,59 +62,59 @@
      * @param data
      * @private
      */
-    function _initTeamTable(data) {
-
-        if (careTeamTable) {
-            careTeamTable.destroy();
-        }
-
-        careTeamTable = $("#careTeamTable").DataTable({
-            paging: true,
-            searching: false,
-            ordering: false,
-            pageLength: 10,
-            info: false,
-            bLengthChange: false,
-            "serverSide": true,
-            ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.getCareTeam,
-                pages: 2, // number of pages to cache
-                data: data
-            }),
-            columns: [
-                {
-                    data: function (source) {
-                        if (careTeamRole[source.staffType - 1] === "Surgeon") {
-                            return '<div class="bottom-content">' +
-                                '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
-                                '</div>';
-                        } else {
-                            return '';
-                        }
-                    }
-                },
-                {
-                    data: "id",
-                    className: "careTeamId"
-                },
-                {data: "firstName"},
-                {data: "lastName"},
-                {
-                    data: function (source) {
-                        return careTeamRole[source.staffType - 1];
-                    }
-                },
-                {data: "email"},
-                {
-                    data: function (source) {
-                        return '<div class="bottom-content">' +
-                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
-                            '</div>';
-                    }
-                }
-            ]
-        });
-    }
+    //function _initTeamTable(data) {
+    //
+    //    if (careTeamTable) {
+    //        careTeamTable.destroy();
+    //    }
+    //
+    //    careTeamTable = $("#careTeamTable").DataTable({
+    //        paging: true,
+    //        searching: false,
+    //        ordering: false,
+    //        pageLength: 10,
+    //        info: false,
+    //        bLengthChange: false,
+    //        "serverSide": true,
+    //        ajax: $.fn.dataTable.pipeline({
+    //            url: opts.urls.getCareTeam,
+    //            pages: 2, // number of pages to cache
+    //            data: data
+    //        }),
+    //        columns: [
+    //            {
+    //                data: function (source) {
+    //                    if (careTeamRole[source.staffType - 1] === "Surgeon") {
+    //                        return '<div class="bottom-content">' +
+    //                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+    //                            '</div>';
+    //                    } else {
+    //                        return '';
+    //                    }
+    //                }
+    //            },
+    //            {
+    //                data: "id",
+    //                className: "careTeamId"
+    //            },
+    //            {data: "firstName"},
+    //            {data: "lastName"},
+    //            {
+    //                data: function (source) {
+    //                    return careTeamRole[source.staffType - 1];
+    //                }
+    //            },
+    //            {data: "email"},
+    //            {
+    //                data: function (source) {
+    //                    return '<div class="bottom-content">' +
+    //                        '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+    //                        '</div>';
+    //                }
+    //            }
+    //        ]
+    //    });
+    //}
 
     /**
      *
@@ -132,7 +132,8 @@
             paging: true,
             searching: false,
             ordering: false,
-            pageLength: 10,
+            "scrollCollapse": true,
+            //pageLength: 10,
             info: false,
             bLengthChange: false,
             "serverSide": true,
@@ -142,36 +143,44 @@
                 data: data
             }),
             columns: [
+                //{
+                //    data: function (source) {
+                //        return '<div class="bottom-content">' +
+                //            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
+                //            '</div>';
+                //    }
+                //},
                 {
-                    data: function (source) {
-                        return '<div class="bottom-content">' +
-                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
-                            '</div>';
-                    }
+                    data: "id",
+                    width: "15%"
                 },
-                {data: "id"},
                 {
                     data: "firstName",
-                    class: "firstName"
+                    class: "firstName",
+                    width: "15%"
                 },
                 {
                     data: "lastName",
-                    class: "lastName"
+                    class: "lastName",
+                    width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
-                    class: "relationship"
+                    class: "relationship",
+                    width: "15%"
                 },
                 {
                     data: "email",
-                    class: "email"
+                    class: "email",
+                    width: "20%"
                 },
                 {
                     data: function (source) {
                         return careGiverStatus[source.status - 1];
-                    }
+                    },
+                    width: "10%"
                 },
                 {
                     data: function (source) {
@@ -179,7 +188,8 @@
                             '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" > <div class="icon-edit"></div> </a>' +
                             '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
                             '</div>';
-                    }
+                    },
+                    width: "10%"
                 }
             ]
         });
@@ -194,7 +204,7 @@
         var data = {
             medicalRecordId: medicalRecordId
         };
-        _initTeamTable(data);
+        //_initTeamTable(data);
         _initGiverTable(data);
     }
 
@@ -203,46 +213,46 @@
      * bind add team event
      * @private
      */
-    function _bindAddTeamEvent() {
-        // new a record
-        $("#add-member").on("click", function (e) {
-            e.preventDefault();
-            $(".addTeamForm")[0].reset();
-
-            var medicalRecordId = $(this).data("medicalRecordId");
-            var clientId = $(this).data("clientId");
-            var patientId = $(this).data("patientId");
-
-            var careTeams = $(this).parents().find("td.careTeamId");
-            var existCareTeam = [];
-            $.each(careTeams, function (index, item) {
-                existCareTeam.push({
-                    'id': $(item).text()
-                });
-            });
-
-            _initStaffSelect(existCareTeam);
-
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTeamFormArguments, {
-                element: $(".addTeamForm"),
-                okCallback: function () {
-                    if ($(".addTeamForm").valid()) {
-                        var staffId = $("#selectStaff").val();
-                        //var isPrimaryCareTeam;
-                        //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
-                        var careTeamInfo = {
-                            medicalRecordId: medicalRecordId,
-                            staffId: staffId
-                            //isPrimaryCareTeam: isPrimaryCareTeam
-                        };
-                        _addCareTeam(clientId, patientId, careTeamInfo);
-                        return true;
-                    }
-                    return false;
-                }
-            }));
-        });
-    }
+    //function _bindAddTeamEvent() {
+    //    // new a record
+    //    $("#add-member").on("click", function (e) {
+    //        e.preventDefault();
+    //        $(".addTeamForm")[0].reset();
+    //
+    //        var medicalRecordId = $(this).data("medicalRecordId");
+    //        var clientId = $(this).data("clientId");
+    //        var patientId = $(this).data("patientId");
+    //
+    //        var careTeams = $(this).parents().find("td.careTeamId");
+    //        var existCareTeam = [];
+    //        $.each(careTeams, function (index, item) {
+    //            existCareTeam.push({
+    //                'id': $(item).text()
+    //            });
+    //        });
+    //
+    //        _initStaffSelect(existCareTeam);
+    //
+    //        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTeamFormArguments, {
+    //            element: $(".addTeamForm"),
+    //            okCallback: function () {
+    //                if ($(".addTeamForm").valid()) {
+    //                    var staffId = $("#selectStaff").val();
+    //                    //var isPrimaryCareTeam;
+    //                    //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
+    //                    var careTeamInfo = {
+    //                        medicalRecordId: medicalRecordId,
+    //                        staffId: staffId
+    //                        //isPrimaryCareTeam: isPrimaryCareTeam
+    //                    };
+    //                    _addCareTeam(clientId, patientId, careTeamInfo);
+    //                    return true;
+    //                }
+    //                return false;
+    //            }
+    //        }));
+    //    });
+    //}
 
     /**
      *
@@ -251,22 +261,22 @@
      * @param careTeamInfo
      * @private
      */
-    function _addCareTeam(clientId, patientId, careTeamInfo) {
-        $.ajax({
-            url: opts.urls.addCareTeam.format(null, clientId, patientId),
-            type: 'POST',
-            data: careTeamInfo
-        }).done(function (data) {
-            if (data.resp === true) {
-                var medicalRecordId = data.medicalRecordId;
-                var ids = {
-                    medicalRecordId: medicalRecordId
-                };
-                _initTeamTable(ids);
-                _removeCareTeam();
-            }
-        });
-    }
+    //function _addCareTeam(clientId, patientId, careTeamInfo) {
+    //    $.ajax({
+    //        url: opts.urls.addCareTeam.format(null, clientId, patientId),
+    //        type: 'POST',
+    //        data: careTeamInfo
+    //    }).done(function (data) {
+    //        if (data.resp === true) {
+    //            var medicalRecordId = data.medicalRecordId;
+    //            var ids = {
+    //                medicalRecordId: medicalRecordId
+    //            };
+    //            _initTeamTable(ids);
+    //            _removeCareTeam();
+    //        }
+    //    });
+    //}
 
     /**
      * bind invite giver event
@@ -337,24 +347,24 @@
      * remove care team event
      * @private
      */
-    function _removeCareTeam() {
-        $("#careTeamTable").on("click", "tr .btn-remove-team", function (e) {
-            e.preventDefault();
-
-            var grandParent = $(this).parent().parent().parent();
-            var careTeamId = $(this).data("careTeamId");
-            var medicalRecordId = $("#hidden-medical-record").val();
-            var clientId = $("#hidden-client-id").val();
-            var patientId = $("#hidden-patient-id").val();
-
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
-                element: $(".warn"),
-                closeCallback: function () {
-                    _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent);
-                }
-            }));
-        });
-    }
+    //function _removeCareTeam() {
+    //    $("#careTeamTable").on("click", "tr .btn-remove-team", function (e) {
+    //        e.preventDefault();
+    //
+    //        var grandParent = $(this).parent().parent().parent();
+    //        var careTeamId = $(this).data("careTeamId");
+    //        var medicalRecordId = $("#hidden-medical-record").val();
+    //        var clientId = $("#hidden-client-id").val();
+    //        var patientId = $("#hidden-patient-id").val();
+    //
+    //        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
+    //            element: $(".warn"),
+    //            closeCallback: function () {
+    //                _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent);
+    //            }
+    //        }));
+    //    });
+    //}
 
     /**
      *
@@ -365,17 +375,17 @@
      * @param grandParent
      * @private
      */
-    function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
-        $.ajax({
-            url: opts.urls.deleteCareTeam.format(null, clientId, patientId, careTeamId, medicalRecordId),
-            type: 'DELETE',
-            success: function (data) {
-                if (data.resp === true) {
-                    grandParent.remove();
-                }
-            }
-        });
-    }
+    //function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
+    //    $.ajax({
+    //        url: opts.urls.deleteCareTeam.format(null, clientId, patientId, careTeamId, medicalRecordId),
+    //        type: 'DELETE',
+    //        success: function (data) {
+    //            if (data.resp === true) {
+    //                grandParent.remove();
+    //            }
+    //        }
+    //    });
+    //}
 
     /**
      * remove care giver event
@@ -502,76 +512,62 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(existCareTeam) {
-        $('#selectStaff').select2({
-            ajax: {
-                transport: function (params) {
-                    params.beforeSend = function () {
-                        RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getStaffs,
-                cache: "true",
-                data: function (term) {
-                    return {
-                        term: term
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, dataItem) {
-                        myResults.push({
-                            'id': dataItem.id,
-                            'text': dataItem.firstName + " " + dataItem.lastName
-                        });
-                    });
-
-                    if (existCareTeam) {
-                        var ids = {},
-                            filterResult = [];
-
-                        _.each(existCareTeam, function (careTeam) {
-                            ids[careTeam.id] = true;
-                        });
-
-                        var existResult = _.filter(myResults, function (myResult) {
-                            return ids[myResult.id];
-                        });
-
-                        $.grep(myResults, function (e) {
-                            if ($.inArray(e, existResult) === -1) {
-                                filterResult.push(e);
-                            }
-                        });
-
-                        return {
-                            results: filterResult
-                        };
-                    } else {
-                        return {
-                            results: myResults
-                        };
-                    }
-                }
-            }
-        });
-    }
-
-    //$.validator.setDefaults({
-    //    debug: true,
-    //    success: "valid"
-    //});
-    //function _validateInviteGiverForm() {
-    //    //$(".inviteGiverForm").valid();
-    //    $('#invite-giver-form').validate({
-    //        rules: {
-    //            email: {
-    //                required: true
+    //function _initStaffSelect(existCareTeam) {
+    //    $('#selectStaff').select2({
+    //        ajax: {
+    //            transport: function (params) {
+    //                params.beforeSend = function () {
+    //                    RC.common.progress(false);
+    //                };
+    //                return $.ajax(params);
+    //            },
+    //            url: opts.urls.getStaffs,
+    //            cache: "true",
+    //            data: function (term) {
+    //                return {
+    //                    term: term
+    //                };
+    //            },
+    //            results: function (data) {
+    //                var myResults = [];
+    //                $.each(data, function (index, dataItem) {
+    //                    myResults.push({
+    //                        'id': dataItem.id,
+    //                        'text': dataItem.firstName + " " + dataItem.lastName
+    //                    });
+    //                });
+    //
+    //                if (existCareTeam) {
+    //                    var ids = {},
+    //                        filterResult = [];
+    //
+    //                    _.each(existCareTeam, function (careTeam) {
+    //                        ids[careTeam.id] = true;
+    //                    });
+    //
+    //                    var existResult = _.filter(myResults, function (myResult) {
+    //                        return ids[myResult.id];
+    //                    });
+    //
+    //                    $.grep(myResults, function (e) {
+    //                        if ($.inArray(e, existResult) === -1) {
+    //                            filterResult.push(e);
+    //                        }
+    //                    });
+    //
+    //                    return {
+    //                        results: filterResult
+    //                    };
+    //                } else {
+    //                    return {
+    //                        results: myResults
+    //                    };
+    //                }
     //            }
     //        }
     //    });
     //}
+
 
     /**
      * patientTeam page Initialization
@@ -579,9 +575,9 @@
      */
     function _init() {
         _loadData();
-        _bindAddTeamEvent();
+        //_bindAddTeamEvent();
         _bindInviteGiverEvent();
-        _removeCareTeam();
+        //_removeCareTeam();
         _removeCareGiver();
         _editCareGiver();
         //_EditCareGiver();

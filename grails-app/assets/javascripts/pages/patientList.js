@@ -8,7 +8,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 800
+                    width: 760
                 }
             },
             waringArguments: {
@@ -254,7 +254,7 @@
 
         $('#selectTreatment, #treatmentForSearchPatient').on("change", function (data) {
             if (data.added.data === true) {
-                $("#div-surgery-time").css("display", "block");
+                $("#div-surgery-time").css("display", "inline-block");
             } else {
                 $("#div-surgery-time").css("display", "none");
             }
