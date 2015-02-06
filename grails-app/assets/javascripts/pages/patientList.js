@@ -8,7 +8,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 800
                 }
             },
             waringArguments: {
@@ -56,7 +56,7 @@
                 {data: "email", width: "20%"},
                 {data: "phoneNumber", width: "10%"},
                 {
-                    data: function(source) {
+                    data: function (source) {
                         var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
                         return formatDate;
                     },
@@ -97,15 +97,23 @@
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         var phoneNumber = $("#phoneNumber").val();
-        var treatmentId = $("#selectTreatment").val();
-        var surgeryTime = $("#surgeryTime").val();
-        var staffIds = $("#selectStaffs").val();
-        var staffArray = staffIds.split(',');
-        var staffIdArr = [];
 
-        $.each(staffArray, function (index, item) {
-            staffIdArr.push(parseInt(item));
-        });
+        var ecFirstName = $("#emergency-firstName").val();
+        var ecLastName = $("#emergency-lastName").val();
+        var relationship = $("#relationship").val();
+        var ecEmail = $("#emergency-email").val();
+
+
+        var treatmentId = $("#selectTreatment").val();
+        var date = new Date($("#surgeryTime").val());
+        var surgeryTime = date.getTime();
+        var staffId = $("#selectStaffs").val();
+        //var staffArray = staffIds.split(',');
+        //var staffIdArr = [];
+        //
+        //$.each(staffArray, function (index, item) {
+        //    staffIdArr.push(parseInt(item));
+        //});
 
         var data = {
             patientId: patientId,
@@ -113,10 +121,17 @@
             lastName: lastName,
             email: email,
             phoneNumber: phoneNumber,
+
+            ecFirstName: ecFirstName,
+            ecLastName: ecLastName,
+            relationship: relationship,
+            ecEmail: ecEmail,
+
             profilePhoto: '',
             treatmentId: treatmentId,
-            staffIds: staffIds,
-            surgeryTime: surgeryTime
+            surgeryTime: surgeryTime,
+            staffId: staffId
+
         };
 
         return data;
@@ -184,6 +199,10 @@
             }));
 
             _initSurgeryTime();
+            _initSelectTreatment();
+            _initStaffSelect();
+            $("#relationship").select2();
+            $("#div-surgery-time").css("display", "none");
         });
     }
 
@@ -204,8 +223,8 @@
     function _initSelectTreatment() {
         $('#selectTreatment, #treatmentForSearchPatient').select2({
             ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
@@ -222,7 +241,53 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.title
+                            'text': item.title,
+                            'data': item.surgeryTimeRequired
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
+
+        $('#selectTreatment, #treatmentForSearchPatient').on("change", function (data) {
+            if (data.added.data === true) {
+                $("#div-surgery-time").css("display", "block");
+            } else {
+                $("#div-surgery-time").css("display", "none");
+            }
+        });
+    }
+
+    /**
+     * init select staff
+     * @private
+     */
+    function _initStaffSelect() {
+
+        $('#selectStaffs').select2({
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getStaffs,
+                cache: "true",
+                data: function (term) {
+                    return {
+                        term: term
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.firstName + " " + item.lastName
                         });
                     });
                     return {
@@ -233,48 +298,14 @@
         });
     }
 
-    /**
-     * init select staff
-     * @private
-     */
-    function _initStaffSelect() {
-        var ajax ={
-            transport: function(params){
-                params.beforeSend = function(){
-                    RC.common.progress(false);
-                };
-                return $.ajax(params);
-            },
-            url: opts.urls.getStaffs,
-            cache: "true",
-            data: function (term) {
-                return {
-                    term: term
-                };
-            },
-            results: function (data) {
-                var myResults = [];
-                $.each(data, function (index, item) {
-                    myResults.push({
-                        'id': item.id,
-                        'text': item.firstName + " " + item.lastName
-                    });
-                });
-                return {
-                    results: myResults
-                };
-            }
-        };
+    //
+    //$('#selectSurgeon').select2({
+    //    ajax: ajax
+    //});
+    //
+    //$('#selectStaffs').select2({
+    //    ajax: ajax
 
-        $('#selectSurgeon').select2({
-            ajax:ajax
-        });
-
-        $('#selectStaffs').select2({
-            tags: true,
-            ajax:ajax
-        });
-    }
 
     /**
      * Provider page Initialization

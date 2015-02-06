@@ -92,6 +92,8 @@ class AuthenticationService {
      * @param response
      */
     def logout(request, response) {
+        def session = request.session
+        def token = session?.token
         /**
          * Call backend logout api
          *

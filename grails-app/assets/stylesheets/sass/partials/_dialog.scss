@@ -70,7 +70,6 @@
     }
 }
 
-
 .ui-icon-closethick {
     display: none;
 }
@@ -116,5 +115,19 @@
     &:before {
         display: inline-block;
         content: '\f2d7';
+    }
+}
+
+.form-group {
+    margin-top: 20px;
+    margin-left: 30px;
+    text-align: left;
+
+    .lbl-group {
+        display: table-row-group;
+    }
+
+    .input-group {
+        margin-top: 0;
     }
 }
