@@ -414,7 +414,7 @@
             var element = $(errorElement.element);
             var errorMessage = errorElement.message;
             element.attr("data-error-msg", errorMessage);
-            var className = "error-msg-right";
+            var className = "error-msg-bottom";
             if (element.is("[data-class]")) {
                 className = element.attr("data-class");
             }
@@ -424,7 +424,7 @@
                     position = {my: 'center bottom', at: 'center top-10'};
                     break;
                 case 'error-msg-bottom':
-                    position = {my: 'center top', at: 'center bottom+10'};
+                    position = {my: 'left top', at: 'left bottom'};
                     break;
                 case 'error-msg-left':
                     position = {my: 'right center', at: 'left-10 center'};

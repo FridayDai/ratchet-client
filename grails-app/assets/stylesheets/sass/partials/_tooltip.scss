@@ -1,27 +1,29 @@
 body .ui-tooltip {
-    @include box-shadow($base-color-error-border 0 0 5px);
+//    @include box-shadow($base-color-error-border 0 0 5px);
     position: absolute;
     z-index: 9999;
     max-width: 300px;
+    height: 20px;
     padding: 0;
     border: 0;
-    border-radius: 4px;
-    color: $base-color-white;
-    background: $base-color-error;
-    opacity: 1;
+//    border-radius: 4px;
+    color: $base-color-red;
+    background: transparent;
+    font-size: 10pt;
+//    opacity: 1;
 }
 
 .ui-tooltip-content {
     position: relative;
-    padding: 6px 10px;
+    padding: 2px;
 
-    &:after {
-        position: absolute;
-        display: block;
-        width: 0;
-        border-style: solid;
-        content: '';
-    }
+//    &:after {
+//        position: absolute;
+//        display: block;
+//        width: 0;
+//        border-style: solid;
+//        content: '';
+//    }
 }
 
 .error-msg-right {
@@ -59,11 +61,11 @@ body .ui-tooltip {
 
 .error-msg-bottom {
     .ui-tooltip-content {
-        &:after {
-            top: -10px;
-            left: 72px;
-            border-width: 0 10px 10px;
-            border-color: $base-color-error transparent;
-        }
+//        &:after {
+//            top: -10px;
+//            left: 72px;
+//            border-width: 0 10px 10px;
+//            border-color: $base-color-error transparent;
+//        }
     }
 }
