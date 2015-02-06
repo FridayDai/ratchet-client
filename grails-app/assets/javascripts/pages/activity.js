@@ -27,6 +27,11 @@
             ordering: false,
             info: false,
             "serverSide": true,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
+            "bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 5,// number of pages to cache

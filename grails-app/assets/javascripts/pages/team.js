@@ -87,6 +87,10 @@
             bLengthChange: false,
             "serverSide": true,
             //"bPaginate": false,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getCareGiver,
                 pages: 2, // number of pages to cache

@@ -90,21 +90,55 @@
         margin-top: 30px;
         padding-top: .25em;
         border: 1px solid transparent;
-        color: $base-color-light-blue;
         background: transparent;
         text-align: right;
         box-shadow: none;
         cursor: default;
+
+        .disabled {
+            color: $base-color-white!important;
+            background-color: $base-color-grey!important;
+            &:hover,
+            &:focus {
+                color: $base-color-white!important;
+                border: 1px $base-color-grey solid!important;
+                background-color: $base-color-grey!important;
+                cursor: inherit;
+            }
+        }
+
+        .previous {
+            font-family: 'Ionicons';
+            display: inline-block;
+            padding: 6px 12px!important;
+
+            &:before {
+                display: inline-block;
+                content: '\f3d2';
+            }
+        }
+
+        .next {
+
+            font-family: 'Ionicons';
+            display: inline-block;
+            padding: 6px 12px!important;
+
+            &:before {
+                display: inline-block;
+                content: '\f3d3';
+            }
+        }
 
         .paginate_button {
             display: inline-block;
             box-sizing: border-box;
             min-width: 1.5em;
             margin: 0 5px;
-            padding: 6px 12px;
-            border: 1px $base-color-dark-grey solid;
+            padding: 4px 10px;
+            border: 1px $base-color-grey solid;
             white-space: nowrap;
-            background-color: $base-color-white;
+            color: $base-color-grey;
             background-image: none;
             font-weight: normal;
             text-align: center;
@@ -116,14 +150,15 @@
             &:focus {
                 color: $base-color-white;
                 background-color: $base-color-dark-grey;
+                border: 1px $base-color-dark-grey solid;
             }
         }
 
         span {
 
             span {
-                color: $base-color-dark-grey;
-                font-size: 40px;
+                font-size: 20px;
+                color: $base-color-grey;
             }
         }
     }

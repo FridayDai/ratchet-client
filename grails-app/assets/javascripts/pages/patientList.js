@@ -44,6 +44,10 @@
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache

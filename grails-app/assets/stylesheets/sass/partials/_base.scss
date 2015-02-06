@@ -80,9 +80,9 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 1px $base-color-dark-grey solid;
+    border: 1px $base-color-grey solid;
     white-space: nowrap;
-    background-color: $base-color-white;
+    color: $base-color-grey;
     background-image: none;
     font-weight: normal;
     text-align: center;
@@ -91,17 +91,20 @@ a {
 
     &:hover,
     &:focus {
-        color: $base-color-white;
-        background-color: $base-color-dark-grey;
+        color: $base-color-dark-grey;
+        background-color: transparent;
+        border: 1px $base-color-dark-grey solid;
     }
 
-    &.primary {
-        color: $base-color-dark-grey;
-
+    &.disabled {
+        color: $base-color-white;
+        background-color: $base-color-grey;
         &:hover,
         &:focus {
             color: $base-color-white;
-            background-color: $base-color-dark-grey;
+            border: 1px $base-color-grey solid;
+            background-color: $base-color-grey;
+            cursor: inherit;
         }
     }
 
@@ -321,8 +324,16 @@ a {
 }
 
 .select2-results {
+    .select2-result-label {
+        color: $base-color-grey;
+    }
+
     .select2-highlighted {
-        background-color: $base-color-dark-grey;
+        background-color: $base-color-white-grey;
+
+        .select2-result-label {
+            color: $base-color-dark-grey;
+        }
     }
 }
 
