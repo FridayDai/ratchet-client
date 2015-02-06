@@ -80,7 +80,7 @@
                    required/>
         </div>
 
-        <div class="form-group ">
+        <div class="form-group">
             <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Staff"
                    required/>
         </div>
@@ -89,6 +89,8 @@
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group"
                    placeholder="Surgery Time">
         </div>
+
+
 
     </g:form>
 

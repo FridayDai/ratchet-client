@@ -7,8 +7,8 @@
                 confirmTreatmentFormArguments: {
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
-                    width: 400
+                    height: 600,
+                    width: 800
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
