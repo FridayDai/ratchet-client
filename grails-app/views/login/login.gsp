@@ -13,17 +13,17 @@
     <div class="site-wrapper">
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>
-            <g:form class="form" controller="authentication" method="post" action="login">
+            <g:form class="form login-form" controller="authentication" method="post" action="login">
 
                 <div class="form-style-content">
                     <div class="input-combination">
                         <div class="align-left">EMAIL ADDRESS</div>
-                        <input name="email" type="text" class="input-control" placeholder="Enter E-mail"/>
+                        <input name="email" type="text" class="input-control" placeholder="Enter E-mail" required/>
                     </div>
 
                     <div class="input-combination">
                         <div class="align-left">PASSWORD</div>
-                        <input name="password" type="password" class="input-control" placeholder="Enter Password"/>
+                        <input name="password" type="password" class="input-control" placeholder="Enter Password" required/>
                     </div>
 
                     <div class="error-area">
