@@ -77,11 +77,11 @@
             var clientId = $(this).data("clientId");
 
             var parent = $(this).parents();
-            var id = parent.find(".id-info").text();
-            var firstName = parent.find(".first-name-info").text();
-            var lastName = parent.find(".last-name-info").text();
-            var email = parent.find(".email-info").text();
-            var phoneNum = parent.find(".phone-info").text();
+            var id = parent.find(".id").text();
+            var firstName = parent.find(".first-name").text();
+            var lastName = parent.find(".last-name").text();
+            var email = parent.find(".email").text();
+            var phoneNum = parent.find(".phone").text();
 
             _initSurgeryTime();
 
@@ -153,11 +153,11 @@
             var clientId = $(this).data("clientId");
 
             var parent = $(this).parents();
-            var id = parent.find(".id-info").text();
-            var firstName = parent.find(".first-name-info").text();
-            var lastName = parent.find(".last-name-info").text();
-            var email = parent.find(".email-info").text();
-            var phoneNum = parent.find(".phone-info").text();
+            var id = parent.find(".id").text();
+            var firstName = parent.find(".first-name").text();
+            var lastName = parent.find(".last-name").text();
+            var email = parent.find(".email").text();
+            var phoneNum = parent.find(".phone").text();
 
             $("#patientId").val(id);
             $("#firstName").val(firstName);
@@ -199,11 +199,11 @@
             dataType: 'json',
             success: function (status) {
                 if (status.resp === 200) {
-                    $('.id-info').text(patientInfo.id);
-                    $('.first-name-info').text(patientInfo.firstName);
-                    $('.last-name-info').text(patientInfo.lastName);
-                    $('.email-info').text(patientInfo.email);
-                    $('.phone-info').text(patientInfo.phoneNum);
+                    $('.id').text(patientInfo.id);
+                    $('.first-name').text(patientInfo.firstName);
+                    $('.last-name').text(patientInfo.lastName);
+                    $('.email').text(patientInfo.email);
+                    $('.phone').text(patientInfo.phoneNum);
                 }
             }
         });
@@ -214,7 +214,7 @@
      * @private
      */
     function _goBackToPrePage() {
-        $('.btn-back').on('click', function (e) {
+        $('.btn-close').on('click', function (e) {
             e.preventDefault();
 
             parent.history.back();

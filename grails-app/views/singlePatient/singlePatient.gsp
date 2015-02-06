@@ -10,44 +10,28 @@
 
     <body>
     <div class="content">
-        <div class="content-head">
-            <a href="#" class="btn-back">
 
-                <div class="icon-back"></div>
-            </a>
+        <div class="patient-info clear">
 
-            <p>Patient</p>
-        </div>
-
-        <div class="patient-info">
-            <div class="patient-left-info patient-inner-info">
-                ID:<div class="id-info color" value="${patientInfo.patientId}">${patientInfo.patientId}</div>
-
-                <div class="name-info first-name-info div-space color"
-                     value="${patientInfo.firstName}">${patientInfo.firstName}</div>
-
-                <div class="name-info last-name-info div-space color"
-                     value="${patientInfo.lastName}">${patientInfo.lastName}</div>
-
+            <div class="patient-col info clear">
+                <img class="icon" src="${assetPath(src: 'patient_logo.png')}"/>
+                <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
+                <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
+                ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
             </div>
 
-            <div class="patient-right-info patient-inner-info">
-                <div class="color email">Email:</div>
+            <div class="patient-col email clear" value="${patientInfo.email}">${patientInfo.email}</div>
 
-                <div class="email-info color email" value="${patientInfo.email}">${patientInfo.email}</div>
+            <div class="patient-col phone clear" value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
 
-                <div class="color phone">Phone:</div>
-
-                <div class="phone-info div-space color phone"
-                     value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
+            <div class="patient-col edit clear">
+                <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
+                   data-client-id="${patientInfo.client.id}">
+                </a>
+                <a href="#" class="btn-close">Close</a>
             </div>
-
-            <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-               data-client-id="${patientInfo.client.id}">
-                <div class="icon-edit"></div>
-            </a>
-
             <input type="hidden" name="clientId" value="${patientInfo.client.id}"/>
+
         </div>
 
         <div id="tabs" class="patient-tab">
