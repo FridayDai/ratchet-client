@@ -57,8 +57,8 @@
         }
 
         &:hover {
-            background-color: $base-color-white-grey;
             color: $base-color-dark-grey;
+            background-color: $base-color-white-grey;
 
             a {
                 color: $base-color-dark-grey;
@@ -96,9 +96,9 @@
         border: 1px solid transparent;
         color: $base-color-light-blue;
         background: transparent;
+        text-align: right;
         box-shadow: none;
         cursor: default;
-        text-align: right;
 
         .paginate_button {
             display: inline-block;

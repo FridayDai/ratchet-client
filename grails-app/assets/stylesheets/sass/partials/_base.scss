@@ -298,8 +298,9 @@ a {
         .select2-arrow {
             border-radius: 0;
             border-left: 0;
-            background-image: none;
             background: none;
+            background-image: none;
+
             b {
                 background: url('../../../images/dataTable/sort_both.png') no-repeat center right !important;
             }
@@ -308,14 +309,14 @@ a {
 }
 
 .select2-container-multi.select2-container-active .select2-choices {
-    border: 1px solid $base-color-dark-grey!important;
+    border: 1px solid $base-color-dark-grey !important;
 }
 
 .select2-dropdown-open,
 .select2-container-active {
     .select2-choice {
+        border: 1px solid $base-color-dark-grey !important;
         background-color: $base-color-white;
-        border: 1px solid $base-color-dark-grey!important;
     }
 }
 
@@ -348,16 +349,16 @@ a {
 
     .search {
         display: inline-block;
-        font-family: 'Ionicons';
-        margin-left: -4px;
         height: 15px;
+        margin-left: -4px;
         padding: 6px 12px;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 1;
         color: $base-font-color;
-        text-align: center;
         background-color: $base-color-white;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Ionicons';
+        line-height: 1;
+        text-align: center;
 
         &:after {
             display: inline-block;
@@ -406,9 +407,9 @@ a {
 }
 
 .view {
-    text-decoration: none;
-    font-family: 'Ionicons';
     color: $base-font-color;
+    font-family: 'Ionicons';
+    text-decoration: none;
 
     &:hover,
     &:focus {

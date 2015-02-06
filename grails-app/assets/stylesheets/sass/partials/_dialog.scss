@@ -7,17 +7,17 @@
     .ui-dialog-titlebar {
         padding: 20px;
         border: 0;
-        border-bottom: 10px solid rgba(0, 0, 0, 0.2);
+        border-bottom: 10px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
 
         .ui-dialog-title {
-            font-weight: 400;
             color: $base-font-color;
+            font-weight: 400;
         }
 
         .ui-button {
-            border: 0;
             margin-right: 10px;
+            border: 0;
 
             &:hover,
             &:focus {
@@ -27,7 +27,7 @@
     }
 
     .ui-dialog-content {
-        height: auto!important;
+        height: auto !important;
         background-color: $base-color-white;
     }
 
@@ -110,11 +110,11 @@
 }
 
 .ui-dialog-titlebar-close {
-    font-family: 'Ionicons';
     display: inline-block;
+    font-family: 'Ionicons';
 
     &:before {
-        content: '\f2d7';
         display: inline-block;
+        content: '\f2d7';
     }
 }
