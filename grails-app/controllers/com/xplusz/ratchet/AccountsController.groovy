@@ -2,7 +2,7 @@ package com.xplusz.ratchet
 
 import grails.converters.JSON
 
-class AccountsController extends BaseController{
+class AccountsController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
 
@@ -42,4 +42,15 @@ class AccountsController extends BaseController{
         render result as JSON
     }
 
+    def getProfile() {
+        def accountId = params?.accountId
+        def accountProfile = accountService.getSingleAccount(request, response, accountId)
+        render(view: '/accounts/profile', model: [accountInfo: accountProfile])
+    }
+
+    def updatePassword() {
+        def resp = accountService.updatePassword(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
 }

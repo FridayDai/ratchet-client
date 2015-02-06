@@ -15,29 +15,36 @@ class PatientService {
     def messageSource
 
     def addPatients(HttpServletRequest request, HttpServletResponse response, params) {
-        def email = params?.email
+        def patientId = params?.patientId
         def firstName = params?.firstName
         def lastName = params?.lastName
         def phoneNumber = params?.phoneNumber
+        def email = params?.email
         def profilePhoto = params?.profilePhoto
-        def patientId = params?.patientId
         def treatmentId = params?.treatmentId
+        def surgeonId = params?.staffId
         def surgeryTime = params?.surgeryTime
-        def primaryStaffId = params?.primaryStaffId
-        def staffIds = params.staffIds
+        def ecFirstName = params?.ecFirstName
+        def ecLastName = params?.ecLastName
+        def relationship = params?.relationship
+        def ecEmail = params?.ecEmail
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.addPatient.url, patientId)
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatments.url, request.session.clientId)
         def resp = Unirest.post(url)
-                .field("email", email)
+                .field("patientId", patientId)
+                .field("clientId", request.session.clientId)
                 .field("firstName", firstName)
                 .field("lastName", lastName)
                 .field("phoneNumber", phoneNumber)
+                .field("email", email)
                 .field("profilePhoto", profilePhoto)
-                .field("clientId", request.session.clientId)
                 .field("treatmentId", treatmentId)
+                .field("surgeonId", surgeonId)
                 .field("surgeryTime", surgeryTime)
-                .field("primaryStaffId", primaryStaffId)
-                .field("staffIds", staffIds)
+                .field("ecFirstName", ecFirstName)
+                .field("ecLastName", ecLastName)
+                .field("relationship", relationship)
+                .field("ecEmail", ecEmail)
                 .asString()
 
         if (resp.status == 201) {

@@ -76,6 +76,7 @@ class AccountService {
     }
 
     def inviteAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
+
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.inviteStaff.url, accountId)
         def resp = Unirest.get(url)
                 .asString()
@@ -87,9 +88,10 @@ class AccountService {
     }
 
     def updateAccount(HttpServletRequest request, HttpServletResponse response, params) {
+
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getAccount.url, params?.accountId)
         def resp = Unirest.post(url)
-                .field("clientId",request.session.clientId)
+                .field("clientId", request.session.clientId)
                 .field("email", params?.email)
                 .field("firstName", params?.firstName)
                 .field("lastName", params?.lastName)
@@ -104,4 +106,17 @@ class AccountService {
         }
     }
 
+    def updatePassword(HttpServletRequest request, HttpServletResponse response, params) {
+
+        def url = grailsApplication.config.ratchetv2.server.updatePassword.url
+        def resp = Unirest.post(url)
+                .field("oldPassword", params?.oldPassword)
+                .field("password", params?.password)
+                .field("confirmPassword", params?.confirmPassword)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+    }
 }

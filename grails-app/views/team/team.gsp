@@ -4,55 +4,62 @@
     <div class="care-team-content">
 
         <div class="inner-header">
-            <p>Care Team</p>
-            <button class="btn-add btn-position" id="add-member" data-medical-record-id="${medicalRecordId}"
-                    data-client-id="${clientId}" data-patient-id="${patientId}">Add Member</button>
+            <h4 class="surgeon">SURGEON</h4>
+            %{--<button class="btn-add btn-position" id="add-member" data-medical-record-id="${medicalRecordId}"--}%
+            %{--data-client-id="${clientId}" data-patient-id="${patientId}">Add Member</button>--}%
         </div>
 
-        <div class="inner-body" id="careTeamBody">
+        <div class="inner-body top-body" id="careTeamBody">
+            <g:each in="${careTeams}" var="careTeam">
+                <div class="left-content inline">
+                    <div class="surgeon-id">
+                        <span>ID:</span>
+                        <span>${careTeam.id}</span>
 
-            <table id="careTeamTable" class="display">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Role</th>
-                    <th>Email Address</th>
-                    <th></th>
-                </tr>
-                </thead>
-            </table>
+                    </div>
 
+                    <div class="surgeon-name">
+                        <span>${careTeam.firstName}</span>
+                        <span>${careTeam.lastName}</span>
+                    </div>
+                </div>
+
+
+                <div class="surgeon-email inline">
+                    ${careTeam.email}
+                </div>
+            </g:each>
         </div>
     </div>
 
     <div class="care-giver-content">
         <div class="inner-header">
-            <p>Care Giver</p>
+            <h4 class="ec-contact">EMERGENCY CONTACT</h4>
             <button class="btn-invite btn-position" id="invite-giver" data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">Invite Care Giver</button>
         </div>
 
-        <div class="inner-body" id="careGiverBody">
 
-            <table id="careGiverTable" class="display">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Relationship</th>
-                    <th>Email Address</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                </thead>
-            </table>
+        <div class="table-group">
+            <div class="inner-body" id="careGiverBody">
 
+                <table id="careGiverTable" class="display">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Relationship</th>
+                        <th>Email Address</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                </table>
+
+            </div>
         </div>
+
     </div>
 </div>
 

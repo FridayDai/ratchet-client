@@ -82,10 +82,7 @@ class TreatmentService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
-            def map = [:]
-
-            map.put("data", result.items)
-            return map
+            return result.items
         } else {
             return false
         }

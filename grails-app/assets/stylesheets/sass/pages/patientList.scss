@@ -5,10 +5,6 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.inline {
-    display: inline-block;
-}
-
 .add-patient {
     display: inline-block;
     float: right;
@@ -21,4 +17,29 @@
         content: '\f2c7';
     }
 }
+
+.inline {
+    display: inline-block;
+}
+
+h4 {
+    margin-bottom: 0;
+    margin-left: 20px;
+    color: $base-color-black;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
+
+.ui-widget-content {
+    background: $base-color-white;
+}
+
+.div-hidden {
+    display: none;
+}
+
+
 
