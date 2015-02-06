@@ -2,8 +2,9 @@
     'use strict';
     //var login = RC.pages.login = RC.pages.login || {};
 
+
+
     var loginLimit = function () {
-        var secondsValue = $("#error-login").attr("rateLimit");
 
         function _forbidLogin() {
             $("#btnLogin").attr("disabled", "disabled");
@@ -14,6 +15,9 @@
         }
 
         function _initLoginLimit() {
+
+            var secondsValue = $("#error-login").attr("rateLimit");
+
             if (secondsValue) {
                 var milliseconds = secondsValue * 1000;
                 _forbidLogin();
