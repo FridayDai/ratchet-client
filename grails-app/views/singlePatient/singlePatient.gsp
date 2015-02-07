@@ -80,7 +80,7 @@
                    required/>
         </div>
 
-        <div class="form-group ">
+        <div class="form-group">
             <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Staff"
                    required/>
         </div>
@@ -88,6 +88,37 @@
         <div class="form-group div-hidden" id="div-surgery-time">
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group"
                    placeholder="Surgery Time">
+        </div>
+
+        <h4>Emergency Contact</h4>
+
+        <div class="form-group inline">
+            <label class="lbl-group">FIRST NAME</label>
+            <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
+                   placeholder="First Name" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">LAST NAME</label>
+            <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
+                   placeholder="Last Name" required/>
+        </div>
+
+        <div class="form-group inline">
+                <label class="lbl-group">RELATIONSHIP</label>
+                <select id="relationship" name="relationship">
+                    <option value="1">Spouse</option>
+                    <option value="2">Parent</option>
+                    <option value="3">Child</option>
+                    <option value="4">Friend</option>
+                    <option value="5">Other</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="form-group inline emr-email">
+             <label class="lbl-group">EMAIL ADDRESS</label>
+             <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
         </div>
 
     </g:form>

@@ -47,12 +47,15 @@ class TreatmentService {
                 .field("treatmentId", params?.treatmentId)
                 .field("surgeonId", params?.staffIds)
                 .field("surgeryTime", params?.surgeryTime)
+                .field("ecFirstName", params?.ecFirstName)
+                .field("ecLastName", params?.ecLastName)
+                .field("relationship", params?.relationship)
+                .field("ecEmail", params?.ecEmail)
                 .asString()
 //                .field("primaryStaffId", params?.primaryStaffId)
-
-
+        def result = JSON.parse(resp.body)
         if (resp.status == 201) {
-            return true
+            return result
         } else {
             return false
         }
