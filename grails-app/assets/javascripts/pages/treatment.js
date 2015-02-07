@@ -16,8 +16,8 @@
             }
         },
         urls: {
-            query: "{0}/getProvider".format(RC.constants.baseUrl),
-            editSurgeryTime: "{0}/clients/{1}/patients/{2}/surgery-time/{3}/{4}".format(RC.constants.baseUrl)
+            query: "/getProvider",
+            editSurgeryTime: "/clients/{0}/patients/{1}/surgery-time/{2}/{3}"
         }
     };
 
@@ -59,7 +59,7 @@
      */
     function _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
-            url: opts.urls.editSurgeryTime.format(null, clientId, patientId, medicalRecordId, surgeryTime),
+            url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, surgeryTime),
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {

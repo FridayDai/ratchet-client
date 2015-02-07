@@ -16,10 +16,10 @@
                 message: RC.constants.warningTip
             },
             urls: {
-                query: "{0}/getPatients".format(RC.constants.baseUrl),
-                add: "{0}/addPatient".format(RC.constants.baseUrl),
-                getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+                query: "/getPatients",
+                add: "/addPatient",
+                getTreatments: "/getTreatments",
+                getStaffs: "/getStaffs"
             }
         },
         provideTable;
@@ -44,6 +44,10 @@
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache

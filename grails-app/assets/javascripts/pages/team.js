@@ -46,16 +46,16 @@
                 }
             },
             urls: {
-                query: "{0}/getPatients".format(RC.constants.baseUrl),
-                getCareTeam: "{0}/getCareTeam".format(RC.constants.baseUrl),
-                getCareGiver: "{0}/getCareGiver".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
-                updateCareTeamSurgeon: "{0}/updateCareTeamSurgeon".format(RC.constants.baseUrl),
-                addCareTeam: "{0}/clients/{1}/patients/{2}/care_team".format(RC.constants.baseUrl),
-                addCareGiver: "{0}/clients/{1}/patients/{2}/care_giver".format(RC.constants.baseUrl),
-                deleteCareTeam: "{0}/clients/{1}/patients/{2}/care_team/{3}/{4}".format(RC.constants.baseUrl),
-                deleteCareGiver: "{0}/clients/{1}/patients/{2}/care_giver/{3}/{4}".format(RC.constants.baseUrl),
-                updateCareGiver: "{0}/updateCareGiver".format(RC.constants.baseUrl)
+                query: "/getPatients",
+                getCareTeam: "/getCareTeam",
+                getCareGiver: "/getCareGiver",
+                getStaffs: "/getStaffs",
+                updateCareTeamSurgeon: "/updateCareTeamSurgeon",
+                addCareTeam: "/clients/{0}/patients/{1}/care_team",
+                addCareGiver: "/clients/{0}/patients/{1}/care_giver",
+                deleteCareTeam: "/clients/{0}/patients/{1}/care_team/{2}/{3}",
+                deleteCareGiver: "/clients/{0}/patients/{1}/care_giver/{2}/{3}",
+                updateCareGiver: "/updateCareGiver"
             }
         },
         careTeamRole =
@@ -87,6 +87,10 @@
             bLengthChange: false,
             "serverSide": true,
             //"bPaginate": false,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getCareGiver,
                 pages: 2, // number of pages to cache
@@ -248,7 +252,7 @@
      */
     function _addCareGiver(clientId, patientId, careGiverInfo, element) {
         $.ajax({
-            url: opts.urls.addCareGiver.format(null, clientId, patientId),
+            url: opts.urls.addCareGiver.format(clientId, patientId),
             type: 'POST',
             data: careGiverInfo
         }).done(function (data) {
@@ -297,7 +301,7 @@
      */
     function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
         $.ajax({
-            url: opts.urls.deleteCareGiver.format(null, clientId, patientId, careGiverId, medicalRecordId),
+            url: opts.urls.deleteCareGiver.format(clientId, patientId, careGiverId, medicalRecordId),
             type: 'DELETE',
             success: function (data) {
                 if (data.resp === true) {

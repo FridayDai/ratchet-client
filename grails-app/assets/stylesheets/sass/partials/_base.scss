@@ -80,9 +80,9 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 1px $base-color-dark-grey solid;
+    border: 1px $base-color-grey solid;
     white-space: nowrap;
-    background-color: $base-color-white;
+    color: $base-color-grey;
     background-image: none;
     font-weight: normal;
     text-align: center;
@@ -91,17 +91,20 @@ a {
 
     &:hover,
     &:focus {
-        color: $base-color-white;
-        background-color: $base-color-dark-grey;
+        color: $base-color-dark-grey;
+        background-color: transparent;
+        border: 1px $base-color-dark-grey solid;
     }
 
-    &.primary {
-        color: $base-color-dark-grey;
-
+    &.disabled {
+        color: $base-color-white;
+        background-color: $base-color-grey;
         &:hover,
         &:focus {
             color: $base-color-white;
-            background-color: $base-color-dark-grey;
+            border: 1px $base-color-grey solid;
+            background-color: $base-color-grey;
+            cursor: inherit;
         }
     }
 
@@ -141,6 +144,7 @@ a {
 
 .inner-head {
     background-color: darken($base-color-light-grey, 0%);
+    min-width: 1060px;
 
     .btn-invite {
         background-color: darken($base-color-white, 0%);
@@ -321,8 +325,16 @@ a {
 }
 
 .select2-results {
+    .select2-result-label {
+        color: $base-color-grey;
+    }
+
     .select2-highlighted {
-        background-color: $base-color-dark-grey;
+        background-color: $base-color-white-grey;
+
+        .select2-result-label {
+            color: $base-color-dark-grey;
+        }
     }
 }
 
@@ -376,6 +388,7 @@ a {
     height: 46px;
     padding: 22px;
     border-bottom: 6px solid $base-color-white-grey;
+    min-width: 960px;
 
     .title {
         width: 80%;
@@ -385,6 +398,7 @@ a {
 }
 
 .inner-search {
+    min-width: 1050px;
 
     .search-content {
         margin: 20px 40px;
@@ -404,6 +418,7 @@ a {
 
 .table-group {
     margin: 40px;
+    min-width: 960px;
 }
 
 .view {
