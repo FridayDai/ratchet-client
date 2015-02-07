@@ -30,7 +30,8 @@
             }
         },
         tabs,
-        tabTitle,
+        patientId,
+        clientId,
         tabTemplate;
 
     /**
@@ -58,7 +59,9 @@
     function _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentTitle;
-        var li = $(tabTemplate.replace(/#\{href\}/g, "/treatment?patiendId&client&medicalRecordId&treatmentId&surgeryTime").replace(/#\{label\}/g, label));
+        var url = "/treatment?patientId=" + patientId + "&client=" + clientId +
+            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
+        var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
         tabs.find(".tab-treatment").append(li);
         tabs.tabs("refresh");
@@ -75,8 +78,8 @@
 
             $(".treatment-form")[0].reset();
 
-            var patientId = $(this).data("patientId");
-            var clientId = $(this).data("clientId");
+            patientId = $(this).data("patientId");
+            clientId = $(this).data("clientId");
 
             var parent = $(this).parents();
             var id = parent.find(".id").text();
@@ -147,7 +150,7 @@
             dataType: 'json',
             success: function (data) {
                 //tabTitle = data.title;
-                var medicalRecordId = data.medicalRecordId;
+                var medicalRecordId = data.medicalRecordId.id;
                 var treatmentId = data.treatmentInfo.id;
                 var treatmentTitle = data.treatmentInfo.title;
                 var surgeryTime = assignInfo.surgeryTime;

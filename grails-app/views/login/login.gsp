@@ -28,7 +28,7 @@
 
                     <div class="error-area">
                         <g:if test="${errorMsg}">
-                            <p class="error" id="errorLogin" rateLimit="${rateLimit}">${errorMsg}</p>
+                            <p class="error" id="error-login" rateLimit="${rateLimit}">${errorMsg}</p>
                         </g:if>
                     </div>
 
