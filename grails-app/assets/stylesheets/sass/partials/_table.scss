@@ -27,28 +27,24 @@
         height: 40px;
         color: $base-font-color;
 
-        .bottom-content {
-            position: relative;
-            text-align: center;
-
-            .icon-remove {
-                position: absolute;
-                top: -5px;
-                right: 10px;
-                width: 20px;
-                height: 20px;
-                background: url('../../../images/dustbin.png') no-repeat 0 0;
-                background-size: cover;
+        .btn-edit {
+            &:before {
+                content: '\f12c';
+                color: $base-font-color;
+                font-weight: lighter;
+                font-size: 22px;
+                font-family: ionicons;
             }
+        }
 
-            .icon-edit {
-                position: absolute;
-                top: -5px;
-                right: 35px;
-                width: 20px;
-                height: 20px;
-                background: url('../../../images/edit.png') no-repeat 0 0;
-                background-size: cover;
+        .btn-remove-team {
+            &:after {
+                margin-left: 10px;
+                content: '\f252';
+                color: $base-font-color;
+                font-weight: lighter;
+                font-size: 22px;
+                font-family: ionicons;
             }
         }
 

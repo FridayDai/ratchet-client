@@ -20,7 +20,7 @@
                 ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
             </div>
 
-            <div class="patient-col email clear" value="${patientInfo.email}">${patientInfo.email}</div>
+            <div class="patient-col email patientEmail clear" value="${patientInfo.email}">${patientInfo.email}</div>
 
             <div class="patient-col phone clear" value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
 
@@ -52,23 +52,30 @@
 
     <g:form class="patient-form ui-hidden" id="patient-form" name="patient-form">
         <div class="form-group">
+            <label class="lbl-group">PATIENT ID*</label>
             <input id="patientId" name="id" type="text" class="input-group" placeholder="ID" required/>
         </div>
 
-        <div class="form-group">
-            <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name" required/>
+        <div class="form-group inline">
+            <label class="lbl-group">FIRST NAME*</label>
+            <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name"
+                   required/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group inline">
+            <label class="lbl-group">LAST NAME*</label>
             <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
         </div>
 
-        <div class="form-group">
-            <input id="email" name="email" type="text" class="input-group" placeholder="Email" required/>
+        <div class="form-group inline">
+            <label class="lbl-group">PHONE NUMBER*</label>
+            <input id="phone" name="phone" type="number" maxlength="11" class="input-group"
+                   placeholder="Phone Number" required/>
         </div>
 
-        <div class="form-group">
-            <input id="phone" name="phone" type="text" class="input-group" placeholder="Phone" required/>
+        <div class="form-group inline">
+            <label class="lbl-group">EMAIL ADDRESS*</label>
+            <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
         </div>
 
     </g:form>

@@ -204,4 +204,18 @@ class TreatmentService {
             return true
         }
     }
+
+    def updateCareTeamSurgeon(HttpServletRequest request, HttpServletResponse response, params) {
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareTeam.url,
+                params?.medicalRecordId, params?.staffId)
+        def resp = Unirest.post(url)
+                .asString()
+
+        def result = JSON.parse(resp.body)
+        if (resp.status == 200) {
+            return result
+        } else {
+            return false
+        }
+    }
 }

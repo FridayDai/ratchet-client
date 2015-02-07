@@ -14,7 +14,7 @@
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 600
                 },
                 waringArguments: {
                     title: RC.constants.warningTipTitle,
@@ -85,7 +85,7 @@
             var id = parent.find(".id").text();
             var firstName = parent.find(".first-name").text();
             var lastName = parent.find(".last-name").text();
-            var email = parent.find(".email").text();
+            var email = parent.find(".patientEmail").text();
             var phoneNum = parent.find(".phone").text();
 
             _initSurgeryTime();
@@ -220,7 +220,7 @@
                     $('.id').text(patientInfo.id);
                     $('.first-name').text(patientInfo.firstName);
                     $('.last-name').text(patientInfo.lastName);
-                    $('.email').text(patientInfo.email);
+                    $('.patientEmail').text(patientInfo.email);
                     $('.phone').text(patientInfo.phoneNum);
                 }
             }
