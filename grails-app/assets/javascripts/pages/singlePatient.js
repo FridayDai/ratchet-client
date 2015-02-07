@@ -55,9 +55,11 @@
      * add treatment tab
      * @private
      */
-    function _addTab() {
-        var label = tabTitle,
-            li = $(tabTemplate.replace(/#\{href\}/g, "/treatment/index").replace(/#\{label\}/g, label));
+    function _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime) {
+        //var label = tabTitle,
+        var label = treatmentTitle;
+        var li = $(tabTemplate.replace(/#\{href\}/g, "/treatment?patiendId&client&medicalRecordId&treatmentId&surgeryTime").replace(/#\{label\}/g, label));
+        //
         tabs.find(".tab-treatment").append(li);
         tabs.tabs("refresh");
     }
@@ -98,6 +100,10 @@
                         });
                         var date = new Date($("#surgeryTime").val());
                         var surgeryTime = date.getTime();
+                        var ecFirstName = $('#emergency-firstName').val();
+                        var ecLastName = $('#emergency-lastName').val();
+                        var relationship = $('#relationship').val();
+                        var ecEmail = $('#emergency-email').val();
 
                         var assignInfo = {
                             id: id,
@@ -109,7 +115,12 @@
                             email: email,
                             treatmentId: treatmentId,
                             staffIds: staffIds,
-                            surgeryTime: surgeryTime
+                            surgeryTime: surgeryTime,
+                            ecFirstName: ecFirstName,
+                            ecLastName: ecLastName,
+                            relationship: relationship,
+                            ecEmail: ecEmail
+
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -135,8 +146,12 @@
             data: assignInfo,
             dataType: 'json',
             success: function (data) {
-                tabTitle = data.title;
-                _addTab();
+                //tabTitle = data.title;
+                var medicalRecordId = data.medicalRecordId;
+                var treatmentId = data.treatmentInfo.id;
+                var treatmentTitle = data.treatmentInfo.title;
+                var surgeryTime = assignInfo.surgeryTime;
+                _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime);
             }
         });
     }
