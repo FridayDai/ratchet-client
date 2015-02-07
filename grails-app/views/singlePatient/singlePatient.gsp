@@ -85,7 +85,8 @@
                    required/>
         </div>
 
-        <div class="form-group div-hidden" id="div-surgery-time">
+        %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
+        <div class="form-group">
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group"
                    placeholder="Surgery Time">
         </div>

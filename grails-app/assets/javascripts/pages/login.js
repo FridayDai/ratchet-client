@@ -7,7 +7,7 @@
     var loginLimit = function () {
 
         function _forbidLogin() {
-            $("#btnLogin").attr("disabled", "disabled");
+            $("#btnLogin").attr("disabled", "disabled").addClass("disabled");
         }
 
         function _allowLogin() {
@@ -23,7 +23,7 @@
                 _forbidLogin();
 
                 setTimeout(_allowLogin, milliseconds);
-                $("#errorLogin").attr("rateLimit", "");
+                $("#error-login").attr("rateLimit", "");
             }
         }
 
