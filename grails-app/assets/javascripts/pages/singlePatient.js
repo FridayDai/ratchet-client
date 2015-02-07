@@ -22,11 +22,11 @@
                 }
             },
             urls: {
-                query: "{0}/getProvider".format(RC.constants.baseUrl),
-                getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl),
-                updatePatient: "{0}/clients/{1}/patients/{2}".format(RC.constants.baseUrl),
-                assignTreatment: "{0}/clients/{1}/patients/{2}/treatments".format(RC.constants.baseUrl)
+                query: "/getProvider",
+                getTreatments: "/getTreatments",
+                getStaffs: "/getStaffs",
+                updatePatient: "/clients/{0}/patients/{1}",
+                assignTreatment: "/clients/{0}/patients/{1}/treatments"
             }
         },
         tabs,
@@ -144,7 +144,7 @@
      */
     function _assignTreatment(patientId, clientId, assignInfo) {
         $.ajax({
-            url: opts.urls.assignTreatment.format(null, clientId, patientId),
+            url: opts.urls.assignTreatment.format(clientId, patientId),
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
@@ -211,7 +211,7 @@
      */
     function _updatePatient(patientId, clientId, patientInfo) {
         $.ajax({
-            url: opts.urls.updatePatient.format(null, clientId, patientId),
+            url: opts.urls.updatePatient.format(clientId, patientId),
             type: 'POST',
             data: patientInfo,
             dataType: 'json',

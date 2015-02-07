@@ -6,8 +6,8 @@
     //Define provider page global variables
     var opts = {
             urls: {
-                query: "{0}/getActivities".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+                query: "/getActivities",
+                getStaffs: "/getStaffs"
             }
         },
         activityTable;

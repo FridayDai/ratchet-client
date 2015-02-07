@@ -144,6 +144,7 @@ a {
 
 .inner-head {
     background-color: darken($base-color-light-grey, 0%);
+    min-width: 1060px;
 
     .btn-invite {
         background-color: darken($base-color-white, 0%);
@@ -387,6 +388,7 @@ a {
     height: 46px;
     padding: 22px;
     border-bottom: 6px solid $base-color-white-grey;
+    min-width: 960px;
 
     .title {
         width: 80%;
@@ -396,6 +398,7 @@ a {
 }
 
 .inner-search {
+    min-width: 1050px;
 
     .search-content {
         margin: 20px 40px;
@@ -415,6 +418,7 @@ a {
 
 .table-group {
     margin: 40px;
+    min-width: 960px;
 }
 
 .view {

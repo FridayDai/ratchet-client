@@ -14,8 +14,8 @@
             }
         },
         urls: {
-            query: "{0}/clients/{1}/patients/{2}/treatments/{3}/task".format(RC.constants.baseUrl),
-            email: "{0}/clients/{1}/patients/{2}/treatments/{3}/task/{4}/sendMail".format(RC.constants.baseUrl)
+            query: "/clients/{0}/patients/{1}/treatments/{2}/task",
+            email: "/clients/{0}/patients/{1}/treatments/{2}/task/{3}/sendMail"
         }
     };
 
@@ -58,7 +58,7 @@
      */
     function _sendTaskEmail(element, taskId) {
         var request = $.ajax({
-            url: opts.urls.email.format(null, opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
+            url: opts.urls.email.format(opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function (data) {
             if (data === "true") {

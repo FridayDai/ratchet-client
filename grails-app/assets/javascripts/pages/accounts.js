@@ -18,11 +18,11 @@
                 },
             },
             urls: {
-                query: "{0}/getAccounts".format(RC.constants.baseUrl),
-                add: "{0}/createAccount".format(RC.constants.baseUrl),
-                updateAccount: "{0}/updateAccount".format(RC.constants.baseUrl),
-                inviteAccount: "{0}/inviteAccount/{1}".format(RC.constants.baseUrl),
-                updatePassword: "{0}/updatePassword".format(RC.constants.baseUrl)
+                query: "/getAccounts",
+                add: "/createAccount",
+                updateAccount: "/updateAccount",
+                inviteAccount: "/inviteAccount/{0}",
+                updatePassword: "/updatePassword"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
@@ -220,7 +220,7 @@
             e.preventDefault();
             var accountId = $(this).data("accountId");
             $.ajax({
-                url: opts.urls.inviteAccount.format(null, accountId),
+                url: opts.urls.inviteAccount.format(accountId),
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
