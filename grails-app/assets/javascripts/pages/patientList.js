@@ -8,7 +8,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 760
+                    width: 600
                 }
             },
             waringArguments: {

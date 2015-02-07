@@ -35,6 +35,7 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
         "/updateCareGiver"(controller: "team", action: "updateCareGiver")
+        "/updateCareTeamSurgeon"(controller: "team", action: "updateCareTeamSurgeon")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")

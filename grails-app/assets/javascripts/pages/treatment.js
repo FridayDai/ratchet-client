@@ -95,7 +95,7 @@
                             RC.pages.task.init();
                             break;
                         case "Team":
-                            RC.pages.team.init();
+                            RC.pages.team.init(ui.panel);
                             break;
                         case "Overview":
                             RC.pages.overview.init(ui.panel);

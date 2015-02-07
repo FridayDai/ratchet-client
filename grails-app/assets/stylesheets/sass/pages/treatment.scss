@@ -13,6 +13,7 @@
 @import '../partials/chart';
 @import '../partials/theme';
 
+
 .icon-edit {
     //    position: absolute;
     top: -5px;
@@ -27,4 +28,15 @@
     display: block;
     color: $base-color-mid-grey;
     font-size: 9pt;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
+
+.ui-button {
+    &:hover {
+        background: none;
+    }
 }

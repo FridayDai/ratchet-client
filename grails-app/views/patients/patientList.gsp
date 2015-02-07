@@ -105,20 +105,20 @@
             </div>
 
             <div class="form-group inline">
-                    <label class="lbl-group">RELATIONSHIP</label>
-                    <select id="relationship" name="relationship">
-                        <option value="1">Spouse</option>
-                        <option value="2">Parent</option>
-                        <option value="3">Child</option>
-                        <option value="4">Friend</option>
-                        <option value="5">Other</option>
-                    </select>
-                </label>
+                <label class="lbl-group">RELATIONSHIP</label>
+                <select id="relationship" name="relationship">
+                    <option value="1">Spouse</option>
+                    <option value="2">Parent</option>
+                    <option value="3">Child</option>
+                    <option value="4">Friend</option>
+                    <option value="5">Other</option>
+                </select>
             </div>
 
             <div class="form-group inline emr-email">
-                 <label class="lbl-group">EMAIL ADDRESS</label>
-                 <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
+                <label class="lbl-group">EMAIL ADDRESS</label>
+                <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address"
+                       required/>
             </div>
 
 
@@ -137,8 +137,9 @@
             </div>
 
             <div class="form-group ">
-                 <label class="lbl-group">CARE TEAM</label>
-                 <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Surgeon"
+                <label class="lbl-group">CARE TEAM</label>
+                <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear"
+                       placeholder="Surgeon"
                        required/>
             </div>
 
