@@ -49,7 +49,7 @@
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
-            "fnDrawCallback": function(oSettings, json) {
+            "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -407,6 +407,15 @@
     }
 
     /**
+     * add set password input valid
+     */
+    function _validSetPassword() {
+        $("#johnRat").click(function () {
+            $(".create-password-form").valid();
+        });
+    }
+
+    /**
      * Provider page Initialization
      * @private
      */
@@ -417,6 +426,7 @@
         _inviteAccount();
         _updateAccount();
         _changePassword();
+        _validSetPassword();
     }
 
     _init();

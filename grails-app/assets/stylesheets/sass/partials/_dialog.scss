@@ -36,14 +36,24 @@
         margin-top: 0;
         padding: 0;
         border: 0;
-        background-color: $base-color-white;
 
         button {
             margin: .5em 1.5em .5em 0;
+            border: 2px solid $base-color-grey;
+            color: $base-color-grey;
 
-            &:hover {
-                color: $base-color-white;
-                background: $base-color-mid-grey;
+            span {
+                color: $base-color-grey;
+            }
+
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+                border: 2px solid $base-color-dark-grey;
+
+                span {
+                    color: $base-color-dark-grey;
+                }
             }
         }
 

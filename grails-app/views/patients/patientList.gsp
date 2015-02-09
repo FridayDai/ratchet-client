@@ -63,29 +63,29 @@
         <g:form class="form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <label class="lbl-group">PATIENT ID</label>
+                <label class="lbl-group">PATIENT ID*</label>
                 <input id="patientId" name="patientId" type="text" class="input-group" placeholder="ID" required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">FIRST NAME</label>
+                <label class="lbl-group">FIRST NAME*</label>
                 <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name"
                        required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">LAST NAME</label>
+                <label class="lbl-group">LAST NAME*</label>
                 <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">PHONE NUMBER</label>
+                <label class="lbl-group">PHONE NUMBER*</label>
                 <input id="phoneNumber" name="phoneNumber" type="number" maxlength="11" class="input-group"
                        placeholder="Phone Number" required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">EMAIL ADDRESS</label>
+                <label class="lbl-group">EMAIL ADDRESS*</label>
                 <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
 
             </div>
@@ -95,13 +95,13 @@
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME</label>
                 <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
-                       placeholder="First Name" required/>
+                       placeholder="First Name"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME</label>
                 <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
-                       placeholder="Last Name" required/>
+                       placeholder="Last Name"/>
             </div>
 
             <div class="form-group inline">
@@ -117,27 +117,26 @@
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS</label>
-                <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address"
-                       required/>
+                <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address"/>
             </div>
 
 
             <h4>Treatment Info</h4>
 
             <div class="form-group inline">
-                <label class="lbl-group">TREATMENT</label>
+                <label class="lbl-group">TREATMENT*</label>
                 <input id="selectTreatment" name="selectTreatment" type="text" class="input-group"
                        placeholder="Treatment" required/>
             </div>
 
-            <div class="form-group inline div-hidden" id="div-surgery-time">
-                <label class="lbl-group">SURGERY TIME</label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group" placeholder="Surgery Time"
+            <div class="form-group inline" id="div-surgery-time">
+                <label class="lbl-group">SURGERY TIME*</label>
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgeryTime" placeholder="Surgery Time"
                        required/>
             </div>
 
             <div class="form-group ">
-                <label class="lbl-group">CARE TEAM</label>
+                <label class="lbl-group">SURGEON*</label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear"
                        placeholder="Surgeon"
                        required/>
