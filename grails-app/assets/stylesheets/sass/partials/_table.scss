@@ -29,6 +29,7 @@
         color: $base-font-color;
 
         .btn-edit {
+
             &:before {
                 content: '\f12c';
                 color: $base-font-color;
@@ -39,6 +40,7 @@
         }
 
         .btn-remove-team {
+
             &:after {
                 margin-left: 10px;
                 content: '\f252';
@@ -98,13 +100,14 @@
         cursor: default;
 
         .disabled {
-            color: $base-color-white!important;
-            background-color: $base-color-grey!important;
+            color: $base-color-white !important;
+            background-color: $base-color-grey !important;
+
             &:hover,
             &:focus {
-                color: $base-color-white!important;
-                border: 1px $base-color-grey solid!important;
-                background-color: $base-color-grey!important;
+                color: $base-color-white !important;
+                border: 1px $base-color-grey solid !important;
+                background-color: $base-color-grey !important;
                 cursor: inherit;
             }
         }
@@ -112,7 +115,7 @@
         .previous {
             font-family: 'Ionicons';
             display: inline-block;
-            padding: 6px 12px!important;
+            padding: 6px 12px !important;
 
             &:before {
                 display: inline-block;
@@ -124,7 +127,7 @@
 
             font-family: 'Ionicons';
             display: inline-block;
-            padding: 6px 12px!important;
+            padding: 6px 12px !important;
 
             &:before {
                 display: inline-block;

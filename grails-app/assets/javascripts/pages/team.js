@@ -32,7 +32,7 @@
                     title: RC.constants.editGiverTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 620
                 },
 
                 deleteTeamWaringArguments: {
@@ -71,14 +71,19 @@
      * @private
      */
 
-    function _initGiverTable(element, data) {
+    function _initGiverTable(element) {
+
+        var medicalRecordId = element.find('#hidden-medical-record').val();
+        var data = {
+            medicalRecordId: medicalRecordId
+        };
 
         if (careGiverTable) {
             careGiverTable.destroy();
         }
 
         careGiverTable = element.find("#careGiverTable").DataTable({
-            paging: true,
+            paging: false,
             searching: false,
             ordering: false,
             "scrollCollapse": true,
@@ -87,7 +92,7 @@
             bLengthChange: false,
             "serverSide": true,
             //"bPaginate": false,
-            "fnDrawCallback": function(oSettings, json) {
+            "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -146,11 +151,8 @@
      * @private
      */
     function _loadData(element) {
-        var medicalRecordId = element.find('#hidden-medical-record').val();
-        var data = {
-            medicalRecordId: medicalRecordId
-        };
-        _initGiverTable(element, data);
+
+        _initGiverTable(element);
     }
 
     /**
@@ -261,7 +263,8 @@
                 var ids = {
                     medicalRecordId: medicalRecordId
                 };
-                _initGiverTable(element, ids);
+                //_initGiverTable(element, ids);
+                _initGiverTable(element);
                 _removeCareGiver(element);
             }
         });
@@ -339,7 +342,7 @@
                 return $(this).text() === relationship;
             }).prop('selected', true);
 
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: $(".inviteGiverForm"),
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
@@ -380,6 +383,7 @@
             data: careGiverInfo
         }).done(function (data) {
             if (data.resp === true) {
+                _initGiverTable(element);
                 //element.find("td.firstName")[0].text(careGiverInfo.firstName);
                 //element.find("td.firstName")[0].text(careGiverInfo.firstName);
                 //element.find("td.lastName")[0].text(careGiverInfo.lastName);
@@ -394,8 +398,8 @@
      * init select
      * @private
      */
-    function _initSelect() {
-        $("#relationship").select2();
+    function _initSelect(element) {
+        element.find("#relationship").select2();
     }
 
     /**
@@ -639,7 +643,7 @@
         _bindInviteGiverEvent(element);
         _removeCareGiver(element);
         _editCareGiver(element);
-        _initSelect();
+        _initSelect(element);
         _editSurgeon(element);
     }
 

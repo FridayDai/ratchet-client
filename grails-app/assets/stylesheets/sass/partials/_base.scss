@@ -91,18 +91,19 @@ a {
 
     &:hover,
     &:focus {
+        border: 1px $base-color-dark-grey solid;
         color: $base-color-dark-grey;
         background-color: transparent;
-        border: 1px $base-color-dark-grey solid;
     }
 
     &.disabled {
         color: $base-color-white;
         background-color: $base-color-grey;
+
         &:hover,
         &:focus {
-            color: $base-color-white;
             border: 1px $base-color-grey solid;
+            color: $base-color-white;
             background-color: $base-color-grey;
             cursor: inherit;
         }
@@ -143,8 +144,8 @@ a {
 }
 
 .inner-head {
-    background-color: darken($base-color-light-grey, 0%);
     min-width: 1060px;
+    background-color: darken($base-color-light-grey, 0%);
 
     .btn-invite {
         background-color: darken($base-color-white, 0%);
@@ -385,10 +386,10 @@ a {
 }
 
 .inner-header {
+    min-width: 960px;
     height: 46px;
     padding: 22px;
     border-bottom: 6px solid $base-color-white-grey;
-    min-width: 960px;
 
     .title {
         width: 80%;
@@ -414,11 +415,12 @@ a {
         border: 0;
     }
 }
+
 //end of filler content
 
 .table-group {
-    margin: 40px;
     min-width: 960px;
+    margin: 40px;
 }
 
 .view {

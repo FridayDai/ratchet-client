@@ -13,7 +13,6 @@
 @import '../partials/chart';
 @import '../partials/theme';
 
-
 .icon-edit {
     //    position: absolute;
     top: -5px;
@@ -39,4 +38,21 @@
     &:hover {
         background: none;
     }
+}
+
+.container {
+    .content {
+        .patient-tab {
+            border: 0;
+        }
+
+        .sub-tabs {
+            border: 0;
+        }
+    }
+}
+
+.ui-datepicker {
+    border: 1px solid $base-color-dark-grey;
+    background: $base-color-white;
 }
