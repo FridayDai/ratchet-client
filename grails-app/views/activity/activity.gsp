@@ -1,4 +1,4 @@
-<div class="clear">
+<div class="activity clear">
     <div class="inner-search">
         <div class="search-content">
              <div class="filler-content">
