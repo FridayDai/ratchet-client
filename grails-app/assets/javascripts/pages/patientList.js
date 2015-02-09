@@ -272,6 +272,21 @@
     function _initStaffSelect() {
 
         $('#selectStaffs').select2({
+            formatSelection: function (dataItem) {
+                if(dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>"+dataItem.text+" </span></div>";
+                } else {
+                    return "<div class='surgery'> "+dataItem.text+" </div>";
+                }
+
+            },
+            formatResult: function (dataItem) {
+                if(dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>"+dataItem.text+" </span></div>";
+                } else {
+                    return "<div class='surgery'> "+dataItem.text+" </div>";
+                }
+            },
             ajax: {
                 transport: function (params) {
                     params.beforeSend = function () {
@@ -291,7 +306,8 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.firstName + " " + item.lastName
+                            'text': item.firstName + " " + item.lastName,
+                            'type': item.type
                         });
                     });
                     return {
