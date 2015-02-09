@@ -119,4 +119,21 @@ class AccountService {
             return true
         }
     }
+
+    def activateStaff(HttpServletRequest request, HttpServletResponse response, params) {
+
+        def url = grailsApplication.config.ratchetv2.server.activateStaff.url
+        def resp = Unirest.post(url)
+                .field("code", params?.code)
+                .field("hasProfile", params?.hasProfile)
+                .field("password", params?.password)
+                .field("confirmPassword", params?.confirmPassword)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }else {
+            return false
+        }
+    }
 }

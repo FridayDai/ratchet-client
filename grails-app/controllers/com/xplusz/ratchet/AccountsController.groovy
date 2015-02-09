@@ -53,4 +53,25 @@ class AccountsController extends BaseController {
         def result = [resp: resp]
         render result as JSON
     }
+
+    def activateAccount() {
+        def code = params?.code
+        def hasProfile = params?.hasProfile
+        def firstName = params?.firstName
+        if (hasProfile == true) {
+            render(view: '/login/login')
+        } else {
+            render(view: "/accounts/activateAccount", model: [code: code, hasProfile: hasProfile, firstName: firstName])
+        }
+    }
+
+    def confirmPassword() {
+        def resp = accountService.activateStaff(request, response, params)
+        if (resp == true) {
+            redirect(uri: '/login')
+        } else {
+            flash.message = "Staff is not exist."
+            render view: '/pages/error503'
+        }
+    }
 }
