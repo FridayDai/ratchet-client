@@ -5,25 +5,45 @@
 
 .ui-dialog {
     .ui-dialog-titlebar {
-        padding: 20px 0 0 30px;
+        padding: 10px;
         border: 0;
-        background: none;
+        border-bottom: 5px solid rgba(0, 0, 0, .2);
+        background: $base-color-white;
 
         .ui-dialog-title {
-            font-weight: bolder;
+            margin-left: 25px;
+            color: $base-font-color;
+            font-weight: $bold;
+        }
+
+        .ui-button {
+            margin-right: 10px;
+            border: 0;
+
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+            }
         }
     }
 
+    .ui-dialog-content {
+        height: auto !important;
+        background-color: $base-color-white;
+    }
+
     .ui-dialog-buttonpane {
-        margin-right: 35px;
+        margin-top: 0;
+        padding: 0;
         border: 0;
+        background-color: $base-color-white;
 
         button {
             margin: .5em 1.5em .5em 0;
 
             &:hover {
                 color: $base-color-white;
-                background: $base-color-mid-blue;
+                background: $base-color-mid-grey;
             }
         }
 
@@ -53,10 +73,6 @@
     }
 }
 
-.ui-dialog-content {
-    height: auto !important;
-}
-
 .ui-icon-closethick {
     display: none;
 }
@@ -78,7 +94,7 @@
     background: none;
 
     .ui-button-text {
-        font-weight: bolder;
+        font-weight: 100;
     }
 
     .ui-icon-add {
@@ -96,5 +112,14 @@
 }
 
 .ui-dialog-titlebar-close {
-    display: none;
+    display: inline-block;
+    font-family: 'Ionicons';
+
+    &:before {
+        display: inline-block;
+        content: '\f2d7';
+    }
 }
+
+
+

@@ -1,36 +1,47 @@
-<div class="detail-info">
-    <div class="head-content">
-        <div class="inner-head-content div-space">
-            <p class="p-id">ID:${id}</p>
+%{--<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>--}%
 
-            <g:if test="${doctor == true}">
-                <p class="p-name">Dr.${firstName}${lastName}</p>
-            </g:if>
-            <g:else>
-                <p class="p-name">${firstName}${lastName}</p>
-            </g:else>
+%{--<div class="detail-info" data-care-team-id="${careTeam.id}">--}%
+    %{--<div class="head-content">--}%
+        %{--<div class="inner-head-content div-space">--}%
+            %{--<p class="p-id">ID:${careTeam.id}</p>--}%
 
-        </div>
+            %{--<g:if test="${careTeam.doctor == true}">--}%
+                %{--<p class="p-name">Dr.${careTeam.firstName}${careTeam.lastName}</p>--}%
+            %{--</g:if>--}%
 
-        <input type="hidden" name="medicalRecordId" class="medicalRecordId" value="${medicalRecordId}"/>
-        <input type="hidden" name="clientId" class="clientId" value="${clientId}"/>
-        <input type="hidden" name="patientId" class="patientId" value="${patientId}"/>
+            %{--<g:else>--}%
+                %{--<p class="p-name">${careTeam.firstName}${careTeam.lastName}</p>--}%
+            %{--</g:else>--}%
 
-        <div class="inner-bottom-content div-space">
-            <p class="p-role">${com.xplusz.ratchet.StatusCodeConstants.STAFF_TYPE_LIST[staffType - 1]}</p>
+        %{--</div>--}%
 
-            <p class="p-email">${email}</p>
-        </div>
+        %{--<div class="inner-bottom-content div-space">--}%
+            %{--<p class="p-role">${StatusCodeConstants.STAFF_TYPE_LIST[careTeam.staffType - 1]}</p>--}%
 
-    </div>
+            %{--<p class="p-email">${careTeam.email}</p>--}%
+        %{--</div>--}%
 
-    <div class="middle-content">
-        <p>${bio}</p>
-    </div>
+    %{--</div>--}%
 
-    <div class="bottom-content">
-        <a href="#" id="remove-care-team" class="btn-remove-team">
-            <div class="icon-remove"></div>
-        </a>
-    </div>
-</div>
+    %{--<div class="middle-content">--}%
+
+        %{--<p>${careTeam.bio}</p>--}%
+
+    %{--</div>--}%
+
+    %{--<div class="bottom-content">--}%
+        %{--<g:if test="${careTeam.primary == true}">--}%
+        %{--<a href="#" class="btn-make-primary btn-primary">Make PRIMARY</a>--}%
+        %{--</g:if>--}%
+        %{--<g:else>--}%
+        %{--<a href="#" class="btn-make-primary">Make PRIMARY</a>--}%
+        %{--</g:else>--}%
+        %{--<a href="#" class="btn-make-primary">Make PRIMARY</a>--}%
+
+        %{--<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="${careTeam.id}"--}%
+           %{--data-medical-record-id="${medicalRecordId}"--}%
+           %{--data-client-id="${clientId}" data-patient-id="${patientId}">--}%
+            %{--<div class="icon-remove"></div>--}%
+        %{--</a>--}%
+    %{--</div>--}%
+%{--</div>--}%

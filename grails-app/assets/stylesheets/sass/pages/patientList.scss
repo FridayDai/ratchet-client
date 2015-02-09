@@ -1,32 +1,20 @@
 @import '../partials/common';
 @import '../partials/table';
 @import '../partials/form';
+@import '../partials/theme';
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.inner-header {
-    padding: 17px;
-    border-bottom: 1px solid $base-dark-blue-color;
-    background: $base-color-grey;
+.add-patient {
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    font-family: 'Ionicons';
 
-    .title {
-        width: 80%;
-        color: $base-color-dark-blue;
-        font-size: 16px;
-    }
-}
-
-.inner-search {
-    padding: 20px 40px;
-    background: $table-search-bg-color;
-
-    input {
-        min-width: 220px;
-        height: 25px;
-        margin-top: 5px;
-        margin-left: 5px;
-        padding-left: 10px;
-        border: 0;
+    &:before {
+        display: inline-block;
+        margin-right: 10px;
+        content: '\f2c7';
     }
 }
 
@@ -34,7 +22,28 @@
     display: inline-block;
 }
 
-.add-patient {
-    display: inline-block;
-    float: right;
+h4 {
+    margin-bottom: 0;
+    margin-left: 20px;
+    color: $base-color-black;
 }
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
+
+.ui-widget-content {
+    background: $base-color-white;
+}
+
+.div-hidden {
+    display: none;
+}
+
+.ui-datepicker-div {
+    .ui-datepicker-header {
+        border-bottom: 1px solid $base-color-dark-grey;
+    }
+}
+

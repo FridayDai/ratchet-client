@@ -8,46 +8,64 @@ class TeamController extends BaseController {
     def treatmentService
 
     def showMedicalCares() {
-        def medicalRecordId = params.medicalRecordId
-        def clientId = params.clientId
-        def patientId = params.patientId
-        def careTeams = treatmentService.getCareTeam(request, response, medicalRecordId)
+        def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
+        def surgeons = treatmentService.getCareTeam(request, response, medicalRecordId)
+        render(view: "/team/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+    }
+
+//    def getCareTeam() {
+//        def medicalRecordId = params?.medicalRecordId
+//        def careTeams = treatmentService.getCareTeam(request, response, medicalRecordId)
+//        render careTeams as JSON
+//    }
+
+    def getCareGiver() {
+        def medicalRecordId = params?.medicalRecordId
         def careGivers = treatmentService.getCareGiver(request, response, medicalRecordId)
-        render(view: "/team/team", model: [careTeams      : careTeams, careGivers: careGivers,
-                                           medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        render careGivers as JSON
     }
 
     def deleteCareTeam() {
         def resp = treatmentService.deleteCareTeam(request, response, params)
-        render resp as JSON
+        def result = [resp: resp]
+        render result as JSON
     }
 
     def deleteCareGiver() {
         def resp = treatmentService.deleteCareGiver(request, response, params)
-        render resp as JSON
+        def result = [resp: resp]
+        render result as JSON
     }
 
     def addCareTeam() {
+        def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
         def resp = treatmentService.addCareTeam(request, response, params)
-        def id = resp.id
-        def doctor = resp.doctor
-        def firstName = resp.firstName
-        def lastName = resp.lastName
-        def email = resp.email
-        def staffType = resp.staffType
-
-        render g.render(template: "/team/careTeamTemplate", model: [id: id, doctor: doctor, firstName: firstName, lastName: lastName, email: email, staffType: staffType])
+        def result = [resp: resp, medicalRecordId: medicalRecordId]
+        render result as JSON
     }
 
     def addCareGiver() {
+        def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
         def resp = treatmentService.addCareGiver(request, response, params)
-        def id = resp.id
-        def relationShip = resp.relationShip
-        def firstName = resp.firstName
-        def lastName = resp.lastName
-        def email = resp.email
-        def status = resp.status
-
-        render g.render(template: "/team/careGiverTemplate", model: [id: id, relationShip: relationShip, firstName: firstName, lastName: lastName, email: email, status: status])
+        def result = [resp: resp, medicalRecordId: medicalRecordId]
+        render result as JSON
     }
+
+    def updateCareGiver() {
+        def resp = treatmentService.updateCareGiver(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def updateCareTeamSurgeon(){
+        def resp = treatmentService.updateCareTeamSurgeon(request, response, params)
+        render resp as JSON
+    }
+
 }

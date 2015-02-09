@@ -6,6 +6,7 @@ import grails.transaction.Transactional
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import java.text.MessageFormat
 
 @Transactional
 class ActivityService {
@@ -20,8 +21,9 @@ class ActivityService {
         def max = params?.max
         def offset = params?.offset
         def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
 
-        def url = grailsApplication.config.ratchetv2.server.patients.url + "" + patientId + "/records/" + medicalRecordId + "/activities"
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getActivity.url, clientId, patientId, medicalRecordId)
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)
@@ -44,11 +46,12 @@ class ActivityService {
         def search = params?.search
         def draw = params?.draw
         def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
 
-        def url = grailsApplication.config.ratchetv2.server.patients.url + "" + patientId + "/records/" + medicalRecordId + "/activities"
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getActivity.url, clientId, patientId, medicalRecordId)
         def resp = Unirest.get(url)
                 .queryString("max", length)
-                .queryString("offset", draw-1)
+                .queryString("offset", start)
                 .asString()
 
         def result = JSON.parse(resp.body)

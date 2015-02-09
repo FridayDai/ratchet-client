@@ -8,18 +8,21 @@
         baseUrl: "http://localhost:8080",
 
         //CONFIRM
-        confirmTitle: "Add a new Provider",
-        confirmPatientTitle: "Add a new Patient",
+        confirmTitle: "New Provider",
+        confirmPatientTitle: "NEW PATIENT",
         confirmTaskTitle: "Add Outcome Task",
         confirmNoteTitle: "Edit Note",
         confirmTeamTitle: "Add a new Team Member",
-        confirmGiverTitle: "Invite a new Care Giver",
+        confirmGiverTitle: "ADD EMERGENCY CONTACT",
         confirmAccountTitle: "New Account",
-        confirmTreatmentTitle:"Add a new treatment",
+        confirmTreatmentTitle: "ADD TREATMENT",
         editGiverTitle: "Edit a Care Giver",
-        editPatientTitle:"Edit a patient",
+        editPatientTitle: "EDIT PATIENT",
+        updateSurgeryTimeTitle: "Edit surgery time",
         confirmContent: "",
         loadingContent: "This is loading content",
+        changePasswordTitle: "CHANGE PASSWORD",
+        editSurgeonTitle: "Update surgeon",
 
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",

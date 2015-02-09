@@ -1,11 +1,13 @@
-.inner-search {
-    padding: 20px 40px;
-    background: $table-search-bg-color;
+.activity {
+    .inner-search {
+        min-width: 950px;
+    }
 
-    input {
-        width: 300px;
-        height: 25px;
-        padding-left: 10px;
-        border: 0;
+    .table-group {
+        min-width: 860px;
+
+        .dataTable {
+            min-width: 860px;
+        }
     }
 }

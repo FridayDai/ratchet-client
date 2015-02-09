@@ -2,102 +2,97 @@
     padding: 20px;
 }
 
-.content-head {
-    display: block;
-    height: 50px;
-    border-bottom: 1px solid $btn-color-primary;
-    background: $base-color-grey;
-
-    .icon-back {
-        position: absolute;
-        width: 25px;
-        height: 20px;
-        margin-top: 4px;
-        margin-left: 10px;
-        background: url('../../../images/patients/arrow.png') no-repeat 0 0;
-        background-size: cover;
-    }
-
-    p {
-        height: 36px;
-        margin-top: -18px;
-        margin-left: 55px;
-        padding-top: 15px;
-        padding-left: 20px;
-        border-left: 1px solid $btn-color-primary;
-        font-size: large;
-    }
-}
-
 .patient-info {
-    position: relative;
-    padding: 20px 40px;
+    min-width: 1024px;
+    padding: 8px 0;
 
-    .btn-edit {
-        position: absolute;
-        top: 0;
-        right: 20px;
+    .patient-col {
+        float: left;
+        width: 300px;
+        height: 40px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+        font-size: 16px;
+        line-height: 40px;
+        text-align: center;
     }
 
-    .patient-inner-info {
-        width: 180px;
-        padding: 20px;
-        border-right: 1px solid $base-light-grey-color;
+    .info {
+        width: 36%;
 
-        .div-space {
-            margin-top: 10px;
+        .icon {
+            height: 30px;
+            vertical-align: middle;
+            padding-right: 35px;
         }
 
-        .color {
-            //            display: inline;
-            color: $base-color-middle-grey;
+        .first-name {
+            font-size: 21px;
+            vertical-align: middle;
+            text-transform: uppercase;
         }
 
-        .name-info {
-            display: inline;
-            font-size: x-large;
-        }
-
-        .email {
-            display: inline;
-        }
-
-        .phone {
-            display: inline;
+        .last-name {
+            padding-right: 35px;
+            font-size: 21px;
+            vertical-align: middle;
+            text-transform: uppercase;
         }
     }
 
-    .icon-edit {
-        position: absolute;
-        top: 40px;
-        right: 20px;
-        width: 20px;
-        height: 20px;
-        background: url('../../../images/edit.png') no-repeat 0 0;
-        background-size: cover;
+    .email {
+        width: 20%;
+        border-left: 2px solid $base-color-white-grey;
     }
-}
 
-.patient-right-info {
-    position: absolute;
-    top: 20px;
-    left: 300px;
+    .phone {
+        width: 20%;
+        border-left: 2px solid $base-color-white-grey;
+    }
 
-    .email-info {
+    .edit {
+        position: relative;
+        width: 22%;
+        border-left: 2px solid $base-color-white-grey;
+        text-align: left;
+    }
+
+    .btn-edit-patient {
+        vertical-align: middle;
+
         &:before {
-            position: absolute;
-            left: -7px;
-            content: url('../../../images/patients/email.png');
+            display: inline-block;
+            padding-left: 30px;
+            content: '\f12c';
+            color: $base-font-color;
+            font-weight: lighter;
+            font-size: 22px;
+            font-family: ionicons;
         }
     }
 
-    .phone-info {
+    .btn-close {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        vertical-align: middle;
+        color: #b3b3b3;
+        font-size: 18px;
+
         &:before {
-            position: absolute;
-            left: -7px;
-            content: url('../../../images/patients/phone.png');
+            display: inline-block;
+            height: 27px;
+            padding-right: 8px;
+            padding-left: 30px;
+            content: '\f2d7';
+            color: $base-font-color;
+            font-weight: lighter;
+            font-size: 22px;
+            font-family: ionicons;
+            vertical-align: middle;
         }
     }
+
 }
 
 .overview-content {
@@ -111,7 +106,7 @@
         .graph {
             min-height: 640px;
             margin-top: 10px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
     }
 
@@ -124,13 +119,13 @@
             width: 100%;
             height: 400px;
             margin-bottom: 10px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
 
         .task {
             width: 100%;
             height: 150px;
-            border-top: 1px solid $base-light-blue-color;
+            border-top: 1px solid $base-color-light-grey;
         }
     }
 }
@@ -139,7 +134,7 @@
     margin-left: 10px;
 
     label {
-        color: $base-darker-grey-color;
+        color: $base-color-light-grey;
     }
 
     .lbl-outcome {
@@ -166,7 +161,7 @@
     @include border-radius(5px);
     margin-top: 20px;
     padding: 5px 20px 20px;
-    border: 1px solid $btn-color-primary;
+    border: 1px solid $base-color-light-grey;
 
     li {
         margin-top: 10px;
@@ -180,7 +175,7 @@
 
     .title-task {
         width: 37px;
-        background: $base-blue-color;
+        background: $base-color-light-grey;
     }
 
     .title-reminder {
@@ -190,7 +185,7 @@
 
     .title-initiate {
         width: 62px;
-        background: $base-color-dark-yellow;
+        background: $base-color-yellow;
     }
 
     .li-last-update {
@@ -215,7 +210,7 @@
     .triangle-icon-down {
         top: 0;
         left: 0;
-        border-color: $base-light-blue-color transparent transparent;
+        border-color: $base-color-light-grey transparent transparent;
     }
 
     .triangle-icon-upper {
@@ -227,17 +222,28 @@
 
 .right-header {
     &:hover {
-        background: $base-dark-blue-color;
+        background: $base-color-mid-grey;
 
         label {
             color: $base-color-white;
         }
 
         .triangle-icon {
-            border-color: $base-dark-blue-color transparent transparent;
+            border-color: $base-color-mid-grey transparent transparent;
         }
     }
 }
 
+.div-hidden {
+    display: none;
+}
 
+.ui-datepicker {
+    right: 10px;
+    margin-top: 32px;
+    padding: 0;
+    border: 2px solid $base-color-white-grey;
+    border-top: 0;
+    background-color: $base-color-white;
+}
 

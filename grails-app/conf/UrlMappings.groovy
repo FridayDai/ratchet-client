@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: "home", action: "index")
+        "/"(controller: "patients", action: "index")
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 
@@ -24,11 +24,18 @@ class UrlMappings {
         "/patients/$id?"(controller: "singlePatient", action: "showPatient")
         "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
         "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+        "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+
+        //team
         "/team"(controller: "team", action: "showMedicalCares")
+        "/getCareTeam"(controller: "team", action: "getCareTeam")
+        "/getCareGiver"(controller: "team", action: "getCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
         "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
         "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
+        "/updateCareGiver"(controller: "team", action: "updateCareGiver")
+        "/updateCareTeamSurgeon"(controller: "team", action: "updateCareTeamSurgeon")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")
@@ -36,7 +43,6 @@ class UrlMappings {
         "/team"(controller: "team", action: "showMedicalCares")
         "/patient/patientTeam"(controller: "patients", action: "showActivity")
         "/getStaffs"(controller: "staff", action: "getStaff")
-        "/getCareGiver"(controller: "patients", action: "getCareGiver")
 
         // treatment
         "/treatment/task"(controller: "task", action: "getTasks")
@@ -44,17 +50,19 @@ class UrlMappings {
         "/getTreatments"(controller: "treatment", action: "getTreatments")
 
         // Accounts
+        "/userProfile/$accountId?"(controller: "accounts", action: "getProfile")
+        "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")
-        "/getAccounts"(controller: "accounts", action: "getAllAccounts")
-        "/singleAccount"(controller: "accounts", action: "getAccount")
         "/getAccounts"(controller: "accounts", action: "getAccounts")
         "/singleAccount/$id?"(controller: "accounts", action: "getSingleAccount")
         "/createAccount"(controller: "accounts", action: "createAccount")
-        "/updateAccount/$id?"(controller: "accounts", action: "updateAccount")
+        "/updateAccount"(controller: "accounts", action: "updateAccount")
+        "/inviteAccount/$accountId?"(controller: "accounts", action: "inviteAccount")
 
         //task
-        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
-        "/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
+        "/clients/$clientId/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
+        "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         "500"(view: '/pages/error')
         "/providers/detail"(controller: "providers", action: "detail")

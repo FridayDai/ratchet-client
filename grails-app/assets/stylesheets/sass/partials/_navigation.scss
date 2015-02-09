@@ -1,13 +1,13 @@
 .nav {
     position: fixed;
-    top: 50px;
+    top: 42px;
     left: 0;
-    z-index: 999;
-    width: 150px;
+    z-index: 99;
+    width: 200px;
     height: auto;
     min-height: 910px;
-    border-right: 1px solid $base-grey;
-    background-color: $base-color-light-grey;
+    border-right: 20px solid $base-color-white-grey;
+    background-color: $base-color-white;
 
     .list {
         height: 100%;
@@ -21,74 +21,101 @@
 .nav-li {
     position: relative;
     height: 50px;
-    border-bottom: 1px solid $base-dark-blue-color;
+    border-bottom: 1px solid $base-color-white-grey;
+    border-left: 5px solid transparent;
 
     a {
         width: 100%;
         height: 100%;
-        color: $base-color-mid-grey;
-    }
+        padding-left: 20px;
+        color: $base-font-color;
+        text-align: left;
 
-    .ui-icon {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        width: 20px;
-        height: 20px;
-    }
-
-    .home-title {
-        margin-top: 17px;
-    }
-
-    .patient {
-        margin-top: 18px;
-        margin-left: 25px;
-    }
-
-    .account {
-        margin-top: 19px;
-        margin-left: 25px;
-    }
-
-    .icon-home {
-        background: url('../../../images/patients/home.png') no-repeat 0 0;
-        background-size: cover;
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 55px;
+        }
     }
 
     .icon-patient {
-        background: url('../../../images/patients/patient.png') no-repeat 0 0;
-        background-size: cover;
+        font-family: 'Ionicons';
+
+        &:before {
+            display: inline-block;
+            margin-top: 10px;
+            content: '\f47d';
+            font-size: 30px;
+        }
     }
 
     .icon-account {
-        background: url('../../../images/patients/account.png') no-repeat 0 0;
-        background-size: cover;
+        font-family: 'Ionicons';
+
+        &:before {
+            display: inline-block;
+            margin-top: 10px;
+            content: '\f47b';
+            font-size: 30px;
+        }
     }
 
     &:hover,
     &.active {
+        border-left: 5px solid $base-color-dark-grey;
+
         a {
-            color: $base-darker-blue-color;
-        }
-
-        .icon-home {
-            background: url('../../../images/patients/home_hover.png') no-repeat 0 0;
-            background-size: cover;
-        }
-
-        .icon-patient {
-            background: url('../../../images/patients/patient_hover.png') no-repeat 0 0;
-            background-size: cover;
+            color: $base-color-dark-grey;
         }
     }
 }
 
-.li-first-color {
-    background: $base-dark-blue-color;
+.login-info {
+    position: relative;
+    height: 50px;
+    padding: 20px;
+    border-bottom: 6px solid $base-color-white-grey;
 
-    .div-calum {
-        padding-top: 15px;
-        color: $base-color-white;
+    a {
+        width: 100%;
+        height: 100%;
+        color: $base-color-dark-grey;
+        font-weight: 600;
+        font-size: 16px;
     }
+
+    .user-photo {
+        position: relative;
+        overflow: hidden;
+        float: left;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+
+        img {
+            margin-top: 10px;
+        }
+    }
+
+    .user-profile {
+        float: left;
+        width: 110px;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: $base-color-dark-grey;
+
+        li {
+            padding-right: 15px;
+            font-size: 12px;
+            text-align: left;
+
+            &:hover,
+            &.active {
+                a {
+                    border: 0;
+                }
+            }
+        }
+    }
+
 }

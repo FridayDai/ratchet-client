@@ -1,11 +1,18 @@
 .form-group {
-    text-align: center;
+    margin-top: 10px;
+    margin-left: 20px;
+    text-align: left;
+
+    .lbl-group {
+        display: table-row-group;
+        font-size: small;
+    }
 
     .input-group {
-        width: 330px;
-        height: 35px;
-        margin-top: 20px;
-        border: 0;
+        width: 30px;
+        height: 25px;
+        margin-top: 0;
+        font-size: small;
     }
 
     .multi-select {
@@ -16,11 +23,21 @@
     }
 
     .select2-container {
+        width: 258px;
+        height: 35px;
+        margin-top: 0;
         padding-left: 0;
 
         .select2-choice {
-            height: 35px;
+            height: 31px;
+            text-align: left;
         }
+    }
+
+    .select2-chosen {
+        margin-top: 5px;
+        margin-left: -5px;
+        font-size: small;
     }
 
     .select2-container-multi {
@@ -36,3 +53,36 @@
         }
     }
 }
+
+//.form-group {
+//    margin-top: 10px;
+//    margin-left: 20px;
+//    text-align: left;
+//
+//    .lbl-group {
+//        display: table-row-group;
+//        font-size: small;
+//    }
+//
+//    .input-group {
+//        height: 25px;
+//        margin-top: 0;
+//        font-size: small;
+//    }
+//
+//    .select2-container {
+//        width: 336px;
+//        height: 35px;
+//        margin-top: 0;
+//
+//        .select2-choice {
+//            height: 31px;
+//        }
+//    }
+//
+//    .select2-chosen {
+//        margin-top: 5px;
+//        margin-left: -5px;
+//        font-size: small;
+//    }
+//}

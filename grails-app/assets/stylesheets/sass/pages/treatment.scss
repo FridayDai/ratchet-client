@@ -11,3 +11,52 @@
 @import '../partials/selector';
 @import '../partials/timepicker';
 @import '../partials/chart';
+@import '../partials/theme';
+
+.icon-edit {
+    //    position: absolute;
+    top: -5px;
+    right: 35px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../images/edit.png') no-repeat 0 0;
+    background-size: cover;
+}
+
+.surgery-time-picker {
+    display: block;
+    color: $base-color-mid-grey;
+    font-size: 9pt;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+    text-align: center;
+}
+
+.ui-button {
+    &:hover {
+        background: none;
+    }
+}
+
+.container {
+    .content {
+        .patient-tab {
+            border: 0;
+        }
+
+        .sub-tabs {
+            border: 0;
+        }
+    }
+}
+
+.ui-datepicker {
+    border: 1px solid $base-color-dark-grey;
+    background: $base-color-white;
+}
+
+.ui-tabs {
+    min-width: 950px;
+}

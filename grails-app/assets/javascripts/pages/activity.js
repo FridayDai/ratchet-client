@@ -6,8 +6,8 @@
     //Define provider page global variables
     var opts = {
             urls: {
-                query: "{0}/getActivities".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+                query: "/getActivities",
+                getStaffs: "/getStaffs"
             }
         },
         activityTable;
@@ -27,6 +27,11 @@
             ordering: false,
             info: false,
             "serverSide": true,
+            "fnDrawCallback": function(oSettings, json) {
+                $(".previous").text('');
+                $(".next").text('');
+            },
+            "bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 5,// number of pages to cache
@@ -36,7 +41,8 @@
                 {data: "description"},
                 {data: "createdBy"},
                 {data: function(source){
-                    return "Last Update: "+(new Date(source.dateCreated)).format("MMM d, yyyy h:mm:ss a");
+                    var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
+                    return "Last Update: "+ formatDate;
                 }}
             ]
         });
@@ -54,6 +60,7 @@
         data.selectBy = selectBy || 'all';
         data.patientId = $("#patientId").val();
         data.medicalRecordId = $("#medicalRecordId").val();
+        data.clientId = $("#clientId").val();
         _initTable(element, data);
     }
 

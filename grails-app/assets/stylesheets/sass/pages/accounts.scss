@@ -4,44 +4,6 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.table-group {
-    width: 100%;
-}
-
-.accounts-table {
-    th:first-child {
-        width: 10%;
-    }
-
-    th {
-        width: 15%;
-    }
-}
-
-.inner-header {
-    padding: 17px;
-    border-bottom: 1px solid $base-dark-blue-color;
-    background: $base-color-grey;
-
-    .title {
-        width: 80%;
-        color: $base-color-dark-blue;
-        font-size: 16px;
-    }
-}
-
-.inner-search {
-    padding: 20px 40px;
-    background: $table-search-bg-color;
-
-    input {
-        width: 300px;
-        height: 25px;
-        padding-left: 10px;
-        border: 0;
-    }
-}
-
 .accounts-form {
     .dr {
         display: inline-block;
@@ -80,4 +42,16 @@
     }
 
 
+}
+
+.add-account {
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Ionicons';
+
+    &:before {
+        display: inline-block;
+        margin-right: 10px;
+        content: '\f2c7';
+    }
 }

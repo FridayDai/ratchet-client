@@ -1,39 +1,68 @@
 .inner-header {
     position: relative;
-    height: 30px;
-    padding-top: 10px;
-    background: $base-color-whiter;
+    height: 40px;
+    padding: 10px;
+    border-bottom: 3px solid $base-color-white-grey;
 
-    p {
-        display: inline;
-        margin-left: 20px;
-    }
-
-    .btn-position {
+    .btn-invite {
         position: absolute;
-        top: 10px;
-        right: 20px;
-        padding-bottom: initial;
-        border: 0;
-        border-bottom: 1px solid $base-blue-color;
-        color: $base-blue-color;
+        top: 18px;
+        right: 15px;
+        width: 155px;
+        height: 30px;
+        margin-right: 0;
+        padding: 0;
         background: none;
         cursor: pointer;
 
         &:before {
-            position: relative;
-            right: 5px;
-            content: '+';
+            position: absolute;
+            top: 3px;
+            left: 8px;
+            padding-left: 5px;
+            content: '\f489';
+            font-size: 20px;
+            font-family: ionicons;
+        }
+
+        span {
+            display: inline-block;
+            padding-left: 20px;
+            font-size: 14px;
+        }
+
+    }
+
+    .surgeon {
+        position: relative;
+        margin-left: 30px;
+
+        &:before {
+            position: absolute;
+            left: -30px;
+            content: url('../../../images/surgeon_logo.png');
+        }
+    }
+
+    .ec-contact {
+        position: relative;
+        margin-left: 40px;
+
+        &:before {
+            position: absolute;
+            left: -40px;
+            content: url('../../../images/emergency_coontact_logo.png');
         }
     }
 }
 
 .inner-body {
-    overflow-y: auto;
     width: 100%;
     height: 400px;
-    border: 1px solid $base-color-mid-blue;
-    background: $base-color-grey;
+
+    .team-table {
+        width: 100% !important;
+    }
 
     .detail-info {
         @include border-radius(5px);
@@ -56,12 +85,12 @@
         }
 
         .active-status {
-            background: $btn-color-green;
+            background: $base-color-light-blue;
 
         }
 
         .invited-status {
-            background: $btn-color-primary;
+            background: $base-color-light-blue;
         }
 
         .div-margin {
@@ -79,19 +108,19 @@
         margin-bottom: 20px;
 
         .p-id {
-            color: $base-grey-color;
+            color: $base-color-light-blue;
         }
 
         .p-name {
-            color: $base-color-mider-blue;
+            color: $base-color-light-blue;
         }
 
         .p-role {
-            color: $base-blue-color;
+            color: $base-color-light-blue;
         }
 
         .p-email {
-            color: $base-bluer-color;
+            color: $base-color-light-blue;
         }
     }
 }
@@ -102,7 +131,7 @@
     p {
         margin-right: 5%;
         margin-left: 5%;
-        color: $base-grey-color;
+        color: $base-color-light-blue;
     }
 }
 
@@ -113,12 +142,12 @@
 
     .btn-make-primary {
         border-bottom: 1px solid;
-        color: $base-color-middle-grey;
+        color: $base-color-light-blue;
         font-size: 10px;
     }
 
     .btn-primary {
-        color: $base-bluer-color;
+        color: $base-color-light-blue;
     }
 
     .icon-edit {
@@ -131,13 +160,46 @@
         background-size: cover;
     }
 
-    .icon-remove {
-        position: absolute;
-        top: -5px;
-        right: 10px;
-        width: 20px;
-        height: 20px;
-        background: url('../../../images/dustbin.png') no-repeat 0 0;
-        background-size: cover;
+}
+
+.top-body {
+    height: 60px;
+    padding: 10px;
+    border-bottom: 20px solid $base-color-white-grey;
+
+    .inline {
+        display: inline-block;
+        margin-left: 15px;
+        padding: 10px 30px 10px 10px;
+        border-right: 1px solid $base-color-white-grey;
+    }
+
+    .surgeon-name {
+        font-weight: $bold;
+    }
+
+    .surgeon-email {
+        position: relative;
+        top: -14px;
+        vertical-align: sub;
+        height: 25px;
+        padding: 15px 30px 15px 20px;
+    }
+
+    .btn-edit-surgeon {
+        &:before {
+            position: relative;
+            top: -8px;
+            left: 20px;
+            content: '\f12c';
+            color: $base-font-color;
+            font-weight: lighter;
+            font-size: 22px;
+            font-family: ionicons;
+        }
     }
 }
+
+//.ui-widget-content {
+//    background: $base-color-white;
+//}

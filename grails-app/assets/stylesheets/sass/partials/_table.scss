@@ -1,65 +1,85 @@
 .dataTable {
     width: 100%;
+    min-width: 980px;
 
     thead {
-
-        tr {
-            background-color: $table-header-bg-color;
-        }
 
         .sorting {
             background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
         }
 
-//        .sorting_asc {
-//            background: url('../../../images/dataTable/sort_asc.png') no-repeat center right;
-//        }
+        .sorting_asc {
+            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
+        }
 
         .sorting_desc {
-            background: url('../../../images/dataTable/sort_desc.png') no-repeat center right;
+            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
         }
 
     }
 
     th {
         width: 23%;
-        color: $base-color-mid-grey;
+        color: $base-color-dark-grey;
         font-weight: $bold;
-
-        &:first-child {
-            padding-left: 20px;
-        }
     }
 
     tr {
         height: 40px;
-        color: $base-color-middle-grey;
+        color: $base-font-color;
 
-        a {
-            text-decoration: underline;
+        .btn-edit {
+
+            &:before {
+                content: '\f12c';
+                color: $base-font-color;
+                font-weight: lighter;
+                font-size: 22px;
+                font-family: ionicons;
+            }
+        }
+
+        .btn-remove-team {
+
+            &:after {
+                margin-left: 10px;
+                content: '\f252';
+                color: $base-font-color;
+                font-weight: lighter;
+                font-size: 22px;
+                font-family: ionicons;
+            }
         }
 
         .tr-label {
-            color: $base-color-mid-blue;
+            color: $base-color-dark-grey;
+        }
+
+        &:hover {
+            color: $base-color-dark-grey;
+            background-color: $base-color-white-grey;
+
+            a {
+                color: $base-color-dark-grey;
+            }
+
         }
     }
 
-    td {
+    td,
+    th {
+        padding-left: 20px;
+        padding-right: 20px;
+        border: 1px solid $base-color-white-grey;
+
         &:first-child {
-            padding-left: 20px;
+            border-left: 0;
         }
 
         &:last-child {
             padding-right: 20px;
+            border-right: 0;
         }
-    }
-
-    .odd {
-        background: $table-odd-color;
-    }
-
-    .even {
-        background: $table-even-color;
     }
 
 }
@@ -74,21 +94,56 @@
         margin-top: 30px;
         padding-top: .25em;
         border: 1px solid transparent;
-        color: $base-color-middle-grey;
         background: transparent;
-        text-align: center;
+        text-align: right;
         box-shadow: none;
         cursor: default;
+
+        .disabled {
+            color: $base-color-white !important;
+            background-color: $base-color-grey !important;
+
+            &:hover,
+            &:focus {
+                color: $base-color-white !important;
+                border: 1px $base-color-grey solid !important;
+                background-color: $base-color-grey !important;
+                cursor: inherit;
+            }
+        }
+
+        .previous {
+            font-family: 'Ionicons';
+            display: inline-block;
+            padding: 6px 12px !important;
+
+            &:before {
+                display: inline-block;
+                content: '\f3d2';
+            }
+        }
+
+        .next {
+
+            font-family: 'Ionicons';
+            display: inline-block;
+            padding: 6px 12px !important;
+
+            &:before {
+                display: inline-block;
+                content: '\f3d3';
+            }
+        }
 
         .paginate_button {
             display: inline-block;
             box-sizing: border-box;
             min-width: 1.5em;
             margin: 0 5px;
-            padding: 6px 12px;
-            border: 1px $base-color-light-blue solid;
+            padding: 4px 10px;
+            border: 1px $base-color-grey solid;
             white-space: nowrap;
-            background-color: $base-color-white;
+            color: $base-color-grey;
             background-image: none;
             font-weight: normal;
             text-align: center;
@@ -99,15 +154,16 @@
             &:hover,
             &:focus {
                 color: $base-color-white;
-                background-color: darken($base-color-light-blue, 10%);
+                background-color: $base-color-dark-grey;
+                border: 1px $base-color-dark-grey solid;
             }
         }
 
         span {
 
             span {
-                color: darken($base-color-light-blue, 10%);
-                font-size: 40px;
+                font-size: 20px;
+                color: $base-color-grey;
             }
         }
     }

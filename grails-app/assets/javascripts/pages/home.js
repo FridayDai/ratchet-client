@@ -16,7 +16,7 @@
                 }
             },
             urls: {
-                query: "{0}/getProvider".format(RC.constants.baseUrl)
+                query: "/getProvider"
             }
         },
         provideTable,

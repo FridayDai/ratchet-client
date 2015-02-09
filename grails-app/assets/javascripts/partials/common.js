@@ -6,34 +6,9 @@
         _setValidator();
         _dataTablePagination();
         _setGlobalAjax();
-        _initTimeFormat();
         $('select').select2();
     }
 
-    function _initTimeFormat() {
-        Date.prototype.format = function(format) {
-            var o = {
-                "M+": this.getMonth() + 1,
-                "d+": this.getDate(),
-                "h+": this.getHours(),
-                "m+": this.getMinutes(),
-                "s+": this.getSeconds(),
-                "q+": Math.floor((this.getMonth() + 3) / 3),
-                "S": this.getMilliseconds(),
-                "a": this.getHours() > 11 ? "PM" : "AM"
-                };
-            if (/(y+)/.test(format) || /(Y+)/.test(format)) {
-                format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            }
-            for (var k in o) {
-                if (new RegExp("(" + k + ")").test(format)) {
-                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
-                }
-            }
-            return format;
-        };
-
-    }
     /**
      * set global validator
      * @private
@@ -439,7 +414,7 @@
             var element = $(errorElement.element);
             var errorMessage = errorElement.message;
             element.attr("data-error-msg", errorMessage);
-            var className = "error-msg-right";
+            var className = "error-msg-bottom";
             if (element.is("[data-class]")) {
                 className = element.attr("data-class");
             }
@@ -449,7 +424,7 @@
                     position = {my: 'center bottom', at: 'center top-10'};
                     break;
                 case 'error-msg-bottom':
-                    position = {my: 'center top', at: 'center bottom+10'};
+                    position = {my: 'left top', at: 'left bottom'};
                     break;
                 case 'error-msg-left':
                     position = {my: 'right center', at: 'left-10 center'};

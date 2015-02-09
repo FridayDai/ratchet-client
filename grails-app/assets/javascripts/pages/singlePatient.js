@@ -7,14 +7,14 @@
                 confirmTreatmentFormArguments: {
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
-                    width: 400
+                    height: 600,
+                    width: 800
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 600
                 },
                 waringArguments: {
                     title: RC.constants.warningTipTitle,
@@ -22,14 +22,16 @@
                 }
             },
             urls: {
-                query: "{0}/getProvider".format(RC.constants.baseUrl),
-                editPatient: "{0}/clients/".format(RC.constants.baseUrl),
-                getTreatments: "{0}/getTreatments".format(RC.constants.baseUrl),
-                getStaffs: "{0}/getStaffs".format(RC.constants.baseUrl)
+                query: "/getProvider",
+                getTreatments: "/getTreatments",
+                getStaffs: "/getStaffs",
+                updatePatient: "/clients/{0}/patients/{1}",
+                assignTreatment: "/clients/{0}/patients/{1}/treatments"
             }
         },
         tabs,
-        tabTitle,
+        patientId,
+        clientId,
         tabTemplate;
 
     /**
@@ -54,20 +56,17 @@
      * add treatment tab
      * @private
      */
-    function _addTab() {
-        var label = tabTitle,
-            li = $(tabTemplate.replace(/#\{href\}/g, "/treatment/index").replace(/#\{label\}/g, label));
+    function _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime) {
+        //var label = tabTitle,
+        var label = treatmentTitle;
+        var url = "/treatment?patientId=" + patientId + "&client=" + clientId +
+            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
+        var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
+        //
         tabs.find(".tab-treatment").append(li);
         tabs.tabs("refresh");
     }
 
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        $("#treatment-form").validate({});
-    }
 
     /**
      * add treatment to a patient
@@ -76,22 +75,25 @@
     function _addTreatment() {
         $("#addTab").button().click(function (e) {
             e.preventDefault();
+
             $(".treatment-form")[0].reset();
 
-            var grandParent = $(this).parent().parent();
-            var emid = grandParent.find('.id-info').attr('value');
-            var clientId = grandParent.find('input').attr('value');
-            var firstName = grandParent.find('.first-name-info').attr('value');
-            var lastName = grandParent.find('.last-name-info').attr('value');
-            var email = grandParent.find('.email-info').attr('value');
-            var phoneNum = grandParent.find('.phone-info').attr('value');
+            patientId = $(this).data("patientId");
+            clientId = $(this).data("clientId");
+
+            var parent = $(this).parents();
+            var id = parent.find(".id").text();
+            var firstName = parent.find(".first-name").text();
+            var lastName = parent.find(".last-name").text();
+            var email = parent.find(".patientEmail").text();
+            var phoneNum = parent.find(".phone").text();
+
+            _initSurgeryTime();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
-                        //tabTitle = $("#selectTreatment");
-
                         var treatmentId = $("#selectTreatment").val();
                         var staffIds = $("#selectStaffs").val();
                         var staffArray = staffIds.split(',');
@@ -99,19 +101,31 @@
                         $.each(staffArray, function (index, item) {
                             staffIdArr.push(parseInt(item));
                         });
+                        var date = new Date($("#surgeryTime").val());
+                        var surgeryTime = date.getTime();
+                        var ecFirstName = $('#emergency-firstName').val();
+                        var ecLastName = $('#emergency-lastName').val();
+                        var relationship = $('#relationship').val();
+                        var ecEmail = $('#emergency-email').val();
 
                         var assignInfo = {
-                            patientId: emid,
+                            id: id,
+                            patientId: patientId,
                             clientId: clientId,
                             firstName: firstName,
                             lastName: lastName,
                             phoneNum: phoneNum,
                             email: email,
                             treatmentId: treatmentId,
-                            staffIds: staffIds
-                            //surgeryTime: surgeryTime
+                            staffIds: staffIds,
+                            surgeryTime: surgeryTime,
+                            ecFirstName: ecFirstName,
+                            ecLastName: ecLastName,
+                            relationship: relationship,
+                            ecEmail: ecEmail
+
                         };
-                        _assignTreatment(emid, clientId, assignInfo);
+                        _assignTreatment(patientId, clientId, assignInfo);
 
                         return true;
                     }
@@ -128,15 +142,19 @@
      * @param assignInfo
      * @private
      */
-    function _assignTreatment(emid, clientId, assignInfo) {
+    function _assignTreatment(patientId, clientId, assignInfo) {
         $.ajax({
-            url: opts.urls.editPatient + clientId + '/patients/' + emid + '/treatments',
+            url: opts.urls.assignTreatment.format(clientId, patientId),
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
             success: function (data) {
-                tabTitle = data[0].title;
-                _addTab();
+                //tabTitle = data.title;
+                var medicalRecordId = data.medicalRecordId.id;
+                var treatmentId = data.treatmentInfo.id;
+                var treatmentTitle = data.treatmentInfo.title;
+                var surgeryTime = assignInfo.surgeryTime;
+                _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime);
             }
         });
     }
@@ -149,25 +167,34 @@
         $('.btn-edit-patient').on('click', function (e) {
             e.preventDefault();
 
-            var parent = $(this).parent();
-            var emid = parent.find('.id-info').attr('value');
-            var clientId = parent.find('input').attr('value');
-            $("#firstName").val(parent.find('.first-name-info').attr('value'));
-            $("#lastName").val(parent.find('.last-name-info').attr('value'));
-            $("#email").val(parent.find('.email-info').attr('value'));
-            $("#phone").val(parent.find('.phone-info').attr('value'));
+            var patientId = $(this).data("patientId");
+            var clientId = $(this).data("clientId");
+
+            var parent = $(this).parents();
+            var id = parent.find(".id").text();
+            var firstName = parent.find(".first-name").text();
+            var lastName = parent.find(".last-name").text();
+            var email = parent.find(".email").text();
+            var phoneNum = parent.find(".phone").text();
+
+            $("#patientId").val(id);
+            $("#firstName").val(firstName);
+            $("#lastName").val(lastName);
+            $("#email").val(email);
+            $("#phone").val(phoneNum);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
                         var patientInfo = {
-                            emid: emid,
+                            patientId: patientId,
+                            id: $("#patientId").val(),
                             firstName: $("#firstName").val(),
                             lastName: $("#lastName").val(),
                             email: $("#email").val(),
                             phoneNum: $("#phone").val()
                         };
-                        _updatePatient(emid, clientId, patientInfo);
+                        _updatePatient(patientId, clientId, patientInfo);
                         return true;
                     }
                 }
@@ -182,18 +209,19 @@
      * @param patientInfo
      * @private
      */
-    function _updatePatient(emid, clientId, patientInfo) {
+    function _updatePatient(patientId, clientId, patientInfo) {
         $.ajax({
-            url: opts.urls.editPatient + clientId + '/patients/' + emid,
+            url: opts.urls.updatePatient.format(clientId, patientId),
             type: 'POST',
             data: patientInfo,
             dataType: 'json',
             success: function (status) {
                 if (status.resp === 200) {
-                    $('.first-name-info').empty().append(patientInfo.firstName);
-                    $('.last-name-info').empty().append(patientInfo.lastName);
-                    $('.email-info').empty().append(patientInfo.email);
-                    $('.phone-info').empty().append(patientInfo.phoneNum);
+                    $('.id').text(patientInfo.id);
+                    $('.first-name').text(patientInfo.firstName);
+                    $('.last-name').text(patientInfo.lastName);
+                    $('.patientEmail').text(patientInfo.email);
+                    $('.phone').text(patientInfo.phoneNum);
                 }
             }
         });
@@ -204,7 +232,7 @@
      * @private
      */
     function _goBackToPrePage() {
-        $('.btn-back').on('click', function (e) {
+        $('.btn-close').on('click', function (e) {
             e.preventDefault();
 
             parent.history.back();
@@ -218,10 +246,11 @@
      * @private
      */
     function _initSelectTreatment() {
+
         $('#selectTreatment').select2({
             ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
@@ -238,13 +267,22 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.title
+                            'text': item.title,
+                            'data': item.surgeryTimeRequired
                         });
                     });
                     return {
                         results: myResults
                     };
                 }
+            }
+        });
+
+        $('#selectTreatment').on("change", function (data) {
+            if (data.added.data === true) {
+                $("#div-surgery-time").css("display", "block");
+            } else {
+                $("#div-surgery-time").css("display", "none");
             }
         });
     }
@@ -255,10 +293,10 @@
      */
     function _initStaffSelect() {
         $('#selectStaffs').select2({
-            tags: true,
+            //tags: true,
             ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
                     };
                     return $.ajax(params);
@@ -287,13 +325,30 @@
     }
 
     /**
+     * init surgery time
+     * @private
+     */
+    function _initSurgeryTime() {
+        $("#surgeryTime").datetimepicker({
+            controlType: 'input'
+        });
+    }
+
+    /**
+     * set validate
+     * @private
+     */
+    function _setValidate() {
+        $("#treatment-form").validate({});
+    }
+
+    /**
      * page Initialization
      * @private
      */
     function _init() {
         _initTab();
         _addTreatment();
-        //_assignTreatment();
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();

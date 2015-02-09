@@ -16,7 +16,7 @@ class StaffService {
 
     def messageSource
 
-    def getStaffs (HttpServletRequest request, HttpServletResponse response, params) {
+    def getStaffs(HttpServletRequest request, HttpServletResponse response, params) {
         def max = params?.max
         def offset = params?.offset
 
@@ -25,29 +25,32 @@ class StaffService {
                 .queryString("max", max)
                 .queryString("offset", offset)
                 .queryString("clientId", request.session.clientId)
+                .queryString("type", StatusCodeConstants.STAFF_TYPE_SURGEON)
                 .asString()
 
         def result = JSON.parse(resp.body)
 
         if (resp.status == 200) {
             return result.items
-        }
-
-        if (resp.status == 400) {
+        } else {
             return false
         }
 
-        if (resp.status == 403) {
-            def rateLimit = result?.error?.errorMessage
-            Integer[] args = [rateLimit]
-            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
-            throw new AccountValidationException(errorMessage, rateLimit)
-
-
-        } else {
-            def errorMessage = result?.error?.errorMessage
-            throw new AccountValidationException(errorMessage)
-
-        }
+//        if (resp.status == 400) {
+//            return false
+//        }
+//
+//        if (resp.status == 403) {
+//            def rateLimit = result?.error?.errorMessage
+//            Integer[] args = [rateLimit]
+//            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
+//            throw new AccountValidationException(errorMessage, rateLimit)
+//
+//
+//        } else {
+//            def errorMessage = result?.error?.errorMessage
+//            throw new AccountValidationException(errorMessage)
+//
+//        }
     }
 }

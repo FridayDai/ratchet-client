@@ -6,12 +6,12 @@
 @import 'compass/css3';
 
 @font-face {
-    font-family: 'fontello';
-    src: url('../../../fonts/fontello.eot');
-    src: url('../../../fonts/fontello.eot?#iefix') format('embedded-opentype'),
-    url('../../../fonts/fontello.woff') format('woff'),
-    url('../../../fonts/fontello.ttf') format('truetype'),
-    url('../../../fonts/fontello.svg?#fontello') format('svg');
+    font-family: 'Ionicons';
+    src: url('../../../fonts/ionicons.eot');
+    src: url('../../../fonts/ionicons.eot?#iefix') format('embedded-opentype'),
+    url('../../../fonts/ionicons.ttf?') format('truetype'),
+    url('../../../fonts/ionicons.woff') format('woff'),
+    url('../../../fonts/ionicons.svg?#Ionicons') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -24,7 +24,7 @@ body {
 
     ::selection {
         color: $base-color-white;
-        background: $base-color-mid-blue;
+        background: $base-color-light-blue;
     }
 }
 
@@ -34,7 +34,7 @@ h5 {
 }
 
 p {
-    color: $base-color-middle-grey;
+    color: $base-font-color;
 }
 
 .inline {
@@ -65,7 +65,7 @@ div {
 
 a {
     display: inline-block;
-    color: $base-color-light-blue;
+    color: $base-color-dark-grey;
     background: transparent;
     font: $base-font-utility;
     text-decoration: none;
@@ -80,29 +80,33 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 1px $base-color-light-blue solid;
-    border-radius: 4px;
+    border: 2px $base-color-grey solid;
     white-space: nowrap;
-    background-color: $base-color-white;
+    color: $base-color-grey;
     background-image: none;
     font-weight: normal;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
+    background-color: transparent;
 
     &:hover,
     &:focus {
-        color: $base-color-white;
-        background-color: darken($base-color-light-blue, 10%);
+        border: 2px $base-color-dark-grey solid;
+        color: $base-color-dark-grey;
+        background-color: transparent;
     }
 
-    &.primary {
-        color: $btn-color-primary;
+    &.disabled {
+        color: $base-color-white;
+        background-color: $base-color-grey;
 
         &:hover,
         &:focus {
+            border: 2px $base-color-grey solid;
             color: $base-color-white;
-            background-color: darken($btn-color-primary, 10%);
+            background-color: $base-color-grey;
+            cursor: inherit;
         }
     }
 
@@ -126,7 +130,7 @@ a {
     }
 
     .btn-add {
-        border: 1px solid $base-color-dark-blue;
+        border: 1px solid $base-color-mid-grey;
         background-color: $base-color-white;
     }
 }
@@ -137,10 +141,11 @@ a {
 }
 
 .border-color {
-    border-bottom: 2px solid $base-color-grey;
+    border-bottom: 2px solid $base-color-light-grey;
 }
 
 .inner-head {
+    min-width: 1060px;
     background-color: darken($base-color-light-grey, 0%);
 
     .btn-invite {
@@ -152,7 +157,7 @@ a {
     }
 
     .p-status {
-        color: $base-color-mid-blue;
+        color: $base-color-light-grey;
     }
 
     .btn-border {
@@ -161,7 +166,7 @@ a {
 }
 
 .color {
-    color: $base-color-lighter-blue;
+    color: $base-color-light-blue;
 }
 
 .li-color {
@@ -178,19 +183,18 @@ a {
 
 .input-group {
     min-width: 250px;
-    background: $base-color-light-grey;
 }
 
 .ui-button {
-    border: 2px solid $btn-color-primary;
+    border: 1px solid $base-color-dark-grey;
 
     .ui-button-text {
-        color: $btn-color-primary;
+        color: $base-color-dark-grey;
     }
 
     &:hover {
         border: 0;
-        background-color: darken($base-color-light-blue, 10%);
+        background-color: darken($base-color-dark-grey, 10%);
 
         .ui-button-text {
             color: $base-color-white;
@@ -199,11 +203,11 @@ a {
 }
 
 .ui-dialog-title {
-    color: $base-color-blue;
+    color: $base-color-dark-grey;
 }
 
 .window-warning-title {
-    color: $base-color-mid-blue;
+    color: $base-color-mid-grey;
 }
 
 .window-warning {
@@ -211,16 +215,16 @@ a {
 }
 
 .treatment-id {
-    color: $base-color-medium-grey;
+    color: $base-color-mid-grey;
 }
 
 .btn-action {
     border: 1px solid $base-color-light-blue;
-    color: $base-color-dark-blue;
+    color: $base-color-mid-grey;
 }
 
 .inner-content {
-    color: $base-color-medium-grey;
+    color: $base-color-mid-grey;
 }
 
 .actions-list {
@@ -232,23 +236,23 @@ a {
         }
 
         .btn-color {
-            color: $base-color-medium-grey;
+            color: $base-color-mid-grey;
         }
     }
 
     &:before {
-        border: solid 5px $base-color-medium-blue;
+        border: solid 5px $base-color-mid-grey;
     }
 }
 
 .div-tool-list {
-    background: $base-color-lighter-grey;
+    background: $base-color-light-grey;
 
     .tool-color {
-        color: $base-color-medium-grey;
+        color: $base-color-light-blue;
 
         .p-color {
-            color: $base-color-bluer;
+            color: $base-color-mid-grey;
         }
     }
 }
@@ -273,7 +277,7 @@ a {
     bottom: 0;
     left: 0;
     z-index: 99999;
-    background-color: #6a6a6a;
+    background-color: $base-color-light-grey;
     opacity: .3;
 
     .loading {
@@ -283,13 +287,170 @@ a {
         z-index: 999999;
         width: 40px;
         height: 40px;
-        color: #3b3b3b;
         background: url('../../../images/loading.gif') no-repeat 0 0;
         background-size: cover;
         font-size: 40px;
     }
 }
 
+//start select2
 .select2-container {
     min-width: 220px;
+
+    .select2-choice {
+        border-radius: 0;
+        background-image: none;
+
+        .select2-arrow {
+            border-radius: 0;
+            border-left: 0;
+            background: none;
+            background-image: none;
+
+            b {
+                background: url('../../../images/dataTable/sort_both.png') no-repeat center right !important;
+            }
+        }
+    }
+}
+
+.select2-container-multi.select2-container-active .select2-choices {
+    border: 1px solid $base-color-dark-grey !important;
+}
+
+.select2-dropdown-open,
+.select2-container-active {
+    .select2-choice {
+        border: 1px solid $base-color-dark-grey !important;
+        background-color: $base-color-white;
+    }
+}
+
+.select2-results {
+    .select2-result-label {
+        color: $base-color-grey;
+    }
+
+    .select2-highlighted {
+        background-color: $base-color-white-grey;
+
+        .select2-result-label {
+            color: $base-color-dark-grey;
+        }
+    }
+}
+
+.select2-drop-active {
+    border: 1px solid $base-color-dark-grey;
+    border-top: 0;
+}
+
+//end of select2
+
+//start filler content
+.filler-content {
+    display: inline-block;
+    max-width: 230px;
+    margin-top: 10px;
+
+    label {
+        width: 100%;
+    }
+
+    .search-input {
+        min-width: 180px;
+    }
+
+    .search {
+        display: inline-block;
+        height: 15px;
+        margin-left: -4px;
+        padding: 6px 12px;
+        color: $base-font-color;
+        background-color: $base-color-white;
+        font-weight: 400;
+        font-size: 14px;
+        font-family: 'Ionicons';
+        line-height: 1;
+        text-align: center;
+
+        &:after {
+            display: inline-block;
+            content: '\f21f';
+        }
+    }
+}
+
+.right-search {
+    float: right;
+    margin-top: 28px;
+}
+
+.inner-header {
+    min-width: 960px;
+    height: 46px;
+    padding: 22px;
+    border-bottom: 6px solid $base-color-white-grey;
+
+    .title {
+        width: 80%;
+        color: $base-color-dark-grey;
+        font-size: 30px;
+    }
+}
+
+.inner-search {
+    min-width: 1050px;
+
+    .search-content {
+        margin: 20px 40px;
+        padding: 20px;
+        background-color: $base-color-search;
+    }
+
+    input {
+        min-width: 220px;
+        height: 25px;
+        margin-top: 5px;
+        padding-left: 10px;
+        border: 0;
+    }
+}
+
+//end of filler content
+
+.table-group {
+    min-width: 960px;
+    margin: 40px;
+}
+
+.view {
+    color: $base-font-color;
+    font-family: 'Ionicons';
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: $base-color-dark-grey;
+    }
+
+    &:before {
+        margin-right: 5px;
+        content: '\f362';
+    }
+}
+
+.disabled {
+
+    &:hover,
+    &:focus {
+        cursor: default;
+        background-color: transparent !important;
+        box-shadow: none;
+    }
+
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
 }
