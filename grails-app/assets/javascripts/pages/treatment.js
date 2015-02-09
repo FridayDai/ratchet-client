@@ -26,26 +26,57 @@
      * @private
      */
     function _initDatePicker() {
-        $('.datetime-picker').datetimepicker({
-            controlType: 'input',
-            showOn: "button",
-            buttonImage: "../../assets/edit.png",
-            buttonImageOnly: true,
-            onClose: function (selectedDate) {
-                var parent = $(this).parent();
-                var medicalRecordId = $(this).data("medicalRecordId");
-                var patientId = $(this).data("patientId");
-                var clientId = $(this).data("clientId");
-                var date = new Date(selectedDate);
-                var surgeryTime = date.getTime();
-                _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate);
-            }
+        $(".surgeryTime-edit").click(function (e) {
+            e.preventDefault();
+
+            var parent = $(this).parent();
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var patientId = $(this).data("patientId");
+            var clientId = $(this).data("clientId");
+            //$(".treatment-time-form")[0].reset();
 
 
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
+                element: $("#treatment-time-form"),
+                okCallback: function () {
+                    if ($("#treatment-time-form").valid()) {
+                        var date = new Date($("#treatment-surgeryTime").val());
+                        var surgeryTime = date.getTime();
+                        _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, surgeryTime);
+                        return true;
+                    }
+                    return false;
+                }
+            }));
+            _initSurgeryTime();
 
 
         });
+
+
+        //$('.datetime-picker').datetimepicker({
+        //    controlType: 'input',
+        //    showOn: "button",
+        //    buttonImage: "../../assets/edit.png",
+        //    buttonImageOnly: true,
+        //    onClose: function (selectedDate) {
+        //        var parent = $(this).parent();
+        //        var medicalRecordId = $(this).data("medicalRecordId");
+        //        var patientId = $(this).data("patientId");
+        //        var clientId = $(this).data("clientId");
+        //        var date = new Date(selectedDate);
+        //        var surgeryTime = date.getTime();
+        //        _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate);
+        //    }
+        //});
     }
+
+    function _initSurgeryTime() {
+        $("#treatment-surgeryTime").datetimepicker({
+            controlType: 'input'
+        });
+    }
+
 
     /**
      *

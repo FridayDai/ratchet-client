@@ -23,12 +23,25 @@
                     <label class="surgery-time-picker">
                         <g:formatDate date="${surgeryTime}" format="MMM d, yyyy h:mm:ss a"></g:formatDate>
                     </label>
-                    <input type="hidden" class="datetime-picker" data-patient-id="${patientId}" data-client-id="${clientId}"
+                    <input type="hidden" class="datetime-picker" data-patient-id="${patientId}"
+                           data-client-id="${clientId}"
                            data-medical-record-id="${medicalRecordId}"/>
+                    <span class="icon-edit surgeryTime-edit inline" data-patient-id="${patientId}"
+                          data-client-id="${clientId}"
+                          data-medical-record-id="${medicalRecordId}"></span>
                 </g:if>
             </li>
         </ul>
 
     </div>
+
+    <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
+        <div class="form-group inline">
+            <label class="lbl-group">SURGERY TIME*</label>
+            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group"
+                   placeholder="Surgery Time" tabindex="-1">
+        </div>
+    </g:form>
+
 </div>
 

@@ -29,11 +29,6 @@
     }
 }
 
-.task-header {
-    height: 30px;
-    padding-right: 20px;
-}
-
 .visible-hidden {
     visibility: hidden;
 }
@@ -54,11 +49,11 @@
 // box item for task
 .box-item {
     display: inline-block;
-    width: 334px;
+    width: 326px;
     margin-right: 10px;
     margin-bottom: 10px;
-    padding: 20px 16px;
-    border: 1px $base-color-mid-grey solid;
+    padding: 22px;
+    border: 1px $base-color-white-grey solid;
 
     h4 {
         color: $base-color-black;
@@ -89,7 +84,7 @@
     }
 
     .item-notify {
-        padding-top: 14px;
+        padding-bottom: 3px;
     }
 
     button {
@@ -124,7 +119,7 @@
 
     // change background and color according to status
     &.pending {
-        border-color: $base-color-green;
+        border: 3px $base-color-green solid;
 
         .status-background {
             background-color: $base-color-green;
@@ -132,7 +127,7 @@
     }
 
     &.overdue {
-        border-color: $base-color-red;
+        border: 3px $base-color-red solid;
 
         .status-background {
             background-color: $base-color-red;
@@ -140,10 +135,10 @@
     }
 
     &.complete {
-        border-color: $base-color-blue;
+        border: 3px $base-font-grey solid;
 
         .status-background {
-            background-color: $base-color-blue;
+            background-color: $base-font-grey;
         }
     }
 }

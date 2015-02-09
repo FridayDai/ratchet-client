@@ -82,34 +82,41 @@
 
     <g:form class="treatment-form ui-hidden" id="treatment-form" name="treatment-form">
 
-        <div class="form-group">
+        <div class="form-group inline">
+            <label class="lbl-group">TREATMENT*</label>
             <input id="selectTreatment" name="selectTreatment" type="text" class="input-group" placeholder="Treatment"
                    required/>
         </div>
 
-        <div class="form-group">
-            <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear" placeholder="Staff"
-                   required/>
-        </div>
-
         %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
-        <div class="form-group">
+        <div class="form-group inline">
+            <label class="lbl-group">SURGERY TIME*</label>
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group"
                    placeholder="Surgery Time">
         </div>
 
-        <h4>Emergency Contact</h4>
+        <div class="form-group inline">
+            <label class="lbl-group">SURGEON*</label>
+            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group" placeholder="Staff"
+                   required/>
+        </div>
+
+        <div class="clear">
+            <div class="pull-right">* Required filed</div>
+        </div>
+
+        <h5>Emergency Contact</h5>
 
         <div class="form-group inline">
             <label class="lbl-group">FIRST NAME</label>
             <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
-                   placeholder="First Name" required/>
+                   placeholder="First Name" />
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">LAST NAME</label>
             <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
-                   placeholder="Last Name" required/>
+                   placeholder="Last Name" />
         </div>
 
         <div class="form-group inline">
@@ -126,7 +133,7 @@
 
         <div class="form-group inline emr-email">
              <label class="lbl-group">EMAIL ADDRESS</label>
-             <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
+             <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" />
         </div>
 
     </g:form>

@@ -293,7 +293,7 @@
      */
     function _initStaffSelect() {
         $('#selectStaffs').select2({
-            tags: true,
+            //tags: true,
             ajax: {
                 transport: function (params) {
                     params.beforeSend = function () {
