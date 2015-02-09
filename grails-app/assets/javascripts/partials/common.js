@@ -279,17 +279,17 @@
                 modal: true,
                 title: confirmFormArguments.title,
                 buttons: {
-                    "CONFIRM": function (e) {
+                    "SAVE": function (e) {
                         if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
                             dialog.dialog("close");
                         }
-                    },
-                    CANCEL: function (e) {
-                        if ($.isFunction(confirmFormArguments.cancelCallback)) {
-                            (confirmFormArguments.cancelCallback)(e);
-                        }
-                        dialog.dialog("close");
                     }
+                    //CANCEL: function (e) {
+                    //    if ($.isFunction(confirmFormArguments.cancelCallback)) {
+                    //        (confirmFormArguments.cancelCallback)(e);
+                    //    }
+                    //    dialog.dialog("close");
+                    //}
                 },
                 close: function () {
 

@@ -83,22 +83,23 @@
         }
 
         careGiverTable = element.find("#careGiverTable").DataTable({
-            paging: false,
+            paging: true,
             searching: false,
-            ordering: false,
-            "scrollCollapse": true,
+            ordering: true,
+            //"scrollCollapse": true,
             pageLength: 10,
             info: false,
             bLengthChange: false,
             "serverSide": true,
-            //"bPaginate": false,
+            //"bPaginate": true,
             "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
+                $(".dataTables_paginate").css("display", "none");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getCareGiver,
-                pages: 2, // number of pages to cache
+                pages: 1, // number of pages to cache
                 data: data
             }),
             columns: [
@@ -172,7 +173,7 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
                 element: $(".editSurgeon"),
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if ($(".editSurgeon").valid()) {
 
                         var staffId = $("#selectStaff").val();
                         var ids = {
@@ -334,9 +335,10 @@
             var relationship = parent.find("td.relationship").text();
             var email = parent.find("td.email").text();
 
-            $("#giver-firstName").val(firstName);
-            $("#giver-lastName").val(lastName);
-            $("#giver-email").val(email);
+            var eleParent = element.parents()
+            eleParent.find("#giver-firstName").val(firstName);
+            eleParent.find("#giver-lastName").val(lastName);
+            eleParent.find("#giver-email").val(email);
 
             $("select option").filter(function () {
                 return $(this).text() === relationship;
