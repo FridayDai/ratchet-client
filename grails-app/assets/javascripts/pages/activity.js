@@ -56,8 +56,7 @@
      */
     function _loadData(element ,selectLevel, selectBy) {
         var data = {};
-        data.selectLevel = selectLevel || 'all';
-        data.selectBy = selectBy || 'all';
+
         data.patientId = $("#patientId").val();
         data.medicalRecordId = $("#medicalRecordId").val();
         data.clientId = $("#clientId").val();
@@ -100,6 +99,11 @@
         });
     }
 
+    function _search() {
+        $('#selectStaffs').on("change", function (data) {
+
+        });
+    }
     /**
      * change seleceLevel value
      * @private

@@ -113,7 +113,7 @@
                 },
                 {
                     data: function (source) {
-                        return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="editor_edit">View</a>';
+                        return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view">View</a>';
                     },
                     width: "10%"
                 }
@@ -127,12 +127,28 @@
      * @private
      */
     function _loadData() {
-        var data = {
-            clientId: 6
-        };
-        _initTable(data);
+        _initTable();
     }
 
+    function _search() {
+        var data = {
+            name:$("#search-input").val()
+        }
+        _initTable(data)
+    }
+
+    function _bindSearchEvent() {
+        $('#search-input').keydown(function(event){
+            if(event.keyCode==13){
+                _search();
+            }}
+        );
+
+        $("#search-btn").on("click", function(e){
+            e.preventDefault();
+            _search();
+        });
+    }
     /**
      * prepare data of add account
      * @private
@@ -427,6 +443,7 @@
         _updateAccount();
         _changePassword();
         _validSetPassword();
+        _bindSearchEvent();
     }
 
     _init();

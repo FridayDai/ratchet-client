@@ -17,8 +17,8 @@
         <div class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content pull-right">
-                    <input type="text" placeholder="Account ID, Name" class="search-input">
-                    <span class="search"></span>
+                    <input type="text" placeholder="Account ID, Name" class="search-input" id="search-input">
+                    <span class="search" id="search-btn"></span>
                 </div>
             </div>
         </div>
