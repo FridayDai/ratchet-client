@@ -1,11 +1,10 @@
-<div class="clear">
+<div class="activity clear">
     <div class="inner-search">
         <div class="search-content">
              <div class="filler-content">
                 <label for="selectStaffs" class="lbl-by">By</label>
                 <input name="selectStaffs" id="selectStaffs" class="input-group"/>
             </div>
-            <a id="searchActivity" class="btn pull-right" href="#">Search</a>
         </div>
     </div>
 

@@ -80,7 +80,7 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 1px $base-color-grey solid;
+    border: 2px $base-color-grey solid;
     white-space: nowrap;
     color: $base-color-grey;
     background-image: none;
@@ -88,10 +88,11 @@ a {
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
+    background-color: transparent;
 
     &:hover,
     &:focus {
-        border: 1px $base-color-dark-grey solid;
+        border: 2px $base-color-dark-grey solid;
         color: $base-color-dark-grey;
         background-color: transparent;
     }
@@ -102,7 +103,7 @@ a {
 
         &:hover,
         &:focus {
-            border: 1px $base-color-grey solid;
+            border: 2px $base-color-grey solid;
             color: $base-color-white;
             background-color: $base-color-grey;
             cursor: inherit;
@@ -382,7 +383,7 @@ a {
 
 .right-search {
     float: right;
-    margin-top: 20px;
+    margin-top: 28px;
 }
 
 .inner-header {
