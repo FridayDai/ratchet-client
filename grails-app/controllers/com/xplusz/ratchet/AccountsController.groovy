@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class AccountsController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth]
+    def beforeInterceptor = [action: this.&auth, except: ['activateAccount', 'confirmPassword']]
 
     def accountService
 
