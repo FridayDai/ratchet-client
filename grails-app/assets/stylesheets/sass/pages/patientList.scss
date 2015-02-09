@@ -41,5 +41,9 @@ h4 {
     display: none;
 }
 
-
+.ui-datepicker-div {
+    .ui-datepicker-header {
+        border-bottom: 1px solid $base-color-dark-grey;
+    }
+}
 
