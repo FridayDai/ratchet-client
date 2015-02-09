@@ -206,7 +206,7 @@
             _initSelectTreatment();
             _initStaffSelect();
             $("#relationship").select2();
-            $("#div-surgery-time").css("display", "none");
+            //$("#div-surgery-time").css("display", "none");
         });
     }
 
@@ -256,13 +256,13 @@
             }
         });
 
-        $('#selectTreatment, #treatmentForSearchPatient').on("change", function (data) {
-            if (data.added.data === true) {
-                $("#div-surgery-time").css("display", "inline-block");
-            } else {
-                $("#div-surgery-time").css("display", "none");
-            }
-        });
+        //$('#selectTreatment, #treatmentForSearchPatient').on("change", function (data) {
+        //    if (data.added.data === true) {
+        //        $("#div-surgery-time").css("display", "inline-block");
+        //    } else {
+        //        $("#div-surgery-time").css("display", "none");
+        //    }
+        //});
     }
 
     /**
