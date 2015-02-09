@@ -39,7 +39,7 @@
     <div class="care-giver-content">
         <div class="inner-header">
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
-            <button class="btn-invite btn-position" id="invite-giver" data-medical-record-id="${medicalRecordId}"
+            <button class="btn btn-invite btn-position" id="invite-giver" data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
                 <span>Invite Care Giver</span>
             </button>

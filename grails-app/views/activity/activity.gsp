@@ -5,7 +5,6 @@
                 <label for="selectStaffs" class="lbl-by">By</label>
                 <input name="selectStaffs" id="selectStaffs" class="input-group"/>
             </div>
-            <a id="searchActivity" class="btn pull-right" href="#">Search</a>
         </div>
     </div>
 
