@@ -123,6 +123,22 @@ class AccountService {
         }
     }
 
+    def confirmCode(HttpServletRequest request, HttpServletResponse response, code) {
+
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.confirmCode.url, code)
+        def resp = Unirest.post(url)
+                .asString()
+
+        def result = JSON.parse(resp.body)
+
+        if (resp.status == 200) {
+            return result
+        } else {
+            return
+        }
+
+    }
+
     def activateStaff(HttpServletRequest request, HttpServletResponse response, params) {
 
         def url = grailsApplication.config.ratchetv2.server.activateStaff.url
@@ -135,7 +151,7 @@ class AccountService {
 
         if (resp.status == 200) {
             return true
-        }else {
+        } else {
             return false
         }
     }

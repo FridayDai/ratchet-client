@@ -1,7 +1,7 @@
 .form-group {
     margin-top: 10px;
-    margin-left: 20px;
     margin-bottom: 10px;
+    margin-left: 20px;
     text-align: left;
 
     .lbl-group {
@@ -16,10 +16,10 @@
         font-size: small;
     }
 
-    .surgeryTime {
-        background: url('../../../images/patients/calender.png') no-repeat center right;
-        border-width: thin;
+    .surgery-time {
         border: 1px solid $base-grey-color;
+        border-width: thin;
+        background: url('../../../images/patients/calender.png') no-repeat center right;
     }
 
     .multi-select {

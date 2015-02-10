@@ -68,8 +68,8 @@
 
     td,
     th {
-        padding-left: 20px;
         padding-right: 20px;
+        padding-left: 20px;
         border: 1px solid $base-color-grey;
 
         &:first-child {
@@ -105,8 +105,8 @@
 
             &:hover,
             &:focus {
-                color: $base-color-white !important;
                 border: 1px $base-color-grey solid !important;
+                color: $base-color-white !important;
                 background-color: $base-color-grey !important;
                 cursor: inherit;
             }
@@ -153,9 +153,9 @@
             &.current,
             &:hover,
             &:focus {
+                border: 1px $base-color-mid-grey solid;
                 color: $base-color-white;
                 background-color: $base-color-mid-grey;
-                border: 1px $base-color-mid-grey solid;
             }
         }
 

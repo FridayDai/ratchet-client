@@ -119,13 +119,14 @@
     padding-top: 10px;
 
     .btn-position {
+
         &:before {
             content: none;
         }
     }
 
     .ui-dialog-titlebar {
-        border-bottom: none;
+        border-bottom: 0;
         background-color: $base-color-warn;
 
         .ui-dialog-title {
@@ -139,16 +140,40 @@
 
     .ui-dialog-buttonpane {
         background-color: $base-color-warn;
+
+        button {
+            border: 2px solid $base-color-red;
+            color: $base-color-white;
+
+            span {
+                color: $base-color-white;
+            }
+
+            &:focus,
+            &:hover {
+                border: 2px solid $base-color-white;
+                color: $base-color-white;
+
+                span {
+                    color: $base-color-white;
+                }
+            }
+        }
+
+        .btn-agree :focus {
+            border: 0;
+            background: $base-color-red;
+        }
     }
 
     .ui-icon-show {
         &:before {
+            margin: auto;
             content: '\f100';
             color: $base-color-white;
             font-weight: lighter;
             font-size: 22px;
             font-family: ionicons;
-            margin: auto;
         }
     }
 }

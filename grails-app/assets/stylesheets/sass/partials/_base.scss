@@ -83,12 +83,12 @@ a {
     border: 2px $base-color-grey solid;
     white-space: nowrap;
     color: $base-color-grey;
+    background-color: transparent;
     background-image: none;
     font-weight: normal;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
-    background-color: transparent;
 
     &:hover,
     &:focus {
@@ -442,8 +442,8 @@ a {
 
 .disabled {
     border: 0;
-    background-color: $base-font-color;
     color: $base-color-white;
+    background-color: $base-font-color;
 
     &:hover,
     &:focus {

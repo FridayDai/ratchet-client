@@ -18,7 +18,7 @@
                 <div class="form-style-content">
                     <div>
                         <span>Hi</span>
-                        <span>${firstName}!</span>
+                        <span>${staff.firstName}!</span>
                     </div>
 
                     <div>
@@ -39,7 +39,7 @@
                     </div>
 
                     <input type="hidden" name="code" value="${code}"/>
-                    <input type="hidden" name="hasProfile" value="${hasProfile}"/>
+                    <input type="hidden" name="hasProfile" value="${staff.hasProfile}"/>
                 </div>
 
                 <div class="align-center cover-inner-footer">

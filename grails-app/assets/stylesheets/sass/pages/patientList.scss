@@ -48,13 +48,13 @@ h4 {
 }
 
 .surgery {
-    display: inline-block;
     position: relative;
+    display: inline-block;
 
     .care-team {
-        margin-left: 10px;
         position: absolute;
         width: 150px;
+        margin-left: 10px;
     }
 
     .text {

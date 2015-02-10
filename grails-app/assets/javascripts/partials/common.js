@@ -199,7 +199,7 @@
         containerParent.find('.ui-widget-header').addClass('ui-icon-show');
 
         //$('<div class="ui-icon-add"></div>').insertBefore(containerParent.find('.ui-button-text')[0]);
-        $(uiButton[1]).addClass('btn-cancel');
+        $(uiButton[1]).addClass('btn-agree');
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
         uiWindowMessage.html('<div class="window-warning">' + warningArguments.message + '</div>');
@@ -387,13 +387,13 @@
                 width: 350,
                 modal: true,
                 buttons: {
-                    YES: function (e) {
+                    Yes: function (e) {
                         if ($.isFunction(warningArguments.closeCallback)) {
                             (warningArguments.closeCallback)(e);
                         }
                         dialog.dialog("close");
                     },
-                    CANCEL: function (e) {
+                    Cancel: function (e) {
                         if ($.isFunction(warningArguments.cancelCallback)) {
                             (warningArguments.cancelCallback)(e);
                         }
