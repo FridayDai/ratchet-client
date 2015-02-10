@@ -340,7 +340,7 @@
      */
     function _setValidate() {
         var validObj = $("#treatment-form").validate({
-            ignore: 'input[type=hidden]',
+            //ignore: 'input[type=hidden]',
             onkeyup: false,
             errorClass: "myErrorClass",
 
