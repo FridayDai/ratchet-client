@@ -10,7 +10,7 @@
     </div>
 
     <div class="show-status">
-        <g:if test="${task?.isSent == "true"}">
+        <g:if test="${task?.isSent == true}">
             <div class="item-status ${StatusCodeConstants.TASK_STATUS[task?.status]}">
                 <label class="uppercase status-background">${StatusCodeConstants.TASK_STATUS[task?.status]}</label>
             </div>

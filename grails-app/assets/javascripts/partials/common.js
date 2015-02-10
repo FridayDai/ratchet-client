@@ -298,6 +298,7 @@
                         RC.common.hideErrorTip(element);
                     });
                     confirmFormArguments.element[0].reset();
+                    dialog.dialog("close");
                 }
             });
             $container.removeClass('ui-hidden');

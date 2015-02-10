@@ -441,11 +441,15 @@ a {
 }
 
 .disabled {
+    border: 0;
+    background-color: $base-font-color;
+    color: $base-color-white;
 
     &:hover,
     &:focus {
+        border: 0;
+        background-color: $base-font-color;
         cursor: default;
-        background-color: transparent !important;
         box-shadow: none;
     }
 

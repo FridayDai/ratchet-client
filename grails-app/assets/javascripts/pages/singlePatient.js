@@ -8,7 +8,7 @@
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
                     height: 600,
-                    width: 800
+                    width: 600
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
@@ -339,7 +339,23 @@
      * @private
      */
     function _setValidate() {
-        $("#treatment-form").validate({});
+        var validObj = $("#treatment-form").validate({
+            //ignore: 'input[type=hidden]',
+            onkeyup: false,
+            errorClass: "myErrorClass",
+
+            errorPlacement: function(error, element){
+                var elem = $(element);
+                error.insertAfter(element);
+            }
+        });
+
+        $(document).on("change", ".select2-offscreen", function () {
+            if (!$.isEmptyObject(validobj.submitted)) {
+                validObj.form();
+            }
+        });
+
     }
 
     /**

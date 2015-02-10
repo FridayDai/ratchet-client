@@ -26,9 +26,9 @@
                     <input type="hidden" class="datetime-picker" data-patient-id="${patientId}"
                            data-client-id="${clientId}"
                            data-medical-record-id="${medicalRecordId}"/>
-                    <span class="icon-edit surgeryTime-edit inline" data-patient-id="${patientId}"
+                    <a class="icon-edit surgeryTime-edit inline" data-patient-id="${patientId}"
                           data-client-id="${clientId}"
-                          data-medical-record-id="${medicalRecordId}"></span>
+                          data-medical-record-id="${medicalRecordId}"></a>
                 </g:if>
             </li>
         </ul>
@@ -36,9 +36,9 @@
     </div>
 
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
-        <div class="form-group inline">
-            <label class="lbl-group">SURGERY TIME*</label>
-            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group"
+        <div class="form-group inline ">
+            <label class="lbl-group">SURGERY TIME</label>
+            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgeryTime"
                    placeholder="Surgery Time" tabindex="-1">
         </div>
     </g:form>
