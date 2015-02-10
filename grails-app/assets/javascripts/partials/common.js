@@ -272,6 +272,10 @@
             var height = confirmFormArguments.height || 300,
                 width = confirmFormArguments.width || 350;
             var $container = $(confirmFormArguments.element);
+
+            var containerParent = $container.parent();
+            var dialogOwn = $container.clone();
+
             var dialog = $container.dialog({
                 autoOpen: false,
                 resizable: false,
@@ -300,6 +304,8 @@
                     });
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
+                    dialogOwn.appendTo(containerParent);
+                    $(this).dialog("destroy").remove();
                 }
             });
             $container.removeClass('ui-hidden');
