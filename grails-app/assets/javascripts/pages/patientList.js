@@ -82,12 +82,32 @@
      * @private
      */
     function _loadData() {
-        var patientType = $("#selectPatient").val();
+        _initTable();
+    }
+
+    function _search() {
+        var treatmentId = $("#treatmentForSearchPatient").val();
+        var surgeonId = $("#selectSurgeon").val();
+        var name = $("#search-input").val();
         var data = {
-            patientType: parseInt(patientType)
+            treatmentId: treatmentId,
+            surgeonId: surgeonId,
+            name: name
         };
         _initTable(data);
+    }
 
+    function _bindSearchEvent() {
+        $('#search-input').keydown(function(event){
+            if(event.keyCode==13){
+                _search();
+            }}
+        );
+
+        $("#search-btn").on("click", function(e){
+            e.preventDefault();
+            _search();
+        });
     }
 
     /**
@@ -112,12 +132,6 @@
         var date = new Date($("#surgeryTime").val());
         var surgeryTime = date.getTime();
         var staffId = $("#selectStaffs").val();
-        //var staffArray = staffIds.split(',');
-        //var staffIdArr = [];
-        //
-        //$.each(staffArray, function (index, item) {
-        //    staffIdArr.push(parseInt(item));
-        //});
 
         var data = {
             patientId: patientId,
@@ -235,9 +249,9 @@
                 },
                 url: opts.urls.getTreatments,
                 cache: "true",
-                data: function (term) {
+                data: function (name) {
                     return {
-                        term: term
+                        name: name
                     };
                 },
                 results: function (data) {
@@ -256,13 +270,41 @@
             }
         });
 
-        //$('#selectTreatment, #treatmentForSearchPatient').on("change", function (data) {
-        //    if (data.added.data === true) {
-        //        $("#div-surgery-time").css("display", "inline-block");
-        //    } else {
-        //        $("#div-surgery-time").css("display", "none");
-        //    }
-        //});
+    }
+
+    function _initSurgeon() {
+
+        $('#selectSurgeon').select2({
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getStaffs,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name,
+                        type: 8
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.firstName + " " + item.lastName,
+                            'type': item.type
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
     }
 
     /**
@@ -284,7 +326,7 @@
                 if(dataItem.type == 8) {
                     return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>"+dataItem.text+" </span></div>";
                 } else {
-                    return "<div class='surgery'> "+dataItem.text+" </div>";
+                    return "<div class='surgery'> <span class='text'>"+dataItem.text+"</span> </div>";
                 }
             },
             ajax: {
@@ -296,9 +338,10 @@
                 },
                 url: opts.urls.getStaffs,
                 cache: "true",
-                data: function (term) {
+                data: function (name) {
                     return {
-                        term: term
+                        name: name,
+                        type: 8
                     };
                 },
                 results: function (data) {
@@ -318,15 +361,6 @@
         });
     }
 
-    //
-    //$('#selectSurgeon').select2({
-    //    ajax: ajax
-    //});
-    //
-    //$('#selectStaffs').select2({
-    //    ajax: ajax
-
-
     /**
      * Provider page Initialization
      * @private
@@ -337,6 +371,8 @@
         _bindAddEvent();
         _initSelectTreatment();
         _initStaffSelect();
+        _bindSearchEvent();
+        _initSurgeon();
     }
 
     _init();
