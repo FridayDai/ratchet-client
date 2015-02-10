@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class AccountsController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth, except: ['activateAccount', 'confirmPassword']]
+    def beforeInterceptor = [action: this.&auth, except: ['confirmCode', 'confirmPassword']]
 
     def accountService
 
@@ -54,15 +54,20 @@ class AccountsController extends BaseController {
         render result as JSON
     }
 
-    def activateAccount() {
+    def confirmCode() {
         def code = params?.code
-        def hasProfile = params?.hasProfile
-        def firstName = params?.firstName
-        if (hasProfile == true) {
-            render(view: '/login/login')
+        def resp = accountService.confirmCode(request, response, code)
+        if (resp) {
+            if (resp.hasProfile == true) {
+                redirect(uri: '/login')
+            } else {
+                render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
+            }
         } else {
-            render(view: "/accounts/activateAccount", model: [code: code, hasProfile: hasProfile, firstName: firstName])
+            flash.message = "Code is invalid."
+            render view: '/pages/error503'
         }
+
     }
 
     def confirmPassword() {

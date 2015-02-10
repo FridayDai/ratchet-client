@@ -34,8 +34,8 @@
 
         &:hover,
         &:focus {
-            color: $base-color-dark-grey;
             border: 2px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
 
             span,
             &:before {

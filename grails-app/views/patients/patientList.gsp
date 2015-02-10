@@ -123,7 +123,7 @@
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY TIME*</label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgeryTime" placeholder="Surgery Time"
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time" placeholder="Surgery Time"
                        required/>
             </div>
 

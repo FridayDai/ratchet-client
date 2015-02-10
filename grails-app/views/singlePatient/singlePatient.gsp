@@ -91,7 +91,7 @@
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline">
             <label class="lbl-group">SURGERY TIME*</label>
-            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgeryTime"
+            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
                    placeholder="Surgery Time">
         </div>
 

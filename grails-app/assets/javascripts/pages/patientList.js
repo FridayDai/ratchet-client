@@ -54,7 +54,7 @@
                 data: data
             }),
             columns: [
-                {data: "id", width: "10%"},
+                {data: "patientId", width: "10%"},
                 {data: "firstName", width: "10%"},
                 {data: "lastName", width: "10%"},
                 {data: "email", width: "20%"},
