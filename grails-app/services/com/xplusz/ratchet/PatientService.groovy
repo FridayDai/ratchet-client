@@ -47,8 +47,10 @@ class PatientService {
                 .field("ecEmail", ecEmail)
                 .asString()
 
+        def result = JSON.parse(resp.body)
+
         if (resp.status == 201) {
-            return true
+            return result
         }
 
     }
