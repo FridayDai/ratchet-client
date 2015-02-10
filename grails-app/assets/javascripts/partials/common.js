@@ -198,7 +198,7 @@
             uiWindowMessage = $container.find('.window-message');
         containerParent.find('.ui-widget-header').addClass('ui-icon-show');
 
-        $('<div class="ui-icon-add"></div>').insertBefore(containerParent.find('.ui-button-text')[0]);
+        //$('<div class="ui-icon-add"></div>').insertBefore(containerParent.find('.ui-button-text')[0]);
         $(uiButton[1]).addClass('btn-cancel');
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
@@ -387,7 +387,7 @@
                 width: 350,
                 modal: true,
                 buttons: {
-                    PROCEED: function (e) {
+                    YES: function (e) {
                         if ($.isFunction(warningArguments.closeCallback)) {
                             (warningArguments.closeCallback)(e);
                         }
