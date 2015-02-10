@@ -171,7 +171,7 @@
             _initStaffSelect(existSurgeonId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
-                element: $(".editSurgeon"),
+                element: element.find(".editSurgeon"),
                 okCallback: function () {
                     if ($(".editSurgeon").valid()) {
 
@@ -221,7 +221,7 @@
             var patientId = $(this).data("patientId");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
-                element: $(".inviteGiverForm"),
+                element: element.find(".inviteGiverForm"),
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
 
@@ -345,7 +345,7 @@
             }).prop('selected', true);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
-                element: $(".inviteGiverForm"),
+                element: element.find(".inviteGiverForm"),
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
 
