@@ -41,10 +41,15 @@
     font-size: 9pt;
 }
 
-.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
-    float: none;
-    text-align: center;
+.ui-dialog {
+    background: $base-color-white;
+
+    .ui-dialog-buttonpane .ui-dialog-buttonset {
+        float: none;
+        text-align: center;
+    }
 }
+
 
 .ui-button {
     &:hover {
@@ -81,6 +86,3 @@
     text-align: center;
 }
 
-.ui-dialog {
-    background: $base-color-white;
-}

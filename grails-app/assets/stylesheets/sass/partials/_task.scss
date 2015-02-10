@@ -88,13 +88,13 @@
     }
 
     button {
-        color: $base-color-grey;
         border: 2px $base-color-grey solid;
+        color: $base-color-grey;
 
         &:hover,
         &:focus {
-            color: $base-color-dark-grey;
             border: 2px $base-color-dark-grey solid;
+            color: $base-color-dark-grey;
         }
     }
 
