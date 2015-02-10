@@ -65,6 +65,11 @@
         return str;
     };
 
+    jQuery.validator.addMethod('isPhone', function(value, element, param) {
+        var tel = /^[\d-]{1,12}$/;
+        return this.optional(element) || (tel.test(value));
+    }, 'Please enter a valid phone number');
+
     RC.pages = (function (self) {
         return self;
     }({}));

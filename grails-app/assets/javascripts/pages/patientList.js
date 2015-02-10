@@ -188,8 +188,10 @@
             url: opts.urls.add,
             type: "post",
             data: data,
-            success: function () {
-                _initTable();
+            success: function (data) {
+                if(data.id) {
+                    window.location.href = window.location.href + 'patients/' + data.id;
+                }
             },
             error: function () {
                 RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
@@ -200,7 +202,6 @@
             }
         });
 
-
     }
 
     /**
@@ -209,6 +210,11 @@
      */
     function _setValidate() {
         $("#table-form").validate({
+                rules: {
+                    phoneNumber: {
+                        isPhone:true
+                    }
+                },
                 messages: {
                     provider: RC.constants.waringMessageProvider,
                     agent: RC.constants.waringMessageAgent,
