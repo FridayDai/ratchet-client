@@ -3,6 +3,7 @@ package com.xplusz.ratchet
 import com.mashape.unirest.http.Unirest
 import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 
 /**
  * Base Controller.
@@ -32,6 +33,11 @@ class BaseController {
 
     def handleApiAjaxAccessException(ApiAjaxAccessException e) {
         render status: '403', model:  e.message
+    }
+
+    def handleApiReturnErrorException(ApiReturnErrorException e) {
+        flash.message = e.message
+        render view: '/pages/error400'
     }
 
     def handleException(Exception e) {

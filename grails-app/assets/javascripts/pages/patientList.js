@@ -19,7 +19,8 @@
                 query: "/getPatients",
                 add: "/addPatient",
                 getTreatments: "/getTreatments",
-                getStaffs: "/getStaffs"
+                getStaffs: "/getStaffs",
+                getSinglePatient: "/patient/{0}"
             }
         },
         provideTable;
@@ -44,7 +45,7 @@
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
-            "fnDrawCallback": function(oSettings, json) {
+            "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -85,6 +86,22 @@
         _initTable();
     }
 
+    /**
+     * click one row to single patient page
+     * @private
+     */
+    function _clickRow() {
+        $('#patientsTable tbody').on('click', 'tr', function () {
+            var id = $(this).find("td a").data("id");
+            window.location.href = window.location.href + 'patients/' + id;
+        });
+    }
+
+
+    /**
+     *
+     * @private
+     */
     function _search() {
         var treatmentId = $("#treatmentForSearchPatient").val();
         var surgeonId = $("#selectSurgeon").val();
@@ -97,14 +114,19 @@
         _initTable(data);
     }
 
+    /**
+     *
+     * @private
+     */
     function _bindSearchEvent() {
-        $('#search-input').keydown(function(event){
-            if(event.keyCode==13){
-                _search();
-            }}
+        $('#search-input').keydown(function (event) {
+                if (event.keyCode == 13) {
+                    _search();
+                }
+            }
         );
 
-        $("#search-btn").on("click", function(e){
+        $("#search-btn").on("click", function (e) {
             e.preventDefault();
             _search();
         });
@@ -272,6 +294,10 @@
 
     }
 
+    /**
+     *
+     * @private
+     */
     function _initSurgeon() {
 
         $('#selectSurgeon').select2({
@@ -315,18 +341,18 @@
 
         $('#selectStaffs').select2({
             formatSelection: function (dataItem) {
-                if(dataItem.type == 8) {
-                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>"+dataItem.text+" </span></div>";
+                if (dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
-                    return "<div class='surgery'> "+dataItem.text+" </div>";
+                    return "<div class='surgery'> " + dataItem.text + " </div>";
                 }
 
             },
             formatResult: function (dataItem) {
-                if(dataItem.type == 8) {
-                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>"+dataItem.text+" </span></div>";
+                if (dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
-                    return "<div class='surgery'> <span class='text'>"+dataItem.text+"</span> </div>";
+                    return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
                 }
             },
             ajax: {
@@ -373,6 +399,7 @@
         _initStaffSelect();
         _bindSearchEvent();
         _initSurgeon();
+        _clickRow();
     }
 
     _init();

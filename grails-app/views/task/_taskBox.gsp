@@ -11,9 +11,13 @@
 
     <div class="show-status">
         <g:if test="${task?.isSent == true}">
-            <div class="item-status ${StatusCodeConstants.TASK_STATUS[task?.status]}">
+            <div class="item-status inline ${StatusCodeConstants.TASK_STATUS[task?.status]}">
                 <label class="uppercase status-background">${StatusCodeConstants.TASK_STATUS[task?.status]}</label>
             </div>
+        </g:if>
+
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <span>Score: ${task?.score}</span>
         </g:if>
     </div>
 

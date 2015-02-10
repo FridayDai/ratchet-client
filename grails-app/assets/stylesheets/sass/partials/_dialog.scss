@@ -142,7 +142,7 @@
         background-color: $base-color-warn;
 
         button {
-            border: 2px solid $base-color-red;
+            //            border: 2px solid $base-color-red;
             color: $base-color-white;
 
             span {
@@ -151,8 +151,10 @@
 
             &:focus,
             &:hover {
-                border: 2px solid $base-color-white;
+                border: 2px solid $base-color-red;
                 color: $base-color-white;
+
+                background-color: $base-color-red;
 
                 span {
                     color: $base-color-white;
@@ -160,9 +162,10 @@
             }
         }
 
-        .btn-agree :focus {
-            border: 0;
-            background: $base-color-red;
+        .btn-agree {
+            border: 2px solid $base-color-red;
+            //            background: $base-color-red;
+            background-color: $base-color-red;
         }
     }
 
