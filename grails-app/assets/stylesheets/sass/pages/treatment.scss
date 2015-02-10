@@ -14,13 +14,25 @@
 @import '../partials/theme';
 
 .icon-edit {
-    //    position: absolute;
-    top: -5px;
-    right: 35px;
     width: 20px;
     height: 20px;
-    background: url('../../../images/edit.png') no-repeat 0 0;
-    background-size: cover;
+
+    &:before {
+        display: inline-block;
+        padding-left: 10px;
+        content: '\f12c';
+        color: #b3b3b3;
+        font-weight: lighter;
+        font-size: 22px;
+        font-family: ionicons;
+    }
+    //    //    position: absolute;
+    //    top: -5px;
+    //    right: 35px;
+    //    width: 20px;
+    //    height: 20px;
+    //    background: url('../../../images/edit.png') no-repeat 0 0;
+    //    background-size: cover;
 }
 
 .surgery-time-picker {
@@ -59,6 +71,14 @@
 
 .ui-tabs {
     min-width: 950px;
+}
+
+.emergency-caption {
+    margin: 16px 20px;
+}
+
+.treatment-time-form {
+    text-align: center;
 }
 
 .ui-dialog {

@@ -111,18 +111,6 @@
         }
     }
 
-    .disabled {
-        border-color: $base-font-color;
-        color: $base-font-color;
-        text-decoration: line-through;
-
-        &:hover,
-        &:focus {
-            border-color: $base-font-color;
-            color: $base-font-color;
-        }
-
-    }
 
     // change background and color according to status
     &.pending {

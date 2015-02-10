@@ -23,12 +23,12 @@
      *  add task page global variable to object opts
      * @private
      */
-    function _extendOpts() {
+    function _extendOpts(element) {
         _.extend(opts, {
                 params: {
-                    clientId: $("#task-info-hidden").data("clientId"),
-                    patientId: $("#task-info-hidden").data("patientId"),
-                    medicalRecordId: $("#task-info-hidden").data("medicalRecordId")
+                    clientId: element.find("#task-info-hidden").data("clientId"),
+                    patientId: element.find("#task-info-hidden").data("patientId"),
+                    medicalRecordId: element.find("#task-info-hidden").data("medicalRecordId")
                 }
             }
         );
@@ -40,7 +40,7 @@
      * @param element
      * @private
      */
-    function _updateTaskBox(element) {
+    function _updateTaskBox(individualTreatment, element) {
         var date = new Date();
         date = moment(date).format("MMM/DD/YYYY, HH:mm a");
         var hasNotStatus = element.parent().siblings('.show-status').has('.item-status').length === 0;
@@ -49,20 +49,20 @@
             var html = "<div class='item-status pending'>"
                 + "<label class='uppercase status-background'>pending</label></div>";
             taskBox = taskBox.find('.show-status').html('').append(html).closest(".box-item");
-            taskBox.addClass('pending').detach().appendTo($('#task-row-sent'));
+            taskBox.addClass('pending').detach().appendTo(individualTreatment.find('#task-row-sent'));
         }
     }
 
     /**
      * sendEmail about task to patient
      */
-    function _sendTaskEmail(element, taskId) {
+    function _sendTaskEmail(individualTreatment, element, taskId) {
         var request = $.ajax({
             url: opts.urls.email.format(opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function (data) {
             if (data === "true") {
-                _updateTaskBox(element);
+                _updateTaskBox(individualTreatment, element);
             }
         });
         request.fail(function () {
@@ -74,11 +74,11 @@
      * init for task Box
      * @private
      */
-    function _initTaskBox() {
+    function _initTaskBox(individualTreatment) {
         $('.task-email').click(function () {
             var element = $(this);
             var taskId = element.data("taskId");
-            _sendTaskEmail(element, taskId);
+            _sendTaskEmail(individualTreatment, element, taskId);
         });
     }
 
@@ -133,15 +133,15 @@
      * init for task page
      * @private
      */
-    function _init() {
-        _extendOpts();
-        _initTaskBox();
+    function _init(element) {
+        _extendOpts(element);
+        _initTaskBox(element);
         dropdownMenu();
     }
 
     $.extend(task, {
-        init: function () {
-            _init();
+        init: function (element) {
+            _init(element);
         }
     });
 

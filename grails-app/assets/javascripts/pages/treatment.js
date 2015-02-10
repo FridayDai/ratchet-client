@@ -123,7 +123,7 @@
                             RC.pages.activity.init(ui.panel.find("#activityTable"));
                             break;
                         case "Task":
-                            RC.pages.task.init();
+                            RC.pages.task.init(ui.panel);
                             break;
                         case "Team":
                             RC.pages.team.init(ui.panel);
