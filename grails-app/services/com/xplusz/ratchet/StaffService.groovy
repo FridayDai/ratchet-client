@@ -19,13 +19,14 @@ class StaffService {
     def getStaffs(HttpServletRequest request, HttpServletResponse response, params) {
         def max = params?.max
         def offset = params?.offset
+        def type = params?.type
 
         def url = grailsApplication.config.ratchetv2.server.staffs.url
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)
                 .queryString("clientId", request.session.clientId)
-                .queryString("type", StatusCodeConstants.STAFF_TYPE_SURGEON)
+                .queryString("type", type)
                 .asString()
 
         def result = JSON.parse(resp.body)
@@ -36,21 +37,5 @@ class StaffService {
             return false
         }
 
-//        if (resp.status == 400) {
-//            return false
-//        }
-//
-//        if (resp.status == 403) {
-//            def rateLimit = result?.error?.errorMessage
-//            Integer[] args = [rateLimit]
-//            def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
-//            throw new AccountValidationException(errorMessage, rateLimit)
-//
-//
-//        } else {
-//            def errorMessage = result?.error?.errorMessage
-//            throw new AccountValidationException(errorMessage)
-//
-//        }
     }
 }

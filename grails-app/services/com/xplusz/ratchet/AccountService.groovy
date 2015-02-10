@@ -12,13 +12,15 @@ class AccountService {
     def grailsApplication
 
     def getAccounts(HttpServletRequest request, HttpServletResponse response, params) {
-        def draw = params?.draw
+        def start = params?.start
         def length = params?.length
+        def name = params?.name
 
         def url = grailsApplication.config.ratchetv2.server.staffs.url
         def resp = Unirest.get(url)
                 .queryString("max", length)
-                .queryString("offset", draw - 1)
+                .queryString("offset", start)
+                .queryString("name", name)
                 .queryString("clientId", request.session.clientId)
                 .asString()
 
@@ -26,7 +28,8 @@ class AccountService {
 
         if (resp.status == 200) {
             def map = [:]
-
+            map.put(start, start)
+            map.put(length, length)
             map.put("data", result.items)
             return map
         } else {
