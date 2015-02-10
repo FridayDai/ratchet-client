@@ -64,8 +64,8 @@ class AccountsController extends BaseController {
                 render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
             }
         } else {
-            flash.message = "Code is invalid."
-            render view: '/pages/error503'
+//            flash.message = "Code is invalid."
+            render view: '/pages/error404'
         }
 
     }
@@ -75,8 +75,8 @@ class AccountsController extends BaseController {
         if (resp == true) {
             redirect(uri: '/login')
         } else {
-            flash.message = "Staff is not exist."
-            render view: '/pages/error503'
+//            flash.message = "Staff is not exist."
+            render view: '/pages/error404'
         }
     }
 }
