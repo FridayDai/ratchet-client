@@ -4,6 +4,7 @@ import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 import com.xplusz.ratchet.exceptions.ApiResourceAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
 import java.text.MessageFormat
 
@@ -13,7 +14,7 @@ class MedicalRecordService {
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def showTasksByMedicalRecord(clientId, medicalRecordId) throws ApiResourceAccessException {
+    def showTasksByMedicalRecord(clientId, medicalRecordId) throws ApiResourceAccessException, ApiReturnErrorException {
 
         def args = [clientId, medicalRecordId].toArray()
         def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.tasks.url, args)
@@ -25,6 +26,11 @@ class MedicalRecordService {
 
             if (resp.status == 200) {
                 return result
+            }
+
+            if (resp.status == 400) {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message)
             }
 
         } catch (UnirestException e) {
