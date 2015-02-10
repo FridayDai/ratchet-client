@@ -20,6 +20,7 @@
                 add: "/addPatient",
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
+                showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}"
             }
         },
@@ -189,9 +190,8 @@
             type: "post",
             data: data,
             success: function (data) {
-                if(data.id) {
-                    window.location.href = window.location.href + 'patients/' + data.id;
-                }
+                var url = opts.urls.showSinglePatient.format(data.resp.id);
+                window.location.href = url;
             },
             error: function () {
                 RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {

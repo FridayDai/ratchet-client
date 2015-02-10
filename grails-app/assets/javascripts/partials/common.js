@@ -48,8 +48,9 @@
             global: true,
             error: function (jqXHR) {
                 if (jqXHR.status === 404) {
-
+                    window.location.href = "/";
                 } else if (jqXHR.status === 403) {
+                    window.location.href = "/login";
 
                 } else if (jqXHR.status === 0) {
 
