@@ -42,7 +42,7 @@
 
                 deleteGiverWaringArguments: {
                     title: RC.constants.deleteGiverWaringTitle,
-                    message: RC.constants.warningTip
+                    message: RC.constants.deleteGiverWarningMsg
                 }
             },
             urls: {

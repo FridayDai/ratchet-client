@@ -18,14 +18,6 @@
         <div class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content">
-                    <label for="selectPatient">PATIENT</label>
-                    <select name="selectPatient" id="selectPatient">
-                        <option value="1" selected>All Patients</option>
-                        <option value="2">My Patients</option>
-                    </select>
-                </div>
-
-                <div class="filler-content">
                     <label for="treatmentForSearchPatient">TREATMENT</label>
                     <input type="text" class="input-group" name="treatmentForSearchPatient"
                            id="treatmentForSearchPatient"/>
@@ -37,8 +29,8 @@
                 </div>
 
                 <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name" class="search-input">
-                    <span class="search"></span>
+                    <input type="text" placeholder="Patient ID, Name" class="search-input" id="search-input">
+                    <span class="search" id="search-btn"></span>
                 </div>
             </div>
         </div>
@@ -131,7 +123,7 @@
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY TIME*</label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgeryTime" placeholder="Surgery Time"
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time" placeholder="Surgery Time"
                        required/>
             </div>
 

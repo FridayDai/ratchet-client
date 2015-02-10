@@ -18,7 +18,7 @@
         confirmTreatmentTitle: "ADD TREATMENT",
         editGiverTitle: "Edit a Care Giver",
         editPatientTitle: "EDIT PATIENT",
-        updateSurgeryTimeTitle: "Edit surgery time",
+        updateSurgeryTimeTitle: "Edit TREATMENT",
         confirmContent: "",
         loadingContent: "This is loading content",
         changePasswordTitle: "CHANGE PASSWORD",
@@ -27,7 +27,8 @@
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",
         deleteTeamWaringTitle: "Are you sure you want to remove the current Care Team?",
-        deleteGiverWaringTitle: "Are you sure you want to remove the current Care Giver?",
+        deleteGiverWaringTitle: "Are you sure you want to remove the current EMERGENCY CONTACT?",
+        deleteGiverWarningMsg:"The information cannot be retrieved.",
         warningTip: "Click “PROCEED” to go to remove the agent.",
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",

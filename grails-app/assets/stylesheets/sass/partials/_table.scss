@@ -26,13 +26,13 @@
 
     tr {
         height: 40px;
-        color: $base-font-color;
+        color: $base-color-medium-black;
 
         .btn-edit {
 
             &:before {
                 content: '\f12c';
-                color: $base-font-color;
+                color: $base-color-medium-black;
                 font-weight: lighter;
                 font-size: 22px;
                 font-family: ionicons;
@@ -44,7 +44,7 @@
             &:after {
                 margin-left: 10px;
                 content: '\f252';
-                color: $base-font-color;
+                color: $base-color-medium-black;
                 font-weight: lighter;
                 font-size: 22px;
                 font-family: ionicons;
@@ -68,9 +68,9 @@
 
     td,
     th {
-        padding-left: 20px;
         padding-right: 20px;
-        border: 1px solid $base-color-white-grey;
+        padding-left: 20px;
+        border: 1px solid $base-color-grey;
 
         &:first-child {
             border-left: 0;
@@ -105,8 +105,8 @@
 
             &:hover,
             &:focus {
-                color: $base-color-white !important;
                 border: 1px $base-color-grey solid !important;
+                color: $base-color-white !important;
                 background-color: $base-color-grey !important;
                 cursor: inherit;
             }
@@ -153,9 +153,9 @@
             &.current,
             &:hover,
             &:focus {
+                border: 1px $base-color-mid-grey solid;
                 color: $base-color-white;
-                background-color: $base-color-dark-grey;
-                border: 1px $base-color-dark-grey solid;
+                background-color: $base-color-mid-grey;
             }
         }
 

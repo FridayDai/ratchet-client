@@ -50,7 +50,7 @@ class UrlMappings {
         "/getTreatments"(controller: "treatment", action: "getTreatments")
 
         // Accounts
-        "/staff/activate/$code?/$hasProfile?/$firstName?"(controller: "accounts",action: "activateAccount")
+        "/staff/email/confirmation/$code?"(controller: "accounts",action: "confirmCode")
         "/userProfile/$accountId?"(controller: "accounts", action: "getProfile")
         "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")

@@ -33,8 +33,9 @@
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
-            //$(".treatment-time-form")[0].reset();
+            $(".treatment-time-form")[0].reset();
 
+            _initSurgeryTime();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
@@ -48,7 +49,6 @@
                     return false;
                 }
             }));
-            _initSurgeryTime();
 
 
         });
@@ -123,7 +123,7 @@
                             RC.pages.activity.init(ui.panel.find("#activityTable"));
                             break;
                         case "Task":
-                            RC.pages.task.init();
+                            RC.pages.task.init(ui.panel);
                             break;
                         case "Team":
                             RC.pages.team.init(ui.panel);

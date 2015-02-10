@@ -83,12 +83,12 @@ a {
     border: 2px $base-color-grey solid;
     white-space: nowrap;
     color: $base-color-grey;
+    background-color: transparent;
     background-image: none;
     font-weight: normal;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
-    background-color: transparent;
 
     &:hover,
     &:focus {
@@ -383,7 +383,7 @@ a {
 
 .right-search {
     float: right;
-    margin-top: 28px;
+    margin-top: 22px;
 }
 
 .inner-header {
@@ -441,11 +441,15 @@ a {
 }
 
 .disabled {
+    border: 0;
+    color: $base-color-white;
+    background-color: $base-font-color;
 
     &:hover,
     &:focus {
+        border: 0;
+        background-color: $base-font-color;
         cursor: default;
-        background-color: transparent !important;
         box-shadow: none;
     }
 

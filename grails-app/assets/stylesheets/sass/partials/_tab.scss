@@ -34,8 +34,8 @@
 
         &:hover,
         &:focus {
-            color: $base-color-dark-grey;
             border: 2px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
 
             span,
             &:before {
@@ -130,7 +130,7 @@
 
         label {
             display: inline;
-            padding-right: 20px;
+            padding-right: 10px;
             color: $base-color-mid-gray;
             font-size: 14px;
         }

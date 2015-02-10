@@ -68,7 +68,6 @@
 
         .ui-spinner-button {
             border: 0;
-            color: $base-color-light-blue;
             font-size: 15px;
         }
     }
@@ -110,7 +109,7 @@
         top: 25px;
         left: 12px;
         width: 25px;
-        color: $base-color-light-blue;
+        color: $base-color-dark-grey;
         font-weight: bold;
         font-size: 22px;
         text-align: center;
@@ -127,7 +126,7 @@
         margin-top: 25px;
         padding: 5px;
         color: $base-color-white;
-        background-color: $base-color-light-blue;
+        background-color: $base-color-dark-grey;
         text-align: center;
     }
 }
@@ -146,6 +145,10 @@
             color: $base-color-light-blue;
             background: $base-color-dark-grey 50% 50% repeat-x;
         }
+    }
+
+    td {
+        padding: 6px;
     }
 
     .ui-datepicker-buttonpane {

@@ -47,4 +47,19 @@ h4 {
     }
 }
 
+.surgery {
+    position: relative;
+    display: inline-block;
+
+    .care-team {
+        position: absolute;
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    .text {
+        margin-left: 32px;
+    }
+}
+
 
