@@ -50,7 +50,9 @@ class PatientService {
         def result = JSON.parse(resp.body)
 
         if (resp.status == 201) {
-            return result
+            def map = [:]
+            map.put("id", result.id)
+            return map
         }
 
     }

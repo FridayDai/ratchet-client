@@ -12,7 +12,7 @@
     <div>
         <div class="inner-header">
             <label class="title">PATIENTS</label>
-            <a href="#" id="add-patient" class="btn add-patient">Add Patient</a>
+            <a href="#" id="add-patient" class="btn add-patient">New Patient</a>
         </div>
 
         <div class="inner-search">

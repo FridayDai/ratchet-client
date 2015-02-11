@@ -44,7 +44,7 @@
             paging: true,
             searching: false,
             ordering: true,
-            pageLength: 10,
+            pageLength: 20,
             info: false,
             bLengthChange: false,
             "serverSide": true,
@@ -58,6 +58,9 @@
                 pages: 2, // number of pages to cache
                 data: data
             }),
+            "columnDefs": [
+                {"targets": [0, 8], "orderable": false}
+            ],
             columns: [
                 {
                     data: function (source) {
@@ -72,7 +75,9 @@
                     width: "5%"
                 },
                 {
-                    data: "id",
+                    data: function (source) {
+                        return '<p class="source-id">' + source.id + '</p>';
+                    },
                     width: "5%"
                 },
                 {
@@ -132,23 +137,25 @@
 
     function _search() {
         var data = {
-            name:$("#search-input").val()
+            name: $("#search-input").val()
         }
         _initTable(data)
     }
 
     function _bindSearchEvent() {
-        $('#search-input').keydown(function(event){
-            if(event.keyCode==13){
-                _search();
-            }}
+        $('#search-input').keydown(function (event) {
+                if (event.keyCode == 13) {
+                    _search();
+                }
+            }
         );
 
-        $("#search-btn").on("click", function(e){
+        $("#search-btn").on("click", function (e) {
             e.preventDefault();
             _search();
         });
     }
+
     /**
      * prepare data of add account
      * @private
