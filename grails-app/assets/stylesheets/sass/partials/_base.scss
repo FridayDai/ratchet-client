@@ -356,10 +356,13 @@ a {
 
     label {
         width: 100%;
+        color: $base-dark-grey;
     }
 
     .search-input {
         min-width: 180px;
+        border: 1px solid $base-font-color;
+        border-right: 0;
     }
 
     .search {
@@ -368,6 +371,8 @@ a {
         margin-left: -4px;
         padding: 6px 12px;
         color: $base-font-color;
+        border: 1px solid $base-font-color;
+        border-left: 0;
         background-color: $base-color-white;
         font-weight: 400;
         font-size: 14px;

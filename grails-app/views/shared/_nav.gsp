@@ -22,12 +22,12 @@
         <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
             <g:else>class="nav-li"</g:else>>
             <g:link controller="patients" class="icon-patient">
-                <div class="title">PATIENTS</div>
+                <div class="title">Patients</div>
             </g:link>
         </li>
         <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if> <g:else>class="nav-li"</g:else>>
             <g:link controller="accounts" action="index" class="icon-account">
-                <div class="title">ACCOUNTS</div>
+                <div class="title">Accounts</div>
             </g:link>
         </li>
     </ul>

@@ -20,13 +20,13 @@
 
     th {
         width: 23%;
-        color: $base-color-dark-grey;
+        color: $base-dark-grey;;
         font-weight: $bold;
     }
 
     tr {
         height: 40px;
-        color: $base-color-medium-black;
+        color: $base-dark-grey;;
         cursor: pointer;
 
         .btn-edit {
@@ -58,12 +58,12 @@
 
         &:hover {
             color: $base-color-dark-grey;
-            background-color: $base-color-white-grey;
+            background-color: $base-color-search;
 
-            a {
+            a,
+            .source-id {
                 color: $base-color-dark-grey;
             }
-
         }
     }
 
