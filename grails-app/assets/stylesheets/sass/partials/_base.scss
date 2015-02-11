@@ -344,6 +344,11 @@ a {
     margin-top: -3px;
     border: 1px solid $base-color-dark-grey;
     border-top: 0;
+    overflow-y: auto;
+
+    .select2-search {
+        display: none;
+    }
 }
 
 //end of select2

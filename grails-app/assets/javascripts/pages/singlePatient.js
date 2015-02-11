@@ -59,7 +59,7 @@
     function _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentTitle;
-        var url = "/treatment?patientId=" + patientId + "&client=" + clientId +
+        var url = "/treatment?patientId=" + patientId + "&clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
@@ -150,7 +150,7 @@
             dataType: 'json',
             success: function (data) {
                 //tabTitle = data.title;
-                var medicalRecordId = data.medicalRecordId.id;
+                var medicalRecordId = data.medicalRecordId;
                 var treatmentId = data.treatmentInfo.id;
                 var treatmentTitle = data.treatmentInfo.title;
                 var surgeryTime = assignInfo.surgeryTime;
