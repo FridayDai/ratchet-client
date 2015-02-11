@@ -19,7 +19,7 @@
             <div class="search-content clear">
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient">TREATMENT</label>
-                    <input type="text" class="input-group" name="treatmentForSearchPatient"
+                    <input type="text" class="input-group treatment-search-patient" name="treatmentForSearchPatient"
                            id="treatmentForSearchPatient"/>
                 </div>
 

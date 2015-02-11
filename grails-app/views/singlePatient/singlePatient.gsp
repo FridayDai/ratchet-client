@@ -101,9 +101,7 @@
                    />
         </div>
 
-        <div class="emergency-caption">
-            <h5>Emergency Contact</h5>
-        </div>
+        <h4>Emergency Contact</h4>
 
         <div class="form-group inline">
             <label class="lbl-group">FIRST NAME</label>

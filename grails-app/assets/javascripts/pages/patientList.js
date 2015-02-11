@@ -70,7 +70,7 @@
                 {data: "phoneNumber", width: "10%"},
                 {
                     data: function (source) {
-                        var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss A');
+                        var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
                     width: "40%"
@@ -296,7 +296,7 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.title,
+                            'text': item.title + ' ' + item.tmpTitle,
                             'data': item.surgeryTimeRequired
                         });
                     });
