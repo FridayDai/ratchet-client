@@ -7,8 +7,8 @@
 
         .ui-dialog-title {
             margin-left: 25px;
-            color: $base-font-color;
-            font-weight: $bold;
+            color: #4d4d4d;
+            font-weight: 500;
         }
 
         .ui-button {
@@ -32,13 +32,17 @@
         padding: 0;
         border: 0;
 
+        .ui-dialog-buttonset {
+            background: $base-color-white;
+        }
+
         button {
             margin: .5em 1.5em .5em 0;
             border: 2px solid $base-color-grey;
             color: $base-color-grey;
 
             span {
-                color: $base-color-grey;
+                color: $base-font-color;
             }
 
             &:hover,
@@ -87,7 +91,7 @@
     background: none;
 
     .ui-button-text {
-        font-weight: 100;
+        font-weight: 500;
     }
     //
     //    .ui-icon-add {

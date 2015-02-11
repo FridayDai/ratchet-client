@@ -24,7 +24,8 @@ class TreatmentController extends BaseController {
     }
 
     def assignTreatment() {
-        def medicalRecordId = treatmentService.assignTreatmentToPatient(request, response, params)
+        def resp = treatmentService.assignTreatmentToExistPatient(request, response, params)
+        def medicalRecordId = resp?.medicalRecordId
         def treatmentInfo = treatmentService.getTreatmentInfo(request, response, params)
         def medicalRecordInfo = [medicalRecordId: medicalRecordId,
                                  treatmentInfo  : treatmentInfo

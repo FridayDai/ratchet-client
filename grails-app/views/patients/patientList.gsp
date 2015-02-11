@@ -55,30 +55,32 @@
         <g:form class="form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <label class="lbl-group">PATIENT ID*</label>
-                <input id="patientId" name="patientId" type="text" class="input-group" placeholder="ID" required/>
-            </div>
-
-            <div class="form-group inline">
-                <label class="lbl-group">FIRST NAME*</label>
-                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="First Name"
+                <label class="lbl-group">PATIENT ID<span>*</span></label>
+                <input id="patientId" name="patientId" type="text" class="input-group" placeholder="1234567890"
                        required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">LAST NAME*</label>
-                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
+                <label class="lbl-group">FIRST NAME<span>*</span></label>
+                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="John"
+                       required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">PHONE NUMBER*</label>
-                <input id="phoneNumber" name="phoneNumber" type="text" class="input-group"
-                       placeholder="Phone Number" required/>
+                <label class="lbl-group">LAST NAME<span>*</span></label>
+                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">EMAIL ADDRESS*</label>
-                <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
+                <label class="lbl-group">PHONE NUMBER<span>*</span></label>
+                <input id="phoneNumber" name="phoneNumber" type="number" class="input-group"
+                       placeholder="777-777-7777" required/>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+                <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"
+                       required/>
 
             </div>
 
@@ -87,18 +89,19 @@
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME</label>
                 <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
-                       placeholder="First Name"/>
+                       placeholder="Grace"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME</label>
                 <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
-                       placeholder="Last Name"/>
+                       placeholder="Smith"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP</label>
                 <select id="relationship" name="relationship">
+                    <option></option>
                     <option value="1">Spouse</option>
                     <option value="2">Parent</option>
                     <option value="3">Child</option>
@@ -109,28 +112,30 @@
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS</label>
-                <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address"/>
+                <input id="emergency-email" name="email" type="email" class="input-group"
+                       placeholder="grace@email.com"/>
             </div>
 
 
             <h4>Treatment Info</h4>
 
             <div class="form-group inline">
-                <label class="lbl-group">TREATMENT*</label>
-                <input id="selectTreatment" name="selectTreatment" type="text" class="input-group"
-                       placeholder="Treatment" required/>
+                <label class="lbl-group">TREATMENT<span>*</span></label>
+                <input id="selectTreatment" name="selectTreatment" type="text" class="input-group treatment clear"
+                       placeholder="" required/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
-                <label class="lbl-group">SURGERY TIME*</label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time" placeholder="Surgery Time"
+                <label class="lbl-group">SURGERY TIME<span>*</span></label>
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
+                       placeholder=""
                        required/>
             </div>
 
             <div class="form-group ">
-                <label class="lbl-group">SURGEON*</label>
+                <label class="lbl-group">SURGEON<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear"
-                       placeholder="Surgeon"
+                       placeholder=""
                        required/>
             </div>
 

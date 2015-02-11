@@ -7,6 +7,12 @@
     .lbl-group {
         display: table-row-group;
         font-size: small;
+        font-weight: 600;
+        color: $base-color-medium-black;
+
+        span {
+            color: $base-color-dark-grey;
+        }
     }
 
     .input-group {
@@ -14,12 +20,21 @@
         height: 25px;
         margin-top: 0;
         font-size: small;
+        color: $base-color-medium-black;
+        background-color: $base-mid-grey-color;
+        border: 1px solid $base-color-white-grey;
+
+        @include input-placeholder {
+            color: $base-font-grey;
+        }
     }
 
     .surgery-time {
-        border: 1px solid $base-grey-color;
-        border-width: thin;
-        background: url('../../../images/patients/calender.png') no-repeat center right;
+        background-color: $base-mid-grey-color;
+        border: 1px solid $base-color-white-grey;
+        background-image: url('../../../images/patients/calender.png');
+        background-repeat: no-repeat;
+        background-position: right center;
     }
 
     .multi-select {
@@ -36,8 +51,10 @@
         padding-left: 0;
 
         .select2-choice {
-            height: 31px;
+            height: 30px;
             text-align: left;
+            background-color: $base-mid-grey-color;
+            border: 1px solid $base-color-white-grey;
         }
     }
 
@@ -58,6 +75,18 @@
         input {
             height: 24px;
         }
+    }
+}
+
+h4 {
+    margin-bottom: 0;
+    margin-left: 20px;
+    color: $base-color-dark-grey;
+}
+
+.form-group {
+    .treatment {
+        border: none;
     }
 }
 

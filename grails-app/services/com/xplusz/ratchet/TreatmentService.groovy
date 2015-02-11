@@ -34,16 +34,10 @@ class TreatmentService {
 
     }
 
-    def assignTreatmentToPatient(HttpServletRequest request, HttpServletResponse response, params) {
+    def assignTreatmentToExistPatient(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatments.url, params?.clientId)
+        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatmentToExistPatient.url, params?.clientId, params?.patientId)
         def resp = Unirest.post(url)
-                .field("patientId", params?.id)
-                .field("clientId", params?.clientId)
-                .field("firstName", params?.firstName)
-                .field("lastName", params?.lastName)
-                .field("phoneNumber", params?.phoneNum)
-                .field("email", params?.email)
                 .field("treatmentId", params?.treatmentId)
                 .field("surgeonId", params?.staffIds)
                 .field("surgeryTime", params?.surgeryTime)
@@ -52,7 +46,6 @@ class TreatmentService {
                 .field("relationship", params?.relationship)
                 .field("ecEmail", params?.ecEmail)
                 .asString()
-//                .field("primaryStaffId", params?.primaryStaffId)
         def result = JSON.parse(resp.body)
         if (resp.status == 201) {
             return result
