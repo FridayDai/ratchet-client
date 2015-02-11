@@ -11,6 +11,9 @@
                 content: RC.constants.confirmContent,
                 height: 200,
                 width: 980
+            },
+            waringArguments: {
+                title: RC.constants.waringMessageSendTask
             }
         },
         urls: {
@@ -40,11 +43,13 @@
      * @param element
      * @private
      */
-    function _updateTaskBox(individualTreatment, element) {
-        var date = new Date();
-        date = moment(date).format("MMM/DD/YYYY, HH:mm a");
+    function _updateTaskBox(individualTreatment, element, sendTime, dueTime) {
+
+        var sendDate = moment(sendTime).format("MMM/DD/YYYY, HH:mm a");
+        var dueDate =  moment(dueTime).format("MMM/DD/YYYY, HH:mm a");
         var hasNotStatus = element.parent().siblings('.show-status').has('.item-status').length === 0;
-        var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " +date+'').closest(".box-item");
+        var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " + sendDate + '').closest(".box-item");
+        taskBox = taskBox.find('.due-time').text("DUE:" + dueDate + '').closest(".box-item");
         if (hasNotStatus) {
             var html = "<div class='item-status pending'>"
                 + "<label class='uppercase status-background'>pending</label></div>";
@@ -61,12 +66,14 @@
             url: opts.urls.email.format(opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function (data) {
-            if (data === "true") {
-                _updateTaskBox(individualTreatment, element);
-            }
+            var sendTime = data.sendTime;
+            var dueTime = data.dueTime;
+            _updateTaskBox(individualTreatment, element, sendTime, dueTime);
         });
-        request.fail(function () {
-
+        request.fail(function (data) {
+            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+                message: data.responseText
+            }));
         });
     }
 

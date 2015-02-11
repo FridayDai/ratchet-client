@@ -1,5 +1,7 @@
 package com.xplusz.ratchet
 
+import grails.converters.JSON
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -25,6 +27,9 @@ class TaskController extends BaseController {
             }
         }
 
+        scheduleTasks = scheduleTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+        sentTasks = sentTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+
 //        def tools = toolService.getToolsByTreatment(treatmentId)
         render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
     }
@@ -35,8 +40,15 @@ class TaskController extends BaseController {
     }
 
     def sendTaskEmail() {
-        def result = taskService.sendTaskEmailToPatient(params)
-        render result
+        def resp = taskService.sendTaskEmailToPatient(params)
+        def status = resp?.status
+        def content = JSON.parse(resp.body)
+
+        if (status == 200) {
+            render content as JSON
+        } else {
+            render(status: status, text: content.error?.errorMessage)
+        }
     }
 
 

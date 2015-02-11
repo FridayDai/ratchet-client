@@ -61,7 +61,7 @@
         .ui-tabs-anchor {
             padding: 0 25px;
             border-right: 2px solid $base-color-white-grey;
-            color: $base-font-color;
+            color: $base-font-grey;
             font-size: 17px;
             line-height: 65px;
             text-transform: uppercase;
@@ -102,7 +102,7 @@
             display: inline-block;
             padding: 0 30px;
             border-bottom: 2px solid transparent;
-            color: $base-font-grey;
+            color: $base-color-medium-black;
             font-size: 15px;
             line-height: 40px;
         }
@@ -131,7 +131,7 @@
         label {
             display: inline;
             padding-right: 10px;
-            color: $base-color-mid-gray;
+            color: $base-color-medium-black;
             font-size: 14px;
         }
 
