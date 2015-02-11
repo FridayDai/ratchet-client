@@ -67,7 +67,7 @@ class UrlMappings {
 
         "500"(view: '/pages/error')
         "/providers/detail"(controller: "providers", action: "detail")
-        "/error404"(view: '/pages/error404')
+        "404"(view: '/pages/error404')
 
     }
 }

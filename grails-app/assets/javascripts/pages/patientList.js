@@ -66,13 +66,13 @@
                         var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
                         return formatDate;
                     },
-                    width: "20%"
+                    width: "40%"
                 },
                 {
                     data: function (source) {
                         return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '">View</a>';
                     },
-                    width: "20%"
+                    width: "10%"
                 }
             ]
         });
@@ -94,7 +94,8 @@
     function _clickRow() {
         $('#patientsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
-            window.location.href = window.location.href + 'patients/' + id;
+            var url = opts.urls.showSinglePatient.format(id);
+            window.location.href = url;
         });
     }
 
