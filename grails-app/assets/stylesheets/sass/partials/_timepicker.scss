@@ -110,7 +110,7 @@
         left: 12px;
         width: 25px;
         color: $base-color-dark-grey;
-        font-weight: bold;
+//        font-weight: bold;
         font-size: 22px;
         text-align: center;
     }
@@ -134,6 +134,23 @@
 .ui-datepicker {
     padding: 0;
     border: 1px solid $base-color-dark-grey;
+    background: $base-color-white;
+
+    .ui-datepicker-header {
+        border: none;
+        background: $base-color-grey-white;
+
+        .ui-datepicker-month {
+            color: $base-color-dark-grey;
+            font-weight: 500;
+        }
+
+        .ui-datepicker-year {
+            color: $base-color-dark-grey;
+            font-weight: 500;
+        }
+
+    }
 
     table {
         margin: 0 0 .2em;
@@ -142,8 +159,19 @@
         thead {
             border-top: 1px solid $base-color-mid-grey;
             border-bottom: 1px solid $base-color-mid-grey;
-            color: $base-color-light-blue;
-            background: $base-color-dark-grey 50% 50% repeat-x;
+            color: $base-color-dark-grey;
+            background: $base-color-grey-white;
+            //            font-weight: 500;
+            th {
+                font-weight: 500;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            color: $base-color-blue-light;
+
         }
     }
 
@@ -188,3 +216,8 @@
     font-size: 20px;
 }
 
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    font-weight: 500;
+}

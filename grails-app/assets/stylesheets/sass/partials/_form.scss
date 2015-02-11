@@ -23,6 +23,7 @@
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         border: 1px solid $base-color-white-grey;
+        padding-left: 6px;
 
         @include input-placeholder {
             color: $base-font-grey;
@@ -51,7 +52,7 @@
         padding-left: 0;
 
         .select2-choice {
-            height: 30px;
+            height: 31px;
             text-align: left;
             background-color: $base-mid-grey-color;
             border: 1px solid $base-color-white-grey;

@@ -73,7 +73,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-                <input id="phoneNumber" name="phoneNumber" type="number" class="input-group"
+                <input id="phoneNumber" name="phoneNumber" type="text" class="input-group"
                        placeholder="777-777-7777" required/>
             </div>
 
