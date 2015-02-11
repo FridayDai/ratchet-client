@@ -12,14 +12,15 @@
                 }
             },
             waringArguments: {
-                title: RC.constants.warningTipTitle,
-                message: RC.constants.warningTip
+                title: RC.constants.errorTip,
+                message: RC.constants.errorTip
             },
             urls: {
                 query: "/getPatients",
                 add: "/addPatient",
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
+                showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}"
             }
         },
@@ -40,11 +41,13 @@
             paging: true,
             searching: false,
             ordering: true,
-            pageLength: 10,
+            pageLength: 20,
             info: false,
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
+            "columnDefs": [
+                {"targets": 6, "orderable": false}],
             "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
@@ -55,23 +58,28 @@
                 data: data
             }),
             columns: [
-                {data: "patientId", width: "10%"},
+                {
+                    data: function (source) {
+                        return '<p class="source-id">' + source.patientId + '</p>';
+                    },
+                    width: "10%"
+                },
                 {data: "firstName", width: "10%"},
                 {data: "lastName", width: "10%"},
                 {data: "email", width: "20%"},
                 {data: "phoneNumber", width: "10%"},
                 {
                     data: function (source) {
-                        var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
+                        var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
-                    width: "20%"
+                    width: "40%"
                 },
                 {
                     data: function (source) {
                         return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '">View</a>';
                     },
-                    width: "20%"
+                    width: "10%"
                 }
             ]
         });
@@ -93,7 +101,8 @@
     function _clickRow() {
         $('#patientsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
-            window.location.href = window.location.href + 'patients/' + id;
+            var url = opts.urls.showSinglePatient.format(id);
+            window.location.href = url;
         });
     }
 
@@ -189,12 +198,12 @@
             type: "post",
             data: data,
             success: function (data) {
-                if(data.id) {
-                    window.location.href = window.location.href + 'patients/' + data.id;
-                }
+                var url = opts.urls.showSinglePatient.format(data.id);
+                window.location.href = url;
             },
-            error: function () {
-                RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+            error: function (data) {
+                opts.waringArguments.message = data.errors.message;
+                RC.common.warning(_.extend({}, opts.waringArguments, {
                     element: $(".warn"),
                     closeCallback: function () {
                     }
@@ -212,7 +221,7 @@
         $("#table-form").validate({
                 rules: {
                     phoneNumber: {
-                        isPhone:true
+                        isPhone: true
                     }
                 },
                 messages: {

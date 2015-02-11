@@ -48,6 +48,13 @@
     display: inline-block;
     font-size: 16px;
     font-family: 'Ionicons';
+    margin-top: 10px;
+    font-weight: lighter;
+    border: 1px $base-color-grey solid;
+    &:hover,
+    &:focus {
+        border: 1px $base-color-dark-grey solid;
+    }
 
     &:before {
         display: inline-block;

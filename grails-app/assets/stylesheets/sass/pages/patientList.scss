@@ -10,6 +10,14 @@
     float: right;
     font-size: 16px;
     font-family: 'Ionicons';
+    font-weight: lighter;
+    border: 1px $base-color-grey solid;
+    margin-top: 10px;
+
+    &:hover,
+    &:focus {
+        border: 1px $base-color-dark-grey solid;
+    }
 
     &:before {
         display: inline-block;
@@ -62,4 +70,6 @@ h4 {
     }
 }
 
-
+.source-id {
+    color: $base-font-grey;
+}
