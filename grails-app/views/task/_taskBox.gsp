@@ -2,7 +2,7 @@
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}" data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <div class="item-header">
-        <p>ID: ${task?.id}</p>
+        ID: ${task?.id}
     </div>
 
     <div class="item-title">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="item-datetime">
-        <label>DUE: <g:formatDate date="${task?.dueTime}" format="MMM/dd/yyyy, HH:mm aaa"></g:formatDate></label>
+        <h5>DUE: <g:formatDate date="${task?.dueTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
     </div>
 
     <div class="item-context">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="item-datetime">
-        <label class="small-font sent-time">Send Time: <g:formatDate date="${task?.sendTime}" format="MMM/dd/yyyy, HH:mm aaa"></g:formatDate></label>
+        <label class="small-font sent-time">Send Time: <g:formatDate date="${task?.sendTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></label>
     </div>
 
     <div class="item-notify">

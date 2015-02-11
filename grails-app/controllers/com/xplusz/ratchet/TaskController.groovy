@@ -25,6 +25,9 @@ class TaskController extends BaseController {
             }
         }
 
+        scheduleTasks = scheduleTasks.sort({a,b -> b["sendTime"] <=> a["sendTime"]})
+        sentTasks = sentTasks.sort({a,b -> b["sendTime"] <=> a["sendTime"]})
+
 //        def tools = toolService.getToolsByTreatment(treatmentId)
         render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
     }
