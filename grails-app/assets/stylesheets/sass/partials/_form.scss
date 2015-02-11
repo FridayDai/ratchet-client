@@ -78,11 +78,6 @@
         }
     }
 
-    h4 {
-        margin-bottom: 0;
-        margin-left: 20px;
-        color: $base-color-dark-grey;
-    }
 }
 
 
@@ -93,3 +88,10 @@
     }
 }
 
+.form {
+
+    h4 {
+        margin-left: 20px;
+        color: $base-color-dark-grey;
+    }
+}
