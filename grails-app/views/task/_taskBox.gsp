@@ -22,7 +22,7 @@
     </div>
 
     <div class="item-datetime">
-        <h5>DUE: <g:formatDate date="${task?.dueTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
+        <h5 class="due-time">DUE: <g:formatDate date="${task?.dueTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
     </div>
 
     <div class="item-context">

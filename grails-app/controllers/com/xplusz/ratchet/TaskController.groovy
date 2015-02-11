@@ -25,8 +25,8 @@ class TaskController extends BaseController {
             }
         }
 
-        scheduleTasks = scheduleTasks.sort({a,b -> b["sendTime"] <=> a["sendTime"]})
-        sentTasks = sentTasks.sort({a,b -> b["sendTime"] <=> a["sendTime"]})
+        scheduleTasks = scheduleTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+        sentTasks = sentTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
 //        def tools = toolService.getToolsByTreatment(treatmentId)
         render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
@@ -38,8 +38,14 @@ class TaskController extends BaseController {
     }
 
     def sendTaskEmail() {
-        def result = taskService.sendTaskEmailToPatient(params)
-        render result
+        def resp = taskService.sendTaskEmailToPatient(params)
+        def status = resp.status
+
+        if (status == 200) {
+            render resp?.content
+        } else {
+            render(status: status, text: resp.content.error.errorMessage)
+        }
     }
 
 
