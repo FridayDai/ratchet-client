@@ -13,7 +13,7 @@
                 width: 980
             },
             waringArguments: {
-                title: RC.constants.warningTipTitle,
+                title: RC.constants.waringMessageSendTask
             }
         },
         urls: {

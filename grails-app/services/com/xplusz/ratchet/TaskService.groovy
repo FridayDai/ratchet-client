@@ -46,12 +46,9 @@ class TaskService {
         try {
             def resp = Unirest.get(url)
                     .asString()
-            def content = JSON.parse(resp.body)
-            def status = resp.status
-
-            result.putAt("status", status)
-            result.putAt("content", content)
-            return result
+//            def content = JSON.parse(resp.body)
+//            def status = resp.status
+            return resp
 
         } catch (UnirestException e) {
             log.error(e.message)

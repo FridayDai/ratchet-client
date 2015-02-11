@@ -1,5 +1,7 @@
 package com.xplusz.ratchet
 
+import grails.converters.JSON
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -39,12 +41,13 @@ class TaskController extends BaseController {
 
     def sendTaskEmail() {
         def resp = taskService.sendTaskEmailToPatient(params)
-        def status = resp.status
+        def status = resp?.status
+        def content = JSON.parse(resp.body)
 
         if (status == 200) {
-            render resp?.content
+            render content as JSON
         } else {
-            render(status: status, text: resp.content.error.errorMessage)
+            render(status: status, text: content.error?.errorMessage)
         }
     }
 

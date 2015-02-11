@@ -77,13 +77,15 @@
             height: 24px;
         }
     }
+
+    h4 {
+        margin-bottom: 0;
+        margin-left: 20px;
+        color: $base-color-dark-grey;
+    }
 }
 
-h4 {
-    margin-bottom: 0;
-    margin-left: 20px;
-    color: $base-color-dark-grey;
-}
+
 
 .form-group {
     .treatment {

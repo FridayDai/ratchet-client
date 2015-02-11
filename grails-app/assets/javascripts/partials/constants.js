@@ -33,6 +33,7 @@
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
+        waringMessageSendTask: "Something wrong with sending task email",
         errorTip: "Something wrong, Please try again later.",
 
 
