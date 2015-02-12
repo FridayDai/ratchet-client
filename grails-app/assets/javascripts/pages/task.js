@@ -54,22 +54,19 @@
         var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " + sendDate + '').closest(".box-item");
         taskBox = taskBox.find('.due-time').text("DUE:" + dueDate + '').closest(".box-item");
 
+        var html = "<div class='item-status pending'>"
+            + "<label class='uppercase status-background'>pending</label></div>";
+
         if (!hasStatus) {
             var hasDefaultSentItem = sentRow.has('.no-item-sent').length !== 0;
-
-            var html = "<div class='item-status pending'>"
-                + "<label class='uppercase status-background'>pending</label></div>";
             taskBox = taskBox.find('.show-status').html('').append(html).closest(".box-item");
 
             if (hasDefaultSentItem) {
                 sentRow.find('.no-item-sent').remove();
             }
-
         }
         else {
-            if (element.closest('.box-item').data('status') == "overdue") {
-                var html = "<div class='item-status pending'>"
-                    + "<label class='uppercase status-background'>pending</label></div>";
+            if (element.closest('.box-item').data('status') === "overdue") {
                 taskBox = taskBox.find('.show-status').html('').append(html).closest(".box-item");
             }
         }
@@ -79,8 +76,8 @@
         var hasDefaultScheduleItem = scheduleRow.has('.no-item-schedule').length !== 0;
         var noScheduleItem = scheduleRow.has('.box-item').length === 0;
         if (noScheduleItem && !hasDefaultScheduleItem) {
-            var html = "<div class='no-item center no-item-schedule'><p>No item has been scheduled yet.</p></div>";
-            scheduleRow.append(html);
+            var itemHtml = "<div class='no-item center no-item-schedule'><p>No item has been scheduled yet.</p></div>";
+            scheduleRow.append(itemHtml);
         }
 
     }
@@ -96,11 +93,6 @@
             var sendTime = data.sendTime;
             var dueTime = data.dueTime;
             _updateTaskBox(individualTreatment, element, sendTime, dueTime);
-        });
-        request.fail(function (data) {
-            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-                message: data.responseText
-            }));
         });
     }
 
