@@ -278,7 +278,7 @@
     function _addLine() {
         $("#phoneNumber").on("input", function () {
             var str = $("#phoneNumber").val();
-            var num = str.replace(/(\d{4})(?=(?:\d)+(?!\d)$)/g, '$1-');
+            var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
             $("#phoneNumber").val(num);
         })
     }

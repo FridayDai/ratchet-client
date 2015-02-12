@@ -8,11 +8,11 @@
 .add-patient {
     display: inline-block;
     float: right;
+    margin-top: 10px;
+    border: 1px $base-color-grey solid;
+    font-weight: lighter;
     font-size: 16px;
     font-family: 'Ionicons';
-    font-weight: lighter;
-    border: 1px $base-color-grey solid;
-    margin-top: 10px;
 
     &:hover,
     &:focus {

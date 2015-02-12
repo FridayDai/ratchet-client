@@ -6,9 +6,9 @@
 
     .lbl-group {
         display: table-row-group;
-        font-size: small;
-        font-weight: 600;
         color: $base-color-medium-black;
+        font-weight: 600;
+        font-size: small;
 
         span {
             color: $base-color-dark-grey;
@@ -19,11 +19,11 @@
         width: 30px;
         height: 25px;
         margin-top: 0;
-        font-size: small;
+        padding-left: 6px;
+        border: 1px solid $base-color-white-grey;
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
-        border: 1px solid $base-color-white-grey;
-        padding-left: 6px;
+        font-size: small;
 
         @include input-placeholder {
             color: $base-font-grey;
@@ -31,8 +31,8 @@
     }
 
     .surgery-time {
-        background-color: $base-mid-grey-color;
         border: 1px solid $base-color-white-grey;
+        background-color: $base-mid-grey-color;
         background-image: url('../../../images/patients/calender.png');
         background-repeat: no-repeat;
         background-position: right center;
@@ -53,9 +53,9 @@
 
         .select2-choice {
             height: 31px;
-            text-align: left;
-            background-color: $base-mid-grey-color;
             border: 1px solid $base-color-white-grey;
+            background-color: $base-mid-grey-color;
+            text-align: left;
         }
     }
 
@@ -78,13 +78,8 @@
         }
     }
 
-}
-
-
-
-.form-group {
     .treatment {
-        border: none;
+        border: 0;
     }
 }
 

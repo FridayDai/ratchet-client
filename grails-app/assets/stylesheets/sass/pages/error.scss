@@ -10,19 +10,19 @@
 }
 
 .container {
-    padding: 0;
-    text-align: center;
     margin-top: 100px;
+    padding: 0;
     color: $base-color-warn;
+    text-align: center;
 
     .top-content {
-        font-size: 50px;
         font-weight: bold;
+        font-size: 50px;
     }
 
     .middle-content {
-        font-size: 100px;
         font-weight: bolder;
+        font-size: 100px;
     }
 
     .logo {
