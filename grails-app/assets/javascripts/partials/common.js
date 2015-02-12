@@ -52,11 +52,12 @@
                 } else if (jqXHR.status === 403) {
                     window.location.href = "/login";
 
-                } else if (jqXHR.status === 0) {
-
                 }
                 else {
-
+                    RC.common.warning({
+                        title: RC.constants.waringMessageAction,
+                        message: jqXHR.responseText
+                    });
                 }
             }
         });

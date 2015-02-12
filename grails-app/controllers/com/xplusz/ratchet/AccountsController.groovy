@@ -65,7 +65,7 @@ class AccountsController extends BaseController {
             }
         } else {
 //            flash.message = "Code is invalid."
-            render view: '/pages/error404'
+            render view: '/error/error404'
         }
 
     }
@@ -76,7 +76,7 @@ class AccountsController extends BaseController {
             redirect(uri: '/login')
         } else {
 //            flash.message = "Staff is not exist."
-            render view: '/pages/error404'
+            render view: '/error/error404'
         }
     }
 }

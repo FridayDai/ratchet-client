@@ -26,9 +26,7 @@ class MedicalRecordService {
 
             if (resp.status == 200) {
                 return result
-            }
-
-            if (resp.status == 400) {
+            } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message)
             }

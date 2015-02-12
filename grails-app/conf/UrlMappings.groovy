@@ -65,9 +65,9 @@ class UrlMappings {
         "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
         "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
-        "500"(view: '/pages/error')
+        "500"(view: '/error/error')
         "/providers/detail"(controller: "providers", action: "detail")
-        "404"(view: '/pages/error404')
+        "404"(view: '/error/error404')
 
     }
 }
