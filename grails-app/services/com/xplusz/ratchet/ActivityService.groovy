@@ -23,7 +23,9 @@ class ActivityService {
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getActivity.url, clientId, patientId, medicalRecordId)
+        String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
+        def url = String.format(getActivityUrl,clientId, patientId, medicalRecordId)
+
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)
@@ -48,7 +50,9 @@ class ActivityService {
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getActivity.url, clientId, patientId, medicalRecordId)
+        String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
+        def url = String.format(getActivityUrl,clientId, patientId, medicalRecordId)
+
         def resp = Unirest.get(url)
                 .queryString("max", length)
                 .queryString("offset", start)

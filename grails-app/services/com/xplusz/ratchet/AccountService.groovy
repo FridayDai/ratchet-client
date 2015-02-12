@@ -16,7 +16,7 @@ class AccountService {
         def length = params?.length
         def name = params?.name
 
-        def url = grailsApplication.config.ratchetv2.server.staffs.url
+        def url = grailsApplication.config.ratchetv2.server.url.staffs
         def resp = Unirest.get(url)
                 .queryString("max", length)
                 .queryString("offset", start)
@@ -38,9 +38,12 @@ class AccountService {
 
     }
 
-    def getSingleAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
+    def getSingleAccount(HttpServletRequest request, HttpServletResponse response,Integer accountId) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getAccount.url, accountId)
+        String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
+
+        def url =  String.format(getSingleAccountUrl, accountId)
+
         def resp = Unirest.get(url)
                 .asString()
         def result = JSON.parse(resp.body)
@@ -61,7 +64,7 @@ class AccountService {
         def isAccountManagement = params?.isAccountManagement
         def isDoctor = params?.isDoctor
 
-        def url = grailsApplication.config.ratchetv2.server.staffs.url
+        def url = grailsApplication.config.ratchetv2.server.url.staffs
         def resp = Unirest.post(url)
                 .field("clientId", request.session.clientId)
                 .field("firstName", firstName)
@@ -78,9 +81,10 @@ class AccountService {
         }
     }
 
-    def inviteAccount(HttpServletRequest request, HttpServletResponse response, accountId) {
+    def inviteAccount(HttpServletRequest request, HttpServletResponse response, Integer accountId) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.inviteStaff.url, accountId)
+        String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
+        def url = String.format(inviteAccountUrl, accountId)
         def resp = Unirest.get(url)
                 .asString()
 
@@ -92,7 +96,11 @@ class AccountService {
 
     def updateAccount(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getAccount.url, params?.accountId)
+        def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
+        Integer accountId = params.int("accountId")
+        def url = String.format(updateAccountUrl, accountId)
+
+
         def resp = Unirest.post(url)
                 .field("clientId", request.session.clientId)
                 .field("email", params?.email)
@@ -111,7 +119,7 @@ class AccountService {
 
     def updatePassword(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = grailsApplication.config.ratchetv2.server.updatePassword.url
+        def url = grailsApplication.config.ratchetv2.server.url.updatePassword
         def resp = Unirest.post(url)
                 .field("oldPassword", params?.oldPassword)
                 .field("password", params?.password)
@@ -125,7 +133,8 @@ class AccountService {
 
     def confirmCode(HttpServletRequest request, HttpServletResponse response, code) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.confirmCode.url, code)
+        String confirmCodeUrl = grailsApplication.config.ratchetv2.server.url.confirmCode
+        def url = String.format(confirmCodeUrl, code)
         def resp = Unirest.post(url)
                 .asString()
 
@@ -141,7 +150,7 @@ class AccountService {
 
     def activateStaff(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = grailsApplication.config.ratchetv2.server.activateStaff.url
+        def url = grailsApplication.config.ratchetv2.server.url.activateStaff
         def resp = Unirest.post(url)
                 .field("code", params?.code)
                 .field("hasProfile", params?.hasProfile)

@@ -132,3 +132,69 @@ String overrideLocation = systemOverrideLocation ? "file:${systemOverrideLocatio
 grails.config.locations = [
         overrideLocation
 ]
+
+
+ratchetv2 {
+    server {
+        url {
+            base = System.getProperty("SERVER_URL") ?: "http://ratchetv2server-qa.elasticbeanstalk.com/api/v1"
+
+            // Authentication
+            login = "${ratchetv2.server.url.base}/login"
+            logout = "${ratchetv2.server.url.base}/logout"
+            validateSessionId = "${ratchetv2.server.url.base}/check_token"
+
+            // Patients URL
+            patients = "${ratchetv2.server.url.base}/patients"
+            patient = "${ratchetv2.server.url.base}/patients/%s"
+            addPatient = "${ratchetv2.server.url.base}/patients/%d/records"
+
+            // Staff URL
+            staffs = "${ratchetv2.server.url.base}/staffs"
+
+            //Account
+            getAccount = "${ratchetv2.server.url.base}/staffs/%d"
+            inviteStaff = "${ratchetv2.server.url.base}/staff/invite/%d"
+            updatePassword = "${ratchetv2.server.url.base}/password/update"
+            activateStaff = "${ratchetv2.server.url.base}/staff/confirm"
+            confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
+
+            // Treatment URL
+            getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
+            assignTreatments = "${ratchetv2.server.url.base}/clients/%s/patients/assign/record"
+            assignTreatmentToExistPatient = "${ratchetv2.server.url.base}/clients/%s/patients/%s/assign/record"
+            getTreatmentInfo = "${ratchetv2.server.url.base}/clients/%s/treatments/%s"
+            updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
+
+            //task
+            getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"
+
+            //activity
+            getActivity = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/activities"
+
+            //medical care
+            showMedicalCares = "${ratchetv2.server.url.base}/medicalCares"
+            deleteCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s"
+            deleteCareGiver = "${ratchetv2.server.url.base}/records/%s/caregiver/%s"
+
+
+            //for toolService
+            tools.loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+
+            //for medicalRecord
+            showMedicalRecords = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s"
+            medicalRecord.tasks = "${ratchetv2.server.url.base}/clients/%d/patients/records/%d/tasks"
+            medicalRecord.assignTask = "${ratchetv2.server.url.base}/clients/%d/patients/%d/records/%d/tasks"
+
+            //for taskService
+            task.sendEmail = "${ratchetv2.server.url.base}/clients/%d/patients/%d/records/%d/tasks/%d/sendMail"
+
+        }
+
+        client_platform = ancient
+        client_type = client
+
+        careGiverType = 1
+        careTeamType = 2
+    }
+}

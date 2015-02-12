@@ -66,14 +66,19 @@
                 },
                 {data: "firstName", width: "10%"},
                 {data: "lastName", width: "10%"},
-                {data: "email", width: "20%"},
-                {data: "phoneNumber", width: "10%"},
+                {
+                    data: function (source) {
+                        return "<p class='table-email'>" + source.email + "</P>"
+                    },
+                    width: "15%"
+                },
+                {data: "phoneNumber", width: "15%"},
                 {
                     data: function (source) {
                         var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
-                    width: "40%"
+                    width: "15%"
                 },
                 {
                     data: function (source) {

@@ -78,18 +78,20 @@
                     data: function (source) {
                         return '<p class="source-id">' + source.id + '</p>';
                     },
-                    width: "5%"
+                    width: "10%"
                 },
                 {
                     data: "firstName",
-                    width: "5%"
+                    width: "10%"
                 },
                 {
                     data: "lastName",
-                    width: "5%"
+                    width: "10%"
                 },
                 {
-                    data: "email",
+                    data: function (source) {
+                        return "<p class='table-email'>" + source.email + "</P>"
+                    },
                     width: "10%"
                 },
                 {

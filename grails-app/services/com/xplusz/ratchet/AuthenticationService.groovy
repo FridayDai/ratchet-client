@@ -47,7 +47,7 @@ class AuthenticationService {
          *
          * @return
          */
-        def url = grailsApplication.config.ratchetv2.server.login.url
+        def url = grailsApplication.config.ratchetv2.server.url.login
         def resp = Unirest.post(url)
                 .field("email", email)
                 .field("password", password)
@@ -106,7 +106,7 @@ class AuthenticationService {
             return false
         }
 
-        def url = grailsApplication.config.ratchetv2.server.logout.url
+        def url = grailsApplication.config.ratchetv2.server.url.logout
         def resp = Unirest.get(url)
                 .asString()
         if (resp.status != 200) {
