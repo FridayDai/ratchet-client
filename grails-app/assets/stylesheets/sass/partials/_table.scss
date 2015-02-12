@@ -114,9 +114,9 @@
         }
 
         .previous {
-            font-family: 'Ionicons';
             display: inline-block;
             padding: 6px 12px !important;
+            font-family: 'Ionicons';
 
             &:before {
                 display: inline-block;
@@ -125,10 +125,9 @@
         }
 
         .next {
-
-            font-family: 'Ionicons';
             display: inline-block;
             padding: 6px 12px !important;
+            font-family: 'Ionicons';
 
             &:before {
                 display: inline-block;
@@ -163,8 +162,8 @@
         span {
 
             span {
-                font-size: 20px;
                 color: $base-color-grey;
+                font-size: 20px;
             }
         }
     }

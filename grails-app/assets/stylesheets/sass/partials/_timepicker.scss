@@ -110,7 +110,7 @@
         left: 12px;
         width: 25px;
         color: $base-color-dark-grey;
-//        font-weight: bold;
+        //        font-weight: bold;
         font-size: 22px;
         text-align: center;
     }
@@ -137,7 +137,7 @@
     background: $base-color-white;
 
     .ui-datepicker-header {
-        border: none;
+        border: 0;
         background: $base-color-grey-white;
 
         .ui-datepicker-month {

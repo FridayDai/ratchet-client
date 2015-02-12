@@ -272,6 +272,18 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _addLine() {
+        $("#phoneNumber").on("input", function () {
+            var str = $("#phoneNumber").val();
+            var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
+            $("#phoneNumber").val(num);
+        })
+    }
+
+    /**
      * init select treatment
      * @private
      */
@@ -415,6 +427,7 @@
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();
+        _addLine();
     }
 
     _init();

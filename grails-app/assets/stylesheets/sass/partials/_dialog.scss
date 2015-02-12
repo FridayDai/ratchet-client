@@ -1,8 +1,8 @@
-.ui-dialog  {
-    overflow: hidden;
+.ui-dialog {
     position: absolute;
     top: 0;
     left: 0;
+    overflow: hidden;
     padding: 0;
     outline: 0;
 
@@ -31,39 +31,39 @@
     }
 
     .ui-dialog-title {
+        overflow: hidden;
         float: left;
+        width: 90%;
         margin: .1em 0;
         white-space: nowrap;
-        width: 90%;
-        overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .ui-dialog-titlebar-close {
         position: absolute;
-        right: .3em;
         top: 50%;
+        right: .3em;
         width: 20px;
-        margin: -10px 0 0 0;
-        padding: 1px;
         height: 20px;
+        margin: -10px 0 0;
+        padding: 1px;
     }
 
     .ui-dialog-content {
         position: relative;
-        border: 0;
-        padding: .5em 1em;
         overflow: auto;
         height: auto !important;
+        padding: .5em 1em;
+        border: 0;
         background-color: $base-color-white;
     }
 
     .ui-dialog-buttonpane {
-        text-align: left;
-        background-image: none;
         margin-top: 0;
         padding: 0;
         border: 0;
+        background-image: none;
+        text-align: left;
 
         .ui-dialog-buttonset {
             float: right;
@@ -82,8 +82,8 @@
 
             &:hover,
             &:focus {
-                color: $base-color-dark-grey;
                 border: 2px solid $base-color-dark-grey;
+                color: $base-color-dark-grey;
 
                 span {
                     color: $base-color-dark-grey;
@@ -99,16 +99,16 @@
     }
 
     .ui-resizable-se {
-        width: 12px;
-        height: 12px;
         right: -5px;
         bottom: -5px;
+        width: 12px;
+        height: 12px;
         background-position: 16px 16px;
     }
 
 }
 
-.ui-draggable  {
+.ui-draggable {
 
     .ui-dialog-titlebar {
         cursor: move;
