@@ -16,8 +16,8 @@ class MedicalRecordService {
 
     def showTasksByMedicalRecord(clientId, medicalRecordId) throws ApiResourceAccessException, ApiReturnErrorException {
 
-        def args = [clientId, medicalRecordId].toArray()
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.tasks.url, args)
+        String showTasksUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.tasks
+        def url = String.format(showTasksUrl, clientId, medicalRecordId)
 
         try {
             def resp = Unirest.get(url)
@@ -41,8 +41,8 @@ class MedicalRecordService {
 
     def assignTaskToMedicalRecord(params) throws ApiAjaxAccessException {
 
-        def args = [params.clientId, params.patientId, params.medicalRecordId].toArray()
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.medicalRecord.assignTask.url, args)
+        String assignTaskUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.assignTask
+        def url = String.format(assignTaskUrl,params.clientId, params.patientId, params.medicalRecordId)
 
         try {
             def toolId = params.toolId

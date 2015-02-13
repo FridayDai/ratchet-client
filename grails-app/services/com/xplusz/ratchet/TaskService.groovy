@@ -25,7 +25,9 @@ class TaskService {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getOverdueTask.url, patientId, medicalRecordId)
+        String getOverdueTasksUrl = grailsApplication.config.ratchetv2.server.url.getOverdueTask
+        def url = String.format(getOverdueTasksUrl, patientId, medicalRecordId)
+
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)
@@ -41,8 +43,9 @@ class TaskService {
 
     def sendTaskEmailToPatient(params) throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
-        def args = [params.clientId, params.patientId, params.medicalRecordId, params.taskId].toArray()
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.task.sendEmail.url, args)
+        String sendTaskEmailUrl = grailsApplication.config.ratchetv2.server.url.task.sendEmail
+        def url = String.format(sendTaskEmailUrl, params.clientId, params.patientId, params.medicalRecordId, params.taskId)
+
         try {
             def resp = Unirest.get(url)
                     .asString()

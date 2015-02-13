@@ -18,7 +18,7 @@ class AccountsController extends BaseController {
     }
 
     def getSingleAccount() {
-        Integer accountId = params.int("id")
+        def accountId = params?.id
         def accountInfo = accountService.getSingleAccount(request, response, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
@@ -44,7 +44,7 @@ class AccountsController extends BaseController {
 
     def getProfile() {
         def accountId = params?.accountId
-        def accountProfile = accountService.getSingleAccount(request, response, accountId)
+        def accountProfile = accountService.getSingleAccount(accountId)
         render(view: '/accounts/profile', model: [accountInfo: accountProfile])
     }
 
