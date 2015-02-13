@@ -67,7 +67,7 @@
         }
         else {
             if (element.closest('.box-item').data('status') === "overdue") {
-                taskBox = taskBox.find('.show-status').html('').append(html).closest(".box-item");
+                taskBox = taskBox.removeClass('overdue').addClass('pending');
             }
         }
 

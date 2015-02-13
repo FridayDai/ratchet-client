@@ -64,8 +64,7 @@
     width: 274px;
     margin-right: 10px;
     margin-bottom: 10px;
-    padding: 20px;
-    border: 1px $base-color-white-grey solid;
+    border: 3px  solid;
 
     h4,
     h5 {
@@ -76,13 +75,76 @@
         font-size: 10pt;
     }
 
-    .item-header {
+    // change background and color according to status
+    &.pending {
+        border: 3px $base-color-green solid;
+
+        .box-item-header {
+            background-color: $base-color-green;
+
+            &:before {
+                content: 'PENDING';
+            }
+        }
+    }
+
+    &.overdue {
+        border: 3px $base-color-red solid;
+
+        .box-item-header {
+            background-color: $base-color-red;
+
+            &:before {
+                content: 'OVERDUE';
+            }
+        }
+    }
+
+    &.complete {
+        border: 3px $base-color-white-grey-dark solid;
+
+        .box-item-header {
+            background-color: $base-color-white-grey-dark;
+
+            &:before {
+                content: 'COMPLETE';
+            }
+        }
+    }
+
+}
+
+.box-item-header {
+    height: 20px;
+    padding: 7px;
+    background: $base-color-dark-grey;
+
+    &:before{
+        display: inline-block;
+        padding-left: 10px;
+        content: '\f3c7';
+        color: #b3b3b3;
+        font-weight: lighter;
+        font-size: 22px;
+        font-family: ionicons;
+    }
+
+}
+
+.box-item-content {
+    padding: 20px;
+
+    .item-fist {
         height: 20px;
         color: $base-font-color-dark;
     }
 
     .item-title {
         height: 50px;
+    }
+
+    .score {
+        background-color: $base-color-dark-grey;
     }
 
     .status-background {
@@ -127,30 +189,7 @@
     }
 
 
-    // change background and color according to status
-    &.pending {
-        border: 3px $base-color-green solid;
 
-        .status-background {
-            background-color: $base-color-green;
-        }
-    }
-
-    &.overdue {
-        border: 3px $base-color-red solid;
-
-        .status-background {
-            background-color: $base-color-red;
-        }
-    }
-
-    &.complete {
-        border: 3px $base-color-white-grey-dark solid;
-
-        .status-background {
-            background-color: $base-color-white-grey-dark;
-        }
-    }
 }
 
 // all change in the form box
