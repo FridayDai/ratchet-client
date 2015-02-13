@@ -88,8 +88,6 @@
             var email = parent.find(".patientEmail").text();
             var phoneNum = parent.find(".phone").text();
 
-            _initSurgeryTime();
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
                 okCallback: function () {
@@ -105,7 +103,7 @@
                         var surgeryTime = date.getTime();
                         var ecFirstName = $('#emergency-firstName').val();
                         var ecLastName = $('#emergency-lastName').val();
-                        var relationship = $('#relationship').val();
+                        var relationship = $('#relationshipName').val();
                         var ecEmail = $('#emergency-email').val();
 
                         var assignInfo = {
@@ -132,9 +130,21 @@
                     return false;
                 }
             }));
+
+            _initSelectTreatment();
+            _initStaffSelect();
+            _initSurgeryTime();
+            _initSelect();
+
         });
     }
-
+    /**
+     * init select
+     * @private
+     */
+    function _initSelect() {
+        $("#relationshipName").select2();
+    }
     /**
      *
      * @param emid
@@ -386,8 +396,6 @@
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
-        _initSelectTreatment();
-        _initStaffSelect();
     }
 
     _init();

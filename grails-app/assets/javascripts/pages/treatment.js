@@ -35,8 +35,6 @@
             var clientId = $(this).data("clientId");
             $(".treatment-time-form")[0].reset();
 
-            _initSurgeryTime();
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
                 okCallback: function () {
@@ -49,7 +47,7 @@
                     return false;
                 }
             }));
-
+            _initSurgeryTime();
 
         });
 

@@ -106,7 +106,7 @@
 
     <div class="form-group inline">
         <label class="lbl-group">RELATIONSHIP*</label>
-        <select id="relationship" name="relationship" class="select-body">>
+        <select id="relationships" name="relationships" class="select-body">>
             <option value="1">Spouse</option>
             <option value="2">Parent</option>
             <option value="3">Child</option>
