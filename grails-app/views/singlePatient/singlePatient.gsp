@@ -92,19 +92,19 @@
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT*</label>
             <input id="selectTreatment" name="selectTreatment" type="text" class="input-group required"
-                   placeholder="Treatment"/>
+                   placeholder=""/>
         </div>
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline">
             <label class="lbl-group">SURGERY TIME*</label>
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
-                   placeholder="Surgery Time">
+                   placeholder="">
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">SURGEON*</label>
-            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group required" placeholder="Staff"/>
+            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group required" placeholder=""/>
         </div>
 
         <h4>Emergency Contact</h4>
@@ -112,18 +112,19 @@
         <div class="form-group inline">
             <label class="lbl-group">FIRST NAME</label>
             <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
-                   placeholder="First Name"/>
+                   placeholder="Grace"/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">LAST NAME</label>
             <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
-                   placeholder="Last Name"/>
+                   placeholder="Smith"/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">RELATIONSHIP</label>
             <select id="relationship" name="relationship">
+                <option></option>
                 <option value="1">Spouse</option>
                 <option value="2">Parent</option>
                 <option value="3">Child</option>
@@ -135,7 +136,7 @@
 
         <div class="form-group inline emr-email">
             <label class="lbl-group">EMAIL ADDRESS</label>
-            <input id="emergency-email" name="email" type="email" class="input-group" placeholder="Email Address" />
+            <input id="emergency-email" name="email" type="email" class="input-group" placeholder="grace@email.com" />
         </div>
 
     </g:form>

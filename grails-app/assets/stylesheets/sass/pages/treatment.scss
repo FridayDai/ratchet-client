@@ -42,14 +42,13 @@
 }
 
 .ui-dialog {
-//    background: $base-color-white;
+    //    background: $base-color-white;
 
     .ui-dialog-buttonpane .ui-dialog-buttonset {
         float: none;
         text-align: center;
     }
 }
-
 
 .ui-button {
     &:hover {
@@ -85,4 +84,20 @@
 .treatment-time-form {
     text-align: center;
 }
+
+.surgery {
+    position: relative;
+    display: inline-block;
+
+    .care-team {
+        position: absolute;
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    .text {
+        margin-left: 32px;
+    }
+}
+
 
