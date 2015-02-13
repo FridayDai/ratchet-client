@@ -153,7 +153,7 @@ ratchetv2 {
             staffs = "${ratchetv2.server.url.base}/staffs"
 
             //Account
-            getAccount = "${ratchetv2.server.url.base}/staffs/%d"
+            getAccount = "${ratchetv2.server.url.base}/staffs/%s"
             inviteStaff = "${ratchetv2.server.url.base}/staff/invite/%d"
             updatePassword = "${ratchetv2.server.url.base}/password/update"
             activateStaff = "${ratchetv2.server.url.base}/staff/confirm"
@@ -183,11 +183,11 @@ ratchetv2 {
 
             //for medicalRecord
             showMedicalRecords = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s"
-            medicalRecord.tasks = "${ratchetv2.server.url.base}/clients/%d/patients/records/%d/tasks"
-            medicalRecord.assignTask = "${ratchetv2.server.url.base}/clients/%d/patients/%d/records/%d/tasks"
+            medicalRecord.tasks = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s/tasks"
+            medicalRecord.assignTask = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks"
 
             //for taskService
-            task.sendEmail = "${ratchetv2.server.url.base}/clients/%d/patients/%d/records/%d/tasks/%d/sendMail"
+            task.sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
 
         }
 

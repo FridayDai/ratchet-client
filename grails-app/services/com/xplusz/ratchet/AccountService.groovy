@@ -38,7 +38,7 @@ class AccountService {
 
     }
 
-    def getSingleAccount(HttpServletRequest request, HttpServletResponse response,Integer accountId) {
+    def getSingleAccount(accountId) {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
 

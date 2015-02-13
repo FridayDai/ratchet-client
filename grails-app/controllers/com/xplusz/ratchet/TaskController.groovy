@@ -42,14 +42,6 @@ class TaskController extends BaseController {
     def sendTaskEmail() {
         def resp = taskService.sendTaskEmailToPatient(params)
         render resp as JSON
-//        def status = resp?.status
-//        def content = JSON.parse(resp.body)
-
-        if (status == 200) {
-
-        } else {
-            render(status: status, text: content.error?.errorMessage)
-        }
     }
 
 
