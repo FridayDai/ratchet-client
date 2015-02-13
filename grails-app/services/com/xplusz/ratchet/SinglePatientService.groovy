@@ -12,7 +12,10 @@ class SinglePatientService {
     def grailsApplication
 
     def showSinglePatient(HttpServletRequest request, HttpServletResponse response, patientId) {
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.patient.url, patientId)
+
+        String showSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
+        def url = String.format(showSinglePatientUrl, patientId)
+
         def resp = Unirest.get(url)
                 .asString()
         def result = JSON.parse(resp.body)
@@ -25,7 +28,10 @@ class SinglePatientService {
     }
 
     def showMedialRecords(HttpServletRequest request, HttpServletResponse response, patientId) {
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.showMedicalRecords.url, request.session.clientId, patientId)
+
+        String showMedialRecordsUrl = grailsApplication.config.ratchetv2.server.url.showMedicalRecords
+        def url = String.format(showMedialRecordsUrl, request.session.clientId, patientId)
+
         def resp = Unirest.get(url)
                 .asString()
         def result = JSON.parse(resp.body)
@@ -38,7 +44,9 @@ class SinglePatientService {
     }
 
     def updateSinglePatient(HttpServletRequest request, HttpServletResponse response, params) {
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.patient.url, params?.patientId)
+        String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
+        def url = String.format(showMedialRecordsUrl, params?.patientId)
+
         def resp = Unirest.post(url)
                 .field("clientId", params?.clientId)
                 .field("patientId", params?.id)

@@ -11,7 +11,6 @@ import java.text.MessageFormat
 class PatientService {
     /** dependency injection for grailsApplication */
     def grailsApplication
-
     def messageSource
 
     def addPatients(HttpServletRequest request, HttpServletResponse response, params) {
@@ -29,7 +28,8 @@ class PatientService {
         def relationship = params?.relationship
         def ecEmail = params?.ecEmail
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatments.url, request.session.clientId)
+        String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
+        def url = String.format(addPatientsUrl, request.session.clientId)
         def resp = Unirest.post(url)
                 .field("patientId", patientId)
                 .field("clientId", request.session.clientId)
@@ -70,7 +70,7 @@ class PatientService {
         def surgeonId = params?.surgeonId
         def name = params?.name
 
-        def url = grailsApplication.config.ratchetv2.server.patients.url
+        def url = grailsApplication.config.ratchetv2.server.url.patients
         def resp = Unirest.get(url)
                 .queryString("max", length)
                 .queryString("offset", start)

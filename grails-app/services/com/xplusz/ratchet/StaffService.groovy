@@ -21,7 +21,7 @@ class StaffService {
         def offset = params?.offset
         def type = params?.type
 
-        def url = grailsApplication.config.ratchetv2.server.staffs.url
+        def url = grailsApplication.config.ratchetv2.server.url.staffs
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)

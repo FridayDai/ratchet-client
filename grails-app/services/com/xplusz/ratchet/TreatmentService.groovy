@@ -20,7 +20,9 @@ class TreatmentService {
         def max = params?.max
         def offset = params?.offset
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getTreatments.url, request.session.clientId)
+        String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
+        def url = String.format(getTreatmentsUrl, request.session.clientId)
+
         def resp = Unirest.get(url)
                 .queryString("max", max)
                 .queryString("offset", offset)
@@ -36,7 +38,10 @@ class TreatmentService {
 
     def assignTreatmentToExistPatient(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.assignTreatmentToExistPatient.url, params?.clientId, params?.patientId)
+        String assignTreatmentToExistPatientUrl = grailsApplication.config.ratchetv2.server.url.assignTreatmentToExistPatient
+        def url = String.format(assignTreatmentToExistPatientUrl, params?.clientId, params?.patientId)
+
+
         def resp = Unirest.post(url)
                 .field("treatmentId", params?.treatmentId)
                 .field("surgeonId", params?.staffIds)
@@ -56,8 +61,9 @@ class TreatmentService {
 
     def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.getTreatmentInfo.url,
-                params?.clientId, params?.treatmentId)
+        String getTreatmentInfoUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentInfo
+        def url = String.format(getTreatmentInfoUrl, params?.clientId, params?.treatmentId)
+
         def resp = Unirest.get(url)
                 .asString()
 
@@ -70,7 +76,7 @@ class TreatmentService {
 
     def getCareTeam(HttpServletRequest request, HttpServletResponse response, medicalRecordId) {
 
-        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         def resp = Unirest.get(url)
                 .queryString("type", grailsApplication.config.ratchetv2.server.careTeamType)
                 .queryString("medicalRecordId", medicalRecordId)
@@ -86,7 +92,7 @@ class TreatmentService {
 
     def getCareGiver(HttpServletRequest request, HttpServletResponse response, medicalRecordId) {
 
-        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         def resp = Unirest.get(url)
                 .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
                 .queryString("medicalRecordId", medicalRecordId)
@@ -105,8 +111,9 @@ class TreatmentService {
 
     def deleteCareTeam(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareTeam.url,
-                params?.medicalRecordId, params?.careTeamId)
+        String deleteCareTeamUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
+        def url = String.format(deleteCareTeamUrl, params?.medicalRecordId, params?.careTeamId)
+
         def resp = Unirest.delete(url)
                 .asString()
 
@@ -119,8 +126,9 @@ class TreatmentService {
 
     def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareGiver.url,
-                params?.medicalRecordId, params?.careGiverId)
+        String deleteCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
+        def url = String.format(deleteCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
+
         def resp = Unirest.delete(url)
                 .asString()
 
@@ -133,7 +141,7 @@ class TreatmentService {
 
     def addCareTeam(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
                 .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
@@ -151,7 +159,7 @@ class TreatmentService {
 
     def addCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = grailsApplication.config.ratchetv2.server.showMedicalCares.url
+        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         def resp = Unirest.post(url)
                 .field("medicalRecordId", params?.medicalRecordId)
                 .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
@@ -171,8 +179,9 @@ class TreatmentService {
 
     def updateSurgeryTime(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.updateSurgeryTime.url,
-                params?.clientId, params?.patientId, params?.medicalRecordId)
+        String updateSurgeryTimeUrl = grailsApplication.config.ratchetv2.server.url.updateSurgeryTime
+        def url = String.format(updateSurgeryTimeUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
+
         def resp = Unirest.post(url)
                 .field("surgeryTime", params?.surgeryTime)
                 .asString()
@@ -184,8 +193,9 @@ class TreatmentService {
 
     def updateCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareGiver.url,
-                params?.medicalRecordId, params?.careGiverId)
+        String updateCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
+        def url = String.format(updateCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
+
         def resp = Unirest.post(url)
                 .field("email", params?.email)
                 .field("firstName", params?.firstName)
@@ -199,8 +209,10 @@ class TreatmentService {
     }
 
     def updateCareTeamSurgeon(HttpServletRequest request, HttpServletResponse response, params) {
-        def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.deleteCareTeam.url,
-                params?.medicalRecordId, params?.staffId)
+
+        String updateCareTeamSurgeonUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
+        def url = String.format(updateCareTeamSurgeonUrl, params?.medicalRecordId, params?.staffId)
+
         def resp = Unirest.post(url)
                 .asString()
 

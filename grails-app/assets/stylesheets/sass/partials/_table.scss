@@ -26,8 +26,9 @@
 
     tr {
         height: 40px;
-        color: $base-dark-grey;;
+        color: $base-dark-grey;
         cursor: pointer;
+        word-break: break-all;
 
         .btn-edit {
 
@@ -61,7 +62,8 @@
             background-color: $base-color-search;
 
             a,
-            .source-id {
+            .source-id,
+            .table-email {
                 color: $base-color-dark-grey;
             }
         }
@@ -81,6 +83,15 @@
             padding-right: 20px;
             border-right: 0;
         }
+    }
+
+    .table-email {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre-wrap;
+        color: $base-dark-grey;
+        word-break: initial;
     }
 
 }

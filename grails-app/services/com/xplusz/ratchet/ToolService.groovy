@@ -18,7 +18,10 @@ class ToolService {
     def getToolsByTreatment(treatmentId) throws ApiResourceAccessException {
 
         try {
-            def url = MessageFormat.format(grailsApplication.config.ratchetv2.server.tools.loadToolByTreatment.url, treatmentId)
+
+            String getToolsByTreatmentUrl = grailsApplication.config.ratchetv2.server.tools.url.loadToolByTreatment
+            def url = String.format(getToolsByTreatmentUrl, treatmentId)
+
             def resp = Unirest.get(url)
                     .asString()
             def result = JSON.parse(resp.body)

@@ -18,7 +18,7 @@ class AccountsController extends BaseController {
     }
 
     def getSingleAccount() {
-        def accountId = params?.id
+        Integer accountId = params.int("id")
         def accountInfo = accountService.getSingleAccount(request, response, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
@@ -30,7 +30,7 @@ class AccountsController extends BaseController {
     }
 
     def inviteAccount() {
-        def accountId = params?.accountId
+        Integer accountId = params.int("accountId")
         def resp = accountService.inviteAccount(request, response, accountId)
         def result = [resp: resp]
         render result as JSON
