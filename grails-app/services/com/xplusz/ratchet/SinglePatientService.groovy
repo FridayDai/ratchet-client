@@ -63,7 +63,7 @@ class SinglePatientService {
     def updateSinglePatient(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiResourceAccessException, ApiReturnErrorException {
         String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
-        def url = String.format(showMedialRecordsUrl, params?.patientId)
+        def url = String.format(updateSinglePatientUrl, params?.patientId)
 
         try {
             def resp = Unirest.post(url)
@@ -74,6 +74,8 @@ class SinglePatientService {
                     .field("lastName", params?.lastName)
                     .field("phoneNumber", params?.phoneNum)
                     .asString()
+
+            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
                 return resp.status

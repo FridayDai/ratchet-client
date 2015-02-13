@@ -1,6 +1,9 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -13,7 +16,8 @@ class PatientService {
     def grailsApplication
     def messageSource
 
-    def addPatients(HttpServletRequest request, HttpServletResponse response, params) {
+    def addPatients(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def patientId = params?.patientId
         def firstName = params?.firstName
         def lastName = params?.lastName
@@ -30,34 +34,44 @@ class PatientService {
 
         String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(addPatientsUrl, request.session.clientId)
-        def resp = Unirest.post(url)
-                .field("patientId", patientId)
-                .field("clientId", request.session.clientId)
-                .field("firstName", firstName)
-                .field("lastName", lastName)
-                .field("phoneNumber", phoneNumber)
-                .field("email", email)
-                .field("profilePhoto", profilePhoto)
-                .field("treatmentId", treatmentId)
-                .field("surgeonId", surgeonId)
-                .field("surgeryTime", surgeryTime)
-                .field("ecFirstName", ecFirstName)
-                .field("ecLastName", ecLastName)
-                .field("relationship", relationship)
-                .field("ecEmail", ecEmail)
-                .asString()
 
-        def result = JSON.parse(resp.body)
+        try {
+            def resp = Unirest.post(url)
+                    .field("patientId", patientId)
+                    .field("clientId", request.session.clientId)
+                    .field("firstName", firstName)
+                    .field("lastName", lastName)
+                    .field("phoneNumber", phoneNumber)
+                    .field("email", email)
+                    .field("profilePhoto", profilePhoto)
+                    .field("treatmentId", treatmentId)
+                    .field("surgeonId", surgeonId)
+                    .field("surgeryTime", surgeryTime)
+                    .field("ecFirstName", ecFirstName)
+                    .field("ecLastName", ecLastName)
+                    .field("relationship", relationship)
+                    .field("ecEmail", ecEmail)
+                    .asString()
 
-        if (resp.status == 201) {
-            def map = [:]
-            map.put("id", result.id)
-            return map
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 201) {
+                def map = [:]
+                map.put("id", result.id)
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
 
     }
 
-    def loadPatients(HttpServletRequest request, HttpServletResponse response, params) {
+    def loadPatients(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         def start = params?.start
         def length = params?.length
@@ -71,29 +85,37 @@ class PatientService {
         def name = params?.name
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
-        def resp = Unirest.get(url)
-                .queryString("max", length)
-                .queryString("offset", start)
-                .queryString("clientId", request.session.clientId)
-                .queryString("patientType", patientType)
-                .queryString("treatmentId", treatmentId)
-                .queryString("surgeonId", surgeonId)
-                .queryString("name", name)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", length)
+                    .queryString("offset", start)
+                    .queryString("clientId", request.session.clientId)
+                    .queryString("patientType", patientType)
+                    .queryString("treatmentId", treatmentId)
+                    .queryString("surgeonId", surgeonId)
+                    .queryString("name", name)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            def map = [:]
+            if (resp.status == 200) {
+                def map = [:]
 
-            map.put(start, start)
-            map.put(length, length)
-            map.put(order, order)
-            map.put(columns, columns)
-            map.put(search, search)
-            map.put(draw, draw)
-            map.put("data", result.items)
-            return map
+                map.put(start, start)
+                map.put(length, length)
+                map.put(order, order)
+                map.put(columns, columns)
+                map.put(search, search)
+                map.put(draw, draw)
+                map.put("data", result.items)
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
     }
 }
