@@ -56,19 +56,20 @@
 
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
-                <input id="patientId" name="patientId" type="text" class="input-group" placeholder="1234567890"
+                <input id="patientId" name="patientId" type="text" class="input-group"
+                       placeholder="1234567890"
                        required/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
-                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="John"
-                       required/>
+                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="John" required/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span>*</span></label>
-                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
+                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith"
+                       required/>
             </div>
 
             <div class="form-group inline">
@@ -128,15 +129,13 @@
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY TIME<span>*</span></label>
                 <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
-                       placeholder=""
-                       required/>
+                       placeholder="" required/>
             </div>
 
             <div class="form-group ">
                 <label class="lbl-group">SURGEON<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear"
-                       placeholder=""
-                       required/>
+                       placeholder="" required/>
             </div>
 
         </g:form>

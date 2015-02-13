@@ -44,6 +44,7 @@
             pageLength: 20,
             info: false,
             bLengthChange: false,
+            //processing: true,
             "serverSide": true,
             "bAutoWidth": false,
             "columnDefs": [
@@ -290,6 +291,23 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _initPlaceholder() {
+
+        $('.form-group input').focus(function () {
+            $(this).data('placeholder', $(this).attr('placeholder'))
+            $(this).attr('placeholder', '');
+        });
+
+        $('.form-group input').blur(function () {
+            $(this).attr('placeholder', $(this).data('placeholder'));
+        });
+
+    }
+
+    /**
      * init select treatment
      * @private
      */
@@ -434,6 +452,7 @@
         _initSurgeon();
         _clickRow();
         _addLine();
+        _initPlaceholder();
     }
 
     _init();
