@@ -80,9 +80,9 @@ a {
     display: inline-block;
     margin-bottom: 0;
     padding: 6px 12px;
-    border: 2px $base-color-grey solid;
+    border: 1px $base-color-dark-grey solid;
     white-space: nowrap;
-    color: $base-color-grey;
+    color: $base-color-dark-grey;
     background-color: transparent;
     background-image: none;
     font-weight: normal;
@@ -92,9 +92,8 @@ a {
 
     &:hover,
     &:focus {
-        border: 2px $base-color-dark-grey solid;
-        color: $base-color-dark-grey;
-        background-color: transparent;
+        color: $base-color-white;
+        background-color: $base-color-dark-grey;
     }
 
     &.disabled {

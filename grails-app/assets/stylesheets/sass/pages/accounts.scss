@@ -47,15 +47,9 @@
 .add-account {
     display: inline-block;
     margin-top: 10px;
-    border: 1px $base-color-grey solid;
     font-weight: lighter;
     font-size: 16px;
     font-family: 'Ionicons';
-
-    &:hover,
-    &:focus {
-        border: 1px $base-color-dark-grey solid;
-    }
 
     &:before {
         display: inline-block;

@@ -26,6 +26,7 @@
             &:hover,
             &:focus {
                 color: $base-color-dark-grey;
+                background-color: transparent;
             }
         }
     }
@@ -73,20 +74,20 @@
         button {
             margin: .5em .4em .5em 0;
             cursor: pointer;
-            border: 2px solid $base-color-grey;
-            color: $base-color-grey;
+            border: 1px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
 
             span {
-                color: $base-font-color;
+                color: $base-color-dark-grey;
             }
 
             &:hover,
             &:focus {
-                border: 2px solid $base-color-dark-grey;
-                color: $base-color-dark-grey;
+                color: $base-color-white;
+                background-color: $base-color-dark-grey;
 
                 span {
-                    color: $base-color-dark-grey;
+                    color: $base-color-white;
                 }
             }
         }
