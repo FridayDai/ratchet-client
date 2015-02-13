@@ -294,6 +294,21 @@
     function _initStaffSelect() {
         $('#selectStaffs').select2({
             //tags: true,
+            formatSelection: function (dataItem) {
+                if (dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
+                } else {
+                    return "<div class='surgery'> " + dataItem.text + " </div>";
+                }
+
+            },
+            formatResult: function (dataItem) {
+                if (dataItem.type == 8) {
+                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
+                } else {
+                    return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
+                }
+            },
             ajax: {
                 transport: function (params) {
                     params.beforeSend = function () {
@@ -305,7 +320,8 @@
                 cache: "true",
                 data: function (term) {
                     return {
-                        term: term
+                        term: term,
+                        type: 8
                     };
                 },
                 results: function (data) {
@@ -313,7 +329,8 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.firstName + " " + item.lastName
+                            'text': item.firstName + " " + item.lastName,
+                            'type': item.type
                         });
                     });
                     return {
@@ -344,7 +361,7 @@
             onkeyup: false,
             errorClass: "myErrorClass",
 
-            errorPlacement: function(error, element){
+            errorPlacement: function (error, element) {
                 var elem = $(element);
                 error.insertAfter(element);
             }

@@ -306,6 +306,8 @@
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
                     dialogOwn.appendTo(containerParent);
+                    //containerParent.find("#selectTreatment").select2("destroy");
+                    //containerParent.find("#selectTreatment").select2();
                     $(this).dialog("destroy").remove();
                 }
             });
