@@ -19,7 +19,7 @@ class AccountsController extends BaseController {
 
     def getSingleAccount() {
         def accountId = params?.id
-        def accountInfo = accountService.getSingleAccount(request, response, accountId)
+        def accountInfo = accountService.getSingleAccount(accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
 

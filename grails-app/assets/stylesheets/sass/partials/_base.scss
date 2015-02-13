@@ -102,7 +102,7 @@ a {
 
         &:hover,
         &:focus {
-            border: 2px $base-color-grey solid;
+            border: 0;
             color: $base-color-white;
             background-color: $base-color-grey;
             cursor: inherit;
