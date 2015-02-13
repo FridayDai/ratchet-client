@@ -3,28 +3,26 @@
 }
 
 .patient-info {
-    min-width: 1024px;
-    padding: 8px 0;
+    padding: 25px 0;
     color: $base-color-light-black;
 
     .patient-col {
         float: left;
         width: 300px;
-        height: 40px;
-        padding-top: 11px;
-        padding-bottom: 11px;
+        height: 50px;
+        padding: 0;
         font-size: 16px;
         line-height: 40px;
         text-align: center;
     }
 
     .info {
-        width: 36%;
+        width: 35%;
 
         .icon {
             height: 30px;
             vertical-align: middle;
-            padding-right: 35px;
+            padding-right: 15px;
         }
 
         .first-name {
@@ -34,7 +32,7 @@
         }
 
         .last-name {
-            padding-right: 35px;
+            padding-right: 15px;
             font-size: 21px;
             vertical-align: middle;
             text-transform: uppercase;
@@ -42,20 +40,24 @@
     }
 
     .email {
-        width: 20%;
+        width: 30%;
         border-left: 2px solid $base-color-white-grey;
     }
 
     .phone {
-        width: 20%;
+        width: 160px;
         border-left: 2px solid $base-color-white-grey;
     }
 
     .edit {
         position: relative;
-        width: 22%;
+        width: 180px;
         border-left: 2px solid $base-color-white-grey;
         text-align: left;
+    }
+
+    .inline {
+        display: inline-block;
     }
 
     .btn-edit-patient {
@@ -74,7 +76,7 @@
 
     .btn-close {
         position: absolute;
-        top: 17px;
+        top: 7px;
         right: 10px;
         vertical-align: middle;
         color: #b3b3b3;
@@ -246,3 +248,43 @@
     background-color: $base-color-white;
 }
 
+@media (min-width: 1281px) {
+
+    .patient-info {
+        padding: 8px 0;
+
+        .patient-col {
+            height: 40px;
+            padding-top: 11px;
+            padding-bottom: 11px;
+        }
+
+        .info {
+            width: 36%;
+
+            .icon {
+                padding-right: 35px;
+            }
+
+            .last-name {
+                padding-right: 35px;
+            }
+        }
+
+        .email {
+            width: 20%;
+        }
+
+        .phone {
+            width: 20%;
+        }
+
+        .edit {
+            width: 22%;
+        }
+
+        .btn-close {
+            top: 17px;
+        }
+    }
+}
