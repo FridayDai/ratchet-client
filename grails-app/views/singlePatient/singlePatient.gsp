@@ -14,10 +14,17 @@
         <div class="patient-info clear">
 
             <div class="patient-col info clear">
-                <img class="icon" src="${assetPath(src: 'patient_logo.png')}"/>
-                <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
-                <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
-                ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
+
+                <div class="inline">
+                    <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
+                    <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
+                </div>
+
+                <div class="inline">
+                    ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                </div>
+
             </div>
 
             <div class="patient-col email patientEmail clear" value="${patientInfo.email}">${patientInfo.email}</div>
@@ -69,7 +76,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">PHONE NUMBER*</label>
-            <input id="phone" name="phone" type="number" maxlength="11" class="input-group"
+            <input id="phone" name="phone" type="text" maxlength="12" class="input-group"
                    placeholder="Phone Number" required/>
         </div>
 
@@ -84,8 +91,8 @@
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT*</label>
-            <input id="selectTreatment" name="selectTreatment" type="text" class="input-group required" placeholder="Treatment"
-                   />
+            <input id="selectTreatment" name="selectTreatment" type="text" class="input-group required"
+                   placeholder="Treatment"/>
         </div>
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
@@ -97,8 +104,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">SURGEON*</label>
-            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group required" placeholder="Staff"
-                   />
+            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group required" placeholder="Staff"/>
         </div>
 
         <h4>Emergency Contact</h4>
