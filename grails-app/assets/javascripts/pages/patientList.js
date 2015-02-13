@@ -272,7 +272,8 @@
      */
     function _initSurgeryTime() {
         $("#surgeryTime").datetimepicker({
-            controlType: 'input'
+            controlType: 'input',
+            minDate: +7
         });
     }
 
