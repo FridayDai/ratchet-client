@@ -191,8 +191,8 @@ ratchetv2 {
 
         }
 
-        client_platform = "ancient"
-        client_type = "client"
+        clientPlatform = "ancient"
+        clientType = "client"
 
         careGiverType = 1
         careTeamType = 2
