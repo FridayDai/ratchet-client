@@ -6,12 +6,12 @@
 
     <div class="box-item-content">
 
-        <div class="item-fist">
+        <div class="item-fist middle-font">
             ID: ${task?.id}
         </div>
 
         <div class="item-title">
-            <h4>${task?.title}</h4>
+           ${task?.title}
         </div>
 
         %{--<div class="show-status">--}%
@@ -29,10 +29,10 @@
         <div class="item-datetime due-time-score">
 
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-                <span class="score">Score: ${task?.score}</span>
+                <span class="score">SCORE: ${task?.score}</span>
             </g:if>
             <g:else>
-                <h5 class="due-time">DUE: <g:formatDate date="${task?.dueTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
+                <h5 class="due-time middle-font">DUE: <g:formatDate date="${task?.dueTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
             </g:else>
 
         </div>

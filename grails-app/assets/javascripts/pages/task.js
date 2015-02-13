@@ -45,33 +45,26 @@
      */
     function _updateTaskBox(individualTreatment, element, sendTime, dueTime) {
 
-        var hasStatus = element.parent().siblings('.show-status').has('.item-status').length !== 0;
-        var sendDate = moment(sendTime).format("MMM/DD/YYYY, HH:mm a");
-        var dueDate = moment(dueTime).format("MMM/DD/YYYY, HH:mm a");
+        var taskStatus = element.closest('.box-item').data('status');
         var sentRow = individualTreatment.find('#task-row-sent');
         var scheduleRow = individualTreatment.find('#task-row-schedule');
+        var sendDate = moment(sendTime).format("MMM/DD/YYYY, HH:mm a");
+        var dueDate = moment(dueTime).format("MMM/DD/YYYY, HH:mm a");
 
         var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " + sendDate + '').closest(".box-item");
-        taskBox = taskBox.find('.due-time').text("DUE:" + dueDate + '').closest(".box-item");
+        taskBox = taskBox.find('.due-time').text("DUE: " + dueDate + '').closest(".box-item");
+        //var html = "<div class='item-status pending'>"
+        //    + "<label class='uppercase status-background'>pending</label></div>";
 
-        var html = "<div class='item-status pending'>"
-            + "<label class='uppercase status-background'>pending</label></div>";
-
-        if (!hasStatus) {
-            var hasDefaultSentItem = sentRow.has('.no-item-sent').length !== 0;
-            taskBox = taskBox.find('.show-status').html('').append(html).closest(".box-item");
-
-            if (hasDefaultSentItem) {
-                sentRow.find('.no-item-sent').remove();
-            }
-        }
-        else {
-            if (element.closest('.box-item').data('status') === "overdue") {
-                taskBox = taskBox.removeClass('overdue').addClass('pending');
-            }
+        if (taskStatus === "pending" || "overdue") {
+            taskBox = taskBox.removeClass(taskStatus);
         }
 
         taskBox.addClass('pending').detach().prependTo(sentRow);
+
+        if (sentRow.has('.no-item-sent').length !== 0) {
+            sentRow.find('.no-item-sent').remove();
+        }
 
         var hasDefaultScheduleItem = scheduleRow.has('.no-item-schedule').length !== 0;
         var noScheduleItem = scheduleRow.has('.box-item').length === 0;
