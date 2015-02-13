@@ -65,9 +65,7 @@
                 {
                     data: function (source) {
                         if (accountType[source.type - 1] === "Surgeon") {
-                            return '<div class="bottom-content">' +
-                                '<div class="icon-remove"></div>' +
-                                '</div>';
+                            return "<img src='/assets/surgeon_logo.png'/>";
                         } else {
                             return '';
                         }
