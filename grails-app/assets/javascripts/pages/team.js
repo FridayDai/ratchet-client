@@ -168,8 +168,6 @@
             var medicalRecordId = $(this).data("medicalRecordId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
 
-            _initStaffSelect(existSurgeonId);
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
                 element: element.find(".editSurgeon"),
                 okCallback: function () {
@@ -187,6 +185,8 @@
                     return false;
                 }
             }));
+
+            _initStaffSelect(existSurgeonId);
         });
     }
 
@@ -213,13 +213,15 @@
      * @private
      */
     function _bindInviteGiverEvent(element) {
-        element.find("#invite-giver").on("click", function (e) {
+
+        var ele = element;
+
+        ele.find("#invite-giver").on("click", function (e) {
             e.preventDefault();
             $(".inviteGiverForm")[0].reset();
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: element.find(".inviteGiverForm"),
                 okCallback: function () {
@@ -228,7 +230,7 @@
                         var firstName = $("#giver-firstName").val();
                         var lastName = $("#giver-lastName").val();
                         var email = $("#giver-email").val();
-                        var relationship = $("#relationship").val();
+                        var relationship = $("#relationships").val();
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -243,7 +245,10 @@
                     return false;
                 }
             }));
+            _initSelect();
+
         });
+
     }
 
     /**
@@ -352,7 +357,7 @@
                         var firstName = $("#giver-firstName").val();
                         var lastName = $("#giver-lastName").val();
                         var email = $("#giver-email").val();
-                        var relationship = $("#relationship").val();
+                        var relationship = $("#relationships").val();
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -400,8 +405,8 @@
      * init select
      * @private
      */
-    function _initSelect(element) {
-        element.find("#relationship").select2();
+    function _initSelect() {
+        $("#relationships").select2();
     }
 
     /**
@@ -645,7 +650,6 @@
         _bindInviteGiverEvent(element);
         _removeCareGiver(element);
         _editCareGiver(element);
-        _initSelect(element);
         _editSurgeon(element);
     }
 

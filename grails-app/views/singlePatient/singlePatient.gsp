@@ -123,7 +123,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">RELATIONSHIP</label>
-            <select id="relationship" name="relationship">
+            <select id="relationshipName" name="relationshipName">
                 <option></option>
                 <option value="1">Spouse</option>
                 <option value="2">Parent</option>
