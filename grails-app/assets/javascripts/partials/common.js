@@ -64,7 +64,6 @@
     }
 
 
-
     /**
      * Pipelining function for DataTables. To be used to the `ajax` option of DataTables
      * @private
@@ -284,6 +283,9 @@
                 width: width,
                 modal: true,
                 title: confirmFormArguments.title,
+                open: function (event, ui) {
+                    $("input").blur();
+                },
                 buttons: {
                     "SAVE": function (e) {
                         if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
