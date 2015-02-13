@@ -1,7 +1,7 @@
 <div role="banner" class="header">
     <div class="toolbar">
         <div class="pull-left">
-            <a href="/ratchet-v2-admin-portal/" class="logo">
+            <a href="/" class="logo">
                 <img src="${assetPath(src: 'ratchet_health_logo.png')}">
             </a>
             <div class="client-logo">
