@@ -228,3 +228,10 @@
     }
 }
 
+.ui-dialog-titlebar {
+    .ui-dialog-titlebar-close {
+        .ui-button-text {
+            display: none;
+        }
+    }
+}

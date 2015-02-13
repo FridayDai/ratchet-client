@@ -363,6 +363,35 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _addLine() {
+        $("#phone").on("input", function () {
+            var str = $("#phone").val();
+            var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
+            $("#phone").val(num);
+        })
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _initPlaceholder() {
+
+        $('.form-group input').focus(function () {
+            $(this).data('placeholder', $(this).attr('placeholder'))
+            $(this).attr('placeholder', '');
+        });
+
+        $('.form-group input').blur(function () {
+            $(this).attr('placeholder', $(this).data('placeholder'));
+        });
+
+    }
+
+    /**
      * set validate
      * @private
      */
@@ -396,6 +425,8 @@
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
+        _addLine();
+        _initPlaceholder();
     }
 
     _init();
