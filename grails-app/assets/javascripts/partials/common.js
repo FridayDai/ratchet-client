@@ -52,7 +52,7 @@
                     window.location.href = "/login";
 
                 }
-                else {
+                else if(jqXHR.status === 400 || 500) {
                     RC.common.warning({
                         title: RC.constants.waringMessageAction,
                         message: jqXHR.responseText
