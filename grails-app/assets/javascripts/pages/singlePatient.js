@@ -186,7 +186,7 @@
             var id = parent.find(".id").text();
             var firstName = parent.find(".first-name").text();
             var lastName = parent.find(".last-name").text();
-            var email = parent.find(".patientEmail").text();
+            var email = parent.find("#patientEmail").text();
             var phoneNum = parent.find(".phone").text();
             var phoneNumber = $.trim(phoneNum)
 
