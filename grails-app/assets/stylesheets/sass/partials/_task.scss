@@ -68,7 +68,7 @@
 
             &:before {
                 content: 'PENDING';
-                font-size: 12pt;
+                font-size: 10pt;
             }
         }
     }
@@ -81,7 +81,7 @@
 
             &:before {
                 content: 'OVERDUE';
-                font-size: 12pt;
+                font-size: 10pt;
             }
         }
     }
@@ -94,7 +94,7 @@
 
             &:before {
                 content: 'COMPLETE';
-                font-size: 12pt;
+                font-size: 10pt;
             }
         }
     }
@@ -102,18 +102,25 @@
 }
 
 .box-item-header {
-    height: 18px;
+    height: 20px;
     padding-bottom: 7px;
     background: $base-color-mid-grey;
 
     &:before {
         display: inline-block;
-        padding-left: 12px;
+        padding-left: 8px;
         content: '\f3c7';
         color: $base-color-white;
         font-weight: lighter;
         font-size: 22px;
         font-family: ionicons;
+    }
+
+    .complete-time {
+        padding: 5px 2px;
+        color: $base-color-medium-black;
+        font-size: 10px;
+        font-weight: 600;
     }
 
 }
@@ -134,10 +141,23 @@
     }
 
     .score {
-        padding: 2px 4px;
-        color: $base-color-white;
-        background-color: $base-color-warn;
+        padding-right: 16px;
+        color: $base-color-medium-black;
         font-size: 12pt;
+
+
+        &:before {
+            display: inline-block;
+            content: '\f42d';
+            font-weight: lighter;
+            font-size: 22px;
+            font-family: ionicons;
+            vertical-align: top;
+        }
+    }
+
+    .numeral {
+        color: $base-color-blue;
     }
 
     .status-background {

@@ -128,12 +128,14 @@
 
 .window-warning-title {
     margin-top: 20px;
+    color: $base-color-white;
     font-weight: bolder;
     text-align: center;
 }
 
 .window-warning {
     margin-top: 20px;
+    color: $base-color-white;
     text-align: center;
 }
 
@@ -188,31 +190,44 @@
     .ui-dialog-buttonpane {
         background-color: $base-color-warn;
 
+        .ui-dialog-buttonset {
+            background-color: $base-color-warn;
+        }
+
         button {
             //            border: 2px solid $base-color-red;
-            color: $base-font-color;
-
+            color: $base-color-white;
+            border: 1px solid $base-color-white;
             span {
-                color: $base-font-color;
+                color: $base-color-white;
             }
+        }
+
+        .btn-agree {
+            border: 1px solid $base-color-error;
+            //            background: $base-color-red;
+            background-color: $base-color-error;
 
             &:focus,
             &:hover {
                 border: 2px solid $base-color-red;
                 color: $base-color-white;
-
                 background-color: $base-color-red;
-
-                span {
-                    color: $base-color-white;
-                }
             }
-        }
 
-        .btn-agree {
-            border: 2px solid $base-color-red;
-            //            background: $base-color-red;
-            background-color: $base-color-red;
+            + .ui-button {
+
+                &:focus,
+                &:hover {
+                    color: $base-color-warn;
+                    background-color: $base-color-white;
+
+                    span {
+                        color: $base-color-warn;
+                    }
+                }
+
+            }
         }
     }
 
@@ -220,7 +235,7 @@
         &:before {
             margin: auto;
             content: '\f100';
-            color: $base-color-white;
+            color: $base-color-red;
             font-weight: lighter;
             font-size: 22px;
             font-family: ionicons;
