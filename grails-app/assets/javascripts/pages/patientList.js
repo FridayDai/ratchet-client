@@ -48,7 +48,7 @@
             "serverSide": true,
             "bAutoWidth": false,
             "columnDefs": [
-                {"targets": 6, "orderable": false}],
+                {"targets": 5, "orderable": false}],
             "fnDrawCallback": function (oSettings, json) {
                 $(".previous").text('');
                 $(".next").text('');
@@ -63,15 +63,19 @@
                     data: function (source) {
                         return '<p class="source-id">' + source.patientId + '</p>';
                     },
-                    width: "10%"
+                    width: "9%"
                 },
-                {data: "firstName", width: "10%"},
-                {data: "lastName", width: "10%"},
                 {
                     data: function (source) {
-                        return "<p class='table-email'>" + source.email + "</P>"
+                        return source.firstName + " " + source.lastName;
                     },
-                    width: "15%"
+                    width: "20%"
+                },
+                {
+                    data: function (source) {
+                        return source.email;
+                    },
+                    width: "28%"
                 },
                 {data: "phoneNumber", width: "15%"},
                 {
@@ -79,13 +83,13 @@
                         var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
-                    width: "15%"
+                    width: "17%"
                 },
                 {
                     data: function (source) {
-                        return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '">View</a>';
+                        return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '"><span>View</span></a>';
                     },
-                    width: "10%"
+                    width: "11%"
                 }
             ]
         });

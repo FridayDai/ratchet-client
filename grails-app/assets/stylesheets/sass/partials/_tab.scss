@@ -84,12 +84,13 @@
 
         &:hover,
         &:focus {
-            border: 1px solid $base-color-dark-grey;
-            color: $base-color-dark-grey;
+            border: 1px solid $base-color-mid-grey;
+            color: $base-color-mid-grey;
+            background-color: $base-color-white;
 
             span,
             &:before {
-                color: $base-color-dark-grey;
+                color: $base-color-mid-grey;
             }
         }
     }
