@@ -450,6 +450,15 @@ a {
         margin-right: 5px;
         content: '\f362';
     }
+
+    span {
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
 }
 
 .disabled {

@@ -83,10 +83,6 @@
         color: $base-color-dark-grey;
         font-weight: 600;
         font-size: 16px;
-        max-width: 95px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: pre-wrap;
     }
 
     .user-photo {
@@ -104,10 +100,11 @@
 
     .user-profile {
         float: left;
-        width: 110px;
-        margin-top: 10px;
-        margin-left: 10px;
+        width: 130px;
         color: $base-color-dark-grey;
+        left: 63px;
+        top: 28px;
+        position: absolute;
 
         li {
             padding-right: 15px;

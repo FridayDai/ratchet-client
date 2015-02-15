@@ -59,7 +59,7 @@
                 data: data
             }),
             "columnDefs": [
-                {"targets": [0, 8], "orderable": false}
+                {"targets": [0, 7], "orderable": false}
             ],
             columns: [
                 {
@@ -76,21 +76,17 @@
                     data: function (source) {
                         return '<p class="source-id">' + source.id + '</p>';
                     },
-                    width: "10%"
-                },
-                {
-                    data: "firstName",
-                    width: "10%"
-                },
-                {
-                    data: "lastName",
-                    width: "10%"
+                    width: "5%"
                 },
                 {
                     data: function (source) {
-                        return "<p class='table-email'>" + source.email + "</P>"
+                        return source.firstName + " " + source.lastName;
                     },
                     width: "10%"
+                },
+                {
+                    data: "email",
+                    width: "28%"
                 },
                 {
                     data: function (source) {
@@ -111,14 +107,14 @@
                 {
                     data: function (source) {
                         var lastUpdateTime = new Date(source.lastUpdateDate);
-                        var formatTime = moment(lastUpdateTime).format('MMM D, YYYY h:mm:ss a');
+                        var formatTime = moment(lastUpdateTime).format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
                     width: "15%"
                 },
                 {
                     data: function (source) {
-                        return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view">View</a>';
+                        return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view"><span>View</span></a>';
                     },
                     width: "10%"
                 }
