@@ -13,11 +13,11 @@
 
         <div class="patient-detail">
 
-            <div class="inline info">
+            <div class="inline info logo">
                 <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
             </div>
 
-            <div class="inline info">
+            <div class="inline info name">
                 <div>
                     <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                     <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
@@ -28,13 +28,14 @@
                 </div>
             </div>
 
-            <div class="inline">
+            <div class="inline number">
                 <div class="id-info">
                     ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                 </div>
 
                 <div class="phone"
-                     value="${patientInfo.phoneNumber}">${(patientInfo.phoneNumber).substring(0, 3) + "-" + (patientInfo.phoneNumber).substring(3, 6) + "-" + (patientInfo.phoneNumber).substring(6, 10)}
+                     value="${patientInfo.phoneNumber}">
+                    ${phoneNumber}
                 </div>
             </div>
 
@@ -49,7 +50,8 @@
         </div>
 
         <div id="tabs" class="patient-tab">
-            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}" data-id="${patientInfo.patientId}"
+            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}"
+                    data-id="${patientInfo.patientId}"
                     data-client-id="${patientInfo.client.id}">Add Treatment</button>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">

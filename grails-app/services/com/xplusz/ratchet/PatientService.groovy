@@ -52,7 +52,6 @@ class PatientService {
                     .field("relationship", relationship)
                     .field("ecEmail", ecEmail)
                     .asString()
-
             def result = JSON.parse(resp.body)
 
             if (resp.status == 201) {
