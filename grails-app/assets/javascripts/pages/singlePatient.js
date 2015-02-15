@@ -188,12 +188,13 @@
             var lastName = parent.find(".last-name").text();
             var email = parent.find(".email").text();
             var phoneNum = parent.find(".phone").text();
+            var phoneNumber = $.trim(phoneNum)
 
             $("#patientId").val(id);
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
-            $("#phone").val(phoneNum);
+            $("#phone").val(phoneNumber);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
