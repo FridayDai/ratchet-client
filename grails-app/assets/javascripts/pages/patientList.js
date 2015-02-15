@@ -80,7 +80,7 @@
                 {
                     data: function (source) {
                         var num = source.phoneNumber;
-                        var phoneNumber = num.substring(0, 3) + "-" + num.substring(3, 6) + "-" + num.substring(6, 10);
+                        var phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
                         return phoneNumber;
                     },
                     width: "15%"
@@ -326,7 +326,41 @@
      * @private
      */
     function _initSelectTreatment() {
-        $('#selectTreatment, #treatmentForSearchPatient').select2({
+        $('#selectTreatment').select2({
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getTreatments,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.title + ' ' + item.tmpTitle,
+                            'data': item.surgeryTimeRequired
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        });
+
+    }
+
+    function _initTreatmentSelect() {
+        $('#treatmentForSearchPatient').select2({
             ajax: {
                 transport: function (params) {
                     params.beforeSend = function () {
@@ -463,6 +497,7 @@
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();
+        _initTreatmentSelect();
         //_initPlaceholder();
     }
 

@@ -10,8 +10,18 @@ class SinglePatientController extends BaseController {
     def showPatient() {
         def patientId = params?.id
         def patientInfo = singlePatientService.showSinglePatient(request, response, patientId)
+        def num = patientInfo?.phoneNumber
+        def length = num.length()
+        def phoneNumber
+        if (length > 6) {
+            phoneNumber = String.format("%s-%s-%s", num.substring(0, 3), num.substring(3, 6),
+                    num.substring(6, length));
+        } else if (length > 3) {
+            phoneNumber = String.format("%s-%s-%s", num.substring(0, 3), num.substring(3, length));
+        }
         def medicalRecords = singlePatientService.showMedialRecords(request, response, patientId)
-        render(view: '/singlePatient/singlePatient', model: [patientInfo: patientInfo, medicalRecords: medicalRecords])
+        render(view: '/singlePatient/singlePatient', model: [patientInfo   : patientInfo,
+                                                             medicalRecords: medicalRecords, phoneNumber: phoneNumber])
     }
 
     def updatePatient() {
