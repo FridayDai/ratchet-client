@@ -71,7 +71,14 @@
 
     function _initSurgeryTime() {
         $("#treatment-surgeryTime").datetimepicker({
-            controlType: 'input'
+            controlType: 'input',
+            dateFormat: 'MM d, yy',
+            timeFormat: "h:mm TT",
+            Default: true,
+            showOn: "focus",
+            ampm: true,
+            hourMax: 11,
+            minDate: +8
         });
     }
 
