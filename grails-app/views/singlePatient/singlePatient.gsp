@@ -13,7 +13,6 @@
 
         <div class="patient-detail">
 
-            %{--<div class="patient-col info clear left">--}%
             <div class="inline info">
                 <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
             </div>
@@ -25,28 +24,19 @@
                 </div>
 
                 <div class="email patientEmail"
-                     value="${patientInfo.email}">${patientInfo.email}</div>
-                %{--<div>--}%
-                %{--ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>--}%
-                %{--</div>--}%
-
+                     value="${patientInfo.email}">${patientInfo.email}
+                </div>
             </div>
-            %{--</div>--}%
 
-            %{--<div class="patient-col clear right">--}%
             <div class="inline">
                 <div class="id-info">
                     ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                 </div>
 
                 <div class="phone"
-                     value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
+                     value="${patientInfo.phoneNumber}">${(patientInfo.phoneNumber).substring(0, 3) + "-" + (patientInfo.phoneNumber).substring(3, 6) + "-" + (patientInfo.phoneNumber).substring(6, 10)}
+                </div>
             </div>
-            %{--</div>--}%
-
-            %{--<div class="patient-col email patientEmail clear" value="${patientInfo.email}">${patientInfo.email}</div>--}%
-
-            %{--<div class="patient-col phone clear" value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>--}%
 
             <div class="edit inline">
                 <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"

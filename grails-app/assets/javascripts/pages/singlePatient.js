@@ -216,6 +216,8 @@
                     }
                 }
             ));
+
+            _addLine();
         });
     }
 
@@ -432,7 +434,6 @@
         _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
-        _addLine();
         _initPlaceholder();
     }
 

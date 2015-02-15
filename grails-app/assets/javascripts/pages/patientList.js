@@ -77,7 +77,14 @@
                     },
                     width: "28%"
                 },
-                {data: "phoneNumber", width: "15%"},
+                {
+                    data: function (source) {
+                        var num = source.phoneNumber;
+                        var phoneNumber = num.substring(0, 3) + "-" + num.substring(3, 6) + "-" + num.substring(6, 10);
+                        return phoneNumber;
+                    },
+                    width: "15%"
+                },
                 {
                     data: function (source) {
                         var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
@@ -264,9 +271,11 @@
                 }
             }));
 
+            _addLine();
             _initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
+            _initPlaceholder();
             $("#relationship").select2();
             //$("#div-surgery-time").css("display", "none");
         });
@@ -451,13 +460,10 @@
         _loadData();
         _setValidate();
         _bindAddEvent();
-        _initSelectTreatment();
-        _initStaffSelect();
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();
-        _addLine();
-        _initPlaceholder();
+        //_initPlaceholder();
     }
 
     _init();
