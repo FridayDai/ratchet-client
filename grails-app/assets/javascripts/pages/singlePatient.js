@@ -138,6 +138,7 @@
 
         });
     }
+
     /**
      * init select
      * @private
@@ -145,6 +146,7 @@
     function _initSelect() {
         $("#relationshipName").select2();
     }
+
     /**
      *
      * @param emid
@@ -196,13 +198,18 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
+
+                        var number = $("#phone").val();
+                        var phoneNumber = number.split('-').join('');
                         var patientInfo = {
                             patientId: patientId,
                             id: $("#patientId").val(),
                             firstName: $("#firstName").val(),
                             lastName: $("#lastName").val(),
                             email: $("#email").val(),
-                            phoneNum: $("#phone").val()
+                            number: number,
+                            phoneNumber: phoneNumber
+                            //phoneNum: $("#phone").val()
                         };
                         _updatePatient(patientId, clientId, patientInfo);
                         return true;
@@ -231,7 +238,7 @@
                     $('.first-name').text(patientInfo.firstName);
                     $('.last-name').text(patientInfo.lastName);
                     $('.patientEmail').text(patientInfo.email);
-                    $('.phone').text(patientInfo.phoneNum);
+                    $('.phone').text(patientInfo.number);
                 }
             }
         });

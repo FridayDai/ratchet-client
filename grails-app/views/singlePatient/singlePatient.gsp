@@ -11,27 +11,44 @@
     <body>
     <div class="content">
 
-        <div class="patient-info clear">
+        <div class="patient-detail">
 
-            <div class="patient-col info clear">
+            %{--<div class="patient-col info clear left">--}%
+            <div class="inline info">
                 <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
+            </div>
 
-                <div class="inline">
+            <div class="inline info">
+                <div>
                     <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                     <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                 </div>
 
-                <div class="inline">
+                <div class="email patientEmail"
+                     value="${patientInfo.email}">${patientInfo.email}</div>
+                %{--<div>--}%
+                %{--ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>--}%
+                %{--</div>--}%
+
+            </div>
+            %{--</div>--}%
+
+            %{--<div class="patient-col clear right">--}%
+            <div class="inline">
+                <div class="id-info">
                     ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                 </div>
 
+                <div class="phone"
+                     value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
             </div>
+            %{--</div>--}%
 
-            <div class="patient-col email patientEmail clear" value="${patientInfo.email}">${patientInfo.email}</div>
+            %{--<div class="patient-col email patientEmail clear" value="${patientInfo.email}">${patientInfo.email}</div>--}%
 
-            <div class="patient-col phone clear" value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>
+            %{--<div class="patient-col phone clear" value="${patientInfo.phoneNumber}">${patientInfo.phoneNumber}</div>--}%
 
-            <div class="patient-col edit clear">
+            <div class="edit inline">
                 <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
                    data-client-id="${patientInfo.client.id}">
                 </a>

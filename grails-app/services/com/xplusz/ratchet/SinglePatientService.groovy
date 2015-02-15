@@ -72,14 +72,13 @@ class SinglePatientService {
                     .field("email", params?.email)
                     .field("firstName", params?.firstName)
                     .field("lastName", params?.lastName)
-                    .field("phoneNumber", params?.phoneNum)
+                    .field("phoneNumber", params?.phoneNumber)
                     .asString()
-
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
                 return resp.status
             } else {
+                def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message)
             }

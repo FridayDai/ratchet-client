@@ -26,7 +26,9 @@
         font-size: small;
 
         @include input-placeholder {
-            color: $base-color-white-grey;
+            color: $base-font-grey;
+            opacity: 0.5;
+            font-size: 14px;
         }
     }
 

@@ -157,7 +157,8 @@
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var email = $("#email").val();
-        var phoneNumber = $("#phoneNumber").val();
+        var number = $("#phoneNumber").val();
+        var phoneNumber = number.split('-').join('');
 
         var ecFirstName = $("#emergency-firstName").val();
         var ecLastName = $("#emergency-lastName").val();
