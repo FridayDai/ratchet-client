@@ -48,8 +48,8 @@
         var taskStatus = element.closest('.box-item').data('status');
         var sentRow = individualTreatment.find('#task-row-sent');
         var scheduleRow = individualTreatment.find('#task-row-schedule');
-        var sendDate = moment(sendTime).format("MMM/DD/YYYY, HH:mm a");
-        var dueDate = moment(dueTime).format("MMM/DD/YYYY, HH:mm a");
+        var sendDate = moment(sendTime).format("MMM DD,YYYY HH:mm a");
+        var dueDate = moment(dueTime).format("MMM DD,YYYY HH:mm a");
 
         var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " + sendDate + '').closest(".box-item");
         taskBox = taskBox.find('.due-time').text("DUE: " + dueDate + '').closest(".box-item");
