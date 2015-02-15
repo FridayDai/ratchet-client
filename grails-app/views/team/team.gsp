@@ -41,7 +41,7 @@
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
             <button class="btn btn-invite btn-position" id="invite-giver" data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
-                <span>Invite Care Giver</span>
+                <span>Invite</span>
             </button>
         </div>
 
@@ -73,7 +73,7 @@
 
 <g:form class="editSurgeon ui-hidden" id="editSurgeon">
     <div class="form-group ">
-        <label class="lbl-group">CARE TEAM</label>
+        <label class="lbl-group">SURGEON</label>
         <input id="selectStaff" name="selectStaff" type="text" class="multi-select clear"
                placeholder="Surgeon"
                required/>

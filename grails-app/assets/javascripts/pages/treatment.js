@@ -30,6 +30,9 @@
             e.preventDefault();
 
             var parent = $(this).parent();
+            var time = parent.find('.surgery-time-picker').text();
+            var surgeryTime = $.trim(time);
+            $("#treatment-surgeryTime").datepicker().val(surgeryTime);
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
