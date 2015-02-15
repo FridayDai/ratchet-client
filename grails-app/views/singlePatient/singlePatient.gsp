@@ -33,9 +33,7 @@
                     ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                 </div>
 
-                <div class="phone"
-                     value="${patientInfo.phoneNumber}">
-                    ${phoneNumber}
+                <div class="phone" value="${patientInfo.phoneNumber}">${phoneNumber}
                 </div>
             </div>
 
