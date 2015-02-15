@@ -373,6 +373,7 @@
                     return false;
                 }
             }));
+            _initSelect();
         });
     }
 
