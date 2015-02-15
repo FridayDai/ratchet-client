@@ -23,7 +23,7 @@
                     <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                 </div>
 
-                <div class="email patientEmail"
+                <div class="email patientEmail" id="patientEmail"
                      value="${patientInfo.email}">${patientInfo.email}
                 </div>
             </div>
@@ -48,7 +48,7 @@
         </div>
 
         <div id="tabs" class="patient-tab">
-            <button id="addTab" class="add-tab" data-patient-id="${patientInfo.id}"
+            <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
                     data-id="${patientInfo.patientId}"
                     data-client-id="${patientInfo.client.id}">Add Treatment</button>
             <ul class="tab-treatment">
