@@ -1,4 +1,4 @@
-<%@ page import="groovy.json.JsonSlurper; com.xplusz.ratchet.StatusCodeConstants " %>
+<%@ page import="org.codehaus.groovy.grails.web.json.JSONObject; groovy.json.JsonSlurper; com.xplusz.ratchet.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
@@ -35,20 +35,25 @@
         <div class="item-datetime due-time-score">
 
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-                <g:if test="${task?.score != 0.0}">
-                    <span class="score">
-                        <label>SCORE:</label>
-                        <label class="numeral">${task?.score}</label></span>
-                </g:if>
-                <g:else>
-                    <% def firstSplit = task?.otherScore?.split(',') %>
+
+                <g:if test="${task?.otherScore}">
+                    <% def firstSplit = ""%>
+                    <% def secondSplit %>
+                    <% if (task?.otherScore != null){%>
+                    <% firstSplit = task?.otherScore?.split(',') %>
+                    <% }%>
                     <g:each in="${firstSplit}" var="num">
-                        <% def secondSplit = num.replace(" ", "") split(':') %>
+                        <% secondSplit = num?.trim().split(':') %>
                         <span class="score">
                             <label class="uppercase">${secondSplit[0]}:</label>
                             <label class="numeral">${secondSplit[1]}</label>
                         </span>
                     </g:each>
+                </g:if>
+                <g:else>
+                    <span class="score">
+                        <label>SCORE:</label>
+                        <label class="numeral">${task?.score}</label></span>
                 </g:else>
             </g:if>
             <g:else>
