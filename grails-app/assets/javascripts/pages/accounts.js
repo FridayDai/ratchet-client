@@ -37,6 +37,7 @@
      */
     function _initTable(data) {
         if (accountTable) {
+            accountTable.clear();
             accountTable.destroy();
         }
 

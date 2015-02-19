@@ -34,6 +34,7 @@
     function _initTable(data) {
 
         if (provideTable) {
+            provideTable.clear();
             provideTable.destroy();
         }
 
