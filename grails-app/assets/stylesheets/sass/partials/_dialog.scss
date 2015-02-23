@@ -67,7 +67,8 @@
         text-align: left;
 
         .ui-dialog-buttonset {
-            float: right;
+            float: none;
+            text-align: center;
             background: $base-color-white;
         }
 

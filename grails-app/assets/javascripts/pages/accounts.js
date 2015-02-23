@@ -8,14 +8,14 @@
                     title: RC.constants.confirmAccountTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 600
                 },
                 changePasswordFormArguments: {
                     title: RC.constants.changePasswordTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 400
-                },
+                }
             },
             urls: {
                 query: "/getAccounts",
@@ -228,6 +228,10 @@
                     return false;
                 }
             }));
+
+            $("#type").select2().change(function () {
+                $(this).valid();
+            });
         });
     }
 
