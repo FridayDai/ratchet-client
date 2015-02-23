@@ -25,10 +25,12 @@
                 <div class="title">Patients</div>
             </g:link>
         </li>
-        <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if> <g:else>class="nav-li"</g:else>>
-            <g:link controller="accounts" action="index" class="icon-account">
-                <div class="title">Accounts</div>
-            </g:link>
-        </li>
+        <g:if test="${request.session.accountManagement == true}"> 
+            <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if> <g:else>class="nav-li"</g:else>>
+                <g:link controller="accounts" action="index" class="icon-account">
+                    <div class="title">Accounts</div>
+                </g:link>
+            </li>
+        </g:if>
     </ul>
 </div>
