@@ -18,7 +18,7 @@
                 <div class="form-style-content">
                     <div class="input-combination">
                         <div class="align-left">EMAIL ADDRESS</div>
-                        <input name="email" type="text" class="input-control" placeholder="Enter E-mail" required/>
+                        <input name="email" type="text" class="input-control email" placeholder="Enter E-mail" required/>
                     </div>
 
                     <div class="input-combination">
