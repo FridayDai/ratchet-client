@@ -69,6 +69,8 @@ class ActivityService {
             map.put(columns, columns)
             map.put(search, search)
             map.put(draw, draw)
+            map.put("recordsTotal", result.totalCount)
+            map.put("recordsFiltered", result.totalCount)
             map.put("data", result.items)
             return map
         }

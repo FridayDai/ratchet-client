@@ -30,6 +30,8 @@ class AccountService {
             def map = [:]
             map.put(start, start)
             map.put(length, length)
+            map.put("recordsTotal", result.totalCount)
+            map.put("recordsFiltered", result.totalCount)
             map.put("data", result.items)
             return map
         } else {
