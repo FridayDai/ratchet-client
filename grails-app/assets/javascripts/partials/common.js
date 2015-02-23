@@ -14,14 +14,31 @@
      */
     function _setValidator() {
         $.validator.setDefaults({
+            ignore: [],
             showErrors: function (errorMap, errorList) {
 
                 $.each(this.validElements(), function (index, element) {
-                    RC.common.hideErrorTip(element);
+
+                    var elem = $(element).parent().find('.select2-container');
+                    if (elem.length > 0) {
+                        RC.common.hideErrorTip(elem);
+                    } else {
+                        RC.common.hideErrorTip(element);
+                    }
                 });
 
                 $.each(errorList, function (index, error) {
-                    RC.common.showErrorTip(error);
+                    var elem = $(error.element).parent().find('.select2-container');
+                    if (elem.length > 0) {
+                        var obj = {
+                            element: elem,
+                            message: error.message,
+                            method : error.method
+                        }
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        RC.common.showErrorTip(error);
+                    }
                 });
             },
             focusInvalid: false
@@ -52,7 +69,7 @@
                     window.location.href = "/login";
 
                 }
-                else if(jqXHR.status === 400 || 500) {
+                else if (jqXHR.status === 400 || 500) {
                     RC.common.warning({
                         title: RC.constants.waringMessageAction,
                         message: jqXHR.responseText

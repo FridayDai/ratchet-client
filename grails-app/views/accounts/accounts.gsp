@@ -42,45 +42,49 @@
         <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <span class="dr">Dr.</span><input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/>
+                <input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/><span class="dr">Dr.</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group inline">
+                <label class="lbl-group">FIRST NAME<span>*</span></label>
                 <input id="firstName" name="firstName" type="text" class="input-group first-name"
-                       placeholder="First Name" required/>
+                       placeholder="John" required/>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">LAST NAME<span>*</span></label>
+                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
             </div>
 
             <div class="form-group">
-                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
+                <label class="lbl-group">Email ADDRESS<span>*</span></label>
+                <input id="email" name="email" type="email" class="input-group" placeholder="john_smith@email.com" required/>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">ROLE<span>*</span></label>
+                <select id="type" name="type" required>
+                    <option></option>
+                    <option value="1">Anesthesiologist</option>
+                    <option value="2">Medical Assistant</option>
+                    <option value="3">Management</option>
+                    <option value="4">Nurse</option>
+                    <option value="5">Physical therapists (PTs)</option>
+                    <option value="6">Primary Physician</option>
+                    <option value="7">Scheduler</option>
+                    <option value="8">Surgeon</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
-            </div>
-
-            <div class="form-group">
-                <label class="role">
-                    <span>Role:</span>
-                    <select id="type" name="type">
-                        <option value="1">Anesthesiologist</option>
-                        <option value="2">Medical Assistant</option>
-                        <option value="3">Management</option>
-                        <option value="4">Nurse</option>
-                        <option value="5">Physical therapists (PTs)</option>
-                        <option value="6">Primary Physician</option>
-                        <option value="7">Scheduler</option>
-                        <option value="8">Surgeon</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="form-group">
+                <label class="lbl-group">GROUP<span>*</span></label>
                 <div class="group">
-                    <span>Groups:</span>
-                    <label><input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
+                    <label class="account-management">
+                        <input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
                     </label>
-                    <label class="account-management"><input id="accountManagement" name="accountManagement"
-                                                             type="checkbox">Account Management</label>
+                    <label class="account-management">
+                        <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
+                    </label>
                 </div>
             </div>
 

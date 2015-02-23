@@ -144,7 +144,9 @@
      * @private
      */
     function _initSelect() {
-        $("#relationshipName").select2();
+        $("#relationshipName").select2().change(function () {
+            $(this).valid();
+        });
     }
 
     /**
@@ -200,20 +202,23 @@
                     element: $(".patient-form"),
                     okCallback: function () {
 
-                        var number = $("#phone").val();
-                        var phoneNumber = number.split('-').join('');
-                        var patientInfo = {
-                            patientId: patientId,
-                            id: $("#patientId").val(),
-                            firstName: $("#firstName").val(),
-                            lastName: $("#lastName").val(),
-                            email: $("#email").val(),
-                            number: number,
-                            phoneNumber: phoneNumber
-                            //phoneNum: $("#phone").val()
-                        };
-                        _updatePatient(patientId, clientId, patientInfo);
-                        return true;
+                        if($("#patient-form").valid()){
+                            var number = $("#phone").val();
+                            var phoneNumber = number.split('-').join('');
+                            var patientInfo = {
+                                patientId: patientId,
+                                id: $("#patientId").val(),
+                                firstName: $("#firstName").val(),
+                                lastName: $("#lastName").val(),
+                                email: $("#email").val(),
+                                number: number,
+                                phoneNumber: phoneNumber
+                                //phoneNum: $("#phone").val()
+                            };
+                            _updatePatient(patientId, clientId, patientInfo);
+                            return true;
+                        }
+                        return false;
                     }
                 }
             ));
@@ -296,9 +301,8 @@
                     };
                 }
             }
-        });
-
-        $('#selectTreatment').on("change", function (data) {
+        }).change(function (data) {
+            $(this).valid();
             if (data.added.data === true) {
                 $("#div-surgery-time").css("display", "block");
             } else {
@@ -358,6 +362,8 @@
                     };
                 }
             }
+        }).change(function () {
+            $(this).valid();
         });
     }
 

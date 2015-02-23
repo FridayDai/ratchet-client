@@ -407,7 +407,9 @@
      * @private
      */
     function _initSelect() {
-        $("#relationships").select2();
+        $("#relationships").select2().change(function () {
+            $(this).valid();
+        });
     }
 
     /**
@@ -464,6 +466,8 @@
                     }
                 }
             }
+        }).change(function () {
+            $(this).valid();
         });
     }
 

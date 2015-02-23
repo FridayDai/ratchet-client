@@ -39,7 +39,7 @@
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY TIME</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgeryTime"
-                   placeholder="Surgery Time" tabindex="-1">
+                   placeholder="Surgery Time" tabindex="-1" required>
         </div>
     </g:form>
 

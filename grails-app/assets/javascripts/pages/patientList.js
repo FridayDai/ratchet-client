@@ -362,6 +362,8 @@
                     };
                 }
             }
+        }).change(function(){
+            $(this).valid();
         });
 
     }
@@ -396,6 +398,8 @@
                     };
                 }
             }
+        }).change(function(){
+            $(this).valid();
         });
 
     }
@@ -436,6 +440,8 @@
                     };
                 }
             }
+        }).change(function(){
+            $(this).valid();
         });
     }
 
@@ -490,6 +496,8 @@
                     };
                 }
             }
+        }).change(function(){
+            $(this).valid();
         });
     }
 

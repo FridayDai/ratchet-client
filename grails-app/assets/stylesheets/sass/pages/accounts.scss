@@ -1,6 +1,7 @@
 @import '../partials/common';
 @import '../partials/table';
 @import '../partials/form';
+@import '../partials/theme';
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
@@ -8,11 +9,12 @@
     .dr {
         display: inline-block;
         vertical-align: middle;
-        margin-top: -20px;
+        margin-top: -12px;
     }
 
     .doctor {
-        width: 300px;
+        width: 20px;
+        height: 20px;
     }
 
     .first-name {
@@ -37,7 +39,7 @@
 
         .account-management {
             display: block;
-            padding-left: 80px;
+            margin-top: 10px;
         }
     }
 
