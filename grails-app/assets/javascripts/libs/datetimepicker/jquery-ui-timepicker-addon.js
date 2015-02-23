@@ -416,7 +416,8 @@
                 html += '<dd class="ui-tpicker-timezone" ' + (showTz ? '' : noDisplay) + '></dd>';
 
                 // Create the elements from string
-                html += '<dd class ="ui-tpicker-am noselect"><div class="ui-tpicker-am-content noselect">AM</div></dd></dl></div>';
+                var amPm = tp_inst.ampm ||'AM';
+                html += '<dd class ="ui-tpicker-am noselect"><div class="ui-tpicker-am-content noselect">'+amPm+'</div></dd></dl></div>';
                 var $tp = $(html);
 
                 // if we only want time picker...
