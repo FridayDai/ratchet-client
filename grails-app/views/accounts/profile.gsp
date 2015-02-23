@@ -84,7 +84,7 @@
 
             <a href="#" id="changePassword" class="btn">Change Password</a>
 
-            <a href="/logout" class="btn-edit-patient">
+            <a href="/logout" class="btn-edit-patient log-out">
                 <span class="icon-edit"></span>
                 <span>Log out</span>
             </a>

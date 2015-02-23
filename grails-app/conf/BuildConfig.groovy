@@ -73,7 +73,7 @@ grails.project.dependency.resolution = {
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ':resources:1.2.13'
-        compile ":cookie-session:0.1.2"
+        compile ":cookie-session:2.0.16"
         //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities

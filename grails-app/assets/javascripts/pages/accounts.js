@@ -440,6 +440,16 @@
     }
 
     /**
+     * reset localStorage item 'storedEmail'
+     * @private
+     */
+    function _logout() {
+        $('.log-out').click(function (){
+            localStorage.setItem('storedEmail', '');
+        })
+    }
+
+    /**
      * Provider page Initialization
      * @private
      */
@@ -452,6 +462,7 @@
         _changePassword();
         _validSetPassword();
         _bindSearchEvent();
+        _logout();
     }
 
     _init();

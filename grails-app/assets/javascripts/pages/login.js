@@ -3,7 +3,6 @@
     //var login = RC.pages.login = RC.pages.login || {};
 
 
-
     var loginLimit = function () {
 
         function _forbidLogin() {
@@ -34,9 +33,16 @@
      * add login input valid
      */
     function _validLogin() {
+
         $("#btnLogin").click(function () {
+            var storedEmail = $('.email').val();
             $(".login-form").valid();
+            localStorage.setItem('storedEmail', storedEmail);
         });
+
+        if(localStorage.getItem('storedEmail')){
+            $('.email').val(localStorage.getItem('storedEmail'));
+        }
     }
 
 
@@ -45,7 +51,13 @@
      * @private
      */
     function _setValidate() {
-        $(".login-form").validate({});
+        $(".login-form").validate({
+            rules: {
+                email: {
+                    email: true
+                }
+            }
+        });
     }
 
     /**
@@ -53,8 +65,8 @@
      * @private
      */
     function _init() {
-        _validLogin();
         _setValidate();
+        _validLogin();
         loginLimit();
     }
 
