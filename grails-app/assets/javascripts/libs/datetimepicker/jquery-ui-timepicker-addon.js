@@ -1124,6 +1124,14 @@
             },
             input: {
                 create: function (tp_inst, obj, unit, val, min, max, step) {
+                    function _setValue(value) {
+                        tp_inst.control.value(tp_inst, obj, unit, value);
+                        tp_inst._onTimeChange();
+                        tp_inst._onSelectHandler();
+                    }
+                    if (val == 0 && unit == "hour"){
+                        val = 12;
+                    }
                     if (unit !== 'ampm') {
                         $('<input class="ui-timepicker-input" value="' + val + '" > ')
                             .appendTo(obj)
@@ -1138,14 +1146,23 @@
                                     tp_inst._onSelectHandler();
                                 },
                                 spin: function (e, ui) { // spin events
-                                    tp_inst.control.value(tp_inst, obj, unit, ui.value);
-                                    tp_inst._onTimeChange();
-                                    tp_inst._onSelectHandler();
+                                    if ( ui.value > 12 ) {
+                                        $( this ).spinner( "value", 1 );
+                                        _setValue(1);
+                                        return false;
+                                    } else if ( ui.value < 1) {
+                                        $( this ).spinner( "value", 12 );
+                                        _setValue(12);
+                                        return false;
+                                    }
+                                    _setValue(ui.value);
                                 }
                             });
                         if (unit == "hour") {
                             $("<span class='ui-dot'>:</span>").appendTo(obj);
                         }
+
+
                     } else {
 
                         obj.find(".ui-tpicker-am-content").on('click', function (e) {
