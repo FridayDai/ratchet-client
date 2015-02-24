@@ -3,21 +3,24 @@
 @import '../partials/dialog';
 @import '../partials/overview';
 @import '../partials/base';
+@import '../partials/theme';
 
 .account-info {
     margin: 20px 0 0 20px;
     padding: 20px;
     color: $base-color-dark-grey;
 
-    .row {
-        margin-top: 20px;
-    }
+    //    .row {
+    //        margin-top: 20px;
+    //    }
 
     .account-top-info {
-        height: 180px;
+        height: 170px;
         border-bottom: 1px solid $base-color-mid-grey;
 
         .account-id {
+            margin-left: 30px;
+            font-size: small;
             color: $base-color-mid-grey;
         }
 
@@ -31,17 +34,24 @@
         }
 
         .account-name {
+            margin-bottom: 20px;
             font-size: 20px;
         }
 
-        .account-email {
-            margin-left: 49px;
-            font-size: 16px;
+        .account-color {
+            color: $base-color-light-black;
         }
 
+        .account-email {
+            margin-bottom: 40px;
+        }
+
+        .color {
+            color: $base-font-grey;
+        }
 
         .icon-edit {
-//            position: absolute;
+            //            position: absolute;
             top: -5px;
             right: 35px;
             width: 20px;
@@ -56,13 +66,53 @@
         font-size: 15px;
 
         .account-status {
-            margin-top: 50px;
+            margin-top: 40px;
+        }
+
+        .account-space {
+            margin-bottom: 15px;
         }
 
         span {
             color: $base-color-mid-grey;
         }
-    }
 
+        .account-color {
+            color: $base-color-light-black;
+        }
+    }
 }
 
+.color {
+    color: $base-font-grey;
+}
+
+.btn-change-password {
+    margin-top: 20px;
+}
+
+.content-head {
+    padding: 20px;
+    border-bottom: 6px solid $base-color-white-grey;
+}
+
+.btn-bottom {
+    margin-top: 60px;
+
+    .btn-logout {
+
+        &:before {
+            //            display: inline-block;
+            padding-right: 8px;
+            content: '\f2a9';
+            color: $base-font-grey;
+            //            font-weight: lighter;
+            font-size: 12px;
+            font-family: ionicons;
+        }
+    }
+}
+
+.form-group{
+    margin-bottom: 20px;
+}

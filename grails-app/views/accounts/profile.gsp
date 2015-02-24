@@ -13,33 +13,34 @@
     <div class="content">
 
         <div class="content-head">
-            <a href="#" class="btn-back">
-                <div class="icon-back"></div>
-            </a>
-
-            <p>Accounts</p>
+            <p>PROFILE</p>
         </div>
 
         <div class="account-info">
             <div class="account-top-info clear">
-                <div class="account-id row">ID: ${accountInfo.id}</div>
+                <g:if test="${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1] == "Surgeon"}">
+                    <div class="surgeon-logo"><img src='/assets/surgeon_logo.png'/></div>
+                </g:if>
 
-                <div class="account-name row">
-                    <span class="account-profile"><img src="${assetPath(src: 'account_profile.png')}"></span>
+                <div class="account-name">
+                %{--<span class="account-profile"><img src="${assetPath(src: 'account_profile.png')}"></span>--}%
 
                     <g:if test="${accountInfo.doctor}">
-                        <span class="account-doctor row" id="isDoctor">
+                        <span class="account-doctor row account-color" id="isDoctor">
                             ${StatusCodeConstants.ACCOUNT_DOCTOR}
                         </span>
                     </g:if>
 
-                    <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
-                    <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
+                    <span class="account-first-name account-color"
+                          id="accountFirstName">${accountInfo.firstName}</span>
+                    <span class="account-last-name account-color"
+                          id="accountLastName">${accountInfo.lastName}</span>
+                    <span class="account-id color">ID: ${accountInfo.id}</span>
                 </div>
 
-                <div class="account-email row" id="accountEmail">${accountInfo.email}</div>
+                <div class="account-email account-color" id="accountEmail">${accountInfo.email}</div>
 
-                <div class="lastLoginTime">
+                <div class="lastLoginTime color">
                     <span>
                         Last Login:
                     </span><g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
@@ -47,33 +48,33 @@
             </div>
 
             <div class="account-bottom-info clear">
-                <div class="account-status row">
-                    <span>Status:</span>
-                    ${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}
+                <div class="account-status account-space">
+                    <span class="color">Status:</span>
+                    <span class="account-color">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
-                    <g:if test="${accountInfo.status == 2}">
-                        <button class="btn" id="invite-account" data-account-id="${accountInfo.id}">
-                            Invite again
-                        </button>
-                    </g:if>
+                    %{--<g:if test="${accountInfo.status == 2}">--}%
+                    %{--<button class="btn" id="invite-account" data-account-id="${accountInfo.id}">--}%
+                    %{--Invite again--}%
+                    %{--</button>--}%
+                    %{--</g:if>--}%
 
                 </div>
 
-                <div class="account-type row">
-                    <span>Role:</span>
-                    <span class="account-role"
+                <div class="account-type account-space">
+                    <span class="color">Role:</span>
+                    <span class="account-role account-color"
                           id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                 </div>
 
-                <div class="account-group row"><span>Group:</span>
+                <div class="account-group account-space"><span class="color">Group:</span>
 
-                    <span class="patientManage" id="isPatientManage">
+                    <span class="patientManage account-color" id="isPatientManage">
                         <g:if test="${accountInfo.patientManagement}">
                             ${StatusCodeConstants.ACCOUNT_PATIENTS_M}
                         </g:if>
                     </span>
 
-                    <span class="accountManage" id="isAccountManage">
+                    <span class="accountManage account-color" id="isAccountManage">
                         <g:if test="${accountInfo.accountManagement}">
                             ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
                         </g:if>
@@ -82,12 +83,14 @@
                 </div>
             </div>
 
-            <a href="#" id="changePassword" class="btn">Change Password</a>
+            <a href="#" id="changePassword" class="btn btn-change-password">Change Password</a>
 
-            <a href="/logout" class="btn-edit-patient log-out">
-                <span class="icon-edit"></span>
-                <span>Log out</span>
-            </a>
+            <div class="btn-bottom">
+                <a href="/logout" class="btn-edit-patient log-out">
+                    %{--<span class="icon-edit"></span>--}%
+                    <span class="color btn-logout">Log out</span>
+                </a>
+            </div>
 
         </div>
     </div>
@@ -96,23 +99,25 @@
     <g:form class="update-password ui-hidden" id="updatePassword" name="updatePassword">
 
         <div class="form-group">
-            <label>OLD PASSWORD</label>
+            <label class="lbl-group">OLD PASSWORD</label>
             <input id="oldPass" name="oldPass" type="password" class="input-group"
-                   placeholder="Enter old password" required/>
+                   placeholder="Enter old password"
+                   required/>
         </div>
 
         <div class="form-group">
-            <label>NEW PASSWORD</label>
+            <label class="lbl-group">NEW PASSWORD</label>
             <input id="newPass" name="newPass" type="password" class="input-group"
-                   placeholder="Enter new password" required/>
+                   placeholder="Enter new password"
+                   required/>
         </div>
 
         <div class="form-group">
-            <label>CONFIRM PASSWORD</label>
+            <label class="lbl-group">CONFIRM PASSWORD</label>
             <input id="confirmPass" name="confirmPass" type="password" class="input-group"
-                   placeholder="Enter new password again" required/>
+                   placeholder="Enter new password again"
+                   required/>
         </div>
-
     </g:form>
     </body>
     </html>
