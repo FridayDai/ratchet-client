@@ -120,6 +120,7 @@
                 ui.jqXHR.error(function () {
                     ui.panel.html(RC.constants.errorMessage);
                 });
+                RC.common.progress(false);
             },
             load: function (event, ui) {
                 var type = ui.tab.data("type");
@@ -139,6 +140,7 @@
                             break;
                     }
                 }
+                RC.common.progress(true);
             },
             disabled: [4, 5]
 
