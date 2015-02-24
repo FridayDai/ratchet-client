@@ -292,7 +292,7 @@
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
-                            'text': item.title,
+                            'text': item.title + ' ' + item.tmpTitle,
                             'data': item.surgeryTimeRequired
                         });
                     });
