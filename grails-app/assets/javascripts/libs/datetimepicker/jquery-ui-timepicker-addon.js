@@ -1129,7 +1129,9 @@
                         tp_inst._onTimeChange();
                         tp_inst._onSelectHandler();
                     }
-                    if (val == 0 && unit == "hour"){
+                    if (val > 12 && unit == "hour") {
+                        val = convert24to12(val);
+                    } else if (val == 0 && unit == "hour") {
                         val = 12;
                     }
                     if (unit !== 'ampm') {
@@ -1448,7 +1450,7 @@
             second: 0,
             millisec: 0,
             microsec: 0,
-            timezone: null,
+            timezone: null
         }, time);
 
         var tmptime = format,
