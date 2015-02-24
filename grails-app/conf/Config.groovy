@@ -135,13 +135,7 @@ grails.config.locations = [
 ]
 
 // asset-pipeline
-grails.assets.excludes = "bower_components/d3/"
-grails.assets.excludes = "bower_components/DataTables/"
-grails.assets.excludes = "bower_components/jquery/"
-grails.assets.excludes = "bower_components/jquery-ui/"
-grails.assets.excludes = "bower_components/jquery-validation/"
-grails.assets.excludes = "bower_components/jquery-moment/"
-grails.assets.excludes = "bower_components/underscore/"
+//grails.assets.excludes = "bower_components/"
 
 ratchetv2 {
     server {
