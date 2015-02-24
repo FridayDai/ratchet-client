@@ -134,6 +134,8 @@ grails.config.locations = [
         overrideLocation
 ]
 
+// asset-pipeline
+grails.assets.excludes = "bower_components/"
 
 ratchetv2 {
     server {

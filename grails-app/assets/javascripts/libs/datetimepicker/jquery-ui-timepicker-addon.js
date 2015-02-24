@@ -1146,11 +1146,11 @@
                                     tp_inst._onSelectHandler();
                                 },
                                 spin: function (e, ui) { // spin events
-                                    if ( ui.value > 12 ) {
+                                    if ( ui.value > 12 && unit == "hour") {
                                         $( this ).spinner( "value", 1 );
                                         _setValue(1);
                                         return false;
-                                    } else if ( ui.value < 1) {
+                                    } else if ( ui.value < 1 && unit == "hour") {
                                         $( this ).spinner( "value", 12 );
                                         _setValue(12);
                                         return false;
