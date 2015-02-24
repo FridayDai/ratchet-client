@@ -34,11 +34,13 @@ class BaseController {
 
     def handleApiAjaxReturnErrorException(ApiAjaxReturnErrorException e) {
         def status = e.statusId ? e.statusId : 500
-        render status: status, text:  e.message
+        def message = e.message ? e.message : g.message(code: 'default.error.500.message')
+        render status: status, text:  message
     }
 
     def handleApiAjaxAccessException(ApiAjaxAccessException e) {
-        render status: '403', text:  e.message
+        def message = e.message ? e.message : g.message(code: 'default.error.500.message')
+        render status: '400', text:  message
     }
 
     def handleApiReturnErrorException(ApiReturnErrorException e) {

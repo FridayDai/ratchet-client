@@ -445,7 +445,7 @@
      */
     function _logout() {
         $('.log-out').click(function (){
-            localStorage.setItem('storedEmail', '');
+            window.localStorage.clear();
         })
     }
 

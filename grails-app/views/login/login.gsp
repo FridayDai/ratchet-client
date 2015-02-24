@@ -32,12 +32,12 @@
                         </g:if>
                     </div>
 
-                    <div class="remember-me">
-                        <label>
-                            <input type="checkbox" class="box-check">
-                            Remember me
-                        </label>
-                    </div>
+                    %{--<div class="remember-me">--}%
+                        %{--<label>--}%
+                            %{--<input type="checkbox" class="box-check">--}%
+                            %{--Remember me--}%
+                        %{--</label>--}%
+                    %{--</div>--}%
 
                 </div>
 
