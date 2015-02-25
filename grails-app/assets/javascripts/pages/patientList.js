@@ -219,14 +219,6 @@
             success: function (data) {
                 var url = opts.urls.showSinglePatient.format(data.id);
                 window.location.href = url;
-            },
-            error: function (data) {
-                opts.waringArguments.message = data.errors.message;
-                RC.common.warning(_.extend({}, opts.waringArguments, {
-                    element: $(".warn"),
-                    closeCallback: function () {
-                    }
-                }));
             }
         });
 
@@ -360,7 +352,7 @@
                     };
                 }
             }
-        }).change(function(){
+        }).change(function () {
             $(this).valid();
         });
 
@@ -396,7 +388,7 @@
                     };
                 }
             }
-        }).change(function(){
+        }).change(function () {
             $(this).valid();
         });
 
@@ -438,7 +430,7 @@
                     };
                 }
             }
-        }).change(function(){
+        }).change(function () {
             $(this).valid();
         });
     }
@@ -494,7 +486,7 @@
                     };
                 }
             }
-        }).change(function(){
+        }).change(function () {
             $(this).valid();
         });
     }
