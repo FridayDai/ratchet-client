@@ -22,11 +22,11 @@
                 add: "/createAccount",
                 updateAccount: "/updateAccount",
                 inviteAccount: "/inviteAccount/{0}",
-                updatePassword: "/updatePassword"
+                updatePassword: "/updatePassword",
+                showSingleAccount: "/singleAccount/{0}"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
-        accountGroup = ["Patients Mgt", "Account Mgt"],
         staffGroup = ["Patients Management", "Accounts Management"],
         accountTable;
 
@@ -61,46 +61,42 @@
             }),
             "columnDefs": [
                 {"targets": [0, 7], "orderable": false},
-                {"targets": [5], "visible": false}
+                {"targets": [5, 0, 4], "visible": false}
             ],
             columns: [
                 {
+                    //ignore
                     data: function (source) {
-                        if (accountType[source.type - 1] === "Surgeon") {
-                            return "<img src='/assets/surgeon_logo.png'/>";
-                        } else {
-                            return '';
-                        }
-                    },
-                    width: "5%"
+                        return null;
+                    }
                 },
                 {
                     data: function (source) {
                         return '<p class="source-id">' + source.id + '</p>';
                     },
-                    width: "5%"
+                    width: "10%"
                 },
                 {
                     data: function (source) {
                         return source.firstName + " " + source.lastName;
                     },
-                    width: "10%"
+                    width: "27%"
                 },
                 {
                     data: "email",
-                    width: "28%"
+                    width: "37%"
                 },
                 {
-                    data: function (source) {
-                        return accountType[source.type - 1];
-                    },
-                    width: "10%"
-                },
-                {
+                    //ignore
                     data: function (source) {
                         return null;
-                    },
-                    width: "13%"
+                    }
+                },
+                {
+                    //ignore
+                    data: function (source) {
+                        return null;
+                    }
                 },
                 {
                     data: function (source) {
@@ -108,13 +104,13 @@
                         var formatTime = moment(lastUpdateTime).format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
-                    width: "15%"
+                    width: "19%"
                 },
                 {
                     data: function (source) {
                         return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view"><span>View</span></a>';
                     },
-                    width: "10%"
+                    width: "12%"
                 }
             ]
         });
@@ -127,6 +123,14 @@
      */
     function _loadData() {
         _initTable();
+    }
+
+    function _clickRow() {
+        $('#accountsTable tbody').on('click', 'tr', function () {
+            var id = $(this).find("td a").data("id");
+            var url = opts.urls.showSingleAccount.format(id);
+            window.location.href = url;
+        });
     }
 
     function _search() {
@@ -439,6 +443,7 @@
         _loadData();
         _setValidate();
         _bindAddEvent();
+        _clickRow();
         _inviteAccount();
         _updateAccount();
         _changePassword();
