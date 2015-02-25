@@ -203,9 +203,9 @@
                     element: $(".patient-form"),
                     okCallback: function () {
 
-                        if($("#patient-form").valid()){
+                        if ($("#patient-form").valid()) {
                             var number = $("#phone").val();
-                            var phoneNumber = number.split('-').join('');
+                            var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
                             var patientInfo = {
                                 patientId: patientId,
                                 id: $("#patientId").val(),
@@ -224,7 +224,7 @@
                 }
             ));
 
-            _addLine();
+            _initPhoneInput();
         });
     }
 
@@ -387,11 +387,10 @@
      *
      * @private
      */
-    function _addLine() {
-        $("#phone").on("input", function () {
-            var str = $("#phone").val();
-            var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
-            $("#phone").val(num);
+    function _initPhoneInput() {
+        $("#phone").intlTelInput({
+            onlyCountries: ["us"],
+            utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
         });
     }
 
@@ -413,12 +412,37 @@
     }
 
     /**
+     * set validate
+     * @private
+     */
+    function _setValidate() {
+        var validObj = $("#treatment-form").validate({
+            //ignore: 'input[type=hidden]',
+            onkeyup: false,
+            errorClass: "myErrorClass",
+
+            errorPlacement: function (error, element) {
+                var elem = $(element);
+                error.insertAfter(element);
+            }
+        });
+
+        $(document).on("change", ".select2-offscreen", function () {
+            if (!$.isEmptyObject(validobj.submitted)) {
+                validObj.form();
+            }
+        });
+
+    }
+
+    /**
      * page Initialization
      * @private
      */
     function _init() {
         _initTab();
         _addTreatment();
+        _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
         _initPlaceholder();

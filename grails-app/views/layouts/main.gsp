@@ -13,6 +13,7 @@
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
     <asset:stylesheet src="bower_components/select2/select2.css"/>
+    <asset:stylesheet src="bower_components/intl-tel-input/build/css/intlTelInput.css"/>
     <!--[if IE 8 ]>    <asset:stylesheet src="css/ie.css"/> <![endif]-->
     <g:if test="${cssPath}">
         <asset:stylesheet src="css/pages/${cssPath}"/>

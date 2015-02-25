@@ -171,7 +171,7 @@
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         var number = $("#phoneNumber").val();
-        var phoneNumber = number.split('-').join('');
+        var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
 
         var ecFirstName = $("#emergency-firstName").val();
         var ecLastName = $("#emergency-lastName").val();
@@ -265,7 +265,7 @@
                 }
             }));
 
-            _addLine();
+            _initPhoneInput();
             _initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
@@ -294,11 +294,10 @@
      *
      * @private
      */
-    function _addLine() {
-        $("#phoneNumber").on("input", function () {
-            var str = $("#phoneNumber").val();
-            var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
-            $("#phoneNumber").val(num);
+    function _initPhoneInput() {
+        $("#phoneNumber").intlTelInput({
+            onlyCountries: ["us"],
+            utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
         });
     }
 

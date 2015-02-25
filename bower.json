@@ -17,6 +17,7 @@
         "DataTables": "1.10.4",
         "select2": "3.5.2",
         "d3": "v3.5.3",
-        "moment": "2.9.0"
+        "moment": "2.9.0",
+        "intl-tel-input": "5.4.3"
     }
 }
