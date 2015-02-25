@@ -389,6 +389,22 @@ a {
             content: '\f4a4';
         }
     }
+
+    .refresh {
+        display: inline-block;
+        height: 15px;
+        padding: 6px 12px;
+        color: $base-font-color;
+        font-weight: 400;
+        font-size: 20px;
+        font-family: 'Ionicons';
+
+
+        &:after {
+            display: inline-block;
+            content: '\f45a';
+        }
+    }
 }
 
 .right-search {

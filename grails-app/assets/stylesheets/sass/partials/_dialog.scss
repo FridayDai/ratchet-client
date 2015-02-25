@@ -68,8 +68,8 @@
 
         .ui-dialog-buttonset {
             float: none;
-            text-align: center;
             background: $base-color-white;
+            text-align: center;
         }
 
         button {
@@ -196,9 +196,9 @@
         }
 
         button {
-            //            border: 2px solid $base-color-red;
-            color: $base-color-white;
             border: 1px solid $base-color-white;
+            color: $base-color-white;
+
             span {
                 color: $base-color-white;
             }

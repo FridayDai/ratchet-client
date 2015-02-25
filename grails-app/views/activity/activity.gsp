@@ -2,8 +2,11 @@
     <div class="inner-search">
         <div class="search-content">
              <div class="filler-content">
-                <label for="selectStaffs" class="lbl-by">By</label>
+                <label for="selectStaffs" class="lbl-by">BY</label>
                 <input name="selectStaffs" id="selectStaffs" class="input-group"/>
+            </div>
+            <div class="filler-content right-search">
+                <span class="refresh" id="refresh-btn"></span>
             </div>
         </div>
     </div>
@@ -14,7 +17,7 @@
             <tr>
                 <th>Description</th>
                 <th>By</th>
-                <th>Time</th>
+                <th>Last Update</th>
             </tr>
             </thead>
         </table>

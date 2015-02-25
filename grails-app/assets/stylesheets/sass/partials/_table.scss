@@ -86,11 +86,11 @@
     }
 
     .table-email {
-        max-width: 150px;
         overflow: hidden;
-        text-overflow: ellipsis;
+        max-width: 150px;
         white-space: pre-wrap;
         color: $base-dark-grey;
+        text-overflow: ellipsis;
         word-break: initial;
     }
 

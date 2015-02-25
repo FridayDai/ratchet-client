@@ -11,8 +11,8 @@
         font-size: small;
 
         span {
-            color: $base-color-dark-grey;
             margin-left: 3px;
+            color: $base-color-dark-grey;
         }
     }
 
@@ -28,7 +28,7 @@
 
         @include input-placeholder {
             color: $base-font-grey;
-            opacity: 0.5;
+            opacity: .5;
             font-size: 14px;
         }
     }

@@ -49,6 +49,7 @@ class ActivityService {
         def draw = params?.draw
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
+        def senderId = params?.senderId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
         def url = String.format(getActivityUrl,clientId, patientId, medicalRecordId)
@@ -56,6 +57,7 @@ class ActivityService {
         def resp = Unirest.get(url)
                 .queryString("max", length)
                 .queryString("offset", start)
+                .queryString("senderId", senderId)
                 .asString()
 
         def result = JSON.parse(resp.body)

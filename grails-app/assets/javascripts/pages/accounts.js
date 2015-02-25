@@ -135,13 +135,13 @@
     function _search() {
         var data = {
             name: $("#search-input").val()
-        }
-        _initTable(data)
+        };
+        _initTable(data);
     }
 
     function _bindSearchEvent() {
         $('#search-input').keydown(function (event) {
-                if (event.keyCode == 13) {
+                if (event.keyCode === 13) {
                     _search();
                 }
             }
@@ -424,7 +424,7 @@
             type: "POST",
             data: passwords,
             dataType: "json",
-            success: function (data) {
+            success: function () {
 
             }
         });
@@ -446,7 +446,7 @@
     function _logout() {
         $('.log-out').click(function (){
             window.localStorage.clear();
-        })
+        });
     }
 
     /**

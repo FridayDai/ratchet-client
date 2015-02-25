@@ -99,12 +99,12 @@
     }
 
     .user-profile {
+        position: absolute;
+        top: 28px;
+        left: 63px;
         float: left;
         width: 130px;
         color: $base-color-dark-grey;
-        left: 63px;
-        top: 28px;
-        position: absolute;
 
         li {
             padding-right: 15px;

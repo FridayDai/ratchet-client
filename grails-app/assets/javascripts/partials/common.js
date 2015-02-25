@@ -34,7 +34,7 @@
                             element: elem,
                             message: error.message,
                             method : error.method
-                        }
+                        };
                         RC.common.showErrorTip(obj);
                     } else {
                         RC.common.showErrorTip(error);
@@ -299,7 +299,7 @@
                 width: width,
                 modal: true,
                 title: confirmFormArguments.title,
-                open: function (event, ui) {
+                open: function () {
                     $("input").blur();
                 },
                 buttons: {

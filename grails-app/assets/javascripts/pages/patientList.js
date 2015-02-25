@@ -50,7 +50,7 @@
             "bAutoWidth": false,
             "columnDefs": [
                 {"targets": 5, "orderable": false}],
-            "fnDrawCallback": function (oSettings, json) {
+            "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -142,12 +142,12 @@
     }
 
     /**
-     *
+     * bind search event
      * @private
      */
     function _bindSearchEvent() {
         $('#search-input').keydown(function (event) {
-                if (event.keyCode == 13) {
+                if (event.keyCode === 13) {
                     _search();
                 }
             }
@@ -298,7 +298,7 @@
             var str = $("#phoneNumber").val();
             var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
             $("#phoneNumber").val(num);
-        })
+        });
     }
 
     /**
@@ -308,7 +308,7 @@
     function _initPlaceholder() {
 
         $('.form-group input').focus(function () {
-            $(this).data('placeholder', $(this).attr('placeholder'))
+            $(this).data('placeholder', $(this).attr('placeholder'));
             $(this).attr('placeholder', '');
         });
 
@@ -443,7 +443,7 @@
 
         $('#selectStaffs').select2({
             formatSelection: function (dataItem) {
-                if (dataItem.type == 8) {
+                if (dataItem.type === 8) {
                     return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
                     return "<div class='surgery'> " + dataItem.text + " </div>";
@@ -451,7 +451,7 @@
 
             },
             formatResult: function (dataItem) {
-                if (dataItem.type == 8) {
+                if (dataItem.type === 8) {
                     return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
                     return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
