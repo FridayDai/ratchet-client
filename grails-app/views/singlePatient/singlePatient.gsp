@@ -151,6 +151,14 @@
 
     </g:form>
 
+    <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
+        <div class="form-group inline ">
+            <label class="lbl-group">SURGERY TIME</label>
+            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgery-time"
+                   placeholder="Surgery Time" tabindex="-1" required>
+        </div>
+    </g:form>
+
     </body>
     </html>
 </g:applyLayout>
