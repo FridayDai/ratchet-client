@@ -36,7 +36,7 @@
         </div>
 
         <div class="table-group">
-            <table id="patientsTable" class="display">
+            <table id="patientsTable" class="display div-hidden">
                 <thead>
                 <tr>
                     <th>ID</th>
