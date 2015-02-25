@@ -19,15 +19,22 @@
      */
     function _initTable(element, data) {
         //before reload dataTable, destroy the last dataTable
-        $(element).dataTable().fnDestroy();
+        //$(element).dataTable().fnDestroy();
 
-        activityTable = $(element).dataTable({
+        if (activityTable) {
+            activityTable.clear();
+            activityTable.destroy();
+        }
+
+        activityTable = $(element).DataTable({
             bLengthChange: false,
             searching: false,
-            ordering: false,
+            ordering: true,
             info: false,
             "serverSide": true,
-            "fnDrawCallback": function(oSettings, json) {
+            "columnDefs": [
+                {"targets": [0,1], "orderable": false}],
+            "fnDrawCallback": function() {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -42,7 +49,7 @@
                 {data: "createdBy"},
                 {data: function(source){
                     var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
-                    return "Last Update: "+ formatDate;
+                    return formatDate;
                 }}
             ]
         });
@@ -54,7 +61,7 @@
      * @params selectBy
      * @private
      */
-    function _loadData(element ,selectLevel, selectBy) {
+    function _loadData(element) {
         var data = {};
 
         data.patientId = $("#patientId").val();
@@ -99,34 +106,32 @@
         });
     }
 
-    function _search() {
-        $('#selectStaffs').on("change", function (data) {
-
-        });
-    }
-    /**
-     * change seleceLevel value
-     * @private
-     */
-    function _changeSelectLevel(element) {
-        $("#activities").change(function () {
-            var selectLevel = $(this).val();
-            var selectBy = $("#organization").val();
-            _loadData(element, selectLevel, selectBy);
-        });
+    function _search(element) {
+        var senderId = $('#selectStaffs').val();
+        var patientId = $("#patientId").val();
+        var medicalRecordId = $("#medicalRecordId").val();
+        var clientId = $("#clientId").val();
+        var data = {
+            senderId: senderId,
+            patientId: patientId,
+            medicalRecordId: medicalRecordId,
+            clientId: clientId
+        };
+        _initTable(element, data);
     }
 
     /**
-     * change selectBy value
+     * bind search event
      * @private
      */
-    function _changeSelectBy(element) {
-        $("#organization").change(function () {
-            var selectLevel = $("#activities").val();
-            var selectBy = $(this).val();
-            _loadData(element, selectLevel, selectBy);
+    function _bindSearchEvent(element) {
+        $("#refresh-btn").on("click", function (e) {
+            e.preventDefault();
+            _search(element);
         });
     }
+
+
 
     /**
      * Provider page Initialization
@@ -134,8 +139,7 @@
      */
     function _init(element) {
         _loadData(element);
-        _changeSelectLevel(element);
-        _changeSelectBy(element);
+        _bindSearchEvent(element);
         _initSelect();
     }
 

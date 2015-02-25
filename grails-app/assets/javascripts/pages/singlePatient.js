@@ -190,7 +190,7 @@
             var lastName = parent.find(".last-name").text();
             var email = parent.find("#patientEmail").text();
             var phoneNum = parent.find(".phone").text();
-            var phoneNumber = $.trim(phoneNum)
+            var phoneNumber = $.trim(phoneNum);
 
             $("#patientId").val(id);
             $("#firstName").val(firstName);
@@ -319,7 +319,7 @@
         $('#selectStaffs').select2({
             //tags: true,
             formatSelection: function (dataItem) {
-                if (dataItem.type == 8) {
+                if (dataItem.type === 8) {
                     return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
                     return "<div class='surgery'> " + dataItem.text + " </div>";
@@ -327,7 +327,7 @@
 
             },
             formatResult: function (dataItem) {
-                if (dataItem.type == 8) {
+                if (dataItem.type === 8) {
                     return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
                 } else {
                     return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
@@ -391,7 +391,7 @@
             var str = $("#phone").val();
             var num = str.replace(/(\d{3})(?=(?:\d{2})+(?!\d)$)/g, '$1-');
             $("#phone").val(num);
-        })
+        });
     }
 
     /**
@@ -401,36 +401,12 @@
     function _initPlaceholder() {
 
         $('.form-group input').focus(function () {
-            $(this).data('placeholder', $(this).attr('placeholder'))
+            $(this).data('placeholder', $(this).attr('placeholder'));
             $(this).attr('placeholder', '');
         });
 
         $('.form-group input').blur(function () {
             $(this).attr('placeholder', $(this).data('placeholder'));
-        });
-
-    }
-
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        var validObj = $("#treatment-form").validate({
-            //ignore: 'input[type=hidden]',
-            onkeyup: false,
-            errorClass: "myErrorClass",
-
-            errorPlacement: function (error, element) {
-                var elem = $(element);
-                error.insertAfter(element);
-            }
-        });
-
-        $(document).on("change", ".select2-offscreen", function () {
-            if (!$.isEmptyObject(validobj.submitted)) {
-                validObj.form();
-            }
         });
 
     }
@@ -442,7 +418,6 @@
     function _init() {
         _initTab();
         _addTreatment();
-        _setValidate();
         _editPatientInfo();
         _goBackToPrePage();
         _initPlaceholder();

@@ -3,9 +3,9 @@
 }
 
 .patient-detail {
+    min-width: 1024px;
     padding: 30px;
     color: $base-color-light-black;
-    min-width: 1024px;
 
     .inline {
         display: inline-block;
@@ -68,11 +68,11 @@
 
     .btn-close {
         position: absolute;
-        right: 30px;
         top: 80px;
-        vertical-align: middle;
+        right: 30px;
         color: #b3b3b3;
         font-size: 18px;
+        vertical-align: middle;
 
         &:before {
             padding-right: 8px;

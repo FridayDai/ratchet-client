@@ -92,7 +92,7 @@
             bLengthChange: false,
             "serverSide": true,
             //"bPaginate": true,
-            "fnDrawCallback": function (oSettings, json) {
+            "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
                 $(".dataTables_paginate").css("display", "none");
@@ -340,7 +340,7 @@
             var relationship = parent.find("td.relationship").text();
             var email = parent.find("td.email").text();
 
-            var eleParent = element.parents()
+            var eleParent = element.parents();
             eleParent.find("#giver-firstName").val(firstName);
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
