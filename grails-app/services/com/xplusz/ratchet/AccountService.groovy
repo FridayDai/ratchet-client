@@ -62,7 +62,6 @@ class AccountService {
         def lastName = params?.lastName
         def email = params?.email
         def type = params?.type
-        def isPatientManagement = params?.isPatientManagement
         def isAccountManagement = params?.isAccountManagement
         def isDoctor = params?.isDoctor
 
@@ -73,7 +72,7 @@ class AccountService {
                 .field("lastName", lastName)
                 .field("email", email)
                 .field("type", type)
-                .field("patientManagement", isPatientManagement)
+                .field("patientManagement", "true")
                 .field("accountManagement", isAccountManagement)
                 .field("doctor", isDoctor)
                 .asString()
@@ -110,7 +109,6 @@ class AccountService {
                 .field("lastName", params?.lastName)
                 .field("type", params?.type)
                 .field("doctor", params?.doctor)
-                .field("patientManagement", params?.patientManagement)
                 .field("accountManagement", params?.accountManagement)
                 .asString()
 

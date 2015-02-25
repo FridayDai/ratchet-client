@@ -40,7 +40,6 @@
             accountTable.clear();
             accountTable.destroy();
         }
-
         accountTable = $("#accountsTable").DataTable({
             paging: true,
             searching: false,
@@ -61,7 +60,8 @@
                 data: data
             }),
             "columnDefs": [
-                {"targets": [0, 7], "orderable": false}
+                {"targets": [0, 7], "orderable": false},
+                {"targets": [5], "visible": false}
             ],
             columns: [
                 {
@@ -98,11 +98,7 @@
                 },
                 {
                     data: function (source) {
-                        var groupMgt = [],
-                            accountMgt = source.accountManagement ? groupMgt.push("Accounts Mgt") : null,
-                            patientMgt = source.patientManagement ? groupMgt.push("Patients Mgt") : null;
-
-                        return groupMgt.join(', ');
+                        return null;
                     },
                     width: "13%"
                 },
@@ -163,9 +159,8 @@
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         var type = $("#type").val();
-        var isPatientManagement, isAccountManagement, isDoctor;
+        var isAccountManagement, isDoctor;
 
-        $("#patientManagement").attr("checked") === "checked" ? isPatientManagement = true : isPatientManagement = false;
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
 
@@ -174,7 +169,6 @@
             lastName: lastName,
             email: email,
             type: type,
-            isPatientManagement: isPatientManagement,
             isAccountManagement: isAccountManagement,
             isDoctor: isDoctor
         };
@@ -218,7 +212,6 @@
         $("#add-account").on("click", function (e) {
             e.preventDefault();
             $(".accounts-form")[0].reset();
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".accounts-form"),
                 okCallback: function () {
@@ -275,16 +268,11 @@
             var lastName = parent.find(".account-last-name").text();
             var email = parent.find(".account-email").text();
             var accountRole = parent.find(".account-role").text();
-            var patientManage = parent.find(".patientManage").text();
-            var isPatientManage = $.trim(patientManage);
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
 
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
-            }
-            if (isPatientManage === "Patients Management") {
-                $("#patientManagement").prop("checked", true);
             }
             if (isAccountManage === "Accounts Management") {
                 $("#accountManagement").prop("checked", true);
@@ -306,9 +294,8 @@
                         var lastName = $("#lastName").val();
                         var email = $("#email").val();
                         var accountType = $("#accountType").val();
-                        var isPatientManagement, isAccountManagement, isDoctor;
+                        var isAccountManagement, isDoctor;
 
-                        $("#patientManagement").attr("checked") === "checked" ? isPatientManagement = true : isPatientManagement = false;
                         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
                         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
 
@@ -319,7 +306,6 @@
                             email: email,
                             type: accountType,
                             doctor: isDoctor,
-                            patientManagement: isPatientManagement,
                             accountManagement: isAccountManagement
                         };
 
@@ -354,11 +340,6 @@
                     $("#accountFirstName").text(accountInfo.firstName);
                     $("#accountLastName").text(accountInfo.lastName);
                     $("#accountRole").text(accountType[accountInfo.type - 1]);
-                    if (accountInfo.patientManagement === true) {
-                        $("#isPatientManage").text(staffGroup[0]);
-                    } else {
-                        $("#isPatientManage").empty();
-                    }
                     if (accountInfo.accountManagement === true) {
                         $("#isAccountManage").text(staffGroup[1]);
                     } else {

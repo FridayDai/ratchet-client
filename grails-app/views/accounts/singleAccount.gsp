@@ -72,12 +72,6 @@
 
                 <div class="account-group row"><span>Group:</span>
 
-                    <span class="patientManage" id="isPatientManage">
-                        <g:if test="${accountInfo.patientManagement}">
-                            ${StatusCodeConstants.ACCOUNT_PATIENTS_M}
-                        </g:if>
-                    </span>
-
                     <span class="accountManage" id="isAccountManage">
                         <g:if test="${accountInfo.accountManagement}">
                             ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
@@ -128,9 +122,7 @@
 
         <div class="form-group">
             <div class="group">
-                <span>Groups:</span>
-                <label><input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
-                </label>
+                <span>Group:</span>
                 <label class="account-management"><input id="accountManagement" name="accountManagement"
                                                          type="checkbox">Account Management</label>
             </div>
