@@ -44,7 +44,7 @@
                     <span>
                         Last Login:
                     </span><g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                         format="MMM d, yyyy h:mm:ss a"/></div>
+                                         format="MMM d, yyyy h:mm a"/></div>
             </div>
 
             <div class="account-bottom-info clear">
@@ -76,7 +76,7 @@
 
                     <span class="accountManage account-color" id="isAccountManage">
                         <g:if test="${accountInfo.accountManagement}">
-                            ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
+                            ,${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
                         </g:if>
                     </span>
 
