@@ -504,3 +504,14 @@ a {
     -ms-user-select: none;
     user-select: none;
 }
+
+//intl-tel-input
+.intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
+    padding-left: 6px;
+    height: 29px;
+    width: 258px;
+}
+
+.intl-tel-input .flag-dropdown {
+    display: none;
+}
