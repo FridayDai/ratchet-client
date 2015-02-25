@@ -40,7 +40,6 @@
             accountTable.clear();
             accountTable.destroy();
         }
-        debugger;
         accountTable = $("#accountsTable").DataTable({
             paging: true,
             searching: false,
