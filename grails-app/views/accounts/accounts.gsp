@@ -80,9 +80,6 @@
                 <label class="lbl-group">GROUP<span>*</span></label>
                 <div class="group">
                     <label class="account-management">
-                        <input id="patientManagement" name="patientManagement" type="checkbox">Patient Management
-                    </label>
-                    <label class="account-management">
                         <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
                     </label>
                 </div>
