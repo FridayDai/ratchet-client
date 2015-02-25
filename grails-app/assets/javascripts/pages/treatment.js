@@ -25,7 +25,7 @@
      *init date picker
      * @private
      */
-    function _initDatePicker() {
+    function _initDatePicker(element) {
         $(".surgeryTime-edit").click(function (e) {
             e.preventDefault();
 
@@ -44,7 +44,7 @@
                     if ($("#treatment-time-form").valid()) {
                         var date = new Date($("#treatment-surgeryTime").val());
                         var surgeryTime = date.getTime();
-                        _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, surgeryTime);
+                        _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, surgeryTime);
                         return true;
                     }
                     return false;
@@ -94,7 +94,7 @@
      * @param selectedDate
      * @private
      */
-    function _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
+    function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
             url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, surgeryTime),
             type: 'PUT',
@@ -102,6 +102,7 @@
                 if (data.resp === true) {
                     var formatDate = moment(selectedDate).format('MMM D, YYYY h:mm:ss a');
                     parent.find('.surgery-time-picker').text(formatDate);
+                    $(element).tabs("load", 0 );
                 }
             }
         });
@@ -113,7 +114,7 @@
      * @private
      */
     function _init(element) {
-        _initDatePicker();
+        _initDatePicker(element);
 
         $(element).tabs({
             beforeLoad: function (event, ui) {
