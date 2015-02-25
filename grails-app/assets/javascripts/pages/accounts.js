@@ -50,9 +50,10 @@
             bLengthChange: false,
             "serverSide": true,
             "bAutoWidth": false,
-            "fnDrawCallback": function (oSettings, json) {
+            "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
+                $(".display").css("display","block");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,

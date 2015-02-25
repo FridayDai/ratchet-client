@@ -48,6 +48,7 @@
             },
             load: function (event, ui) {
                 RC.pages.treatment.init(ui.panel.find("#subTabs"));
+                $('.patient-tab').css("display","block");
             }
         });
     }

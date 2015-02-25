@@ -50,9 +50,10 @@
             "bAutoWidth": false,
             "columnDefs": [
                 {"targets": 5, "orderable": false}],
-            "fnDrawCallback": function (oSettings, json) {
+            "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
+                $(".display").css("display","block");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
