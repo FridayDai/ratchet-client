@@ -94,6 +94,11 @@
 .content-head {
     padding: 20px;
     border-bottom: 6px solid $base-color-white-grey;
+
+    p{
+        color: $base-color-dark-gray;
+        font-size: 21px;
+    }
 }
 
 .btn-bottom {
