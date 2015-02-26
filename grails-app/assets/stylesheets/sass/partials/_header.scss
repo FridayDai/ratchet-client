@@ -35,6 +35,10 @@
             font: message-box;
             font-size: 18px;
         }
+
+        img {
+            height: 16px;
+        }
     }
 
     .client-logo {
@@ -42,7 +46,15 @@
         float: left;
         margin-top: 10px;
         margin-left: 10px;
+        font-weight: 600;
+        font-size: 12px;
         padding: 0 10px;
-        border-left: 3px solid $base-color-mid-grey;
+        color: $base-logo-color;
+        border-left: 3px solid $base-logo-color;
+
+        img {
+            position: relative;
+            top: 1px;
+        }
     }
 }
