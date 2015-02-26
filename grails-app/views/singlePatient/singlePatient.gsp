@@ -57,7 +57,7 @@
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime]">${medicalRecord.title}</g:link>
+                                         surgeryTime    : medicalRecord?.surgeryTime]">${medicalRecord.title} ${medicalRecord.tmpTitle}</g:link>
                     </li>
                 </g:each>
             </ul>
@@ -85,7 +85,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-            <input id="phone" name="phone" type="text" maxlength="12" class="input-group"
+            <input id="phone" name="phone" type="text" maxlength="14" class="input-group"
                    placeholder="777-777-7777" required/>
         </div>
 

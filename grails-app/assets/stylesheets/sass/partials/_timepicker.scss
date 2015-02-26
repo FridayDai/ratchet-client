@@ -182,8 +182,19 @@
     }
 
     .ui-datepicker-buttonpane {
-        display: none;
+        height: 39px;
         margin: 0;
+        border-top: 1px solid $base-color-mid-grey;
+        background: $base-color-grey-white;
+
+        button {
+            display: block;
+            float: none;
+            margin: 8px 0 0 100px;
+            border: 0;
+            color: $base-color-dark-grey;
+            background: none;
+        }
     }
 
     .ui-datepicker-prev {

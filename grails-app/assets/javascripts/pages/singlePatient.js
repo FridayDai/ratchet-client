@@ -48,7 +48,7 @@
             },
             load: function (event, ui) {
                 RC.pages.treatment.init(ui.panel.find("#subTabs"));
-                $('.patient-tab').css("display","block");
+                $('.patient-tab').css("display", "block");
             }
         });
     }
@@ -57,9 +57,9 @@
      * add treatment tab
      * @private
      */
-    function _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime) {
+    function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
         //var label = tabTitle,
-        var label = treatmentTitle;
+        var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
         var url = "/treatment?patientId=" + patientId + "&clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
@@ -167,9 +167,10 @@
                 //tabTitle = data.title;
                 var medicalRecordId = data.medicalRecordId;
                 var treatmentId = data.treatmentInfo.id;
-                var treatmentTitle = data.treatmentInfo.title;
+                //var treatmentTitle = data.treatmentInfo.title;
+                var treatmentInfo = data.treatmentInfo;
                 var surgeryTime = assignInfo.surgeryTime;
-                _addTab(medicalRecordId, treatmentId, treatmentTitle, surgeryTime);
+                _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime);
             }
         });
     }
@@ -390,7 +391,7 @@
     function _initPhoneInput() {
         $("#phone").intlTelInput({
             onlyCountries: ["us"],
-            utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            utilsScript: "/assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
         });
     }
 

@@ -399,7 +399,6 @@ a {
         font-size: 20px;
         font-family: 'Ionicons';
 
-
         &:after {
             display: inline-block;
             content: '\f45a';
@@ -507,9 +506,9 @@ a {
 
 //intl-tel-input
 .intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
-    padding-left: 6px;
-    height: 29px;
     width: 258px;
+    height: 29px;
+    padding-left: 6px;
 }
 
 .intl-tel-input .flag-dropdown {
