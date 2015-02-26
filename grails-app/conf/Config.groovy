@@ -146,6 +146,10 @@ ratchetv2 {
             logout = "${ratchetv2.server.url.base}/logout"
             validateSessionId = "${ratchetv2.server.url.base}/check_token"
 
+            //forgotPassword
+            password.reset = "${ratchetv2.server.url.base}/password/reset"
+            password.confirm = "${ratchetv2.server.url.base}/password/confirm"
+
             // Patients URL
             patients = "${ratchetv2.server.url.base}/patients"
             patient = "${ratchetv2.server.url.base}/patients/%s"

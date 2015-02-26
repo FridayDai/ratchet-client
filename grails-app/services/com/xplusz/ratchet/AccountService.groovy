@@ -1,7 +1,10 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -44,7 +47,7 @@ class AccountService {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
 
-        def url =  String.format(getSingleAccountUrl, accountId)
+        def url = String.format(getSingleAccountUrl, accountId)
 
         def resp = Unirest.get(url)
                 .asString()
@@ -162,6 +165,55 @@ class AccountService {
             return true
         } else {
             return false
+        }
+    }
+
+    def askForResetPassword(email, clientType) throws ApiResourceAccessException, ApiReturnErrorException {
+        def url = grailsApplication.config.ratchetv2.server.url.password.reset
+
+        try {
+            def resp = Unirest.post(url)
+                    .field("email", email)
+                    .field("clientType", clientType)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message)
+            }
+
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
+        }
+
+
+    }
+
+    def resetPassword(params) throws ApiResourceAccessException, ApiReturnErrorException {
+        def url = grailsApplication.config.ratchetv2.server.url.password.confirm
+
+        try {
+            def resp = Unirest.post(url)
+                    .field("code", params?.code)
+                    .field("password", params?.newPassword)
+                    .field("confirmPassword", params?.confirmPassword)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message)
+            }
+
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
     }
 }
