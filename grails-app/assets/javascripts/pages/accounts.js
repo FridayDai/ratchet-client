@@ -52,7 +52,7 @@
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
-                $(".display").css("display","block");
+                $(".display").css("display","inline-table");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -84,7 +84,7 @@
                 },
                 {
                     data: "email",
-                    width: "37%"
+                    width: "35%"
                 },
                 {
                     //ignore
@@ -110,7 +110,7 @@
                     data: function (source) {
                         return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view"><span>View</span></a>';
                     },
-                    width: "12%"
+                    width: "14%"
                 }
             ]
         });

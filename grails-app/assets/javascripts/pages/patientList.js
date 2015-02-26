@@ -53,7 +53,7 @@
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
-                $(".display").css("display","block");
+                $(".display").css("display","inline-table");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
