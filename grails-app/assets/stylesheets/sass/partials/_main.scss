@@ -31,8 +31,15 @@ h5 {
 }
 
 .cover-container {
-    max-width: 400px;
+    max-width: 426px;
     margin: 0 auto;
+}
+
+.cover-inner-header {
+    width: 80%;
+    height: 45px;
+    margin: 0 auto;
+    padding-bottom: 44px;
 }
 
 .form {
@@ -61,6 +68,10 @@ h5 {
             font-size: 14px;
         }
     }
+}
+
+.image-ratchet-health {
+    background: url('../../../images/login/ratchet_health_big.png') no-repeat 0 0;
 }
 
 .align-left {

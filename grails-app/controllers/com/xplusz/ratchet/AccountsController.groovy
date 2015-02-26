@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class AccountsController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth, except: ['confirmCode', 'confirmPassword']]
+    def beforeInterceptor = [action: this.&auth, except: ['confirmCode', 'confirmPassword', 'forgotPassword', 'resetPassword', 'confirmResetPassword']]
 
     def accountService
 
@@ -79,4 +79,25 @@ class AccountsController extends BaseController {
             render view: '/error/error404'
         }
     }
+
+    def forgotPassword() {
+        def resp = accountService.askForResetPassword(params.email, "client")
+        if (resp) {
+            render view: '/forgotPassword/resettingIntroduction', model: [email: params.email]
+        }
+    }
+
+    def resetPassword() {
+        def code = params?.code
+        render view: '/forgotPassword/resetPassword', model: [code: code]
+    }
+
+    def confirmResetPassword() {
+        def resp = accountService.resetPassword(params)
+        if (resp) {
+            render view: '/login/login'
+        }
+    }
+
+
 }

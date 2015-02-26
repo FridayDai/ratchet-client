@@ -38,6 +38,7 @@
 
 
         //ERROR
-        errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible."
+        errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
+        confirmPassword: "Your passwords don't match. Please enter them again."
     });
 })(jQuery);
