@@ -5,7 +5,7 @@
                 <img src="${assetPath(src: 'ratchet_health_logo.png')}">
             </a>
             <div class="client-logo">
-                <img src="${assetPath(src: 'client_portal_logo.png')}">
+                CLIENT PORTAL
             </div>
         </div>
     </div>
