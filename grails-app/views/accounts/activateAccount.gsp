@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <g:set var="scriptPath" value="accountsBundle"/>
-<g:set var="cssPath" value="login"/>
+<g:set var="cssPath" value="activateAccount"/>
 <g:applyLayout name="form">
     <html>
     <head>
@@ -16,26 +16,28 @@
             <g:form class="form create-password-form" controller="accounts" method="post" action="confirmPassword">
 
                 <div class="form-style-content">
-                    <div>
+                    <div class="greeting color-black align-center">
                         <span>Hi</span>
                         <span>${staff.firstName}!</span>
                     </div>
 
-                    <div>
+                    <div class="info color-black align-center">
                         Please create a new password to access Ratchet
                     </div>
 
-                    <div class="input-combination">
-                        <div class="align-left">NEW PASSWORD</div>
-                        <input name="password" type="password" id="password" class="input-control"
-                               placeholder="Enter Password" required/>
-                    </div>
+                    <div class="input-container">
+                        <div class="input-combination">
+                            <div class="align-left">NEW PASSWORD</div>
+                            <input name="password" type="password" id="password" class="input-control"
+                                   placeholder="Enter Password" required/>
+                        </div>
 
-                    <div class="input-combination">
-                        <div class="align-left">CONFIRM PASSWORD</div>
-                        <input name="confirmPassword" type="password" id="confirmPassword" class="input-control"
-                               placeholder="CONFIRM PASSWORD"
-                               required/>
+                        <div class="input-combination">
+                            <div class="align-left">CONFIRM PASSWORD</div>
+                            <input name="confirmPassword" type="password" id="confirmPassword" class="input-control"
+                                   placeholder="Confirm Password"
+                                   required/>
+                        </div>                        
                     </div>
 
                     <input type="hidden" name="code" value="${code}"/>
@@ -43,6 +45,9 @@
                 </div>
 
                 <div class="align-center cover-inner-footer">
+                    <div class="terms-service color-black">
+                        You agree to our <a href="#" class="dark-link">Terms of Service</a> upon creating account
+                    </div>                
                     <button type="submit" class="btn btn-submit" id='johnRat'>Join Ratchet</button>
                 </div>
             </g:form>
