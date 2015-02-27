@@ -13,74 +13,69 @@
     <div class="content">
 
         <div class="content-head">
-            <a href="#" class="btn-back">
-                <div class="icon-back"></div>
-            </a>
 
-            <p>Accounts</p>
+            <p>ACCOUNT</p>
+
+            <a href="#" class="btn-close">Close</a>
         </div>
 
-        <div class="account-info">
-            <div class="account-top-info clear">
-                <div class="account-id row">ID: ${accountInfo.id}</div>
+        <div class="middle-content">
+            <div class="name-info">
 
-                <div class="account-name row">
-                    <span class="account-profile"><img src="${assetPath(src: 'account_profile.png')}"></span>
-
+                <span class="account-doctor row" id="isDoctor">
                     <g:if test="${accountInfo.doctor}">
-                        <span class="account-doctor row" id="isDoctor">
-                            ${StatusCodeConstants.ACCOUNT_DOCTOR}
-                        </span>
+                        ${StatusCodeConstants.ACCOUNT_DOCTOR}
                     </g:if>
+                </span>
 
-                    <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
-                    <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
-                </div>
-
-                <div class="account-email row" id="accountEmail">${accountInfo.email}</div>
-
-                <div class="lastLoginTime">
-                    <span>
-                        Last Login:
-                    </span>
-                    <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                  format="MMM d, yyyy h:mm:ss a"/></div>
-
-                <a href="#" id="edit-account" class="btn-edit" data-account-id="${accountInfo.id}">
-                    <div class="icon-edit"></div>
-                </a>
+                <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
+                <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
             </div>
 
-            <div class="account-bottom-info clear">
-                <div class="account-status row">
-                    <span>Status:</span>
-                    ${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}
+            <a href="#" id="edit-account" class="btn-edit" data-account-id="${accountInfo.id}">
+            </a>
+        </div>
 
-                    <g:if test="${accountInfo.status == 2}">
-                        <button class="btn" id="invite-account" data-account-id="${accountInfo.id}">
-                            Invite again
-                        </button>
-                    </g:if>
 
-                </div>
+        <div class="account-info">
 
-                <div class="account-type row">
-                    <span>Role:</span>
-                    <span class="account-role"
-                          id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
-                </div>
+            <table class="account-table">
+                <tr>
+                    <td class="bg-color">ID: ${accountInfo.id}</td>
+                    <td class="bg-color"></td>
+                </tr>
 
-                <div class="account-group row"><span>Group:</span>
+                <tr class="tr-border">
+                    <td class="td-width"><div class="email-logo"></div></td>
+                    <td><span class="account-email">${accountInfo.email}</span></td>
+                </tr>
 
-                    <span class="accountManage" id="isAccountManage">
+                <tr class="tr-border">
+                    <td class="td-width">Role</td>
+                    <td><span class="account-role"
+                              id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                    </td>
+                </tr>
+
+
+                <tr class="tr-border">
+                    <td class="td-width">Group</td>
+                    <td><span class="accountManage" id="isAccountManage">
                         <g:if test="${accountInfo.accountManagement}">
                             ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
                         </g:if>
-                    </span>
+                    </span></td>
+                </tr>
 
-                </div>
-            </div>
 
+                <tr>
+                    <td class="bg-color">Last Login:</td>
+                    <td class="bg-color">
+                        <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
+                                      format="MMM d, yyyy h:mm:ss a"/>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -88,43 +83,49 @@
     <g:form class="update-account-form ui-hidden" id="updateAccount" name="updateAccount">
 
         <div class="form-group">
-            <span class="dr">Dr.</span><input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/>
+            <input id="doctor" name="doctor" type="checkbox" class="input-group doctor">
+            <label class="dr">Dr.</label>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">FIRST NAME<span>*</span></label>
+            <input id="firstName" name="firstName" type="text" class="input-group first-name" placeholder="John"
+                   required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">LAST NAME<span>*</span></label>
+            <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">EMAIL ADDRESS</label>
+            <input id="email" name="email" type="email" class="input-group readonly-email"
+                   placeholder="john.smith@email.com"
+                   readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group role">ROLE<span>*</span></label>
+            <select id="accountType" name="accountType" required>
+                <option value="1">Anesthesiologist</option>
+                <option value="2">Medical Assistant</option>
+                <option value="3">Management</option>
+                <option value="4">Nurse</option>
+                <option value="5">Physical therapists (PTs)</option>
+                <option value="6">Primary Physician</option>
+                <option value="7">Scheduler</option>
+                <option value="8">Surgeon</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <input id="firstName" name="firstName" type="text" class="input-group first-name"
-                   placeholder="First Name" required/>
-        </div>
+            <label class="lbl-group">GROUP<span>*</span></label>
 
-        <div class="form-group">
-            <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
-        </div>
-
-        <div class="form-group">
-            <input id="email" name="email" type="email" class="input-group" placeholder="Email Address" readonly/>
-        </div>
-
-        <div class="form-group">
-            <label class="role">
-                <span>Role:</span>
-                <select id="accountType" name="accountType">
-                    <option value="1">Anesthesiologist</option>
-                    <option value="2">Medical Assistant</option>
-                    <option value="3">Management</option>
-                    <option value="4">Nurse</option>
-                    <option value="5">Physical therapists (PTs)</option>
-                    <option value="6">Primary Physician</option>
-                    <option value="7">Scheduler</option>
-                    <option value="8">Surgeon</option>
-                </select>
-            </label>
-        </div>
-
-        <div class="form-group">
             <div class="group">
-                <span>Group:</span>
-                <label class="account-management"><input id="accountManagement" name="accountManagement"
-                                                         type="checkbox">Account Management</label>
+                <label class="account-management">
+                    <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
+                </label>
             </div>
         </div>
 

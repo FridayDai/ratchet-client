@@ -16,78 +16,65 @@
             <p>PROFILE</p>
         </div>
 
-        <div class="account-info">
-            <div class="account-top-info clear">
-                <g:if test="${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1] == "Surgeon"}">
-                    <div class="surgeon-logo"><img src='/assets/surgeon_logo.png'/></div>
-                </g:if>
+        <div class="middle-content">
+            <div class="name-info name">
 
-                <div class="account-name">
-                %{--<span class="account-profile"><img src="${assetPath(src: 'account_profile.png')}"></span>--}%
-
+                <span class="account-doctor row" id="isDoctor">
                     <g:if test="${accountInfo.doctor}">
-                        <span class="account-doctor row account-color" id="isDoctor">
-                            ${StatusCodeConstants.ACCOUNT_DOCTOR}
-                        </span>
+                        ${StatusCodeConstants.ACCOUNT_DOCTOR}
                     </g:if>
+                </span>
 
-                    <span class="account-first-name account-color"
-                          id="accountFirstName">${accountInfo.firstName}</span>
-                    <span class="account-last-name account-color"
-                          id="accountLastName">${accountInfo.lastName}</span>
-                    <span class="account-id color">ID: ${accountInfo.id}</span>
-                </div>
-
-                <div class="account-email account-color" id="accountEmail">${accountInfo.email}</div>
-
-                <div class="lastLoginTime color">
-                    <span>
-                        Last Login:
-                    </span><g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                         format="MMM d, yyyy h:mm a"/></div>
+                <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
+                <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
             </div>
 
-            <div class="account-bottom-info clear">
-                <div class="account-status account-space">
-                    <span class="color">Status:</span>
-                    <span class="account-color">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
-
-                    %{--<g:if test="${accountInfo.status == 2}">--}%
-                    %{--<button class="btn" id="invite-account" data-account-id="${accountInfo.id}">--}%
-                    %{--Invite again--}%
-                    %{--</button>--}%
-                    %{--</g:if>--}%
-
-                </div>
-
-                <div class="account-type account-space">
-                    <span class="color">Role:</span>
-                    <span class="account-role account-color"
-                          id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
-                </div>
-
-                <div class="account-group account-space"><span class="color">Group:</span>
-
-                    <span class="patientManage account-color" id="isPatientManage">
-                        <g:if test="${accountInfo.patientManagement}">
-                            ${StatusCodeConstants.ACCOUNT_PATIENTS_M}
-                        </g:if>
-                    </span>
-
-                    <span class="accountManage account-color" id="isAccountManage">
-                        <g:if test="${accountInfo.accountManagement}">
-                            ,${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
-                        </g:if>
-                    </span>
-
-                </div>
-            </div>
 
             <a href="#" id="changePassword" class="btn btn-change-password">Change Password</a>
+        </div>
+
+
+        <div class="account-info">
+
+            <table class="account-table">
+                <tr>
+                    <td class="bg-color">ID: ${accountInfo.id}</td>
+                    <td class="bg-color"></td>
+                </tr>
+
+                <tr class="tr-border">
+                    <td class="td-width"><div class="email-logo"></div></td>
+                    <td><span class="account-email">${accountInfo.email}</span></td>
+                </tr>
+
+                <tr class="tr-border">
+                    <td class="td-width">Status</td>
+                    <td><span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                    </td>
+                </tr>
+
+
+                <tr class="tr-border">
+                    <td class="td-width">Group</td>
+                    <td><span class="accountManage" id="isAccountManage">
+                        <g:if test="${accountInfo.accountManagement}">
+                            ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
+                        </g:if>
+                    </span></td>
+                </tr>
+
+
+                <tr>
+                    <td class="bg-color">Last Login:</td>
+                    <td class="bg-color">
+                        <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
+                                      format="MMM d, yyyy h:mm a"/>
+                    </td>
+                </tr>
+            </table>
 
             <div class="btn-bottom">
                 <a href="/logout" class="btn-edit-patient log-out">
-                    %{--<span class="icon-edit"></span>--}%
                     <span class="color btn-logout">Log out</span>
                 </a>
             </div>
