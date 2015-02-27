@@ -10,6 +10,12 @@
                     height: 200,
                     width: 600
                 },
+                updateFormArguments: {
+                    title: RC.constants.updateAccountTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 600
+                },
                 changePasswordFormArguments: {
                     title: RC.constants.changePasswordTitle,
                     content: RC.constants.confirmContent,
@@ -285,11 +291,11 @@
             $("#lastName").val(lastName);
             $("#email").val(email);
 
-            //$("select option").filter(function () {
-            //    return $(this).text() === accountRole;
-            //}).prop('selected', true);
+            $("select option").filter(function () {
+                return $(this).text() === accountRole;
+            }).prop('selected', true);
 
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $(".update-account-form"),
 
                 okCallback: function () {
@@ -319,9 +325,10 @@
                     return false;
                 }
             }));
+
+            _initSelect();
         });
     }
-
 
     /**
      * ajax call backend
@@ -430,8 +437,31 @@
      * @private
      */
     function _logout() {
-        $('.log-out').click(function (){
+        $('.log-out').click(function () {
             window.localStorage.clear();
+        });
+    }
+
+    /**
+     * go back to previous page
+     * @private
+     */
+    function _goBackToPrePage() {
+        $('.btn-close').on('click', function (e) {
+            e.preventDefault();
+
+            parent.history.back();
+            return false;
+        });
+    }
+
+    /**
+     * init select
+     * @private
+     */
+    function _initSelect() {
+        $("#accountType").select2().change(function () {
+            $(this).valid();
         });
     }
 
@@ -450,6 +480,7 @@
         _validSetPassword();
         _bindSearchEvent();
         _logout();
+        _goBackToPrePage();
     }
 
     _init();
