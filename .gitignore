@@ -31,7 +31,12 @@
 /node_modules
 
 .idea/
+
 *.iml
+*.ipr
+*.iws
+projectFilesBackup
+
 .classpath
 .project
 .DS_Store
