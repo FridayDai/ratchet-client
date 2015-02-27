@@ -17,23 +17,25 @@
                 <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
             </div>
 
-            <div class="inline info name">
-                <div>
-                    <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
-                    <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
+            <div class="inline">
+                <div class="info name clear">
+                    <div class="pull-left">
+                        <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
+                        <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
+                    </div>
+
+                    <div class="id-info pull-left">
+                        ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                    </div>
                 </div>
 
-                <div class="email patientEmail" id="patientEmail"
-                     value="${patientInfo.email}">${patientInfo.email}
-                </div>
-            </div>
+                <div class="info number clear">
+                    <div class="email patient-email pull-left" id="patientEmail"
+                         value="${patientInfo.email}">${patientInfo.email}
+                    </div>
 
-            <div class="inline number">
-                <div class="id-info">
-                    ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
-                </div>
-
-                <div class="phone" value="${patientInfo.phoneNumber}">${phoneNumber}
+                    <div class="phone pull-left" value="${patientInfo.phoneNumber}">${phoneNumber}
+                    </div>
                 </div>
             </div>
 

@@ -12,7 +12,8 @@
         margin-left: 20px;
 
         .id-info {
-            margin-bottom: 5px;
+            margin-top: 5px;
+            margin-left: 18px;
         }
     }
 
@@ -20,9 +21,9 @@
 //        min-width: 50px;
 //    }
 //
-//    .name {
-//        min-width: 220px;
-//    }
+    .name {
+        padding-bottom: 5px;
+    }
 //
 //    .number {
 //        min-width: 200px;
@@ -52,7 +53,7 @@
 
     .btn-edit-patient {
         position: relative;
-        top: -15px;
+        top: -20px;
         vertical-align: middle;
 
         &:before {
@@ -83,6 +84,33 @@
             font-size: 30px;
             font-family: ionicons;
             vertical-align: middle;
+        }
+    }
+
+    .patient-email {
+
+        &:before {
+            display: inline-block;
+            padding-right: 8px;
+            content: '\f422';
+            vertical-align: middle;
+            font-weight: lighter;
+            font-size: 24px;
+            font-family: ionicons;
+        }
+    }
+
+    .phone {
+        padding-left: 22px;
+
+        &:before {
+            display: inline-block;
+            padding-right: 8px;
+            content: '\f4b8';
+            vertical-align: middle;
+            font-weight: lighter;
+            font-size: 22px;
+            font-family: ionicons;
         }
     }
 
