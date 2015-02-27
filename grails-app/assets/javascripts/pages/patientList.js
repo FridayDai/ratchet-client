@@ -65,7 +65,7 @@
                     data: function (source) {
                         return '<p class="source-id">' + source.patientId + '</p>';
                     },
-                    width: "9%"
+                    width: "10%"
                 },
                 {
                     data: function (source) {
@@ -92,13 +92,13 @@
                         var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
-                    width: "17%"
+                    width: "19%"
                 },
                 {
                     data: function (source) {
                         return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '"><span>View</span></a>';
                     },
-                    width: "11%"
+                    width: "8%"
                 }
             ]
         });
