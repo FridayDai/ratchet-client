@@ -354,7 +354,8 @@ a {
 
 //start filler content
 .filler-content {
-    display: inline-block;
+    display: block;
+    float:left;
     max-width: 230px;
     margin-top: 10px;
 
@@ -364,13 +365,14 @@ a {
     }
 
     .search-input {
+        float:left;
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
     }
 
     .search {
-        display: inline-block;
+        float:left;
         height: 15px;
         margin-left: -4px;
         padding: 6px 12px;
@@ -408,7 +410,7 @@ a {
 
 .right-search {
     float: right;
-    margin-top: 22px;
+    margin-top: 27px;
 }
 
 .inner-header {
@@ -438,7 +440,6 @@ a {
     input {
         min-width: 220px;
         height: 25px;
-        margin-top: 5px;
         padding-left: 10px;
         border: 0;
     }
