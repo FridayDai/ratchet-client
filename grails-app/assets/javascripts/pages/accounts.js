@@ -90,7 +90,7 @@
                 },
                 {
                     data: "email",
-                    width: "35%"
+                    width: "37%"
                 },
                 {
                     //ignore
@@ -116,7 +116,7 @@
                     data: function (source) {
                         return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view"><span>View</span></a>';
                     },
-                    width: "14%"
+                    width: "7%"
                 }
             ]
         });
