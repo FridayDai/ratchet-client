@@ -58,7 +58,7 @@
 
         &:before {
             display: inline-block;
-            padding-left: 30px;
+            padding-left: 6px;
             content: '\f417';
             color: $base-font-color;
             font-weight: lighter;
@@ -112,6 +112,16 @@
             font-size: 22px;
             font-family: ionicons;
         }
+    }
+
+    .div-invite {
+        padding-top: 20px;
+        vertical-align: top;
+    }
+
+    .btn-invite {
+        padding: 6px 18px;
+        font-weight: 600;
     }
 
 }

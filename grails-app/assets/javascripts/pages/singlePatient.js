@@ -26,7 +26,8 @@
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
                 updatePatient: "/clients/{0}/patients/{1}",
-                assignTreatment: "/clients/{0}/patients/{1}/treatments"
+                assignTreatment: "/clients/{0}/patients/{1}/treatments",
+                invitePatient: "/invitePatient/{0}"
             }
         },
         tabs,
@@ -137,6 +138,18 @@
             _initSurgeryTime();
             _initSelect();
 
+        });
+    }
+
+    /**
+     * invite patient again
+     */
+    function _inviteAgain(){
+        var id = $('#invitePatient').data("id");
+        $('#invitePatient').click(function() {
+            $.ajax({
+                    url: opts.urls.invitePatient.format(id)
+                });
         });
     }
 
@@ -447,6 +460,7 @@
         _editPatientInfo();
         _goBackToPrePage();
         _initPlaceholder();
+        _inviteAgain();
     }
 
     _init();

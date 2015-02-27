@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page import="com.xplusz.ratchet.StatusCodeConstants"%>
 
 <g:set var="scriptPath" value="singlePatientBundle"/>
 <g:set var="cssPath" value="treatment"/>
@@ -38,6 +39,12 @@
                     </div>
                 </div>
             </div>
+
+            <g:if test="${StatusCodeConstants.PATIENT_STATUS[patientInfo.status ] == "invited"}">
+                <div class="inline div-invite">
+                    <button id="invitePatient" class="btn btn-invite" data-id="${patientInfo.id}">Invite Again</button>
+                </div>
+            </g:if>
 
             <div class="edit inline">
                 <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
