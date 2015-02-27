@@ -53,7 +53,7 @@
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
-                $(".display").css("display","inline-table");
+                $(".display").css("display", "inline-table");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -266,6 +266,7 @@
             }));
 
             _initPhoneInput();
+            _limitMaxLength();
             _initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
@@ -298,6 +299,21 @@
         $("#phoneNumber").intlTelInput({
             onlyCountries: ["us"],
             utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+        });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _limitMaxLength() {
+        $("#phoneNumber").on("input", function () {
+            var str = $("#phoneNumber").val();
+            if (str.substring(0, 2) === "11") {
+                $('#phoneNumber').attr('maxlength', '13');
+            } else {
+                $('#phoneNumber').attr('maxlength', '14');
+            }
         });
     }
 
@@ -503,7 +519,6 @@
         _initSurgeon();
         _clickRow();
         _initTreatmentSelect();
-        //_initPlaceholder();
     }
 
     _init();
