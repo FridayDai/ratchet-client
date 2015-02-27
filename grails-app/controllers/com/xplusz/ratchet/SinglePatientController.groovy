@@ -6,6 +6,7 @@ class SinglePatientController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
     def singlePatientService
+    def invitationService
 
     def showPatient() {
         def patientId = params?.id
@@ -28,5 +29,9 @@ class SinglePatientController extends BaseController {
         def resp = singlePatientService.updateSinglePatient(request, response, params)
         def status = [resp: resp]
         render status as JSON
+    }
+
+    def invitePatient() {
+        invitationService.invitePatient(params.id)
     }
 }

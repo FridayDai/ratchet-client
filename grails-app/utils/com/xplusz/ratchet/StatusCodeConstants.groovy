@@ -7,6 +7,10 @@ class StatusCodeConstants {
     public static final String[] STAFF_TYPE_LIST =
             ["ANESTHESIOLOGIST", "MEDICAL ASSISTANT", "MANAGEMENT", "NURSE", "PHYSICAL THERAPISTS", "PRIMARY PHYSICIAN", "SCHEDULER", "SURGEON"]
 
+    //patient status
+    public static final String[] PATIENT_STATUS =
+            ["undefined", "invited", "normal", "uninvited", "deactive"]
+
     //CareGiver relation type
     public static final String[] CAREGIVER_RELATION =
             ["OFFSPRING", "SPOUSE"]
