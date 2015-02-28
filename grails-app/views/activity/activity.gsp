@@ -1,6 +1,6 @@
 <div class="activity clear">
     <div class="inner-search">
-        <div class="search-content">
+        <div class="search-content clear">
              <div class="filler-content">
                 <label for="selectStaffs" class="lbl-by">BY</label>
                 <input name="selectStaffs" id="selectStaffs" class="input-group"/>

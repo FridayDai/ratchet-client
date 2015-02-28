@@ -33,7 +33,7 @@
             info: false,
             "serverSide": true,
             "columnDefs": [
-                {"targets": [0,1], "orderable": false}],
+                {"targets": [0, 1], "orderable": false}],
             "fnDrawCallback": function() {
                 $(".previous").text('');
                 $(".next").text('');
@@ -45,12 +45,21 @@
                 data: data
             }),
             columns: [
-                {data: "description"},
-                {data: "createdBy"},
-                {data: function(source){
+                {
+                    data: "description",
+                    width: "70%"
+                },
+                {
+                    data: "createdBy",
+                    width: "14%"
+                },
+                {
+                    data: function(source){
                     var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
                     return formatDate;
-                }}
+                    },
+                    width: "16%"
+                }
             ]
         });
     }
@@ -92,6 +101,10 @@
                 },
                 results: function (data) {
                     var myResults = [];
+                    myResults.push({
+                        'id' : '',
+                        'text': 'ALL'
+                    });
                     $.each(data, function (index, item) {
                         myResults.push({
                             'id': item.id,
@@ -104,6 +117,8 @@
                 }
             }
         });
+
+        $("#selectStaffs").select2('data', {id: '', text: 'ALL'});
     }
 
     function _search(element) {

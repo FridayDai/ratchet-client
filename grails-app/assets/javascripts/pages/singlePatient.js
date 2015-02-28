@@ -297,9 +297,9 @@
                 },
                 url: opts.urls.getTreatments,
                 cache: "true",
-                data: function (term) {
+                data: function (name) {
                     return {
-                        term: term
+                        name: name
                     };
                 },
                 results: function (data) {
@@ -357,9 +357,9 @@
                 },
                 url: opts.urls.getStaffs,
                 cache: "true",
-                data: function (term) {
+                data: function (name) {
                     return {
-                        term: term,
+                        name: name,
                         type: 8
                     };
                 },
