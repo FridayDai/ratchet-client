@@ -66,16 +66,9 @@
                 data: data
             }),
             "columnDefs": [
-                {"targets": [0, 7], "orderable": false},
-                {"targets": [5, 0, 4], "visible": false}
+                {"targets": [0, 4], "orderable": false}
             ],
             columns: [
-                {
-                    //ignore
-                    data: function (source) {
-                        return null;
-                    }
-                },
                 {
                     data: function (source) {
                         return '<p class="source-id">' + source.id + '</p>';
@@ -86,23 +79,11 @@
                     data: function (source) {
                         return source.firstName + " " + source.lastName;
                     },
-                    width: "27%"
+                    width: "18%"
                 },
                 {
                     data: "email",
-                    width: "37%"
-                },
-                {
-                    //ignore
-                    data: function (source) {
-                        return null;
-                    }
-                },
-                {
-                    //ignore
-                    data: function (source) {
-                        return null;
-                    }
+                    width: "27%"
                 },
                 {
                     data: function (source) {
