@@ -126,36 +126,44 @@
             <input id="selectStaffs" name="selectStaffs" type="text" class="required" placeholder=""/>
         </div>
 
-        <h4>Emergency Contact</h4>
+        <div class="emergency-contact-info">
+            <h4>Emergency Contact</h4>
 
-        <div class="form-group inline">
-            <label class="lbl-group">FIRST NAME</label>
-            <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group"
-                   placeholder="Grace"/>
-        </div>
+            <div class="form-group inline">
+                <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
+                <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group emergency-field"
+                       placeholder="Grace"/>
+            </div>
 
-        <div class="form-group inline">
-            <label class="lbl-group">LAST NAME</label>
-            <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group"
-                   placeholder="Smith"/>
-        </div>
+            <div class="form-group inline">
+                <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
+                <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group emergency-field"
+                       placeholder="Smith"/>
+            </div>
 
-        <div class="form-group inline">
-            <label class="lbl-group">RELATIONSHIP</label>
-            <select id="relationshipName" name="relationshipName">
-                <option></option>
-                <option value="1">Spouse</option>
-                <option value="2">Parent</option>
-                <option value="3">Child</option>
-                <option value="4">Friend</option>
-                <option value="5">Other</option>
-            </select>
-        </label>
-        </div>
+            <div class="form-group inline">
+                <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
+                <select id="relationshipName" name="relationshipName" class="emergency-field">
+                    <option></option>
+                    <option value="1">Spouse</option>
+                    <option value="2">Parent</option>
+                    <option value="3">Child</option>
+                    <option value="4">Friend</option>
+                    <option value="5">Other</option>
+                </select>
+            </label>
+            </div>
 
-        <div class="form-group inline emr-email">
-            <label class="lbl-group">EMAIL ADDRESS</label>
-            <input id="emergency-email" name="email" type="email" class="input-group" placeholder="grace@email.com" />
+            <div class="form-group inline emr-email">
+                <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
+                <input id="emergency-email" name="email" type="email" class="input-group emergency-field" placeholder="grace@email.com" />
+            </div>
+
+            <div class="form-group inline permission-confirm">
+                <label></label>
+                <input type="checkbox" name="permissionConfirm" required/>*
+                <span>Patient has given permission to release his/her health information to emergency contact.</span>
+            </div>
         </div>
 
     </g:form>
