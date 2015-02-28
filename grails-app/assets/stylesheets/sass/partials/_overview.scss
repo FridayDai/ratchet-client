@@ -32,7 +32,7 @@
     .info {
 
         .icon {
-            height: 50px;
+            height: 45px;
             margin-left: 0;
             vertical-align: text-bottom;
         }
@@ -49,6 +49,11 @@
             vertical-align: middle;
             text-transform: uppercase;
         }
+    }
+
+    .logo {
+        margin-top: 5px;
+        vertical-align: top;
     }
 
     .btn-edit-patient {
