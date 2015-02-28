@@ -1,0 +1,151 @@
+@import '../partials/common';
+
+p {
+    padding: 20px 0;
+    color: $base-color-medium-black;
+    font-size: 22px;
+
+    span {
+        font-weight: 600;
+    }
+
+    a {
+        color: $base-color-blue-dark;
+        font-size: 22px;
+        word-break: break-all;
+    }
+}
+
+.header {
+    position: inherit;
+    border: 0;
+}
+
+.content {
+    padding-top: 100px;
+}
+
+h1,
+h4 {
+    padding: 0 120px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: $base-color-dark-grey;
+    font-size: 34px;
+}
+
+h4 {
+    margin-top: 40px;
+    color: $base-color-dark-grey;
+    font-size: 26px;
+
+    span {
+        margin-right: 10px;
+        padding: 0 10px;
+        color: $base-color-white;
+        background-color: $base-color-dark-grey;
+    }
+}
+
+.summary {
+    padding: 40px 120px;
+    background-color: $base-color-tab-bg;
+}
+
+.update {
+    margin-top: 50px;
+    padding: 20px 120px;
+    background-color: $base-color-tab-bg;
+    font-weight: 500;
+}
+
+.agreement-content {
+    padding: 0 120px;
+}
+
+.agreement-footer {
+    height: 100px;
+    padding-top: 10px;
+    color: $base-color-white;
+    background-color: $base-color-mid-grey;
+    font-weight: 100;
+    font-size: 12px;
+    text-align: center;
+
+    ul {
+        float: none;
+        height: 30px;
+        margin-left: 10px;
+
+        li {
+            display: inline-block;
+            height: 30px;
+            margin: 0;
+            padding: 0 10px 0 0;
+            line-height: 30px;
+
+            a {
+                color: $base-color-white;
+                font-weight: 100;
+                font-size: 12px;
+            }
+
+            &:after {
+                padding-left: 10px;
+                content: '·';
+            }
+
+            &:last-child {
+
+                &:after {
+                    padding-left: 0;
+                    content: '';
+                }
+            }
+        }
+    }
+
+    .copyright {
+        float: none;
+        text-align: center;
+
+        ul {
+
+            li {
+                font-size: 12px;
+
+                &:after {
+                    padding-left: 0;
+                    content: '';
+                }
+            }
+        }
+
+        .copyright-field {
+            float: left;
+
+            .logo {
+                margin-top: 7px;
+            }
+        }
+    }
+
+}
+
+
+ul {
+    margin-left: 25px;
+    list-style: inherit;
+
+    li {
+        font-size: 22px;
+
+        a {
+            color: $base-color-blue-dark;
+            font-size: 22px;
+            word-break: break-all;
+        }
+    }
+}

@@ -9,31 +9,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="Grails"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png')}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
-    <asset:stylesheet src="bower_components/select2/select2.css"/>
-    <asset:stylesheet src="bower_components/intl-tel-input/build/css/intlTelInput.css"/>
     <!--[if IE 8 ]>    <asset:stylesheet src="css/ie.css"/> <![endif]-->
     <g:if test="${cssPath}">
         <asset:stylesheet src="css/pages/${cssPath}"/>
     </g:if>
     <g:layoutHead/>
 </head>
-
 <body>
 <g:render template="/shared/header"></g:render>
-<g:render template="/shared/nav"></g:render>
-
-<div class="container">
+<div>
     <g:layoutBody/>
 </div>
-<g:render template="/shared/footer"></g:render>
-<g:if test="${scriptPath}">
-    <asset:javascript src="bundles/${scriptPath}"/>
-</g:if>
-<g:else>
-    <asset:javascript src="bundles/defaultBundle"/>
-</g:else>
+<g:render template="/shared/agreementFooter"></g:render>
+
 </body>
 </html>
