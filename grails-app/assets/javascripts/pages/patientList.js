@@ -272,6 +272,7 @@
             _initStaffSelect();
             _initPlaceholder();
             $("#relationship").select2();
+            _checkEmergencyContact();
             //$("#div-surgery-time").css("display", "none");
         });
     }
@@ -519,6 +520,49 @@
             }
         }).change(function () {
             $(this).valid();
+        });
+    }
+
+    function _checkEmergencyContact() {
+        _.each($('.emergency-field'), function(element, index) {
+           $(element).on('input', function() {
+               if($(element).val() != '') {
+                   $('#emergency-firstName').attr('required', true);
+                   $('#emergency-lastName').attr('required', true);
+                   $('#relationship').attr('required', true);
+                   $('#emergency-email').attr('required', true);
+                   $('.permission-confirm-check').attr('required', true);
+
+                   _.each($('.emergency-required'), function(element, index) {
+                       $(element).show();
+                   });
+
+                   $('.permission-confirm').addClass('visible');
+               }
+
+               var flagOptional = _.every($('.emergency-field'), function(element) {
+                   return $(element).val() == '';
+               });
+
+               if(flagOptional) {
+                   $('#emergency-firstName').attr('required', false);
+                   $('#emergency-lastName').attr('required', false);
+                   $('#relationship').attr('required', false);
+                   $('#emergency-email').attr('required', false);
+                   $('.permission-confirm-check').attr('required', false);
+
+                   _.each($('.emergency-required'), function(element, index) {
+                       $(element).hide();
+                   });
+
+                   $('.permission-confirm').removeClass('visible');
+
+                   var elementList = $('.emergency-contact-info').find('.form-group').children();
+                   $.each(elementList, function (index, element) {
+                       RC.common.hideErrorTip(element);
+                   });
+               }
+           });
         });
     }
 
