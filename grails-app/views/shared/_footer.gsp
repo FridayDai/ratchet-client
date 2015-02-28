@@ -3,7 +3,7 @@
         <span class="copyright-year pull-left">© 2015</span>
         <div class="copyright pull-left">
             <a href="/" class="logo">
-                <img src="${assetPath(src: 'footer_logo.png')}">
+                <img class="footer-logo" src="${assetPath(src: 'footer_logo.png')}">
             </a>
         </div>
         <div class="pull-left">
