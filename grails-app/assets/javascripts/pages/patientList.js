@@ -77,7 +77,7 @@
                     data: function (source) {
                         return source.email;
                     },
-                    width: "28%"
+                    width: "26%"
                 },
                 {
                     data: function (source) {

@@ -26,12 +26,9 @@
             <table id="accountsTable" class="display accounts-table">
                 <thead>
                 <tr>
-                    <th></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email Address</th>
-                    <th>Role</th>
-                    <th>Groups</th>
                     <th>Last Update</th>
                     <th></th>
                 </tr>
