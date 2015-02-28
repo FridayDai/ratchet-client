@@ -3,6 +3,7 @@
 }
 
 .patient-detail {
+    position: relative;
     min-width: 1024px;
     padding: 30px;
     color: $base-color-light-black;
@@ -12,22 +13,19 @@
         margin-left: 20px;
 
         .id-info {
-            margin-top: 5px;
+            margin-top: 8px;
             margin-left: 18px;
+            font-size: 12pt;
         }
     }
 
-//    .logo {
-//        min-width: 50px;
-//    }
-//
-    .name {
+    .first-line {
         padding-bottom: 5px;
     }
-//
-//    .number {
-//        min-width: 200px;
-//    }
+
+    .number {
+        font-size: 13pt;
+    }
 
     .info {
 
@@ -35,6 +33,10 @@
             height: 45px;
             margin-left: 0;
             vertical-align: text-bottom;
+        }
+
+        .name {
+            font-size: 18pt;
         }
 
         .first-name {
@@ -52,13 +54,13 @@
     }
 
     .logo {
-        margin-top: 5px;
+        margin-top: 10px;
         vertical-align: top;
     }
 
     .btn-edit-patient {
         position: relative;
-        top: -20px;
+        top: -33px;
         vertical-align: middle;
 
         &:before {
@@ -67,14 +69,14 @@
             content: '\f417';
             color: $base-font-color;
             font-weight: lighter;
-            font-size: 22px;
+            font-size: 26px;
             font-family: ionicons;
         }
     }
 
     .btn-close {
         position: absolute;
-        top: 80px;
+        top: 47px;
         right: 30px;
         color: #b3b3b3;
         font-size: 18px;
@@ -100,7 +102,7 @@
             content: '\f422';
             vertical-align: middle;
             font-weight: lighter;
-            font-size: 24px;
+            font-size: 27px;
             font-family: ionicons;
         }
     }
@@ -114,19 +116,19 @@
             content: '\f4b8';
             vertical-align: middle;
             font-weight: lighter;
-            font-size: 22px;
+            font-size: 27px;
             font-family: ionicons;
         }
     }
 
     .div-invite {
-        padding-top: 20px;
+        padding-top: 16px;
         vertical-align: top;
     }
 
     .btn-invite {
-        padding: 6px 18px;
-        font-weight: 600;
+        padding: 5px 22px;
+        font-size: 13px;
     }
 
 }

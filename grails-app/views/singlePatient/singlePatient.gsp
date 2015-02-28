@@ -19,8 +19,8 @@
             </div>
 
             <div class="inline">
-                <div class="info name clear">
-                    <div class="pull-left">
+                <div class="info first-line clear">
+                    <div class="pull-left name">
                         <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                         <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                     </div>
