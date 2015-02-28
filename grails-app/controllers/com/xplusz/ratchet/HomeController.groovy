@@ -9,6 +9,14 @@ class HomeController extends BaseController {
         render view: '/home/home'
     }
 
+    def termsOfService() {
+        render view: '/termsOfService/termsOfService'
+    }
+
+    def privacyPolicy() {
+        render view: '/privacyPolicy/privacyPolicy'
+    }
+
     def getProvider() {
 
         def provider1 = new Provider("001", "image1", "GroupHealth", "Thomas Ferguson", "tferguson@ghc.org")
