@@ -276,20 +276,20 @@ a {
     bottom: 0;
     left: 0;
     z-index: 99999;
-    background-color: $base-color-white-grey;
+    background-color: $base-font-grey;
     opacity: .3;
+}
 
-    .loading {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 999999;
-        width: 40px;
-        height: 40px;
-        background: url('../../../images/loading.gif') no-repeat 0 0;
-        background-size: cover;
-        font-size: 40px;
-    }
+.msg-process-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999999;
+    width: 40px;
+    height: 40px;
+    background: url('../../../images/loading.gif') no-repeat 0 0;
+    background-size: cover;
+    font-size: 40px;
 }
 
 //start select2

@@ -234,7 +234,7 @@
                     $("#msg-process").hide();
                 }
             } else {
-                var $msgDiv = $('<div id="msg-process" class="msg-process-background ui-tips ui-tips-center"><span class="loading"></span></span></div>');
+                var $msgDiv = $('<div id="msg-process"><div class="msg-process-background ui-tips ui-tips-center"></div><span class="msg-process-loading"></span></div>');
                 if ($("#msg-process").length > 0) {
                     $msgDiv = $("#msg-process");
                 } else {
