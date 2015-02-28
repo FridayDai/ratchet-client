@@ -135,7 +135,7 @@
 
             _initSelectTreatment();
             _initStaffSelect();
-            _initSurgeryTime();
+            //_initSurgeryTime();
             _initSelect();
 
         });
@@ -144,12 +144,12 @@
     /**
      * invite patient again
      */
-    function _inviteAgain(){
+    function _inviteAgain() {
         var id = $('#invitePatient').data("id");
-        $('#invitePatient').click(function() {
+        $('#invitePatient').click(function () {
             $.ajax({
-                    url: opts.urls.invitePatient.format(id)
-                });
+                url: opts.urls.invitePatient.format(id)
+            });
         });
     }
 
@@ -308,7 +308,8 @@
                         myResults.push({
                             'id': item.id,
                             'text': item.title + ' ' + item.tmpTitle,
-                            'data': item.surgeryTimeRequired
+                            'data': item.surgeryTimeRequired,
+                            'timeStamp': item.sendTimeOffset
                         });
                     });
                     return {
@@ -323,6 +324,9 @@
             } else {
                 $("#div-surgery-time").css("display", "none");
             }
+            var date = new Date();
+            var time = date.getTime() + data.added.timeStamp;
+            _initSurgeryTime(time);
         });
     }
 
@@ -386,14 +390,15 @@
      * init surgery time
      * @private
      */
-    function _initSurgeryTime() {
+    function _initSurgeryTime(time) {
+        $("#surgeryTime").datetimepicker("destroy");
         $("#surgeryTime").datetimepicker({
             controlType: 'input',
             dateFormat: 'MM d, yy',
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: +8
+            minDate: new Date(time)
         });
     }
 
