@@ -267,7 +267,7 @@
 
             _initPhoneInput();
             _limitMaxLength();
-            _initSurgeryTime();
+            //_initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
             _initPlaceholder();
@@ -280,14 +280,15 @@
      * init surgery time
      * @private
      */
-    function _initSurgeryTime() {
+    function _initSurgeryTime(time) {
+        $("#surgeryTime").datetimepicker("destroy");
         $("#surgeryTime").datetimepicker({
             controlType: 'input',
             dateFormat: 'MM d, yy',
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: +8
+            minDate: new Date(time)
         });
     }
 
@@ -360,7 +361,9 @@
                         myResults.push({
                             'id': item.id,
                             'text': item.title + ' ' + item.tmpTitle,
-                            'data': item.surgeryTimeRequired
+                            'data': item.surgeryTimeRequired,
+                            'timeStamp': item.sendTimeOffset
+
                         });
                     });
                     return {
@@ -368,9 +371,19 @@
                     };
                 }
             }
-        }).change(function () {
+        }).change(function (data) {
             $(this).valid();
+            var date = new Date();
+            var time = date.getTime() + data.added.timeStamp;
+            _initSurgeryTime(time);
         });
+
+
+        //$('#selectTreatment').on("change", function (data) {
+        //    var date = new Date();
+        //    var time = date.getTime() + data.added.timeStamp;
+        //    _initSurgeryTime(time);
+        //});
 
     }
 
@@ -449,6 +462,8 @@
         }).change(function () {
             $(this).valid();
         });
+
+
     }
 
     /**
