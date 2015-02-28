@@ -82,8 +82,12 @@ class AccountsController extends BaseController {
 
     def forgotPassword() {
         def resp = accountService.askForResetPassword(params.email, "client")
-        if (resp) {
+        if (resp.status == 200) {
             render view: '/forgotPassword/resettingIntroduction', model: [email: params.email]
+        } else {
+            def result = JSON.parse(resp.body)
+            def message = result?.error?.errorMessage
+            render view: '/forgotPassword/forgotPassword', model: [errorMsg: message]
         }
     }
 
