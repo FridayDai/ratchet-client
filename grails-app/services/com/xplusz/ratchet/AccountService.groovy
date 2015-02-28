@@ -168,7 +168,7 @@ class AccountService {
         }
     }
 
-    def askForResetPassword(email, clientType) throws ApiResourceAccessException, ApiReturnErrorException {
+    def askForResetPassword(email, clientType) throws ApiResourceAccessException {
         def url = grailsApplication.config.ratchetv2.server.url.password.reset
 
         try {
@@ -176,14 +176,7 @@ class AccountService {
                     .field("email", email)
                     .field("clientType", clientType)
                     .asString()
-
-            if (resp.status == 200) {
-                return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message)
-            }
+            return resp
 
         } catch (UnirestException e) {
             log.error(e.message)

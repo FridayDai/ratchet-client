@@ -13,7 +13,7 @@ class UrlMappings {
 
         //forgotPassword
         "/forgotPassword"(view: "/forgotPassword/forgotPassword")
-        "/resetPassword"(controller: "accounts", action: "resetPassword")
+        "/resetPassword/$code?"(controller: "accounts", action: "resetPassword")
 
         // Home
         "/providers"(controller: "providers", action: "index")
