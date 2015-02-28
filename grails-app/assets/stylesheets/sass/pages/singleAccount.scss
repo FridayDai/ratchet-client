@@ -22,6 +22,7 @@
 
         span {
             margin-left: 20px;
+            margin-right: 20px;
             color: $base-color-medium-black;
         }
     }
@@ -113,7 +114,6 @@
         position: absolute;
         top: 15px;
         right: 30px;
-        //        margin-top: 20px;
     }
 }
 
@@ -123,11 +123,9 @@
     .btn-logout {
 
         &:before {
-            //            display: inline-block;
             padding-right: 8px;
             content: '\f2a9';
             color: $base-font-grey;
-            //            font-weight: lighter;
             font-size: 12px;
             font-family: ionicons;
         }
@@ -147,9 +145,14 @@
     .readonly-email {
         border: 0;
         background: 0;
+        padding-left: 0;
     }
 
     .account-management {
         color: $base-color-dark-gray;
     }
+}
+
+.role-select {
+    margin-left: 28px;
 }

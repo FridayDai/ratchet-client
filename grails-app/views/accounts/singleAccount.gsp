@@ -72,7 +72,7 @@
                     <td class="bg-color">Last Login:</td>
                     <td class="bg-color">
                         <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                      format="MMM d, yyyy h:mm:ss a"/>
+                                      format="MMM d, yyyy h:mm a"/>
                     </td>
                 </tr>
             </table>
@@ -105,7 +105,7 @@
                    readonly/>
         </div>
 
-        <div class="form-group inline">
+        <div class="form-group inline role-select">
             <label class="lbl-group role">ROLE<span>*</span></label>
             <select id="accountType" name="accountType" required>
                 <option value="1">Anesthesiologist</option>
