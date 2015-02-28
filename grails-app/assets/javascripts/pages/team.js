@@ -427,9 +427,10 @@
                 },
                 url: opts.urls.getStaffs,
                 cache: "true",
-                data: function (term) {
+                data: function (name) {
                     return {
-                        term: term
+                        name: name ,
+                        type: 8
                     };
                 },
                 results: function (data) {
