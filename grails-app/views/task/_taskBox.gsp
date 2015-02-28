@@ -37,11 +37,11 @@
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
 
                 <g:if test="${task?.otherScore}">
-                    <% def firstSplit = ""%>
+                    <% def firstSplit = "" %>
                     <% def secondSplit %>
-                    <% if (task?.otherScore != null){%>
+                    <% if (task?.otherScore != null) { %>
                     <% firstSplit = task?.otherScore?.split(',') %>
-                    <% }%>
+                    <% } %>
                     <g:each in="${firstSplit}" var="num">
                         <% secondSplit = num?.trim().split(':') %>
                         <span class="score">
@@ -68,17 +68,26 @@
         </div>
 
         <div class="item-datetime">
-            <label class="small-font sent-time">Send Time: <g:formatDate date="${task?.sendTime}"
-                                                                         format="MMM dd,yyyy HH:mm aaa"></g:formatDate></label>
+            <label class="small-font sent-time">
+                <g:if test="${task?.isSent}">
+                    <label>Sent Time: </label>
+                </g:if>
+                <g:else>
+                    <label>Send Time: </label>
+                </g:else>
+                <g:formatDate date="${task?.sendTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate>
+            </label>
         </div>
 
         <div class="item-notify">
-            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-                <button class="btn task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
+            <g:if test="${task?.isSent}">
+                <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+                    <button class="btn task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
+                </g:if>
+                <g:else>
+                    <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
+                </g:else>
             </g:if>
-            <g:else>
-                <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
-            </g:else>
         </div>
     </div>
 
