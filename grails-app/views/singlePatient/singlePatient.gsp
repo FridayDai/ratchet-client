@@ -110,7 +110,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
-            <input id="selectTreatment" name="selectTreatment" type="text" class="input-group required"
+            <input id="selectTreatment" name="selectTreatment" type="text" class=" required"
                    placeholder=""/>
         </div>
 
@@ -123,7 +123,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">SURGEON<span>*</span></label>
-            <input id="selectStaffs" name="selectStaffs" type="text" class="input-group required" placeholder=""/>
+            <input id="selectStaffs" name="selectStaffs" type="text" class="required" placeholder=""/>
         </div>
 
         <h4>Emergency Contact</h4>
