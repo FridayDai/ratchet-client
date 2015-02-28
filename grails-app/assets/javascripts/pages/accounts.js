@@ -58,7 +58,7 @@
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
-                $(".display").css("display","inline-table");
+                $(".display").css("display", "inline-table");
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -182,14 +182,14 @@
                 if (data.resp === true) {
                     _initTable();
                 }
-            },
-            error: function () {
-                RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-                    element: $(".warn"),
-                    closeCallback: function () {
-                    }
-                }));
             }
+            //error: function () {
+            //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+            //        element: $(".warn"),
+            //        closeCallback: function () {
+            //        }
+            //    }));
+            //}
         });
     }
 

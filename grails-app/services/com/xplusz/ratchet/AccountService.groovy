@@ -3,6 +3,8 @@ package com.xplusz.ratchet
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
@@ -60,7 +62,8 @@ class AccountService {
         }
     }
 
-    def createAccount(HttpServletRequest request, HttpServletResponse response, params) {
+    def createAccount(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def firstName = params?.firstName
         def lastName = params?.lastName
         def email = params?.email
@@ -69,20 +72,31 @@ class AccountService {
         def isDoctor = params?.isDoctor
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
-        def resp = Unirest.post(url)
-                .field("clientId", request.session.clientId)
-                .field("firstName", firstName)
-                .field("lastName", lastName)
-                .field("email", email)
-                .field("type", type)
-                .field("patientManagement", "true")
-                .field("accountManagement", isAccountManagement)
-                .field("doctor", isDoctor)
-                .asString()
 
-        if (resp.status == 201) {
-            return true
+        try {
+            def resp = Unirest.post(url)
+                    .field("clientId", request.session.clientId)
+                    .field("firstName", firstName)
+                    .field("lastName", lastName)
+                    .field("email", email)
+                    .field("type", type)
+                    .field("patientManagement", "true")
+                    .field("accountManagement", isAccountManagement)
+                    .field("doctor", isDoctor)
+                    .asString()
+
+            if (resp.status == 201) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
+
     }
 
     def inviteAccount(HttpServletRequest request, HttpServletResponse response, Integer accountId) {
