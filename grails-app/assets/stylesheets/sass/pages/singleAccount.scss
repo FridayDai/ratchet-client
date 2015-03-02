@@ -94,6 +94,40 @@
         margin-bottom: 20px;
     }
 
+    .triangle-right {
+
+        &:after {
+            padding-left: 10px;
+            content: '\f10a';
+            color: $base-grey-dark-color;
+            font-weight: lighter;
+            font-size: 18px;
+            font-family: ionicons;
+            cursor: pointer;
+        }
+    }
+
+    .triangle-bottom {
+
+        &:after {
+            padding-left: 10px;
+            content: '\f104';
+            color: $base-grey-dark-color;
+            font-weight: lighter;
+            font-size: 18px;
+            font-family: ionicons;
+            cursor: pointer;
+        }
+    }
+
+    .displaynone {
+        display: none;
+    }
+
+    .displayblock {
+        display: block;
+    }
+
     .btn-edit {
 
         &:before {
@@ -114,6 +148,16 @@
         position: absolute;
         top: 15px;
         right: 30px;
+    }
+}
+
+.icons {
+    position: relative;
+
+    .btn-deactive {
+        position: absolute;
+        left: -80px;
+        top: 35px;
     }
 }
 

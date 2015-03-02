@@ -30,6 +30,14 @@
 
                 <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
+
+                <span class="icons">
+                    <a class="triangle-right" id="triangle"></a>
+
+                    <a class="btn btn-deactive displaynone" id="btn-deactivate"
+                       data-account-id="${accountInfo.id}">Deactivate</a>
+                </span>
+
             </div>
 
             <a href="#" id="edit-account" class="btn-edit" data-account-id="${accountInfo.id}">
@@ -140,6 +148,10 @@
                 </label>
             </div>
         </div>
+
+    </g:form>
+
+    <g:form class="warn ui-hidden">
 
     </g:form>
     </body>

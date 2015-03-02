@@ -95,7 +95,7 @@
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
                         var treatmentId = $("#selectTreatment").val();
-                        var staffIds = $("#selectStaffs").val();
+                        var staffIds = $("#selectSurgeons").val();
                         var staffArray = staffIds.split(',');
                         var staffIdArr = [];
                         $.each(staffArray, function (index, item) {
@@ -123,7 +123,6 @@
                             ecLastName: ecLastName,
                             relationship: relationship,
                             ecEmail: ecEmail
-
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -194,7 +193,7 @@
      * @private
      */
     function _checkTreatmentBtn() {
-        if($('.tab-treatment li').length >= 3) {
+        if ($('.tab-treatment li').length >= 3) {
             $('#addTab').hide();
         }
     }
