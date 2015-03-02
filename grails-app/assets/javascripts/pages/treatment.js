@@ -43,8 +43,11 @@
                 okCallback: function () {
                     if ($("#treatment-time-form").valid()) {
                         var date = new Date($("#treatment-surgeryTime").val());
-                        var surgeryTime = date.getTime();
-                        _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, surgeryTime);
+                        var newSurgeryTime = date.getTime();
+                        var oldSurgeryTime = (new Date(surgeryTime)).getTime();
+                        if(newSurgeryTime !== oldSurgeryTime) {
+                            _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                        }
                         return true;
                     }
                     return false;
