@@ -89,13 +89,15 @@
             <div class="emergency-contact-info">
                 <div class="form-group inline">
                     <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group emergency-field"
+                    <input id="emergency-firstName" name="emergency-firstName" type="text"
+                           class="input-group emergency-field"
                            placeholder="Grace"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group emergency-field"
+                    <input id="emergency-lastName" name="emergency-lastName" type="text"
+                           class="input-group emergency-field"
                            placeholder="Smith"/>
                 </div>
 

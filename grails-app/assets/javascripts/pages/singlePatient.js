@@ -325,8 +325,7 @@
             } else {
                 $("#div-surgery-time").css("display", "none");
             }
-            var date = new Date();
-            var time = date.getTime() + data.added.timeStamp;
+            var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
             _initSurgeryTime(time);
         });
     }
@@ -399,7 +398,7 @@
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: new Date(time)
+            minDate: +time
         });
     }
 
@@ -456,34 +455,34 @@
     }
 
     function _checkEmergencyContact() {
-        _.each($('.emergency-field'), function(element, index) {
-            $(element).on('input', function() {
-                if($(element).val() != '') {
+        _.each($('.emergency-field'), function (element, index) {
+            $(element).on('input', function () {
+                if ($(element).val() != '') {
                     $('#emergency-firstName').attr('required', true);
                     $('#emergency-lastName').attr('required', true);
                     $('#relationshipName').attr('required', true);
                     $('#emergency-email').attr('required', true);
                     $('.permission-confirm-check').attr('required', true);
 
-                    _.each($('.emergency-required'), function(element, index) {
+                    _.each($('.emergency-required'), function (element, index) {
                         $(element).show();
                     });
 
                     $('.permission-confirm').addClass('visible');
                 }
 
-                var flagOptional = _.every($('.emergency-field'), function(element) {
+                var flagOptional = _.every($('.emergency-field'), function (element) {
                     return $(element).val() == '';
                 });
 
-                if(flagOptional) {
+                if (flagOptional) {
                     $('#emergency-firstName').attr('required', false);
                     $('#emergency-lastName').attr('required', false);
                     $('#relationshipName').attr('required', false);
                     $('#emergency-email').attr('required', false);
                     $('.permission-confirm-check').attr('required', false);
 
-                    _.each($('.emergency-required'), function(element, index) {
+                    _.each($('.emergency-required'), function (element, index) {
                         $(element).hide();
                     });
 
