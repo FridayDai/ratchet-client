@@ -16,49 +16,65 @@ class AccountService {
 
     def grailsApplication
 
-    def getAccounts(HttpServletRequest request, HttpServletResponse response, params) {
+    def getAccounts(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def start = params?.start
         def length = params?.length
         def name = params?.name
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
-        def resp = Unirest.get(url)
-                .queryString("max", length)
-                .queryString("offset", start)
-                .queryString("name", name)
-                .queryString("clientId", request.session.clientId)
-                .asString()
 
-        def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            def map = [:]
-            map.put(start, start)
-            map.put(length, length)
-            map.put("recordsTotal", result.totalCount)
-            map.put("recordsFiltered", result.totalCount)
-            map.put("data", result.items)
-            return map
-        } else {
-            return false
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", length)
+                    .queryString("offset", start)
+                    .queryString("name", name)
+                    .queryString("clientId", request.session.clientId)
+                    .asString()
+
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                def map = [:]
+                map.put(start, start)
+                map.put(length, length)
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
+
 
     }
 
-    def getSingleAccount(accountId) {
+    def getSingleAccount(accountId) throws ApiResourceAccessException, ApiReturnErrorException {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
 
         def url = String.format(getSingleAccountUrl, accountId)
 
-        def resp = Unirest.get(url)
-                .asString()
-        def result = JSON.parse(resp.body)
+        try {
+            def resp = Unirest.get(url)
+                    .asString()
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result
-        } else {
-            return false
+            if (resp.status == 200) {
+                return result
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
     }
 

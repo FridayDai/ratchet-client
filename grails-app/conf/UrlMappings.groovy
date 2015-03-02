@@ -55,7 +55,7 @@ class UrlMappings {
         "/getTreatments"(controller: "treatment", action: "getTreatments")
 
         // Accounts
-        "/staff/email/confirmation/$code?"(controller: "accounts",action: "confirmCode")
+        "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
         "/userProfile/$accountId?"(controller: "accounts", action: "getProfile")
         "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")
@@ -77,6 +77,7 @@ class UrlMappings {
         "500"(view: '/error/error')
         "/providers/detail"(controller: "providers", action: "detail")
         "404"(view: '/error/error404')
+//        "/401"(view: '/error/error401')
 
     }
 }

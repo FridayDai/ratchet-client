@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <g:set var="cssPath" value="error"/>
-<g:applyLayout name="main">
+<g:applyLayout name="error">
     <html>
     <head>
         <title>Welcome to ratchet</title>

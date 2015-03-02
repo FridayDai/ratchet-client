@@ -1,15 +1,7 @@
 @import '../partials/common';
 @import '../partials/error';
 
-.header {
-    display: none;
-}
-
-.nav {
-    display: none;
-}
-
-.container {
+.error-body {
     margin-top: 100px;
     padding: 0;
     color: $base-color-warn;
