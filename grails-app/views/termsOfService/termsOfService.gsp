@@ -26,13 +26,13 @@
 
             <ul>
                 <li>
-                    Change the terms and conditions of this Agreement;
+                    <span class="dot"></span>Change the terms and conditions of this Agreement;
                 </li>
                 <li>
-                    Change the App or the Service, including eliminating or discontinuing any feature of the Service or any content on the App;
+                    <span class="dot"></span>Change the App or the Service, including eliminating or discontinuing any feature of the Service or any content on the App;
                 </li>
                 <li>
-                    Change any fees or charges for use of the App and the Service.
+                    <span class="dot"></span>Change any fees or charges for use of the App and the Service.
                 </li>
             </ul>
             <P>
@@ -59,43 +59,43 @@
             <p>While using the App and the Service, you agree not to:</p>
             <ul>
                 <li>
-                    Restrict or inhibit any other user or member from using the App, including, without limitation, by means of “hacking” or defacing any portion of the App;
+                    <span class="dot"></span>Restrict or inhibit any other user or member from using the App, including, without limitation, by means of “hacking” or defacing any portion of the App;
                 </li>
                 <li>
-                    Post or transmit a message under a false name;
+                    <span class="dot"></span>Post or transmit a message under a false name;
                 </li>
                 <li>
-                    Use the App or Service for any unlawful purpose;
+                    <span class="dot"></span>Use the App or Service for any unlawful purpose;
                 </li>
                 <li>
-                    Express or imply that any statements you make are endorsed by us without our prior written consent;
+                    <span class="dot"></span>Express or imply that any statements you make are endorsed by us without our prior written consent;
                 </li>
                 <li>
-                    Transmit (a) any content or information that is unlawful, fraudulent, threatening, abusive, libellous, defamatory, obscene or otherwise objectionable, or that infringes on our or any third party’s intellectual property or other rights; (b) any material, non-public information about companies without the authorization to do so; (c) any trade secret of any third party; or (d) any advertisements, solicitations, chain letters, pyramid schemes, investment opportunities or other unsolicited commercial communication, except as otherwise expressly permitted by us;
+                    <span class="dot"></span>Transmit (a) any content or information that is unlawful, fraudulent, threatening, abusive, libellous, defamatory, obscene or otherwise objectionable, or that infringes on our or any third party’s intellectual property or other rights; (b) any material, non-public information about companies without the authorization to do so; (c) any trade secret of any third party; or (d) any advertisements, solicitations, chain letters, pyramid schemes, investment opportunities or other unsolicited commercial communication, except as otherwise expressly permitted by us;
                 </li>
                 <li>
-                    Engage in spamming or flooding;
+                    <span class="dot"></span>Engage in spamming or flooding;
                 </li>
                 <li>
-                    Transmit any software or other materials that contain any viruses, worms, Trojan horses, defects, date bombs, time bombs or other items of a destructive nature;
+                    <span class="dot"></span>Transmit any software or other materials that contain any viruses, worms, Trojan horses, defects, date bombs, time bombs or other items of a destructive nature;
                 </li>
                 <li>
-                    Modify, adapt, sub-license, translate, sell, reverse engineer, decompile or disassemble any portion of the App or Service;
+                    <span class="dot"></span>Modify, adapt, sub-license, translate, sell, reverse engineer, decompile or disassemble any portion of the App or Service;
                 </li>
                 <li>
-                    Remove any copyright, trademark or other proprietary rights notices contained in the App or Service;
+                    <span class="dot"></span>Remove any copyright, trademark or other proprietary rights notices contained in the App or Service;
                 </li>
                 <li>
-                    “Frame” or “mirror” any part of the App without our prior written authorization;
+                    <span class="dot"></span>“Frame” or “mirror” any part of the App without our prior written authorization;
                 </li>
                 <li>
-                    Use any robot, spider, App search/retrieval application or other manual or automatic device or process to retrieve, index, “data mine” or in any way reproduce or circumvent the navigational structure or presentation of the App or its contents;
+                    <span class="dot"></span>Use any robot, spider, App search/retrieval application or other manual or automatic device or process to retrieve, index, “data mine” or in any way reproduce or circumvent the navigational structure or presentation of the App or its contents;
                 </li>
                 <li>
-                    Harvest or collect information about App users or members without their express consent.
+                    <span class="dot"></span>Harvest or collect information about App users or members without their express consent.
                 </li>
                 <li>
-                    While using the App or the Service, you agree to comply with all applicable laws, rules and regulations.
+                    <span class="dot"></span>While using the App or the Service, you agree to comply with all applicable laws, rules and regulations.
                 </li>
             </ul>
 
@@ -110,7 +110,7 @@
         <h4><span>5</span>ACCESS BY MINORS</h4>
         <div class="agreement-content">
             <p>
-                Pursuant to 47 U.S.C. Section 230 (d), as amended, we hereby notify you that parental control protections (such as computer hardware, software or filtering services) are commercially available that may assist you in limiting access to material that is harmful to minors. Information identifying current providers of such protections is available at the websites of the Electronic Frontier Foundation (<a href="http://www.eff/org/pub/Censorship/Ratings_filters_labelling/">http://www.eff/org/pub/Censorship/Ratings_filters_labelling/</a>) and America Links Up (<a href="http://www.netparents.org/parentstips/browsers.html">http://www.netparents.org/parentstips/browsers.html</a>).
+                Pursuant to 47 U.S.C. Section 230 (d), as amended, we hereby notify you that parental control protections (such as computer hardware, software or filtering services) are commercially available that may assist you in limiting access to material that is harmful to minors. Information identifying current providers of such protections is available at the websites of the Electronic Frontier Foundation (<a target="_blank" href="http://www.eff.org/pub/Censorship/Ratings_filters_labelling/">http://www.eff.org/pub/Censorship/Ratings_filters_labelling/</a>) and America Links Up (<a target="_blank" href="http://www.netparents.org/parentstips/browsers.html">http://www.netparents.org/parentstips/browsers.html</a>).
             </p>
         </div>
         <h4><span>6</span>JURISDICTIONAL ISSUES</h4>
