@@ -185,8 +185,18 @@
                 var treatmentInfo = data.treatmentInfo;
                 var surgeryTime = assignInfo.surgeryTime;
                 _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime);
+                _checkTreatmentBtn();
             }
         });
+    }
+
+    /**
+     * @private
+     */
+    function _checkTreatmentBtn() {
+        if($('.tab-treatment li').length >= 3) {
+            $('#addTab').hide();
+        }
     }
 
     /**

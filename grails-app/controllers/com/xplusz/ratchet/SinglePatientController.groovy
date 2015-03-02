@@ -14,6 +14,7 @@ class SinglePatientController extends BaseController {
         def num = patientInfo?.phoneNumber
         def length = num.length()
         def phoneNumber
+        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         if (length > 6) {
             phoneNumber = String.format("%s-%s-%s", num.substring(0, 3), num.substring(3, 6),
                     num.substring(6, length));
@@ -22,7 +23,7 @@ class SinglePatientController extends BaseController {
         }
         def medicalRecords = singlePatientService.showMedialRecords(request, response, patientId)
         render(view: '/singlePatient/singlePatient', model: [patientInfo   : patientInfo,
-                                                             medicalRecords: medicalRecords, phoneNumber: phoneNumber])
+                                                             medicalRecords: medicalRecords, phoneNumber: phoneNumber, treatmentLimit: treatmentLimit])
     }
 
     def updatePatient() {

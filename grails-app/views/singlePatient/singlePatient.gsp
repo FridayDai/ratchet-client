@@ -57,9 +57,11 @@
         </div>
 
         <div id="tabs" class="patient-tab">
-            <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
+            <g:if test="${medicalRecords.size() < treatmentLimit}">
+                <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
                     data-id="${patientInfo.patientId}"
                     data-client-id="${patientInfo.client.id}">Add Treatment</button>
+            </g:if>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
                     <li>

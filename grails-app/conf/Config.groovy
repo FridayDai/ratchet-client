@@ -203,5 +203,7 @@ ratchetv2 {
 
         careGiverType = 1
         careTeamType = 2
+
+        patientTreatmentLimit = 3
     }
 }
