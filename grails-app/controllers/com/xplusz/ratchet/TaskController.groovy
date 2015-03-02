@@ -42,7 +42,7 @@ class TaskController extends BaseController {
 
     def sendTaskEmail() {
         def resp = taskService.sendTaskEmailToPatient(params)
-        render resp as JSON
+        render resp
     }
 
 

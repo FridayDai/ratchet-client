@@ -51,7 +51,7 @@ class TaskService {
                     .asString()
             def result = JSON.parse(resp.body)
             if (resp.status == 200) {
-                return result
+                return true
             }
             else {
                 def message = result?.error?.errorMessage
