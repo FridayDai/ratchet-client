@@ -21,7 +21,9 @@
                 <g:if test="${surgeryTime}">
                     <span>Surgery Time:</span>
                     <label class="surgery-time-picker">
-                        <g:formatDate date="${surgeryTime}" format="MMM d, yyyy h:mm a"></g:formatDate>
+                        <g:formatDate date="${surgeryTime}"
+                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                      format="MMM d, yyyy h:mm a"></g:formatDate>
                     </label>
                     %{--<input type="hidden" class="datetime-picker" data-patient-id="${patientId}"--}%
                            %{--data-client-id="${clientId}"--}%

@@ -100,7 +100,7 @@
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {
-                    var formatDate = moment(selectedDate).format('MMM D, YYYY h:mm:ss a');
+                    var formatDate = moment(selectedDate).format('MMM DD,YYYY HH:mm A');
                     parent.find('.surgery-time-picker').text(formatDate);
                     $(element).tabs("load", 0 );
                 }

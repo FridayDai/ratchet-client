@@ -5,7 +5,9 @@
     <div class="box-item-header">
         <g:if test="${task?.completeTime}">
             <span class="complete-time pull-right">Complete Time:
-                <g:formatDate date="${task?.completeTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate></span>
+                <g:formatDate date="${task?.completeTime}"
+                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                              format="MMM dd,yyyy HH:mm aaa"></g:formatDate></span>
         </g:if>
     %{--<span class="complete-time pull-right">Complete Time: Jan 10, 2015 8:00AM</span>--}%
     </div>
@@ -57,8 +59,10 @@
                 </g:else>
             </g:if>
             <g:else>
-                <h5 class="due-time middle-font">DUE: <g:formatDate date="${task?.dueTime}"
-                                                                    format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
+                <h5 class="due-time middle-font">DUE:
+                    <g:formatDate date="${task?.dueTime}"
+                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                  format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
             </g:else>
 
         </div>
@@ -70,10 +74,10 @@
         <div class="item-datetime">
             <label class="small-font sent-time">
                 <g:if test="${task?.isSent}">
-                    <label>Sent Time: </label>
+                    <label>Sent Time:</label>
                 </g:if>
                 <g:else>
-                    <label>Send Time: </label>
+                    <label>Send Time:</label>
                 </g:else>
                 <g:formatDate date="${task?.sendTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate>
             </label>
