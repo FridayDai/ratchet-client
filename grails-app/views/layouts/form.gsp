@@ -23,7 +23,7 @@
 <div>
     <g:layoutBody/>
 </div>
-
+<g:render template="/shared/footer"></g:render>
 
 <g:if test="${scriptPath}">
     <asset:javascript src="bundles/${scriptPath}"/>

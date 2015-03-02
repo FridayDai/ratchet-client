@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class HomeController extends BaseController {
 
-    def beforeInterceptor = [action: this.&auth]
+    def beforeInterceptor = [action: this.&auth, except: ['termsOfService', 'privacyPolicy']]
     def index() {
         render view: '/home/home'
     }
