@@ -34,12 +34,13 @@
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
-        waringMessageAction: "Something wrong, Please check messages below.",
         errorTip: "Something wrong, Please try again later.",
 
 
         //ERROR
+        errorTitle: "ERROR",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
+        errorMessageAction: "Something wrong, Please check messages below.",
         confirmPassword: "Your passwords don't match. Please enter them again."
     });
 })(jQuery);
