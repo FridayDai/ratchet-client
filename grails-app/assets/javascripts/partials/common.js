@@ -33,7 +33,7 @@
                         var obj = {
                             element: elem,
                             message: error.message,
-                            method : error.method
+                            method: error.method
                         };
                         RC.common.showErrorTip(obj);
                     } else {
@@ -65,11 +65,11 @@
             error: function (jqXHR) {
                 if (jqXHR.status === 404) {
                     //window.location.href = "/";
-                } else if (jqXHR.status === 403) {
+                } else if (jqXHR.status === 403 || jqXHR.status === 401) {
                     window.location.href = "/login";
 
                 }
-                else if (jqXHR.status === (400 || 500)) {
+                else if (jqXHR.status === 400 || jqXHR.status === 500) {
                     RC.common.warning({
                         title: RC.constants.waringMessageAction,
                         message: jqXHR.responseText

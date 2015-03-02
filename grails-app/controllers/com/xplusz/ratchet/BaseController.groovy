@@ -35,20 +35,24 @@ class BaseController {
     def handleApiAjaxReturnErrorException(ApiAjaxReturnErrorException e) {
         def status = e.statusId ? e.statusId : 500
         def message = e.message ? e.message : g.message(code: 'default.error.500.message')
-        render status: status, text:  message
+        render status: status, text: message
     }
 
     def handleApiAjaxAccessException(ApiAjaxAccessException e) {
         def message = e.message ? e.message : g.message(code: 'default.error.500.message')
-        render status: '400', text:  message
+        render status: '400', text: message
     }
 
     def handleApiReturnErrorException(ApiReturnErrorException e) {
         flash.message = e.message
-        render view: '/error/error400'
+        if (e.statusId == 401) {
+            redirect(uri: '/login')
+        } else {
+            render view: '/error/error400'
+        }
     }
 
     def handleException(Exception e) {
-       log.error(e.message)
+        log.error(e.message)
     }
 }
