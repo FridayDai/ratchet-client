@@ -40,9 +40,15 @@
             localStorage.setItem('storedEmail', storedEmail);
         });
 
-        if(localStorage.getItem('storedEmail')){
+        if (localStorage.getItem('storedEmail')) {
             $('.email').val(localStorage.getItem('storedEmail'));
         }
+
+        $(".input-control").each(function () {
+            $(this).change(function () {
+                $("#error-login").css("display", "none");
+            });
+        });
     }
 
 

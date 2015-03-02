@@ -70,9 +70,10 @@
 
                 }
                 else if (jqXHR.status === 400 || jqXHR.status === 500) {
-                    RC.common.warning({
-                        title: RC.constants.waringMessageAction,
-                        message: jqXHR.responseText
+                    RC.common.error({
+                        title: RC.constants.errorTitle,
+                        message: RC.constants.errorMessageAction,
+                        errorMessage: jqXHR.responseText
                     });
                 }
             }
@@ -220,6 +221,30 @@
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
         uiWindowMessage.html('<div class="window-warning">' + warningArguments.message + '</div>');
+        return $container;
+    }
+
+    /**
+     *
+     * @param container
+     * @param errorArguments
+     * @returns {*|HTMLElement}
+     * @private
+     */
+    function _setErrorContainer(container, errorArguments) {
+        var $container = $(container);
+        var containerParent = $container.parent().addClass('ui-size'),
+            uiButton = containerParent.find('.ui-button').addClass('btn-position'),
+            uiWindowTitle = $container.find('.window-title'),
+            uiWindowMessage = $container.find('.window-message');
+        containerParent.find('.ui-widget-header').addClass('ui-icon-show');
+
+        $(uiButton[1]).addClass('btn-ok');
+
+        uiWindowTitle.html('<div class="window-error-title">' + errorArguments.title + '</div>');
+        uiWindowMessage.html('<div class="window-error">' + errorArguments.message + '</div>' +
+            '<div class="window-error-message">' + errorArguments.errorMessage + '</div>'
+        );
         return $container;
     }
 
@@ -428,6 +453,50 @@
                 }
             });
             $container = _setWaringContainer($container, warningArguments);
+            dialog.dialog("open");
+            return false;
+        },
+
+        /**
+         * error dialog
+         * @param title
+         * @param message
+         * @param errorMessage
+         * @returns {boolean}
+         */
+        error: function (errorArguments) {
+            if (window !== window.top) {
+                window.top.RC.common.error(errorArguments);
+                return;
+            }
+            var $container,
+                dialog;
+            if ($(".window-container").length > 0) {
+                $container = $(".window-container");
+            } else {
+                $container = $('<div class="window-container">' +
+                '<div class="window-title"></div>' +
+                '<div class="window-message"></div>' +
+                '</div>');
+                $(document.body).append($container);
+            }
+
+            dialog = $container.dialog({
+                autoOpen: false,
+                resizable: false,
+                height: 140,
+                width: 350,
+                modal: true,
+                buttons: {
+                    Ok: function (e) {
+                        if ($.isFunction(errorArguments.closeCallback)) {
+                            (errorArguments.closeCallback)(e);
+                        }
+                        dialog.dialog("close");
+                    }
+                }
+            });
+            $container = _setErrorContainer($container, errorArguments);
             dialog.dialog("open");
             return false;
         },

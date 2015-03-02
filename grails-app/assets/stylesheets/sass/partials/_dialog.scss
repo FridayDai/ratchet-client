@@ -140,6 +140,19 @@
     text-align: center;
 }
 
+.window-error-title {
+    color: $base-color-white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.window-error,
+.window-error-message {
+    margin-top: 13px;
+    color: $base-color-white;
+    text-align: center;
+}
+
 .ui-button {
     width: 120px;
     height: 35px;
@@ -166,7 +179,6 @@
 
 .ui-size {
     width: 450px !important;
-    padding-top: 10px;
 
     .btn-position {
 
@@ -228,6 +240,19 @@
                     }
                 }
 
+            }
+        }
+
+        .btn-ok {
+            margin: 24px;
+
+            &:hover {
+                color: $base-color-warn;
+                background-color: $base-color-white;
+
+                span {
+                    color: $base-color-warn;
+                }
             }
         }
     }
