@@ -289,7 +289,7 @@
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: new Date(time)
+            minDate: +time
         });
     }
 
@@ -374,18 +374,11 @@
             }
         }).change(function (data) {
             $(this).valid();
-            var date = new Date();
-            var time = date.getTime() + data.added.timeStamp;
+            //var date = new Date();
+            //var time = date.getTime() + data.added.timeStamp;
+            var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
             _initSurgeryTime(time);
         });
-
-
-        //$('#selectTreatment').on("change", function (data) {
-        //    var date = new Date();
-        //    var time = date.getTime() + data.added.timeStamp;
-        //    _initSurgeryTime(time);
-        //});
-
     }
 
     function _initTreatmentSelect() {
@@ -524,45 +517,45 @@
     }
 
     function _checkEmergencyContact() {
-        _.each($('.emergency-field'), function(element, index) {
-           $(element).on('input', function() {
-               if($(element).val() != '') {
-                   $('#emergency-firstName').attr('required', true);
-                   $('#emergency-lastName').attr('required', true);
-                   $('#relationship').attr('required', true);
-                   $('#emergency-email').attr('required', true);
-                   $('.permission-confirm-check').attr('required', true);
+        _.each($('.emergency-field'), function (element, index) {
+            $(element).on('input', function () {
+                if ($(element).val() != '') {
+                    $('#emergency-firstName').attr('required', true);
+                    $('#emergency-lastName').attr('required', true);
+                    $('#relationship').attr('required', true);
+                    $('#emergency-email').attr('required', true);
+                    $('.permission-confirm-check').attr('required', true);
 
-                   _.each($('.emergency-required'), function(element, index) {
-                       $(element).show();
-                   });
+                    _.each($('.emergency-required'), function (element, index) {
+                        $(element).show();
+                    });
 
-                   $('.permission-confirm').addClass('visible');
-               }
+                    $('.permission-confirm').addClass('visible');
+                }
 
-               var flagOptional = _.every($('.emergency-field'), function(element) {
-                   return $(element).val() == '';
-               });
+                var flagOptional = _.every($('.emergency-field'), function (element) {
+                    return $(element).val() == '';
+                });
 
-               if(flagOptional) {
-                   $('#emergency-firstName').attr('required', false);
-                   $('#emergency-lastName').attr('required', false);
-                   $('#relationship').attr('required', false);
-                   $('#emergency-email').attr('required', false);
-                   $('.permission-confirm-check').attr('required', false);
+                if (flagOptional) {
+                    $('#emergency-firstName').attr('required', false);
+                    $('#emergency-lastName').attr('required', false);
+                    $('#relationship').attr('required', false);
+                    $('#emergency-email').attr('required', false);
+                    $('.permission-confirm-check').attr('required', false);
 
-                   _.each($('.emergency-required'), function(element, index) {
-                       $(element).hide();
-                   });
+                    _.each($('.emergency-required'), function (element, index) {
+                        $(element).hide();
+                    });
 
-                   $('.permission-confirm').removeClass('visible');
+                    $('.permission-confirm').removeClass('visible');
 
-                   var elementList = $('.emergency-contact-info').find('.form-group').children();
-                   $.each(elementList, function (index, element) {
-                       RC.common.hideErrorTip(element);
-                   });
-               }
-           });
+                    var elementList = $('.emergency-contact-info').find('.form-group').children();
+                    $.each(elementList, function (index, element) {
+                        RC.common.hideErrorTip(element);
+                    });
+                }
+            });
         });
     }
 
