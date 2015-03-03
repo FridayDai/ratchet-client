@@ -34,5 +34,6 @@ class SinglePatientController extends BaseController {
 
     def invitePatient() {
         invitationService.invitePatient(params.id)
+        render true
     }
 }
