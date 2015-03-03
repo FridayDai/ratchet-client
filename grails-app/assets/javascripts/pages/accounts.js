@@ -227,15 +227,15 @@
     function _inviteAccount() {
         $("#invite-account").on("click", function (e) {
             e.preventDefault();
-            var accountId = $(this).data("accountId");
+            var accountId = $(this).data("id");
             $.ajax({
                 url: opts.urls.inviteAccount.format(accountId),
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    if (data.resp === true) {
-                        $("#status-text").text("Invited");
-                    }
+                    //if (data.resp === true) {
+                    //    $("#status-text").text("Invited");
+                    //}
                 }
             });
         });

@@ -53,6 +53,12 @@
                     </td>
                 </tr>
 
+                <tr class="tr-border">
+                    <td class="td-width">Role</td>
+                    <td><span class="account-role"
+                              id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                    </td>
+                </tr>
 
                 <tr class="tr-border">
                     <td class="td-width">Group</td>
@@ -87,21 +93,21 @@
     <g:form class="update-password ui-hidden" id="updatePassword" name="updatePassword">
 
         <div class="form-group">
-            <label class="lbl-group">OLD PASSWORD</label>
+            <label class="lbl-group">OLD PASSWORD<span>*</span></label>
             <input id="oldPass" name="oldPass" type="password" class="input-group"
                    placeholder="Enter old password"
                    required/>
         </div>
 
         <div class="form-group">
-            <label class="lbl-group">NEW PASSWORD</label>
+            <label class="lbl-group">NEW PASSWORD<span>*</span></label>
             <input id="newPass" name="newPass" type="password" class="input-group"
                    placeholder="Enter new password"
                    required/>
         </div>
 
         <div class="form-group">
-            <label class="lbl-group">CONFIRM PASSWORD</label>
+            <label class="lbl-group">CONFIRM PASSWORD<span>*</span></label>
             <input id="confirmPass" name="confirmPass" type="password" class="input-group"
                    placeholder="Enter new password again"
                    required/>
