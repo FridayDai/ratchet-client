@@ -93,7 +93,11 @@ class AccountsController extends BaseController {
 
     def resetPassword() {
         def code = params?.code
-        render view: '/forgotPassword/resetPassword', model: [code: code]
+        def resp = accountService.validPasswordCode(code)
+        if (resp) {
+            render view: '/forgotPassword/resetPassword', model: [code: code]
+        }
+
     }
 
     def confirmResetPassword() {

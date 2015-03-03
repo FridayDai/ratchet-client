@@ -239,4 +239,26 @@ class AccountService {
             throw new ApiResourceAccessException(e.message)
         }
     }
+
+    def validPasswordCode(code) throws ApiResourceAccessException, ApiReturnErrorException {
+        def url = grailsApplication.config.ratchetv2.server.url.password.restCheck
+
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("code", code)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message)
+            }
+
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
+        }
+    }
 }
