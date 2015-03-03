@@ -99,7 +99,7 @@
      */
     function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
-            url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, surgeryTime),
+            url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, selectedDate),
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {
