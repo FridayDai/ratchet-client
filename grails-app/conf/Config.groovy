@@ -148,6 +148,7 @@ ratchetv2 {
 
             //forgotPassword
             password.reset = "${ratchetv2.server.url.base}/password/reset"
+            password.restCheck = "${ratchetv2.server.url.base}/password/reset/check"
             password.confirm = "${ratchetv2.server.url.base}/password/confirm"
 
             // Patients URL
