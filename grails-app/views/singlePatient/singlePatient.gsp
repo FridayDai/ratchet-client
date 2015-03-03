@@ -125,7 +125,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">SURGEON<span>*</span></label>
-            <input id="selectStaffs" name="selectStaffs" type="text" class="required" placeholder=""/>
+            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""/>
         </div>
 
         <div class="emergency-contact-info">

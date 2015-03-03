@@ -345,7 +345,7 @@
      * @private
      */
     function _initStaffSelect() {
-        $('#selectStaffs').select2({
+        $('#selectSurgeons').select2({
             //tags: true,
             //formatSelection: function (dataItem) {
             //    if (dataItem.type === 8) {
