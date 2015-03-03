@@ -11,6 +11,10 @@
     }
 }
 
+input[type="text"], input[type="textarea"], input[type="email"]{
+    font-family: inherit;
+}
+
 .ui-widget-content {
     padding: 0;
     border: 15px solid rgba(0, 0, 0, .2);
