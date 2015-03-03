@@ -51,6 +51,18 @@
                 </tr>
 
                 <tr class="tr-border">
+                    <td class="td-width">Status</td>
+                    <td>
+                        <span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status -1 ] == "Inactive"}">
+                            <div class="inline div-invite">
+                                <button id="invite-account" class="btn btn-invite" data-id="${accountInfo.id}">Invite Again</button>
+                            </div>
+                        </g:if>
+                    </td>
+                </tr>
+
+                <tr class="tr-border">
                     <td class="td-width">Role</td>
                     <td><span class="account-role"
                               id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
