@@ -104,19 +104,21 @@
         border-bottom: 0;
         border-left: 0;
         background-image: none;
+
+        .ui-datepicker-current {
+            display: none;
+            float: left;
+        }
+
     }
 
     button {
         overflow: visible;
         float: right;
         width: auto;
-        margin: .5em .2em .4em;
-        padding: .2em .6em .3em;
+        //margin: .5em .2em .4em;
+        padding: .6em .3em;
         cursor: pointer;
-
-        .ui-datepicker-current {
-            float: left;
-        }
     }
 
     .ui-datepicker-multi {
@@ -210,8 +212,8 @@
     .ui-datepicker-days-cell-over {
 
         .ui-state-default {
-            background-color: #335d70;
             color: #fff;
+            background-color: #335d70;
         }
     }
 }
