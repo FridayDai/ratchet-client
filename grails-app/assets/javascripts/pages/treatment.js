@@ -124,7 +124,6 @@
                 ui.jqXHR.error(function () {
                     ui.panel.html(RC.constants.errorMessage);
                 });
-                RC.common.progress(true);
             },
             load: function (event, ui) {
                 var type = ui.tab.data("type");
@@ -135,11 +134,9 @@
                             break;
                         case "Task":
                             RC.pages.task.init(ui.panel);
-                            RC.common.progress(false);
                             break;
                         case "Team":
                             RC.pages.team.init(ui.panel);
-                            RC.common.progress(false);
                             break;
                         case "Overview":
                             RC.pages.overview.init(ui.panel);
