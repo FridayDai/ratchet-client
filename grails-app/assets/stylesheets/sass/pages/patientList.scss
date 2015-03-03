@@ -18,6 +18,11 @@
         margin-right: 10px;
         content: '\f2c7';
     }
+
+    span {
+        font: $base-font-utility;
+        font-size: 16px;
+    }
 }
 
 .inline {
