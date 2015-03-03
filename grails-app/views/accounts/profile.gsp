@@ -38,8 +38,7 @@
 
             <table class="account-table">
                 <tr>
-                    <td class="bg-color">ID: ${accountInfo.id}</td>
-                    <td class="bg-color"></td>
+                    <td class="bg-color" colspan="2">ID: ${accountInfo.id}</td>
                 </tr>
 
                 <tr class="tr-border">
@@ -71,11 +70,11 @@
 
 
                 <tr>
-                    <td class="bg-color">Last Login:</td>
-                    <td class="bg-color">
+                    <td class="bg-color" colspan="2">
+                        Last Login:
                         <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMM d, yyyy h:mm a"/>
+                                                 timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                 format="MMM d, yyyy h:mm a"/>
                     </td>
                 </tr>
             </table>
