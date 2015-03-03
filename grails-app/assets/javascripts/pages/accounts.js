@@ -88,7 +88,7 @@
                 {
                     data: function (source) {
                         var lastUpdateTime = new Date(source.lastUpdateDate);
-                        var formatTime = moment(lastUpdateTime).format('MMM D, YYYY h:mm:ss A');
+                        var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
                     width: "19%"

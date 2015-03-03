@@ -55,7 +55,7 @@
                 },
                 {
                     data: function(source){
-                    var formatDate = moment(source.dateCreated).format('MMM D, YYYY h:mm:ss a');
+                    var formatDate = moment(source.dateCreated).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss a');
                     return formatDate;
                     },
                     width: "16%"

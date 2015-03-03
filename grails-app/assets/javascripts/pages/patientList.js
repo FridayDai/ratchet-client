@@ -89,7 +89,7 @@
                 },
                 {
                     data: function (source) {
-                        var formatDate = moment(source.lastUpdate).format('MMM D, YYYY h:mm:ss A');
+                        var formatDate = moment(source.lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
                     width: "19%"
@@ -411,8 +411,6 @@
                     };
                 }
             }
-        }).change(function () {
-            $(this).valid();
         });
 
     }
@@ -453,8 +451,6 @@
                     };
                 }
             }
-        }).change(function () {
-            $(this).valid();
         });
 
 
