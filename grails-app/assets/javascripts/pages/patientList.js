@@ -463,21 +463,21 @@
     function _initStaffSelect() {
 
         $('#selectStaffs').select2({
-            formatSelection: function (dataItem) {
-                if (dataItem.type === 8) {
-                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
-                } else {
-                    return "<div class='surgery'> " + dataItem.text + " </div>";
-                }
-
-            },
-            formatResult: function (dataItem) {
-                if (dataItem.type === 8) {
-                    return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
-                } else {
-                    return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
-                }
-            },
+            //formatSelection: function (dataItem) {
+            //    if (dataItem.type === 8) {
+            //        return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
+            //    } else {
+            //        return "<div class='surgery'> " + dataItem.text + " </div>";
+            //    }
+            //
+            //},
+            //formatResult: function (dataItem) {
+            //    if (dataItem.type === 8) {
+            //        return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
+            //    } else {
+            //        return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
+            //    }
+            //},
             ajax: {
                 transport: function (params) {
                     params.beforeSend = function () {
