@@ -8,7 +8,7 @@
         display: table-row-group;
         color: $base-color-medium-black;
         font-weight: 600;
-        font-size: small;
+        font-size: 14px;
 
         span {
             margin-left: 3px;
@@ -24,7 +24,7 @@
         border: 1px solid $base-color-white-grey;
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
-        font-size: small;
+        font-size: 14px;
 
         @include input-placeholder {
             color: $base-font-grey;
@@ -65,7 +65,7 @@
     .select2-chosen {
         margin-top: 5px;
         margin-left: -5px;
-        font-size: small;
+        font-size: 14px;
     }
 
     .select2-container-multi {
