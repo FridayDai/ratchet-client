@@ -81,8 +81,21 @@
                 },
                 {
                     data: function (source) {
-                        var num = source.phoneNumber;
-                        var phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        var num = source.phoneNumber,
+                            isUS,
+                            phoneNumber,
+                            subNumber;
+
+                        num.charAt(0) === '1' ? isUS = true : isUS = false;
+
+                        if(isUS) {
+                            subNumber = num.slice(1, num.length);
+                            phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                            phoneNumber = '1 ' + phoneNumber;
+                        } else {
+                            phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        }
+
                         return phoneNumber;
                     },
                     width: "15%"
