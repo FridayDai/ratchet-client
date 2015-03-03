@@ -68,6 +68,7 @@
                     <td class="bg-color">Last Login:</td>
                     <td class="bg-color">
                         <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
+                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                       format="MMM d, yyyy h:mm a"/>
                     </td>
                 </tr>
