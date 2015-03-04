@@ -87,7 +87,7 @@
             var id = parent.find(".id").text();
             var firstName = parent.find(".first-name").text();
             var lastName = parent.find(".last-name").text();
-            var email = parent.find(".patientEmail").text();
+            var email = parent.find("#patientEmail").text();
             var phoneNum = parent.find(".phone").text();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
@@ -279,7 +279,7 @@
                     $('.id').text(patientInfo.id);
                     $('.first-name').text(patientInfo.firstName);
                     $('.last-name').text(patientInfo.lastName);
-                    $('.patientEmail').text(patientInfo.email);
+                    $('#patientEmail').text(patientInfo.email);
                     $('.phone').text(patientInfo.number);
                 }
             }
