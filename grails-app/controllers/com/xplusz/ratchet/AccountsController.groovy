@@ -9,7 +9,10 @@ class AccountsController extends BaseController {
     def accountService
 
     def index() {
-        render view: 'accounts'
+        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+        def accountList = accountService.getAccounts(request, response, params)        
+        render(view: 'accounts', model: [accountList: accountList, pagesize: params.length])
     }
 
     def getAccounts() {
