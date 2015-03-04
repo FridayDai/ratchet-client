@@ -12,8 +12,6 @@ class PatientsController extends BaseController {
     static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
 
     def index() {
-        //def start = params.page?:RatchetConstants.DEFAULT_PAGE_OFFSET
-        //def length = params.pagesize?:RatchetConstants.DEFAULT_PAGE_SIZE
         def pagesize = RatchetConstants.DEFAULT_PAGE_SIZE
         def patientList = patientService.loadPatients(request, response, params)
         render(view: '/patients/patientList', model: [patientList: patientList, pagesize: pagesize])
