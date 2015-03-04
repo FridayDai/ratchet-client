@@ -46,7 +46,7 @@ class BaseController {
     def handleApiReturnErrorException(ApiReturnErrorException e) {
         flash.message = e.message
         if (e.statusId == 401) {
-            redirect(uri: '/login')
+            render view: '/error/error404'
         } else {
             render view: '/error/error400'
         }
