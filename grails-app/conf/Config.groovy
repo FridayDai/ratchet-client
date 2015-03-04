@@ -166,6 +166,7 @@ ratchetv2 {
             updatePassword = "${ratchetv2.server.url.base}/password/update"
             activateStaff = "${ratchetv2.server.url.base}/staff/confirm"
             confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
+            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
 
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
