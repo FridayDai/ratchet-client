@@ -29,7 +29,8 @@
                 updateAccount: "/updateAccount",
                 inviteAccount: "/inviteAccount/{0}",
                 updatePassword: "/updatePassword",
-                showSingleAccount: "/singleAccount/{0}"
+                showSingleAccount: "/singleAccount/{0}",
+                deactivateAccount: "/deactivateAccount/{0}"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
@@ -453,6 +454,7 @@
     function _showDeactiveBtn() {
         $("#triangle").on("click", function (e) {
             e.preventDefault();
+            e.stopPropagation();
 
             if ($(this).hasClass("triangle-right")) {
                 $(this).removeClass("triangle-right").addClass("triangle-bottom");
@@ -465,11 +467,72 @@
     }
 
 
+    /**
+     *
+     * @private
+     */
     function _deactivateStaff() {
         $("#btn-deactivate").on("click", function (e) {
             e.preventDefault();
+            e.stopPropagation();
 
             var accountId = $(this).data("accountId");
+            var parents = $(this).parents();
+            var doctor = parents.find("#isDoctor").text();
+            var isDoctor = $.trim(doctor);
+            var firstName = parents.find("#accountFirstName").text();
+            var lastName = parents.find("#accountLastName").text();
+
+            RC.common.warning(_.extend({}, {
+                    title: '<div class="window-error">' + "DEACTIVATE ACCOUNT" + '</div>',
+                    message: '<div class="window-error">' + "Are you sure you want to delete the following account?" + '</div>' +
+                    '<div class="window-deactivate-msg">' + isDoctor + " " + firstName + " " + lastName + '</div>'
+                },
+                {
+                    element: $(".warn"),
+                    closeCallback: function () {
+                        _deactivateAccount(accountId);
+                    },
+                    cancelCallback: function () {
+                        $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
+                        $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+                    }
+                }));
+        });
+    }
+
+    /**
+     *
+     * @param accountId
+     * @private
+     */
+    function _deactivateAccount(accountId) {
+        $.ajax({
+            url: opts.urls.deactivateAccount.format(accountId),
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.resp === true) {
+                    $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
+                    $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+                }
+            }
+        });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _clickToClose() {
+        $(".content").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if ($("#btn-deactivate").is(':visible')) {
+                $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
+                $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+            }
         });
     }
 
@@ -489,7 +552,10 @@
         _bindSearchEvent();
         _logout();
         _goBackToPrePage();
+        _clickToClose();
         _showDeactiveBtn();
+        _deactivateStaff();
+
     }
 
     _init();

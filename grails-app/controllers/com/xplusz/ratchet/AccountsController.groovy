@@ -42,12 +42,6 @@ class AccountsController extends BaseController {
         render result as JSON
     }
 
-//    def getProfile() {
-//        def accountId = params?.accountId
-//        def accountProfile = accountService.getSingleAccount(accountId)
-//        render(view: '/accounts/profile', model: [accountInfo: accountProfile])
-//    }
-
     def updatePassword() {
         def resp = accountService.updatePassword(request, response, params)
         def result = [resp: resp]
@@ -64,7 +58,6 @@ class AccountsController extends BaseController {
                 render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
             }
         } else {
-//            flash.message = "Code is invalid."
             render view: '/error/error404'
         }
 
@@ -75,7 +68,6 @@ class AccountsController extends BaseController {
         if (resp == true) {
             redirect(uri: '/login')
         } else {
-//            flash.message = "Staff is not exist."
             render view: '/error/error404'
         }
     }
@@ -107,5 +99,11 @@ class AccountsController extends BaseController {
         }
     }
 
+    def deactivateAccount() {
+        Integer accountId = params.int("accountId")
+        def resp = accountService.deactivateAccount(request, response, accountId)
+        def result = [resp: resp]
+        render result as JSON
+    }
 
 }
