@@ -79,7 +79,9 @@
                 <g:else>
                     <label>Send Time:</label>
                 </g:else>
-                <g:formatDate date="${task?.sendTime}" format="MMM dd,yyyy HH:mm aaa"></g:formatDate>
+                <g:formatDate date="${task?.sendTime}"
+                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                              format="MMM dd,yyyy HH:mm aaa"></g:formatDate>
             </label>
         </div>
 
