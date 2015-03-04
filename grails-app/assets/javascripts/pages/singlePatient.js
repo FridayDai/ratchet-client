@@ -248,8 +248,11 @@
                 }
             ));
 
-            _initPhoneInput();
-            _checkDoubleOneNumber();
+            _checkSpecialNumber();
+
+            if (phoneNumber.substring(0, 3) !== "1 1" && phoneNumber.substring(0, 3) !== "1 0") {
+                _initPhoneInput();
+            }
         });
     }
 
@@ -424,21 +427,22 @@
     }
 
     /**
-     *
+     * format phone number when the front characters are '11' or '10'
      * @private
      */
-    function _checkDoubleOneNumber() {
+    function _checkSpecialNumber() {
+        var phoneStr;
+
         $("#phone").on("input", function () {
-            var str = $("#phone").val(),
-                firstNum,
-                secondNum;
+            _initPhoneInput();
 
-            if (str.substring(0, 2) === "11" || str.substring(0, 2) === "10") {
-                firstNum = str.charAt(0);
-                secondNum = str.charAt(1);
-                str = firstNum + ' ' + secondNum + str.substring(2, str.length);
+            phoneStr = $("#phone").val();
+            if (phoneStr.substring(0, 2) === "11" || phoneStr.substring(0, 2) === "10") {
+                var firstNum = phoneStr.charAt(0);
+                var secondNum = phoneStr.charAt(1);
+                phoneStr = firstNum + ' ' + secondNum + phoneStr.substring(2, phoneStr.length);
 
-                $('#phone').val(str);
+                $('#phone').val(phoneStr);
             }
         });
     }
