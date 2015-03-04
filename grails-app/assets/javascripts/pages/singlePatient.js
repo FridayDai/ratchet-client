@@ -250,6 +250,7 @@
             ));
 
             _initPhoneInput();
+            _checkDoubleOneNumber();
         });
     }
 
@@ -420,6 +421,26 @@
         $("#phone").intlTelInput({
             onlyCountries: ["us"],
             utilsScript: "/assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+        });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _checkDoubleOneNumber() {
+        $("#phone").on("input", function () {
+            var str = $("#phone").val(),
+                firstNum,
+                secondNum;
+
+            if (str.substring(0, 2) === "11" || str.substring(0, 2) === "10") {
+                firstNum = str.charAt(0);
+                secondNum = str.charAt(1);
+                str = firstNum + ' ' + secondNum + str.substring(2, str.length);
+
+                $('#phone').val(str);
+            }
         });
     }
 

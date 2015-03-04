@@ -299,7 +299,7 @@
             }));
 
             _initPhoneInput();
-            _limitMaxLength();
+            _checkDoubleOneNumber();
             //_initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
@@ -341,13 +341,18 @@
      *
      * @private
      */
-    function _limitMaxLength() {
+    function _checkDoubleOneNumber() {
         $("#phoneNumber").on("input", function () {
-            var str = $("#phoneNumber").val();
-            if (str.substring(0, 2) === "11") {
-                $('#phoneNumber').attr('maxlength', '13');
-            } else {
-                $('#phoneNumber').attr('maxlength', '14');
+            var str = $("#phoneNumber").val(),
+                firstNum,
+                secondNum;
+
+            if (str.substring(0, 2) === "11" || str.substring(0, 2) === "10") {
+                firstNum = str.charAt(0);
+                secondNum = str.charAt(1);
+                str = firstNum + ' ' + secondNum + str.substring(2, str.length);
+
+                $('#phoneNumber').val(str);
             }
         });
     }
