@@ -65,9 +65,10 @@
             error: function (jqXHR) {
                 if (jqXHR.status === 404) {
                     //window.location.href = "/";
-                } else if (jqXHR.status === 403 || jqXHR.status === 401) {
+                } else if (jqXHR.status === 403) {
                     window.location.href = "/login";
-
+                } else if (jqXHR.status === 401) {
+                    window.location.href = "404";
                 }
                 else if (jqXHR.status === 400 || jqXHR.status === 500) {
                     RC.common.error({
@@ -93,8 +94,8 @@
                 pages: 5,     // number of pages to cache
                 url: '',      // script url
                 data: null,   // function or object with parameters to send to the server
-                         // matching how `ajax.data` works in DataTables
-                method: 'GET' ,// Ajax HTTP method
+                // matching how `ajax.data` works in DataTables
+                method: 'GET',// Ajax HTTP method
                 beforeSend: function () {
                 }
             }, opts);
