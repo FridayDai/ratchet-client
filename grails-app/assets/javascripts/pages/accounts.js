@@ -3,6 +3,9 @@
 
     //Define accounts page global variables
     var opts = {
+            table: {
+                id: '#accountsTable'
+            },
             defaultConfirmArguments: {
                 confirmFormArguments: {
                     title: RC.constants.confirmAccountTitle,
@@ -47,15 +50,16 @@
             accountTable.clear();
             accountTable.destroy();
         }
-        accountTable = $("#accountsTable").DataTable({
+        accountTable = $(opts.table.id).DataTable({
             paging: true,
             searching: false,
             ordering: true,
-            pageLength: 20,
             info: false,
             bLengthChange: false,
-            "serverSide": true,
+            serverSide: true,
             "bAutoWidth": false,
+            pageLength: $(opts.table.id).data("pagesize"),
+            deferLoading: $(opts.table.id).data("total"),
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
@@ -66,43 +70,53 @@
                 pages: 2, // number of pages to cache
                 data: data
             }),
-            "columnDefs": [
-                {"targets": [0, 4], "orderable": false}
-            ],
-            columns: [
-                {
-                    data: function (source) {
-                        return '<p class="source-id">' + source.id + '</p>';
-                    },
-                    width: "10%"
+            "columnDefs": [{
+                "targets": [0, 4],
+                "orderable": false
+            },
+            {
+                "targets": 0,
+                "render": function (data, type, full) {
+                    var id = data === undefined ? full.id : data;
+                    return '<p class="source-id">' + id + '</p>';
                 },
-                {
-                    data: function (source) {
-                        return source.firstName + " " + source.lastName;
-                    },
-                    width: "18%"
+                width: "10%"
+            },
+            {
+                "targets": 1,
+                "render": function (data, type, full) {
+                    var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                    return name;
                 },
-                {
-                    data: "email",
-                    width: "27%"
+                width: "18%"
+            },
+            {
+                "targets": 2,
+                "render": function (data, type, full) {
+                    var email = data === undefined ? full.email : data;
+                    return email;
                 },
-                {
-                    data: function (source) {
-                        var lastUpdateTime = new Date(source.lastUpdateDate);
-                        var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                        return formatTime;
-                    },
-                    width: "19%"
+                width: "27%"
+            },
+            {
+                "targets": 3,
+                "render": function (data, type, full) {
+                    var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
+                    var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                    var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                    return formatTime;
                 },
-                {
-                    data: function (source) {
-                        return '<a href="/singleAccount/' + source.id + '" data-id ="' + source.id + '" class="view"><span>View</span></a>';
-                    },
-                    width: "7%"
-                }
-            ]
+                width: "19%"
+            },
+            {
+                "targets": 4,
+                "render": function (data, type, full) {
+                    var id = data == undefined ? full.id : data;
+                    return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                },
+                width: "7%"
+            }]
         });
-
     }
 
     /**

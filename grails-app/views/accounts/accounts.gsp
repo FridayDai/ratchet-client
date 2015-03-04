@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="table-group">
-            <table id="accountsTable" class="display accounts-table">
+            <table id="accountsTable" class="display accounts-table" data-total="${accountList.recordsTotal}" data-pagesize="${pagesize}">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -33,6 +33,17 @@
                     <th></th>
                 </tr>
                 </thead>
+                <tbody>
+                <g:each var="account" in="${accountList.data}" status="i">
+                    <tr data-is-dom-data="true">
+                        <td>${account.id}</td>
+                        <td>${account.firstName} ${account.lastName}</td>
+                        <td>${account.email}</td>
+                        <td>${account.lastUpdateDate}</td>
+                        <td>${account.id}</td>
+                    </tr>
+                </g:each>
+                </tbody>                
             </table>
         </div>
 

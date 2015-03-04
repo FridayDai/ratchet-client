@@ -3,6 +3,9 @@
 
     //Define provider page global variables
     var opts = {
+            table: {
+                id: '#patientsTable'
+            },
             defaultConfirmArguments: {
                 confirmFormArguments: {
                     title: RC.constants.confirmPatientTitle,
@@ -38,40 +41,54 @@
             provideTable.destroy();
         }
 
-        provideTable = $("#patientsTable").DataTable({
+        provideTable = $(opts.table.id).DataTable({
             paging: true,
             searching: false,
             ordering: true,
-            pageLength: $('#patientsTable').data("pagesize"),
             info: false,
             bLengthChange: false,
             serverSide: true,
             "bAutoWidth": false,
-            "columnDefs": [{
+            pageLength: $(opts.table.id).data("pagesize"),
+            deferLoading: $(opts.table.id).data("total"),
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".display").css("display", "inline-table");
+            },
+            ajax: $.fn.dataTable.pipeline({
+                url: opts.urls.query,
+                pages: 2, // number of pages to cache
+                data: data
+            }),
+            columnDefs: [{
                 "targets": 5,
                 "orderable": false,
             },
             {
                 "targets": 0,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var id = data === undefined ? full.id : data;
                     return '<p class="source-id">' + id + '</p>';
-                }
+                },
+                width: "10%"
             }, {
                 "targets": 1,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
                     return name;
-                }
+                },
+                width: "20%"
             }, {
                 "targets": 2,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var email = data === undefined ? full.email : data;
                     return email;
-                }
+                },
+                width: "26%"
             }, {
                 "targets": 3,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var isUS,
                         phoneNumber,
                         subNumber;
@@ -88,52 +105,24 @@
                     }
 
                     return phoneNumber;
-                }
+                },
+                width: "15%"
             }, {
                 "targets": 4,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var lastUpdate = data === undefined ? full.lastUpdate : data;
                     var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                     return formatDate;
-                }
+                },
+                width: "19%"
             }, {
                 "targets": 5,
-                "render": function ( data, type, full, meta ) {
+                "render": function (data, type, full) {
                     var id = data == undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
-                }
+                },
+                width: "8%"
             }],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                $(".display").css("display", "inline-table");
-            },
-            ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.query,
-                pages: 2, // number of pages to cache
-                data: data
-            }),
-            deferLoading: $('#patientsTable').data("total"),
-            columns: [
-                {
-                    width: "10%",
-                },
-                {
-                    width: "20%"
-                },
-                {
-                    width: "26%"
-                },
-                {
-                    width: "15%"
-                },
-                {
-                    width: "19%"
-                },
-                {
-                    width: "8%"
-                }
-            ]
         });
 
     }
