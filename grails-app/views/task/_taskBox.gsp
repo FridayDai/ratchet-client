@@ -7,7 +7,7 @@
             <span class="complete-time pull-right">Complete Time:
                 <g:formatDate date="${task?.completeTime}"
                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd,yyyy HH:mm aaa"></g:formatDate></span>
+                              format="MMM dd,yyyy hh:mm aaa"></g:formatDate></span>
         </g:if>
     %{--<span class="complete-time pull-right">Complete Time: Jan 10, 2015 8:00AM</span>--}%
     </div>
@@ -62,7 +62,7 @@
                 <h5 class="due-time middle-font">DUE:
                     <g:formatDate date="${task?.dueTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd,yyyy HH:mm aaa"></g:formatDate></h5>
+                                  format="MMM dd,yyyy hh:mm aaa"></g:formatDate></h5>
             </g:else>
 
         </div>
@@ -81,7 +81,7 @@
                 </g:else>
                 <g:formatDate date="${task?.sendTime}"
                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd,yyyy HH:mm aaa"></g:formatDate>
+                              format="MMM dd,yyyy hh:mm aaa"></g:formatDate>
             </label>
         </div>
 
