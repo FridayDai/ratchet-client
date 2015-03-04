@@ -47,6 +47,9 @@ class BaseController {
         flash.message = e.message
         if (e.statusId == 401) {
             render view: '/error/error404'
+        }
+        if (e.statusId == 403) {
+            render view: '/login/login'
         } else {
             render view: '/error/error400'
         }

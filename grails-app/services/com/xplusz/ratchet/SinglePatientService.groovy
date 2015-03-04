@@ -2,6 +2,8 @@ package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
@@ -61,7 +63,7 @@ class SinglePatientService {
     }
 
     def updateSinglePatient(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiResourceAccessException, ApiReturnErrorException {
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
         def url = String.format(updateSinglePatientUrl, params?.patientId)
 
@@ -80,11 +82,11 @@ class SinglePatientService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message)
+                throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiResourceAccessException(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }
