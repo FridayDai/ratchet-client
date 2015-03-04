@@ -174,7 +174,7 @@
                 </ul>
 
 
-                <p>If you are not able to tell us your preference, for example if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety.</p>
+                <p><span class="italic">If you are not able to tell us your preference, for example if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety.</span></p>
 
                 <p>In these cases we never share your information unless you give us written permission:</p>
 
@@ -201,21 +201,21 @@
 
                 <p><span>Treat you</span></p>
 
-                <p>We can use your health information and share it with other professionals who are treating you.
+                <p>We can use your health information and share it with other professionals who are treating you.<br>
 
-                Example: A doctor treating you for an injury asks another doctor about your overall health condition.</p>
+                 <span class="example">Example:</span> A doctor treating you for an injury asks another doctor about your overall health condition.</p>
 
                 <p><span>Run our organization</span>
 
-                <p>We can use and share your health information to run our practice, improve your care, and contact you when necessary.
+                <p>We can use and share your health information to run our practice, improve your care, and contact you when necessary.<br>
 
-                Example: We use health information about you to manage your treatment and services.</p>
+                <span class="example">Example:</span> We use health information about you to manage your treatment and services.</p>
 
                 <p><span>Bill for your services</span></p>
 
-                <p>We can use and share your health information to bill and get payment from health plans or other entities.
+                <p>We can use and share your health information to bill and get payment from health plans or other entities.<br>
 
-                Example: We give information about you to your health insurance plan so it will pay for your services.</p>
+                <span class="example">Example:</span> We give information about you to your health insurance plan so it will pay for your services.</p>
 
 
                 <p><span>How else can we use or share your health information?</span></p>
@@ -234,7 +234,7 @@
                     <li><span class="dot"></span>Preventing or reducing a serious threat to anyone’s health or safety</li>
                 </ul>
 
-                <p><span>Do research</span><p>
+                <p><span>Do research</span></p>
                 <p>We can use or share your information for health research.</p>
 
                 <p><span>Comply with the law</span></p>

@@ -1,5 +1,5 @@
 <div role="banner" >
-    <p class="update">Last update:Aug 25,2014</p>
+    <p class="update">Last update:  Aug 25,2014</p>
     <div class="agreement-footer">
         <ul class="clear">
             <li><g:link controller="home" action="termsOfService">Terms of Service</g:link></li>
