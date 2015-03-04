@@ -447,6 +447,33 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _showDeactiveBtn() {
+        $("#triangle").on("click", function (e) {
+            e.preventDefault();
+
+            if ($(this).hasClass("triangle-right")) {
+                $(this).removeClass("triangle-right").addClass("triangle-bottom");
+                $("#btn-deactivate").removeClass("displaynone").addClass("displayblock");
+            } else {
+                $(this).removeClass("triangle-bottom").addClass("triangle-right");
+                $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+            }
+        });
+    }
+
+
+    function _deactivateStaff() {
+        $("#btn-deactivate").on("click", function (e) {
+            e.preventDefault();
+
+            var accountId = $(this).data("accountId");
+        });
+    }
+
+    /**
      * Provider page Initialization
      * @private
      */
@@ -462,6 +489,7 @@
         _bindSearchEvent();
         _logout();
         _goBackToPrePage();
+        _showDeactiveBtn();
     }
 
     _init();
