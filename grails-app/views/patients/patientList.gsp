@@ -36,7 +36,7 @@
         </div>
 
         <div class="table-group">
-            <table id="patientsTable" class="display div-hidden">
+            <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}" data-pagesize="${pagesize}">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -47,7 +47,18 @@
                     <th></th>
                 </tr>
                 </thead>
-
+                <tbody>
+                <g:each var="patient" in="${patientList.data}" status="i">
+                    <tr data-is-dom-data="true">
+                        <td>${patient.id}</td>
+                        <td>${patient.firstName} ${patient.lastName}</td>
+                        <td>${patient.email}</td>
+                        <td>${patient.phoneNumber}</td>
+                        <td>${patient.lastUpdate}</td>
+                        <td>${patient.id}</td>
+                    </tr>
+                </g:each>
+                </tbody>
             </table>
         </div>
 

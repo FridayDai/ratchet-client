@@ -42,14 +42,67 @@
             paging: true,
             searching: false,
             ordering: true,
-            pageLength: 20,
+            pageLength: $('#patientsTable').data("pagesize"),
             info: false,
             bLengthChange: false,
-            //processing: true,
-            "serverSide": true,
+            serverSide: true,
             "bAutoWidth": false,
-            "columnDefs": [
-                {"targets": 5, "orderable": false}],
+            "columnDefs": [{
+                "targets": 5,
+                "orderable": false,
+            },
+            {
+                "targets": 0,
+                "render": function ( data, type, full, meta ) {
+                    var id = data === undefined ? full.id : data;
+                    return '<p class="source-id">' + id + '</p>';
+                }
+            }, {
+                "targets": 1,
+                "render": function ( data, type, full, meta ) {
+                    var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                    return name;
+                }
+            }, {
+                "targets": 2,
+                "render": function ( data, type, full, meta ) {
+                    var email = data === undefined ? full.email : data;
+                    return email;
+                }
+            }, {
+                "targets": 3,
+                "render": function ( data, type, full, meta ) {
+                    var isUS,
+                        phoneNumber,
+                        subNumber;
+                    var num = data === undefined ? full.phoneNumber : data;
+
+                    num.charAt(0) === '1' ? isUS = true : isUS = false;
+
+                    if(isUS) {
+                        subNumber = num.slice(1, num.length);
+                        phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        phoneNumber = '1 ' + phoneNumber;
+                    } else {
+                        phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                    }
+
+                    return phoneNumber;
+                }
+            }, {
+                "targets": 4,
+                "render": function ( data, type, full, meta ) {
+                    var lastUpdate = data === undefined ? full.lastUpdate : data;
+                    var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                    return formatDate;
+                }
+            }, {
+                "targets": 5,
+                "render": function ( data, type, full, meta ) {
+                    var id = data == undefined ? full.id : data;
+                    return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
+                }
+            }],
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
@@ -60,57 +113,24 @@
                 pages: 2, // number of pages to cache
                 data: data
             }),
+            deferLoading: $('#patientsTable').data("total"),
             columns: [
                 {
-                    data: function (source) {
-                        return '<p class="source-id">' + source.patientId + '</p>';
-                    },
-                    width: "10%"
+                    width: "10%",
                 },
                 {
-                    data: function (source) {
-                        return source.firstName + " " + source.lastName;
-                    },
                     width: "20%"
                 },
                 {
-                    data: function (source) {
-                        return source.email;
-                    },
                     width: "26%"
                 },
                 {
-                    data: function (source) {
-                        var num = source.phoneNumber,
-                            isUS,
-                            phoneNumber,
-                            subNumber;
-
-                        num.charAt(0) === '1' ? isUS = true : isUS = false;
-
-                        if(isUS) {
-                            subNumber = num.slice(1, num.length);
-                            phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                            phoneNumber = '1 ' + phoneNumber;
-                        } else {
-                            phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                        }
-
-                        return phoneNumber;
-                    },
                     width: "15%"
                 },
                 {
-                    data: function (source) {
-                        var formatDate = moment(source.lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                        return formatDate;
-                    },
                     width: "19%"
                 },
                 {
-                    data: function (source) {
-                        return '<a href="/patients/' + source.id + '"class="view" data-id ="' + source.id + '"><span>View</span></a>';
-                    },
                     width: "8%"
                 }
             ]
