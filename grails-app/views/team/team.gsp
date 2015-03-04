@@ -1,11 +1,12 @@
 <%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
 
-<div class="content">
+<div <g:if test="${status == 'false'}">class="content archived"</g:if> <g:else>class="content"</g:else>>
     <div class="care-team-content">
 
         <input type="hidden" id="hidden-medical-record" value="${medicalRecordId}"/>
         <input type="hidden" id="hidden-client-id" value="${clientId}"/>
         <input type="hidden" id="hidden-patient-id" value="${patientId}"/>
+        <input type="hidden" id="hidden-status" value="${status}"/>
 
         <div class="inner-header">
             <h4 class="surgeon">SURGEON</h4>
@@ -30,8 +31,15 @@
                     ${surgeon.email}
                 </div>
 
-                <a href="#" class="btn-edit-surgeon" id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
-                </a>
+                <button
+                    <g:if test="${status == 'false'}">
+                        class="btn-edit-surgeon disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn-edit-surgeon"
+                    </g:else>
+                        id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
+                </button>
             </g:each>
         </div>
     </div>
@@ -39,7 +47,7 @@
     <div class="care-giver-content">
         <div class="inner-header">
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
-            <button class="btn btn-invite btn-position" id="invite-giver" data-medical-record-id="${medicalRecordId}"
+            <button <g:if test="${status == 'false'}"> class="btn btn-invite btn-position disabled" disabled="disabled"</g:if> <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver" data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
                 <span>Invite</span>
             </button>

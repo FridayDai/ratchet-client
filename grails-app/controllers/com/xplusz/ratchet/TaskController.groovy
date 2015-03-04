@@ -11,9 +11,10 @@ class TaskController extends BaseController {
     def medicalRecordService
 
     def getTasksAndTools() {
-        def clientId = params.clientId
-        def patientId = params.patientId
-        def medicalRecordId = params.medicalRecordId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def status = params?.status
 //        def treatmentId = params.treatmentId
 
         def tasks = medicalRecordService.showTasksByMedicalRecord(clientId, medicalRecordId)
@@ -32,7 +33,7 @@ class TaskController extends BaseController {
 
 //        def tools = toolService.getToolsByTreatment(treatmentId)
 //        def otherScores = "neck:4, arm:5"
-        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId]
+        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, status: status]
     }
 
     def addTaskToMedicalRecord() {

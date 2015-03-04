@@ -130,6 +130,7 @@
         _initDatePicker(element);
 
         $(element).tabs({
+            cache: false,
             beforeLoad: function (event, ui) {
                 ui.jqXHR.error(function () {
                     ui.panel.html(RC.constants.errorMessage);

@@ -14,26 +14,33 @@
 @import '../partials/theme';
 
 .icon-edit {
-    width: 20px;
-    height: 20px;
+    padding: 5px 0;
+    border: 0;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
 
     &:before {
         display: inline-block;
         padding-left: 10px;
         content: '\f417';
-        color: #b3b3b3;
+        color: $base-font-color;
         font-weight: lighter;
         font-size: 26px;
         font-family: ionicons;
         cursor: pointer;
     }
-    //    //    position: absolute;
-    //    top: -5px;
-    //    right: 35px;
-    //    width: 20px;
-    //    height: 20px;
-    //    background: url('../../../images/edit.png') no-repeat 0 0;
-    //    background-size: cover;
+}
+
+.icon-edit.disabled {
+    background-color: transparent;
+
+    &:before {
+        color: $base-color-grey;
+    }
 }
 
 .surgery-time-picker {

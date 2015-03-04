@@ -11,8 +11,9 @@ class TeamController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
         def patientId = params?.patientId
+        def status = params?.status
         def surgeons = treatmentService.getCareTeam(request, response, medicalRecordId)
-        render(view: "/team/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId])
+        render(view: "/team/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, status: status])
     }
 
 //    def getCareTeam() {

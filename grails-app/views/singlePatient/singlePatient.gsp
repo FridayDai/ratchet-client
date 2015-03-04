@@ -68,7 +68,7 @@
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime]">${medicalRecord.title} ${medicalRecord.tmpTitle}</g:link>
+                                         surgeryTime    : medicalRecord?.surgeryTime, status : false]">${medicalRecord.title} ${medicalRecord.tmpTitle}</g:link>
                     </li>
                 </g:each>
             </ul>

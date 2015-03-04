@@ -129,6 +129,10 @@
     .ui-tabs-panel {
         padding: 0;
         border: 0;
+
+        .archived {
+            background-color: $base-color-archived-bg;
+        }
     }
 }
 

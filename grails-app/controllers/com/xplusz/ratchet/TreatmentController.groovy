@@ -13,6 +13,7 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def treatmentId = params?.treatmentId
         def clientId = params?.clientId
+        def status = params?.status
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null") {
@@ -20,7 +21,7 @@ class TreatmentController extends BaseController {
         }
         render view: '/treatment/treatment',
                 model: [patientId  : patientId, clientId: clientId, medicalRecordId: medicalRecordId,
-                        treatmentId: treatmentId, surgeryTime: surgeryTime]
+                        treatmentId: treatmentId, surgeryTime: surgeryTime, status: status]
     }
 
     def assignTreatment() {

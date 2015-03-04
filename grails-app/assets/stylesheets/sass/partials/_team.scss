@@ -186,6 +186,9 @@
     }
 
     .btn-edit-surgeon {
+        border: 0;
+        background-color: transparent;
+
         &:before {
             position: relative;
             top: -8px;
@@ -195,6 +198,14 @@
             font-weight: lighter;
             font-size: 22px;
             font-family: ionicons;
+        }
+    }
+
+    .disabled {
+        background-color: transparent;
+
+        &:before {
+            color: $base-color-grey;
         }
     }
 }
