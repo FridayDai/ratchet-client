@@ -25,6 +25,9 @@
         changePasswordTitle: "CHANGE PASSWORD",
         editSurgeonTitle: "Update surgeon",
 
+        //SUCCESS
+        invitePatientSuccess: "An invitation e-mail has been sent",
+
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",
         deleteTeamWaringTitle: "Are you sure you want to remove the current Care Team?",

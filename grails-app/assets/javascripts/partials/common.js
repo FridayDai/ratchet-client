@@ -282,7 +282,7 @@
                 window.top.RC.common.showMsg(msg, remain);
                 return;
             }
-            var $msgDiv = $('<div id="msg-info" class="ui-hide ui-tips ui-tips-center"></div>');
+            var $msgDiv = $('<div id="msg-info" class="ui-hide ui-tips ui-tips-center msg-info"></div>');
             if ($("#msg-info").length > 0) {
                 $msgDiv = $("#msg-info");
             } else {
