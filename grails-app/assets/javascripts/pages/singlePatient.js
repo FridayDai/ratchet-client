@@ -136,7 +136,7 @@
             _initStaffSelect();
             //_initSurgeryTime();
             _initSelect();
-            _checkEmergencyContact()
+            _checkEmergencyContact();
 
         });
     }
@@ -148,7 +148,12 @@
         var id = $('#invitePatient').data("id");
         $('#invitePatient').click(function () {
             $.ajax({
-                url: opts.urls.invitePatient.format(id)
+                url: opts.urls.invitePatient.format(id),
+                success: function (data) {
+                    if (data === "true") {
+                        RC.common.showMsg(RC.constants.invitePatientSuccess);
+                    }
+                }
             });
         });
     }
