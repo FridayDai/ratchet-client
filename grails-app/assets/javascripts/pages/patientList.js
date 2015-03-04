@@ -299,7 +299,7 @@
             }));
 
             _initPhoneInput();
-            _checkDoubleOneNumber();
+            _checkSpecialNumber();
             //_initSurgeryTime();
             _initSelectTreatment();
             _initStaffSelect();
@@ -341,7 +341,7 @@
      *
      * @private
      */
-    function _checkDoubleOneNumber() {
+    function _checkSpecialNumber() {
         $("#phoneNumber").on("input", function () {
             var str = $("#phoneNumber").val(),
                 firstNum,
