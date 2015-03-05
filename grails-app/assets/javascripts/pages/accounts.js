@@ -187,16 +187,16 @@
      * @private
      */
     function _add() {
-        var data = _prepareAddData();
+        var newAccountData = _prepareAddData();
 
         $.ajax({
             url: opts.urls.add,
             type: "post",
-            data: data,
+            data: newAccountData,
             success: function (data) {
-                if (data.resp === true) {
-                    _initTable();
-                }
+                newAccountData.id = data.resp.id;
+                newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
+                accountTable.row.add(newAccountData).draw();
             }
             //error: function () {
             //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
