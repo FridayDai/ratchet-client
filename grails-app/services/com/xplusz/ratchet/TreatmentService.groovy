@@ -1,6 +1,9 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import grails.converters.JSON
 import grails.transaction.Transactional
 
@@ -59,19 +62,29 @@ class TreatmentService {
         }
     }
 
-    def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params) {
+    def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         String getTreatmentInfoUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentInfo
         def url = String.format(getTreatmentInfoUrl, params?.clientId, params?.treatmentId)
 
-        def resp = Unirest.get(url)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result
+            if (resp.status == 200) {
+                return result
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
+
     }
 
     def getCareTeam(HttpServletRequest request, HttpServletResponse response, medicalRecordId) {
