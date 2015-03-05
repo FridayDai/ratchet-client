@@ -33,10 +33,10 @@
     }
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
-    margin-bottom: -1px;
-    padding-bottom: 1px;
-}
+//.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+////    margin-bottom: -1px;
+////    padding-bottom: 1px;
+//}
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
 .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,
@@ -52,6 +52,16 @@
     position: relative;
     padding: 0;
     border: 0;
+
+    .icon-archived {
+        margin-right: 5px;
+        color: inherit;
+
+        &:before {
+            padding-left: 0;
+            color: inherit;
+        }
+    }
 
     .add-tab {
         position: absolute;
@@ -111,6 +121,7 @@
         .ui-tabs-anchor {
             padding: 0 25px;
             border-right: 2px solid $base-color-mid-grey;
+            border-bottom: 0;
             color: $base-color-white;
             font-size: 17px;
             line-height: 65px;
@@ -122,6 +133,7 @@
 
             a {
                 color: $base-color-dark-grey;
+                height: 65px;
             }
         }
     }
@@ -131,6 +143,7 @@
         border: 0;
 
         .archived {
+            min-height: 600px;
             background-color: $base-color-archived-bg;
         }
     }
@@ -139,6 +152,14 @@
 .sub-tabs {
     padding: 0;
     border: 0;
+
+    .icon-archived {
+
+        &:before {
+            padding-left: 0;
+            color: $base-font-color;
+        }
+    }
 
     .tab-list {
         position: relative;
@@ -174,6 +195,13 @@
             position: absolute;
             right: 25px;
             line-height: 40px;
+
+            .archived-treatment-title {
+                color: $base-color-dark-grey;
+                display: inline;
+                font-weight: 400;
+                margin-right: 40px;
+            }
         }
     }
 
@@ -198,7 +226,7 @@
 
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
+//.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+//    margin-bottom: 0;
+//    padding-bottom: 0;
+//}

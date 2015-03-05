@@ -13,7 +13,8 @@
 @import '../partials/chart';
 @import '../partials/theme';
 
-.icon-edit {
+.icon-edit,
+.icon-archived {
     padding: 5px 0;
     border: 0;
     background-color: transparent;
@@ -29,12 +30,19 @@
         content: '\f417';
         color: $base-font-color;
         font-weight: lighter;
-        font-size: 26px;
         font-family: ionicons;
         cursor: pointer;
     }
 }
 
+.icon-archived {
+
+    &:before {
+        content: '\f2c9';
+    }
+}
+
+.icon-archived.disabled,
 .icon-edit.disabled {
     background-color: transparent;
 

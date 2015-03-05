@@ -74,6 +74,7 @@
     function _initGiverTable(element) {
 
         var medicalRecordId = element.find('#hidden-medical-record').val();
+        var active = element.find('#hidden-active').val();
         var data = {
             medicalRecordId: medicalRecordId
         };
@@ -137,8 +138,15 @@
                 },
                 {
                     data: function (source) {
-                        return '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" ></a>' +
-                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > </a>';
+                        if (active==="true") {
+                            return '<button id="edit-care-giver" disabled="disabled" class="btn-edit disabled" data-care-giver-id="' + source.id + '" ></button>' +
+                                '<button id="remove-care-team" disabled="disabled" class="btn-remove-team disabled" data-care-giver-id="' + source.id + '" > </button>';
+
+                        }else {
+                            return '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" ></a>' +
+                                '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > </a>';
+                        }
+
                     },
                     class: "icons",
                     width: "10%"

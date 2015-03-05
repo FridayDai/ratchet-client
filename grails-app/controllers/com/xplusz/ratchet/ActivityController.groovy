@@ -1,11 +1,19 @@
 package com.xplusz.ratchet
 
-class ActivityController {
+class ActivityController extends BaseController{
+
+    def beforeInterceptor = [action: this.&auth]
 
     def index() {
-        def patientId = params.patientId
-        def medicalRecordId = params.medicalRecordId
-        def clientId = params.clientId
-        render(view: '/activity/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId])
+        def archived = params?.archived
+        if (archived==null)
+        {
+            archived = false
+        }
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def clientId = params?.clientId
+
+        render(view: '/activity/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
     }
 }

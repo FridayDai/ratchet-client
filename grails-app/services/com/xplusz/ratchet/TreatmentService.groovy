@@ -204,6 +204,19 @@ class TreatmentService {
         }
     }
 
+    def archived (HttpServletRequest request, HttpServletResponse response, params) {
+
+        String archivedUrl = grailsApplication.config.ratchetv2.server.url.archived
+        def url = String.format(archivedUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
+
+        def resp = Unirest.post(url)
+                .asString()
+
+        if (resp.status == 200) {
+            return true
+        }
+    }
+
     def updateCareGiver(HttpServletRequest request, HttpServletResponse response, params) {
 
         String updateCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver

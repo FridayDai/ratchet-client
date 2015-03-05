@@ -186,13 +186,12 @@
     }
 
     .btn-edit-surgeon {
+        margin-bottom: 20px;
         border: 0;
         background-color: transparent;
 
         &:before {
             position: relative;
-            top: -8px;
-            left: 20px;
             content: '\f417';
             color: $base-font-color;
             font-weight: lighter;
@@ -206,6 +205,11 @@
 
         &:before {
             color: $base-color-grey;
+        }
+
+        &:focus,
+        &:hover {
+            background-color: transparent;
         }
     }
 }

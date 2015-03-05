@@ -13,7 +13,7 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def treatmentId = params?.treatmentId
         def clientId = params?.clientId
-        def status = params?.status
+        def archived = params?.archived
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null") {
@@ -21,7 +21,7 @@ class TreatmentController extends BaseController {
         }
         render view: '/treatment/treatment',
                 model: [patientId  : patientId, clientId: clientId, medicalRecordId: medicalRecordId,
-                        treatmentId: treatmentId, surgeryTime: surgeryTime, status: status]
+                        treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
     }
 
     def assignTreatment() {
@@ -34,6 +34,8 @@ class TreatmentController extends BaseController {
         render medicalRecordInfo as JSON
     }
 
+
+
     def getTreatments() {
         def resp = treatmentService.getTreatments(request, response, params)
         render resp as JSON
@@ -41,6 +43,12 @@ class TreatmentController extends BaseController {
 
     def updateSurgeryTime() {
         def resp = treatmentService.updateSurgeryTime(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def archived() {
+        def resp = treatmentService.archived(request, response, params)
         def result = [resp: resp]
         render result as JSON
     }

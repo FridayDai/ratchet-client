@@ -1,12 +1,12 @@
 <%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
 
-<div <g:if test="${status == 'false'}">class="content archived"</g:if> <g:else>class="content"</g:else>>
+<div <g:if test="${archived == 'true'}">class="content archived"</g:if> <g:else>class="content"</g:else>>
     <div class="care-team-content">
 
         <input type="hidden" id="hidden-medical-record" value="${medicalRecordId}"/>
         <input type="hidden" id="hidden-client-id" value="${clientId}"/>
         <input type="hidden" id="hidden-patient-id" value="${patientId}"/>
-        <input type="hidden" id="hidden-status" value="${status}"/>
+        <input type="hidden" id="hidden-active" value="${archived}"/>
 
         <div class="inner-header">
             <h4 class="surgeon">SURGEON</h4>
@@ -32,11 +32,11 @@
                 </div>
 
                 <button
-                    <g:if test="${status == 'false'}">
-                        class="btn-edit-surgeon disabled" disabled="disabled"
+                    <g:if test="${archived == 'true'}">
+                        class="btn btn-edit-surgeon disabled" disabled="disabled"
                     </g:if>
                     <g:else>
-                        class="btn-edit-surgeon"
+                        class="btn btn-edit-surgeon"
                     </g:else>
                         id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
                 </button>
@@ -47,7 +47,7 @@
     <div class="care-giver-content">
         <div class="inner-header">
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
-            <button <g:if test="${status == 'false'}"> class="btn btn-invite btn-position disabled" disabled="disabled"</g:if> <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver" data-medical-record-id="${medicalRecordId}"
+            <button <g:if test="${archived == 'true'}"> class="btn btn-invite btn-position disabled" disabled="disabled"</g:if> <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver" data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
                 <span>Invite</span>
             </button>
