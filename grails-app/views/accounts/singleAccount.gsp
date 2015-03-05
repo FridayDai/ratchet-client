@@ -61,9 +61,10 @@
                     <td class="td-width">Status</td>
                     <td>
                         <span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status -1 ] == "Inactive"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Inactive"}">
                             <div class="inline div-invite">
-                                <button id="invite-account" class="btn btn-invite" data-id="${accountInfo.id}">Invite Again</button>
+                                <button id="invite-account" class="btn btn-invite"
+                                        data-id="${accountInfo.id}">Invite Again</button>
                             </div>
                         </g:if>
                     </td>
@@ -90,9 +91,11 @@
                 <tr>
                     <td class="bg-color" colspan="2">
                         Last Login:
-                        <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                                 timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                                 format="MMM d, yyyy h:mm a"/>
+                        <g:if test="${accountInfo.lastLoginDate}">
+                            <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
+                                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                          format="MMM d, yyyy h:mm a"/>
+                        </g:if>
                     </td>
                 </tr>
             </table>

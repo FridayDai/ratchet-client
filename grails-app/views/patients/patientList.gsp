@@ -148,7 +148,7 @@
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY TIME<span>*</span></label>
                 <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
-                       placeholder="" required/>
+                       placeholder="" required disabled/>
             </div>
 
             <div class="form-group ">

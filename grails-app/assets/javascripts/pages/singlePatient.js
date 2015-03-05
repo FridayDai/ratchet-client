@@ -344,6 +344,7 @@
                 $("#div-surgery-time").css("display", "none");
             }
             var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
+            $("#surgeryTime").prop("disabled", false);
             _initSurgeryTime(time);
         });
     }
