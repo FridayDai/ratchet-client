@@ -65,64 +65,64 @@
                 "targets": 5,
                 "orderable": false,
             },
-            {
-                "targets": 0,
-                "render": function (data, type, full) {
-                    var id = data === undefined ? full.id : data;
-                    return '<p class="source-id">' + id + '</p>';
-                },
-                width: "10%"
-            }, {
-                "targets": 1,
-                "render": function (data, type, full) {
-                    var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                    return name;
-                },
-                width: "20%"
-            }, {
-                "targets": 2,
-                "render": function (data, type, full) {
-                    var email = data === undefined ? full.email : data;
-                    return email;
-                },
-                width: "26%"
-            }, {
-                "targets": 3,
-                "render": function (data, type, full) {
-                    var isUS,
-                        phoneNumber,
-                        subNumber;
-                    var num = data === undefined ? full.phoneNumber : data;
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.id : data;
+                        return '<p class="source-id">' + id + '</p>';
+                    },
+                    width: "10%"
+                }, {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        return name;
+                    },
+                    width: "20%"
+                }, {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var email = data === undefined ? full.email : data;
+                        return email;
+                    },
+                    width: "26%"
+                }, {
+                    "targets": 3,
+                    "render": function (data, type, full) {
+                        var isUS,
+                            phoneNumber,
+                            subNumber;
+                        var num = data === undefined ? full.phoneNumber : data;
 
-                    num.charAt(0) === '1' ? isUS = true : isUS = false;
+                        num.charAt(0) === '1' ? isUS = true : isUS = false;
 
-                    if(isUS) {
-                        subNumber = num.slice(1, num.length);
-                        phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                        phoneNumber = '1 ' + phoneNumber;
-                    } else {
-                        phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                    }
+                        if (isUS) {
+                            subNumber = num.slice(1, num.length);
+                            phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                            phoneNumber = '1 ' + phoneNumber;
+                        } else {
+                            phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        }
 
-                    return phoneNumber;
-                },
-                width: "15%"
-            }, {
-                "targets": 4,
-                "render": function (data, type, full) {
-                    var lastUpdate = data === undefined ? full.lastUpdate : data;
-                    var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                    return formatDate;
-                },
-                width: "19%"
-            }, {
-                "targets": 5,
-                "render": function (data, type, full) {
-                    var id = data == undefined ? full.id : data;
-                    return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
-                },
-                width: "8%"
-            }],
+                        return phoneNumber;
+                    },
+                    width: "15%"
+                }, {
+                    "targets": 4,
+                    "render": function (data, type, full) {
+                        var lastUpdate = data === undefined ? full.lastUpdate : data;
+                        var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatDate;
+                    },
+                    width: "19%"
+                }, {
+                    "targets": 5,
+                    "render": function (data, type, full) {
+                        var id = data == undefined ? full.id : data;
+                        return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
+                    },
+                    width: "8%"
+                }],
         });
 
     }
@@ -404,6 +404,7 @@
             //var date = new Date();
             //var time = date.getTime() + data.added.timeStamp;
             var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
+            $("#surgeryTime").prop("disabled", false);
             _initSurgeryTime(time);
         });
     }
