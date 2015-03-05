@@ -540,7 +540,6 @@
      */
     function _clickToClose() {
         $(".content").on("click", function (e) {
-            e.preventDefault();
             e.stopPropagation();
 
             if ($("#btn-deactivate").is(':visible')) {
