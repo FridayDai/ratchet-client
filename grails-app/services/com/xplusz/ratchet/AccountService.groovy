@@ -102,7 +102,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 201) {
-                return true
+                return JSON.parse(resp.body)
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
