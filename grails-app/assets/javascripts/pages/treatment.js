@@ -17,7 +17,8 @@
         },
         urls: {
             query: "/getProvider",
-            editSurgeryTime: "/clients/{0}/patients/{1}/surgery-time/{2}/{3}"
+            editSurgeryTime: "/clients/{0}/patients/{1}/surgery-time/{2}/{3}",
+            getTreatmentInfo: "/clients/{0}/treatments/{1}"
         }
     };
 
@@ -36,7 +37,9 @@
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
+            var treatmentId = $(this).data("treatmentId");
             $(".treatment-time-form")[0].reset();
+
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
@@ -45,7 +48,7 @@
                         var date = new Date($("#treatment-surgeryTime").val());
                         var newSurgeryTime = date.getTime();
                         var oldSurgeryTime = (new Date(surgeryTime)).getTime();
-                        if(newSurgeryTime !== oldSurgeryTime) {
+                        if (newSurgeryTime !== oldSurgeryTime) {
                             _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
                         }
                         return true;
@@ -53,36 +56,43 @@
                     return false;
                 }
             }));
-            _initSurgeryTime();
+            _getTreatmentInfo(clientId, treatmentId);
 
         });
-
-
-        //$('.datetime-picker').datetimepicker({
-        //    controlType: 'input',
-        //    showOn: "button",
-        //    buttonImage: "../../assets/edit.png",
-        //    buttonImageOnly: true,
-        //    onClose: function (selectedDate) {
-        //        var parent = $(this).parent();
-        //        var medicalRecordId = $(this).data("medicalRecordId");
-        //        var patientId = $(this).data("patientId");
-        //        var clientId = $(this).data("clientId");
-        //        var date = new Date(selectedDate);
-        //        var surgeryTime = date.getTime();
-        //        _updateSurgeryTime(clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate);
-        //    }
-        //});
     }
 
-    function _initSurgeryTime() {
+    /**
+     *
+     * @param clientId
+     * @param treatmentId
+     * @private
+     */
+    function _getTreatmentInfo(clientId, treatmentId) {
+        $.ajax({
+            url: opts.urls.getTreatmentInfo.format(clientId, treatmentId),
+            type: 'POST',
+            success: function (data) {
+                var sendTimeOffset = data.sendTimeOffset;
+                var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
+                _initSurgeryTime(time);
+            }
+        });
+    }
+
+    /**
+     *
+     * @param time
+     * @private
+     */
+    function _initSurgeryTime(time) {
+        $("#treatment-surgeryTime").datetimepicker("destroy");
         $("#treatment-surgeryTime").datetimepicker({
             controlType: 'input',
             dateFormat: 'MM d, yy',
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: +8
+            minDate: +time
         });
     }
 
@@ -105,7 +115,7 @@
                 if (data.resp === true) {
                     var formatDate = moment(selectedDate).format('MMM DD,YYYY HH:mm A');
                     parent.find('.surgery-time-picker').text(formatDate);
-                    $(element).tabs("load", 0 );
+                    $(element).tabs("load", 0);
                 }
             }
         });

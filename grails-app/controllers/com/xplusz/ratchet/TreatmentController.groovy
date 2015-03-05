@@ -43,4 +43,9 @@ class TreatmentController extends BaseController {
         def result = [resp: resp]
         render result as JSON
     }
+
+    def getTreatmentInfo() {
+        def resp = treatmentService.getTreatmentInfo(request, response, params)
+        render resp as JSON
+    }
 }
