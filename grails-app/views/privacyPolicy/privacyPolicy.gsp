@@ -10,7 +10,7 @@
     <body>
         <div class="content">
             <h1>PRIVACY POLICY</h1>
-            <div class="summary"><p>This notice describes how medical information about you may be used and disclosed and how you can get access to this information. <span>Please review it carefully</span>.</p></div>
+            <div class="summary"><p>This notice describes how medical information about you may be used and disclosed and how you can get access to this information. Please review it carefully.</p></div>
             <h4>YOUR RIGHTS</h4>
             <div class="agreement-content">
             <p>You have the right to:</p>
@@ -57,9 +57,9 @@
                 </div>
             <h4>YOUR RIGHTS</h4>
             <div class="agreement-content">
-                <p><span>When it comes to your health information, you have certain rights.</span> This section explains your rights and some of our responsibilities to help you.</p>
+                <p>When it comes to your health information, you have certain rights. This section explains your rights and some of our responsibilities to help you.</p>
 
-                <p><span>Get an electronic or paper copy of your medical record</span></p>
+                <p>Get an electronic or paper copy of your medical record</p>
 
                 <ul>
                     <li><span class="dot"></span>You can ask to see or get an electronic or paper copy of your medical record and other health information we have about you. Ask us how to do this.
@@ -69,7 +69,7 @@
                 </ul>
 
 
-                <p><span>Ask us to correct your medical record</span></p>
+                <p>Ask us to correct your medical record</p>
 
                 <ul>
                     <li>
@@ -82,7 +82,7 @@
 
 
 
-                <p><span>Request confidential communications</span></p>
+                <p>Request confidential communications</p>
 
                 <ul>
                     <li>
@@ -95,7 +95,7 @@
 
 
 
-                <p><span>Ask us to limit what we use or share</span></p>
+                <p>Ask us to limit what we use or share</p>
 
                 <ul>
                     <li>
@@ -107,7 +107,7 @@
                 </ul>
 
 
-                <p><span>Get a list of those with whom we’ve shared information</span></p>
+                <p>Get a list of those with whom we’ve shared information</p>
 
                 <ul>
                     <li>
@@ -119,7 +119,7 @@
                 </ul>
 
 
-                <p><span>Get a copy of this privacy notice</span></p>
+                <p>Get a copy of this privacy notice</p>
 
                 <ul>
                     <li>
@@ -128,7 +128,7 @@
 
                 </ul>
 
-                <p><span>Choose someone to act for you</span></p>
+                <p>Choose someone to act for you</p>
 
                 <ul>
                     <li>
@@ -140,7 +140,7 @@
                 </ul>
 
 
-                <p><span>File a complaint if you feel your rights are violated</span></p>
+                <p>File a complaint if you feel your rights are violated</p>
 
                 <ul>
                     <li>
@@ -157,7 +157,7 @@
             </div>
             <h4>YOUR CHOICES</h4>
             <div class="agreement-content">
-                <p><span>For certain health information, you can tell us your choices about what we share.</span> If you have a clear preference for how we share your information in the situations described below, talk to us. Tell us what you want us to do, and we will follow your instructions.</p>
+                <p>For certain health information, you can tell us your choices about what we share. If you have a clear preference for how we share your information in the situations described below, talk to us. Tell us what you want us to do, and we will follow your instructions.</p>
 
                 <p>In these cases, you have both the right and choice to tell us to:</p>
 
@@ -174,7 +174,7 @@
                 </ul>
 
 
-                <p><span class="italic">If you are not able to tell us your preference, for example if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety.</span></p>
+                <p>If you are not able to tell us your preference, for example if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety.</p>
 
                 <p>In these cases we never share your information unless you give us written permission:</p>
 
@@ -195,35 +195,35 @@
             </div>
             <h4>OUR USES AND DISCLOSURES</h4>
             <div class="agreement-content">
-                <p><span>How do we typically use or share your health information?</span></p>
+                <p>How do we typically use or share your health information?</p>
 
                 <p>We typically use or share your health information in the following ways.</p>
 
-                <p><span>Treat you</span></p>
+                <p>Treat you</p>
 
                 <p>We can use your health information and share it with other professionals who are treating you.<br>
 
                  <span class="example">Example:</span> A doctor treating you for an injury asks another doctor about your overall health condition.</p>
 
-                <p><span>Run our organization</span>
+                <p>Run our organization</p>
 
                 <p>We can use and share your health information to run our practice, improve your care, and contact you when necessary.<br>
 
                 <span class="example">Example:</span> We use health information about you to manage your treatment and services.</p>
 
-                <p><span>Bill for your services</span></p>
+                <p>Bill for your services</p>
 
                 <p>We can use and share your health information to bill and get payment from health plans or other entities.<br>
 
                 <span class="example">Example:</span> We give information about you to your health insurance plan so it will pay for your services.</p>
 
 
-                <p><span>How else can we use or share your health information?</span></p>
+                <p>How else can we use or share your health information?</p>
 
                 <p>We are allowed or required to share your information in other ways – usually in ways that contribute to the public good, such as public health and research. We have to meet many conditions in the law before we can share your information for these purposes. For more information see: <a target="_blank" href="http://www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/index.html.">www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/index.html.</a></p>
 
 
-                <p><span>Help with public health and safety issues</span></p>
+                <p>Help with public health and safety issues</p>
 
                 <p>We can share health information about you for certain situations such as:</p>
                 <ul>
@@ -234,20 +234,20 @@
                     <li><span class="dot"></span>Preventing or reducing a serious threat to anyone’s health or safety</li>
                 </ul>
 
-                <p><span>Do research</span></p>
+                <p>Do research</p>
                 <p>We can use or share your information for health research.</p>
 
-                <p><span>Comply with the law</span></p>
+                <p>Comply with the law</p>
                 <p>We will share information about you if state or federal laws require it, including with the Department of Health and Human Services if it wants to see that we’re complying with federal privacy law.</p>
 
-                <p><span>Respond to organ and tissue donation requests</span></p>
+                <p>Respond to organ and tissue donation requests</p>
                 <p>We can share health information about you with organ procurement organizations.</p>
 
 
-                <p><span>Work with a medical examiner or funeral director</span></p>
+                <p>Work with a medical examiner or funeral director</p>
                 <p>We can share health information with a coroner, medical examiner, or funeral director when an individual dies.</p>
 
-                <p><span>Address workers’ compensation, law enforcement, and other government requests</span><p>
+                <p>Address workers’ compensation, law enforcement, and other government requests<p>
 
                 <p>We can use or share health information about you:</p>
 
@@ -260,7 +260,7 @@
                     </li>
                 </ul>
 
-                <p><span>Respond to lawsuits and legal actions</span><p>
+                <p>Respond to lawsuits and legal actions<p>
 
                 <p>We can share health information about you in response to a court or administrative order, or in response to a subpoena.</p>
 
@@ -286,13 +286,13 @@
             <h4>CHANGES TO THE TERMS OF THIS NOTICE</h4>
             <div class="agreement-content">
                 <p>
-                    <span>We can change the terms of this notice, and the changes will apply to all information we have about you. The new notice will be available upon request, in our office, and on our web site.</span>
+                    We can change the terms of this notice, and the changes will apply to all information we have about you. The new notice will be available upon request, in our office, and on our web site.
                 </p>
             </div>
             <h4>OTHER INFORMATION</h4>
             <div class="agreement-content">
-                <p><span>Effective Date: September 1st 2014</span></p>
-                <p><span>Privacy Officer: Winston Ng, <a href="mailto:winston@ratchethealth.com">winston@ratchethealth.com</a>, 604-558-4113</span></p>
+                <p>Effective Date: September 1st 2014</p>
+                <p>Privacy Officer: Winston Ng, <a href="mailto:winston@ratchethealth.com">winston@ratchethealth.com</a>, 604-558-4113</p>
             </div>
         </div>
 

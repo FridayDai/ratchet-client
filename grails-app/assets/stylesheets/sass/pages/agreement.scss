@@ -3,7 +3,7 @@
 p {
     padding: 20px 0;
     color: $base-color-medium-black;
-    font-size: 22px;
+    font-size: 16pt;
 
     span {
         font-weight: 600;
@@ -21,7 +21,6 @@ p {
     }
 
     .example {
-        font-style: italic;
         font-weight: normal;
         margin-left: 30px;
     }
@@ -74,7 +73,6 @@ h4 {
     margin-top: 50px;
     padding: 20px 120px;
     background-color: $base-color-tab-bg;
-    font-weight: 600;
 }
 
 .agreement-content {
@@ -82,24 +80,23 @@ h4 {
 }
 
 .agreement-footer {
-    height: 100px;
-    padding-top: 10px;
+    height: 36px;
     color: $base-color-white;
     background-color: $base-color-mid-grey;
     font-weight: 100;
     font-size: 11pt;
-    text-align: center;
 
     ul {
-        float: none;
+        float: left;
         height: 30px;
-        margin-left: 10px;
+        margin-left: 0;
+        margin-top: 5px;
 
         li {
-            display: inline-block;
+            float: left;
+            font-size: 11pt;
             height: 30px;
             margin: 0;
-            padding: 0 10px 0 0;
             line-height: 30px;
 
             a {
@@ -108,16 +105,15 @@ h4 {
                 font-size: 11pt;
             }
 
-            &:after {
-                margin-left: 5px;
+            &:before {
+                padding-right: 10px;
                 padding-left: 10px;
-                font-size: 10px;
-                content: '•';
+                font-size: 16px;
+                content: '|';
             }
+            &:first-child {
 
-            &:last-child {
-
-                &:after {
+                &:before {
                     padding-left: 0;
                     content: '';
                 }
@@ -126,14 +122,15 @@ h4 {
     }
 
     .copyright {
-        float: none;
+        float: left;
         text-align: center;
 
         ul {
+            margin-left: 10px;
 
             li {
                 font-size: 11pt;
-
+                &:before,
                 &:after {
                     padding-left: 0;
                     content: '';
