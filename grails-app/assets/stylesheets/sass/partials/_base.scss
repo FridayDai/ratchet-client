@@ -28,6 +28,15 @@ body {
     }
 }
 
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    margin-bottom: 36px;
+}
+
 h4,
 h5 {
     color: $base-color-mid-grey;
