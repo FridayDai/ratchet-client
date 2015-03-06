@@ -27,7 +27,11 @@
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",
+        inviteAccountSuccess: "An invitation e-mail has been sent.",
+        activeAccountSuccess: "The account is activated.",
+        deactiveAccountSuccess: "The account is deactivated.",
         sendTaskEmailSuccess: "The task has been sent.",
+
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",
         deleteTeamWaringTitle: "Are you sure you want to remove the current Care Team?",

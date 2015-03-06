@@ -252,6 +252,7 @@
                     //if (data.resp === true) {
                     //    $("#status-text").text("Invited");
                     //}
+                    RC.common.showMsg(RC.constants.inviteAccountSuccess);
                 }
             });
         });
@@ -521,6 +522,7 @@
                 if (data.resp === true) {
                     parents.find(".span-activate-action").text("Inactive").removeClass("span-deactive").addClass("span-active");
                     parents.find(".activate-action").text("Activate");
+                    RC.common.showMsg(RC.constants.deactiveAccountSuccess);
                 }
             }
         });
@@ -541,6 +543,7 @@
                 if (data.resp === true) {
                     parents.find(".span-activate-action").text("Active").removeClass("span-active").addClass("span-deactive");
                     parents.find(".activate-action").text("Deactivate");
+                    RC.common.showMsg(RC.constants.activeAccountSuccess);
                 }
             }
         });
