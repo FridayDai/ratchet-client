@@ -33,7 +33,8 @@
                 inviteAccount: "/inviteAccount/{0}",
                 updatePassword: "/updatePassword",
                 showSingleAccount: "/singleAccount/{0}",
-                deactivateAccount: "/deactivateAccount/{0}"
+                deactivateAccount: "/deactivateAccount/{0}",
+                activateAccount: "/activateAccount/{0}"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
@@ -461,58 +462,49 @@
         });
     }
 
-    /**
-     *
-     * @private
-     */
-    function _showDeactiveBtn() {
-        $("#triangle").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            if ($(this).hasClass("triangle-right")) {
-                $(this).removeClass("triangle-right").addClass("triangle-bottom");
-                $("#btn-deactivate").removeClass("displaynone").addClass("displayblock");
-            } else {
-                $(this).removeClass("triangle-bottom").addClass("triangle-right");
-                $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
-            }
-        });
-    }
-
 
     /**
      *
      * @private
      */
-    function _deactivateStaff() {
-        $("#btn-deactivate").on("click", function (e) {
+    function _activateAndDeactivate() {
+        $(".activate-action").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             var accountId = $(this).data("accountId");
             var parents = $(this).parents();
-            var doctor = parents.find("#isDoctor").text();
-            var isDoctor = $.trim(doctor);
-            var firstName = parents.find("#accountFirstName").text();
-            var lastName = parents.find("#accountLastName").text();
+            var text = $(this).text();
 
-            RC.common.warning(_.extend({}, {
-                    title: '<div class="window-error">' + "DEACTIVATE ACCOUNT" + '</div>',
-                    message: '<div class="window-error">' + "Are you sure you want to delete the following account?" + '</div>' +
-                    '<div class="window-deactivate-msg">' + isDoctor + " " + firstName + " " + lastName + '</div>'
-                },
-                {
-                    element: $(".warn"),
-                    closeCallback: function () {
-                        _deactivateAccount(accountId);
-                    },
-                    cancelCallback: function () {
-                        $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
-                        $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
-                    }
-                }));
+            if (text === "Activate") {
+                _activateAccount(accountId, parents);
+            } else {
+                _deactivateStaff(accountId, parents);
+            }
         });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _deactivateStaff(accountId, parents) {
+        var doctor = parents.find("#isDoctor").text();
+        var isDoctor = $.trim(doctor);
+        var firstName = parents.find("#accountFirstName").text();
+        var lastName = parents.find("#accountLastName").text();
+
+        RC.common.warning(_.extend({}, {
+                title: '<div class="window-error">' + "DEACTIVATE ACCOUNT" + '</div>',
+                message: '<div class="window-error">' + "Are you sure you want to deactivate the following account?" + '</div>' +
+                '<div class="window-deactivate-msg">' + isDoctor + " " + firstName + " " + lastName + '</div>'
+            },
+            {
+                element: $(".warn"),
+                closeCallback: function () {
+                    _deactivateAccount(accountId, parents);
+                }
+            }));
     }
 
     /**
@@ -520,15 +512,15 @@
      * @param accountId
      * @private
      */
-    function _deactivateAccount(accountId) {
+    function _deactivateAccount(accountId, parents) {
         $.ajax({
             url: opts.urls.deactivateAccount.format(accountId),
             type: "GET",
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
-                    $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+                    parents.find(".span-activate-action").text("Inactive").removeClass("span-deactive").addClass("span-active");
+                    parents.find(".activate-action").text("Activate");
                 }
             }
         });
@@ -536,15 +528,20 @@
 
     /**
      *
+     * @param accountId
+     * @param parents
      * @private
      */
-    function _clickToClose() {
-        $(".content").on("click", function (e) {
-            e.stopPropagation();
-
-            if ($("#btn-deactivate").is(':visible')) {
-                $("#triangle").removeClass("triangle-bottom").addClass("triangle-right");
-                $("#btn-deactivate").removeClass("displayblock").addClass("displaynone");
+    function _activateAccount(accountId, parents) {
+        $.ajax({
+            url: opts.urls.activateAccount.format(accountId),
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.resp === true) {
+                    parents.find(".span-activate-action").text("Active").removeClass("span-active").addClass("span-deactive");
+                    parents.find(".activate-action").text("Deactivate");
+                }
             }
         });
     }
@@ -565,9 +562,7 @@
         _bindSearchEvent();
         _logout();
         _goBackToPrePage();
-        _clickToClose();
-        _showDeactiveBtn();
-        _deactivateStaff();
+        _activateAndDeactivate();
 
     }
 

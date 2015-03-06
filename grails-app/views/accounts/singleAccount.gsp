@@ -31,12 +31,12 @@
                 <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
 
-                <span class="icons">
-                    <a class="triangle-right" id="triangle"></a>
+                %{--<span class="icons">--}%
+                %{--<a class="triangle-right" id="triangle"></a>--}%
 
-                    <a class="btn btn-deactive displaynone" id="btn-deactivate"
-                       data-account-id="${accountInfo.id}">Deactivate</a>
-                </span>
+                %{--<a class="btn btn-deactive displaynone" id="btn-deactivate"--}%
+                %{--data-account-id="${accountInfo.id}">Deactivate</a>--}%
+                %{--</span>--}%
 
             </div>
 
@@ -60,13 +60,31 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Inactive"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Invited"}">
+                            <span class="span-invited"
+                                  id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+
                             <div class="inline div-invite">
                                 <button id="invite-account" class="btn btn-invite"
                                         data-id="${accountInfo.id}">Invite Again</button>
                             </div>
                         </g:if>
+
+                        <g:elseif test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Active"}">
+                            <span class="span-deactive span-activate-action"
+                                  id="span-deactive">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+
+                            <a class="btn btn-deactive activate-action" id="btn-deactivate"
+                               data-account-id="${accountInfo.id}">Deactivate</a>
+                        </g:elseif>
+
+                        <g:else test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Inactive"}">
+                            <span class="span-active span-activate-action"
+                                  id="span-active">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+
+                            <a class="btn btn-active activate-action" id="btn-activate"
+                               data-account-id="${accountInfo.id}">Activate</a>
+                        </g:else>
                     </td>
                 </tr>
 

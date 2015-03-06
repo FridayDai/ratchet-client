@@ -25,6 +25,24 @@
             margin-right: 20px;
             color: $base-color-medium-black;
         }
+
+        .span-invited {
+            padding: 0 5px;
+            background: $base-color-invited;
+            color: $base-color-white;
+        }
+
+        .span-deactive {
+            padding: 0 5px;
+            background: $base-color-deactive;
+            color: $base-color-white;
+        }
+
+        .span-active {
+            padding: 0 5px;
+            background: $base-color-active;
+            color: $base-color-white;
+        }
     }
 
     .bg-color {

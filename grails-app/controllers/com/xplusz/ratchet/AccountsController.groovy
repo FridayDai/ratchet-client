@@ -11,7 +11,7 @@ class AccountsController extends BaseController {
     def index() {
         params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
         params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def accountList = accountService.getAccounts(request, response, params)        
+        def accountList = accountService.getAccounts(request, response, params)
         render(view: 'accounts', model: [accountList: accountList, pagesize: params.length])
     }
 
@@ -105,6 +105,13 @@ class AccountsController extends BaseController {
     def deactivateAccount() {
         Integer accountId = params.int("accountId")
         def resp = accountService.deactivateAccount(request, response, accountId)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def activateAccount() {
+        Integer accountId = params.int("accountId")
+        def resp = accountService.activateAccount(request, response, accountId)
         def result = [resp: resp]
         render result as JSON
     }
