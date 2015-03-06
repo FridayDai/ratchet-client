@@ -154,9 +154,8 @@
         $(element).tabs({
             cache: false,
             beforeLoad: function (event, ui) {
-                ui.jqXHR.error(function () {
-                    ui.panel.html(RC.constants.errorMessage);
-                });
+                // if the target panel is empty, return true
+                return ui.panel.html() == "";
             },
             load: function (event, ui) {
                 var type = ui.tab.data("type");

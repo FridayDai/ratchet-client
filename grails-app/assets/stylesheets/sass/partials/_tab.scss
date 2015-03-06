@@ -34,8 +34,8 @@
 }
 
 //.ui-tabs .ui-tabs-nav li.ui-tabs-active {
-////    margin-bottom: -1px;
-////    padding-bottom: 1px;
+//    margin-bottom: -1px;
+//    padding-bottom: 1px;
 //}
 
 .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
@@ -106,6 +106,7 @@
     }
 
     .tab-treatment {
+        min-width: 1060px;
         height: 65px;
         padding: 0;
         border: 0;
@@ -113,6 +114,7 @@
         background: $base-color-mid-grey;
 
         .ui-state-default {
+            max-height: 65px;
             margin: 0;
             padding: 0;
             background-color: $base-color-tab-default;
