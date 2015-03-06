@@ -108,11 +108,6 @@
     </div>
 
     <div class="form-group inline">
-        <label class="lbl-group">EMAIL ADDRESS*</label>
-        <input id="giver-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
-    </div>
-
-    <div class="form-group inline">
         <label class="lbl-group">RELATIONSHIP*</label>
         <select id="relationships" name="relationships" class="select-body" required>
             <option></option>
@@ -122,6 +117,11 @@
             <option value="4">Friend</option>
             <option value="5">Other</option>
         </select>
+    </div>
+
+    <div class="form-group inline">
+        <label class="lbl-group">EMAIL ADDRESS*</label>
+        <input id="giver-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
     </div>
 
     <div class="form-group inline team-permission-confirm">
