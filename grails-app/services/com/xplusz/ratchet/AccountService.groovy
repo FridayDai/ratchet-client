@@ -183,7 +183,7 @@ class AccountService {
 
     def activateStaff(HttpServletRequest request, HttpServletResponse response, params) {
 
-        def url = grailsApplication.config.ratchetv2.server.url.activateStaff
+        def url = grailsApplication.config.ratchetv2.server.url.activeStaff
         def resp = Unirest.post(url)
                 .field("code", params?.code)
                 .field("hasProfile", params?.hasProfile)

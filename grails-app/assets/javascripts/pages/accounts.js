@@ -75,48 +75,48 @@
                 "targets": [0, 4],
                 "orderable": false
             },
-            {
-                "targets": 0,
-                "render": function (data, type, full) {
-                    var id = data === undefined ? full.id : data;
-                    return '<p class="source-id">' + id + '</p>';
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.id : data;
+                        return '<p class="source-id">' + id + '</p>';
+                    },
+                    width: "10%"
                 },
-                width: "10%"
-            },
-            {
-                "targets": 1,
-                "render": function (data, type, full) {
-                    var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                    return name;
+                {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        return name;
+                    },
+                    width: "18%"
                 },
-                width: "18%"
-            },
-            {
-                "targets": 2,
-                "render": function (data, type, full) {
-                    var email = data === undefined ? full.email : data;
-                    return email;
+                {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var email = data === undefined ? full.email : data;
+                        return email;
+                    },
+                    width: "27%"
                 },
-                width: "27%"
-            },
-            {
-                "targets": 3,
-                "render": function (data, type, full) {
-                    var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
-                    var lastUpdateTime = new Date(parseInt(lastUpdateStr));
-                    var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                    return formatTime;
+                {
+                    "targets": 3,
+                    "render": function (data, type, full) {
+                        var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
+                        var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                        var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatTime;
+                    },
+                    width: "19%"
                 },
-                width: "19%"
-            },
-            {
-                "targets": 4,
-                "render": function (data, type, full) {
-                    var id = data == undefined ? full.id : data;
-                    return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
-                },
-                width: "7%"
-            }]
+                {
+                    "targets": 4,
+                    "render": function (data, type, full) {
+                        var id = data == undefined ? full.id : data;
+                        return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                    },
+                    width: "7%"
+                }]
         });
     }
 
@@ -427,6 +427,13 @@
     function _validSetPassword() {
         $("#johnRat").click(function () {
             $(".create-password-form").valid();
+
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPassword").val();
+            if (password !== confirmPassword) {
+                $(".error-area").text(RC.constants.confirmPassword);
+                return false;
+            }
         });
     }
 
