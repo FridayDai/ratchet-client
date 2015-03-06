@@ -285,4 +285,28 @@ class AccountService {
             throw new ApiAjaxAccessException()
         }
     }
+
+    def activateAccount(HttpServletRequest request, HttpServletResponse response, accountId)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+
+        String activateStaff = grailsApplication.config.ratchetv2.server.url.activateStaff
+
+        def url = String.format(activateStaff, accountId)
+
+        try {
+            def resp = Unirest.get(url)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
+        }
+    }
 }

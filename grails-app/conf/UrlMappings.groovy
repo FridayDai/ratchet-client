@@ -67,6 +67,7 @@ class UrlMappings {
         "/updateAccount"(controller: "accounts", action: "updateAccount")
         "/inviteAccount/$accountId?"(controller: "accounts", action: "inviteAccount")
         "/deactivateAccount/$accountId?"(controller: "accounts", action: "deactivateAccount")
+        "/activateAccount/$accountId?"(controller: "accounts", action: "activateAccount")
 
         //task
         "/clients/$clientId/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")

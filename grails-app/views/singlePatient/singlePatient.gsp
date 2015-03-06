@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page import="com.xplusz.ratchet.StatusCodeConstants"%>
+<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
 
 <g:set var="scriptPath" value="singlePatientBundle"/>
 <g:set var="cssPath" value="treatment"/>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <g:if test="${StatusCodeConstants.PATIENT_STATUS[patientInfo.status ] == "invited"}">
+            <g:if test="${StatusCodeConstants.PATIENT_STATUS[patientInfo.status] == "invited"}">
                 <div class="inline div-invite">
                     <button id="invitePatient" class="btn btn-invite" data-id="${patientInfo.id}">Invite Again</button>
                 </div>
@@ -59,8 +59,8 @@
         <div id="tabs" class="patient-tab">
             <g:if test="${medicalRecords.size() < treatmentLimit}">
                 <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
-                    data-id="${patientInfo.patientId}"
-                    data-client-id="${patientInfo.client.id}">Add Treatment</button>
+                        data-id="${patientInfo.patientId}"
+                        data-client-id="${patientInfo.client.id}">Add Treatment</button>
             </g:if>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
@@ -138,7 +138,8 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                <input id="emergency-firstName" name="emergency-firstName" type="text" class="input-group emergency-field"
+                <input id="emergency-firstName" name="emergency-firstName" type="text"
+                       class="input-group emergency-field"
                        placeholder="Grace"/>
             </div>
 
@@ -163,7 +164,8 @@
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                <input id="emergency-email" name="email" type="email" class="input-group emergency-field" placeholder="grace@email.com" />
+                <input id="emergency-email" name="email" type="email" class="input-group emergency-field"
+                       placeholder="grace@email.com"/>
             </div>
 
             <div class="form-group inline permission-confirm">
