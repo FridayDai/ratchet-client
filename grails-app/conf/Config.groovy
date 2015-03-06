@@ -174,6 +174,7 @@ ratchetv2 {
             assignTreatmentToExistPatient = "${ratchetv2.server.url.base}/clients/%s/patients/%s/assign/record"
             getTreatmentInfo = "${ratchetv2.server.url.base}/clients/%s/treatments/%s"
             updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
+            archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
 
             //task
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"

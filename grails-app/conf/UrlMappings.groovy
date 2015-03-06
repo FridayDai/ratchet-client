@@ -29,6 +29,7 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
         "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+        "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
         "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
 
         //team
@@ -73,8 +74,8 @@ class UrlMappings {
         "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         //agreement
-        "/termsOfService"(controller: "home", action: "termsOfService")
-        "/privacyPolicy"(controller: "home", action: "privacyPolicy")
+        "/terms_of_service"(controller: "home", action: "termsOfService")
+        "/privacy_policy"(controller: "home", action: "privacyPolicy")
 
         "500"(view: '/error/error')
         "/providers/detail"(controller: "providers", action: "detail")

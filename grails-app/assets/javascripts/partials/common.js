@@ -95,9 +95,7 @@
                 url: '',      // script url
                 data: null,   // function or object with parameters to send to the server
                 // matching how `ajax.data` works in DataTables
-                method: 'GET',// Ajax HTTP method
-                beforeSend: function () {
-                }
+                method: 'GET'// Ajax HTTP method
             }, opts);
 
             // Private variables for storing the cache
@@ -165,7 +163,6 @@
                     }
 
                     settings.jqXHR = $.ajax({
-                        "beforeSend": conf.beforeSend,
                         "type": conf.method,
                         "url": conf.url,
                         "data": request,

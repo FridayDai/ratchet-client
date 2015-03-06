@@ -18,6 +18,7 @@
         urls: {
             query: "/getProvider",
             editSurgeryTime: "/clients/{0}/patients/{1}/surgery-time/{2}/{3}",
+            archived: "/clients/{0}/patients/{1}/records/{2}/archived",
             getTreatmentInfo: "/clients/{0}/treatments/{1}"
         }
     };
@@ -107,7 +108,7 @@
      * @param selectedDate
      * @private
      */
-    function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
+    function _updateSurgeryTime (element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
             url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, selectedDate),
             type: 'PUT',
@@ -121,6 +122,27 @@
         });
     }
 
+    /**
+     * archived a treatment
+     * @private
+     */
+    function _initArchived (element){
+        $('.archived-active').click(function (e) {
+            e.preventDefault();
+            var medicalRecordId = $(this).data("medicalRecordId");
+            var patientId = $(this).data("patientId");
+            var clientId = $(this).data("clientId");
+            $.ajax({
+                url: opts.urls.archived.format(clientId, patientId, medicalRecordId),
+                type: 'PUT',
+                success: function (data) {
+                    if (data.resp === true) {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    }
 
     /**
      * page Initialization
@@ -128,8 +150,9 @@
      */
     function _init(element) {
         _initDatePicker(element);
-
+        _initArchived (element);
         $(element).tabs({
+            cache: false,
             beforeLoad: function (event, ui) {
                 ui.jqXHR.error(function () {
                     ui.panel.html(RC.constants.errorMessage);

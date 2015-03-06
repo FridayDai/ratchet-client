@@ -31,6 +31,7 @@
         word-break: break-all;
 
         .btn-edit {
+            background-color: transparent;
 
             &:before {
                 content: '\f417';
@@ -42,6 +43,7 @@
         }
 
         .btn-remove-team {
+            background-color: transparent;
 
             &:after {
                 margin-left: 10px;
@@ -50,6 +52,14 @@
                 font-weight: lighter;
                 font-size: 22px;
                 font-family: ionicons;
+            }
+        }
+
+        .disabled {
+
+            &:before,
+            &:after {
+                color: $base-color-grey;
             }
         }
 
