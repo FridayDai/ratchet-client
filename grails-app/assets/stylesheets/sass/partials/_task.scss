@@ -52,11 +52,15 @@
     }
 
     .small-font {
-        font-size: 11pt;
+        font-size: 10pt;
     }
 
     .middle-font {
-        font-size: 12pt;
+        font-size: 11pt;
+    }
+
+    .number-font {
+        font-size: 14px;
     }
 
     // change background and color according to status
@@ -126,7 +130,15 @@
 }
 
 .box-item-content {
+    position: relative;
     padding: 18px;
+
+    .complete-score {
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        background: $base-logo-color;
+    }
 
     .item-fist {
         height: 20px;
@@ -136,21 +148,23 @@
     .item-title {
         height: 50px;
         padding-top: 4px;
+        color: $base-logo-color;
         font-weight: 500;
-        font-size: 14pt;
+        font-size: 13pt;
     }
 
     .score {
-        padding-right: 16px;
-        color: $base-color-medium-black;
-        font-size: 12pt;
+        padding: 0 8px;
+        color: $base-color-white;
+        font-size: 9pt;
 
 
         &:before {
             display: inline-block;
-            content: '\f42d';
+            padding: 3px 2px;
+            content: '\f42c';
             font-weight: lighter;
-            font-size: 22px;
+            font-size: 18px;
             font-family: ionicons;
             vertical-align: top;
         }
@@ -158,6 +172,10 @@
 
     .numeral {
         color: $base-color-blue;
+    }
+
+    .label-space {
+        padding-right: 10px;
     }
 
     .status-background {
@@ -172,9 +190,17 @@
         font-weight: 500;
     }
 
+    .relative-sent-time {
+        font-size: 11pt;
+    }
+
     .item-notify {
         padding-bottom: 3px;
-        font-size: 12pt;
+        font-size: 11pt;
+    }
+
+    .send-time {
+        margin-top: 20px;
     }
 
     button {
@@ -203,137 +229,48 @@
 
 }
 
-// all change in the form box
-.form-box {
-    display: inline-block;
-    width: 300px;
-    height: 120px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: 2px solid;
+// box item archived
+.archived {
 
-    .box-header {
-        width: 100%;
-        height: 54px;
-        background-color: $base-color-dark-grey;
+    .box-item {
+        border-color: $base-font-color;
+//        &.pending,
+//        &.overdue,
+//        &.complete
+//        {
+//            border-color: $base-font-color;
+//            .box-item-header {
+//                background: $base-font-color;
+//            }
+//        }
 
-        .header-left {
-            float: left;
-            width: 25%;
-            height: 100%;
-            color: $base-color-white;
-            text-align: center;
-        }
-
-        .header-middle {
-            float: left;
-            width: 60%;
-            height: 100%;
-            padding-left: 4px;
-        }
-
-        .header-right {
-            float: right;
-        }
-
-    }
-
-    .box-content {
-        padding: 12px 10px;
-    }
-
-}
-
-// for task form
-.task-form {
-
-    .divider {
-        margin-bottom: 0;
-    }
-
-    .label-notify {
-        padding-right: 40px;
-    }
-
-    .radio-box {
-        margin: 6px 0;
-        color: $base-color-dark-grey;
-    }
-
-    .label-height {
-        display: block;
-        height: 25px;
-    }
-}
-
-.task-content-up {
-    padding: 20px;
-    padding-bottom: 40px;
-    background-color: $base-color-light-grey;
-}
-
-.bg-color-change {
-    background-color: $base-color-mid-grey;
-
-    &.sdm {
-        background-color: $base-color-yellow;
-    }
-
-    &.basic {
-        background-color: $base-color-green;
-    }
-
-    &.outcome {
-        background-color: $base-color-blue;
-    }
-
-}
-
-.border-color-change {
-    border-color: $base-color-mid-grey;
-
-    &.sdm {
-        border-color: $base-color-yellow;
-    }
-
-    &.basic {
-        border-color: $base-color-green;
-    }
-
-    &.outcome {
-        border-color: $base-color-blue;
-    }
-}
-
-.color-change {
-    color: $base-color-mid-grey;
-
-    &.active-color {
-        color: $base-color-blue;
-    }
-}
-
-.form-content {
-    padding: 10px 20px;
-}
-
-.ui-tabs-panel {
-    .btn-task {
-        padding: 10px 27px 2px 2px;
-        border: 0;
-        color: $base-color-light-blue;
-        text-decoration: underline;
-
-        &:focus {
-            color: #59b7c4;
-            background-color: $base-color-white;
-        }
-
-        &:hover {
-            color: #59b7c4;
-            background-color: $base-color-white;
+        .box-item-header {
+            background: $base-font-color;
         }
     }
-}
 
+
+    .box-item-content {
+
+        .complete-score {
+            background: $base-font-grey-dark;
+        }
+
+        .item-datetime {
+            color: $base-color-dark-gray;
+        }
+
+        .numeral {
+            color: $base-color-dark-gray;
+        }
+
+//        .task-email {
+//            border: 0;
+//            color: $base-color-white;
+//            background-color: $base-font-color;
+//            cursor: inherit;
+//        }
+    }
+
+}
 

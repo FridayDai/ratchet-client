@@ -82,11 +82,12 @@
         var request = $.ajax({
             url: opts.urls.email.format(opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
-        //request.done(function (data) {
+        request.done(function (data) {
             //var sendTime = data.sendTime;
             //var dueTime = data.dueTime;
             //_updateTaskBox(individualTreatment, element, sendTime, dueTime);
-        //});
+            RC.common.showMsg(RC.constants.sendTaskEmailSuccess);
+        });
     }
 
     /**
