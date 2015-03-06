@@ -145,17 +145,34 @@
      * invite patient again
      */
     function _inviteAgain() {
-        var id = $('#invitePatient').data("id");
-        $('#invitePatient').click(function () {
-            $.ajax({
-                url: opts.urls.invitePatient.format(id),
-                success: function (data) {
-                    if (data === "true") {
-                        RC.common.showMsg(RC.constants.invitePatientSuccess);
+        var secondsLimitValue = 86400;
+
+        function _forbidInvite() {
+            $("#invitePatient").attr("disabled", "disabled").addClass("disabled");
+        }
+        function _allowInvite() {
+            $("#invitePatient").removeAttr("disabled").removeClass("disabled");
+        }
+        function _startLimiter() {
+            _forbidInvite();
+            var milliseconds = secondsLimitValue * 1000;
+            setTimeout(_allowInvite, milliseconds);
+        }
+        function _initInviteLimit() {
+            var id = $('#invitePatient').data("id");
+            $('#invitePatient').click(function () {
+                $.ajax({
+                    url: opts.urls.invitePatient.format(id),
+                    success: function (data) {
+                        if (data === "true") {
+                            RC.common.showMsg(RC.constants.invitePatientSuccess);
+                        }
+                        _startLimiter();
                     }
-                }
+                });
             });
-        });
+        }
+        _initInviteLimit();
     }
 
     /**
