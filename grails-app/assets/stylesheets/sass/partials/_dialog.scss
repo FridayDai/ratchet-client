@@ -284,14 +284,19 @@
     }
 }
 
+
 .msg-info {
     position: fixed;
-    top: 30%;
+    top: 33%;
     left: 50%;
-    padding: 20px 32px;
-    box-shadow: $base-color-mid-grey 2px 2px 8px;
-    background: $base-color-msg-info;
-    color: $base-color-white;
     z-index: 999999;
+    width: 290px;
+    margin-left: -177px;
+    padding: 20px 32px;
+    color: #fff;
+    background: #288fa4;
+    opacity: 0.75;
     font-size: 17px;
+    text-align: center;
+    box-shadow: #6d8a93 2px 2px 8px;
 }
