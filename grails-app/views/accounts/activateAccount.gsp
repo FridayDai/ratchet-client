@@ -37,7 +37,10 @@
                             <input name="confirmPassword" type="password" id="confirmPassword" class="input-control"
                                    placeholder="Confirm Password"
                                    required/>
-                        </div>                        
+                        </div>
+
+                        <div class="error-area error">
+                        </div>
                     </div>
 
                     <input type="hidden" name="code" value="${code}"/>
@@ -47,7 +50,7 @@
                 <div class="align-center cover-inner-footer">
                     <div class="terms-service color-black">
                         You agree to our <a href="#" class="dark-link">Terms of Service</a> upon creating account
-                    </div>                
+                    </div>
                     <button type="submit" class="btn btn-submit" id='johnRat'>Join Ratchet</button>
                 </div>
             </g:form>

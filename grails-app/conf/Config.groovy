@@ -164,7 +164,7 @@ ratchetv2 {
             getAccount = "${ratchetv2.server.url.base}/staffs/%s"
             inviteStaff = "${ratchetv2.server.url.base}/staff/invite/%d"
             updatePassword = "${ratchetv2.server.url.base}/password/update"
-            activateStaff = "${ratchetv2.server.url.base}/staff/confirm"
+            activeStaff = "${ratchetv2.server.url.base}/staff/confirm"
             confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
             deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
             activateStaff = "${ratchetv2.server.url.base}/staff/activate/%s"
