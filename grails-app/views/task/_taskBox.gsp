@@ -7,37 +7,15 @@
             <span class="complete-time pull-right">Complete Time:
                 <g:formatDate date="${task?.completeTime}"
                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd,yyyy hh:mm aaa"></g:formatDate></span>
+                              format="MMM dd, yyyy hh:mm aaa"></g:formatDate></span>
         </g:if>
-    %{--<span class="complete-time pull-right">Complete Time: Jan 10, 2015 8:00AM</span>--}%
     </div>
 
     <div class="box-item-content">
 
-        <div class="item-fist middle-font">
-            ID: ${task?.id}
-        </div>
-
-        <div class="item-title">
-            ${task?.title}
-        </div>
-
-        %{--<div class="show-status">--}%
-        %{--<g:if test="${task?.isSent == true}">--}%
-        %{--<div class="item-status inline ${StatusCodeConstants.TASK_STATUS[task?.status]}">--}%
-        %{--<label class="uppercase status-background">${StatusCodeConstants.TASK_STATUS[task?.status]}</label>--}%
-        %{--</div>--}%
-        %{--</g:if>--}%
-
-        %{--<g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">--}%
-        %{--<span>Score: ${task?.score}</span>--}%
-        %{--</g:if>--}%
-        %{--</div>--}%
-
-        <div class="item-datetime due-time-score">
+        <div class="complete-score">
 
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-
                 <g:if test="${task?.otherScore}">
                     <% def firstSplit = "" %>
                     <% def secondSplit %>
@@ -48,23 +26,50 @@
                         <% secondSplit = num?.trim().split(':') %>
                         <span class="score">
                             <label class="uppercase">${secondSplit[0]}:</label>
-                            <label class="numeral">${secondSplit[1]}</label>
+                            <label>${secondSplit[1]}</label>
                         </span>
                     </g:each>
                 </g:if>
                 <g:else>
                     <span class="score">
-                        <label>SCORE:</label>
-                        <label class="numeral">${task?.score}</label></span>
+                        <label>Total:</label>
+                        <label>${task?.score}</label></span>
                 </g:else>
             </g:if>
-            <g:else>
-                <h5 class="due-time middle-font">DUE:
-                    <g:formatDate date="${task?.dueTime}"
-                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd,yyyy hh:mm aaa"></g:formatDate></h5>
-            </g:else>
 
+        </div>
+
+        <div class="item-fist middle-font">
+            ID: ${task?.id}
+        </div>
+
+        <div class="item-title">
+            ${task?.title}
+        </div>
+
+        <div class="item-datetime relative-sent-time">
+
+            <g:set var="sentTimeDays"
+                   value="${(int) ((task?.sendTime - task?.surgeryTime) / (1000 * 60 * 60 * 24)).abs()}"></g:set>
+            <g:if test="${sentTimeDays == 0}">
+                <label class="numeral">On Surgery Day</label>
+            </g:if>
+            <g:else>
+                <span class="numeral label-space">${sentTimeDays}</span>
+                <g:if test="${sentTimeDays == 1}">
+                    <label class="label-space">Day</label>
+                </g:if>
+                <g:else>
+                    <label class="label-space">Days</label>
+                </g:else>
+                <g:if test="${(task?.sendTime - task?.surgeryTime) > 0}">
+                    <span class="numeral label-space">After</span>
+                </g:if>
+                <g:else>
+                    <span class="numeral label-space">Before</span>
+                </g:else>
+                <label>Surgery</label>
+            </g:else>
         </div>
 
         <div class="item-context">
@@ -72,17 +77,33 @@
         </div>
 
         <div class="item-datetime">
-            <label class="small-font sent-time">
-                <g:if test="${task?.isSent}">
+            <g:if test="${task?.isSent}">
+                <div class="small-font ">
                     <label>Sent Time:</label>
-                </g:if>
-                <g:else>
+                    <g:formatDate date="${task?.sendTime}"
+                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                  format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
+                </div>
+            </g:if>
+            <g:else>
+                <div class="small-font send-time">
                     <label>Send Time:</label>
-                </g:else>
-                <g:formatDate date="${task?.sendTime}"
-                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd,yyyy hh:mm aaa"></g:formatDate>
-            </label>
+                    <g:formatDate date="${task?.sendTime}"
+                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                  format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
+                </div>
+            </g:else>
+        %{--<label class="small-font sent-time">--}%
+        %{--<g:if test="${task?.isSent}">--}%
+        %{--<label>Sent Time:</label>--}%
+        %{--</g:if>--}%
+        %{--<g:else>--}%
+        %{--<label>Send Time:</label>--}%
+        %{--</g:else>--}%
+        %{--<g:formatDate date="${task?.sendTime}"--}%
+        %{--timeZone="${TimeZone.getTimeZone('America/Vancouver')}"--}%
+        %{--format="MMM dd,yyyy hh:mm aaa"></g:formatDate>--}%
+        %{--</label>--}%
         </div>
 
         <div class="item-notify">
