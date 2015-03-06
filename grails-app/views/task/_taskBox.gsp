@@ -40,7 +40,8 @@
         </div>
 
         <div class="item-fist middle-font">
-            ID: ${task?.id}
+            <label>ID:</label>
+            <span class="number-font">${task?.id}</span>
         </div>
 
         <div class="item-title">
@@ -55,7 +56,7 @@
                 <label class="numeral">On Surgery Day</label>
             </g:if>
             <g:else>
-                <span class="numeral label-space">${sentTimeDays}</span>
+                <span class="numeral label-space number-font">${sentTimeDays}</span>
                 <g:if test="${sentTimeDays == 1}">
                     <label class="label-space">Day</label>
                 </g:if>
@@ -63,10 +64,10 @@
                     <label class="label-space">Days</label>
                 </g:else>
                 <g:if test="${(task?.sendTime - task?.surgeryTime) > 0}">
-                    <span class="numeral label-space">After</span>
+                    <span class="numeral label-space number-font">After</span>
                 </g:if>
                 <g:else>
-                    <span class="numeral label-space">Before</span>
+                    <span class="numeral label-space number-font">Before</span>
                 </g:else>
                 <label>Surgery</label>
             </g:else>
@@ -76,39 +77,31 @@
             <p>${task?.description}</p>
         </div>
 
-        <div class="item-datetime">
-            <g:if test="${task?.isSent}">
+
+        <g:if test="${task?.isSent}">
+            <div class="item-datetime">
                 <div class="small-font ">
                     <label>Sent Time:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                   format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
                 </div>
-            </g:if>
-            <g:else>
-                <div class="small-font send-time">
+            </div>
+        </g:if>
+        <g:else>
+            <div class="item-datetime send-time">
+                <div class="small-font">
                     <label>Send Time:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                   format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
                 </div>
-            </g:else>
-        %{--<label class="small-font sent-time">--}%
-        %{--<g:if test="${task?.isSent}">--}%
-        %{--<label>Sent Time:</label>--}%
-        %{--</g:if>--}%
-        %{--<g:else>--}%
-        %{--<label>Send Time:</label>--}%
-        %{--</g:else>--}%
-        %{--<g:formatDate date="${task?.sendTime}"--}%
-        %{--timeZone="${TimeZone.getTimeZone('America/Vancouver')}"--}%
-        %{--format="MMM dd,yyyy hh:mm aaa"></g:formatDate>--}%
-        %{--</label>--}%
-        </div>
+            </div>
+        </g:else>
 
         <div class="item-notify">
             <g:if test="${task?.isSent}">
-                <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+                <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] == "complete") || archivedStatus}">
                     <button class="btn task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
                 </g:if>
                 <g:else>

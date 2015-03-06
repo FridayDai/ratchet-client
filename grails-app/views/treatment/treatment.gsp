@@ -41,7 +41,7 @@
                             </g:else>
                             data-patient-id="${patientId}"
                        data-client-id="${clientId}" data-treatment-id="${treatmentId}"
-                       data-medical-record-id="${medicalRecordId}"></a>
+                       data-medical-record-id="${medicalRecordId}">
                     </button>
                 </g:if>
                 <button

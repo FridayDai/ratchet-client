@@ -52,11 +52,15 @@
     }
 
     .small-font {
-        font-size: 11pt;
+        font-size: 10pt;
     }
 
     .middle-font {
-        font-size: 12pt;
+        font-size: 11pt;
+    }
+
+    .number-font {
+        font-size: 14px;
     }
 
     // change background and color according to status
@@ -144,6 +148,7 @@
     .item-title {
         height: 50px;
         padding-top: 4px;
+        color: $base-logo-color;
         font-weight: 500;
         font-size: 13pt;
     }
@@ -156,8 +161,8 @@
 
         &:before {
             display: inline-block;
-            content: '\f42c';
             padding: 3px 2px;
+            content: '\f42c';
             font-weight: lighter;
             font-size: 18px;
             font-family: ionicons;
@@ -186,12 +191,12 @@
     }
 
     .relative-sent-time {
-        font-size: 12pt;
+        font-size: 11pt;
     }
 
     .item-notify {
         padding-bottom: 3px;
-        font-size: 12pt;
+        font-size: 11pt;
     }
 
     .send-time {
