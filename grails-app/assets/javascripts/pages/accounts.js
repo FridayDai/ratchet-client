@@ -38,7 +38,7 @@
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
-        staffGroup = ["Patients Management", "Accounts Management"],
+        staffGroup = ["Patient Management", "Account Management"],
         accountTable;
 
     /**
@@ -282,7 +282,7 @@
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
             }
-            if (isAccountManage === "Accounts Management") {
+            if (isAccountManage === "Account Management") {
                 $("#accountManagement").prop("checked", true);
             }
             $("#firstName").val(firstName);
@@ -527,7 +527,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("Inactive").removeClass("span-deactive").addClass("span-active");
+                    parents.find(".span-activate-action").text("INACTIVE").removeClass("span-deactive").addClass("span-active");
                     parents.find(".activate-action").text("Activate");
                     RC.common.showMsg(RC.constants.deactiveAccountSuccess);
                 }
@@ -548,7 +548,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("Active").removeClass("span-active").addClass("span-deactive");
+                    parents.find(".span-activate-action").text("ACTIVE").removeClass("span-active").addClass("span-deactive");
                     parents.find(".activate-action").text("Deactivate");
                     RC.common.showMsg(RC.constants.activeAccountSuccess);
                 }

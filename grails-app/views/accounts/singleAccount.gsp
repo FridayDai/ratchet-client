@@ -60,7 +60,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Invited"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}">
                             <span class="span-invited"
                                   id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
@@ -70,7 +70,7 @@
                             </div>
                         </g:if>
 
-                        <g:elseif test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Active"}">
+                        <g:elseif test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "ACTIVE"}">
                             <span class="span-deactive span-activate-action"
                                   id="span-deactive">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
@@ -78,7 +78,7 @@
                                data-account-id="${accountInfo.id}">Deactivate</a>
                         </g:elseif>
 
-                        <g:else test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "Inactive"}">
+                        <g:else test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INACTIVE"}">
                             <span class="span-active span-activate-action"
                                   id="span-active">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 

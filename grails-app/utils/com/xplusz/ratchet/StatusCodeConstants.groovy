@@ -34,10 +34,10 @@ class StatusCodeConstants {
             ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
 
     //Account constants
-    public static final String[] ACCOUNT_STATUS = ["Uninvited", "Invited","Active", "Inactive"]
+    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "INVITED", "ACTIVE", "INACTIVE"]
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"]
-    public static final String ACCOUNT_PATIENTS_M = "Patients Management"
-    public static final String ACCOUNT_ACCOUNTS_M = "Accounts Management"
+    public static final String ACCOUNT_PATIENTS_M = "Patient Management"
+    public static final String ACCOUNT_ACCOUNTS_M = "Account Management"
 }
