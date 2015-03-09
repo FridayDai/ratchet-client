@@ -150,17 +150,28 @@ class AccountService {
         }
     }
 
-    def updatePassword(HttpServletRequest request, HttpServletResponse response, params) {
+    def updatePassword(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         def url = grailsApplication.config.ratchetv2.server.url.updatePassword
-        def resp = Unirest.post(url)
-                .field("oldPassword", params?.oldPassword)
-                .field("password", params?.password)
-                .field("confirmPassword", params?.confirmPassword)
-                .asString()
 
-        if (resp.status == 200) {
-            return true
+        try {
+            def resp = Unirest.post(url)
+                    .field("oldPassword", params?.oldPassword)
+                    .field("password", params?.password)
+                    .field("confirmPassword", params?.confirmPassword)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException()
         }
     }
 
