@@ -271,15 +271,22 @@
         },
         /**
          * show remind message
-         * @param msg
-         * @param remain
+         * @param msg, remain, top, left, marginLeft in showMsgArguments
+         *
          */
-        showMsg: function (msg, remain) {
+        showMsg: function (showMsgArguments) {
             if (window !== window.top) {
-                window.top.RC.common.showMsg(msg, remain);
+                window.top.RC.common.showMsg(showMsgArguments);
                 return;
             }
+            var top = showMsgArguments.top || '33%',
+                left = showMsgArguments.left || '50%',
+                remain = showMsgArguments.remain || 2000,
+                match = /\d+/,
+                marginLeft;
+
             var $msgDiv = $('<div id="msg-info" class="ui-hide ui-tips ui-tips-center msg-info"></div>');
+
             if ($("#msg-info").length > 0) {
                 $msgDiv = $("#msg-info");
             } else {
@@ -287,9 +294,21 @@
             }
             var self = this;
 
-            remain = remain || 2000;
+            $msgDiv = $msgDiv.html(showMsgArguments.msg).css({
+                position: 'fixed',
+                top: top,
+                left: left
+            });
 
-            $msgDiv.fadeIn("slow").html(msg);
+            if (showMsgArguments.marginLeft) {
+                marginLeft = showMsgArguments.marginLeft
+            }
+            else {
+                marginLeft = (parseInt(match.exec($msgDiv.css('width'))) + parseInt(match.exec($msgDiv.css('padding-left')))) / -2;
+            }
+            $msgDiv.css('margin-left', marginLeft + 'px');
+
+            $msgDiv.fadeIn("slow");
             setTimeout(function () {
                     $msgDiv.fadeOut("slow");
                 },

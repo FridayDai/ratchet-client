@@ -24,6 +24,15 @@
                     content: RC.constants.confirmContent,
                     height: 300,
                     width: 340
+                },
+                showMsgArguments: {
+                    msg: RC.constants.inviteAccountSuccess
+                },
+                showActiveArguments: {
+                    msg: RC.constants.activeAccountSuccess
+                },
+                showDeactiveArguments: {
+                    msg: RC.constants.deactiveAccountSuccess
                 }
             },
             urls: {
@@ -252,7 +261,7 @@
                     //if (data.resp === true) {
                     //    $("#status-text").text("Invited");
                     //}
-                    RC.common.showMsg(RC.constants.inviteAccountSuccess);
+                    RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                 }
             });
         });
@@ -529,7 +538,7 @@
                 if (data.resp === true) {
                     parents.find(".span-activate-action").text("INACTIVE").removeClass("span-deactive").addClass("span-active");
                     parents.find(".activate-action").text("Activate");
-                    RC.common.showMsg(RC.constants.deactiveAccountSuccess);
+                    RC.common.showMsg(opts.defaultConfirmArguments.showDeactiveArguments);
                 }
             }
         });
@@ -550,7 +559,7 @@
                 if (data.resp === true) {
                     parents.find(".span-activate-action").text("ACTIVE").removeClass("span-active").addClass("span-deactive");
                     parents.find(".activate-action").text("Deactivate");
-                    RC.common.showMsg(RC.constants.activeAccountSuccess);
+                    RC.common.showMsg(opts.defaultConfirmArguments.showActiveArguments);
                 }
             }
         });
