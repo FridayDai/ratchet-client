@@ -149,34 +149,17 @@
      * invite patient again
      */
     function _inviteAgain() {
-        var secondsLimitValue = 86400;
-
-        function _forbidInvite() {
-            $(".invite-patient").attr("disabled", "disabled").addClass("disabled");
-        }
-        function _allowInvite() {
-            $(".invite-patient").removeAttr("disabled").removeClass("disabled");
-        }
-        function _startLimiter() {
-            _forbidInvite();
-            var milliseconds = secondsLimitValue * 1000;
-            setTimeout(_allowInvite, milliseconds);
-        }
-        function _initInviteLimit() {
-            var id = $('.invite-patient').data("id");
-            $('.invite-patient').click(function () {
-                $.ajax({
-                    url: opts.urls.invitePatient.format(id),
-                    success: function (data) {
-                        if (data === "true") {
-                            RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
-                        }
-                        _startLimiter();
+        var id = $('.invite-patient').data("id");
+        $('.invite-patient').click(function () {
+            $.ajax({
+                url: opts.urls.invitePatient.format(id),
+                success: function (data) {
+                    if (data === "true") {
+                        RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                     }
-                });
+                }
             });
-        }
-        _initInviteLimit();
+        });
     }
 
     /**
