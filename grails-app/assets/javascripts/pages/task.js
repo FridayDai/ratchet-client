@@ -12,8 +12,8 @@
                 height: 200,
                 width: 980
             },
-            waringArguments: {
-                title: RC.constants.waringMessageSendTask
+            showMsgArguments: {
+                msg: RC.constants.sendTaskEmailSuccess
             }
         },
         urls: {
@@ -86,7 +86,7 @@
             //var sendTime = data.sendTime;
             //var dueTime = data.dueTime;
             //_updateTaskBox(individualTreatment, element, sendTime, dueTime);
-            RC.common.showMsg(RC.constants.sendTaskEmailSuccess);
+            RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
         });
     }
 

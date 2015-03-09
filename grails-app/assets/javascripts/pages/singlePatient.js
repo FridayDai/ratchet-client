@@ -19,6 +19,9 @@
                 waringArguments: {
                     title: RC.constants.warningTipTitle,
                     message: RC.constants.warningTip
+                },
+                showMsgArguments: {
+                    msg: RC.constants.invitePatientSuccess
                 }
             },
             urls: {
@@ -165,7 +168,7 @@
                     url: opts.urls.invitePatient.format(id),
                     success: function (data) {
                         if (data === "true") {
-                            RC.common.showMsg(RC.constants.invitePatientSuccess);
+                            RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                         }
                         _startLimiter();
                     }

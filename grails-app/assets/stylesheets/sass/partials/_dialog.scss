@@ -286,17 +286,13 @@
 
 
 .msg-info {
-    position: fixed;
-    top: 33%;
-    left: 50%;
     z-index: 999999;
-    width: 290px;
-    margin-left: -177px;
+    min-width: 200px;
     padding: 20px 32px;
     color: #fff;
     background: #288fa4;
     opacity: 0.75;
-    font-size: 17px;
+    font-size: 16px;
     text-align: center;
     box-shadow: #6d8a93 2px 2px 8px;
 }
