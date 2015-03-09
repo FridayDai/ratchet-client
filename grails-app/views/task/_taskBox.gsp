@@ -1,4 +1,4 @@
-<%@ page import="org.codehaus.groovy.grails.web.json.JSONObject; groovy.json.JsonSlurper; com.xplusz.ratchet.StatusCodeConstants " %>
+<%@ page import="org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.xplusz.ratchet.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
@@ -7,7 +7,7 @@
             <span class="complete-time pull-right">Complete Time:
                 <g:formatDate date="${task?.completeTime}"
                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd, yyyy hh:mm aaa"></g:formatDate></span>
+                              format="MMM dd, yyyy h:mm aaa"></g:formatDate></span>
         </g:if>
     </div>
 
@@ -50,8 +50,10 @@
 
         <div class="item-datetime relative-sent-time">
 
-            <g:set var="sentTimeDays"
-                   value="${(int) ((task?.sendTime - task?.surgeryTime) / (1000 * 60 * 60 * 24)).abs()}"></g:set>
+            <% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver")%>
+            <% DateTime start = new DateTime(task?.sendTime, Vancouver)%>
+            <% DateTime end = new DateTime(task?.surgeryTime, Vancouver)%>
+            <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs()%>
             <g:if test="${sentTimeDays == 0}">
                 <label class="numeral">On Surgery Day</label>
             </g:if>
@@ -84,7 +86,7 @@
                     <label>Sent Time:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
+                                  format="MMM dd, yyyy h:mm aaa"></g:formatDate>
                 </div>
             </div>
         </g:if>
@@ -94,7 +96,7 @@
                     <label>Send Time:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd, yyyy hh:mm aaa"></g:formatDate>
+                                  format="MMM dd, yyyy h:mm aaa"></g:formatDate>
                 </div>
             </div>
         </g:else>

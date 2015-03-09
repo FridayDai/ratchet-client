@@ -74,6 +74,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         runtime ':resources:1.2.13'
         compile ":cookie-session:2.0.16"
+        compile ":joda-time:1.5"
         //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
