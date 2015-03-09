@@ -36,7 +36,8 @@
         tabs,
         patientId,
         clientId,
-        tabTemplate;
+        tabTemplate,
+        originalPatientEmail = $('#patientEmail').text();
 
     /**
      * init treatment tab
@@ -151,10 +152,10 @@
         var secondsLimitValue = 86400;
 
         function _forbidInvite() {
-            $("#invitePatient").attr("disabled", "disabled").addClass("disabled");
+            $(".invite-patient").attr("disabled", "disabled").addClass("disabled");
         }
         function _allowInvite() {
-            $("#invitePatient").removeAttr("disabled").removeClass("disabled");
+            $(".invite-patient").removeAttr("disabled").removeClass("disabled");
         }
         function _startLimiter() {
             _forbidInvite();
@@ -162,8 +163,8 @@
             setTimeout(_allowInvite, milliseconds);
         }
         function _initInviteLimit() {
-            var id = $('#invitePatient').data("id");
-            $('#invitePatient').click(function () {
+            var id = $('.invite-patient').data("id");
+            $('.invite-patient').click(function () {
                 $.ajax({
                     url: opts.urls.invitePatient.format(id),
                     success: function (data) {
@@ -301,9 +302,21 @@
                     $('.last-name').text(patientInfo.lastName);
                     $('#patientEmail').text(patientInfo.email);
                     $('.phone').text(patientInfo.number);
+
+                    _checkEmailUpdated(patientInfo.email);
                 }
             }
         });
+    }
+
+    /**
+     * show invite again button when email updated.
+     * @private
+     */
+    function _checkEmailUpdated(updatedEmail) {
+        if(originalPatientEmail !== updatedEmail) {
+            $('.invisible-invite').css('display', 'inline-block');
+        }
     }
 
     /**
