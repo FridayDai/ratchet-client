@@ -208,8 +208,8 @@
             type: "post",
             data: newAccountData,
             success: function (data) {
-                newAccountData.id = data.resp.id;
-                newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
+                //newAccountData.id = data.resp.id;
+                //newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
                 //accountTable.row.add(newAccountData).draw();
                 _loadData();
             }
