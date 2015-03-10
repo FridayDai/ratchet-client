@@ -31,7 +31,7 @@ class SinglePatientService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message)
+                throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
             log.error(e.message)
@@ -54,7 +54,7 @@ class SinglePatientService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message)
+                throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
             log.error(e.message)

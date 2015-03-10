@@ -1,7 +1,10 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -93,7 +96,7 @@ class AuthenticationService {
      * @param request
      * @param response
      */
-    def logout(request, response) {
+    def logout(request, response) throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def session = request.session
         def token = session?.token
         /**
@@ -107,17 +110,24 @@ class AuthenticationService {
             log.error("There is no token.")
             return false
         }
-
-        def url = grailsApplication.config.ratchetv2.server.url.logout
-        def resp = Unirest.get(url)
-                .asString()
-        if (resp.status != 200) {
-            log.warn("No user login in the session.")
-            return false
+        try {
+            def url = grailsApplication.config.ratchetv2.server.url.logout
+            def resp = Unirest.get(url)
+                    .asString()
+            if (resp.status == 200) {
+                log.info("Logout ${token}")
+                session.invalidate()
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        }
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
 
-        log.info("Logout ${token}")
-        session.invalidate()
-        return true
     }
 }

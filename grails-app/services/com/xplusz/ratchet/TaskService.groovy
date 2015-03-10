@@ -4,6 +4,7 @@ import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
 
@@ -18,7 +19,8 @@ class TaskService {
 
     def messageSource
 
-    def getOverdueTasks(HttpServletRequest request, HttpServletResponse response, params) {
+    def getOverdueTasks(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiResourceAccessException, ApiReturnErrorException {
 
         def max = params?.max
         def offset = params?.offset
@@ -28,15 +30,23 @@ class TaskService {
         String getOverdueTasksUrl = grailsApplication.config.ratchetv2.server.url.getOverdueTask
         def url = String.format(getOverdueTasksUrl, patientId, medicalRecordId)
 
-        def resp = Unirest.get(url)
-                .queryString("max", max)
-                .queryString("offset", offset)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", max)
+                    .queryString("offset", offset)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result.items
+            if (resp.status == 200) {
+                return result.items
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
 
     }
@@ -49,18 +59,18 @@ class TaskService {
         try {
             def resp = Unirest.get(url)
                     .asString()
-            def result = JSON.parse(resp.body)
+
             if (resp.status == 200) {
                 return true
-            }
-            else {
+            } else {
+                def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
 
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
     }
 }

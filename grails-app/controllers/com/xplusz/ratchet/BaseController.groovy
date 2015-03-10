@@ -29,7 +29,7 @@ class BaseController {
 
     def handleApiResourceAccessException(ApiResourceAccessException e) {
         flash.message = e.message
-        render view: '/error/error503'
+        render view: '/error/error404'
     }
 
     def handleApiAjaxReturnErrorException(ApiAjaxReturnErrorException e) {
@@ -45,13 +45,13 @@ class BaseController {
 
     def handleApiReturnErrorException(ApiReturnErrorException e) {
         flash.message = e.message
-        if (e.statusId == 401) {
-            render view: '/error/error404'
-        }
+//        if (e.statusId == 401) {
+//            render view: '/error/error404'
+//        }
         if (e.statusId == 403) {
             render view: '/login/login'
         } else {
-            render view: '/error/error400'
+            render view: '/error/error404'
         }
     }
 

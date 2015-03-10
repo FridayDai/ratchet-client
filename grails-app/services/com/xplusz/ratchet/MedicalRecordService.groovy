@@ -28,7 +28,7 @@ class MedicalRecordService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message)
+                throw new ApiReturnErrorException(message, resp.status)
             }
 
         } catch (UnirestException e) {
@@ -42,7 +42,7 @@ class MedicalRecordService {
     def assignTaskToMedicalRecord(params) throws ApiAjaxAccessException {
 
         String assignTaskUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.assignTask
-        def url = String.format(assignTaskUrl,params.clientId, params.patientId, params.medicalRecordId)
+        def url = String.format(assignTaskUrl, params.clientId, params.patientId, params.medicalRecordId)
 
         try {
             def toolId = params.toolId

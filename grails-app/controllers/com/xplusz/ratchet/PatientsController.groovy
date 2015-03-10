@@ -14,7 +14,7 @@ class PatientsController extends BaseController {
     def index() {
         params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
         params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def patientList = patientService.loadPatients(request, response, params)
+        def patientList = patientService.loadPatientsForPage(request, response, params)
         render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
     }
 
