@@ -56,11 +56,7 @@
      * @private
      */
     function _initTable(data) {
-        if (accountTable) {
-            accountTable.clear();
-            accountTable.destroy();
-        }
-        accountTable = $(opts.table.id).DataTable({
+        var options = {
             paging: true,
             searching: false,
             ordering: true,
@@ -69,7 +65,7 @@
             serverSide: true,
             "bAutoWidth": false,
             pageLength: $(opts.table.id).data("pagesize"),
-            //deferLoading: $(opts.table.id).data("total"),
+            deferLoading: $(opts.table.id).data("total"),
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
@@ -126,7 +122,15 @@
                     },
                     width: "7%"
                 }]
-        });
+        };
+
+        if (accountTable) {
+            accountTable.clear();
+            accountTable.destroy();
+            delete options.deferLoading;
+        }
+
+        accountTable = $(opts.table.id).DataTable(options);
     }
 
     /**
@@ -204,9 +208,10 @@
             type: "post",
             data: newAccountData,
             success: function (data) {
-                newAccountData.id = data.resp.id;
-                newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
-                accountTable.row.add(newAccountData).draw();
+                //newAccountData.id = data.resp.id;
+                //newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
+                //accountTable.row.add(newAccountData).draw();
+                _loadData();
             }
             //error: function () {
             //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
