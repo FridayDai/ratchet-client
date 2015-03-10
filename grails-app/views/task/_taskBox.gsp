@@ -1,4 +1,4 @@
-<%@ page import="org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.xplusz.ratchet.StatusCodeConstants " %>
+<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.xplusz.ratchet.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
@@ -51,8 +51,8 @@
         <div class="item-datetime relative-sent-time">
 
             <% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver")%>
-            <% DateTime start = new DateTime(task?.sendTime, Vancouver)%>
-            <% DateTime end = new DateTime(task?.surgeryTime, Vancouver)%>
+            <% LocalDate start = new LocalDate(task?.sendTime, Vancouver)%>
+            <% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver)%>
             <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs()%>
             <g:if test="${sentTimeDays == 0}">
                 <label class="numeral">On Surgery Day</label>
