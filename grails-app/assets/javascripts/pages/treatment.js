@@ -114,7 +114,7 @@
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {
-                    var formatDate = moment(selectedDate).format('MMM DD, YYYY h:mm A');
+                    var formatDate = moment(selectedDate).tz("America/Vancouver").format('MMM DD, YYYY h:mm A');
                     parent.find('.surgery-time-picker').text(formatDate);
                     $(element).tabs("load", 0);
                 }
