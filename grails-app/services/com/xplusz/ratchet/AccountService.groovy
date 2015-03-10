@@ -49,7 +49,7 @@ class AccountService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
 
 
@@ -110,44 +110,64 @@ class AccountService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }
 
-    def inviteAccount(HttpServletRequest request, HttpServletResponse response, Integer accountId) {
+    def inviteAccount(HttpServletRequest request, HttpServletResponse response, Integer accountId)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
         def url = String.format(inviteAccountUrl, accountId)
-        def resp = Unirest.get(url)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .asString()
 
-        if (resp.status == 200) {
-            return true
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }
 
-    def updateAccount(HttpServletRequest request, HttpServletResponse response, params) {
+    def updateAccount(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
         Integer accountId = params.int("accountId")
         def url = String.format(updateAccountUrl, accountId)
 
+        try {
+            def resp = Unirest.post(url)
+                    .field("clientId", request.session.clientId)
+                    .field("email", params?.email)
+                    .field("firstName", params?.firstName)
+                    .field("lastName", params?.lastName)
+                    .field("type", params?.type)
+                    .field("doctor", params?.doctor)
+                    .field("accountManagement", params?.accountManagement)
+                    .asString()
 
-        def resp = Unirest.post(url)
-                .field("clientId", request.session.clientId)
-                .field("email", params?.email)
-                .field("firstName", params?.firstName)
-                .field("lastName", params?.lastName)
-                .field("type", params?.type)
-                .field("doctor", params?.doctor)
-                .field("accountManagement", params?.accountManagement)
-                .asString()
-
-        if (resp.status == 200) {
-            return true
+            if (resp.status == 200) {
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
+
     }
 
     def updatePassword(HttpServletRequest request, HttpServletResponse response, params)
@@ -171,42 +191,56 @@ class AccountService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
     }
 
-    def confirmCode(HttpServletRequest request, HttpServletResponse response, code) {
+    def confirmCode(HttpServletRequest request, HttpServletResponse response, code) throws ApiResourceAccessException {
 
         String confirmCodeUrl = grailsApplication.config.ratchetv2.server.url.confirmCode
         def url = String.format(confirmCodeUrl, code)
-        def resp = Unirest.post(url)
-                .asString()
 
-        def result = JSON.parse(resp.body)
+        try {
+            def resp = Unirest.post(url)
+                    .asString()
 
-        if (resp.status == 200) {
-            return result
-        } else {
-            return
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                return result
+            } else {
+                return false
+            }
         }
-
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
+        }
     }
 
-    def activateStaff(HttpServletRequest request, HttpServletResponse response, params) {
+    def activateStaff(HttpServletRequest request, HttpServletResponse response, params) throws ApiResourceAccessException {
 
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
-        def resp = Unirest.post(url)
-                .field("code", params?.code)
-                .field("hasProfile", params?.hasProfile)
-                .field("password", params?.password)
-                .field("confirmPassword", params?.confirmPassword)
-                .asString()
 
-        if (resp.status == 200) {
-            return true
-        } else {
-            return false
+        try {
+            def resp = Unirest.post(url)
+                    .field("code", params?.code)
+                    .field("hasProfile", params?.hasProfile)
+                    .field("password", params?.password)
+                    .field("confirmPassword", params?.confirmPassword)
+                    .asString()
+
+            if (resp.status == 200) {
+                return true
+            } else {
+                return false
+            }
         }
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
+        }
+
     }
 
     def askForResetPassword(email, clientType) throws ApiResourceAccessException {
@@ -293,7 +327,7 @@ class AccountService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
     }
 
@@ -317,7 +351,7 @@ class AccountService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
     }
 }

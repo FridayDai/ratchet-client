@@ -22,8 +22,7 @@ class InvitationService {
                     .asString()
             if (resp.status == 200) {
                 return true
-            }
-            else {
+            } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
@@ -31,7 +30,7 @@ class InvitationService {
 
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
     }
 

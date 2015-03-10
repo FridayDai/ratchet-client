@@ -1,7 +1,10 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.AccountValidationException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import grails.converters.JSON
 import grails.transaction.Transactional
 
@@ -16,25 +19,33 @@ class StaffService {
 
     def messageSource
 
-    def getStaffs(HttpServletRequest request, HttpServletResponse response, params) {
+    def getStaffs(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def max = params?.max
         def offset = params?.offset
         def type = params?.type
 
-        def url = grailsApplication.config.ratchetv2.server.url.staffs
-        def resp = Unirest.get(url)
-                .queryString("max", max)
-                .queryString("offset", offset)
-                .queryString("clientId", request.session.clientId)
-                .queryString("type", type)
-                .asString()
+        try {
+            def url = grailsApplication.config.ratchetv2.server.url.staffs
+            def resp = Unirest.get(url)
+                    .queryString("max", max)
+                    .queryString("offset", offset)
+                    .queryString("clientId", request.session.clientId)
+                    .queryString("type", type)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result.items
-        } else {
-            return false
+            if (resp.status == 200) {
+                return result.items
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        }
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }

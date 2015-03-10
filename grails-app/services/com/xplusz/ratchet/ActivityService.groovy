@@ -1,6 +1,11 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
+import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
 import grails.transaction.Transactional
 
@@ -16,7 +21,8 @@ class ActivityService {
 
     def messageSource
 
-    def getActivity(HttpServletRequest request, HttpServletResponse response, params) {
+    def getActivity(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiResourceAccessException, ApiReturnErrorException {
         def patientId = params?.patientId
         def max = params?.max
         def offset = params?.offset
@@ -24,22 +30,32 @@ class ActivityService {
         def clientId = params?.clientId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
-        def url = String.format(getActivityUrl,clientId, patientId, medicalRecordId)
+        def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
 
-        def resp = Unirest.get(url)
-                .queryString("max", max)
-                .queryString("offset", offset)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", max)
+                    .queryString("offset", offset)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            return result.items
+            if (resp.status == 200) {
+                return result.items
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message, resp.status)
+            }
+        }
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
 
     }
 
-    def getActivities(HttpServletRequest request, HttpServletResponse response, params) {
+    def getActivities(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
         def patientId = params?.patientId
         def start = params?.start
         def length = params?.length
@@ -52,29 +68,38 @@ class ActivityService {
         def senderId = params?.senderId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
-        def url = String.format(getActivityUrl,clientId, patientId, medicalRecordId)
+        def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
 
-        def resp = Unirest.get(url)
-                .queryString("max", length)
-                .queryString("offset", start)
-                .queryString("senderId", senderId)
-                .asString()
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", length)
+                    .queryString("offset", start)
+                    .queryString("senderId", senderId)
+                    .asString()
 
-        def result = JSON.parse(resp.body)
+            def result = JSON.parse(resp.body)
 
-        if (resp.status == 200) {
-            def map = [:]
+            if (resp.status == 200) {
+                def map = [:]
 
-            map.put(start, start)
-            map.put(length, length)
-            map.put(order, order)
-            map.put(columns, columns)
-            map.put(search, search)
-            map.put(draw, draw)
-            map.put("recordsTotal", result.totalCount)
-            map.put("recordsFiltered", result.totalCount)
-            map.put("data", result.items)
-            return map
+                map.put(start, start)
+                map.put(length, length)
+                map.put(order, order)
+                map.put(columns, columns)
+                map.put(search, search)
+                map.put(draw, draw)
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiAjaxReturnErrorException(message, resp.status)
+            }
+        }
+        catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }

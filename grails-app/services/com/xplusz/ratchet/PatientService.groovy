@@ -4,6 +4,8 @@ import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiResourceAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -64,7 +66,7 @@ class PatientService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
         }
 
     }
@@ -116,7 +118,58 @@ class PatientService {
             }
         } catch (UnirestException e) {
             log.error(e.message)
-            throw new ApiAjaxAccessException()
+            throw new ApiAjaxAccessException(e.message)
+        }
+    }
+
+    def loadPatientsForPage(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiResourceAccessException, ApiReturnErrorException {
+
+        def start = params?.start
+        def length = params?.length
+        def order = params?.order
+        def columns = params?.columns
+        def search = params?.search
+        def draw = params?.draw
+        def patientType = params?.patientType
+        def treatmentId = params?.treatmentId
+        def surgeonId = params?.surgeonId
+        def name = params?.name
+
+        def url = grailsApplication.config.ratchetv2.server.url.patients
+        try {
+            def resp = Unirest.get(url)
+                    .queryString("max", length)
+                    .queryString("offset", start)
+                    .queryString("clientId", request.session.clientId)
+                    .queryString("patientType", patientType)
+                    .queryString("treatmentId", treatmentId)
+                    .queryString("surgeonId", surgeonId)
+                    .queryString("name", name)
+                    .asString()
+
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                def map = [:]
+
+                map.put(start, start)
+                map.put(length, length)
+                map.put(order, order)
+                map.put(columns, columns)
+                map.put(search, search)
+                map.put(draw, draw)
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnErrorException(message, resp.status)
+            }
+        } catch (UnirestException e) {
+            log.error(e.message)
+            throw new ApiResourceAccessException(e.message)
         }
     }
 }
