@@ -1,9 +1,5 @@
 dataSource {
-    pooled = true
-    jmxExport = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
+
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -12,23 +8,4 @@ hibernate {
     cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
     singleSession = true // configure OSIV singleSession mode
     flush.mode = 'manual' // OSIV session flush mode outside of transactional context
-}
-
-// environment specific settings
-environments {
-    development {
-        dataSource {
-
-        }
-    }
-    test {
-        dataSource {
-
-        }
-    }
-    production {
-        dataSource {
-
-        }
-    }
 }
