@@ -1,8 +1,13 @@
-.header {
-    position: fixed;
+.sticky-header {
+    position:fixed;
     top: 0;
     left: 0;
-    z-index: 99;
+    width:100%;
+    z-index: 100;
+}
+
+.header {
+    position: relative;
     width: 100%;
     height: 36px;
     padding: 0;

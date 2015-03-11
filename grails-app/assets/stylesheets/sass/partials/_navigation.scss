@@ -124,3 +124,39 @@
         }
     }
 }
+
+.maintenance {
+    padding: 10px;
+    color: #4D4D4D;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #FBD9D7;
+
+    .btn-close {
+        margin-top: -5px;
+        float:right;
+        &:before {
+            padding-right: 8px;
+            padding-left: 30px;
+            content: '\f404';
+            color: $base-font-color;
+            font-weight: lighter;
+            font-size: 30px;
+            font-family: ionicons;
+            vertical-align: middle;
+        }
+    }
+
+    .attention {
+        color: #F05B50;
+    }
+}
+
+.nav.push-down {
+    top:80px;
+}
+
+.container.push-down {
+    padding-top: 80px;
+}
