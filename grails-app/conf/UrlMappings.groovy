@@ -61,7 +61,7 @@ class UrlMappings {
 
         // Accounts
         "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
-        "/userProfile/$accountId?"(controller: "accounts", action: "getProfile")
+        "/userProfile/$accountId?"(controller: "profile", action: "getProfile")
         "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")
         "/getAccounts"(controller: "accounts", action: "getAccounts")
