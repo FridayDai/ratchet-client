@@ -11,7 +11,6 @@ import grails.transaction.Transactional
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@Transactional
 class StaffService {
 
     /** dependency injection for grailsApplication */

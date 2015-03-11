@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import java.text.MessageFormat
 
-@Transactional
 class TreatmentService {
 
     /** dependency injection for grailsApplication */
@@ -104,7 +103,7 @@ class TreatmentService {
 
     }
 
-    def getCareTeam(HttpServletRequest request, HttpServletResponse response, medicalRecordId)
+    def getCareTeam( request,  response, medicalRecordId)
             throws ApiResourceAccessException, ApiReturnErrorException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
