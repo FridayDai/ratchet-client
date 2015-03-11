@@ -6,6 +6,7 @@
         _setValidator();
         _dataTablePagination();
         _setGlobalAjax();
+        _setMaintenance();
     }
 
     /**
@@ -81,6 +82,24 @@
         });
     }
 
+    function _setMaintenance() {
+
+        var _closeBanner = function() {
+            $('.container').removeClass('push-down');
+            $('.nav').removeClass('push-down');
+            $('.maintenance').hide();
+            //TO-DO: close banner ajax call
+        }
+
+        if($('.maintenance').length) {
+            $('.container').addClass('push-down');
+            $('.nav').addClass('push-down');
+            $('.maintenance .btn-close').click(function() {
+                _closeBanner();
+            });
+        }
+
+    }
 
     /**
      * Pipelining function for DataTables. To be used to the `ajax` option of DataTables

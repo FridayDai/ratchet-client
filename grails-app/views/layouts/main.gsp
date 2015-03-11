@@ -20,8 +20,8 @@
     </g:if>
     <g:layoutHead/>
 </head>
-
 <body>
+
 <g:render template="/shared/header"></g:render>
 <g:render template="/shared/nav"></g:render>
 
@@ -29,11 +29,14 @@
     <g:layoutBody/>
 </div>
 <g:render template="/shared/footer"></g:render>
+
 <g:if test="${scriptPath}">
     <asset:javascript src="bundles/${scriptPath}"/>
 </g:if>
+
 <g:else>
     <asset:javascript src="bundles/defaultBundle"/>
 </g:else>
+
 </body>
 </html>

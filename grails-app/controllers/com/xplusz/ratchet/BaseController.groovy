@@ -26,6 +26,10 @@ class BaseController {
         }
     }
 
+    static afterInterceptor = { model ->
+        //TO-DO: add logic here to determin maintenance mode
+        model.maintenance = 'false'
+    }
 
     def handleApiResourceAccessException(ApiResourceAccessException e) {
         flash.message = e.message
