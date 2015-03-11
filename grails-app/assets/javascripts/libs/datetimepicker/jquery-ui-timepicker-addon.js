@@ -30,7 +30,7 @@
         this.regional = []; // Available regional settings, indexed by language code
         this.regional[''] = { // Default regional settings
             currentText: 'Now',
-            closeText: 'Save',
+            closeText: 'Done',
             amNames: ['AM', 'A'],
             pmNames: ['PM', 'P'],
             timeFormat: 'HH:mm',
@@ -416,8 +416,8 @@
                 html += '<dd class="ui-tpicker-timezone" ' + (showTz ? '' : noDisplay) + '></dd>';
 
                 // Create the elements from string
-                var amPm = tp_inst.ampm ||'AM';
-                html += '<dd class ="ui-tpicker-am noselect"><div class="ui-tpicker-am-content noselect">'+amPm+'</div></dd></dl></div>';
+                var amPm = this.control.getAmPm(this);
+                html += '<dd class ="ui-tpicker-am noselect"><div class="ui-tpicker-am-content noselect">' + amPm + '</div></dd></dl></div>';
                 var $tp = $(html);
 
                 // if we only want time picker...
@@ -577,7 +577,13 @@
                 }
 
                 if (dp_inst.settings.timeOnly || minDateTimeDate.getTime() === dp_date.getTime()) {
-                    this._defaults.hourMin = minDateTime.getHours();
+
+                    if (minDateTime.getHours() > 12) {
+                        this._defaults.hourMin = convert24to12(minDateTime.getHours());
+                        //this.hour = convert24to12(this.hour);
+                    } else {
+                        this._defaults.hourMin = minDateTime.getHours();
+                    }
                     if (this.hour <= this._defaults.hourMin) {
                         this.hour = this._defaults.hourMin;
                         this._defaults.minuteMin = minDateTime.getMinutes();
@@ -844,7 +850,7 @@
             second !== parseInt(this.second, 10) ||
             millisec !== parseInt(this.millisec, 10) ||
             microsec !== parseInt(this.microsec, 10) ||
-            //(this.ampm.length > 0 && (hour < 12) !== ($.inArray(this.ampm.toUpperCase(), this.amNames) !== -1)) ||
+                //(this.ampm.length > 0 && (hour < 12) !== ($.inArray(this.ampm.toUpperCase(), this.amNames) !== -1)) ||
             (ampm != this.ampm.toUpperCase) ||
             (this.timezone !== null && timezone !== this.timezone.toString()) // could be numeric or "EST" format, so use toString()
             );
@@ -1129,6 +1135,7 @@
                         tp_inst._onTimeChange();
                         tp_inst._onSelectHandler();
                     }
+
                     if (val > 12 && unit == "hour") {
                         val = convert24to12(val);
                     } else if (val == 0 && unit == "hour") {
@@ -1148,12 +1155,12 @@
                                     tp_inst._onSelectHandler();
                                 },
                                 spin: function (e, ui) { // spin events
-                                    if ( ui.value > 12 && unit == "hour") {
-                                        $( this ).spinner( "value", 1 );
+                                    if (ui.value > 12 && unit == "hour") {
+                                        $(this).spinner("value", 1);
                                         _setValue(1);
                                         return false;
-                                    } else if ( ui.value < 1 && unit == "hour") {
-                                        $( this ).spinner( "value", 12 );
+                                    } else if (ui.value < 1 && unit == "hour") {
+                                        $(this).spinner("value", 12);
                                         _setValue(12);
                                         return false;
                                     }
@@ -1171,8 +1178,10 @@
                             var tpickerEl = $(this);
                             if (tpickerEl.text() === 'AM') {
                                 $(this).text("PM");
+                                tp_inst.ampm = "PM";
                             } else {
                                 $(this).text("AM");
+                                tp_inst.ampm = "AM";
                             }
 
                             tp_inst._onTimeChange();
@@ -1191,8 +1200,15 @@
                         return obj.find('.ui-timepicker-input').spinner('value', val);
                     return obj.find('.ui-timepicker-input').spinner('value');
                 },
-                getAmPm: function (tp_inst, obj) {
-                    return obj.find('.ui-tpicker-am-content').text();
+                getAmPm: function (tp_inst) {
+                    var minDateTime = $.datepicker._get(tp_inst.inst, 'minDateTime');
+                    var amPm;
+                    if (tp_inst.ampm) {
+                        amPm = tp_inst.ampm;
+                    } else {
+                        amPm = minDateTime.getHours() > 12 ? "PM" : "AM";
+                    }
+                    return amPm;
                 }
             }
         }

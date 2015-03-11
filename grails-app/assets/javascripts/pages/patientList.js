@@ -311,7 +311,7 @@
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: +time
+            minDate: new Date(time)
         });
     }
 
@@ -401,9 +401,9 @@
             }
         }).change(function (data) {
             $(this).valid();
-            //var date = new Date();
-            //var time = date.getTime() + data.added.timeStamp;
-            var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
+            var date = new Date();
+            var time = date.getTime() + data.added.timeStamp;
+            //var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
             $("#surgeryTime").prop("disabled", false);
             _initSurgeryTime(time);
         });

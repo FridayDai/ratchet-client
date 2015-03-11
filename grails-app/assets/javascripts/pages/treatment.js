@@ -73,8 +73,10 @@
             url: opts.urls.getTreatmentInfo.format(clientId, treatmentId),
             type: 'POST',
             success: function (data) {
-                var sendTimeOffset = data.sendTimeOffset;
-                var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
+                //var sendTimeOffset = data.sendTimeOffset;
+                //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
+                var date = new Date();
+                var time = date.getTime() + data.sendTimeOffset;
                 _initSurgeryTime(time);
             }
         });
@@ -93,8 +95,8 @@
             timeFormat: "h:mm TT",
             showOn: "focus",
             ampm: true,
-            minDate: +time
-        });
+            minDate: new Date(time)
+    });
     }
 
 
