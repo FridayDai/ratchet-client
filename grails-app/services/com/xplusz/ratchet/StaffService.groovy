@@ -37,6 +37,7 @@ class StaffService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get staffs success, token: ${request.session.token}")
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
@@ -44,9 +45,7 @@ class StaffService {
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 }

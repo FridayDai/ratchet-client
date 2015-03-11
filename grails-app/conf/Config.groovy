@@ -103,6 +103,22 @@ log4j.main = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
+    if (System.getProperty("ELK_TCP_ADDR")) {
+        appenders {
+            console name: 'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
+            appender new biz.paluch.logging.gelf.log4j.GelfLogAppender(name: 'central',
+                    host: System.getProperty("ELK_TCP_ADDR"), port: 12201)
+        }
+
+        root { info "central", "stdout", "stacktrace" }
+    }
+
+    info 'com.xplusz.ratchet',
+            'grails.app.domain',
+            'grails.app.services',
+            'grails.app.controllers',
+            'grails.app.filters.com.xplusz.ratchet.LoggingFilters'
+
     error 'org.codehaus.groovy.grails.web.servlet',        // controllers
             'org.codehaus.groovy.grails.web.pages',          // GSP
             'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -114,7 +130,22 @@ log4j.main = {
             'org.springframework',
             'org.hibernate',
             'net.sf.ehcache.hibernate'
+
+    environments {
+        development {
+            debug 'com.xplusz.ratchet',
+                    'grails.app.domain',
+                    'grails.app.services',
+                    'grails.app.controllers'
+        }
+    }
 }
+
+
+
+
+
+
 grails.resources.resourceLocatorEnabled = false
 grails.plugin.cookiesession.enabled = true
 grails.plugin.cookiesession.cookiename = "ratchet-session"

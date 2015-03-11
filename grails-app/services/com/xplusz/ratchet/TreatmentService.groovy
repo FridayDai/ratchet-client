@@ -38,13 +38,13 @@ class TreatmentService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get treatments success, token: ${request.session.token}")
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -68,16 +68,15 @@ class TreatmentService {
                     .asString()
             def result = JSON.parse(resp.body)
             if (resp.status == 201) {
+                log.info("Assign treatment to exist patient success, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 
     def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params)
@@ -93,13 +92,13 @@ class TreatmentService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get treatment info success, token:${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -117,16 +116,15 @@ class TreatmentService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get care team success, token:${request.session.token}")
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
-
     }
 
     def getCareGiver(HttpServletRequest request, HttpServletResponse response, medicalRecordId)
@@ -143,15 +141,14 @@ class TreatmentService {
 
             if (resp.status == 200) {
                 def map = [:]
-
                 map.put("data", result.items)
+                log.info("Get care giver success, token: ${request.session.token}")
                 return map
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -168,6 +165,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 204) {
+                log.info("Delete care team success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -175,10 +173,8 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 
     def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params)
@@ -192,6 +188,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 204) {
+                log.info("Delete care giver success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -199,10 +196,8 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 
     def addCareTeam(HttpServletRequest request, HttpServletResponse response, params)
@@ -218,6 +213,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Add care team success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -225,10 +221,8 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 
     def addCareGiver(HttpServletRequest request, HttpServletResponse response, params)
@@ -247,6 +241,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Add care giver success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -254,7 +249,6 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -272,6 +266,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Update surgery time success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -279,10 +274,8 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 
     def archived(HttpServletRequest request, HttpServletResponse response, params)
@@ -296,6 +289,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Archive medical record success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -303,7 +297,6 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -324,6 +317,7 @@ class TreatmentService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Update care giver success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -331,7 +325,6 @@ class TreatmentService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -349,15 +342,14 @@ class TreatmentService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Update care team surgeon success, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 }

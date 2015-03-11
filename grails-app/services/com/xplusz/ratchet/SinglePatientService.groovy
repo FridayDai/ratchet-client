@@ -28,13 +28,13 @@ class SinglePatientService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Show single patient success, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
@@ -51,13 +51,13 @@ class SinglePatientService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Show medical records success, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
@@ -78,6 +78,7 @@ class SinglePatientService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Update single patient success, token: ${request.session.token}")
                 return resp.status
             } else {
                 def result = JSON.parse(resp.body)
@@ -85,9 +86,7 @@ class SinglePatientService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
-
     }
 }

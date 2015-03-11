@@ -42,20 +42,21 @@ class AccountService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
+                log.info("Get accounts success, token: ${request.session.token}.")
                 return map
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAjaxAccessException()
         }
 
 
     }
 
-    def getSingleAccount(accountId) throws ApiResourceAccessException, ApiReturnErrorException {
+    def getSingleAccount(HttpServletRequest request, HttpServletResponse response, accountId)
+            throws ApiResourceAccessException, ApiReturnErrorException {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
 
@@ -67,13 +68,13 @@ class AccountService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get single account success, token: ${request.session.token}.")
                 return result
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
@@ -102,6 +103,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 201) {
+                log.info("Create account success, token: ${request.session.token}.")
                 return JSON.parse(resp.body)
             } else {
                 def result = JSON.parse(resp.body)
@@ -109,8 +111,7 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAjaxAccessException()
         }
 
     }
@@ -125,6 +126,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Invite account success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -132,7 +134,6 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -157,6 +158,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Update account success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -164,7 +166,6 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -183,6 +184,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Update password success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -190,12 +192,12 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }
 
-    def confirmCode(HttpServletRequest request, HttpServletResponse response, code) throws ApiResourceAccessException {
+    def confirmCode(HttpServletRequest request, HttpServletResponse response, code)
+            throws ApiResourceAccessException {
 
         String confirmCodeUrl = grailsApplication.config.ratchetv2.server.url.confirmCode
         def url = String.format(confirmCodeUrl, code)
@@ -207,18 +209,19 @@ class AccountService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Confirm code success, token: ${request.session.token}.")
                 return result
             } else {
                 return false
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
 
-    def activateStaff(HttpServletRequest request, HttpServletResponse response, params) throws ApiResourceAccessException {
+    def activateStaff(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiResourceAccessException {
 
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
 
@@ -231,19 +234,20 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Active staff success, token: ${request.session.token}.")
                 return true
             } else {
                 return false
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
 
     }
 
-    def askForResetPassword(email, clientType) throws ApiResourceAccessException {
+    def askForResetPassword(HttpServletRequest request, HttpServletResponse response, email, clientType)
+            throws ApiResourceAccessException {
         def url = grailsApplication.config.ratchetv2.server.url.password.reset
 
         try {
@@ -251,17 +255,19 @@ class AccountService {
                     .field("email", email)
                     .field("clientType", clientType)
                     .asString()
+
+            log.info("Ask for reset password success, token: ${request.session.token}.")
             return resp
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
 
 
     }
 
-    def resetPassword(params) throws ApiResourceAccessException, ApiReturnErrorException {
+    def resetPassword(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiResourceAccessException, ApiReturnErrorException {
         def url = grailsApplication.config.ratchetv2.server.url.password.confirm
 
         try {
@@ -272,6 +278,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Reset password success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -280,12 +287,12 @@ class AccountService {
             }
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
 
-    def validPasswordCode(code) throws ApiResourceAccessException, ApiReturnErrorException {
+    def validPasswordCode(HttpServletRequest request, HttpServletResponse response, code)
+            throws ApiResourceAccessException, ApiReturnErrorException {
         def url = grailsApplication.config.ratchetv2.server.url.password.restCheck
 
         try {
@@ -294,6 +301,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Valid password success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -302,7 +310,6 @@ class AccountService {
             }
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }
@@ -319,6 +326,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Deactivate password success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -326,7 +334,6 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }
@@ -343,6 +350,7 @@ class AccountService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Activate password success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -350,7 +358,6 @@ class AccountService {
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }

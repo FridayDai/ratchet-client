@@ -22,7 +22,7 @@ class AccountsController extends BaseController {
 
     def getSingleAccount() {
         def accountId = params?.id
-        def accountInfo = accountService.getSingleAccount(accountId)
+        def accountInfo = accountService.getSingleAccount(request, response, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
 
@@ -76,7 +76,7 @@ class AccountsController extends BaseController {
     }
 
     def forgotPassword() {
-        def resp = accountService.askForResetPassword(params.email, "client")
+        def resp = accountService.askForResetPassword(request, response, params.email, "client")
         if (resp.status == 200) {
             render view: '/forgotPassword/resettingIntroduction', model: [email: params.email]
         } else {
@@ -88,7 +88,7 @@ class AccountsController extends BaseController {
 
     def resetPassword() {
         def code = params?.code
-        def resp = accountService.validPasswordCode(code)
+        def resp = accountService.validPasswordCode(request, response, code)
         if (resp) {
             render view: '/forgotPassword/resetPassword', model: [code: code]
         }
@@ -96,7 +96,7 @@ class AccountsController extends BaseController {
     }
 
     def confirmResetPassword() {
-        def resp = accountService.resetPassword(params)
+        def resp = accountService.resetPassword(request, response, params)
         if (resp) {
             render view: '/login/login'
         }

@@ -15,13 +15,12 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def archived = params?.archived
-        if (archived==null)
-        {
+        if (archived == null) {
             archived = false
         }
 //        def treatmentId = params.treatmentId
 
-        def tasks = medicalRecordService.showTasksByMedicalRecord(clientId, medicalRecordId)
+        def tasks = medicalRecordService.showTasksByMedicalRecord(request, response, clientId, medicalRecordId)
         def sentTasks = []
         def scheduleTasks = []
         for (task in tasks) {
@@ -41,12 +40,12 @@ class TaskController extends BaseController {
     }
 
     def addTaskToMedicalRecord() {
-        def result = medicalRecordService.assignTaskToMedicalRecord(params)
+        def result = medicalRecordService.assignTaskToMedicalRecord(request, response, params)
         render(template: "/task/taskBox", model: [task: result])
     }
 
     def sendTaskEmail() {
-        def resp = taskService.sendTaskEmailToPatient(params)
+        def resp = taskService.sendTaskEmailToPatient(request, response, params)
         render resp
     }
 

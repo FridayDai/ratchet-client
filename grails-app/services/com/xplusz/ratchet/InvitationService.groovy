@@ -6,13 +6,17 @@ import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
 import grails.converters.JSON
 
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+
 
 class InvitationService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def invitePatient(id) throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+    def invitePatient(HttpServletRequest request, HttpServletResponse response, id)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         String invitePatientUrl = grailsApplication.config.ratchetv2.server.url.invitePatient
         def url = String.format(invitePatientUrl, id)
@@ -21,6 +25,7 @@ class InvitationService {
             def resp = Unirest.get(url)
                     .asString()
             if (resp.status == 200) {
+                log.info("Invite patient success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -29,7 +34,6 @@ class InvitationService {
             }
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }
