@@ -1,5 +1,9 @@
 @import '../partials/common';
 
+body {
+    margin-bottom: 0;
+}
+
 p {
     padding: 20px 0;
     color: $base-color-medium-black;

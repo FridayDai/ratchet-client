@@ -49,7 +49,7 @@
 
                 <div class="align-center cover-inner-footer">
                     <div class="terms-service color-black">
-                        You agree to our <g:link class="dark-link" controller="home" action="termsOfService">Terms of Service</g:link>upon creating account
+                        You agree to our <a href="/terms_of_service" target="_blank" class="dark-link" >Terms of Service</a>upon creating account
                     </div>                
                     <button type="submit" class="btn btn-submit" id='johnRat'>Join Ratchet</button>
                 </div>

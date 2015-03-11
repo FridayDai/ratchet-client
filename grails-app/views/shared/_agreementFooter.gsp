@@ -1,5 +1,5 @@
 <div role="banner" >
-    <p class="update">Last update:  Aug 25,2014</p>
+    <p class="update">Last update:  Aug 25, 2014</p>
     <div class="agreement-footer clear" >
         <div class="copyright pull-left">
             <ul>
@@ -20,10 +20,6 @@
                 <li><g:link controller="home" action="privacyPolicy">Privacy Policy</g:link></li>
             </ul>
         </div>
-        %{--<ul class="clear">--}%
-            %{--<li><g:link controller="home" action="termsOfService">Terms of Service</g:link></li>--}%
-            %{--<li><g:link controller="home" action="privacyPolicy">Privacy Policy</g:link></li>--}%
-        %{--</ul>--}%
 
     </div>
 </div>
