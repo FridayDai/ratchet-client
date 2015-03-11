@@ -20,8 +20,8 @@ class SinglePatientController extends BaseController {
         def isUS = num.charAt(0)
         def space = ' '
 
-        if(isUS == '1') {
-            subNumber = num.substring(1,length)
+        if (isUS == '1') {
+            subNumber = num.substring(1, length)
             length = subNumber.length()
         }
         if (length > 6) {
@@ -30,7 +30,7 @@ class SinglePatientController extends BaseController {
         } else if (length > 3) {
             phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, length))
         }
-        if(isUS == '1') {
+        if (isUS == '1') {
             phoneNumber = String.format("%s%s%s", isUS, space, phoneNumber)
         }
 
@@ -45,7 +45,7 @@ class SinglePatientController extends BaseController {
     }
 
     def invitePatient() {
-        invitationService.invitePatient(params.id)
+        invitationService.invitePatient(request, response, params.id)
         render true
     }
 }

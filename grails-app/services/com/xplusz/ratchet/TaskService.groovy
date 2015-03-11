@@ -39,19 +39,20 @@ class TaskService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get overdue tasks success, token: ${request.session.token}")
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
 
     }
 
-    def sendTaskEmailToPatient(params) throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+    def sendTaskEmailToPatient(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
 
         String sendTaskEmailUrl = grailsApplication.config.ratchetv2.server.url.task.sendEmail
         def url = String.format(sendTaskEmailUrl, params.clientId, params.patientId, params.medicalRecordId, params.taskId)
@@ -61,6 +62,7 @@ class TaskService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("Send task email to patient success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -69,7 +71,6 @@ class TaskService {
             }
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }

@@ -59,13 +59,13 @@ class PatientService {
             if (resp.status == 201) {
                 def map = [:]
                 map.put("id", result.id)
+                log.info("Add patient success, token: ${request.session.token}")
                 return map
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
@@ -111,13 +111,14 @@ class PatientService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
+
+                log.info("Get patients success, token: ${request.session.token}")
                 return map
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiAjaxReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
     }
@@ -162,13 +163,13 @@ class PatientService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
+                log.info("Get patients for page success, token: ${request.session.token}")
                 return map
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnErrorException(message, resp.status)
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
     }

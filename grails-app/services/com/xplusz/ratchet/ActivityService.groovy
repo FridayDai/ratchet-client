@@ -41,6 +41,7 @@ class ActivityService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get activity success, token: ${request.session.token}.")
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
@@ -48,7 +49,6 @@ class ActivityService {
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
 
@@ -91,6 +91,7 @@ class ActivityService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
+                log.info("Get activities success, token: ${request.session.token}.")
                 return map
             } else {
                 def message = result?.error?.errorMessage
@@ -98,7 +99,6 @@ class ActivityService {
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 

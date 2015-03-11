@@ -6,6 +6,9 @@ import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
 import com.xplusz.ratchet.exceptions.ApiResourceAccessException
 import com.xplusz.ratchet.exceptions.ApiReturnErrorException
 import grails.converters.JSON
+
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 import java.text.MessageFormat
 
 
@@ -14,7 +17,8 @@ class MedicalRecordService {
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def showTasksByMedicalRecord(clientId, medicalRecordId) throws ApiResourceAccessException, ApiReturnErrorException {
+    def showTasksByMedicalRecord(HttpServletRequest request, HttpServletResponse response, clientId, medicalRecordId)
+            throws ApiResourceAccessException, ApiReturnErrorException {
 
         String showTasksUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.tasks
         def url = String.format(showTasksUrl, clientId, medicalRecordId)
@@ -25,6 +29,7 @@ class MedicalRecordService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("Get tasks success, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
@@ -32,14 +37,12 @@ class MedicalRecordService {
             }
 
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiResourceAccessException(e.message)
         }
-
-
     }
 
-    def assignTaskToMedicalRecord(params) throws ApiAjaxAccessException {
+    def assignTaskToMedicalRecord(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAjaxAccessException {
 
         String assignTaskUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.assignTask
         def url = String.format(assignTaskUrl, params.clientId, params.patientId, params.medicalRecordId)
@@ -70,12 +73,12 @@ class MedicalRecordService {
 
             def result = JSON.parse(resp.body)
             if (resp.status == 200) {
+                log.info("Assign task to medical record success, token: ${request.session.token}")
                 return result
             } else {
                 return false
             }
         } catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 

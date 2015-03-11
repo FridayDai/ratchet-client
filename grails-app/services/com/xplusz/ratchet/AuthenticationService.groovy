@@ -28,7 +28,8 @@ class AuthenticationService {
      * @return the authenticated status and errorMessage which restAPI returned.
      */
 
-    def authenticate(HttpServletRequest request, HttpServletResponse response, params) throws AccountValidationException {
+    def authenticate(HttpServletRequest request, HttpServletResponse response, params)
+            throws AccountValidationException {
 
         def email = params.email
         def password = params.password
@@ -70,6 +71,7 @@ class AuthenticationService {
             def data = [
                     authenticated: true,
             ]
+            log.info("Authenticate success, token: ${request.session.token}")
             return data
         }
 
@@ -83,9 +85,7 @@ class AuthenticationService {
         } else {
             def errorMessage = result?.error?.errorMessage
             throw new AccountValidationException(errorMessage)
-
         }
-
 
     }
 
@@ -115,7 +115,7 @@ class AuthenticationService {
             def resp = Unirest.get(url)
                     .asString()
             if (resp.status == 200) {
-                log.info("Logout ${token}")
+                log.info("Logout success, token: ${token}")
                 session.invalidate()
                 return true
             } else {
@@ -125,7 +125,6 @@ class AuthenticationService {
             }
         }
         catch (UnirestException e) {
-            log.error(e.message)
             throw new ApiAjaxAccessException(e.message)
         }
 
