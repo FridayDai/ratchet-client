@@ -11,6 +11,9 @@ class UrlMappings {
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 
+        //health check
+        "/healthcheck"(controller: "healthCheck", action: "index")
+
         //forgotPassword
         "/forgotPassword"(view: "/forgotPassword/forgotPassword")
         "/resetPassword/$code?"(controller: "accounts", action: "resetPassword")
