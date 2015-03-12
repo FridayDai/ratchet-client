@@ -523,7 +523,7 @@
             },
             {
                 element: $(".warn"),
-                closeCallback: function () {
+                yesCallback: function () {
                     _deactivateAccount(accountId, parents);
                 }
             }));

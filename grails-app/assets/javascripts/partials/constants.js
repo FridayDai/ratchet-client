@@ -37,11 +37,14 @@
         deleteTeamWaringTitle: "Are you sure you want to remove the current Care Team?",
         deleteGiverWaringTitle: "Are you sure you want to remove the current EMERGENCY CONTACT?",
         deleteGiverWarningMsg: "The information cannot be retrieved.",
+        archivedTreatmentWarningMsg: "Are you sure you want to archive this treatment?",
+        archivedMessage: "Archived treatment cannot be started again.",
         warningTip: "Click “PROCEED” to go to remove the agent.",
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
         errorTip: "Something wrong, Please try again later.",
+
 
 
         //ERROR

@@ -11,8 +11,8 @@
                 width: 400
             },
             waringArguments: {
-                title: RC.constants.warningTipTitle,
-                message: RC.constants.warningTip
+                title: RC.constants.archivedTreatmentWarningMsg,
+                message: RC.constants.archivedMessage
             }
         },
         urls: {
@@ -96,7 +96,7 @@
             showOn: "focus",
             ampm: true,
             minDate: new Date(time)
-    });
+        });
     }
 
 
@@ -110,7 +110,7 @@
      * @param selectedDate
      * @private
      */
-    function _updateSurgeryTime (element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
+    function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
             url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, selectedDate),
             type: 'PUT',
@@ -125,24 +125,40 @@
     }
 
     /**
-     * archived a treatment
+     * init archived a treatment event
      * @private
      */
-    function _initArchived (element){
+    function _initArchived(element) {
         $('.archived-active').click(function (e) {
             e.preventDefault();
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
-            $.ajax({
-                url: opts.urls.archived.format(clientId, patientId, medicalRecordId),
-                type: 'PUT',
-                success: function (data) {
-                    if (data.resp === true) {
-                        window.location.reload();
-                    }
+            RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
+                element: $(".warn"),
+                yesCallback: function () {
+                    _archived(clientId, patientId, medicalRecordId);
                 }
-            });
+            }));
+        });
+    }
+
+    /**
+     * archived a treatment
+     * @param clientId
+     * @param patientId
+     * @param medicalRecordId
+     * @private
+     */
+    function _archived(clientId, patientId, medicalRecordId) {
+        $.ajax({
+            url: opts.urls.archived.format(clientId, patientId, medicalRecordId),
+            type: 'PUT',
+            success: function (data) {
+                if (data.resp === true) {
+                    window.location.reload();
+                }
+            }
         });
     }
 
@@ -152,7 +168,7 @@
      */
     function _init(element) {
         _initDatePicker(element);
-        _initArchived (element);
+        _initArchived(element);
         $(element).tabs({
             cache: false,
             beforeLoad: function (event, ui) {

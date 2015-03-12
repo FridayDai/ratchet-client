@@ -300,7 +300,7 @@
 
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteGiverWaringArguments, {
                 element: $(".warn"),
-                closeCallback: function () {
+                yesCallback: function () {
                     _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent);
                 }
             }));
