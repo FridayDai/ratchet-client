@@ -43,6 +43,10 @@
             background: $base-color-active;
             color: $base-color-white;
         }
+
+        .activate-action {
+            padding: 3px 6px;
+        }
     }
 
     .bg-color {
@@ -170,16 +174,6 @@
     }
 }
 
-.icons {
-    position: relative;
-
-    .btn-deactive {
-        position: absolute;
-        left: -80px;
-        top: 35px;
-    }
-}
-
 .btn-bottom {
     margin-top: 60px;
 
@@ -218,4 +212,24 @@
 
 .role-select {
     margin-left: 28px;
+}
+
+.ui-dialog {
+    .ui-dialog-titlebar {
+        padding-bottom: 0;
+    }
+
+    .ui-dialog-content {
+        padding: 0;
+    }
+
+    .ui-dialog-buttonpane {
+        .ui-dialog-buttonset {
+            padding: 10px;
+        }
+
+        button {
+            margin: .5em 1em .5em 0;
+        }
+    }
 }
