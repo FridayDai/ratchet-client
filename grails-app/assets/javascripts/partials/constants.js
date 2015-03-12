@@ -43,12 +43,12 @@
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
-        errorTip: "Something wrong, Please try again later.",
-
 
 
         //ERROR
         errorTitle: "ERROR",
+        errorTitle404: "ERROR : 404",
+        errorTip: "Something has gone wrong. Please try again!",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
         errorMessageAction: "Something wrong, Please check messages below.",
         confirmPassword: "Your passwords don't match. Please enter them again."

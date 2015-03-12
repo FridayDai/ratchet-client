@@ -2,26 +2,38 @@
 @import '../partials/error';
 
 .error-body {
-    margin-top: 100px;
+    margin-top: 138px;
     padding: 0;
-    color: $base-color-warn;
+    color: $base-logo-color;
     text-align: center;
 
     .top-content {
-        font-weight: bold;
-        font-size: 50px;
+        font-weight: 500;
+        font-size: 58px;
     }
 
     .middle-content {
-        font-weight: bolder;
-        font-size: 100px;
+        font-weight: 500;
+        font-size: 116px;
+    }
+
+    .bottom-content {
+        padding: 50px 0;
+    }
+
+    .text-font {
+        font-size: 19px;
+    }
+
+    .btn-home {
+        padding: 10px 34px;
+        font-size: 18px;
     }
 
     .logo {
-        margin-top: 200px;
 
         &:before {
-            content: url('../../../images/login/ratchet_health_big.png');
+            content: url('../../../images/login/ratchet_health_cube.png');
         }
     }
 }
