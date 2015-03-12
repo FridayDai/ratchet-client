@@ -64,18 +64,20 @@
             },
             global: true,
             error: function (jqXHR) {
-                if (jqXHR.status === 404) {
-                    //window.location.href = "/";
-                } else if (jqXHR.status === 403) {
+                if (jqXHR.status === 403) {
                     window.location.href = "/login";
-                } else if (jqXHR.status === 401) {
-                    window.location.href = "404";
                 }
-                else if (jqXHR.status === 400 || jqXHR.status === 500) {
+                else if (jqXHR.status === 400) {
                     RC.common.error({
                         title: RC.constants.errorTitle,
                         message: RC.constants.errorMessageAction,
                         errorMessage: jqXHR.responseText
+                    });
+                }
+                else if (jqXHR.status === 401 || jqXHR.status >= 404 ) {
+                    RC.common.error({
+                        title: RC.constants.errorTitle404,
+                        message: RC.constants.errorTip
                     });
                 }
             }
@@ -262,9 +264,13 @@
         $(uiButton[1]).addClass('btn-ok');
 
         uiWindowTitle.html('<div class="window-error-title">' + errorArguments.title + '</div>');
-        uiWindowMessage.html('<div class="window-error">' + errorArguments.message + '</div>' +
-            '<div class="window-error-message">' + errorArguments.errorMessage + '</div>'
-        );
+        uiWindowMessage.html('');
+        if(errorArguments.message){
+            uiWindowMessage.append('<div class="window-error">' + errorArguments.message + '</div>');
+        }
+        if(errorArguments.errorMessage) {
+            uiWindowMessage.append('<div class="window-error-message">' + errorArguments.errorMessage + '</div>');
+        }
         return $container;
     }
 

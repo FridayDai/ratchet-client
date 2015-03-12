@@ -31,12 +31,6 @@ class BaseController {
         model.maintenance = 'false'
     }
 
-    def handleApiResourceAccessException(ApiResourceAccessException e) {
-        log.error("API resource access exception: ${e.message}, token: ${session.token}.")
-        flash.message = e.message
-        render view: '/error/error404'
-    }
-
     def handleApiAjaxReturnErrorException(ApiAjaxReturnErrorException e) {
         log.error("API ajax return error exception: ${e.message}, token: ${session.token}.")
         def status = e.statusId ? e.statusId : 500
@@ -46,8 +40,15 @@ class BaseController {
 
     def handleApiAjaxAccessException(ApiAjaxAccessException e) {
         log.error("API ajax access exception: ${e.message}, token: ${session.token}.")
+        def status = e.statusId ? e.statusId : 500
         def message = e.message ? e.message : g.message(code: 'default.error.500.message')
-        render status: '400', text: message
+        render status: status, text: message
+    }
+
+    def handleApiResourceAccessException(ApiResourceAccessException e) {
+        log.error("API resource access exception: ${e.message}, token: ${session.token}.")
+        flash.message = e.message
+        render view: '/error/error404'
     }
 
     def handleApiReturnErrorException(ApiReturnErrorException e) {
