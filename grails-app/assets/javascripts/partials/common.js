@@ -478,8 +478,8 @@
                 modal: true,
                 buttons: {
                     Yes: function (e) {
-                        if ($.isFunction(warningArguments.closeCallback)) {
-                            (warningArguments.closeCallback)(e);
+                        if ($.isFunction(warningArguments.yesCallback)) {
+                            (warningArguments.yesCallback)(e);
                         }
                         dialog.dialog("close");
                     },

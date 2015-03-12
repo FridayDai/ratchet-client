@@ -321,7 +321,7 @@
 
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
                 element: $(".warn"),
-                closeCallback: function () {
+                yesCallback: function () {
                     _remove(dataId, tr);
                 }
             }));
