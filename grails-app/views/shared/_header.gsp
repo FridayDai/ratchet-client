@@ -1,12 +1,12 @@
 <div class="sticky-header">
-    <g:if test="${maintenance == 'true'}">
-        <div role="banner" class="maintenance">
-            <span class="attention">Attention:</span> Ratchet Health will be performing network maintenace between START-TIME & END-TIME UTC.
+    <g:if test="${announcement.status == 'active'}">
+        <div role="banner" class="maintenance ${announcement.background}">
+            <span class="attention">Attention:</span> ${announcement.announcement}
             <a href="#" class="btn-close"> </a>
         </div>
     </g:if>
 
-    <div role="banner" class="header">
+    <div role="banner" class="header <g:if test="${announcement.status == 'active'}"> push-down</g:if>">
         <div class="toolbar">
             <div class="pull-left">
                 <a href="/" class="logo">

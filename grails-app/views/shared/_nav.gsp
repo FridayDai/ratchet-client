@@ -1,4 +1,4 @@
-<div class="nav">
+<div class="nav <g:if test="${announcement.status == 'active'}"> push-down</g:if>">
     <ul id="menu" class="list">
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>

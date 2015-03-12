@@ -90,17 +90,12 @@
             $('.container').removeClass('push-down');
             $('.nav').removeClass('push-down');
             $('.maintenance').hide();
+        }
+
+        $('.maintenance .btn-close').click(function() {
             //TO-DO: close banner ajax call
-        }
-
-        if($('.maintenance').length) {
-            $('.container').addClass('push-down');
-            $('.nav').addClass('push-down');
-            $('.maintenance .btn-close').click(function() {
-                _closeBanner();
-            });
-        }
-
+            _closeBanner();
+        });
     }
 
     /**
