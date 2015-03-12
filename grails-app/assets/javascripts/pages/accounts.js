@@ -65,7 +65,7 @@
             serverSide: true,
             "bAutoWidth": false,
             pageLength: $(opts.table.id).data("pagesize"),
-            deferLoading: $(opts.table.id).data("total"),
+            deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');

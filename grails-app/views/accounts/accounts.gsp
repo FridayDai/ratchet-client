@@ -14,6 +14,7 @@
             <label class="title">ACCOUNTS</label>
             <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
         </div>
+
         <div class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content pull-right">
@@ -22,8 +23,10 @@
                 </div>
             </div>
         </div>
+
         <div class="table-group">
-            <table id="accountsTable" class="display accounts-table" data-total="${accountList.recordsTotal}" data-pagesize="${pagesize}">
+            <table id="accountsTable" class="display accounts-table" data-total="${accountList.recordsTotal}"
+                   data-filtered="${accountList.recordsFiltered} " data-pagesize="${pagesize}">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -43,7 +46,7 @@
                         <td>${account.id}</td>
                     </tr>
                 </g:each>
-                </tbody>                
+                </tbody>
             </table>
         </div>
 
@@ -66,7 +69,8 @@
 
             <div class="form-group">
                 <label class="lbl-group">Email ADDRESS<span>*</span></label>
-                <input id="email" name="email" type="email" class="input-group" placeholder="john_smith@email.com" required/>
+                <input id="email" name="email" type="email" class="input-group" placeholder="john_smith@email.com"
+                       required/>
             </div>
 
             <div class="form-group inline">
@@ -86,6 +90,7 @@
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
+
                 <div class="group">
                     <label class="account-management">
                         <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
