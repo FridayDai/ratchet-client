@@ -1,4 +1,8 @@
 .container {
+    &.push-down {
+        padding-top: 80px;
+    }
+
     overflow: hidden;
     min-width: 480px;
     padding-top: 42px;
