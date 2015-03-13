@@ -132,17 +132,22 @@
                 },
                 {
                     data: function (source) {
-                        return careGiverStatus[source.status - 1];
+
+                        if (careGiverStatus[source.status - 1] === "ACTIVE") {
+                            return '<span class="status-active">ACTIVE</span>'
+                        } else {
+                            return '<span class="status-inactive">INACTIVE</span>'
+                        }
                     },
                     width: "15%"
                 },
                 {
                     data: function (source) {
-                        if (active==="true") {
+                        if (active === "true") {
                             return '<button id="edit-care-giver" disabled="disabled" class="btn-edit disabled" data-care-giver-id="' + source.id + '" ></button>' +
                                 '<button id="remove-care-team" disabled="disabled" class="btn-remove-team disabled" data-care-giver-id="' + source.id + '" > </button>';
 
-                        }else {
+                        } else {
                             return '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" ></a>' +
                                 '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > </a>';
                         }
