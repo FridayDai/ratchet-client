@@ -1175,8 +1175,23 @@
                     } else {
 
                         obj.find(".ui-tpicker-am-content").on('click', function (e) {
+                            var minDateTime = $.datepicker._get(tp_inst.inst, 'minDateTime');
+                            var selectedDay = tp_inst.inst.selectedDay;
                             var tpickerEl = $(this);
-                            if (tpickerEl.text() === 'AM') {
+
+                            if (minDateTime.getHours() > 12) {
+                                if (selectedDay === minDateTime.getDate()) {
+                                    return
+                                } else {
+                                    if (tpickerEl.text() === 'AM') {
+                                        $(this).text("PM");
+                                        tp_inst.ampm = "PM";
+                                    } else {
+                                        $(this).text("AM");
+                                        tp_inst.ampm = "AM";
+                                    }
+                                }
+                            } else if (tpickerEl.text() === 'AM') {
                                 $(this).text("PM");
                                 tp_inst.ampm = "PM";
                             } else {
