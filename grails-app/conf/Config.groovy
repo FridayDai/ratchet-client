@@ -171,8 +171,8 @@ grails.config.locations = [
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://ratchetv2server-qa.elasticbeanstalk.com/api/v1"
-            baseUrl = System.getProperty("SERVER_URL") ?: "http://ratchetv2server-qa.elasticbeanstalk.com"
+            base = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com/api/v1"
+            baseUrl = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com"
 
             //health check
             healthCheck = "${ratchetv2.server.url.baseUrl}/healthcheck"
