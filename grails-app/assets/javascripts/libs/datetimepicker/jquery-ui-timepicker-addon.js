@@ -558,6 +558,7 @@
          */
         _limitMinMaxDateTime: function (dp_inst, adjustSliders) {
             var o = this._defaults,
+                tpickerampm = dp_inst.dpDiv.find('.ui-tpicker-am').text(),
                 dp_date = new Date(dp_inst.selectedYear, dp_inst.selectedMonth, dp_inst.selectedDay);
 
             if (!this._defaults.showTimepicker) {
@@ -578,11 +579,14 @@
 
                 if (dp_inst.settings.timeOnly || minDateTimeDate.getTime() === dp_date.getTime()) {
 
+                    var text = dp_inst.dpDiv.find('.ui-tpicker-am').text();
                     if (minDateTime.getHours() > 12) {
                         this._defaults.hourMin = convert24to12(minDateTime.getHours());
                         //this.hour = convert24to12(this.hour);
-                    } else {
+                    } else if (tpickerampm === "" || tpickerampm === "AM") {
                         this._defaults.hourMin = minDateTime.getHours();
+                    } else {
+                        this._defaults.hourMin = 0;
                     }
                     if (this.hour <= this._defaults.hourMin) {
                         this.hour = this._defaults.hourMin;
@@ -902,7 +906,8 @@
                 this._updateDateTime();
                 //this.$input.focus(); // may automatically open the picker on setDate
             }
-        },
+        }
+        ,
 
         /*
          * call custom onSelect.
@@ -914,7 +919,8 @@
             if (onSelect && inputEl) {
                 onSelect.apply(inputEl, [this.formattedDateTime, this]);
             }
-        },
+        }
+        ,
 
         /*
          * update our input with the new date time..
@@ -993,7 +999,8 @@
             }
 
             this.$input.trigger("change");
-        },
+        }
+        ,
 
         _onFocus: function () {
             if (!this.$input.val() && this._defaults.defaultValue) {
@@ -1010,7 +1017,8 @@
                     }
                 }
             }
-        },
+        }
+        ,
 
         /*
          * Small abstraction to control types
@@ -1035,7 +1043,8 @@
                             tp_inst._onSelectHandler();
                         }
                     });
-                },
+                }
+                ,
                 options: function (tp_inst, obj, unit, opts, val) {
                     if (tp_inst._defaults.isRTL) {
                         if (typeof(opts) === 'string') {
@@ -1062,7 +1071,8 @@
                         return obj.slider(opts, val);
                     }
                     return obj.slider(opts);
-                },
+                }
+                ,
                 value: function (tp_inst, obj, unit, val) {
                     if (tp_inst._defaults.isRTL) {
                         if (val !== undefined) {
@@ -1075,7 +1085,8 @@
                     }
                     return obj.slider('value');
                 }
-            },
+            }
+            ,
             // select methods
             select: {
                 create: function (tp_inst, obj, unit, val, min, max, step) {
@@ -1105,7 +1116,8 @@
                     });
 
                     return obj;
-                },
+                }
+                ,
                 options: function (tp_inst, obj, unit, opts, val) {
                     var o = {},
                         $t = obj.children('select');
@@ -1119,7 +1131,8 @@
                         o = opts;
                     }
                     return tp_inst.control.create(tp_inst, obj, $t.data('unit'), $t.val(), o.min || $t.data('min'), o.max || $t.data('max'), o.step || $t.data('step'));
-                },
+                }
+                ,
                 value: function (tp_inst, obj, unit, val) {
                     var $t = obj.children('select');
                     if (val !== undefined) {
@@ -1127,7 +1140,8 @@
                     }
                     return $t.val();
                 }
-            },
+            }
+            ,
             input: {
                 create: function (tp_inst, obj, unit, val, min, max, step) {
                     function _setValue(value) {
@@ -1194,6 +1208,7 @@
                             } else if (tpickerEl.text() === 'AM') {
                                 $(this).text("PM");
                                 tp_inst.ampm = "PM";
+                                _setValue(minDateTime.getHours());
                             } else {
                                 $(this).text("AM");
                                 tp_inst.ampm = "AM";
@@ -1204,17 +1219,20 @@
                         });
                     }
                     return obj;
-                },
+                }
+                ,
                 options: function (tp_inst, obj, unit, opts, val) {
                     if (typeof(opts) == 'string' && val !== undefined)
                         return obj.find('.ui-timepicker-input').spinner(opts, val);
                     return obj.find('.ui-timepicker-input').spinner(opts);
-                },
+                }
+                ,
                 value: function (tp_inst, obj, unit, val) {
                     if (val !== undefined)
                         return obj.find('.ui-timepicker-input').spinner('value', val);
                     return obj.find('.ui-timepicker-input').spinner('value');
-                },
+                }
+                ,
                 getAmPm: function (tp_inst) {
                     var minDateTime = $.datepicker._get(tp_inst.inst, 'minDateTime');
                     var amPm;
@@ -1227,9 +1245,10 @@
                 }
             }
         }
-        // end _controls
+// end _controls
 
-    });
+    })
+    ;
 
     $.fn.extend({
         /*
@@ -2376,4 +2395,5 @@
      */
     $.timepicker.version = "1.5.0";
 
-})(jQuery);
+})
+(jQuery);
