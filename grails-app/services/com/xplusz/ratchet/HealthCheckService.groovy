@@ -8,7 +8,8 @@ class HealthCheckService {
 
     def checkHealth() {
 
-        def url = grailsApplication.config.ratchetv2.server.url.healthCheck
+        URL baseUrl = new URL(grailsApplication.config.ratchetv2.server.url.base)
+        def url = baseUrl.toString() - baseUrl.path + grailsApplication.config.ratchetv2.server.url.healthCheck
         def resp = Unirest.get(url)
                 .asString()
         return resp
