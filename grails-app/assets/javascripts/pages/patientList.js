@@ -63,7 +63,7 @@
             }),
             columnDefs: [{
                 "targets": 5,
-                "orderable": false,
+                "orderable": false
             },
                 {
                     "targets": 0,
@@ -122,7 +122,7 @@
                         return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
                     },
                     width: "8%"
-                }],
+                }]
         });
 
     }
@@ -153,7 +153,7 @@
      * @private
      */
     function _search() {
-        var treatmentId = $("#treatmentForSearchPatient").val();
+        var treatmentId = $("#treatmentForSearchPatient").data("id");
         var surgeonId = $("#selectSurgeon").val();
         var name = $("#search-input").val();
         var data = {
@@ -410,36 +410,73 @@
     }
 
     function _initTreatmentSelect() {
-        $('#treatmentForSearchPatient').select2({
-            ajax: {
-                transport: function (params) {
-                    params.beforeSend = function () {
+        $("#treatmentForSearchPatient").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function (eve, ui) {
                         RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getTreatments,
-                cache: "true",
-                data: function (name) {
-                    return {
-                        name: name
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, item) {
-                        myResults.push({
-                            'id': item.id,
-                            'text': item.title + ' ' + item.tmpTitle,
-                            'data': item.surgeryTimeRequired
-                        });
-                    });
-                    return {
-                        results: myResults
-                    };
-                }
+                    },
+                    url: opts.urls.getTreatments,
+                    type: "POST",
+                    data: {
+                        max: 12,
+                        treatmentTitle: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.title + ' ' + item.tmpTitle,
+                                    value: item.id,
+                                    data: item.surgeryTimeRequired
+                                }
+                            }));
+                        }
+                    }
+                })
             }
+
         });
+        //$('#treatmentForSearchPatient').select2({
+        //    ajax: {
+        //        transport: function (params) {
+        //            params.beforeSend = function () {
+        //                RC.common.progress(false);
+        //            };
+        //            return $.ajax(params);
+        //        },
+        //        url: opts.urls.getTreatments,
+        //        cache: "true",
+        //        data: function (name) {
+        //            return {
+        //                name: name
+        //            };
+        //        },
+        //        results: function (data) {
+        //            var myResults = [];
+        //            $.each(data, function (index, item) {
+        //                myResults.push({
+        //                    'id': item.id,
+        //                    'text': item.title + ' ' + item.tmpTitle,
+        //                    'data': item.surgeryTimeRequired
+        //                });
+        //            });
+        //            return {
+        //                results: myResults
+        //            };
+        //        }
+        //    }
+        //});
 
     }
 

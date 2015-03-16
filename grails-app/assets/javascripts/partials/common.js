@@ -7,6 +7,7 @@
         _dataTablePagination();
         _setGlobalAjax();
         _setMaintenance();
+        _initComboboxWidget();
         _setNavbar();
     }
 
@@ -278,6 +279,82 @@
             });
         });
 
+    }
+
+    /**
+     * init combobox widget
+     * @private
+     */
+    function _initComboboxWidget() {
+        $.widget("ui.combobox", {
+            _create: function () {
+                var wrapper = this.wrapper = $("<span />").addClass("ui-combobox")
+                    , self = this;
+
+                this.element.wrap(wrapper);
+
+                this.element
+                    .addClass("ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
+                    .autocomplete($.extend({
+                        minLength: 0,
+                        open: function (event, ui) {
+                            event.preventDefault();
+                            var backgoundUrl = '../assets/dataTable/sort_both.png';
+                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
+                        },
+                        close: function (event, ui) {
+                            event.preventDefault();
+                            var backgoundUrl = '../assets/dataTable/sort_both.png';
+                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
+                        },
+                        response: function (event, ui) {
+                            event.preventDefault();
+                            if (ui.content.value == "No matches found") {
+                                $(this).data("id", "");
+                            }
+                        },
+                        select: function (event, ui) {
+                            event.preventDefault();
+                            if (ui.item.value == "No matches found") {
+                                return;
+                            }
+                            $(this).val(ui.item.label);
+                            $(this).data("id", ui.item.value);
+                        },
+                        search: function (data) {
+                            var backgoundUrl = '../assets/autocomplete-spinner.gif';
+                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
+                        }
+                    }, this.options));
+
+                $("<a />")
+                    .insertAfter(this.element)
+                    .button({
+                        icons: {
+                            primary: "ui-icon-triangle-1-s"
+                        },
+                        text: false
+                    })
+                    .removeClass("ui-corner-all")
+                    .addClass("ui-corner-right ui-combobox-toggle")
+                    .click(function () {
+                        if (self.element.autocomplete("widget").is(":visible")) {
+                            self.element.autocomplete("close");
+                            return;
+                        }
+
+                        $(this).blur();
+
+                        self.element.autocomplete("search", "");
+                        self.element.focus();
+                    });
+            },
+
+            destroy: function () {
+                this.wrapper.remove();
+                $.Widget.prototype.destroy.call(this);
+            }
+        });
     }
 
     /**

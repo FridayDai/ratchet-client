@@ -21,6 +21,7 @@ class TreatmentService {
             throws ApiAccessException, ApiReturnException {
         def max = params?.max
         def offset = params?.offset
+        def treatmentTitle = params?.treatmentTitle
 
         String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
         def url = String.format(getTreatmentsUrl, request.session.clientId)
@@ -29,6 +30,7 @@ class TreatmentService {
             def resp = Unirest.get(url)
                     .queryString("max", max)
                     .queryString("offset", offset)
+                    .queryString("treatmentTitle", treatmentTitle)
                     .asString()
 
             def result = JSON.parse(resp.body)
