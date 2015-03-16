@@ -172,10 +172,9 @@ ratchetv2 {
     server {
         url {
             base = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com/api/v1"
-            baseUrl = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com"
 
             //health check
-            healthCheck = "${ratchetv2.server.url.baseUrl}/healthcheck"
+            healthCheck = "/healthcheck"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
