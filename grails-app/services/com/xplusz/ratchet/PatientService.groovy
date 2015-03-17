@@ -2,10 +2,8 @@ package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
-import com.xplusz.ratchet.exceptions.ApiReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -19,7 +17,7 @@ class PatientService {
     def messageSource
 
     def addPatients(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
         def patientId = params?.patientId
         def firstName = params?.firstName
         def lastName = params?.lastName
@@ -63,16 +61,16 @@ class PatientService {
                 return map
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def loadPatients(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         def start = params?.start
         def length = params?.length
@@ -116,61 +114,11 @@ class PatientService {
                 return map
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
-    def loadPatientsForPage(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiResourceAccessException, ApiReturnErrorException {
-
-        def start = params?.start
-        def length = params?.length
-        def order = params?.order
-        def columns = params?.columns
-        def search = params?.search
-        def draw = params?.draw
-        def patientType = params?.patientType
-        def treatmentId = params?.treatmentId
-        def surgeonId = params?.surgeonId
-        def name = params?.name
-
-        def url = grailsApplication.config.ratchetv2.server.url.patients
-        try {
-            def resp = Unirest.get(url)
-                    .queryString("max", length)
-                    .queryString("offset", start)
-                    .queryString("clientId", request.session.clientId)
-                    .queryString("patientType", patientType)
-                    .queryString("treatmentId", treatmentId)
-                    .queryString("surgeonId", surgeonId)
-                    .queryString("name", name)
-                    .asString()
-
-            def result = JSON.parse(resp.body)
-
-            if (resp.status == 200) {
-                def map = [:]
-
-                map.put(start, start)
-                map.put(length, length)
-                map.put(order, order)
-                map.put(columns, columns)
-                map.put(search, search)
-                map.put(draw, draw)
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
-                log.info("Get patients for page success, token: ${request.session.token}")
-                return map
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message, resp.status)
-            }
-        } catch (UnirestException e) {
-            throw new ApiResourceAccessException(e.message)
-        }
-    }
 }

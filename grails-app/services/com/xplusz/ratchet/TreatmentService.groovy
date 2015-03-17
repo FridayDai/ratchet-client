@@ -2,12 +2,9 @@ package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
-import com.xplusz.ratchet.exceptions.ApiReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 import grails.converters.JSON
-import grails.transaction.Transactional
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -21,7 +18,7 @@ class TreatmentService {
     def messageSource
 
     def getTreatments(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
         def max = params?.max
         def offset = params?.offset
 
@@ -41,16 +38,16 @@ class TreatmentService {
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def assignTreatmentToExistPatient(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String assignTreatmentToExistPatientUrl = grailsApplication.config.ratchetv2.server.url.assignTreatmentToExistPatient
         def url = String.format(assignTreatmentToExistPatientUrl, params?.clientId, params?.patientId)
@@ -71,15 +68,15 @@ class TreatmentService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String getTreatmentInfoUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentInfo
         def url = String.format(getTreatmentInfoUrl, params?.clientId, params?.treatmentId)
@@ -95,16 +92,16 @@ class TreatmentService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
-    def getCareTeam( request,  response, medicalRecordId)
-            throws ApiResourceAccessException, ApiReturnErrorException {
+    def getCareTeam(request, response, medicalRecordId)
+            throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         try {
@@ -119,15 +116,15 @@ class TreatmentService {
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiResourceAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def getCareGiver(HttpServletRequest request, HttpServletResponse response, medicalRecordId)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
@@ -145,16 +142,16 @@ class TreatmentService {
                 return map
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def deleteCareTeam(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String deleteCareTeamUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
         try {
@@ -169,15 +166,15 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String deleteCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
         def url = String.format(deleteCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
@@ -192,15 +189,15 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def addCareTeam(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
@@ -217,15 +214,15 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def addCareGiver(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
@@ -245,16 +242,16 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def updateSurgeryTime(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String updateSurgeryTimeUrl = grailsApplication.config.ratchetv2.server.url.updateSurgeryTime
         def url = String.format(updateSurgeryTimeUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
@@ -270,15 +267,15 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def archived(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String archivedUrl = grailsApplication.config.ratchetv2.server.url.archived
         def url = String.format(archivedUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
@@ -293,16 +290,16 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def updateCareGiver(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String updateCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
         def url = String.format(updateCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
@@ -321,16 +318,16 @@ class TreatmentService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def updateCareTeamSurgeon(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String updateCareTeamSurgeonUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
         def url = String.format(updateCareTeamSurgeonUrl, params?.medicalRecordId, params?.staffId)
@@ -345,10 +342,10 @@ class TreatmentService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 }

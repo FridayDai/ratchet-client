@@ -1,10 +1,8 @@
 package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
-import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 
 /**
  * Base Controller.
@@ -39,33 +37,25 @@ class BaseController {
         model.announcement = announcement
     }
 
-    def handleApiAjaxReturnErrorException(ApiAjaxReturnErrorException e) {
-        log.error("API ajax return error exception: ${e.message}, token: ${session.token}.")
+    def handleApiAccessException(ApiAccessException e) {
+        log.error("API Access exception: ${e.message}, token: ${session.token}.")
+        def status = 500
+        def message = e.message ? e.message : g.message(code: 'default.error.500.message')
+        if(request.isXhr()) {
+            render status: status, text: message
+        } else {
+            render view: '/error/error404'
+        }
+    }
+
+    def handleApiReturnException(ApiReturnException e) {
+        log.error("API return exception: ${e.message}, token: ${session.token}.")
         def status = e.statusId ? e.statusId : 500
         def message = e.message ? e.message : g.message(code: 'default.error.500.message')
-        render status: status, text: message
-    }
-
-    def handleApiAjaxAccessException(ApiAjaxAccessException e) {
-        log.error("API ajax access exception: ${e.message}, token: ${session.token}.")
-        def status = e.statusId ? e.statusId : 500
-        def message = e.message ? e.message : g.message(code: 'default.error.500.message')
-        render status: status, text: message
-    }
-
-    def handleApiResourceAccessException(ApiResourceAccessException e) {
-        log.error("API resource access exception: ${e.message}, token: ${session.token}.")
-        flash.message = e.message
-        render view: '/error/error404'
-    }
-
-    def handleApiReturnErrorException(ApiReturnErrorException e) {
-        log.error("API return error exception: ${e.message}, token: ${session.token}.")
-        flash.message = e.message
-//        if (e.statusId == 401) {
-//            render view: '/error/error404'
-//        }
-        if (e.statusId == 403) {
+        if(request.isXhr()) {
+            render status: status, text: message
+        }
+        else if (e.statusId == 403) {
             render view: '/login/login'
         } else {
             render view: '/error/error404'
