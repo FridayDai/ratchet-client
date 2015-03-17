@@ -36,8 +36,7 @@
         tabs,
         patientId,
         clientId,
-        tabTemplate,
-        originalPatientEmail = $('#patientEmail').text();
+        tabTemplate;
 
     /**
      * init treatment tab
@@ -273,6 +272,7 @@
      * @private
      */
     function _updatePatient(patientId, clientId, patientInfo) {
+        var originalPatientEmail = $('#patientEmail').attr('value');
         $.ajax({
             url: opts.urls.updatePatient.format(clientId, patientId),
             type: 'POST',
@@ -286,7 +286,7 @@
                     $('#patientEmail').text(patientInfo.email);
                     $('.phone').text(patientInfo.number);
 
-                    _checkEmailUpdated(patientInfo.email);
+                    _checkEmailUpdated(originalPatientEmail, patientInfo.email);
                 }
             }
         });
@@ -296,7 +296,7 @@
      * show invite again button when email updated.
      * @private
      */
-    function _checkEmailUpdated(updatedEmail) {
+    function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
         if(originalPatientEmail !== updatedEmail) {
             $('.invisible-invite').css('display', 'inline-block');
         }
