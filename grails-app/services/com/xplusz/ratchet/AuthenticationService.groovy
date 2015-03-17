@@ -3,8 +3,8 @@ package com.xplusz.ratchet
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
 import com.xplusz.ratchet.exceptions.AccountValidationException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -96,7 +96,7 @@ class AuthenticationService {
      * @param request
      * @param response
      */
-    def logout(request, response) throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+    def logout(request, response) throws ApiAccessException, ApiReturnException {
         def session = request.session
         def token = session?.token
         /**
@@ -121,11 +121,11 @@ class AuthenticationService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         }
         catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }

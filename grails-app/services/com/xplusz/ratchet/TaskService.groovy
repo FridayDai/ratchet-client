@@ -2,10 +2,8 @@ package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiAjaxReturnErrorException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
-import com.xplusz.ratchet.exceptions.ApiReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -20,7 +18,7 @@ class TaskService {
     def messageSource
 
     def getOverdueTasks(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiResourceAccessException, ApiReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         def max = params?.max
         def offset = params?.offset
@@ -43,16 +41,16 @@ class TaskService {
                 return result.items
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
         } catch (UnirestException e) {
-            throw new ApiResourceAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
 
     def sendTaskEmailToPatient(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException, ApiAjaxReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String sendTaskEmailUrl = grailsApplication.config.ratchetv2.server.url.task.sendEmail
         def url = String.format(sendTaskEmailUrl, params.clientId, params.patientId, params.medicalRecordId, params.taskId)
@@ -67,11 +65,11 @@ class TaskService {
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
-                throw new ApiAjaxReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
 
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 }

@@ -2,9 +2,8 @@ package com.xplusz.ratchet
 
 import com.mashape.unirest.http.Unirest
 import com.mashape.unirest.http.exceptions.UnirestException
-import com.xplusz.ratchet.exceptions.ApiAjaxAccessException
-import com.xplusz.ratchet.exceptions.ApiResourceAccessException
-import com.xplusz.ratchet.exceptions.ApiReturnErrorException
+import com.xplusz.ratchet.exceptions.ApiAccessException
+import com.xplusz.ratchet.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
@@ -18,7 +17,7 @@ class MedicalRecordService {
     def grailsApplication
 
     def showTasksByMedicalRecord(HttpServletRequest request, HttpServletResponse response, clientId, medicalRecordId)
-            throws ApiResourceAccessException, ApiReturnErrorException {
+            throws ApiAccessException, ApiReturnException {
 
         String showTasksUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.tasks
         def url = String.format(showTasksUrl, clientId, medicalRecordId)
@@ -33,16 +32,16 @@ class MedicalRecordService {
                 return result
             } else {
                 def message = result?.error?.errorMessage
-                throw new ApiReturnErrorException(message, resp.status)
+                throw new ApiReturnException(resp.status, message)
             }
 
         } catch (UnirestException e) {
-            throw new ApiResourceAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
     def assignTaskToMedicalRecord(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAjaxAccessException {
+            throws ApiAccessException {
 
         String assignTaskUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.assignTask
         def url = String.format(assignTaskUrl, params.clientId, params.patientId, params.medicalRecordId)
@@ -79,7 +78,7 @@ class MedicalRecordService {
                 return false
             }
         } catch (UnirestException e) {
-            throw new ApiAjaxAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
 
     }
