@@ -66,6 +66,7 @@ class AuthenticationService {
             request.session.clientId = result.clientId
             request.session.firstName = result.firstName
             request.session.lastName = result.lastName
+            request.session.email = email
             request.session.patientManagement = result.patientManagement
             request.session.accountManagement = result.accountManagement
             def data = [
