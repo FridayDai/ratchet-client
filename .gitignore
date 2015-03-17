@@ -32,10 +32,13 @@
 
 .idea/
 
+# IDE
 *.iml
 *.ipr
 *.iws
 projectFilesBackup
+.setting
+target-eclipse
 
 .classpath
 .project

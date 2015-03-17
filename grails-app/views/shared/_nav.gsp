@@ -34,5 +34,39 @@
                 </g:link>
             </li>
         </g:if>
+
+        <li>
+            <a href="#" id="assist-me" class="btn assist-me">
+                <span>Assist Me</span>
+            </a>
+        </li>
     </ul>
 </div>
+
+<g:form class="assist-form ui-hidden" id="assist-form" name="assist-form">
+
+    <div class="form-group">
+        <label class="lbl-group">TITLE<span>*</span></label>
+        <input id="assist-title" name="title" type="text" class="input-group title" placeholder="Please assist me on this" />
+    </div>
+
+    <div class="form-group">
+        <label class="lbl-group">DESCRIPTION<span>*</span></label>
+        <textarea id="assist-desc" name="description" type="text" class="input-group description" placeholder="Description here" ></textarea>
+    </div>
+
+    <div class="form-group inline">
+        <label class="lbl-group">NAME<span>*</span></label>
+        <label id="assist-name">${request.session.firstName} ${request.session.lastName}</label>
+    </div>
+
+    <div class="form-group inline">
+        <label class="lbl-group">EMAIL<span>*</span></label>
+        <label id="assist-email">${request.session.email}</label>
+    </div>
+
+    <div class="form-group center">
+        </label>A response will be made in 24 hours or less</label>
+    </div>
+
+</g:form>

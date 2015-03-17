@@ -81,6 +81,9 @@ class UrlMappings {
         "/terms_of_service"(controller: "home", action: "termsOfService")
         "/privacy_policy"(controller: "home", action: "privacyPolicy")
 
+        // Help
+        "/addAssist"(controller: "assist", action: "addAssist")
+
         "500"(view: '/error/error')
         "/providers/detail"(controller: "providers", action: "detail")
         "404"(view: '/error/error404')

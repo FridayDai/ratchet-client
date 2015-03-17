@@ -7,6 +7,7 @@
         _dataTablePagination();
         _setGlobalAjax();
         _setMaintenance();
+        _setNavbar();
     }
 
     /**
@@ -84,18 +85,79 @@
         });
     }
 
+    /**
+     * Maintenance banner set up
+     * @private
+     */
     function _setMaintenance() {
 
-        var _closeBanner = function() {
+        var _closeBanner = function () {
             $('.container').removeClass('push-down');
             $('.nav').removeClass('push-down');
             $('.maintenance').hide();
         }
 
-        $('.maintenance .btn-close').click(function() {
+        $('.maintenance .btn-close').click(function () {
             //TO-DO: close banner ajax call
             _closeBanner();
         });
+    }
+
+    function _setNavbar() {
+
+        function _getAssistData() {
+            var title = $('#assist-title').val();
+            var desc = $('#assist-desc').val();
+            var name = $('#assist-name').val();
+
+            return {
+                title: title,
+                desc: desc,
+                name: name,
+            }
+        }
+
+        function _sendAssistReport() {
+            var addAssistUrl = '/addAssist';
+            var data = _getAssistData();
+
+            $.ajax({
+                url: addAssistUrl,
+                type: 'post',
+                data: data,
+                success: function (data) {
+                    //TO-DO: thank you message
+                }
+            });
+        }
+
+        function _bindAssistEvent() {
+            $('#assist-me').on('click', function (e) {
+                e.preventDefault();
+                $('.assist-form')[0].reset();
+
+                var args = {
+                    title: 'ASSIST ME',
+                    content: '',
+                    height: 300,
+                    width: 600,
+                    okTitle: 'SEND'
+                }
+
+                RC.common.confirmForm(_.extend({}, args, {
+                    element: $('.assist-form'),
+                    okCallback: function () {
+                        if ($('#assist-form').valid()) {
+                            _sendAssistReport();
+                            return true;
+                        }
+                        return false;
+                    }
+                }));
+            });
+        }
+
+        _bindAssistEvent();
     }
 
     /**
@@ -352,12 +414,14 @@
             }
             var height = confirmFormArguments.height || 300,
                 width = confirmFormArguments.width || 350;
+            var title = confirmFormArguments.okTitle || "SAVE";
+
             var $container = $(confirmFormArguments.element);
 
             var containerParent = $container.parent();
             var dialogOwn = $container.clone();
 
-            var dialog = $container.dialog({
+            var dialogOpts = {
                 autoOpen: false,
                 resizable: false,
                 height: height,
@@ -367,19 +431,7 @@
                 open: function () {
                     $("input").blur();
                 },
-                buttons: {
-                    "SAVE": function (e) {
-                        if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
-                            dialog.dialog("close");
-                        }
-                    }
-                    //CANCEL: function (e) {
-                    //    if ($.isFunction(confirmFormArguments.cancelCallback)) {
-                    //        (confirmFormArguments.cancelCallback)(e);
-                    //    }
-                    //    dialog.dialog("close");
-                    //}
-                },
+                buttons: {},
                 close: function () {
 
                     var elementList = $(confirmFormArguments.element).find(".form-group").children();
@@ -391,7 +443,15 @@
                     dialogOwn.appendTo(containerParent);
                     $(this).dialog("destroy").remove();
                 }
-            });
+            };
+
+            dialogOpts.buttons[title] = function (e) {
+                if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
+                    dialog.dialog("close");
+                }
+            }
+
+            var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');
             dialog.dialog("open");
             return false;
@@ -657,8 +717,7 @@
                     $(selectors.selectChoice).hide();
                 });
             });
-        }
-
+        },
     });
     _init();
 })(jQuery);

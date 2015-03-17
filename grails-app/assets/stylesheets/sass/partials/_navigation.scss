@@ -75,6 +75,40 @@
     }
 }
 
+.assist-me {
+
+    position: relative;
+    margin: 25px 0px 0px;
+    width: 115px;
+    //border-color: $base-color-white-grey;
+    border-color: #808080;
+    color: #808080;
+
+    &:before {
+        font-family: 'Ionicons';
+        display: inline-block;
+        content: '\f142';
+        //color: $base-color-white-grey;
+        color: #808080;
+    }
+}
+
+.assist-form {
+    .form-group {
+        &.center {
+            text-align: center;
+        }
+        input,
+        textarea {
+            width: 515px;
+        }
+
+        textarea {
+            height: 200px;
+        }
+    }
+}
+
 .login-info {
     position: relative;
     height: 50px;

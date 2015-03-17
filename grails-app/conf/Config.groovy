@@ -231,6 +231,8 @@ ratchetv2 {
             medicalRecord.tasks = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s/tasks"
             medicalRecord.assignTask = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks"
 
+            addAssist = "${ratchetv2.server.url.base}/assist"
+
             //for taskService
             task.sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
 
