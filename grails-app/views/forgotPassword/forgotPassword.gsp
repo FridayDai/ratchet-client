@@ -28,11 +28,11 @@
                     <input name="email" type="text" class="input-control email" placeholder="Enter E-mail" required/>
                 </div>
 
-                <div class="error-area">
-                    <g:if test="${errorMsg}">
-                        <p class="error" >${errorMsg}</p>
-                    </g:if>
-                </div>
+                %{--<div class="error-area">--}%
+                    %{--<g:if test="${errorMsg}">--}%
+                        %{--<p class="error" >${errorMsg}</p>--}%
+                    %{--</g:if>--}%
+                %{--</div>--}%
             </div>
 
             <div class="align-center cover-inner-footer">
