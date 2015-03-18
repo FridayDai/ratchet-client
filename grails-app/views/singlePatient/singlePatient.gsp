@@ -157,13 +157,6 @@
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
                 <input id="relationshipName" name="relationshipName" class="input-group emergency-field">
-                    %{--<option></option>--}%
-                    %{--<option value="1">Spouse</option>--}%
-                    %{--<option value="2">Parent</option>--}%
-                    %{--<option value="3">Child</option>--}%
-                    %{--<option value="4">Friend</option>--}%
-                    %{--<option value="5">Other</option>--}%
-                %{--</select>--}%
             </label>
             </div>
 
