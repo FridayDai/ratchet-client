@@ -25,6 +25,7 @@
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         font-size: 14px;
+        font-family: inherit;
 
         @include input-placeholder {
             color: $base-font-grey;

@@ -75,36 +75,30 @@
     }
 }
 
-.assist-me {
+.btn-li {
+    margin: 25px 0px 25px;
 
-    position: relative;
-    margin: 25px 0px 0px;
-    width: 115px;
-    //border-color: $base-color-white-grey;
-    border-color: #808080;
-    color: #808080;
-
-    &:before {
-        font-family: 'Ionicons';
-        display: inline-block;
-        content: '\f142';
-        //color: $base-color-white-grey;
-        color: #808080;
+    a {
+        color: $base-color-darker-grey;
     }
-}
 
-.assist-form {
-    .form-group {
-        &.center {
-            text-align: center;
-        }
-        input,
-        textarea {
-            width: 515px;
+    .assist-me {
+
+        position: relative;
+        width: 115px;
+        border-color: $base-color-darker-grey;
+
+        &:before {
+            font-family: 'Ionicons';
+            display: inline-block;
+            content: '\f142';
         }
 
-        textarea {
-            height: 200px;
+        &:hover,
+        &.active {
+            a {
+                color: #fff;
+            }
         }
     }
 }

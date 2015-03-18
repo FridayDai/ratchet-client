@@ -7,7 +7,6 @@
         _dataTablePagination();
         _setGlobalAjax();
         _setMaintenance();
-        _initComboboxWidget();
         _setNavbar();
     }
 
@@ -109,7 +108,7 @@
         function _getAssistData() {
             var title = $('#assist-title').val();
             var desc = $('#assist-desc').val();
-            var name = $('#assist-name').val();
+            var name = $('#assist-name').html();
 
             return {
                 title: title,
@@ -141,7 +140,7 @@
                     title: 'ASSIST ME',
                     content: '',
                     height: 300,
-                    width: 600,
+                    width: 800,
                     okTitle: 'SEND'
                 }
 
@@ -279,84 +278,6 @@
             });
         });
 
-    }
-
-    /**
-     * init combobox widget
-     * @private
-     */
-    function _initComboboxWidget() {
-        $.widget("ui.combobox", {
-            _create: function () {
-                var wrapper = this.wrapper = $("<span />").addClass("ui-combobox")
-                    , self = this;
-
-                this.element.wrap(wrapper);
-
-                this.element
-                    .addClass("input-group ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
-                    .autocomplete($.extend({
-                        minLength: 0,
-                        open: function (event, ui) {
-                            event.preventDefault();
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-loading')
-                                .addClass('ui-button-icon-primary');
-                        },
-                        close: function (event, ui) {
-                            event.preventDefault();
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-loading')
-                                .addClass('ui-button-icon-primary');
-                        },
-                        select: function (event, ui) {
-                            event.preventDefault();
-                            if (ui.item.value == "No matches found") {
-                                return;
-                            }
-                            $(this).val(ui.item.label);
-                            $(this).data("id", ui.item.value);
-                        },
-                        search: function (data) {
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-primary')
-                                .addClass('ui-button-icon-loading');
-                        },
-                        change: function (e , ui) {
-                            if(ui.item==null){
-                                $(this).data("id", "");
-                            }
-                        }
-                    }, this.options));
-
-                $("<a />")
-                    .insertAfter(this.element)
-                    .button({
-                        icons: {
-                            primary: "ui-icon-triangle-1-s"
-                        },
-                        text: false
-                    })
-                    .removeClass("ui-corner-all")
-                    .addClass("ui-corner-right ui-combobox-toggle")
-                    .click(function () {
-                        if (self.element.autocomplete("widget").is(":visible")) {
-                            self.element.autocomplete("close");
-                            return;
-                        }
-
-                        $(this).blur();
-
-                        self.element.autocomplete("search", "");
-                        self.element.focus();
-                    });
-            },
-
-            destroy: function () {
-                this.wrapper.remove();
-                $.Widget.prototype.destroy.call(this);
-            }
-        });
     }
 
     /**

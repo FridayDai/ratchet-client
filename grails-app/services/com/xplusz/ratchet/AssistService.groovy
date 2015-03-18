@@ -40,8 +40,7 @@ class AssistService {
 
             if (resp.status == 201) {
                 def map = [:]
-                map.put("id", result.id)
-                log.info("Add assist success, token: ${request.session.token}")
+                map.put("status", "ok")
                 return map
             } else {
                 def message = result?.error?.errorMessage

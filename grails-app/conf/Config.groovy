@@ -171,7 +171,7 @@ grails.config.locations = [
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://localhost:8090/api/v1"
 
             //health check
             healthCheck = "/healthcheck"
