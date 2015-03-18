@@ -75,17 +75,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">ROLE<span>*</span></label>
-                <select id="type" name="type" required>
-                    <option></option>
-                    <option value="1">Anesthesiologist</option>
-                    <option value="2">Medical Assistant</option>
-                    <option value="3">Management</option>
-                    <option value="4">Nurse</option>
-                    <option value="5">Physical therapists (PTs)</option>
-                    <option value="6">Primary Physician</option>
-                    <option value="7">Scheduler</option>
-                    <option value="8">Surgeon</option>
-                </select>
+                <input id="type" name="type" class="input-group" required>
             </div>
 
             <div class="form-group">

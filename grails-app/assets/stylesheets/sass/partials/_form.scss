@@ -33,6 +33,23 @@
         }
     }
 
+    .ui-combobox {
+
+        .input-group {
+            min-width: 232px;
+            height: 29px;
+            color: $base-color-medium-black;
+            font-weight: normal;
+        }
+
+        .ui-combobox-toggle {
+            height: 29px;
+            border: 1px solid $base-color-white-grey;
+            border-left: 0;
+            background-color: $base-mid-grey-color;
+        }
+    }
+
     .surgery-time {
         border: 1px solid $base-color-white-grey;
         background-color: $base-mid-grey-color;
@@ -81,9 +98,9 @@
         }
     }
 
-    .treatment {
-        border: 0;
-    }
+//    .treatment {
+//        border: 0;
+//    }
 }
 
 .form {
@@ -93,3 +110,11 @@
         color: $base-color-dark-grey;
     }
 }
+
+.container {
+    .ui-autocomplete.ui-widget-content {
+        max-width: 254px;
+        z-index: 99999;
+    }
+}
+

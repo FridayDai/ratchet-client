@@ -294,24 +294,20 @@
                 this.element.wrap(wrapper);
 
                 this.element
-                    .addClass("ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
+                    .addClass("input-group ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
                     .autocomplete($.extend({
                         minLength: 0,
                         open: function (event, ui) {
                             event.preventDefault();
-                            var backgoundUrl = '../assets/dataTable/sort_both.png';
-                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
+                            $(this).parent().find('.ui-icon')
+                                .removeClass('ui-button-icon-loading')
+                                .addClass('ui-button-icon-primary');
                         },
                         close: function (event, ui) {
                             event.preventDefault();
-                            var backgoundUrl = '../assets/dataTable/sort_both.png';
-                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
-                        },
-                        response: function (event, ui) {
-                            event.preventDefault();
-                            if (ui.content.value == "No matches found") {
-                                $(this).data("id", "");
-                            }
+                            $(this).parent().find('.ui-icon')
+                                .removeClass('ui-button-icon-loading')
+                                .addClass('ui-button-icon-primary');
                         },
                         select: function (event, ui) {
                             event.preventDefault();
@@ -322,8 +318,14 @@
                             $(this).data("id", ui.item.value);
                         },
                         search: function (data) {
-                            var backgoundUrl = '../assets/autocomplete-spinner.gif';
-                            $(this).parent().find('.ui-button-icon-primary').css("backgroundImage", "url(" + backgoundUrl + ")");
+                            $(this).parent().find('.ui-icon')
+                                .removeClass('ui-button-icon-primary')
+                                .addClass('ui-button-icon-loading');
+                        },
+                        change: function (e , ui) {
+                            if(ui.item==null){
+                                $(this).data("id", "");
+                            }
                         }
                     }, this.options));
 

@@ -21,6 +21,7 @@ class StaffService {
         def max = params?.max
         def offset = params?.offset
         def type = params?.type
+        def name = params?.name
 
         try {
             def url = grailsApplication.config.ratchetv2.server.url.staffs
@@ -29,6 +30,7 @@ class StaffService {
                     .queryString("offset", offset)
                     .queryString("clientId", request.session.clientId)
                     .queryString("type", type)
+                    .queryString("name", name)
                     .asString()
 
             def result = JSON.parse(resp.body)

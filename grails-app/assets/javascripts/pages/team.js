@@ -181,7 +181,7 @@
                 okCallback: function () {
                     if ($(".editSurgeon").valid()) {
 
-                        var staffId = $("#selectStaff").val();
+                        var staffId = $("#selectStaff").data("id");
                         var ids = {
                             medicalRecordId: medicalRecordId,
                             staffId: staffId
@@ -238,7 +238,7 @@
                         var firstName = $("#giver-firstName").val();
                         var lastName = $("#giver-lastName").val();
                         var email = $("#giver-email").val();
-                        var relationship = $("#relationships").val();
+                        var relationship = $("#relationships").data("id");
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -415,8 +415,25 @@
      * @private
      */
     function _initSelect() {
-        $("#relationships").select2().change(function () {
-            $(this).valid();
+        var data = [
+            {label: "Spouse", id: 1},
+            {label: "Parent", id: 2},
+            {label: "Child", id: 3},
+            {label: "Friend", id: 4},
+            {label: "Other", id: 5},
+        ]
+
+
+        $("#relationships").combobox({
+            source: function (request, response) {
+                response($.map(data, function (item) {
+                    return {
+                        label: item.label,
+                        value: item.id
+                    }
+                }));
+            },
+            appendTo: ".container"
         });
     }
 
@@ -425,59 +442,69 @@
      * @private
      */
     function _initStaffSelect(existSurgeonId) {
-        $('#selectStaff').select2({
-            ajax: {
-                transport: function (params) {
-                    params.beforeSend = function () {
+        $("#selectStaff").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function (eve, ui) {
                         RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getStaffs,
-                cache: "true",
-                data: function (name) {
-                    return {
-                        name: name ,
+                    },
+                    url: opts.urls.getStaffs,
+                    type: "POST",
+                    data: {
+                        name: request.term,
                         type: 8
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, dataItem) {
-                        myResults.push({
-                            'id': dataItem.id,
-                            'text': dataItem.firstName + " " + dataItem.lastName
-                        });
-                    });
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            if (existSurgeonId) {
+                                var ids = {},
+                                    filterResult = [];
+                                ids[existSurgeonId] = true;
 
-                    if (existSurgeonId) {
-                        var ids = {},
-                            filterResult = [];
-                        ids[existSurgeonId] = true;
+                                var existResult = _.filter(data, function (data) {
+                                    return ids[data.id];
+                                });
 
-                        var existResult = _.filter(myResults, function (myResult) {
-                            return ids[myResult.id];
-                        });
+                                $.grep(data, function (e) {
+                                    if ($.inArray(e, existResult) === -1) {
+                                        filterResult.push(e);
+                                    }
+                                });
 
-                        $.grep(myResults, function (e) {
-                            if ($.inArray(e, existResult) === -1) {
-                                filterResult.push(e);
+                                response($.map(filterResult, function (item) {
+                                    return {
+                                        label: item.firstName + " " + item.lastName,
+                                        value: item.id
+                                    }
+                                }));
+                            } else {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.firstName + " " + item.lastName,
+                                        value: item.id
+                                    }
+                                }));
                             }
-                        });
 
-                        return {
-                            results: filterResult
-                        };
-                    } else {
-                        return {
-                            results: myResults
-                        };
+                        }
+
                     }
-                }
-            }
-        }).change(function () {
-            $(this).valid();
+                })
+            },
+            appendTo: ".container"
+
         });
+
     }
 
     /**

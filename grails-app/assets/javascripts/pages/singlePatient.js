@@ -97,8 +97,8 @@
                 element: $(".treatment-form"),
                 okCallback: function () {
                     if ($("#treatment-form").valid()) {
-                        var treatmentId = $("#selectTreatment").val();
-                        var staffIds = $("#selectSurgeons").val();
+                        var treatmentId = $("#selectTreatment").data("id");
+                        var staffIds = $("#selectSurgeons").data("id");
                         var staffArray = staffIds.split(',');
                         var staffIdArr = [];
                         $.each(staffArray, function (index, item) {
@@ -108,7 +108,7 @@
                         var surgeryTime = date.getTime();
                         var ecFirstName = $('#emergency-firstName').val();
                         var ecLastName = $('#emergency-lastName').val();
-                        var relationship = $('#relationshipName').val();
+                        var relationship = $('#relationshipName').data("id");
                         var ecEmail = $('#emergency-email').val();
 
                         var assignInfo = {
@@ -166,8 +166,25 @@
      * @private
      */
     function _initSelect() {
-        $("#relationshipName").select2().change(function () {
-            $(this).valid();
+        var data = [
+            {label: "Spouse", id: 1},
+            {label: "Parent", id: 2},
+            {label: "Child", id: 3},
+            {label: "Friend", id: 4},
+            {label: "Other", id: 5},
+        ]
+
+
+        $("#relationshipName").combobox({
+            source: function (request, response) {
+                response($.map(data, function (item) {
+                    return {
+                        label: item.label,
+                        value: item.id
+                    }
+                }));
+            },
+            appendTo: ".container"
         });
     }
 
@@ -321,49 +338,66 @@
      * @private
      */
     function _initSelectTreatment() {
-
-        $('#selectTreatment').select2({
-            ajax: {
-                transport: function (params) {
-                    params.beforeSend = function () {
+        $("#selectTreatment").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function (eve, ui) {
                         RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getTreatments,
-                cache: "true",
-                data: function (name) {
-                    return {
-                        name: name
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, item) {
-                        myResults.push({
-                            'id': item.id,
-                            'text': item.title + ' ' + item.tmpTitle,
-                            'data': item.surgeryTimeRequired,
-                            'timeStamp': item.sendTimeOffset
-                        });
-                    });
-                    return {
-                        results: myResults
-                    };
+                    },
+                    url: opts.urls.getTreatments,
+                    type: "POST",
+                    data: {
+                        treatmentTitle: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.title + ' ' + item.tmpTitle,
+                                    value: item.id,
+                                    surgeryTime: item.surgeryTimeRequired,
+                                    timeStamp: item.sendTimeOffset
+                                }
+                            }));
+                        }
+                    }
+                })
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value == "No matches found") {
+                    return;
                 }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $(this).data("surgeryTime", ui.item.surgeryTimeRequired);
+                $(this).data("timeStamp", ui.item.sendTimeOffset);
+            },
+            appendTo: ".container",
+            change: function (data, ui) {
+                if (ui.item == null) {
+                    $(this).data("id", "");
+                    return;
+                }
+                if (data.surgeryTime === true) {
+                    $("#div-surgery-time").css("display", "block");
+                } else {
+                    $("#div-surgery-time").css("display", "none");
+                }
+                var time = data.timeStamp;
+                $("#surgeryTime").prop("disabled", false);
+                _initSurgeryTime(time);
             }
-        }).change(function (data) {
-            $(this).valid();
-            if (data.added.data === true) {
-                $("#div-surgery-time").css("display", "block");
-            } else {
-                $("#div-surgery-time").css("display", "none");
-            }
-            var date = new Date();
-            var time = date.getTime() + data.added.timeStamp;
-            //var time = Math.ceil((data.added.timeStamp) / 1000 / 60 / 60 / 24);
-            $("#surgeryTime").prop("disabled", false);
-            _initSurgeryTime(time);
         });
     }
 
@@ -372,54 +406,42 @@
      * @private
      */
     function _initStaffSelect() {
-        $('#selectSurgeons').select2({
-            //tags: true,
-            //formatSelection: function (dataItem) {
-            //    if (dataItem.type === 8) {
-            //        return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
-            //    } else {
-            //        return "<div class='surgery'> " + dataItem.text + " </div>";
-            //    }
-            //
-            //},
-            //formatResult: function (dataItem) {
-            //    if (dataItem.type === 8) {
-            //        return "<div class='surgery'> <img src='/assets/surgeon_logo.png'/><span class='care-team'>" + dataItem.text + " </span></div>";
-            //    } else {
-            //        return "<div class='surgery'> <span class='text'>" + dataItem.text + "</span> </div>";
-            //    }
-            //},
-            ajax: {
-                transport: function (params) {
-                    params.beforeSend = function () {
+        $("#selectSurgeons").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function (eve, ui) {
                         RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getStaffs,
-                cache: "true",
-                data: function (name) {
-                    return {
-                        name: name,
+                    },
+                    url: opts.urls.getStaffs,
+                    type: "POST",
+                    data: {
+                        name: request.term,
                         type: 8
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    $.each(data, function (index, item) {
-                        myResults.push({
-                            'id': item.id,
-                            'text': item.firstName + " " + item.lastName,
-                            'type': item.type
-                        });
-                    });
-                    return {
-                        results: myResults
-                    };
-                }
-            }
-        }).change(function () {
-            $(this).valid();
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.firstName + " " + item.lastName,
+                                    value: item.id
+                                }
+                            }));
+                        }
+                    }
+                })
+            },
+            appendTo: ".container"
+
         });
     }
 

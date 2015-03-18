@@ -108,6 +108,9 @@
         background-position: 16px 16px;
     }
 
+    .ui-autocomplete.ui-widget-content {
+        max-width: 254px;
+    }
 }
 
 .ui-draggable {

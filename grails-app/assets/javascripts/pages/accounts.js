@@ -178,7 +178,7 @@
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var email = $("#email").val();
-        var type = $("#type").val();
+        var type = $("#type").data("id");
         var isAccountManagement, isDoctor;
 
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
@@ -244,8 +244,26 @@
                 }
             }));
 
-            $("#type").select2().change(function () {
-                $(this).valid();
+            var data = [
+                {label: "Anesthesiologist", id: 1},
+                {label: "Medical Assistant", id: 2},
+                {label: "Management", id: 3},
+                {label: "Nurse", id: 4},
+                {label: "Physical therapists (PTs)", id: 5},
+                {label: "Primary Physician", id: 6},
+                {label: "Scheduler", id: 7},
+                {label: "Surgeon", id: 8}
+            ]
+            $("#type").combobox({
+                source: function (request, response) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.label,
+                            value: item.id
+                        }
+                    }));
+                },
+                appendTo: ".container"
             });
         });
     }
