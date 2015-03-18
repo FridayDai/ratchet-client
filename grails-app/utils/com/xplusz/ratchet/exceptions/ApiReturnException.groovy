@@ -12,6 +12,11 @@ class ApiReturnException extends Exception {
         super(message);
     }
 
+    public ApiReturnException(Integer status) {
+        super();
+        this.statusId = status
+    }
+
     public ApiReturnException(Integer status, String message) {
         super(message);
         this.statusId = status;
