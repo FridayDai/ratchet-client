@@ -112,3 +112,9 @@ ratchet-v2-provider-desktop
         bower install
         grails run-app
     ```
+
+## Configuration variables
+
+- ELK_TCP_ADDR
+- SERVER_URL
+
