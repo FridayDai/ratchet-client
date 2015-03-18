@@ -51,7 +51,7 @@
                     <div class="terms-service color-black">
                         You agree to our <a href="/terms_of_service" target="_blank" class="dark-link" >Terms of Service</a> upon creating account
                     </div>                
-                    <button type="submit" class="btn btn-submit" id='johnRat'>Join Ratchet</button>
+                    <button type="submit" class="btn btn-submit" id='johnRat'>Activate Account</button>
                 </div>
             </g:form>
         </div>

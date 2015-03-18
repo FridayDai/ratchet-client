@@ -68,7 +68,7 @@
             </div>
 
             <div class="form-group">
-                <label class="lbl-group">Email ADDRESS<span>*</span></label>
+                <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group" placeholder="john_smith@email.com"
                        required/>
             </div>
