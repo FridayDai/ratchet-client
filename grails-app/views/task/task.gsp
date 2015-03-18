@@ -26,7 +26,7 @@
     </div>
 
     <div class="items-title">
-        <h4>SCHEDULE ITEMS</h4>
+        <h4>SCHEDULED ITEMS</h4>
     </div>
 
     <div class="tasks-list">
