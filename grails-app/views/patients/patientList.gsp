@@ -36,7 +36,8 @@
         </div>
 
         <div class="table-group">
-            <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}" data-pagesize="${pagesize}">
+            <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
+                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered} ">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -114,14 +115,7 @@
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <select id="relationship" name="relationship" class="emergency-field">
-                        <option></option>
-                        <option value="1">Spouse</option>
-                        <option value="2">Parent</option>
-                        <option value="3">Child</option>
-                        <option value="4">Friend</option>
-                        <option value="5">Other</option>
-                    </select>
+                    <input id="relationship" name="relationship" class="input-group">
                 </div>
 
                 <div class="form-group inline emr-email">
@@ -153,7 +147,7 @@
 
             <div class="form-group ">
                 <label class="lbl-group">SURGEON<span>*</span></label>
-                <input id="selectStaffs" name="selectStaffs" type="text" class="multi-select clear"
+                <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
                        placeholder="" required/>
             </div>
 

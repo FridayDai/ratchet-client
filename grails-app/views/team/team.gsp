@@ -82,7 +82,7 @@
 <g:form class="editSurgeon ui-hidden" id="editSurgeon">
     <div class="form-group ">
         <label class="lbl-group">SURGEON</label>
-        <input id="selectStaff" name="selectStaff" type="text" class="multi-select clear"
+        <input id="selectStaff" name="selectStaff" type="text" class="clear"
                placeholder="Surgeon"
                required/>
     </div>
@@ -109,14 +109,7 @@
 
     <div class="form-group inline">
         <label class="lbl-group">RELATIONSHIP*</label>
-        <select id="relationships" name="relationships" class="select-body" required>
-            <option></option>
-            <option value="1">Spouse</option>
-            <option value="2">Parent</option>
-            <option value="3">Child</option>
-            <option value="4">Friend</option>
-            <option value="5">Other</option>
-        </select>
+        <input id="relationships" name="relationships" class="select-body input-group" required>
     </div>
 
     <div class="form-group inline">
