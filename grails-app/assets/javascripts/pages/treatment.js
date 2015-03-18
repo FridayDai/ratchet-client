@@ -118,7 +118,12 @@
                 if (data.resp === true) {
                     var formatDate = moment(selectedDate).tz("America/Vancouver").format('MMM DD, YYYY h:mm A');
                     parent.find('.surgery-time-picker').text(formatDate);
-                    $(element).tabs("load", 0);
+                    $(element).tabs({
+                        beforeLoad: function (event, ui) {
+                            ui.tab.data("loaded", false);
+                        }
+                    }).tabs("load", 0);
+                    _init(element);
                 }
             }
         });
@@ -170,10 +175,21 @@
         _initDatePicker(element);
         _initArchived(element);
         $(element).tabs({
-            cache: false,
+            cache: true,
+            ajaxOptions: {cache: true},
             beforeLoad: function (event, ui) {
                 // if the target panel is empty, return true
-                return ui.panel.html() == "";
+                //    return ui.panel.html() == "";
+
+                if(ui.tab.data("loaded")) {
+                    event.preventDefault();
+                    return ;
+                }
+
+                ui.jqXHR.success(function() {
+                    ui.tab.data("loaded", true);
+                });
+
             },
             load: function (event, ui) {
                 var type = ui.tab.data("type");
