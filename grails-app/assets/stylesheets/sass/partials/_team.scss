@@ -214,4 +214,14 @@
     }
 }
 
+.team-table{
+    .status-active{
+        background: $base-color-deactive;
+        color: $base-color-white;
+    }
 
+    .status-inactive{
+        background: $base-light-grey-color;
+        color: $base-color-white;
+    }
+}

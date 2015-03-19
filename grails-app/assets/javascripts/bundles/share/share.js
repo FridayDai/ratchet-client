@@ -12,3 +12,4 @@
 //= require ../../bower_components/moment/moment
 //= require ../../bower_components/moment-timezone/builds/moment-timezone-with-data
 //= require ../../bower_components/intl-tel-input/build/js/intlTelInput.min.js
+//= require ../../bower_components/ElementTransitions.js/build/elementTransitions.min.js
