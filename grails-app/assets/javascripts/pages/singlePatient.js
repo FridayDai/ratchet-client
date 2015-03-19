@@ -395,8 +395,8 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
-                $(this).data("surgeryTime", ui.item.surgeryTimeRequired);
-                $(this).data("timeStamp", ui.item.sendTimeOffset);
+                $(this).data("surgeryTime", ui.item.surgeryTime);
+                $(this).data("timeStamp", ui.item.timeStamp);
             },
             appendTo: ".container",
             change: function (data, ui) {
@@ -404,12 +404,14 @@
                     $(this).data("id", "");
                     return;
                 }
-                if (data.surgeryTime === true) {
+                if (ui.item.surgeryTime === true) {
                     $("#div-surgery-time").css("display", "block");
                 } else {
                     $("#div-surgery-time").css("display", "none");
                 }
-                var time = data.timeStamp;
+                var date = new Date();
+                var time =date.getTime() +  ui.item.timeStamp;
+                $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
             }

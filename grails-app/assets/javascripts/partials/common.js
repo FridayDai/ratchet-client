@@ -114,7 +114,7 @@
             return {
                 title: title,
                 desc: desc,
-                name: name,
+                name: name
             }
         }
 
