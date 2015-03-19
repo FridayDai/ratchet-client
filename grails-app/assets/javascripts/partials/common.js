@@ -109,7 +109,7 @@
         function _getAssistData() {
             var title = $('#assist-title').val();
             var desc = $('#assist-desc').val();
-            var name = $('#assist-name').val();
+            var name = $('#assist-name').html();
 
             return {
                 title: title,
@@ -141,7 +141,7 @@
                     title: 'ASSIST ME',
                     content: '',
                     height: 300,
-                    width: 600,
+                    width: 800,
                     okTitle: 'SEND'
                 }
 

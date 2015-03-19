@@ -1,0 +1,20 @@
+.assist-form {
+    .form-group {
+        &.center {
+            text-align: center;
+        }
+        input,
+        textarea {
+            width: 719px;
+        }
+
+        textarea {
+            height: 200px;
+        }
+    }
+    .lbl-input {
+        display: block;
+        color: $base-color-medium-black;
+        min-width: 340px;
+    }
+}

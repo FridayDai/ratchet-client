@@ -35,7 +35,7 @@
             </li>
         </g:if>
 
-        <li>
+        <li class="btn-li">
             <a href="#" id="assist-me" class="btn assist-me">
                 <span>Assist Me</span>
             </a>
@@ -57,12 +57,12 @@
 
     <div class="form-group inline">
         <label class="lbl-group">NAME<span>*</span></label>
-        <label id="assist-name">${request.session.firstName} ${request.session.lastName}</label>
+        <label class="lbl-input" id="assist-name">${request.session.firstName} ${request.session.lastName}</label>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">EMAIL<span>*</span></label>
-        <label id="assist-email">${request.session.email}</label>
+        <label class="lbl-input" id="assist-email">${request.session.email}</label>
     </div>
 
     <div class="form-group center">
