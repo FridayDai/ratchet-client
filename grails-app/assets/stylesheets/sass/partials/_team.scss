@@ -216,11 +216,13 @@
 
 .team-table{
     .status-active{
+        padding: 3px;
         background: $base-color-deactive;
         color: $base-color-white;
     }
 
     .status-inactive{
+        padding: 3px;
         background: $base-light-grey-color;
         color: $base-color-white;
     }

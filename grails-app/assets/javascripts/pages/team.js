@@ -357,10 +357,11 @@
             eleParent.find("#giver-firstName").val(firstName);
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
+            eleParent.find("#relationships").val(relationship);
 
-            $("select option").filter(function () {
-                return $(this).text() === relationship;
-            }).prop('selected', true);
+            //$("select option").filter(function () {
+            //    return $(this).text() === relationship;
+            //}).prop('selected', true);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: element.find(".inviteGiverForm"),
@@ -431,7 +432,7 @@
 
         $("#relationships").combobox({
             source: function (request, response) {
-                var sources = _.filter(data, function(num){
+                var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term) > -1;
                 });
                 if (!sources.length) {
