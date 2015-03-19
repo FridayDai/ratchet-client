@@ -127,7 +127,9 @@
                 type: 'post',
                 data: data,
                 success: function (data) {
-                    //TO-DO: thank you message
+                    RC.common.showMsg({
+                        msg: RC.constants.sendAssistMessageSuccess
+                    });
                 }
             });
         }
