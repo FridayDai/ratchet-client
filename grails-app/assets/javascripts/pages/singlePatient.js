@@ -99,11 +99,11 @@
                     if ($("#treatment-form").valid()) {
                         var treatmentId = $("#selectTreatment").data("id");
                         var staffIds = $("#selectSurgeons").data("id");
-                        var staffArray = staffIds.split(',');
-                        var staffIdArr = [];
-                        $.each(staffArray, function (index, item) {
-                            staffIdArr.push(parseInt(item));
-                        });
+                        //var staffArray = staffIds.split(',');
+                        //var staffIdArr = [];
+                        //$.each(staffArray, function (index, item) {
+                        //    staffIdArr.push(parseInt(item));
+                        //});
                         var date = new Date($("#surgeryTime").val());
                         var surgeryTime = date.getTime();
                         var ecFirstName = $('#emergency-firstName').val();
