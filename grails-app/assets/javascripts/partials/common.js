@@ -110,11 +110,13 @@
             var title = $('#assist-title').val();
             var desc = $('#assist-desc').val();
             var name = $('#assist-name').html();
+            var browser = window.navigator.userAgent;
 
             return {
                 title: title,
                 desc: desc,
-                name: name
+                name: name,
+                browser: browser,
             };
         }
 
