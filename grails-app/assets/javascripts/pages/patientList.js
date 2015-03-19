@@ -63,7 +63,7 @@
                 {
                     "targets": 0,
                     "render": function (data, type, full) {
-                        var id = data === undefined ? full.id : data;
+                        var id = data === undefined ? full.patientId : data;
                         return '<p class="source-id">' + id + '</p>';
                     },
                     width: "10%"

@@ -51,7 +51,7 @@
                 <tbody>
                 <g:each var="patient" in="${patientList.data}" status="i">
                     <tr data-is-dom-data="true">
-                        <td>${patient.id}</td>
+                        <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
                         <td>${patient.email}</td>
                         <td>${patient.phoneNumber}</td>
