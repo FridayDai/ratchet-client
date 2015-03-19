@@ -301,66 +301,6 @@ a {
     font-size: 40px;
 }
 
-//start select2
-.select2-container {
-    min-width: 220px;
-
-    .select2-choice {
-        border-radius: 0;
-        background-image: none;
-
-        .select2-arrow {
-            border-radius: 0;
-            border-left: 0;
-            background: none;
-            background-image: none;
-
-            b {
-                background: url('../../../images/dataTable/sort_both.png') no-repeat center right !important;
-            }
-        }
-    }
-}
-
-.select2-container-multi.select2-container-active .select2-choices {
-    border: 1px solid $base-color-dark-grey !important;
-}
-
-.select2-dropdown-open,
-.select2-container-active {
-    .select2-choice {
-        border: 1px solid $base-color-dark-grey !important;
-        background-color: $base-color-white;
-    }
-}
-
-.select2-results {
-    .select2-result-label {
-        color: $base-dark-grey;
-    }
-
-    .select2-highlighted {
-        background-color: $base-color-white-grey;
-
-        .select2-result-label {
-            color: $base-color-dark-grey;
-        }
-    }
-}
-
-.select2-drop-active {
-    overflow-y: auto;
-    margin-top: -3px;
-    border: 1px solid $base-color-dark-grey;
-    border-top: 0;
-
-    .select2-search {
-        display: none;
-    }
-}
-
-//end of select2
-
 //start filler content
 .filler-content {
     display: block;

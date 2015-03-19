@@ -1,10 +1,13 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic);
 // Font weights
 $light: 100;
 $regular: 400;
 $bold: 600;
 
 // Base Font
-$base-font-utility: 14px 'avenir next';
+$base-font-light: 14px 'Lato Light', sans-serif;
+$base-font-utility: 14px 'Lato Regular', sans-serif;
+$base-font-bold: 14px 'Lato Bold', sans-serif;
 
 // Headings
 $header-font-weight: $bold;
