@@ -470,6 +470,7 @@ a {
     position: relative;
     display: inline-block;
     margin-right: 20px;
+    z-index: 99;
 
     input {
         min-width: 184px;
