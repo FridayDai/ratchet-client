@@ -22,8 +22,14 @@ class AssistService {
         def title = params?.title
         def desc = params?.desc
         def name = params?.name
+        def browser = params?.browser
+
         def email = request.session.email
+        def user_id = request.session.accountId        
         def clientId = request.session.clientId
+        def session = request.session.token
+
+        def type = 'Client Staff'
 
         String addAssistUrl = grailsApplication.config.ratchetv2.server.url.addAssist
         def url = String.format(addAssistUrl, clientId)
@@ -33,8 +39,12 @@ class AssistService {
                     .field("title", title)
                     .field("desc", desc)
                     .field("name", name)
+                    .field("browser", browser)
                     .field("email", email)
+                    .field("user_id", user_id)
                     .field("clientId", clientId)
+                    .field("session", session)
+                    .field("type", type)
                     .asString()
             def result = JSON.parse(resp.body)
 
