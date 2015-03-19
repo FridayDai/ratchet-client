@@ -23,7 +23,7 @@
         confirmContent: "",
         loadingContent: "This is loading content",
         changePasswordTitle: "CHANGE PASSWORD",
-        editSurgeonTitle: "Update surgeon",
+        editSurgeonTitle: "EDIT SURGEON",
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",

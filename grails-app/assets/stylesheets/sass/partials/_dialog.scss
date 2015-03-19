@@ -8,7 +8,7 @@
 
     .ui-dialog-titlebar {
         position: relative;
-        padding: 10px;
+        padding: 14px 10px;
         border: 0;
         border-bottom: 5px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
@@ -73,7 +73,7 @@
         }
 
         button {
-            margin: .5em .4em .5em 0;
+            margin: .6em .4em 1em 0;
             cursor: pointer;
             border: 1px solid $base-color-dark-grey;
             color: $base-color-dark-grey;
@@ -159,8 +159,8 @@
 .window-deactivate-msg {
     margin-top: 13px;
     color: $base-color-white;
-    text-align: center;
     font-weight: 700;
+    text-align: center;
 }
 
 .ui-button {
