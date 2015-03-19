@@ -370,7 +370,7 @@
                         var firstName = $("#giver-firstName").val();
                         var lastName = $("#giver-lastName").val();
                         var email = $("#giver-email").val();
-                        var relationship = $("#relationships").val();
+                        var relationship = $("#relationships").data("id");
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -431,12 +431,27 @@
 
         $("#relationships").combobox({
             source: function (request, response) {
-                response($.map(data, function (item) {
-                    return {
-                        label: item.label,
-                        value: item.id
-                    }
-                }));
+                var sources = _.filter(data, function(num){
+                    return num.label.toLowerCase().indexOf(request.term) > -1;
+                });
+                if (!sources.length) {
+                    var result = [
+                        {
+                            label: 'No matches found',
+                            value: ''
+                        }
+                    ];
+                    response(result);
+                }
+                else {
+                    response($.map(sources, function (item) {
+
+                        return {
+                            label: item.label,
+                            value: item.id
+                        }
+                    }));
+                }
             },
             appendTo: ".container"
         });
