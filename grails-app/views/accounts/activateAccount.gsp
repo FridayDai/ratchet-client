@@ -5,7 +5,7 @@
 <g:applyLayout name="form">
     <html>
     <head>
-        <title>Welcome to ratchet</title>
+        <title>Welcome to Ratchet Health</title>
     </head>
 
     <body>
