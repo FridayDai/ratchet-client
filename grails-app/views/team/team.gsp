@@ -80,7 +80,7 @@
 
 
 <g:form class="editSurgeon ui-hidden" id="editSurgeon">
-    <div class="form-group ">
+    <div class="form-group inline">
         <label class="lbl-group">SURGEON</label>
         <input id="selectStaff" name="selectStaff" type="text" class="clear"
                placeholder="Surgeon"

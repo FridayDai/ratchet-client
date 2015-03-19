@@ -96,7 +96,7 @@
             $('.container').removeClass('push-down');
             $('.nav').removeClass('push-down');
             $('.maintenance').hide();
-        }
+        };
 
         $('.maintenance .btn-close').click(function () {
             //TO-DO: close banner ajax call
@@ -115,7 +115,7 @@
                 title: title,
                 desc: desc,
                 name: name
-            }
+            };
         }
 
         function _sendAssistReport() {
@@ -143,7 +143,7 @@
                     height: 300,
                     width: 800,
                     okTitle: 'SEND'
-                }
+                };
 
                 RC.common.confirmForm(_.extend({}, args, {
                     element: $('.assist-form'),
@@ -493,7 +493,7 @@
             }
             var height = confirmFormArguments.height || 300,
                 width = confirmFormArguments.width || 350;
-            var title = confirmFormArguments.okTitle || "SAVE";
+            var title = confirmFormArguments.okTitle || "Save";
 
             var $container = $(confirmFormArguments.element);
 
