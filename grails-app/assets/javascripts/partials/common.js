@@ -377,9 +377,14 @@
             uiWindowTitle = $container.find('.window-title'),
             uiWindowMessage = $container.find('.window-message');
         containerParent.find('.ui-widget-header').addClass('ui-icon-show');
-
-        //$('<div class="ui-icon-add"></div>').insertBefore(containerParent.find('.ui-button-text')[0]);
-        $(uiButton[1]).addClass('btn-agree');
+        
+        if (warningArguments.confirmText) {
+            $(uiButton[1]).addClass('btn-agree')
+                .find('.ui-button-text')
+                .text(warningArguments.confirmText);
+        }else {
+            $(uiButton[1]).addClass('btn-agree');
+        }
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
         uiWindowMessage.html('<div class="window-warning">' + warningArguments.message + '</div>');
@@ -800,7 +805,7 @@
                     $(selectors.selectChoice).hide();
                 });
             });
-        },
+        }
     });
     _init();
 })(jQuery);
