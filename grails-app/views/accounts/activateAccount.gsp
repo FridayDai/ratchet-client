@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="info color-black align-center">
-                        Please create a new password to access Ratchet
+                        Welcome to Ratchet Health!
                     </div>
 
                     <div class="input-container">
