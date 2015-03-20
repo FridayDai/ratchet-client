@@ -141,6 +141,7 @@
             var clientId = $(this).data("clientId");
             RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
                 element: $(".warn"),
+                confirmText: "Archive",
                 yesCallback: function () {
                     _archived(clientId, patientId, medicalRecordId);
                 }
