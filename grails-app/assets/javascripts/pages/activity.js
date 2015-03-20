@@ -83,43 +83,43 @@
      * init selectmenu
      * @private
      */
-    function _initSelect() {
-        $('#selectStaffs').select2({
-            ajax: {
-                transport: function(params){
-                    params.beforeSend = function(){
-                        RC.common.progress(false);
-                    };
-                    return $.ajax(params);
-                },
-                url: opts.urls.getStaffs,
-                cache: "true",
-                data: function (term) {
-                    return {
-                        term: term
-                    };
-                },
-                results: function (data) {
-                    var myResults = [];
-                    myResults.push({
-                        'id' : '',
-                        'text': 'ALL'
-                    });
-                    $.each(data, function (index, item) {
-                        myResults.push({
-                            'id': item.id,
-                            'text': item.firstName + " " + item.lastName
-                        });
-                    });
-                    return {
-                        results: myResults
-                    };
-                }
-            }
-        });
-
-        $("#selectStaffs").select2('data', {id: '', text: 'ALL'});
-    }
+    //function _initSelect() {
+    //    $('#selectStaffs').select2({
+    //        ajax: {
+    //            transport: function(params){
+    //                params.beforeSend = function(){
+    //                    RC.common.progress(false);
+    //                };
+    //                return $.ajax(params);
+    //            },
+    //            url: opts.urls.getStaffs,
+    //            cache: "true",
+    //            data: function (term) {
+    //                return {
+    //                    term: term
+    //                };
+    //            },
+    //            results: function (data) {
+    //                var myResults = [];
+    //                myResults.push({
+    //                    'id' : '',
+    //                    'text': 'ALL'
+    //                });
+    //                $.each(data, function (index, item) {
+    //                    myResults.push({
+    //                        'id': item.id,
+    //                        'text': item.firstName + " " + item.lastName
+    //                    });
+    //                });
+    //                return {
+    //                    results: myResults
+    //                };
+    //            }
+    //        }
+    //    });
+    //
+    //    $("#selectStaffs").select2('data', {id: '', text: 'ALL'});
+    //}
 
     function _search(element) {
         var senderId = $('#selectStaffs').val();
@@ -155,7 +155,7 @@
     function _init(element) {
         _loadData(element);
         _bindSearchEvent(element);
-        _initSelect();
+        //_initSelect();
     }
 
     $.extend(activity, {

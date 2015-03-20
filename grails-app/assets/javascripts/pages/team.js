@@ -134,9 +134,9 @@
                     data: function (source) {
 
                         if (careGiverStatus[source.status - 1] === "ACTIVE") {
-                            return '<span class="status-active">ACTIVE</span>'
+                            return '<span class="status-active">ACTIVE</span>';
                         } else {
-                            return '<span class="status-inactive">INACTIVE</span>'
+                            return '<span class="status-inactive">INACTIVE</span>';
                         }
                     },
                     width: "15%"
@@ -180,9 +180,13 @@
 
             var medicalRecordId = $(this).data("medicalRecordId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
+            var firstName = element.find("#surgeonFirstName").text().trim();
+            var lastName = element.find("#surgeonLastName").text().trim();
+            element.find("#selectStaff").val(firstName + ' ' + lastName);
+            var form = element.find(".editSurgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
-                element: element.find(".editSurgeon"),
+                element: form,
                 okCallback: function () {
                     if ($(".editSurgeon").valid()) {
 
@@ -199,7 +203,7 @@
                 }
             }));
 
-            _initStaffSelect(existSurgeonId);
+            _initStaffSelect(form, existSurgeonId);
         });
     }
 
@@ -235,8 +239,9 @@
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
+            var form =  element.find(".inviteGiverForm");
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
-                element: element.find(".inviteGiverForm"),
+                element: form,
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
 
@@ -258,7 +263,7 @@
                     return false;
                 }
             }));
-            _initSelect();
+            _initSelect(form);
 
         });
 
@@ -358,13 +363,14 @@
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
             eleParent.find("#relationships").val(relationship);
+            var form = element.find(".inviteGiverForm");
 
             //$("select option").filter(function () {
             //    return $(this).text() === relationship;
             //}).prop('selected', true);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
-                element: element.find(".inviteGiverForm"),
+                element: form,
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
 
@@ -387,7 +393,7 @@
                     return false;
                 }
             }));
-            _initSelect();
+            _initSelect(form);
         });
     }
 
@@ -411,7 +417,7 @@
                 //element.find("td.lastName")[0].text(careGiverInfo.lastName);
                 //element.find("td.relationship")[0].text(careGiverRelation[careGiverInfo.relationship - 1]);
                 //element.find("td.email")[0].text(careGiverInfo.email);
-                _initSelect();
+                //_initSelect(element);
             }
         });
     }
@@ -420,17 +426,17 @@
      * init select
      * @private
      */
-    function _initSelect() {
+    function _initSelect(form) {
         var data = [
             {label: "Spouse", id: 1},
             {label: "Parent", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
-            {label: "Other", id: 5},
-        ]
+            {label: "Other", id: 5}
+        ];
 
 
-        $("#relationships").combobox({
+        $(form).find("#relationships").combobox({
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term) > -1;
@@ -450,7 +456,7 @@
                         return {
                             label: item.label,
                             value: item.id
-                        }
+                        };
                     }));
                 }
             },
@@ -462,8 +468,8 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(existSurgeonId) {
-        $("#selectStaff").combobox({
+    function _initStaffSelect(form, existSurgeonId) {
+        $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function (eve, ui) {
@@ -506,7 +512,7 @@
                                     return {
                                         label: item.firstName + " " + item.lastName,
                                         value: item.id
-                                    }
+                                    };
                                 }));
                             } else {
                                 response($.map(data, function (item) {
