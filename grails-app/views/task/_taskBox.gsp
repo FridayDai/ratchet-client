@@ -13,9 +13,8 @@
 
     <div class="box-item-content">
 
-        <div class="complete-score">
-
-            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <div class="complete-score">
                 <g:if test="${task?.otherScore}">
                     <% def firstSplit = "" %>
                     <% def secondSplit %>
@@ -35,9 +34,8 @@
                         <label>Total:</label>
                         <label>${task?.score.toInteger()}</label></span>
                 </g:else>
-            </g:if>
-
-        </div>
+            </div>
+        </g:if>
 
         <div class="item-fist middle-font">
             <label>ID:</label>
@@ -50,10 +48,10 @@
 
         <div class="item-datetime relative-sent-time">
 
-            <% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver")%>
-            <% LocalDate start = new LocalDate(task?.sendTime, Vancouver)%>
-            <% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver)%>
-            <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs()%>
+            <% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>
+            <% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>
+            <% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>
+            <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>
             <g:if test="${sentTimeDays == 0}">
                 <label class="numeral">On Surgery Day</label>
             </g:if>
