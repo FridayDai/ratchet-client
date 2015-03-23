@@ -71,8 +71,8 @@
             background-color: $base-color-green;
 
             &:before {
-                content: 'PENDING';
                 padding: 5px 8px 0;
+                content: 'PENDING';
                 font-size: 10pt;
             }
         }
@@ -85,8 +85,8 @@
             background-color: $base-color-task-overdue;
 
             &:before {
-                content: 'OVERDUE';
                 padding: 5px 8px 0;
+                content: 'OVERDUE';
                 font-size: 10pt;
             }
         }
@@ -99,8 +99,8 @@
             background-color: $base-color-task-complete;
 
             &:before {
-                content: 'COMPLETE';
                 padding: 5px 8px 0;
+                content: 'COMPLETE';
                 font-size: 10pt;
             }
         }
