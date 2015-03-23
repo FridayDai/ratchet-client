@@ -134,8 +134,8 @@
             background-color: $base-color-tab-bg;
 
             a {
-                color: $base-color-dark-grey;
                 height: 65px;
+                color: $base-color-dark-grey;
             }
         }
     }
@@ -187,9 +187,9 @@
 
         .ui-state-active {
             a {
-                font-weight: 600;
                 border-color: $base-color-dark-grey;
                 color: $base-color-dark-grey;
+                font-weight: 600;
             }
         }
 
@@ -199,10 +199,10 @@
             line-height: 40px;
 
             .archived-treatment-title {
-                color: $base-color-dark-grey;
                 display: inline;
-                font-weight: 400;
                 margin-right: 40px;
+                color: $base-color-dark-grey;
+                font-weight: 400;
             }
         }
     }

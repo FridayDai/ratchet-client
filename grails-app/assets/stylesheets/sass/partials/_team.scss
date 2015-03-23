@@ -217,8 +217,8 @@
 .team-table {
     .status-active {
         padding: 5px 3px 2px;
-        background: $base-color-deactive;
         color: $base-color-white;
+        background: $base-color-deactive;
     }
 
     .status-inactive {
@@ -228,6 +228,6 @@
     }
 }
 
-.editSurgeon {
+.edit-surgeon {
     text-align: center;
 }

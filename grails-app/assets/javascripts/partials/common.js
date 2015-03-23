@@ -76,7 +76,7 @@
                         errorMessage: jqXHR.responseText
                     });
                 }
-                else if (jqXHR.status === 401 || jqXHR.status >= 404 ) {
+                else if (jqXHR.status === 401 || jqXHR.status >= 404) {
                     RC.common.error({
                         title: RC.constants.errorTitle404,
                         message: RC.constants.errorTip
@@ -116,7 +116,7 @@
                 title: title,
                 desc: desc,
                 name: name,
-                browser: browser,
+                browser: browser
             };
         }
 
@@ -315,7 +315,7 @@
                         },
                         select: function (event, ui) {
                             event.preventDefault();
-                            if (ui.item.value == "No matches found") {
+                            if (ui.item.value === "No matches found") {
                                 return;
                             }
                             $(this).val(ui.item.label);
@@ -326,8 +326,8 @@
                                 .removeClass('ui-button-icon-primary')
                                 .addClass('ui-button-icon-loading');
                         },
-                        change: function (e , ui) {
-                            if(ui.item==null){
+                        change: function (e, ui) {
+                            if (ui.item === null) {
                                 $(this).data("id", "");
                             }
                         }
@@ -377,12 +377,12 @@
             uiWindowTitle = $container.find('.window-title'),
             uiWindowMessage = $container.find('.window-message');
         containerParent.find('.ui-widget-header').addClass('ui-icon-show');
-        
+
         if (warningArguments.confirmText) {
             $(uiButton[1]).addClass('btn-agree')
                 .find('.ui-button-text')
                 .text(warningArguments.confirmText);
-        }else {
+        } else {
             $(uiButton[1]).addClass('btn-agree');
         }
 
@@ -410,10 +410,10 @@
 
         uiWindowTitle.html('<div class="window-error-title">' + errorArguments.title + '</div>');
         uiWindowMessage.html('');
-        if(errorArguments.message){
+        if (errorArguments.message) {
             uiWindowMessage.append('<div class="window-error">' + errorArguments.message + '</div>');
         }
-        if(errorArguments.errorMessage) {
+        if (errorArguments.errorMessage) {
             uiWindowMessage.append('<div class="window-error-message">' + errorArguments.errorMessage + '</div>');
         }
         return $container;
@@ -471,7 +471,7 @@
             });
 
             if (showMsgArguments.marginLeft) {
-                marginLeft = showMsgArguments.marginLeft
+                marginLeft = showMsgArguments.marginLeft;
             }
             else {
                 marginLeft = (parseInt(match.exec($msgDiv.css('width'))) + parseInt(match.exec($msgDiv.css('padding-left')))) / -2;
@@ -537,7 +537,7 @@
                 if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
                     dialog.dialog("close");
                 }
-            }
+            };
 
             var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');

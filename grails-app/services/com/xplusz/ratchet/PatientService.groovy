@@ -81,7 +81,7 @@ class PatientService {
         def patientType = params?.patientType
         def treatmentId = params?.treatmentId
         def surgeonId = params?.surgeonId
-        def name = params?.name
+        def patientIdOrName = params?.patientIdOrName
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         try {
@@ -92,7 +92,7 @@ class PatientService {
                     .queryString("patientType", patientType)
                     .queryString("treatmentId", treatmentId)
                     .queryString("surgeonId", surgeonId)
-                    .queryString("name", name)
+                    .queryString("patientIdOrName", patientIdOrName)
                     .asString()
 
             def result = JSON.parse(resp.body)

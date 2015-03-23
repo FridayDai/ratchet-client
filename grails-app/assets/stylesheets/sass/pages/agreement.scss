@@ -20,13 +20,13 @@ p {
     }
 
     .italic {
-        font-style: italic;
         font-weight: normal;
+        font-style: italic;
     }
 
     .example {
-        font-weight: normal;
         margin-left: 30px;
+        font-weight: normal;
     }
 }
 
@@ -57,13 +57,13 @@ h4 {
     font-size: 26px;
 
     span {
-        font-size: 18px;
-        padding: 5px 0px;
-        margin-right: 10px;
-        color: $base-color-white;
-        background-color: $base-color-dark-grey;
         display: inline-block;
         width: 35px;
+        margin-right: 10px;
+        padding: 5px 0;
+        color: $base-color-white;
+        background-color: $base-color-dark-grey;
+        font-size: 18px;
         text-align: center;
     }
 }
@@ -93,14 +93,14 @@ h4 {
     ul {
         float: left;
         height: 30px;
-        margin-left: 0;
         margin-top: 5px;
+        margin-left: 0;
 
         li {
             float: left;
-            font-size: 11pt;
             height: 30px;
             margin: 0;
+            font-size: 11pt;
             line-height: 30px;
 
             a {
@@ -112,9 +112,10 @@ h4 {
             &:before {
                 padding-right: 10px;
                 padding-left: 10px;
-                font-size: 16px;
                 content: '|';
+                font-size: 16px;
             }
+
             &:first-child {
 
                 &:before {
@@ -134,6 +135,7 @@ h4 {
 
             li {
                 font-size: 11pt;
+
                 &:before,
                 &:after {
                     padding-left: 0;
@@ -166,14 +168,14 @@ ul {
         line-height: 35px;
 
         .dot {
+            overflow: hidden;
             margin-right: 10px;
             vertical-align: middle;
-            overflow: hidden;
 
             &:before {
-                font-size: 16px;
-                color: $base-color-dark-grey;
                 content: '•';
+                color: $base-color-dark-grey;
+                font-size: 16px;
             }
         }
 

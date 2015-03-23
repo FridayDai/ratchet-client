@@ -1,7 +1,7 @@
 (function ($, undefined) {
     'use strict';
 
-    //Define provider page global variables
+    //Define patient page global variables
     var opts = {
             defaultConfirmArguments: {
                 confirmTreatmentFormArguments: {
@@ -171,8 +171,8 @@
             {label: "Parent", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
-            {label: "Other", id: 5},
-        ]
+            {label: "Other", id: 5}
+        ];
 
 
         $("#relationshipName").combobox({
@@ -195,7 +195,7 @@
                         return {
                             label: item.label,
                             value: item.id
-                        }
+                        };
                     }));
                 }
             },
@@ -356,7 +356,7 @@
         $("#selectTreatment").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getTreatments,
@@ -382,15 +382,15 @@
                                     value: item.id,
                                     surgeryTime: item.surgeryTimeRequired,
                                     timeStamp: item.sendTimeOffset
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value == "No matches found") {
+                if (ui.item.value === "No matches found") {
                     return;
                 }
                 $(this).val(ui.item.label);
@@ -400,7 +400,7 @@
             },
             appendTo: ".container",
             change: function (data, ui) {
-                if (ui.item == null) {
+                if (ui.item === null) {
                     $(this).data("id", "");
                     return;
                 }
@@ -426,7 +426,7 @@
         $("#selectSurgeons").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getStaffs,
@@ -451,11 +451,11 @@
                                 return {
                                     label: item.firstName + " " + item.lastName,
                                     value: item.id
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             },
             appendTo: ".container"
 
@@ -539,12 +539,12 @@
 
             errorPlacement: function (error, element) {
                 var elem = $(element);
-                error.insertAfter(element);
+                error.insertAfter(elem);
             }
         });
 
         $(document).on("change", ".select2-offscreen", function () {
-            if (!$.isEmptyObject(validobj.submitted)) {
+            if (!$.isEmptyObject(validObj.submitted)) {
                 validObj.form();
             }
         });
@@ -554,7 +554,7 @@
     function _checkEmergencyContact() {
         _.each($('.emergency-field'), function (element, index) {
             $(element).on('input', function () {
-                if ($(element).val() != '') {
+                if ($(element).val() !== '') {
                     $('#emergency-firstName').attr('required', true);
                     $('#emergency-lastName').attr('required', true);
                     $('#relationshipName').attr('required', true);
@@ -569,7 +569,7 @@
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
-                    return $(element).val() == '';
+                    return $(element).val() === '';
                 });
 
                 if (flagOptional) {

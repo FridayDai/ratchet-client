@@ -15,33 +15,33 @@
         .td-width {
             width: 90px;
             height: 40px;
-            text-align: center;
             border-right: 1px solid $base-light-grey-color;
             color: $base-color-medium-black;
+            text-align: center;
         }
 
         span {
-            margin-left: 20px;
             margin-right: 20px;
+            margin-left: 20px;
             color: $base-color-medium-black;
         }
 
         .span-invited {
             padding: 4px 3px 2px;
-            background: $base-color-invited;
             color: $base-color-white;
+            background: $base-color-invited;
         }
 
         .span-deactive {
             padding: 4px 3px 2px;
-            background: $base-color-deactive;
             color: $base-color-white;
+            background: $base-color-deactive;
         }
 
         .span-active {
             padding: 4px 3px 2px;
-            background: $base-light-grey-color;
             color: $base-color-white;
+            background: $base-light-grey-color;
         }
 
         .activate-action {
@@ -50,17 +50,17 @@
     }
 
     .bg-color {
-        background-color: $base-grey-dark-color;
         padding: 5px;
         color: $base-color-white;
+        background-color: $base-grey-dark-color;
     }
 
     .email-logo {
 
         &:after {
             display: inline-block;
-            content: '\f422';
             margin-top: 2px;
+            content: '\f422';
             color: $base-color-medium-black;
             font-weight: lighter;
             font-size: 22px;
@@ -74,9 +74,9 @@
 }
 
 .content-head {
+    position: relative;
     padding: 20px;
     border-bottom: 6px solid $base-color-white-grey;
-    position: relative;
 
     p {
         color: $base-color-dark-gray;
@@ -105,9 +105,9 @@
 }
 
 .middle-content {
+    position: relative;
     padding: 20px 20px 0;
     border-bottom: 1px solid $base-light-grey-color;
-    position: relative;
 
     .name-info {
         font-size: 24px;
@@ -194,15 +194,15 @@
 
     .dr {
         margin-left: -15px;
-        font-size: 24px;
-        font-weight: 500;
         color: $base-color-medium-black;
+        font-weight: 500;
+        font-size: 24px;
     }
 
     .readonly-email {
+        padding-left: 0;
         border: 0;
         background: 0;
-        padding-left: 0;
     }
 
     .account-management {

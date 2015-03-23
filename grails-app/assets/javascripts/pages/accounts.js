@@ -117,7 +117,7 @@
                 {
                     "targets": 4,
                     "render": function (data, type, full) {
-                        var id = data == undefined ? full.id : data;
+                        var id = data === undefined ? full.id : data;
                         return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
                     },
                     width: "7%"
@@ -141,6 +141,10 @@
         _initTable();
     }
 
+    /**
+     * init click row event
+     * @private
+     */
     function _clickRow() {
         $('#accountsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
@@ -149,6 +153,10 @@
         });
     }
 
+    /**
+     * init search event
+     * @private
+     */
     function _search() {
         var data = {
             name: $("#search-input").val()
@@ -156,6 +164,10 @@
         _initTable(data);
     }
 
+    /**
+     * bind search event
+     * @private
+     */
     function _bindSearchEvent() {
         $('#search-input').keydown(function (event) {
                 if (event.keyCode === 13) {
@@ -207,19 +219,9 @@
             url: opts.urls.add,
             type: "post",
             data: newAccountData,
-            success: function (data) {
-                //newAccountData.id = data.resp.id;
-                //newAccountData.lastUpdateDate = data.resp.lastUpdateDate;
-                //accountTable.row.add(newAccountData).draw();
+            success: function () {
                 _loadData();
             }
-            //error: function () {
-            //    RC.common.warning(_.extend({}, opts.defaultConfirmArguments.waringArguments, {
-            //        element: $(".warn"),
-            //        closeCallback: function () {
-            //        }
-            //    }));
-            //}
         });
     }
 
@@ -253,10 +255,10 @@
                 {label: "Primary Physician", id: 6},
                 {label: "Scheduler", id: 7},
                 {label: "Surgeon", id: 8}
-            ]
+            ];
             $("#type").combobox({
                 source: function (request, response) {
-                    var sources = _.filter(data, function(num){
+                    var sources = _.filter(data, function (num) {
                         return num.label.toLowerCase().indexOf(request.term) > -1;
                     });
                     if (!sources.length) {
@@ -274,7 +276,7 @@
                             return {
                                 label: item.label,
                                 value: item.id
-                            }
+                            };
                         }));
                     }
                 },
@@ -295,10 +297,7 @@
                 url: opts.urls.inviteAccount.format(accountId),
                 type: "GET",
                 dataType: "json",
-                success: function (data) {
-                    //if (data.resp === true) {
-                    //    $("#status-text").text("Invited");
-                    //}
+                success: function () {
                     RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                 }
             });
@@ -456,6 +455,11 @@
         });
     }
 
+    /**
+     * update password
+     * @param passwords
+     * @private
+     */
     function _updatePassword(passwords) {
         $.ajax({
             url: opts.urls.updatePassword,
