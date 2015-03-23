@@ -25,7 +25,7 @@
 <g:render template="/shared/header" />
 <g:render template="/shared/nav" />
 
-<div class="container <g:if test="${announcement.status == 'active'}"> push-down</g:if>">
+<div class="container">
     <g:layoutBody/>
 </div>
 <g:render template="/shared/footer" />

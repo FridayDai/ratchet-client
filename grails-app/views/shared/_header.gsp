@@ -1,5 +1,5 @@
 <div class="sticky-header">
-    <div role="banner" class="header <g:if test="${announcement.status == 'active'}"> push-down</g:if>">
+    <div role="banner" class="header">
         <div class="toolbar">
             <div class="pull-left">
                 <a href="/" class="logo">
