@@ -142,6 +142,7 @@
                     width: "15%"
                 },
                 {
+                    "orderable": false,
                     data: function (source) {
                         if (active === "true") {
                             return '<button id="edit-care-giver" disabled="disabled" class="btn-edit disabled" data-care-giver-id="' + source.id + '" ></button>' +
