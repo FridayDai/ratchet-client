@@ -17,7 +17,7 @@
      * @param data
      * @private
      */
-    function _initTable(element, data) {
+    function _initTable(ele, element, data) {
         //before reload dataTable, destroy the last dataTable
         //$(element).dataTable().fnDestroy();
 
@@ -34,7 +34,7 @@
             "serverSide": true,
             "columnDefs": [
                 {"targets": [0, 1], "orderable": false}],
-            "fnDrawCallback": function() {
+            "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
             },
@@ -54,9 +54,9 @@
                     width: "14%"
                 },
                 {
-                    data: function(source){
-                    var formatDate = moment(source.dateCreated).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss a');
-                    return formatDate;
+                    data: function (source) {
+                        var formatDate = moment(source.dateCreated).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss a');
+                        return formatDate;
                     },
                     width: "16%"
                 }
@@ -70,13 +70,13 @@
      * @params selectBy
      * @private
      */
-    function _loadData(element) {
+    function _loadData(ele, element) {
         var data = {};
 
-        data.patientId = $("#patientId").val();
-        data.medicalRecordId = $("#medicalRecordId").val();
-        data.clientId = $("#clientId").val();
-        _initTable(element, data);
+        data.patientId = ele.find("#patientId").val();
+        data.medicalRecordId = ele.find("#medicalRecordId").val();
+        data.clientId = ele.find("#clientId").val();
+        _initTable(ele, element, data);
     }
 
     /**
@@ -121,7 +121,7 @@
     //    $("#selectStaffs").select2('data', {id: '', text: 'ALL'});
     //}
 
-    function _search(element) {
+    function _search(ele, element) {
         var senderId = $('#selectStaffs').val();
         var patientId = $("#patientId").val();
         var medicalRecordId = $("#medicalRecordId").val();
@@ -132,35 +132,34 @@
             medicalRecordId: medicalRecordId,
             clientId: clientId
         };
-        _initTable(element, data);
+        _initTable(ele, element, data);
     }
 
     /**
      * bind search event
      * @private
      */
-    function _bindSearchEvent(element) {
+    function _bindSearchEvent(ele, element) {
         $("#refresh-btn").on("click", function (e) {
             e.preventDefault();
-            _search(element);
+            _search(ele, element);
         });
     }
-
 
 
     /**
      * Provider page Initialization
      * @private
      */
-    function _init(element) {
-        _loadData(element);
-        _bindSearchEvent(element);
+    function _init(ele, element) {
+        _loadData(ele, element);
+        _bindSearchEvent(ele, element);
         //_initSelect();
     }
 
     $.extend(activity, {
-        init: function(element){
-            _init(element);
+        init: function (ele, element) {
+            _init(ele, element);
         }
     });
 

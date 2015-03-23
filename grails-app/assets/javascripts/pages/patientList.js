@@ -446,7 +446,7 @@
                     }
                 });
             },
-            
+
             select: function (event, ui) {
                 event.preventDefault();
                 if (ui.item.value === "No matches found") {
