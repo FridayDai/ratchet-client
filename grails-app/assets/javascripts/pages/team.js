@@ -176,19 +176,19 @@
     function _editSurgeon(element) {
         element.find("#btn-edit-surgeon").on("click", function (e) {
             e.preventDefault();
-            $(".editSurgeon")[0].reset();
+            $(".edit-surgeon")[0].reset();
 
             var medicalRecordId = $(this).data("medicalRecordId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
             element.find("#selectStaff").val(firstName + ' ' + lastName);
-            var form = element.find(".editSurgeon");
+            var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".editSurgeon").valid()) {
+                    if ($(".edit-surgeon").valid()) {
 
                         var staffId = $("#selectStaff").data("id");
                         var ids = {
@@ -355,14 +355,29 @@
             var parent = $(this).parent().parent();
             var firstName = parent.find("td.firstName").text();
             var lastName = parent.find("td.lastName").text();
-            var relationship = parent.find("td.relationship").text();
+            var relationship = parent.find("td.relationship").text().trim();
             var email = parent.find("td.email").text();
+
+            var data =
+                {
+                    "Spouse": 1,
+                    "Parent": 2,
+                    "Child": 3,
+                    "Friend": 4,
+                    "Other": 5
+                };
+            var relationshipId = _.map(data, function(num, key){
+                if(key === relationship) {
+                    return num;
+                }
+            });
+            relationshipId = _.compact(relationshipId).toString();
 
             var eleParent = element.parents();
             eleParent.find("#giver-firstName").val(firstName);
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
-            eleParent.find("#relationships").val(relationship);
+            eleParent.find("#relationships").val(relationship).data('id', relationshipId);
             var form = element.find(".inviteGiverForm");
 
             //$("select option").filter(function () {
@@ -374,10 +389,10 @@
                 okCallback: function () {
                     if ($(".inviteGiverForm").valid()) {
 
-                        var firstName = $("#giver-firstName").val();
-                        var lastName = $("#giver-lastName").val();
-                        var email = $("#giver-email").val();
-                        var relationship = $("#relationships").data("id");
+                        var firstName = eleParent.find("#giver-firstName").val();
+                        var lastName = eleParent.find("#giver-lastName").val();
+                        var email = eleParent.find("#giver-email").val();
+                        var relationship = eleParent.find("#relationships").data('id');
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
