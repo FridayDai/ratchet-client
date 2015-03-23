@@ -1,0 +1,29 @@
+.maintenance {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    padding: 10px;
+    color: #333;
+    text-align: left;
+
+    .maintenance-content {
+        margin-right: 15px;
+    }
+
+    .maintenance-attention {
+        color: #f05b50;
+    }
+
+    .btn-close {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        color: #333;
+        cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}

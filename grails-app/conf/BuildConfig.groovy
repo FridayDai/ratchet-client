@@ -71,8 +71,10 @@ grails.project.dependency.resolution = {
 //        compile ":rest-client-builder:1.0.3"
         compile ":compass-sass:0.7"
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
-        runtime ":database-migration:1.4.0"
+        runtime ":hibernate4:4.3.6.1", { // or ":hibernate:3.6.10.18"
+            excludes 'ehcache-core'
+        }
+        compile ":cache-ehcache:1.0.5"
         runtime ':resources:1.2.13'
         compile ":cookie-session:2.0.16"
         compile ":joda-time:1.5"

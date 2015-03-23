@@ -2,40 +2,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 98;
     width: 100%;
-
-    .maintenance {
-        padding: 10px;
-        white-space: nowrap;
-        color: $base-logo-color;
-        font-weight: 500;
-        text-overflow: ellipsis;
-
-        &.red {
-            background-color: #fbd9d7;
-        }
-
-        .btn-close {
-            float: right;
-            margin-top: -5px;
-
-            &:before {
-                padding-right: 8px;
-                padding-left: 30px;
-                content: '\f404';
-                color: $base-logo-color;
-                font-weight: lighter;
-                font-size: 27px;
-                font-family: ionicons;
-                vertical-align: middle;
-            }
-        }
-
-        .attention {
-            color: #f05b50;
-        }
-    }
 
     .header {
         position: relative;

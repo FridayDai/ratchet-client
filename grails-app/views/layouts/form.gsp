@@ -19,11 +19,11 @@
     <g:layoutHead/>
 </head>
 <body>
-
+<g:render template="/shared/announcement" />
 <div>
     <g:layoutBody/>
 </div>
-<g:render template="/shared/footer"></g:render>
+<g:render template="/shared/footer" />
 
 <g:if test="${scriptPath}">
     <asset:javascript src="bundles/${scriptPath}"/>
