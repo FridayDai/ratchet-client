@@ -12,23 +12,23 @@
 
     .greeting {
         position: relative;
-        font-weight: 600;
         top: -5px;
+        font-weight: 600;
         font-size: 20px;
     }
 
     .info {
+        padding: 5px;
         font-weight: 400;
-        padding: 10px 0 5px;
     }
 
     .input-container {
-        margin: 13px 26px 0px 26px;
+        margin: 32px 26px 0;
     }
 
     .input-combination {
+        margin-top: 0;
         padding: 3% 0;
-        margin-top: 0px;
     }
 }
 
@@ -38,13 +38,13 @@
 }
 
 .dark-link {
-    text-decoration: underline;
     color: $base-color-medium-black;
+    text-decoration: underline;
 }
 
 .btn-submit {
     width: 165px;
     height: 42px;
-    font-size: 13pt;
     margin-top: 20px;
+    font-size: 13pt;
 }

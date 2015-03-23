@@ -1,24 +1,25 @@
 .sticky-header {
-    position:fixed;
+    position: fixed;
     top: 0;
     left: 0;
-    width:100%;
     z-index: 100;
+    width: 100%;
 
     .maintenance {
         padding: 10px;
+        white-space: nowrap;
         color: $base-logo-color;
         font-weight: 500;
         text-overflow: ellipsis;
-        white-space: nowrap;
 
         &.red {
-            background-color: #FBD9D7;
+            background-color: #fbd9d7;
         }
 
         .btn-close {
+            float: right;
             margin-top: -5px;
-            float:right;
+
             &:before {
                 padding-right: 8px;
                 padding-left: 30px;
@@ -32,7 +33,7 @@
         }
 
         .attention {
-            color: #F05B50;
+            color: #f05b50;
         }
     }
 
@@ -82,11 +83,11 @@
         float: left;
         margin-top: 11px;
         margin-left: 10px;
+        padding: 0 10px;
+        border-left: 3px solid $base-logo-color;
+        color: $base-logo-color;
         font-weight: 600;
         font-size: 12px;
-        padding: 0 10px;
-        color: $base-logo-color;
-        border-left: 3px solid $base-logo-color;
 
         img {
             position: relative;

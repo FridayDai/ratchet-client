@@ -79,7 +79,7 @@
 
 
 
-<g:form class="editSurgeon ui-hidden" id="editSurgeon">
+<g:form class="edit-surgeon ui-hidden" id="editSurgeon">
     <div class="form-group inline">
         <label class="lbl-group">SURGEON</label>
         <input id="selectStaff" name="selectStaff" type="text" class="clear"

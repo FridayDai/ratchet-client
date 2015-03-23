@@ -113,7 +113,7 @@
                 }, {
                     "targets": 5,
                     "render": function (data, type, full) {
-                        var id = data == undefined ? full.id : data;
+                        var id = data === undefined ? full.id : data;
                         return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
                     },
                     width: "8%"
@@ -157,11 +157,11 @@
     function _search() {
         var treatmentId = $("#treatmentForSearchPatient").data("id");
         var surgeonId = $("#selectSurgeon").data("id");
-        var name = $("#search-input").val();
+        var patientIdOrName = $("#search-input").val();
         var data = {
             treatmentId: treatmentId,
             surgeonId: surgeonId,
-            name: name
+            patientIdOrName: patientIdOrName
         };
         _initTable(data);
     }
@@ -308,8 +308,8 @@
             {label: "Parent", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
-            {label: "Other", id: 5},
-        ]
+            {label: "Other", id: 5}
+        ];
 
 
         $("#relationship").combobox({
@@ -332,7 +332,7 @@
                         return {
                             label: item.label,
                             value: item.id
-                        }
+                        };
                     }));
                 }
             },
@@ -413,7 +413,7 @@
         $("#selectTreatment").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getTreatments,
@@ -439,15 +439,15 @@
                                     value: item.id,
                                     surgeryTime: item.surgeryTimeRequired,
                                     timeStamp: item.sendTimeOffset
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value == "No matches found") {
+                if (ui.item.value === "No matches found") {
                     return;
                 }
                 $(this).val(ui.item.label);
@@ -457,7 +457,7 @@
             },
             appendTo: ".container",
             change: function (data, ui) {
-                if (ui.item == null) {
+                if (ui.item === null) {
                     $(this).data("id", "");
                     return;
                 }
@@ -474,7 +474,7 @@
         $("#treatmentForSearchPatient").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getTreatments,
@@ -498,11 +498,11 @@
                                 return {
                                     label: item.title + ' ' + item.tmpTitle,
                                     value: item.id
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             }
         });
 
@@ -517,7 +517,7 @@
         $("#selectSurgeon").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getStaffs,
@@ -542,11 +542,11 @@
                                 return {
                                     label: item.firstName + " " + item.lastName,
                                     value: item.id
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             }
 
         });
@@ -561,7 +561,7 @@
         $("#selectStaffs").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getStaffs,
@@ -586,15 +586,15 @@
                                 return {
                                     label: item.firstName + " " + item.lastName,
                                     value: item.id
-                                }
+                                };
                             }));
                         }
                     }
-                })
+                });
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value == "No matches found") {
+                if (ui.item.value === "No matches found") {
                     return;
                 }
                 $(this).val(ui.item.label);
@@ -608,7 +608,7 @@
     function _checkEmergencyContact() {
         _.each($('.emergency-field'), function (element, index) {
             $(element).on('input', function () {
-                if ($(element).val() != '') {
+                if ($(element).val() !== '') {
                     $('#emergency-firstName').attr('required', true);
                     $('#emergency-lastName').attr('required', true);
                     $('#relationship').attr('required', true);
@@ -623,7 +623,7 @@
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
-                    return $(element).val() == '';
+                    return $(element).val() === '';
                 });
 
                 if (flagOptional) {

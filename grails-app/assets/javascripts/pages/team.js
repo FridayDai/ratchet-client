@@ -519,14 +519,14 @@
                                     return {
                                         label: item.firstName + " " + item.lastName,
                                         value: item.id
-                                    }
+                                    };
                                 }));
                             }
 
                         }
 
                     }
-                })
+                });
             },
             appendTo: ".container"
 

@@ -29,8 +29,8 @@ body {
 }
 
 html {
-    min-height: 100%;
     position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -304,7 +304,7 @@ a {
 //start filler content
 .filler-content {
     display: block;
-    float:left;
+    float: left;
     max-width: 230px;
     margin-top: 10px;
 
@@ -314,15 +314,15 @@ a {
     }
 
     .search-input {
-        font-size: 14px;
-        float:left;
+        float: left;
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
+        font-size: 14px;
     }
 
     .search {
-        float:left;
+        float: left;
         height: 15px;
         margin-left: -4px;
         padding: 6px 12px;
@@ -468,31 +468,31 @@ a {
 
 .ui-combobox {
     position: relative;
+    z-index: 99;
     display: inline-block;
     margin-right: 20px;
-    z-index: 99;
 
     input {
         min-width: 184px;
-        font-size: 15px;
-        font-weight: inherit;
-        color: $base-dark-grey;
         border: 1px solid $base-font-color;
         border-right: 0;
+        color: $base-dark-grey;
         background-color: $base-color-white;
+        font-weight: inherit;
+        font-size: 15px;
     }
 
     .ui-combobox-toggle {
         position: absolute;
         top: 0;
         bottom: 0;
+        width: 16px;
+        height: 25px;
         margin-left: -1px;
         padding: 0;
-        height: 25px;
         border: 1px solid $base-font-color;
-        background-color: $base-color-white;
         border-left: 0;
-        width: 16px;
+        background-color: $base-color-white;
 
         &:hover,
         &:focus {
@@ -500,44 +500,43 @@ a {
         }
 
         .ui-button-icon-primary {
-            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
             width: 100%;
             height: 100%;
             margin-top: -12px;
+            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
         }
 
         .ui-button-icon-loading {
-            background: url('../../../images/autocomplete-spinner.gif') no-repeat center right;
             width: 100%;
             height: 100%;
             margin-top: -12px;
+            background: url('../../../images/autocomplete-spinner.gif') no-repeat center right;
         }
     }
 }
 
 .ui-autocomplete.ui-widget-content {
-
+    z-index: 9999;
+    overflow-x: hidden;
+    overflow-y: auto;
     max-width: 209px;
     max-height: 200px;
     margin: 0 4px 4px 0;
-    overflow-x: hidden;
-    overflow-y: auto;
     border: 1px solid $base-font-color;
     border-top: 0;
     background-color: $base-color-white;
-    z-index: 9999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
 
     li {
-        list-style: none;
         display: list-item;
-        color: $base-dark-grey;
-        padding: 3px 15px 4px;
-        margin: 0;
-        cursor: pointer;
         min-height: 1em;
+        margin: 0;
+        padding: 3px 15px 4px;
+        color: $base-dark-grey;
+        list-style: none;
+        cursor: pointer;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -546,9 +545,9 @@ a {
     }
 
     .ui-menu-item.ui-state-focus {
-        font-weight: normal;
-        color: $base-color-dark-grey;;
+        color: $base-color-dark-grey;
         background-color: $base-color-white-grey;
+        font-weight: normal;
     }
 }
 

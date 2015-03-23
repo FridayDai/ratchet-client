@@ -1,6 +1,6 @@
 .nav {
     &.push-down {
-        top:80px;
+        top: 80px;
     }
 
     position: fixed;
@@ -76,7 +76,7 @@
 }
 
 .btn-li {
-    margin: 25px 0px 25px;
+    margin: 25px 0;
 
     a {
         color: $base-color-darker-grey;
@@ -89,9 +89,9 @@
         border-color: $base-color-darker-grey;
 
         &:before {
-            font-family: 'Ionicons';
             display: inline-block;
             content: '\f142';
+            font-family: 'Ionicons';
         }
 
         &:hover,

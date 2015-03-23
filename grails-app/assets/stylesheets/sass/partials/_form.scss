@@ -99,9 +99,6 @@
         }
     }
 
-//    .treatment {
-//        border: 0;
-//    }
 }
 
 .form {
@@ -114,8 +111,8 @@
 
 .container {
     .ui-autocomplete.ui-widget-content {
-        max-width: 254px;
         z-index: 99999;
+        max-width: 254px;
     }
 }
 
