@@ -165,6 +165,26 @@ grails.config.locations = [
         overrideLocation
 ]
 
+
+grails.cache.enabled = true
+
+grails.cache.config = {
+    cache {
+        name 'announcement'
+    }
+    defaultCache {
+        memoryStoreEvictionPolicy 'LRU'
+    }
+
+    defaults {
+        maxElementsInMemory 10
+        eternal false
+        overflowToDisk false
+        maxElementsOnDisk 0
+        timeToIdleSeconds 600
+        timeToLiveSeconds 600
+    }
+}
 // asset-pipeline
 //grails.assets.excludes = "bower_components/"
 
@@ -235,6 +255,9 @@ ratchetv2 {
 
             //for taskService
             task.sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
+
+            //Announcement
+            announcements = "${ratchetv2.server.url.base}/announcements"
 
         }
 
