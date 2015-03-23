@@ -314,7 +314,7 @@
 
         $("#relationship").combobox({
             source: function (request, response) {
-                var sources = _.filter(data, function(num){
+                var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term) > -1;
                 });
                 if (!sources.length) {
@@ -336,6 +336,7 @@
                     }));
                 }
             },
+            //appendTo:"body"
             appendTo: ".container"
         });
 
@@ -445,6 +446,7 @@
                     }
                 });
             },
+            
             select: function (event, ui) {
                 event.preventDefault();
                 if (ui.item.value === "No matches found") {
@@ -455,14 +457,16 @@
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
             },
+
             appendTo: ".container",
+
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
                     return;
                 }
                 var date = new Date();
-                var time =date.getTime() +  ui.item.timeStamp;
+                var time = date.getTime() + ui.item.timeStamp;
                 $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
@@ -601,7 +605,6 @@
                 $(this).data("id", ui.item.value);
             },
             appendTo: ".container"
-
         });
     }
 
