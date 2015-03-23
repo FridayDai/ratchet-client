@@ -197,7 +197,7 @@
                 if (type) {
                     switch (type) {
                         case "Activity":
-                            RC.pages.activity.init(ui.panel.find("#activityTable"));
+                            RC.pages.activity.init(ui.panel,ui.panel.find("#activityTable"));
                             break;
                         case "Task":
                             RC.pages.task.init(ui.panel);
