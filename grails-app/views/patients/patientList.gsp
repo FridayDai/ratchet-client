@@ -18,13 +18,13 @@
         <div class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content">
-                    <label for="treatmentForSearchPatient">TREATMENT</label>
+                    <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
                     <input type="text" class="input-group treatment-search-patient" name="treatmentForSearchPatient"
                            id="treatmentForSearchPatient"/>
                 </div>
 
                 <div class="filler-content">
-                    <label for="selectSurgeon">SURGEON</label>
+                    <label for="selectSurgeon" class="select-tip">SURGEON</label>
                     <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
                 </div>
 

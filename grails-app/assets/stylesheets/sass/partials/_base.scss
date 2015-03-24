@@ -318,7 +318,7 @@ a {
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
-        font-size: 14px;
+        font-size: 11px;
     }
 
     .search {
@@ -366,7 +366,7 @@ a {
 .inner-header {
     min-width: 960px;
     height: 46px;
-    padding: 22px;
+    padding: 22px 40px;
     border-bottom: 6px solid $base-color-white-grey;
 
     .title {
@@ -374,7 +374,8 @@ a {
         width: 80%;
         margin-top: 10px;
         color: $base-color-dark-grey;
-        font-size: 22px;
+        font-size: 20px;
+        line-height: 32px;
     }
 }
 
@@ -550,4 +551,10 @@ a {
         font-weight: normal;
     }
 }
+
+.container .ui-autocomplete.ui-widget-content {
+    height: 90px;
+    overflow-y: auto;
+}
+
 

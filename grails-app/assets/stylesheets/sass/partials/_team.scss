@@ -34,10 +34,12 @@
 
     .surgeon {
         position: relative;
+        margin-top: 15px;
         margin-left: 30px;
 
         &:before {
             position: absolute;
+            top: -5px;
             left: -30px;
             content: url('../../../images/surgeon_logo.png');
         }
@@ -45,10 +47,12 @@
 
     .ec-contact {
         position: relative;
+        margin-top: 15px;
         margin-left: 40px;
 
         &:before {
             position: absolute;
+            top: -5px;
             left: -40px;
             content: url('../../../images/emergency_coontact_logo.png');
         }
@@ -173,8 +177,13 @@
         border-right: 1px solid $base-color-white-grey;
     }
 
+    .surgeon-id {
+        font-weight: 200;
+    }
+
     .surgeon-name {
-        font-weight: $bold;
+        margin-top: 4px;
+        font-weight: 400;
     }
 
     .surgeon-email {
@@ -183,6 +192,7 @@
         vertical-align: sub;
         height: 25px;
         padding: 15px 30px 15px 20px;
+        font-weight: 200;
     }
 
     .btn-edit-surgeon {
@@ -216,12 +226,14 @@
 
 .team-table {
     .status-active {
+        font-size: 13px;
         padding: 5px 3px 2px;
         color: $base-color-white;
         background: $base-color-deactive;
     }
 
     .status-inactive {
+        font-size: 13px;
         padding: 5px 3px 2px;
         color: $base-color-white;
         background: $base-light-grey-color;
