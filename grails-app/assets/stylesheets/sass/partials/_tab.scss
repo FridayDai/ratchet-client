@@ -170,6 +170,7 @@
         border: 0;
         border-bottom: 2px solid $base-color-white-grey;
         background-color: $base-color-tab-bg;
+        font-weight: 200;
 
         .ui-state-default {
             margin: 0;
@@ -189,7 +190,7 @@
             a {
                 border-color: $base-color-dark-grey;
                 color: $base-color-dark-grey;
-                font-weight: 600;
+                font-weight: 500;
             }
         }
 

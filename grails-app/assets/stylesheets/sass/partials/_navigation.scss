@@ -127,6 +127,7 @@
 
         img {
             margin-top: 10px;
+            height: 40px;
         }
     }
 
@@ -137,6 +138,8 @@
         float: left;
         width: 130px;
         color: $base-color-dark-grey;
+        padding-top: 5px;
+        margin-left: 8px;
 
         li {
             padding-right: 15px;
@@ -145,6 +148,7 @@
 
             a {
                 padding-left: 0;
+                margin-top: 10px;
             }
 
             &:hover,
