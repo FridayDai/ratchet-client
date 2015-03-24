@@ -131,7 +131,6 @@
 }
 
 .window-warning-title {
-    margin-top: 20px;
     color: $base-color-white;
     font-weight: bolder;
     text-align: center;
@@ -188,7 +187,7 @@
 }
 
 .ui-size {
-    width: 480px !important;
+    min-width: 450px;
 
     .btn-position {
 

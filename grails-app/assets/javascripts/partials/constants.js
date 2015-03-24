@@ -39,7 +39,7 @@
         deleteGiverWaringTitle: "Are you sure you want to remove the current EMERGENCY CONTACT?",
         deleteGiverWarningMsg: "The information cannot be retrieved.",
         archivedTreatmentWarningMsg: "ARCHIVE TREATMENT",
-        archivedMessage: "Waring: This action cannot be undone.",
+        archivedMessage: "Warning: This action cannot be undone.",
         warningTip: "Click “PROCEED” to go to remove the agent.",
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
