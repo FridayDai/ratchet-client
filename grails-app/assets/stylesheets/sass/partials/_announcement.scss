@@ -3,7 +3,7 @@
     top: 0;
     z-index: 99;
     width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     color: #333;
     text-align: left;
 
@@ -15,10 +15,10 @@
         color: #f05b50;
     }
 
-    .btn-close {
+    .maintenance-btn-close {
         position: fixed;
         top: 10px;
-        right: 10px;
+        right: 20px;
         color: #333;
         cursor: pointer;
 
