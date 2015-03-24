@@ -8,7 +8,7 @@
 
     .ui-dialog-titlebar {
         position: relative;
-        padding: 14px 10px;
+        padding: 12px 10px 6px;
         border: 0;
         border-bottom: 5px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
@@ -73,7 +73,7 @@
         }
 
         button {
-            margin: .6em .4em 1em 0;
+            margin: 20px 12px 25px;
             cursor: pointer;
             border: 1px solid $base-color-dark-grey;
             color: $base-color-dark-grey;
@@ -132,13 +132,15 @@
 
 .window-warning-title {
     color: $base-color-white;
-    font-weight: bolder;
+    font-weight: 400;
+    font-size: 19px;
     text-align: center;
 }
 
 .window-warning {
     margin-top: 20px;
     color: $base-color-white;
+    font-weight: 100;
     text-align: center;
 }
 

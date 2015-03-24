@@ -36,8 +36,8 @@
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",
         deleteTeamWaringTitle: "Are you sure you want to remove the current Care Team?",
-        deleteGiverWaringTitle: "Are you sure you want to remove the current EMERGENCY CONTACT?",
-        deleteGiverWarningMsg: "The information cannot be retrieved.",
+        deleteGiverWaringTitle: "DELETE EMERGENCY CONTACT",
+        deleteGiverWarningMsg: "Are you sure you want to remove the current emergency contact?",
         archivedTreatmentWarningMsg: "ARCHIVE TREATMENT",
         archivedMessage: "Warning: This action cannot be undone.",
         warningTip: "Click “PROCEED” to go to remove the agent.",
