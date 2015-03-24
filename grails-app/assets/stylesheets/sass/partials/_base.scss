@@ -551,3 +551,9 @@ a {
     }
 }
 
+.container .ui-autocomplete.ui-widget-content {
+    height: 90px;
+    overflow-y: auto;
+}
+
+

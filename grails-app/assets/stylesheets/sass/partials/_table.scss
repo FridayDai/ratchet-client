@@ -22,6 +22,7 @@
         width: 23%;
         color: $base-dark-grey;
         font-weight: $bold;
+        font-size: 14px;
     }
 
     tr {
@@ -29,6 +30,10 @@
         color: $base-dark-grey;
         cursor: pointer;
         word-break: break-all;
+
+        td {
+            font-size: 14px;
+        }
 
         .btn-edit {
             background-color: transparent;
