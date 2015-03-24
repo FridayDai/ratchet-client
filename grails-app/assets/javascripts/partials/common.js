@@ -91,16 +91,14 @@
      * @private
      */
     function _setMaintenance() {
+        var maintenanceEl = $('#maintenance');
 
-        var _closeBanner = function () {
-            $('.container').removeClass('push-down');
-            $('.nav').removeClass('push-down');
-            $('.maintenance').hide();
-        };
+        $('.maintenance-btn-close').click(function () {
+            var announcementLastUpdated = maintenanceEl.data('announcementLastUpdated');
 
-        $('.maintenance .btn-close').click(function () {
-            //TO-DO: close banner ajax call
-            _closeBanner();
+            $.get('/announcement/close?announcementLastUpdated=' + announcementLastUpdated);
+
+            maintenanceEl.remove();
         });
     }
 
