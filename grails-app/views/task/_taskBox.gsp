@@ -25,14 +25,14 @@
                         <% secondSplit = num?.trim().split(':') %>
                         <span class="score">
                             <label class="uppercase">${secondSplit[0]}:</label>
-                            <label>${secondSplit[1]?.toInteger()}</label>
+                            <label>${secondSplit[1]}</label>
                         </span>
                     </g:each>
                 </g:if>
                 <g:else>
                     <span class="score">
                         <label>Total:</label>
-                        <label>${task?.score.toInteger()}</label></span>
+                        <label>${task?.score}</label></span>
                 </g:else>
             </div>
         </g:if>
