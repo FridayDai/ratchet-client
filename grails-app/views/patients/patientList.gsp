@@ -19,13 +19,13 @@
             <div class="search-content clear">
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
-                    <input type="text" class="input-group treatment-search-patient" name="treatmentForSearchPatient"
+                    <input type="text" class="input-group treatment-search-patient input-auto-search" name="treatmentForSearchPatient"
                            id="treatmentForSearchPatient"/>
                 </div>
 
                 <div class="filler-content">
                     <label for="selectSurgeon" class="select-tip">SURGEON</label>
-                    <input name="selectSurgeon" id="selectSurgeon" class="input-group"/>
+                    <input name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>
                 </div>
 
                 <div class="filler-content right-search">

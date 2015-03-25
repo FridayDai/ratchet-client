@@ -154,9 +154,9 @@
      *
      * @private
      */
-    function _search() {
-        var treatmentId = $("#treatmentForSearchPatient").data("id");
-        var surgeonId = $("#selectSurgeon").data("id");
+    function _search(treatment, surgeon) {
+        var treatmentId = treatment || $("#treatmentForSearchPatient").data("id");
+        var surgeonId = surgeon || $("#selectSurgeon").data("id");
         var patientIdOrName = $("#search-input").val();
         var data = {
             treatmentId: treatmentId,
@@ -171,6 +171,21 @@
      * @private
      */
     function _bindSearchEvent() {
+
+        $(".input-auto-search").on("autocompleteselect", function (event, ui) {
+            var selectedId = ui.item.value;
+            var searchId = $(this).attr('id');
+
+            if (searchId === "treatmentForSearchPatient") {
+                var treatment = selectedId;
+            }
+            if (searchId === "selectSurgeon") {
+                var surgeon = selectedId;
+            }
+
+            _search(treatment, surgeon);
+        });
+
         $('#search-input').keydown(function (event) {
                 if (event.keyCode === 13) {
                     _search();
