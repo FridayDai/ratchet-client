@@ -47,12 +47,12 @@
 
     <div class="form-group">
         <label class="lbl-group">TITLE<span>*</span></label>
-        <input id="assist-title" name="title" type="text" class="input-group title" placeholder="Please assist me on this" />
+        <input id="assist-title" name="title" type="text" class="input-group title" placeholder="Please assist me on this" required/>
     </div>
-
+    
     <div class="form-group">
         <label class="lbl-group">DESCRIPTION<span>*</span></label>
-        <textarea id="assist-desc" name="description" type="text" class="input-group description" placeholder="Description here" ></textarea>
+        <textarea id="assist-desc" name="description" type="text" class="input-group description" placeholder="Description here" required></textarea>
     </div>
 
     <div class="form-group inline">
