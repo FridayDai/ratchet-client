@@ -209,6 +209,7 @@
 
     .ui-dialog-content {
         background-color: $base-color-warn;
+        border: 1px solid $base-color-warn;
     }
 
     .ui-dialog-buttonpane {
