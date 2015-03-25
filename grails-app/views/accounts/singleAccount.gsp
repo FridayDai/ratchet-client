@@ -141,16 +141,7 @@
 
         <div class="form-group inline role-select">
             <label class="lbl-group role">ROLE<span>*</span></label>
-            <select id="accountType" name="accountType" required>
-                <option value="1">Anesthesiologist</option>
-                <option value="2">Medical Assistant</option>
-                <option value="3">Management</option>
-                <option value="4">Nurse</option>
-                <option value="5">Physical therapists (PTs)</option>
-                <option value="6">Primary Physician</option>
-                <option value="7">Scheduler</option>
-                <option value="8">Surgeon</option>
-            </select>
+            <input id="accountType" name="accountType" class="input-group" required>
         </div>
 
         <div class="form-group">
