@@ -518,6 +518,12 @@
                 title: confirmFormArguments.title,
                 open: function () {
                     $("input").blur();
+                    var $element = $(this).parent();
+                    $element.addClass('fade');
+                    setTimeout(function(){
+                        $element.addClass("in");
+                    },300);
+
                 },
                 buttons: {},
                 close: function () {
@@ -574,6 +580,12 @@
                     height: 140,
                     width: 350,
                     modal: true,
+                    open: function() {
+                        $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
+                    },
+                    close: function() {
+                        $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
+                    },
                     buttons: {
                         "Ok": function (e) {
                             if ($.isFunction(confirmArguments.okCallback) && (confirmArguments.okCallback)(e)) {
@@ -586,9 +598,6 @@
                             }
                             dialog.dialog("close");
                         }
-                    },
-                    close: function () {
-
                     }
                 });
             }
@@ -625,6 +634,12 @@
                 height: 140,
                 width: 350,
                 modal: true,
+                open: function() {
+                    $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
+                },
+                close: function() {
+                    $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
+                },
                 buttons: {
                     Yes: function (e) {
                         if ($.isFunction(warningArguments.yesCallback)) {
@@ -675,6 +690,12 @@
                 height: 140,
                 width: 350,
                 modal: true,
+                open: function() {
+                    $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
+                },
+                close: function() {
+                    $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
+                },
                 buttons: {
                     Ok: function (e) {
                         if ($.isFunction(errorArguments.closeCallback)) {
