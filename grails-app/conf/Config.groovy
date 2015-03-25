@@ -169,6 +169,9 @@ grails.config.locations = [
 grails.cache.enabled = true
 
 grails.cache.config = {
+    provider {
+        name 'ehcache-client-portal-' + (new Date().format('yyyyMMddHHmmss'))
+    }
     cache {
         name 'announcement'
     }
