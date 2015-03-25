@@ -27,7 +27,9 @@
     border-bottom: 3px solid $base-color-white-grey;
 
     h4 {
+        margin-bottom: 7px;
         color: $base-color-dark-gray;
+        font-weight: 200;
     }
 }
 
@@ -37,6 +39,10 @@
 
 .no-item {
     padding: 3% 0;
+
+    p{
+        font-weight: 200;
+    }
 }
 
 // box item for task

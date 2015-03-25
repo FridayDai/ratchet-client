@@ -35,26 +35,28 @@
     .surgeon {
         position: relative;
         margin-top: 15px;
-        margin-left: 30px;
+        margin-left: 45px;
+        color: $base-color-warn;
 
         &:before {
             position: absolute;
-            top: -5px;
-            left: -30px;
-            content: url('../../../images/surgeon_logo.png');
+            top: -10px;
+            left: -35px;
+            content: url('../../../images/surgeon.png');
         }
     }
 
     .ec-contact {
         position: relative;
         margin-top: 15px;
-        margin-left: 40px;
+        margin-left: 50px;
+        color: $base-color-warn;
 
         &:before {
             position: absolute;
-            top: -5px;
-            left: -40px;
-            content: url('../../../images/emergency_coontact_logo.png');
+            top: -8px;
+            left: -35px;
+            content: url('../../../images/ec_emergency.png');
         }
     }
 }
@@ -169,6 +171,7 @@
     height: 60px;
     padding: 10px;
     border-bottom: 20px solid $base-color-white-grey;
+    color: $base-color-light-black;
 
     .inline {
         display: inline-block;
@@ -179,11 +182,13 @@
 
     .surgeon-id {
         font-weight: 200;
+        font-size: 14px;
     }
 
     .surgeon-name {
         margin-top: 4px;
-        font-weight: 400;
+        font-weight: 200;
+        font-size: 20px;
     }
 
     .surgeon-email {
