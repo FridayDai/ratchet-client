@@ -518,7 +518,8 @@ a {
 }
 
 .ui-autocomplete.ui-widget-content {
-    z-index: 9999;
+    position: absolute;
+    z-index: 90;
     overflow-x: hidden;
     overflow-y: auto;
     max-width: 209px;

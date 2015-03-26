@@ -290,6 +290,16 @@
      * @private
      */
     function _initComboboxWidget() {
+        $.widget("ui.autocomplete", $.ui.autocomplete, {
+            _resizeMenu: function() {
+                var ul = this.menu.element;
+                ul.outerWidth( Math.max(
+                    ul.width( "" ).outerWidth() + 1,
+                    this.element.outerWidth() + 17
+                ) );
+            }
+        });
+
         $.widget("ui.combobox", {
             _create: function () {
                 var wrapper = this.wrapper = $("<span />").addClass("ui-combobox")
