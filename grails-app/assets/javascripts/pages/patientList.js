@@ -172,7 +172,7 @@
      */
     function _bindSearchEvent() {
 
-        $(".input-auto-search").on("autocompleteselect", function (event, ui) {
+        $(".filler-content .input-auto-search").on("autocompleteselect", function (event, ui) {
             var selectedId = ui.item.value;
             var searchId = $(this).attr('id');
 
