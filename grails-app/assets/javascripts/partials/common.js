@@ -330,6 +330,10 @@
                             if (ui.item === null) {
                                 $(this).data("id", "");
                             }
+                        },
+                        focus: function (event, ui) {
+                            $(this).val(ui.item.label);
+                            return false;
                         }
                     }, this.options));
 
@@ -520,9 +524,9 @@
                     $("input").blur();
                     var $element = $(this).parent();
                     $element.addClass('fade');
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $element.addClass("in");
-                    },300);
+                    }, 300);
 
                 },
                 buttons: {},
@@ -580,10 +584,10 @@
                     height: 140,
                     width: 350,
                     modal: true,
-                    open: function() {
+                    open: function () {
                         $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
                     },
-                    close: function() {
+                    close: function () {
                         $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
                     },
                     buttons: {
@@ -634,10 +638,10 @@
                 height: 140,
                 width: 350,
                 modal: true,
-                open: function() {
+                open: function () {
                     $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
                 },
-                close: function() {
+                close: function () {
                     $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
                 },
                 buttons: {
@@ -690,10 +694,10 @@
                 height: 140,
                 width: 350,
                 modal: true,
-                open: function() {
+                open: function () {
                     $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
                 },
-                close: function() {
+                close: function () {
                     $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
                 },
                 buttons: {

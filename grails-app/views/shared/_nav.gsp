@@ -3,7 +3,7 @@
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
             <div class="user-photo">
-                <img src="${assetPath(src: 'staff_profile.png')}">
+                <img src="${assetPath(src: 'user.png')}">
             </div>
             <ul class="user-profile">
                 <li>Welcome!</li>
