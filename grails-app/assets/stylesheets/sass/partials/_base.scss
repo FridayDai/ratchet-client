@@ -219,6 +219,7 @@ a {
 }
 
 .window-warning {
+    border-bottom: 1px solid $base-color-warn;
     color: $base-color-mid-grey;
 }
 
@@ -561,6 +562,6 @@ a {
 
 
 .ui-widget-overlay {
-    background-color: $base-font-grey-dark;
+    background-color: $base-color-mid-gray;
     opacity: 0.4;
 }

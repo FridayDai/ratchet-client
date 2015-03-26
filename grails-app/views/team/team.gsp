@@ -119,7 +119,7 @@
 
     <div class="form-group inline team-permission-confirm">
         <label></label>
-        <input type="checkbox" name="permissionConfirm" checked required/>*
+        <input type="checkbox" id="permissionConfirm" name="permissionConfirm" required/>*
         <span>Patient has given permission to release his/her health information to emergency contact.</span>
     </div>
 
