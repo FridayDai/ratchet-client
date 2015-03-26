@@ -236,7 +236,7 @@
 
         ele.find("#invite-giver").on("click", function (e) {
             e.preventDefault();
-            $(".inviteGiverForm")[0].reset();
+            element.find('.inviteGiverForm')[0].reset();
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
@@ -379,6 +379,7 @@
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
             eleParent.find("#relationships").val(relationship).data('id', relationshipId);
+            eleParent.find("#permissionConfirm").prop('checked', true);
             var form = element.find(".inviteGiverForm");
 
             //$("select option").filter(function () {
