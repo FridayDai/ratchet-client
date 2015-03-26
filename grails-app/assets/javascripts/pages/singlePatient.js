@@ -341,8 +341,9 @@
     function _goBackToPrePage() {
         $('.btn-close').on('click', function (e) {
             e.preventDefault();
-            parent.history.back();
-            return false;
+            window.location.href = "/patients";
+            //parent.history.back();
+            //return false;
         });
     }
 
