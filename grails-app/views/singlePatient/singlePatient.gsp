@@ -139,7 +139,7 @@
         </div>
 
         <div class="emergency-contact-info">
-            <h4>Emergency Contact</h4>
+            <h4>EMERGENCY CONTACT</h4>
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>

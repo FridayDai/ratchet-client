@@ -96,7 +96,7 @@
 
             </div>
 
-            <h4>Emergency Contact</h4>
+            <h4>EMERGENCY CONTACT</h4>
 
             <div class="emergency-contact-info">
                 <div class="form-group inline">
@@ -131,7 +131,7 @@
                 </div>
             </div>
 
-            <h4 class="treatment-info-title">Treatment Info</h4>
+            <h4 class="treatment-info-title">TREATMENT INFO</h4>
 
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>

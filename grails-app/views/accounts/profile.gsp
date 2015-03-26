@@ -98,14 +98,14 @@
                    required/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group password-group">
             <label class="lbl-group">NEW PASSWORD<span>*</span></label>
             <input id="newPass" name="newPass" type="password" class="input-group"
                    placeholder="Enter new password"
                    required/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group password-group">
             <label class="lbl-group">CONFIRM PASSWORD<span>*</span></label>
             <input id="confirmPass" name="confirmPass" type="password" class="input-group"
                    placeholder="Enter new password again"

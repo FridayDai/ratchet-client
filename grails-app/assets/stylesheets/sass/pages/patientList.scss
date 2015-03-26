@@ -64,7 +64,8 @@
 //}
 
 .permission-confirm {
-    visibility: hidden;
+//    visibility: hidden;
+    display: none;
     margin-top: 7px;
     margin-bottom: 0;
     color: $base-font-grey;
@@ -76,7 +77,8 @@
 }
 
 .visible {
-    visibility: visible;
+//    visibility: visible;
+    display: block;
 }
 
 .emergency-required {
