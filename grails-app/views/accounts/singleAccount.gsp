@@ -84,7 +84,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Role</td>
                     <td><span class="account-role"
-                              id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                              id="accountRole" data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                     </td>
                 </tr>
 

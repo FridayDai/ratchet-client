@@ -322,6 +322,7 @@
             var lastName = parent.find(".account-last-name").text();
             var email = parent.find(".account-email").text();
             var accountRole = parent.find(".account-role").text();
+            var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
 
@@ -335,9 +336,12 @@
             $("#lastName").val(lastName);
             $("#email").val(email);
 
-            $("select option").filter(function () {
-                return $(this).text() === accountRole;
-            }).prop('selected', true);
+            //$("select option").filter(function () {
+            //    return $(this).text() === accountRole;
+            //}).prop('selected', true);
+
+            $("#accountType").val(accountRole);
+            $("#accountType").data("id",typeId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $(".update-account-form"),
