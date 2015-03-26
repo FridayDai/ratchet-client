@@ -23,7 +23,7 @@
                     title: RC.constants.changePasswordTitle,
                     content: RC.constants.confirmContent,
                     height: 300,
-                    width: 340
+                    width: 320
                 },
                 showMsgArguments: {
                     msg: RC.constants.inviteAccountSuccess
