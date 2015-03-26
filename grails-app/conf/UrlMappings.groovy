@@ -78,8 +78,8 @@ class UrlMappings {
         "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         //agreement
-        "/terms_of_service"(controller: "home", action: "termsOfService")
-        "/privacy_policy"(controller: "home", action: "privacyPolicy")
+//        "/terms_of_service"(controller: "home", action: "termsOfService")
+//        "/privacy_policy"(controller: "home", action: "privacyPolicy")
 
         // announcement
         "/announcement/close"(controller: "announcement", action: "close")
