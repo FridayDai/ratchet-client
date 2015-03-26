@@ -9,8 +9,8 @@
         <div class="pull-left">
             <ul>
                 <li>All rights reserved.</li>
-                <li><g:link controller="home" action="termsOfService">Terms of Service</g:link></li>
-                <li><g:link controller="home" action="privacyPolicy">Privacy Policy</g:link></li>
+                %{--<li><g:link controller="home" action="termsOfService">Terms of Service</g:link></li>--}%
+                %{--<li><g:link controller="home" action="privacyPolicy">Privacy Policy</g:link></li>--}%
             </ul>
         </div>
     </div>
