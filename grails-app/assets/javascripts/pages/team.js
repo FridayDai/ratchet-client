@@ -232,24 +232,24 @@
      */
     function _bindInviteGiverEvent(element) {
 
-        var ele = element;
-
-        ele.find("#invite-giver").on("click", function (e) {
+        element.find("#invite-giver").on("click", function (e) {
             e.preventDefault();
             element.find('.inviteGiverForm')[0].reset();
+            $('.inviteGiverForm')[0].reset();
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
-            var form =  element.find(".inviteGiverForm");
+            var form = element.find(".inviteGiverForm");
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if (form.valid()) {
 
-                        var firstName = $("#giver-firstName").val();
-                        var lastName = $("#giver-lastName").val();
-                        var email = $("#giver-email").val();
-                        var relationship = $("#relationships").data("id");
+                        var firstName = form.find("#giver-firstName").val();
+                        var lastName = form.find("#giver-lastName").val();
+                        var email = form.find("#giver-email").val();
+                        var relationship = form.find("#relationships").data("id");
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -360,15 +360,15 @@
             var email = parent.find("td.email").text();
 
             var data =
-                {
-                    "Spouse": 1,
-                    "Parent": 2,
-                    "Child": 3,
-                    "Friend": 4,
-                    "Other": 5
-                };
-            var relationshipId = _.map(data, function(num, key){
-                if(key === relationship) {
+            {
+                "Spouse": 1,
+                "Parent": 2,
+                "Child": 3,
+                "Friend": 4,
+                "Other": 5
+            };
+            var relationshipId = _.map(data, function (num, key) {
+                if (key === relationship) {
                     return num;
                 }
             });
