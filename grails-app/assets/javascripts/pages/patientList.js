@@ -173,6 +173,9 @@
     function _bindSearchEvent() {
 
         $(".filler-content .input-auto-search").on("autocompleteselect", function (event, ui) {
+            if (ui.item.value === "No matches found") {
+                return;
+            }
             var selectedId = ui.item.value;
             var searchId = $(this).attr('id');
 
