@@ -114,28 +114,28 @@
         width: 100%;
         height: 100%;
         color: $base-color-dark-grey;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 16px;
     }
 
     .user-photo {
         position: absolute;
-        bottom: 20px;
+        bottom: 25px;
         overflow: hidden;
         float: left;
         width: 40px;
         height: 40px;
         text-align: center;
 
-//        img {
-//            margin-top: 10px;
-//            height: 40px;
-//        }
+        //        img {
+        //            margin-top: 10px;
+        //            height: 40px;
+        //        }
     }
 
     .user-profile {
         position: absolute;
-        top: 28px;
+        top: 23px;
         left: 63px;
         float: left;
         width: 130px;
@@ -145,12 +145,15 @@
 
         li {
             padding-right: 15px;
-            font-size: 13px;
+            font-size: 12px;
             text-align: left;
 
             a {
                 padding-left: 0;
                 margin-top: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: pre-line;
             }
 
             &:hover,
