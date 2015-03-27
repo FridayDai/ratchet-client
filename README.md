@@ -117,5 +117,4 @@ ratchet-v2-provider-desktop
 
 - ELK_TCP_ADDR
 - SERVER_URL
-- APP_TYPE
 
