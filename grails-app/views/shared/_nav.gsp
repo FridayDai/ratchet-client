@@ -57,7 +57,7 @@
 
     <div class="form-group inline">
         <label class="lbl-group">NAME<span>*</span></label>
-        <label class="lbl-input" id="assist-name">${request.session.firstName} ${request.session.lastName}</label>
+        <label class="lbl-input" id="assist-full-name" data-first="${request.session.firstName}" data-last="${request.session.lastName}">${request.session.firstName} ${request.session.lastName}</label>
     </div>
 
     <div class="form-group inline">
