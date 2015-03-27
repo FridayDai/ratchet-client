@@ -5,7 +5,7 @@ class LoggingFilters {
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-                log.info("${request.requestURI} params: ${params}, session: ${session.token}, ip: ${request.getRemoteAddr()}")
+                log.info("${request.requestURI}, session: ${session.token}, ip: ${request.getRemoteAddr()}")
             }
             after = { Map model ->
             }
