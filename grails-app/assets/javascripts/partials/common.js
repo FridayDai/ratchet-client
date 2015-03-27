@@ -316,6 +316,7 @@
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
                                 .addClass('ui-button-icon-primary');
+                            $(this).data("id","");
                         },
                         close: function (event, ui) {
                             event.preventDefault();
@@ -326,6 +327,7 @@
                         select: function (event, ui) {
                             event.preventDefault();
                             if (ui.item.value === "No matches found") {
+                                $(this).val("");
                                 return;
                             }
                             $(this).val(ui.item.label);
@@ -336,13 +338,20 @@
                                 .removeClass('ui-button-icon-primary')
                                 .addClass('ui-button-icon-loading');
                         },
-                        change: function (e, ui) {
+                        change: function (event, ui) {
+                            event.preventDefault();
                             if (ui.item === null) {
                                 $(this).data("id", "");
                             }
                         },
                         focus: function (event, ui) {
+                            event.preventDefault();
+                            if (ui.item.value === "No matches found") {
+                                $(this).val("");
+                                return;
+                            }
                             $(this).val(ui.item.label);
+                            $(this).data("id", ui.item.value);
                             return false;
                         }
                     }, this.options));
