@@ -521,6 +521,13 @@
                         }
                     }
                 });
+            },
+            change: function (data, ui) {
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    _search();
+                    return;
+                }
             }
         });
 
@@ -565,6 +572,13 @@
                         }
                     }
                 });
+            },
+            change: function (data, ui) {
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    _search();
+                    return;
+                }
             }
 
         });
