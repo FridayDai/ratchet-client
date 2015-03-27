@@ -186,8 +186,11 @@
             _search(treatment, surgeon);
         });
 
-        $('#search-input').keydown(function (event) {
+        $('#search-input').add(".filler-content .input-auto-search").keydown(function (event) {
                 if (event.keyCode === 13) {
+                    if ($(this).val().trim() === "" && $(this).data("id")) {
+                        $(this).data("id", "");
+                    }
                     _search();
                 }
             }
