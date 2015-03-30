@@ -47,17 +47,17 @@
     }
 
     .ec-contact {
-        position: relative;
-        margin-top: 15px;
-        margin-left: 50px;
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: super;
         color: $base-color-warn;
+    }
 
-        &:before {
-            position: absolute;
-            top: -8px;
-            left: -35px;
-            content: url('../../../images/ec_emergency.png');
-        }
+    img{
+        display: inline-block;
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 34px;
     }
 }
 
