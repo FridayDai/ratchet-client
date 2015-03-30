@@ -21,13 +21,10 @@ class AssistService {
 
         def title = params?.title
         def desc = params?.desc
-        def firstName = params?.firstName
-        def lastName = params?.lastName
         def browser = params?.browser
         def url = params?.url
         
-        def email = request.session.email
-        def user_id = request.session.accountId        
+        def staffId = request.session.accountId       
         def clientId = request.session.clientId
         def session = request.session.token
 
@@ -41,11 +38,8 @@ class AssistService {
             def resp = Unirest.post(formattedUrl)
                     .field("title", title)
                     .field("desc", desc)
-                    .field("firstName", firstName)
-                    .field("lastName", lastName)
                     .field("browser", browser)
-                    .field("email", email)
-                    .field("user_id", user_id)
+                    .field("staffId", staffId)
                     .field("clientId", clientId)
                     .field("session", session)
                     .field("url", url)

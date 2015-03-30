@@ -24,19 +24,6 @@ class BaseController {
         }
     }
 
-    static afterInterceptor = { model ->
-        //TO-DO: add logic here to determin maintenance mode
-
-        def announcement = [:]
-        announcement.id = 1
-        announcement.announcement = "The system will be down for maintenance on Wed, Jan 21 2016-15:00 PST. Sorry for the inconvenience!"
-        announcement.status = "not_active"
-        announcement.background = "red"
-        announcement.timeCreated = "12:00"
-
-        model.announcement = announcement
-    }
-
     def handleApiAccessException(ApiAccessException e) {
         log.error("API Access exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
         def status = 500
