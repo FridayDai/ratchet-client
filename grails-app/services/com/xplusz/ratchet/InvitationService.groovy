@@ -22,6 +22,7 @@ class InvitationService {
         def url = String.format(invitePatientUrl, id)
 
         try {
+            log.info("Call backend service to invite patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
             if (resp.status == 200) {

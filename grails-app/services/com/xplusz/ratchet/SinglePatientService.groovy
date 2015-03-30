@@ -21,6 +21,7 @@ class SinglePatientService {
         def url = String.format(showSinglePatientUrl, patientId)
 
         try {
+            log.info("Call backend service to show single patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
             def result = JSON.parse(resp.body)
@@ -44,6 +45,7 @@ class SinglePatientService {
         def url = String.format(showMedialRecordsUrl, request.session.clientId, patientId)
 
         try {
+            log.info("Call backend service to show medical record, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
             def result = JSON.parse(resp.body)
@@ -66,6 +68,7 @@ class SinglePatientService {
         def url = String.format(updateSinglePatientUrl, params?.patientId)
 
         try {
+            log.info("Call backend service to update single patient with clientId and patient info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("clientId", params?.clientId)
                     .field("patientId", params?.id)

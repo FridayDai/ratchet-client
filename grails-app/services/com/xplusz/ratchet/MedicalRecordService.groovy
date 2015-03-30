@@ -23,12 +23,13 @@ class MedicalRecordService {
         def url = String.format(showTasksUrl, clientId, medicalRecordId)
 
         try {
+            log.info("Call backend service to show tasks by medical record, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Get tasks success, token: ${request.session.token}")
+                log.info("Get tasks success by medical record, token: ${request.session.token}")
                 return result
             } else {
                 def message = result?.error?.errorMessage
@@ -47,6 +48,7 @@ class MedicalRecordService {
         def url = String.format(assignTaskUrl, params.clientId, params.patientId, params.medicalRecordId)
 
         try {
+            log.info("Call backend service to assign task to medical record with toolId, status, sendTime and remindTime, token: ${request.session.token}.")
             def toolId = params.toolId
             def status = params.status
             def requireCompletion = params.requireCompletion

@@ -52,6 +52,9 @@ class AuthenticationService {
          * @return
          */
         def url = grailsApplication.config.ratchetv2.server.url.login
+
+        log.info("Call backend service to authenticate with email, password, clientPlatform and clientType, token: ${request.session.token}.")
+
         def resp = Unirest.post(url)
                 .field("email", email)
                 .field("password", password)
@@ -112,6 +115,7 @@ class AuthenticationService {
             return false
         }
         try {
+            log.info("Call backend service to logout, token: ${token}.")
             def url = grailsApplication.config.ratchetv2.server.url.logout
             def resp = Unirest.get(url)
                     .asString()

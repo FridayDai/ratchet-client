@@ -29,6 +29,7 @@ class TaskService {
         def url = String.format(getOverdueTasksUrl, patientId, medicalRecordId)
 
         try {
+            log.info("Call backend service to get overdue tasks with max and offset, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", max)
                     .queryString("offset", offset)
@@ -56,6 +57,7 @@ class TaskService {
         def url = String.format(sendTaskEmailUrl, params.clientId, params.patientId, params.medicalRecordId, params.taskId)
 
         try {
+            log.info("Call backend service to send task email to patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
 
