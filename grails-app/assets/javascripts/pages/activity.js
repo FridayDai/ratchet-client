@@ -146,6 +146,19 @@
         });
     }
 
+    /**
+     * check archived element height. if it can't fill the whole page, we will set it's height.
+     * @param ele
+     * @private
+     */
+    function _checkArchivedWindowSize(ele) {
+        var content = ele.find('.activity');
+        if (content.hasClass('archived') && $('.container').outerHeight() < $(window).height()) {
+            var topHeight = ele.offset().top;
+            var contentHeight = $(window).height() - topHeight - $('.footer').height();
+            content.height(contentHeight);
+        }
+    }
 
     /**
      * Provider page Initialization
@@ -154,6 +167,7 @@
     function _init(ele, element) {
         _loadData(ele, element);
         _bindSearchEvent(ele, element);
+        _checkArchivedWindowSize(ele);
         //_initSelect();
     }
 
