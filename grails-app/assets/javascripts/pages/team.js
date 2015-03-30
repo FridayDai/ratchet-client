@@ -725,6 +725,19 @@
     //    });
     //}
 
+    /**
+     * check archived element height. if it can't fill the whole page, we will set it's height.
+     * @param element
+     * @private
+     */
+    function _checkArchivedWindowSize(element) {
+        var content = element.find('.content');
+        if (content.hasClass('archived') && $('.container').outerHeight() < $(window).height()) {
+            var topHeight = element.offset().top;
+            var contentHeight = $(window).height() - topHeight - $('.footer').height();
+            content.height(contentHeight);
+        }
+    }
 
     /**
      * patientTeam page Initialization
@@ -736,6 +749,7 @@
         _removeCareGiver(element);
         _editCareGiver(element);
         _editSurgeon(element);
+        _checkArchivedWindowSize(element);
     }
 
     $.extend(team, {
