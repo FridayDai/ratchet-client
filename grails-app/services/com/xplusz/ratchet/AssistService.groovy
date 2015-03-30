@@ -36,6 +36,7 @@ class AssistService {
         def formattedUrl = String.format(addAssistUrl, clientId)
 
         try {
+            log.info("Call backend service to add assist with user and client info, token: ${request.session.token}.")
             def resp = Unirest.post(formattedUrl)
                     .field("title", title)
                     .field("desc", desc)
@@ -53,6 +54,7 @@ class AssistService {
             if (resp.status == 201) {
                 def map = [:]
                 map.put("status", "ok")
+                log.info("Add assist success, token: ${request.session.token}.")
                 return map
             } else {
                 def message = result?.error?.errorMessage

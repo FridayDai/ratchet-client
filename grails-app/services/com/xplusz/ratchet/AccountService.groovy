@@ -21,6 +21,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.staffs
 
         try {
+            log.info("Call backend service to get accounts with start, length, name and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", length)
                     .queryString("offset", start)
@@ -58,6 +59,7 @@ class AccountService {
         def url = String.format(getSingleAccountUrl, accountId)
 
         try {
+            log.info("Call backend service to get sinle account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
             def result = JSON.parse(resp.body)
@@ -86,6 +88,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.staffs
 
         try {
+            log.info("Call backend service to add a new account with clientId and account personal info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("clientId", request.session.clientId)
                     .field("firstName", firstName)
@@ -117,6 +120,7 @@ class AccountService {
         String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
         def url = String.format(inviteAccountUrl, accountId)
         try {
+            log.info("Call backend service to invite account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
 
@@ -142,6 +146,7 @@ class AccountService {
         def url = String.format(updateAccountUrl, accountId)
 
         try {
+            log.info("Call backend service to update account with clientId and account info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("clientId", request.session.clientId)
                     .field("email", params?.email)
@@ -172,6 +177,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.updatePassword
 
         try {
+            log.info("Call backend service to update password with old and new password, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("oldPassword", params?.oldPassword)
                     .field("password", params?.password)
@@ -198,6 +204,7 @@ class AccountService {
         def url = String.format(confirmCodeUrl, code)
 
         try {
+            log.info("Call backend service to confirm code, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .asString()
 
@@ -221,6 +228,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
 
         try {
+            log.info("Call backend service to get accounts with code and password, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("code", params?.code)
                     .field("hasProfile", params?.hasProfile)
@@ -246,6 +254,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.password.reset
 
         try {
+            log.info("Call backend service to ask for reset password with email and client type, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("email", email)
                     .field("clientType", clientType)
@@ -266,6 +275,7 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.password.confirm
 
         try {
+            log.info("Call backend service to reset password with code and password, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("code", params?.code)
                     .field("password", params?.newPassword)
@@ -291,12 +301,13 @@ class AccountService {
         def url = grailsApplication.config.ratchetv2.server.url.password.restCheck
 
         try {
+            log.info("Call backend service to valid password code, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("code", code)
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Valid password success, token: ${request.session.token}.")
+                log.info("Valid password code success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -317,6 +328,7 @@ class AccountService {
         def url = String.format(deactivateStaff, accountId)
 
         try {
+            log.info("Call backend service to deactivate account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
 
@@ -341,6 +353,7 @@ class AccountService {
         def url = String.format(activateStaff, accountId)
 
         try {
+            log.info("Call backend service to activate account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
 

@@ -36,6 +36,7 @@ class PatientService {
         def url = String.format(addPatientsUrl, request.session.clientId)
 
         try {
+            log.info("Call backend service to add patient with clientId and patient info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("patientId", patientId)
                     .field("clientId", request.session.clientId)
@@ -85,6 +86,7 @@ class PatientService {
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         try {
+            log.info("Call backend service to get patients with max, offset and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", length)
                     .queryString("offset", start)

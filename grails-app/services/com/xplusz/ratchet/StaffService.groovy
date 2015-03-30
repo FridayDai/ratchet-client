@@ -24,6 +24,7 @@ class StaffService {
         def name = params?.name
 
         try {
+            log.info("Call backend service to get staffs with max, offset, clientId, type and name, token: ${request.session.token}.")
             def url = grailsApplication.config.ratchetv2.server.url.staffs
             def resp = Unirest.get(url)
                     .queryString("max", max)

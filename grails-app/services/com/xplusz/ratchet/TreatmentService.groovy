@@ -27,6 +27,7 @@ class TreatmentService {
         def url = String.format(getTreatmentsUrl, request.session.clientId)
 
         try {
+            log.info("Call backend service to get treatments with max, offset and treatmetnTitle, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", max)
                     .queryString("offset", offset)
@@ -55,6 +56,7 @@ class TreatmentService {
         def url = String.format(assignTreatmentToExistPatientUrl, params?.clientId, params?.patientId)
 
         try {
+            log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("treatmentId", params?.treatmentId)
                     .field("surgeonId", params?.staffIds)
@@ -84,6 +86,7 @@ class TreatmentService {
         def url = String.format(getTreatmentInfoUrl, params?.clientId, params?.treatmentId)
 
         try {
+            log.info("Call backend service to get treatment info, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .asString()
 
@@ -107,6 +110,7 @@ class TreatmentService {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
         try {
+            log.info("Call backend service to get care team with type and medicalRecordId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("type", grailsApplication.config.ratchetv2.server.careTeamType)
                     .queryString("medicalRecordId", medicalRecordId)
@@ -131,6 +135,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
         try {
+            log.info("Call backend service to get care giver with type and medicalRecordId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
                     .queryString("medicalRecordId", medicalRecordId)
@@ -157,6 +162,7 @@ class TreatmentService {
 
         String deleteCareTeamUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
         try {
+            log.info("Call backend service to delete care team, token: ${request.session.token}.")
             def url = String.format(deleteCareTeamUrl, params?.medicalRecordId, params?.careTeamId)
 
             def resp = Unirest.delete(url)
@@ -182,6 +188,7 @@ class TreatmentService {
         def url = String.format(deleteCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
 
         try {
+            log.info("Call backend service to delete care giver, token: ${request.session.token}.")
             def resp = Unirest.delete(url)
                     .asString()
 
@@ -204,6 +211,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
         try {
+            log.info("Call backend service to add care team with medicalRecordId, type and staffId, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("medicalRecordId", params?.medicalRecordId)
                     .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
@@ -229,6 +237,7 @@ class TreatmentService {
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
 
         try {
+            log.info("Call backend service to add care giver with medicalRecordId and emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("medicalRecordId", params?.medicalRecordId)
                     .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
@@ -259,6 +268,7 @@ class TreatmentService {
         def url = String.format(updateSurgeryTimeUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
 
         try {
+            log.info("Call backend service to update surgery time, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("surgeryTime", params?.surgeryTime)
                     .asString()
@@ -283,6 +293,7 @@ class TreatmentService {
         def url = String.format(archivedUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
 
         try {
+            log.info("Call backend service to archive medical record, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .asString()
 
@@ -307,6 +318,7 @@ class TreatmentService {
         def url = String.format(updateCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
 
         try {
+            log.info("Call backend service to update care giver with emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("email", params?.email)
                     .field("firstName", params?.firstName)
@@ -335,6 +347,7 @@ class TreatmentService {
         def url = String.format(updateCareTeamSurgeonUrl, params?.medicalRecordId, params?.staffId)
 
         try {
+            log.info("Call backend service to update care team surgeon, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .asString()
             def result = JSON.parse(resp.body)

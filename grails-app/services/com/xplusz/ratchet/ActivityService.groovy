@@ -29,6 +29,7 @@ class ActivityService {
         def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
 
         try {
+            log.info("Call backend service to get activity with max and offset, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", max)
                     .queryString("offset", offset)
@@ -67,6 +68,7 @@ class ActivityService {
         def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
 
         try {
+            log.info("Call backend service to get activities with max, offset and senderId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
                     .queryString("max", length)
                     .queryString("offset", start)

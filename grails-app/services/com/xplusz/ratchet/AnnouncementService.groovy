@@ -12,6 +12,7 @@ class AnnouncementService {
 	def checkAnnouncement() {
 		String announcementsUrl = grailsApplication.config.ratchetv2.server.url.announcements
 
+		log.info("Call backend service to get announcement")
 		def resp = Unirest.get(announcementsUrl)
 				.queryString("latest", true)
 				.asString()
