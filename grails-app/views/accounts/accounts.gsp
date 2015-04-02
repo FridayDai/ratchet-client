@@ -34,16 +34,20 @@
                     <th>Email Address</th>
                     <th>Last Update</th>
                     <th></th>
+                    <th>isDoctor</th>
                 </tr>
                 </thead>
                 <tbody>
                 <g:each var="account" in="${accountList.data}" status="i">
                     <tr data-is-dom-data="true">
                         <td>${account.id}</td>
-                        <td>${account.firstName} ${account.lastName}</td>
+                        <td>
+                            ${account.firstName} ${account.lastName}
+                        </td>
                         <td>${account.email}</td>
                         <td>${account.lastUpdateDate}</td>
                         <td>${account.id}</td>
+                        <td>${account.doctor}</td>
                     </tr>
                 </g:each>
                 </tbody>

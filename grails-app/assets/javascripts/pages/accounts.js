@@ -77,7 +77,7 @@
                 data: data
             }),
             "columnDefs": [{
-                "targets": [0, 4],
+                "targets": [0, 5],
                 "orderable": false
             },
                 {
@@ -91,7 +91,22 @@
                 {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        var fullName,
+                            dataName;
+
+                        if (full[5] === "true") {
+                            dataName = ("<img src='/assets/isDoctor.png'/>" + " " + data);
+                        } else {
+                            dataName = "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + data;
+                        }
+
+                        if (full.doctor === true) {
+                            fullName = "<img src='/assets/isDoctor.png'/>" + " " + full.firstName + " " + full.lastName;
+                        } else {
+                            fullName = "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + full.firstName + " " + full.lastName;
+                        }
+                        var name = data === undefined ? fullName : dataName;
+
                         return name;
                     },
                     width: "18%"
@@ -121,7 +136,16 @@
                         return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
                     },
                     width: "7%"
-                }]
+                },
+                {
+                    "targets": 5,
+                    "visible": false,
+                    "render": function (data, type, full) {
+                        var isDoctor = data === undefined ? full.doctor : data;
+                        return isDoctor;
+                    }
+                }
+            ]
         };
 
         if (accountTable) {
@@ -341,7 +365,7 @@
             //}).prop('selected', true);
 
             $("#accountType").val(accountRole);
-            $("#accountType").data("id",typeId);
+            $("#accountType").data("id", typeId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $(".update-account-form"),

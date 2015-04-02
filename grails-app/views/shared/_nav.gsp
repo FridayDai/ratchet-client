@@ -9,7 +9,8 @@
                 <li>Welcome!</li>
                 <li><g:link class="" controller="profile"
                             action="getProfile"
-                            params="[accountId: request.session.accountId]">${request.session.firstName}  ${request.session.lastName}</g:link></li>
+                            params="[accountId: request.session.accountId]"><g:if test="${request.session.isDoctor == true}">Dr.${request.session.firstName}  ${request.session.lastName}</g:if><g:else>${request.session.firstName}  ${request.session.lastName}</g:else>
+                </g:link></li>
             </ul>
         </li>
         %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
@@ -47,12 +48,14 @@
 
     <div class="form-group">
         <label class="lbl-group">TITLE<span>*</span></label>
-        <input id="assist-title" name="title" type="text" class="input-group title" placeholder="Please assist me on this" required/>
+        <input id="assist-title" name="title" type="text" class="input-group title"
+               placeholder="Please assist me on this" required/>
     </div>
-    
+
     <div class="form-group">
         <label class="lbl-group">DESCRIPTION<span>*</span></label>
-        <textarea id="assist-desc" name="description" type="text" class="input-group description" placeholder="Description here" required></textarea>
+        <textarea id="assist-desc" name="description" type="text" class="input-group description"
+                  placeholder="Description here" required></textarea>
     </div>
 
     <div class="form-group inline">

@@ -72,6 +72,8 @@ class AuthenticationService {
             request.session.email = email
             request.session.patientManagement = result.patientManagement
             request.session.accountManagement = result.accountManagement
+            request.session.isDoctor = result.doctor
+
             def data = [
                     authenticated: true,
             ]
