@@ -1,4 +1,4 @@
-<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.xplusz.ratchet.StatusCodeConstants " %>
+<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.ratchethealth.client.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 

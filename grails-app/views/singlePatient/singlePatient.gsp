@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
 <g:set var="scriptPath" value="singlePatientBundle"/>
 <g:set var="cssPath" value="treatment"/>

@@ -1,4 +1,4 @@
-<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
 <div <g:if test="${archived == 'true'}">class="content archived"</g:if> <g:else>class="content"</g:else>>
     <div class="care-team-content">

@@ -1,4 +1,4 @@
-<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <!DOCTYPE html>
 
 <g:set var="scriptPath" value="accountsBundle"/>
