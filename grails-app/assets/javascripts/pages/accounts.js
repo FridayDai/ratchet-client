@@ -481,11 +481,11 @@
      */
     function _validSetPassword() {
         $("#johnRat").click(function () {
-            $(".create-password-form").valid();
-
             var password = $("#password").val();
             var confirmPassword = $("#confirmPassword").val();
-            if (password !== confirmPassword) {
+            $(".error-area").text('');
+
+            if ($(".create-password-form").valid() && password !== confirmPassword) {
                 $(".error-area").text(RC.constants.confirmPassword);
                 return false;
             }
