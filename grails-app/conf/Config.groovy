@@ -194,7 +194,7 @@ grails.cache.config = {
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://ratchetv2server-develop.elasticbeanstalk.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"

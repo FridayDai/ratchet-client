@@ -35,6 +35,7 @@
     function _validLogin() {
 
         $("#btnLogin").click(function () {
+            $("#error-login").css("display", "none");
             var storedEmail = $('.email').val();
             $(".login-form").valid();
             localStorage.setItem('storedEmail', storedEmail);
