@@ -26,6 +26,7 @@
         editSurgeonTitle: "EDIT SURGEON",
         addGroupTitle: "NEW GROUP",
         editGroupTitle: "EDIT GROUP",
+        editSurgeonTitle: "EDIT GROUP AND PROVIDER",
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",

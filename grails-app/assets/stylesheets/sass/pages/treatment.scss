@@ -98,8 +98,17 @@
     margin: 16px 20px;
 }
 
-.treatment-time-form {
+.emergency-contact-info {
+    margin-top: 40px;
+}
+
+.treatment-time-form,
+.edit-surgeon {
     text-align: center;
+
+    .form-group {
+        width: 70%;
+    }
 }
 
 .surgery {
@@ -118,6 +127,7 @@
 }
 
 .team-permission-confirm {
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 15px;
     color: $base-font-grey;

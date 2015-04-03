@@ -115,7 +115,7 @@
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"
                    required/>
         </div>
-
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
 
     <g:form class="form treatment-form ui-hidden" id="treatment-form" name="treatment-form">
@@ -133,11 +133,11 @@
                    placeholder="" disabled>
         </div>
 
-        <div class="form-group inline">
-            <label class="lbl-group">SURGEON<span>*</span></label>
+        <div class="form-group">
+            <label class="lbl-group">PROVIDER<span>*</span></label>
             <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""/>
         </div>
-
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
         <div class="emergency-contact-info">
             <h4>EMERGENCY CONTACT</h4>
 
@@ -172,7 +172,7 @@
                 <span>Patient has given permission to release his/her health information to emergency contact.</span>
             </div>
         </div>
-
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
 
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">

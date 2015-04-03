@@ -37,7 +37,7 @@ class StatusCodeConstants {
     public static final String[] ACCOUNT_STATUS = ["UNINVITED", "INVITED", "ACTIVE", "INACTIVE"]
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
-            ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"]
+            ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"]
     public static final String ACCOUNT_PATIENTS_M = "Patient Management"
     public static final String ACCOUNT_ACCOUNTS_M = "Account Management"
 }
