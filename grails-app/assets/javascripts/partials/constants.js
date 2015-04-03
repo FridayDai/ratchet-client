@@ -24,6 +24,8 @@
         loadingContent: "This is loading content",
         changePasswordTitle: "CHANGE PASSWORD",
         editSurgeonTitle: "EDIT SURGEON",
+        addGroupTitle: "NEW GROUP",
+        editGroupTitle: "EDIT GROUP",
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",
@@ -40,6 +42,7 @@
         deleteGiverWarningMsg: "Are you sure you want to remove the current emergency contact?",
         archivedTreatmentWarningMsg: "ARCHIVE TREATMENT",
         archivedMessage: "Warning: This action cannot be undone.",
+        deleteGroupWaringTitle:"DELETE GROUP",
         warningTip: "Click “PROCEED” to go to remove the agent.",
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",

@@ -27,6 +27,7 @@
                 <div class="title">Patients</div>
             </g:link>
         </li>
+
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
@@ -35,6 +36,13 @@
                 </g:link>
             </li>
         </g:if>
+
+        <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
+            <g:else>class="nav-li"</g:else>>s
+            <g:link controller="groups" action="index" class="icon-account">
+                <div class="title">Groups</div>
+            </g:link>
+        </li>
 
         <li class="btn-li">
             <a href="#" id="assist-me" class="btn assist-me">

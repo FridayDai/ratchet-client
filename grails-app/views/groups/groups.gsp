@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<g:set var="scriptPath" value="groupsBundle"/>
+<g:set var="cssPath" value="groups"/>
+<g:applyLayout name="main">
+  <html>
+  <head>
+    <title>Welcome to Ratchet Health</title>
+  </head>
+
+  <body>
+  <div>
+    <div class="inner-header">
+      <label class="title">GROUPS</label>
+      <a href="#" id="add-group" class="btn add-group"><span>New Group</span></a>
+    </div>
+
+    <div class="inner-search">
+      <div class="search-content clear">
+        <div class="filler-content right-search">
+          <input type="text" placeholder="Name" class="search-input" id="search-input">
+          <span class="search" id="search-btn"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-group">
+      <table id="groupsTable" class="display div-hidden" data-total="${groupList?.recordsTotal}"
+             data-pagesize="${pagesize}" data-filtered="${groupList?.recordsFiltered} ">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Group Name</th>
+          <th>Last Update</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each var="group" in="${groupList.data}" status="i">
+          <tr data-is-dom-data="true">
+            <td>${group.emid}</td>
+            <td>${group.name}</td>
+            <td>${group.lastUpdate}</td>
+            <td>${group.id}</td>
+          </tr>
+        </g:each>
+        </tbody>
+      </table>
+    </div>
+
+    <g:form class="form ui-hidden" id="group-form" name="group-form">
+
+      <div class="form-group inline">
+        <label class="lbl-group">GROUP NAME<span>*</span></label>
+        <input id="groupName" name="groupName" type="text" class="input-group input-only-one" placeholder="Enter group name" required/>
+      </div>
+
+      <div class="required-field required-padding">
+        *Required field
+      </div>
+
+    </g:form>
+
+  </div>
+  </body>
+  </html>
+</g:applyLayout>
