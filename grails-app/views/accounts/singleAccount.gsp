@@ -82,7 +82,7 @@
                 </tr>
 
                 <tr class="tr-border">
-                    <td class="td-width">Role</td>
+                    <td class="td-width">Provider</td>
                     <td><span class="account-role"
                               id="accountRole" data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                     </td>
@@ -90,7 +90,7 @@
 
 
                 <tr class="tr-border">
-                    <td class="td-width">Group</td>
+                    <td class="td-width">Permission</td>
                     <td><span class="accountManage" id="isAccountManage">
                         <g:if test="${accountInfo.accountManagement}">
                             ${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}
@@ -114,7 +114,7 @@
     </div>
 
 
-    <g:form class="update-account-form ui-hidden" id="updateAccount" name="updateAccount">
+    <g:form class="accounts-form ui-hidden" id="updateAccount" name="updateAccount">
 
         <div class="form-group">
             <input id="doctor" name="doctor" type="checkbox" class="input-group doctor">
@@ -132,27 +132,39 @@
             <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
         </div>
 
-        <div class="form-group inline">
+        <div class="form-group">
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="email" name="email" type="email" class="input-group readonly-email"
                    placeholder="john.smith@email.com"
                    readonly/>
         </div>
 
-        <div class="form-group inline role-select">
-            <label class="lbl-group role">ROLE<span>*</span></label>
-            <input id="accountType" name="accountType" class="input-group" required>
-        </div>
+        %{--<div class="form-group inline role-select">--}%
+            %{--<label class="lbl-group role">ROLE<span>*</span></label>--}%
+            %{--<input id="accountType" name="accountType" class="input-group" required>--}%
+        %{--</div>--}%
 
-        <div class="form-group">
-            <label class="lbl-group">GROUP<span>*</span></label>
+        <div class="form-group inline">
+            <label class="lbl-group">PROVIDER</label>
 
             <div class="group">
-                <label class="account-management">
+                <label class="checkbox">
+                    <input id="accountProvider" name="accountProvider" type="checkbox">Yes
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">PERMISSION</label>
+
+            <div class="group">
+                <label class="checkbox">
                     <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
                 </label>
             </div>
         </div>
+
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
 
     </g:form>
 

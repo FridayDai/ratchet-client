@@ -62,7 +62,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
-                <input id="firstName" name="firstName" type="text" class="input-group first-name"
+                <input id="firstName" name="firstName" type="text" class="input-group"
                        placeholder="John" required/>
             </div>
 
@@ -83,25 +83,26 @@
             %{--</div>--}%
 
             <div class="form-group inline">
-                <label class="lbl-group">PROVIDER<span>*</span></label>
+                <label class="lbl-group">PROVIDER</label>
 
                 <div class="group">
-                    <label class="account-management">
+                    <label class="checkbox">
                         <input id="provider" name="provider" type="checkbox">Yes
                     </label>
                 </div>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">PERMISSION<span>*</span></label>
+                <label class="lbl-group">PERMISSION</label>
 
                 <div class="group">
-                    <label class="account-management">
+                    <label class="checkbox">
                         <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
                     </label>
                 </div>
             </div>
 
+            <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>
 
     </div>

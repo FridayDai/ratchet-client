@@ -9,7 +9,7 @@
         <input type="hidden" id="hidden-active" value="${archived}"/>
 
         <div class="inner-header">
-            <h4 class="surgeon">SURGEON</h4>
+            <h4 class="surgeon">GROUP AND PROVIDER</h4>
         </div>
 
         <div class="inner-body top-body" id="careTeamBody">
@@ -82,7 +82,7 @@
 
 <g:form class="edit-surgeon ui-hidden" id="editSurgeon">
     <div class="form-group inline">
-        <label class="lbl-group">SURGEON</label>
+        <label class="lbl-group">PROVIDER<span>*</span></label>
         <input id="selectStaff" name="selectStaff" type="text" class="clear"
                placeholder="Surgeon"
                required/>
@@ -91,30 +91,30 @@
 %{--<input type="checkbox" name="primaryCareTeam" id="primaryCareTeam">--}%
 %{--<label for="primaryCareTeam">Primary CareTeam</label>--}%
 %{--</div>--}%
-
+    <label class="form-group required pull-right"><span>*</span>Required field</label>
 </g:form>
 
 
 <g:form class="inviteGiverForm ui-hidden" id="invite-giver-form">
 
     <div class="form-group inline">
-        <label class="lbl-group">FIRST NAME*</label>
+        <label class="lbl-group">FIRST NAME<span>*</span></label>
         <input id="giver-firstName" name="firstName" type="text" class="input-group" placeholder="First Name"
                required/>
     </div>
 
     <div class="form-group inline">
-        <label class="lbl-group">LAST NAME*</label>
+        <label class="lbl-group">LAST NAME<span>*</span></label>
         <input id="giver-lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
     </div>
 
     <div class="form-group inline">
-        <label class="lbl-group">RELATIONSHIP*</label>
+        <label class="lbl-group">RELATIONSHIP<span>*</span></label>
         <input id="relationships" name="relationships" class="select-body input-group" required>
     </div>
 
     <div class="form-group inline">
-        <label class="lbl-group">EMAIL ADDRESS*</label>
+        <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
         <input id="giver-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
     </div>
 
@@ -123,7 +123,7 @@
         <input type="checkbox" id="permissionConfirm" name="permissionConfirm" required/>*
         <span>Patient has given permission to release his/her health information to emergency contact.</span>
     </div>
-
+    <label class="form-group required pull-right"><span>*</span>Required field</label>
 </g:form>
 
 
