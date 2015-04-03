@@ -113,8 +113,29 @@ ratchet-v2-provider-desktop
         grails run-app
     ```
 
+## CDN
+1. The variable CDN_ENABLE should be set as 'true' in env configuration.
+2. The variable S3_ASSET_BUCKET should be set in env configuration, also with variables: AWS_ACCESS_KEY, AWS_SECRET_KEY.
+3. ```grails asset-cdn-push``` should be run before war generation.
+4. Set CORS configuration in s3 asset bucket as following rules:
+
+
+    ```
+        <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+            <CORSRule>
+                <AllowedOrigin>*</AllowedOrigin>
+                <AllowedMethod>GET</AllowedMethod>
+            </CORSRule>
+        </CORSConfiguration>
+    ```
+
+
 ## Configuration variables
 
 - ELK_TCP_ADDR
 - SERVER_URL
+- CDN_ENABLE
+- S3_ASSET_BUCKET
+- AWS_ACCESS_KEY
+- AWS_SECRET_KEY
 

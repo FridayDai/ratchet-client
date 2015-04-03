@@ -387,7 +387,7 @@
     function _initPhoneInput() {
         $("#phoneNumber").intlTelInput({
             onlyCountries: ["us"],
-            utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            utilsScript: false
         });
     }
 
