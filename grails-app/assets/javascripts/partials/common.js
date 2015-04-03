@@ -107,14 +107,12 @@
         function _getAssistData() {
             var title = $('#assist-title').val();
             var desc = $('#assist-desc').val();
-            var name = $('#assist-name').html();
             var browser = window.navigator.userAgent;
             var url = window.location.href;
 
             return {
                 title: title,
                 desc: desc,
-                name: name,
                 browser: browser,
                 url: url
             };
