@@ -24,7 +24,8 @@
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
                 showSinglePatient: "/patients/{0}",
-                getSinglePatient: "/patient/{0}"
+                getSinglePatient: "/patient/{0}",
+                getGroups:"/getGroups"
             }
         },
         provideTable;
@@ -697,7 +698,7 @@
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getTreatments,
+                    url: opts.urls.getGroups,
                     type: "POST",
                     data: {
                         treatmentTitle: request.term

@@ -51,28 +51,13 @@
                     </td>
                 </tr>
 
-                %{--<tr class="tr-border">--}%
-                %{--<td class="td-width">Role</td>--}%
-                %{--<td><span class="account-role"--}%
-                %{--id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>--}%
-                %{--</td>--}%
-                %{--</tr>--}%
-
                 <tr class="tr-border">
                     <td class="td-width">Provider</td>
                     <td><span class="account-role"
-                              id="accountRole">Yes</span>
+                              id="accountRole"
+                              data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                     </td>
                 </tr>
-
-                %{--<tr class="tr-border">--}%
-                %{--<td class="td-width">Group</td>--}%
-                %{--<td><span class="accountManage" id="isAccountManage">--}%
-                %{--<g:if test="${accountInfo.accountManagement}">--}%
-                %{--${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}--}%
-                %{--</g:if>--}%
-                %{--</span></td>--}%
-                %{--</tr>--}%
 
                 <tr class="tr-border">
                     <td class="td-width">Permission</td>

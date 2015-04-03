@@ -133,7 +133,7 @@
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text" class="input-group group clear"
+                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
                        placeholder="" required/>
             </div>
 
