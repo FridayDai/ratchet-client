@@ -13,34 +13,44 @@
         </div>
 
         <div class="inner-body top-body" id="careTeamBody">
-            <g:each in="${surgeons}" var="surgeon">
-                <div class="left-content inline">
-                    <div class="surgeon-id">
-                        <span>ID:</span>
-                        <span id="surgeonId">${surgeon.id}</span>
+            <div class="group-content">
+                <h4>GROUP</h4>
+
+                <div id="group-name">Rainier Orthopedic Institute</div>
+            </div>
+
+            <div class="provider-content">
+                <h4>PROVIDER</h4>
+                <g:each in="${surgeons}" var="surgeon">
+                    <div class="left-content">
+                        <div class="surgeon-id">
+                            <span>ID:</span>
+                            <span id="surgeonId">${surgeon.id}</span>
+                        </div>
+
                     </div>
 
-                    <div class="surgeon-name">
+                    <div class="surgeon-name inline">
                         <span id="surgeonFirstName">${surgeon.firstName}</span>
                         <span id="surgeonLastName">${surgeon.lastName}</span>
                     </div>
-                </div>
 
+                    <div class="surgeon-email inline" id="surgeonEmail">
+                        ${surgeon.email}
+                    </div>
+                </g:each>
+            </div>
 
-                <div class="surgeon-email inline" id="surgeonEmail">
-                    ${surgeon.email}
-                </div>
+            <button
+                <g:if test="${archived == 'true'}">
+                    class="btn btn-edit-surgeon disabled" disabled="disabled"
+                </g:if>
+                <g:else>
+                    class="btn btn-edit-surgeon"
+                </g:else>
+                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
+            </button>
 
-                <button
-                    <g:if test="${archived == 'true'}">
-                        class="btn btn-edit-surgeon disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="btn btn-edit-surgeon"
-                    </g:else>
-                        id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
-                </button>
-            </g:each>
         </div>
     </div>
 
@@ -48,7 +58,10 @@
         <div class="inner-header">
             <img src="${assetPath(src: 'emergency_contact.png')}">
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
-            <button <g:if test="${archived == 'true'}"> class="btn btn-invite btn-position disabled" disabled="disabled"</g:if> <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver" data-medical-record-id="${medicalRecordId}"
+            <button <g:if
+                            test="${archived == 'true'}">class="btn btn-invite btn-position disabled" disabled="disabled"</g:if>
+                    <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver"
+                    data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
                 <span>Invite</span>
             </button>
@@ -81,11 +94,16 @@
 
 
 <g:form class="edit-surgeon ui-hidden" id="editSurgeon">
-    <div class="form-group inline">
+    <div class="form-group">
+        <label class="lbl-group">GROUP<span>*</span></label>
+        <input id="groupSelect" name="groupSelect" type="text" class="team-group clear"
+               placeholder="" required/>
+    </div>
+
+    <div class="form-group team-provider">
         <label class="lbl-group">PROVIDER<span>*</span></label>
-        <input id="selectStaff" name="selectStaff" type="text" class="clear"
-               placeholder="Surgeon"
-               required/>
+        <input id="selectStaff" name="selectStaff" type="text" class="team-group clear"
+               placeholder="Surgeon" required/>
     </div>
 %{--<div class="form-group">--}%
 %{--<input type="checkbox" name="primaryCareTeam" id="primaryCareTeam">--}%
