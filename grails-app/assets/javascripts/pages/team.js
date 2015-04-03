@@ -183,7 +183,9 @@
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
+            var groupName = element.find("#group-name").text();
             element.find("#selectStaff").val(firstName + ' ' + lastName);
+            element.find("#groupSelect").val(groupName);
             var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
@@ -205,6 +207,7 @@
             }));
 
             _initStaffSelect(form, existSurgeonId);
+            _initSelectGroup(form);
         });
     }
 
@@ -549,6 +552,49 @@
 
         });
 
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup(form) {
+        $(form).find("#groupSelect").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getStaffs,
+                    type: "POST",
+                    data: {
+                        name: request.term,
+                        type: 8
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.firstName + " " + item.lastName,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+            appendTo: ".container"
+        });
     }
 
     /**

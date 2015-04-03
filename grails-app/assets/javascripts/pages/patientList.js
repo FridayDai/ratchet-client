@@ -318,6 +318,7 @@
             _initPlaceholder();
             _initRelationship();
             _checkEmergencyContact();
+            _initSelectGroup();
             //$("#div-surgery-time").css("display", "none");
         });
     }
@@ -682,6 +683,62 @@
                     });
                 }
             });
+        });
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup() {
+        $("#selectGroup").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getTreatments,
+                    type: "POST",
+                    data: {
+                        treatmentTitle: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.title + ' ' + item.tmpTitle,
+                                    value: item.id,
+                                    surgeryTime: item.surgeryTimeRequired,
+                                    timeStamp: item.sendTimeOffset
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $(this).data("surgeryTime", ui.item.surgeryTime);
+                $(this).data("timeStamp", ui.item.timeStamp);
+            },
+
+            appendTo: ".container"
         });
     }
 

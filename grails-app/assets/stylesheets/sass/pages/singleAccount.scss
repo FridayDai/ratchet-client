@@ -9,6 +9,11 @@
     padding: 20px;
     color: $base-color-dark-grey;
 
+    .account-table {
+        width: 100%;
+    }
+
+
     .tr-border {
         border-bottom: 1px solid $base-light-grey-color;
 
@@ -47,12 +52,17 @@
         .activate-action {
             padding: 6px 12px;
         }
+
+        .groups {
+            white-space: pre-line;
+            white-space: pre-line;
+        }
     }
 
     .bg-color {
         padding: 5px;
-        color: $base-color-white;
-        background-color: $base-grey-dark-color;
+        color: $base-color-warn;
+        background-color: $base-color-grey-white;
     }
 
     .email-logo {
@@ -222,14 +232,13 @@
 
 .ui-dialog {
     .ui-dialog-titlebar {
-//        padding-bottom: 0;
+        //        padding-bottom: 0;
         padding: 15px;
 
-        .ui-dialog-title{
+        .ui-dialog-title {
             margin-left: 15px;
         }
     }
-
 
     .ui-dialog-content {
         padding: 0;
@@ -252,6 +261,6 @@
     }
 }
 
-.password-group{
+.password-group {
     padding-top: 0;
 }

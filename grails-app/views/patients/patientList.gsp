@@ -131,6 +131,12 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="lbl-group">GROUP<span>*</span></label>
+                <input id="selectGroup" name="selectGroup" type="text" class="input-group group clear"
+                       placeholder="" required/>
+            </div>
+
             <h4 class="treatment-info-title">TREATMENT INFO</h4>
 
             <div class="form-group inline">

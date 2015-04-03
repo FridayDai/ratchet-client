@@ -41,7 +41,7 @@
         <div class="account-info">
 
             <table class="account-table">
-                <tr>
+                <tr class="tr-border">
                     <td class="bg-color" colspan="2">ID: ${accountInfo.id}</td>
                 </tr>
 
@@ -81,13 +81,29 @@
                     </td>
                 </tr>
 
+                %{--<tr class="tr-border">--}%
+                %{--<td class="td-width">Role</td>--}%
+                %{--<td><span class="account-role"--}%
+                %{--id="accountRole" data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>--}%
+                %{--</td>--}%
+                %{--</tr>--}%
+
+
+                %{--<tr class="tr-border">--}%
+                %{--<td class="td-width">Group</td>--}%
+                %{--<td><span class="accountManage" id="isAccountManage">--}%
+                %{--<g:if test="${accountInfo.accountManagement}">--}%
+                %{--${StatusCodeConstants.ACCOUNT_ACCOUNTS_M}--}%
+                %{--</g:if>--}%
+                %{--</span></td>--}%
+                %{--</tr>--}%
+
                 <tr class="tr-border">
                     <td class="td-width">Provider</td>
                     <td><span class="account-role"
-                              id="accountRole" data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                              id="accountRole">Yes</span>
                     </td>
                 </tr>
-
 
                 <tr class="tr-border">
                     <td class="td-width">Permission</td>
@@ -98,6 +114,13 @@
                     </span></td>
                 </tr>
 
+
+                <tr class="tr-border">
+                    <td class="td-width">Groups</td>
+                    <td><span class="groups"
+                              id="Groups">Proliance Hand, Wrist, and Elbow Physicians - Bellevue
+                    </span></td>
+                </tr>
 
                 <tr>
                     <td class="bg-color" colspan="2">
