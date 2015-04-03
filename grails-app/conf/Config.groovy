@@ -165,6 +165,43 @@ grails.config.locations = [
         overrideLocation
 ]
 
+// asset-pipeline
+grails.assets.excludes = [
+        'bower_components/**',
+        '.sass-cache/**',
+        'sass/**',
+        'config.rb',
+        'share/*.js',
+        'libs/**',
+        'pages/*.js',
+        'partials/*.js'
+]
+
+grails.assets.plugin."resources".excludes =["**"]
+grails.assets.plugin."cookie-session".excludes =["**"]
+
+
+def appName = grails.util.Metadata.current.'app.name'
+def appVersion = grails.util.Metadata.current.'app.version'
+
+grails {
+    assets {
+        cdn {
+            provider = 's3' // Karman provider
+            directory = System.getProperty("S3_ASSET_BUCKET") ?: 'com-xplusz-ratchet-assets-dev'
+            accessKey = System.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
+            secretKey = System.getProperty("AWS_SECRET_KEY") ?: "h88C9qlpgkmVChb/s7nLaFGzcbRh6qlUOxyhEEtf"
+            storagePath = "assets/${appName}-${appVersion}/" // This is just a prefix example
+            expires = 365
+            gzip = true
+        }
+    }
+}
+
+if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
+    grails.assets.url = "https://s3.amazonaws.com/${grails.assets.cdn.directory}/assets/${appName}-${appVersion}/"
+}
+
 
 grails.cache.enabled = true
 
