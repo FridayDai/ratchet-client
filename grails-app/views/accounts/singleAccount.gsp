@@ -41,7 +41,7 @@
         <div class="account-info">
 
             <table class="account-table">
-                <tr>
+                <tr class="tr-border">
                     <td class="bg-color" colspan="2">ID: ${accountInfo.id}</td>
                 </tr>
 
@@ -84,10 +84,10 @@
                 <tr class="tr-border">
                     <td class="td-width">Provider</td>
                     <td><span class="account-role"
-                              id="accountRole" data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                              id="accountRole"
+                              data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                     </td>
                 </tr>
-
 
                 <tr class="tr-border">
                     <td class="td-width">Permission</td>
@@ -98,6 +98,13 @@
                     </span></td>
                 </tr>
 
+
+                <tr class="tr-border">
+                    <td class="td-width">Groups</td>
+                    <td><span class="groups"
+                              id="Groups">Proliance Hand, Wrist, and Elbow Physicians - Bellevue
+                    </span></td>
+                </tr>
 
                 <tr>
                     <td class="bg-color" colspan="2">
@@ -139,10 +146,10 @@
                    readonly/>
         </div>
 
-        %{--<div class="form-group inline role-select">--}%
-            %{--<label class="lbl-group role">ROLE<span>*</span></label>--}%
-            %{--<input id="accountType" name="accountType" class="input-group" required>--}%
-        %{--</div>--}%
+    %{--<div class="form-group inline role-select">--}%
+    %{--<label class="lbl-group role">ROLE<span>*</span></label>--}%
+    %{--<input id="accountType" name="accountType" class="input-group" required>--}%
+    %{--</div>--}%
 
         <div class="form-group inline">
             <label class="lbl-group">PROVIDER</label>
@@ -162,6 +169,12 @@
                     <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
                 </label>
             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="lbl-group">GROUP<span>*</span></label>
+            <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                   placeholder="" required/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

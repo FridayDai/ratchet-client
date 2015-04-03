@@ -77,10 +77,10 @@
                        required/>
             </div>
 
-            %{--<div class="form-group inline">--}%
-                %{--<label class="lbl-group">ROLE<span>*</span></label>--}%
-                %{--<input id="type" name="type" class="input-group" required>--}%
-            %{--</div>--}%
+        %{--<div class="form-group inline">--}%
+        %{--<label class="lbl-group">ROLE<span>*</span></label>--}%
+        %{--<input id="type" name="type" class="input-group" required>--}%
+        %{--</div>--}%
 
             <div class="form-group inline">
                 <label class="lbl-group">PROVIDER</label>
@@ -100,6 +100,12 @@
                         <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
                     </label>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label class="lbl-group">GROUP<span>*</span></label>
+                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                       placeholder="" required/>
             </div>
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>

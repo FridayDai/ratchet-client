@@ -55,6 +55,14 @@
         }
     }
 
+    .patient-group {
+        width: 520px;
+    }
+
+    .team-group {
+        width: 300px;
+    }
+
     .ui-combobox {
 
         .input-group {
@@ -138,6 +146,10 @@
         z-index: 99999;
         max-width: 254px;
     }
+}
+
+.team-provider {
+    margin-top: 30px;
 }
 
 

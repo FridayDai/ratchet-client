@@ -35,9 +35,8 @@
 
 
         <div class="account-info">
-
             <table class="account-table">
-                <tr>
+                <tr class="tr-border">
                     <td class="bg-color" colspan="2">ID: ${accountInfo.id}</td>
                 </tr>
 
@@ -55,7 +54,8 @@
                 <tr class="tr-border">
                     <td class="td-width">Provider</td>
                     <td><span class="account-role"
-                              id="accountRole">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
+                              id="accountRole"
+                              data-id="${accountInfo.type}">${StatusCodeConstants.ACCOUNT_ROLE[accountInfo.type - 1]}</span>
                     </td>
                 </tr>
 
@@ -69,12 +69,19 @@
                 </tr>
 
 
+                <tr class="tr-border">
+                    <td class="td-width">Groups</td>
+                    <td><span class="groups"
+                              id="Groups">Proliance Hand, Wrist, and Elbow Physicians - Bellevue
+                    </span></td>
+                </tr>
+
                 <tr>
-                    <td class="bg-color" colspan="2">
+                    <td class="bg-color" colspan="4">
                         Last Login:
                         <g:formatDate date="${new java.util.Date(accountInfo.lastLoginDate)}"
-                                                 timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                                 format="MMM d, yyyy h:mm a"/>
+                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                      format="MMM d, yyyy h:mm a"/>
                     </td>
                 </tr>
             </table>
