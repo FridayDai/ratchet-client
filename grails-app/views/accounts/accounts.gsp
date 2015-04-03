@@ -77,13 +77,23 @@
                        required/>
             </div>
 
+            %{--<div class="form-group inline">--}%
+                %{--<label class="lbl-group">ROLE<span>*</span></label>--}%
+                %{--<input id="type" name="type" class="input-group" required>--}%
+            %{--</div>--}%
+
             <div class="form-group inline">
-                <label class="lbl-group">ROLE<span>*</span></label>
-                <input id="type" name="type" class="input-group" required>
+                <label class="lbl-group">PROVIDER<span>*</span></label>
+
+                <div class="group">
+                    <label class="account-management">
+                        <input id="provider" name="provider" type="checkbox">Yes
+                    </label>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="lbl-group">GROUP<span>*</span></label>
+            <div class="form-group inline">
+                <label class="lbl-group">PERMISSION<span>*</span></label>
 
                 <div class="group">
                     <label class="account-management">
