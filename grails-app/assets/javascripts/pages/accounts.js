@@ -359,9 +359,9 @@
                 $("#accountManagement").prop("checked", true);
             }
 
-            if(typeId === 9) {
+            if (accountRole === "Yes") {
                 $("#accountProvider").prop("checked", true);
-            }else {
+            } else {
                 $("#accountProvider").prop("checked", false);
             }
             $("#firstName").val(firstName);
