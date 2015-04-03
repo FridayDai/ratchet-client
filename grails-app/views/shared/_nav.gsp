@@ -9,7 +9,7 @@
                 <li>Welcome!</li>
                 <li><g:link class="" controller="profile"
                             action="getProfile"
-                            params="[accountId: request.session.accountId]"><g:if test="${request.session.isDoctor == true}">Dr.${request.session.firstName}  ${request.session.lastName}</g:if><g:else>${request.session.firstName}  ${request.session.lastName}</g:else>
+                            params="[accountId: request.session.accountId]"><g:if test="${request.session.isDoctor == true}">Dr.${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else>
                 </g:link></li>
             </ul>
         </li>

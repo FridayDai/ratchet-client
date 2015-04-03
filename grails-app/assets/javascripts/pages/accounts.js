@@ -97,13 +97,13 @@
                         if (full[5] === "true") {
                             dataName = ("<img src='/assets/isDoctor.png'/>" + " " + data);
                         } else {
-                            dataName = "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + data;
+                            dataName = data;
                         }
 
                         if (full.doctor === true) {
                             fullName = "<img src='/assets/isDoctor.png'/>" + " " + full.firstName + " " + full.lastName;
                         } else {
-                            fullName = "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + "&nbsp;" + full.firstName + " " + full.lastName;
+                            fullName = full.firstName + " " + full.lastName;
                         }
                         var name = data === undefined ? fullName : dataName;
 
