@@ -46,7 +46,7 @@
                 activateAccount: "/activateAccount/{0}"
             }
         },
-        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
+        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
         staffGroup = ["Patient Management", "Account Management"],
         accountTable;
 
@@ -214,11 +214,12 @@
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var email = $("#email").val();
-        var type = $("#type").data("id");
-        var isAccountManagement, isDoctor;
+        //var type = $("#type").data("id");
+        var isAccountManagement, isDoctor, type;
 
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
+        $("#provider").attr("checked") === "checked" ? type = 9 : type = 10;
 
         var data = {
             firstName: firstName,
@@ -270,42 +271,42 @@
                 }
             }));
 
-            var data = [
-                {label: "Anesthesiologist", id: 1},
-                {label: "Medical Assistant", id: 2},
-                {label: "Management", id: 3},
-                {label: "Nurse", id: 4},
-                {label: "Physical therapists (PTs)", id: 5},
-                {label: "Primary Physician", id: 6},
-                {label: "Scheduler", id: 7},
-                {label: "Surgeon", id: 8}
-            ];
-            $("#type").combobox({
-                source: function (request, response) {
-                    var sources = _.filter(data, function (num) {
-                        return num.label.toLowerCase().indexOf(request.term) > -1;
-                    });
-                    if (!sources.length) {
-                        var result = [
-                            {
-                                label: 'No matches found',
-                                value: ''
-                            }
-                        ];
-                        response(result);
-                    }
-                    else {
-                        response($.map(sources, function (item) {
-
-                            return {
-                                label: item.label,
-                                value: item.id
-                            };
-                        }));
-                    }
-                },
-                appendTo: ".container"
-            });
+            //var data = [
+            //    {label: "Anesthesiologist", id: 1},
+            //    {label: "Medical Assistant", id: 2},
+            //    {label: "Management", id: 3},
+            //    {label: "Nurse", id: 4},
+            //    {label: "Physical therapists (PTs)", id: 5},
+            //    {label: "Primary Physician", id: 6},
+            //    {label: "Scheduler", id: 7},
+            //    {label: "Surgeon", id: 8}
+            //];
+            //$("#type").combobox({
+            //    source: function (request, response) {
+            //        var sources = _.filter(data, function (num) {
+            //            return num.label.toLowerCase().indexOf(request.term) > -1;
+            //        });
+            //        if (!sources.length) {
+            //            var result = [
+            //                {
+            //                    label: 'No matches found',
+            //                    value: ''
+            //                }
+            //            ];
+            //            response(result);
+            //        }
+            //        else {
+            //            response($.map(sources, function (item) {
+            //
+            //                return {
+            //                    label: item.label,
+            //                    value: item.id
+            //                };
+            //            }));
+            //        }
+            //    },
+            //    appendTo: ".container"
+            //});
         });
     }
 
@@ -336,7 +337,7 @@
         $("#edit-account").on("click", function (e) {
             e.preventDefault();
 
-            $(".update-account-form")[0].reset();
+            $("#updateAccount")[0].reset();
             var accountId = $(this).data("accountId");
 
             var parent = $(this).parents();
@@ -353,8 +354,15 @@
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
             }
+
             if (isAccountManage === "Account Management") {
                 $("#accountManagement").prop("checked", true);
+            }
+
+            if(typeId === 9) {
+                $("#accountProvider").prop("checked", true);
+            }else {
+                $("#accountProvider").prop("checked", false);
             }
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
@@ -364,23 +372,23 @@
             //    return $(this).text() === accountRole;
             //}).prop('selected', true);
 
-            $("#accountType").val(accountRole);
-            $("#accountType").data("id", typeId);
+            //$("#accountType").val(accountRole);
+            //$("#accountType").data("id", typeId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
-                element: $(".update-account-form"),
+                element: $("#updateAccount"),
 
                 okCallback: function () {
                     if ($("#updateAccount").valid()) {
                         var firstName = $("#firstName").val();
                         var lastName = $("#lastName").val();
                         var email = $("#email").val();
-                        var accountType = $("#accountType").data("id");
-                        var isAccountManagement, isDoctor;
+                        //var accountType = $("#accountType").data("id");
+                        var isAccountManagement, isDoctor, accountType;
 
                         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
                         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-
+                        $("#accountProvider").attr("checked") === "checked" ? accountType = 9 : accountType = 10;
                         var accountInfo = {
                             accountId: accountId,
                             firstName: firstName,
@@ -398,7 +406,7 @@
                 }
             }));
 
-            _initSelect();
+            //_initSelect();
         });
     }
 

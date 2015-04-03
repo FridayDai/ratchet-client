@@ -433,7 +433,7 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 8
+                        type: 9
                     },
                     success: function (data) {
                         if (!data.length) {

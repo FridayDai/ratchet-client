@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="filler-content">
-                    <label for="selectSurgeon" class="select-tip">SURGEON</label>
+                    <label for="selectSurgeon" class="select-tip">PROVIDER</label>
                     <input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>
                 </div>
 
@@ -136,7 +136,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
                 <input id="selectTreatment" name="selectTreatment" type="text" class="input-group treatment clear"
-                       placeholder="" required/>
+                       placeholder="Select treatment" required/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
@@ -146,11 +146,11 @@
             </div>
 
             <div class="form-group ">
-                <label class="lbl-group">SURGEON<span>*</span></label>
+                <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="" required/>
+                       placeholder="Select provider" required/>
             </div>
-
+            <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>
 
         <g:form class="warn ui-hidden">
