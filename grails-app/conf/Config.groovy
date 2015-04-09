@@ -261,6 +261,13 @@ ratchetv2 {
             deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
             activateStaff = "${ratchetv2.server.url.base}/staff/activate/%s"
 
+            //Group
+            createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"
+            updateGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            showGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
+            getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
+
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
             assignTreatments = "${ratchetv2.server.url.base}/clients/%s/patients/assign/record"

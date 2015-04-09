@@ -34,7 +34,6 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
         "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
         "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
-//        "/getGroups"(controller: "patients",action: "getGroups")
 
         //team
         "/team"(controller: "team", action: "showMedicalCares")
@@ -75,7 +74,7 @@ class UrlMappings {
 
         // groups
         "/groups"(controller: "groups", action: "index")
-        "/getGroups"(controller: "groups", action: "getGroups")
+        "/getStaffGroups"(controller: "groups", action: "getStaffGroups")
         "/createGroup"(controller: "groups", action: "addGroup")
         "/updateGroup"(controller: "groups", action: "updateGroup")
         "/deleteGroup"(controller: "groups", action: "deleteGroup")
