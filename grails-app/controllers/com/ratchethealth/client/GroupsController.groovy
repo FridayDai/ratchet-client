@@ -26,7 +26,7 @@ class GroupsController extends BaseController {
     }
 
     def updateGroup() {
-         def resp = groupService.updateGroup(request, response, params)
+        def resp = groupService.updateGroup(request, response, params)
         def result = [resp: resp]
         render result as JSON
     }

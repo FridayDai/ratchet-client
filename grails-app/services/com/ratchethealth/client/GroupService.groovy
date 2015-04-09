@@ -95,11 +95,10 @@ class GroupService {
                     .field("name", name)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
                 return true
             } else {
+                def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
                 throw new ApiReturnException(resp.status, message)
             }
