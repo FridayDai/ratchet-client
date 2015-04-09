@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
+
 class GroupsController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -10,8 +12,9 @@ class GroupsController extends BaseController {
         render view:'groups', model: [groupList: groupList, pagesize: params.length]
     }
 
-    def getGroups() {
-        def resp = groupService.getGroups(request, response)
+    def getStaffGroups() {
+        def resp = groupService.getStaffGroups(request, response)
+        render resp as JSON
     }
 
     def addGroup() {

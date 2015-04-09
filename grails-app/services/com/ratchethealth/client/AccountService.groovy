@@ -84,6 +84,7 @@ class AccountService {
         def type = params?.type
         def isAccountManagement = params?.isAccountManagement
         def isDoctor = params?.isDoctor
+        def groupId = params?.groupId
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
 
@@ -98,6 +99,7 @@ class AccountService {
                     .field("patientManagement", "true")
                     .field("accountManagement", isAccountManagement)
                     .field("doctor", isDoctor)
+                    .field("groupIds",groupId)
                     .asString()
 
             if (resp.status == 201) {
@@ -155,6 +157,7 @@ class AccountService {
                     .field("type", params?.type)
                     .field("doctor", params?.doctor)
                     .field("accountManagement", params?.accountManagement)
+                    .field("groupIds",params?.groupId)
                     .asString()
 
             if (resp.status == 200) {

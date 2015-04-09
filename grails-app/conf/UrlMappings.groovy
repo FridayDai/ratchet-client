@@ -74,7 +74,7 @@ class UrlMappings {
 
         // groups
         "/groups"(controller: "groups", action: "index")
-        "/getGroups"(controller: "groups", action: "getGroups")
+        "/getStaffGroups"(controller: "groups", action: "getStaffGroups")
         "/createGroup"(controller: "groups", action: "addGroup")
         "/updateGroup"(controller: "groups", action: "updateGroup")
         "/deleteGroup"(controller: "groups", action: "deleteGroup")

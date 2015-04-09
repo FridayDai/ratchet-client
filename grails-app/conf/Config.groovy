@@ -297,7 +297,7 @@ ratchetv2 {
             announcements = "${ratchetv2.server.url.base}/announcements"
 
             //groups
-            getGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
+            getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
 
         }
 

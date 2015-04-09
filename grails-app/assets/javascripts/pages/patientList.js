@@ -25,7 +25,7 @@
                 getStaffs: "/getStaffs",
                 showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}",
-                getGroups:"/getGroups"
+                getGroups: "/getStaffGroups"
             }
         },
         provideTable;
@@ -229,6 +229,7 @@
         var date = new Date($("#surgeryTime").val());
         var surgeryTime = date.getTime();
         var staffId = $("#selectStaffs").data('id');
+        var groupId = $("#selectGroup").data('id');
 
         var data = {
             patientId: patientId,
@@ -245,8 +246,8 @@
             profilePhoto: '',
             treatmentId: treatmentId,
             surgeryTime: surgeryTime,
-            staffId: staffId
-
+            staffId: staffId,
+            groupId: groupId
         };
 
         return data;
@@ -701,7 +702,7 @@
                     url: opts.urls.getGroups,
                     type: "POST",
                     data: {
-                        treatmentTitle: request.term
+                        name: request.term
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -717,10 +718,8 @@
                             // normal response
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.title + ' ' + item.tmpTitle,
-                                    value: item.id,
-                                    surgeryTime: item.surgeryTimeRequired,
-                                    timeStamp: item.sendTimeOffset
+                                    label: item.name,
+                                    value: item.id
                                 };
                             }));
                         }
@@ -735,8 +734,6 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
-                $(this).data("surgeryTime", ui.item.surgeryTime);
-                $(this).data("timeStamp", ui.item.timeStamp);
             },
 
             appendTo: ".container"

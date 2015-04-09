@@ -29,6 +29,7 @@ class PatientService {
         def ecLastName = params?.ecLastName
         def relationship = params?.relationship
         def ecEmail = params?.ecEmail
+        def groupId = params?.groupId
 
         String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(addPatientsUrl, request.session.clientId)
@@ -50,6 +51,7 @@ class PatientService {
                     .field("ecLastName", ecLastName)
                     .field("relationship", relationship)
                     .field("ecEmail", ecEmail)
+                    .field("groupId",groupId)
                     .asString()
             def result = JSON.parse(resp.body)
 

@@ -43,7 +43,8 @@
                 updatePassword: "/updatePassword",
                 showSingleAccount: "/singleAccount/{0}",
                 deactivateAccount: "/deactivateAccount/{0}",
-                activateAccount: "/activateAccount/{0}"
+                activateAccount: "/activateAccount/{0}",
+                getGroups: "/getStaffGroups"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
@@ -215,11 +216,13 @@
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         //var type = $("#type").data("id");
+        var groupId = $("#selectGroup").data("id");
         var isAccountManagement, isDoctor, type;
 
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
         $("#provider").attr("checked") === "checked" ? type = 9 : type = 10;
+
 
         var data = {
             firstName: firstName,
@@ -227,7 +230,8 @@
             email: email,
             type: type,
             isAccountManagement: isAccountManagement,
-            isDoctor: isDoctor
+            isDoctor: isDoctor,
+            groupId: groupId
         };
 
         return data;
@@ -271,6 +275,7 @@
                 }
             }));
 
+            _initSelectGroup();
             //var data = [
             //    {label: "Anesthesiologist", id: 1},
             //    {label: "Medical Assistant", id: 2},
@@ -350,6 +355,7 @@
             var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
+            var groups = parent.find(".groups").text();
 
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
@@ -367,6 +373,7 @@
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
+            $("#groupSelect").val(groups);
 
             //$("select option").filter(function () {
             //    return $(this).text() === accountRole;
@@ -384,6 +391,8 @@
                         var lastName = $("#lastName").val();
                         var email = $("#email").val();
                         //var accountType = $("#accountType").data("id");
+                        var groupId = $("#groupSelect").data("id");
+                        var groupValue = $("#groupSelect").val();
                         var isAccountManagement, isDoctor, accountType;
 
                         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
@@ -396,16 +405,18 @@
                             email: email,
                             type: accountType,
                             doctor: isDoctor,
-                            accountManagement: isAccountManagement
+                            accountManagement: isAccountManagement,
+                            groupId: groupId
                         };
 
-                        _updateStaff(accountInfo);
+                        _updateStaff(accountInfo, groupValue);
                         return true;
                     }
                     return false;
                 }
             }));
 
+            _initGroupSelect();
             //_initSelect();
         });
     }
@@ -415,7 +426,7 @@
      * @param accountInfo
      * @private
      */
-    function _updateStaff(accountInfo) {
+    function _updateStaff(accountInfo, groupValue) {
         $.ajax({
             url: opts.urls.updateAccount,
             type: "POST",
@@ -436,6 +447,7 @@
                     } else {
                         $("#isAccountManage").empty();
                     }
+                    $("#groups").text(groupValue);
                 }
             }
         });
@@ -673,6 +685,111 @@
                     RC.common.showMsg(opts.defaultConfirmArguments.showActiveArguments);
                 }
             }
+        });
+    }
+
+    /**
+     * init select groups
+     * @private
+     */
+    function _initSelectGroup() {
+        $("#selectGroup").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+            },
+
+            appendTo: ".container"
+        });
+    }
+
+
+    /**
+     * init select groups
+     * @private
+     */
+    function _initGroupSelect() {
+        $("#groupSelect").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+            },
+
+            appendTo: ".container"
         });
     }
 
