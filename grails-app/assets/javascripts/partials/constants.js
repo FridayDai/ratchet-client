@@ -23,7 +23,6 @@
         confirmContent: "",
         loadingContent: "This is loading content",
         changePasswordTitle: "CHANGE PASSWORD",
-        editSurgeonTitle: "EDIT SURGEON",
         addGroupTitle: "NEW GROUP",
         editGroupTitle: "EDIT GROUP",
         editSurgeonTitle: "EDIT GROUP AND PROVIDER",

@@ -38,7 +38,7 @@
         </g:if>
 
         <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
-            <g:else>class="nav-li"</g:else>>s
+            <g:else>class="nav-li"</g:else>>
             <g:link controller="groups" action="index" class="icon-account">
                 <div class="title">Groups</div>
             </g:link>
