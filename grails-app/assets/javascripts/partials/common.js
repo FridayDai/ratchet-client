@@ -740,6 +740,7 @@
             var element = $(errorElement.element);
             var errorMessage = errorElement.message;
             element.attr("data-error-msg", errorMessage);
+            element.attr("data-error-hover-close", false);
             var className = "error-msg-bottom";
             if (element.is("[data-class]")) {
                 className = element.attr("data-class");
@@ -774,12 +775,12 @@
                         return element.attr("title");
                     }
                     return errorContent;
-                },
-                close: function(event, ui)
-                {
-                    if(!$(this).valid()){
-                        return;
-                    }
+                }
+
+            }).on( "mouseleave", function( event ) {
+                event.stopImmediatePropagation();
+                if(!$(this).valid()){
+                    return;
                 }
 
             });
@@ -795,6 +796,7 @@
             if ($(element).tooltip()) {
                 $(element).tooltip("destroy");
                 $(element).removeAttr("data-error-msg");
+                $(element).attr("data-error-hover-close", true);
             }
         },
 
