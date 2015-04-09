@@ -38,8 +38,4 @@ class PatientsController extends BaseController {
         def data = patientService.loadActivities(params)
         render data as JSON
     }
-
-    def getGroups() {
-        def resp = patientService.getGroups(request, response)
-    }
 }

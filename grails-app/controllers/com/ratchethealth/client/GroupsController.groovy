@@ -11,7 +11,7 @@ class GroupsController extends BaseController {
     }
 
     def getGroups() {
-
+        def resp = groupService.getGroups(request, response)
     }
 
     def addGroup() {

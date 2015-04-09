@@ -120,29 +120,4 @@ class PatientService {
             throw new ApiAccessException(e.message)
         }
     }
-
-    def getGroups(HttpServletRequest request, HttpServletResponse response)
-            throws ApiAccessException, ApiReturnException {
-
-        def url = grailsApplication.config.ratchetv2.server.url.getGroups
-        try {
-            log.info("Call backend service to get groups with clientId, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .queryString("clientId", request.session.clientId)
-                    .asString()
-
-            def result = JSON.parse(resp.body)
-
-            if (resp.status == 200) {
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
-            }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
-    }
-
-
 }
