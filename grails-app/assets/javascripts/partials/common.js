@@ -774,7 +774,14 @@
                         return element.attr("title");
                     }
                     return errorContent;
+                },
+                close: function(event, ui)
+                {
+                    if(!$(this).valid()){
+                        return;
+                    }
                 }
+
             });
             tooltips.tooltip("open");
         },
