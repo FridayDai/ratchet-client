@@ -30,13 +30,13 @@
             updateGroup: "/updateGroup",
             deleteGroup: "/deleteGroup"
         }
-    };
+    },
+        groupTable;
 
     /**
      * init table, when sent request
      */
     function _initTable(data) {
-        var groupTable;
         var options = {
             paging: true,
             searching: false,
@@ -82,7 +82,7 @@
                 {
                     "targets": 2,
                     "render": function (data, type, full) {
-                        var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
+                        var lastUpdateStr = data === undefined ? full.lastUpdated : data;
                         var lastUpdateTime = new Date(parseInt(lastUpdateStr));
                         var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
@@ -148,8 +148,9 @@
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.addFormArguments, {
             element: $ele,
             okCallback: function () {
+                var name = $('#groupName').val();
                 if ($ele.valid()) {
-                    _addGroup();
+                    _addGroup(name);
                     return true;
                 }
                 return false;
@@ -158,7 +159,16 @@
 
     }
 
-    function _addGroup() {
+    function _addGroup(name) {
+        $.ajax({
+            url: opts.urls.addGroup,
+            type: "POST",
+            data: {name: name},
+            dataType: "json",
+            success: function () {
+                _initTable();
+            }
+        });
 
     }
 
@@ -169,17 +179,23 @@
     var editGroupModel = function (e) {
         e.preventDefault();
         var ele = '#group-form';
-        _bindEditModel(ele);
+        var $this = $(this);
+        _bindEditModel(ele, $this);
     };
 
-    function _bindEditModel(ele) {
+    function _bindEditModel(ele, $this) {
         var $ele = $(ele);
         $ele[0].reset();
+        $ele.find('#groupName').val($this.closest('tr').find('td:eq(1)').text());
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editFormArguments, {
             element: $ele,
             okCallback: function () {
+                var groupInfo = {
+                    name: $('#groupName').val(),
+                    groupId: $this.data("groupId")
+                };
                 if ($ele.valid()) {
-                    _editGroup();
+                    _editGroup(groupInfo);
                     return true;
                 }
                 return false;
@@ -187,8 +203,16 @@
         }));
     }
 
-    function _editGroup() {
-
+    function _editGroup(groupInfo) {
+        $.ajax({
+            url: opts.urls.updateGroup,
+            type: "POST",
+            data: groupInfo,
+            dataType: "json",
+            success: function () {
+                _initTable();
+            }
+        });
     }
 
     /**

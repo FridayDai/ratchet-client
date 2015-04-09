@@ -8,24 +8,32 @@ class GroupsController extends BaseController {
     def groupService
 
     def index() {
-        def groupList = groupService.getGroups(params)
-        render view:'groups', model: [groupList: groupList, pagesize: params.length]
+        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+        def groupList = groupService.showGroupsList(request, response, params)
+        render view: 'groups', model: [groupList: groupList, pagesize: params.length]
     }
 
+    def getGroups() {
+        def resp = groupService.showGroupsList(request, response, params)
+        render resp as JSON
+    }
+    
     def getStaffGroups() {
         def resp = groupService.getStaffGroups(request, response)
         render resp as JSON
     }
 
     def addGroup() {
-
+        def resp = groupService.createGroup(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
     }
 
     def updateGroup() {
-
+         def resp = groupService.updateGroup(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
     }
 
-    def deleteGroup() {
-
-    }
 }
