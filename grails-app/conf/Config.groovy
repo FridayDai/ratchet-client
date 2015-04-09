@@ -296,6 +296,9 @@ ratchetv2 {
             //Announcement
             announcements = "${ratchetv2.server.url.base}/announcements"
 
+            //groups
+            getGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
+
         }
 
         clientPlatform = "ancient"
