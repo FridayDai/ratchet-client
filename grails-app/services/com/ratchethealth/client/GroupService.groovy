@@ -13,6 +13,45 @@ class GroupService {
 
     def grailsApplication
 
+    def showGroupsList(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAccessException, ApiReturnException {
+        def start = params?.start
+        def length = params?.length
+        def name = params?.name
+
+        String showGroupsUrl = grailsApplication.config.ratchetv2.server.url.showGroups
+        def url = String.format(showGroupsUrl, request.session.clientId)
+
+        try {
+            log.info("Call backend service to get groups list with start, length, name and clientId, token: ${request.session.token}.")
+            def resp = Unirest.get(url)
+                    .queryString("max", length)
+                    .queryString("offset", start)
+                    .queryString("name", name)
+                    .asString()
+
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                def map = [:]
+                map.put(start, start)
+                map.put(length, length)
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                log.info("Get groups success, token: ${request.session.token}.")
+                return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+
+
+    }
+
     def createGroup(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiAccessException, ApiReturnException {
 
@@ -51,7 +90,7 @@ class GroupService {
         def url = String.format(updateGroupUrl, request.session.clientId, groupId)
 
         try {
-            log.info("Call backend service to update groups with name and clientId, token: ${request.session.token}.")
+            log.info("Call backend service to update group with name and clientId, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .field("name", name)
                     .asString()
@@ -98,42 +137,5 @@ class GroupService {
 
     }
 
-    def showGroupsList(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAccessException, ApiReturnException {
-        def start = params?.start
-        def length = params?.length
-        def name = params?.name
 
-        String showGroupsUrl = grailsApplication.config.ratchetv2.server.url.showGroups
-        def url = String.format(showGroupsUrl, request.session.clientId)
-
-        try {
-            log.info("Call backend service to get groups list with start, length, name and clientId, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .queryString("max", length)
-                    .queryString("offset", start)
-                    .queryString("name", name)
-                    .asString()
-
-            def result = JSON.parse(resp.body)
-
-            if (resp.status == 200) {
-                def map = [:]
-                map.put(start, start)
-                map.put(length, length)
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
-                log.info("Get groups success, token: ${request.session.token}.")
-                return map
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
-            }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
-
-
-    }
 }

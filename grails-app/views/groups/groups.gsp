@@ -38,9 +38,9 @@
         <tbody>
         <g:each var="group" in="${groupList.data}" status="i">
           <tr data-is-dom-data="true">
-            <td>${group.emid}</td>
+            <td>${group.id}</td>
             <td>${group.name}</td>
-            <td>${group.lastUpdate}</td>
+            <td>${group.lastUpdated}</td>
             <td>${group.id}</td>
           </tr>
         </g:each>
