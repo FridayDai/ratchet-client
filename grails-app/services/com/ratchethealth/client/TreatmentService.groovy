@@ -64,6 +64,7 @@ class TreatmentService {
                     .field("ecLastName", params?.ecLastName)
                     .field("relationship", params?.relationship)
                     .field("ecEmail", params?.ecEmail)
+                    .field("groupId", params?.groupId)
                     .asString()
             def result = JSON.parse(resp.body)
             if (resp.status == 201) {

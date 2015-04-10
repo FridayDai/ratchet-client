@@ -30,7 +30,8 @@
                 getStaffs: "/getStaffs",
                 updatePatient: "/clients/{0}/patients/{1}",
                 assignTreatment: "/clients/{0}/patients/{1}/treatments",
-                invitePatient: "/invitePatient/{0}"
+                invitePatient: "/invitePatient/{0}",
+                getGroups: "/getStaffGroups"
             }
         },
         tabs,
@@ -99,6 +100,7 @@
                     if ($("#treatment-form").valid()) {
                         var treatmentId = $("#selectTreatment").data("id");
                         var staffIds = $("#selectSurgeons").data("id");
+                        var groupId = $("#selectGroup").data("id");
                         //var staffArray = staffIds.split(',');
                         //var staffIdArr = [];
                         //$.each(staffArray, function (index, item) {
@@ -125,7 +127,8 @@
                             ecFirstName: ecFirstName,
                             ecLastName: ecLastName,
                             relationship: relationship,
-                            ecEmail: ecEmail
+                            ecEmail: ecEmail,
+                            groupId: groupId
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -140,6 +143,7 @@
             //_initSurgeryTime();
             _initSelect();
             _checkEmergencyContact();
+            _initSelectGroup();
 
         });
     }
@@ -177,7 +181,7 @@
 
         $("#relationshipName").combobox({
             source: function (request, response) {
-                var sources = _.filter(data, function(num){
+                var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term) > -1;
                 });
                 if (!sources.length) {
@@ -329,7 +333,7 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
-        if(originalPatientEmail !== updatedEmail) {
+        if (originalPatientEmail !== updatedEmail) {
             $('.invisible-invite').css('display', 'inline-block');
         }
     }
@@ -410,7 +414,7 @@
                     $("#div-surgery-time").css("display", "none");
                 }
                 var date = new Date();
-                var time =date.getTime() +  ui.item.timeStamp;
+                var time = date.getTime() + ui.item.timeStamp;
                 $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
@@ -591,6 +595,58 @@
                     });
                 }
             });
+        });
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup() {
+        $("#selectGroup").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+            },
+
+            appendTo: ".container"
         });
     }
 
