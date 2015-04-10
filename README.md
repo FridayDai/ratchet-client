@@ -115,27 +115,14 @@ ratchet-v2-provider-desktop
 
 ## CDN
 1. The variable CDN_ENABLE should be set as 'true' in env configuration.
-2. The variable S3_ASSET_BUCKET should be set in env configuration, also with variables: AWS_ACCESS_KEY, AWS_SECRET_KEY.
-3. ```grails asset-cdn-push``` should be run before war generation.
-4. Set CORS configuration in s3 asset bucket as following rules:
-
-
-    ```
-        <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-            <CORSRule>
-                <AllowedOrigin>*</AllowedOrigin>
-                <AllowedMethod>GET</AllowedMethod>
-            </CORSRule>
-        </CORSConfiguration>
-    ```
+2. Set one custom origin instance of clouldfront
+2. The variable CDN_DOMAIN should be set with clouldfront instance domain name
 
 
 ## Configuration variables
 
 - ELK_TCP_ADDR
 - SERVER_URL
-- CDN_ENABLE
-- S3_ASSET_BUCKET
-- AWS_ACCESS_KEY
-- AWS_SECRET_KEY
+- CDN_ENABLE    // true | false | not define
+- CDN_DOMAIN    // just cloudfront url domain like: ```d1gdqclzwn7f9.cloudfront.net```
 
