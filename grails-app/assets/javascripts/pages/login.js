@@ -46,7 +46,7 @@
         }
 
         $(".input-control").each(function () {
-            $(this).change(function () {
+            $(this).on('input', function () {
                 $("#error-login").css("display", "none");
             });
         });
