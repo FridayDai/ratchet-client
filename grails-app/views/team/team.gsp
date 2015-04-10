@@ -31,6 +31,7 @@
                     </div>
 
                     <div class="surgeon-name inline">
+                        <g:if test="${surgeon.doctor == true}"><span>Dr.</span></g:if>
                         <span id="surgeonFirstName">${surgeon.firstName}</span>
                         <span id="surgeonLastName">${surgeon.lastName}</span>
                     </div>
