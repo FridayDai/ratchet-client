@@ -265,6 +265,7 @@ ratchetv2 {
             createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"
             updateGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
             showGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            deleteGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
             showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
             getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
 

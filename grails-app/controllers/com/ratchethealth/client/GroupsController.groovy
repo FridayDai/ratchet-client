@@ -36,4 +36,10 @@ class GroupsController extends BaseController {
         render result as JSON
     }
 
+    def deleteGroup() {
+        def resp = groupService.deleteGroup(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
 }
