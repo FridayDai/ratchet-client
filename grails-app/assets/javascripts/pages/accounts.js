@@ -44,7 +44,8 @@
                 showSingleAccount: "/singleAccount/{0}",
                 deactivateAccount: "/deactivateAccount/{0}",
                 activateAccount: "/activateAccount/{0}",
-                getGroups: "/getStaffGroups"
+                getGroups: "/getStaffGroups",
+                getAllGroups:"/getGroups"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
@@ -709,13 +710,13 @@
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getAllGroups,
                     type: "POST",
                     data: {
                         name: request.term
                     },
                     success: function (data) {
-                        if (!data.length) {
+                        if (!data.data.length) {
                             var result = [
                                 {
                                     label: 'No matches found',
@@ -726,7 +727,7 @@
                         }
                         else {
                             // normal response
-                            response($.map(data, function (item) {
+                            response($.map(data.data, function (item) {
                                 return {
                                     label: item.name,
                                     value: item.id
