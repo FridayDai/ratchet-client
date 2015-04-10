@@ -45,7 +45,7 @@
                 deactivateAccount: "/deactivateAccount/{0}",
                 activateAccount: "/activateAccount/{0}",
                 getGroups: "/getStaffGroups",
-                getAllGroups:"/getGroups"
+                getAllGroups: "/getGroups"
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
@@ -408,7 +408,15 @@
                         var selections = $("#groupSelect").select2('data');
                         var groupValue = '';
                         $.each(selections, function (index, item) {
-                            groupValue = groupValue +' '+ item.text;
+                            groupValue = groupValue + '<p> ' + item.text + '</p> </br>';
+                        });
+
+                        var newValue = [];
+                        $.each(selections, function (index, item) {
+                            newValue.push({
+                                'id': item.id,
+                                'name': item.text
+                            });
                         });
 
                         var isAccountManagement, isDoctor, accountType;
@@ -424,7 +432,8 @@
                             type: accountType,
                             doctor: isDoctor,
                             accountManagement: isAccountManagement,
-                            groupId: groupId
+                            groupId: groupId,
+                            newValue: newValue
                         };
 
                         _updateStaff(accountInfo, groupValue);
@@ -465,7 +474,8 @@
                     } else {
                         $("#isAccountManage").empty();
                     }
-                    $("#groups").text(groupValue);
+                    $("#groups").html(groupValue);
+                    $("#groups").data("ids", accountInfo.newValue);
                 }
             }
         });
@@ -735,7 +745,7 @@
                 },
                 results: function (data) {
                     var myResults = [];
-                    $.each(data, function (index, item) {
+                    $.each(data.data, function (index, item) {
                         myResults.push({
                             'id': item.id,
                             'text': item.name
@@ -767,7 +777,7 @@
                     };
                     return $.ajax(params);
                 },
-                url: opts.urls.getGroups,
+                url: opts.urls.getAllGroups,
                 cache: "true",
                 data: function (name) {
                     return {
@@ -776,7 +786,7 @@
                 },
                 results: function (data) {
                     var myResults = [];
-                    $.each(data, function (index, item) {
+                    $.each(data.data, function (index, item) {
                         myResults.push({
                             'id': item.id,
                             'text': item.name
@@ -789,7 +799,7 @@
             }
         }).change(function () {
             $(this).valid();
-        }).select2('data',groups);
+        }).select2('data', groups);
     }
 
     /**
