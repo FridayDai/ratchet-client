@@ -20,7 +20,7 @@ class GroupsController extends BaseController {
     }
     
     def getStaffGroups() {
-        def resp = groupService.getStaffGroups(request, response)
+        def resp = groupService.getStaffGroups(request, response, params)
         render resp as JSON
     }
 

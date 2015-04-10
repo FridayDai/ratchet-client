@@ -27,7 +27,7 @@ class GroupService {
             def resp = Unirest.get(url)
                     .queryString("max", length)
                     .queryString("offset", start)
-                    .queryString("name", name)
+                    .queryString("groupName", name)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -162,14 +162,15 @@ class GroupService {
 
     }
 
-    def getStaffGroups(HttpServletRequest request, HttpServletResponse response)
+    def getStaffGroups(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiAccessException, ApiReturnException {
-
+        def name = params?.name
         String getStaffGroupsUrl = grailsApplication.config.ratchetv2.server.url.getStaffGroups
         def url = String.format(getStaffGroupsUrl, request.session.clientId)
         try {
             log.info("Call backend service to get groups with clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .queryString("groupName", name)
                     .asString()
 
             def result = JSON.parse(resp.body)

@@ -779,10 +779,14 @@
 
             }).on( "mouseleave", function( event ) {
                 event.stopImmediatePropagation();
-                if(!$(this).valid()){
-                    return;
-                }
+                var elem = $(this).parent().find('.select2-container');
+                if (elem.length > 0) {
 
+                } else {
+                    if(!$(this).valid()){
+                        return;
+                    }
+                }
             });
             tooltips.tooltip("open");
         },

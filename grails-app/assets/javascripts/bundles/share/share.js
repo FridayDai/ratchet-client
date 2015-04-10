@@ -1,5 +1,6 @@
 //= require ../../bower_components/jquery/jquery
 //= require ../../bower_components/jquery-ui/jquery-ui
+//= require ../../bower_components/select2/select2
 //= require ../../bower_components/d3/d3
 //= require ../../libs/datetimepicker/jquery-ui-timepicker-addon
 //= require ../../bower_components/jquery-validation/dist/jquery.validate

@@ -4,6 +4,7 @@
 @import '../partials/overview';
 @import '../partials/base';
 @import '../partials/theme';
+@import '../partials/select2';
 
 .account-info {
     padding: 20px;
@@ -56,6 +57,11 @@
         .groups {
             white-space: pre-line;
             white-space: pre-line;
+
+            p {
+                padding-left: 20px;
+                color: $base-color-medium-black;
+            }
         }
     }
 
