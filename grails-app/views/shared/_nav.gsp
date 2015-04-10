@@ -38,12 +38,14 @@
             </li>
         </g:if>
 
-        <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
-            <g:else>class="nav-li"</g:else>>
-            <g:link controller="groups" action="index" class="icon-group">
-                <div class="title">Groups</div>
-            </g:link>
-        </li>
+        <g:if test="${request.session.accountManagement == true}">
+            <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
+                <g:else>class="nav-li"</g:else>>
+                <g:link controller="groups" action="index" class="icon-group">
+                    <div class="title">Groups</div>
+                </g:link>
+            </li>
+        </g:if>
 
         <li class="btn-li">
             <a href="#" id="assist-me" class="btn assist-me">
