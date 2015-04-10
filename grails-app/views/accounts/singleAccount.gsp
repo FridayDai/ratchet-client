@@ -102,7 +102,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
-                              id="groups"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
+                              id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
                                                                                      var="group">${group.name}</g:each></g:if>
                     </span></td>
                 </tr>

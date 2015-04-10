@@ -221,7 +221,7 @@
         var lastName = $("#lastName").val();
         var email = $("#email").val();
         //var type = $("#type").data("id");
-        var groupId = $("#selectGroup").data("id");
+        var groupId = $("#selectGroup").val();
         var isAccountManagement, isDoctor, type;
 
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
@@ -360,7 +360,15 @@
             var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
-            var groups = parent.find(".groups").text();
+            var groups = parent.find(".groups").data("ids");
+
+            var selectResults = [];
+            $.each(groups, function (index, item) {
+                selectResults.push({
+                    id: item.id,
+                    text: item.name
+                });
+            });
 
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
@@ -378,7 +386,7 @@
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
-            $("#groupSelect").val(groups);
+
 
             //$("select option").filter(function () {
             //    return $(this).text() === accountRole;
@@ -396,8 +404,13 @@
                         var lastName = $("#lastName").val();
                         var email = $("#email").val();
                         //var accountType = $("#accountType").data("id");
-                        var groupId = $("#groupSelect").data("id");
-                        var groupValue = $("#groupSelect").val();
+                        var groupId = $("#groupSelect").val();
+                        var selections = $("#groupSelect").select2('data');
+                        var groupValue = '';
+                        $.each(selections, function (index, item) {
+                            groupValue = groupValue +' '+ item.text;
+                        });
+
                         var isAccountManagement, isDoctor, accountType;
 
                         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
@@ -420,8 +433,8 @@
                     return false;
                 }
             }));
-
-            _initGroupSelect();
+            _initGroupSelect(selectResults);
+            //$("#groupSelect").val(selectResults);
             //_initSelect();
         });
     }
@@ -704,50 +717,37 @@
      * @private
      */
     function _initSelectGroup() {
-        $("#selectGroup").combobox({
-            source: function (request, response) {
-                $.ajax({
-                    beforeSend: function () {
+        $('#selectGroup').select2({
+            tags: true,
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
-                    },
-                    url: opts.urls.getAllGroups,
-                    type: "POST",
-                    data: {
-                        name: request.term
-                    },
-                    success: function (data) {
-                        if (!data.data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data.data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.id
-                                };
-                            }));
-                        }
-                    }
-                });
-            },
-
-            select: function (event, ui) {
-                event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getAllGroups,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
                 }
-                $(this).val(ui.item.label);
-                $(this).data("id", ui.item.value);
-            },
-
-            appendTo: ".container"
+            }
+        }).change(function () {
+            $(this).valid();
         });
     }
 
@@ -756,52 +756,40 @@
      * init select groups
      * @private
      */
-    function _initGroupSelect() {
-        $("#groupSelect").combobox({
-            source: function (request, response) {
-                $.ajax({
-                    beforeSend: function () {
+    function _initGroupSelect(groups) {
+
+        $('#groupSelect').select2({
+            tags: true,
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
                         RC.common.progress(false);
-                    },
-                    url: opts.urls.getGroups,
-                    type: "POST",
-                    data: {
-                        name: request.term
-                    },
-                    success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.id
-                                };
-                            }));
-                        }
-                    }
-                });
-            },
-
-            select: function (event, ui) {
-                event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getGroups,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
                 }
-                $(this).val(ui.item.label);
-                $(this).data("id", ui.item.value);
-            },
-
-            appendTo: ".container"
-        });
+            }
+        }).change(function () {
+            $(this).valid();
+        }).select2('data',groups);
     }
 
     /**
