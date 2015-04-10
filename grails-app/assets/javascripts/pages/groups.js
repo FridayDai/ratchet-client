@@ -221,19 +221,30 @@
      */
     var deleteGroupModel = function (e) {
         e.preventDefault();
-        _bindDeleteModel();
+        var $this = $(this);
+        _bindDeleteModel($this);
     };
 
-    function _bindDeleteModel() {
+    function _bindDeleteModel($this) {
+        var groupId = $this.data("groupId");
+        var parentTr = $this.closest('tr');
         RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteWarningArguments, {
-            closeCallback: function () {
-                _deleteGroup();
+            yesCallback: function () {
+                _deleteGroup(groupId, parentTr);
             }
         }));
     }
 
-    function _deleteGroup() {
-
+    function _deleteGroup(groupId, parentTr) {
+        $.ajax({
+            url: opts.urls.deleteGroup,
+            type: "POST",
+            data: {groupId: groupId},
+            dataType: "json",
+            success: function () {
+                parentTr.remove();
+            }
+        });
     }
 
 

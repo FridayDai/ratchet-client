@@ -96,6 +96,7 @@ class GroupService {
                     .asString()
 
             if (resp.status == 200) {
+                log.info("update group success, token: ${request.session.token}.")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -123,8 +124,35 @@ class GroupService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                log.info("show a group success, token: ${request.session.token}.")
                 return result
             } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+
+    }
+
+    def deleteGroup(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAccessException, ApiReturnException {
+
+        def groupId = params?.groupId
+        String deleteGroupUrl = grailsApplication.config.ratchetv2.server.url.deleteGroup
+        def url = String.format(deleteGroupUrl, request.session.clientId, groupId)
+
+        try {
+            log.info("Call backend service to delete a group with groupId and clientId, token: ${request.session.token}.")
+            def resp = Unirest.delete(url)
+                    .asString()
+
+            if (resp.status == 204) {
+                log.info("delete a group success, token: ${request.session.token}.")
+                return true
+            } else {
+                def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
                 throw new ApiReturnException(resp.status, message)
             }

@@ -538,6 +538,12 @@
                 return false;
             }
         });
+
+        $('.create-password-form .input-control').each(function () {
+            $(this).on('input', function () {
+                $(".error-area").text('');
+            });
+        });
     }
 
     /**
