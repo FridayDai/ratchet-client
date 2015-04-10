@@ -145,8 +145,12 @@
     function _clickRow() {
         $('#patientsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
-            var url = opts.urls.showSinglePatient.format(id);
-            window.location.href = url;
+            if (id) {
+                var url = opts.urls.showSinglePatient.format(id);
+                window.location.href = url;
+            } else {
+                return;
+            }
         });
     }
 

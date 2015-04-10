@@ -9,7 +9,8 @@
                 <li>Welcome!</li>
                 <li><g:link class="" controller="profile"
                             action="getProfile"
-                            params="[accountId: request.session.accountId]"><g:if test="${request.session.isDoctor == true}">Dr.${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else>
+                            params="[accountId: request.session.accountId]"><g:if
+                            test="${request.session.isDoctor == true}">Dr.${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else>
                 </g:link></li>
             </ul>
         </li>
@@ -68,7 +69,9 @@
 
     <div class="form-group inline">
         <label class="lbl-group">NAME<span>*</span></label>
-        <label class="lbl-input" id="assist-full-name" data-first="${request.session.firstName}" data-last="${request.session.lastName}">${request.session.firstName} ${request.session.lastName}</label>
+        <label class="lbl-input" id="assist-full-name" data-first="${request.session.firstName}"
+               data-last="${request.session.lastName}">
+            <g:if test="${request.session.isDoctor == true}">Dr.</g:if>${request.session.firstName} ${request.session.lastName}</label>
     </div>
 
     <div class="form-group inline">

@@ -18,6 +18,7 @@
                 <div class="form-style-content">
                     <div class="greeting color-black align-center">
                         <span>Hi</span>
+                        <g:if test="${staff.doctor == true}"><span>Dr.</span></g:if>
                         <span>${staff.firstName}!</span>
                     </div>
 
@@ -49,7 +50,7 @@
 
                 <div class="align-center cover-inner-footer">
                     %{--<div class="terms-service color-black">--}%
-                        %{--You agree to our <a href="/terms_of_service" target="_blank" class="dark-link" >Terms of Service</a> upon creating account--}%
+                    %{--You agree to our <a href="/terms_of_service" target="_blank" class="dark-link" >Terms of Service</a> upon creating account--}%
                     %{--</div>                --}%
                     <button type="submit" class="btn btn-submit" id='johnRat'>Activate Account</button>
                 </div>
