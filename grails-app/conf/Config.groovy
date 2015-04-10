@@ -177,8 +177,8 @@ grails.assets.excludes = [
         'partials/*.js'
 ]
 
-grails.assets.plugin."resources".excludes =["**"]
-grails.assets.plugin."cookie-session".excludes =["**"]
+grails.assets.plugin."resources".excludes = ["**"]
+grails.assets.plugin."cookie-session".excludes = ["**"]
 
 
 def appName = grails.util.Metadata.current.'app.name'
@@ -286,6 +286,7 @@ ratchetv2 {
             showMedicalCares = "${ratchetv2.server.url.base}/medicalCares"
             deleteCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s"
             deleteCareGiver = "${ratchetv2.server.url.base}/records/%s/caregiver/%s"
+            updateCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s/groups/%s"
 
             //for toolService
             tools.loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"

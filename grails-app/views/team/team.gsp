@@ -8,23 +8,28 @@
         <input type="hidden" id="hidden-patient-id" value="${patientId}"/>
         <input type="hidden" id="hidden-active" value="${archived}"/>
 
+
         <div class="inner-header">
             <h4 class="surgeon">GROUP AND PROVIDER</h4>
         </div>
 
         <div class="inner-body top-body" id="careTeamBody">
-            <div class="group-content">
-                <h4>GROUP</h4>
+            <g:each in="${surgeons}" var="surgeon">
+                <input type="hidden" id="hidden-group-id" value="${surgeon.groupId}"/>
 
-                <div id="group-name">Rainier Orthopedic Institute</div>
-            </div>
+                <div class="group-content">
+                    <h4>GROUP</h4>
 
-            <div class="provider-content">
-                <h4>PROVIDER</h4>
-                <g:each in="${surgeons}" var="surgeon">
+                    <div id="group-name">${surgeon.groupName}</div>
+                </div>
+
+                <div class="provider-content">
+                    <h4>PROVIDER</h4>
+
                     <div class="left-content">
                         <div class="surgeon-id">
                             <span>ID:</span>
+                            <input type="hidden" id="hidden-surgeon-id" value="${surgeon.id}"/>
                             <span id="surgeonId">${surgeon.id}</span>
                         </div>
 
@@ -39,8 +44,9 @@
                     <div class="surgeon-email inline" id="surgeonEmail">
                         ${surgeon.email}
                     </div>
-                </g:each>
-            </div>
+
+                </div>
+            </g:each>
 
             <button
                 <g:if test="${archived == 'true'}">

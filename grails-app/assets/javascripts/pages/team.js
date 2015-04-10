@@ -55,7 +55,8 @@
                 addCareGiver: "/clients/{0}/patients/{1}/care_giver",
                 deleteCareTeam: "/clients/{0}/patients/{1}/care_team/{2}/{3}",
                 deleteCareGiver: "/clients/{0}/patients/{1}/care_giver/{2}/{3}",
-                updateCareGiver: "/updateCareGiver"
+                updateCareGiver: "/updateCareGiver",
+                getGroups: "/getStaffGroups"
             }
         },
         careTeamRole =
@@ -186,6 +187,8 @@
             var groupName = element.find("#group-name").text();
             element.find("#selectStaff").val(firstName + ' ' + lastName);
             element.find("#groupSelect").val(groupName);
+            var existGroupId = element.find("#hidden-group-id").val();
+            var existSurgeonId = element.find("#hidden-surgeon-id").val();
             var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
@@ -193,10 +196,23 @@
                 okCallback: function () {
                     if ($(".edit-surgeon").valid()) {
 
-                        var staffId = $("#selectStaff").data("id");
+                        var selectStaffId = $("#selectStaff").data("id");
+                        var selectGroupId = $("#groupSelect").data('id');
+                        var groupId, staffId;
+                        if (selectGroupId) {
+                            groupId = selectGroupId;
+                        } else {
+                            groupId = existGroupId;
+                        }
+                        if (selectStaffId) {
+                            staffId = selectStaffId;
+                        } else {
+                            staffId = existSurgeonId;
+                        }
                         var ids = {
                             medicalRecordId: medicalRecordId,
-                            staffId: staffId
+                            staffId: staffId,
+                            groupId: groupId
                         };
 
                         _updateCareTeamSurgeon(ids, element);
@@ -223,9 +239,12 @@
             data: ids
         }).done(function (data) {
             element.find("#surgeonId").text(data.id);
+            element.find("#hidden-surgeon-id").val(data.id);
             element.find("#surgeonFirstName").text(data.firstName);
             element.find("#surgeonLastName").text(data.lastName);
             element.find("#surgeonEmail").text(data.email);
+            element.find("#group-name").text(data.groupName);
+            element.find("#hidden-group-id").val(data.groupId);
         });
     }
 
@@ -565,11 +584,10 @@
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getStaffs,
+                    url: opts.urls.getGroups,
                     type: "POST",
                     data: {
-                        name: request.term,
-                        type: 8
+                        name: request.term
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -585,13 +603,21 @@
                             // normal response
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.firstName + " " + item.lastName,
+                                    label: item.name,
                                     value: item.id
                                 };
                             }));
                         }
                     }
                 });
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
             },
             appendTo: ".container"
         });

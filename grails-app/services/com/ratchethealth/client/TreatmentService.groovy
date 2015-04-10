@@ -342,8 +342,8 @@ class TreatmentService {
     def updateCareTeamSurgeon(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiAccessException, ApiReturnException {
 
-        String updateCareTeamSurgeonUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
-        def url = String.format(updateCareTeamSurgeonUrl, params?.medicalRecordId, params?.staffId)
+        String updateCareTeamSurgeonUrl = grailsApplication.config.ratchetv2.server.url.updateCareTeam
+        def url = String.format(updateCareTeamSurgeonUrl, params?.medicalRecordId, params?.staffId, params?.groupId)
 
         try {
             log.info("Call backend service to update care team surgeon, token: ${request.session.token}.")
