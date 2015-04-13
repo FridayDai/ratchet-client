@@ -8,13 +8,13 @@
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
                     height: 600,
-                    width: 600
+                    width: 620
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 },
                 waringArguments: {
                     title: RC.constants.warningTipTitle,
@@ -428,7 +428,7 @@
      * @private
      */
     function _initStaffSelect(groupId) {
-        if(groupId) {
+        if (groupId) {
             $("#selectSurgeons").combobox("destroy");
         }
         $("#selectSurgeons").combobox({
@@ -465,9 +465,7 @@
                         }
                     }
                 });
-            }.change(function () {
-                    $(this).valid();
-                }),
+            },
             appendTo: ".container"
 
         });

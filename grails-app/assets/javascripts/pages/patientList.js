@@ -11,7 +11,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 }
             },
             waringArguments: {

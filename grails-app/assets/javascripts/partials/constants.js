@@ -19,7 +19,7 @@
         confirmTreatmentTitle: "ADD TREATMENT",
         editGiverTitle: "Edit a Care Giver",
         editPatientTitle: "EDIT PATIENT",
-        updateSurgeryTimeTitle: "EDIT TREATMENT",
+        updateSurgeryTimeTitle: "EDIT SURGERY TIME",
         confirmContent: "",
         loadingContent: "This is loading content",
         changePasswordTitle: "CHANGE PASSWORD",

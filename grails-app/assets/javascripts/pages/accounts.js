@@ -11,13 +11,13 @@
                     title: RC.constants.confirmAccountTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 },
                 updateFormArguments: {
                     title: RC.constants.updateAccountTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 630
                 },
                 changePasswordFormArguments: {
                     title: RC.constants.changePasswordTitle,
