@@ -131,13 +131,13 @@
                 </div>
             </div>
 
+            <h4 class="treatment-info-title">TREATMENT INFO</h4>
+
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
                 <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
                        placeholder="Select group" required/>
             </div>
-
-            <h4 class="treatment-info-title">TREATMENT INFO</h4>
 
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
@@ -154,7 +154,7 @@
             <div class="form-group ">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="Select provider" required/>
+                       placeholder="Select provider" required disabled/>
             </div>
             <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>
