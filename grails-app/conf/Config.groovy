@@ -209,8 +209,8 @@ grails.cache.config = {
         timeToLiveSeconds 600
     }
 }
-// asset-pipeline
-//grails.assets.excludes = "bower_components/"
+
+cors.url.pattern = '/assets/*'
 
 ratchetv2 {
     server {
