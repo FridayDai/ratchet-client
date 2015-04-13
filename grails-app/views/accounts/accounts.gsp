@@ -53,7 +53,7 @@
                 </tbody>
             </table>
         </div>
-
+        <span id="isDoctorImg" class="ui-hidden" data-img-path="${assetPath(src: 'isDoctor.png')}"></span>
         <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
