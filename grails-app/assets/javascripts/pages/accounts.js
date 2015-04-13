@@ -46,6 +46,9 @@
                 activateAccount: "/activateAccount/{0}",
                 getGroups: "/getStaffGroups",
                 getAllGroups: "/getGroups"
+            },
+            img: {
+                isDoctor: ""
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
@@ -96,14 +99,16 @@
                         var fullName,
                             dataName;
 
+
+
                         if (full[5] === "true") {
-                            dataName = ("<img src='/assets/isDoctor.png'/>" + " " + data);
+                            dataName = ("<img src=" + opts.img.isDoctor + "/>" + " " + data);
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<img src='/assets/isDoctor.png'/>" + " " + full.firstName + " " + full.lastName;
+                            fullName = "<img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName;
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
@@ -802,11 +807,16 @@
         }).select2('data', groups);
     }
 
+    function _setIsDoctorImgPath() {
+        opts.img.isDoctor = $('#isDoctorImg').data()['imgPath'];
+    }
+
     /**
      * Provider page Initialization
      * @private
      */
     function _init() {
+        _setIsDoctorImgPath();
         _loadData();
         _setValidate();
         _bindAddEvent();
@@ -819,7 +829,6 @@
         _logout();
         _goBackToPrePage();
         _activateAndDeactivate();
-
     }
 
     _init();
