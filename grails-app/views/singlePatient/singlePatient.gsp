@@ -142,7 +142,7 @@
 
         <div class="form-group">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""/>
+            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder="Select provider" disabled/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
 

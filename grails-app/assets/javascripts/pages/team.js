@@ -222,8 +222,8 @@
                 }
             }));
 
-            _initStaffSelect(form, existSurgeonId);
-            _initSelectGroup(form);
+            _initStaffSelect(form, existSurgeonId, existGroupId);
+            _initSelectGroup(form, existSurgeonId);
         });
     }
 
@@ -507,7 +507,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(form, existSurgeonId) {
+    function _initStaffSelect(form, existSurgeonId, groupId) {
+        if ($(form).find("#selectStaff").combobox()) {
+            $(form).find("#selectStaff").combobox("destroy");
+        }
         $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -518,7 +521,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 9
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -577,7 +581,7 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup(form) {
+    function _initSelectGroup(form, existSurgeonId) {
         $(form).find("#groupSelect").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -619,7 +623,16 @@
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
             },
-            appendTo: ".container"
+            appendTo: ".container",
+            change: function (data, ui) {
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    return;
+                }
+                $("#selectStaff").val("");
+                $("#selectStaff").prop("disabled", false);
+                _initStaffSelect(form, existSurgeonId, $(this).data("id"));
+            }
         });
     }
 
