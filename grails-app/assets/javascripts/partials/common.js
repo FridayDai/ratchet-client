@@ -365,6 +365,9 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
+                        if(self.element.is(":disabled")) {
+                            return;
+                        }
                         if (self.element.autocomplete("widget").is(":visible")) {
                             self.element.autocomplete("close");
                             return;
@@ -379,6 +382,8 @@
 
             destroy: function () {
                 this.wrapper.remove();
+                this.element.parent().find("a").remove();
+                this.element.show();
                 $.Widget.prototype.destroy.call(this);
             }
         });

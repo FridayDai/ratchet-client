@@ -427,7 +427,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect() {
+    function _initStaffSelect(groupId) {
+        if(groupId) {
+            $("#selectSurgeons").combobox("destroy");
+        }
         $("#selectSurgeons").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -438,7 +441,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 9
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -650,7 +654,16 @@
                 $(this).valid();
             },
 
-            appendTo: ".container"
+            appendTo: ".container",
+            change: function (data, ui) {
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    return;
+                }
+                $("#selectSurgeons").val("");
+                $("#selectSurgeons").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+            }
         });
     }
 
