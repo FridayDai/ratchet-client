@@ -671,6 +671,8 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "down");
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
@@ -689,6 +691,8 @@
                     });
 
                     $('.permission-confirm').removeClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "up");
 
                     var elementList = $('.emergency-contact-info').find('.form-group').children();
                     $.each(elementList, function (index, element) {
@@ -697,6 +701,28 @@
                 }
             });
         });
+    }
+
+    function _resetToolTipPosition(elements) {
+        if ($('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "up") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) + 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "down");
+
+        }
+        if (!$('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "down") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) - 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "up");
+        }
+
+
     }
 
     /**
