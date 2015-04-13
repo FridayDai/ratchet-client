@@ -808,7 +808,11 @@
     }
 
     function _setIsDoctorImgPath() {
-        opts.img.isDoctor = $('#isDoctorImg').data()['imgPath'];
+        var data = $('#isDoctorImg').data();
+
+        if (data) {
+            opts.img.isDoctor = data['imgPath'];
+        }
     }
 
     /**
