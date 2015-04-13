@@ -622,6 +622,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
             appendTo: ".container",
             change: function (data, ui) {
