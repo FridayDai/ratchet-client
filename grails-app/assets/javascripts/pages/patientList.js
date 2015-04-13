@@ -483,6 +483,7 @@
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
+                $(this).valid();
             },
 
             appendTo: ".container",
@@ -644,6 +645,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
             appendTo: ".container"
         });
@@ -738,6 +740,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
 
             appendTo: ".container"

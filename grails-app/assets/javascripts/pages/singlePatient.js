@@ -401,6 +401,7 @@
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
+                $(this).valid();
             },
             appendTo: ".container",
             change: function (data, ui) {
@@ -460,7 +461,9 @@
                         }
                     }
                 });
-            },
+            }.change(function () {
+                    $(this).valid();
+                }),
             appendTo: ".container"
 
         });
@@ -489,7 +492,7 @@
     function _initPhoneInput() {
         $("#phone").intlTelInput({
             onlyCountries: ["us"],
-            utilsScript: "/assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            utilsScript: false
         });
     }
 
@@ -644,6 +647,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
 
             appendTo: ".container"
