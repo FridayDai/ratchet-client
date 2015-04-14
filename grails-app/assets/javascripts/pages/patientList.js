@@ -772,17 +772,24 @@
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
-            },
-
-            appendTo: ".container",
-            change: function (data, ui) {
-                if (ui.item === null) {
-                    $(this).data("id", "");
-                    return;
-                }
                 $("#selectStaffs").val("");
                 $("#selectStaffs").prop("disabled", false);
                 _initStaffSelect($(this).data("id"));
+            },
+
+            appendTo: ".container",
+            focus: function (event, ui) {
+                event.preventDefault();
+                    if (ui.item.value === "No matches found") {
+                        $(this).val("");
+                        return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $("#selectStaffs").val("");
+                $("#selectStaffs").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+                return false;
             }
         });
     }
