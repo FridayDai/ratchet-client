@@ -11,7 +11,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 }
             },
             waringArguments: {
@@ -483,6 +483,7 @@
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
+                $(this).valid();
             },
 
             appendTo: ".container",
@@ -602,7 +603,11 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect() {
+    function _initStaffSelect(groupId) {
+        if(groupId) {
+            $("#selectStaffs").combobox("destroy");
+        }
+
         $("#selectStaffs").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -613,7 +618,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 9
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -644,6 +650,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
             appendTo: ".container"
         });
@@ -664,6 +671,8 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "down");
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
@@ -682,6 +691,8 @@
                     });
 
                     $('.permission-confirm').removeClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "up");
 
                     var elementList = $('.emergency-contact-info').find('.form-group').children();
                     $.each(elementList, function (index, element) {
@@ -690,6 +701,28 @@
                 }
             });
         });
+    }
+
+    function _resetToolTipPosition(elements) {
+        if ($('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "up") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) + 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "down");
+
+        }
+        if (!$('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "down") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) - 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "up");
+        }
+
+
     }
 
     /**
@@ -738,9 +771,26 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
+                $("#selectStaffs").val("");
+                $("#selectStaffs").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
             },
 
-            appendTo: ".container"
+            appendTo: ".container",
+            focus: function (event, ui) {
+                event.preventDefault();
+                    if (ui.item.value === "No matches found") {
+                        $(this).val("");
+                        return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $("#selectStaffs").val("");
+                $("#selectStaffs").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+                return false;
+            }
         });
     }
 

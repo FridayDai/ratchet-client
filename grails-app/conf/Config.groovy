@@ -209,13 +209,13 @@ grails.cache.config = {
         timeToLiveSeconds 600
     }
 }
-// asset-pipeline
-//grails.assets.excludes = "bower_components/"
+
+cors.url.pattern = '/assets/*'
 
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://ratchetv2server-develop.elasticbeanstalk.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"

@@ -4,6 +4,7 @@
 @import '../partials/overview';
 @import '../partials/base';
 @import '../partials/theme';
+@import '../partials/select2';
 
 .account-info {
     padding: 20px;
@@ -56,6 +57,11 @@
         .groups {
             white-space: pre-line;
             white-space: pre-line;
+
+            p {
+                padding-left: 20px;
+                color: $base-color-medium-black;
+            }
         }
     }
 
@@ -241,7 +247,7 @@
     }
 
     .ui-dialog-content {
-        padding: 0;
+        padding: 0px 20px 0 20px;
     }
 
     .ui-dialog-buttonpane {
@@ -262,5 +268,7 @@
 }
 
 .password-group {
-    padding-top: 0;
+    width: 60%;
+    margin-top: 30px;
+    margin-left: 7px;
 }

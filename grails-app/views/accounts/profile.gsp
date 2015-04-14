@@ -73,7 +73,7 @@
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
                               id="Groups"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
-                                                                                     var="group">${group.name}</g:each></g:if>
+                                                                                     var="group"><p>${group.name}</p></br></g:each></g:if>
                     </span></td>
                 </tr>
 
@@ -99,7 +99,7 @@
 
     <g:form class="update-password ui-hidden" id="updatePassword" name="updatePassword">
 
-        <div class="form-group">
+        <div class="form-group password-group">
             <label class="lbl-group">OLD PASSWORD<span>*</span></label>
             <input id="oldPass" name="oldPass" type="password" class="input-group"
                    placeholder="Enter old password"
@@ -119,6 +119,7 @@
                    placeholder="Enter new password again"
                    required/>
         </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
     </body>
     </html>

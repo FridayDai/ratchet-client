@@ -22,6 +22,7 @@ class StaffService {
         def offset = params?.offset
         def type = params?.type
         def name = params?.name
+        def groupId = params?.groupId
 
         try {
             log.info("Call backend service to get staffs with max, offset, clientId, type and name, token: ${request.session.token}.")
@@ -32,6 +33,7 @@ class StaffService {
                     .queryString("clientId", request.session.clientId)
                     .queryString("type", type)
                     .queryString("name", name)
+                    .queryString("groupId", groupId)
                     .asString()
 
             def result = JSON.parse(resp.body)

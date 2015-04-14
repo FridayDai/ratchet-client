@@ -289,12 +289,12 @@
      */
     function _initComboboxWidget() {
         $.widget("ui.autocomplete", $.ui.autocomplete, {
-            _resizeMenu: function() {
+            _resizeMenu: function () {
                 var ul = this.menu.element;
-                ul.outerWidth( Math.max(
-                    ul.width( "" ).outerWidth() + 1,
+                ul.outerWidth(Math.max(
+                    ul.width("").outerWidth() + 1,
                     this.element.outerWidth() + 17
-                ) );
+                ));
             }
         });
 
@@ -314,7 +314,7 @@
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
                                 .addClass('ui-button-icon-primary');
-                            $(this).data("id","");
+                            $(this).data("id", "");
                         },
                         close: function (event, ui) {
                             event.preventDefault();
@@ -365,6 +365,9 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
+                        if(self.element.is(":disabled")) {
+                            return;
+                        }
                         if (self.element.autocomplete("widget").is(":visible")) {
                             self.element.autocomplete("close");
                             return;
@@ -379,6 +382,8 @@
 
             destroy: function () {
                 this.wrapper.remove();
+                this.element.parent().find("a").remove();
+                this.element.show();
                 $.Widget.prototype.destroy.call(this);
             }
         });
@@ -777,12 +782,16 @@
                     return errorContent;
                 }
 
-            }).on( "mouseleave", function( event ) {
+            }).on("mouseleave", function (event) {
                 event.stopImmediatePropagation();
-                if(!$(this).valid()){
-                    return;
-                }
+                var elem = $(this).parent().find('.select2-container');
+                if (elem.length > 0) {
 
+                } else {
+                    if (!$(this).valid()) {
+                        return;
+                    }
+                }
             });
             tooltips.tooltip("open");
         },

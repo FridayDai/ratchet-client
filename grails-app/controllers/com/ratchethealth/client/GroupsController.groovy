@@ -18,9 +18,15 @@ class GroupsController extends BaseController {
         def resp = groupService.showGroupsList(request, response, params)
         render resp as JSON
     }
-    
+
     def getStaffGroups() {
-        def resp = groupService.getStaffGroups(request, response)
+        def resp
+        if (request.session.accountManagement == true) {
+            def response = groupService.showGroupsList(request, response, params)
+            resp = response.data
+        } else {
+            resp = groupService.getStaffGroups(request, response, params)
+        }
         render resp as JSON
     }
 

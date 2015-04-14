@@ -124,37 +124,37 @@
                            placeholder="grace@email.com" required/>
                 </div>
 
-                <div class="form-group inline permission-confirm">
+                <div class="form-group inline permission-confirm" data-direction="up">
                     <label></label>
                     <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
                     <span>Patient has given permission to release his/her health information to emergency contact.</span>
                 </div>
             </div>
 
+            <h4 class="treatment-info-title">TREATMENT INFO</h4>
+
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group re-position clear"
                        placeholder="Select group" required/>
             </div>
 
-            <h4 class="treatment-info-title">TREATMENT INFO</h4>
-
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
-                <input id="selectTreatment" name="selectTreatment" type="text" class="input-group treatment clear"
+                <input id="selectTreatment" name="selectTreatment" type="text" class="input-group treatment re-position clear"
                        placeholder="Select treatment" required/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY TIME<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time"
+                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time re-position"
                        placeholder="" required disabled/>
             </div>
 
             <div class="form-group ">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="Select provider" required/>
+                       placeholder="Select provider" required disabled/>
             </div>
             <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>

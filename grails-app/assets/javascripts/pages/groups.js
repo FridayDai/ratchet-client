@@ -11,13 +11,13 @@
                 title: RC.constants.addGroupTitle,
                 content: RC.constants.confirmContent,
                 height: 200,
-                width: 400
+                width: 385
             },
             editFormArguments: {
                 title: RC.constants.editGroupTitle,
                 content: RC.constants.confirmContent,
                 height: 200,
-                width: 400
+                width: 385
             },
             deleteWarningArguments: {
                 title: RC.constants.deleteGroupWaringTitle,
