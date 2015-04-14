@@ -4,6 +4,7 @@
 @import '../partials/theme';
 @import '../partials/dialog';
 @import '../partials/timepicker';
+@import '../partials/select2';
 
 .accounts-form {
     .dr {
@@ -26,21 +27,6 @@
         width: 330px;
         margin-top: 15px;
         text-align: left;
-    }
-
-    .group {
-        margin-top: 15px;
-        text-align: left;
-
-        span {
-            display: inline-block;
-            padding-left: 18px;
-        }
-
-        .account-management {
-            display: block;
-            margin-top: 10px;
-        }
     }
 
 }

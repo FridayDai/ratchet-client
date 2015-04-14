@@ -11,13 +11,13 @@
                     title: RC.constants.confirmAccountTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 },
                 updateFormArguments: {
                     title: RC.constants.updateAccountTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 630
                 },
                 changePasswordFormArguments: {
                     title: RC.constants.changePasswordTitle,
@@ -43,10 +43,15 @@
                 updatePassword: "/updatePassword",
                 showSingleAccount: "/singleAccount/{0}",
                 deactivateAccount: "/deactivateAccount/{0}",
-                activateAccount: "/activateAccount/{0}"
+                activateAccount: "/activateAccount/{0}",
+                getGroups: "/getStaffGroups",
+                getAllGroups: "/getGroups"
+            },
+            img: {
+                isDoctor: ""
             }
         },
-        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon"],
+        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
         staffGroup = ["Patient Management", "Account Management"],
         accountTable;
 
@@ -77,7 +82,7 @@
                 data: data
             }),
             "columnDefs": [{
-                "targets": [0, 4],
+                "targets": [0, 5],
                 "orderable": false
             },
                 {
@@ -91,7 +96,24 @@
                 {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        var fullName,
+                            dataName;
+
+
+
+                        if (full[5] === "true") {
+                            dataName = ("<img src=" + opts.img.isDoctor + "/>" + " " + data);
+                        } else {
+                            dataName = data;
+                        }
+
+                        if (full.doctor === true) {
+                            fullName = "<img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName;
+                        } else {
+                            fullName = full.firstName + " " + full.lastName;
+                        }
+                        var name = data === undefined ? fullName : dataName;
+
                         return name;
                     },
                     width: "18%"
@@ -121,7 +143,16 @@
                         return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
                     },
                     width: "7%"
-                }]
+                },
+                {
+                    "targets": 5,
+                    "visible": false,
+                    "render": function (data, type, full) {
+                        var isDoctor = data === undefined ? full.doctor : data;
+                        return isDoctor;
+                    }
+                }
+            ]
         };
 
         if (accountTable) {
@@ -148,8 +179,12 @@
     function _clickRow() {
         $('#accountsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
-            var url = opts.urls.showSingleAccount.format(id);
-            window.location.href = url;
+            if (id) {
+                var url = opts.urls.showSingleAccount.format(id);
+                window.location.href = url;
+            } else {
+                return;
+            }
         });
     }
 
@@ -190,11 +225,14 @@
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var email = $("#email").val();
-        var type = $("#type").data("id");
-        var isAccountManagement, isDoctor;
+        //var type = $("#type").data("id");
+        var groupId = $("#selectGroup").val();
+        var isAccountManagement, isDoctor, type;
 
         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
+        $("#provider").attr("checked") === "checked" ? type = 9 : type = 10;
+
 
         var data = {
             firstName: firstName,
@@ -202,7 +240,8 @@
             email: email,
             type: type,
             isAccountManagement: isAccountManagement,
-            isDoctor: isDoctor
+            isDoctor: isDoctor,
+            groupId: groupId
         };
 
         return data;
@@ -246,42 +285,43 @@
                 }
             }));
 
-            var data = [
-                {label: "Anesthesiologist", id: 1},
-                {label: "Medical Assistant", id: 2},
-                {label: "Management", id: 3},
-                {label: "Nurse", id: 4},
-                {label: "Physical therapists (PTs)", id: 5},
-                {label: "Primary Physician", id: 6},
-                {label: "Scheduler", id: 7},
-                {label: "Surgeon", id: 8}
-            ];
-            $("#type").combobox({
-                source: function (request, response) {
-                    var sources = _.filter(data, function (num) {
-                        return num.label.toLowerCase().indexOf(request.term) > -1;
-                    });
-                    if (!sources.length) {
-                        var result = [
-                            {
-                                label: 'No matches found',
-                                value: ''
-                            }
-                        ];
-                        response(result);
-                    }
-                    else {
-                        response($.map(sources, function (item) {
-
-                            return {
-                                label: item.label,
-                                value: item.id
-                            };
-                        }));
-                    }
-                },
-                appendTo: ".container"
-            });
+            _initSelectGroup();
+            //var data = [
+            //    {label: "Anesthesiologist", id: 1},
+            //    {label: "Medical Assistant", id: 2},
+            //    {label: "Management", id: 3},
+            //    {label: "Nurse", id: 4},
+            //    {label: "Physical therapists (PTs)", id: 5},
+            //    {label: "Primary Physician", id: 6},
+            //    {label: "Scheduler", id: 7},
+            //    {label: "Surgeon", id: 8}
+            //];
+            //$("#type").combobox({
+            //    source: function (request, response) {
+            //        var sources = _.filter(data, function (num) {
+            //            return num.label.toLowerCase().indexOf(request.term) > -1;
+            //        });
+            //        if (!sources.length) {
+            //            var result = [
+            //                {
+            //                    label: 'No matches found',
+            //                    value: ''
+            //                }
+            //            ];
+            //            response(result);
+            //        }
+            //        else {
+            //            response($.map(sources, function (item) {
+            //
+            //                return {
+            //                    label: item.label,
+            //                    value: item.id
+            //                };
+            //            }));
+            //        }
+            //    },
+            //    appendTo: ".container"
+            //});
         });
     }
 
@@ -312,7 +352,7 @@
         $("#edit-account").on("click", function (e) {
             e.preventDefault();
 
-            $(".update-account-form")[0].reset();
+            $("#updateAccount")[0].reset();
             var accountId = $(this).data("accountId");
 
             var parent = $(this).parents();
@@ -322,37 +362,73 @@
             var lastName = parent.find(".account-last-name").text();
             var email = parent.find(".account-email").text();
             var accountRole = parent.find(".account-role").text();
+            var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
+            var groups = parent.find(".groups").data("ids");
+
+            var selectResults = [];
+            $.each(groups, function (index, item) {
+                selectResults.push({
+                    id: item.id,
+                    text: item.name
+                });
+            });
 
             if (isDoctor === "Dr.") {
                 $("#doctor").prop("checked", true);
             }
+
             if (isAccountManage === "Account Management") {
                 $("#accountManagement").prop("checked", true);
+            }
+
+            if (accountRole === "Yes") {
+                $("#accountProvider").prop("checked", true);
+            } else {
+                $("#accountProvider").prop("checked", false);
             }
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
 
-            $("select option").filter(function () {
-                return $(this).text() === accountRole;
-            }).prop('selected', true);
+
+            //$("select option").filter(function () {
+            //    return $(this).text() === accountRole;
+            //}).prop('selected', true);
+
+            //$("#accountType").val(accountRole);
+            //$("#accountType").data("id", typeId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
-                element: $(".update-account-form"),
+                element: $("#updateAccount"),
 
                 okCallback: function () {
                     if ($("#updateAccount").valid()) {
                         var firstName = $("#firstName").val();
                         var lastName = $("#lastName").val();
                         var email = $("#email").val();
-                        var accountType = $("#accountType").data("id");
-                        var isAccountManagement, isDoctor;
+                        //var accountType = $("#accountType").data("id");
+                        var groupId = $("#groupSelect").val();
+                        var selections = $("#groupSelect").select2('data');
+                        var groupValue = '';
+                        $.each(selections, function (index, item) {
+                            groupValue = groupValue + '<p> ' + item.text + '</p> </br>';
+                        });
+
+                        var newValue = [];
+                        $.each(selections, function (index, item) {
+                            newValue.push({
+                                'id': item.id,
+                                'name': item.text
+                            });
+                        });
+
+                        var isAccountManagement, isDoctor, accountType;
 
                         $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
                         $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-
+                        $("#accountProvider").attr("checked") === "checked" ? accountType = 9 : accountType = 10;
                         var accountInfo = {
                             accountId: accountId,
                             firstName: firstName,
@@ -360,17 +436,20 @@
                             email: email,
                             type: accountType,
                             doctor: isDoctor,
-                            accountManagement: isAccountManagement
+                            accountManagement: isAccountManagement,
+                            groupId: groupId,
+                            newValue: newValue
                         };
 
-                        _updateStaff(accountInfo);
+                        _updateStaff(accountInfo, groupValue);
                         return true;
                     }
                     return false;
                 }
             }));
-
-            _initSelect();
+            _initGroupSelect(selectResults);
+            //$("#groupSelect").val(selectResults);
+            //_initSelect();
         });
     }
 
@@ -379,7 +458,7 @@
      * @param accountInfo
      * @private
      */
-    function _updateStaff(accountInfo) {
+    function _updateStaff(accountInfo, groupValue) {
         $.ajax({
             url: opts.urls.updateAccount,
             type: "POST",
@@ -400,6 +479,8 @@
                     } else {
                         $("#isAccountManage").empty();
                     }
+                    $("#groups").html(groupValue);
+                    $("#groups").data("ids", accountInfo.newValue);
                 }
             }
         });
@@ -477,14 +558,20 @@
      */
     function _validSetPassword() {
         $("#johnRat").click(function () {
-            $(".create-password-form").valid();
-
             var password = $("#password").val();
             var confirmPassword = $("#confirmPassword").val();
-            if (password !== confirmPassword) {
+            $(".error-area").text('');
+
+            if ($(".create-password-form").valid() && password !== confirmPassword) {
                 $(".error-area").text(RC.constants.confirmPassword);
                 return false;
             }
+        });
+
+        $('.create-password-form .input-control').each(function () {
+            $(this).on('input', function () {
+                $(".error-area").text('');
+            });
         });
     }
 
@@ -641,10 +728,99 @@
     }
 
     /**
+     * init select groups
+     * @private
+     */
+    function _initSelectGroup() {
+        $('#selectGroup').select2({
+            tags: true,
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getAllGroups,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data.data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        }).change(function () {
+            $(this).valid();
+        });
+    }
+
+
+    /**
+     * init select groups
+     * @private
+     */
+    function _initGroupSelect(groups) {
+
+        $('#groupSelect').select2({
+            tags: true,
+            ajax: {
+                transport: function (params) {
+                    params.beforeSend = function () {
+                        RC.common.progress(false);
+                    };
+                    return $.ajax(params);
+                },
+                url: opts.urls.getAllGroups,
+                cache: "true",
+                data: function (name) {
+                    return {
+                        name: name
+                    };
+                },
+                results: function (data) {
+                    var myResults = [];
+                    $.each(data.data, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
+                }
+            }
+        }).change(function () {
+            $(this).valid();
+        }).select2('data', groups);
+    }
+
+    function _setIsDoctorImgPath() {
+        var data = $('#isDoctorImg').data();
+
+        if (data) {
+            opts.img.isDoctor = data['imgPath'];
+        }
+    }
+
+    /**
      * Provider page Initialization
      * @private
      */
     function _init() {
+        _setIsDoctorImgPath();
         _loadData();
         _setValidate();
         _bindAddEvent();
@@ -657,7 +833,6 @@
         _logout();
         _goBackToPrePage();
         _activateAndDeactivate();
-
     }
 
     _init();

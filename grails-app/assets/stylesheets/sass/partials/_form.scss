@@ -1,4 +1,5 @@
 .form-group {
+    width: 45%;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 20px;
@@ -19,7 +20,7 @@
     .input-group {
         width: 30px;
         height: 25px;
-        margin-top: 0;
+        margin-top: 3px;
         padding-left: 6px;
         border: 1px solid $base-color-white-grey;
         color: $base-color-medium-black;
@@ -34,6 +35,34 @@
         }
     }
 
+    .input-only-one {
+        width: 300px;
+    }
+
+    .group {
+        margin-top: 5px;
+        margin-left: -2px;
+        text-align: left;
+
+        span {
+            display: inline-block;
+            padding-left: 18px;
+        }
+
+        .checkbox {
+            display: block;
+            margin-top: 10px;
+        }
+    }
+
+    .patient-group {
+        width: 525px;
+    }
+
+    .team-group {
+        width: 300px;
+    }
+
     .ui-combobox {
 
         .input-group {
@@ -44,6 +73,7 @@
         }
 
         .ui-combobox-toggle {
+            margin-top: 3px;
             height: 29px;
             border: 1px solid $base-color-white-grey;
             border-left: 0;
@@ -114,7 +144,19 @@
 .container {
     .ui-autocomplete.ui-widget-content {
         z-index: 99999;
-        max-width: 254px;
+        max-width: 1000px;
+        font-size: 13px;
+        padding: 5px 5px 5px 0;
     }
 }
 
+.team-provider {
+    margin-top: 30px;
+}
+
+.form-group.required {
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: right;
+}

@@ -8,7 +8,7 @@
                 title: RC.constants.updateSurgeryTimeTitle,
                 content: RC.constants.confirmContent,
                 height: 200,
-                width: 400
+                width: 420
             },
             waringArguments: {
                 title: RC.constants.archivedTreatmentWarningMsg,

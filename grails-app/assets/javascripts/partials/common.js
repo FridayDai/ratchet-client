@@ -107,14 +107,12 @@
         function _getAssistData() {
             var title = $('#assist-title').val();
             var desc = $('#assist-desc').val();
-            var name = $('#assist-name').html();
             var browser = window.navigator.userAgent;
             var url = window.location.href;
 
             return {
                 title: title,
                 desc: desc,
-                name: name,
                 browser: browser,
                 url: url
             };
@@ -291,12 +289,12 @@
      */
     function _initComboboxWidget() {
         $.widget("ui.autocomplete", $.ui.autocomplete, {
-            _resizeMenu: function() {
+            _resizeMenu: function () {
                 var ul = this.menu.element;
-                ul.outerWidth( Math.max(
-                    ul.width( "" ).outerWidth() + 1,
+                ul.outerWidth(Math.max(
+                    ul.width("").outerWidth() + 1,
                     this.element.outerWidth() + 17
-                ) );
+                ));
             }
         });
 
@@ -316,6 +314,7 @@
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
                                 .addClass('ui-button-icon-primary');
+                            $(this).data("id", "");
                         },
                         close: function (event, ui) {
                             event.preventDefault();
@@ -326,6 +325,7 @@
                         select: function (event, ui) {
                             event.preventDefault();
                             if (ui.item.value === "No matches found") {
+                                $(this).val("");
                                 return;
                             }
                             $(this).val(ui.item.label);
@@ -336,13 +336,20 @@
                                 .removeClass('ui-button-icon-primary')
                                 .addClass('ui-button-icon-loading');
                         },
-                        change: function (e, ui) {
+                        change: function (event, ui) {
+                            event.preventDefault();
                             if (ui.item === null) {
                                 $(this).data("id", "");
                             }
                         },
                         focus: function (event, ui) {
+                            event.preventDefault();
+                            if (ui.item.value === "No matches found") {
+                                $(this).val("");
+                                return;
+                            }
                             $(this).val(ui.item.label);
+                            $(this).data("id", ui.item.value);
                             return false;
                         }
                     }, this.options));
@@ -358,6 +365,9 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
+                        if(self.element.is(":disabled")) {
+                            return;
+                        }
                         if (self.element.autocomplete("widget").is(":visible")) {
                             self.element.autocomplete("close");
                             return;
@@ -372,6 +382,8 @@
 
             destroy: function () {
                 this.wrapper.remove();
+                this.element.parent().find("a").remove();
+                this.element.show();
                 $.Widget.prototype.destroy.call(this);
             }
         });
@@ -733,6 +745,7 @@
             var element = $(errorElement.element);
             var errorMessage = errorElement.message;
             element.attr("data-error-msg", errorMessage);
+            element.attr("data-error-hover-close", false);
             var className = "error-msg-bottom";
             if (element.is("[data-class]")) {
                 className = element.attr("data-class");
@@ -768,6 +781,17 @@
                     }
                     return errorContent;
                 }
+
+            }).on("mouseleave", function (event) {
+                event.stopImmediatePropagation();
+                var elem = $(this).parent().find('.select2-container');
+                if (elem.length > 0) {
+
+                } else {
+                    if (!$(this).valid()) {
+                        return;
+                    }
+                }
             });
             tooltips.tooltip("open");
         },
@@ -781,6 +805,7 @@
             if ($(element).tooltip()) {
                 $(element).tooltip("destroy");
                 $(element).removeAttr("data-error-msg");
+                $(element).attr("data-error-hover-close", true);
             }
         },
 

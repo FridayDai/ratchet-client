@@ -113,8 +113,16 @@ ratchet-v2-provider-desktop
         grails run-app
     ```
 
+## CDN
+1. The variable CDN_ENABLE should be set as 'true' in env configuration.
+2. Set one custom origin instance of clouldfront
+2. The variable CDN_DOMAIN should be set with clouldfront instance domain name
+
+
 ## Configuration variables
 
 - ELK_TCP_ADDR
 - SERVER_URL
+- CDN_ENABLE    // true | false | not define
+- CDN_DOMAIN    // just cloudfront url domain like: ```d1gdqclzwn7f9.cloudfront.net```
 

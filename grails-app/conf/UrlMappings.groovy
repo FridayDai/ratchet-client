@@ -72,6 +72,14 @@ class UrlMappings {
         "/deactivateAccount/$accountId?"(controller: "accounts", action: "deactivateAccount")
         "/activateAccount/$accountId?"(controller: "accounts", action: "activateAccount")
 
+        // groups
+        "/groups"(controller: "groups", action: "index")
+        "/getGroups"(controller: "groups", action: "getGroups")
+        "/getStaffGroups"(controller: "groups", action: "getStaffGroups")
+        "/createGroup"(controller: "groups", action: "addGroup")
+        "/updateGroup"(controller: "groups", action: "updateGroup")
+        "/deleteGroup"(controller: "groups", action: "deleteGroup")
+
         //task
         "/clients/$clientId/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
         "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")

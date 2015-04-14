@@ -47,23 +47,23 @@
     }
 
     .ec-contact {
-        position: relative;
-        margin-top: 15px;
-        margin-left: 50px;
+        display: inline-block;
+        margin-left: 5px;
+        vertical-align: super;
         color: $base-color-warn;
+    }
 
-        &:before {
-            position: absolute;
-            top: -8px;
-            left: -35px;
-            content: url('../../../images/ec_emergency.png');
-        }
+    img {
+        display: inline-block;
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 34px;
     }
 }
 
 .inner-body {
     //    width: 100%;
-    height: 400px;
+    //    height: 400px;
 
     .team-table {
         width: 100% !important;
@@ -168,16 +168,25 @@
 }
 
 .top-body {
-    height: 60px;
-    padding: 10px;
+    position: relative;
+    height: 150px;
+    padding: 20px 30px 30px;
     border-bottom: 20px solid $base-color-white-grey;
     color: $base-color-light-black;
 
-    .inline {
-        display: inline-block;
-        margin-left: 15px;
-        padding: 10px 30px 10px 10px;
-        border-right: 1px solid $base-color-white-grey;
+    //    .inline {
+    //        display: inline-block;
+    //        margin-left: 15px;
+    //        padding: 10px 30px 10px 10px;
+    //        border-right: 1px solid $base-color-white-grey;
+    //    }
+
+    .provider-content {
+        margin-top: 30px;
+    }
+
+    h4 {
+        color: $base-color-warn;
     }
 
     .surgeon-id {
@@ -192,16 +201,20 @@
     }
 
     .surgeon-email {
-        position: relative;
-        top: -14px;
-        vertical-align: sub;
-        height: 25px;
-        padding: 15px 30px 15px 20px;
+        //        position: relative;
+        //        top: -14px;
+        //        vertical-align: sub;
+        //        height: 25px;
+        //        padding: 15px 30px 15px 20px;
+        margin-left: 20px;
         font-weight: 200;
     }
 
     .btn-edit-surgeon {
-        margin-bottom: 20px;
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        //        margin-bottom: 20px;
         border: 0;
         background-color: transparent;
 

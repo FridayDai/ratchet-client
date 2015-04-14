@@ -65,8 +65,7 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
-        compile ':asset-pipeline:1.9.4'
-        compile ":cdn-asset-pipeline:0.2.2"
+        compile ':asset-pipeline:2.1.5'
 //        compile ":sass-asset-pipeline:1.9.2"
 //        compile ":rest-client-builder:1.0.3"
         compile ":compass-sass:0.7"
@@ -78,6 +77,7 @@ grails.project.dependency.resolution = {
         runtime ':resources:1.2.13'
         compile ":cookie-session:2.0.16"
         compile ":joda-time:1.5"
+        runtime ":cors:1.1.6"
         //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities

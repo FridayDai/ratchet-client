@@ -8,13 +8,13 @@
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
                     height: 600,
-                    width: 600
+                    width: 620
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 },
                 waringArguments: {
                     title: RC.constants.warningTipTitle,
@@ -30,7 +30,8 @@
                 getStaffs: "/getStaffs",
                 updatePatient: "/clients/{0}/patients/{1}",
                 assignTreatment: "/clients/{0}/patients/{1}/treatments",
-                invitePatient: "/invitePatient/{0}"
+                invitePatient: "/invitePatient/{0}",
+                getGroups: "/getStaffGroups"
             }
         },
         tabs,
@@ -99,6 +100,7 @@
                     if ($("#treatment-form").valid()) {
                         var treatmentId = $("#selectTreatment").data("id");
                         var staffIds = $("#selectSurgeons").data("id");
+                        var groupId = $("#selectGroup").data("id");
                         //var staffArray = staffIds.split(',');
                         //var staffIdArr = [];
                         //$.each(staffArray, function (index, item) {
@@ -125,7 +127,8 @@
                             ecFirstName: ecFirstName,
                             ecLastName: ecLastName,
                             relationship: relationship,
-                            ecEmail: ecEmail
+                            ecEmail: ecEmail,
+                            groupId: groupId
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -140,6 +143,7 @@
             //_initSurgeryTime();
             _initSelect();
             _checkEmergencyContact();
+            _initSelectGroup();
 
         });
     }
@@ -177,7 +181,7 @@
 
         $("#relationshipName").combobox({
             source: function (request, response) {
-                var sources = _.filter(data, function(num){
+                var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term) > -1;
                 });
                 if (!sources.length) {
@@ -329,7 +333,7 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
-        if(originalPatientEmail !== updatedEmail) {
+        if (originalPatientEmail !== updatedEmail) {
             $('.invisible-invite').css('display', 'inline-block');
         }
     }
@@ -397,6 +401,7 @@
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
+                $(this).valid();
             },
             appendTo: ".container",
             change: function (data, ui) {
@@ -410,7 +415,7 @@
                     $("#div-surgery-time").css("display", "none");
                 }
                 var date = new Date();
-                var time =date.getTime() +  ui.item.timeStamp;
+                var time = date.getTime() + ui.item.timeStamp;
                 $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
@@ -422,7 +427,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect() {
+    function _initStaffSelect(groupId) {
+        if (groupId) {
+            $("#selectSurgeons").combobox("destroy");
+        }
         $("#selectSurgeons").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -433,7 +441,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 8
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -485,7 +494,7 @@
     function _initPhoneInput() {
         $("#phone").intlTelInput({
             onlyCountries: ["us"],
-            utilsScript: "/assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            utilsScript: false
         });
     }
 
@@ -591,6 +600,75 @@
                     });
                 }
             });
+        });
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup() {
+        $("#selectGroup").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $(this).valid();
+                $("#selectSurgeons").val("");
+                $("#selectSurgeons").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+            },
+
+            appendTo: ".container",
+            focus: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    $(this).val("");
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $("#selectSurgeons").val("");
+                $("#selectSurgeons").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+                return false;
+            }
         });
     }
 

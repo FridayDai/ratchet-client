@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page import="com.xplusz.ratchet.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
 <g:set var="scriptPath" value="singlePatientBundle"/>
 <g:set var="cssPath" value="treatment"/>
@@ -42,7 +42,8 @@
 
             <g:if test="${StatusCodeConstants.PATIENT_STATUS[patientInfo.status] == "invited"}">
                 <div class="inline div-invite">
-                    <button id="invitePatient" class="btn btn-invite invite-patient" data-id="${patientInfo.id}">Invite Again</button>
+                    <button id="invitePatient" class="btn btn-invite invite-patient"
+                            data-id="${patientInfo.id}">Invite Again</button>
                 </div>
             </g:if>
             <g:else>
@@ -73,7 +74,7 @@
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime, archived : medicalRecord?.archived]">
+                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
                             </g:if>
@@ -115,10 +116,16 @@
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"
                    required/>
         </div>
-
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
 
     <g:form class="form treatment-form ui-hidden" id="treatment-form" name="treatment-form">
+
+        <div class="form-group">
+            <label class="lbl-group">GROUP<span>*</span></label>
+            <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                   placeholder="Select group" required/>
+        </div>
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
@@ -133,10 +140,12 @@
                    placeholder="" disabled>
         </div>
 
-        <div class="form-group inline">
-            <label class="lbl-group">SURGEON<span>*</span></label>
-            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""/>
+        <div class="form-group">
+            <label class="lbl-group">PROVIDER<span>*</span></label>
+            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder="Select provider" disabled/>
         </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
+
 
         <div class="emergency-contact-info">
             <h4>EMERGENCY CONTACT</h4>
@@ -172,7 +181,7 @@
                 <span>Patient has given permission to release his/her health information to emergency contact.</span>
             </div>
         </div>
-
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
 
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">

@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:xplusz/ratchet-v2-provider-desktop.git"
+    "url": "git@github.com:xplusz/ratchet-client.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xplusz/ratchet-v2-provider-desktop/issues"
+    "url": "https://github.com/xplusz/ratchet-client/issues"
   },
-  "homepage": "https://github.com/xplusz/ratchet-v2-provider-desktop",
+  "homepage": "https://github.com/xplusz/ratchet-client",
   "devDependencies": {
     "gulp": "^3.8.10",
     "gulp-jshint": "^1.9.0",

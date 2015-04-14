@@ -1,4 +1,4 @@
-<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.xplusz.ratchet.StatusCodeConstants " %>
+<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.ratchethealth.client.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
@@ -52,9 +52,12 @@
             <% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>
             <% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>
             <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>
-            <g:if test="${sentTimeDays == 0}">
-                <label class="numeral">On Surgery Day</label>
+            <g:if test="${task?.isBaseline}">
+                <label class="numeral">BASELINE</label>
             </g:if>
+            <g:elseif test="${sentTimeDays == 0}">
+                <label class="numeral">On Surgery Day</label>
+            </g:elseif>
             <g:else>
                 <span class="numeral label-space number-font">${sentTimeDays}</span>
                 <g:if test="${sentTimeDays == 1}">

@@ -55,7 +55,8 @@
                 addCareGiver: "/clients/{0}/patients/{1}/care_giver",
                 deleteCareTeam: "/clients/{0}/patients/{1}/care_team/{2}/{3}",
                 deleteCareGiver: "/clients/{0}/patients/{1}/care_giver/{2}/{3}",
-                updateCareGiver: "/updateCareGiver"
+                updateCareGiver: "/updateCareGiver",
+                getGroups: "/getStaffGroups"
             }
         },
         careTeamRole =
@@ -183,7 +184,11 @@
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
+            var groupName = element.find("#group-name").text();
             element.find("#selectStaff").val(firstName + ' ' + lastName);
+            element.find("#groupSelect").val(groupName);
+            var existGroupId = element.find("#hidden-group-id").val();
+            var existSurgeonId = element.find("#hidden-surgeon-id").val();
             var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
@@ -191,10 +196,23 @@
                 okCallback: function () {
                     if ($(".edit-surgeon").valid()) {
 
-                        var staffId = $("#selectStaff").data("id");
+                        var selectStaffId = $("#selectStaff").data("id");
+                        var selectGroupId = $("#groupSelect").data('id');
+                        var groupId, staffId;
+                        if (selectGroupId) {
+                            groupId = selectGroupId;
+                        } else {
+                            groupId = existGroupId;
+                        }
+                        if (selectStaffId) {
+                            staffId = selectStaffId;
+                        } else {
+                            staffId = existSurgeonId;
+                        }
                         var ids = {
                             medicalRecordId: medicalRecordId,
-                            staffId: staffId
+                            staffId: staffId,
+                            groupId: groupId
                         };
 
                         _updateCareTeamSurgeon(ids, element);
@@ -204,7 +222,8 @@
                 }
             }));
 
-            _initStaffSelect(form, existSurgeonId);
+            _initStaffSelect(form, existSurgeonId, existGroupId);
+            _initSelectGroup(form, existSurgeonId);
         });
     }
 
@@ -220,9 +239,12 @@
             data: ids
         }).done(function (data) {
             element.find("#surgeonId").text(data.id);
+            element.find("#hidden-surgeon-id").val(data.id);
             element.find("#surgeonFirstName").text(data.firstName);
             element.find("#surgeonLastName").text(data.lastName);
             element.find("#surgeonEmail").text(data.email);
+            element.find("#group-name").text(data.groupName);
+            element.find("#hidden-group-id").val(data.groupId);
         });
     }
 
@@ -232,24 +254,24 @@
      */
     function _bindInviteGiverEvent(element) {
 
-        var ele = element;
-
-        ele.find("#invite-giver").on("click", function (e) {
+        element.find("#invite-giver").on("click", function (e) {
             e.preventDefault();
             element.find('.inviteGiverForm')[0].reset();
+            $('.inviteGiverForm')[0].reset();
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
-            var form =  element.find(".inviteGiverForm");
+            var form = element.find(".inviteGiverForm");
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if (form.valid()) {
 
-                        var firstName = $("#giver-firstName").val();
-                        var lastName = $("#giver-lastName").val();
-                        var email = $("#giver-email").val();
-                        var relationship = $("#relationships").data("id");
+                        var firstName = form.find("#giver-firstName").val();
+                        var lastName = form.find("#giver-lastName").val();
+                        var email = form.find("#giver-email").val();
+                        var relationship = form.find("#relationships").data("id");
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -360,15 +382,15 @@
             var email = parent.find("td.email").text();
 
             var data =
-                {
-                    "Spouse": 1,
-                    "Parent": 2,
-                    "Child": 3,
-                    "Friend": 4,
-                    "Other": 5
-                };
-            var relationshipId = _.map(data, function(num, key){
-                if(key === relationship) {
+            {
+                "Spouse": 1,
+                "Parent": 2,
+                "Child": 3,
+                "Friend": 4,
+                "Other": 5
+            };
+            var relationshipId = _.map(data, function (num, key) {
+                if (key === relationship) {
                     return num;
                 }
             });
@@ -485,7 +507,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(form, existSurgeonId) {
+    function _initStaffSelect(form, existSurgeonId, groupId) {
+        if ($(form).find("#selectStaff").combobox()) {
+            $(form).find("#selectStaff").combobox("destroy");
+        }
         $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -496,7 +521,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 8
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -549,6 +575,74 @@
 
         });
 
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup(form, existSurgeonId) {
+        $(form).find("#groupSelect").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $(this).valid();
+                $("#selectStaff").val("");
+                $("#selectStaff").prop("disabled", false);
+                _initStaffSelect(form, existSurgeonId, $(this).data("id"));
+            },
+            appendTo: ".container",
+            focus: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    $(this).val("");
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $("#selectStaff").val("");
+                $("#selectStaff").prop("disabled", false);
+                _initStaffSelect(form, existSurgeonId, $(this).data("id"));
+                return false;
+
+            }
+        });
     }
 
     /**
@@ -725,6 +819,19 @@
     //    });
     //}
 
+    /**
+     * check archived element height. if it can't fill the whole page, we will set it's height.
+     * @param element
+     * @private
+     */
+    function _checkArchivedWindowSize(element) {
+        var content = element.find('.content');
+        if (content.hasClass('archived') && $('.container').outerHeight() < $(window).height()) {
+            var topHeight = element.offset().top;
+            var contentHeight = $(window).height() - topHeight - $('.footer').height();
+            content.height(contentHeight);
+        }
+    }
 
     /**
      * patientTeam page Initialization
@@ -736,6 +843,7 @@
         _removeCareGiver(element);
         _editCareGiver(element);
         _editSurgeon(element);
+        _checkArchivedWindowSize(element);
     }
 
     $.extend(team, {

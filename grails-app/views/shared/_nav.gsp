@@ -9,7 +9,9 @@
                 <li>Welcome!</li>
                 <li><g:link class="" controller="profile"
                             action="getProfile"
-                            params="[accountId: request.session.accountId]">${request.session.firstName}  ${request.session.lastName}</g:link></li>
+                            params="[accountId: request.session.accountId]"><g:if
+                            test="${request.session.isDoctor == true}">Dr. ${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else>
+                </g:link></li>
             </ul>
         </li>
         %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
@@ -26,11 +28,21 @@
                 <div class="title">Patients</div>
             </g:link>
         </li>
+
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
                 <g:link controller="accounts" action="index" class="icon-account">
                     <div class="title">Accounts</div>
+                </g:link>
+            </li>
+        </g:if>
+
+        <g:if test="${request.session.accountManagement == true}">
+            <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
+                <g:else>class="nav-li"</g:else>>
+                <g:link controller="groups" action="index" class="icon-group">
+                    <div class="title">Groups</div>
                 </g:link>
             </li>
         </g:if>
@@ -47,17 +59,21 @@
 
     <div class="form-group">
         <label class="lbl-group">TITLE<span>*</span></label>
-        <input id="assist-title" name="title" type="text" class="input-group title" placeholder="Please assist me on this" required/>
+        <input id="assist-title" name="title" type="text" class="input-group title"
+               placeholder="Please assist me on this" required/>
     </div>
-    
+
     <div class="form-group">
         <label class="lbl-group">DESCRIPTION<span>*</span></label>
-        <textarea id="assist-desc" name="description" type="text" class="input-group description" placeholder="Description here" required></textarea>
+        <textarea id="assist-desc" name="description" type="text" class="input-group description"
+                  placeholder="Description here" required></textarea>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">NAME<span>*</span></label>
-        <label class="lbl-input" id="assist-name">${request.session.firstName} ${request.session.lastName}</label>
+        <label class="lbl-input" id="assist-full-name" data-first="${request.session.firstName}"
+               data-last="${request.session.lastName}">
+            <g:if test="${request.session.isDoctor == true}">Dr.</g:if> ${request.session.firstName} ${request.session.lastName}</label>
     </div>
 
     <div class="form-group inline">

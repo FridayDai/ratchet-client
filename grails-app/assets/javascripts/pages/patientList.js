@@ -11,7 +11,7 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 600
+                    width: 620
                 }
             },
             waringArguments: {
@@ -24,7 +24,8 @@
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
                 showSinglePatient: "/patients/{0}",
-                getSinglePatient: "/patient/{0}"
+                getSinglePatient: "/patient/{0}",
+                getGroups: "/getStaffGroups"
             }
         },
         provideTable;
@@ -144,8 +145,12 @@
     function _clickRow() {
         $('#patientsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
-            var url = opts.urls.showSinglePatient.format(id);
-            window.location.href = url;
+            if (id) {
+                var url = opts.urls.showSinglePatient.format(id);
+                window.location.href = url;
+            } else {
+                return;
+            }
         });
     }
 
@@ -173,6 +178,9 @@
     function _bindSearchEvent() {
 
         $(".filler-content .input-auto-search").on("autocompleteselect", function (event, ui) {
+            if (ui.item.value === "No matches found") {
+                return;
+            }
             var selectedId = ui.item.value;
             var searchId = $(this).attr('id');
 
@@ -186,8 +194,11 @@
             _search(treatment, surgeon);
         });
 
-        $('#search-input').keydown(function (event) {
+        $('#search-input').add(".filler-content .input-auto-search").keydown(function (event) {
                 if (event.keyCode === 13) {
+                    if ($(this).val().trim() === "" && $(this).data("id")) {
+                        $(this).data("id", "");
+                    }
                     _search();
                 }
             }
@@ -222,6 +233,7 @@
         var date = new Date($("#surgeryTime").val());
         var surgeryTime = date.getTime();
         var staffId = $("#selectStaffs").data('id');
+        var groupId = $("#selectGroup").data('id');
 
         var data = {
             patientId: patientId,
@@ -238,8 +250,8 @@
             profilePhoto: '',
             treatmentId: treatmentId,
             surgeryTime: surgeryTime,
-            staffId: staffId
-
+            staffId: staffId,
+            groupId: groupId
         };
 
         return data;
@@ -312,6 +324,7 @@
             _initPlaceholder();
             _initRelationship();
             _checkEmergencyContact();
+            _initSelectGroup();
             //$("#div-surgery-time").css("display", "none");
         });
     }
@@ -379,7 +392,7 @@
     function _initPhoneInput() {
         $("#phoneNumber").intlTelInput({
             onlyCountries: ["us"],
-            utilsScript: "assets/bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            utilsScript: false
         });
     }
 
@@ -470,6 +483,7 @@
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
                 $(this).data("timeStamp", ui.item.timeStamp);
+                $(this).valid();
             },
 
             appendTo: ".container",
@@ -549,7 +563,7 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 8
+                        type: 9
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -589,7 +603,11 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect() {
+    function _initStaffSelect(groupId) {
+        if(groupId) {
+            $("#selectStaffs").combobox("destroy");
+        }
+
         $("#selectStaffs").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -600,7 +618,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 8
+                        type: 9,
+                        groupId: groupId
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -631,6 +650,7 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
+                $(this).valid();
             },
             appendTo: ".container"
         });
@@ -651,6 +671,8 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "down");
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
@@ -669,6 +691,8 @@
                     });
 
                     $('.permission-confirm').removeClass('visible');
+                    _resetToolTipPosition($('.re-position'));
+                    $('.permission-confirm').data("direction", "up");
 
                     var elementList = $('.emergency-contact-info').find('.form-group').children();
                     $.each(elementList, function (index, element) {
@@ -676,6 +700,97 @@
                     });
                 }
             });
+        });
+    }
+
+    function _resetToolTipPosition(elements) {
+        if ($('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "up") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) + 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "down");
+
+        }
+        if (!$('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "down") {
+            _.each(elements, function (element, index) {
+                var id = "#" + $(element).attr("aria-describedby");
+                var originalTop = parseInt($(id).css('top')) - 20;
+                $(id).css('top', originalTop);
+            });
+            $('.permission-confirm').data("direction", "up");
+        }
+
+
+    }
+
+    /**
+     * init select gruop
+     * @private
+     */
+    function _initSelectGroup() {
+        $("#selectGroup").combobox({
+            source: function (request, response) {
+                $.ajax({
+                    beforeSend: function () {
+                        RC.common.progress(false);
+                    },
+                    url: opts.urls.getGroups,
+                    type: "POST",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        if (!data.length) {
+                            var result = [
+                                {
+                                    label: 'No matches found',
+                                    value: ''
+                                }
+                            ];
+                            response(result);
+                        }
+                        else {
+                            // normal response
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.name,
+                                    value: item.id
+                                };
+                            }));
+                        }
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.value === "No matches found") {
+                    return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $(this).valid();
+                $("#selectStaffs").val("");
+                $("#selectStaffs").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+            },
+
+            appendTo: ".container",
+            focus: function (event, ui) {
+                event.preventDefault();
+                    if (ui.item.value === "No matches found") {
+                        $(this).val("");
+                        return;
+                }
+                $(this).val(ui.item.label);
+                $(this).data("id", ui.item.value);
+                $("#selectStaffs").val("");
+                $("#selectStaffs").prop("disabled", false);
+                _initStaffSelect($(this).data("id"));
+                return false;
+            }
         });
     }
 

@@ -107,17 +107,17 @@ log4j.main = {
         appenders {
             console name: 'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
             appender new biz.paluch.logging.gelf.log4j.GelfLogAppender(name: 'central',
-                    host: System.getProperty("ELK_TCP_ADDR"), port: 12201)
+                    host: System.getProperty("ELK_TCP_ADDR"), port: 12201, additionalFields: "app_type=client")
         }
 
         root { info "central", "stdout", "stacktrace" }
     }
 
-    info 'com.xplusz.ratchet',
+    info 'com.ratchethealth.client',
             'grails.app.domain',
             'grails.app.services',
             'grails.app.controllers',
-            'grails.app.filters.com.xplusz.ratchet.LoggingFilters'
+            'grails.app.filters.com.ratchethealth.client.LoggingFilters'
 
     error 'org.codehaus.groovy.grails.web.servlet',        // controllers
             'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -133,7 +133,7 @@ log4j.main = {
 
     environments {
         development {
-            debug 'com.xplusz.ratchet',
+            debug 'com.ratchethealth.client',
                     'grails.app.domain',
                     'grails.app.services',
                     'grails.app.controllers'
@@ -165,6 +165,27 @@ grails.config.locations = [
         overrideLocation
 ]
 
+// asset-pipeline
+grails.assets.excludes = [
+        'bower_components/**',
+        '.sass-cache/**',
+        'sass/**',
+        'config.rb',
+        'share/*.js',
+        'libs/**',
+        'pages/*.js',
+        'partials/*.js'
+]
+
+grails.assets.plugin."resources".excludes = ["**"]
+grails.assets.plugin."cookie-session".excludes = ["**"]
+
+
+if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
+    cdn_domain = System.getProperty("CDN_DOMAIN") ?: "http://d3pngev0rteoe.cloudfront.net"
+    grails.assets.url = "${cdn_domain}/assets/"
+}
+
 
 grails.cache.enabled = true
 
@@ -188,13 +209,13 @@ grails.cache.config = {
         timeToLiveSeconds 600
     }
 }
-// asset-pipeline
-//grails.assets.excludes = "bower_components/"
+
+cors.url.pattern = '/assets/*'
 
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.qa.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
@@ -224,6 +245,14 @@ ratchetv2 {
             deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
             activateStaff = "${ratchetv2.server.url.base}/staff/activate/%s"
 
+            //Group
+            createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"
+            updateGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            showGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            deleteGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
+            showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
+            getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
+
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
             assignTreatments = "${ratchetv2.server.url.base}/clients/%s/patients/assign/record"
@@ -242,6 +271,7 @@ ratchetv2 {
             showMedicalCares = "${ratchetv2.server.url.base}/medicalCares"
             deleteCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s"
             deleteCareGiver = "${ratchetv2.server.url.base}/records/%s/caregiver/%s"
+            updateCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s/groups/%s"
 
             //for toolService
             tools.loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
