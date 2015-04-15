@@ -72,12 +72,21 @@
             font-weight: normal;
         }
 
+        .input-group:disabled {
+            background-color: $base-color-white-grey-dark;
+        }
+
         .ui-combobox-toggle {
             margin-top: 3px;
             height: 29px;
             border: 1px solid $base-color-white-grey;
             border-left: 0;
             background-color: $base-mid-grey-color;
+        }
+
+        .ui-combobox-toggle.disable {
+            background-color: $base-color-white-grey-dark;
+            cursor: inherit;
         }
     }
 
@@ -87,6 +96,10 @@
         background-image: url('../../../images/patients/calender.png');
         background-repeat: no-repeat;
         background-position: right center;
+    }
+
+    .surgery-time:disabled {
+        background-color: $base-color-white-grey-dark;
     }
 
     .multi-select {

@@ -125,8 +125,9 @@
     <g:form class="accounts-form ui-hidden" id="updateAccount" name="updateAccount">
 
         <div class="form-group">
-            <input id="doctor" name="doctor" type="checkbox" class="input-group doctor">
-            <label class="dr">Dr.</label>
+            <label class="checkbox">
+                <input id="doctor" name="doctor" type="checkbox">Dr.
+            </label>
         </div>
 
         <div class="form-group inline">
