@@ -62,6 +62,10 @@ p {
     outline: none;
 }
 
+button, input {
+    font: $base-font-utility;
+}
+
 *:before,
 *:after {
     @include box-sizing(border-box);
