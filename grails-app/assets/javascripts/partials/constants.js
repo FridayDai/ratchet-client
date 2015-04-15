@@ -47,7 +47,8 @@
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
-
+        surgeryTimeEditWaringTitle: "EDIT SURGERY TIME",
+        surgeryTimeEditWaringMessage: "Are you sure? All results will be cleared and all tasks will be rescheduled.",
 
         //ERROR
         errorTitle: "ERROR",
