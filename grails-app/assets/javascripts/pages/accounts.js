@@ -557,7 +557,7 @@
      * add set password input valid
      */
     function _validSetPassword() {
-        $("#johnRat").click(function () {
+        $("#joinRat").click(function () {
             var password = $("#password").val();
             var confirmPassword = $("#confirmPassword").val();
             $(".error-area").text('');

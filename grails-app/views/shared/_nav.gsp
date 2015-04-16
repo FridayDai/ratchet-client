@@ -82,7 +82,7 @@
     </div>
 
     <div class="form-group center">
-        </label>A response will be made in 24 hours or less</label>
+        </label>You will receive a response within 24 hours.</label>
     </div>
 
 </g:form>
