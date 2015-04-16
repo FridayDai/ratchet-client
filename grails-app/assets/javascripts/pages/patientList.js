@@ -491,6 +491,7 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $(this).val("");
                     return;
                 }
                 var date = new Date();
@@ -539,6 +540,7 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $(this).val("");
                     _search();
                     return;
                 }
@@ -590,6 +592,7 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $(this).val("");
                     _search();
                     return;
                 }

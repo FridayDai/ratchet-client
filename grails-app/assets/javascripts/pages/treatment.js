@@ -13,6 +13,10 @@
             waringArguments: {
                 title: RC.constants.archivedTreatmentWarningMsg,
                 message: RC.constants.archivedMessage
+            },
+            surgeryTimeEditWaringArguments: {
+                title: RC.constants.surgeryTimeEditWaringTitle,
+                message: RC.constants.surgeryTimeEditWaringMessage
             }
         },
         urls: {
@@ -50,16 +54,32 @@
                         var newSurgeryTime = date.getTime();
                         var oldSurgeryTime = (new Date(surgeryTime)).getTime();
                         if (newSurgeryTime !== oldSurgeryTime) {
-                            _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                            _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
                         }
-                        return true;
                     }
-                    return false;
                 }
             }));
             _getTreatmentInfo(clientId, treatmentId);
 
         });
+    }
+
+    /**
+     * It will binds a warning pop up and to update surgery time when user confirmed.
+     * @private
+     */
+    function _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime) {
+        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.surgeryTimeEditWaringArguments, {
+            element: $(".warn"),
+            yesCallback: function () {
+                _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                $("#treatment-time-form").dialog("close");
+            }
+        }));
+
+
+
+
     }
 
     /**

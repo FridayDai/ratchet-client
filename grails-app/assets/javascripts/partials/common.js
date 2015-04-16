@@ -340,6 +340,7 @@
                             event.preventDefault();
                             if (ui.item === null) {
                                 $(this).data("id", "");
+                                $(this).val("");
                             }
                         },
                         focus: function (event, ui) {
@@ -378,6 +379,9 @@
                         self.element.autocomplete("search", "");
                         self.element.focus();
                     });
+                if(self.element.is(":disabled")){
+                    self.element.parent().find("a").addClass('disable');
+                }
             },
 
             destroy: function () {

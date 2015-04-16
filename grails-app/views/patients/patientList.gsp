@@ -142,6 +142,12 @@
                        placeholder="Select group" required/>
             </div>
 
+            <div class="form-group ">
+                <label class="lbl-group">PROVIDER<span>*</span></label>
+                <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
+                       placeholder="Select provider" required disabled/>
+            </div>
+
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
                 <input id="selectTreatment" name="selectTreatment" type="text"
@@ -155,11 +161,7 @@
                        placeholder="" required disabled/>
             </div>
 
-            <div class="form-group ">
-                <label class="lbl-group">PROVIDER<span>*</span></label>
-                <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="Select provider" required disabled/>
-            </div>
+
             <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>
 
