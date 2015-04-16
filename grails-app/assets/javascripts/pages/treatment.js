@@ -43,7 +43,7 @@
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
             var treatmentId = $(this).data("treatmentId");
-            $(".treatment-time-form")[0].reset();
+            $("#treatment-time-form")[0].reset();
 
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
@@ -73,13 +73,9 @@
             element: $(".warn"),
             yesCallback: function () {
                 _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
-                $("#treatment-time-form").dialog("close");
+                $("#treatment-time-form").dialog("destroy");
             }
         }));
-
-
-
-
     }
 
     /**

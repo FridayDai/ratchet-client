@@ -564,8 +564,8 @@
                     });
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
-                    dialogOwn.appendTo(containerParent);
-                    $(this).dialog("destroy").remove();
+                    //dialogOwn.appendTo(containerParent);
+                    $(this).dialog("destroy").addClass('ui-hidden');
                 }
             };
 
