@@ -19,7 +19,7 @@
                     <div class="input-combination">
                         <div class="form-text">
                             <p class="color-black">
-                                Please follow the instruction that's sent to
+                                Please follow the instructions set to
                                 <label class="bolder">${email}</label> to reset your password.</p>
                         </div>
                     </div>

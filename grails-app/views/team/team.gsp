@@ -146,7 +146,7 @@
     <div class="form-group inline team-permission-confirm">
         <label></label>
         <input type="checkbox" id="permissionConfirm" name="permissionConfirm" required/>*
-        <span>Patient has given permission to release his/her health information to emergency contact.</span>
+        <span>Patient would like to release his/her health information to emergency contact.</span>
     </div>
     <label class="form-group required pull-right"><span>*</span>Required field</label>
 </g:form>
