@@ -305,6 +305,10 @@
             e.preventDefault();
             $(".form")[0].reset();
 
+            if ($('.permission-confirm').hasClass('visible')) {
+                $('.permission-confirm').removeClass('visible');
+            }
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
                 element: $(".form"),
                 okCallback: function () {
@@ -607,7 +611,7 @@
      * @private
      */
     function _initStaffSelect(groupId) {
-        if(groupId) {
+        if (groupId) {
             $("#selectStaffs").combobox("destroy");
         }
 
@@ -784,9 +788,9 @@
             appendTo: ".container",
             focus: function (event, ui) {
                 event.preventDefault();
-                    if (ui.item.value === "No matches found") {
-                        $(this).val("");
-                        return;
+                if (ui.item.value === "No matches found") {
+                    $(this).val("");
+                    return;
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
