@@ -127,7 +127,9 @@
                 <div class="form-group inline permission-confirm" data-direction="up">
                     <label></label>
                     <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
-                    <span>Patient has given permission to release his/her health information to emergency contact.</span>
+                    <span>Patient would like to release his/her health information to
+                        <span id="ec-first-name"></span>.</span>
+
                 </div>
             </div>
 
@@ -135,7 +137,8 @@
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group re-position clear"
+                <input id="selectGroup" name="selectGroup" type="text"
+                       class="input-group patient-group re-position clear"
                        placeholder="Select group" required/>
             </div>
 
@@ -147,7 +150,8 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
-                <input id="selectTreatment" name="selectTreatment" type="text" class="input-group treatment re-position clear"
+                <input id="selectTreatment" name="selectTreatment" type="text"
+                       class="input-group treatment re-position clear"
                        placeholder="Select treatment" required/>
             </div>
 

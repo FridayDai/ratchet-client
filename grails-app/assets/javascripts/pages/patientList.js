@@ -674,6 +674,7 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    $('#ec-first-name').text($("#emergency-firstName").val());
                     _resetToolTipPosition($('.re-position'));
                     $('.permission-confirm').data("direction", "down");
                 }

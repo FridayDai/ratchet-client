@@ -19,7 +19,7 @@
         <div class="form-style-content">
 
           <div class="form-text">
-            <p class="color-black">Please enter a new password:</p>
+            <p class="color-black">Please Reset your Password</p>
           </div>
 
           <div class="input-combination">
