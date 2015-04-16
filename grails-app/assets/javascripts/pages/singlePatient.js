@@ -575,6 +575,7 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    $('#ec-first-name').text($("#emergency-firstName").val());
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {
