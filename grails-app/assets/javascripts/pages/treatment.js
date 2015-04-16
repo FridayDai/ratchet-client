@@ -73,7 +73,7 @@
             element: $(".warn"),
             yesCallback: function () {
                 _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
-                $("#treatment-time-form").dialog("destroy");
+                $("#treatment-time-form").dialog("destroy").addClass('ui-hidden');
             }
         }));
     }
