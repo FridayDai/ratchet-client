@@ -129,14 +129,14 @@
 
         <div class="form-group">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder="Select provider"
+            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""
                    disabled/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
             <input id="selectTreatment" name="selectTreatment" type="text" class=" required"
-                   placeholder=""/>
+                   placeholder="Select treatment"/>
         </div>
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
