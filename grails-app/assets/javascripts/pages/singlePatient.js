@@ -83,6 +83,10 @@
             e.preventDefault();
 
             $(".treatment-form")[0].reset();
+            
+            if ($('.permission-confirm').hasClass('visible')) {
+                $('.permission-confirm').removeClass('visible');
+            }
 
             patientId = $(this).data("patientId");
             clientId = $(this).data("clientId");

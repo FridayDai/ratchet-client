@@ -103,7 +103,7 @@
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
                               id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
-                                                                                     var="group"><p>${group.name}</p></br></g:each></g:if>
+                                                                                     var="group"><p>${group.name}</p></g:each></g:if>
                     </span></td>
                 </tr>
 

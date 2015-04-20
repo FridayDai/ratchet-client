@@ -309,6 +309,9 @@
      */
     function _bindAddEvent(patientId) {
 
+        if ($('.permission-confirm').hasClass('visible')) {
+            $('.permission-confirm').removeClass('visible');
+        }
         $('#patient-id-value').text(patientId);
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
             element: $("#table-form"),

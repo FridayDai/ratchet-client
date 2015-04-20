@@ -82,7 +82,7 @@
                 data: data
             }),
             "columnDefs": [{
-                "targets": [0, 5],
+                "targets": 4,
                 "orderable": false
             },
                 {
@@ -98,7 +98,6 @@
                     "render": function (data, type, full) {
                         var fullName,
                             dataName;
-
 
 
                         if (full[5] === "true") {

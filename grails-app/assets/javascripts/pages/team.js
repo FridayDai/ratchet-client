@@ -111,24 +111,20 @@
                 },
                 {
                     data: "firstName",
-                    class: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
-                    class: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
-                    class: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
-                    class: "email",
                     width: "20%"
                 },
                 {
@@ -155,7 +151,6 @@
                         }
 
                     },
-                    class: "icons",
                     width: "10%"
                 }
             ]
@@ -194,10 +189,10 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".edit-surgeon").valid()) {
+                    if (form.valid()) {
 
-                        var selectStaffId = $("#selectStaff").data("id");
-                        var selectGroupId = $("#groupSelect").data('id');
+                        var selectStaffId = form.find("#selectStaff").data("id");
+                        var selectGroupId = form.find("#groupSelect").data('id');
                         var groupId, staffId;
                         if (selectGroupId) {
                             groupId = selectGroupId;
@@ -623,8 +618,8 @@
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
-                $("#selectStaff").val("");
-                $("#selectStaff").prop("disabled", false);
+                $(form).find("#selectStaff").val("");
+                $(form).find("#selectStaff").prop("disabled", false);
                 _initStaffSelect(form, existSurgeonId, $(this).data("id"));
             },
             appendTo: ".container",
@@ -636,11 +631,10 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
-                $("#selectStaff").val("");
-                $("#selectStaff").prop("disabled", false);
+                $(form).find("#selectStaff").val("");
+                $(form).find("#selectStaff").prop("disabled", false);
                 _initStaffSelect(form, existSurgeonId, $(this).data("id"));
                 return false;
-
             }
         });
     }

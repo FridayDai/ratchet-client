@@ -159,7 +159,7 @@
             <div class="form-group ">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="Select provider" required disabled/>
+                       placeholder="" required disabled/>
             </div>
 
             <div class="form-group inline">
