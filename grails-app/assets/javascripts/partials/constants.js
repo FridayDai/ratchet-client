@@ -53,6 +53,7 @@
         //ERROR
         errorTitle: "ERROR",
         errorTitle404: "ERROR : 404",
+        groupErrorTip:"CANNOT DELETE GROUP",
         errorTip: "Something has gone wrong. Please try again!",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
         errorMessageAction: "Something wrong, Please check messages below.",

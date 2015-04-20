@@ -63,35 +63,49 @@
             </table>
         </div>
 
+        <g:form class="form ui-hidden" id="patient-id-form" name="patient-id-form">
+
+            <div class="form-group inline">
+                <label class="lbl-group">PATIENT ID<span>*</span></label>
+                <input id="new-patient-id" name="new-patient-id" type="text" class="input-group input-only-one" placeholder="1234567890" required/>
+            </div>
+
+            <div class="required-field required-padding">
+                *Required field
+            </div>
+
+        </g:form>
+
         <g:form class="form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
-                <input id="patientId" name="patientId" type="text" class="input-group"
-                       placeholder="1234567890"
-                       required/>
+                <div id="patient-id-value" class="patient-id-div"></div>
+                %{--<input id="patientId" name="patientId" type="text" class="input-group"--}%
+                       %{--placeholder="1234567890"--}%
+                       %{--required/>--}%
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
-                <input id="firstName" name="firstName" type="text" class="input-group" placeholder="John" required/>
+                <input id="firstName" name="firstName" type="text" class="input-group input-convert" placeholder="John" required/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span>*</span></label>
-                <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith"
+                <input id="lastName" name="lastName" type="text" class="input-group input-convert" placeholder="Smith"
                        required/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-                <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group" maxlength="14"
+                <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group input-convert" maxlength="14"
                        placeholder="777-777-7777" required/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
-                <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"
+                <input id="email" name="email" type="email" class="input-group input-convert" placeholder="john.smith@email.com"
                        required/>
 
             </div>
@@ -145,7 +159,7 @@
             <div class="form-group ">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="Select provider" required disabled/>
+                       placeholder="" required disabled/>
             </div>
 
             <div class="form-group inline">

@@ -67,7 +67,7 @@ class AuthenticationService {
             request.session.token = result.token
             request.session.accountId = result.id
             request.session.clientId = result.clientId
-            request.session.clientName = result.clientName
+            request.session.clientPortalName = result.clientPortalName
             request.session.firstName = result.firstName
             request.session.lastName = result.lastName
             request.session.email = email
@@ -120,7 +120,7 @@ class AuthenticationService {
         try {
             log.info("Call backend service to logout, token: ${token}.")
             def url = grailsApplication.config.ratchetv2.server.url.logout
-            def resp = Unirest.get(url)
+            def resp = Unirest.post(url)
                     .asString()
             if (resp.status == 200) {
                 log.info("Logout success, token: ${token}")

@@ -3,34 +3,34 @@
 
     //Define groups page global variables
     var opts = {
-        table: {
-            id: "#groupsTable"
-        },
-        defaultConfirmArguments: {
-            addFormArguments: {
-                title: RC.constants.addGroupTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 385
+            table: {
+                id: "#groupsTable"
             },
-            editFormArguments: {
-                title: RC.constants.editGroupTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 385
+            defaultConfirmArguments: {
+                addFormArguments: {
+                    title: RC.constants.addGroupTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 385
+                },
+                editFormArguments: {
+                    title: RC.constants.editGroupTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 385
+                },
+                deleteWarningArguments: {
+                    title: RC.constants.deleteGroupWaringTitle,
+                    message: RC.constants.archivedMessage
+                }
             },
-            deleteWarningArguments: {
-                title: RC.constants.deleteGroupWaringTitle,
-                message: RC.constants.archivedMessage
+            urls: {
+                getGroups: "/getGroups",
+                addGroup: "/createGroup",
+                updateGroup: "/updateGroup",
+                deleteGroup: "/deleteGroup"
             }
         },
-        urls: {
-            getGroups: "/getGroups",
-            addGroup: "/createGroup",
-            updateGroup: "/updateGroup",
-            deleteGroup: "/deleteGroup"
-        }
-    },
         groupTable;
 
     /**
@@ -243,6 +243,19 @@
             dataType: "json",
             success: function () {
                 parentTr.remove();
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 400) {
+                    var resp = jqXHR.responseText;
+                    var msgs = resp.split(".");
+
+                    RC.common.error({
+                        title: RC.constants.groupErrorTip,
+                        message: msgs[0] + ".",
+                        errorMessage: msgs[1] + "."
+                    });
+                }
+
             }
         });
     }

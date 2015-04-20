@@ -8,6 +8,7 @@ class PatientsController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
 
     def patientService
+    def singlePatientService
 
     static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
 
@@ -36,6 +37,11 @@ class PatientsController extends BaseController {
 
     def getActivities() {
         def data = patientService.loadActivities(params)
+        render data as JSON
+    }
+
+    def checkPatientExist() {
+        def data = singlePatientService.showPatientByPatientId(request, response, params)
         render data as JSON
     }
 }
