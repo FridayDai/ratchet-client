@@ -40,7 +40,7 @@
 .no-item {
     padding: 3% 0;
 
-    p{
+    p {
         font-weight: 200;
     }
 }
@@ -168,7 +168,6 @@
         color: $base-color-white;
         font-size: 9pt;
 
-
         &:before {
             display: inline-block;
             padding: 0 2px;
@@ -176,7 +175,7 @@
             font-weight: lighter;
             font-size: 18px;
             font-family: ionicons;
-            vertical-align: top;
+            vertical-align: sub;
         }
     }
 
@@ -244,21 +243,20 @@
 
     .box-item {
         border-color: $base-font-color;
-//        &.pending,
-//        &.overdue,
-//        &.complete
-//        {
-//            border-color: $base-font-color;
-//            .box-item-header {
-//                background: $base-font-color;
-//            }
-//        }
+        //        &.pending,
+        //        &.overdue,
+        //        &.complete
+        //        {
+        //            border-color: $base-font-color;
+        //            .box-item-header {
+        //                background: $base-font-color;
+        //            }
+        //        }
 
         .box-item-header {
             background: $base-font-color;
         }
     }
-
 
     .box-item-content {
 
@@ -274,12 +272,12 @@
             color: $base-color-dark-gray;
         }
 
-//        .task-email {
-//            border: 0;
-//            color: $base-color-white;
-//            background-color: $base-font-color;
-//            cursor: inherit;
-//        }
+        //        .task-email {
+        //            border: 0;
+        //            color: $base-color-white;
+        //            background-color: $base-font-color;
+        //            cursor: inherit;
+        //        }
     }
 
 }
