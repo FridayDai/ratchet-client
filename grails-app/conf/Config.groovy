@@ -232,6 +232,7 @@ ratchetv2 {
             patient = "${ratchetv2.server.url.base}/patients/%s"
             addPatient = "${ratchetv2.server.url.base}/patients/%d/records"
             invitePatient = "${ratchetv2.server.url.base}/patient/invite/%s"
+            showPatient = "${ratchetv2.server.url.base}/patients/patientId/%s"
 
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/staffs"

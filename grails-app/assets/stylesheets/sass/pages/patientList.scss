@@ -27,6 +27,7 @@
 }
 
 .inline {
+    position: relative;
     display: inline-block;
 }
 
@@ -92,6 +93,50 @@
 
 .select-tip{
     font-size: 11px;
+}
+
+// for new patient inline edit
+.icon-edit {
+    padding: 5px 0;
+    border: 0;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
+
+    &:before {
+        display: inline-block;
+        padding-left: 10px;
+        content: '\f417';
+        color: $base-font-color;
+        font-weight: lighter;
+        font-family: ionicons;
+        cursor: pointer;
+    }
+}
+
+.form-group-edit {
+    position: absolute;
+    top: -5px;
+    right: 8px;
+}
+
+.replace-input-div {
+    height: 25px;
+    margin-top: 3px;
+    padding: 2px 0;
+    color: $base-color-medium-black;
+    font-size: 14px;
+}
+
+.patient-id-div {
+    height: 25px;
+    margin-top: 3px;
+    padding: 2px 0;
+    color: $base-color-medium-black;
+    font-size: 14px;
 }
 
 
