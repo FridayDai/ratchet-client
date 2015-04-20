@@ -1,20 +1,20 @@
 <div class="nav">
     <ul id="menu" class="list">
-        <li class="client-name">${request.session.clientName}</li>
+        <li class="client-name">${request.session.clientPortalName}</li>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
             <g:link class="" controller="profile"
                     action="getProfile"
                     params="[accountId: request.session.accountId]">
-            <div class="user-photo">
-                <img src="${assetPath(src: 'user.png')}">
-            </div>
-            <ul class="user-profile">
-                <li>Welcome!</li>
-                <li><span><g:if
+                <div class="user-photo">
+                    <img src="${assetPath(src: 'user.png')}">
+                </div>
+                <ul class="user-profile">
+                    <li>Welcome!</li>
+                    <li><span><g:if
                             test="${request.session.isDoctor == true}">Dr. ${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else></span>
-                </li>
-            </ul>
+                    </li>
+                </ul>
             </g:link>
         </li>
         %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%

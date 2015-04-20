@@ -67,7 +67,7 @@ class AuthenticationService {
             request.session.token = result.token
             request.session.accountId = result.id
             request.session.clientId = result.clientId
-            request.session.clientName = result.clientName
+            request.session.clientPortalName = result.clientPortalName
             request.session.firstName = result.firstName
             request.session.lastName = result.lastName
             request.session.email = email
