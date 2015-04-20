@@ -182,7 +182,7 @@ grails.assets.plugin."cookie-session".excludes = ["**"]
 
 
 if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
-    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN") ?: "https://d3pngev0rteoe.cloudfront.net"
+    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "http://d3pngev0rteoe.cloudfront.net"
     grails.assets.url = "${cdn_domain}/assets/"
 }
 
