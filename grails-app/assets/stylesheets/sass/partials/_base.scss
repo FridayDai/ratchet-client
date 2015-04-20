@@ -540,8 +540,8 @@ a {
     li {
         display: list-item;
         min-height: 1em;
-        margin: 0;
-        padding: 3px 15px 4px;
+        margin: 3px 5px 0;
+        padding: 3px 10px;
         color: $base-dark-grey;
         list-style: none;
         cursor: pointer;
@@ -550,6 +550,7 @@ a {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        font-size: 13px;
     }
 
     .ui-menu-item.ui-state-focus {
@@ -563,7 +564,6 @@ a {
     max-height: 110px;
     overflow-y: auto;
 }
-
 
 .ui-widget-overlay {
     background-color: $base-color-mid-gray;
