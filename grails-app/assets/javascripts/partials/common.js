@@ -563,6 +563,9 @@
                         RC.common.hideErrorTip(element);
                     });
                     confirmFormArguments.element[0].reset();
+                    if ($.isFunction(confirmFormArguments.cancelCallback)) {
+                        (confirmFormArguments.cancelCallback)();
+                    }
                     dialog.dialog("close");
                     //dialogOwn.appendTo(containerParent);
                     $(this).dialog("destroy").addClass('ui-hidden');

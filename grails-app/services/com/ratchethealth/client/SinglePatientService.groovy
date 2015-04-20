@@ -89,4 +89,30 @@ class SinglePatientService {
             throw new ApiAccessException(e.message)
         }
     }
+
+    def showPatientByPatientId(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
+        String showPatientUrl = grailsApplication.config.ratchetv2.server.url.showPatient
+        def url = String.format(showPatientUrl, params?.patientId)
+
+        try {
+            log.info("Call backend service to get patient info with patientId token: ${request.session.token}.")
+            def resp = Unirest.get(url)
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("get patient info success, token: ${request.session.token}")
+                def result = JSON.parse(resp.body)
+                return result
+            } else if (resp.status == 404) {
+                log.info("get patient info failed, haven't this patientId, token: ${request.session.token}")
+                return [check: "false"]
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+    }
 }

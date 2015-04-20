@@ -12,6 +12,12 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 620
+                },
+                newPatientIdConfirmArguments: {
+                    title: RC.constants.confirmPatientTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 400
                 }
             },
             waringArguments: {
@@ -25,7 +31,8 @@
                 getStaffs: "/getStaffs",
                 showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}",
-                getGroups: "/getStaffGroups"
+                getGroups: "/getStaffGroups",
+                checkPatientId: "/checkPatientId/{0}"
             }
         },
         provideTable;
@@ -216,11 +223,11 @@
      * @private
      */
     function _getAddData() {
-        var patientId = $("#patientId").val();
-        var firstName = $("#firstName").val();
-        var lastName = $("#lastName").val();
-        var email = $("#email").val();
-        var number = $("#phoneNumber").val();
+        var patientId = $("#patient-id-value").text();
+        var firstName = $("#firstName").val() || $("#firstName").text();
+        var lastName = $("#lastName").val() || $("#lastName").text();
+        var email = $("#email").val() || $("#email").text();
+        var number = $("#phoneNumber").val() || $("#phoneNumber").text();
         var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
 
         var ecFirstName = $("#emergency-firstName").val();
@@ -300,37 +307,181 @@
      * bind add event
      * @private
      */
-    function _bindAddEvent() {
+    function _bindAddEvent(patientId) {
+
+        if ($('.permission-confirm').hasClass('visible')) {
+            $('.permission-confirm').removeClass('visible');
+        }
+        $('#patient-id-value').text(patientId);
+        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+            element: $("#table-form"),
+            okCallback: function () {
+                if ($("#table-form").valid()) {
+                    _add();
+                    return true;
+                }
+                return false;
+            },
+            cancelCallback: function () {
+                _restoreNewPatientForm();
+                _destroyPhone();
+            }
+        }));
+
+        _bindEditPatientInfoModel();
+        _initPhoneInput();
+        _checkSpecialNumber();
+        //_initSurgeryTime();
+        _initSelectTreatment();
+        _initStaffSelect();
+        _initPlaceholder();
+        _initRelationship();
+        _checkEmergencyContact();
+        _initSelectGroup();
+        //$("#div-surgery-time").css("display", "none");
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _bindNewPatientModel() {
         $("#add-patient").on("click", function (e) {
             e.preventDefault();
-            $(".form")[0].reset();
+            var form = $("#patient-id-form");
+            form[0].reset();
 
-            if ($('.permission-confirm').hasClass('visible')) {
-                $('.permission-confirm').removeClass('visible');
-            }
-
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".form"),
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.newPatientIdConfirmArguments, {
+                element: form,
+                okTitle: "Next",
                 okCallback: function () {
-                    if ($("#table-form").valid()) {
-                        _add();
+                    if (form.valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
                         return true;
                     }
-                    return false;
                 }
             }));
 
-            _initPhoneInput();
-            _checkSpecialNumber();
-            //_initSurgeryTime();
-            _initSelectTreatment();
-            _initStaffSelect();
-            _initPlaceholder();
-            _initRelationship();
-            _checkEmergencyContact();
-            _initSelectGroup();
-            //$("#div-surgery-time").css("display", "none");
         });
+    }
+
+    /**
+     * edit patient base info in the second model
+     * @private
+     */
+    function _bindEditPatientInfoModel() {
+        $('.form-group-edit').on("click", function (e) {
+            e.preventDefault();
+            var element = $(this).prev();
+            if (!element.hasClass('replace-input-div')) {
+                element = element.find('.replace-input-div');
+            }
+            _divReplaceWithInput(element);
+            if(element.attr("id") === "phoneNumber") {
+                _initPhoneInput();
+                _checkSpecialNumber();
+            }
+        });
+    }
+
+    /**
+     * check the patient is already exist
+     * @param patientId
+     * @private
+     */
+    function _checkPatientExist(patientId) {
+        $.ajax({
+            url: opts.urls.checkPatientId.format(patientId),
+            type: "POST",
+            data: {patientId: patientId},
+            dataType: "json",
+            success: function (data) {
+                if (data.check === "false") {
+                    _bindAddEvent(patientId);
+                } else {
+                    _inputReplaceWithDiv(data, patientId, _bindAddEvent);
+                }
+
+            }
+        });
+
+    }
+
+    function _restoreNewPatientForm() {
+        _.each($(".replace-input-div"), function (element, index) {
+            var key = element.id;
+            var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";
+            $(element).replaceWith(html);
+            var $ele = $('#' + key);
+            switch (key) {
+                case "firstName":
+                    $ele.attr("placeholder", "John");
+                    break;
+                case "lastName":
+                    $ele.attr("placeholder", "Smith");
+                    break;
+                case "email":
+                    $ele.prop("type", "email");
+                    $ele.attr("placeholder", "777-777-7777");
+                    break;
+                case "phoneNumber":
+                    $ele.prop("type", "tel");
+                    $ele.attr("placeholder", "john.smith@email.com");
+                    $ele.attr("maxlength", "14");
+                    $ele = $ele.closest(".intl-tel-input");
+                    break;
+            }
+            $ele.next().remove();
+
+        });
+    }
+
+    function _inputReplaceWithDiv(data, patientId, fn) {
+
+        _.each($(".input-convert"), function (element, index) {
+            var key = element.id;
+            var html = "<div class='replace-input-div' id=" + key + ">" + data[key] + "</div>";
+            var edit = "<a class='icon-edit form-group-edit'>" + "</a>";
+            if (key === "phoneNumber") {
+                if ($('#' + key).parent().hasClass("int-tel-input")) {
+                    $(element).replaceWith(html);
+                    $('#' + key).closest(".form-group").append(edit);
+                } else {
+                    $(element).replaceWith(html + edit);
+                }
+
+                $('#' + key).text(data[key].replace(/(\d{3})(\d{4})/, "($1)$2-"));
+            } else {
+                $(element).replaceWith(html + edit);
+            }
+
+
+        });
+        fn(patientId);
+    }
+
+    function _divReplaceWithInput(element) {
+        var div = element;
+        var key = div.attr("id");
+        var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";//add type
+        div.replaceWith(html);
+        var $ele = $('#' + key).val(div.text());
+        switch (key) {
+            case "email":
+                $ele.prop("type", "email");
+                $ele.attr("placeholder", "777-777-7777");
+                break;
+            case "phoneNumber":
+                $ele.prop("type", "tel");
+                $ele.attr("placeholder", "john.smith@email.com");
+                $ele.attr("maxlength", "14");
+                $ele = $ele.closest(".intl-tel-input");
+                break;
+            default :
+                $ele.prop("type", "text");
+                break;
+        }
     }
 
 
@@ -398,6 +549,10 @@
             onlyCountries: ["us"],
             utilsScript: false
         });
+    }
+
+    function _destroyPhone(){
+        $("#phoneNumber").intlTelInput("destroy");
     }
 
     /**
@@ -493,7 +648,7 @@
             appendTo: ".container",
 
             change: function (data, ui) {
-                if (ui.item === null) {
+                if (ui.item === null || ui.item === undefined) {
                     $(this).data("id", "");
                     $(this).val("");
                     return;
@@ -809,7 +964,7 @@
     function _init() {
         _loadData();
         _setValidate();
-        _bindAddEvent();
+        _bindNewPatientModel();
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();
