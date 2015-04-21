@@ -536,8 +536,8 @@
 
             var $container = $(confirmFormArguments.element);
 
-            var containerParent = $container.parent();
-            var dialogOwn = $container.clone();
+            //var containerParent = $container.parent();
+            //var dialogOwn = $container.clone();
 
             var dialogOpts = {
                 autoOpen: false,
@@ -558,10 +558,11 @@
                 buttons: {},
                 close: function () {
 
-                    var elementList = $(confirmFormArguments.element).find(".form-group").children();
+                    var elementList = $(confirmFormArguments.element).find(".form-group").find(":input");
                     $.each(elementList, function (index, element) {
                         RC.common.hideErrorTip(element);
                     });
+                    confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
                     if ($.isFunction(confirmFormArguments.cancelCallback)) {
                         (confirmFormArguments.cancelCallback)();

@@ -313,10 +313,11 @@
             $('.permission-confirm').removeClass('visible');
         }
         $('#patient-id-value').text(patientId);
+        var form = $("#table-form");
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-            element: $("#table-form"),
+            element: form,
             okCallback: function () {
-                if ($("#table-form").valid()) {
+                if (form.valid()) {
                     _add();
                     return true;
                 }
@@ -349,6 +350,7 @@
         $("#add-patient").on("click", function (e) {
             e.preventDefault();
             var form = $("#patient-id-form");
+            form.validate().resetForm();
             form[0].reset();
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.newPatientIdConfirmArguments, {

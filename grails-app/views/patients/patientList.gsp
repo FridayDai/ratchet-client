@@ -134,8 +134,8 @@
 
                 <div class="form-group inline emr-email">
                     <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                    <input id="emergency-email" name="email" type="email" class="input-group emergency-field"
-                           placeholder="grace@email.com" required/>
+                    <input id="emergency-email" name="emergency-email" type="email" class="input-group emergency-field"
+                           placeholder="grace@email.com"/>
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">
