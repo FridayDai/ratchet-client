@@ -13,6 +13,7 @@
         <div class="inner-header">
             <label class="title">PATIENTS</label>
             <a href="#" id="add-patient" class="btn add-patient"><span>New Patient</span></a>
+            <a href="#" id="bulk-important" class="btn bulk-important"><span>Bulk Import</span></a>
         </div>
 
         <div class="inner-search">
@@ -181,6 +182,44 @@
 
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>
+        </g:form>
+
+        <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
+
+            <p>Upload a file containing the patients you wish to create. Please note that a maximum of 100 patients can be included in your file and it may take a few minutes to process.</p>
+            <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
+            <div class="inner-search">
+                <div class="search-content clear">
+                    <div class="filler-content">
+                        <input type="text" placeholder="Title" class="search-input" autocomplete="false" name="search-title-input" id="search-title-input">
+                        <span class="search" id="search-title-btn"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="import-table-group">
+                <table id="helpTable" class="display div-hidden" >
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>ID</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <span id="bulk-important-file"  class="btn bulk-important bulk-important-file">
+                <span>Import File</span>
+                <input id="fileupload" type="file" name="files[]" multiple data-url="/upload">
+            </span>
+
+            <div class="progress-box">
+                <div id="progress" class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
+                </div>
+                <div class="loading"></div>
+            </div>
+
+            <div id="files" class="files"></div>
         </g:form>
 
         <g:form class="warn ui-hidden">

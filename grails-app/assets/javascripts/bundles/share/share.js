@@ -12,3 +12,4 @@
 //= require ../../bower_components/moment-timezone/builds/moment-timezone-with-data
 //= require ../../bower_components/intl-tel-input/lib/libphonenumber/build/utils
 //= require ../../bower_components/intl-tel-input/build/js/intlTelInput.min
+//= require ../../bower_components/jquery-file-upload/js/jquery.fileupload
