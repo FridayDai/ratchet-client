@@ -57,6 +57,9 @@
         errorTip: "Something has gone wrong. Please try again!",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
         errorMessageAction: "Something wrong, Please check messages below.",
-        confirmPassword: "Your passwords don't match. Please enter them again."
+        confirmPassword: "Your passwords don't match. Please enter them again.",
+
+        //OTHERS
+        emailExist: "Email already exists"
     });
 })(jQuery);
