@@ -8,7 +8,7 @@
     .lbl-group {
         display: table-row-group;
         color: $base-color-medium-black;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 14px;
 
         span {
@@ -22,11 +22,12 @@
         height: 25px;
         margin-top: 3px;
         padding-left: 6px;
-        border: 1px solid $base-color-white-grey;
+        border: 1px solid $base-font-color;
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         font-size: 14px;
-        font-family: inherit;
+        font-family: "Lato";
+        font-weight: 400;
 
         @include input-placeholder {
             color: $base-font-grey;
@@ -69,7 +70,7 @@
             min-width: 232px;
             height: 29px;
             color: $base-color-medium-black;
-            font-weight: normal;
+            font-weight: 300;
         }
 
         .input-group:disabled {
@@ -79,7 +80,7 @@
         .ui-combobox-toggle {
             margin-top: 3px;
             height: 29px;
-            border: 1px solid $base-color-white-grey;
+            border: 1px solid $base-font-color;
             border-left: 0;
             background-color: $base-mid-grey-color;
         }
@@ -91,7 +92,7 @@
     }
 
     .surgery-time {
-        border: 1px solid $base-color-white-grey;
+        border: 1px solid $base-font-color;
         background-color: $base-mid-grey-color;
         background-image: url('../../../images/patients/calender.png');
         background-repeat: no-repeat;
@@ -172,4 +173,8 @@
     margin-top: 10px;
     margin-bottom: 0;
     text-align: right;
+}
+
+.form-provider {
+    margin-top: 20px;
 }

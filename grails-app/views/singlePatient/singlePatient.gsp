@@ -127,7 +127,7 @@
                    placeholder="Select group" required/>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-provider">
             <label class="lbl-group">PROVIDER<span>*</span></label>
             <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""
                    disabled/>

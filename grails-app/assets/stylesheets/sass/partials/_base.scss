@@ -98,7 +98,7 @@ a {
     color: $base-color-dark-grey;
     background-color: transparent;
     background-image: none;
-    font-weight: normal;
+    font-weight: 400;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
@@ -411,8 +411,8 @@ a {
 
 .view {
     color: $base-a-default-color;
-    font-family: 'Ionicons';
     text-decoration: none;
+    font-weight: 300;
 
     &:hover,
     &:focus {
@@ -422,6 +422,7 @@ a {
     &:before {
         margin-right: 5px;
         content: '\f362';
+        font-family: 'Ionicons';
     }
 
     span {
