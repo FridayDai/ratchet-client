@@ -60,6 +60,7 @@
         confirmPassword: "Your passwords don't match. Please enter them again.",
 
         //OTHERS
+        patientIdExist: "ID already exists",
         emailExist: "Email already exists"
     });
 })(jQuery);
