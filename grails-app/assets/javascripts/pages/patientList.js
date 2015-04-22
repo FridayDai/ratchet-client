@@ -318,7 +318,17 @@
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
             element: form,
             okCallback: function () {
-                if (form.valid()) {
+                var hasEmailMsg = $('#email').attr('data-error-msg');
+                var hasValid = form.valid();
+                if (hasEmailMsg) {
+                    var obj = {
+                        element: $('#email'),
+                        message: hasEmailMsg,
+                        method: "email"
+                    };
+                    RC.common.showErrorTip(obj);
+                }
+                if (!hasEmailMsg && hasValid) {
                     _add();
                     return true;
                 }
@@ -327,6 +337,7 @@
             cancelCallback: function () {
                 _restoreNewPatientForm();
                 _destroyPhone();
+                RC.common.hideErrorTip($("#email"));
             }
         }));
 
@@ -398,16 +409,18 @@
                 _checkSpecialNumber();
             }
             if (element.attr("id") === "email") {
-                _bindPatientEmailInput();
+                _bindPatientEmailInput(element.text());
             }
         });
     }
 
-    function _bindPatientEmailInput() {
+    function _bindPatientEmailInput(primaryEmail) {
         $('#email').on("blur", function (e) {
             e.preventDefault();
             var email = $(this).val();
-            _checkPatientEmailExist($(this), email);
+            _checkPatientEmailExist($(this), email, primaryEmail);
+
+
         })
     }
 
@@ -439,28 +452,32 @@
      * @param email
      * @private
      */
-    function _checkPatientEmailExist(elem, email) {
-        $.ajax({
-            url: opts.urls.checkPatientEmail,
-            type: "POST",
-            data: {email: email},
-            dataType: "json",
-            beforeSend: function () {
-                RC.common.progress(false);
-            },
-            success: function (data) {
-                if (!(data.check === "false")) {
-                    var obj = {
-                        element: elem,
-                        message: RC.constants.emailExist,
-                        method: "email"
-                    };
-                    RC.common.showErrorTip(obj);
-                } else {
-                    RC.common.hideErrorTip(elem);
+    function _checkPatientEmailExist(elem, email, primaryEmail) {
+        if (!(email === primaryEmail)) {
+
+            $.ajax({
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                data: {email: email},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.emailExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     /**
@@ -495,7 +512,7 @@
 
         _.each($(".input-convert"), function (element, index) {
             var $ele = $(element);
-            if(element.id === "phoneNumber") {
+            if (element.id === "phoneNumber") {
                 $ele.closest(".form-group").find('.form-group-edit').remove();
             } else if ($ele.next().is("a")) {
                 $ele.next().remove();
