@@ -8,7 +8,7 @@
     .lbl-group {
         display: table-row-group;
         color: $base-color-medium-black;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 14px;
 
         span {
@@ -26,7 +26,8 @@
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         font-size: 14px;
-        font-family: inherit;
+        font-family: "Lato";
+        font-weight: 300;
 
         @include input-placeholder {
             color: $base-font-grey;
@@ -69,7 +70,7 @@
             min-width: 232px;
             height: 29px;
             color: $base-color-medium-black;
-            font-weight: normal;
+            font-weight: 300;
         }
 
         .input-group:disabled {

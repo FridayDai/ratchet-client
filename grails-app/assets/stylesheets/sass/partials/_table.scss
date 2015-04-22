@@ -21,9 +21,8 @@
     th {
         width: 23%;
         color: $base-dark-grey;
-        font-weight: $bold;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
     }
 
     tr {
@@ -34,7 +33,7 @@
 
         td {
             font-size: 14px;
-            font-weight: 200;
+            font-weight: 300;
         }
 
         .btn-edit {
@@ -112,8 +111,8 @@
     }
 
     img {
-        vertical-align: sub;
-        height: 20px;
+        vertical-align: initial;
+        height: 13px;
     }
 }
 
