@@ -475,10 +475,10 @@
          *
          */
         showMsg: function (showMsgArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.showMsg(showMsgArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.showMsg(showMsgArguments);
+            //    return;
+            //}
             var top = showMsgArguments.top || '33%',
                 left = showMsgArguments.left || '50%',
                 remain = showMsgArguments.remain || 2000,
@@ -526,10 +526,10 @@
          * @param width
          */
         confirmForm: function (confirmFormArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.confirmForm(confirmFormArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.confirmForm(confirmFormArguments);
+            //    return;
+            //}
             var height = confirmFormArguments.height || 300,
                 width = confirmFormArguments.width || 350;
             var title = confirmFormArguments.okTitle || "Save";
@@ -593,10 +593,10 @@
          * @param cancelCallback
          */
         confirm: function (confirmArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.confirm(confirmArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.confirm(confirmArguments);
+            //    return;
+            //}
             var $container;
             if ($(".window-Container").length > 0) {
                 $container = $(".window-Container");
@@ -646,10 +646,10 @@
          * @param closeCallback
          */
         warning: function (warningArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.warning(warningArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.warning(warningArguments);
+            //    return;
+            //}
             var $container,
                 dialog;
             if ($(".window-container").length > 0) {
@@ -702,10 +702,10 @@
          * @returns {boolean}
          */
         error: function (errorArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.error(errorArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.error(errorArguments);
+            //    return;
+            //}
             var $container,
                 dialog;
             if ($(".window-container").length > 0) {
@@ -825,10 +825,10 @@
         },
 
         dropDownSelect: function (selectDiv) {
-            if (window !== window.top) {
-                window.top.RC.common.dropDownSelect(selectDiv);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.dropDownSelect(selectDiv);
+            //    return;
+            //}
             var $container = $(selectDiv.element),
                 selectorBody = $container.find('.selector-body');
             $container.width(selectDiv.width || 140);
