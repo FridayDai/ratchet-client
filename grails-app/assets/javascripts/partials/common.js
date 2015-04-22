@@ -66,7 +66,7 @@
             },
             global: true,
             error: function (jqXHR) {
-                if (jqXHR.status === 403) {
+                if (jqXHR.status === 401) {
                     window.location.href = "/login";
                 }
                 else if (jqXHR.status === 400) {
@@ -76,7 +76,7 @@
                         errorMessage: jqXHR.responseText
                     });
                 }
-                else if (jqXHR.status === 401 || jqXHR.status >= 404) {
+                else if (jqXHR.status === 403 || jqXHR.status >= 404) {
                     RC.common.error({
                         title: RC.constants.errorTitle404,
                         message: RC.constants.errorTip
