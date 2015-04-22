@@ -312,6 +312,10 @@
                             return true;
                         }
                         return false;
+                    },
+                    cancelCallback: function () {
+                        RC.common.hideErrorTip($("#patientId"));
+                        RC.common.hideErrorTip($("#email"));
                     }
                 }
             ));
