@@ -22,7 +22,7 @@
         height: 25px;
         margin-top: 3px;
         padding-left: 6px;
-        border: 1px solid $base-color-white-grey;
+        border: 1px solid $base-font-color;
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         font-size: 14px;
@@ -80,7 +80,7 @@
         .ui-combobox-toggle {
             margin-top: 3px;
             height: 29px;
-            border: 1px solid $base-color-white-grey;
+            border: 1px solid $base-font-color;
             border-left: 0;
             background-color: $base-mid-grey-color;
         }
@@ -92,7 +92,7 @@
     }
 
     .surgery-time {
-        border: 1px solid $base-color-white-grey;
+        border: 1px solid $base-font-color;
         background-color: $base-mid-grey-color;
         background-image: url('../../../images/patients/calender.png');
         background-repeat: no-repeat;
