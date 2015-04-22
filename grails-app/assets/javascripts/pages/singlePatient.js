@@ -31,7 +31,9 @@
                 updatePatient: "/clients/{0}/patients/{1}",
                 assignTreatment: "/clients/{0}/patients/{1}/treatments",
                 invitePatient: "/invitePatient/{0}",
-                getGroups: "/getStaffGroups"
+                getGroups: "/getStaffGroups",
+                checkPatientId: "/checkPatientId/{0}",
+                checkPatientEmail: "/checkPatientEmail"
             }
         },
         tabs,
@@ -83,7 +85,7 @@
             e.preventDefault();
 
             $(".treatment-form")[0].reset();
-            
+
             if ($('.permission-confirm').hasClass('visible')) {
                 $('.permission-confirm').removeClass('visible');
             }
@@ -274,8 +276,26 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
-
-                        if ($("#patient-form").valid()) {
+                        var hasEmailMsg = $('#email').attr('data-error-msg');
+                        var hasIdMsg = $("#patientId").attr('data-error-msg');
+                        var hasValid = $("#patient-form").valid();
+                        if(hasIdMsg) {
+                            var objId = {
+                                element: $("#patientId"),
+                                message: hasIdMsg,
+                                method: "required"
+                            };
+                            RC.common.showErrorTip(objId);
+                        }
+                        if (hasEmailMsg) {
+                            var obj = {
+                                element: $('#email'),
+                                message: hasEmailMsg,
+                                method: "email"
+                            };
+                            RC.common.showErrorTip(obj);
+                        }
+                        if (!hasIdMsg && !hasEmailMsg && hasValid) {
                             var number = $("#phone").val();
                             var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
                             var patientInfo = {
@@ -296,11 +316,32 @@
                 }
             ));
 
+            _bindPatientIdAndEmailCheck($("#patientId").val(), $("#email").val());
             _checkSpecialNumber();
 
             if (phoneNumber.substring(0, 3) !== "1 1" && phoneNumber.substring(0, 3) !== "1 0") {
                 _initPhoneInput();
             }
+        });
+    }
+
+    /**
+     *
+     * @param primaryEmail
+     * @private
+     */
+    function _bindPatientIdAndEmailCheck(primaryPatientId, primaryEmail) {
+        $('#patientId').on("blur", function (e) {
+            e.preventDefault();
+            var patientId = $(this).val();
+            _checkPatientIdExist($(this), patientId, primaryPatientId);
+
+        });
+        $('#email').on("blur", function (e) {
+            e.preventDefault();
+            var email = $(this).val();
+            _checkPatientEmailExist($(this), email, primaryEmail);
+
         });
     }
 
@@ -353,6 +394,71 @@
             //parent.history.back();
             //return false;
         });
+    }
+
+    /**
+     * check the patient is already exist
+     * @param patientId
+     * @private
+     */
+    function _checkPatientIdExist(elem, patientId, primaryPatientId) {
+        if (!(patientId === primaryPatientId)) {
+            $.ajax({
+                url: opts.urls.checkPatientId.format(patientId),
+                type: "POST",
+                data: {patientId: patientId},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.patientIdExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
+
+                }
+            });
+        }
+    }
+
+    /**
+     * check patient email exist
+     * @param email
+     * @private
+     */
+    function _checkPatientEmailExist(elem, email, primaryEmail) {
+        if (!(email === primaryEmail)) {
+
+            $.ajax({
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                data: {email: email},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.emailExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
+                }
+            });
+        }
+
     }
 
 
