@@ -44,4 +44,9 @@ class PatientsController extends BaseController {
         def data = singlePatientService.showPatientByPatientId(request, response, params)
         render data as JSON
     }
+
+    def checkPatientEmailExist() {
+        def data = singlePatientService.checkPatientEmail(request, response, params)
+        render data as JSON
+    }
 }

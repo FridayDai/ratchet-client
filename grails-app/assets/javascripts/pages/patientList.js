@@ -32,7 +32,8 @@
                 showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}",
                 getGroups: "/getStaffGroups",
-                checkPatientId: "/checkPatientId/{0}"
+                checkPatientId: "/checkPatientId/{0}",
+                checkPatientEmail: "/checkPatientEmail"
             }
         },
         provideTable;
@@ -332,6 +333,7 @@
         _bindEditPatientInfoModel();
         _initPhoneInput();
         _checkSpecialNumber();
+        _bindPatientEmailInput();
         //_initSurgeryTime();
         _initSelectTreatment();
         _initStaffSelect();
@@ -366,6 +368,17 @@
             }));
 
         });
+
+        $("#new-patient-id").keydown(function (event) {
+                if (event.keyCode === 13) {
+                    if ($("#patient-id-form").valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
+                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+                    }
+                }
+            }
+        );
     }
 
     /**
@@ -380,11 +393,22 @@
                 element = element.find('.replace-input-div');
             }
             _divReplaceWithInput(element);
-            if(element.attr("id") === "phoneNumber") {
+            if (element.attr("id") === "phoneNumber") {
                 _initPhoneInput();
                 _checkSpecialNumber();
             }
+            if (element.attr("id") === "email") {
+                _bindPatientEmailInput();
+            }
         });
+    }
+
+    function _bindPatientEmailInput() {
+        $('#email').on("blur", function (e) {
+            e.preventDefault();
+            var email = $(this).val();
+            _checkPatientEmailExist($(this), email);
+        })
     }
 
     /**
@@ -410,6 +434,39 @@
 
     }
 
+    /**
+     * check patient email exist
+     * @param email
+     * @private
+     */
+    function _checkPatientEmailExist(elem, email) {
+        $.ajax({
+            url: opts.urls.checkPatientEmail,
+            type: "POST",
+            data: {email: email},
+            dataType: "json",
+            beforeSend: function () {
+                RC.common.progress(false);
+            },
+            success: function (data) {
+                if (!(data.check === "false")) {
+                    var obj = {
+                        element: elem,
+                        message: RC.constants.emailExist,
+                        method: "email"
+                    };
+                    RC.common.showErrorTip(obj);
+                } else {
+                    RC.common.hideErrorTip(elem);
+                }
+            }
+        });
+    }
+
+    /**
+     * revert all patient form change, make it just like the status when init.
+     * @private
+     */
     function _restoreNewPatientForm() {
         _.each($(".replace-input-div"), function (element, index) {
             var key = element.id;
@@ -425,17 +482,24 @@
                     break;
                 case "email":
                     $ele.prop("type", "email");
-                    $ele.attr("placeholder", "777-777-7777");
+                    $ele.attr("placeholder", "john.smith@email.com");
                     break;
                 case "phoneNumber":
                     $ele.prop("type", "tel");
-                    $ele.attr("placeholder", "john.smith@email.com");
+                    $ele.attr("placeholder", "777-777-7777");
                     $ele.attr("maxlength", "14");
-                    $ele = $ele.closest(".intl-tel-input");
                     break;
             }
             $ele.next().remove();
+        });
 
+        _.each($(".input-convert"), function (element, index) {
+            var $ele = $(element);
+            if(element.id === "phoneNumber") {
+                $ele.closest(".form-group").find('.form-group-edit').remove();
+            } else if ($ele.next().is("a")) {
+                $ele.next().remove();
+            }
         });
     }
 
@@ -470,6 +534,12 @@
         div.replaceWith(html);
         var $ele = $('#' + key).val(div.text());
         switch (key) {
+            case "firstName":
+                $ele.attr("placeholder", "John");
+                break;
+            case "lastName":
+                $ele.attr("placeholder", "Smith");
+                break;
             case "email":
                 $ele.prop("type", "email");
                 $ele.attr("placeholder", "777-777-7777");
@@ -478,14 +548,9 @@
                 $ele.prop("type", "tel");
                 $ele.attr("placeholder", "john.smith@email.com");
                 $ele.attr("maxlength", "14");
-                $ele = $ele.closest(".intl-tel-input");
-                break;
-            default :
-                $ele.prop("type", "text");
                 break;
         }
     }
-
 
     function _initRelationship() {
         var data = [
@@ -553,7 +618,7 @@
         });
     }
 
-    function _destroyPhone(){
+    function _destroyPhone() {
         $("#phoneNumber").intlTelInput("destroy");
     }
 
