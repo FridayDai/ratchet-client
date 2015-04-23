@@ -273,13 +273,16 @@
             $("#email").val(email);
             $("#phone").val(phoneNumber);
 
+            RC.common.hideErrorTip($("#patientId"));
+            RC.common.hideErrorTip($("#email"));
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
                         var hasEmailMsg = $('#email').attr('data-error-msg');
                         var hasIdMsg = $("#patientId").attr('data-error-msg');
                         var hasValid = $("#patient-form").valid();
-                        if(hasIdMsg) {
+                        if (hasIdMsg) {
                             var objId = {
                                 element: $("#patientId"),
                                 message: hasIdMsg,
@@ -347,6 +350,17 @@
             _checkPatientEmailExist($(this), email, primaryEmail);
 
         });
+
+        $('#patientId').on("focus", function (e) {
+            e.preventDefault();
+            RC.common.hideErrorTip($(this));
+
+        });
+        $('#email').on("focus", function (e) {
+            e.preventDefault();
+            RC.common.hideErrorTip($(this));
+
+        });
     }
 
     /**
@@ -407,6 +421,7 @@
      */
     function _checkPatientIdExist(elem, patientId, primaryPatientId) {
         if (!(patientId === primaryPatientId)) {
+            var button = $('#patient-form').next().find(".ui-button");
             $.ajax({
                 url: opts.urls.checkPatientId.format(patientId),
                 type: "POST",
@@ -414,6 +429,10 @@
                 dataType: "json",
                 beforeSend: function () {
                     RC.common.progress(false);
+                    _disableButton(button);
+                },
+                complete: function () {
+                    _enableButton(button);
                 },
                 success: function (data) {
                     if (!(data.check === "false")) {
@@ -427,6 +446,11 @@
                         //RC.common.hideErrorTip(elem);
                     }
 
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
                 }
             });
         }
@@ -439,7 +463,7 @@
      */
     function _checkPatientEmailExist(elem, email, primaryEmail) {
         if (!(email === primaryEmail)) {
-
+            var button = $('#patient-form').next().find(".ui-button");
             $.ajax({
                 url: opts.urls.checkPatientEmail,
                 type: "POST",
@@ -447,6 +471,10 @@
                 dataType: "json",
                 beforeSend: function () {
                     RC.common.progress(false);
+                    _disableButton(button);
+                },
+                complete: function () {
+                    _enableButton(button);
                 },
                 success: function (data) {
                     if (!(data.check === "false")) {
@@ -459,12 +487,34 @@
                     } else {
                         //RC.common.hideErrorTip(elem);
                     }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
                 }
             });
         }
 
     }
 
+    /**
+     * disabled button
+     * @param elem
+     * @private
+     */
+    function _disableButton(elem) {
+        elem.prop("disabled", true);
+    }
+
+    /**
+     * enabled button
+     * @param elem
+     * @private
+     */
+    function _enableButton(elem) {
+        elem.prop("disabled", false);
+    }
 
     /**
      * init select treatment

@@ -751,57 +751,63 @@
          */
         showErrorTip: function (errorElement) {
             var element = $(errorElement.element);
-            var errorMessage = errorElement.message;
-            element.attr("data-error-msg", errorMessage);
-            element.attr("data-error-hover-close", false);
-            var className = "error-msg-bottom";
-            if (element.is("[data-class]")) {
-                className = element.attr("data-class");
-            }
-            var position;
-            switch (className) {
-                case 'error-msg-top':
-                    position = {my: 'center bottom', at: 'center top-10'};
-                    break;
-                case 'error-msg-bottom':
-                    position = {my: 'left top', at: 'left bottom'};
-                    break;
-                case 'error-msg-left':
-                    position = {my: 'right center', at: 'left-10 center'};
-                    break;
-                case 'error-msg-right':
-                    position = {my: 'left center', at: 'right+10 center'};
-                    break;
-            }
-            position.collision = 'none';
-            var errorContent = $('<div class="validation-error-text">' +
-            '<i class="misc-icon ui-validation-error"></i>' + errorMessage + '</div>');
-            var tooltips = element.tooltip({
-                tooltipClass: className,
-                position: position,
-                items: "[data-error-msg], [title]",
-                content: function () {
-                    if (element.is("[data-error-msg]")) {
+            var form = element.closest("form");
+            if(form.css("display") == "none") {
+                return
+            } else {
+                var errorMessage = errorElement.message;
+                element.attr("data-error-msg", errorMessage);
+                element.attr("data-error-hover-close", false);
+                var className = "error-msg-bottom";
+                if (element.is("[data-class]")) {
+                    className = element.attr("data-class");
+                }
+                var position;
+                switch (className) {
+                    case 'error-msg-top':
+                        position = {my: 'center bottom', at: 'center top-10'};
+                        break;
+                    case 'error-msg-bottom':
+                        position = {my: 'left top', at: 'left bottom'};
+                        break;
+                    case 'error-msg-left':
+                        position = {my: 'right center', at: 'left-10 center'};
+                        break;
+                    case 'error-msg-right':
+                        position = {my: 'left center', at: 'right+10 center'};
+                        break;
+                }
+                position.collision = 'none';
+                var errorContent = $('<div class="validation-error-text">' +
+                '<i class="misc-icon ui-validation-error"></i>' + errorMessage + '</div>');
+                var tooltips = element.tooltip({
+                    tooltipClass: className,
+                    position: position,
+                    items: "[data-error-msg], [title]",
+                    content: function () {
+                        if (element.is("[data-error-msg]")) {
+                            return errorContent;
+                        }
+                        if (element.is("[title]")) {
+                            return element.attr("title");
+                        }
                         return errorContent;
                     }
-                    if (element.is("[title]")) {
-                        return element.attr("title");
-                    }
-                    return errorContent;
-                }
 
-            }).on("mouseleave", function (event) {
-                event.stopImmediatePropagation();
-                var elem = $(this).parent().find('.select2-container');
-                if (elem.length > 0) {
+                }).on("mouseleave", function (event) {
+                    event.stopImmediatePropagation();
+                    var elem = $(this).parent().find('.select2-container');
+                    if (elem.length > 0) {
 
-                } else {
-                    if (!$(this).valid()) {
-                        return;
+                    } else {
+                        //if (!$(this).valid()) {
+                        //    return;
+                        //}
                     }
-                }
-            });
-            tooltips.tooltip("open");
+                });
+                tooltips.tooltip("open");
+            }
+
         },
 
         /**
