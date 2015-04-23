@@ -1,3 +1,3 @@
-Patient ID,First Name,Last Name,Email Address,Phone Number,Group ID,Provider ID,Treatment ID,Surgery Time,Emergency Contact First Name,Emergency Contact Last Name,Emergency Contact Email,Emergency Contact Phone number,Patient's Permission
-TY78AK83,Staci,Guzzi,staci@email.com,447-1233-1234,2344,223312,441,2015-01-19 20:51,,,,,
-1241GW23,Amie,Hillier,amie@email.com,447-1233-1234,32123,312314,332,2015-01-19 8:51,Hermina,Hartranft,hermina@email.com,333-123-4123,Yes
+Patient ID,First Name,Last Name,Email Address,Phone Number,Group ID,Provider ID,Treatment ID,Surgery Time,Emergency Contact First Name,Emergency Contact Last Name,Emergency Contact Email,Emergency Contact Phone number,Emergency Contact Relationship,Patient's Permission
+TY78AK83,Staci,Guzzi,sid.feng+115@xplusz.com,447-1233-1234,8184,8188,8177,5/19/15 20:51,,,,,,
+1241GW23,Amie,Hillier,sid.feng+116@xplusz.com,447-1233-1234,8184,8188,8177,6/19/15 8:51,Hermina,Hartranft,hermina@email.com,333-123-4123,child,Yes

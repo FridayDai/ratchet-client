@@ -179,6 +179,7 @@
         float: left;
         position: relative;
         overflow: hidden;
+        z-index: 50;
 
         input {
             position: absolute;
@@ -197,11 +198,71 @@
         min-height: 200px;
         overflow: auto;
 
+        .div-hidden {
+            display: none;
+        }
+
+        .search-tip {
+            padding-left: 30px;
+        }
+
         .dataTable {
             min-width: inherit;
         }
     }
+
+    .patient-display {
+
+        thead {
+
+            tr {
+                background-color: $base-color-search;
+            }
+        }
+    }
 }
+
+.result-box {
+    position: relative;
+    z-index: 100;
+    float: left;
+
+    .upload-error {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 200px;
+        color: $base-color-red;
+    }
+
+    .upload-success {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 500px;
+
+        &:after {
+            font-family: 'Ionicons';
+            margin-left: 10px;
+            color: $base-color-green;
+            content: '\f383';
+        }
+    }
+
+}
+
+.error-tip-box {
+    position: relative;
+    min-height: 76px;
+
+    .error-tip {
+        margin-top: 20px;
+        position: absolute;
+        left: 0;
+        top: 30px;
+    }
+}
+
 
 .progress-box {
     position: relative;

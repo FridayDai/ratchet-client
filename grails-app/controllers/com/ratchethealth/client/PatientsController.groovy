@@ -29,10 +29,10 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
-    def getTitle() {
+    def lookup() {
         params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
         params.length = 5
-        def resp = patientService.loadPatients(request, response, params)
+        def resp = patientService.lookup(request, response, params)
         render resp as JSON
     }
 
@@ -74,26 +74,16 @@ class PatientsController extends BaseController {
         }
     }
 
-    def uploadFile = {
-        if (request instanceof MultipartHttpServletRequest) {
-            for (filename in request.fileNames) {
-
-                def uploadedMessage = StringUtils.EMPTY
-
-                MultipartFile file = request.getFile(filename)
-
-                JSONBuilder jSON = new JSONBuilder()
-                JSON json = jSON.build {
-                    name = file.originalFilename
-                    size = file.size
-                }
-
-                results = json.toString()
-            }
-        }
-
-        render results
+    def uploadFile() {
+        def data = patientService.uploadPatients(request, response, params)
+        render data as JSON
     }
+
+    def savePatients() {
+        def resp = patientService.savePatients(request, response, params)
+        render resp as JSON
+    }
+
 
     def checkPatientEmailExist() {
         def data = singlePatientService.checkPatientEmail(request, response, params)

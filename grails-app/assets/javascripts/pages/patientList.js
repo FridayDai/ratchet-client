@@ -5,7 +5,8 @@
     var opts = {
             table: {
                 id: '#patientsTable',
-                helpTableTableId: '#helpTable'
+                helpTableTableId: '#helpTable',
+                patientListTable: '#patient-list'
             },
             defaultConfirmArguments: {
                 confirmFormArguments: {
@@ -19,7 +20,7 @@
                     content: RC.constants.confirmContent,
                     okTitle: "Next",
                     height: RC.windowHeight,
-                    width: RC.windowWidth-30
+                    width: RC.windowWidth - 30
                 },
                 newPatientIdConfirmArguments: {
                     title: RC.constants.confirmPatientTitle,
@@ -40,12 +41,13 @@
                 showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}",
                 getGroups: "/getStaffGroups",
-                getTitle: "/getTitle",
+                lookup: "/lookup",
                 checkPatientId: "/checkPatientId/{0}",
+                save: "/savePatients",
                 checkPatientEmail: "/checkPatientEmail"
             }
         },
-        provideTable,helpTable;
+        provideTable, helpTable, patientListTable, patientListTableData;
 
     /**
      * init table with the data which loaded
@@ -163,14 +165,13 @@
             serverSide: true,
             "bAutoWidth": false,
             pageLength: 5,
-            deferLoading: [$(opts.table.helpTableTableId).data("filtered"), $(opts.table.helpTableTableId).data("total")],
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
-                $(".display").css("display", "inline-table");
+                $(".help-display").css("display", "inline-table");
             },
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.getTitle,
+                url: opts.urls.lookup,
                 pages: 1, // number of pages to cache
                 data: data
             }),
@@ -178,22 +179,22 @@
                 {
                     "targets": 0,
                     "render": function (data, type, full) {
-                        var id = data === undefined ? full.patientId : data;
-                        return '<p class="source-id">' + id + '</p>';
+                        var title = data === undefined ? full.title : data;
+                        return title;
                     },
                     width: "10%"
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                        return name;
+                        var type = data === undefined ? full.type : data;
+                        return type;
                     },
                     width: "20%"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
-                        var email = data === undefined ? full.email : data;
-                        return email;
+                        var id = data === undefined ? full.id : data;
+                        return id;
                     },
                     width: "26%"
                 }]
@@ -202,18 +203,18 @@
         if (helpTable) {
             helpTable.clear();
             helpTable.destroy();
-            delete options.deferLoading;
         }
 
         helpTable = $(opts.table.helpTableTableId).DataTable(options);
     }
+
     /**
      * load Data from server side
      * @private
      */
     function _loadData() {
         _initTable();
-        _initHelpTable();
+        //_initHelpTable();
     }
 
     /**
@@ -248,11 +249,13 @@
         };
         _initTable(data);
     }
+
     /**
      *
      * @private
      */
     function _searchTitle(treatment, surgeon) {
+        $(".search-tip").css("display", "none");
         var title = $("#search-title-input").val();
         var data = {
             title: title
@@ -493,15 +496,147 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
                 okCallback: function () {
-                    if ($("#bulk-import-form").valid()) {
-
-                        return true;
+                    if($('.after-important').is(":visible")){
+                        _save();
+                    }else{
+                        $('.after-important').show().css({'height': $(window).height() - 180});
+                        $('.import-content').hide();
+                        $(".ui-dialog-buttonpane button:contains('Next')").text("Confirm");
+                        _initPatientListTable();
                     }
-                    return false;
+
+                    return;
+                },
+                cancelCallback: function () {
+                    RC.common.warning(_.extend({}, opts.waringArguments, {
+                        element: $(".warn"),
+                        confirmText: "Discard Patients",
+                        yesCallback: function () {
+                            $('body').css('overflow', 'auto');
+                            $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                            $('.upload-success').hide().html('');
+                            $('#progress .progress-bar').css({"width": 0});
+                        }
+                    }));
+                    $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
                 }
             }));
+            $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
         });
+    }
+
+    /**
+     * data table add a row
+     * @private
+     */
+    function _save() {
+
+        $.ajax({
+            url: opts.urls.save,
+            type: "post",
+            data: {bulkList: JSON.stringify(patientListTableData)},
+            success: function (data) {
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+            }
+        });
+
+    }
+
+    /**
+     * init table with the data which loaded
+     * @param data
+     * @private
+     */
+    function _initPatientListTable() {
+
+        var options = {
+            paging: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            bLengthChange: false,
+            "bAutoWidth": false,
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".patient-display").css("display", "inline-table");
+            },
+            "data": patientListTableData,
+            columnDefs:[
+        {
+            "targets": 0,
+            "render": function (data, type, full) {
+                var id = data === undefined ? full.patientId : data;
+                return id;
+            },
+            width: "5%"
+        }, {
+            "targets": 1,
+            "render": function (data, type, full) {
+                var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                return name;
+            },
+            width: "5%"
+        }, {
+            "targets": 2,
+            "render": function (data, type, full) {
+                var email = data === undefined ? full.email : data;
+                return email;
+            },
+            width: "12%"
+        }, {
+            "targets": 3,
+            "render": function (data, type, full) {
+                var isUS,
+                    phoneNumber,
+                    subNumber;
+                var num = data === undefined ? full.phone : data;
+
+                num.charAt(0) === '1' ? isUS = true : isUS = false;
+
+                if (isUS) {
+                    subNumber = num.slice(1, num.length);
+                    phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                    phoneNumber = '1 ' + phoneNumber;
+                } else {
+                    phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                }
+
+                return phoneNumber;
+            },
+            width: "5%"
+        }, {
+            "targets": 4,
+            "render": function (data, type, full) {
+                var groupName = data === undefined ? full.groupName : data;
+                return groupName;
+            },
+            width: "10%"
+        }, {
+            "targets": 5,
+            "render": function (data, type, full) {
+                var providerName = data === undefined ? full.providerName : data;
+                return providerName;
+            },
+            width: "8%"
+        }, {
+                    "targets": 6,
+                    "render": function (data, type, full) {
+                        var treatmentName = data === undefined ? full.treatmentName : data;
+                        return treatmentName;
+                    },
+                    width: "8%"
+                }]
+
+        };
+
+        if (patientListTable) {
+            patientListTable.clear();
+            patientListTable.destroy();
+        }
+
+        patientListTable = $(opts.table.patientListTable).DataTable(options);
     }
 
     /**
@@ -525,31 +660,61 @@
             }
         });
     }
+
     function _initImportPopupEvent() {
-        $('body').css("overflow","hidden");
-        $('.import-table-group').css({'height':$(window).height()-420});
+        $('body').css("overflow", "hidden");
+        $('.import-table-group').css({'height': $(window).height() - 450});
         $('.progress-box').hide();
+        $('.error-tip').hide();
         $(window).resize(function () {
             $('.ui-dialog').css({
-                'width': $(window).width()-30,
-                'height': $(window).height()-30,
+                'width': $(window).width() - 30,
+                'height': $(window).height() - 30,
                 'left': '0px',
-                'top':'0px'
+                'top': '0px'
             });
-            $('.import-table-group').css({'height':$(window).height()-420});
+            $('.import-table-group').css({'height': $(window).height() - 450});
+            $('.after-important').css({'height': $(window).height() - 180});
 
         }).resize();
 
         $('#fileupload').fileupload({
-            beforeSend : function(xhr, opts){
+            dataType: 'json',
+            beforeSend: function (xhr, opts) {
                 RC.common.progress(false);
                 $('.progress-box').show();
+                $('.error-box').hide();
+                $('.upload-error').hide();
+                $('.error-tip').hide();
+                $('.upload-success').hide();
             },
             done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#files');
+                $.each(data.files, function (index, file) {
+                    $('<p class="upload-success"/>').text(file.name).appendTo('.result-box');
                 });
+                patientListTableData = data.result.data;
                 $('.progress-box').hide();
+                $('.upload-error').hide();
+                $('.error-tip').hide();
+                $(".ui-dialog-buttonpane button:contains('Next')").button("enable");
+                $('#progress .progress-bar').css({"width": 0});
+            },
+            error: function (e, data) {
+                $('.progress-box').hide();
+                $('.result-box').show();
+                $('.error-tip').show();
+                var html,tip;
+                if (e.status===209) {
+                    html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
+                    tip = "Data Error!";
+                } else {
+                    html = RC.constants.formatError;
+                    tip = "Format Error!";
+                }
+                $('.upload-error').html(tip).show();
+                $('.error-tip').html(html);
+                $('#progress .progress-bar').css({"width": 0});
+
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
