@@ -1,6 +1,11 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
+import grails.web.JSONBuilder
+import org.apache.commons.lang.StringUtils
+import org.codehaus.groovy.grails.io.support.IOUtils
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class PatientsController extends BaseController {
 
@@ -24,6 +29,13 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
+    def lookup() {
+        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+        params.length = 5
+        def resp = patientService.lookup(request, response, params)
+        render resp as JSON
+    }
+
     def addPatient() {
         def resp = patientService.addPatients(request, response, params)
         render resp as JSON
@@ -44,6 +56,34 @@ class PatientsController extends BaseController {
         def data = singlePatientService.showPatientByPatientId(request, response, params)
         render data as JSON
     }
+
+    def downloadFile() {
+        InputStream contentStream
+        try {
+            def file = new File("grails-app/assets/bulk-patient-import-sample.csv")
+            if (file.exists()) {
+                response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
+                response.setHeader("Content-Length", "file-size")
+                response.setContentType("file-mime-type")
+                contentStream = file.newInputStream()
+                response.outputStream << contentStream
+                webRequest.renderView = false
+            }else render "Error!"
+        } finally {
+            IOUtils.closeQuietly(contentStream)
+        }
+    }
+
+    def uploadFile() {
+        def data = patientService.uploadPatients(request, response, params)
+        render data as JSON
+    }
+
+    def savePatients() {
+        def resp = patientService.savePatients(request, response, params)
+        render resp as JSON
+    }
+
 
     def checkPatientEmailExist() {
         def data = singlePatientService.checkPatientEmail(request, response, params)

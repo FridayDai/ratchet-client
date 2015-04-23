@@ -5,7 +5,8 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.add-patient {
+.add-patient,
+.bulk-important {
     display: inline-block;
     float: right;
     margin-top: 10px;
@@ -24,6 +25,10 @@
         font: $base-font-utility;
         font-size: 13px;
     }
+}
+
+.add-patient {
+    margin-left: 10px;
 }
 
 .inline {
@@ -140,4 +145,168 @@
     font-size: 14px;
 }
 
+.import-form {
+    padding: 1em 1.8em!important;
+//    height: 80%!important;
 
+    p {
+        color: $base-dark-grey;
+        min-height: 36px;
+    }
+
+    .download-file {
+        margin-top: 25px;
+    }
+
+    .inner-search {
+        min-width: inherit;
+
+        .search-content {
+            margin: 20px 0px;
+        }
+    }
+
+    .filler-content {
+        width: 100%;
+        max-width: inherit;
+
+        .search-input {
+            width: 93%;
+        }
+    }
+
+    .bulk-important-file {
+        float: left;
+        position: relative;
+        overflow: hidden;
+        z-index: 50;
+
+        input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+            direction: ltr;
+            cursor: pointer;
+        }
+    }
+
+    .import-table-group {
+        min-height: 200px;
+        overflow: auto;
+
+        .div-hidden {
+            display: none;
+        }
+
+        .search-tip {
+            padding-left: 30px;
+        }
+
+        .dataTable {
+            min-width: inherit;
+        }
+    }
+
+    .patient-display {
+
+        thead {
+
+            tr {
+                background-color: $base-color-search;
+            }
+        }
+    }
+}
+
+.result-box {
+    position: relative;
+    z-index: 100;
+    float: left;
+
+    .upload-error {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 200px;
+        color: $base-color-red;
+    }
+
+    .upload-success {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 500px;
+
+        &:after {
+            font-family: 'Ionicons';
+            margin-left: 10px;
+            color: $base-color-green;
+            content: '\f383';
+        }
+    }
+
+}
+
+.error-tip-box {
+    position: relative;
+    min-height: 76px;
+
+    .error-tip {
+        margin-top: 20px;
+        position: absolute;
+        left: 0;
+        top: 30px;
+    }
+}
+
+
+.progress-box {
+    position: relative;
+    display: none;
+
+    .progress {
+        position: absolute;
+        left: 140px;
+        top: 25px;
+        width: 200px;
+        height: 4px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+
+        .progress-bar {
+            float: left;
+            width: 0;
+            height: 100%;
+            font-size: 12px;
+            line-height: 20px;
+            color: #fff;
+            text-align: center;
+            background-color: #428bca;
+            -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+            -webkit-transition: width .6s ease;
+            -o-transition: width .6s ease;
+            transition: width .6s ease;
+        }
+
+        .progress-bar-success {
+            background-color: $base-color-mid-grey;
+        }
+    }
+
+    .loading {
+        width: 16px;
+        height: 16px;
+        left: 350px;
+        top: 20px;
+        position: absolute;
+        background: #fff url('../../../images/select2-spinner.gif') no-repeat 100% !important;
+    }
+}

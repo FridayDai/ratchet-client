@@ -534,6 +534,8 @@
                 width = confirmFormArguments.width || 350;
             var title = confirmFormArguments.okTitle || "Save";
 
+            var cancel = confirmFormArguments.cancelCallback;
+
             var $container = $(confirmFormArguments.element);
 
             //var containerParent = $container.parent();
@@ -578,6 +580,15 @@
                     dialog.dialog("close");
                 }
             };
+
+            if (cancel) {
+                dialogOpts.buttons['Cancel'] = function (e) {
+                    if ($.isFunction(confirmFormArguments.cancelCallback) && (confirmFormArguments.cancelCallback)(e)) {
+
+                    }
+                };
+            }
+
 
             var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');
