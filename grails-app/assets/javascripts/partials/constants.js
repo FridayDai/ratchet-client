@@ -60,7 +60,7 @@
         errorMessageAction: "Something wrong, Please check messages below.",
         confirmPassword: "Your passwords don't match. Please enter them again.",
         formatError: "We are not able to process this file due to a format problem. Please verify the file you uploaded.",
-        dataError: "We are not able to process this file due to a data problem. Please download and fix the error file and try again."
+        dataError: "We are not able to process this file due to a data problem. Please download and fix the error file and try again.",
 
         //OTHERS
         patientIdExist: "ID already exists",
