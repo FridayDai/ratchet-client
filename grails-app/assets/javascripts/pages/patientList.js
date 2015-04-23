@@ -412,6 +412,9 @@
         if ($('.permission-confirm').hasClass('visible')) {
             $('.permission-confirm').removeClass('visible');
         }
+        $("#surgeryTime").prop("disabled", true);
+        $("#selectStaffs").prop("disabled", true);
+
         $('#patient-id-value').text(patientId);
         var form = $("#table-form");
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
