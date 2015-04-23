@@ -474,6 +474,11 @@
                     } else {
                         //RC.common.hideErrorTip(elem);
                     }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
                 }
             });
         }
@@ -559,11 +564,11 @@
                 break;
             case "email":
                 $ele.prop("type", "email");
-                $ele.attr("placeholder", "777-777-7777");
+                $ele.attr("placeholder", "john.smith@email.com");
                 break;
             case "phoneNumber":
                 $ele.prop("type", "tel");
-                $ele.attr("placeholder", "john.smith@email.com");
+                $ele.attr("placeholder", "777-777-7777");
                 $ele.attr("maxlength", "14");
                 break;
         }
