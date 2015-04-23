@@ -30,8 +30,6 @@ class PatientsController extends BaseController {
     }
 
     def lookup() {
-        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-        params.length = 5
         def resp = patientService.lookup(request, response, params)
         render resp as JSON
     }

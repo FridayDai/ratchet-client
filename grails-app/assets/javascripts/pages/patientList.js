@@ -186,7 +186,16 @@
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var type = data === undefined ? full.type : data;
+                        var type = data === undefined ? function(){
+                            if(full.type === "1"){
+                                return 'Treatment';
+                            }else if(full.type === "2"){
+                                return 'Provider';
+                            }else {
+                                return 'Group';
+                            }
+                        } : data;
+
                         return type;
                     },
                     width: "20%"
