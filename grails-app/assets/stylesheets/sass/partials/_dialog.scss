@@ -80,6 +80,7 @@
 
             span {
                 color: $base-color-dark-grey;
+                font-weight: 300;
             }
 
             &:hover,
@@ -135,18 +136,20 @@
     font-weight: 400;
     font-size: 19px;
     text-align: center;
+    font-family: "Lato";
 }
 
 .window-warning {
     margin-top: 20px;
     color: $base-color-white;
-    font-weight: 100;
+    font-weight: 300;
     text-align: center;
+    font-family: "Lato";
 }
 
 .window-error-title {
     color: $base-color-white;
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -155,12 +158,13 @@
     margin-top: 13px;
     color: $base-color-white;
     text-align: center;
+    font-weight: 300;
 }
 
 .window-deactivate-msg {
     margin-top: 13px;
     color: $base-color-white;
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -170,7 +174,7 @@
     background: none;
 
     .ui-button-text {
-        font-weight: 500;
+        font-weight: 400;
     }
 }
 
@@ -275,7 +279,7 @@
         &:before {
             margin: auto;
             content: '\f100';
-            color: $base-color-red;
+            color: $base-color-white;
             font-weight: lighter;
             font-size: 22px;
             font-family: ionicons;
