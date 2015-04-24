@@ -268,6 +268,7 @@
             var phoneNumber = $.trim(phoneNum);
 
             $("#patientId").val(id);
+            $("#patientId").blur();
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);

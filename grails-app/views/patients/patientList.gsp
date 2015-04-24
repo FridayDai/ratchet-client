@@ -74,6 +74,8 @@
                        placeholder="1234567890" required/>
             </div>
 
+        %{--<label class="form-group required pull-right"><span>*</span>Required field</label>--}%
+
             <div class="required-field required-padding">
                 *Required field
             </div>
@@ -188,18 +190,20 @@
 
         <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
             <div class="import-content">
-                <p>Upload a .csv file containing the patients you wish to create. Please note that a maximum of 100 patients can be included in your file and it may take a few minutes to process. </p>
+                <p>Upload a .csv file containing the patients you wish to create. Please note that a maximum of 100 patients can be included in your file and it may take a few minutes to process.</p>
                 <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
                 <div class="inner-search">
                     <div class="search-content clear">
                         <div class="filler-content">
-                            <input type="text" placeholder="Title" class="search-input" autocomplete="false" name="search-title-input" id="search-title-input">
+                            <input type="text" placeholder="Title" class="search-input" autocomplete="false"
+                                   name="search-title-input" id="search-title-input">
                             <span class="search" id="search-title-btn"></span>
                         </div>
                     </div>
                 </div>
+
                 <div class="import-table-group">
-                    <table id="helpTable" class="help-display div-hidden" >
+                    <table id="helpTable" class="help-display div-hidden">
                         <thead>
                         <tr>
                             <th>Title</th>
@@ -208,24 +212,31 @@
                         </tr>
                         </thead>
                     </table>
+
                     <p class="search-tip">Lookup ID by typing in the name of treatment, provider or group in the above search box.</p>
                 </div>
 
                 <div class="clear">
-                    <span id="bulk-important-file"  class="btn bulk-important bulk-important-file clear">
+                    <span id="bulk-important-file" class="btn bulk-important bulk-important-file clear">
                         <span>Import File</span>
-                        <input id="fileupload" type="file" name="file"  data-url="/upload" accept=".csv">
+                        <input id="fileupload" type="file" name="file" data-url="/upload" accept=".csv">
                     </span>
+
                     <div class="result-box">
                         <p class="upload-error"></p>
                     </div>
+
                     <div class="progress-box">
                         <div id="progress" class="progress">
                             <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
                         </div>
+
                         <div class="loading"></div>
                     </div>
-                    <div class="error-tip-box"><p class="error-tip">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p></div>
+
+                    <div class="error-tip-box"><p
+                            class="error-tip">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p>
+                    </div>
 
 
                     <div id="files" class="files"></div>
@@ -234,7 +245,7 @@
 
             <div class="after-important div-hidden">
                 <p>Please confirm the patient list.</p>
-                <table id="patient-list" class="patient-display div-hidden" >
+                <table id="patient-list" class="patient-display div-hidden">
                     <thead>
                     <tr>
                         <th>ID</th>

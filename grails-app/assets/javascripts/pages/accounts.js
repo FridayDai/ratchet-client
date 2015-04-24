@@ -673,8 +673,8 @@
         var lastName = parents.find("#accountLastName").text();
 
         RC.common.warning(_.extend({}, {
-                title: '<div class="window-error">' + "DEACTIVATE ACCOUNT" + '</div>',
-                message: '<div class="window-error">' + "Are you sure you want to deactivate the following account?" + '</div>' +
+                title: '<div>' + "DEACTIVATE ACCOUNT" + '</div>',
+                message: '<div>' + "Are you sure you want to deactivate the following account?" + '</div>' +
                 '<div class="window-deactivate-msg">' + isDoctor + " " + firstName + " " + lastName + '</div>'
             },
             {

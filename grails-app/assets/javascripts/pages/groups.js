@@ -11,7 +11,7 @@
                     title: RC.constants.addGroupTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 385
+                    width: 380
                 },
                 editFormArguments: {
                     title: RC.constants.editGroupTitle,

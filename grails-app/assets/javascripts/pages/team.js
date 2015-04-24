@@ -111,20 +111,24 @@
                 },
                 {
                     data: "firstName",
+                    class: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
+                    class: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
+                    class: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
+                    class: "email",
                     width: "20%"
                 },
                 {
@@ -393,6 +397,7 @@
 
             var eleParent = element.parents();
             eleParent.find("#giver-firstName").val(firstName);
+
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
             eleParent.find("#relationships").val(relationship).data('id', relationshipId);

@@ -292,8 +292,8 @@
             _resizeMenu: function () {
                 var ul = this.menu.element;
                 ul.outerWidth(Math.max(
-                    ul.width("").outerWidth() + 1,
-                    this.element.outerWidth() + 17
+                    ul.width("").outerWidth(),
+                    this.element.outerWidth() + 16
                 ));
             }
         });
@@ -366,7 +366,7 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
-                        if(self.element.is(":disabled")) {
+                        if (self.element.is(":disabled")) {
                             return;
                         }
                         if (self.element.autocomplete("widget").is(":visible")) {
@@ -379,7 +379,7 @@
                         self.element.autocomplete("search", "");
                         self.element.focus();
                     });
-                if(self.element.is(":disabled")){
+                if (self.element.is(":disabled")) {
                     self.element.parent().find("a").addClass('disable');
                 }
             },
@@ -549,7 +549,7 @@
                 modal: true,
                 title: confirmFormArguments.title,
                 open: function () {
-                    $("input").blur();
+                    //$("input").blur();
                     var $element = $(this).parent();
                     $element.addClass('fade');
                     setTimeout(function () {
@@ -763,7 +763,7 @@
         showErrorTip: function (errorElement) {
             var element = $(errorElement.element);
             var form = element.closest("form");
-            if(form.css("display") == "none") {
+            if (form.css("display") == "none") {
                 return
             } else {
                 var errorMessage = errorElement.message;
