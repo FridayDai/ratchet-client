@@ -30,8 +30,8 @@
                 }
             },
             waringArguments: {
-                title: RC.constants.errorTip,
-                message: RC.constants.errorTip
+                title: RC.constants.discardPatientsTitle,
+                message: RC.constants.discardPatientsMessage
             },
             urls: {
                 query: "/getPatients",
