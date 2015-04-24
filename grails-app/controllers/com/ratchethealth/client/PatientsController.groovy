@@ -61,10 +61,10 @@ class PatientsController extends BaseController {
     def downloadFile() {
         InputStream contentStream
         try {
-            def file = new File("grails-app/assets/bulk-patient-import-sample.csv")
+            def file = new File("bulk-patient-import-sample.csv")
             if (file.exists()) {
                 response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-                response.setHeader("Content-Length", "file-size")
+                response.setHeader("Content-Length", "" + file.length())
                 response.setContentType("file-mime-type")
                 contentStream = file.newInputStream()
                 response.outputStream << contentStream
