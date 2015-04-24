@@ -537,6 +537,7 @@
             var cancel = confirmFormArguments.cancelCallback;
 
             var $container = $(confirmFormArguments.element);
+            var beforeClose = confirmFormArguments.beforeClose;
 
             //var containerParent = $container.parent();
             //var dialogOwn = $container.clone();
@@ -555,6 +556,9 @@
                     setTimeout(function () {
                         $element.addClass("in");
                     }, 300);
+
+                },
+                beforeClose: function () {
 
                 },
                 buttons: {},
@@ -589,6 +593,9 @@
                 };
             }
 
+            if($.isFunction(beforeClose)) {
+                dialogOpts.beforeClose = beforeClose;
+            }
 
             var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');

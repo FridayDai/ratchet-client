@@ -182,6 +182,10 @@
         overflow: hidden;
         z-index: 50;
 
+        &:before {
+            margin-right: 0;
+        }
+
         input {
             position: absolute;
             top: 0;
@@ -213,6 +217,8 @@
     }
 
     .patient-display {
+        min-width: 1800px;
+        overflow: auto;
 
         thead {
 
@@ -257,6 +263,7 @@
     min-height: 76px;
 
     .error-tip {
+        width: 100%;
         margin-top: 20px;
         position: absolute;
         left: 0;

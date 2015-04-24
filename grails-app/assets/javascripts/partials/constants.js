@@ -50,6 +50,8 @@
         waringMessageEmail: "Please enter a valid email address",
         surgeryTimeEditWaringTitle: "EDIT SURGERY TIME",
         surgeryTimeEditWaringMessage: "Are you sure? All results will be cleared and all tasks will be rescheduled.",
+        discardPatientsTitle: "ARE YOU SURE?",
+        discardPatientsMessage: "Are you sure you want to discard the patient list?",
 
         //ERROR
         errorTitle: "ERROR",

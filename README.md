@@ -124,5 +124,5 @@ ratchet-v2-provider-desktop
 - ELK_TCP_ADDR
 - SERVER_URL
 - CDN_ENABLE    // true | false | not define
-- CDN_ASSET_DOMAIN_CLIENT    // just cloudfront url domain like: ```d1gdqclzwn7f9.cloudfront.net```
+- CDN_ASSET_DOMAIN_CLIENT    // just cloudfront url like: ```https://d1gdqclzwn7f9.cloudfront.net```
 

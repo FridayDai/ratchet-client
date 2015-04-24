@@ -30,8 +30,8 @@
                 }
             },
             waringArguments: {
-                title: RC.constants.errorTip,
-                message: RC.constants.errorTip
+                title: RC.constants.discardPatientsTitle,
+                message: RC.constants.discardPatientsMessage
             },
             urls: {
                 query: "/getPatients",
@@ -190,9 +190,9 @@
                             if (full.type === "1") {
                                 return 'Treatment';
                             } else if (full.type === "2") {
-                                return 'Provider';
-                            } else {
                                 return 'Group';
+                            } else {
+                                return 'Provider';
                             }
                         } : data;
 
@@ -507,6 +507,9 @@
             $(".import-form ")[0].reset();
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
+                beforeClose: function () {
+                    return _importWindowCloseHandle();
+                },
                 okCallback: function () {
                     if ($('.after-important').is(":visible")) {
                         _save();
@@ -516,26 +519,32 @@
                         $(".ui-dialog-buttonpane button:contains('Next')").text("Confirm");
                         _initPatientListTable();
                     }
-
                     return;
                 },
                 cancelCallback: function () {
-                    RC.common.warning(_.extend({}, opts.waringArguments, {
-                        element: $(".warn"),
-                        confirmText: "Discard Patients",
-                        yesCallback: function () {
-                            $('body').css('overflow', 'auto');
-                            $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
-                            $('.upload-success').hide().html('');
-                            $('#progress .progress-bar').css({"width": 0});
-                        }
-                    }));
-                    $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+                    return _importWindowCloseHandle();
                 }
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
         });
+
+    }
+
+    function _importWindowCloseHandle() {
+        RC.common.warning(_.extend({}, opts.waringArguments, {
+            element: $(".warn"),
+            confirmText: "Discard Patients",
+            yesCallback: function () {
+                $('body').css('overflow', 'auto');
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                $('.upload-success').hide().html('');
+                $('#progress .progress-bar').css({"width": 0});
+                return true;
+            }
+        }));
+        $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+        return false;
     }
 
     /**
@@ -550,6 +559,7 @@
             data: {bulkList: JSON.stringify(patientListTableData)},
             success: function (data) {
                 $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                location.reload();
             }
         });
 
@@ -603,7 +613,7 @@
                         var groupName = data === undefined ? full.groupName : data;
                         return groupName;
                     },
-                    width: "10%"
+                    width: "12%"
                 }, {
                     "targets": 4,
                     "render": function (data, type, full) {
@@ -618,6 +628,28 @@
                         return treatmentName;
                     },
                     width: "8%"
+                },{
+                    "targets": 6,
+                    "render": function (data, type, full) {
+                        var surgeryTime = data === undefined ? full.surgeryTime : data;
+                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatDate;
+                    },
+                    width: "12%"
+                },{
+                    "targets": 7,
+                    "render": function (data, type, full) {
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName?full.emergencyFirstName:'') + " " + (full.emergencyLastName?full.emergencyLastName:'')) : data;
+                        return emergencyName;
+                    },
+                    width: "15%"
+                },{
+                    "targets": 8,
+                    "render": function (data, type, full) {
+                        var emergencyEmail = data === undefined ? full.emergencyEmail  : data;
+                        return emergencyEmail;
+                    },
+                    width: "18%"
                 }]
 
         };
@@ -658,7 +690,7 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.ui-dialog').css({
+            $('.import-form').parent().css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 30,
                 'left': '0px',
