@@ -82,7 +82,7 @@ class AuthenticationService {
             return data
         }
 
-        if (resp.status == 401) {
+        if (resp.status == 403) {
             def rateLimit = result?.error?.errorMessage
             Integer[] args = [rateLimit]
             def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
