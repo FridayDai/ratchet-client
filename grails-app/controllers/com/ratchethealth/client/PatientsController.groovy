@@ -60,11 +60,12 @@ class PatientsController extends BaseController {
 
     def downloadFile() {
         try {
-            def file = new File("bulk-patient-import-sample.csv")
+            def file = new File("grails-app/resources/bulk-patient-import-sample.csv")
             if (file.exists()) {
-                response.setContentType("application/octet-stream")
-                response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-                response.outputStream << file.bytes
+                response.setContentType("file-mime-type")
+                response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+                response.outputStream << file.text
+                response.outputStream.flush()
             } else {
                 def message = "File is not exist!"
                 throw new ApiReturnException(message)
