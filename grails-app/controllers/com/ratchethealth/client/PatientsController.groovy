@@ -59,25 +59,18 @@ class PatientsController extends BaseController {
     }
 
     def downloadFile() {
-        InputStream contentStream
         try {
             def file = new File("bulk-patient-import-sample.csv")
             if (file.exists()) {
+                response.setContentType("application/octet-stream")
                 response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-                response.setHeader("Content-Length", "" + file.length())
-                response.setContentType("file-mime-type")
-                contentStream = file.newInputStream()
-                response.outputStream << contentStream
-                webRequest.renderView = false
+                response.outputStream << file.bytes
             } else {
                 def message = "File is not exist!"
                 throw new ApiReturnException(message)
             }
         } catch (UnirestException e) {
                 throw new ApiAccessException(e.message)
-        }
-        finally {
-            IOUtils.closeQuietly(contentStream)
         }
     }
 

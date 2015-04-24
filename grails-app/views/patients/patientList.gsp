@@ -243,6 +243,9 @@
                         <th>Group</th>
                         <th>Provider</th>
                         <th>Treatment</th>
+                        <th>Surgery Time</th>
+                        <th>Emergency Contact Name</th>
+                        <th>Emergency Contact E-mail Address</th>
                     </tr>
                     </thead>
                 </table>

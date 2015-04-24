@@ -35,7 +35,6 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
         "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
         "/download"(controller: "patients", action: "downloadFile")
-        "/downloadError"(controller: "patients", action: "downloadErrorFile")
         "/upload"(controller: "patients", action: "uploadFile")
         "/lookup"(controller: "patients", action: "lookup")
         "/savePatients"(controller: "patients", action: "savePatients")
