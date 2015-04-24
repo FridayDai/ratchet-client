@@ -8,13 +8,13 @@
 
     .ui-dialog-titlebar {
         position: relative;
-        padding: 12px 10px 6px;
+        padding: 10px;
         border: 0;
         border-bottom: 5px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
 
         .ui-dialog-title {
-            margin-left: 5px;
+            margin-left: 10px;
             color: #4d4d4d;
             font-weight: 400;
         }
@@ -80,7 +80,6 @@
 
             span {
                 color: $base-color-dark-grey;
-                font-weight: 300;
             }
 
             &:hover,
@@ -223,6 +222,7 @@
         .ui-dialog-buttonset {
             border: 1px solid $base-color-warn;
             background-color: $base-color-warn;
+            padding: 10px;
         }
 
         button {
@@ -281,7 +281,7 @@
             content: '\f100';
             color: $base-color-white;
             font-weight: lighter;
-            font-size: 22px;
+            font-size: 27px;
             font-family: ionicons;
         }
     }

@@ -14,7 +14,6 @@
         width: 100%;
     }
 
-
     .tr-border {
         border-bottom: 1px solid $base-light-grey-color;
 
@@ -36,18 +35,21 @@
             padding: 4px 3px 2px;
             color: $base-color-white;
             background: $base-color-invited;
+            vertical-align: sub;
         }
 
         .span-deactive {
             padding: 4px 3px 2px;
             color: $base-color-white;
             background: $base-color-deactive;
+            vertical-align: sub;
         }
 
         .span-active {
             padding: 4px 3px 2px;
             color: $base-color-white;
             background: $base-light-grey-color;
+            vertical-align: sub;
         }
 
         .activate-action {
@@ -251,9 +253,9 @@
     }
 
     .ui-dialog-buttonpane {
-        .ui-dialog-buttonset {
-            padding: 10px;
-        }
+        //        .ui-dialog-buttonset {
+        //            padding: 10px;
+        //        }
 
         button {
             margin: .5em 1em .5em 0;
