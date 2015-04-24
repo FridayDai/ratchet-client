@@ -508,7 +508,9 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
                 beforeClose: function () {
-                    return _importWindowCloseHandle();
+                    //if ($('.after-important').is(":visible")) {
+                        return _importWindowCloseHandle();
+                    //}
                 },
                 okCallback: function () {
                     if ($('.after-important').is(":visible")) {
@@ -522,7 +524,13 @@
                     return;
                 },
                 cancelCallback: function () {
-                    return _importWindowCloseHandle();
+                    //if ($('.after-important').is(":visible")) {
+                        return _importWindowCloseHandle();
+                    //}else {
+                    //    $("#bulk-import-form").dialog();
+                    //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                    //    _closeHandle();
+                    //}
                 }
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
@@ -536,15 +544,20 @@
             element: $(".warn"),
             confirmText: "Discard Patients",
             yesCallback: function () {
-                $('body').css('overflow', 'auto');
+                _closeHandle();
                 $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
-                $('.upload-success').hide().html('');
-                $('#progress .progress-bar').css({"width": 0});
                 return true;
             }
         }));
         $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
         return false;
+    }
+
+    function _closeHandle() {
+        $('body').css('overflow', 'auto');
+        $('.upload-success').hide().html('');
+        $('.upload-error').hide().html('');
+        $('#progress .progress-bar').css({"width": 0});
     }
 
     /**
