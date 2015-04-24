@@ -13,7 +13,9 @@
         <div class="inner-header">
             <label class="title">PATIENTS</label>
             <a href="#" id="add-patient" class="btn add-patient"><span>New Patient</span></a>
-            <a href="#" id="bulk-important" class="btn bulk-important"><span>Bulk Import</span></a>
+            <g:if test="${request.session.accountManagement == true}">
+                <a href="#" id="bulk-important" class="btn bulk-important"><span>Bulk Import</span></a>
+            </g:if>
         </div>
 
         <div class="inner-search">
@@ -238,7 +240,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email Address</th>
-                        <th>Phone Number</th>
                         <th>Group</th>
                         <th>Provider</th>
                         <th>Treatment</th>

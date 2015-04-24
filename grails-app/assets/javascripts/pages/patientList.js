@@ -597,43 +597,22 @@
                 return email;
             },
             width: "12%"
-        }, {
+        },  {
             "targets": 3,
-            "render": function (data, type, full) {
-                var isUS,
-                    phoneNumber,
-                    subNumber;
-                var num = data === undefined ? full.phone : data;
-
-                num.charAt(0) === '1' ? isUS = true : isUS = false;
-
-                if (isUS) {
-                    subNumber = num.slice(1, num.length);
-                    phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                    phoneNumber = '1 ' + phoneNumber;
-                } else {
-                    phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                }
-
-                return phoneNumber;
-            },
-            width: "5%"
-        }, {
-            "targets": 4,
             "render": function (data, type, full) {
                 var groupName = data === undefined ? full.groupName : data;
                 return groupName;
             },
             width: "10%"
         }, {
-            "targets": 5,
+            "targets": 4,
             "render": function (data, type, full) {
                 var providerName = data === undefined ? full.providerName : data;
                 return providerName;
             },
             width: "8%"
         }, {
-                    "targets": 6,
+                    "targets": 5,
                     "render": function (data, type, full) {
                         var treatmentName = data === undefined ? full.treatmentName : data;
                         return treatmentName;
