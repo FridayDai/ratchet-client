@@ -612,7 +612,7 @@
                         var groupName = data === undefined ? full.groupName : data;
                         return groupName;
                     },
-                    width: "10%"
+                    width: "12%"
                 }, {
                     "targets": 4,
                     "render": function (data, type, full) {
@@ -627,6 +627,28 @@
                         return treatmentName;
                     },
                     width: "8%"
+                },{
+                    "targets": 6,
+                    "render": function (data, type, full) {
+                        var surgeryTime = data === undefined ? full.surgeryTime : data;
+                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatDate;
+                    },
+                    width: "12%"
+                },{
+                    "targets": 7,
+                    "render": function (data, type, full) {
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName?full.emergencyFirstName:'') + " " + (full.emergencyLastName?full.emergencyLastName:'')) : data;
+                        return emergencyName;
+                    },
+                    width: "15%"
+                },{
+                    "targets": 8,
+                    "render": function (data, type, full) {
+                        var emergencyEmail = data === undefined ? full.emergencyEmail  : data;
+                        return emergencyEmail;
+                    },
+                    width: "18%"
                 }]
 
         };
@@ -667,7 +689,7 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.ui-dialog').css({
+            $('.import-form').parent().css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 30,
                 'left': '0px',

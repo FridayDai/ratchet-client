@@ -215,7 +215,7 @@ cors.url.pattern = '/assets/*'
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://ratchet-api-develop.elasticbeanstalk.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
