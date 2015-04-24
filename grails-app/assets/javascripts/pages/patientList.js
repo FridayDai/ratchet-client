@@ -463,6 +463,7 @@
         _initRelationship();
         _checkEmergencyContact();
         _initSelectGroup();
+        _checkPageHeightForForm(form);
         //$("#div-surgery-time").css("display", "none");
     }
 
@@ -1393,6 +1394,17 @@
                 return false;
             }
         });
+    }
+
+    /**
+     * check the window height, if it less than model height, resize container height.
+     * @param form
+     * @private
+     */
+    function _checkPageHeightForForm(form) {
+        if ($(window).height() < form.closest(".ui-dialog").outerHeight()) {
+            $(".container").height(form.closest(".ui-dialog").outerHeight() - 41);
+        }
     }
 
     /**
