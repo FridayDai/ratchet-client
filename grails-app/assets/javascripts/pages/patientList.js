@@ -445,7 +445,7 @@
                 }
                 return false;
             },
-            cancelCallback: function () {
+            beforeClose: function () {
                 _restoreNewPatientForm();
                 _destroyPhone();
                 RC.common.hideErrorTip($("#email"));
@@ -756,7 +756,6 @@
             var email = $(this).val();
             _checkPatientEmailExist($(this), email, primaryEmail);
 
-
         })
     }
 
@@ -766,6 +765,7 @@
      * @private
      */
     function _checkPatientExist(patientId) {
+        _restoreNewPatientForm();
         $.ajax({
             url: opts.urls.checkPatientId.format(patientId),
             type: "POST",

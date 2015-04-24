@@ -317,7 +317,7 @@
                         }
                         return false;
                     },
-                    cancelCallback: function () {
+                    beforeClose: function () {
                         RC.common.hideErrorTip($("#patientId"));
                         RC.common.hideErrorTip($("#email"));
                     }
