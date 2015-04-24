@@ -559,6 +559,7 @@
             data: {bulkList: JSON.stringify(patientListTableData)},
             success: function (data) {
                 $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                location.reload();
             }
         });
 
