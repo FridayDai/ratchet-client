@@ -186,13 +186,13 @@
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var type = data === undefined ? function(){
-                            if(full.type === "1"){
+                        var type = data === undefined ? function () {
+                            if (full.type === "1") {
                                 return 'Treatment';
-                            }else if(full.type === "2"){
-                                return 'Provider';
-                            }else {
+                            } else if (full.type === "2") {
                                 return 'Group';
+                            } else {
+                                return 'Provider';
                             }
                         } : data;
 
@@ -507,35 +507,44 @@
             $(".import-form ")[0].reset();
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
+                beforeClose: function () {
+                    return _importWindowCloseHandle();
+                },
                 okCallback: function () {
-                    if($('.after-important').is(":visible")){
+                    if ($('.after-important').is(":visible")) {
                         _save();
-                    }else{
+                    } else {
                         $('.after-important').show().css({'height': $(window).height() - 180});
                         $('.import-content').hide();
                         $(".ui-dialog-buttonpane button:contains('Next')").text("Confirm");
                         _initPatientListTable();
                     }
-
                     return;
                 },
                 cancelCallback: function () {
-                    RC.common.warning(_.extend({}, opts.waringArguments, {
-                        element: $(".warn"),
-                        confirmText: "Discard Patients",
-                        yesCallback: function () {
-                            $('body').css('overflow', 'auto');
-                            $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
-                            $('.upload-success').hide().html('');
-                            $('#progress .progress-bar').css({"width": 0});
-                        }
-                    }));
-                    $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+                    return _importWindowCloseHandle();
                 }
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
         });
+
+    }
+
+    function _importWindowCloseHandle() {
+        RC.common.warning(_.extend({}, opts.waringArguments, {
+            element: $(".warn"),
+            confirmText: "Discard Patients",
+            yesCallback: function () {
+                $('body').css('overflow', 'auto');
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                $('.upload-success').hide().html('');
+                $('#progress .progress-bar').css({"width": 0});
+                return true;
+            }
+        }));
+        $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+        return false;
     }
 
     /**
@@ -575,43 +584,43 @@
                 $(".patient-display").css("display", "inline-table");
             },
             "data": patientListTableData,
-            columnDefs:[
-        {
-            "targets": 0,
-            "render": function (data, type, full) {
-                var id = data === undefined ? full.patientId : data;
-                return id;
-            },
-            width: "5%"
-        }, {
-            "targets": 1,
-            "render": function (data, type, full) {
-                var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                return name;
-            },
-            width: "5%"
-        }, {
-            "targets": 2,
-            "render": function (data, type, full) {
-                var email = data === undefined ? full.email : data;
-                return email;
-            },
-            width: "12%"
-        },  {
-            "targets": 3,
-            "render": function (data, type, full) {
-                var groupName = data === undefined ? full.groupName : data;
-                return groupName;
-            },
-            width: "10%"
-        }, {
-            "targets": 4,
-            "render": function (data, type, full) {
-                var providerName = data === undefined ? full.providerName : data;
-                return providerName;
-            },
-            width: "8%"
-        }, {
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.patientId : data;
+                        return id;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        return name;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var email = data === undefined ? full.email : data;
+                        return email;
+                    },
+                    width: "12%"
+                }, {
+                    "targets": 3,
+                    "render": function (data, type, full) {
+                        var groupName = data === undefined ? full.groupName : data;
+                        return groupName;
+                    },
+                    width: "10%"
+                }, {
+                    "targets": 4,
+                    "render": function (data, type, full) {
+                        var providerName = data === undefined ? full.providerName : data;
+                        return providerName;
+                    },
+                    width: "8%"
+                }, {
                     "targets": 5,
                     "render": function (data, type, full) {
                         var treatmentName = data === undefined ? full.treatmentName : data;
@@ -694,8 +703,8 @@
                 $('.progress-box').hide();
                 $('.result-box').show();
                 $('.error-tip').show();
-                var html,tip;
-                if (e.status===209) {
+                var html, tip;
+                if (e.status === 209) {
                     html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
                     tip = "Data Error!";
                 } else {
