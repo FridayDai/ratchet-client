@@ -1,5 +1,8 @@
 package com.ratchethealth.client
 
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.ratchethealth.client.exceptions.ApiAccessException
+import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 import grails.web.JSONBuilder
 import org.apache.commons.lang.StringUtils
@@ -66,8 +69,14 @@ class PatientsController extends BaseController {
                 contentStream = file.newInputStream()
                 response.outputStream << contentStream
                 webRequest.renderView = false
-            }else render "Error!"
-        } finally {
+            } else {
+                def message = "File is not exist!"
+                throw new ApiReturnException(message)
+            }
+        } catch (UnirestException e) {
+                throw new ApiAccessException(e.message)
+        }
+        finally {
             IOUtils.closeQuietly(contentStream)
         }
     }
