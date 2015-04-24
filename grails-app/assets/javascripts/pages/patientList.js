@@ -558,6 +558,8 @@
         $('.upload-success').hide().html('');
         $('.upload-error').hide().html('');
         $('#progress .progress-bar').css({"width": 0});
+        $('.after-important').hide();
+        $('.import-content').show();
     }
 
     /**
