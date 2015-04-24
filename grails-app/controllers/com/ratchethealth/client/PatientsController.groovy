@@ -60,7 +60,8 @@ class PatientsController extends BaseController {
 
     def downloadFile() {
         try {
-            def file = new File("grails-app/resources/bulk-patient-import-sample.csv")
+            def webRootDir = servletContext.getRealPath("/")
+            def file = new File("${webRootDir}/bulk-patient-import-sample.csv")
             if (file.exists()) {
                 response.setContentType("file-mime-type")
                 response.setHeader("Content-disposition", "attachment;filename=${file.name}")
