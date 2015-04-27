@@ -70,6 +70,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -169,6 +174,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
                 _initCopy();
             },
             ajax: $.fn.dataTable.pipeline({
@@ -206,7 +216,7 @@
                         var id = data === undefined ? full.id : data;
                         return "<div class='copy-id-content'><p class='id-text' data-title='copied!'>"+ id +"<span class='copy'></span></p></div>";
                     },
-                    width: "26%"
+                    width: "30%"
                 }]
         };
 
@@ -730,7 +740,7 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.import-form').parent().css({
+            $('.import-form').closest(".ui-dialog").css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 80,
                 'left': '0px',
