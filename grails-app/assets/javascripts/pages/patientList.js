@@ -510,7 +510,7 @@
                 element: $(".import-form "),
                 beforeClose: function () {
                     //if ($('.after-important').is(":visible")) {
-                        return _importWindowCloseHandle();
+                    return _importWindowCloseHandle();
                     //}
                 },
                 okCallback: function () {
@@ -526,7 +526,7 @@
                 },
                 cancelCallback: function () {
                     //if ($('.after-important').is(":visible")) {
-                        return _importWindowCloseHandle();
+                    return _importWindowCloseHandle();
                     //}else {
                     //    $("#bulk-import-form").dialog();
                     //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
@@ -644,7 +644,7 @@
                         return treatmentName;
                     },
                     width: "8%"
-                },{
+                }, {
                     "targets": 6,
                     "render": function (data, type, full) {
                         var surgeryTime = data === undefined ? full.surgeryTime : data;
@@ -652,17 +652,17 @@
                         return formatDate;
                     },
                     width: "12%"
-                },{
+                }, {
                     "targets": 7,
                     "render": function (data, type, full) {
-                        var emergencyName = data === undefined ? ((full.emergencyFirstName?full.emergencyFirstName:'') + " " + (full.emergencyLastName?full.emergencyLastName:'')) : data;
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
                     width: "15%"
-                },{
+                }, {
                     "targets": 8,
                     "render": function (data, type, full) {
-                        var emergencyEmail = data === undefined ? full.emergencyEmail  : data;
+                        var emergencyEmail = data === undefined ? full.emergencyEmail : data;
                         return emergencyEmail;
                     },
                     width: "18%"
@@ -702,17 +702,17 @@
 
     function _initImportPopupEvent() {
         $('body').css("overflow", "hidden");
-        $('.import-table-group').css({'height': $(window).height() - 450});
+        $('.import-table-group').css({'height': $(window).height() - 500});
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
             $('.import-form').parent().css({
                 'width': $(window).width() - 30,
-                'height': $(window).height() - 30,
+                'height': $(window).height() - 80,
                 'left': '0px',
-                'top': '0px'
+                'top': '25px'
             });
-            $('.import-table-group').css({'height': $(window).height() - 450});
+            $('.import-table-group').css({'height': $(window).height() - 500});
             $('.after-important').css({'height': $(window).height() - 180});
 
         }).resize();
