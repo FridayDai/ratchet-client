@@ -163,11 +163,12 @@ class PatientService {
 
         try {
             log.info("Call backend service to bulk import patient, token: ${request.session.token}.")
-            file.transferTo(file.fileItem.tempFile)
+            File tempFile = File.createTempFile("error_csv", ".tmp")
+            file.transferTo(tempFile)
 
             def resp = Unirest.post(url)
                     .header("accept", "application/json")
-                    .field("file", file.fileItem.tempFile)
+                    .field("file", tempFile)
                     .asString()
 
             def result = JSON.parse(resp.body)

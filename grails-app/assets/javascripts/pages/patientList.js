@@ -169,6 +169,7 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
+                _initCopy();
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.lookup,
@@ -182,7 +183,7 @@
                         var title = data === undefined ? full.title : data;
                         return title;
                     },
-                    width: "10%"
+                    width: "40%"
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
@@ -198,12 +199,12 @@
 
                         return type;
                     },
-                    width: "20%"
+                    width: "30%"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return id;
+                        return "<div class='copy-id-content'><p class='id-text'>"+ id +"<span class='copy'></span></p></div>";
                     },
                     width: "26%"
                 }]
@@ -215,15 +216,31 @@
         }
 
         helpTable = $(opts.table.helpTableTableId).DataTable(options);
+
     }
 
+    function _initCopy() {
+        $.zeroclipboard({
+            moviePath: './assets/bower_components/zeroclipboard/ZeroClipboard.swf',
+            activeClass: 'active',
+            hoverClass: 'hover'
+        });
+        $('.copy').zeroclipboard({
+            dataRequested: function (event, setText) {
+                var text = $(this).parent().text();
+                setText(text);
+            },
+            complete: function (data) {
+                //alert("success!");
+            }
+        });
+    }
     /**
      * load Data from server side
      * @private
      */
     function _loadData() {
         _initTable();
-        //_initHelpTable();
     }
 
     /**
