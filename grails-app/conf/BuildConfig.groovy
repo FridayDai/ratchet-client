@@ -22,11 +22,6 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-grails.war.resources = { stagingDir, args ->
-    copy(file: "grails-app/resources/bulk-patient-import-sample.csv",
-            tofile: "${stagingDir}/WEB-INF/grails-app/resources/bulk-patient-import-sample.csv")
-}
-
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
