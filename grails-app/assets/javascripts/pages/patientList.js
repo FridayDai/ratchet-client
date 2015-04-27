@@ -733,7 +733,7 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.import-form').parent().css({
+            $('.import-form').closest(".ui-dialog").css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 80,
                 'left': '0px',
