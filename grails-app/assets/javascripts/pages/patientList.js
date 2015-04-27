@@ -1404,8 +1404,9 @@
      * @private
      */
     function _checkPageHeightForForm(form) {
-        if ($(window).height() < form.closest(".ui-dialog").outerHeight()) {
-            $(".container").height(form.closest(".ui-dialog").outerHeight() - 41);
+        var formHeight = form.closest(".ui-dialog").outerHeight();
+        if ($(window).height() < formHeight) {
+            $(".container").css('min-height', formHeight - 41 + 'px');
         }
     }
 
