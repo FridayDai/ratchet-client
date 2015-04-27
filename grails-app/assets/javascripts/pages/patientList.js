@@ -737,22 +737,22 @@
 
     function _initImportPopupEvent() {
         $('body').css("overflow", "hidden");
-        $('.import-table-group').css({'height': $(window).height() - 500});
+        $('.import-table-group').css({'height': $(window).height() - 450});
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
             $('.import-form').closest(".ui-dialog").css({
                 'width': $(window).width() - 30,
-                'height': $(window).height() - 80,
+                'height': $(window).height() - 30,
                 'left': '0px',
-                'top': '25px'
+                'top': '0px'
             });
             $('.import-table-group').css({
-                'height': $(window).height() - 500
+                'height': $(window).height() - 450
             });
             $('.after-important').css({
-                'height': $(window).height() - 180,
-                'max-height': "650px"
+                'height': $(window).height() - 330,
+                'max-height': "775px"
             });
         }).resize();
 
