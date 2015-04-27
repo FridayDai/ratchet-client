@@ -323,7 +323,7 @@ a {
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
-        font-weight: 100;
+        font-weight: 400;
         font-size: 14px;
     }
 
@@ -562,7 +562,7 @@ a {
 }
 
 .container .ui-autocomplete.ui-widget-content {
-    max-height: 110px;
+    max-height: 125px;
     overflow-y: auto;
 }
 

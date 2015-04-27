@@ -93,6 +93,21 @@
             }
         }
 
+        button:disabled {
+            border: 1px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
+
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+                background-color: $base-color-white;
+
+                span {
+                    color: $base-color-dark-grey;
+                }
+            }
+        }
+
         .ui-state-focus {
             z-index: 9999;
             color: #000;
@@ -241,9 +256,9 @@
 
             &:focus,
             &:hover {
-                border: 2px solid $base-color-red;
+                border: 2px solid $base-color-dark-red;
                 color: $base-color-white;
-                background-color: $base-color-red;
+                background-color: $base-color-dark-red;
             }
 
             + .ui-button {

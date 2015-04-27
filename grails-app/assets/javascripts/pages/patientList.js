@@ -719,17 +719,17 @@
 
     function _initImportPopupEvent() {
         $('body').css("overflow", "hidden");
-        $('.import-table-group').css({'height': $(window).height() - 450});
+        $('.import-table-group').css({'height': $(window).height() - 500});
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
             $('.import-form').parent().css({
                 'width': $(window).width() - 30,
-                'height': $(window).height() - 30,
+                'height': $(window).height() - 80,
                 'left': '0px',
-                'top': '0px'
+                'top': '25px'
             });
-            $('.import-table-group').css({'height': $(window).height() - 450});
+            $('.import-table-group').css({'height': $(window).height() - 500});
             $('.after-important').css({'height': $(window).height() - 180});
 
         }).resize();
