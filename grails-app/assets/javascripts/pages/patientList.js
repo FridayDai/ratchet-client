@@ -72,7 +72,7 @@
                 $(".display").css("display", "inline-table");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
             },
@@ -176,7 +176,7 @@
                 $(".help-display").css("display", "inline-table");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
                 _initCopy();
@@ -214,7 +214,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return "<div class='copy-id-content'><p class='id-text'>"+ id +"<span class='copy'></span></p></div>";
+                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy'></span></p></div>";
                     },
                     width: "30%"
                 }]
@@ -245,6 +245,7 @@
             }
         });
     }
+
     /**
      * load Data from server side
      * @private
@@ -739,9 +740,13 @@
                 'left': '0px',
                 'top': '25px'
             });
-            $('.import-table-group').css({'height': $(window).height() - 500});
-            $('.after-important').css({'height': $(window).height() - 180});
-
+            $('.import-table-group').css({
+                'height': $(window).height() - 500
+            });
+            $('.after-important').css({
+                'height': $(window).height() - 180,
+                'max-height': "700px"
+            });
         }).resize();
 
         $('#fileupload').fileupload({
