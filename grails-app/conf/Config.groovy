@@ -216,7 +216,6 @@ ratchetv2 {
     server {
         url {
             base = System.getProperty("SERVER_URL") ?: "http://ratchet-api-release.elasticbeanstalk.com/api/v1"
-//            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"

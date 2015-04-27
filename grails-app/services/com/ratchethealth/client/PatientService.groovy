@@ -40,6 +40,7 @@ class PatientService {
         try {
             log.info("Call backend service to add patient with clientId and patient info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("patientId", patientId)
                     .field("clientId", request.session.clientId)
                     .field("firstName", firstName)
@@ -84,6 +85,7 @@ class PatientService {
         try {
             log.info("Call backend service to save patients with bulkList, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("bulkList", bulkList)
                     .asString()
 
@@ -119,6 +121,7 @@ class PatientService {
         try {
             log.info("Call backend service to get patients with max, offset and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("clientId", request.session.clientId)
@@ -167,6 +170,7 @@ class PatientService {
             file.transferTo(tempFile)
 
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .header("accept", "application/json")
                     .field("file", tempFile)
                     .asString()
@@ -207,6 +211,7 @@ class PatientService {
         try {
             log.info("Call backend service to lookup with max, offset and title, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("max", length)
                     .field("offset", start)
                     .field("title", title)

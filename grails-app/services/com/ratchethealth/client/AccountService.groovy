@@ -23,6 +23,7 @@ class AccountService {
         try {
             log.info("Call backend service to get accounts with start, length, name and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("name", name)
@@ -61,6 +62,7 @@ class AccountService {
         try {
             log.info("Call backend service to get sinle account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             def result = JSON.parse(resp.body)
 
@@ -91,6 +93,7 @@ class AccountService {
         try {
             log.info("Call backend service to add a new account with clientId and account personal info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("clientId", request.session.clientId)
                     .field("firstName", firstName)
                     .field("lastName", lastName)
@@ -124,6 +127,7 @@ class AccountService {
         try {
             log.info("Call backend service to invite account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {
@@ -150,6 +154,7 @@ class AccountService {
         try {
             log.info("Call backend service to update account with clientId and account info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("clientId", request.session.clientId)
                     .field("email", params?.email)
                     .field("firstName", params?.firstName)
@@ -182,6 +187,7 @@ class AccountService {
         try {
             log.info("Call backend service to update password with old and new password, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("oldPassword", params?.oldPassword)
                     .field("password", params?.password)
                     .field("confirmPassword", params?.confirmPassword)
@@ -333,6 +339,7 @@ class AccountService {
         try {
             log.info("Call backend service to deactivate account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {
@@ -358,6 +365,7 @@ class AccountService {
         try {
             log.info("Call backend service to activate account, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {

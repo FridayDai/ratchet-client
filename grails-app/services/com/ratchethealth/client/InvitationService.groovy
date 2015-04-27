@@ -24,6 +24,7 @@ class InvitationService {
         try {
             log.info("Call backend service to invite patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             if (resp.status == 200) {
                 log.info("Invite patient success, token: ${request.session.token}")
