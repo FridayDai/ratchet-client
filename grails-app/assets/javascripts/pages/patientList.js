@@ -214,7 +214,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy'></span></p></div>";
+                        return "<div class='copy-id-content'><p class='id-text' data-title='copied!'>" + id + "<span class='copy'></span></p></div>";
                     },
                     width: "30%"
                 }]
@@ -231,7 +231,7 @@
 
     function _initCopy() {
         $.zeroclipboard({
-            moviePath: './assets/bower_components/zeroclipboard/ZeroClipboard.swf',
+            moviePath: './assets/ZeroClipboard.swf',
             activeClass: 'active',
             hoverClass: 'hover'
         });
@@ -241,7 +241,14 @@
                 setText(text);
             },
             complete: function (data) {
-                //alert("success!");
+                //var tooltips =  $(this).parent().tooltip({
+                //    items: "[title]",
+                //    content: function () {
+                //        return $(this).parent().attr("title");
+                //    }
+                //
+                //});
+                //tooltips.tooltip("open");
             }
         });
     }
@@ -734,7 +741,7 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.import-form').parent().css({
+            $('.import-form').closest(".ui-dialog").css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 80,
                 'left': '0px',
@@ -744,8 +751,7 @@
                 'height': $(window).height() - 500
             });
             $('.after-important').css({
-                'height': $(window).height() - 180,
-                'max-height': "700px"
+                'height': $(window).height() - 180, 'max-height': "700px"
             });
         }).resize();
 

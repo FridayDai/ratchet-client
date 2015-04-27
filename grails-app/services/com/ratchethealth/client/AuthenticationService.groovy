@@ -121,6 +121,7 @@ class AuthenticationService {
             log.info("Call backend service to logout, token: ${token}.")
             def url = grailsApplication.config.ratchetv2.server.url.logout
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             if (resp.status == 200) {
                 log.info("Logout success, token: ${token}")
