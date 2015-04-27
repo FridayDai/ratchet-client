@@ -30,6 +30,7 @@ class TaskService {
         try {
             log.info("Call backend service to get overdue tasks with max and offset, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("max", max)
                     .queryString("offset", offset)
                     .asString()
@@ -58,6 +59,7 @@ class TaskService {
         try {
             log.info("Call backend service to send task email to patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {

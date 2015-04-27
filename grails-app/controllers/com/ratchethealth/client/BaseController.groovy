@@ -18,9 +18,6 @@ class BaseController {
         if (!session.token) {
             redirect(uri: "/login")
             return false
-        } else {
-            Unirest.setDefaultHeader("X-Auth-Token", session.token)
-            return true
         }
     }
 

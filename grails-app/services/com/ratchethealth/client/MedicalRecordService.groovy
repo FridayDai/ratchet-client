@@ -23,6 +23,7 @@ class MedicalRecordService {
         try {
             log.info("Call backend service to show tasks by medical record, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             def result = JSON.parse(resp.body)
 
@@ -64,6 +65,7 @@ class MedicalRecordService {
             }
 
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("tool.id", toolId)
                     .field("status", status)
                     .field("sendTime", sendTime)

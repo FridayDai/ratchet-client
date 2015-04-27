@@ -34,6 +34,7 @@ class AssistService {
         try {
             log.info("Call backend service to add assist with user and client info, token: ${request.session.token}.")
             def resp = Unirest.post(formattedUrl)
+                    .header("X-Auth-Token", request.session.token)
                     .field("title", title)
                     .field("desc", desc)
                     .field("browser", browser)
