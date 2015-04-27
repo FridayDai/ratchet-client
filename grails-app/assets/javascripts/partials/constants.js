@@ -17,7 +17,7 @@
         confirmAccountTitle: "New Account",
         updateAccountTitle: "EDIT ACCOUNT",
         confirmTreatmentTitle: "ADD TREATMENT",
-        editGiverTitle: "Edit a Care Giver",
+        editGiverTitle: "EDIT EMERGENCY CONTACT",
         editPatientTitle: "EDIT PATIENT",
         updateSurgeryTimeTitle: "EDIT SURGERY TIME",
         confirmContent: "",

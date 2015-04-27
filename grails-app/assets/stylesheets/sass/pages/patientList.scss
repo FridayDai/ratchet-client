@@ -172,7 +172,7 @@
         max-width: inherit;
 
         .search-input {
-            width: 93%;
+            width: 45%;
         }
     }
 
@@ -323,5 +323,28 @@
         top: 20px;
         position: absolute;
         background: #fff url('../../../images/select2-spinner.gif') no-repeat 100% !important;
+    }
+}
+
+.copy-id-content {
+
+    .id-text {
+        width: 100%;
+        min-height: inherit;
+
+        .copy {
+            float: right;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+
+            &:after {
+                font-family: 'Ionicons';
+                margin-left: 10px;
+                font-size: 18px;
+                color: $base-font-color;
+                content: '\f41b';
+            }
+        }
     }
 }

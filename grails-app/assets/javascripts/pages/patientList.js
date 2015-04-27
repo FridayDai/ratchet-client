@@ -179,6 +179,7 @@
                 if ( bothDisabled && paginate.find(".current").length === 0 ) {
                     paginate.hide();
                 }
+                _initCopy();
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.lookup,
@@ -213,7 +214,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return id;
+                        return "<div class='copy-id-content'><p class='id-text'>"+ id +"<span class='copy'></span></p></div>";
                     },
                     width: "30%"
                 }]
@@ -225,15 +226,31 @@
         }
 
         helpTable = $(opts.table.helpTableTableId).DataTable(options);
+
     }
 
+    function _initCopy() {
+        $.zeroclipboard({
+            moviePath: './assets/bower_components/zeroclipboard/ZeroClipboard.swf',
+            activeClass: 'active',
+            hoverClass: 'hover'
+        });
+        $('.copy').zeroclipboard({
+            dataRequested: function (event, setText) {
+                var text = $(this).parent().text();
+                setText(text);
+            },
+            complete: function (data) {
+                //alert("success!");
+            }
+        });
+    }
     /**
      * load Data from server side
      * @private
      */
     function _loadData() {
         _initTable();
-        //_initHelpTable();
     }
 
     /**
@@ -712,17 +729,17 @@
 
     function _initImportPopupEvent() {
         $('body').css("overflow", "hidden");
-        $('.import-table-group').css({'height': $(window).height() - 450});
+        $('.import-table-group').css({'height': $(window).height() - 500});
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
             $('.import-form').parent().css({
                 'width': $(window).width() - 30,
-                'height': $(window).height() - 30,
+                'height': $(window).height() - 80,
                 'left': '0px',
-                'top': '0px'
+                'top': '25px'
             });
-            $('.import-table-group').css({'height': $(window).height() - 450});
+            $('.import-table-group').css({'height': $(window).height() - 500});
             $('.after-important').css({'height': $(window).height() - 180});
 
         }).resize();
