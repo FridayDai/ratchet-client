@@ -751,7 +751,8 @@
                 'height': $(window).height() - 500
             });
             $('.after-important').css({
-                'height': $(window).height() - 180, 'max-height': "700px"
+                'height': $(window).height() - 180,
+                'max-height': "650px"
             });
         }).resize();
 
