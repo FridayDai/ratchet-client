@@ -70,6 +70,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -169,6 +174,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.lookup,
@@ -182,7 +192,7 @@
                         var title = data === undefined ? full.title : data;
                         return title;
                     },
-                    width: "10%"
+                    width: "40%"
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
@@ -198,14 +208,14 @@
 
                         return type;
                     },
-                    width: "20%"
+                    width: "30%"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
                         return id;
                     },
-                    width: "26%"
+                    width: "30%"
                 }]
         };
 

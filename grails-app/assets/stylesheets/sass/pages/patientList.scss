@@ -227,6 +227,14 @@
             }
         }
     }
+
+    .dataTables_wrapper {
+
+        .dataTables_paginate {
+            margin-bottom: 0;
+        }
+    }
+
 }
 
 .result-box {
