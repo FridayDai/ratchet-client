@@ -346,5 +346,17 @@
                 content: '\f41b';
             }
         }
+
+        .copy.active {
+            &:after {
+                color: darken($base-font-color, 40%);
+            }
+        }
     }
+}
+
+.ui-tooltip.copy-tooltip {
+    background-color: #000000;
+    margin-left: 40px;
+
 }
