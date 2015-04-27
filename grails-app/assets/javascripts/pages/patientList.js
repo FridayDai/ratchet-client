@@ -510,7 +510,7 @@
                 element: $(".import-form "),
                 beforeClose: function () {
                     //if ($('.after-important').is(":visible")) {
-                        return _importWindowCloseHandle();
+                    return _importWindowCloseHandle();
                     //}
                 },
                 okCallback: function () {
@@ -526,7 +526,7 @@
                 },
                 cancelCallback: function () {
                     //if ($('.after-important').is(":visible")) {
-                        return _importWindowCloseHandle();
+                    return _importWindowCloseHandle();
                     //}else {
                     //    $("#bulk-import-form").dialog();
                     //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
@@ -644,7 +644,7 @@
                         return treatmentName;
                     },
                     width: "8%"
-                },{
+                }, {
                     "targets": 6,
                     "render": function (data, type, full) {
                         var surgeryTime = data === undefined ? full.surgeryTime : data;
@@ -652,17 +652,17 @@
                         return formatDate;
                     },
                     width: "12%"
-                },{
+                }, {
                     "targets": 7,
                     "render": function (data, type, full) {
-                        var emergencyName = data === undefined ? ((full.emergencyFirstName?full.emergencyFirstName:'') + " " + (full.emergencyLastName?full.emergencyLastName:'')) : data;
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
                     width: "15%"
-                },{
+                }, {
                     "targets": 8,
                     "render": function (data, type, full) {
-                        var emergencyEmail = data === undefined ? full.emergencyEmail  : data;
+                        var emergencyEmail = data === undefined ? full.emergencyEmail : data;
                         return emergencyEmail;
                     },
                     width: "18%"
@@ -1404,8 +1404,9 @@
      * @private
      */
     function _checkPageHeightForForm(form) {
-        if ($(window).height() < form.closest(".ui-dialog").outerHeight()) {
-            $(".container").height(form.closest(".ui-dialog").outerHeight() - 41);
+        var formHeight = form.closest(".ui-dialog").outerHeight();
+        if ($(window).height() < formHeight) {
+            $(".container").css('min-height', formHeight - 41 + 'px');
         }
     }
 
