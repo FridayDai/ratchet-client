@@ -790,7 +790,7 @@
                     tip = "Data Error!";
                 } else {
                     html = RC.constants.formatError;
-                    tip = "Format Error!";
+                    tip = e.responseText;
                 }
                 $('.upload-error').html(tip).show();
                 $('.error-tip').html(html);
