@@ -11,7 +11,7 @@
                     title: RC.constants.addGroupTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 385
+                    width: 380
                 },
                 editFormArguments: {
                     title: RC.constants.editGroupTitle,
@@ -51,6 +51,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getGroups,

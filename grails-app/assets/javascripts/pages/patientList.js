@@ -26,12 +26,12 @@
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
                     height: 200,
-                    width: 400
+                    width: 380
                 }
             },
             waringArguments: {
-                title: RC.constants.errorTip,
-                message: RC.constants.errorTip
+                title: RC.constants.discardPatientsTitle,
+                message: RC.constants.discardPatientsMessage
             },
             urls: {
                 query: "/getPatients",
@@ -70,6 +70,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -169,6 +174,12 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
+                _initCopy();
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.lookup,
@@ -182,30 +193,30 @@
                         var title = data === undefined ? full.title : data;
                         return title;
                     },
-                    width: "10%"
+                    width: "40%"
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var type = data === undefined ? function(){
-                            if(full.type === "1"){
+                        var type = data === undefined ? function () {
+                            if (full.type === "1") {
                                 return 'Treatment';
-                            }else if(full.type === "2"){
-                                return 'Provider';
-                            }else {
+                            } else if (full.type === "2") {
                                 return 'Group';
+                            } else {
+                                return 'Provider';
                             }
                         } : data;
 
                         return type;
                     },
-                    width: "20%"
+                    width: "30%"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return id;
+                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
                     },
-                    width: "26%"
+                    width: "30%"
                 }]
         };
 
@@ -215,6 +226,27 @@
         }
 
         helpTable = $(opts.table.helpTableTableId).DataTable(options);
+
+    }
+
+    function _initCopy() {
+        $.zeroclipboard({
+            moviePath: './assets/ZeroClipboard.swf',
+            hoverClass: 'hover'
+        });
+        $('.copy').zeroclipboard({
+            dataRequested: function (event, setText) {
+                var text = $(this).parent().text();
+                setText(text);
+            },
+            complete: function (data) {
+                var self = $(this);
+                self.addClass("active");
+                setTimeout(function () {
+                    self.removeClass("active");
+                }, 3000);
+            }
+        });
     }
 
     /**
@@ -223,7 +255,6 @@
      */
     function _loadData() {
         _initTable();
-        //_initHelpTable();
     }
 
     /**
@@ -445,7 +476,7 @@
                 }
                 return false;
             },
-            cancelCallback: function () {
+            beforeClose: function () {
                 _restoreNewPatientForm();
                 _destroyPhone();
                 RC.common.hideErrorTip($("#email"));
@@ -463,6 +494,7 @@
         _initRelationship();
         _checkEmergencyContact();
         _initSelectGroup();
+        _checkPageHeightForForm(form);
         //$("#div-surgery-time").css("display", "none");
     }
 
@@ -507,35 +539,59 @@
             $(".import-form ")[0].reset();
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
+                beforeClose: function () {
+                    //if ($('.after-important').is(":visible")) {
+                    return _importWindowCloseHandle();
+                    //}
+                },
                 okCallback: function () {
-                    if($('.after-important').is(":visible")){
+                    if ($('.after-important').is(":visible")) {
                         _save();
-                    }else{
+                    } else {
                         $('.after-important').show().css({'height': $(window).height() - 180});
                         $('.import-content').hide();
                         $(".ui-dialog-buttonpane button:contains('Next')").text("Confirm");
                         _initPatientListTable();
                     }
-
                     return;
                 },
                 cancelCallback: function () {
-                    RC.common.warning(_.extend({}, opts.waringArguments, {
-                        element: $(".warn"),
-                        confirmText: "Discard Patients",
-                        yesCallback: function () {
-                            $('body').css('overflow', 'auto');
-                            $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
-                            $('.upload-success').hide().html('');
-                            $('#progress .progress-bar').css({"width": 0});
-                        }
-                    }));
-                    $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+                    //if ($('.after-important').is(":visible")) {
+                    return _importWindowCloseHandle();
+                    //}else {
+                    //    $("#bulk-import-form").dialog();
+                    //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                    //    _closeHandle();
+                    //}
                 }
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
         });
+
+    }
+
+    function _importWindowCloseHandle() {
+        RC.common.warning(_.extend({}, opts.waringArguments, {
+            element: $(".warn"),
+            confirmText: "Discard Patients",
+            yesCallback: function () {
+                _closeHandle();
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                return true;
+            }
+        }));
+        $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+        return false;
+    }
+
+    function _closeHandle() {
+        $('body').css('overflow', 'auto');
+        $('.upload-success').hide().html('');
+        $('.upload-error').hide().html('');
+        $('#progress .progress-bar').css({"width": 0});
+        $('.after-important').hide();
+        $('.import-content').show();
     }
 
     /**
@@ -550,6 +606,7 @@
             data: {bulkList: JSON.stringify(patientListTableData)},
             success: function (data) {
                 $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                location.reload();
             }
         });
 
@@ -575,70 +632,78 @@
                 $(".patient-display").css("display", "inline-table");
             },
             "data": patientListTableData,
-            columnDefs:[
-        {
-            "targets": 0,
-            "render": function (data, type, full) {
-                var id = data === undefined ? full.patientId : data;
-                return id;
-            },
-            width: "5%"
-        }, {
-            "targets": 1,
-            "render": function (data, type, full) {
-                var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                return name;
-            },
-            width: "5%"
-        }, {
-            "targets": 2,
-            "render": function (data, type, full) {
-                var email = data === undefined ? full.email : data;
-                return email;
-            },
-            width: "12%"
-        }, {
-            "targets": 3,
-            "render": function (data, type, full) {
-                var isUS,
-                    phoneNumber,
-                    subNumber;
-                var num = data === undefined ? full.phone : data;
-
-                num.charAt(0) === '1' ? isUS = true : isUS = false;
-
-                if (isUS) {
-                    subNumber = num.slice(1, num.length);
-                    phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                    phoneNumber = '1 ' + phoneNumber;
-                } else {
-                    phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                }
-
-                return phoneNumber;
-            },
-            width: "5%"
-        }, {
-            "targets": 4,
-            "render": function (data, type, full) {
-                var groupName = data === undefined ? full.groupName : data;
-                return groupName;
-            },
-            width: "10%"
-        }, {
-            "targets": 5,
-            "render": function (data, type, full) {
-                var providerName = data === undefined ? full.providerName : data;
-                return providerName;
-            },
-            width: "8%"
-        }, {
-                    "targets": 6,
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.patientId : data;
+                        return id;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        return name;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var email = data === undefined ? full.email : data;
+                        return email;
+                    },
+                    width: "12%"
+                }, {
+                    "targets": 3,
+                    "render": function (data, type, full) {
+                        var groupName = data === undefined ? full.groupName : data;
+                        return groupName;
+                    },
+                    width: "12%"
+                }, {
+                    "targets": 4,
+                    "render": function (data, type, full) {
+                        var providerName = data === undefined ? full.providerName : data;
+                        return providerName;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 5,
                     "render": function (data, type, full) {
                         var treatmentName = data === undefined ? full.treatmentName : data;
                         return treatmentName;
                     },
-                    width: "8%"
+                    width: "7%"
+                }, {
+                    "targets": 6,
+                    "render": function (data, type, full) {
+                        var surgeryTime = data === undefined ? full.surgeryTime : data;
+                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatDate;
+                    },
+                    width: "11%"
+                }, {
+                    "targets": 7,
+                    "render": function (data, type, full) {
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
+                        return emergencyName;
+                    },
+                    width: "14%"
+                }, {
+                    "targets": 8,
+                    "render": function (data, type, full) {
+                        var relationship = data === undefined ? full.relationship : data;
+                        return relationship;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 9,
+                    "render": function (data, type, full) {
+                        var emergencyEmail = data === undefined ? full.emergencyEmail : data;
+                        return emergencyEmail;
+                    },
+                    width: "15%"
                 }]
 
         };
@@ -679,15 +744,19 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.ui-dialog').css({
+            $('.import-form').closest(".ui-dialog").css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 30,
                 'left': '0px',
                 'top': '0px'
             });
-            $('.import-table-group').css({'height': $(window).height() - 450});
-            $('.after-important').css({'height': $(window).height() - 180});
-
+            $('.import-table-group').css({
+                'height': $(window).height() - 450
+            });
+            $('.after-important').css({
+                'height': $(window).height() - 330,
+                'max-height': "775px"
+            });
         }).resize();
 
         $('#fileupload').fileupload({
@@ -715,13 +784,13 @@
                 $('.progress-box').hide();
                 $('.result-box').show();
                 $('.error-tip').show();
-                var html,tip;
-                if (e.status===209) {
+                var html, tip;
+                if (e.status === 209) {
                     html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
                     tip = "Data Error!";
                 } else {
                     html = RC.constants.formatError;
-                    tip = "Format Error!";
+                    tip = e.responseText;
                 }
                 $('.upload-error').html(tip).show();
                 $('.error-tip').html(html);
@@ -745,7 +814,6 @@
             var email = $(this).val();
             _checkPatientEmailExist($(this), email, primaryEmail);
 
-
         })
     }
 
@@ -755,6 +823,7 @@
      * @private
      */
     function _checkPatientExist(patientId) {
+        _restoreNewPatientForm();
         $.ajax({
             url: opts.urls.checkPatientId.format(patientId),
             type: "POST",
@@ -1369,6 +1438,18 @@
                 return false;
             }
         });
+    }
+
+    /**
+     * check the window height, if it less than model height, resize container height.
+     * @param form
+     * @private
+     */
+    function _checkPageHeightForForm(form) {
+        var formHeight = form.closest(".ui-dialog").outerHeight();
+        if ($(window).height() < formHeight) {
+            $(".container").css('min-height', formHeight - 41 + 'px');
+        }
     }
 
     /**

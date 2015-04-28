@@ -292,8 +292,8 @@
             _resizeMenu: function () {
                 var ul = this.menu.element;
                 ul.outerWidth(Math.max(
-                    ul.width("").outerWidth() + 1,
-                    this.element.outerWidth() + 17
+                    ul.width("").outerWidth(),
+                    this.element.outerWidth() + 16
                 ));
             }
         });
@@ -366,7 +366,7 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
-                        if(self.element.is(":disabled")) {
+                        if (self.element.is(":disabled")) {
                             return;
                         }
                         if (self.element.autocomplete("widget").is(":visible")) {
@@ -379,7 +379,7 @@
                         self.element.autocomplete("search", "");
                         self.element.focus();
                     });
-                if(self.element.is(":disabled")){
+                if (self.element.is(":disabled")) {
                     self.element.parent().find("a").addClass('disable');
                 }
             },
@@ -537,9 +537,10 @@
             var cancel = confirmFormArguments.cancelCallback;
 
             var $container = $(confirmFormArguments.element);
+            var beforeClose = confirmFormArguments.beforeClose;
 
             //var containerParent = $container.parent();
-            //var dialogOwn = $container.clone();
+            var dialogOwn = $container.clone();
 
             var dialogOpts = {
                 autoOpen: false,
@@ -549,7 +550,7 @@
                 modal: true,
                 title: confirmFormArguments.title,
                 open: function () {
-                    $("input").blur();
+                    //$("input").blur();
                     var $element = $(this).parent();
                     $element.addClass('fade');
                     setTimeout(function () {
@@ -557,21 +558,20 @@
                     }, 300);
 
                 },
+                beforeClose: function () {
+
+                },
                 buttons: {},
                 close: function () {
-
                     var elementList = $(confirmFormArguments.element).find(".form-group").find(":input");
                     $.each(elementList, function (index, element) {
                         RC.common.hideErrorTip(element);
                     });
                     confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
-                    if ($.isFunction(confirmFormArguments.cancelCallback)) {
-                        (confirmFormArguments.cancelCallback)();
-                    }
                     dialog.dialog("close");
                     //dialogOwn.appendTo(containerParent);
-                    $(this).dialog("destroy").addClass('ui-hidden');
+                    $(this).dialog("destroy").replaceWith(dialogOwn);
                 }
             };
 
@@ -589,6 +589,9 @@
                 };
             }
 
+            if($.isFunction(beforeClose)) {
+                dialogOpts.beforeClose = beforeClose;
+            }
 
             var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');
@@ -763,7 +766,7 @@
         showErrorTip: function (errorElement) {
             var element = $(errorElement.element);
             var form = element.closest("form");
-            if(form.css("display") == "none") {
+            if (form.css("display") == "none") {
                 return
             } else {
                 var errorMessage = errorElement.message;

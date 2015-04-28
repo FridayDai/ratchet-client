@@ -1,5 +1,8 @@
 package com.ratchethealth.client
 
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.ratchethealth.client.exceptions.ApiAccessException
+import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 import grails.web.JSONBuilder
 import org.apache.commons.lang.StringUtils
@@ -56,19 +59,20 @@ class PatientsController extends BaseController {
     }
 
     def downloadFile() {
-        InputStream contentStream
         try {
-            def file = new File("grails-app/assets/bulk-patient-import-sample.csv")
+            def webRootDir = servletContext.getRealPath("/")
+            def file = new File("${webRootDir}/bulk-patient-import-sample.csv")
             if (file.exists()) {
-                response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-                response.setHeader("Content-Length", "file-size")
                 response.setContentType("file-mime-type")
-                contentStream = file.newInputStream()
-                response.outputStream << contentStream
-                webRequest.renderView = false
-            }else render "Error!"
-        } finally {
-            IOUtils.closeQuietly(contentStream)
+                response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+                response.outputStream << file.text
+                response.outputStream.flush()
+            } else {
+                def message = "File is not exist!"
+                throw new ApiReturnException(message)
+            }
+        } catch (UnirestException e) {
+                throw new ApiAccessException(e.message)
         }
     }
 

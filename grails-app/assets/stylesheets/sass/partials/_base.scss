@@ -219,12 +219,12 @@ a {
 }
 
 .window-warning-title {
-    color: $base-color-mid-grey;
+    color: $base-color-white;
 }
 
 .window-warning {
     border-bottom: 1px solid $base-color-warn;
-    color: $base-color-mid-grey;
+    color: $base-color-white;
 }
 
 .treatment-id {
@@ -323,7 +323,7 @@ a {
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
-        font-weight: 100;
+        font-weight: 400;
         font-size: 14px;
     }
 
@@ -530,7 +530,8 @@ a {
     overflow-y: auto;
     max-width: 209px;
     max-height: 200px;
-    margin: 0 4px 4px 0;
+    margin: 0;
+    padding: 10px;
     border: 1px solid $base-font-color;
     border-top: 0;
     background-color: $base-color-white;
@@ -541,8 +542,7 @@ a {
     li {
         display: list-item;
         min-height: 1em;
-        margin: 3px 5px 0;
-        padding: 3px 10px;
+        padding: 5px 10px;
         color: $base-dark-grey;
         list-style: none;
         cursor: pointer;
@@ -562,7 +562,7 @@ a {
 }
 
 .container .ui-autocomplete.ui-widget-content {
-    max-height: 110px;
+    max-height: 125px;
     overflow-y: auto;
 }
 

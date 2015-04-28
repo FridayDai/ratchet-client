@@ -37,6 +37,11 @@
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             "bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({

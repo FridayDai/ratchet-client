@@ -61,7 +61,7 @@
         },
         careTeamRole =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
-        careGiverRelation = ["Spouse", "Parent", "Child", "Friend", "Other"],
+        careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
         careGiverStatus = ["INACTIVE", "ACTIVE"],
         careTeamTable,
         careGiverTable;
@@ -98,6 +98,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".dataTables_paginate").css("display", "none");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getCareGiver,
@@ -111,20 +116,24 @@
                 },
                 {
                     data: "firstName",
+                    class: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
+                    class: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
+                    class: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
+                    class: "email",
                     width: "20%"
                 },
                 {
@@ -378,8 +387,8 @@
 
             var data =
             {
-                "Spouse": 1,
-                "Parent": 2,
+                "Parent": 1,
+                "Spouse": 2,
                 "Child": 3,
                 "Friend": 4,
                 "Other": 5
@@ -393,6 +402,7 @@
 
             var eleParent = element.parents();
             eleParent.find("#giver-firstName").val(firstName);
+
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
             eleParent.find("#relationships").val(relationship).data('id', relationshipId);
@@ -462,8 +472,8 @@
      */
     function _initSelect(form) {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}

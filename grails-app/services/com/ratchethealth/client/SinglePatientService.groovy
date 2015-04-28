@@ -22,6 +22,7 @@ class SinglePatientService {
         try {
             log.info("Call backend service to show single patient, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             def result = JSON.parse(resp.body)
 
@@ -46,7 +47,9 @@ class SinglePatientService {
         try {
             log.info("Call backend service to show medical record, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
+
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
@@ -69,6 +72,7 @@ class SinglePatientService {
         try {
             log.info("Call backend service to update single patient with clientId and patient info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("clientId", params?.clientId)
                     .field("patientId", params?.id)
                     .field("email", params?.email)
@@ -97,6 +101,7 @@ class SinglePatientService {
         try {
             log.info("Call backend service to get patient info with patientId token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {
@@ -123,6 +128,7 @@ class SinglePatientService {
         try {
             log.info("Call backend service to check patient email, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("clientId", request.session.clientId)
                     .field("email", params?.email)
                     .asString()

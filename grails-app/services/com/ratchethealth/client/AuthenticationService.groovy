@@ -82,7 +82,7 @@ class AuthenticationService {
             return data
         }
 
-        if (resp.status == 401) {
+        if (resp.status == 403) {
             def rateLimit = result?.error?.errorMessage
             Integer[] args = [rateLimit]
             def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
@@ -121,6 +121,7 @@ class AuthenticationService {
             log.info("Call backend service to logout, token: ${token}.")
             def url = grailsApplication.config.ratchetv2.server.url.logout
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
             if (resp.status == 200) {
                 log.info("Logout success, token: ${token}")

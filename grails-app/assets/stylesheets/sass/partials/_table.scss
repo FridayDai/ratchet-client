@@ -110,10 +110,19 @@
         word-break: initial;
     }
 
-    img {
-        vertical-align: initial;
-        height: 13px;
+    .img {
+        position: relative;
+        padding-left: 26px;
+
+        img {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            vertical-align: initial;
+            height: 13px;
+        }
     }
+
 }
 
 .dataTables_wrapper {
