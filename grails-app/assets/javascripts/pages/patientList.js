@@ -214,7 +214,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return "<div class='copy-id-content'><p class='id-text'>"+ id +"<span class='copy' title='Copy to clipboard'></span></p></div>";
+                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
                     },
                     width: "30%"
                 }]
@@ -242,12 +242,13 @@
             complete: function (data) {
                 var self = $(this);
                 self.addClass("active");
-                setTimeout(function() {
+                setTimeout(function () {
                     self.removeClass("active");
                 }, 3000);
             }
         });
     }
+
     /**
      * load Data from server side
      * @private
@@ -666,14 +667,14 @@
                         var providerName = data === undefined ? full.providerName : data;
                         return providerName;
                     },
-                    width: "8%"
+                    width: "7%"
                 }, {
                     "targets": 5,
                     "render": function (data, type, full) {
                         var treatmentName = data === undefined ? full.treatmentName : data;
                         return treatmentName;
                     },
-                    width: "8%"
+                    width: "7%"
                 }, {
                     "targets": 6,
                     "render": function (data, type, full) {
@@ -681,21 +682,28 @@
                         var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatDate;
                     },
-                    width: "12%"
+                    width: "11%"
                 }, {
                     "targets": 7,
                     "render": function (data, type, full) {
                         var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
-                    width: "15%"
+                    width: "14%"
                 }, {
                     "targets": 8,
+                    "render": function (data, type, full) {
+                        var relationship = data === undefined ? full.relationship : data;
+                        return relationship;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 9,
                     "render": function (data, type, full) {
                         var emergencyEmail = data === undefined ? full.emergencyEmail : data;
                         return emergencyEmail;
                     },
-                    width: "18%"
+                    width: "15%"
                 }]
 
         };

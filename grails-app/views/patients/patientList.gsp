@@ -256,6 +256,7 @@
                         <th>Treatment</th>
                         <th>Surgery Time</th>
                         <th>Emergency Contact Name</th>
+                        <th>Relationship</th>
                         <th>Emergency Contact E-mail Address</th>
                     </tr>
                     </thead>
