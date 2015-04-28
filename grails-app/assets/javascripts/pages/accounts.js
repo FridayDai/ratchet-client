@@ -106,13 +106,13 @@
 
 
                         if (full[5] === "true") {
-                            dataName = ("<img src=" + opts.img.isDoctor + "/>" + " " + data);
+                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data+"</div>");
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName;
+                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName+"</div>";
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
