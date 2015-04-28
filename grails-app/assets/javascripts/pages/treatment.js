@@ -13,6 +13,10 @@
             waringArguments: {
                 title: RC.constants.archivedTreatmentWarningMsg,
                 message: RC.constants.archivedMessage
+            },
+            surgeryTimeEditWaringArguments: {
+                title: RC.constants.surgeryTimeEditWaringTitle,
+                message: RC.constants.surgeryTimeEditWaringMessage
             }
         },
         urls: {
@@ -39,7 +43,7 @@
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
             var treatmentId = $(this).data("treatmentId");
-            $(".treatment-time-form")[0].reset();
+            $("#treatment-time-form")[0].reset();
 
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
@@ -50,16 +54,28 @@
                         var newSurgeryTime = date.getTime();
                         var oldSurgeryTime = (new Date(surgeryTime)).getTime();
                         if (newSurgeryTime !== oldSurgeryTime) {
-                            _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                            _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
                         }
-                        return true;
                     }
-                    return false;
                 }
             }));
             _getTreatmentInfo(clientId, treatmentId);
 
         });
+    }
+
+    /**
+     * It will binds a warning pop up and to update surgery time when user confirmed.
+     * @private
+     */
+    function _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime) {
+        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.surgeryTimeEditWaringArguments, {
+            element: $(".warn"),
+            yesCallback: function () {
+                _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                $("#treatment-time-form").dialog("destroy").addClass('ui-hidden');
+            }
+        }));
     }
 
     /**

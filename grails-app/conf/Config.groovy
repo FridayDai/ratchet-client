@@ -182,7 +182,7 @@ grails.assets.plugin."cookie-session".excludes = ["**"]
 
 
 if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
-    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "http://d3pngev0rteoe.cloudfront.net"
+    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "https://d3pngev0rteoe.cloudfront.net"
     grails.assets.url = "${cdn_domain}/assets/"
 }
 
@@ -232,6 +232,12 @@ ratchetv2 {
             patient = "${ratchetv2.server.url.base}/patients/%s"
             addPatient = "${ratchetv2.server.url.base}/patients/%d/records"
             invitePatient = "${ratchetv2.server.url.base}/patient/invite/%s"
+            showPatient = "${ratchetv2.server.url.base}/patients/patientId/%s"
+            uploadPatient = "${ratchetv2.server.url.base}/clients/%s/bulk/import"
+            savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
+            lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
+
+            checkPatientEmail = "${ratchetv2.server.url.base}/patients/check_email"
 
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/staffs"

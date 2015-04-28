@@ -3,34 +3,34 @@
 
     //Define groups page global variables
     var opts = {
-        table: {
-            id: "#groupsTable"
-        },
-        defaultConfirmArguments: {
-            addFormArguments: {
-                title: RC.constants.addGroupTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 385
+            table: {
+                id: "#groupsTable"
             },
-            editFormArguments: {
-                title: RC.constants.editGroupTitle,
-                content: RC.constants.confirmContent,
-                height: 200,
-                width: 385
+            defaultConfirmArguments: {
+                addFormArguments: {
+                    title: RC.constants.addGroupTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 380
+                },
+                editFormArguments: {
+                    title: RC.constants.editGroupTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 385
+                },
+                deleteWarningArguments: {
+                    title: RC.constants.deleteGroupWaringTitle,
+                    message: RC.constants.archivedMessage
+                }
             },
-            deleteWarningArguments: {
-                title: RC.constants.deleteGroupWaringTitle,
-                message: RC.constants.archivedMessage
+            urls: {
+                getGroups: "/getGroups",
+                addGroup: "/createGroup",
+                updateGroup: "/updateGroup",
+                deleteGroup: "/deleteGroup"
             }
         },
-        urls: {
-            getGroups: "/getGroups",
-            addGroup: "/createGroup",
-            updateGroup: "/updateGroup",
-            deleteGroup: "/deleteGroup"
-        }
-    },
         groupTable;
 
     /**
@@ -51,6 +51,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getGroups,
@@ -243,6 +248,19 @@
             dataType: "json",
             success: function () {
                 parentTr.remove();
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 400) {
+                    var resp = jqXHR.responseText;
+                    var msgs = resp.split(".");
+
+                    RC.common.error({
+                        title: RC.constants.groupErrorTip,
+                        message: msgs[0] + ".",
+                        errorMessage: msgs[1] + "."
+                    });
+                }
+
             }
         });
     }

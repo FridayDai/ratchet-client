@@ -18,9 +18,6 @@ class BaseController {
         if (!session.token) {
             redirect(uri: "/login")
             return false
-        } else {
-            Unirest.setDefaultHeader("X-Auth-Token", session.token)
-            return true
         }
     }
 
@@ -41,7 +38,7 @@ class BaseController {
         def message = e.message ? e.message : g.message(code: 'default.error.500.message')
         if (request.isXhr()) {
             render status: status, text: message
-        } else if (e.statusId == 403) {
+        } else if (e.statusId == 401) {
             render view: '/login/login'
         } else {
             render view: '/error/error404'

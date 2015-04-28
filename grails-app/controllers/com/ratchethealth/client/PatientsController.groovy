@@ -1,6 +1,14 @@
 package com.ratchethealth.client
 
+import com.mashape.unirest.http.exceptions.UnirestException
+import com.ratchethealth.client.exceptions.ApiAccessException
+import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
+import grails.web.JSONBuilder
+import org.apache.commons.lang.StringUtils
+import org.codehaus.groovy.grails.io.support.IOUtils
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class PatientsController extends BaseController {
 
@@ -8,6 +16,7 @@ class PatientsController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
 
     def patientService
+    def singlePatientService
 
     static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
 
@@ -20,6 +29,11 @@ class PatientsController extends BaseController {
 
     def getPatients() {
         def resp = patientService.loadPatients(request, response, params)
+        render resp as JSON
+    }
+
+    def lookup() {
+        def resp = patientService.lookup(request, response, params)
         render resp as JSON
     }
 
@@ -36,6 +50,45 @@ class PatientsController extends BaseController {
 
     def getActivities() {
         def data = patientService.loadActivities(params)
+        render data as JSON
+    }
+
+    def checkPatientExist() {
+        def data = singlePatientService.showPatientByPatientId(request, response, params)
+        render data as JSON
+    }
+
+    def downloadFile() {
+        try {
+            def webRootDir = servletContext.getRealPath("/")
+            def file = new File("${webRootDir}/bulk-patient-import-sample.csv")
+            if (file.exists()) {
+                response.setContentType("file-mime-type")
+                response.setHeader("Content-disposition", "attachment;filename=${file.name}")
+                response.outputStream << file.text
+                response.outputStream.flush()
+            } else {
+                def message = "File is not exist!"
+                throw new ApiReturnException(message)
+            }
+        } catch (UnirestException e) {
+                throw new ApiAccessException(e.message)
+        }
+    }
+
+    def uploadFile() {
+        def data = patientService.uploadPatients(request, response, params)
+        render data as JSON
+    }
+
+    def savePatients() {
+        def resp = patientService.savePatients(request, response, params)
+        render resp as JSON
+    }
+
+
+    def checkPatientEmailExist() {
+        def data = singlePatientService.checkPatientEmail(request, response, params)
         render data as JSON
     }
 }

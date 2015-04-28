@@ -103,7 +103,7 @@
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
                               id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
-                                                                                     var="group"><p>${group.name}</p></br></g:each></g:if>
+                                                                                     var="group"><p>${group.name}</p></g:each></g:if>
                     </span></td>
                 </tr>
 
@@ -125,8 +125,9 @@
     <g:form class="accounts-form ui-hidden" id="updateAccount" name="updateAccount">
 
         <div class="form-group">
-            <input id="doctor" name="doctor" type="checkbox" class="input-group doctor">
-            <label class="dr">Dr.</label>
+            <label class="checkbox">
+                <input id="doctor" name="doctor" type="checkbox">Dr.
+            </label>
         </div>
 
         <div class="form-group inline">

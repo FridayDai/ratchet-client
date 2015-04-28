@@ -6,9 +6,9 @@ $regular: 400;
 $bold: 600;
 
 // Base Font
-$base-font-light: 14px 'Lato Light', sans-serif;
-$base-font-utility: 14px 'Lato Regular', sans-serif;
-$base-font-bold: 14px 'Lato Bold', sans-serif;
+$base-font-light: normal 300 14px 'Lato', sans-serif;
+$base-font-utility: normal 400 14px 'Lato', sans-serif;
+$base-font-bold: normal 700 14px 'Lato', sans-serif;
 
 // Headings
 $header-font-weight: $bold;
@@ -57,6 +57,7 @@ $base-color-error-border: #d43f3a;
 $base-color-yellow: #fdc15b;
 $base-color-red: #ef5c55;
 $base-color-light-red: #f69da3;
+$base-color-dark-red: #d01203;
 $base-color-green: #6eb56f;
 $base-color-blue: #28c2d2;
 $base-color-red: #f05a4f;

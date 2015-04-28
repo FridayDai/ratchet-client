@@ -8,15 +8,15 @@
 
     .ui-dialog-titlebar {
         position: relative;
-        padding: 12px 10px 6px;
+        padding: 10px;
         border: 0;
         border-bottom: 5px solid rgba(0, 0, 0, .2);
         background: $base-color-white;
 
         .ui-dialog-title {
-            margin-left: 25px;
+            margin-left: 10px;
             color: #4d4d4d;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .ui-button {
@@ -93,6 +93,21 @@
             }
         }
 
+        button:disabled {
+            border: 1px solid $base-color-dark-grey;
+            color: $base-color-dark-grey;
+
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+                background-color: $base-color-white;
+
+                span {
+                    color: $base-color-dark-grey;
+                }
+            }
+        }
+
         .ui-state-focus {
             z-index: 9999;
             color: #000;
@@ -135,18 +150,20 @@
     font-weight: 400;
     font-size: 19px;
     text-align: center;
+    font-family: "Lato";
 }
 
 .window-warning {
     margin-top: 20px;
     color: $base-color-white;
-    font-weight: 100;
+    font-weight: 300;
     text-align: center;
+    font-family: "Lato";
 }
 
 .window-error-title {
     color: $base-color-white;
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -155,12 +172,13 @@
     margin-top: 13px;
     color: $base-color-white;
     text-align: center;
+    font-weight: 300;
 }
 
 .window-deactivate-msg {
     margin-top: 13px;
     color: $base-color-white;
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -170,7 +188,7 @@
     background: none;
 
     .ui-button-text {
-        font-weight: 500;
+        font-weight: 400;
     }
 }
 
@@ -219,6 +237,7 @@
         .ui-dialog-buttonset {
             border: 1px solid $base-color-warn;
             background-color: $base-color-warn;
+            padding: 10px;
         }
 
         button {
@@ -237,9 +256,9 @@
 
             &:focus,
             &:hover {
-                border: 2px solid $base-color-red;
+                border: 2px solid $base-color-dark-red;
                 color: $base-color-white;
-                background-color: $base-color-red;
+                background-color: $base-color-dark-red;
             }
 
             + .ui-button {
@@ -275,9 +294,9 @@
         &:before {
             margin: auto;
             content: '\f100';
-            color: $base-color-red;
+            color: $base-color-white;
             font-weight: lighter;
-            font-size: 22px;
+            font-size: 27px;
             font-family: ionicons;
         }
     }
@@ -290,7 +309,6 @@
         }
     }
 }
-
 
 .msg-info {
     z-index: 999999;

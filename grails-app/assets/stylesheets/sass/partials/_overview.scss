@@ -14,7 +14,7 @@
         font-weight: 200;
 
         .id-info {
-            margin-top: 3px;
+            margin-top: 8px;
             margin-left: 18px;
             font-size: 12pt;
         }
@@ -38,6 +38,7 @@
 
         .name {
             font-size: 18pt;
+            font-weight: 400;
         }
 
         .first-name {
@@ -114,7 +115,8 @@
 
         &:before {
             display: inline-block;
-            padding-right: 8px;
+            margin-top: -1px;
+            padding-right: 5px;
             content: '\f4b8';
             vertical-align: middle;
             font-weight: lighter;

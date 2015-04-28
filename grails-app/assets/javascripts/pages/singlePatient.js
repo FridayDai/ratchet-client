@@ -31,7 +31,9 @@
                 updatePatient: "/clients/{0}/patients/{1}",
                 assignTreatment: "/clients/{0}/patients/{1}/treatments",
                 invitePatient: "/invitePatient/{0}",
-                getGroups: "/getStaffGroups"
+                getGroups: "/getStaffGroups",
+                checkPatientId: "/checkPatientId/{0}",
+                checkPatientEmail: "/checkPatientEmail"
             }
         },
         tabs,
@@ -83,6 +85,10 @@
             e.preventDefault();
 
             $(".treatment-form")[0].reset();
+
+            if ($('.permission-confirm').hasClass('visible')) {
+                $('.permission-confirm').removeClass('visible');
+            }
 
             patientId = $(this).data("patientId");
             clientId = $(this).data("clientId");
@@ -262,16 +268,38 @@
             var phoneNumber = $.trim(phoneNum);
 
             $("#patientId").val(id);
+            $("#patientId").blur();
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
             $("#phone").val(phoneNumber);
 
+            RC.common.hideErrorTip($("#patientId"));
+            RC.common.hideErrorTip($("#email"));
+
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: $(".patient-form"),
                     okCallback: function () {
-
-                        if ($("#patient-form").valid()) {
+                        var hasEmailMsg = $('#email').attr('data-error-msg');
+                        var hasIdMsg = $("#patientId").attr('data-error-msg');
+                        var hasValid = $("#patient-form").valid();
+                        if (hasIdMsg) {
+                            var objId = {
+                                element: $("#patientId"),
+                                message: hasIdMsg,
+                                method: "required"
+                            };
+                            RC.common.showErrorTip(objId);
+                        }
+                        if (hasEmailMsg) {
+                            var obj = {
+                                element: $('#email'),
+                                message: hasEmailMsg,
+                                method: "email"
+                            };
+                            RC.common.showErrorTip(obj);
+                        }
+                        if (!hasIdMsg && !hasEmailMsg && hasValid) {
                             var number = $("#phone").val();
                             var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
                             var patientInfo = {
@@ -288,15 +316,51 @@
                             return true;
                         }
                         return false;
+                    },
+                    beforeClose: function () {
+                        RC.common.hideErrorTip($("#patientId"));
+                        RC.common.hideErrorTip($("#email"));
                     }
                 }
             ));
 
+            _bindPatientIdAndEmailCheck($("#patientId").val(), $("#email").val());
             _checkSpecialNumber();
 
             if (phoneNumber.substring(0, 3) !== "1 1" && phoneNumber.substring(0, 3) !== "1 0") {
                 _initPhoneInput();
             }
+        });
+    }
+
+    /**
+     *
+     * @param primaryEmail
+     * @private
+     */
+    function _bindPatientIdAndEmailCheck(primaryPatientId, primaryEmail) {
+        $('#patientId').on("blur", function (e) {
+            e.preventDefault();
+            var patientId = $(this).val();
+            _checkPatientIdExist($(this), patientId, primaryPatientId);
+
+        });
+        $('#email').on("blur", function (e) {
+            e.preventDefault();
+            var email = $(this).val();
+            _checkPatientEmailExist($(this), email, primaryEmail);
+
+        });
+
+        $('#patientId').on("focus", function (e) {
+            e.preventDefault();
+            RC.common.hideErrorTip($(this));
+
+        });
+        $('#email').on("focus", function (e) {
+            e.preventDefault();
+            RC.common.hideErrorTip($(this));
+
         });
     }
 
@@ -351,6 +415,107 @@
         });
     }
 
+    /**
+     * check the patient is already exist
+     * @param patientId
+     * @private
+     */
+    function _checkPatientIdExist(elem, patientId, primaryPatientId) {
+        if (!(patientId === primaryPatientId)) {
+            var button = $('#patient-form').next().find(".ui-button");
+            $.ajax({
+                url: opts.urls.checkPatientId.format(patientId),
+                type: "POST",
+                data: {patientId: patientId},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                    _disableButton(button);
+                },
+                complete: function () {
+                    _enableButton(button);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.patientIdExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
+
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * check patient email exist
+     * @param email
+     * @private
+     */
+    function _checkPatientEmailExist(elem, email, primaryEmail) {
+        if (!(email === primaryEmail)) {
+            var button = $('#patient-form').next().find(".ui-button");
+            $.ajax({
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                data: {email: email},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                    _disableButton(button);
+                },
+                complete: function () {
+                    _enableButton(button);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.emailExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * disabled button
+     * @param elem
+     * @private
+     */
+    function _disableButton(elem) {
+        elem.prop("disabled", true);
+    }
+
+    /**
+     * enabled button
+     * @param elem
+     * @private
+     */
+    function _enableButton(elem) {
+        elem.prop("disabled", false);
+    }
 
     /**
      * init select treatment
@@ -575,6 +740,7 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    $('#ec-first-name').text($("#emergency-firstName").val());
                 }
 
                 var flagOptional = _.every($('.emergency-field'), function (element) {

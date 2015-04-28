@@ -28,6 +28,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to get treatments with max, offset and treatmetnTitle, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("max", max)
                     .queryString("offset", offset)
                     .queryString("treatmentTitle", treatmentTitle)
@@ -57,6 +58,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("treatmentId", params?.treatmentId)
                     .field("surgeonId", params?.staffIds)
                     .field("surgeryTime", params?.surgeryTime)
@@ -88,6 +90,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to get treatment info, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -112,6 +115,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to get care team with type and medicalRecordId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("type", grailsApplication.config.ratchetv2.server.careTeamType)
                     .queryString("medicalRecordId", medicalRecordId)
                     .asString()
@@ -137,6 +141,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to get care giver with type and medicalRecordId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
                     .queryString("medicalRecordId", medicalRecordId)
                     .asString()
@@ -166,6 +171,7 @@ class TreatmentService {
             def url = String.format(deleteCareTeamUrl, params?.medicalRecordId, params?.careTeamId)
 
             def resp = Unirest.delete(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 204) {
@@ -190,6 +196,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to delete care giver, token: ${request.session.token}.")
             def resp = Unirest.delete(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 204) {
@@ -213,6 +220,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to add care team with medicalRecordId, type and staffId, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("medicalRecordId", params?.medicalRecordId)
                     .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
                     .field("staffId", params?.staffId)
@@ -239,6 +247,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to add care giver with medicalRecordId and emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("medicalRecordId", params?.medicalRecordId)
                     .field("type", grailsApplication.config.ratchetv2.server.careGiverType)
                     .field("email", params?.email)
@@ -270,6 +279,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to update surgery time, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("surgeryTime", params?.surgeryTime)
                     .asString()
 
@@ -295,6 +305,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to archive medical record, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 200) {
@@ -320,6 +331,7 @@ class TreatmentService {
         try {
             log.info("Call backend service to update care giver with emergency contact info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("email", params?.email)
                     .field("firstName", params?.firstName)
                     .field("lastName", params?.lastName)
@@ -349,7 +361,9 @@ class TreatmentService {
         try {
             log.info("Call backend service to update care team surgeon, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
+
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {

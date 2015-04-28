@@ -17,7 +17,7 @@
         confirmAccountTitle: "New Account",
         updateAccountTitle: "EDIT ACCOUNT",
         confirmTreatmentTitle: "ADD TREATMENT",
-        editGiverTitle: "Edit a Care Giver",
+        editGiverTitle: "EDIT EMERGENCY CONTACT",
         editPatientTitle: "EDIT PATIENT",
         updateSurgeryTimeTitle: "EDIT SURGERY TIME",
         confirmContent: "",
@@ -26,6 +26,7 @@
         addGroupTitle: "NEW GROUP",
         editGroupTitle: "EDIT GROUP",
         editSurgeonTitle: "EDIT GROUP AND PROVIDER",
+        importFormTitle: "BULK IMPORT",
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",
@@ -47,14 +48,24 @@
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
         waringMessageEmail: "Please enter a valid email address",
-
+        surgeryTimeEditWaringTitle: "EDIT SURGERY TIME",
+        surgeryTimeEditWaringMessage: "Are you sure? All results will be cleared and all tasks will be rescheduled.",
+        discardPatientsTitle: "ARE YOU SURE?",
+        discardPatientsMessage: "Are you sure you want to discard the patient list?",
 
         //ERROR
         errorTitle: "ERROR",
         errorTitle404: "ERROR : 404",
+        groupErrorTip:"CANNOT DELETE GROUP",
         errorTip: "Something has gone wrong. Please try again!",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
         errorMessageAction: "Something wrong, Please check messages below.",
-        confirmPassword: "Your passwords don't match. Please enter them again."
+        confirmPassword: "Your passwords don't match. Please enter them again.",
+        formatError: "We are not able to process this file due to a format problem. Please verify the file you uploaded.",
+        dataError: "We are not able to process this file due to a data problem. Please download and fix the error file and try again.",
+
+        //OTHERS
+        patientIdExist: "ID already exists",
+        emailExist: "Email already exists"
     });
 })(jQuery);

@@ -61,7 +61,7 @@
         },
         careTeamRole =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
-        careGiverRelation = ["Spouse", "Parent", "Child", "Friend", "Other"],
+        careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
         careGiverStatus = ["INACTIVE", "ACTIVE"],
         careTeamTable,
         careGiverTable;
@@ -98,6 +98,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".dataTables_paginate").css("display", "none");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getCareGiver,
@@ -155,7 +160,6 @@
                         }
 
                     },
-                    class: "icons",
                     width: "10%"
                 }
             ]
@@ -194,10 +198,10 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".edit-surgeon").valid()) {
+                    if (form.valid()) {
 
-                        var selectStaffId = $("#selectStaff").data("id");
-                        var selectGroupId = $("#groupSelect").data('id');
+                        var selectStaffId = form.find("#selectStaff").data("id");
+                        var selectGroupId = form.find("#groupSelect").data('id');
                         var groupId, staffId;
                         if (selectGroupId) {
                             groupId = selectGroupId;
@@ -383,8 +387,8 @@
 
             var data =
             {
-                "Spouse": 1,
-                "Parent": 2,
+                "Parent": 1,
+                "Spouse": 2,
                 "Child": 3,
                 "Friend": 4,
                 "Other": 5
@@ -398,6 +402,7 @@
 
             var eleParent = element.parents();
             eleParent.find("#giver-firstName").val(firstName);
+
             eleParent.find("#giver-lastName").val(lastName);
             eleParent.find("#giver-email").val(email);
             eleParent.find("#relationships").val(relationship).data('id', relationshipId);
@@ -467,8 +472,8 @@
      */
     function _initSelect(form) {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
@@ -623,8 +628,8 @@
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
-                $("#selectStaff").val("");
-                $("#selectStaff").prop("disabled", false);
+                $(form).find("#selectStaff").val("");
+                $(form).find("#selectStaff").prop("disabled", false);
                 _initStaffSelect(form, existSurgeonId, $(this).data("id"));
             },
             appendTo: ".container",
@@ -636,11 +641,10 @@
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
-                $("#selectStaff").val("");
-                $("#selectStaff").prop("disabled", false);
+                $(form).find("#selectStaff").val("");
+                $(form).find("#selectStaff").prop("disabled", false);
                 _initStaffSelect(form, existSurgeonId, $(this).data("id"));
                 return false;
-
             }
         });
     }

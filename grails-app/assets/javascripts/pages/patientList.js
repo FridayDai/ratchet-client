@@ -4,7 +4,9 @@
     //Define provider page global variables
     var opts = {
             table: {
-                id: '#patientsTable'
+                id: '#patientsTable',
+                helpTableTableId: '#helpTable',
+                patientListTable: '#patient-list'
             },
             defaultConfirmArguments: {
                 confirmFormArguments: {
@@ -12,11 +14,24 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 620
+                },
+                importFormArguments: {
+                    title: RC.constants.importFormTitle,
+                    content: RC.constants.confirmContent,
+                    okTitle: "Next",
+                    height: RC.windowHeight,
+                    width: RC.windowWidth - 30
+                },
+                newPatientIdConfirmArguments: {
+                    title: RC.constants.confirmPatientTitle,
+                    content: RC.constants.confirmContent,
+                    height: 200,
+                    width: 380
                 }
             },
             waringArguments: {
-                title: RC.constants.errorTip,
-                message: RC.constants.errorTip
+                title: RC.constants.discardPatientsTitle,
+                message: RC.constants.discardPatientsMessage
             },
             urls: {
                 query: "/getPatients",
@@ -25,10 +40,14 @@
                 getStaffs: "/getStaffs",
                 showSinglePatient: "/patients/{0}",
                 getSinglePatient: "/patient/{0}",
-                getGroups: "/getStaffGroups"
+                getGroups: "/getStaffGroups",
+                lookup: "/lookup",
+                checkPatientId: "/checkPatientId/{0}",
+                save: "/savePatients",
+                checkPatientEmail: "/checkPatientEmail"
             }
         },
-        provideTable;
+        provideTable, helpTable, patientListTable, patientListTableData;
 
     /**
      * init table with the data which loaded
@@ -51,6 +70,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -131,6 +155,101 @@
     }
 
     /**
+     * init table with the data which loaded
+     * @param data
+     * @private
+     */
+    function _initHelpTable(data) {
+
+        var options = {
+            paging: true,
+            searching: false,
+            ordering: true,
+            info: false,
+            bLengthChange: false,
+            serverSide: true,
+            "bAutoWidth": false,
+            pageLength: 5,
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".help-display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
+                _initCopy();
+            },
+            ajax: $.fn.dataTable.pipeline({
+                url: opts.urls.lookup,
+                pages: 1, // number of pages to cache
+                data: data
+            }),
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var title = data === undefined ? full.title : data;
+                        return title;
+                    },
+                    width: "40%"
+                }, {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var type = data === undefined ? function () {
+                            if (full.type === "1") {
+                                return 'Treatment';
+                            } else if (full.type === "2") {
+                                return 'Group';
+                            } else {
+                                return 'Provider';
+                            }
+                        } : data;
+
+                        return type;
+                    },
+                    width: "30%"
+                }, {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.id : data;
+                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
+                    },
+                    width: "30%"
+                }]
+        };
+
+        if (helpTable) {
+            helpTable.clear();
+            helpTable.destroy();
+        }
+
+        helpTable = $(opts.table.helpTableTableId).DataTable(options);
+
+    }
+
+    function _initCopy() {
+        $.zeroclipboard({
+            moviePath: './assets/ZeroClipboard.swf',
+            hoverClass: 'hover'
+        });
+        $('.copy').zeroclipboard({
+            dataRequested: function (event, setText) {
+                var text = $(this).parent().text();
+                setText(text);
+            },
+            complete: function (data) {
+                var self = $(this);
+                self.addClass("active");
+                setTimeout(function () {
+                    self.removeClass("active");
+                }, 3000);
+            }
+        });
+    }
+
+    /**
      * load Data from server side
      * @private
      */
@@ -172,6 +291,19 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _searchTitle(treatment, surgeon) {
+        $(".search-tip").css("display", "none");
+        var title = $("#search-title-input").val();
+        var data = {
+            title: title
+        };
+        _initHelpTable(data);
+    }
+
+    /**
      * bind search event
      * @private
      */
@@ -200,6 +332,7 @@
                         $(this).data("id", "");
                     }
                     _search();
+                    return false;
                 }
             }
         );
@@ -208,6 +341,20 @@
             e.preventDefault();
             _search();
         });
+
+        $("#search-title-btn").on("click", function (e) {
+            e.preventDefault();
+            _searchTitle();
+        });
+
+        $('#search-title-input').keydown(function (event) {
+                if (event.keyCode === 13) {
+                    _searchTitle();
+                    return false;
+                }
+            }
+        );
+
     }
 
     /**
@@ -216,11 +363,11 @@
      * @private
      */
     function _getAddData() {
-        var patientId = $("#patientId").val();
-        var firstName = $("#firstName").val();
-        var lastName = $("#lastName").val();
-        var email = $("#email").val();
-        var number = $("#phoneNumber").val();
+        var patientId = $("#patient-id-value").text();
+        var firstName = $("#firstName").val() || $("#firstName").text();
+        var lastName = $("#lastName").val() || $("#lastName").text();
+        var email = $("#email").val() || $("#email").text();
+        var number = $("#phoneNumber").val() || $("#phoneNumber").text();
         var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
 
         var ecFirstName = $("#emergency-firstName").val();
@@ -300,35 +447,526 @@
      * bind add event
      * @private
      */
-    function _bindAddEvent() {
+    function _bindAddEvent(patientId) {
+
+        if ($('.permission-confirm').hasClass('visible')) {
+            $('.permission-confirm').removeClass('visible');
+        }
+        $("#surgeryTime").prop("disabled", true);
+        $("#selectStaffs").prop("disabled", true);
+
+        $('#patient-id-value').text(patientId);
+        var form = $("#table-form");
+        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+            element: form,
+            okCallback: function () {
+                var hasEmailMsg = $('#email').attr('data-error-msg');
+                var hasValid = form.valid();
+                if (hasEmailMsg) {
+                    var obj = {
+                        element: $('#email'),
+                        message: hasEmailMsg,
+                        method: "email"
+                    };
+                    RC.common.showErrorTip(obj);
+                }
+                if (!hasEmailMsg && hasValid) {
+                    _add();
+                    return true;
+                }
+                return false;
+            },
+            beforeClose: function () {
+                _restoreNewPatientForm();
+                _destroyPhone();
+                RC.common.hideErrorTip($("#email"));
+            }
+        }));
+
+        _bindEditPatientInfoModel();
+        _initPhoneInput();
+        _checkSpecialNumber();
+        _bindPatientEmailInput();
+        //_initSurgeryTime();
+        _initSelectTreatment();
+        _initStaffSelect();
+        _initPlaceholder();
+        _initRelationship();
+        _checkEmergencyContact();
+        _initSelectGroup();
+        _checkPageHeightForForm(form);
+        //$("#div-surgery-time").css("display", "none");
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _bindNewPatientModel() {
         $("#add-patient").on("click", function (e) {
             e.preventDefault();
-            $(".form")[0].reset();
+            var form = $("#patient-id-form");
+            form.validate().resetForm();
+            form[0].reset();
 
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".form"),
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.newPatientIdConfirmArguments, {
+                element: form,
+                okTitle: "Next",
                 okCallback: function () {
-                    if ($("#table-form").valid()) {
-                        _add();
+                    if (form.valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
                         return true;
                     }
-                    return false;
                 }
             }));
 
-            _initPhoneInput();
-            _checkSpecialNumber();
-            //_initSurgeryTime();
-            _initSelectTreatment();
-            _initStaffSelect();
-            _initPlaceholder();
-            _initRelationship();
-            _checkEmergencyContact();
-            _initSelectGroup();
-            //$("#div-surgery-time").css("display", "none");
+        });
+
+        $("#new-patient-id").keydown(function (event) {
+                if (event.keyCode === 13) {
+                    if ($("#patient-id-form").valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
+                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+                    }
+                }
+            }
+        );
+
+        $("#bulk-important").on("click", function (e) {
+            e.preventDefault();
+            $(".import-form ")[0].reset();
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
+                element: $(".import-form "),
+                beforeClose: function () {
+                    //if ($('.after-important').is(":visible")) {
+                    return _importWindowCloseHandle();
+                    //}
+                },
+                okCallback: function () {
+                    if ($('.after-important').is(":visible")) {
+                        _save();
+                    } else {
+                        $('.after-important').show().css({'height': $(window).height() - 180});
+                        $('.import-content').hide();
+                        $(".ui-dialog-buttonpane button:contains('Next')").text("Confirm");
+                        _initPatientListTable();
+                    }
+                    return;
+                },
+                cancelCallback: function () {
+                    //if ($('.after-important').is(":visible")) {
+                    return _importWindowCloseHandle();
+                    //}else {
+                    //    $("#bulk-import-form").dialog();
+                    //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                    //    _closeHandle();
+                    //}
+                }
+            }));
+            $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
+            _initImportPopupEvent();
+        });
+
+    }
+
+    function _importWindowCloseHandle() {
+        RC.common.warning(_.extend({}, opts.waringArguments, {
+            element: $(".warn"),
+            confirmText: "Discard Patients",
+            yesCallback: function () {
+                _closeHandle();
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                return true;
+            }
+        }));
+        $(".ui-dialog-buttonpane button:contains('Discard Patients')").css({"width": 150});
+        return false;
+    }
+
+    function _closeHandle() {
+        $('body').css('overflow', 'auto');
+        $('.upload-success').hide().html('');
+        $('.upload-error').hide().html('');
+        $('#progress .progress-bar').css({"width": 0});
+        $('.after-important').hide();
+        $('.import-content').show();
+    }
+
+    /**
+     * data table add a row
+     * @private
+     */
+    function _save() {
+
+        $.ajax({
+            url: opts.urls.save,
+            type: "post",
+            data: {bulkList: JSON.stringify(patientListTableData)},
+            success: function (data) {
+                $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
+                location.reload();
+            }
+        });
+
+    }
+
+    /**
+     * init table with the data which loaded
+     * @param data
+     * @private
+     */
+    function _initPatientListTable() {
+
+        var options = {
+            paging: false,
+            searching: false,
+            ordering: true,
+            info: false,
+            bLengthChange: false,
+            "bAutoWidth": false,
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".patient-display").css("display", "inline-table");
+            },
+            "data": patientListTableData,
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "render": function (data, type, full) {
+                        var id = data === undefined ? full.patientId : data;
+                        return id;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 1,
+                    "render": function (data, type, full) {
+                        var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
+                        return name;
+                    },
+                    width: "5%"
+                }, {
+                    "targets": 2,
+                    "render": function (data, type, full) {
+                        var email = data === undefined ? full.email : data;
+                        return email;
+                    },
+                    width: "12%"
+                }, {
+                    "targets": 3,
+                    "render": function (data, type, full) {
+                        var groupName = data === undefined ? full.groupName : data;
+                        return groupName;
+                    },
+                    width: "12%"
+                }, {
+                    "targets": 4,
+                    "render": function (data, type, full) {
+                        var providerName = data === undefined ? full.providerName : data;
+                        return providerName;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 5,
+                    "render": function (data, type, full) {
+                        var treatmentName = data === undefined ? full.treatmentName : data;
+                        return treatmentName;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 6,
+                    "render": function (data, type, full) {
+                        var surgeryTime = data === undefined ? full.surgeryTime : data;
+                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        return formatDate;
+                    },
+                    width: "11%"
+                }, {
+                    "targets": 7,
+                    "render": function (data, type, full) {
+                        var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
+                        return emergencyName;
+                    },
+                    width: "14%"
+                }, {
+                    "targets": 8,
+                    "render": function (data, type, full) {
+                        var relationship = data === undefined ? full.relationship : data;
+                        return relationship;
+                    },
+                    width: "7%"
+                }, {
+                    "targets": 9,
+                    "render": function (data, type, full) {
+                        var emergencyEmail = data === undefined ? full.emergencyEmail : data;
+                        return emergencyEmail;
+                    },
+                    width: "15%"
+                }]
+
+        };
+
+        if (patientListTable) {
+            patientListTable.clear();
+            patientListTable.destroy();
+        }
+
+        patientListTable = $(opts.table.patientListTable).DataTable(options);
+    }
+
+    /**
+     * edit patient base info in the second model
+     * @private
+     */
+    function _bindEditPatientInfoModel() {
+        $('.form-group-edit').on("click", function (e) {
+            e.preventDefault();
+            var element = $(this).prev();
+            if (!element.hasClass('replace-input-div')) {
+                element = element.find('.replace-input-div');
+            }
+            _divReplaceWithInput(element);
+            if (element.attr("id") === "phoneNumber") {
+                _initPhoneInput();
+                _checkSpecialNumber();
+            }
+            if (element.attr("id") === "email") {
+                _bindPatientEmailInput(element.text());
+            }
         });
     }
 
+    function _initImportPopupEvent() {
+        $('body').css("overflow", "hidden");
+        $('.import-table-group').css({'height': $(window).height() - 450});
+        $('.progress-box').hide();
+        $('.error-tip').hide();
+        $(window).resize(function () {
+            $('.import-form').closest(".ui-dialog").css({
+                'width': $(window).width() - 30,
+                'height': $(window).height() - 30,
+                'left': '0px',
+                'top': '0px'
+            });
+            $('.import-table-group').css({
+                'height': $(window).height() - 450
+            });
+            $('.after-important').css({
+                'height': $(window).height() - 330,
+                'max-height': "775px"
+            });
+        }).resize();
+
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            beforeSend: function (xhr, opts) {
+                RC.common.progress(false);
+                $('.progress-box').show();
+                $('.error-box').hide();
+                $('.upload-error').hide();
+                $('.error-tip').hide();
+                $('.upload-success').hide();
+            },
+            done: function (e, data) {
+                $.each(data.files, function (index, file) {
+                    $('<p class="upload-success"/>').text(file.name).appendTo('.result-box');
+                });
+                patientListTableData = data.result.data;
+                $('.progress-box').hide();
+                $('.upload-error').hide();
+                $('.error-tip').hide();
+                $(".ui-dialog-buttonpane button:contains('Next')").button("enable");
+                $('#progress .progress-bar').css({"width": 0});
+            },
+            error: function (e, data) {
+                $('.progress-box').hide();
+                $('.result-box').show();
+                $('.error-tip').show();
+                var html, tip;
+                if (e.status === 209) {
+                    html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
+                    tip = "Data Error!";
+                } else {
+                    html = RC.constants.formatError;
+                    tip = e.responseText;
+                }
+                $('.upload-error').html(tip).show();
+                $('.error-tip').html(html);
+                $('#progress .progress-bar').css({"width": 0});
+
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            }
+        }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    }
+
+    function _bindPatientEmailInput(primaryEmail) {
+        $('#email').on("blur", function (e) {
+            e.preventDefault();
+            var email = $(this).val();
+            _checkPatientEmailExist($(this), email, primaryEmail);
+
+        })
+    }
+
+    /**
+     * check the patient is already exist
+     * @param patientId
+     * @private
+     */
+    function _checkPatientExist(patientId) {
+        _restoreNewPatientForm();
+        $.ajax({
+            url: opts.urls.checkPatientId.format(patientId),
+            type: "POST",
+            data: {patientId: patientId},
+            dataType: "json",
+            success: function (data) {
+                if (data.check === "false") {
+                    _bindAddEvent(patientId);
+                } else {
+                    _inputReplaceWithDiv(data, patientId, _bindAddEvent);
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * check patient email exist
+     * @param email
+     * @private
+     */
+    function _checkPatientEmailExist(elem, email, primaryEmail) {
+        if (!(email === primaryEmail)) {
+
+            $.ajax({
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                data: {email: email},
+                dataType: "json",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                success: function (data) {
+                    if (!(data.check === "false")) {
+                        var obj = {
+                            element: elem,
+                            message: RC.constants.emailExist,
+                            method: "email"
+                        };
+                        RC.common.showErrorTip(obj);
+                    } else {
+                        //RC.common.hideErrorTip(elem);
+                    }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * revert all patient form change, make it just like the status when init.
+     * @private
+     */
+    function _restoreNewPatientForm() {
+        _.each($(".replace-input-div"), function (element, index) {
+            var key = element.id;
+            var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";
+            $(element).replaceWith(html);
+            var $ele = $('#' + key);
+            switch (key) {
+                case "firstName":
+                    $ele.attr("placeholder", "John");
+                    break;
+                case "lastName":
+                    $ele.attr("placeholder", "Smith");
+                    break;
+                case "email":
+                    $ele.prop("type", "email");
+                    $ele.attr("placeholder", "john.smith@email.com");
+                    break;
+                case "phoneNumber":
+                    $ele.prop("type", "tel");
+                    $ele.attr("placeholder", "777-777-7777");
+                    $ele.attr("maxlength", "14");
+                    break;
+            }
+            $ele.next().remove();
+        });
+
+        _.each($(".input-convert"), function (element, index) {
+            var $ele = $(element);
+            if (element.id === "phoneNumber") {
+                $ele.closest(".form-group").find('.form-group-edit').remove();
+            } else if ($ele.next().is("a")) {
+                $ele.next().remove();
+            }
+        });
+    }
+
+    function _inputReplaceWithDiv(data, patientId, fn) {
+
+        _.each($(".input-convert"), function (element, index) {
+            var key = element.id;
+            var html = "<div class='replace-input-div' id=" + key + ">" + data[key] + "</div>";
+            var edit = "<a class='icon-edit form-group-edit'>" + "</a>";
+            if (key === "phoneNumber") {
+                if ($('#' + key).parent().hasClass("int-tel-input")) {
+                    $(element).replaceWith(html);
+                    $('#' + key).closest(".form-group").append(edit);
+                } else {
+                    $(element).replaceWith(html + edit);
+                }
+
+                $('#' + key).text(data[key].replace(/(\d{3})(\d{4})/, "($1)$2-"));
+            } else {
+                $(element).replaceWith(html + edit);
+            }
+
+
+        });
+        fn(patientId);
+    }
+
+    function _divReplaceWithInput(element) {
+        var div = element;
+        var key = div.attr("id");
+        var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";//add type
+        div.replaceWith(html);
+        var $ele = $('#' + key).val(div.text());
+        switch (key) {
+            case "firstName":
+                $ele.attr("placeholder", "John");
+                break;
+            case "lastName":
+                $ele.attr("placeholder", "Smith");
+                break;
+            case "email":
+                $ele.prop("type", "email");
+                $ele.attr("placeholder", "john.smith@email.com");
+                break;
+            case "phoneNumber":
+                $ele.prop("type", "tel");
+                $ele.attr("placeholder", "777-777-7777");
+                $ele.attr("maxlength", "14");
+                break;
+        }
+    }
 
     function _initRelationship() {
         var data = [
@@ -394,6 +1032,10 @@
             onlyCountries: ["us"],
             utilsScript: false
         });
+    }
+
+    function _destroyPhone() {
+        $("#phoneNumber").intlTelInput("destroy");
     }
 
     /**
@@ -489,8 +1131,9 @@
             appendTo: ".container",
 
             change: function (data, ui) {
-                if (ui.item === null) {
+                if (ui.item === null || ui.item === undefined) {
                     $(this).data("id", "");
+                    $(this).val("");
                     return;
                 }
                 var date = new Date();
@@ -539,6 +1182,7 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $(this).val("");
                     _search();
                     return;
                 }
@@ -590,6 +1234,7 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $(this).val("");
                     _search();
                     return;
                 }
@@ -604,7 +1249,7 @@
      * @private
      */
     function _initStaffSelect(groupId) {
-        if(groupId) {
+        if (groupId) {
             $("#selectStaffs").combobox("destroy");
         }
 
@@ -671,6 +1316,7 @@
                     });
 
                     $('.permission-confirm').addClass('visible');
+                    $('#ec-first-name').text($("#emergency-firstName").val());
                     _resetToolTipPosition($('.re-position'));
                     $('.permission-confirm').data("direction", "down");
                 }
@@ -780,9 +1426,9 @@
             appendTo: ".container",
             focus: function (event, ui) {
                 event.preventDefault();
-                    if (ui.item.value === "No matches found") {
-                        $(this).val("");
-                        return;
+                if (ui.item.value === "No matches found") {
+                    $(this).val("");
+                    return;
                 }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
@@ -795,13 +1441,25 @@
     }
 
     /**
+     * check the window height, if it less than model height, resize container height.
+     * @param form
+     * @private
+     */
+    function _checkPageHeightForForm(form) {
+        var formHeight = form.closest(".ui-dialog").outerHeight();
+        if ($(window).height() < formHeight) {
+            $(".container").css('min-height', formHeight - 41 + 'px');
+        }
+    }
+
+    /**
      * Provider page Initialization
      * @private
      */
     function _init() {
         _loadData();
         _setValidate();
-        _bindAddEvent();
+        _bindNewPatientModel();
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();

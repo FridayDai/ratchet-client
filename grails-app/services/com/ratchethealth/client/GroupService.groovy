@@ -25,6 +25,7 @@ class GroupService {
         try {
             log.info("Call backend service to get groups list with start, length, name and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("groupName", name)
@@ -62,6 +63,7 @@ class GroupService {
         try {
             log.info("Call backend service to create group with name and clientId, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("name", name)
                     .asString()
 
@@ -92,6 +94,7 @@ class GroupService {
         try {
             log.info("Call backend service to update group with name and clientId, token: ${request.session.token}.")
             def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
                     .field("name", name)
                     .asString()
 
@@ -119,6 +122,7 @@ class GroupService {
         try {
             log.info("Call backend service to show a group with groupId and clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -146,6 +150,7 @@ class GroupService {
         try {
             log.info("Call backend service to delete a group with groupId and clientId, token: ${request.session.token}.")
             def resp = Unirest.delete(url)
+                    .header("X-Auth-Token", request.session.token)
                     .asString()
 
             if (resp.status == 204) {
@@ -170,6 +175,7 @@ class GroupService {
         try {
             log.info("Call backend service to get groups with clientId, token: ${request.session.token}.")
             def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
                     .queryString("groupName", name)
                     .asString()
 
@@ -185,6 +191,4 @@ class GroupService {
             throw new ApiAccessException(e.message)
         }
     }
-
-
 }

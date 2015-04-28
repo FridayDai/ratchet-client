@@ -75,6 +75,11 @@
                 $(".previous").text('');
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                    paginate.hide();
+                }
             },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
@@ -82,7 +87,7 @@
                 data: data
             }),
             "columnDefs": [{
-                "targets": [0, 5],
+                "targets": 4,
                 "orderable": false
             },
                 {
@@ -100,15 +105,14 @@
                             dataName;
 
 
-
                         if (full[5] === "true") {
-                            dataName = ("<img src=" + opts.img.isDoctor + "/>" + " " + data);
+                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data+"</div>");
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName;
+                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName+"</div>";
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
@@ -557,7 +561,7 @@
      * add set password input valid
      */
     function _validSetPassword() {
-        $("#johnRat").click(function () {
+        $("#joinRat").click(function () {
             var password = $("#password").val();
             var confirmPassword = $("#confirmPassword").val();
             $(".error-area").text('');
@@ -674,8 +678,8 @@
         var lastName = parents.find("#accountLastName").text();
 
         RC.common.warning(_.extend({}, {
-                title: '<div class="window-error">' + "DEACTIVATE ACCOUNT" + '</div>',
-                message: '<div class="window-error">' + "Are you sure you want to deactivate the following account?" + '</div>' +
+                title: '<div>' + "DEACTIVATE ACCOUNT" + '</div>',
+                message: '<div>' + "Are you sure you want to deactivate the following account?" + '</div>' +
                 '<div class="window-deactivate-msg">' + isDoctor + " " + firstName + " " + lastName + '</div>'
             },
             {

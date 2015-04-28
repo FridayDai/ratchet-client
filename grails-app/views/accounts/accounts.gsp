@@ -12,7 +12,7 @@
     <div class="content">
         <div class="inner-header">
             <label class="title">ACCOUNTS</label>
-            <a href="#" id="add-account" class="btn add-account pull-right">New Account</a>
+            <a href="#" id="add-account" class="btn add-account"><span>New Account</span></a>
         </div>
 
         <div class="inner-search">
@@ -57,7 +57,9 @@
         <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
             <div class="form-group">
-                <input id="doctor" name="doctor" type="checkbox" class="input-group doctor"/><span class="dr">Dr.</span>
+                <label class="checkbox">
+                    <input id="doctor" name="doctor" type="checkbox">Dr.
+                </label>
             </div>
 
             <div class="form-group inline">

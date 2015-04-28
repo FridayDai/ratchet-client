@@ -27,6 +27,7 @@
         span {
             display: inline-block;
             padding-left: 20px;
+            padding-bottom: 4px;
             font-size: 14px;
         }
 
@@ -37,10 +38,12 @@
         margin-top: 15px;
         margin-left: 45px;
         color: $base-color-warn;
+        font-weight: 400;
+        font-size: 14px;
 
         &:before {
             position: absolute;
-            top: -10px;
+            top: -7px;
             left: -35px;
             content: url('../../../images/surgeon.png');
         }
@@ -51,6 +54,8 @@
         margin-left: 5px;
         vertical-align: super;
         color: $base-color-warn;
+        font-weight: 400;
+        font-size: 14px;
     }
 
     img {
@@ -169,7 +174,7 @@
 
 .top-body {
     position: relative;
-    height: 150px;
+    height: 160px;
     padding: 20px 30px 30px;
     border-bottom: 20px solid $base-color-white-grey;
     color: $base-color-light-black;
@@ -187,6 +192,8 @@
 
     h4 {
         color: $base-color-warn;
+        font-weight: 400;
+        font-size: 13px;
     }
 
     .surgeon-id {
@@ -196,7 +203,7 @@
 
     .surgeon-name {
         margin-top: 4px;
-        font-weight: 200;
+        font-weight: 400;
         font-size: 20px;
     }
 
@@ -245,14 +252,14 @@
 .team-table {
     .status-active {
         font-size: 13px;
-        padding: 5px 3px 2px;
+        padding: 5px 3px;
         color: $base-color-white;
         background: $base-color-deactive;
     }
 
     .status-inactive {
         font-size: 13px;
-        padding: 5px 3px 2px;
+        padding: 5px 3px;
         color: $base-color-white;
         background: $base-light-grey-color;
     }

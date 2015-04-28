@@ -66,7 +66,7 @@
             },
             global: true,
             error: function (jqXHR) {
-                if (jqXHR.status === 403) {
+                if (jqXHR.status === 401) {
                     window.location.href = "/login";
                 }
                 else if (jqXHR.status === 400) {
@@ -76,7 +76,7 @@
                         errorMessage: jqXHR.responseText
                     });
                 }
-                else if (jqXHR.status === 401 || jqXHR.status >= 404) {
+                else if (jqXHR.status === 403 || jqXHR.status >= 404) {
                     RC.common.error({
                         title: RC.constants.errorTitle404,
                         message: RC.constants.errorTip
@@ -292,8 +292,8 @@
             _resizeMenu: function () {
                 var ul = this.menu.element;
                 ul.outerWidth(Math.max(
-                    ul.width("").outerWidth() + 1,
-                    this.element.outerWidth() + 17
+                    ul.width("").outerWidth(),
+                    this.element.outerWidth() + 16
                 ));
             }
         });
@@ -340,6 +340,7 @@
                             event.preventDefault();
                             if (ui.item === null) {
                                 $(this).data("id", "");
+                                $(this).val("");
                             }
                         },
                         focus: function (event, ui) {
@@ -365,7 +366,7 @@
                     .removeClass("ui-corner-all")
                     .addClass("ui-corner-right ui-combobox-toggle")
                     .click(function () {
-                        if(self.element.is(":disabled")) {
+                        if (self.element.is(":disabled")) {
                             return;
                         }
                         if (self.element.autocomplete("widget").is(":visible")) {
@@ -378,6 +379,9 @@
                         self.element.autocomplete("search", "");
                         self.element.focus();
                     });
+                if (self.element.is(":disabled")) {
+                    self.element.parent().find("a").addClass('disable');
+                }
             },
 
             destroy: function () {
@@ -471,10 +475,10 @@
          *
          */
         showMsg: function (showMsgArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.showMsg(showMsgArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.showMsg(showMsgArguments);
+            //    return;
+            //}
             var top = showMsgArguments.top || '33%',
                 left = showMsgArguments.left || '50%',
                 remain = showMsgArguments.remain || 2000,
@@ -522,17 +526,20 @@
          * @param width
          */
         confirmForm: function (confirmFormArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.confirmForm(confirmFormArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.confirmForm(confirmFormArguments);
+            //    return;
+            //}
             var height = confirmFormArguments.height || 300,
                 width = confirmFormArguments.width || 350;
             var title = confirmFormArguments.okTitle || "Save";
 
-            var $container = $(confirmFormArguments.element);
+            var cancel = confirmFormArguments.cancelCallback;
 
-            var containerParent = $container.parent();
+            var $container = $(confirmFormArguments.element);
+            var beforeClose = confirmFormArguments.beforeClose;
+
+            //var containerParent = $container.parent();
             var dialogOwn = $container.clone();
 
             var dialogOpts = {
@@ -543,7 +550,7 @@
                 modal: true,
                 title: confirmFormArguments.title,
                 open: function () {
-                    $("input").blur();
+                    //$("input").blur();
                     var $element = $(this).parent();
                     $element.addClass('fade');
                     setTimeout(function () {
@@ -551,17 +558,20 @@
                     }, 300);
 
                 },
+                beforeClose: function () {
+
+                },
                 buttons: {},
                 close: function () {
-
-                    var elementList = $(confirmFormArguments.element).find(".form-group").children();
+                    var elementList = $(confirmFormArguments.element).find(".form-group").find(":input");
                     $.each(elementList, function (index, element) {
                         RC.common.hideErrorTip(element);
                     });
+                    confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
-                    dialogOwn.appendTo(containerParent);
-                    $(this).dialog("destroy").remove();
+                    //dialogOwn.appendTo(containerParent);
+                    $(this).dialog("destroy").replaceWith(dialogOwn);
                 }
             };
 
@@ -570,6 +580,18 @@
                     dialog.dialog("close");
                 }
             };
+
+            if (cancel) {
+                dialogOpts.buttons['Cancel'] = function (e) {
+                    if ($.isFunction(confirmFormArguments.cancelCallback) && (confirmFormArguments.cancelCallback)(e)) {
+
+                    }
+                };
+            }
+
+            if($.isFunction(beforeClose)) {
+                dialogOpts.beforeClose = beforeClose;
+            }
 
             var dialog = $container.dialog(dialogOpts);
             $container.removeClass('ui-hidden');
@@ -585,10 +607,10 @@
          * @param cancelCallback
          */
         confirm: function (confirmArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.confirm(confirmArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.confirm(confirmArguments);
+            //    return;
+            //}
             var $container;
             if ($(".window-Container").length > 0) {
                 $container = $(".window-Container");
@@ -638,10 +660,10 @@
          * @param closeCallback
          */
         warning: function (warningArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.warning(warningArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.warning(warningArguments);
+            //    return;
+            //}
             var $container,
                 dialog;
             if ($(".window-container").length > 0) {
@@ -694,10 +716,10 @@
          * @returns {boolean}
          */
         error: function (errorArguments) {
-            if (window !== window.top) {
-                window.top.RC.common.error(errorArguments);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.error(errorArguments);
+            //    return;
+            //}
             var $container,
                 dialog;
             if ($(".window-container").length > 0) {
@@ -743,57 +765,63 @@
          */
         showErrorTip: function (errorElement) {
             var element = $(errorElement.element);
-            var errorMessage = errorElement.message;
-            element.attr("data-error-msg", errorMessage);
-            element.attr("data-error-hover-close", false);
-            var className = "error-msg-bottom";
-            if (element.is("[data-class]")) {
-                className = element.attr("data-class");
-            }
-            var position;
-            switch (className) {
-                case 'error-msg-top':
-                    position = {my: 'center bottom', at: 'center top-10'};
-                    break;
-                case 'error-msg-bottom':
-                    position = {my: 'left top', at: 'left bottom'};
-                    break;
-                case 'error-msg-left':
-                    position = {my: 'right center', at: 'left-10 center'};
-                    break;
-                case 'error-msg-right':
-                    position = {my: 'left center', at: 'right+10 center'};
-                    break;
-            }
-            position.collision = 'none';
-            var errorContent = $('<div class="validation-error-text">' +
-            '<i class="misc-icon ui-validation-error"></i>' + errorMessage + '</div>');
-            var tooltips = element.tooltip({
-                tooltipClass: className,
-                position: position,
-                items: "[data-error-msg], [title]",
-                content: function () {
-                    if (element.is("[data-error-msg]")) {
+            var form = element.closest("form");
+            if (form.css("display") == "none") {
+                return
+            } else {
+                var errorMessage = errorElement.message;
+                element.attr("data-error-msg", errorMessage);
+                element.attr("data-error-hover-close", false);
+                var className = "error-msg-bottom";
+                if (element.is("[data-class]")) {
+                    className = element.attr("data-class");
+                }
+                var position;
+                switch (className) {
+                    case 'error-msg-top':
+                        position = {my: 'center bottom', at: 'center top-10'};
+                        break;
+                    case 'error-msg-bottom':
+                        position = {my: 'left top', at: 'left bottom'};
+                        break;
+                    case 'error-msg-left':
+                        position = {my: 'right center', at: 'left-10 center'};
+                        break;
+                    case 'error-msg-right':
+                        position = {my: 'left center', at: 'right+10 center'};
+                        break;
+                }
+                position.collision = 'none';
+                var errorContent = $('<div class="validation-error-text">' +
+                '<i class="misc-icon ui-validation-error"></i>' + errorMessage + '</div>');
+                var tooltips = element.tooltip({
+                    tooltipClass: className,
+                    position: position,
+                    items: "[data-error-msg], [title]",
+                    content: function () {
+                        if (element.is("[data-error-msg]")) {
+                            return errorContent;
+                        }
+                        if (element.is("[title]")) {
+                            return element.attr("title");
+                        }
                         return errorContent;
                     }
-                    if (element.is("[title]")) {
-                        return element.attr("title");
-                    }
-                    return errorContent;
-                }
 
-            }).on("mouseleave", function (event) {
-                event.stopImmediatePropagation();
-                var elem = $(this).parent().find('.select2-container');
-                if (elem.length > 0) {
+                }).on("mouseleave", function (event) {
+                    event.stopImmediatePropagation();
+                    var elem = $(this).parent().find('.select2-container');
+                    if (elem.length > 0) {
 
-                } else {
-                    if (!$(this).valid()) {
-                        return;
+                    } else {
+                        //if (!$(this).valid()) {
+                        //    return;
+                        //}
                     }
-                }
-            });
-            tooltips.tooltip("open");
+                });
+                tooltips.tooltip("open");
+            }
+
         },
 
         /**
@@ -817,10 +845,10 @@
         },
 
         dropDownSelect: function (selectDiv) {
-            if (window !== window.top) {
-                window.top.RC.common.dropDownSelect(selectDiv);
-                return;
-            }
+            //if (window !== window.top) {
+            //    window.top.RC.common.dropDownSelect(selectDiv);
+            //    return;
+            //}
             var $container = $(selectDiv.element),
                 selectorBody = $container.find('.selector-body');
             $container.width(selectDiv.width || 140);

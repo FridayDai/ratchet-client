@@ -125,17 +125,21 @@
             border-right: 2px solid $base-color-mid-grey;
             border-bottom: 0;
             color: $base-color-white;
-            font-size: 17px;
+            font-size: 16px;
             line-height: 65px;
             text-transform: uppercase;
+            font-weight: 300;
         }
 
         .ui-state-active {
-            background-color: $base-color-tab-bg;
+            //            background-color: $base-color-tab-bg;
+            background-color: $base-color-white;
 
             a {
                 height: 65px;
                 color: $base-color-dark-grey;
+                font-weight: 400;
+                font-size: 17px;
             }
         }
     }
@@ -145,7 +149,7 @@
         border: 0;
 
         .archived {
-//            min-height: 600px;
+            //            min-height: 600px;
             background-color: $base-color-archived-bg;
         }
     }
@@ -169,7 +173,7 @@
         padding: 0;
         border: 0;
         border-bottom: 2px solid $base-color-white-grey;
-        background-color: $base-color-tab-bg;
+        //        background-color: $base-color-tab-bg;
         font-weight: 200;
 
         .ui-state-default {
@@ -184,13 +188,14 @@
             color: $base-color-medium-black;
             font-size: 15px;
             line-height: 40px;
+            font-weight: 300;
         }
 
         .ui-state-active {
             a {
                 border-color: $base-color-dark-grey;
                 color: $base-color-dark-grey;
-                font-weight: 500;
+                font-weight: 400;
             }
         }
 
@@ -211,8 +216,8 @@
     .surgery-date {
         span {
             color: $base-color-medium-black;
-            font-weight: normal;
-            font-size: 15px;
+            font-weight: 300;
+            font-size: 13px;
         }
 
         label {
@@ -220,6 +225,7 @@
             padding-right: 10px;
             color: $base-color-medium-black;
             font-size: 14px;
+            font-weight: 400;
         }
 
         img {

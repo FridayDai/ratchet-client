@@ -34,6 +34,12 @@ class UrlMappings {
         "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
         "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
         "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
+        "/bulk_import/download"(controller: "patients", action: "downloadFile")
+        "/upload"(controller: "patients", action: "uploadFile")
+        "/lookup"(controller: "patients", action: "lookup")
+        "/savePatients"(controller: "patients", action: "savePatients")
+        "/checkPatientId/$patientId?"(controller: "patients", action: "checkPatientExist")
+        "/checkPatientEmail/$email?"(controller: "patients", action: "checkPatientEmailExist")
 
         //team
         "/team"(controller: "team", action: "showMedicalCares")

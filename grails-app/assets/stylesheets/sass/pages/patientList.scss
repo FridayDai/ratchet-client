@@ -5,7 +5,8 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.add-patient {
+.add-patient,
+.bulk-important {
     display: inline-block;
     float: right;
     margin-top: 10px;
@@ -26,7 +27,12 @@
     }
 }
 
+.add-patient {
+    margin-left: 10px;
+}
+
 .inline {
+    position: relative;
     display: inline-block;
 }
 
@@ -64,7 +70,7 @@
 //}
 
 .permission-confirm {
-//    visibility: hidden;
+    //    visibility: hidden;
     display: none;
     margin-top: 7px;
     margin-bottom: 0;
@@ -77,7 +83,7 @@
 }
 
 .visible {
-//    visibility: visible;
+    //    visibility: visible;
     display: block;
     width: 95%;
 }
@@ -90,8 +96,267 @@
     margin-top: 15px;
 }
 
-.select-tip{
+.select-tip {
     font-size: 11px;
+    font-weight: 700;
 }
 
+// for new patient inline edit
+.icon-edit {
+    padding: 5px 0;
+    border: 0;
+    background-color: transparent;
 
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
+
+    &:before {
+        display: inline-block;
+        padding-left: 10px;
+        content: '\f417';
+        color: $base-font-color;
+        font-weight: lighter;
+        font-family: ionicons;
+        cursor: pointer;
+    }
+}
+
+.form-group-edit {
+    position: absolute;
+    top: -5px;
+    right: 8px;
+}
+
+.replace-input-div {
+    height: 25px;
+    margin-top: 3px;
+    padding: 2px 0;
+    color: $base-color-medium-black;
+    font-size: 14px;
+}
+
+.patient-id-div {
+    height: 25px;
+    margin-top: 3px;
+    padding: 2px 0;
+    color: $base-color-medium-black;
+    font-size: 14px;
+}
+
+.import-form {
+    padding: 1em 1.8em !important;
+    //    height: 80%!important;
+
+    p {
+        color: $base-dark-grey;
+        min-height: 36px;
+        width: 680px;
+    }
+
+    .download-file {
+        margin-top: 25px;
+    }
+
+    .inner-search {
+        min-width: inherit;
+
+        .search-content {
+            margin: 20px 0px;
+        }
+    }
+
+    .filler-content {
+        width: 100%;
+        max-width: inherit;
+
+        .search-input {
+            width: 45%;
+        }
+    }
+
+    .bulk-important-file {
+        float: left;
+        position: relative;
+        overflow: hidden;
+        z-index: 50;
+
+        &:before {
+            margin-right: 0;
+        }
+
+        input {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+            font-size: 200px;
+            direction: ltr;
+            cursor: pointer;
+        }
+    }
+
+    .import-table-group {
+        min-height: 200px;
+        overflow: auto;
+
+        .div-hidden {
+            display: none;
+        }
+
+        .search-tip {
+            padding-left: 30px;
+        }
+
+        .dataTable {
+            min-width: inherit;
+        }
+    }
+
+    .patient-display {
+        min-width: 1800px;
+        overflow: auto;
+
+        thead {
+
+            tr {
+                background-color: $base-color-search;
+            }
+        }
+    }
+
+    .dataTables_wrapper {
+
+        .dataTables_paginate {
+            margin-bottom: 0;
+        }
+    }
+
+}
+
+.result-box {
+    position: relative;
+    z-index: 100;
+    float: left;
+
+    .upload-error {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 200px;
+        color: $base-color-red;
+    }
+
+    .upload-success {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        width: 500px;
+
+        &:after {
+            font-family: 'Ionicons';
+            margin-left: 10px;
+            color: $base-color-green;
+            content: '\f383';
+        }
+    }
+
+}
+
+.error-tip-box {
+    position: relative;
+    min-height: 76px;
+
+    .error-tip {
+        width: 100%;
+        margin-top: 20px;
+        position: absolute;
+        left: 0;
+        top: 30px;
+    }
+}
+
+.progress-box {
+    position: relative;
+    display: none;
+
+    .progress {
+        position: absolute;
+        left: 140px;
+        top: 25px;
+        width: 200px;
+        height: 4px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+
+        .progress-bar {
+            float: left;
+            width: 0;
+            height: 100%;
+            font-size: 12px;
+            line-height: 20px;
+            color: #fff;
+            text-align: center;
+            background-color: #428bca;
+            -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+            -webkit-transition: width .6s ease;
+            -o-transition: width .6s ease;
+            transition: width .6s ease;
+        }
+
+        .progress-bar-success {
+            background-color: $base-color-mid-grey;
+        }
+    }
+
+    .loading {
+        width: 16px;
+        height: 16px;
+        left: 350px;
+        top: 20px;
+        position: absolute;
+        background: #fff url('../../../images/select2-spinner.gif') no-repeat 100% !important;
+    }
+}
+
+.copy-id-content {
+
+    .id-text {
+        width: 100%;
+        min-height: inherit;
+
+        .copy {
+            float: right;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+
+            &:after {
+                font-family: 'Ionicons';
+                margin-left: 10px;
+                font-size: 18px;
+                color: $base-font-color;
+                content: '\f41b';
+            }
+        }
+
+        .copy.active {
+            &:after {
+                color: darken($base-font-color, 40%);
+            }
+        }
+    }
+}
+
+.ui-tooltip.copy-tooltip {
+    background-color: #000000;
+    margin-left: 40px;
+
+}
