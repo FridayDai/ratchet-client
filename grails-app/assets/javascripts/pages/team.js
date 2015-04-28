@@ -61,7 +61,7 @@
         },
         careTeamRole =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
-        careGiverRelation = ["Spouse", "Parent", "Child", "Friend", "Other"],
+        careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
         careGiverStatus = ["INACTIVE", "ACTIVE"],
         careTeamTable,
         careGiverTable;
@@ -100,7 +100,7 @@
                 $(".dataTables_paginate").css("display", "none");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
             },
@@ -387,8 +387,8 @@
 
             var data =
             {
-                "Spouse": 1,
-                "Parent": 2,
+                "Parent": 1,
+                "Spouse": 2,
                 "Child": 3,
                 "Friend": 4,
                 "Other": 5
@@ -472,8 +472,8 @@
      */
     function _initSelect(form) {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
