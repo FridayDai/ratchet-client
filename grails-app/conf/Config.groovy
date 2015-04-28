@@ -182,7 +182,7 @@ grails.assets.plugin."cookie-session".excludes = ["**"]
 
 
 if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
-    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "http://d3pngev0rteoe.cloudfront.net"
+    cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "https://d3pngev0rteoe.cloudfront.net"
     grails.assets.url = "${cdn_domain}/assets/"
 }
 
@@ -215,7 +215,7 @@ cors.url.pattern = '/assets/*'
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://ratchet-api-release.elasticbeanstalk.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
