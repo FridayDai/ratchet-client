@@ -110,8 +110,9 @@
         left: 12px;
         width: 25px;
         color: $base-color-dark-grey;
-        //        font-weight: bold;
-        font-size: 22px;
+        font-family: Lato;
+        font-weight: 400;
+        font-size: 20px;
         text-align: center;
     }
 }
@@ -235,6 +236,5 @@
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-    font-family: Lato;
     font-weight: 400;
 }
