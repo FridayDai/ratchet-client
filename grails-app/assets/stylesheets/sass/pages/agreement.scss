@@ -10,7 +10,8 @@ p {
     font-size: 16pt;
 
     span {
-        font-weight: 600;
+        font-family: Lato;
+        font-weight: 700;
     }
 
     a {
@@ -20,13 +21,15 @@ p {
     }
 
     .italic {
-        font-weight: normal;
+        font-family: Lato;
+        font-weight: 400;
         font-style: italic;
     }
 
     .example {
+        font-family: Lato;
         margin-left: 30px;
-        font-weight: normal;
+        font-weight: 400;
     }
 }
 
@@ -42,7 +45,7 @@ p {
 h1,
 h4 {
     padding: 0 120px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 h1 {
@@ -87,8 +90,9 @@ h4 {
     height: 36px;
     color: $base-color-white;
     background-color: $base-color-mid-grey;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 11pt;
+    font-family: Lato;
 
     ul {
         float: left;
@@ -105,8 +109,9 @@ h4 {
 
             a {
                 color: $base-color-white;
-                font-weight: 100;
+                font-weight: 300;
                 font-size: 11pt;
+                font-family: Lato;
             }
 
             &:before {

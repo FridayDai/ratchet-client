@@ -5,6 +5,7 @@
     overflow: hidden;
     padding: 0;
     outline: 0;
+    font-family: Lato;
 
     .ui-dialog-titlebar {
         position: relative;
@@ -17,6 +18,7 @@
             margin-left: 10px;
             color: #4d4d4d;
             font-weight: 400;
+            font-family: Lato;
         }
 
         .ui-button {
@@ -163,6 +165,7 @@
 
 .window-error-title {
     color: $base-color-white;
+    font-family: Lato;
     font-weight: 400;
     text-align: center;
 }
@@ -172,12 +175,14 @@
     margin-top: 13px;
     color: $base-color-white;
     text-align: center;
+    font-family: Lato;
     font-weight: 300;
 }
 
 .window-deactivate-msg {
     margin-top: 13px;
     color: $base-color-white;
+    font-family: Lato;
     font-weight: 400;
     text-align: center;
 }
@@ -188,6 +193,7 @@
     background: none;
 
     .ui-button-text {
+        font-family: Lato;
         font-weight: 400;
     }
 }
@@ -198,9 +204,9 @@
 
 .ui-dialog-titlebar-close {
     display: inline-block;
-    font-family: 'Ionicons';
 
     &:before {
+        font-family: 'Ionicons';
         display: inline-block;
         content: '\f2d7';
     }
