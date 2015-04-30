@@ -43,7 +43,7 @@
 
                 <div class="align-center cover-inner-footer">
                     <button type="submit" class="btn btn-submit" id='btnLogin'>Log In</button>
-                    <g:link uri="/forgotPassword" class="forgot-password">Forgot Password?</g:link>
+                    <g:link uri="/forgot_password" class="forgot-password">Forgot Password?</g:link>
                 </div>
             </g:form>
         </div>

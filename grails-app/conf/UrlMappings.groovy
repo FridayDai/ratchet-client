@@ -15,7 +15,12 @@ class UrlMappings {
         "/healthcheck"(controller: "healthCheck", action: "index")
 
         //forgotPassword
-        "/forgotPassword"(view: "/forgotPassword/forgotPassword")
+        "/forgot_password"(controller: "accounts") {
+            action = [GET: "getForgotPassword", POST: "forgotPassword"]
+        }
+        "/confirm_password"(controller: "accounts") {
+            action = [POST: "confirmPassword"]
+        }
         "/resetPassword/$code?"(controller: "accounts", action: "resetPassword")
 
         // Home
@@ -71,7 +76,7 @@ class UrlMappings {
         "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")
         "/getAccounts"(controller: "accounts", action: "getAccounts")
-        "/singleAccount/$id?"(controller: "accounts", action: "getSingleAccount")
+        "/accounts/$id?"(controller: "accounts", action: "getSingleAccount")
         "/createAccount"(controller: "accounts", action: "createAccount")
         "/updateAccount"(controller: "accounts", action: "updateAccount")
         "/inviteAccount/$accountId?"(controller: "accounts", action: "inviteAccount")

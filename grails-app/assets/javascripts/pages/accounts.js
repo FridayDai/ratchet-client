@@ -41,7 +41,7 @@
                 updateAccount: "/updateAccount",
                 inviteAccount: "/inviteAccount/{0}",
                 updatePassword: "/updatePassword",
-                showSingleAccount: "/singleAccount/{0}",
+                showSingleAccount: "/accounts/{0}",
                 deactivateAccount: "/deactivateAccount/{0}",
                 activateAccount: "/activateAccount/{0}",
                 getGroups: "/getStaffGroups",
@@ -144,7 +144,7 @@
                     "targets": 4,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                        return '<a href="/single_account/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
                     },
                     width: "7%"
                 },
