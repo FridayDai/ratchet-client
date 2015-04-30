@@ -47,7 +47,7 @@
                 checkPatientEmail: "/checkPatientEmail"
             }
         },
-        provideTable, helpTable, patientListTable, patientListTableData;
+        provideTable, helpTable, patientListTable, patientListTableData,isUploaded;
 
     /**
      * init table with the data which loaded
@@ -540,9 +540,11 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
                 beforeClose: function () {
-                    //if ($('.after-important').is(":visible")) {
-                    return _importWindowCloseHandle();
-                    //}
+                    if (isUploaded) {
+                        return _importWindowCloseHandle();
+                    }else {
+                        return true;
+                    }
                 },
                 okCallback: function () {
                     if ($('.after-important').is(":visible")) {
@@ -556,13 +558,15 @@
                     return;
                 },
                 cancelCallback: function () {
-                    //if ($('.after-important').is(":visible")) {
-                    return _importWindowCloseHandle();
-                    //}else {
-                    //    $("#bulk-import-form").dialog();
-                    //    $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
-                    //    _closeHandle();
-                    //}
+                    if (isUploaded) {
+                        return _importWindowCloseHandle();
+                    }else {
+                        //$("#bulk-import-form").dialog();
+                        $("#bulk-import-form").dialog("close");
+                        isUploaded = false;
+                        //_closeHandle();
+                        return true;
+                    }
                 }
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
@@ -592,6 +596,7 @@
         $('#progress .progress-bar').css({"width": 0});
         $('.after-important').hide();
         $('.import-content').show();
+        isUploaded = false;
     }
 
     /**
@@ -779,11 +784,13 @@
                 $('.error-tip').hide();
                 $(".ui-dialog-buttonpane button:contains('Next')").button("enable");
                 $('#progress .progress-bar').css({"width": 0});
+                isUploaded = true;
             },
             error: function (e, data) {
                 $('.progress-box').hide();
                 $('.result-box').show();
                 $('.error-tip').show();
+                isUploaded = true;
                 var html, tip;
                 if (e.status === 209) {
                     html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
