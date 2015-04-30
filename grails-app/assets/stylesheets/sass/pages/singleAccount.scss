@@ -97,8 +97,20 @@
     border-bottom: 6px solid $base-color-white-grey;
 
     p {
-        color: $base-color-dark-gray;
-        font-size: 21px;
+        color: $base-logo-color;
+        font-size: 20px;
+
+        &:before {
+            display: inline-block;
+            margin-top: -5px;
+            padding-right: 10px;
+            content: '\f47d';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 30px;
+            font-family: ionicons;
+            vertical-align: middle;
+        }
     }
 
     .btn-close {
