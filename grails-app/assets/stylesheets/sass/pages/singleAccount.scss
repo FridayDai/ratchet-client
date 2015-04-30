@@ -58,7 +58,6 @@
 
         .groups {
             white-space: pre-line;
-            white-space: pre-line;
 
             p {
                 padding-left: 20px;
@@ -99,6 +98,9 @@
     p {
         color: $base-logo-color;
         font-size: 20px;
+    }
+
+    .account {
 
         &:before {
             display: inline-block;
