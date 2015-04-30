@@ -12,8 +12,8 @@
     <body>
     <div class="content">
 
-        <div class="content-head">
-            <p>PROFILE</p>
+        <div class="inner-header">
+            <label class="title">PROFILE</label>
         </div>
 
         <div class="middle-content">
