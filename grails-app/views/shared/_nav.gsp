@@ -56,11 +56,11 @@
             </a>
         </li>
 
-        <div class="btn-bottom">
-            <a href="/logout" class="btn-edit-patient log-out">
+        <li class="btn-bottom">
+            <a href="/logout" class="log-out">
                 <span class="btn-logout">Logout</span>
             </a>
-        </div>
+        </li>
 
     </ul>
 </div>
