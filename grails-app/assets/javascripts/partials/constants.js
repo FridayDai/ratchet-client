@@ -35,6 +35,7 @@
         deactiveAccountSuccess: "The account is deactivated.",
         sendTaskEmailSuccess: "The task has been sent.",
         sendAssistMessageSuccess: "Message Sent!",
+        copySuccess: "ID Copied",
 
         //WARNING
         warningTipTitle: "Are you sure you want to remove the current Agent?",
