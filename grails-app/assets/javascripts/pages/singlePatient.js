@@ -339,13 +339,13 @@
      * @private
      */
     function _bindPatientIdAndEmailCheck(primaryPatientId, primaryEmail) {
-        $('#patientId').on("blur", function (e) {
+        $('#patientId').bind("input propertychange", function (e) {
             e.preventDefault();
             var patientId = $(this).val();
             _checkPatientIdExist($(this), patientId, primaryPatientId);
 
         });
-        $('#email').on("blur", function (e) {
+        $('#email').bind("input propertychange", function (e) {
             e.preventDefault();
             var email = $(this).val();
             _checkPatientEmailExist($(this), email, primaryEmail);

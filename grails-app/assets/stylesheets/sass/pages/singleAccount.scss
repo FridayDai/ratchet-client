@@ -206,21 +206,6 @@
     }
 }
 
-.btn-bottom {
-    margin-top: 60px;
-
-    .btn-logout {
-
-        &:before {
-            padding-right: 8px;
-            content: '\f2a9';
-            color: $base-font-grey;
-            font-size: 12px;
-            font-family: ionicons;
-        }
-    }
-}
-
 .form-group {
     width: 45%;
     margin-top: 10px;

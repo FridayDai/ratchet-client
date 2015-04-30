@@ -55,6 +55,13 @@
                 <span>Assist Me</span>
             </a>
         </li>
+
+        <div class="btn-bottom">
+            <a href="/logout" class="btn-edit-patient log-out">
+                <span class="btn-logout">Logout</span>
+            </a>
+        </div>
+
     </ul>
 </div>
 
