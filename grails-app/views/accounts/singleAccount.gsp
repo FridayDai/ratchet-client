@@ -14,7 +14,7 @@
 
         <div class="content-head">
 
-            <p>ACCOUNT</p>
+            <p class="account">ACCOUNT</p>
 
             <a href="#" class="btn-close">Close</a>
         </div>

@@ -28,9 +28,39 @@
 
     h4 {
         margin-bottom: 7px;
-        color: $base-color-dark-gray;
+        color: $base-logo-color;
         font-weight: 400;
         font-size: 14px;
+    }
+
+    .sent_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f473';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 30px;
+            font-family: ionicons;
+            vertical-align: middle;
+
+        }
+    }
+
+    .scheduled_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f3c7';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 26px;
+            font-family: ionicons;
+            vertical-align: sub;
+
+        }
     }
 }
 

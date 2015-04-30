@@ -53,7 +53,7 @@
                 $(".display").css("display", "inline-table");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
+                if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
             },
@@ -234,6 +234,7 @@
         var groupId = $this.data("groupId");
         var parentTr = $this.closest('tr');
         RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteWarningArguments, {
+            confirmText: "Delete",
             yesCallback: function () {
                 _deleteGroup(groupId, parentTr);
             }
