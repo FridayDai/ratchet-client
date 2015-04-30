@@ -1,18 +1,19 @@
 .ui-widget {
     font-size: 1.1em;
-    font-family: $base-font-utility;
+//    font: $base-font-utility;
 
     input,
     select,
     textarea,
     button {
         font-size: 1em;
-        font-family: $base-font-utility;
+        font: $base-font-utility;
     }
 }
 
 input[type="text"], input[type="textarea"], input[type="email"], input[type="tel"] {
-    font-family: inherit;
+    font-family: Lato;
+    font-weight: 400;
 }
 
 .ui-widget-content {
@@ -30,6 +31,7 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-header {
     border: 1px solid $base-color-dark-grey;
     color: $base-color-dark-grey;
+    font-family: Lato;
     font-weight: bold;
 
     a {
@@ -41,7 +43,8 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
     color: $base-font-color;
-    font-weight: bold;
+    font-family: Lato;
+    font-weight: 400;
 }
 
 .ui-state-default {
@@ -62,7 +65,8 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-header .ui-state-focus {
     color: $base-font-color;
     background: transparent 50% 50% repeat-x;
-    font-weight: bold;
+    font-family: Lato;
+    font-weight: 400;
 }
 
 .ui-state-hover,
@@ -82,8 +86,9 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active {
     color: $base-color-dark-grey;
-//    background: $base-color-white 50% 50% repeat-x;
-    font-weight: bold;
+    //    background: $base-color-white 50% 50% repeat-x;
+    font-family: Lato;
+    font-weight: 400;
 }
 
 .ui-state-active {
@@ -133,7 +138,8 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
 .ui-widget-header .ui-priority-primary {
-    font-weight: bold;
+    font-family: Lato;
+    font-weight: 400;
 }
 
 .ui-priority-secondary,
@@ -141,7 +147,8 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-header .ui-priority-secondary {
     filter: Alpha(Opacity=70);
     opacity: .7;
-    font-weight: normal;
+    font-family: Lato;
+    font-weight: 300;
 }
 
 .ui-state-disabled,

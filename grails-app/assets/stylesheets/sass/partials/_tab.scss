@@ -129,6 +129,7 @@
             line-height: 65px;
             text-transform: uppercase;
             font-weight: 300;
+            font-family: Lato;
         }
 
         .ui-state-active {
@@ -139,6 +140,7 @@
                 height: 65px;
                 color: $base-color-dark-grey;
                 font-weight: 400;
+                font-family: Lato;
                 font-size: 17px;
             }
         }
@@ -174,7 +176,8 @@
         border: 0;
         border-bottom: 2px solid $base-color-white-grey;
         //        background-color: $base-color-tab-bg;
-        font-weight: 200;
+        font-weight: 300;
+        font-family: Lato;
 
         .ui-state-default {
             margin: 0;
@@ -189,6 +192,7 @@
             font-size: 15px;
             line-height: 40px;
             font-weight: 300;
+            font-family: Lato;
         }
 
         .ui-state-active {
@@ -196,6 +200,7 @@
                 border-color: $base-color-dark-grey;
                 color: $base-color-dark-grey;
                 font-weight: 400;
+                font-family: Lato;
             }
         }
 
@@ -209,6 +214,7 @@
                 margin-right: 40px;
                 color: $base-color-dark-grey;
                 font-weight: 400;
+                font-family: Lato;
             }
         }
     }
@@ -216,6 +222,7 @@
     .surgery-date {
         span {
             color: $base-color-medium-black;
+            font-family: Lato;
             font-weight: 300;
             font-size: 13px;
         }
