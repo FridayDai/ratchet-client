@@ -552,7 +552,9 @@
             data: passwords,
             dataType: "json",
             success: function () {
-
+                RC.common.showMsg({
+                    msg: RC.constants.changePasswordSuccess
+                });
             }
         });
     }
