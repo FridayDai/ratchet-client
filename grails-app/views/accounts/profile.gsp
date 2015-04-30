@@ -86,13 +86,6 @@
                     </td>
                 </tr>
             </table>
-
-            <div class="btn-bottom">
-                <a href="/logout" class="btn-edit-patient log-out">
-                    <span class="color btn-logout">Log out</span>
-                </a>
-            </div>
-
         </div>
     </div>
 

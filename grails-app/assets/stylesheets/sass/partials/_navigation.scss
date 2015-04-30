@@ -195,3 +195,19 @@
         }
     }
 }
+
+.btn-bottom {
+    margin-top: 20px;
+
+    .btn-logout {
+        color: $base-font-grey;
+
+        &:before {
+            padding-right: 8px;
+            content: '\f29f';
+            color: $base-font-grey;
+            font-size: 12px;
+            font-family: ionicons;
+        }
+    }
+}
