@@ -105,7 +105,7 @@
         <div class="item-notify">
             <g:if test="${task?.isSent}">
                 <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] == "complete") || archivedStatus}">
-                    <button class="btn task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
+                    <button class="btn task-email disabled ui-hidden" data-task-id="${task?.id}" disabled>Click to notify</button>
                 </g:if>
                 <g:else>
                     <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
