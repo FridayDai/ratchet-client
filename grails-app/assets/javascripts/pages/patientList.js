@@ -698,7 +698,7 @@
                 }, {
                     "targets": 8,
                     "render": function (data, type, full) {
-                        var relationship = data === undefined ? full.relationship : data;
+                        var relationship = data === undefined ? full.relationshipName : data;
                         return relationship;
                     },
                     width: "7%"

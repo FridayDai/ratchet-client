@@ -1,6 +1,6 @@
 <div class="nav">
     <ul id="menu" class="list">
-        <li class="client-name">${request.session.clientPortalName}</li>
+        <li class="client-name">${request.session.clientName}</li>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
             <g:link class="" controller="profile"

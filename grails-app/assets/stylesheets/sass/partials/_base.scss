@@ -99,6 +99,7 @@ a {
     background-color: transparent;
     background-image: none;
     font-weight: 400;
+    font-family: Lato;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
@@ -323,8 +324,9 @@ a {
         min-width: 180px;
         border: 1px solid $base-font-color;
         border-right: 0;
+        font-family: Lato;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .search {
@@ -337,7 +339,7 @@ a {
         color: $base-font-color;
         background-color: $base-color-white;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         font-family: 'Ionicons';
         line-height: 1;
         text-align: center;
@@ -382,6 +384,8 @@ a {
         color: $base-color-dark-grey;
         font-size: 20px;
         line-height: 32px;
+        font-family: Lato;
+        font-weight: 400;
     }
 }
 
@@ -486,7 +490,7 @@ a {
         border-right: 0;
         color: $base-dark-grey;
         background-color: $base-color-white;
-        font-weight: inherit;
+        font-weight: 400;
         font-size: 15px;
     }
 
