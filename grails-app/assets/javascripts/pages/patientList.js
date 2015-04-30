@@ -27,6 +27,9 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 380
+                },
+                showMsgArguments: {
+                    msg: RC.constants.copySuccess
                 }
             },
             waringArguments: {
@@ -242,6 +245,7 @@
             complete: function (data) {
                 var self = $(this);
                 self.addClass("active");
+                RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                 setTimeout(function () {
                     self.removeClass("active");
                 }, 3000);
