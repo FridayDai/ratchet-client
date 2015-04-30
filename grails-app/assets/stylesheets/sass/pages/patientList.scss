@@ -157,6 +157,7 @@
 
     .download-file {
         margin-top: 25px;
+        text-decoration: underline;
     }
 
     .inner-search {
@@ -276,6 +277,10 @@
         position: absolute;
         left: 0;
         top: 30px;
+    }
+
+    .error-link {
+        text-decoration: underline;
     }
 }
 
