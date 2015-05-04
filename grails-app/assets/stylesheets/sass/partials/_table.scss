@@ -22,6 +22,7 @@
         width: 23%;
         color: $base-dark-grey;
         font-size: 14px;
+        font-family: Lato;
         font-weight: 400;
     }
 
@@ -34,6 +35,7 @@
         td {
             font-size: 14px;
             font-weight: 300;
+            font-family: Lato;
         }
 
         .btn-edit {
@@ -186,7 +188,7 @@
             white-space: nowrap;
             color: $base-color-grey;
             background-image: none;
-            font-weight: normal;
+            font-weight: 400;
             text-align: center;
             cursor: pointer;
             vertical-align: middle;

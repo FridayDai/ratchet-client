@@ -12,6 +12,11 @@
 
     .account-table {
         width: 100%;
+
+        td {
+            font-family: Lato;
+            font-weight: 400;
+        }
     }
 
     .tr-border {
@@ -29,6 +34,8 @@
             margin-right: 20px;
             margin-left: 20px;
             color: $base-color-medium-black;
+            font-family: Lato;
+            font-weight: 400;
         }
 
         .span-invited {
@@ -98,6 +105,8 @@
     p {
         color: $base-logo-color;
         font-size: 20px;
+        font-family: Lato;
+        font-weight: 400;
     }
 
     .account {
@@ -122,7 +131,8 @@
         color: #b3b3b3;
         font-size: 16px;
         vertical-align: middle;
-        font-weight: 200;
+        font-weight: 300;
+        font-family: Lato;
 
         &:before {
             padding-right: 8px;
@@ -143,8 +153,9 @@
     border-bottom: 1px solid $base-light-grey-color;
 
     .name-info {
-        font-size: 24px;
-        font-weight: 200;
+        font-size: 20px;
+        font-weight: 400;
+        font-family: Lato;
     }
 
     .name {
@@ -208,6 +219,21 @@
     }
 }
 
+.btn-bottom {
+    margin-top: 60px;
+
+    .btn-logout {
+
+        &:before {
+            padding-right: 8px;
+            content: '\f2a9';
+            color: $base-font-grey;
+            font-size: 12px;
+            font-family: ionicons;
+        }
+    }
+}
+
 .form-group {
     width: 45%;
     margin-top: 10px;
@@ -218,7 +244,8 @@
     .dr {
         margin-left: -15px;
         color: $base-color-medium-black;
-        font-weight: 500;
+        font-weight: 400;
+        font-family: Lato;
         font-size: 24px;
     }
 

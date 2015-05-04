@@ -35,6 +35,7 @@
         deactiveAccountSuccess: "The account is deactivated.",
         sendTaskEmailSuccess: "The task has been sent.",
         sendAssistMessageSuccess: "Message Sent!",
+        changePasswordSuccess: "Password changed.",
         copySuccess: "ID Copied",
 
         //WARNING
