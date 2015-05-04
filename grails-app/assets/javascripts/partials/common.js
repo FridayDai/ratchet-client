@@ -570,6 +570,7 @@
                     confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
+                    $('.btn').blur();
                     //dialogOwn.appendTo(containerParent);
                     $(this).dialog("destroy").replaceWith(dialogOwn);
                 }
