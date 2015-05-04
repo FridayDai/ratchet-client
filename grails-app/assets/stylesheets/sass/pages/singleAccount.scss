@@ -273,3 +273,21 @@
     margin-top: 30px;
     margin-left: 7px;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.form-group.required {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.error-password {
+    margin-left: 6px;
+    margin-top: -5px;
+}

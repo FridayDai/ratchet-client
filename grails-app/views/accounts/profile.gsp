@@ -112,7 +112,12 @@
                    placeholder="Enter new password again"
                    required/>
         </div>
+
+        <div class="error-area error hide error-password">
+            Passwords do not match, please retype.
+        </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
+
     </g:form>
     </body>
     </html>
