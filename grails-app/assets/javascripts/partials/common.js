@@ -144,7 +144,7 @@
                     content: '',
                     height: 300,
                     width: 800,
-                    okTitle: 'SEND'
+                    okTitle: 'Send'
                 };
 
                 RC.common.confirmForm(_.extend({}, args, {
