@@ -36,7 +36,7 @@
             </div>
 
             <div class="align-center cover-inner-footer">
-                <button type="submit" class="btn btn-reset">Reset Password</button>
+                <button type="submit" class="btn btn-large">Reset Password</button>
             </div>
         </g:form>
     </div>

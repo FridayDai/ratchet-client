@@ -12,7 +12,7 @@
     <div>
         <div class="inner-header">
             <label class="title">GROUPS</label>
-            <a href="#" id="add-group" class="btn add-group"><span>New Group</span></a>
+            <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 
         <div class="inner-search">

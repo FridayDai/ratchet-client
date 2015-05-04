@@ -58,7 +58,7 @@
                                   id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
                             <div class="inline div-invite">
-                                <button id="invite-account" class="btn btn-invite"
+                                <button id="invite-account" class="btn"
                                         data-id="${accountInfo.id}">Invite Again</button>
                             </div>
                         </g:if>
@@ -67,7 +67,7 @@
                             <span class="span-deactive span-activate-action"
                                   id="span-deactive">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
-                            <a class="btn btn-deactive activate-action" id="btn-deactivate"
+                            <a class="btn activate-action" id="btn-deactivate"
                                data-account-id="${accountInfo.id}">Deactivate</a>
                         </g:elseif>
 
@@ -75,7 +75,7 @@
                             <span class="span-active span-activate-action"
                                   id="span-active">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
-                            <a class="btn btn-active activate-action" id="btn-activate"
+                            <a class="btn activate-action" id="btn-activate"
                                data-account-id="${accountInfo.id}">Activate</a>
                         </g:else>
                     </td>

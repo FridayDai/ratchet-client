@@ -112,7 +112,8 @@
 }
 
 .btn-li {
-    margin: 25px 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
 
     a {
         color: $base-color-darker-grey;
@@ -127,7 +128,7 @@
 
         &:before {
             display: inline-block;
-            content: '\f142';
+            content: '\f445';
             font-family: 'Ionicons';
         }
 

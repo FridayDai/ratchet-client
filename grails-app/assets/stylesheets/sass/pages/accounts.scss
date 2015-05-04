@@ -31,27 +31,6 @@
 
 }
 
-.add-account {
-    display: inline-block;
-    float: right;
-    margin-top: 10px;
-    font-weight: lighter;
-    font-size: 16px;
-    font-family: 'Ionicons';
-
-    &:before {
-        display: inline-block;
-        margin-right: 10px;
-        content: '\f2c7';
-    }
-
-    span {
-        vertical-align: middle;
-        font: $base-font-utility;
-        font-size: 13px;
-    }
-}
-
 .display {
     display: none;
 }
