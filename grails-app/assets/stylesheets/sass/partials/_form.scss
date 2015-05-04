@@ -4,10 +4,13 @@
     margin-bottom: 10px;
     margin-left: 20px;
     text-align: left;
+    font-family: Lato;
+    font-weight: 400;
 
     .lbl-group {
         display: table-row-group;
         color: $base-color-medium-black;
+        font-family: Lato;
         font-weight: 400;
         font-size: 14px;
 
@@ -70,6 +73,7 @@
             min-width: 232px;
             height: 29px;
             color: $base-color-medium-black;
+            font-family: Lato;
             font-weight: 400;
         }
 
@@ -173,8 +177,13 @@
     margin-top: 10px;
     margin-bottom: 0;
     text-align: right;
+    font-family: Lato;
     font-weight: 400;
     font-size: 14px;
+}
+
+.required-width {
+    width: 94%;
 }
 
 .form-provider {

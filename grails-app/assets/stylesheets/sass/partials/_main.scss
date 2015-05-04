@@ -22,8 +22,9 @@ h4 {
 }
 
 h5 {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 14px;
+    font-family: Lato;
 }
 
 .border-bottom {
@@ -54,22 +55,24 @@ h5 {
         padding: 32px 26px;
         border-top: 6px solid $base-color-mid-grey;
         background-color: $form-color-background;
-        font-weight: 500;
+        font-weight: 400;
+        font-family: Lato;
     }
 
     .input-combination {
         margin-bottom: 6px;
         padding: 2% 0;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 10pt;
+        font-family: Lato;
         text-align: center;
         vertical-align: middle;
 
         .input-control {
             width: 93%;
             height: auto;
-            padding: 10px;
             margin: 3px 0;
+            padding: 10px;
             font-size: 14px;
         }
     }
@@ -98,12 +101,13 @@ h5 {
 }
 
 .required-field {
-    text-align: right;
     font-size: 14px;
+    text-align: right;
 }
 
 .required-padding {
     padding-right: 21px;
     font-weight: 400;
+    font-family: Lato;
 }
 

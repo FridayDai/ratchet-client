@@ -38,6 +38,7 @@
         margin-top: 15px;
         margin-left: 45px;
         color: $base-logo-color;
+        font-family: Lato;
         font-weight: 400;
         font-size: 14px;
 
@@ -54,6 +55,7 @@
         margin-left: 5px;
         vertical-align: super;
         color: $base-logo-color;
+        font-family: Lato;
         font-weight: 400;
         font-size: 14px;
     }
@@ -192,12 +194,14 @@
 
     h4 {
         color: $base-color-warn;
+        font-family: Lato;
         font-weight: 400;
         font-size: 13px;
     }
 
     .surgeon-id {
-        font-weight: 200;
+        font-family: Lato;
+        font-weight: 300;
         font-size: 14px;
     }
 
@@ -214,7 +218,8 @@
         //        height: 25px;
         //        padding: 15px 30px 15px 20px;
         margin-left: 20px;
-        font-weight: 200;
+        font-family: Lato;
+        font-weight: 300;
     }
 
     .btn-edit-surgeon {
