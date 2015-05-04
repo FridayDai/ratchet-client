@@ -35,6 +35,7 @@
         deactiveAccountSuccess: "The account is deactivated.",
         sendTaskEmailSuccess: "The task has been sent.",
         sendAssistMessageSuccess: "Message Sent!",
+        changePasswordSuccess: "Password changed.",
         copySuccess: "ID Copied",
 
         //WARNING
@@ -44,7 +45,7 @@
         deleteGiverWarningMsg: "Are you sure you want to remove the current emergency contact?",
         archivedTreatmentWarningMsg: "ARCHIVE TREATMENT",
         archivedMessage: "Warning: This action cannot be undone.",
-        deleteGroupWaringTitle:"DELETE GROUP",
+        deleteGroupWaringTitle: "DELETE GROUP",
         warningTip: "Click “PROCEED” to go to remove the agent.",
         waringMessageProvider: "Please enter your provider",
         waringMessageAgent: "Please enter your agent",
@@ -57,13 +58,14 @@
         //ERROR
         errorTitle: "ERROR",
         errorTitle404: "ERROR : 404",
-        groupErrorTip:"CANNOT DELETE GROUP",
+        groupErrorTip: "CANNOT DELETE GROUP",
         errorTip: "Something has gone wrong. Please try again!",
         errorMessage: "Couldn't load this tab. We'll try to fix this as soon as possible.",
         errorMessageAction: "Something wrong, Please check messages below.",
         confirmPassword: "Your passwords don't match. Please enter them again.",
         formatError: "We are not able to process this file due to a format problem. Please verify the file you uploaded.",
         dataError: "We are not able to process this file due to a data problem. Please download and fix the error file and try again.",
+        passwordTip: "Passwords do not match, please retype.",
 
         //OTHERS
         patientIdExist: "ID already exists",
