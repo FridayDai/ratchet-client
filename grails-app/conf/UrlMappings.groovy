@@ -11,26 +11,21 @@ class UrlMappings {
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 
-        //health check
+        // Health check
         "/healthcheck"(controller: "healthCheck", action: "index")
 
-        //forgotPassword
+        // Password
         "/forgot_password"(controller: "accounts") {
             action = [GET: "getForgotPassword", POST: "forgotPassword"]
         }
         "/confirm_password"(controller: "accounts") {
             action = [POST: "confirmPassword"]
         }
-        "/resetPassword/$code?"(controller: "accounts", action: "resetPassword")
-
-        // Home
-        "/providers"(controller: "providers", action: "index")
-        "/getProvider"(controller: "home", action: "getProvider")
+        "/reset_password/$code?"(controller: "accounts", action: "resetPassword")
 
         // Patients
         "/getPatients"(controller: "patients", action: "getPatients")
         "/addPatient"(controller: "patients", action: "addPatient")
-        "/activity"(controller: "activity", action: "index")
         "/patient/patientActivity"(controller: "patients", action: "showActivity")
         "/patients"(controller: "patients", action: "index")
         "/patients/$id?"(controller: "singlePatient", action: "showPatient")
