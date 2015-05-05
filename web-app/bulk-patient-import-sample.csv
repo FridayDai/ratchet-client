@@ -1,1 +1,3 @@
-Patient ID,First Name,Last Name,Email Address,Phone Number,Group ID,Provider ID,Treatment ID,Surgery Time,Emergency Contact First Name,Emergency Contact Last Name,Emergency Contact Email,Emergency Contact Relationship,Patient's PermissionTY78AK83,Staci,Guzzi,sid.feng+115@xplusz.com,447-1233-1234,8184,8188,8177,5/19/15 20:51,,,,,1241GW23,Amie,Hillier,sid.feng+116@xplusz.com,447-1233-1234,8184,8188,8177,6/19/15 8:51,Hermina,Hartranft,hermina@email.com,child,Yes
+Patient ID,First Name,Last Name,Email Address,Phone Number,Group ID,Provider ID,Treatment ID,Surgery Time,Emergency Contact First Name,Emergency Contact Last Name,Emergency Contact Email,Emergency Contact Relationship,Patient's Permission
+TY78AK83,Staci,Guzzi,samplepatient1@ratchethealth.com,447-123-1234,8184,8188,8177,5/1/15 8:00,,,,,
+1241GW23,Amie,Hillier,samplepatient2@ratchethealth.com,447-123-1234,8184,8188,8177,10/20/15 14:00,Hermina,Hartranft,sampleec@ratchethealth.com,child,Yes

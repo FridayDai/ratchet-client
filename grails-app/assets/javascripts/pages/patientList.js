@@ -27,6 +27,9 @@
                     content: RC.constants.confirmContent,
                     height: 200,
                     width: 380
+                },
+                showMsgArguments: {
+                    msg: RC.constants.copySuccess
                 }
             },
             waringArguments: {
@@ -62,26 +65,10 @@
      */
     function _initTable(data) {
 
-        var options = {
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            serverSide: true,
-            "bAutoWidth": false,
+        var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                $(".display").css("display", "inline-table");
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if (bothDisabled && paginate.find(".current").length === 0) {
-                    paginate.hide();
-                }
-            },
+
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.patients,
                 pages: 2, // number of pages to cache
@@ -150,7 +137,7 @@
                     },
                     width: "8%"
                 }]
-        };
+        });
 
         if (provideTable) {
             provideTable.clear();
@@ -168,14 +155,7 @@
      */
     function _initHelpTable(data) {
 
-        var options = {
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            serverSide: true,
-            "bAutoWidth": false,
+        var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: 5,
             "fnDrawCallback": function () {
                 $(".previous").text('');
@@ -225,7 +205,7 @@
                     },
                     width: "30%"
                 }]
-        };
+        });
 
         if (helpTable) {
             helpTable.clear();
@@ -249,6 +229,7 @@
             complete: function (data) {
                 var self = $(this);
                 self.addClass("active");
+                RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
                 setTimeout(function () {
                     self.removeClass("active");
                 }, 3000);
@@ -631,13 +612,9 @@
      */
     function _initPatientListTable() {
 
-        var options = {
+        var options = _.extend({}, RC.common.dataTableOptions, {
             paging: false,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            "bAutoWidth": false,
+            serverSide: false,
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
@@ -705,7 +682,7 @@
                 }, {
                     "targets": 8,
                     "render": function (data, type, full) {
-                        var relationship = data === undefined ? full.relationship : data;
+                        var relationship = data === undefined ? full.relationshipName : data;
                         return relationship;
                     },
                     width: "7%"
@@ -717,8 +694,7 @@
                     },
                     width: "15%"
                 }]
-
-        };
+        });
 
         if (patientListTable) {
             patientListTable.clear();
@@ -951,8 +927,6 @@
             } else {
                 $(element).replaceWith(html + edit);
             }
-
-
         });
         fn(patientId);
     }
@@ -990,7 +964,6 @@
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
         ];
-
 
         $("#relationship").combobox({
             source: function (request, response) {
@@ -1253,9 +1226,7 @@
                     return;
                 }
             }
-
         });
-
     }
 
     /**

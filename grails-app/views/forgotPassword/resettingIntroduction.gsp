@@ -28,7 +28,7 @@
 
 
             <div class="align-center cover-inner-footer">
-                <g:link uri="/login" class="btn btn-reset">Back to Log In</g:link>
+                <g:link uri="/login" class="btn btn-large">Back to Log In</g:link>
             </div>
         </div>
     </div>

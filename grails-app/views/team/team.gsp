@@ -78,7 +78,7 @@
         <div class="table-group">
             <div class="inner-body" id="careGiverBody">
 
-                <table id="careGiverTable" class="team-table display">
+                <table id="careGiverTable" class="team-table display cursorAuto">
                     <thead>
                     <tr>
                         <th>ID</th>

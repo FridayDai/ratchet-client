@@ -26,24 +26,24 @@
             activityTable.destroy();
         }
 
-        activityTable = $(element).DataTable({
-            bLengthChange: false,
-            searching: false,
-            ordering: true,
-            info: false,
-            "serverSide": true,
+        activityTable = $(element).DataTable(_.extend({}, RC.common.dataTableOptions, {
+            //bLengthChange: false,
+            //searching: false,
+            //ordering: true,
+            //info: false,
+            //"serverSide": true,
             "columnDefs": [
                 {"targets": [0, 1], "orderable": false}],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
-                    paginate.hide();
-                }
-            },
-            "bAutoWidth": false,
+            //"fnDrawCallback": function () {
+            //    $(".previous").text('');
+            //    $(".next").text('');
+            //    var paginate = $(this).siblings();
+            //    var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+            //    if (bothDisabled && paginate.find(".current").length === 0) {
+            //        paginate.hide();
+            //    }
+            //},
+            //"bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 5,// number of pages to cache
@@ -66,7 +66,7 @@
                     width: "16%"
                 }
             ]
-        });
+        }));
     }
 
     /**

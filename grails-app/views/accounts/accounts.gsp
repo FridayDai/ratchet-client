@@ -12,7 +12,7 @@
     <div class="content">
         <div class="inner-header">
             <label class="title">ACCOUNTS</label>
-            <a href="#" id="add-account" class="btn add-account"><span>New Account</span></a>
+            <a href="#" id="add-account" class="btn btn-add add-account"><span>New Account</span></a>
         </div>
 
         <div class="inner-search">

@@ -1,6 +1,6 @@
 <div class="nav">
     <ul id="menu" class="list">
-        <li class="client-name">${request.session.clientPortalName}</li>
+        <li class="client-name">${request.session.clientName}</li>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
             <g:link class="" controller="profile"
@@ -55,6 +55,13 @@
                 <span>Assist Me</span>
             </a>
         </li>
+
+        <li class="btn-bottom">
+            <a href="/logout" class="log-out">
+                <span class="btn-logout">Logout</span>
+            </a>
+        </li>
+
     </ul>
 </div>
 
@@ -84,7 +91,9 @@
         <label class="lbl-input" id="assist-email">${request.session.email}</label>
     </div>
 
-    <div class="form-group center">
+    <div class="form-group required required-width"><span>*</span>Required field</div>
+
+    <div class="align-center assist-tip">
         </label>You will receive a response within 24 hours.</label>
     </div>
 

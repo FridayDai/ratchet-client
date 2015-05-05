@@ -75,13 +75,14 @@
     .ui-spinner-up {
         position: absolute;
         top: 0;
-        left: 15px;
+        left: 5px;
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'Ionicons';
+        //        font-family: 'Ionicons';
 
         &:before {
+            font-family: 'Ionicons';
             content: '\f126';
         }
     }
@@ -89,13 +90,14 @@
     .ui-spinner-down {
         position: absolute;
         top: 55px;
-        left: 15px;
+        left: 5px;
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'Ionicons';
+        //        font-family: 'Ionicons';
 
         &:before {
+            font-family: 'Ionicons';
             content: '\f123';
         }
     }
@@ -110,8 +112,9 @@
         left: 12px;
         width: 25px;
         color: $base-color-dark-grey;
-        //        font-weight: bold;
-        font-size: 22px;
+        font-family: Lato;
+        font-weight: 400;
+        font-size: 20px;
         text-align: center;
     }
 }
@@ -144,12 +147,14 @@
 
         .ui-datepicker-month {
             color: $base-color-dark-grey;
-            font-weight: 500;
+            font-family: Lato;
+            font-weight: 400;
         }
 
         .ui-datepicker-year {
             color: $base-color-dark-grey;
-            font-weight: 500;
+            font-family: Lato;
+            font-weight: 400;
         }
 
     }
@@ -165,7 +170,8 @@
             background: $base-color-grey-white;
             //            font-weight: 500;
             th {
-                font-weight: 500;
+                font-family: Lato;
+                font-weight: 400;
             }
         }
     }

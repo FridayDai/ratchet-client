@@ -42,7 +42,7 @@
 
             <g:if test="${StatusCodeConstants.PATIENT_STATUS[patientInfo.status] == "invited"}">
                 <div class="inline div-invite">
-                    <button id="invitePatient" class="btn btn-invite invite-patient"
+                    <button id="invitePatient" class="btn invite-patient"
                             data-id="${patientInfo.id}">Invite Again</button>
                 </div>
             </g:if>

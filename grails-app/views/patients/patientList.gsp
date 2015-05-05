@@ -12,9 +12,9 @@
     <div>
         <div class="inner-header">
             <label class="title">PATIENTS</label>
-            <a href="#" id="add-patient" class="btn add-patient"><span>New Patient</span></a>
+            <a href="#" id="add-patient" class="btn btn-add add-patient"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
-                <a href="#" id="bulk-important" class="btn bulk-important"><span>Bulk Import</span></a>
+                <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
         </div>
 
@@ -203,7 +203,7 @@
                 </div>
 
                 <div class="import-table-group">
-                    <table id="helpTable" class="help-display div-hidden">
+                    <table id="helpTable" class="help-display div-hidden cursorAuto">
                         <thead>
                         <tr>
                             <th>Title</th>
@@ -217,7 +217,7 @@
                 </div>
 
                 <div class="clear">
-                    <span id="bulk-important-file" class="btn bulk-important bulk-important-file clear">
+                    <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
                         <input id="fileupload" type="file" name="file" data-url="/patients/bulk_import/upload"
                                accept=".csv">

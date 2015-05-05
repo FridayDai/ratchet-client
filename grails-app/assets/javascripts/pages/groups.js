@@ -37,26 +37,11 @@
      * init table, when sent request
      */
     function _initTable(data) {
-        var options = {
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            serverSide: true,
-            "bAutoWidth": false,
+
+        var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                $(".display").css("display", "inline-table");
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
-                    paginate.hide();
-                }
-            },
+
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.getGroups,
                 pages: 2, // number of pages to cache
@@ -104,7 +89,7 @@
                     width: "10%"
                 }
             ]
-        };
+        });
 
         if (groupTable) {
             groupTable.clear();
@@ -234,6 +219,7 @@
         var groupId = $this.data("groupId");
         var parentTr = $this.closest('tr');
         RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteWarningArguments, {
+            confirmText: "Delete",
             yesCallback: function () {
                 _deleteGroup(groupId, parentTr);
             }

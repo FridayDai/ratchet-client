@@ -12,8 +12,8 @@
     <body>
     <div class="content">
 
-        <div class="content-head">
-            <p>PROFILE</p>
+        <div class="inner-header">
+            <label class="title">PROFILE</label>
         </div>
 
         <div class="middle-content">
@@ -86,13 +86,6 @@
                     </td>
                 </tr>
             </table>
-
-            <div class="btn-bottom">
-                <a href="/logout" class="btn-edit-patient log-out">
-                    <span class="color btn-logout">Log out</span>
-                </a>
-            </div>
-
         </div>
     </div>
 
@@ -119,7 +112,12 @@
                    placeholder="Enter new password again"
                    required/>
         </div>
+
+        <div class="error-area error hide error-password">
+            Passwords do not match, please retype.
+        </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
+
     </g:form>
     </body>
     </html>

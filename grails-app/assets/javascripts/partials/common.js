@@ -144,7 +144,7 @@
                     content: '',
                     height: 300,
                     width: 800,
-                    okTitle: 'SEND'
+                    okTitle: 'Send'
                 };
 
                 RC.common.confirmForm(_.extend({}, args, {
@@ -570,6 +570,7 @@
                     confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
                     dialog.dialog("close");
+                    $('.btn').blur();
                     //dialogOwn.appendTo(containerParent);
                     $(this).dialog("destroy").replaceWith(dialogOwn);
                 }
@@ -589,7 +590,7 @@
                 };
             }
 
-            if($.isFunction(beforeClose)) {
+            if ($.isFunction(beforeClose)) {
                 dialogOpts.beforeClose = beforeClose;
             }
 
@@ -893,6 +894,26 @@
                     $(selectors.selectChoice).hide();
                 });
             });
+        },
+
+        dataTableOptions: {
+            paging: true,
+            searching: false,
+            ordering: true,
+            info: false,
+            bLengthChange: false,
+            serverSide: true,
+            "bAutoWidth": false,
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                if (bothDisabled && paginate.find(".current").length === 0) {
+                    paginate.hide();
+                }
+            }
         }
     });
     _init();

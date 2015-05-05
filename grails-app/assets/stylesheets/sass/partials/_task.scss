@@ -28,9 +28,41 @@
 
     h4 {
         margin-bottom: 7px;
-        color: $base-color-dark-gray;
+        color: $base-logo-color;
+        font-family: Lato;
+        color: $base-logo-color;
         font-weight: 400;
         font-size: 14px;
+    }
+
+    .sent_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f473';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 30px;
+            font-family: ionicons;
+            vertical-align: middle;
+
+        }
+    }
+
+    .scheduled_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f3c7';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 26px;
+            font-family: ionicons;
+            vertical-align: sub;
+
+        }
     }
 }
 
@@ -42,7 +74,8 @@
     padding: 3% 0;
 
     p {
-        font-weight: 200;
+        font-weight: 300;
+        font-family: Lato;
     }
 }
 
@@ -134,7 +167,8 @@
     .complete-time {
         padding: 8px 2px;
         color: $base-color-medium-black;
-        font-weight: 600;
+        font-family: Lato;
+        font-weight: 700;
         font-size: 10px;
     }
 
@@ -161,6 +195,7 @@
         height: 50px;
         padding-top: 4px;
         color: $base-logo-color;
+        font-family: Lato;
         font-weight: 400;
         font-size: 13pt;
     }
@@ -199,6 +234,7 @@
         padding: 10px 0;
         color: $base-color-medium-black;
         font-weight: 400;
+        font-family: Lato;
     }
 
     .relative-sent-time {
