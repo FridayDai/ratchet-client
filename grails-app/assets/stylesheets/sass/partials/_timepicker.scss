@@ -75,13 +75,14 @@
     .ui-spinner-up {
         position: absolute;
         top: 0;
-        left: 15px;
+        left: 5px;
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'Ionicons';
+        //        font-family: 'Ionicons';
 
         &:before {
+            font-family: 'Ionicons';
             content: '\f126';
         }
     }
@@ -89,13 +90,14 @@
     .ui-spinner-down {
         position: absolute;
         top: 55px;
-        left: 15px;
+        left: 5px;
         width: 10px;
         height: 10px;
         margin: 0;
-        font-family: 'Ionicons';
+        //        font-family: 'Ionicons';
 
         &:before {
+            font-family: 'Ionicons';
             content: '\f123';
         }
     }

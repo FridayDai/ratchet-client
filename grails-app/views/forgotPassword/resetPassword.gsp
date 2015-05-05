@@ -38,7 +38,7 @@
 
         <g:hiddenField name="code" value="${code}"></g:hiddenField>
         <div class="align-center cover-inner-footer">
-          <button type="submit" class="btn btn-large">Reset Password</button>
+          <button type="submit" id="btn-reset" class="btn btn-large">Reset Password</button>
         </div>
       </g:form>
     </div>
