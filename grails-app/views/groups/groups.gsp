@@ -25,7 +25,7 @@
         </div>
 
         <div class="table-group">
-            <table id="groupsTable" class="display div-hidden" data-total="${groupList?.recordsTotal}"
+            <table id="groupsTable" class="display div-hidden cursorAuto" data-total="${groupList?.recordsTotal}"
                    data-pagesize="${pagesize}" data-filtered="${groupList?.recordsFiltered} ">
                 <thead>
                 <tr>

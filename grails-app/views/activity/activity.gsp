@@ -12,7 +12,7 @@
     %{--</div>--}%
 
     <div class="table-group">
-        <table id="activityTable" class="display activityTable">
+        <table id="activityTable" class="display activityTable cursorAuto">
             <thead>
             <tr>
                 <th>Description</th>

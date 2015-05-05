@@ -203,7 +203,7 @@
                 </div>
 
                 <div class="import-table-group">
-                    <table id="helpTable" class="help-display div-hidden">
+                    <table id="helpTable" class="help-display div-hidden cursorAuto">
                         <thead>
                         <tr>
                             <th>Title</th>
