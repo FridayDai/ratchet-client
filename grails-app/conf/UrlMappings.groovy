@@ -7,7 +7,6 @@ class UrlMappings {
             }
         }
 
-        "/"(controller: "patients", action: "index")
         "/login"(controller: "authentication", action: "login")
         "/logout"(controller: "authentication", action: 'logout')
 
@@ -24,22 +23,49 @@ class UrlMappings {
         "/reset_password/$code?"(controller: "accounts", action: "resetPassword")
 
         // Patients
-        "/getPatients"(controller: "patients", action: "getPatients")
-        "/addPatient"(controller: "patients", action: "addPatient")
-        "/patient/patientActivity"(controller: "patients", action: "showActivity")
-        "/patients"(controller: "patients", action: "index")
-        "/patients/$id?"(controller: "singlePatient", action: "showPatient")
-        "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updatePatient")
-        "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-        "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
-        "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
-        "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
-        "/bulk_import/download"(controller: "patients", action: "downloadFile")
-        "/upload"(controller: "patients", action: "uploadFile")
-        "/lookup"(controller: "patients", action: "lookup")
-        "/savePatients"(controller: "patients", action: "savePatients")
-        "/checkPatientId/$patientId?"(controller: "patients", action: "checkPatientExist")
-        "/checkPatientEmail/$email?"(controller: "patients", action: "checkPatientEmailExist")
+        "/"(controller: "patients", action: "getPatients")
+
+        "/patients"(controller: "patients") {
+            action = [GET: "getPatients", POST: "addPatient"]
+        }
+
+        "/patients/$patientId?"(controller: "singlePatient") {
+            action = [GET: "getSinglePatient", POST: "updateSinglePatient"]
+        }
+
+        "/patients/bulk_import/sample_download"(controller: "patients", action: "downloadFile")
+        "/patients/bulk_import/upload"(controller: "patients", action: "uploadFile")
+        "/patients/bulk_import/lookup"(controller: "patients", action: "lookup")
+        "/patients/bulk_import/save"(controller: "patients", action: "savePatients")
+
+        "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
+        "/patients/$patientId?/check_id"(controller: "patients", action: "checkPatientExist")
+        "/patients/check_email"(controller: "patients", action: "checkPatientEmailExist")
+
+
+        "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+        "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+        "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
+
+//        "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+//        "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
+
+//        "/getPatients"(controller: "patients", action: "getPatients")
+//        "/addPatient"(controller: "patients", action: "addPatient")
+//        "/patients"(controller: "patients", action: "index")
+//        "/patients/$id?"(controller: "singlePatient", action: "getSinglePatient")
+//        "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updateSinglePatient")
+
+//        "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
+//        "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+//        "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
+//        "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
+//        "/bulk_import/download"(controller: "patients", action: "downloadFile")
+//        "/upload"(controller: "patients", action: "uploadFile")
+//        "/lookup"(controller: "patients", action: "lookup")
+//        "/savePatients"(controller: "patients", action: "savePatients")
+//        "/checkPatientId/$patientId?"(controller: "patients", action: "checkPatientExist")
+//        "/checkPatientEmail"(controller: "patients", action: "checkPatientEmailExist")
 
         //team
         "/team"(controller: "team", action: "showMedicalCares")

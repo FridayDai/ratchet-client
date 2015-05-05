@@ -18,17 +18,29 @@ class PatientsController extends BaseController {
     def patientService
     def singlePatientService
 
-    static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
+    static allowedMethods = [getPatients: ['GET'], addPatient: ['POST']]
 
-    def index() {
-        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def patientList = patientService.loadPatients(request, response, params)
-        render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
-    }
+//    def index() {
+//        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+//        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+//        def patientList = patientService.loadPatients(request, response, params)
+//        render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
+//    }
 
     def getPatients() {
-        def resp = patientService.loadPatients(request, response, params)
+        if (request.isXhr()) {
+            def resp = patientService.loadPatients(request, response, params)
+            render resp as JSON
+        } else {
+            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def patientList = patientService.loadPatients(request, response, params)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
+        }
+    }
+
+    def addPatient() {
+        def resp = patientService.addPatients(request, response, params)
         render resp as JSON
     }
 
@@ -37,21 +49,16 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
-    def addPatient() {
-        def resp = patientService.addPatients(request, response, params)
-        render resp as JSON
-    }
+//    def showActivity() {
+//        def teamData = patientService.loadCareTeam()
+//        def giverData = patientService.loadCareGiver()
+//        render(view: "/patients/patientTeam", model: [teams: teamData, givers: giverData])
+//    }
 
-    def showActivity() {
-        def teamData = patientService.loadCareTeam()
-        def giverData = patientService.loadCareGiver()
-        render(view: "/patients/patientTeam", model: [teams: teamData, givers: giverData])
-    }
-
-    def getActivities() {
-        def data = patientService.loadActivities(params)
-        render data as JSON
-    }
+//    def getActivities() {
+//        def data = patientService.loadActivities(params)
+//        render data as JSON
+//    }
 
     def checkPatientExist() {
         def data = singlePatientService.showPatientByPatientId(request, response, params)
@@ -72,7 +79,7 @@ class PatientsController extends BaseController {
                 throw new ApiReturnException(message)
             }
         } catch (UnirestException e) {
-                throw new ApiAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 

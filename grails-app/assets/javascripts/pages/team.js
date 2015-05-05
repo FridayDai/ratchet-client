@@ -46,7 +46,7 @@
                 }
             },
             urls: {
-                query: "/getPatients",
+                //query: "/getPatients",
                 getCareTeam: "/getCareTeam",
                 getCareGiver: "/getCareGiver",
                 getStaffs: "/getStaffs",

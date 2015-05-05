@@ -25,15 +25,21 @@
                 }
             },
             urls: {
+                updatePatient: "/patients/{0}",
+                assignTreatment: "/patients/{0}/treatments",
+                invitePatient: "/patients/{0}/invite",
+                checkPatientId: "/patients/{0}/check_id",
+                checkPatientEmail: "/patients/check_email",
+
+
                 query: "/getProvider",
                 getTreatments: "/getTreatments",
                 getStaffs: "/getStaffs",
-                updatePatient: "/clients/{0}/patients/{1}",
-                assignTreatment: "/clients/{0}/patients/{1}/treatments",
-                invitePatient: "/invitePatient/{0}",
-                getGroups: "/getStaffGroups",
-                checkPatientId: "/checkPatientId/{0}",
-                checkPatientEmail: "/checkPatientEmail"
+
+
+                getGroups: "/getStaffGroups"
+
+                //checkPatientEmail: "/checkPatientEmail"
             }
         },
         tabs,
@@ -222,7 +228,7 @@
      */
     function _assignTreatment(patientId, clientId, assignInfo) {
         $.ajax({
-            url: opts.urls.assignTreatment.format(clientId, patientId),
+            url: opts.urls.assignTreatment.format(patientId),
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
@@ -309,7 +315,8 @@
                                 lastName: $("#lastName").val(),
                                 email: $("#email").val(),
                                 number: number,
-                                phoneNumber: phoneNumber
+                                phoneNumber: phoneNumber,
+                                clientId: clientId
                                 //phoneNum: $("#phone").val()
                             };
                             _updatePatient(patientId, clientId, patientInfo);
@@ -374,7 +381,7 @@
     function _updatePatient(patientId, clientId, patientInfo) {
         var originalPatientEmail = $('#patientEmail').attr('value');
         $.ajax({
-            url: opts.urls.updatePatient.format(clientId, patientId),
+            url: opts.urls.updatePatient.format(patientId),
             type: 'POST',
             data: patientInfo,
             dataType: 'json',
