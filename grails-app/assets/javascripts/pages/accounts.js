@@ -61,26 +61,10 @@
      * @private
      */
     function _initTable(data) {
-        var options = {
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            serverSide: true,
-            "bAutoWidth": false,
+
+        var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                $(".display").css("display", "inline-table");
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if (bothDisabled && paginate.find(".current").length === 0) {
-                    paginate.hide();
-                }
-            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache
@@ -103,7 +87,6 @@
                     "render": function (data, type, full) {
                         var fullName,
                             dataName;
-
 
                         if (full[5] === "true") {
                             dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data + "</div>");
@@ -155,9 +138,8 @@
                         var isDoctor = data === undefined ? full.doctor : data;
                         return isDoctor;
                     }
-                }
-            ]
-        };
+                }]
+        });
 
         if (accountTable) {
             accountTable.clear();

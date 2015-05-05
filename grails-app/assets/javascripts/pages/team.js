@@ -84,16 +84,7 @@
             careGiverTable.destroy();
         }
 
-        careGiverTable = element.find("#careGiverTable").DataTable({
-            paging: true,
-            searching: false,
-            ordering: true,
-            //"scrollCollapse": true,
-            pageLength: 10,
-            info: false,
-            bLengthChange: false,
-            "serverSide": true,
-            //"bPaginate": true,
+        careGiverTable = element.find("#careGiverTable").DataTable(_.extend({}, RC.common.dataTableOptions, {
             "fnDrawCallback": function () {
                 $(".previous").text('');
                 $(".next").text('');
@@ -163,7 +154,7 @@
                     width: "10%"
                 }
             ]
-        });
+        }));
     }
 
     /**
