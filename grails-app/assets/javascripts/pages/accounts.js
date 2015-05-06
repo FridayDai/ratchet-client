@@ -487,7 +487,7 @@
         );
     }
 
-    /**
+        /**
      * change account password
      * @private
      */
@@ -500,7 +500,7 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.changePasswordFormArguments, {
                 element: $(".update-password"),
                 okCallback: function () {
-                    if ($(".update-password").valid() && _validatePasswordConsistent()) {
+                    if ($(".update-password").valid() && _isPasswordConsistent()) {
 
                         var oldPass = $("#oldPass").val();
                         var newPass = $("#newPass").val();
@@ -524,30 +524,42 @@
         });
     }
 
+    /**
+     * check password consistent
+     * @private
+     */
+    function _isPasswordConsistent() {
+        var password = $("#newPass").val();
+        var confirmPassword = $("#confirmPass").val();
+
+        if ($(".update-password").valid() && password !== confirmPassword) {
+            //$(".error-area").text(RC.constants.passwordTip);
+            $(".error-area").addClass("show");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * bind inputs to validation method
+     * @private
+     */
     function _validatePasswordConsistent() {
-        $("#confirmPass").on("input", function (e) {
+        function _resetInput(e) {
             e.preventDefault();
 
             if ($(".error-area").hasClass("show")) {
-                $(".error-area").removeClass("show")
+                $(".error-area").removeClass("show");
             }
+        }
+
+        $("#confirmPass").on("input", function (e) {
+            _resetInput(e);
         });
 
         $("#confirmPass").on("blur", function (e) {
-            e.preventDefault();
-
-            var password = $("#newPass").val();
-            var confirmPassword = $("#confirmPass").val();
-
-            if ($(".error-area").hasClass("show")) {
-                $(".error-area").removeClass("show")
-            }
-
-            if ($(".update-password").valid() && password !== confirmPassword) {
-                //$(".error-area").text(RC.constants.passwordTip);
-                $(".error-area").addClass("show");
-                return false;
-            }
+            _resetInput(e);
+            _isPasswordConsistent();
         });
     }
 
