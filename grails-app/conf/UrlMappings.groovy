@@ -39,44 +39,21 @@ class UrlMappings {
         "/patients/bulk_import/save"(controller: "patients", action: "savePatients")
 
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
-        "/patients/$patientId?/check_id"(controller: "patients", action: "checkPatientExist")
+        "/patients/check_id"(controller: "patients", action: "checkPatientExist")
         "/patients/check_email"(controller: "patients", action: "checkPatientEmailExist")
 
-
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-        "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+        "/patients/$patientId?/surgery_time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
-//        "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
-//        "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
+        //Patient team
+        "/patients/$patientId?/emergency_contact"(controller: "team") {
+            action = [GET: "getCareGiver", POST: "addCareGiver"]
+        }
 
-//        "/getPatients"(controller: "patients", action: "getPatients")
-//        "/addPatient"(controller: "patients", action: "addPatient")
-//        "/patients"(controller: "patients", action: "index")
-//        "/patients/$id?"(controller: "singlePatient", action: "getSinglePatient")
-//        "/clients/$clientId?/patients/$patientId?"(controller: "singlePatient", action: "updateSinglePatient")
-
-//        "/clients/$clientId?/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-//        "/clients/$clientId?/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
-//        "/clients/$clientId?/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
-//        "/invitePatient/$id?"(controller: "singlePatient", action: "invitePatient")
-//        "/bulk_import/download"(controller: "patients", action: "downloadFile")
-//        "/upload"(controller: "patients", action: "uploadFile")
-//        "/lookup"(controller: "patients", action: "lookup")
-//        "/savePatients"(controller: "patients", action: "savePatients")
-//        "/checkPatientId/$patientId?"(controller: "patients", action: "checkPatientExist")
-//        "/checkPatientEmail"(controller: "patients", action: "checkPatientEmailExist")
-
-        //team
-        "/team"(controller: "team", action: "showMedicalCares")
-        "/getCareTeam"(controller: "team", action: "getCareTeam")
-        "/getCareGiver"(controller: "team", action: "getCareGiver")
-        "/clients/$clientId?/patients/$patientId?/care_team/$careTeamId?/$medicalRecordId?"(controller: "team", action: "deleteCareTeam")
-        "/clients/$clientId?/patients/$patientId?/care_giver/$careGiverId?/$medicalRecordId?"(controller: "team", action: "deleteCareGiver")
-        "/clients/$clientId?/patients/$patientId?/care_team"(controller: "team", action: "addCareTeam")
-        "/clients/$clientId?/patients/$patientId?/care_giver"(controller: "team", action: "addCareGiver")
-        "/updateCareGiver"(controller: "team", action: "updateCareGiver")
-        "/updateCareTeamSurgeon"(controller: "team", action: "updateCareTeamSurgeon")
+        "/patients/$patientId?/$medicalRecordId?/emergency_contact/$emergencyContactId?"(controller: "team", action: "deleteCareGiver")
+        "/patients/$patientId?/emergency_contact/update"(controller: "team", action: "updateCareGiver")
+        "/patients/$patientId?/group_and_provider/update"(controller: "team", action: "updateCareTeamSurgeon")
 
         "/overview"(controller: "overview", action: "index")
         "/getActivities"(controller: "overview", action: "getActivities")

@@ -27,7 +27,6 @@
                     width: 400
                 },
 
-
                 editGiverFormArguments: {
                     title: RC.constants.editGiverTitle,
                     content: RC.constants.confirmContent,
@@ -46,16 +45,11 @@
                 }
             },
             urls: {
-                //query: "/getPatients",
-                getCareTeam: "/getCareTeam",
-                getCareGiver: "/getCareGiver",
+                careGiver: "/patients/{0}/emergency_contact",
+                deleteCareGiver: "/patients/{0}/{1}/emergency_contact/{2}",
+                updateCareGiver: "/patients/{0}/emergency_contact/update",
+                updateCareTeamSurgeon: "/patients/{0}/group_and_provider/update",
                 getStaffs: "/getStaffs",
-                updateCareTeamSurgeon: "/updateCareTeamSurgeon",
-                addCareTeam: "/clients/{0}/patients/{1}/care_team",
-                addCareGiver: "/clients/{0}/patients/{1}/care_giver",
-                deleteCareTeam: "/clients/{0}/patients/{1}/care_team/{2}/{3}",
-                deleteCareGiver: "/clients/{0}/patients/{1}/care_giver/{2}/{3}",
-                updateCareGiver: "/updateCareGiver",
                 getGroups: "/getStaffGroups"
             }
         },
@@ -75,6 +69,7 @@
     function _initGiverTable(element) {
 
         var medicalRecordId = element.find('#hidden-medical-record').val();
+        var patientId = element.find('#hidden-patient-id').val();
         var active = element.find('#hidden-active').val();
         var data = {
             medicalRecordId: medicalRecordId
@@ -96,9 +91,10 @@
                 }
             },
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.getCareGiver,
+                url: opts.urls.careGiver.format(patientId),
                 pages: 1, // number of pages to cache
-                data: data
+                data: data,
+                type: 'GET'
             }),
             columns: [
                 {
@@ -176,6 +172,7 @@
             $(".edit-surgeon")[0].reset();
 
             var medicalRecordId = $(this).data("medicalRecordId");
+            var patientId = $(this).data("patientId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
@@ -210,7 +207,7 @@
                             groupId: groupId
                         };
 
-                        _updateCareTeamSurgeon(ids, element);
+                        _updateCareTeamSurgeon(patientId, ids, element);
                         return true;
                     }
                     return false;
@@ -227,9 +224,9 @@
      * @param ids
      * @private
      */
-    function _updateCareTeamSurgeon(ids, element) {
+    function _updateCareTeamSurgeon(patientId, ids, element) {
         $.ajax({
-            url: opts.urls.updateCareTeamSurgeon,
+            url: opts.urls.updateCareTeamSurgeon.format(patientId),
             type: 'POST',
             data: ids
         }).done(function (data) {
@@ -296,7 +293,7 @@
      */
     function _addCareGiver(clientId, patientId, careGiverInfo, element) {
         $.ajax({
-            url: opts.urls.addCareGiver.format(clientId, patientId),
+            url: opts.urls.careGiver.format(patientId),
             type: 'POST',
             data: careGiverInfo
         }).done(function (data) {
@@ -346,7 +343,7 @@
      */
     function _removeGiver(clientId, patientId, careGiverId, medicalRecordId, grandParent) {
         $.ajax({
-            url: opts.urls.deleteCareGiver.format(clientId, patientId, careGiverId, medicalRecordId),
+            url: opts.urls.deleteCareGiver.format(patientId, medicalRecordId, careGiverId),
             type: 'DELETE',
             success: function (data) {
                 if (data.resp === true) {
@@ -441,7 +438,7 @@
      */
     function _updateCareGiver(clientId, patientId, careGiverInfo, parent, element) {
         $.ajax({
-            url: opts.urls.updateCareGiver,
+            url: opts.urls.updateCareGiver.format(patientId),
             type: 'POST',
             data: careGiverInfo
         }).done(function (data) {
@@ -639,180 +636,6 @@
             }
         });
     }
-
-    /**
-     *
-     * @param data
-     * @private
-     */
-    //function _initTeamTable(data) {
-    //
-    //    if (careTeamTable) {
-    //        careTeamTable.destroy();
-    //    }
-    //
-    //    careTeamTable = $("#careTeamTable").DataTable({
-    //        paging: true,
-    //        searching: false,
-    //        ordering: false,
-    //        pageLength: 10,
-    //        info: false,
-    //        bLengthChange: false,
-    //        "serverSide": true,
-    //        ajax: $.fn.dataTable.pipeline({
-    //            url: opts.urls.getCareTeam,
-    //            pages: 2, // number of pages to cache
-    //            data: data
-    //        }),
-    //        columns: [
-    //            {
-    //                data: function (source) {
-    //                    if (careTeamRole[source.staffType - 1] === "Surgeon") {
-    //                        return '<div class="bottom-content">' +
-    //                            '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
-    //                            '</div>';
-    //                    } else {
-    //                        return '';
-    //                    }
-    //                }
-    //            },
-    //            {
-    //                data: "id",
-    //                className: "careTeamId"
-    //            },
-    //            {data: "firstName"},
-    //            {data: "lastName"},
-    //            {
-    //                data: function (source) {
-    //                    return careTeamRole[source.staffType - 1];
-    //                }
-    //            },
-    //            {data: "email"},
-    //            {
-    //                data: function (source) {
-    //                    return '<div class="bottom-content">' +
-    //                        '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-team-id="' + source.id + '" > <div class="icon-remove"></div> </a>' +
-    //                        '</div>';
-    //                }
-    //            }
-    //        ]
-    //    });
-    //}
-
-
-    /**
-     * bind add team event
-     * @private
-     */
-    //function _bindAddTeamEvent() {
-    //    // new a record
-    //    $("#add-member").on("click", function (e) {
-    //        e.preventDefault();
-    //        $(".addTeamForm")[0].reset();
-    //
-    //        var medicalRecordId = $(this).data("medicalRecordId");
-    //        var clientId = $(this).data("clientId");
-    //        var patientId = $(this).data("patientId");
-    //
-    //        var careTeams = $(this).parents().find("td.careTeamId");
-    //        var existCareTeam = [];
-    //        $.each(careTeams, function (index, item) {
-    //            existCareTeam.push({
-    //                'id': $(item).text()
-    //            });
-    //        });
-    //
-    //        _initStaffSelect(existCareTeam);
-    //
-    //        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTeamFormArguments, {
-    //            element: $(".addTeamForm"),
-    //            okCallback: function () {
-    //                if ($(".addTeamForm").valid()) {
-    //                    var staffId = $("#selectStaff").val();
-    //                    //var isPrimaryCareTeam;
-    //                    //$("#primaryCareTeam").attr("checked") === "checked" ? isPrimaryCareTeam = true : isPrimaryCareTeam = false;
-    //                    var careTeamInfo = {
-    //                        medicalRecordId: medicalRecordId,
-    //                        staffId: staffId
-    //                        //isPrimaryCareTeam: isPrimaryCareTeam
-    //                    };
-    //                    _addCareTeam(clientId, patientId, careTeamInfo);
-    //                    return true;
-    //                }
-    //                return false;
-    //            }
-    //        }));
-    //    });
-    //}
-
-    /**
-     *
-     * @param clientId
-     * @param patientId
-     * @param careTeamInfo
-     * @private
-     */
-    //function _addCareTeam(clientId, patientId, careTeamInfo) {
-    //    $.ajax({
-    //        url: opts.urls.addCareTeam.format(null, clientId, patientId),
-    //        type: 'POST',
-    //        data: careTeamInfo
-    //    }).done(function (data) {
-    //        if (data.resp === true) {
-    //            var medicalRecordId = data.medicalRecordId;
-    //            var ids = {
-    //                medicalRecordId: medicalRecordId
-    //            };
-    //            _initTeamTable(ids);
-    //            _removeCareTeam();
-    //        }
-    //    });
-    //}
-
-
-    /**
-     * remove care team event
-     * @private
-     */
-    //function _removeCareTeam() {
-    //    $("#careTeamTable").on("click", "tr .btn-remove-team", function (e) {
-    //        e.preventDefault();
-    //
-    //        var grandParent = $(this).parent().parent().parent();
-    //        var careTeamId = $(this).data("careTeamId");
-    //        var medicalRecordId = $("#hidden-medical-record").val();
-    //        var clientId = $("#hidden-client-id").val();
-    //        var patientId = $("#hidden-patient-id").val();
-    //
-    //        RC.common.warning(_.extend({}, opts.defaultConfirmArguments.deleteTeamWaringArguments, {
-    //            element: $(".warn"),
-    //            closeCallback: function () {
-    //                _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent);
-    //            }
-    //        }));
-    //    });
-    //}
-
-    /**
-     *
-     * @param clientId
-     * @param patientId
-     * @param careTeamId
-     * @param medicalRecordId
-     * @param grandParent
-     * @private
-     */
-    //function _removeTeam(clientId, patientId, careTeamId, medicalRecordId, grandParent) {
-    //    $.ajax({
-    //        url: opts.urls.deleteCareTeam.format(null, clientId, patientId, careTeamId, medicalRecordId),
-    //        type: 'DELETE',
-    //        success: function (data) {
-    //            if (data.resp === true) {
-    //                grandParent.remove();
-    //            }
-    //        }
-    //    });
-    //}
 
     /**
      * check archived element height. if it can't fill the whole page, we will set it's height.
