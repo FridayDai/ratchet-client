@@ -37,23 +37,16 @@
                 message: RC.constants.discardPatientsMessage
             },
             urls: {
-                //query: "/getPatients",
-                //add: "/addPatient",
                 patients: "/patients",
                 singlePatient: "/patients/{0}",
                 lookup: "/patients/bulk_import/lookup",
                 save: "/patients/bulk_import/save",
-                checkPatientId: "/patients/{0}/check_id",
+                checkPatientId: "/patients/check_id",
                 checkPatientEmail: "/patients/check_email",
-
-
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
-                //showSinglePatient: "/patients/{0}",
-                //getSinglePatient: "/patient/{0}",
                 getGroups: "/getStaffGroups"
-                //checkPatientId: "/checkPatientId/{0}",
-                //checkPatientEmail: "/checkPatientEmail"
+
             }
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
@@ -815,7 +808,7 @@
     function _checkPatientExist(patientId) {
         _restoreNewPatientForm();
         $.ajax({
-            url: opts.urls.checkPatientId.format(patientId),
+            url: opts.urls.checkPatientId,
             type: "POST",
             data: {patientId: patientId},
             dataType: "json",

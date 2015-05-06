@@ -162,36 +162,11 @@ class TreatmentService {
 
     }
 
-    def deleteCareTeam(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAccessException, ApiReturnException {
-
-        String deleteCareTeamUrl = grailsApplication.config.ratchetv2.server.url.deleteCareTeam
-        try {
-            log.info("Call backend service to delete care team, token: ${request.session.token}.")
-            def url = String.format(deleteCareTeamUrl, params?.medicalRecordId, params?.careTeamId)
-
-            def resp = Unirest.delete(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .asString()
-
-            if (resp.status == 204) {
-                log.info("Delete care team success, token: ${request.session.token}")
-                return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
-            }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
-    }
-
     def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiAccessException, ApiReturnException {
 
         String deleteCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
-        def url = String.format(deleteCareGiverUrl, params?.medicalRecordId, params?.careGiverId)
+        def url = String.format(deleteCareGiverUrl, params?.medicalRecordId, params?.emergencyContactId)
 
         try {
             log.info("Call backend service to delete care giver, token: ${request.session.token}.")
@@ -201,33 +176,6 @@ class TreatmentService {
 
             if (resp.status == 204) {
                 log.info("Delete care giver success, token: ${request.session.token}")
-                return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
-            }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
-    }
-
-    def addCareTeam(HttpServletRequest request, HttpServletResponse response, params)
-            throws ApiAccessException, ApiReturnException {
-
-        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
-
-        try {
-            log.info("Call backend service to add care team with medicalRecordId, type and staffId, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("medicalRecordId", params?.medicalRecordId)
-                    .field("type", grailsApplication.config.ratchetv2.server.careTeamType)
-                    .field("staffId", params?.staffId)
-                    .asString()
-
-            if (resp.status == 200) {
-                log.info("Add care team success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)

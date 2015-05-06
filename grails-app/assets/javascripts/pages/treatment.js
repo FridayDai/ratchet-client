@@ -21,7 +21,7 @@
         },
         urls: {
             query: "/getProvider",
-            editSurgeryTime: "/patients/{0}/surgery-time/{1}/{2}",
+            editSurgeryTime: "/patients/{0}/surgery_time/{1}/{2}",
             archived: "/patients/{0}/records/{1}/archived",
             getTreatmentInfo: "/treatments/{0}"
         }

@@ -20,13 +20,6 @@ class PatientsController extends BaseController {
 
     static allowedMethods = [getPatients: ['GET'], addPatient: ['POST']]
 
-//    def index() {
-//        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-//        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-//        def patientList = patientService.loadPatients(request, response, params)
-//        render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
-//    }
-
     def getPatients() {
         if (request.isXhr()) {
             def resp = patientService.loadPatients(request, response, params)
@@ -47,22 +40,6 @@ class PatientsController extends BaseController {
     def lookup() {
         def resp = patientService.lookup(request, response, params)
         render resp as JSON
-    }
-
-//    def showActivity() {
-//        def teamData = patientService.loadCareTeam()
-//        def giverData = patientService.loadCareGiver()
-//        render(view: "/patients/patientTeam", model: [teams: teamData, givers: giverData])
-//    }
-
-//    def getActivities() {
-//        def data = patientService.loadActivities(params)
-//        render data as JSON
-//    }
-
-    def checkPatientExist() {
-        def data = singlePatientService.showPatientByPatientId(request, response, params)
-        render data as JSON
     }
 
     def downloadFile() {
@@ -93,6 +70,10 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
+    def checkPatientExist() {
+        def data = singlePatientService.showPatientByPatientId(request, response, params)
+        render data as JSON
+    }
 
     def checkPatientEmailExist() {
         def data = singlePatientService.checkPatientEmail(request, response, params)

@@ -60,6 +60,7 @@
             },
             complete: function () {
                 RC.common.progress(false);
+                $('.btn').blur();
             },
             success: function () {
 

@@ -28,18 +28,12 @@
                 updatePatient: "/patients/{0}",
                 assignTreatment: "/patients/{0}/treatments",
                 invitePatient: "/patients/{0}/invite",
-                checkPatientId: "/patients/{0}/check_id",
+                checkPatientId: "/patients/check_id",
                 checkPatientEmail: "/patients/check_email",
-
-
                 query: "/getProvider",
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
-
-
                 getGroups: "/getStaffGroups"
-
-                //checkPatientEmail: "/checkPatientEmail"
             }
         },
         tabs,
