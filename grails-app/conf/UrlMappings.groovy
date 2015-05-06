@@ -46,6 +46,15 @@ class UrlMappings {
         "/patients/$patientId?/surgery_time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
+        //Patient treatment
+        "/patients/$patientId?/treatment"(controller: "treatment", action: "index")
+        "/treatments"(controller: "treatment", action: "getTreatments")
+        "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
+
+        //Patient task
+        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
+
         //Patient team
         "/patients/$patientId?/emergency_contact"(controller: "team") {
             action = [GET: "getCareGiver", POST: "addCareGiver"]
@@ -55,22 +64,8 @@ class UrlMappings {
         "/patients/$patientId?/emergency_contact/update"(controller: "team", action: "updateCareGiver")
         "/patients/$patientId?/group_and_provider/update"(controller: "team", action: "updateCareTeamSurgeon")
 
-//        "/overview"(controller: "overview", action: "index")
+        //Patient activity
         "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
-//        "/task"(controller: "overview", action: "index")
-//        "/team"(controller: "team", action: "showMedicalCares")
-//        "/patient/patientTeam"(controller: "patients", action: "showActivity")
-
-
-        // treatment
-//        "/treatment/task"(controller: "task", action: "getTasks")
-        "/patients/$patientId?/treatment"(controller: "treatment", action: "index")
-        "/treatments"(controller: "treatment", action: "getTreatments")
-        "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
-
-        //task
-        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
-        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         // Accounts
         "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
@@ -95,11 +90,6 @@ class UrlMappings {
         "/createGroup"(controller: "groups", action: "addGroup")
         "/updateGroup"(controller: "groups", action: "updateGroup")
         "/deleteGroup"(controller: "groups", action: "deleteGroup")
-
-
-        //agreement
-//        "/terms_of_service"(controller: "home", action: "termsOfService")
-//        "/privacy_policy"(controller: "home", action: "privacyPolicy")
 
         // announcement
         "/announcement/close"(controller: "announcement", action: "close")
