@@ -6,8 +6,7 @@
     //Define provider page global variables
     var opts = {
             urls: {
-                query: "/getActivities",
-                getStaffs: "/getStaffs"
+                query: "/patients/{0}/activities"
             }
         },
         activityTable;
@@ -20,7 +19,7 @@
     function _initTable(ele, element, data) {
         //before reload dataTable, destroy the last dataTable
         //$(element).dataTable().fnDestroy();
-
+        var patientId = ele.find("#patientId").val();
         if (activityTable) {
             activityTable.clear();
             activityTable.destroy();
@@ -45,7 +44,7 @@
             //},
             //"bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
-                url: opts.urls.query,
+                url: opts.urls.query.format(patientId),
                 pages: 5,// number of pages to cache
                 data: data
             }),
@@ -78,7 +77,7 @@
     function _loadData(ele, element) {
         var data = {};
 
-        data.patientId = ele.find("#patientId").val();
+        //data.patientId = ele.find("#patientId").val();
         data.medicalRecordId = ele.find("#medicalRecordId").val();
         data.clientId = ele.find("#clientId").val();
         _initTable(ele, element, data);
@@ -128,12 +127,11 @@
 
     function _search(ele, element) {
         var senderId = $('#selectStaffs').val();
-        var patientId = $("#patientId").val();
+        //var patientId = $("#patientId").val();
         var medicalRecordId = $("#medicalRecordId").val();
         var clientId = $("#clientId").val();
         var data = {
             senderId: senderId,
-            patientId: patientId,
             medicalRecordId: medicalRecordId,
             clientId: clientId
         };

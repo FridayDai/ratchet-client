@@ -23,7 +23,7 @@
             query: "/getProvider",
             editSurgeryTime: "/patients/{0}/surgery-time/{1}/{2}",
             archived: "/patients/{0}/records/{1}/archived",
-            getTreatmentInfo: "/clients/{0}/treatments/{1}"
+            getTreatmentInfo: "/treatments/{0}"
         }
     };
 
@@ -86,8 +86,9 @@
      */
     function _getTreatmentInfo(clientId, treatmentId) {
         $.ajax({
-            url: opts.urls.getTreatmentInfo.format(clientId, treatmentId),
+            url: opts.urls.getTreatmentInfo.format(treatmentId),
             type: 'POST',
+            data: {clientId: clientId},
             success: function (data) {
                 //var sendTimeOffset = data.sendTimeOffset;
                 //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);

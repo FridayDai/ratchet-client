@@ -47,8 +47,8 @@
                 checkPatientEmail: "/patients/check_email",
 
 
-                getTreatments: "/getTreatments",
-                getStaffs: "/getStaffs",
+                getTreatments: "/treatments",
+                getStaffs: "/staffs",
                 //showSinglePatient: "/patients/{0}",
                 //getSinglePatient: "/patient/{0}",
                 getGroups: "/getStaffGroups"

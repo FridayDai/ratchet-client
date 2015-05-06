@@ -33,8 +33,8 @@
 
 
                 query: "/getProvider",
-                getTreatments: "/getTreatments",
-                getStaffs: "/getStaffs",
+                getTreatments: "/treatments",
+                getStaffs: "/staffs",
 
 
                 getGroups: "/getStaffGroups"
@@ -73,7 +73,7 @@
     function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
-        var url = "/treatment?patientId=" + patientId + "&clientId=" + clientId +
+        var url = "/patients/"+ patientId +"/treatment?clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //

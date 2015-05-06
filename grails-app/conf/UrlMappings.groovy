@@ -78,18 +78,22 @@ class UrlMappings {
         "/updateCareGiver"(controller: "team", action: "updateCareGiver")
         "/updateCareTeamSurgeon"(controller: "team", action: "updateCareTeamSurgeon")
 
-        "/overview"(controller: "overview", action: "index")
-        "/getActivities"(controller: "overview", action: "getActivities")
-        "/task"(controller: "overview", action: "index")
-        "/team"(controller: "team", action: "showMedicalCares")
-        "/patient/patientTeam"(controller: "patients", action: "showActivity")
-        "/getStaffs"(controller: "staff", action: "getStaff")
+//        "/overview"(controller: "overview", action: "index")
+        "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
+//        "/task"(controller: "overview", action: "index")
+//        "/team"(controller: "team", action: "showMedicalCares")
+//        "/patient/patientTeam"(controller: "patients", action: "showActivity")
+
 
         // treatment
-        "/treatment/task"(controller: "task", action: "getTasks")
-        "/treatment"(controller: "treatment", action: "index")
-        "/getTreatments"(controller: "treatment", action: "getTreatments")
-        "/clients/$clientId?/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
+//        "/treatment/task"(controller: "task", action: "getTasks")
+        "/patients/$patientId?/treatment"(controller: "treatment", action: "index")
+        "/treatments"(controller: "treatment", action: "getTreatments")
+        "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
+
+        //task
+        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         // Accounts
         "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
@@ -104,6 +108,9 @@ class UrlMappings {
         "/deactivateAccount/$accountId?"(controller: "accounts", action: "deactivateAccount")
         "/activateAccount/$accountId?"(controller: "accounts", action: "activateAccount")
 
+        // staffs (a type of account)
+        "/staffs"(controller: "staff", action: "getStaff")
+
         // groups
         "/groups"(controller: "groups", action: "index")
         "/getGroups"(controller: "groups", action: "getGroups")
@@ -112,10 +119,6 @@ class UrlMappings {
         "/updateGroup"(controller: "groups", action: "updateGroup")
         "/deleteGroup"(controller: "groups", action: "deleteGroup")
 
-        //task
-        "/clients/$clientId/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
-        "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task"(controller: "task", action: "addTaskToMedicalRecord")
-        "/clients/$clientId/patients/$patientId/treatments/$medicalRecordId/task/$taskId/sendMail"(controller: "task", action: "sendTaskEmail")
 
         //agreement
 //        "/terms_of_service"(controller: "home", action: "termsOfService")

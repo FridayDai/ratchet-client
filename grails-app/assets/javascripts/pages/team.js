@@ -49,7 +49,7 @@
                 //query: "/getPatients",
                 getCareTeam: "/getCareTeam",
                 getCareGiver: "/getCareGiver",
-                getStaffs: "/getStaffs",
+                getStaffs: "/staffs",
                 updateCareTeamSurgeon: "/updateCareTeamSurgeon",
                 addCareTeam: "/clients/{0}/patients/{1}/care_team",
                 addCareGiver: "/clients/{0}/patients/{1}/care_giver",
