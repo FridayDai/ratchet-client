@@ -686,7 +686,7 @@
                     "targets": 7,
                     "render": function (data, type, full) {
                         var surgeryTime = data === undefined ? full.surgeryTime : data;
-                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        var formatDate = moment(surgeryTime).format('MMM D, YYYY');
                         return formatDate;
                     },
                     width: "170px"
