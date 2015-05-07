@@ -339,182 +339,11 @@
     }
 
     /**
-     * get add patient data
-     * @returns data
+     * functions for bulk import
      * @private
      */
-    function _getAddData() {
-        var patientId = $("#patient-id-value").text();
-        var firstName = $("#firstName").val() || $("#firstName").text();
-        var lastName = $("#lastName").val() || $("#lastName").text();
-        var email = $("#email").val() || $("#email").text();
-        var number = $("#phoneNumber").val() || $("#phoneNumber").text();
-        var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
 
-        var ecFirstName = $("#emergency-firstName").val();
-        var ecLastName = $("#emergency-lastName").val();
-        var relationship = $("#relationship").data('id');
-        var ecEmail = $("#emergency-email").val();
-
-
-        var treatmentId = $("#selectTreatment").data('id');
-        var date = new Date($("#surgeryTime").val());
-        var surgeryTime = date.getTime();
-        var staffId = $("#selectStaffs").data('id');
-        var groupId = $("#selectGroup").data('id');
-
-        var data = {
-            patientId: patientId,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            phoneNumber: phoneNumber,
-
-            ecFirstName: ecFirstName,
-            ecLastName: ecLastName,
-            relationship: relationship,
-            ecEmail: ecEmail,
-
-            profilePhoto: '',
-            treatmentId: treatmentId,
-            surgeryTime: surgeryTime,
-            staffId: staffId,
-            groupId: groupId
-        };
-
-        return data;
-    }
-
-    /**
-     * data table add a row
-     * @private
-     */
-    function _add() {
-
-        var data = _getAddData();
-        $.ajax({
-            url: opts.urls.patients,
-            type: "post",
-            data: data,
-            success: function (data) {
-                var url = opts.urls.singlePatient.format(data.id);
-                window.location.href = url;
-            }
-        });
-
-    }
-
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        $("#table-form").validate({
-                rules: {
-                    phoneNumber: {
-                        isPhone: true
-                    }
-                },
-                messages: {
-                    provider: RC.constants.waringMessageProvider,
-                    agent: RC.constants.waringMessageAgent,
-                    email: RC.constants.waringMessageEmail
-                }
-            }
-        );
-    }
-
-    /**
-     * bind add event
-     * @private
-     */
-    function _bindAddEvent(patientId) {
-
-        if ($('.permission-confirm').hasClass('visible')) {
-            $('.permission-confirm').removeClass('visible');
-        }
-        $("#surgeryTime").prop("disabled", true);
-        $("#selectStaffs").prop("disabled", true);
-
-        $('#patient-id-value').text(patientId);
-        var form = $("#table-form");
-        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-            element: form,
-            okCallback: function () {
-                var hasEmailMsg = $('#email').attr('data-error-msg');
-                var hasValid = form.valid();
-                if (hasEmailMsg) {
-                    var obj = {
-                        element: $('#email'),
-                        message: hasEmailMsg,
-                        method: "email"
-                    };
-                    RC.common.showErrorTip(obj);
-                }
-                if (!hasEmailMsg && hasValid) {
-                    _add();
-                    return true;
-                }
-                return false;
-            },
-            beforeClose: function () {
-                _restoreNewPatientForm();
-                _destroyPhone();
-                RC.common.hideErrorTip($("#email"));
-            }
-        }));
-
-        _bindEditPatientInfoModel();
-        _initPhoneInput();
-        _checkSpecialNumber();
-        _bindPatientEmailInput();
-        //_initSurgeryTime();
-        _initSelectTreatment();
-        _initStaffSelect();
-        _initPlaceholder();
-        _initRelationship();
-        _checkEmergencyContact();
-        _initSelectGroup();
-        _checkPageHeightForForm(form);
-        //$("#div-surgery-time").css("display", "none");
-    }
-
-    /**
-     *
-     * @private
-     */
-    function _bindNewPatientModel() {
-        $("#add-patient").on("click", function (e) {
-            e.preventDefault();
-            var form = $("#patient-id-form");
-            form.validate().resetForm();
-            form[0].reset();
-
-            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.newPatientIdConfirmArguments, {
-                element: form,
-                okTitle: "Next",
-                okCallback: function () {
-                    if (form.valid()) {
-                        var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
-                        return true;
-                    }
-                }
-            }));
-
-        });
-
-        $("#new-patient-id").keydown(function (event) {
-                if (event.keyCode === 13) {
-                    if ($("#patient-id-form").valid()) {
-                        var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
-                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
-                    }
-                }
-            }
-        );
-
+    function _bindBulkImportModel() {
         $("#bulk-important").on("click", function (e) {
             e.preventDefault();
             $(".import-form ")[0].reset();
@@ -553,7 +382,6 @@
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
         });
-
     }
 
     function _importWindowCloseHandle() {
@@ -697,27 +525,6 @@
         patientListTable = $(opts.table.patientListTable).DataTable(options);
     }
 
-    /**
-     * edit patient base info in the second model
-     * @private
-     */
-    function _bindEditPatientInfoModel() {
-        $('.form-group-edit').on("click", function (e) {
-            e.preventDefault();
-            var element = $(this).prev();
-            if (!element.hasClass('replace-input-div')) {
-                element = element.find('.replace-input-div');
-            }
-            _divReplaceWithInput(element);
-            if (element.attr("id") === "phoneNumber") {
-                _initPhoneInput();
-                _checkSpecialNumber();
-            }
-            if (element.attr("id") === "email") {
-                _bindPatientEmailInput(element.text());
-            }
-        });
-    }
 
     function _initImportPopupEvent() {
         $('body').css("overflow", "hidden");
@@ -791,13 +598,67 @@
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
     }
 
-    function _bindPatientEmailInput(primaryEmail) {
-        $('#email').on("blur", function (e) {
-            e.preventDefault();
-            var email = $(this).val();
-            _checkPatientEmailExist($(this), email, primaryEmail);
 
-        })
+// functions in new patient process
+
+    /**
+     * bind the first patientId model
+     * @private
+     */
+    function _bindNewPatientModel() {
+
+        $("#add-patient").on("click", function (e) {
+            e.preventDefault();
+            var form = $("#patient-id-form");
+            form.validate().resetForm();
+            form[0].reset();
+
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.newPatientIdConfirmArguments, {
+                element: form,
+                okTitle: "Next",
+                okCallback: function () {
+                    if (form.valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
+                        return true;
+                    }
+                }
+            }));
+
+        });
+
+        $("#new-patient-id").keydown(function (event) {
+                if (event.keyCode === 13) {
+                    if ($("#patient-id-form").valid()) {
+                        var patientId = $('#new-patient-id').val();
+                        _checkPatientExist(patientId);
+                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+                    }
+                }
+            }
+        );
+    }
+
+    /**
+     * edit patient base info in the second model
+     * @private
+     */
+    function _bindEditPatientInfoModel() {
+        $('.form-group-edit').on("click", function (e) {
+            e.preventDefault();
+            var element = $(this).prev();
+            if (!element.hasClass('replace-input-div')) {
+                element = element.find('.replace-input-div');
+            }
+            _divReplaceWithInput(element);
+            if (element.attr("id") === "phoneNumber") {
+                _initPhoneInput();
+                _checkSpecialNumber();
+            }
+            if (element.attr("id") === "email") {
+                _bindPatientEmailInput(element.text());
+            }
+        });
     }
 
     /**
@@ -816,13 +677,169 @@
                 if (data.check === "false") {
                     _bindAddEvent(patientId);
                 } else {
-                    _inputReplaceWithDiv(data, patientId, _bindAddEvent);
+                    _bindAddEvent(patientId, data);
+                    //_inputReplaceWithDiv(data, patientId, _bindAddEvent);
                 }
 
             }
         });
 
     }
+
+    /**
+     * get add patient data
+     * @returns data
+     * @private
+     */
+    function _getAddData() {
+        var patientId = $("#patient-id-value").text();
+        var firstName = $("#firstName").val() || $("#firstName").text();
+        var lastName = $("#lastName").val() || $("#lastName").text();
+        var email = $("#email").val() || $("#email").text();
+        var number = $("#phoneNumber").val() || $("#phoneNumber").text();
+        var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
+
+        var ecFirstName = $("#emergency-firstName").val();
+        var ecLastName = $("#emergency-lastName").val();
+        var relationship = $("#relationship").data('id');
+        var ecEmail = $("#emergency-email").val();
+
+
+        var treatmentId = $("#selectTreatment").data('id');
+        var date = new Date($("#surgeryTime").val());
+        var surgeryTime = date.getTime();
+        var staffId = $("#selectStaffs").data('id');
+        var groupId = $("#selectGroup").data('id');
+
+        var data = {
+            patientId: patientId,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phoneNumber: phoneNumber,
+
+            ecFirstName: ecFirstName,
+            ecLastName: ecLastName,
+            relationship: relationship,
+            ecEmail: ecEmail,
+
+            profilePhoto: '',
+            treatmentId: treatmentId,
+            surgeryTime: surgeryTime,
+            staffId: staffId,
+            groupId: groupId
+        };
+
+        return data;
+    }
+
+    /**
+     * data table add a row
+     * @private
+     */
+    function _add() {
+
+        var data = _getAddData();
+        $.ajax({
+            url: opts.urls.patients,
+            type: "post",
+            data: data,
+            success: function (data) {
+                var url = opts.urls.singlePatient.format(data.id);
+                window.location.href = url;
+            }
+        });
+
+    }
+
+    /**
+     * set validate
+     * @private
+     */
+    function _setValidate() {
+        $("#table-form").validate({
+                rules: {
+                    phoneNumber: {
+                        isPhone: true
+                    }
+                },
+                messages: {
+                    provider: RC.constants.waringMessageProvider,
+                    agent: RC.constants.waringMessageAgent,
+                    email: RC.constants.waringMessageEmail
+                }
+            }
+        );
+    }
+
+    /**
+     * bind add event
+     * @private
+     */
+    function _bindAddEvent() {
+
+        var patientId = arguments[0];
+        if(arguments.length >1 ) {
+            _inputReplaceWithDiv(arguments[1]);
+        }
+
+        //if ($('.permission-confirm').hasClass('visible')) {
+        //    $('.permission-confirm').removeClass('visible');
+        //}
+        //$("#surgeryTime").prop("disabled", true);
+        //$("#selectStaffs").prop("disabled", true);
+
+        $('#patient-id-value').text(patientId);
+        var form = $("#table-form");
+        RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
+            element: form,
+            okCallback: function () {
+                var hasEmailMsg = $('#email').attr('data-error-msg');
+                var hasValid = form.valid();
+                if (hasEmailMsg) {
+                    var obj = {
+                        element: $('#email'),
+                        message: hasEmailMsg,
+                        method: "email"
+                    };
+                    RC.common.showErrorTip(obj);
+                }
+                if (!hasEmailMsg && hasValid) {
+                    _add();
+                    return true;
+                }
+                return false;
+            },
+            beforeClose: function () {
+                _destroyPhone();
+                RC.common.hideErrorTip($("#email"));
+            }
+        }));
+
+        _bindEditPatientInfoModel();
+        _initPhoneInput();
+        _checkSpecialNumber();
+        _bindPatientEmailInput();
+        //_initSurgeryTime();
+        _initSelectTreatment();
+        _initStaffSelect();
+        _initPlaceholder();
+        _initRelationship();
+        _checkEmergencyContact();
+        _initSelectGroup();
+        _checkPageHeightForForm(form);
+    }
+
+
+    function _bindPatientEmailInput(primaryEmail) {
+        $('#email').on("blur", function (e) {
+            e.preventDefault();
+            var email = $(this).val();
+            _checkPatientEmailExist($(this), email, primaryEmail);
+
+        })
+    }
+
 
     /**
      * check patient email exist
@@ -872,23 +889,7 @@
             var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";
             $(element).replaceWith(html);
             var $ele = $('#' + key);
-            switch (key) {
-                case "firstName":
-                    $ele.attr("placeholder", "John");
-                    break;
-                case "lastName":
-                    $ele.attr("placeholder", "Smith");
-                    break;
-                case "email":
-                    $ele.prop("type", "email");
-                    $ele.attr("placeholder", "john.smith@email.com");
-                    break;
-                case "phoneNumber":
-                    $ele.prop("type", "tel");
-                    $ele.attr("placeholder", "777-777-7777");
-                    $ele.attr("maxlength", "14");
-                    break;
-            }
+            _addInputPlaceholder($ele, key);
             $ele.next().remove();
         });
 
@@ -902,7 +903,7 @@
         });
     }
 
-    function _inputReplaceWithDiv(data, patientId, fn) {
+    function _inputReplaceWithDiv(data) {
 
         _.each($(".input-convert"), function (element, index) {
             var key = element.id;
@@ -921,7 +922,6 @@
                 $(element).replaceWith(html + edit);
             }
         });
-        fn(patientId);
     }
 
     function _divReplaceWithInput(element) {
@@ -930,6 +930,15 @@
         var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";//add type
         div.replaceWith(html);
         var $ele = $('#' + key).val(div.text());
+        _addInputPlaceholder($ele,key);
+    }
+
+    /**
+     * add input placeholder for div convert to input.
+     * @param key
+     * @private
+     */
+    function _addInputPlaceholder($ele, key) {
         switch (key) {
             case "firstName":
                 $ele.attr("placeholder", "John");
@@ -949,6 +958,10 @@
         }
     }
 
+    /**
+     * init relationship input
+     * @private
+     */
     function _initRelationship() {
         var data = [
             {label: "Spouse", id: 1},
@@ -1438,6 +1451,7 @@
         _loadData();
         _setValidate();
         _bindNewPatientModel();
+        _bindBulkImportModel();
         _bindSearchEvent();
         _initSurgeon();
         _clickRow();
