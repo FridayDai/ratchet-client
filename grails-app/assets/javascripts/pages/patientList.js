@@ -655,9 +655,9 @@
                 _initPhoneInput();
                 _checkSpecialNumber();
             }
-            if (element.attr("id") === "email") {
-                _bindPatientEmailInput(element.text());
-            }
+            //if (element.attr("id") === "email") {
+            //    _bindPatientEmailInput(element.text());
+            //}
         });
     }
 
@@ -756,17 +756,49 @@
      * set validate
      * @private
      */
-    function _setValidate() {
-        $("#table-form").validate({
+    function _setValidate(form, primaryEmail) {
+        form.validate({
                 rules: {
                     phoneNumber: {
                         isPhone: true
+                    },
+                    email: {
+                        email: true,
+                        remote: {
+                            url: opts.urls.checkPatientEmail,
+                            type: "POST",
+                            beforeSend: function () {
+                                RC.common.progress(false);
+                            },
+                            data: {
+                                email: function () {
+                                    return $('#table-form #email').val();
+                                }
+                            },
+                            async: false,
+                            dataFilter: function (responseString) {
+                                var resp = jQuery.parseJSON(responseString);
+                                if (primaryEmail === $('#table-form #email').val()) {
+                                    return '"true"';
+                                }
+                                else if (!(resp.check === "false")) {
+                                    return "\"" + RC.constants.emailExist + "\"";
+                                } else {
+                                    return '"true"';
+                                }
+                            },
+                            error: function (jqXHR) {
+                                if (jqXHR.status === 500) {
+                                    return
+                                }
+                            }
+
+                        }
                     }
                 },
                 messages: {
                     provider: RC.constants.waringMessageProvider,
-                    agent: RC.constants.waringMessageAgent,
-                    email: RC.constants.waringMessageEmail
+                    agent: RC.constants.waringMessageAgent
                 }
             }
         );
@@ -782,29 +814,15 @@
         if(arguments.length >1 ) {
             _inputReplaceWithDiv(arguments[1]);
         }
-
-        //if ($('.permission-confirm').hasClass('visible')) {
-        //    $('.permission-confirm').removeClass('visible');
-        //}
-        //$("#surgeryTime").prop("disabled", true);
-        //$("#selectStaffs").prop("disabled", true);
-
         $('#patient-id-value').text(patientId);
         var form = $("#table-form");
+        var email = $("#table-form #email").val() || null;
+        _setValidate(form, email);
+
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
             element: form,
             okCallback: function () {
-                var hasEmailMsg = $('#email').attr('data-error-msg');
-                var hasValid = form.valid();
-                if (hasEmailMsg) {
-                    var obj = {
-                        element: $('#email'),
-                        message: hasEmailMsg,
-                        method: "email"
-                    };
-                    RC.common.showErrorTip(obj);
-                }
-                if (!hasEmailMsg && hasValid) {
+                if (form.valid() && form.valid()) {
                     _add();
                     return true;
                 }
@@ -812,14 +830,12 @@
             },
             beforeClose: function () {
                 _destroyPhone();
-                RC.common.hideErrorTip($("#email"));
             }
         }));
 
         _bindEditPatientInfoModel();
         _initPhoneInput();
         _checkSpecialNumber();
-        _bindPatientEmailInput();
         //_initSurgeryTime();
         _initSelectTreatment();
         _initStaffSelect();
@@ -828,55 +844,6 @@
         _checkEmergencyContact();
         _initSelectGroup();
         _checkPageHeightForForm(form);
-    }
-
-
-    function _bindPatientEmailInput(primaryEmail) {
-        $('#email').on("blur", function (e) {
-            e.preventDefault();
-            var email = $(this).val();
-            _checkPatientEmailExist($(this), email, primaryEmail);
-
-        })
-    }
-
-
-    /**
-     * check patient email exist
-     * @param email
-     * @private
-     */
-    function _checkPatientEmailExist(elem, email, primaryEmail) {
-        if (!(email === primaryEmail)) {
-
-            $.ajax({
-                url: opts.urls.checkPatientEmail,
-                type: "POST",
-                data: {email: email},
-                dataType: "json",
-                beforeSend: function () {
-                    RC.common.progress(false);
-                },
-                success: function (data) {
-                    if (!(data.check === "false")) {
-                        var obj = {
-                            element: elem,
-                            message: RC.constants.emailExist,
-                            method: "email"
-                        };
-                        RC.common.showErrorTip(obj);
-                    } else {
-                        //RC.common.hideErrorTip(elem);
-                    }
-                },
-                error: function (jqXHR) {
-                    if (jqXHR.status === 500) {
-                        return
-                    }
-                }
-            });
-        }
-
     }
 
     /**
@@ -1449,7 +1416,6 @@
      */
     function _init() {
         _loadData();
-        _setValidate();
         _bindNewPatientModel();
         _bindBulkImportModel();
         _bindSearchEvent();
