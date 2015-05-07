@@ -36,16 +36,13 @@
                 }
             },
             urls: {
-                query: "/getAccounts",
-                add: "/createAccount",
-                updateAccount: "/updateAccount",
-                inviteAccount: "/inviteAccount/{0}",
-                updatePassword: "/updatePassword",
-                showSingleAccount: "/accounts/{0}",
-                deactivateAccount: "/deactivateAccount/{0}",
-                activateAccount: "/activateAccount/{0}",
-                getGroups: "/getStaffGroups",
-                getAllGroups: "/getGroups"
+                accounts: "/accounts",
+                singleAccount: "/accounts/{0}",
+                updatePassword: "/profile/{0}/",
+                inviteAccount: "/accounts/{0}/invite",
+                activateAccount: "/accounts/{0}/activate",
+                deactivateAccount: "/accounts/{0}/deactivate",
+                getAllGroups: "/groups"
             },
             img: {
                 isDoctor: ""
@@ -66,9 +63,10 @@
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.query,
+                url: opts.urls.accounts,
                 pages: 2, // number of pages to cache
-                data: data
+                data: data,
+                method: "get"
             }),
             "columnDefs": [{
                 "targets": 4,
@@ -166,7 +164,7 @@
         $('#accountsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
             if (id) {
-                var url = opts.urls.showSingleAccount.format(id);
+                var url = opts.urls.singleAccount.format(id);
                 window.location.href = url;
             } else {
                 return;
@@ -241,7 +239,7 @@
         var newAccountData = _prepareAddData();
 
         $.ajax({
-            url: opts.urls.add,
+            url: opts.urls.accounts,
             type: "post",
             data: newAccountData,
             success: function () {
@@ -427,7 +425,7 @@
                             newValue: newValue
                         };
 
-                        _updateStaff(accountInfo, groupValue);
+                        _updateStaff(accountInfo, groupValue, accountId);
                         return true;
                     }
                     return false;
@@ -444,9 +442,9 @@
      * @param accountInfo
      * @private
      */
-    function _updateStaff(accountInfo, groupValue) {
+    function _updateStaff(accountInfo, groupValue, id) {
         $.ajax({
-            url: opts.urls.updateAccount,
+            url: opts.urls.singleAccount.format(id),
             type: "POST",
             data: accountInfo,
             dataType: "json",
@@ -487,7 +485,7 @@
         );
     }
 
-        /**
+    /**
      * change account password
      * @private
      */
@@ -496,6 +494,8 @@
         $("#changePassword").on("click", function (e) {
             e.preventDefault();
             $(".update-password")[0].reset();
+
+            var accountId = $(this).data("accountId");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.changePasswordFormArguments, {
                 element: $(".update-password"),
@@ -512,7 +512,7 @@
                             confirmPassword: confirmPass
                         };
 
-                        _updatePassword(passwords);
+                        _updatePassword(passwords, accountId);
 
                         return true;
                     }
@@ -569,9 +569,9 @@
      * @param passwords
      * @private
      */
-    function _updatePassword(passwords) {
+    function _updatePassword(passwords, accountId) {
         $.ajax({
-            url: opts.urls.updatePassword,
+            url: opts.urls.updatePassword.format(accountId),
             type: "POST",
             data: passwords,
             dataType: "json",

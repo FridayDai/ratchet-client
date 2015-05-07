@@ -25,10 +25,9 @@
                 }
             },
             urls: {
-                getGroups: "/getGroups",
-                addGroup: "/createGroup",
-                updateGroup: "/updateGroup",
-                deleteGroup: "/deleteGroup"
+                groups: "/groups",
+                updateGroup: "/groups/update",
+                deleteGroup: "/groups/delete"
             }
         },
         groupTable;
@@ -43,9 +42,10 @@
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
 
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.getGroups,
+                url: opts.urls.groups,
                 pages: 2, // number of pages to cache
-                data: data
+                data: data,
+                method: "get"
             }),
             "columnDefs": [{
                 "targets": [0, 3],
@@ -151,7 +151,7 @@
 
     function _addGroup(name) {
         $.ajax({
-            url: opts.urls.addGroup,
+            url: opts.urls.groups,
             type: "POST",
             data: {name: name},
             dataType: "json",

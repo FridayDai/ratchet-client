@@ -30,7 +30,8 @@
             </div>
 
 
-            <a href="#" id="changePassword" class="btn btn-change-password">Change Password</a>
+            <a href="#" id="changePassword" class="btn btn-change-password"
+               data-account-id="${accountInfo.id}">Change Password</a>
         </div>
 
 

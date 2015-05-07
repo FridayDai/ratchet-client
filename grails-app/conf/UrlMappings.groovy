@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.Get
+
 class UrlMappings {
 
     static mappings = {
@@ -67,29 +69,38 @@ class UrlMappings {
         //Patient activity
         "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
 
-        // Accounts
-        "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
-        "/userProfile/$accountId?"(controller: "profile", action: "getProfile")
-        "/updatePassword"(controller: "accounts", action: "updatePassword")
-        "/accounts"(controller: "accounts", action: "index")
-        "/getAccounts"(controller: "accounts", action: "getAccounts")
-        "/accounts/$id?"(controller: "accounts", action: "getSingleAccount")
-        "/createAccount"(controller: "accounts", action: "createAccount")
-        "/updateAccount"(controller: "accounts", action: "updateAccount")
-        "/inviteAccount/$accountId?"(controller: "accounts", action: "inviteAccount")
-        "/deactivateAccount/$accountId?"(controller: "accounts", action: "deactivateAccount")
-        "/activateAccount/$accountId?"(controller: "accounts", action: "activateAccount")
+        //Accounts
+        "/accounts"(controller: "accounts") {
+            action = [GET: "getAccounts", POST: "addAccount"]
+        }
+
+        "/accounts/$id?"(controller: "accounts") {
+            action = [GET: "getSingleAccount", POST: "updateAccount"]
+        }
+
+        "/accounts/$accountId?/invite"(controller: "accounts", action: "inviteAccount")
+        "/accounts/$accountId?/activate"(controller: "accounts", action: "activateAccount")
+        "/accounts/$accountId?/deactivate"(controller: "accounts", action: "deactivateAccount")
+
+        //email confirm to activate account
+        "/email_confirm/$code?"(controller: "accounts", action: "confirmCode")
+
+        //Account profile
+        "/profile/$accountId?"(controller: "profile") {
+            action = [GET: "getProfile", POST: "updatePassword"]
+        }
 
         // staffs (a type of account)
         "/staffs"(controller: "staff", action: "getStaff")
 
         // groups
-        "/groups"(controller: "groups", action: "index")
-        "/getGroups"(controller: "groups", action: "getGroups")
+        "/groups"(controller: "groups") {
+            action = [GET: "getGroups", POST: "addGroup"]
+        }
+        "/groups/update"(controller: "groups", action: "updateGroup")
+        "/groups/delete"(controller: "groups", action: "deleteGroup")
+
         "/getStaffGroups"(controller: "groups", action: "getStaffGroups")
-        "/createGroup"(controller: "groups", action: "addGroup")
-        "/updateGroup"(controller: "groups", action: "updateGroup")
-        "/deleteGroup"(controller: "groups", action: "deleteGroup")
 
         // announcement
         "/announcement/close"(controller: "announcement", action: "close")
