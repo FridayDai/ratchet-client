@@ -19,8 +19,12 @@
     .forgot-password {
         display: block;
         padding-top: 8px;
-    }
 
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
 }
 
 .btn-submit {
