@@ -114,8 +114,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com"
-                       required/>
+                       placeholder="john.smith@email.com" required/>
 
             </div>
 
