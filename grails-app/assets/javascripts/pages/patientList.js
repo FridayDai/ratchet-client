@@ -449,71 +449,78 @@
                         var id = data === undefined ? full.patientId : data;
                         return id;
                     },
-                    width: "5%"
+                    width: "90px"
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
                         var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
                         return name;
                     },
-                    width: "5%"
+                    width: "120px"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
                         var email = data === undefined ? full.email : data;
                         return email;
                     },
-                    width: "12%"
+                    width: "260px"
                 }, {
                     "targets": 3,
+                    "render": function (data, type, full) {
+                        var phone = data === undefined ? full.phone : data;
+                        return phone;
+                    },
+                    width: "120px"
+                }, {
+                    "targets": 4,
                     "render": function (data, type, full) {
                         var groupName = data === undefined ? full.groupName : data;
                         return groupName;
                     },
-                    width: "12%"
+                    width: "200px"
                 }, {
-                    "targets": 4,
+                    "targets": 5,
                     "render": function (data, type, full) {
                         var providerName = data === undefined ? full.providerName : data;
                         return providerName;
                     },
-                    width: "7%"
+                    width: "150px"
                 }, {
-                    "targets": 5,
+                    "targets": 6,
                     "render": function (data, type, full) {
                         var treatmentName = data === undefined ? full.treatmentName : data;
                         return treatmentName;
                     },
-                    width: "7%"
-                }, {
-                    "targets": 6,
-                    "render": function (data, type, full) {
-                        var surgeryTime = data === undefined ? full.surgeryTime : data;
-                        var formatDate = moment(surgeryTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                        return formatDate;
-                    },
-                    width: "11%"
+                    width: "150px"
                 }, {
                     "targets": 7,
+                    "render": function (data, type, full) {
+                        var surgeryTime = data === undefined ? full.surgeryTime : data;
+                        var formatDate = moment(surgeryTime).format('MMM D, YYYY');
+                        return formatDate;
+                    },
+                    width: "170px"
+                }, {
+                    "targets": 8,
                     "render": function (data, type, full) {
                         var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
-                    width: "14%"
+                    width: "180px"
                 }, {
-                    "targets": 8,
+                    "targets": 9,
                     "render": function (data, type, full) {
                         var relationship = data === undefined ? full.relationshipName : data;
                         return relationship;
                     },
-                    width: "7%"
+                    width: "100px"
                 }, {
-                    "targets": 9,
+                    "targets": 10,
                     "render": function (data, type, full) {
                         var emergencyEmail = data === undefined ? full.emergencyEmail : data;
                         return emergencyEmail;
                     },
-                    width: "15%"
+                    width: "260px"
                 }]
         });
 
