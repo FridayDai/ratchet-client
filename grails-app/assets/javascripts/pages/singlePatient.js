@@ -67,7 +67,7 @@
     function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
-        var url = "/patients/"+ patientId +"/treatment?clientId=" + clientId +
+        var url = "/patients/" + patientId + "/treatment?clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
@@ -269,6 +269,7 @@
                                 return $('.patient-form #patientId').val();
                             }
                         },
+                        async: false,
                         dataType: "json",
                         dataFilter: function (responseString) {
                             var resp = jQuery.parseJSON(responseString);
@@ -302,6 +303,7 @@
                                 return $('.patient-form #email').val();
                             }
                         },
+                        async: false,
                         dataFilter: function (responseString) {
                             var resp = jQuery.parseJSON(responseString);
                             if (primaryEmail === $('.patient-form #email').val()) {
@@ -357,7 +359,7 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: form,
                     okCallback: function () {
-                        if (form.valid()) {
+                        if (form.valid() && form.valid()) {
                             var number = $("#phone").val();
                             var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
                             var patientInfo = {
@@ -406,7 +408,7 @@
                     $('.id').text(patientInfo.id);
                     $('.first-name').text(patientInfo.firstName);
                     $('.last-name').text(patientInfo.lastName);
-                    $('#patientEmail').text(patientInfo.email);
+                    $('#patientEmail').text((patientInfo.email).toLowerCase());
                     $('.phone').text(patientInfo.number);
 
                     _checkEmailUpdated(originalPatientEmail, patientInfo.email);

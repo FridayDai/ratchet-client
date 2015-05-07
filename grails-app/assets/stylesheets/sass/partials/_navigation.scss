@@ -219,9 +219,7 @@
 .btn-bottom {
     margin-top: 20px;
 
-    .btn-logout {
-        color: $base-font-grey;
-        padding-right: 22px;
+    .log-out {
 
         &:before {
             padding-right: 8px;
@@ -229,6 +227,22 @@
             color: $base-font-grey;
             font-size: 12px;
             font-family: ionicons;
+        }
+
+        &:hover,
+        &:focus {
+            color: darken($base-font-grey, 20%);
+        }
+    }
+
+    .btn-logout {
+        color: $base-font-grey;
+        padding-right: 22px;
+
+        &:hover,
+        &:focus {
+            color: darken($base-font-grey, 20%);
+            text-decoration: underline;
         }
     }
 }
