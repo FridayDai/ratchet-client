@@ -94,13 +94,13 @@
 
         &:hover,
         &:focus {
-            border: 1px solid $base-color-mid-grey;
-            color: $base-color-mid-grey;
+            border: 1px solid $base-color-tab-font-hover;
+            color: $base-color-tab-font-hover;
             background-color: $base-color-white;
 
             span,
             &:before {
-                color: $base-color-mid-grey;
+                color: $base-color-tab-font-hover;
             }
         }
     }
