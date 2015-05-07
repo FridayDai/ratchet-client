@@ -67,7 +67,7 @@
     function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
-        var url = "/patients/"+ patientId +"/treatment?clientId=" + clientId +
+        var url = "/patients/" + patientId + "/treatment?clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
@@ -408,7 +408,7 @@
                     $('.id').text(patientInfo.id);
                     $('.first-name').text(patientInfo.firstName);
                     $('.last-name').text(patientInfo.lastName);
-                    $('#patientEmail').text(patientInfo.email);
+                    $('#patientEmail').text((patientInfo.email).toLowerCase());
                     $('.phone').text(patientInfo.number);
 
                     _checkEmailUpdated(originalPatientEmail, patientInfo.email);
