@@ -68,7 +68,7 @@ class UrlMappings {
         "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
 
         // Accounts
-        "/staff/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
+        "/email_confirm/$code?"(controller: "accounts", action: "confirmCode")
         "/userProfile/$accountId?"(controller: "profile", action: "getProfile")
         "/updatePassword"(controller: "accounts", action: "updatePassword")
         "/accounts"(controller: "accounts", action: "index")
