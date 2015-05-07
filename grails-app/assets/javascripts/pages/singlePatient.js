@@ -269,6 +269,7 @@
                                 return $('.patient-form #patientId').val();
                             }
                         },
+                        async: false,
                         dataType: "json",
                         dataFilter: function (responseString) {
                             var resp = jQuery.parseJSON(responseString);
@@ -302,6 +303,7 @@
                                 return $('.patient-form #email').val();
                             }
                         },
+                        async: false,
                         dataFilter: function (responseString) {
                             var resp = jQuery.parseJSON(responseString);
                             if (primaryEmail === $('.patient-form #email').val()) {
@@ -357,7 +359,7 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
                     element: form,
                     okCallback: function () {
-                        if (form.valid()) {
+                        if (form.valid() && form.valid()) {
                             var number = $("#phone").val();
                             var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
                             var patientInfo = {
