@@ -2,7 +2,6 @@
 @import '../partials/form';
 @import '../partials/dialog';
 @import '../partials/overview';
-@import '../partials/base';
 @import '../partials/theme';
 @import '../partials/select2';
 
@@ -261,16 +260,6 @@
 
     .ui-dialog-content {
         padding: 0px 20px 0 20px;
-    }
-
-    .ui-dialog-buttonpane {
-        //        .ui-dialog-buttonset {
-        //            padding: 10px;
-        //        }
-
-        button {
-            margin: .5em 1em .5em 0;
-        }
     }
 }
 
