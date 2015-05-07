@@ -252,6 +252,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email Address</th>
+                        <th>Phone Number</th>
                         <th>Group</th>
                         <th>Provider</th>
                         <th>Treatment</th>
