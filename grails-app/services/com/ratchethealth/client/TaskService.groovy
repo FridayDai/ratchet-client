@@ -53,8 +53,9 @@ class TaskService {
     def sendTaskEmailToPatient(HttpServletRequest request, HttpServletResponse response, params)
             throws ApiAccessException, ApiReturnException {
 
+        def clientId = request.session.clientId
         String sendTaskEmailUrl = grailsApplication.config.ratchetv2.server.url.task.sendEmail
-        def url = String.format(sendTaskEmailUrl, params.clientId, params.patientId, params.medicalRecordId, params.taskId)
+        def url = String.format(sendTaskEmailUrl, clientId, params.patientId, params.medicalRecordId, params.taskId)
 
         try {
             log.info("Call backend service to send task email to patient, token: ${request.session.token}.")

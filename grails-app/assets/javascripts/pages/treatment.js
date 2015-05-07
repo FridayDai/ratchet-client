@@ -21,9 +21,9 @@
         },
         urls: {
             query: "/getProvider",
-            editSurgeryTime: "/clients/{0}/patients/{1}/surgery-time/{2}/{3}",
-            archived: "/clients/{0}/patients/{1}/records/{2}/archived",
-            getTreatmentInfo: "/clients/{0}/treatments/{1}"
+            editSurgeryTime: "/patients/{0}/surgery_time/{1}/{2}",
+            archived: "/patients/{0}/records/{1}/archived",
+            getTreatmentInfo: "/treatments/{0}"
         }
     };
 
@@ -86,8 +86,9 @@
      */
     function _getTreatmentInfo(clientId, treatmentId) {
         $.ajax({
-            url: opts.urls.getTreatmentInfo.format(clientId, treatmentId),
+            url: opts.urls.getTreatmentInfo.format(treatmentId),
             type: 'POST',
+            data: {clientId: clientId},
             success: function (data) {
                 //var sendTimeOffset = data.sendTimeOffset;
                 //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
@@ -128,7 +129,7 @@
      */
     function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
         $.ajax({
-            url: opts.urls.editSurgeryTime.format(clientId, patientId, medicalRecordId, selectedDate),
+            url: opts.urls.editSurgeryTime.format(patientId, medicalRecordId, selectedDate),
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {
@@ -174,8 +175,8 @@
      */
     function _archived(clientId, patientId, medicalRecordId) {
         $.ajax({
-            url: opts.urls.archived.format(clientId, patientId, medicalRecordId),
-            type: 'PUT',
+            url: opts.urls.archived.format(patientId, medicalRecordId),
+            type: 'POST',
             success: function (data) {
                 if (data.resp === true) {
                     window.location.reload();
@@ -198,12 +199,12 @@
                 // if the target panel is empty, return true
                 //    return ui.panel.html() == "";
 
-                if(ui.tab.data("loaded")) {
+                if (ui.tab.data("loaded")) {
                     event.preventDefault();
-                    return ;
+                    return;
                 }
 
-                ui.jqXHR.success(function() {
+                ui.jqXHR.success(function () {
                     ui.tab.data("loaded", true);
                 });
 
@@ -213,7 +214,7 @@
                 if (type) {
                     switch (type) {
                         case "Activity":
-                            RC.pages.activity.init(ui.panel,ui.panel.find("#activityTable"));
+                            RC.pages.activity.init(ui.panel, ui.panel.find("#activityTable"));
                             break;
                         case "Task":
                             RC.pages.task.init(ui.panel);

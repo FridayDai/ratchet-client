@@ -8,8 +8,10 @@ class SinglePatientController extends BaseController {
     def singlePatientService
     def invitationService
 
-    def showPatient() {
-        def patientId = params?.id
+    static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
+
+    def getSinglePatient() {
+        def patientId = params?.patientId
         def patientInfo = singlePatientService.showSinglePatient(request, response, patientId)
         def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         def medicalRecords = singlePatientService.showMedialRecords(request, response, patientId)
@@ -38,7 +40,7 @@ class SinglePatientController extends BaseController {
                                                              medicalRecords: medicalRecords, phoneNumber: phoneNumber, treatmentLimit: treatmentLimit])
     }
 
-    def updatePatient() {
+    def updateSinglePatient() {
         def resp = singlePatientService.updateSinglePatient(request, response, params)
         def status = [resp: resp]
         render status as JSON

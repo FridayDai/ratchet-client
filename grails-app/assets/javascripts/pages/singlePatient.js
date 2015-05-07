@@ -25,15 +25,15 @@
                 }
             },
             urls: {
+                updatePatient: "/patients/{0}",
+                assignTreatment: "/patients/{0}/treatments",
+                invitePatient: "/patients/{0}/invite",
+                checkPatientId: "/patients/check_id",
+                checkPatientEmail: "/patients/check_email",
                 query: "/getProvider",
-                getTreatments: "/getTreatments",
-                getStaffs: "/getStaffs",
-                updatePatient: "/clients/{0}/patients/{1}",
-                assignTreatment: "/clients/{0}/patients/{1}/treatments",
-                invitePatient: "/invitePatient/{0}",
-                getGroups: "/getStaffGroups",
-                checkPatientId: "/checkPatientId",
-                checkPatientEmail: "/checkPatientEmail"
+                getTreatments: "/treatments",
+                getStaffs: "/staffs",
+                getGroups: "/getStaffGroups"
             }
         },
         tabs,
@@ -67,7 +67,7 @@
     function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
         //var label = tabTitle,
         var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
-        var url = "/treatment?patientId=" + patientId + "&clientId=" + clientId +
+        var url = "/patients/"+ patientId +"/treatment?clientId=" + clientId +
             "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
@@ -222,7 +222,7 @@
      */
     function _assignTreatment(patientId, clientId, assignInfo) {
         $.ajax({
-            url: opts.urls.assignTreatment.format(clientId, patientId),
+            url: opts.urls.assignTreatment.format(patientId),
             type: 'POST',
             data: assignInfo,
             dataType: 'json',
@@ -367,7 +367,8 @@
                                 lastName: $("#lastName").val(),
                                 email: $("#email").val(),
                                 number: number,
-                                phoneNumber: phoneNumber
+                                phoneNumber: phoneNumber,
+                                clientId: clientId
                                 //phoneNum: $("#phone").val()
                             };
                             _updatePatient(patientId, clientId, patientInfo);
@@ -396,7 +397,7 @@
     function _updatePatient(patientId, clientId, patientInfo) {
         var originalPatientEmail = $('#patientEmail').attr('value');
         $.ajax({
-            url: opts.urls.updatePatient.format(clientId, patientId),
+            url: opts.urls.updatePatient.format(patientId),
             type: 'POST',
             data: patientInfo,
             dataType: 'json',

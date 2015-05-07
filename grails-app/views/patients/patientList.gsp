@@ -219,7 +219,8 @@
                 <div class="clear">
                     <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
-                        <input id="fileupload" type="file" name="file" data-url="/upload" accept=".csv">
+                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk_import/upload"
+                               accept=".csv">
                     </span>
 
                     <div class="result-box">

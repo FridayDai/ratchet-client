@@ -17,8 +17,8 @@
             }
         },
         urls: {
-            query: "/clients/{0}/patients/{1}/treatments/{2}/task",
-            email: "/clients/{0}/patients/{1}/treatments/{2}/task/{3}/sendMail"
+            query: "/patients/{0}/treatments/{1}/task",
+            email: "/patients/{0}/treatments/{1}/task/{2}/sendMail"
         }
     };
 
@@ -80,7 +80,7 @@
      */
     function _sendTaskEmail(individualTreatment, element, taskId) {
         var request = $.ajax({
-            url: opts.urls.email.format(opts.params.clientId, opts.params.patientId, opts.params.medicalRecordId, taskId)
+            url: opts.urls.email.format(opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
         request.done(function (data) {
             //var sendTime = data.sendTime;

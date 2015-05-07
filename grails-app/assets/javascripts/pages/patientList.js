@@ -37,17 +37,16 @@
                 message: RC.constants.discardPatientsMessage
             },
             urls: {
-                query: "/getPatients",
-                add: "/addPatient",
-                getTreatments: "/getTreatments",
-                getStaffs: "/getStaffs",
-                showSinglePatient: "/patients/{0}",
-                getSinglePatient: "/patient/{0}",
-                getGroups: "/getStaffGroups",
-                lookup: "/lookup",
-                checkPatientId: "/checkPatientId/{0}",
-                save: "/savePatients",
-                checkPatientEmail: "/checkPatientEmail"
+                patients: "/patients",
+                singlePatient: "/patients/{0}",
+                lookup: "/patients/bulk_import/lookup",
+                save: "/patients/bulk_import/save",
+                checkPatientId: "/patients/check_id",
+                checkPatientEmail: "/patients/check_email",
+                getTreatments: "/treatments",
+                getStaffs: "/staffs",
+                getGroups: "/getStaffGroups"
+
             }
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
@@ -64,9 +63,10 @@
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
 
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.query,
+                url: opts.urls.patients,
                 pages: 2, // number of pages to cache
-                data: data
+                data: data,
+                type: "get"
             }),
             columnDefs: [{
                 "targets": 5,
@@ -246,7 +246,7 @@
         $('#patientsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
             if (id) {
-                var url = opts.urls.showSinglePatient.format(id);
+                var url = opts.urls.singlePatient.format(id);
                 window.location.href = url;
             } else {
                 return;
@@ -393,11 +393,11 @@
 
         var data = _getAddData();
         $.ajax({
-            url: opts.urls.add,
+            url: opts.urls.patients,
             type: "post",
             data: data,
             success: function (data) {
-                var url = opts.urls.showSinglePatient.format(data.id);
+                var url = opts.urls.singlePatient.format(data.id);
                 window.location.href = url;
             }
         });
@@ -808,7 +808,7 @@
     function _checkPatientExist(patientId) {
         _restoreNewPatientForm();
         $.ajax({
-            url: opts.urls.checkPatientId.format(patientId),
+            url: opts.urls.checkPatientId,
             type: "POST",
             data: {patientId: patientId},
             dataType: "json",
