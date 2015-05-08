@@ -194,7 +194,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return "<div class='copy-id-content'><p class='id-text'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
+                        return "<div class='copy-id-content'><p class='id-text strong'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
                     },
                     width: "30%"
                 }]
