@@ -50,7 +50,8 @@
                 updateCareGiver: "/patients/{0}/emergency_contact/update",
                 updateCareTeamSurgeon: "/patients/{0}/group_and_provider/update",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
+                //getGroups: "/getStaffGroups"
             }
         },
         careTeamRole =
@@ -173,6 +174,7 @@
 
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
+            var accountId = $(this).data("accountId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
@@ -215,7 +217,7 @@
             }));
 
             _initStaffSelect(form, existSurgeonId, existGroupId);
-            _initSelectGroup(form, existSurgeonId);
+            _initSelectGroup(form, existSurgeonId, accountId);
         });
     }
 
@@ -574,14 +576,14 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup(form, existSurgeonId) {
+    function _initSelectGroup(form, existSurgeonId, accountId) {
         $(form).find("#groupSelect").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
                         name: request.term

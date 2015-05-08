@@ -45,7 +45,8 @@
                 checkPatientEmail: "/patients/check_email",
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
+                //getGroups: "/getStaffGroups"
 
             }
         },
@@ -428,7 +429,7 @@
      * bind add event
      * @private
      */
-    function _bindAddEvent(patientId) {
+    function _bindAddEvent(patientId, accountId) {
 
         if ($('.permission-confirm').hasClass('visible')) {
             $('.permission-confirm').removeClass('visible');
@@ -474,7 +475,7 @@
         _initPlaceholder();
         _initRelationship();
         _checkEmergencyContact();
-        _initSelectGroup();
+        _initSelectGroup(accountId);
         _checkPageHeightForForm(form);
         //$("#div-surgery-time").css("display", "none");
     }
@@ -487,6 +488,7 @@
         $("#add-patient").on("click", function (e) {
             e.preventDefault();
             var form = $("#patient-id-form");
+            var accountId = $(this).data("accountId");
             form.validate().resetForm();
             form[0].reset();
 
@@ -496,7 +498,7 @@
                 okCallback: function () {
                     if (form.valid()) {
                         var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
+                        _checkPatientExist(patientId, accountId);
                         return true;
                     }
                 }
@@ -508,7 +510,7 @@
                 if (event.keyCode === 13) {
                     if ($("#patient-id-form").valid()) {
                         var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
+                        _checkPatientExist(patientId, accountId);
                         $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
                     }
                 }
@@ -812,7 +814,7 @@
      * @param patientId
      * @private
      */
-    function _checkPatientExist(patientId) {
+    function _checkPatientExist(patientId, accountId) {
         _restoreNewPatientForm();
         $.ajax({
             url: opts.urls.checkPatientId,
@@ -821,9 +823,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.check === "false") {
-                    _bindAddEvent(patientId);
+                    _bindAddEvent(patientId, accountId);
                 } else {
-                    _inputReplaceWithDiv(data, patientId, _bindAddEvent);
+                    _inputReplaceWithDiv(data, patientId, accountId, _bindAddEvent);
                 }
 
             }
@@ -909,7 +911,7 @@
         });
     }
 
-    function _inputReplaceWithDiv(data, patientId, fn) {
+    function _inputReplaceWithDiv(data, patientId, accountId, fn) {
 
         _.each($(".input-convert"), function (element, index) {
             var key = element.id;
@@ -928,7 +930,7 @@
                 $(element).replaceWith(html + edit);
             }
         });
-        fn(patientId);
+        fn(patientId, accountId);
     }
 
     function _divReplaceWithInput(element) {
@@ -1360,14 +1362,15 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup() {
+    function _initSelectGroup(accountId) {
+
         $("#selectGroup").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
                         name: request.term

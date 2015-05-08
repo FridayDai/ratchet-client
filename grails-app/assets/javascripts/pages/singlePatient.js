@@ -33,7 +33,8 @@
                 query: "/getProvider",
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                //getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
             }
         },
         tabs,
@@ -92,6 +93,7 @@
 
             patientId = $(this).data("patientId");
             clientId = $(this).data("clientId");
+            var accountId = $(this).data("accountId");
 
             var parent = $(this).parents();
             var id = parent.find(".id").text();
@@ -149,7 +151,7 @@
             //_initSurgeryTime();
             _initSelect();
             _checkEmergencyContact();
-            _initSelectGroup();
+            _initSelectGroup(accountId);
 
         });
     }
@@ -714,14 +716,14 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup() {
+    function _initSelectGroup(accountId) {
         $("#selectGroup").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
                         name: request.term

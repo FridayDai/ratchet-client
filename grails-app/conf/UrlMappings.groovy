@@ -81,6 +81,7 @@ class UrlMappings {
         "/accounts/$accountId?/invite"(controller: "accounts", action: "inviteAccount")
         "/accounts/$accountId?/activate"(controller: "accounts", action: "activateAccount")
         "/accounts/$accountId?/deactivate"(controller: "accounts", action: "deactivateAccount")
+        "/accounts/$accountId?/groups"(controller: "groups", action: "getStaffGroups")
 
         //email confirm to activate account
         "/email_confirm/$code?"(controller: "accounts", action: "confirmCode")
@@ -100,18 +101,13 @@ class UrlMappings {
         "/groups/update"(controller: "groups", action: "updateGroup")
         "/groups/delete"(controller: "groups", action: "deleteGroup")
 
-        "/getStaffGroups"(controller: "groups", action: "getStaffGroups")
-
         // announcement
         "/announcement/close"(controller: "announcement", action: "close")
 
         // Help
-        "/addAssist"(controller: "assist", action: "addAssist")
+        "/assist_me"(controller: "assist", action: "addAssist")
 
         "500"(view: '/error/error')
-        "/providers/detail"(controller: "providers", action: "detail")
         "404"(view: '/error/error404')
-
-
     }
 }

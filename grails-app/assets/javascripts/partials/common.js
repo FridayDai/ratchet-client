@@ -120,7 +120,7 @@
         }
 
         function _sendAssistReport() {
-            var addAssistUrl = '/addAssist';
+            var addAssistUrl = '/assist_me';
             var data = _getAssistData();
 
             $.ajax({

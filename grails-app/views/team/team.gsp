@@ -55,7 +55,8 @@
                 <g:else>
                     class="btn btn-edit-surgeon"
                 </g:else>
-                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}" data-patient-id="${patientId}">
+                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}" data-patient-id="${patientId}"
+                    data-account-id="${request.session.accountId}">
             </button>
 
         </div>
