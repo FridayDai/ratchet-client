@@ -328,7 +328,8 @@
             _searchTitle();
         });
 
-        $('#search-title-input').keydown(function (event) {
+        $('#search-title-input').bind('keypress keydown keyup', function (e) {
+                e.preventDefault();
                 if (event.keyCode === 13) {
                     _searchTitle();
                     return false;
