@@ -231,7 +231,7 @@
 
         &:hover,
         &:focus {
-            color: darken($base-font-grey, 20%);
+            color: $base-color-dark-grey;
         }
     }
 
@@ -241,7 +241,7 @@
 
         &:hover,
         &:focus {
-            color: darken($base-font-grey, 20%);
+            color: $base-color-dark-grey;
             text-decoration: underline;
         }
     }
