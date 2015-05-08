@@ -230,6 +230,13 @@
             type: 'POST',
             data: ids
         }).done(function (data) {
+            if (data.doctor == true) {
+                element.find("#surgeonDoctor").text("");
+                element.find("#surgeonDoctorHidden").text("Dr.").addClass("show");
+            } else {
+                element.find("#surgeonDoctor").text("");
+                element.find("#surgeonDoctorHidden").text("");
+            }
             element.find("#surgeonId").text(data.id);
             element.find("#hidden-surgeon-id").val(data.id);
             element.find("#surgeonFirstName").text(data.firstName);
