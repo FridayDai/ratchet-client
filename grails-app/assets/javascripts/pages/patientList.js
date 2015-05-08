@@ -891,8 +891,20 @@
                 } else {
                     $(element).replaceWith(html + edit);
                 }
+                var
+                    subNumber,
+                    phoneNumber,
+                    num = data[key],
+                    isUS = num.charAt(0) === '1'? true : false;
 
-                $('#' + key).text(data[key].replace(/(\d{3})(\d{4})/, "($1)$2-"));
+                if (isUS) {
+                    subNumber = num.slice(1, num.length);
+                    phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                    phoneNumber = '1 ' + phoneNumber;
+                } else {
+                    phoneNumber = num.replace(/(\d{3})(\d{4})/, "($1)$2-");
+                }
+                $('#' + key).text(phoneNumber);
             } else {
                 $(element).replaceWith(html + edit);
             }
