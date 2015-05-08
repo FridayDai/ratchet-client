@@ -824,7 +824,7 @@
         }
         $('#patient-id-value').text(patientId);
         var form = $("#table-form");
-        var email = $("#table-form #email").val() || null;
+        var email = $("#table-form #email").val() || $("#table-form #email").text().trim();
         _setValidate(form, email);
 
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
