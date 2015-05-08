@@ -167,6 +167,14 @@ class AccountService {
 
             if (resp.status == 200) {
                 log.info("Update account success, token: ${request.session.token}.")
+				
+                def result = JSON.parse(resp.body)
+				
+                if(accountId == request.session.accountId) {
+                    request.session.firstName = result.firstName
+                    request.session.lastName = result.lastName
+                    request.session.accountManagement = result.accountManagement
+                }
                 return true
             } else {
                 def result = JSON.parse(resp.body)
