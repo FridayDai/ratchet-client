@@ -308,8 +308,14 @@
 
                 this.element
                     .addClass("input-group ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
+                    .focus(function() {
+                        if($(this).data('uiAutocomplete').options.focusSearch) {
+                            $(this).autocomplete("search");
+                        }
+                    })
                     .autocomplete($.extend({
                         minLength: 0,
+                        focusSearch: true,
                         open: function (event, ui) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
