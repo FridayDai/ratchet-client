@@ -82,7 +82,7 @@
 
 
         <g:if test="${task?.isSent}">
-            <div class="item-datetime">
+            <div class="item-datetime complete-sent-time">
                 <div class="small-font ">
                     <label>Sent Time:</label>
                     <g:formatDate date="${task?.sendTime}"
@@ -104,12 +104,9 @@
 
         <div class="item-notify">
             <g:if test="${task?.isSent}">
-                <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] == "complete") || archivedStatus}">
-                    <button class="btn task-email disabled ui-hidden" data-task-id="${task?.id}" disabled>Click to notify</button>
-                </g:if>
-                <g:else>
+                <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] != "complete") || archivedStatus}">
                     <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
-                </g:else>
+                </g:if>
             </g:if>
         </div>
     </div>
