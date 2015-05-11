@@ -145,6 +145,14 @@
                 font-size: 10pt;
             }
         }
+
+        .box-item-content {
+            .complete-sent-time {
+                height: 25px;
+                padding: 0;
+                margin-top: 52px;
+            }
+        }
     }
 
 }
@@ -242,12 +250,14 @@
     }
 
     .item-notify {
-        padding-bottom: 3px;
+//        padding-bottom: 3px;
         font-size: 11pt;
     }
 
     .send-time {
-        margin-top: 20px;
+        height: 25px;
+        padding: 0;
+        margin-top: 52px;
     }
 
     button {
