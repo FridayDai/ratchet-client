@@ -902,7 +902,7 @@
                     phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
                     phoneNumber = '1 ' + phoneNumber;
                 } else {
-                    phoneNumber = num.replace(/(\d{3})(\d{3})/, "($1)$2-");
+                    phoneNumber = num.replace(/(\d{3})(\d{3})/, "($1) $2-");
                 }
                 $('#' + key).text(phoneNumber);
             } else {
