@@ -102,13 +102,15 @@
             </div>
         </g:else>
 
-        <div class="item-notify">
-            <g:if test="${task?.isSent}">
-                <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] != "complete") || archivedStatus}">
+
+        <g:if test="${task?.isSent}">
+            <g:if test="${(StatusCodeConstants.TASK_STATUS[task?.status] != "complete") && !archivedStatus}">
+                <div class="item-notify">
                     <button class="btn task-email" data-task-id="${task?.id}">Click to notify</button>
-                </g:if>
+                </div>
             </g:if>
-        </div>
+        </g:if>
+
     </div>
 
 </div>
