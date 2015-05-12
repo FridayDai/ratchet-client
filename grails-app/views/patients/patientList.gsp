@@ -11,10 +11,10 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">PATIENTS</label>
-            <a href="#" id="add-patient" class="btn add-patient"><span>New Patient</span></a>
+            <label class="title patient-icon">PATIENTS</label>
+            <a href="#" id="add-patient" class="btn btn-add add-patient"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
-                <a href="#" id="bulk-important" class="btn bulk-important"><span>Bulk Import</span></a>
+                <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
         </div>
 
@@ -114,8 +114,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com"
-                       required/>
+                       placeholder="john.smith@email.com" required/>
 
             </div>
 
@@ -190,7 +189,7 @@
 
         <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
             <div class="import-content">
-                <p>Upload a .csv file containing the patients you wish to create. Please note that a maximum of 100 patients can be included in your file and it may take a few minutes to process.</p>
+                <p>Upload a <strong class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.</p>
                 <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
                 <div class="inner-search">
                     <div class="search-content clear">
@@ -203,7 +202,7 @@
                 </div>
 
                 <div class="import-table-group">
-                    <table id="helpTable" class="help-display div-hidden">
+                    <table id="helpTable" class="help-display div-hidden cursorAuto">
                         <thead>
                         <tr>
                             <th>Title</th>
@@ -217,9 +216,10 @@
                 </div>
 
                 <div class="clear">
-                    <span id="bulk-important-file" class="btn bulk-important bulk-important-file clear">
+                    <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
-                        <input id="fileupload" type="file" name="file" data-url="/upload" accept=".csv">
+                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk_import/upload"
+                               accept=".csv">
                     </span>
 
                     <div class="result-box">

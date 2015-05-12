@@ -70,20 +70,29 @@
         &:before {
             display: inline-block;
             margin-top: 10px;
-            content: '\f47d';
+            content: '\f47b';
             font-size: 30px;
         }
     }
 
     .icon-group {
-        font-family: 'Ionicons';
 
         &:before {
             display: inline-block;
-            margin-top: 10px;
-            content: '\f47b';
-            font-size: 30px;
+            margin-top: 20px;
+            margin-left: 4px;
+            width: 10px;
+            height: 25px;
+            content: url('../../../images/groups/groups_icon.png');
         }
+        //        font-family: 'Ionicons';
+        //
+        //        &:before {
+        //            display: inline-block;
+        //            margin-top: 10px;
+        //            content: '\f47d';
+        //            font-size: 30px;
+        //        }
     }
 
     &:hover,
@@ -97,11 +106,16 @@
         .icon-patient:before {
             content: url('../../../images/patients/patients_icon_active.png');
         }
+
+        .icon-group:before {
+            content: url('../../../images/groups/groups_icon_active.png');
+        }
     }
 }
 
 .btn-li {
-    margin: 25px 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
 
     a {
         color: $base-color-darker-grey;
@@ -117,7 +131,7 @@
 
         &:before {
             display: inline-block;
-            content: '\f142';
+            content: '\f445';
             font-family: 'Ionicons';
         }
 
@@ -198,6 +212,37 @@
                     border: 0;
                 }
             }
+        }
+    }
+}
+
+.btn-bottom {
+    margin-top: 20px;
+
+    .log-out {
+
+        &:before {
+            padding-right: 8px;
+            content: '\f29f';
+            color: $base-font-grey;
+            font-size: 12px;
+            font-family: ionicons;
+        }
+
+        &:hover,
+        &:focus {
+            color: $base-color-dark-grey;
+        }
+    }
+
+    .btn-logout {
+        color: $base-font-color;
+        padding-right: 22px;
+
+        &:hover,
+        &:focus {
+            color: $base-color-dark-grey;
+            text-decoration: underline;
         }
     }
 }

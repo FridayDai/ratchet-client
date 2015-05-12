@@ -36,7 +36,8 @@
                     </div>
 
                     <div class="surgeon-name inline">
-                        <g:if test="${surgeon.doctor == true}"><span>Dr.</span></g:if>
+                        <g:if test="${surgeon.doctor == true}"><span id="surgeonDoctor">Dr.</span></g:if>
+                        <span class="hide" id="surgeonDoctorHidden"></span>
                         <span id="surgeonFirstName">${surgeon.firstName}</span>
                         <span id="surgeonLastName">${surgeon.lastName}</span>
                     </div>
@@ -55,7 +56,7 @@
                 <g:else>
                     class="btn btn-edit-surgeon"
                 </g:else>
-                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}">
+                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}" data-patient-id="${patientId}">
             </button>
 
         </div>
@@ -78,7 +79,7 @@
         <div class="table-group">
             <div class="inner-body" id="careGiverBody">
 
-                <table id="careGiverTable" class="team-table display">
+                <table id="careGiverTable" class="team-table display cursorAuto">
                     <thead>
                     <tr>
                         <th>ID</th>

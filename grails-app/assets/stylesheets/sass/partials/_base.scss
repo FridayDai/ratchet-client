@@ -90,16 +90,16 @@ a {
 
 .btn,
 .ui-button {
+    position: relative;
     display: inline-block;
     margin-bottom: 0;
-    padding: 6px 12px;
+    padding: 6px 22px;
     border: 1px $base-color-dark-grey solid;
     white-space: nowrap;
     color: $base-color-dark-grey;
     background-color: transparent;
     background-image: none;
-    font-weight: 400;
-    font-family: Lato;
+    font: $base-font-utility;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
@@ -123,6 +123,37 @@ a {
         }
     }
 
+}
+
+.btn.btn-large {
+    min-width: 132px;
+    min-height: 42px;
+    font-size: 21px;
+}
+
+.btn.btn-add {
+    padding-left: 32px;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    font-weight: lighter;
+    font-size: 16px;
+    font-family: 'Ionicons';
+
+    &:before {
+        display: inline-block;
+        margin-right: 10px;
+        content: '\f2c7';
+        position: absolute;
+        left: 15px;
+        top: 7px;
+    }
+
+    span {
+        vertical-align: middle;
+        font: $base-font-utility;
+        font-size: 13px;
+    }
 }
 
 .ui-dialog {
@@ -347,6 +378,7 @@ a {
         &:after {
             display: inline-block;
             content: '\f4a4';
+            margin-top: 2px;
         }
     }
 
@@ -378,10 +410,12 @@ a {
     border-bottom: 6px solid $base-color-white-grey;
 
     .title {
+        position: relative;
         float: left;
         width: 60%;
         margin-top: 10px;
-        color: $base-color-dark-grey;
+        margin-left: 35px;
+        color: $base-logo-color;
         font-size: 20px;
         line-height: 32px;
         font-family: Lato;
@@ -514,7 +548,7 @@ a {
         .ui-button-icon-primary {
             width: 100%;
             height: 100%;
-            margin-top: -14px;
+            margin-top: -13px;
             background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
         }
 

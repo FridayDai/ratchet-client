@@ -6,8 +6,7 @@
     //Define provider page global variables
     var opts = {
             urls: {
-                query: "/getActivities",
-                getStaffs: "/getStaffs"
+                query: "/patients/{0}/activities"
             }
         },
         activityTable;
@@ -20,32 +19,32 @@
     function _initTable(ele, element, data) {
         //before reload dataTable, destroy the last dataTable
         //$(element).dataTable().fnDestroy();
-
+        var patientId = ele.find("#patientId").val();
         if (activityTable) {
             activityTable.clear();
             activityTable.destroy();
         }
 
-        activityTable = $(element).DataTable({
-            bLengthChange: false,
-            searching: false,
-            ordering: true,
-            info: false,
-            "serverSide": true,
+        activityTable = $(element).DataTable(_.extend({}, RC.common.dataTableOptions, {
+            //bLengthChange: false,
+            //searching: false,
+            //ordering: true,
+            //info: false,
+            //"serverSide": true,
             "columnDefs": [
                 {"targets": [0, 1], "orderable": false}],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
-                    paginate.hide();
-                }
-            },
-            "bAutoWidth": false,
+            //"fnDrawCallback": function () {
+            //    $(".previous").text('');
+            //    $(".next").text('');
+            //    var paginate = $(this).siblings();
+            //    var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+            //    if (bothDisabled && paginate.find(".current").length === 0) {
+            //        paginate.hide();
+            //    }
+            //},
+            //"bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
-                url: opts.urls.query,
+                url: opts.urls.query.format(patientId),
                 pages: 5,// number of pages to cache
                 data: data
             }),
@@ -66,7 +65,7 @@
                     width: "16%"
                 }
             ]
-        });
+        }));
     }
 
     /**
@@ -78,7 +77,7 @@
     function _loadData(ele, element) {
         var data = {};
 
-        data.patientId = ele.find("#patientId").val();
+        //data.patientId = ele.find("#patientId").val();
         data.medicalRecordId = ele.find("#medicalRecordId").val();
         data.clientId = ele.find("#clientId").val();
         _initTable(ele, element, data);
@@ -128,12 +127,11 @@
 
     function _search(ele, element) {
         var senderId = $('#selectStaffs').val();
-        var patientId = $("#patientId").val();
+        //var patientId = $("#patientId").val();
         var medicalRecordId = $("#medicalRecordId").val();
         var clientId = $("#clientId").val();
         var data = {
             senderId: senderId,
-            patientId: patientId,
             medicalRecordId: medicalRecordId,
             clientId: clientId
         };

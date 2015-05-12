@@ -55,6 +55,13 @@
                 <span>Assist Me</span>
             </a>
         </li>
+
+        <li class="btn-bottom">
+            <a href="/logout" class="log-out">
+                <span class="btn-logout">Logout</span>
+            </a>
+        </li>
+
     </ul>
 </div>
 
@@ -84,7 +91,9 @@
         <label class="lbl-input" id="assist-email">${request.session.email}</label>
     </div>
 
-    <div class="form-group center">
+    <div class="form-group required required-width"><span>*</span>Required field</div>
+
+    <div class="align-center assist-tip">
         </label>You will receive a response within 24 hours.</label>
     </div>
 

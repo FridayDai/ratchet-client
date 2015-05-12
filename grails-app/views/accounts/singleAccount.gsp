@@ -12,12 +12,16 @@
     <body>
     <div class="content">
 
-        <div class="content-head">
-
-            <p>ACCOUNT</p>
-
+        <div class="content-head inner-header">
+            <label class="title account">ACCOUNT</label>
             <a href="#" class="btn-close">Close</a>
         </div>
+        %{--<div class="content-head">--}%
+
+        %{--<p class="account">ACCOUNT</p>--}%
+
+        %{--<a href="#" class="btn-close">Close</a>--}%
+        %{--</div>--}%
 
         <div class="middle-content">
             <div class="name-info">
@@ -58,7 +62,7 @@
                                   id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
                             <div class="inline div-invite">
-                                <button id="invite-account" class="btn btn-invite"
+                                <button id="invite-account" class="btn"
                                         data-id="${accountInfo.id}">Invite Again</button>
                             </div>
                         </g:if>
@@ -67,7 +71,7 @@
                             <span class="span-deactive span-activate-action"
                                   id="span-deactive">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
-                            <a class="btn btn-deactive activate-action" id="btn-deactivate"
+                            <a class="btn activate-action" id="btn-deactivate"
                                data-account-id="${accountInfo.id}">Deactivate</a>
                         </g:elseif>
 
@@ -75,7 +79,7 @@
                             <span class="span-active span-activate-action"
                                   id="span-active">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
-                            <a class="btn btn-active activate-action" id="btn-activate"
+                            <a class="btn activate-action" id="btn-activate"
                                data-account-id="${accountInfo.id}">Activate</a>
                         </g:else>
                     </td>
@@ -102,8 +106,9 @@
                 <tr class="tr-border">
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
-                              id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
-                                                                                     var="group"><p>${group.name}</p></g:each></g:if>
+                              id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each
+                                in="${accountInfo.groups}"
+                                var="group"><p>${group.name}</p></g:each></g:if>
                     </span></td>
                 </tr>
 

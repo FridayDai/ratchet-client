@@ -13,13 +13,13 @@
     <div class="site-wrapper">
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>
-            <g:form class="form create-password-form" controller="accounts" method="post" action="confirmPassword">
 
+            <form action="/confirm_password" method="post" class="form create-password-form">
                 <div class="form-style-content">
                     <div class="greeting color-black align-center">
                         <span>Hi</span>
                         <g:if test="${staff.doctor == true}"><span>Dr.</span></g:if>
-                        <span>${staff.firstName}!</span>
+                        <span>${staff.firstName} ${staff.lastName}!</span>
                     </div>
 
                     <div class="info color-black align-center">
@@ -54,7 +54,7 @@
                     %{--</div>                --}%
                     <button type="submit" class="btn btn-submit" id='joinRat'>Activate Account</button>
                 </div>
-            </g:form>
+            </form>
         </div>
     </div>
 

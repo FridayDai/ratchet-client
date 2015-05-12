@@ -28,10 +28,41 @@
 
     h4 {
         margin-bottom: 7px;
-        color: $base-color-dark-gray;
+        color: $base-logo-color;
         font-family: Lato;
+        color: $base-logo-color;
         font-weight: 400;
         font-size: 14px;
+    }
+
+    .sent_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f473';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 30px;
+            font-family: ionicons;
+            vertical-align: middle;
+
+        }
+    }
+
+    .scheduled_items {
+
+        &:before {
+            display: inline-block;
+            padding-right: 10px;
+            content: '\f3c7';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 26px;
+            font-family: ionicons;
+            vertical-align: sub;
+
+        }
     }
 }
 
@@ -112,6 +143,14 @@
                 padding: 5px 8px 0;
                 content: 'COMPLETE';
                 font-size: 10pt;
+            }
+        }
+
+        .box-item-content {
+            .complete-sent-time {
+                height: 25px;
+                padding: 0;
+                margin-top: 52px;
             }
         }
     }
@@ -210,13 +249,14 @@
         font-size: 11pt;
     }
 
-    .item-notify {
-        padding-bottom: 3px;
+    .task-email {
         font-size: 11pt;
     }
 
     .send-time {
-        margin-top: 20px;
+        height: 25px;
+        padding: 0;
+        margin-top: 52px;
     }
 
     button {
@@ -250,15 +290,6 @@
 
     .box-item {
         border-color: $base-font-color;
-        //        &.pending,
-        //        &.overdue,
-        //        &.complete
-        //        {
-        //            border-color: $base-font-color;
-        //            .box-item-header {
-        //                background: $base-font-color;
-        //            }
-        //        }
 
         .box-item-header {
             background: $base-font-color;
@@ -279,12 +310,12 @@
             color: $base-color-dark-gray;
         }
 
-        //        .task-email {
-        //            border: 0;
-        //            color: $base-color-white;
-        //            background-color: $base-font-color;
-        //            cursor: inherit;
-        //        }
+        .complete-sent-time {
+            height: 25px;
+            padding: 0;
+            margin-top: 52px;
+        }
+
     }
 
 }

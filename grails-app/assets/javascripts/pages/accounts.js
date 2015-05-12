@@ -41,7 +41,7 @@
                 updateAccount: "/updateAccount",
                 inviteAccount: "/inviteAccount/{0}",
                 updatePassword: "/updatePassword",
-                showSingleAccount: "/singleAccount/{0}",
+                showSingleAccount: "/accounts/{0}",
                 deactivateAccount: "/deactivateAccount/{0}",
                 activateAccount: "/activateAccount/{0}",
                 getGroups: "/getStaffGroups",
@@ -61,26 +61,10 @@
      * @private
      */
     function _initTable(data) {
-        var options = {
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: false,
-            bLengthChange: false,
-            serverSide: true,
-            "bAutoWidth": false,
+
+        var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
-            "fnDrawCallback": function () {
-                $(".previous").text('');
-                $(".next").text('');
-                $(".display").css("display", "inline-table");
-                var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-                if ( bothDisabled && paginate.find(".current").length === 0 ) {
-                    paginate.hide();
-                }
-            },
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.query,
                 pages: 2, // number of pages to cache
@@ -104,15 +88,14 @@
                         var fullName,
                             dataName;
 
-
                         if (full[5] === "true") {
-                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data+"</div>");
+                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data + "</div>");
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName+"</div>";
+                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName + "</div>";
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
@@ -144,7 +127,7 @@
                     "targets": 4,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return '<a href="/singleAccount/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                        return '<a href="/single_account/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
                     },
                     width: "7%"
                 },
@@ -155,9 +138,8 @@
                         var isDoctor = data === undefined ? full.doctor : data;
                         return isDoctor;
                     }
-                }
-            ]
-        };
+                }]
+        });
 
         if (accountTable) {
             accountTable.clear();
@@ -505,7 +487,7 @@
         );
     }
 
-    /**
+        /**
      * change account password
      * @private
      */
@@ -518,7 +500,7 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.changePasswordFormArguments, {
                 element: $(".update-password"),
                 okCallback: function () {
-                    if ($("#updatePassword").valid()) {
+                    if ($(".update-password").valid() && _isPasswordConsistent()) {
 
                         var oldPass = $("#oldPass").val();
                         var newPass = $("#newPass").val();
@@ -537,8 +519,50 @@
                     return false;
                 }
             }));
+
+            _validatePasswordConsistent();
         });
     }
+
+    /**
+     * check password consistent
+     * @private
+     */
+    function _isPasswordConsistent() {
+        var password = $("#newPass").val();
+        var confirmPassword = $("#confirmPass").val();
+
+        if ($(".update-password").valid() && password !== confirmPassword) {
+            //$(".error-area").text(RC.constants.passwordTip);
+            $(".error-area").addClass("show");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * bind inputs to validation method
+     * @private
+     */
+    function _validatePasswordConsistent() {
+        function _resetInput(e) {
+            e.preventDefault();
+
+            if ($(".error-area").hasClass("show")) {
+                $(".error-area").removeClass("show");
+            }
+        }
+
+        $("#confirmPass").on("input", function (e) {
+            _resetInput(e);
+        });
+
+        $("#confirmPass").on("blur", function (e) {
+            _resetInput(e);
+            _isPasswordConsistent();
+        });
+    }
+
 
     /**
      * update password
@@ -552,7 +576,9 @@
             data: passwords,
             dataType: "json",
             success: function () {
-
+                RC.common.showMsg({
+                    msg: RC.constants.changePasswordSuccess
+                });
             }
         });
     }

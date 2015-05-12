@@ -75,7 +75,7 @@ grails.project.dependency.resolution = {
         }
         compile ":cache-ehcache:1.0.5"
         runtime ':resources:1.2.13'
-        compile ":cookie-session:2.0.16"
+        compile ":cookie-session:2.0.17"
         compile ":joda-time:1.5"
         runtime ":cors:1.1.6"
         //runtime ":jquery:1.11.1"

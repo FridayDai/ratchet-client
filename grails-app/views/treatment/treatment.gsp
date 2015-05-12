@@ -11,7 +11,7 @@
                         params="[clientId: clientId, patientId: patientId, treatmentId: treatmentId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
             </li>
             <li data-type="Team">
-                <g:link controller="team" action="showMedicalCares"
+                <g:link controller="team" action="getTeam"
                         params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived]">TEAM</g:link>
             </li>
             <li data-type="Activity">
@@ -33,15 +33,15 @@
                 %{--data-client-id="${clientId}"--}%
                 %{--data-medical-record-id="${medicalRecordId}"/>--}%
                     <button
-                            <g:if test="${archived == 'true'}">
-                                class="icon-edit surgeryTime-edit inline disabled" disabled="disabled"
-                            </g:if>
-                            <g:else>
-                                class="icon-edit surgeryTime-edit inline "
-                            </g:else>
+                        <g:if test="${archived == 'true'}">
+                            class="icon-edit surgeryTime-edit inline disabled" disabled="disabled"
+                        </g:if>
+                        <g:else>
+                            class="icon-edit surgeryTime-edit inline "
+                        </g:else>
                             data-patient-id="${patientId}"
-                       data-client-id="${clientId}" data-treatment-id="${treatmentId}"
-                       data-medical-record-id="${medicalRecordId}">
+                            data-client-id="${clientId}" data-treatment-id="${treatmentId}"
+                            data-medical-record-id="${medicalRecordId}">
                     </button>
                 </g:if>
                 <button

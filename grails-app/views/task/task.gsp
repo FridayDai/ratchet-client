@@ -9,7 +9,7 @@
 
 
     <div class="items-title">
-        <h4>SENT ITEMS</h4>
+        <h4 class="sent_items">SENT ITEMS</h4>
     </div>
 
     <div class="tasks-list list-bottom">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="items-title">
-        <h4>SCHEDULED ITEMS</h4>
+        <h4 class="scheduled_items">SCHEDULED ITEMS</h4>
     </div>
 
     <div class="tasks-list">

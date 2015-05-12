@@ -37,7 +37,7 @@
         position: relative;
         margin-top: 15px;
         margin-left: 45px;
-        color: $base-color-warn;
+        color: $base-logo-color;
         font-family: Lato;
         font-weight: 400;
         font-size: 14px;
@@ -54,7 +54,7 @@
         display: inline-block;
         margin-left: 5px;
         vertical-align: super;
-        color: $base-color-warn;
+        color: $base-logo-color;
         font-family: Lato;
         font-weight: 400;
         font-size: 14px;
@@ -272,4 +272,12 @@
 
 .edit-surgeon {
     text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline-block;
 }

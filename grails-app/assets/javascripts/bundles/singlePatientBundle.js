@@ -1,6 +1,3 @@
-/**
- * Created by sid on 1/15/15.
- */
 //= require share/share
 //= require ../libs/raphael/raphael
 //= require ../pages/activity

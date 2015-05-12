@@ -5,27 +5,31 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 
-.add-patient,
-.bulk-important {
-    display: inline-block;
-    float: right;
-    margin-top: 10px;
-    font-weight: lighter;
-    font-size: 16px;
-    font-family: 'Ionicons';
-
-    &:before {
-        display: inline-block;
-        margin-right: 10px;
-        content: '\f2c7';
-    }
-
-    span {
-        vertical-align: middle;
-        font: $base-font-utility;
-        font-size: 13px;
-    }
-}
+//.add-patient,
+//.bulk-important {
+//    padding-left: 32px;
+//    display: inline-block;
+//    float: right;
+//    margin-top: 10px;
+//    font-weight: lighter;
+//    font-size: 16px;
+//    font-family: 'Ionicons';
+//
+//    &:before {
+//        display: inline-block;
+//        margin-right: 10px;
+//        content: '\f2c7';
+//        position: absolute;
+//        left: 15px;
+//        top: 7px;
+//    }
+//
+//    span {
+//        vertical-align: middle;
+//        font: $base-font-utility;
+//        font-size: 13px;
+//    }
+//}
 
 .add-patient {
     margin-left: 10px;
@@ -158,6 +162,7 @@
 
     .download-file {
         margin-top: 25px;
+        text-decoration: underline;
     }
 
     .inner-search {
@@ -278,6 +283,10 @@
         left: 0;
         top: 30px;
     }
+
+    .error-link {
+        text-decoration: underline;
+    }
 }
 
 .progress-box {
@@ -360,4 +369,16 @@
     background-color: #000000;
     margin-left: 40px;
 
+}
+
+.patient-icon {
+    &:before {
+        position: absolute;
+        display: inline-block;
+        top: -3px;
+        left: -35px;
+        width: 10px;
+        height: 25px;
+        content: url('../../../images/patients/patients_icon_active.png');
+    }
 }

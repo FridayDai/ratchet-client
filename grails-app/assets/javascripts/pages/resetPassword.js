@@ -3,7 +3,7 @@
 
     $(".password-form").validate({});
 
-    $(".btn-reset").click(function() {
+    $("#btn-reset").click(function() {
         var newPassword = $("#newPassword").val();
         var confirmPassword = $("#confirmPassword").val();
         if(newPassword !== confirmPassword) {

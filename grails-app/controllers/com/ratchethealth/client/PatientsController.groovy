@@ -18,23 +18,18 @@ class PatientsController extends BaseController {
     def patientService
     def singlePatientService
 
-    static allowedMethods = [getPatients: ['GET'], addPatient: ['GET', 'POST']]
-
-    def index() {
-        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def patientList = patientService.loadPatients(request, response, params)
-        render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
-    }
+    static allowedMethods = [getPatients: ['GET'], addPatient: ['POST']]
 
     def getPatients() {
-        def resp = patientService.loadPatients(request, response, params)
-        render resp as JSON
-    }
-
-    def lookup() {
-        def resp = patientService.lookup(request, response, params)
-        render resp as JSON
+        if (request.isXhr()) {
+            def resp = patientService.loadPatients(request, response, params)
+            render resp as JSON
+        } else {
+            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def patientList = patientService.loadPatients(request, response, params)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
+        }
     }
 
     def addPatient() {
@@ -42,20 +37,9 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
-    def showActivity() {
-        def teamData = patientService.loadCareTeam()
-        def giverData = patientService.loadCareGiver()
-        render(view: "/patients/patientTeam", model: [teams: teamData, givers: giverData])
-    }
-
-    def getActivities() {
-        def data = patientService.loadActivities(params)
-        render data as JSON
-    }
-
-    def checkPatientExist() {
-        def data = singlePatientService.showPatientByPatientId(request, response, params)
-        render data as JSON
+    def lookup() {
+        def resp = patientService.lookup(request, response, params)
+        render resp as JSON
     }
 
     def downloadFile() {
@@ -72,7 +56,7 @@ class PatientsController extends BaseController {
                 throw new ApiReturnException(message)
             }
         } catch (UnirestException e) {
-                throw new ApiAccessException(e.message)
+            throw new ApiAccessException(e.message)
         }
     }
 
@@ -86,6 +70,10 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
+    def checkPatientExist() {
+        def data = singlePatientService.showPatientByPatientId(request, response, params)
+        render data as JSON
+    }
 
     def checkPatientEmailExist() {
         def data = singlePatientService.checkPatientEmail(request, response, params)

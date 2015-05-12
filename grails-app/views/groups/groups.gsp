@@ -11,8 +11,8 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">GROUPS</label>
-            <a href="#" id="add-group" class="btn add-group"><span>New Group</span></a>
+            <label class="title group-icon">GROUPS</label>
+            <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 
         <div class="inner-search">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="table-group">
-            <table id="groupsTable" class="display div-hidden" data-total="${groupList?.recordsTotal}"
+            <table id="groupsTable" class="display div-hidden cursorAuto" data-total="${groupList?.recordsTotal}"
                    data-pagesize="${pagesize}" data-filtered="${groupList?.recordsFiltered} ">
                 <thead>
                 <tr>

@@ -94,13 +94,13 @@
 
         &:hover,
         &:focus {
-            border: 1px solid $base-color-mid-grey;
-            color: $base-color-mid-grey;
+            border: 1px solid $base-color-tab-font-hover;
+            color: $base-color-tab-font-hover;
             background-color: $base-color-white;
 
             span,
             &:before {
-                color: $base-color-mid-grey;
+                color: $base-color-tab-font-hover;
             }
         }
     }
@@ -124,6 +124,8 @@
             padding: 0 25px;
             border-right: 2px solid $base-color-mid-grey;
             border-bottom: 0;
+            min-width: 150px;
+            text-align: center;
             color: $base-color-white;
             font-size: 16px;
             line-height: 65px;
