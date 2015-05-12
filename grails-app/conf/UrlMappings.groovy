@@ -17,10 +17,14 @@ class UrlMappings {
         "/forgot_password"(controller: "accounts") {
             action = [GET: "getForgotPassword", POST: "forgotPassword"]
         }
+
         "/confirm_password"(controller: "accounts") {
             action = [POST: "confirmPassword"]
         }
+
         "/reset_password/$code?"(controller: "accounts", action: "resetPassword")
+
+        "/confirm_reset_password"(controller: "accounts", action: "confirmResetPassword")
 
         // Patients
         "/"(controller: "patients", action: "getPatients")
