@@ -370,3 +370,15 @@
     margin-left: 40px;
 
 }
+
+.patient-icon {
+    &:before {
+        position: absolute;
+        display: inline-block;
+        top: -3px;
+        left: -35px;
+        width: 10px;
+        height: 25px;
+        content: url('../../../images/patients/patients_icon_active.png');
+    }
+}

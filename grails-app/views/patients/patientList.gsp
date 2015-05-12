@@ -11,7 +11,7 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">PATIENTS</label>
+            <label class="title patient-icon">PATIENTS</label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
                 <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
