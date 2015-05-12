@@ -410,9 +410,11 @@ a {
     border-bottom: 6px solid $base-color-white-grey;
 
     .title {
+        position: relative;
         float: left;
         width: 60%;
         margin-top: 10px;
+        margin-left: 35px;
         color: $base-logo-color;
         font-size: 20px;
         line-height: 32px;
