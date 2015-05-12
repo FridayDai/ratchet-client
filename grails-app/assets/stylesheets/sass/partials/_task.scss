@@ -249,8 +249,7 @@
         font-size: 11pt;
     }
 
-    .item-notify {
-//        padding-bottom: 3px;
+    .task-email {
         font-size: 11pt;
     }
 
@@ -291,15 +290,6 @@
 
     .box-item {
         border-color: $base-font-color;
-        //        &.pending,
-        //        &.overdue,
-        //        &.complete
-        //        {
-        //            border-color: $base-font-color;
-        //            .box-item-header {
-        //                background: $base-font-color;
-        //            }
-        //        }
 
         .box-item-header {
             background: $base-font-color;
@@ -320,12 +310,12 @@
             color: $base-color-dark-gray;
         }
 
-        //        .task-email {
-        //            border: 0;
-        //            color: $base-color-white;
-        //            background-color: $base-font-color;
-        //            cursor: inherit;
-        //        }
+        .complete-sent-time {
+            height: 25px;
+            padding: 0;
+            margin-top: 52px;
+        }
+
     }
 
 }
