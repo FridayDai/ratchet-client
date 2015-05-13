@@ -36,7 +36,8 @@
                     </div>
 
                     <div class="surgeon-name inline">
-                        <g:if test="${surgeon.doctor == true}"><span>Dr.</span></g:if>
+                        <g:if test="${surgeon.doctor == true}"><span id="surgeonDoctor">Dr.</span></g:if>
+                        <span class="hide" id="surgeonDoctorHidden"></span>
                         <span id="surgeonFirstName">${surgeon.firstName}</span>
                         <span id="surgeonLastName">${surgeon.lastName}</span>
                     </div>
@@ -55,7 +56,8 @@
                 <g:else>
                     class="btn btn-edit-surgeon"
                 </g:else>
-                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}" data-patient-id="${patientId}">
+                    id="btn-edit-surgeon" data-medical-record-id="${medicalRecordId}" data-patient-id="${patientId}"
+                    data-account-id="${request.session.accountId}">
             </button>
 
         </div>

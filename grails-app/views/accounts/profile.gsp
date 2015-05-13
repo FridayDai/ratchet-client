@@ -13,7 +13,7 @@
     <div class="content">
 
         <div class="inner-header">
-            <label class="title">PROFILE</label>
+            <label class="title profile-icon">PROFILE</label>
         </div>
 
         <div class="middle-content">
@@ -30,7 +30,8 @@
             </div>
 
 
-            <a href="#" id="changePassword" class="btn btn-change-password">Change Password</a>
+            <a href="#" id="changePassword" class="btn btn-change-password"
+               data-account-id="${accountInfo.id}">Change Password</a>
         </div>
 
 

@@ -7,16 +7,24 @@ class GroupsController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
     def groupService
 
-    def index() {
-        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def groupList = groupService.showGroupsList(request, response, params)
-        render view: 'groups', model: [groupList: groupList, pagesize: params.length]
-    }
+    static allowedMethods = [getGroups: ['GET'], addGroup: ['POST']]
+//    def index() {
+//        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+//        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+//        def groupList = groupService.showGroupsList(request, response, params)
+//        render view: 'groups', model: [groupList: groupList, pagesize: params.length]
+//    }
 
     def getGroups() {
-        def resp = groupService.showGroupsList(request, response, params)
-        render resp as JSON
+        if (request.isXhr()) {
+            def resp = groupService.showGroupsList(request, response, params)
+            render resp as JSON
+        } else {
+            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def groupList = groupService.showGroupsList(request, response, params)
+            render view: 'groups', model: [groupList: groupList, pagesize: params.length]
+        }
     }
 
     def getStaffGroups() {

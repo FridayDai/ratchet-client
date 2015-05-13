@@ -231,17 +231,17 @@
 
         &:hover,
         &:focus {
-            color: darken($base-font-grey, 20%);
+            color: $base-color-dark-grey;
         }
     }
 
     .btn-logout {
-        color: $base-font-grey;
+        color: $base-font-color;
         padding-right: 22px;
 
         &:hover,
         &:focus {
-            color: darken($base-font-grey, 20%);
+            color: $base-color-dark-grey;
             text-decoration: underline;
         }
     }

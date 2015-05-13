@@ -125,9 +125,9 @@
 
     .btn-close {
         position: absolute;
-        top: 20px;
+        top: 30px;
         right: 30px;
-        color: #b3b3b3;
+        color: $base-font-color;
         font-size: 16px;
         vertical-align: middle;
         font-weight: 300;
@@ -291,4 +291,16 @@
 .error-password {
     margin-left: 6px;
     margin-top: -5px;
+}
+
+.profile-icon {
+    &:before {
+        position: absolute;
+        display: inline-block;
+        top: 2px;
+        left: -35px;
+        width: 10px;
+        height: 25px;
+        content: url('../../../images/profile_icon.png');
+    }
 }

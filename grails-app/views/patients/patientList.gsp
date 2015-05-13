@@ -12,7 +12,8 @@
     <div>
         <div class="inner-header">
             <label class="title">PATIENTS</label>
-            <a href="#" id="add-patient" class="btn btn-add add-patient"><span>New Patient</span></a>
+            <a href="#" id="add-patient" class="btn btn-add add-patient"
+               data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
                 <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
@@ -114,8 +115,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com"
-                       required/>
+                       placeholder="john.smith@email.com" required/>
 
             </div>
 
@@ -190,7 +190,7 @@
 
         <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
             <div class="import-content">
-                <p>Upload a .csv file containing the patients you wish to create. Please note that a maximum of 100 patients can be included in your file and it may take a few minutes to process.</p>
+                <p>Upload a <strong class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.</p>
                 <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
                 <div class="inner-search">
                     <div class="search-content clear">
@@ -219,7 +219,7 @@
                 <div class="clear">
                     <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
-                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk_import/upload"
+                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk-import/upload"
                                accept=".csv">
                     </span>
 

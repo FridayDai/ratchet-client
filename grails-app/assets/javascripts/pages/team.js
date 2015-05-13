@@ -45,12 +45,13 @@
                 }
             },
             urls: {
-                careGiver: "/patients/{0}/emergency_contact",
-                deleteCareGiver: "/patients/{0}/{1}/emergency_contact/{2}",
-                updateCareGiver: "/patients/{0}/emergency_contact/update",
-                updateCareTeamSurgeon: "/patients/{0}/group_and_provider/update",
+                careGiver: "/patients/{0}/emergency-contact",
+                deleteCareGiver: "/patients/{0}/{1}/emergency-contact/{2}",
+                updateCareGiver: "/patients/{0}/emergency-contact/update",
+                updateCareTeamSurgeon: "/patients/{0}/group-and-provider/update",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
+                //getGroups: "/getStaffGroups"
             }
         },
         careTeamRole =
@@ -173,6 +174,7 @@
 
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
+            var accountId = $(this).data("accountId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
@@ -215,7 +217,7 @@
             }));
 
             _initStaffSelect(form, existSurgeonId, existGroupId);
-            _initSelectGroup(form, existSurgeonId);
+            _initSelectGroup(form, existSurgeonId, accountId);
         });
     }
 
@@ -230,6 +232,13 @@
             type: 'POST',
             data: ids
         }).done(function (data) {
+            if (data.doctor == true) {
+                element.find("#surgeonDoctor").text("");
+                element.find("#surgeonDoctorHidden").text("Dr.").addClass("show");
+            } else {
+                element.find("#surgeonDoctor").text("");
+                element.find("#surgeonDoctorHidden").text("");
+            }
             element.find("#surgeonId").text(data.id);
             element.find("#hidden-surgeon-id").val(data.id);
             element.find("#surgeonFirstName").text(data.firstName);
@@ -574,14 +583,14 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup(form, existSurgeonId) {
+    function _initSelectGroup(form, existSurgeonId, accountId) {
         $(form).find("#groupSelect").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
                         name: request.term
