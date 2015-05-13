@@ -86,7 +86,7 @@ class UrlMappings {
         "/accounts/$accountId?/groups"(controller: "groups", action: "getStaffGroups")
 
         //email confirm to activate account
-        "/email_confirm/$code?"(controller: "accounts", action: "confirmCode")
+        "/email/confirmation/$code?"(controller: "accounts", action: "confirmCode")
 
         //Account profile
         "/profile/$accountId?"(controller: "profile") {
