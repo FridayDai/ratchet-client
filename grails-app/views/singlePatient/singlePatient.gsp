@@ -142,7 +142,7 @@
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline">
-            <label class="lbl-group">SURGERY TIME<span>*</span></label>
+            <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time required"
                    placeholder="" disabled>
         </div>
@@ -190,7 +190,7 @@
 
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
         <div class="form-group inline ">
-            <label class="lbl-group">SURGERY TIME</label>
+            <label class="lbl-group">SURGERY DATE</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgery-time"
                    placeholder="Surgery Time" tabindex="-1" required>
         </div>

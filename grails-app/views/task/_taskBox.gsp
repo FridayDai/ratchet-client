@@ -84,20 +84,20 @@
         <g:if test="${task?.isSent}">
             <div class="item-datetime complete-sent-time">
                 <div class="small-font ">
-                    <label>Sent Time:</label>
+                    <label>Sent Date:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd, yyyy h:mm aaa"></g:formatDate>
+                                  format="MMM dd, yyyy"></g:formatDate>
                 </div>
             </div>
         </g:if>
         <g:else>
             <div class="item-datetime send-time">
                 <div class="small-font">
-                    <label>Send Time:</label>
+                    <label>Send Date:</label>
                     <g:formatDate date="${task?.sendTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM dd, yyyy h:mm aaa"></g:formatDate>
+                                  format="MMM dd, yyyy"></g:formatDate>
                 </div>
             </div>
         </g:else>

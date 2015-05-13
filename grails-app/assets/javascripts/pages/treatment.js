@@ -45,14 +45,12 @@
             var treatmentId = $(this).data("treatmentId");
             $("#treatment-time-form")[0].reset();
 
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
                 okCallback: function () {
                     if ($("#treatment-time-form").valid()) {
-                        var date = new Date($("#treatment-surgeryTime").val());
-                        var newSurgeryTime = date.getTime();
-                        var oldSurgeryTime = (new Date(surgeryTime)).getTime();
+                        var newSurgeryTime = RC.common.parseVancouverTime($("#treatment-surgeryTime").val());
+                        var oldSurgeryTime = RC.common.parseVancouverTime(surgeryTime);
                         if (newSurgeryTime !== oldSurgeryTime) {
                             _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
                         }
@@ -65,7 +63,7 @@
     }
 
     /**
-     * It will binds a warning pop up and to update surgery time when user confirmed.
+     * It will binds a warning pop up and to update surgery date when user confirmed.
      * @private
      */
     function _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime) {
@@ -105,13 +103,9 @@
      * @private
      */
     function _initSurgeryTime(time) {
-        $("#treatment-surgeryTime").datetimepicker("destroy");
-        $("#treatment-surgeryTime").datetimepicker({
-            controlType: 'input',
+        $("#treatment-surgeryTime").datepicker("destroy");
+        $("#treatment-surgeryTime").datepicker({
             dateFormat: 'MM d, yy',
-            timeFormat: "h:mm TT",
-            showOn: "focus",
-            ampm: true,
             minDate: new Date(time)
         });
     }
@@ -133,7 +127,7 @@
             type: 'PUT',
             success: function (data) {
                 if (data.resp === true) {
-                    var formatDate = moment(selectedDate).tz("America/Vancouver").format('MMM DD, YYYY h:mm A');
+                    var formatDate = RC.common.formatVancouverTime(parseInt(selectedDate, 10));
                     parent.find('.surgery-time-picker').text(formatDate);
                     $(element).tabs({
                         beforeLoad: function (event, ui) {

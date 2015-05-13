@@ -179,7 +179,7 @@
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
-                <label class="lbl-group">SURGERY TIME<span>*</span></label>
+                <label class="lbl-group">SURGERY DATE<span>*</span></label>
                 <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time re-position"
                        placeholder="" required disabled/>
             </div>
@@ -256,7 +256,7 @@
                         <th>Group</th>
                         <th>Provider</th>
                         <th>Treatment</th>
-                        <th>Surgery Time</th>
+                        <th>Surgery Date</th>
                         <th>Emergency Contact Name</th>
                         <th>Relationship</th>
                         <th>Emergency Contact E-mail Address</th>
