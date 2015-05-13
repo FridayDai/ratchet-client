@@ -39,10 +39,10 @@
             urls: {
                 patients: "/patients",
                 singlePatient: "/patients/{0}",
-                lookup: "/patients/bulk_import/lookup",
-                save: "/patients/bulk_import/save",
-                checkPatientId: "/patients/check_id",
-                checkPatientEmail: "/patients/check_email",
+                lookup: "/patients/bulk-import/lookup",
+                save: "/patients/bulk-import/save",
+                checkPatientId: "/patients/check-id",
+                checkPatientEmail: "/patients/check-email",
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
                 getGroups: "/accounts/{0}/groups"

@@ -18,12 +18,14 @@
                 <div class="form-style-content">
                     <div class="input-combination">
                         <div class="align-left">EMAIL ADDRESS</div>
-                        <input name="email" type="text" class="input-control email" placeholder="Enter E-mail" required/>
+                        <input name="email" type="text" class="input-control email" placeholder="Enter E-mail"
+                               required/>
                     </div>
 
                     <div class="input-combination">
                         <div class="align-left">PASSWORD</div>
-                        <input name="password" type="password" class="input-control" placeholder="Enter Password" required/>
+                        <input name="password" type="password" class="input-control" placeholder="Enter Password"
+                               required/>
                     </div>
 
                     <div class="error-area">
@@ -33,17 +35,17 @@
                     </div>
 
                     %{--<div class="remember-me">--}%
-                        %{--<label>--}%
-                            %{--<input type="checkbox" class="box-check">--}%
-                            %{--Remember me--}%
-                        %{--</label>--}%
+                    %{--<label>--}%
+                    %{--<input type="checkbox" class="box-check">--}%
+                    %{--Remember me--}%
+                    %{--</label>--}%
                     %{--</div>--}%
 
                 </div>
 
                 <div class="align-center cover-inner-footer">
                     <button type="submit" class="btn btn-submit" id='btnLogin'>Log In</button>
-                    <g:link uri="/forgot_password" class="forgot-password">Forgot Password?</g:link>
+                    <g:link uri="/forgot-password" class="forgot-password">Forgot Password?</g:link>
                 </div>
             </g:form>
         </div>

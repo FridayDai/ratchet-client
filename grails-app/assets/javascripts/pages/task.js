@@ -18,7 +18,7 @@
         },
         urls: {
             query: "/patients/{0}/treatments/{1}/task",
-            email: "/patients/{0}/treatments/{1}/task/{2}/sendMail"
+            email: "/patients/{0}/treatments/{1}/task/{2}/send-mail"
         }
     };
 

@@ -45,10 +45,10 @@
                 }
             },
             urls: {
-                careGiver: "/patients/{0}/emergency_contact",
-                deleteCareGiver: "/patients/{0}/{1}/emergency_contact/{2}",
-                updateCareGiver: "/patients/{0}/emergency_contact/update",
-                updateCareTeamSurgeon: "/patients/{0}/group_and_provider/update",
+                careGiver: "/patients/{0}/emergency-contact",
+                deleteCareGiver: "/patients/{0}/{1}/emergency-contact/{2}",
+                updateCareGiver: "/patients/{0}/emergency-contact/update",
+                updateCareTeamSurgeon: "/patients/{0}/group-and-provider/update",
                 getStaffs: "/staffs",
                 getGroups: "/accounts/{0}/groups"
                 //getGroups: "/getStaffGroups"
