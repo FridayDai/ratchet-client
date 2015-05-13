@@ -7,3 +7,15 @@
 .div-hidden {
     display: none;
 }
+
+.group-icon {
+    &:before {
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: -35px;
+        width: 10px;
+        height: 25px;
+        content: url('../../../images/groups/groups_icon_active.png');
+    }
+}

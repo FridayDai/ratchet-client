@@ -11,7 +11,7 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">GROUPS</label>
+            <label class="title group-icon">GROUPS</label>
             <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 

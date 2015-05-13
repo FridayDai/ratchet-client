@@ -24,6 +24,8 @@ class UrlMappings {
         }
         "/reset-password/$code?"(controller: "accounts", action: "resetPassword")
 
+        "/confirm-reset-password"(controller: "accounts", action: "confirmResetPassword")
+
         // Patients
         "/"(controller: "patients", action: "getPatients")
 

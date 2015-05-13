@@ -13,7 +13,7 @@
     <div class="content">
 
         <div class="inner-header">
-            <label class="title">PROFILE</label>
+            <label class="title profile-icon">PROFILE</label>
         </div>
 
         <div class="middle-content">

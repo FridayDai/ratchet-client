@@ -12,12 +12,16 @@
     <body>
     <div class="content">
 
-        <div class="content-head">
-
-            <p class="account">ACCOUNT</p>
-
+        <div class="content-head inner-header">
+            <label class="title account">ACCOUNT</label>
             <a href="#" class="btn-close">Close</a>
         </div>
+        %{--<div class="content-head">--}%
+
+        %{--<p class="account">ACCOUNT</p>--}%
+
+        %{--<a href="#" class="btn-close">Close</a>--}%
+        %{--</div>--}%
 
         <div class="middle-content">
             <div class="name-info">
@@ -102,8 +106,9 @@
                 <tr class="tr-border">
                     <td class="td-width">Groups</td>
                     <td><span class="groups"
-                              id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each in="${accountInfo.groups}"
-                                                                                     var="group"><p>${group.name}</p></g:each></g:if>
+                              id="groups" data-ids="${accountInfo.groups}"><g:if test="${accountInfo.groups}"><g:each
+                                in="${accountInfo.groups}"
+                                var="group"><p>${group.name}</p></g:each></g:if>
                     </span></td>
                 </tr>
 
