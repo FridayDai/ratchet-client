@@ -49,7 +49,7 @@
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
-        staffGroup = ["Patient Management", "Account Management"],
+        staffGroup = ["Patient Management", "Administrator"],
         accountTable;
 
     /**
@@ -512,11 +512,18 @@
                             confirmPassword: confirmPass
                         };
 
-                        _updatePassword(passwords, accountId);
+                        return $.when(_updatePassword(passwords, accountId))
+                            .done(function () {
 
-                        return true;
+                            })
+                            .fail(function () {
+                                $('.ui-dialog #old-password-error').removeClass("hide").addClass("show");
+                            });
+
+                    } else {
+                        return false;
                     }
-                    return false;
+
                 }
             }));
 
@@ -534,7 +541,7 @@
 
         if ($(".update-password").valid() && password !== confirmPassword) {
             //$(".error-area").text(RC.constants.passwordTip);
-            $(".error-area").addClass("show");
+            $("#confirmPass-error").removeClass("hide").addClass("show");
             return false;
         }
         return true;
@@ -548,16 +555,18 @@
         function _resetInput(e) {
             e.preventDefault();
 
-            if ($(".error-area").hasClass("show")) {
-                $(".error-area").removeClass("show");
-            }
+            _.each($(".error-area"),function(element) {
+                if ($(element).hasClass("show")) {
+                    $(".error-area").removeClass("show").addClass("hide");
+                }
+            });
         }
 
-        $("#confirmPass").on("input", function (e) {
+        $("#confirmPass, #oldPass").on("input", function (e) {
             _resetInput(e);
         });
 
-        $("#confirmPass").on("blur", function (e) {
+        $("#confirmPass, #oldPass").on("blur", function (e) {
             _resetInput(e);
             _isPasswordConsistent();
         });
@@ -570,17 +579,38 @@
      * @private
      */
     function _updatePassword(passwords, accountId) {
+
+        var deferred = $.Deferred();
         $.ajax({
             url: opts.urls.updatePassword.format(accountId),
             type: "POST",
             data: passwords,
             dataType: "json",
             success: function () {
-                RC.common.showMsg({
-                    msg: RC.constants.changePasswordSuccess
-                });
+                deferred.resolve();
+                setTimeout(function() {
+                    RC.common.showMsg({
+                        msg: RC.constants.changePasswordSuccess
+                    });
+                }, 1000)
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 400) {
+                    deferred.reject();
+                }
+                if (jqXHR.status === 401) {
+                    window.location.href = "/login";
+                }
+                if (jqXHR.status === 403 || jqXHR.status >= 404) {
+                    deferred.resolve();
+                    RC.common.error({
+                        title: RC.constants.errorTitle404,
+                        message: RC.constants.errorTip
+                    });
+                }
             }
         });
+        return deferred.promise();
     }
 
     /**

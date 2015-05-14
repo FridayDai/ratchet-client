@@ -114,8 +114,7 @@
                         //$.each(staffArray, function (index, item) {
                         //    staffIdArr.push(parseInt(item));
                         //});
-                        var date = new Date($("#surgeryTime").val());
-                        var surgeryTime = date.getTime();
+                        var surgeryTime = RC.common.parseVancouverTime($("#surgeryTime").val());
                         var ecFirstName = $('#emergency-firstName').val();
                         var ecLastName = $('#emergency-lastName').val();
                         var relationship = $('#relationshipName').data("id");
@@ -580,17 +579,13 @@
     }
 
     /**
-     * init surgery time
+     * init surgery date
      * @private
      */
     function _initSurgeryTime(time) {
-        $("#surgeryTime").datetimepicker("destroy");
-        $("#surgeryTime").datetimepicker({
-            controlType: 'input',
+        $("#surgeryTime").datepicker("destroy");
+        $("#surgeryTime").datepicker({
             dateFormat: 'MM d, yy',
-            timeFormat: "h:mm TT",
-            showOn: "focus",
-            ampm: true,
             minDate: new Date(time)
         });
     }

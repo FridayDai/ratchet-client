@@ -585,7 +585,11 @@
 
             dialogOpts.buttons[title] = function (e) {
                 if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
-                    dialog.dialog("close");
+                    $.when((confirmFormArguments.okCallback)(e))
+                        .done(function() {
+                        dialog.dialog("close");
+                    });
+
                 }
             };
 
@@ -921,6 +925,14 @@
                     paginate.hide();
                 }
             }
+        },
+
+        parseVancouverTime: function (time) {
+            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x')
+        },
+
+        formatVancouverTime: function (time) {
+            return moment.tz(time, "America/Vancouver").format('MMM D, YYYY');
         }
     });
     _init();
