@@ -39,5 +39,5 @@ class StatusCodeConstants {
     public static final String[] ACCOUNT_ROLE =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"]
     public static final String ACCOUNT_PATIENTS_M = "Patient Management"
-    public static final String ACCOUNT_ACCOUNTS_M = "Account Management"
+    public static final String ACCOUNT_ACCOUNTS_M = "Administrator"
 }

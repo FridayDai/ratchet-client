@@ -715,8 +715,7 @@
 
 
         var treatmentId = $("#selectTreatment").data('id');
-        var date = new Date($("#surgeryTime").val());
-        var surgeryTime = date.getTime();
+        var surgeryTime = RC.common.parseVancouverTime($("#surgeryTime").val());
         var staffId = $("#selectStaffs").data('id');
         var groupId = $("#selectGroup").data('id');
 
@@ -991,17 +990,13 @@
     }
 
     /**
-     * init surgery time
+     * init surgery date
      * @private
      */
     function _initSurgeryTime(time) {
-        $("#surgeryTime").datetimepicker("destroy");
-        $("#surgeryTime").datetimepicker({
-            controlType: 'input',
+        $("#surgeryTime").datepicker("destroy");
+        $("#surgeryTime").datepicker({
             dateFormat: 'MM d, yy',
-            timeFormat: "h:mm TT",
-            showOn: "focus",
-            ampm: true,
             minDate: new Date(time)
         });
     }

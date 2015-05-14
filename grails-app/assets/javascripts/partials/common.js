@@ -925,6 +925,14 @@
                     paginate.hide();
                 }
             }
+        },
+
+        parseVancouverTime: function (time) {
+            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x')
+        },
+
+        formatVancouverTime: function (time) {
+            return moment.tz(time, "America/Vancouver").format('MMM D, YYYY');
         }
     });
     _init();

@@ -99,7 +99,7 @@
 
                 <div class="group">
                     <label class="checkbox">
-                        <input id="accountManagement" name="accountManagement" type="checkbox">Account Management
+                        <input id="accountManagement" name="accountManagement" type="checkbox">Administrator
                     </label>
                 </div>
             </div>

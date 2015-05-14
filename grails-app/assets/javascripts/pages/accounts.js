@@ -49,7 +49,7 @@
             }
         },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
-        staffGroup = ["Patient Management", "Account Management"],
+        staffGroup = ["Patient Management", "Administrator"],
         accountTable;
 
     /**

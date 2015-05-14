@@ -225,14 +225,14 @@ class TreatmentService {
         def url = String.format(updateSurgeryTimeUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
 
         try {
-            log.info("Call backend service to update surgery time, token: ${request.session.token}.")
+            log.info("Call backend service to update surgery date, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .header("X-Auth-Token", request.session.token)
                     .field("surgeryTime", params?.surgeryTime)
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Update surgery time success, token: ${request.session.token}")
+                log.info("Update surgery date success, token: ${request.session.token}")
                 return true
             } else {
                 def result = JSON.parse(resp.body)
