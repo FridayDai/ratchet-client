@@ -79,4 +79,12 @@ class PatientsController extends BaseController {
         def data = singlePatientService.checkPatientEmail(request, response, params)
         render data as JSON
     }
+
+    def downloadErrors() {
+        def errorFilePath = patientService.downloadErrors(request, response, params)
+
+        if (errorFilePath) {
+            redirect url: errorFilePath
+        }
+    }
 }

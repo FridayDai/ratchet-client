@@ -233,6 +233,7 @@ ratchetv2 {
             invitePatient = "${ratchetv2.server.url.base}/patient/invite/%s"
             showPatient = "${ratchetv2.server.url.base}/patients/patientId/%s"
             uploadPatient = "${ratchetv2.server.url.base}/clients/%s/bulk/import"
+            downloadErrors = "${ratchetv2.server.url.base}/clients/%s/bulk/error/link"
             savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
 

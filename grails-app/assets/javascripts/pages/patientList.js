@@ -583,7 +583,7 @@
                 isUploaded = true;
                 var html, tip;
                 if (e.status === 209) {
-                    html = RC.constants.dataError + " <a class='error-link' href='" + e.responseText + "'>Download Error File</a>";
+                    html = RC.constants.dataError + " <a class='error-link' target='_blank' href='/patients/bulk-import/download-errors'>Download Error File</a>";
                     tip = "Data Error!";
                 } else {
                     html = RC.constants.formatError;
