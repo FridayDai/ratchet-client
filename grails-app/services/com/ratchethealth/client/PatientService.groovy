@@ -166,16 +166,19 @@ class PatientService {
 
         try {
             log.info("Call backend service to bulk import patient, token: ${request.session.token}.")
-            File tempFile = File.createTempFile("error_csv", ".tmp")
+            File tempFile = File.createTempFile("error_csv", ".csv")
             file.transferTo(tempFile)
 
             def resp = Unirest.post(url)
                     .header("X-Auth-Token", request.session.token)
                     .header("accept", "application/json")
                     .field("file", tempFile)
+                    .field("fileName", file.fileItem.fileName)
                     .asString()
 
-            def result = JSON.parse(resp.body)
+            if (resp.status != 209) {
+                def result = JSON.parse(resp.body)
+            }
 
             if (resp.status == 200) {
                 def map = [:]
@@ -183,8 +186,7 @@ class PatientService {
                 log.info("Bulk import patient success, token: ${request.session.token}")
                 return map
             } else if (resp.status == 209){
-                def message = result?.errorFilePath
-                throw new ApiReturnException(resp.status, message)
+                throw new ApiReturnException(resp.status, '')
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnException(resp.status, message)
@@ -234,6 +236,33 @@ class PatientService {
 
                 log.info("Lookup success, token: ${request.session.token}")
                 return map
+            } else {
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+    }
+
+    def downloadErrors(HttpServletRequest request, HttpServletResponse response, params)
+            throws ApiAccessException, ApiReturnException {
+
+        String errorUrl = grailsApplication.config.ratchetv2.server.url.downloadErrors
+        def url = String.format(errorUrl, request.session.clientId)
+
+        try {
+            log.info("Call backend service to get bulk import patient error file link, token: ${request.session.token}.")
+
+            def resp = Unirest.get(url)
+                    .header("X-Auth-Token", request.session.token)
+                    .asString()
+
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                log.info("Get bulk import patient error file link success, token: ${request.session.token}")
+                return result?.errorFilePath
             } else {
                 def message = result?.error?.errorMessage
                 throw new ApiReturnException(resp.status, message)
