@@ -584,12 +584,16 @@
             };
 
             dialogOpts.buttons[title] = function (e) {
-                if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
-                    $.when((confirmFormArguments.okCallback)(e))
-                        .done(function() {
+                var back = (confirmFormArguments.okCallback)(e);
+                if ($.isFunction(confirmFormArguments.okCallback) && back) {
+                    if ($.isFunction(back.promise)) {
+                        $.when((confirmFormArguments.okCallback)(e)).done(function () {
+                            dialog.dialog("close");
+                        });
+                    }
+                    else {
                         dialog.dialog("close");
-                    });
-
+                    }
                 }
             };
 
