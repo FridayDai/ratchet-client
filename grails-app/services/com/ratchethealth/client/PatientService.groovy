@@ -176,8 +176,10 @@ class PatientService {
                     .field("fileName", file.fileItem.fileName)
                     .asString()
 
+            def result
+
             if (resp.status != 209) {
-                def result = JSON.parse(resp.body)
+                result = JSON.parse(resp.body)
             }
 
             if (resp.status == 200) {
