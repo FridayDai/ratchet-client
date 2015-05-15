@@ -214,7 +214,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.release.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
@@ -233,6 +233,7 @@ ratchetv2 {
             invitePatient = "${ratchetv2.server.url.base}/patient/invite/%s"
             showPatient = "${ratchetv2.server.url.base}/patients/patientId/%s"
             uploadPatient = "${ratchetv2.server.url.base}/clients/%s/bulk/import"
+            downloadErrors = "${ratchetv2.server.url.base}/clients/%s/bulk/error/link"
             savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
 
