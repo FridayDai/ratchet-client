@@ -78,6 +78,7 @@ grails.project.dependency.resolution = {
         compile ":cookie-session:2.0.17"
         compile ":joda-time:1.5"
         runtime ":cors:1.1.6"
+        compile ":codenarc:0.23"
         //runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
@@ -85,5 +86,28 @@ grails.project.dependency.resolution = {
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
+    }
+}
+
+codenarc {
+    reports = {
+        XmlReport('xml') {
+            outputFile = 'target/CodeNarc-Report.xml'
+            title = 'CodeNarc Report'
+        }
+        HtmlReport('html') {
+            outputFile = 'target/CodeNarc-Report.html'
+            title = 'CodeNarc Report'
+        }
+    }
+
+    systemExitOnBuildException = true
+    maxPriority1Violations = 100
+    maxPriority2Violations = 100
+    maxPriority3Violations = 100
+
+    properties = {
+        CatchException.enabled = false
+        GrailsDomainReservedSqlKeywordName.enabled = false
     }
 }
