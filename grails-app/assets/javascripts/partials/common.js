@@ -308,8 +308,8 @@
 
                 this.element
                     .addClass("input-group ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
-                    .focus(function() {
-                        if($(this).data('uiAutocomplete').options.focusSearch) {
+                    .focus(function () {
+                        if ($(this).data('uiAutocomplete').options.focusSearch) {
                             $(this).autocomplete("search");
                         }
                     })
@@ -576,6 +576,10 @@
                     });
                     confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
+                    var body = $(confirmFormArguments.element).parents().find("body");
+                    if (body.css("overflow") == "hidden") {
+                        body.css('overflow', 'auto');
+                    }
                     dialog.dialog("close");
                     $('.btn').blur();
                     //dialogOwn.appendTo(containerParent);
