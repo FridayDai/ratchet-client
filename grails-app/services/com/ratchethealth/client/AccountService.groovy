@@ -17,6 +17,8 @@ class AccountService {
         def start = params?.start
         def length = params?.length
         def name = params?.name
+        def sort = params?.sort
+        def order = params?.order
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
 
@@ -28,6 +30,8 @@ class AccountService {
                     .queryString("offset", start)
                     .queryString("name", name)
                     .queryString("clientId", request.session.clientId)
+                    .queryString("sorted", sort)
+                    .queryString("order", order)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -102,7 +106,7 @@ class AccountService {
                     .field("patientManagement", "true")
                     .field("accountManagement", isAccountManagement)
                     .field("doctor", isDoctor)
-                    .field("groupIds",groupId)
+                    .field("groupIds", groupId)
                     .asString()
 
             if (resp.status == 201) {
@@ -162,15 +166,15 @@ class AccountService {
                     .field("type", params?.type)
                     .field("doctor", params?.doctor)
                     .field("accountManagement", params?.accountManagement)
-                    .field("groupIds",params?.groupId)
+                    .field("groupIds", params?.groupId)
                     .asString()
 
             if (resp.status == 200) {
                 log.info("Update account success, token: ${request.session.token}.")
-				
+
                 def result = JSON.parse(resp.body)
-				
-                if(accountId == request.session.accountId) {
+
+                if (accountId == request.session.accountId) {
                     request.session.firstName = result.firstName
                     request.session.lastName = result.lastName
                     request.session.accountManagement = result.accountManagement

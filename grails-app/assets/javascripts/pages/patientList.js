@@ -50,6 +50,13 @@
 
             }
         },
+        sortType = {
+            "ID": "s_patient_id",
+            "Name": "s_first_name",
+            "Email Address": "s_email",
+            "Phone Number": "s_phone_number",
+            "Last Update": "d_updated_time"
+        },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
 
     /**
@@ -270,6 +277,34 @@
             patientIdOrName: patientIdOrName
         };
         _initTable(data);
+    }
+
+
+    /**
+     *
+     * @private
+     */
+    function _sortPatientTable() {
+        _.each($('#patientsTable th'), function (element, index) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = sortType[ele.text()];
+                var orderSC;
+                if (flag == 0) {
+                    flag = 1;
+                    orderSC = "asc"
+                } else {
+                    flag = 0;
+                    orderSC = "desc"
+                }
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initTable(data);
+            })
+        });
     }
 
     /**
@@ -1441,6 +1476,7 @@
         _initSurgeon();
         _clickRow();
         _initTreatmentSelect();
+        _sortPatientTable();
     }
 
     _init();

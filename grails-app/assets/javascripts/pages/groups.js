@@ -30,6 +30,11 @@
                 deleteGroup: "/groups/delete"
             }
         },
+        sortType = {
+            "ID": "id",
+            "Group Name": "name",
+            "Last Update": "lastUpdated"
+        },
         groupTable;
 
     /**
@@ -120,6 +125,33 @@
             name: $("#search-input").val()
         };
         _initTable(data);
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _sortGroupTable() {
+        _.each($('#groupsTable th'), function (element, index) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = sortType[ele.text()];
+                var orderSC;
+                if (flag == 0) {
+                    flag = 1;
+                    orderSC = "asc"
+                } else {
+                    flag = 0;
+                    orderSC = "desc"
+                }
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initTable(data);
+            })
+        });
     }
 
     /**
@@ -279,6 +311,7 @@
     function _init() {
         events();
         _initTable();
+        _sortGroupTable();
     }
 
     _init();

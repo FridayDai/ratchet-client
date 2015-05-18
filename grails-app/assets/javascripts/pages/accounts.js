@@ -49,6 +49,12 @@
                 isDoctor: ""
             }
         },
+        sortType = {
+            "ID": "id",
+            "Name": "firstName",
+            "Email Address": "email",
+            "Last Update": "lastUpdated"
+        },
         accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
         staffGroup = ["Patient Management", "Administrator"],
         accountTable;
@@ -199,6 +205,33 @@
         $("#search-btn").on("click", function (e) {
             e.preventDefault();
             _search();
+        });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _sortAccountTable() {
+        _.each($('#accountsTable th'), function (element, index) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = sortType[ele.text()];
+                var orderSC;
+                if (flag == 0) {
+                    flag = 1;
+                    orderSC = "asc"
+                } else {
+                    flag = 0;
+                    orderSC = "desc"
+                }
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initTable(data);
+            })
         });
     }
 
@@ -940,6 +973,7 @@
         _logout();
         _goBackToPrePage();
         _activateAndDeactivate();
+        _sortAccountTable();
     }
 
     _init();
