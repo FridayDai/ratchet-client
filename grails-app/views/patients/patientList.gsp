@@ -11,7 +11,7 @@
     <body>
     <div>
         <div class="inner-header">
-            <label class="title">PATIENTS</label>
+            <label class="title patient-icon">PATIENTS</label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
@@ -190,7 +190,10 @@
 
         <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
             <div class="import-content">
-                <p>Upload a <strong class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.</p>
+                <p>Upload a <strong
+                        class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong
+                        class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.
+                </p>
                 <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
                 <div class="inner-search">
                     <div class="search-content clear">

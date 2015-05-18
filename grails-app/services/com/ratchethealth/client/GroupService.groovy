@@ -18,6 +18,8 @@ class GroupService {
         def start = params?.start
         def length = params?.length
         def name = params?.name
+        def sort = params?.sort
+        def order = params?.order
 
         String showGroupsUrl = grailsApplication.config.ratchetv2.server.url.showGroups
         def url = String.format(showGroupsUrl, request.session.clientId)
@@ -29,6 +31,8 @@ class GroupService {
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("groupName", name)
+                    .queryString("sorted", sort)
+                    .queryString("order", order)
                     .asString()
 
             def result = JSON.parse(resp.body)
