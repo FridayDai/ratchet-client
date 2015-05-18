@@ -55,7 +55,7 @@ class PatientService {
                     .field("ecLastName", ecLastName)
                     .field("relationship", relationship)
                     .field("ecEmail", ecEmail)
-                    .field("groupId",groupId)
+                    .field("groupId", groupId)
                     .asString()
             def result = JSON.parse(resp.body)
 
@@ -108,7 +108,6 @@ class PatientService {
 
         def start = params?.start
         def length = params?.length
-        def order = params?.order
         def columns = params?.columns
         def search = params?.search
         def draw = params?.draw
@@ -116,6 +115,8 @@ class PatientService {
         def treatmentId = params?.treatmentId
         def surgeonId = params?.surgeonId
         def patientIdOrName = params?.patientIdOrName
+        def order = params?.order
+        def sort = params?.sort
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         try {
@@ -129,6 +130,8 @@ class PatientService {
                     .queryString("treatmentId", treatmentId)
                     .queryString("surgeonId", surgeonId)
                     .queryString("patientIdOrName", patientIdOrName)
+                    .queryString("order", order)
+                    .queryString("sorted", sort)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -182,7 +185,7 @@ class PatientService {
                 map.put("data", result.items)
                 log.info("Bulk import patient success, token: ${request.session.token}")
                 return map
-            } else if (resp.status == 209){
+            } else if (resp.status == 209) {
                 def message = result?.errorFilePath
                 throw new ApiReturnException(resp.status, message)
             } else {
