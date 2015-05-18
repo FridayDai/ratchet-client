@@ -388,4 +388,32 @@ class AccountService {
             throw new ApiAccessException(e.message)
         }
     }
+
+    def checkEmail(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
+
+        def url = grailsApplication.config.ratchetv2.server.url.checkAccountEmail
+
+        try {
+            log.info("Call backend service to check account email, token: ${request.session.token}.")
+            def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
+//                    .field("clientId", request.session.clientId)
+                    .field("email", params?.email)
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("this account email already exist, token: ${request.session.token}")
+                return [check: "true"]
+            } else if (resp.status == 404) {
+                log.info("this account email doesn't exist, token: ${request.session.token}")
+                return [check: "false"]
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+    }
 }
