@@ -117,4 +117,9 @@ class AccountsController extends BaseController {
         render result as JSON
     }
 
+    def checkAccountEmail() {
+        def data = accountService.checkEmail(request, response, params)
+        render data as JSON
+    }
+
 }
