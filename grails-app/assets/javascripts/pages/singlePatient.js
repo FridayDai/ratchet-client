@@ -189,7 +189,7 @@
         $("#relationshipName").combobox({
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
-                    return num.label.toLowerCase().indexOf(request.term) > -1;
+                    return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
                 if (!sources.length) {
                     var result = [
