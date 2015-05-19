@@ -1102,7 +1102,8 @@
                     url: opts.urls.getTreatments,
                     type: "POST",
                     data: {
-                        treatmentTitle: request.term
+                        treatmentTitle: request.term,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -1168,7 +1169,8 @@
                     url: opts.urls.getTreatments,
                     type: "POST",
                     data: {
-                        treatmentTitle: request.term
+                        treatmentTitle: request.term,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -1220,7 +1222,8 @@
                     type: "POST",
                     data: {
                         name: request.term,
-                        type: 9
+                        type: 9,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -1275,7 +1278,8 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId
+                        groupId: groupId,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -1397,7 +1401,8 @@
                     url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
-                        name: request.term
+                        name: request.term,
+                        length: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
