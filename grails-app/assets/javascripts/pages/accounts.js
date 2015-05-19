@@ -42,7 +42,8 @@
                 inviteAccount: "/accounts/{0}/invite",
                 activateAccount: "/accounts/{0}/activate",
                 deactivateAccount: "/accounts/{0}/deactivate",
-                getAllGroups: "/groups"
+                getAllGroups: "/groups",
+                checkAccountEmail: "/accounts/check-email"
             },
             img: {
                 isDoctor: ""
@@ -283,6 +284,50 @@
 
 
     /**
+     * set validate
+     * @private
+     */
+    function _setValidate(form) {
+        form.validate({
+                rules: {
+                    email: {
+                        email: true,
+                        remote: {
+                            url: opts.urls.checkAccountEmail,
+                            type: "POST",
+                            beforeSend: function () {
+                                RC.common.progress(false);
+                            },
+                            data: {
+                                email: function () {
+                                    return $('#table-form #email').val();
+                                }
+                            },
+                            async: false,
+                            dataFilter: function (responseString) {
+                                var resp = jQuery.parseJSON(responseString);
+
+                                if (!(resp.check === "false")) {
+                                    return "\"" + RC.constants.emailExist + "\"";
+                                } else {
+                                    return '"true"';
+                                }
+                            },
+                            error: function (jqXHR) {
+                                if (jqXHR.status === 500) {
+                                    return
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        );
+    }
+
+
+    /**
      * bind add account event
      * @private
      */
@@ -291,10 +336,12 @@
         $("#add-account").on("click", function (e) {
             e.preventDefault();
             $(".accounts-form")[0].reset();
+            var form = $(".accounts-form");
+            _setValidate(form);
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".accounts-form"),
+                element: form,
                 okCallback: function () {
-                    if ($("#table-form").valid()) {
+                    if (form.valid() && form.valid()) {
                         _add();
                         return true;
                     }
@@ -503,20 +550,20 @@
         });
     }
 
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        $("#table-form").validate({
-                messages: {
-                    provider: RC.constants.waringMessageProvider,
-                    agent: RC.constants.waringMessageAgent,
-                    email: RC.constants.waringMessageEmail
-                }
-            }
-        );
-    }
+    ///**
+    // * set validate
+    // * @private
+    // */
+    //function _setValidate() {
+    //    $("#table-form").validate({
+    //            messages: {
+    //                provider: RC.constants.waringMessageProvider,
+    //                agent: RC.constants.waringMessageAgent,
+    //                email: RC.constants.waringMessageEmail
+    //            }
+    //        }
+    //    );
+    //}
 
     /**
      * change account password
@@ -917,7 +964,7 @@
     function _init() {
         _setIsDoctorImgPath();
         _loadData();
-        _setValidate();
+        //_setValidate();
         _bindAddEvent();
         _clickRow();
         _inviteAccount();

@@ -266,6 +266,7 @@
             dataType: "json",
             success: function () {
                 parentTr.remove();
+                groupTable.clearPipeline().draw();
             },
             error: function (jqXHR) {
                 if (jqXHR.status === 400) {
