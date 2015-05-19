@@ -443,7 +443,7 @@
                 $("#doctor").prop("checked", true);
             }
 
-            if (isAccountManage === "Account Management") {
+            if (isAccountManage === "Administrator") {
                 $("#accountManagement").prop("checked", true);
             }
 
@@ -635,7 +635,7 @@
         function _resetInput(e) {
             e.preventDefault();
 
-            _.each($(".error-area"),function(element) {
+            _.each($(".error-area"), function (element) {
                 if ($(element).hasClass("show")) {
                     $(".error-area").removeClass("show").addClass("hide");
                 }
@@ -668,7 +668,7 @@
             dataType: "json",
             success: function () {
                 deferred.resolve();
-                setTimeout(function() {
+                setTimeout(function () {
                     RC.common.showMsg({
                         msg: RC.constants.changePasswordSuccess
                     });
@@ -885,7 +885,8 @@
                 cache: "true",
                 data: function (name) {
                     return {
-                        name: name
+                        name: name,
+                        length: 1000
                     };
                 },
                 results: function (data) {
@@ -926,7 +927,8 @@
                 cache: "true",
                 data: function (name) {
                     return {
-                        name: name
+                        name: name,
+                        length: 1000
                     };
                 },
                 results: function (data) {

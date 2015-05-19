@@ -179,6 +179,13 @@
             }
         }));
 
+        _bindEnterEvent($('#groupName'), function() {
+            var name = $('#groupName').val();
+            if ($ele.valid()) {
+                _addGroup(name);
+                $ele.dialog("destroy").addClass('ui-hidden');
+            }
+        });
     }
 
     function _addGroup(name) {
@@ -192,6 +199,15 @@
             }
         });
 
+    }
+
+    //bind group name event enter
+    function _bindEnterEvent(element, callback) {
+        element.keydown(function (event) {
+            if (event.keyCode === 13) {
+                callback();
+            }
+        })
     }
 
     /**
@@ -223,6 +239,17 @@
                 return false;
             }
         }));
+
+        _bindEnterEvent($('#groupName'), function() {
+            var groupInfo = {
+                name: $('#groupName').val(),
+                groupId: $this.data("groupId")
+            };
+            if ($ele.valid()) {
+                _editGroup(groupInfo);
+                $ele.dialog("destroy").addClass('ui-hidden');
+            }
+        });
     }
 
     function _editGroup(groupInfo) {

@@ -29,6 +29,7 @@ class GroupsController extends BaseController {
 
     def getStaffGroups() {
         def resp
+//        params.length = RatchetConstants.DEFAULT_MAX_OFFSET
         if (request.session.accountManagement == true) {
             def response = groupService.showGroupsList(request, response, params)
             resp = response.data
