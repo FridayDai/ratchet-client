@@ -55,6 +55,7 @@
     .ui-dialog-content {
         position: relative;
         overflow: auto;
+        overflow-x: hidden;
         height: auto !important;
         padding: .5em 1em;
         border: 0;
