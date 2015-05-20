@@ -365,7 +365,6 @@
         });
 
         $('#search-title-input').bind('keypress keydown keyup', function (e) {
-                e.preventDefault();
                 if (event.keyCode === 13) {
                     _searchTitle();
                     return false;
@@ -418,6 +417,8 @@
             }));
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
+            _bindSearchEvent();
+
         });
     }
 
@@ -1483,7 +1484,6 @@
         _loadData();
         _bindNewPatientModel();
         _bindBulkImportModel();
-        _bindSearchEvent();
         _initSurgeon();
         _clickRow();
         _initTreatmentSelect();
