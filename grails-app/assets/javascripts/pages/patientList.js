@@ -576,12 +576,18 @@
         $('.progress-box').hide();
         $('.error-tip').hide();
         $(window).resize(function () {
-            $('.import-form').closest(".ui-dialog").css({
+            var uiDialog = $('.import-form').closest(".ui-dialog");
+            uiDialog.css({
                 'width': $(window).width() - 30,
                 'height': $(window).height() - 30,
                 'left': '0px',
                 'top': '0px'
             });
+            if (uiDialog.height() <= 630) {
+                uiDialog.css("overflow", "auto");
+            } else {
+                uiDialog.css("overflow", "hidden");
+            }
             $('.import-table-group').css({
                 'height': $(window).height() - 450
             });
