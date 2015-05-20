@@ -203,9 +203,10 @@
 
     //bind group name event enter
     function _bindEnterEvent(element, callback) {
-        element.keydown(function (event) {
+        element.on("keydown",function (event) {
             if (event.keyCode === 13) {
                 callback();
+                element.off("keydown");
             }
         })
     }
