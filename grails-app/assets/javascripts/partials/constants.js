@@ -1,3 +1,4 @@
+/* jshint -W101 */
 (function ($, undefined) {
     'use strict';
     var constants = RC.constants = RC.constants || {};
@@ -72,3 +73,4 @@
         emailExist: "Email already exists"
     });
 })(jQuery);
+/* jshint +W101 */

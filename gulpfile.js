@@ -17,7 +17,8 @@ var jshintConfigPath = '.jshintrc';
 gulp.task('js-lint', function () {
     return gulp.src(paths.js)
         .pipe(jshint(jshintConfigPath))
-        .pipe(jshint.reporter(jshintStylish));
+        .pipe(jshint.reporter(jshintStylish))
+        .pipe(jshint.reporter('fail'));
 });
 
 // Scss lint for checking JS code

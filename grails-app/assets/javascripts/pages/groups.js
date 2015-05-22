@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -78,7 +80,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var lastUpdateStr = data === undefined ? full.lastUpdated : data;
-                        var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                        var lastUpdateTime = new Date(parseInt(lastUpdateStr, 10));
                         var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
@@ -132,25 +134,25 @@
      * @private
      */
     function _sortGroupTable() {
-        _.each($('#groupsTable th'), function (element, index) {
+        _.each($('#groupsTable th'), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
                 var sort = sortType[ele.text()];
                 var orderSC;
-                if (flag == 0) {
+                if (flag === 0) {
                     flag = 1;
-                    orderSC = "asc"
+                    orderSC = "asc";
                 } else {
                     flag = 0;
-                    orderSC = "desc"
+                    orderSC = "desc";
                 }
                 var data = {
                     sort: sort,
                     order: orderSC
                 };
                 _initTable(data);
-            })
+            });
         });
     }
 
@@ -208,7 +210,7 @@
                 callback();
                 element.off("keydown");
             }
-        })
+        });
     }
 
     /**
@@ -346,3 +348,4 @@
     _init();
 
 })(jQuery);
+/* jshint +W071 */
