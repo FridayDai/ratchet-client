@@ -748,7 +748,7 @@
         var lastName = $("#lastName").val() || $("#lastName").text();
         var email = $("#email").val() || $("#email").text();
         var number = $("#phoneNumber").val() || $("#phoneNumber").text();
-        var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
+        var phoneNumber = number.replace(/[\s\(\)-]/g, '');
 
         var ecFirstName = $("#emergency-firstName").val();
         var ecLastName = $("#emergency-lastName").val();
