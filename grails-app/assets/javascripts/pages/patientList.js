@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -109,8 +111,9 @@
                             subNumber;
                         var num = data === undefined ? full.phoneNumber : data;
 
-                        num.charAt(0) === '1' ? isUS = true : isUS = false;
+                        //num.charAt(0) === '1' ? isUS = true : isUS = false;
 
+                        isUS = num.charAt(0) === '1' ? true : false;
                         if (isUS) {
                             subNumber = num.slice(1, num.length);
                             phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
@@ -163,7 +166,9 @@
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
                 var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                var previousDisabled = paginate.find(".previous").hasClass("disabled");
+                var nextDisabled = paginate.find(".next").hasClass("disabled");
+                var bothDisabled = previousDisabled && nextDisabled;
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
@@ -185,7 +190,7 @@
                 }, {
                     "targets": 1,
                     "render": function (data, type, full) {
-                        var type = data === undefined ? function () {
+                        var typeData = data === undefined ? function () {
                             if (full.type === "1") {
                                 return 'Treatment';
                             } else if (full.type === "2") {
@@ -195,14 +200,22 @@
                             }
                         } : data;
 
-                        return type;
+                        return typeData;
                     },
                     width: "30%"
                 }, {
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return "<div class='copy-id-content'><p class='id-text strong'>" + id + "<span class='copy' title='Copy to clipboard'></span></p></div>";
+                        var html = [
+                            "<div class='copy-id-content'>",
+                                "<p class='id-text strong'>",
+                                    "{0}",
+                                    "<span class='copy' title='Copy to clipboard'></span>",
+                                "</p >",
+                            "</div>"
+                        ].join().format(id);
+                        return html;
                     },
                     width: "30%"
                 }]
@@ -227,7 +240,7 @@
                 var text = $(this).parent().text();
                 setText(text);
             },
-            complete: function (data) {
+            complete: function () {
                 var self = $(this);
                 self.addClass("active");
                 RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
@@ -285,25 +298,25 @@
      * @private
      */
     function _sortPatientTable() {
-        _.each($('#patientsTable th'), function (element, index) {
+        _.each($('#patientsTable th'), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
                 var sort = sortType[ele.text()];
                 var orderSC;
-                if (flag == 0) {
+                if (flag === 0) {
                     flag = 1;
-                    orderSC = "asc"
+                    orderSC = "asc";
                 } else {
                     flag = 0;
-                    orderSC = "desc"
+                    orderSC = "desc";
                 }
                 var data = {
                     sort: sort,
                     order: orderSC
                 };
                 _initTable(data);
-            })
+            });
         });
     }
 
@@ -311,7 +324,7 @@
      *
      * @private
      */
-    function _searchTitle(treatment, surgeon) {
+    function _searchTitle() {
         $(".search-tip").css("display", "none");
         var title = $("#search-title-input").val();
         var data = {
@@ -364,7 +377,7 @@
             _searchTitle();
         });
 
-        $('#search-title-input').bind('keypress keydown keyup', function (e) {
+        $('#search-title-input').bind('keypress keydown keyup', function () {
                 if (event.keyCode === 13) {
                     _searchTitle();
                     return false;
@@ -456,7 +469,7 @@
             url: opts.urls.save,
             type: "post",
             data: {bulkList: JSON.stringify(patientListTableData)},
-            success: function (data) {
+            success: function () {
                 $("#bulk-import-form").dialog("destroy").addClass('ui-hidden');
                 location.reload();
             }
@@ -541,7 +554,9 @@
                 }, {
                     "targets": 8,
                     "render": function (data, type, full) {
-                        var emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') + " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
+                        var emergencyName;
+                        emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '')+
+                         " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
                     width: "180px"
@@ -600,7 +615,7 @@
 
         $('#fileupload').fileupload({
             dataType: 'json',
-            beforeSend: function (xhr, opts) {
+            beforeSend: function () {
                 RC.common.progress(false);
                 $('.progress-box').show();
                 $('.error-box').hide();
@@ -620,14 +635,19 @@
                 $('#progress .progress-bar').css({"width": 0});
                 isUploaded = true;
             },
-            error: function (e, data) {
+            error: function (e) {
                 $('.progress-box').hide();
                 $('.result-box').show();
                 $('.error-tip').show();
                 isUploaded = true;
                 var html, tip;
                 if (e.status === 209) {
-                    html = RC.constants.dataError + " <a class='error-link' target='_blank' href='/patients/bulk-import/download-errors'>Download Error File</a>";
+                    html = [
+                        "{0}",
+                        " <a class='error-link' target='_blank' href='/patients/bulk-import/download-errors'>",
+                            "Download Error File",
+                        "</a>"
+                    ].join().format(RC.constants.dataError);
                     tip = "Data Error!";
                 } else {
                     html = RC.constants.formatError;
@@ -831,7 +851,7 @@
                                 if (primaryEmail === $('#table-form #email').val()) {
                                     return '"true"';
                                 }
-                                else if (!(resp.check === "false")) {
+                                else if (resp.check !== "false") {
                                     return "\"" + RC.constants.emailExist + "\"";
                                 } else {
                                     return '"true"';
@@ -839,7 +859,7 @@
                             },
                             error: function (jqXHR) {
                                 if (jqXHR.status === 500) {
-                                    return
+                                    return;
                                 }
                             }
 
@@ -903,7 +923,7 @@
      * @private
      */
     function _restoreNewPatientForm() {
-        _.each($(".replace-input-div"), function (element, index) {
+        _.each($(".replace-input-div"), function (element) {
             var key = element.id;
             var html = "<input id=" + key + " name=" + key + " class='input-group input-convert' required/>";
             $(element).replaceWith(html);
@@ -912,7 +932,7 @@
             $ele.next().remove();
         });
 
-        _.each($(".input-convert"), function (element, index) {
+        _.each($(".input-convert"), function (element) {
             var $ele = $(element);
             if (element.id === "phoneNumber") {
                 $ele.closest(".form-group").find('.form-group-edit').remove();
@@ -924,7 +944,7 @@
 
     function _inputReplaceWithDiv(data) {
 
-        _.each($(".input-convert"), function (element, index) {
+        _.each($(".input-convert"), function (element) {
             var key = element.id;
             var html = "<div class='replace-input-div' id=" + key + ">" + data[key] + "</div>";
             var edit = "<a class='icon-edit form-group-edit'>" + "</a>";
@@ -1324,7 +1344,7 @@
     }
 
     function _checkEmergencyContact() {
-        _.each($('.emergency-field'), function (element, index) {
+        _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
                 if ($(element).val() !== '') {
                     $('#emergency-firstName').attr('required', true);
@@ -1333,7 +1353,7 @@
                     $('#emergency-email').attr('required', true);
                     $('.permission-confirm-check').attr('required', true);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).show();
                     });
 
@@ -1354,7 +1374,7 @@
                     $('#emergency-email').attr('required', false);
                     $('.permission-confirm-check').attr('required', false);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).hide();
                     });
 
@@ -1373,18 +1393,18 @@
 
     function _resetToolTipPosition(elements) {
         if ($('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "up") {
-            _.each(elements, function (element, index) {
+            _.each(elements, function (element) {
                 var id = "#" + $(element).attr("aria-describedby");
-                var originalTop = parseInt($(id).css('top')) + 20;
+                var originalTop = parseInt($(id).css('top'), 10) + 20;
                 $(id).css('top', originalTop);
             });
             $('.permission-confirm').data("direction", "down");
 
         }
         if (!$('.permission-confirm').hasClass('visible') && $('.permission-confirm').data("direction") === "down") {
-            _.each(elements, function (element, index) {
+            _.each(elements, function (element) {
                 var id = "#" + $(element).attr("aria-describedby");
-                var originalTop = parseInt($(id).css('top')) - 20;
+                var originalTop = parseInt($(id).css('top'), 10) - 20;
                 $(id).css('top', originalTop);
             });
             $('.permission-confirm').data("direction", "up");
@@ -1494,3 +1514,4 @@
 
 })
 (jQuery);
+/* jshint +W071 */
