@@ -37,44 +37,6 @@
         );
     }
 
-
-    /**
-     * update task sendTime. if this box is in schedule item, it also needs to update status and move to sent items
-     * @param element
-     * @private
-     */
-    //function _updateTaskBox(individualTreatment, element, sendTime, dueTime) {
-    //
-    //    var taskStatus = element.closest('.box-item').data('status');
-    //    var sentRow = individualTreatment.find('#task-row-sent');
-    //    var scheduleRow = individualTreatment.find('#task-row-schedule');
-    //    var sendDate = moment(sendTime).format("MMM DD,YYYY HH:mm a");
-    //    var dueDate = moment(dueTime).format("MMM DD,YYYY HH:mm a");
-    //
-    //    var taskBox = element.closest('.box-item').find('.sent-time').text("Send Time: " + sendDate + '').closest(".box-item");
-    //    taskBox = taskBox.find('.due-time').text("DUE: " + dueDate + '').closest(".box-item");
-    //    //var html = "<div class='item-status pending'>"
-    //    //    + "<label class='uppercase status-background'>pending</label></div>";
-    //
-    //    if (taskStatus === ("pending" || "overdue")) {
-    //        taskBox = taskBox.removeClass(taskStatus);
-    //    }
-    //
-    //    taskBox.addClass('pending').detach().prependTo(sentRow);
-    //
-    //    if (sentRow.has('.no-item-sent').length !== 0) {
-    //        sentRow.find('.no-item-sent').remove();
-    //    }
-    //
-    //    var hasDefaultScheduleItem = scheduleRow.has('.no-item-schedule').length !== 0;
-    //    var noScheduleItem = scheduleRow.has('.box-item').length === 0;
-    //    if (noScheduleItem && !hasDefaultScheduleItem) {
-    //        var itemHtml = "<div class='no-item center no-item-schedule'><p>No item has been scheduled yet.</p></div>";
-    //        scheduleRow.append(itemHtml);
-    //    }
-    //
-    //}
-
     /**
      * sendEmail about task to patient
      */
@@ -82,10 +44,7 @@
         var request = $.ajax({
             url: opts.urls.email.format(opts.params.patientId, opts.params.medicalRecordId, taskId)
         });
-        request.done(function (data) {
-            //var sendTime = data.sendTime;
-            //var dueTime = data.dueTime;
-            //_updateTaskBox(individualTreatment, element, sendTime, dueTime);
+        request.done(function () {
             RC.common.showMsg(opts.defaultConfirmArguments.showMsgArguments);
         });
     }

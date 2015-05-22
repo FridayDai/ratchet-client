@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -55,7 +57,17 @@
             "Email Address": "email",
             "Last Update": "lastUpdated"
         },
-        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
+        accountType = [
+            "Anesthesiologist",
+            "Medical Assistant",
+            "Management",
+            "Nurse",
+            "Physical therapists (PTs)",
+            "Primary Physican",
+            "Scheduler",
+            "Surgeon",
+            "Yes",
+            "No"],
         staffGroup = ["Patient Management", "Administrator"],
         accountTable;
 
@@ -94,13 +106,23 @@
                             dataName;
 
                         if (full[5] === "true") {
-                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data + "</div>");
+                            dataName = [
+                                "<div class='img'>",
+                                "<img src='{0}'/>",
+                                " {1}",
+                                "</div>"
+                            ].join('').format(opts.img.isDoctor, data);
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName + "</div>";
+                            fullName = [
+                                "<div class='img'>",
+                                "<img src='{0}'/>",
+                                " {1} {2}",
+                                "</div>"
+                            ].join('').format(opts.img.isDoctor, full.firstName, full.lastName);
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
@@ -121,8 +143,8 @@
                 {
                     "targets": 3,
                     "render": function (data, type, full) {
-                        var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
-                        var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                        var lastUpdate = data === undefined ? full.lastUpdateDate : data;
+                        var lastUpdateTime = new Date(parseInt(lastUpdate, 10));
                         var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
@@ -132,7 +154,9 @@
                     "targets": 4,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return '<a href="/single_account/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                        return '<a href="/accounts/' + id + '" data-id ="' + id + '" class="view">' +
+                            '<span>View</span>' +
+                            '</a>';
                     },
                     width: "7%"
                 },
@@ -213,25 +237,26 @@
      * @private
      */
     function _sortAccountTable() {
-        _.each($('#accountsTable th'), function (element, index) {
+        _.each($('#accountsTable th'), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
                 var sort = sortType[ele.text()];
                 var orderSC;
-                if (flag == 0) {
+                if (flag === 0) {
                     flag = 1;
-                    orderSC = "asc"
+                    orderSC = "asc";
                 } else {
                     flag = 0;
-                    orderSC = "desc"
+                    orderSC = "desc";
                 }
+
                 var data = {
                     sort: sort,
                     order: orderSC
                 };
                 _initTable(data);
-            })
+            });
         });
     }
 
@@ -245,12 +270,16 @@
         var email = $("#email").val();
         //var type = $("#type").data("id");
         var groupId = $("#selectGroup").val();
-        var isAccountManagement, isDoctor, type;
+        var isAccountManagement, isDoctor, type, isProvider;
 
-        $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
-        $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-        $("#provider").attr("checked") === "checked" ? type = 9 : type = 10;
-
+        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
+        isDoctor = $("#doctor").attr("checked") === "checked";
+        isProvider = $("#provider").attr("checked") === "checked";
+        if (isProvider) {
+            type = 9;
+        } else {
+            type = 10;
+        }
 
         var data = {
             firstName: firstName,
@@ -307,7 +336,7 @@
                             dataFilter: function (responseString) {
                                 var resp = jQuery.parseJSON(responseString);
 
-                                if (!(resp.check === "false")) {
+                                if (resp.check !== "false") {
                                     return "\"" + RC.constants.emailExist + "\"";
                                 } else {
                                     return '"true"';
@@ -315,7 +344,7 @@
                             },
                             error: function (jqXHR) {
                                 if (jqXHR.status === 500) {
-                                    return
+                                    return;
                                 }
                             }
 
@@ -426,7 +455,7 @@
             var lastName = parent.find(".account-last-name").text();
             var email = parent.find(".account-email").text();
             var accountRole = parent.find(".account-role").text();
-            var typeId = parent.find(".account-role").data("id");
+            //var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
             var groups = parent.find(".groups").data("ids");
@@ -488,11 +517,16 @@
                             });
                         });
 
-                        var isAccountManagement, isDoctor, accountType;
+                        var isAccountManagement, isDoctor, accountType, isProvider;
 
-                        $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
-                        $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-                        $("#accountProvider").attr("checked") === "checked" ? accountType = 9 : accountType = 10;
+                        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
+                        isDoctor = $("#doctor").attr("checked") === "checked";
+                        isProvider = $("#accountProvider").attr("checked") === "checked";
+                        if (isProvider) {
+                            accountType = 9;
+                        } else {
+                            accountType = 10;
+                        }
                         var accountInfo = {
                             accountId: accountId,
                             firstName: firstName,
@@ -672,7 +706,7 @@
                     RC.common.showMsg({
                         msg: RC.constants.changePasswordSuccess
                     });
-                }, 1000)
+                }, 1000);
             },
             error: function (jqXHR) {
                 if (jqXHR.status === 400) {
@@ -742,44 +776,44 @@
      * init select
      * @private
      */
-    function _initSelect() {
-        var data = [
-            {label: "Anesthesiologist", id: 1},
-            {label: "Medical Assistant", id: 2},
-            {label: "Management", id: 3},
-            {label: "Nurse", id: 4},
-            {label: "Physical therapists (PTs)", id: 5},
-            {label: "Primary Physician", id: 6},
-            {label: "Scheduler", id: 7},
-            {label: "Surgeon", id: 8}
-        ];
-        $("#accountType").combobox({
-            source: function (request, response) {
-                var sources = _.filter(data, function (num) {
-                    return num.label.toLowerCase().indexOf(request.term) > -1;
-                });
-                if (!sources.length) {
-                    var result = [
-                        {
-                            label: 'No matches found',
-                            value: ''
-                        }
-                    ];
-                    response(result);
-                }
-                else {
-                    response($.map(sources, function (item) {
-
-                        return {
-                            label: item.label,
-                            value: item.id
-                        };
-                    }));
-                }
-            },
-            appendTo: ".container"
-        });
-    }
+    //function _initSelect() {
+    //    var data = [
+    //        {label: "Anesthesiologist", id: 1},
+    //        {label: "Medical Assistant", id: 2},
+    //        {label: "Management", id: 3},
+    //        {label: "Nurse", id: 4},
+    //        {label: "Physical therapists (PTs)", id: 5},
+    //        {label: "Primary Physician", id: 6},
+    //        {label: "Scheduler", id: 7},
+    //        {label: "Surgeon", id: 8}
+    //    ];
+    //    $("#accountType").combobox({
+    //        source: function (request, response) {
+    //            var sources = _.filter(data, function (num) {
+    //                return num.label.toLowerCase().indexOf(request.term) > -1;
+    //            });
+    //            if (!sources.length) {
+    //                var result = [
+    //                    {
+    //                        label: 'No matches found',
+    //                        value: ''
+    //                    }
+    //                ];
+    //                response(result);
+    //            }
+    //            else {
+    //                response($.map(sources, function (item) {
+    //
+    //                    return {
+    //                        label: item.label,
+    //                        value: item.id
+    //                    };
+    //                }));
+    //            }
+    //        },
+    //        appendTo: ".container"
+    //    });
+    //}
 
 
     /**
@@ -838,7 +872,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("INACTIVE").removeClass("span-deactive").addClass("span-active");
+                    parents.find(".span-activate-action").text("INACTIVE")
+                        .removeClass("span-deactive")
+                        .addClass("span-active");
                     parents.find(".activate-action").text("Activate");
                     RC.common.showMsg(opts.defaultConfirmArguments.showDeactiveArguments);
                 }
@@ -859,7 +895,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("ACTIVE").removeClass("span-active").addClass("span-deactive");
+                    parents.find(".span-activate-action").text("ACTIVE")
+                        .removeClass("span-active")
+                        .addClass("span-deactive");
                     parents.find(".activate-action").text("Deactivate");
                     RC.common.showMsg(opts.defaultConfirmArguments.showActiveArguments);
                 }
@@ -953,7 +991,7 @@
         var data = $('#isDoctorImg').data();
 
         if (data) {
-            opts.img.isDoctor = data['imgPath'];
+            opts.img.isDoctor = data['.imgPath'];
         }
     }
 
@@ -982,3 +1020,5 @@
 
 })
 (jQuery);
+/* jshint +W071 */
+

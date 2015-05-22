@@ -74,6 +74,7 @@ class ActivityService {
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("senderId", senderId)
+                    .queryString("order", order)
                     .asString()
 
             def result = JSON.parse(resp.body)
