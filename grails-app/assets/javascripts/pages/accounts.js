@@ -991,7 +991,7 @@
         var data = $('#isDoctorImg').data();
 
         if (data) {
-            opts.img.isDoctor = data['.imgPath'];
+            opts.img.isDoctor = data.imgPath;
         }
     }
 
