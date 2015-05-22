@@ -61,12 +61,12 @@
         var clientId = $("#clientId").val();
         $('#sortLastUpdate').on("click", function () {
             var orderSC;
-            if (flag == 0) {
+            if (flag === 0) {
                 flag = 1;
-                orderSC = "asc"
+                orderSC = "asc";
             } else {
                 flag = 0;
-                orderSC = "desc"
+                orderSC = "desc";
             }
             var data = {
                 order: orderSC,
