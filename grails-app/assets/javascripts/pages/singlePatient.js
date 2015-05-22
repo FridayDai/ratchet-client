@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -277,7 +279,7 @@
                             if (primaryPatientId === $('.patient-form #patientId').val()) {
                                 return '"true"';
                             }
-                            else if (!(resp.check === "false")) {
+                            else if (resp.check !== "false") {
                                 return "\"" + RC.constants.patientIdExist + "\"";
                             } else {
                                 return '"true"';
@@ -285,7 +287,7 @@
                         },
                         error: function (jqXHR) {
                             if (jqXHR.status === 500) {
-                                return
+                                return;
                             }
                         }
 
@@ -310,7 +312,7 @@
                             if (primaryEmail === $('.patient-form #email').val()) {
                                 return '"true"';
                             }
-                            else if (!(resp.check === "false")) {
+                            else if (resp.check !== "false") {
                                 return "\"" + RC.constants.emailExist + "\"";
                             } else {
                                 return '"true"';
@@ -318,7 +320,7 @@
                         },
                         error: function (jqXHR) {
                             if (jqXHR.status === 500) {
-                                return
+                                return;
                             }
                         }
 
@@ -362,7 +364,7 @@
                     okCallback: function () {
                         if (form.valid() && form.valid()) {
                             var number = $("#phone").val();
-                            var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
+                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
                             var patientInfo = {
                                 patientId: patientId,
                                 id: $("#patientId").val(),
@@ -446,18 +448,18 @@
      * @param elem
      * @private
      */
-    function _disableButton(elem) {
-        elem.prop("disabled", true);
-    }
+    //function _disableButton(elem) {
+    //    elem.prop("disabled", true);
+    //}
 
     /**
      * enabled button
      * @param elem
      * @private
      */
-    function _enableButton(elem) {
-        elem.prop("disabled", false);
-    }
+    //function _enableButton(elem) {
+    //    elem.prop("disabled", false);
+    //}
 
     /**
      * init select treatment
@@ -666,7 +668,7 @@
     }
 
     function _checkEmergencyContact() {
-        _.each($('.emergency-field'), function (element, index) {
+        _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
                 if ($(element).val() !== '') {
                     $('#emergency-firstName').attr('required', true);
@@ -675,7 +677,7 @@
                     $('#emergency-email').attr('required', true);
                     $('.permission-confirm-check').attr('required', true);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).show();
                     });
 
@@ -694,7 +696,7 @@
                     $('#emergency-email').attr('required', false);
                     $('.permission-confirm-check').attr('required', false);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).hide();
                     });
 
@@ -797,3 +799,4 @@
 
 })
 (jQuery);
+/* jshint +W071 */

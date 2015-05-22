@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W072 */
 (function ($, undefined) {
     'use strict';
     var treatment = RC.pages.treatment = RC.pages.treatment || {};
@@ -52,7 +54,15 @@
                         var newSurgeryTime = RC.common.parseVancouverTime($("#treatment-surgeryTime").val());
                         var oldSurgeryTime = RC.common.parseVancouverTime(surgeryTime);
                         if (newSurgeryTime !== oldSurgeryTime) {
-                            _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                            _editSurgeryTime(
+                                element,
+                                clientId,
+                                patientId,
+                                medicalRecordId,
+                                surgeryTime,
+                                parent,
+                                newSurgeryTime
+                            );
                         }
                     }
                 }
@@ -144,7 +154,7 @@
      * init archived a treatment event
      * @private
      */
-    function _initArchived(element) {
+    function _initArchived() {
         $('.archived-active').click(function (e) {
             e.preventDefault();
             var medicalRecordId = $(this).data("medicalRecordId");
@@ -237,3 +247,4 @@
 
 })
 (jQuery);
+/* jshint +W072 */

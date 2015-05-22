@@ -21,29 +21,29 @@
         $.extend(RC, getWindowSize());
     });
 
-    var share = {
-        /**
-         * share data api
-         * @param {String} the name of save data
-         * @param {Any} the save data value
-         * **/
-        data: function (name, value) {
-            var top = window.top,
-                cache = top._CACHE || {};
-            top._CACHE = cache;
-            return value !== undefined ? cache[name] = value : cache[name];
-        },
-        /**
-         * remove share data api
-         * @param {String} the name of remove share data
-         * **/
-        removeData: function (name) {
-            var cache = window.top._CACHE;
-            if (cache && cache[name]) {
-                delete cache[name];
-            }
-        }
-    };
+    //var share = {
+    //    /**
+    //     * share data api
+    //     * @param {String} the name of save data
+    //     * @param {Any} the save data value
+    //     * **/
+    //    data: function (name, value) {
+    //        var top = window.top,
+    //            cache = top._CACHE || {};
+    //        top._CACHE = cache;
+    //        return value !== undefined ? cache[name] = value : cache[name];
+    //    },
+    //    /**
+    //     * remove share data api
+    //     * @param {String} the name of remove share data
+    //     * **/
+    //    removeData: function (name) {
+    //        var cache = window.top._CACHE;
+    //        if (cache && cache[name]) {
+    //            delete cache[name];
+    //        }
+    //    }
+    //};
 
     /**
      * string format
@@ -65,7 +65,7 @@
         return str;
     };
 
-    jQuery.validator.addMethod('isPhone', function (value, element, param) {
+    jQuery.validator.addMethod('isPhone', function (value, element) {
         var tel = /^[0-9\-\(\)\s]+$/;
         return this.optional(element) || (tel.test(value));
     }, 'Please enter a valid phone number');
