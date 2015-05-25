@@ -86,11 +86,11 @@
                 $(".dataTables_paginate").css("display", "none");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate
-                                    .find(".previous")
-                                    .hasClass("disabled") &&
-                                paginate
-                                    .find(".next")
-                                    .hasClass("disabled");
+                        .find(".previous")
+                        .hasClass("disabled") &&
+                    paginate
+                        .find(".next")
+                        .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
@@ -108,20 +108,24 @@
                 },
                 {
                     data: "firstName",
+                    className: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
+                    className: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
+                    className: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
+                    className: "email",
                     width: "20%"
                 },
                 {
@@ -141,32 +145,32 @@
                         if (active === "true") {
                             return [
                                 '<button ',
-                                    'id="edit-care-giver" ',
-                                    'disabled="disabled" ',
-                                    'class="btn-edit disabled" ',
-                                    'data-care-giver-id="{0}"',
+                                'id="edit-care-giver" ',
+                                'disabled="disabled" ',
+                                'class="btn-edit disabled" ',
+                                'data-care-giver-id="{0}"',
                                 '</button>',
                                 '<button ',
-                                    'id="remove-care-team" ',
-                                    'disabled="disabled" ',
-                                    'class="btn-remove-team disabled" ',
-                                    'data-care-giver-id="{0}"',
+                                'id="remove-care-team" ',
+                                'disabled="disabled" ',
+                                'class="btn-remove-team disabled" ',
+                                'data-care-giver-id="{0}"',
                                 '</button>'
                             ].join('').format(source.id);
 
                         } else {
                             return [
                                 '<a ',
-                                    'href="#" ',
-                                    'id="edit-care-giver" ',
-                                    'class="btn-edit" ',
-                                    'data-care-giver-id="{0}"',
+                                'href="#" ',
+                                'id="edit-care-giver" ',
+                                'class="btn-edit" ',
+                                'data-care-giver-id="{0}"',
                                 '</a>',
                                 '<a ',
-                                    'href="#" ',
-                                    'id="remove-care-team" ',
-                                    'class="btn-remove-team" ',
-                                    'data-care-giver-id="{0}"',
+                                'href="#" ',
+                                'id="remove-care-team" ',
+                                'class="btn-remove-team" ',
+                                'data-care-giver-id="{0}"',
                                 '</a>'
                             ].join('').format(source.id);
                         }
@@ -431,12 +435,12 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if (form.valid()) {
 
-                        var firstName = eleParent.find("#giver-firstName").val();
-                        var lastName = eleParent.find("#giver-lastName").val();
-                        var email = eleParent.find("#giver-email").val();
-                        var relationship = eleParent.find("#relationships").data('id');
+                        var firstName = form.find("#giver-firstName").val();
+                        var lastName = form.find("#giver-lastName").val();
+                        var email = form.find("#giver-email").val();
+                        var relationship = form.find("#relationships").data('id');
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
