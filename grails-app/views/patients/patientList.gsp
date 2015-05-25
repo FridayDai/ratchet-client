@@ -199,7 +199,7 @@
                     <div class="search-content clear">
                         <div class="filler-content">
                             <input type="text" placeholder="Title" class="search-input" autocomplete="false"
-                                   name="search-title-input" id="search-title-input">
+                                   name="search-title-input" id="search-title-input" autofocus="autofocus">
                             <span class="search" id="search-title-btn"></span>
                         </div>
                     </div>
