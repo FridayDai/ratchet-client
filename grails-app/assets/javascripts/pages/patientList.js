@@ -207,14 +207,15 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                       return [
-                            '<div class="copy-id-content">',
-                                '<p class="id-text strong">',
-                                    '{0}',
-                                    '<span class="copy" title="Copy to clipboard"></span>',
-                                '</p >',
-                            '</div>'
+                        var html = [
+                            "<div class='copy-id-content'>",
+                                "<p class='id-text strong'>",
+                                    "{0}",
+                                    "<span class='copy' title='Copy to clipboard'></span>",
+                                "</p >",
+                            "</div>"
                         ].join('').format(id);
+                        return html;
                     },
                     width: "30%"
                 }]
@@ -646,7 +647,7 @@
                         " <a class='error-link' target='_blank' href='/patients/bulk-import/download-errors'>",
                             "Download Error File",
                         "</a>"
-                    ].join().format(RC.constants.dataError);
+                    ].join('').format(RC.constants.dataError);
                     tip = "Data Error!";
                 } else {
                     html = RC.constants.formatError;
