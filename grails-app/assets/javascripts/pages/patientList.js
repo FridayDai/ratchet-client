@@ -207,15 +207,14 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        var html = [
-                            "<div class='copy-id-content'>",
-                                "<p class='id-text strong'>",
-                                    "{0}",
-                                    "<span class='copy' title='Copy to clipboard'></span>",
-                                "</p >",
-                            "</div>"
-                        ].join().format(id);
-                        return html;
+                       return [
+                            '<div class="copy-id-content">',
+                                '<p class="id-text strong">',
+                                    '{0}',
+                                    '<span class="copy" title="Copy to clipboard"></span>',
+                                '</p >',
+                            '</div>'
+                        ].join('').format(id);
                     },
                     width: "30%"
                 }]
