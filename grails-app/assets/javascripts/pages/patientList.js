@@ -1507,6 +1507,7 @@
         _clickRow();
         _initTreatmentSelect();
         _sortPatientTable();
+        _bindSearchEvent();
     }
 
     _init();
