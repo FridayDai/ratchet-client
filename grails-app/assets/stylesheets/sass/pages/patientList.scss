@@ -383,3 +383,7 @@
         content: url('../../../images/patients/patients_icon_active.png');
     }
 }
+
+#patient-list_wrapper {
+    overflow: scroll;
+}
