@@ -682,7 +682,7 @@
 
         $("#confirmPass, #oldPass").on("blur", function (e) {
             _resetInput(e);
-            _isPasswordConsistent();
+            //_isPasswordConsistent();
         });
     }
 
