@@ -57,7 +57,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "UNVERIFIED"}">
                             <span class="span-invited"
                                   id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
