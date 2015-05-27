@@ -41,6 +41,7 @@ class UrlMappings {
         "/patients/bulk-import/upload"(controller: "patients", action: "uploadFile")
         "/patients/bulk-import/lookup"(controller: "patients", action: "lookup")
         "/patients/bulk-import/save"(controller: "patients", action: "savePatients")
+        "/patients/bulk-import/download-errors"(controller: "patients", action: "downloadErrors")
 
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
         "/patients/check-id"(controller: "patients", action: "checkPatientExist")

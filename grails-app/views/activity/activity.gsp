@@ -1,23 +1,11 @@
-<div <g:if test="${archived == 'true'}">class="activity clear archived"</g:if> <g:else> class="activity clear" </g:else>>
-    %{--<div class="inner-search">--}%
-        %{--<div class="search-content clear">--}%
-             %{--<div class="filler-content">--}%
-                %{--<label for="selectStaffs" class="lbl-by">BY</label>--}%
-                %{--<input name="selectStaffs" id="selectStaffs" class="input-group"/>--}%
-            %{--</div>--}%
-            %{--<div class="filler-content right-search">--}%
-                %{--<span class="refresh" id="refresh-btn"></span>--}%
-            %{--</div>--}%
-        %{--</div>--}%
-    %{--</div>--}%
-
+<div <g:if test="${archived == 'true'}">class="activity clear archived"</g:if> <g:else>class="activity clear"</g:else>>
     <div class="table-group">
         <table id="activityTable" class="display activityTable cursorAuto">
             <thead>
             <tr>
-                <th>Description</th>
+                <th class="nosort">Description</th>
                 <th>By</th>
-                <th>Last Update</th>
+                <th id="sortLastUpdate">Last Update</th>
             </tr>
             </thead>
         </table>

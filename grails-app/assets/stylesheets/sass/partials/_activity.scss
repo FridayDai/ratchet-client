@@ -10,4 +10,12 @@
             min-width: 860px;
         }
     }
+
+    .dataTable {
+        thead {
+            .nosort {
+                background: none;
+            }
+        }
+    }
 }

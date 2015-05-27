@@ -19,7 +19,7 @@
 					<div class="greeting color-black align-center">
 						<span>Hi</span>
 						<g:if test="${staff.doctor == true}"><span>Dr.</span></g:if>
-						<span>${staff.firstName}!</span>
+						<span>${staff.firstName} ${staff.lastName}!</span>
 					</div>
 
                     <div class="info color-black align-center">

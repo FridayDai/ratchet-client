@@ -18,7 +18,6 @@
      */
     function _initTable(ele, element, data) {
         //before reload dataTable, destroy the last dataTable
-        //$(element).dataTable().fnDestroy();
         var patientId = ele.find("#patientId").val();
         if (activityTable) {
             activityTable.clear();
@@ -26,23 +25,8 @@
         }
 
         activityTable = $(element).DataTable(_.extend({}, RC.common.dataTableOptions, {
-            //bLengthChange: false,
-            //searching: false,
-            //ordering: true,
-            //info: false,
-            //"serverSide": true,
             "columnDefs": [
                 {"targets": [0, 1], "orderable": false}],
-            //"fnDrawCallback": function () {
-            //    $(".previous").text('');
-            //    $(".next").text('');
-            //    var paginate = $(this).siblings();
-            //    var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
-            //    if (bothDisabled && paginate.find(".current").length === 0) {
-            //        paginate.hide();
-            //    }
-            //},
-            //"bAutoWidth": false,
             "ajax": $.fn.dataTable.pipeline({
                 url: opts.urls.query.format(patientId),
                 pages: 5,// number of pages to cache
@@ -59,7 +43,9 @@
                 },
                 {
                     data: function (source) {
-                        var formatDate = moment(source.dateCreated).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss a');
+                        var formatDate = moment(source.dateCreated)
+                                            .tz("America/Vancouver")
+                                            .format('MMM D, YYYY h:mm:ss a');
                         return formatDate;
                     },
                     width: "16%"
@@ -67,6 +53,30 @@
             ]
         }));
     }
+
+
+    function _sortActivityTable(ele, element) {
+        var flag = 0;
+        var medicalRecordId = $("#medicalRecordId").val();
+        var clientId = $("#clientId").val();
+        $('#sortLastUpdate').on("click", function () {
+            var orderSC;
+            if (flag === 0) {
+                flag = 1;
+                orderSC = "asc";
+            } else {
+                flag = 0;
+                orderSC = "desc";
+            }
+            var data = {
+                order: orderSC,
+                medicalRecordId: medicalRecordId,
+                clientId: clientId
+            };
+            _initTable(ele, element, data);
+        });
+    }
+
 
     /**
      * load Data from server side
@@ -171,6 +181,7 @@
         _loadData(ele, element);
         _bindSearchEvent(ele, element);
         _checkArchivedWindowSize(ele);
+        _sortActivityTable(ele, element);
         //_initSelect();
     }
 

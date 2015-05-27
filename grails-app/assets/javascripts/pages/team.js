@@ -1,3 +1,6 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
+/* jshint -W072 */
 (function ($, undefined) {
     'use strict';
 
@@ -51,14 +54,10 @@
                 updateCareTeamSurgeon: "/patients/{0}/group-and-provider/update",
                 getStaffs: "/staffs",
                 getGroups: "/accounts/{0}/groups"
-                //getGroups: "/getStaffGroups"
             }
         },
-        careTeamRole =
-            ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
         careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
         careGiverStatus = ["INACTIVE", "ACTIVE"],
-        careTeamTable,
         careGiverTable;
 
     /**
@@ -86,7 +85,12 @@
                 $(".next").text('');
                 $(".dataTables_paginate").css("display", "none");
                 var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                var bothDisabled = paginate
+                        .find(".previous")
+                        .hasClass("disabled") &&
+                    paginate
+                        .find(".next")
+                        .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
@@ -104,24 +108,24 @@
                 },
                 {
                     data: "firstName",
-                    class: "firstName",
+                    className: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
-                    class: "lastName",
+                    className: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
-                    class: "relationship",
+                    className: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
-                    class: "email",
+                    className: "email",
                     width: "20%"
                 },
                 {
@@ -139,14 +143,37 @@
                     "orderable": false,
                     data: function (source) {
                         if (active === "true") {
-                            return '<button id="edit-care-giver" disabled="disabled" class="btn-edit disabled" data-care-giver-id="' + source.id + '" ></button>' +
-                                '<button id="remove-care-team" disabled="disabled" class="btn-remove-team disabled" data-care-giver-id="' + source.id + '" > </button>';
+                            return [
+                                '<button ',
+                                'id="edit-care-giver" ',
+                                'disabled="disabled" ',
+                                'class="btn-edit disabled" ',
+                                'data-care-giver-id="{0}"',
+                                '</button>',
+                                '<button ',
+                                'id="remove-care-team" ',
+                                'disabled="disabled" ',
+                                'class="btn-remove-team disabled" ',
+                                'data-care-giver-id="{0}"',
+                                '</button>'
+                            ].join('').format(source.id);
 
                         } else {
-                            return '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" ></a>' +
-                                '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > </a>';
+                            return [
+                                '<a ',
+                                'href="#" ',
+                                'id="edit-care-giver" ',
+                                'class="btn-edit" ',
+                                'data-care-giver-id="{0}"',
+                                '</a>',
+                                '<a ',
+                                'href="#" ',
+                                'id="remove-care-team" ',
+                                'class="btn-remove-team" ',
+                                'data-care-giver-id="{0}"',
+                                '</a>'
+                            ].join('').format(source.id);
                         }
-
                     },
                     width: "10%"
                 }
@@ -182,7 +209,7 @@
             element.find("#selectStaff").val(firstName + ' ' + lastName);
             element.find("#groupSelect").val(groupName);
             var existGroupId = element.find("#hidden-group-id").val();
-            var existSurgeonId = element.find("#hidden-surgeon-id").val();
+            existSurgeonId = element.find("#hidden-surgeon-id").val();
             var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
@@ -232,7 +259,7 @@
             type: 'POST',
             data: ids
         }).done(function (data) {
-            if (data.doctor == true) {
+            if (data.doctor === true) {
                 element.find("#surgeonDoctor").text("");
                 element.find("#surgeonDoctorHidden").text("Dr.").addClass("show");
             } else {
@@ -307,11 +334,6 @@
             data: careGiverInfo
         }).done(function (data) {
             if (data.resp === true) {
-                var medicalRecordId = data.medicalRecordId;
-                var ids = {
-                    medicalRecordId: medicalRecordId
-                };
-                //_initGiverTable(element, ids);
                 _initGiverTable(element);
                 _removeCareGiver(element);
             }
@@ -413,12 +435,12 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if (form.valid()) {
 
-                        var firstName = eleParent.find("#giver-firstName").val();
-                        var lastName = eleParent.find("#giver-lastName").val();
-                        var email = eleParent.find("#giver-email").val();
-                        var relationship = eleParent.find("#relationships").data('id');
+                        var firstName = form.find("#giver-firstName").val();
+                        var lastName = form.find("#giver-lastName").val();
+                        var email = form.find("#giver-email").val();
+                        var relationship = form.find("#relationships").data('id');
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -516,7 +538,7 @@
         $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getStaffs,
@@ -682,3 +704,5 @@
     });
 
 })(jQuery);
+/* jshint +W071 */
+/* jshint +W072*/
