@@ -12,7 +12,8 @@
     <div>
         <div class="inner-header">
             <label class="title patient-icon">PATIENTS</label>
-            <a href="#" id="add-patient" class="btn btn-add add-patient"><span>New Patient</span></a>
+            <a href="#" id="add-patient" class="btn btn-add add-patient"
+               data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
                 <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
@@ -178,7 +179,7 @@
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
-                <label class="lbl-group">SURGERY TIME<span>*</span></label>
+                <label class="lbl-group">SURGERY DATE<span>*</span></label>
                 <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time re-position"
                        placeholder="" required disabled/>
             </div>
@@ -189,13 +190,16 @@
 
         <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
             <div class="import-content">
-                <p>Upload a <strong class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.</p>
+                <p>Upload a <strong
+                        class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong
+                        class="strong">100</strong> patients can be included in your file and it may take a few minutes to process.
+                </p>
                 <g:link action="downloadFile" controller="patients" class="download-file">Download Sample File</g:link>
                 <div class="inner-search">
                     <div class="search-content clear">
                         <div class="filler-content">
                             <input type="text" placeholder="Title" class="search-input" autocomplete="false"
-                                   name="search-title-input" id="search-title-input">
+                                   name="search-title-input" id="search-title-input" autofocus="autofocus">
                             <span class="search" id="search-title-btn"></span>
                         </div>
                     </div>
@@ -218,7 +222,7 @@
                 <div class="clear">
                     <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
-                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk_import/upload"
+                        <input id="fileupload" type="file" name="file" data-url="/patients/bulk-import/upload"
                                accept=".csv">
                     </span>
 
@@ -255,7 +259,7 @@
                         <th>Group</th>
                         <th>Provider</th>
                         <th>Treatment</th>
-                        <th>Surgery Time</th>
+                        <th>Surgery Date</th>
                         <th>Emergency Contact Name</th>
                         <th>Relationship</th>
                         <th>Emergency Contact E-mail Address</th>

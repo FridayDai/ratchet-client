@@ -3,9 +3,10 @@
         <li class="client-name">${request.session.clientName}</li>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
-            <g:link class="" controller="profile"
-                    action="getProfile"
-                    params="[accountId: request.session.accountId]">
+            %{--<a class="" controller="profile"--}%
+            %{--action="getProfile"--}%
+            %{--params="[accountId: request.session.accountId]">--}%
+            <a href="/profile/${request.session.accountId}">
                 <div class="user-photo">
                     <img src="${assetPath(src: 'user.png')}">
                 </div>
@@ -15,7 +16,7 @@
                             test="${request.session.isDoctor == true}">Dr. ${request.session.lastName}</g:if><g:else>${request.session.firstName}</g:else></span>
                     </li>
                 </ul>
-            </g:link>
+            </a>
         </li>
         %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
         %{--<g:else>class="nav-li"</g:else>>--}%
@@ -35,18 +36,18 @@
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
-                <g:link controller="accounts" action="index" class="icon-account">
+                <a href="/accounts" class="icon-account">
                     <div class="title">Accounts</div>
-                </g:link>
+                </a>
             </li>
         </g:if>
 
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'groups'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
-                <g:link controller="groups" action="index" class="icon-group">
+                <a href="/groups" class="icon-group">
                     <div class="title">Groups</div>
-                </g:link>
+                </a>
             </li>
         </g:if>
 

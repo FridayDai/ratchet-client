@@ -23,11 +23,11 @@
                     <h4 class="archived-treatment-title">Archived Treatment</h4>
                 </g:if>
                 <g:if test="${surgeryTime}">
-                    <span>Surgery Time:</span>
+                    <span>Surgery Date:</span>
                     <label class="surgery-time-picker">
                         <g:formatDate date="${surgeryTime}"
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMM d, yyyy h:mm a"></g:formatDate>
+                                      format="MMM d, yyyy"></g:formatDate>
                     </label>
                 %{--<input type="hidden" class="datetime-picker" data-patient-id="${patientId}"--}%
                 %{--data-client-id="${clientId}"--}%

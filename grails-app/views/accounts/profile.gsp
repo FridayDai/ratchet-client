@@ -30,7 +30,8 @@
             </div>
 
 
-            <a href="#" id="changePassword" class="btn btn-change-password">Change Password</a>
+            <a href="#" id="changePassword" class="btn btn-change-password"
+               data-account-id="${accountInfo.id}">Change Password</a>
         </div>
 
 
@@ -97,23 +98,26 @@
             <input id="oldPass" name="oldPass" type="password" class="input-group"
                    placeholder="Enter old password"
                    required/>
+            <div class="error-area error hide" id="old-password-error">
+                Old password is incorrect.
+            </div>
         </div>
 
-        <div class="form-group password-group">
+        <div class="form-group password-group new-password">
             <label class="lbl-group">NEW PASSWORD<span>*</span></label>
             <input id="newPass" name="newPass" type="password" class="input-group"
                    placeholder="Enter new password"
                    required/>
         </div>
 
-        <div class="form-group password-group">
+        <div class="form-group password-group confirm-password">
             <label class="lbl-group">CONFIRM PASSWORD<span>*</span></label>
             <input id="confirmPass" name="confirmPass" type="password" class="input-group"
                    placeholder="Enter new password again"
                    required/>
         </div>
 
-        <div class="error-area error hide error-password">
+        <div class="error-area error hide error-password" id="confirmPass-error">
             Passwords do not match, please retype.
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>

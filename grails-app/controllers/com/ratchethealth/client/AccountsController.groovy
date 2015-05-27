@@ -6,18 +6,26 @@ class AccountsController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth, except: ['confirmCode', 'confirmPassword', 'getForgotPassword', 'forgotPassword', 'resetPassword', 'confirmResetPassword']]
 
+    static allowedMethods = [getAccounts: ['GET'], getSingleAccount: ['GET'], addAccount: ['POST'], updateAccount: ['POST']]
+
     def accountService
 
-    def index() {
-        params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-        params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-        def accountList = accountService.getAccounts(request, response, params)
-        render(view: 'accounts', model: [accountList: accountList, pagesize: params.length])
+    def getAccounts() {
+        if (request.isXhr()) {
+            def resp = accountService.getAccounts(request, response, params);
+            render resp as JSON
+        } else {
+            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def accountList = accountService.getAccounts(request, response, params)
+            render(view: 'accounts', model: [accountList: accountList, pagesize: params.length])
+        }
     }
 
-    def getAccounts() {
-        def resp = accountService.getAccounts(request, response, params);
-        render resp as JSON
+    def addAccount() {
+        def resp = accountService.createAccount(request, response, params)
+        def result = [resp: resp]
+        render result as JSON
     }
 
     def getSingleAccount() {
@@ -26,11 +34,12 @@ class AccountsController extends BaseController {
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
 
-    def createAccount() {
-        def resp = accountService.createAccount(request, response, params)
+    def updateAccount() {
+        def resp = accountService.updateAccount(request, response, params)
         def result = [resp: resp]
         render result as JSON
     }
+
 
     def inviteAccount() {
         Integer accountId = params.int("accountId")
@@ -39,17 +48,12 @@ class AccountsController extends BaseController {
         render result as JSON
     }
 
-    def updateAccount() {
-        def resp = accountService.updateAccount(request, response, params)
-        def result = [resp: resp]
-        render result as JSON
-    }
-
-    def updatePassword() {
-        def resp = accountService.updatePassword(request, response, params)
-        def result = [resp: resp]
-        render result as JSON
-    }
+//
+//    def updatePassword() {
+//        def resp = accountService.updatePassword(request, response, params)
+//        def result = [resp: resp]
+//        render result as JSON
+//    }
 
     def confirmCode() {
         def code = params?.code
@@ -111,6 +115,11 @@ class AccountsController extends BaseController {
         def resp = accountService.activateAccount(request, response, accountId)
         def result = [resp: resp]
         render result as JSON
+    }
+
+    def checkAccountEmail() {
+        def data = accountService.checkEmail(request, response, params)
+        render data as JSON
     }
 
 }

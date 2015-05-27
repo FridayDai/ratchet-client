@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -28,12 +30,13 @@
                 updatePatient: "/patients/{0}",
                 assignTreatment: "/patients/{0}/treatments",
                 invitePatient: "/patients/{0}/invite",
-                checkPatientId: "/patients/check_id",
-                checkPatientEmail: "/patients/check_email",
+                checkPatientId: "/patients/check-id",
+                checkPatientEmail: "/patients/check-email",
                 query: "/getProvider",
                 getTreatments: "/treatments",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                //getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
             }
         },
         tabs,
@@ -92,6 +95,7 @@
 
             patientId = $(this).data("patientId");
             clientId = $(this).data("clientId");
+            var accountId = $(this).data("accountId");
 
             var parent = $(this).parents();
             var id = parent.find(".id").text();
@@ -112,8 +116,7 @@
                         //$.each(staffArray, function (index, item) {
                         //    staffIdArr.push(parseInt(item));
                         //});
-                        var date = new Date($("#surgeryTime").val());
-                        var surgeryTime = date.getTime();
+                        var surgeryTime = RC.common.parseVancouverTime($("#surgeryTime").val());
                         var ecFirstName = $('#emergency-firstName').val();
                         var ecLastName = $('#emergency-lastName').val();
                         var relationship = $('#relationshipName').data("id");
@@ -149,7 +152,7 @@
             //_initSurgeryTime();
             _initSelect();
             _checkEmergencyContact();
-            _initSelectGroup();
+            _initSelectGroup(accountId);
 
         });
     }
@@ -188,7 +191,7 @@
         $("#relationshipName").combobox({
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
-                    return num.label.toLowerCase().indexOf(request.term) > -1;
+                    return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
                 if (!sources.length) {
                     var result = [
@@ -276,7 +279,7 @@
                             if (primaryPatientId === $('.patient-form #patientId').val()) {
                                 return '"true"';
                             }
-                            else if (!(resp.check === "false")) {
+                            else if (resp.check !== "false") {
                                 return "\"" + RC.constants.patientIdExist + "\"";
                             } else {
                                 return '"true"';
@@ -284,7 +287,7 @@
                         },
                         error: function (jqXHR) {
                             if (jqXHR.status === 500) {
-                                return
+                                return;
                             }
                         }
 
@@ -309,7 +312,7 @@
                             if (primaryEmail === $('.patient-form #email').val()) {
                                 return '"true"';
                             }
-                            else if (!(resp.check === "false")) {
+                            else if (resp.check !== "false") {
                                 return "\"" + RC.constants.emailExist + "\"";
                             } else {
                                 return '"true"';
@@ -317,7 +320,7 @@
                         },
                         error: function (jqXHR) {
                             if (jqXHR.status === 500) {
-                                return
+                                return;
                             }
                         }
 
@@ -361,7 +364,7 @@
                     okCallback: function () {
                         if (form.valid() && form.valid()) {
                             var number = $("#phone").val();
-                            var phoneNumber = number.split(' ').join('').split('(').join('').split(')').join('').split('-').join('');
+                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
                             var patientInfo = {
                                 patientId: patientId,
                                 id: $("#patientId").val(),
@@ -445,18 +448,18 @@
      * @param elem
      * @private
      */
-    function _disableButton(elem) {
-        elem.prop("disabled", true);
-    }
+    //function _disableButton(elem) {
+    //    elem.prop("disabled", true);
+    //}
 
     /**
      * enabled button
      * @param elem
      * @private
      */
-    function _enableButton(elem) {
-        elem.prop("disabled", false);
-    }
+    //function _enableButton(elem) {
+    //    elem.prop("disabled", false);
+    //}
 
     /**
      * init select treatment
@@ -472,7 +475,8 @@
                     url: opts.urls.getTreatments,
                     type: "POST",
                     data: {
-                        treatmentTitle: request.term
+                        treatmentTitle: request.term,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -548,7 +552,8 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId
+                        groupId: groupId,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -578,17 +583,13 @@
     }
 
     /**
-     * init surgery time
+     * init surgery date
      * @private
      */
     function _initSurgeryTime(time) {
-        $("#surgeryTime").datetimepicker("destroy");
-        $("#surgeryTime").datetimepicker({
-            controlType: 'input',
+        $("#surgeryTime").datepicker("destroy");
+        $("#surgeryTime").datepicker({
             dateFormat: 'MM d, yy',
-            timeFormat: "h:mm TT",
-            showOn: "focus",
-            ampm: true,
             minDate: new Date(time)
         });
     }
@@ -667,7 +668,7 @@
     }
 
     function _checkEmergencyContact() {
-        _.each($('.emergency-field'), function (element, index) {
+        _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
                 if ($(element).val() !== '') {
                     $('#emergency-firstName').attr('required', true);
@@ -676,7 +677,7 @@
                     $('#emergency-email').attr('required', true);
                     $('.permission-confirm-check').attr('required', true);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).show();
                     });
 
@@ -695,7 +696,7 @@
                     $('#emergency-email').attr('required', false);
                     $('.permission-confirm-check').attr('required', false);
 
-                    _.each($('.emergency-required'), function (element, index) {
+                    _.each($('.emergency-required'), function (element) {
                         $(element).hide();
                     });
 
@@ -714,17 +715,18 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup() {
+    function _initSelectGroup(accountId) {
         $("#selectGroup").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
-                        name: request.term
+                        name: request.term,
+                        length: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -797,3 +799,4 @@
 
 })
 (jQuery);
+/* jshint +W071 */

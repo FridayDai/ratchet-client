@@ -137,6 +137,5 @@ class AuthenticationService {
         catch (UnirestException e) {
             throw new ApiAccessException(e.message)
         }
-
     }
 }

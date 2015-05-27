@@ -14,13 +14,13 @@
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>
 
-            <form action="/confirm_password" method="post" class="form create-password-form">
-                <div class="form-style-content">
-                    <div class="greeting color-black align-center">
-                        <span>Hi</span>
-                        <g:if test="${staff.doctor == true}"><span>Dr.</span></g:if>
-                        <span>${staff.firstName} ${staff.lastName}!</span>
-                    </div>
+			<form action="/confirm-password" method="post" class="form create-password-form">
+				<div class="form-style-content">
+					<div class="greeting color-black align-center">
+						<span>Hi</span>
+						<g:if test="${staff.doctor == true}"><span>Dr.</span></g:if>
+						<span>${staff.firstName} ${staff.lastName}!</span>
+					</div>
 
                     <div class="info color-black align-center">
                         Welcome to Ratchet Health!

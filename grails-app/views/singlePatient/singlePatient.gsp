@@ -66,7 +66,8 @@
             <g:if test="${medicalRecords.size() < treatmentLimit}">
                 <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
                         data-id="${patientInfo.patientId}"
-                        data-client-id="${patientInfo.client.id}">Add Treatment</button>
+                        data-client-id="${patientInfo.client.id}"
+                        data-account-id="${request.session.accountId}">Add Treatment</button>
             </g:if>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
@@ -141,7 +142,7 @@
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline">
-            <label class="lbl-group">SURGERY TIME<span>*</span></label>
+            <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time required"
                    placeholder="" disabled>
         </div>
@@ -189,7 +190,7 @@
 
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
         <div class="form-group inline ">
-            <label class="lbl-group">SURGERY TIME</label>
+            <label class="lbl-group">SURGERY DATE</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgery-time"
                    placeholder="Surgery Time" tabindex="-1" required>
         </div>

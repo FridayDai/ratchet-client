@@ -1,3 +1,6 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
+/* jshint -W072 */
 (function ($, undefined) {
     'use strict';
 
@@ -45,19 +48,16 @@
                 }
             },
             urls: {
-                careGiver: "/patients/{0}/emergency_contact",
-                deleteCareGiver: "/patients/{0}/{1}/emergency_contact/{2}",
-                updateCareGiver: "/patients/{0}/emergency_contact/update",
-                updateCareTeamSurgeon: "/patients/{0}/group_and_provider/update",
+                careGiver: "/patients/{0}/emergency-contact",
+                deleteCareGiver: "/patients/{0}/{1}/emergency-contact/{2}",
+                updateCareGiver: "/patients/{0}/emergency-contact/update",
+                updateCareTeamSurgeon: "/patients/{0}/group-and-provider/update",
                 getStaffs: "/staffs",
-                getGroups: "/getStaffGroups"
+                getGroups: "/accounts/{0}/groups"
             }
         },
-        careTeamRole =
-            ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical Therapists", "Primary Physician", "Scheduler", "Surgeon"],
         careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
         careGiverStatus = ["INACTIVE", "ACTIVE"],
-        careTeamTable,
         careGiverTable;
 
     /**
@@ -85,7 +85,12 @@
                 $(".next").text('');
                 $(".dataTables_paginate").css("display", "none");
                 var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                var bothDisabled = paginate
+                        .find(".previous")
+                        .hasClass("disabled") &&
+                    paginate
+                        .find(".next")
+                        .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
@@ -103,24 +108,24 @@
                 },
                 {
                     data: "firstName",
-                    class: "firstName",
+                    className: "firstName",
                     width: "15%"
                 },
                 {
                     data: "lastName",
-                    class: "lastName",
+                    className: "lastName",
                     width: "15%"
                 },
                 {
                     data: function (source) {
                         return careGiverRelation[source.relationShip - 1];
                     },
-                    class: "relationship",
+                    className: "relationship",
                     width: "15%"
                 },
                 {
                     data: "email",
-                    class: "email",
+                    className: "email",
                     width: "20%"
                 },
                 {
@@ -138,14 +143,37 @@
                     "orderable": false,
                     data: function (source) {
                         if (active === "true") {
-                            return '<button id="edit-care-giver" disabled="disabled" class="btn-edit disabled" data-care-giver-id="' + source.id + '" ></button>' +
-                                '<button id="remove-care-team" disabled="disabled" class="btn-remove-team disabled" data-care-giver-id="' + source.id + '" > </button>';
+                            return [
+                                '<button ',
+                                'id="edit-care-giver" ',
+                                'disabled="disabled" ',
+                                'class="btn-edit disabled" ',
+                                'data-care-giver-id="{0}"',
+                                '</button>',
+                                '<button ',
+                                'id="remove-care-team" ',
+                                'disabled="disabled" ',
+                                'class="btn-remove-team disabled" ',
+                                'data-care-giver-id="{0}"',
+                                '</button>'
+                            ].join('').format(source.id);
 
                         } else {
-                            return '<a href="#" id="edit-care-giver" class="btn-edit" data-care-giver-id="' + source.id + '" ></a>' +
-                                '<a href="#" id="remove-care-team" class="btn-remove-team" data-care-giver-id="' + source.id + '" > </a>';
+                            return [
+                                '<a ',
+                                'href="#" ',
+                                'id="edit-care-giver" ',
+                                'class="btn-edit" ',
+                                'data-care-giver-id="{0}"',
+                                '</a>',
+                                '<a ',
+                                'href="#" ',
+                                'id="remove-care-team" ',
+                                'class="btn-remove-team" ',
+                                'data-care-giver-id="{0}"',
+                                '</a>'
+                            ].join('').format(source.id);
                         }
-
                     },
                     width: "10%"
                 }
@@ -173,6 +201,7 @@
 
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
+            var accountId = $(this).data("accountId");
             var existSurgeonId = $(this).parent().find("#surgeonId").text();
             var firstName = element.find("#surgeonFirstName").text().trim();
             var lastName = element.find("#surgeonLastName").text().trim();
@@ -180,7 +209,7 @@
             element.find("#selectStaff").val(firstName + ' ' + lastName);
             element.find("#groupSelect").val(groupName);
             var existGroupId = element.find("#hidden-group-id").val();
-            var existSurgeonId = element.find("#hidden-surgeon-id").val();
+            existSurgeonId = element.find("#hidden-surgeon-id").val();
             var form = element.find(".edit-surgeon");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editSurgeonFormArguments, {
@@ -215,7 +244,7 @@
             }));
 
             _initStaffSelect(form, existSurgeonId, existGroupId);
-            _initSelectGroup(form, existSurgeonId);
+            _initSelectGroup(form, existSurgeonId, accountId);
         });
     }
 
@@ -230,7 +259,7 @@
             type: 'POST',
             data: ids
         }).done(function (data) {
-            if (data.doctor == true) {
+            if (data.doctor === true) {
                 element.find("#surgeonDoctor").text("");
                 element.find("#surgeonDoctorHidden").text("Dr.").addClass("show");
             } else {
@@ -305,11 +334,6 @@
             data: careGiverInfo
         }).done(function (data) {
             if (data.resp === true) {
-                var medicalRecordId = data.medicalRecordId;
-                var ids = {
-                    medicalRecordId: medicalRecordId
-                };
-                //_initGiverTable(element, ids);
                 _initGiverTable(element);
                 _removeCareGiver(element);
             }
@@ -411,12 +435,12 @@
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if ($(".inviteGiverForm").valid()) {
+                    if (form.valid()) {
 
-                        var firstName = eleParent.find("#giver-firstName").val();
-                        var lastName = eleParent.find("#giver-lastName").val();
-                        var email = eleParent.find("#giver-email").val();
-                        var relationship = eleParent.find("#relationships").data('id');
+                        var firstName = form.find("#giver-firstName").val();
+                        var lastName = form.find("#giver-lastName").val();
+                        var email = form.find("#giver-email").val();
+                        var relationship = form.find("#relationships").data('id');
 
                         var careGiverInfo = {
                             medicalRecordId: medicalRecordId,
@@ -478,7 +502,7 @@
         $(form).find("#relationships").combobox({
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
-                    return num.label.toLowerCase().indexOf(request.term) > -1;
+                    return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
                 if (!sources.length) {
                     var result = [
@@ -514,7 +538,7 @@
         $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
-                    beforeSend: function (eve, ui) {
+                    beforeSend: function () {
                         RC.common.progress(false);
                     },
                     url: opts.urls.getStaffs,
@@ -522,7 +546,8 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId
+                        groupId: groupId,
+                        max: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -581,17 +606,18 @@
      * init select gruop
      * @private
      */
-    function _initSelectGroup(form, existSurgeonId) {
+    function _initSelectGroup(form, existSurgeonId, accountId) {
         $(form).find("#groupSelect").combobox({
             source: function (request, response) {
                 $.ajax({
                     beforeSend: function () {
                         RC.common.progress(false);
                     },
-                    url: opts.urls.getGroups,
+                    url: opts.urls.getGroups.format(accountId),
                     type: "POST",
                     data: {
-                        name: request.term
+                        name: request.term,
+                        length: 1000
                     },
                     success: function (data) {
                         if (!data.length) {
@@ -678,3 +704,5 @@
     });
 
 })(jQuery);
+/* jshint +W071 */
+/* jshint +W072*/

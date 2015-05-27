@@ -17,6 +17,8 @@ class AccountService {
         def start = params?.start
         def length = params?.length
         def name = params?.name
+        def sort = params?.sort
+        def order = params?.order
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
 
@@ -28,6 +30,8 @@ class AccountService {
                     .queryString("offset", start)
                     .queryString("name", name)
                     .queryString("clientId", request.session.clientId)
+                    .queryString("sorted", sort)
+                    .queryString("order", order)
                     .asString()
 
             def result = JSON.parse(resp.body)
@@ -102,7 +106,7 @@ class AccountService {
                     .field("patientManagement", "true")
                     .field("accountManagement", isAccountManagement)
                     .field("doctor", isDoctor)
-                    .field("groupIds",groupId)
+                    .field("groupIds", groupId)
                     .asString()
 
             if (resp.status == 201) {
@@ -162,11 +166,19 @@ class AccountService {
                     .field("type", params?.type)
                     .field("doctor", params?.doctor)
                     .field("accountManagement", params?.accountManagement)
-                    .field("groupIds",params?.groupId)
+                    .field("groupIds", params?.groupId)
                     .asString()
 
             if (resp.status == 200) {
                 log.info("Update account success, token: ${request.session.token}.")
+
+                def result = JSON.parse(resp.body)
+
+                if (accountId == request.session.accountId) {
+                    request.session.firstName = result.firstName
+                    request.session.lastName = result.lastName
+                    request.session.accountManagement = result.accountManagement
+                }
                 return true
             } else {
                 def result = JSON.parse(resp.body)
@@ -371,6 +383,34 @@ class AccountService {
             if (resp.status == 200) {
                 log.info("Activate password success, token: ${request.session.token}.")
                 return true
+            } else {
+                def result = JSON.parse(resp.body)
+                def message = result?.error?.errorMessage
+                throw new ApiReturnException(resp.status, message)
+            }
+        } catch (UnirestException e) {
+            throw new ApiAccessException(e.message)
+        }
+    }
+
+    def checkEmail(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
+
+        def url = grailsApplication.config.ratchetv2.server.url.checkAccountEmail
+
+        try {
+            log.info("Call backend service to check account email, token: ${request.session.token}.")
+            def resp = Unirest.post(url)
+                    .header("X-Auth-Token", request.session.token)
+//                    .field("clientId", request.session.clientId)
+                    .field("email", params?.email)
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("this account email already exist, token: ${request.session.token}")
+                return [check: "true"]
+            } else if (resp.status == 404) {
+                log.info("this account email doesn't exist, token: ${request.session.token}")
+                return [check: "false"]
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage

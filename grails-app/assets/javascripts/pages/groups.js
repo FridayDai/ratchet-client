@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -25,11 +27,15 @@
                 }
             },
             urls: {
-                getGroups: "/getGroups",
-                addGroup: "/createGroup",
-                updateGroup: "/updateGroup",
-                deleteGroup: "/deleteGroup"
+                groups: "/groups",
+                updateGroup: "/groups/update",
+                deleteGroup: "/groups/delete"
             }
+        },
+        sortType = {
+            "ID": "id",
+            "Group Name": "name",
+            "Last Update": "lastUpdated"
         },
         groupTable;
 
@@ -43,9 +49,10 @@
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
 
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.getGroups,
+                url: opts.urls.groups,
                 pages: 2, // number of pages to cache
-                data: data
+                data: data,
+                method: "get"
             }),
             "columnDefs": [{
                 "targets": [0, 3],
@@ -73,7 +80,7 @@
                     "targets": 2,
                     "render": function (data, type, full) {
                         var lastUpdateStr = data === undefined ? full.lastUpdated : data;
-                        var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                        var lastUpdateTime = new Date(parseInt(lastUpdateStr, 10));
                         var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
@@ -123,6 +130,33 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _sortGroupTable() {
+        _.each($('#groupsTable th'), function (element) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = sortType[ele.text()];
+                var orderSC;
+                if (flag === 0) {
+                    flag = 1;
+                    orderSC = "asc";
+                } else {
+                    flag = 0;
+                    orderSC = "desc";
+                }
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initTable(data);
+            });
+        });
+    }
+
+    /**
      * new a single group
      */
     var addGroupModel = function (e) {
@@ -147,11 +181,18 @@
             }
         }));
 
+        _bindEnterEvent($('#groupName'), function() {
+            var name = $('#groupName').val();
+            if ($ele.valid()) {
+                _addGroup(name);
+                $ele.dialog("destroy").addClass('ui-hidden');
+            }
+        });
     }
 
     function _addGroup(name) {
         $.ajax({
-            url: opts.urls.addGroup,
+            url: opts.urls.groups,
             type: "POST",
             data: {name: name},
             dataType: "json",
@@ -160,6 +201,16 @@
             }
         });
 
+    }
+
+    //bind group name event enter
+    function _bindEnterEvent(element, callback) {
+        element.on("keydown",function (event) {
+            if (event.keyCode === 13) {
+                callback();
+                element.off("keydown");
+            }
+        });
     }
 
     /**
@@ -191,6 +242,17 @@
                 return false;
             }
         }));
+
+        _bindEnterEvent($('#groupName'), function() {
+            var groupInfo = {
+                name: $('#groupName').val(),
+                groupId: $this.data("groupId")
+            };
+            if ($ele.valid()) {
+                _editGroup(groupInfo);
+                $ele.dialog("destroy").addClass('ui-hidden');
+            }
+        });
     }
 
     function _editGroup(groupInfo) {
@@ -234,6 +296,7 @@
             dataType: "json",
             success: function () {
                 parentTr.remove();
+                groupTable.clearPipeline().draw();
             },
             error: function (jqXHR) {
                 if (jqXHR.status === 400) {
@@ -279,8 +342,10 @@
     function _init() {
         events();
         _initTable();
+        _sortGroupTable();
     }
 
     _init();
 
 })(jQuery);
+/* jshint +W071 */

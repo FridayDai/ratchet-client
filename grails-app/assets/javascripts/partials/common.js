@@ -1,3 +1,6 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
+/* jshint -W074 */
 (function ($, undefined) {
     'use strict';
     var common = RC.common = RC.common || {};
@@ -120,14 +123,14 @@
         }
 
         function _sendAssistReport() {
-            var addAssistUrl = '/addAssist';
+            var addAssistUrl = '/assist-me';
             var data = _getAssistData();
 
             $.ajax({
                 url: addAssistUrl,
                 type: 'post',
                 data: data,
-                success: function (data) {
+                success: function () {
                     RC.common.showMsg({
                         msg: RC.constants.sendAssistMessageSuccess
                     });
@@ -301,23 +304,38 @@
 
         $.widget("ui.combobox", {
             _create: function () {
-                var wrapper = this.wrapper = $("<span />").addClass("ui-combobox")
-                    , self = this;
+                var wrapper = this.wrapper = $("<span />").addClass("ui-combobox"),
+                    self = this,
+                    classes = [
+                        "input-group",
+                        "ui-state-default",
+                        "ui-combobox-input",
+                        "ui-widget",
+                        "ui-widget-content",
+                        "ui-corner-left"
+                    ].join(' ');
+
 
                 this.element.wrap(wrapper);
 
                 this.element
-                    .addClass("input-group ui-state-default ui-combobox-input ui-widget ui-widget-content ui-corner-left")
+                    .addClass(classes)
+                    .focus(function () {
+                        if ($(this).data('uiAutocomplete').options.focusSearch) {
+                            $(this).autocomplete("search");
+                        }
+                    })
                     .autocomplete($.extend({
                         minLength: 0,
-                        open: function (event, ui) {
+                        focusSearch: true,
+                        open: function (event) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
                                 .addClass('ui-button-icon-primary');
                             $(this).data("id", "");
                         },
-                        close: function (event, ui) {
+                        close: function (event) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
@@ -332,7 +350,7 @@
                             $(this).val(ui.item.label);
                             $(this).data("id", ui.item.value);
                         },
-                        search: function (data) {
+                        search: function () {
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-primary')
                                 .addClass('ui-button-icon-loading');
@@ -456,12 +474,19 @@
          * @param hide
          */
         progress: function (hide) {
+            var elementStr = [
+                '<div id="msg-process">',
+                    '<div class="msg-process-background ui-tips ui-tips-center"></div>',
+                    '<span class="msg-process-loading"></span>',
+                '</div>'
+            ].join('');
+
             if (hide === undefined || hide === false) {
                 if ($("#msg-process").length > 0) {
                     $("#msg-process").hide();
                 }
             } else {
-                var $msgDiv = $('<div id="msg-process"><div class="msg-process-background ui-tips ui-tips-center"></div><span class="msg-process-loading"></span></div>');
+                var $msgDiv = $(elementStr);
                 if ($("#msg-process").length > 0) {
                     $msgDiv = $("#msg-process");
                 } else {
@@ -505,7 +530,9 @@
                 marginLeft = showMsgArguments.marginLeft;
             }
             else {
-                marginLeft = (parseInt(match.exec($msgDiv.css('width'))) + parseInt(match.exec($msgDiv.css('padding-left')))) / -2;
+                marginLeft =
+                    (parseInt(match.exec($msgDiv.css('width')), 10) +
+                    parseInt(match.exec($msgDiv.css('padding-left')), 10)) / -2;
             }
             $msgDiv.css('margin-left', marginLeft + 'px');
 
@@ -570,6 +597,10 @@
                     });
                     confirmFormArguments.element.validate().resetForm();
                     confirmFormArguments.element[0].reset();
+                    var body = $(confirmFormArguments.element).parents().find("body");
+                    if (body.css("overflow") === "hidden") {
+                        body.css('overflow', 'auto');
+                    }
                     dialog.dialog("close");
                     $('.btn').blur();
                     //dialogOwn.appendTo(containerParent);
@@ -578,13 +609,21 @@
             };
 
             dialogOpts.buttons[title] = function (e) {
-                if ($.isFunction(confirmFormArguments.okCallback) && (confirmFormArguments.okCallback)(e)) {
-                    dialog.dialog("close");
+                var back = confirmFormArguments.okCallback(e);
+                if ($.isFunction(confirmFormArguments.okCallback)) {
+                    if ($.isFunction(back.promise)) {
+                        $.when(back).done(function () {
+                            dialog.dialog("close");
+                        });
+                    }
+                    else if(back) {
+                        dialog.dialog("close");
+                    }
                 }
             };
 
             if (cancel) {
-                dialogOpts.buttons['Cancel'] = function (e) {
+                dialogOpts.buttons.Cancel = function (e) {
                     if ($.isFunction(confirmFormArguments.cancelCallback) && (confirmFormArguments.cancelCallback)(e)) {
 
                     }
@@ -768,8 +807,8 @@
         showErrorTip: function (errorElement) {
             var element = $(errorElement.element);
             var form = element.closest("form");
-            if (form.css("display") == "none") {
-                return
+            if (form.css("display") === "none") {
+                return;
             } else {
                 var errorMessage = errorElement.message;
                 element.attr("data-error-msg", errorMessage);
@@ -910,12 +949,27 @@
                 $(".next").text('');
                 $(".display").css("display", "inline-table");
                 var paginate = $(this).siblings();
-                var bothDisabled = paginate.find(".previous").hasClass("disabled") && paginate.find(".next").hasClass("disabled");
+                var bothDisabled = paginate
+                                    .find(".previous")
+                                    .hasClass("disabled") &&
+                                paginate
+                                    .find(".next")
+                                    .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
             }
+        },
+
+        parseVancouverTime: function (time) {
+            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+        },
+
+        formatVancouverTime: function (time) {
+            return moment.tz(time, "America/Vancouver").format('MMM D, YYYY');
         }
     });
     _init();
 })(jQuery);
+/* jshint +W071 */
+/* jshint +W074 */

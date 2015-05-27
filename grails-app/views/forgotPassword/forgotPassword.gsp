@@ -15,7 +15,7 @@
 		<div class="cover-container">
 			<div class="image-ratchet-health cover-inner-header"></div>
 
-			<form action="/forgot_password" method="post" class="form password-form" novalidate="novalidate">
+			<form action="/forgot-password" method="post" class="form password-form" novalidate="novalidate">
 
 				<div class="form-style-content">
 					<p class="color-black p-title">Hi!</p>

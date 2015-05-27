@@ -273,14 +273,20 @@
     width: 60%;
     margin-top: 30px;
     margin-left: 7px;
+    &.new-password {
+        margin-top: 2px;
+    }
+    &.confirm-password {
+        margin-bottom: 6px;
+    }
 }
 
 .hide {
-    display: none;
+    visibility: hidden;
 }
 
 .show {
-    display: block;
+    visibility: visible;
 }
 
 .form-group.required {

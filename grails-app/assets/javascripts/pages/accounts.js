@@ -1,3 +1,5 @@
+// TODO: This code should be removed after refactor
+/* jshint -W071 */
 (function ($, undefined) {
     'use strict';
 
@@ -36,23 +38,37 @@
                 }
             },
             urls: {
-                query: "/getAccounts",
-                add: "/createAccount",
-                updateAccount: "/updateAccount",
-                inviteAccount: "/inviteAccount/{0}",
-                updatePassword: "/updatePassword",
-                showSingleAccount: "/accounts/{0}",
-                deactivateAccount: "/deactivateAccount/{0}",
-                activateAccount: "/activateAccount/{0}",
-                getGroups: "/getStaffGroups",
-                getAllGroups: "/getGroups"
+                accounts: "/accounts",
+                singleAccount: "/accounts/{0}",
+                updatePassword: "/profile/{0}/",
+                inviteAccount: "/accounts/{0}/invite",
+                activateAccount: "/accounts/{0}/activate",
+                deactivateAccount: "/accounts/{0}/deactivate",
+                getAllGroups: "/groups",
+                checkAccountEmail: "/accounts/check-email"
             },
             img: {
                 isDoctor: ""
             }
         },
-        accountType = ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"],
-        staffGroup = ["Patient Management", "Account Management"],
+        sortType = {
+            "ID": "id",
+            "Name": "firstName",
+            "Email Address": "email",
+            "Last Update": "lastUpdated"
+        },
+        accountType = [
+            "Anesthesiologist",
+            "Medical Assistant",
+            "Management",
+            "Nurse",
+            "Physical therapists (PTs)",
+            "Primary Physican",
+            "Scheduler",
+            "Surgeon",
+            "Yes",
+            "No"],
+        staffGroup = ["Patient Management", "Administrator"],
         accountTable;
 
     /**
@@ -66,9 +82,10 @@
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
             ajax: $.fn.dataTable.pipeline({
-                url: opts.urls.query,
+                url: opts.urls.accounts,
                 pages: 2, // number of pages to cache
-                data: data
+                data: data,
+                method: "get"
             }),
             "columnDefs": [{
                 "targets": 4,
@@ -89,13 +106,23 @@
                             dataName;
 
                         if (full[5] === "true") {
-                            dataName = ("<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + data + "</div>");
+                            dataName = [
+                                "<div class='img'>",
+                                "<img src='{0}'/>",
+                                " {1}",
+                                "</div>"
+                            ].join('').format(opts.img.isDoctor, data);
                         } else {
                             dataName = data;
                         }
 
                         if (full.doctor === true) {
-                            fullName = "<div class='img'><img src=" + opts.img.isDoctor + "/>" + " " + full.firstName + " " + full.lastName + "</div>";
+                            fullName = [
+                                "<div class='img'>",
+                                "<img src='{0}'/>",
+                                " {1} {2}",
+                                "</div>"
+                            ].join('').format(opts.img.isDoctor, full.firstName, full.lastName);
                         } else {
                             fullName = full.firstName + " " + full.lastName;
                         }
@@ -116,8 +143,8 @@
                 {
                     "targets": 3,
                     "render": function (data, type, full) {
-                        var lastUpdateStr = data === undefined ? full.lastUpdateDate : data;
-                        var lastUpdateTime = new Date(parseInt(lastUpdateStr));
+                        var lastUpdate = data === undefined ? full.lastUpdateDate : data;
+                        var lastUpdateTime = new Date(parseInt(lastUpdate, 10));
                         var formatTime = moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
                         return formatTime;
                     },
@@ -127,7 +154,9 @@
                     "targets": 4,
                     "render": function (data, type, full) {
                         var id = data === undefined ? full.id : data;
-                        return '<a href="/single_account/' + id + '" data-id ="' + id + '" class="view"><span>View</span></a>';
+                        return '<a href="/accounts/' + id + '" data-id ="' + id + '" class="view">' +
+                            '<span>View</span>' +
+                            '</a>';
                     },
                     width: "7%"
                 },
@@ -166,7 +195,7 @@
         $('#accountsTable tbody').on('click', 'tr', function () {
             var id = $(this).find("td a").data("id");
             if (id) {
-                var url = opts.urls.showSingleAccount.format(id);
+                var url = opts.urls.singleAccount.format(id);
                 window.location.href = url;
             } else {
                 return;
@@ -204,6 +233,34 @@
     }
 
     /**
+     *
+     * @private
+     */
+    function _sortAccountTable() {
+        _.each($('#accountsTable th'), function (element) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = sortType[ele.text()];
+                var orderSC;
+                if (flag === 0) {
+                    flag = 1;
+                    orderSC = "asc";
+                } else {
+                    flag = 0;
+                    orderSC = "desc";
+                }
+
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initTable(data);
+            });
+        });
+    }
+
+    /**
      * prepare data of add account
      * @private
      */
@@ -213,12 +270,16 @@
         var email = $("#email").val();
         //var type = $("#type").data("id");
         var groupId = $("#selectGroup").val();
-        var isAccountManagement, isDoctor, type;
+        var isAccountManagement, isDoctor, type, isProvider;
 
-        $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
-        $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-        $("#provider").attr("checked") === "checked" ? type = 9 : type = 10;
-
+        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
+        isDoctor = $("#doctor").attr("checked") === "checked";
+        isProvider = $("#provider").attr("checked") === "checked";
+        if (isProvider) {
+            type = 9;
+        } else {
+            type = 10;
+        }
 
         var data = {
             firstName: firstName,
@@ -241,13 +302,57 @@
         var newAccountData = _prepareAddData();
 
         $.ajax({
-            url: opts.urls.add,
+            url: opts.urls.accounts,
             type: "post",
             data: newAccountData,
             success: function () {
                 _loadData();
             }
         });
+    }
+
+
+    /**
+     * set validate
+     * @private
+     */
+    function _setValidate(form) {
+        form.validate({
+                rules: {
+                    email: {
+                        email: true,
+                        remote: {
+                            url: opts.urls.checkAccountEmail,
+                            type: "POST",
+                            beforeSend: function () {
+                                RC.common.progress(false);
+                            },
+                            data: {
+                                email: function () {
+                                    return $('#table-form #email').val();
+                                }
+                            },
+                            async: false,
+                            dataFilter: function (responseString) {
+                                var resp = jQuery.parseJSON(responseString);
+
+                                if (resp.check !== "false") {
+                                    return "\"" + RC.constants.emailExist + "\"";
+                                } else {
+                                    return '"true"';
+                                }
+                            },
+                            error: function (jqXHR) {
+                                if (jqXHR.status === 500) {
+                                    return;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        );
     }
 
 
@@ -260,10 +365,12 @@
         $("#add-account").on("click", function (e) {
             e.preventDefault();
             $(".accounts-form")[0].reset();
+            var form = $(".accounts-form");
+            _setValidate(form);
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
-                element: $(".accounts-form"),
+                element: form,
                 okCallback: function () {
-                    if ($("#table-form").valid()) {
+                    if (form.valid() && form.valid()) {
                         _add();
                         return true;
                     }
@@ -348,7 +455,7 @@
             var lastName = parent.find(".account-last-name").text();
             var email = parent.find(".account-email").text();
             var accountRole = parent.find(".account-role").text();
-            var typeId = parent.find(".account-role").data("id");
+            //var typeId = parent.find(".account-role").data("id");
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
             var groups = parent.find(".groups").data("ids");
@@ -365,7 +472,7 @@
                 $("#doctor").prop("checked", true);
             }
 
-            if (isAccountManage === "Account Management") {
+            if (isAccountManage === "Administrator") {
                 $("#accountManagement").prop("checked", true);
             }
 
@@ -410,11 +517,16 @@
                             });
                         });
 
-                        var isAccountManagement, isDoctor, accountType;
+                        var isAccountManagement, isDoctor, accountType, isProvider;
 
-                        $("#accountManagement").attr("checked") === "checked" ? isAccountManagement = true : isAccountManagement = false;
-                        $("#doctor").attr("checked") === "checked" ? isDoctor = true : isDoctor = false;
-                        $("#accountProvider").attr("checked") === "checked" ? accountType = 9 : accountType = 10;
+                        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
+                        isDoctor = $("#doctor").attr("checked") === "checked";
+                        isProvider = $("#accountProvider").attr("checked") === "checked";
+                        if (isProvider) {
+                            accountType = 9;
+                        } else {
+                            accountType = 10;
+                        }
                         var accountInfo = {
                             accountId: accountId,
                             firstName: firstName,
@@ -427,7 +539,7 @@
                             newValue: newValue
                         };
 
-                        _updateStaff(accountInfo, groupValue);
+                        _updateStaff(accountInfo, groupValue, accountId);
                         return true;
                     }
                     return false;
@@ -444,9 +556,9 @@
      * @param accountInfo
      * @private
      */
-    function _updateStaff(accountInfo, groupValue) {
+    function _updateStaff(accountInfo, groupValue, id) {
         $.ajax({
-            url: opts.urls.updateAccount,
+            url: opts.urls.singleAccount.format(id),
             type: "POST",
             data: accountInfo,
             dataType: "json",
@@ -472,22 +584,22 @@
         });
     }
 
-    /**
-     * set validate
-     * @private
-     */
-    function _setValidate() {
-        $("#table-form").validate({
-                messages: {
-                    provider: RC.constants.waringMessageProvider,
-                    agent: RC.constants.waringMessageAgent,
-                    email: RC.constants.waringMessageEmail
-                }
-            }
-        );
-    }
+    ///**
+    // * set validate
+    // * @private
+    // */
+    //function _setValidate() {
+    //    $("#table-form").validate({
+    //            messages: {
+    //                provider: RC.constants.waringMessageProvider,
+    //                agent: RC.constants.waringMessageAgent,
+    //                email: RC.constants.waringMessageEmail
+    //            }
+    //        }
+    //    );
+    //}
 
-        /**
+    /**
      * change account password
      * @private
      */
@@ -496,6 +608,8 @@
         $("#changePassword").on("click", function (e) {
             e.preventDefault();
             $(".update-password")[0].reset();
+
+            var accountId = $(this).data("accountId");
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.changePasswordFormArguments, {
                 element: $(".update-password"),
@@ -512,11 +626,18 @@
                             confirmPassword: confirmPass
                         };
 
-                        _updatePassword(passwords);
+                        return $.when(_updatePassword(passwords, accountId))
+                            .done(function () {
 
-                        return true;
+                            })
+                            .fail(function () {
+                                $('.ui-dialog #old-password-error').removeClass("hide").addClass("show");
+                            });
+
+                    } else {
+                        return false;
                     }
-                    return false;
+
                 }
             }));
 
@@ -534,7 +655,7 @@
 
         if ($(".update-password").valid() && password !== confirmPassword) {
             //$(".error-area").text(RC.constants.passwordTip);
-            $(".error-area").addClass("show");
+            $("#confirmPass-error").removeClass("hide").addClass("show");
             return false;
         }
         return true;
@@ -548,18 +669,20 @@
         function _resetInput(e) {
             e.preventDefault();
 
-            if ($(".error-area").hasClass("show")) {
-                $(".error-area").removeClass("show");
-            }
+            _.each($(".error-area"), function (element) {
+                if ($(element).hasClass("show")) {
+                    $(".error-area").removeClass("show").addClass("hide");
+                }
+            });
         }
 
-        $("#confirmPass").on("input", function (e) {
+        $("#confirmPass, #oldPass").on("input", function (e) {
             _resetInput(e);
         });
 
-        $("#confirmPass").on("blur", function (e) {
+        $("#confirmPass, #oldPass").on("blur", function (e) {
             _resetInput(e);
-            _isPasswordConsistent();
+            //_isPasswordConsistent();
         });
     }
 
@@ -569,18 +692,39 @@
      * @param passwords
      * @private
      */
-    function _updatePassword(passwords) {
+    function _updatePassword(passwords, accountId) {
+
+        var deferred = $.Deferred();
         $.ajax({
-            url: opts.urls.updatePassword,
+            url: opts.urls.updatePassword.format(accountId),
             type: "POST",
             data: passwords,
             dataType: "json",
             success: function () {
-                RC.common.showMsg({
-                    msg: RC.constants.changePasswordSuccess
-                });
+                deferred.resolve();
+                setTimeout(function () {
+                    RC.common.showMsg({
+                        msg: RC.constants.changePasswordSuccess
+                    });
+                }, 1000);
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 400) {
+                    deferred.reject();
+                }
+                if (jqXHR.status === 401) {
+                    window.location.href = "/login";
+                }
+                if (jqXHR.status === 403 || jqXHR.status >= 404) {
+                    deferred.resolve();
+                    RC.common.error({
+                        title: RC.constants.errorTitle404,
+                        message: RC.constants.errorTip
+                    });
+                }
             }
         });
+        return deferred.promise();
     }
 
     /**
@@ -632,44 +776,44 @@
      * init select
      * @private
      */
-    function _initSelect() {
-        var data = [
-            {label: "Anesthesiologist", id: 1},
-            {label: "Medical Assistant", id: 2},
-            {label: "Management", id: 3},
-            {label: "Nurse", id: 4},
-            {label: "Physical therapists (PTs)", id: 5},
-            {label: "Primary Physician", id: 6},
-            {label: "Scheduler", id: 7},
-            {label: "Surgeon", id: 8}
-        ];
-        $("#accountType").combobox({
-            source: function (request, response) {
-                var sources = _.filter(data, function (num) {
-                    return num.label.toLowerCase().indexOf(request.term) > -1;
-                });
-                if (!sources.length) {
-                    var result = [
-                        {
-                            label: 'No matches found',
-                            value: ''
-                        }
-                    ];
-                    response(result);
-                }
-                else {
-                    response($.map(sources, function (item) {
-
-                        return {
-                            label: item.label,
-                            value: item.id
-                        };
-                    }));
-                }
-            },
-            appendTo: ".container"
-        });
-    }
+    //function _initSelect() {
+    //    var data = [
+    //        {label: "Anesthesiologist", id: 1},
+    //        {label: "Medical Assistant", id: 2},
+    //        {label: "Management", id: 3},
+    //        {label: "Nurse", id: 4},
+    //        {label: "Physical therapists (PTs)", id: 5},
+    //        {label: "Primary Physician", id: 6},
+    //        {label: "Scheduler", id: 7},
+    //        {label: "Surgeon", id: 8}
+    //    ];
+    //    $("#accountType").combobox({
+    //        source: function (request, response) {
+    //            var sources = _.filter(data, function (num) {
+    //                return num.label.toLowerCase().indexOf(request.term) > -1;
+    //            });
+    //            if (!sources.length) {
+    //                var result = [
+    //                    {
+    //                        label: 'No matches found',
+    //                        value: ''
+    //                    }
+    //                ];
+    //                response(result);
+    //            }
+    //            else {
+    //                response($.map(sources, function (item) {
+    //
+    //                    return {
+    //                        label: item.label,
+    //                        value: item.id
+    //                    };
+    //                }));
+    //            }
+    //        },
+    //        appendTo: ".container"
+    //    });
+    //}
 
 
     /**
@@ -728,7 +872,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("INACTIVE").removeClass("span-deactive").addClass("span-active");
+                    parents.find(".span-activate-action").text("INACTIVE")
+                        .removeClass("span-deactive")
+                        .addClass("span-active");
                     parents.find(".activate-action").text("Activate");
                     RC.common.showMsg(opts.defaultConfirmArguments.showDeactiveArguments);
                 }
@@ -749,7 +895,9 @@
             dataType: "json",
             success: function (data) {
                 if (data.resp === true) {
-                    parents.find(".span-activate-action").text("ACTIVE").removeClass("span-active").addClass("span-deactive");
+                    parents.find(".span-activate-action").text("ACTIVE")
+                        .removeClass("span-active")
+                        .addClass("span-deactive");
                     parents.find(".activate-action").text("Deactivate");
                     RC.common.showMsg(opts.defaultConfirmArguments.showActiveArguments);
                 }
@@ -775,7 +923,8 @@
                 cache: "true",
                 data: function (name) {
                     return {
-                        name: name
+                        name: name,
+                        length: 1000
                     };
                 },
                 results: function (data) {
@@ -816,7 +965,8 @@
                 cache: "true",
                 data: function (name) {
                     return {
-                        name: name
+                        name: name,
+                        length: 1000
                     };
                 },
                 results: function (data) {
@@ -841,7 +991,7 @@
         var data = $('#isDoctorImg').data();
 
         if (data) {
-            opts.img.isDoctor = data['imgPath'];
+            opts.img.isDoctor = data.imgPath;
         }
     }
 
@@ -852,7 +1002,7 @@
     function _init() {
         _setIsDoctorImgPath();
         _loadData();
-        _setValidate();
+        //_setValidate();
         _bindAddEvent();
         _clickRow();
         _inviteAccount();
@@ -863,9 +1013,12 @@
         _logout();
         _goBackToPrePage();
         _activateAndDeactivate();
+        _sortAccountTable();
     }
 
     _init();
 
 })
 (jQuery);
+/* jshint +W071 */
+
