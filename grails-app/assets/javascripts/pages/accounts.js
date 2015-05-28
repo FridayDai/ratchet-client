@@ -379,43 +379,26 @@
             }));
 
             _initSelectGroup();
-            //var data = [
-            //    {label: "Anesthesiologist", id: 1},
-            //    {label: "Medical Assistant", id: 2},
-            //    {label: "Management", id: 3},
-            //    {label: "Nurse", id: 4},
-            //    {label: "Physical therapists (PTs)", id: 5},
-            //    {label: "Primary Physician", id: 6},
-            //    {label: "Scheduler", id: 7},
-            //    {label: "Surgeon", id: 8}
-            //];
-            //$("#type").combobox({
-            //    source: function (request, response) {
-            //        var sources = _.filter(data, function (num) {
-            //            return num.label.toLowerCase().indexOf(request.term) > -1;
-            //        });
-            //        if (!sources.length) {
-            //            var result = [
-            //                {
-            //                    label: 'No matches found',
-            //                    value: ''
-            //                }
-            //            ];
-            //            response(result);
-            //        }
-            //        else {
-            //            response($.map(sources, function (item) {
-            //
-            //                return {
-            //                    label: item.label,
-            //                    value: item.id
-            //                };
-            //            }));
-            //        }
-            //    },
-            //    appendTo: ".container"
-            //});
+            _checkIsProvider();
         });
+    }
+
+    /**
+     *
+     * @private
+     */
+    function _checkAddIsProvider() {
+        $("#provider").on("click", function () {
+
+            var isProvider = $("#provider").attr("checked") === "checked";
+            if (isProvider) {
+                $('#selectGroup').attr('required', true);
+                $('.hidden').addClass('show');
+            } else {
+                $('#selectGroup').attr('required', false);
+                $('.hidden').removeClass('show');
+            }
+        })
     }
 
     /**
@@ -478,8 +461,12 @@
 
             if (accountRole === "Yes") {
                 $("#accountProvider").prop("checked", true);
+                $('#groupSelect').attr('required', true);
+                $('.hidden').addClass('show');
             } else {
                 $("#accountProvider").prop("checked", false);
+                $('#groupSelect').attr('required', false);
+                $('.hidden').removeClass('show');
             }
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
@@ -546,9 +533,25 @@
                 }
             }));
             _initGroupSelect(selectResults);
+            _checkEditIsProvider();
             //$("#groupSelect").val(selectResults);
             //_initSelect();
         });
+    }
+
+    function _checkEditIsProvider() {
+
+        $("#accountProvider").on("click", function () {
+
+            var isProvider = $("#accountProvider").attr("checked") === "checked";
+            if (isProvider) {
+                $('#groupSelect').attr('required', true);
+                $('.hidden').addClass('show');
+            } else {
+                $('#groupSelect').attr('required', false);
+                $('.hidden').removeClass('show');
+            }
+        })
     }
 
     /**
@@ -556,6 +559,7 @@
      * @param accountInfo
      * @private
      */
+
     function _updateStaff(accountInfo, groupValue, id) {
         $.ajax({
             url: opts.urls.singleAccount.format(id),

@@ -53,7 +53,7 @@
 
         .span-active {
             padding: 2px 3px;
-            
+
             color: $base-color-white;
             background: $base-light-grey-color;
             vertical-align: sub;
@@ -282,13 +282,13 @@
     }
 }
 
-.hide {
-    visibility: hidden;
-}
-
-.show {
-    visibility: visible;
-}
+//.hide {
+//    visibility: hidden;
+//}
+//
+//.show {
+//    visibility: visible;
+//}
 
 .form-group.required {
     margin: 0;
