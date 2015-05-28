@@ -398,7 +398,7 @@
                 $('#selectGroup').attr('required', false);
                 $('.hidden').removeClass('show');
             }
-        })
+        });
     }
 
     /**
@@ -551,7 +551,7 @@
                 $('#groupSelect').attr('required', false);
                 $('.hidden').removeClass('show');
             }
-        })
+        });
     }
 
     /**
