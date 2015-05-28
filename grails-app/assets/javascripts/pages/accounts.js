@@ -379,7 +379,7 @@
             }));
 
             _initSelectGroup();
-            _checkIsProvider();
+            _checkAddIsProvider();
         });
     }
 
