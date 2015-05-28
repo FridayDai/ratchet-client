@@ -4,11 +4,6 @@ import com.mashape.unirest.http.exceptions.UnirestException
 import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
-import grails.web.JSONBuilder
-import org.apache.commons.lang.StringUtils
-import org.codehaus.groovy.grails.io.support.IOUtils
-import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class PatientsController extends BaseController {
 
@@ -22,30 +17,30 @@ class PatientsController extends BaseController {
 
     def getPatients() {
         if (request.isXhr()) {
-            def resp = patientService.loadPatients(request, response, params)
+            def resp = patientService.loadPatients(request, params)
             render resp as JSON
         } else {
             params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
             params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-            def patientList = patientService.loadPatients(request, response, params)
+            def patientList = patientService.loadPatients(request, params)
             render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
         }
     }
 
     def addPatient() {
-        def resp = patientService.addPatients(request, response, params)
+        def resp = patientService.addPatients(request, params)
         render resp as JSON
     }
 
     def lookup() {
-        def resp = patientService.lookup(request, response, params)
+        def resp = patientService.lookup(request, params)
         render resp as JSON
     }
 
     def downloadFile() {
         try {
-            def webRootDir = servletContext.getRealPath("/")
-            def file = new File("${webRootDir}/bulk-patient-import-sample.csv")
+            def root = this.servletContext.getRealPath("/")
+            def file = new File("${root}/bulk-patient-import-sample.csv")
             if (file.exists()) {
                 response.setContentType("file-mime-type")
                 response.setHeader("Content-disposition", "attachment;filename=${file.name}")
@@ -61,27 +56,27 @@ class PatientsController extends BaseController {
     }
 
     def uploadFile() {
-        def data = patientService.uploadPatients(request, response, params)
+        def data = patientService.uploadPatients(request, params)
         render data as JSON
     }
 
     def savePatients() {
-        def resp = patientService.savePatients(request, response, params)
+        def resp = patientService.savePatients(request, params)
         render resp as JSON
     }
 
     def checkPatientExist() {
-        def data = singlePatientService.showPatientByPatientId(request, response, params)
+        def data = singlePatientService.showPatientByPatientId(request, params)
         render data as JSON
     }
 
     def checkPatientEmailExist() {
-        def data = singlePatientService.checkPatientEmail(request, response, params)
+        def data = singlePatientService.checkPatientEmail(request, params)
         render data as JSON
     }
 
     def downloadErrors() {
-        def errorFilePath = patientService.downloadErrors(request, response, params)
+        def errorFilePath = patientService.downloadErrors(request)
 
         if (errorFilePath) {
             redirect url: errorFilePath

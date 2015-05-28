@@ -7,7 +7,6 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class TaskService {
 
@@ -16,7 +15,7 @@ class TaskService {
 
     def messageSource
 
-    def getOverdueTasks(HttpServletRequest request, HttpServletResponse response, params)
+    def getOverdueTasks(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def max = params?.max
@@ -50,7 +49,7 @@ class TaskService {
 
     }
 
-    def sendTaskEmailToPatient(HttpServletRequest request, HttpServletResponse response, params)
+    def sendTaskEmailToPatient(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def clientId = request.session.clientId

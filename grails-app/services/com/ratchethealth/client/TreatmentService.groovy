@@ -7,7 +7,6 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class TreatmentService {
 
@@ -16,7 +15,7 @@ class TreatmentService {
 
     def messageSource
 
-    def getTreatments(HttpServletRequest request, HttpServletResponse response, params)
+    def getTreatments(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def max = params?.max
         def offset = params?.offset
@@ -49,7 +48,7 @@ class TreatmentService {
 
     }
 
-    def assignTreatmentToExistPatient(HttpServletRequest request, HttpServletResponse response, params)
+    def assignTreatmentToExistPatient(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String assignTreatmentToExistPatientUrl = grailsApplication.config.ratchetv2.server.url.assignTreatmentToExistPatient
@@ -81,7 +80,7 @@ class TreatmentService {
         }
     }
 
-    def getTreatmentInfo(HttpServletRequest request, HttpServletResponse response, params)
+    def getTreatmentInfo(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String getTreatmentInfoUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentInfo
@@ -108,7 +107,7 @@ class TreatmentService {
 
     }
 
-    def getCareTeam(request, response, medicalRecordId)
+    def getCareTeam(request, medicalRecordId)
             throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
@@ -133,7 +132,7 @@ class TreatmentService {
         }
     }
 
-    def getCareGiver(HttpServletRequest request, HttpServletResponse response, medicalRecordId)
+    def getCareGiver(HttpServletRequest request, medicalRecordId)
             throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
@@ -162,7 +161,7 @@ class TreatmentService {
 
     }
 
-    def deleteCareGiver(HttpServletRequest request, HttpServletResponse response, params)
+    def deleteCareGiver(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String deleteCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
@@ -187,7 +186,7 @@ class TreatmentService {
         }
     }
 
-    def addCareGiver(HttpServletRequest request, HttpServletResponse response, params)
+    def addCareGiver(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
@@ -218,7 +217,7 @@ class TreatmentService {
 
     }
 
-    def updateSurgeryTime(HttpServletRequest request, HttpServletResponse response, params)
+    def updateSurgeryTime(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String updateSurgeryTimeUrl = grailsApplication.config.ratchetv2.server.url.updateSurgeryTime
@@ -244,7 +243,7 @@ class TreatmentService {
         }
     }
 
-    def archived(HttpServletRequest request, HttpServletResponse response, params)
+    def archived(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String archivedUrl = grailsApplication.config.ratchetv2.server.url.archived
@@ -270,7 +269,7 @@ class TreatmentService {
 
     }
 
-    def updateCareGiver(HttpServletRequest request, HttpServletResponse response, params)
+    def updateCareGiver(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String updateCareGiverUrl = grailsApplication.config.ratchetv2.server.url.deleteCareGiver
@@ -300,7 +299,7 @@ class TreatmentService {
 
     }
 
-    def updateCareTeamSurgeon(HttpServletRequest request, HttpServletResponse response, params)
+    def updateCareTeamSurgeon(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         String updateCareTeamSurgeonUrl = grailsApplication.config.ratchetv2.server.url.updateCareTeam

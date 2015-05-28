@@ -6,13 +6,12 @@ import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class AccountService {
 
     def grailsApplication
 
-    def getAccounts(HttpServletRequest request, HttpServletResponse response, params)
+    def getAccounts(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def start = params?.start
         def length = params?.length
@@ -56,7 +55,7 @@ class AccountService {
 
     }
 
-    def getSingleAccount(HttpServletRequest request, HttpServletResponse response, accountId)
+    def getSingleAccount(HttpServletRequest request, accountId)
             throws ApiAccessException, ApiReturnException {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
@@ -82,7 +81,7 @@ class AccountService {
         }
     }
 
-    def createAccount(HttpServletRequest request, HttpServletResponse response, params)
+    def createAccount(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def firstName = params?.firstName
         def lastName = params?.lastName
@@ -123,7 +122,7 @@ class AccountService {
 
     }
 
-    def inviteAccount(HttpServletRequest request, HttpServletResponse response, Integer accountId)
+    def inviteAccount(HttpServletRequest request, Integer accountId)
             throws ApiAccessException, ApiReturnException {
 
         String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
@@ -148,7 +147,7 @@ class AccountService {
 
     }
 
-    def updateAccount(HttpServletRequest request, HttpServletResponse response, params)
+    def updateAccount(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
@@ -191,7 +190,7 @@ class AccountService {
 
     }
 
-    def updatePassword(HttpServletRequest request, HttpServletResponse response, params)
+    def updatePassword(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.updatePassword
@@ -218,7 +217,7 @@ class AccountService {
         }
     }
 
-    def confirmCode(HttpServletRequest request, HttpServletResponse response, code)
+    def confirmCode(HttpServletRequest request, code)
             throws ApiAccessException {
 
         String confirmCodeUrl = grailsApplication.config.ratchetv2.server.url.confirmCode
@@ -243,7 +242,7 @@ class AccountService {
         }
     }
 
-    def activateStaff(HttpServletRequest request, HttpServletResponse response, params)
+    def activateStaff(HttpServletRequest request, params)
             throws ApiAccessException {
 
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
@@ -270,7 +269,7 @@ class AccountService {
 
     }
 
-    def askForResetPassword(HttpServletRequest request, HttpServletResponse response, email, clientType)
+    def askForResetPassword(HttpServletRequest request, email, clientType)
             throws ApiAccessException {
         def url = grailsApplication.config.ratchetv2.server.url.password.reset
 
@@ -291,7 +290,7 @@ class AccountService {
 
     }
 
-    def resetPassword(HttpServletRequest request, HttpServletResponse response, params)
+    def resetPassword(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def url = grailsApplication.config.ratchetv2.server.url.password.confirm
 
@@ -317,7 +316,7 @@ class AccountService {
         }
     }
 
-    def validPasswordCode(HttpServletRequest request, HttpServletResponse response, code)
+    def validPasswordCode(HttpServletRequest request, code)
             throws ApiAccessException, ApiReturnException {
         def url = grailsApplication.config.ratchetv2.server.url.password.restCheck
 
@@ -341,7 +340,7 @@ class AccountService {
         }
     }
 
-    def deactivateAccount(HttpServletRequest request, HttpServletResponse response, accountId)
+    def deactivateAccount(HttpServletRequest request, accountId)
             throws ApiAccessException, ApiReturnException {
 
         String deactivateStaff = grailsApplication.config.ratchetv2.server.url.deactivateStaff
@@ -367,7 +366,7 @@ class AccountService {
         }
     }
 
-    def activateAccount(HttpServletRequest request, HttpServletResponse response, accountId)
+    def activateAccount(HttpServletRequest request, accountId)
             throws ApiAccessException, ApiReturnException {
 
         String activateStaff = grailsApplication.config.ratchetv2.server.url.activateStaff
@@ -393,7 +392,8 @@ class AccountService {
         }
     }
 
-    def checkEmail(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
+    def checkEmail(HttpServletRequest request, params)
+            throws ApiAccessException, ApiReturnException {
 
         def url = grailsApplication.config.ratchetv2.server.url.checkAccountEmail
 

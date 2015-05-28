@@ -7,13 +7,12 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class GroupService {
 
     def grailsApplication
 
-    def showGroupsList(HttpServletRequest request, HttpServletResponse response, params)
+    def showGroupsList(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def start = params?.start
         def length = params?.length
@@ -57,7 +56,7 @@ class GroupService {
 
     }
 
-    def createGroup(HttpServletRequest request, HttpServletResponse response, params)
+    def createGroup(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def name = params?.name
@@ -87,7 +86,7 @@ class GroupService {
 
     }
 
-    def updateGroup(HttpServletRequest request, HttpServletResponse response, params)
+    def updateGroup(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def name = params?.name
@@ -116,7 +115,7 @@ class GroupService {
 
     }
 
-    def showGroup(HttpServletRequest request, HttpServletResponse response, params)
+    def showGroup(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def groupId = params?.groupId
@@ -144,7 +143,7 @@ class GroupService {
 
     }
 
-    def deleteGroup(HttpServletRequest request, HttpServletResponse response, params)
+    def deleteGroup(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def groupId = params?.groupId
@@ -171,7 +170,7 @@ class GroupService {
 
     }
 
-    def getStaffGroups(HttpServletRequest request, HttpServletResponse response, params)
+    def getStaffGroups(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def name = params?.name
         String getStaffGroupsUrl = grailsApplication.config.ratchetv2.server.url.getStaffGroups

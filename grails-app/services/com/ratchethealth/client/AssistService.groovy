@@ -7,22 +7,21 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class AssistService {
     /** dependency injection for grailsApplication */
     def grailsApplication
     def messageSource
 
-    def addAssist(HttpServletRequest request, HttpServletResponse response, params)
+    def addAssist(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def title = params?.title
         def desc = params?.desc
         def browser = params?.browser
         def url = params?.url
-        
-        def staffId = request.session.accountId       
+
+        def staffId = request.session.accountId
         def clientId = request.session.clientId
         def session = request.session.token
 

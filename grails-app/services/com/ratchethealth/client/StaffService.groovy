@@ -7,7 +7,6 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class StaffService {
 
@@ -16,7 +15,7 @@ class StaffService {
 
     def messageSource
 
-    def getStaffs(HttpServletRequest request, HttpServletResponse response, params)
+    def getStaffs(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def max = params?.max
         def offset = params?.offset

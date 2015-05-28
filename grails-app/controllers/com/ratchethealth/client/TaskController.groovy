@@ -17,7 +17,7 @@ class TaskController extends BaseController {
             archived = false
         }
 
-        def tasks = medicalRecordService.showTasksByMedicalRecord(request, response, clientId, medicalRecordId)
+        def tasks = medicalRecordService.showTasksByMedicalRecord(request, clientId, medicalRecordId)
         def sentTasks = []
         def scheduleTasks = []
         for (task in tasks) {
@@ -35,7 +35,7 @@ class TaskController extends BaseController {
     }
 
     def sendTaskEmail() {
-        def resp = taskService.sendTaskEmailToPatient(request, response, params)
+        def resp = taskService.sendTaskEmailToPatient(request, params)
         render resp
     }
 

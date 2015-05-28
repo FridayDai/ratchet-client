@@ -7,7 +7,6 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class ActivityService {
 
@@ -16,7 +15,7 @@ class ActivityService {
 
     def messageSource
 
-    def getActivity(HttpServletRequest request, HttpServletResponse response, params)
+    def getActivity(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def patientId = params?.patientId
         def max = params?.max
@@ -51,7 +50,7 @@ class ActivityService {
 
     }
 
-    def getActivities(HttpServletRequest request, HttpServletResponse response, params)
+    def getActivities(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def patientId = params?.patientId
         def start = params?.start

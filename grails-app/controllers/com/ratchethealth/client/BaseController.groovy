@@ -1,6 +1,5 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.http.Unirest
 import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 

@@ -19,7 +19,7 @@ class AuthenticationController extends BaseController {
             render(view: '/login/login')
         } else if (request.method == "POST") {
             params?.email = params?.email.toLowerCase();
-            def resp = authenticationService.authenticate(request, response, params)
+            def resp = authenticationService.authenticate(request, params)
 
             if (resp?.authenticated) {
                 redirect(uri: '/')
@@ -33,7 +33,7 @@ class AuthenticationController extends BaseController {
      * @return
      */
     def logout() {
-        if (!authenticationService.logout(request, response)) {
+        if (!authenticationService.logout(request)) {
             log.warn("logout failed")
         } else {
             redirect(uri: '/login')
