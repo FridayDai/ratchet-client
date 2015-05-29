@@ -97,7 +97,7 @@ class AccountsController extends BaseController {
     }
 
     def confirmResetPassword() {
-        def resp = accountService.resetPassword(request, response, params)
+        def resp = accountService.resetPassword(request, params)
         if (resp) {
             render view: '/login/login'
         }
