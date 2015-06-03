@@ -397,6 +397,7 @@
             } else {
                 $('#selectGroup').attr('required', false);
                 $('.hidden').removeClass('show');
+                $('#selectGroup').valid();
             }
         });
     }
