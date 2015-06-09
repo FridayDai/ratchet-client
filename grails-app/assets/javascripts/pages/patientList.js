@@ -176,7 +176,10 @@
                 $(".next").text('');
                 $(".help-display").css("display", "inline-table");
                 var paginate = $(this).siblings();
-                if (this.fnSettings().aoData.length === 0) {
+                var previousDisabled = paginate.find(".previous").hasClass("disabled");
+                var nextDisabled = paginate.find(".next").hasClass("disabled");
+                var bothDisabled = previousDisabled && nextDisabled;
+                if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }
                 _initCopy();
