@@ -6,7 +6,7 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title>${patientInfo.firstName} ${patientInfo.lastName} - Ratchet Health</title>
     </head>
 
     <body>
