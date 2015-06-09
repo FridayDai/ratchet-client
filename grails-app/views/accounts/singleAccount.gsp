@@ -6,7 +6,7 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title><g:if test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR} </g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
     </head>
 
     <body>
