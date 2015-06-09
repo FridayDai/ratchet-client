@@ -17,39 +17,38 @@ class TeamController extends BaseController {
         if (archived == null) {
             archived = false
         }
-        def surgeons = treatmentService.getCareTeam(request, response, medicalRecordId)
+        def surgeons = treatmentService.getCareTeam(request, medicalRecordId)
         render(view: "/team/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived])
     }
 
     def getCareGiver() {
         def medicalRecordId = params?.medicalRecordId
-        def careGivers = treatmentService.getCareGiver(request, response, medicalRecordId)
+        def careGivers = treatmentService.getCareGiver(request, medicalRecordId)
         render careGivers as JSON
     }
 
     def addCareGiver() {
         def medicalRecordId = params?.medicalRecordId
-        def patientId = params?.patientId
-        def resp = treatmentService.addCareGiver(request, response, params)
+        def resp = treatmentService.addCareGiver(request, params)
         def result = [resp: resp, medicalRecordId: medicalRecordId]
         render result as JSON
     }
 
     def updateCareGiver() {
-        def resp = treatmentService.updateCareGiver(request, response, params)
+        def resp = treatmentService.updateCareGiver(request, params)
         def result = [resp: resp]
         render result as JSON
     }
 
     def deleteCareGiver() {
-        def resp = treatmentService.deleteCareGiver(request, response, params)
+        def resp = treatmentService.deleteCareGiver(request, params)
         def result = [resp: resp]
         render result as JSON
     }
 
 
     def updateCareTeamSurgeon() {
-        def resp = treatmentService.updateCareTeamSurgeon(request, response, params)
+        def resp = treatmentService.updateCareTeamSurgeon(request, params)
         render resp as JSON
     }
 

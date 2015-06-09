@@ -95,7 +95,7 @@
     <div class="form-group required required-width"><span>*</span>Required field</div>
 
     <div class="align-center assist-tip">
-        </label>You will receive a response within 24 hours.</label>
+        </label>We will respond to you as soon as we can!</label>
     </div>
 
 </g:form>

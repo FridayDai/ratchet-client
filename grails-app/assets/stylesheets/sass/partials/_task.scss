@@ -140,6 +140,7 @@
             background-color: $base-color-task-complete;
 
             &:before {
+                width: 10px;
                 padding: 5px 8px 0;
                 content: 'COMPLETE';
                 font-size: 10pt;
@@ -173,11 +174,15 @@
     }
 
     .complete-time {
-        padding: 8px 2px;
+        padding: 6px 0;
+        margin-right: -15px;
         color: $base-color-medium-black;
         font-family: Lato;
         font-weight: 700;
-        font-size: 10px;
+        font-size: 12px;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
     }
 
 }

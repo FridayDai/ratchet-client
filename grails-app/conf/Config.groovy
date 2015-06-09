@@ -129,7 +129,11 @@ log4j.main = {
             'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
             'org.springframework',
             'org.hibernate',
-            'net.sf.ehcache.hibernate'
+            'net.sf.ehcache.hibernate',
+            'com.granicus.grails.plugins.cookiesession.CookieSessionFilter',
+            'com.granicus.grails.plugins.cookiesession.SessionRepositoryRequestWrapper',
+            'com.granicus.grails.plugins.cookiesession.SessionRepositoryResponseWrapper',
+            'com.granicus.grails.plugins.cookiesession.CookieSessionRepository'
 
     environments {
         development {

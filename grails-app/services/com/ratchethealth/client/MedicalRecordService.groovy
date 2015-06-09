@@ -7,14 +7,13 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class MedicalRecordService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def showTasksByMedicalRecord(HttpServletRequest request, HttpServletResponse response, clientId, medicalRecordId)
+    def showTasksByMedicalRecord(HttpServletRequest request, clientId, medicalRecordId)
             throws ApiAccessException, ApiReturnException {
 
         String showTasksUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.tasks

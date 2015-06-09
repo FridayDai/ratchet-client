@@ -6,7 +6,7 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title><g:if test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR} </g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
     </head>
 
     <body>
@@ -57,7 +57,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "UNVERIFIED"}">
                             <span class="span-invited"
                                   id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
 
@@ -179,9 +179,9 @@
         </div>
 
         <div class="form-group">
-            <label class="lbl-group">GROUP<span>*</span></label>
+            <label class="lbl-group">GROUP<span class="hidden">*</span></label>
             <input id="groupSelect" name="selectGroup" type="text" class="input-group patient-group clear"
-                   placeholder="" required/>
+                   placeholder=""/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

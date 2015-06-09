@@ -8,7 +8,7 @@ class StaffController extends BaseController {
     def staffService
 
     def getStaff() {
-        def resp = staffService.getStaffs(request, response, params)
+        def resp = staffService.getStaffs(request, params)
         render resp as JSON
     }
 }

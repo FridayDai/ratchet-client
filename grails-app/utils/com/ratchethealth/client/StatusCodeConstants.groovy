@@ -34,7 +34,7 @@ class StatusCodeConstants {
             ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
 
     //Account constants
-    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "INVITED", "ACTIVE", "INACTIVE"]
+    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "UNVERIFIED", "ACTIVE", "INACTIVE"]
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"]

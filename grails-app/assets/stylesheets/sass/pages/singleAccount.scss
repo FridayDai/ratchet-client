@@ -38,21 +38,22 @@
         }
 
         .span-invited {
-            padding: 4px 3px 2px;
+            padding: 2px 3px;
             color: $base-color-white;
             background: $base-color-invited;
             vertical-align: sub;
         }
 
         .span-deactive {
-            padding: 4px 3px 2px;
+            padding: 2px 3px;
             color: $base-color-white;
             background: $base-color-deactive;
             vertical-align: sub;
         }
 
         .span-active {
-            padding: 4px 3px 2px;
+            padding: 2px 3px;
+
             color: $base-color-white;
             background: $base-light-grey-color;
             vertical-align: sub;

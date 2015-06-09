@@ -5,7 +5,7 @@
 
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title>Password Reset - Ratchet Health</title>
     </head>
 
     <body>

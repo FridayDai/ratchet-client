@@ -7,13 +7,12 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class SinglePatientService {
 
     def grailsApplication
 
-    def showSinglePatient(HttpServletRequest request, HttpServletResponse response, patientId)
+    def showSinglePatient(HttpServletRequest request, patientId)
             throws ApiAccessException, ApiReturnException {
 
         String showSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
@@ -38,7 +37,7 @@ class SinglePatientService {
         }
     }
 
-    def showMedialRecords(HttpServletRequest request, HttpServletResponse response, patientId)
+    def showMedialRecords(HttpServletRequest request, patientId)
             throws ApiAccessException, ApiReturnException {
 
         String showMedialRecordsUrl = grailsApplication.config.ratchetv2.server.url.showMedicalRecords
@@ -64,7 +63,7 @@ class SinglePatientService {
         }
     }
 
-    def updateSinglePatient(HttpServletRequest request, HttpServletResponse response, params)
+    def updateSinglePatient(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
         def url = String.format(updateSinglePatientUrl, params?.patientId)
@@ -94,7 +93,8 @@ class SinglePatientService {
         }
     }
 
-    def showPatientByPatientId(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
+    def showPatientByPatientId(HttpServletRequest request, params)
+            throws ApiAccessException, ApiReturnException {
         String showPatientUrl = grailsApplication.config.ratchetv2.server.url.showPatient
         def url = String.format(showPatientUrl, params?.patientId)
 
@@ -121,8 +121,8 @@ class SinglePatientService {
         }
     }
 
-    def checkPatientEmail(HttpServletRequest request, HttpServletResponse response, params) throws ApiAccessException, ApiReturnException {
-
+    def checkPatientEmail(HttpServletRequest request, params)
+            throws ApiAccessException, ApiReturnException {
         def url = grailsApplication.config.ratchetv2.server.url.checkPatientEmail
 
         try {

@@ -7,7 +7,6 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 
 class InvitationService {
@@ -15,7 +14,7 @@ class InvitationService {
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def invitePatient(HttpServletRequest request, HttpServletResponse response, id)
+    def invitePatient(HttpServletRequest request, id)
             throws ApiAccessException, ApiReturnException {
 
         String invitePatientUrl = grailsApplication.config.ratchetv2.server.url.invitePatient

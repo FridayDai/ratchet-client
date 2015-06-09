@@ -5,19 +5,15 @@ import com.mashape.unirest.http.exceptions.UnirestException
 import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
-import org.apache.commons.lang.StringUtils
-import org.springframework.web.multipart.MultipartFile
-import org.springframework.web.multipart.MultipartHttpServletRequest
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class PatientService {
     /** dependency injection for grailsApplication */
     def grailsApplication
     def messageSource
 
-    def addPatients(HttpServletRequest request, HttpServletResponse response, params)
+    def addPatients(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def patientId = params?.patientId
         def firstName = params?.firstName
@@ -74,7 +70,7 @@ class PatientService {
 
     }
 
-    def savePatients(HttpServletRequest request, HttpServletResponse response, params)
+    def savePatients(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
         def bulkList = JSON.parse(params.bulkList)
 
@@ -103,7 +99,7 @@ class PatientService {
 
     }
 
-    def loadPatients(HttpServletRequest request, HttpServletResponse response, params)
+    def loadPatients(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def start = params?.start
@@ -160,7 +156,7 @@ class PatientService {
         }
     }
 
-    def uploadPatients(HttpServletRequest request, HttpServletResponse response, params)
+    def uploadPatients(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def file = params.file
@@ -190,7 +186,7 @@ class PatientService {
                 map.put("data", result.items)
                 log.info("Bulk import patient success, token: ${request.session.token}")
                 return map
-            } else if (resp.status == 209){
+            } else if (resp.status == 209) {
                 throw new ApiReturnException(resp.status, '')
             } else {
                 def message = result?.error?.errorMessage
@@ -202,7 +198,7 @@ class PatientService {
     }
 
 
-    def lookup(HttpServletRequest request, HttpServletResponse response, params)
+    def lookup(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
 
         def start = params?.start
@@ -250,7 +246,7 @@ class PatientService {
         }
     }
 
-    def downloadErrors(HttpServletRequest request, HttpServletResponse response, params)
+    def downloadErrors(HttpServletRequest request)
             throws ApiAccessException, ApiReturnException {
 
         String errorUrl = grailsApplication.config.ratchetv2.server.url.downloadErrors

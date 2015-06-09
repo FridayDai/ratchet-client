@@ -12,12 +12,12 @@ class ProfileController extends BaseController {
 
     def getProfile() {
         def accountId = params?.accountId
-        def accountProfile = accountService.getSingleAccount(request, response, accountId)
+        def accountProfile = accountService.getSingleAccount(request, accountId)
         render(view: '/accounts/profile', model: [accountInfo: accountProfile])
     }
 
     def updatePassword() {
-        def resp = accountService.updatePassword(request, response, params)
+        def resp = accountService.updatePassword(request, params)
         def result = [resp: resp]
         render result as JSON
     }

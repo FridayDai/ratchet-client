@@ -9,7 +9,7 @@ class OverviewController {
     def activityService
 
     def getActivities() {
-        def data = activityService.getActivities(request, response, params)
+        def data = activityService.getActivities(request, params)
         render data as JSON
     }
 }
