@@ -5,7 +5,7 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title>Accounts - Ratchet Health</title>
     </head>
 
     <body>

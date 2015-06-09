@@ -71,6 +71,16 @@
         var options = _.extend({}, RC.common.dataTableOptions, {
             pageLength: $(opts.table.id).data("pagesize"),
             deferLoading: [$(opts.table.id).data("filtered"), $(opts.table.id).data("total")],
+            "fnDrawCallback": function () {
+                $(".previous").text('');
+                $(".next").text('');
+                $(".display").css("display", "inline-table");
+                var paginate = $(this).siblings();
+                if (this.fnSettings().aoData.length === 0) {
+                    paginate.hide();
+                }
+
+            },
 
             ajax: $.fn.dataTable.pipeline({
                 url: opts.urls.patients,
@@ -209,10 +219,10 @@
                         var id = data === undefined ? full.id : data;
                         var html = [
                             "<div class='copy-id-content'>",
-                                "<p class='id-text strong'>",
-                                    "{0}",
-                                    "<span class='copy' title='Copy to clipboard'></span>",
-                                "</p >",
+                            "<p class='id-text strong'>",
+                            "{0}",
+                            "<span class='copy' title='Copy to clipboard'></span>",
+                            "</p >",
                             "</div>"
                         ].join('').format(id);
                         return html;
@@ -555,8 +565,8 @@
                     "targets": 8,
                     "render": function (data, type, full) {
                         var emergencyName;
-                        emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '')+
-                         " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
+                        emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') +
+                        " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
                         return emergencyName;
                     },
                     width: "180px"
@@ -645,7 +655,7 @@
                     html = [
                         "{0}",
                         " <a class='error-link' target='_blank' href='/patients/bulk-import/download-errors'>",
-                            "Download Error File",
+                        "Download Error File",
                         "</a>"
                     ].join('').format(RC.constants.dataError);
                     tip = "Data Error!";

@@ -4,7 +4,7 @@
 <g:applyLayout name="error">
     <html>
     <head>
-        <title>Welcome to Ratchet Health</title>
+        <title>404 - Ratchet Health</title>
     </head>
 
     <body>

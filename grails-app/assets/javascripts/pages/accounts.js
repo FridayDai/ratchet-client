@@ -551,6 +551,7 @@
             } else {
                 $('#groupSelect').attr('required', false);
                 $('.hidden').removeClass('show');
+                $('#groupSelect').valid();
             }
         });
     }
