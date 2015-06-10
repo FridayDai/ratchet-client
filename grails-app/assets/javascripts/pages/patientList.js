@@ -78,6 +78,8 @@
                 var paginate = $(this).siblings();
                 if (this.fnSettings().aoData.length === 0) {
                     paginate.hide();
+                } else {
+                    paginate.show();
                 }
 
             },
