@@ -773,8 +773,8 @@
         $('.btn-close').on('click', function (e) {
             e.preventDefault();
 
-            parent.history.back();
-            return false;
+            var url = opts.urls.accounts;
+            window.location.href = url;
         });
     }
 
