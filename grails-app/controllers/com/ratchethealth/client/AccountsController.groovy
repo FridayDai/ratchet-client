@@ -61,6 +61,8 @@ class AccountsController extends BaseController {
         if (resp) {
             if (resp.hasProfile == true) {
                 redirect(uri: '/login')
+            } else if (resp.error?.errorId == 412) {
+                render view: '/error/invitationExpired'
             } else {
                 render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
             }

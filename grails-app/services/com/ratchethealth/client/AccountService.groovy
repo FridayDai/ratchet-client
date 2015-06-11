@@ -233,6 +233,9 @@ class AccountService {
             if (resp.status == 200) {
                 log.info("Confirm code success, token: ${request.session.token}.")
                 return result
+            } else if (resp.status == 412) {
+                log.info("Invitation link is expired,token:${request.session.token}.")
+                return result
             } else {
                 return false
             }
