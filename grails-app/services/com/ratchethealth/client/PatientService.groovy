@@ -203,11 +203,13 @@ class PatientService {
 
         def start = params?.start
         def length = params?.length
-        def order = params?.order
+//        def order = params?.order
         def columns = params?.columns
         def search = params?.search
         def draw = params?.draw
         def title = params?.title
+        def order = params?.order
+        def sort = params?.sort
 
         String lookupUrl = grailsApplication.config.ratchetv2.server.url.lookup
         def url = String.format(lookupUrl, request.session.clientId)
@@ -218,6 +220,8 @@ class PatientService {
                     .field("max", length)
                     .field("offset", start)
                     .field("title", title)
+                    .field("sorted", sort)
+                    .field("order", order)
                     .asString()
 
             def result = JSON.parse(resp.body)
