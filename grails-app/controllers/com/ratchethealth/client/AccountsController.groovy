@@ -93,8 +93,11 @@ class AccountsController extends BaseController {
     def resetPassword() {
         def code = params?.code
         def resp = accountService.validPasswordCode(request, code)
-        if (resp) {
+
+        if (resp == 200) {
             render view: '/forgotPassword/resetPassword', model: [code: code]
+        } else if (resp.error?.errorId == 412) {
+            render view: '/error/passwordLinkExpired'
         }
     }
 
