@@ -471,7 +471,7 @@
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
             _bindSearchEvent();
-
+            _sortBulkImportSearchTable();
         });
     }
 
@@ -1549,7 +1549,6 @@
         _initTreatmentSelect();
         _sortPatientTable();
         _bindSearchEvent();
-        _sortBulkImportSearchTable();
     }
 
     _init();
