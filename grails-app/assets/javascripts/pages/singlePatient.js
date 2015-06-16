@@ -349,7 +349,7 @@
             var phoneNum = parent.find(".phone").text();
             var phoneNumber = $.trim(phoneNum);
 
-            $("#patientId").val(id);
+            $("form #patientId").val(id);
             $("#patientId").blur();
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
@@ -367,7 +367,7 @@
                             var phoneNumber = number.replace(/[\s\(\)-]/g, '');
                             var patientInfo = {
                                 patientId: patientId,
-                                id: $("#patientId").val(),
+                                id: $("form #patientId").val(),
                                 firstName: $("#firstName").val(),
                                 lastName: $("#lastName").val(),
                                 email: $("#email").val(),
