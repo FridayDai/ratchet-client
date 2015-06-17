@@ -736,18 +736,17 @@
                 }
             }));
 
-        });
-
-        $("#new-patient-id").keydown(function (event) {
-                if (event.keyCode === 13) {
-                    if ($("#patient-id-form").valid()) {
-                        var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
-                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+            $("#new-patient-id").keydown(function (event) {
+                    if (event.keyCode === 13) {
+                        if ($("#patient-id-form").valid()) {
+                            var patientId = $('#new-patient-id').val();
+                            _checkPatientExist(patientId);
+                            $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+                        }
                     }
                 }
-            }
-        );
+            );
+        });
     }
 
     /**
