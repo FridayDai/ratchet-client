@@ -9,7 +9,7 @@ class StatusCodeConstants {
 
     //patient status
     public static final String[] PATIENT_STATUS =
-            ["undefined", "invited", "normal", "uninvited", "deactive"]
+            ["undefined", "invited", "normal", "uninvited", "deactive", "UNCONFIRMED_TO_INVITED"]
 
     //CareGiver relation type
     public static final String[] CAREGIVER_RELATION =
