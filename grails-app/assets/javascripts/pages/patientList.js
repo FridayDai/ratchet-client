@@ -59,6 +59,11 @@
             "Phone Number": "s_phone_number",
             "Last Update": "d_updated_time"
         },
+        BulkImportSortType = {
+            "Title": "title",
+            "Type": "type",
+            "ID": "id"
+        },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
 
     /**
@@ -332,6 +337,29 @@
         });
     }
 
+    function _sortBulkImportSearchTable() {
+        _.each($('#helpTable th'), function (element) {
+            var flag = 0;
+            $(element).on("click", function () {
+                var ele = $(element);
+                var sort = BulkImportSortType[ele.text()];
+                var orderSC;
+                if (flag === 0) {
+                    flag = 1;
+                    orderSC = "asc";
+                } else {
+                    flag = 0;
+                    orderSC = "desc";
+                }
+                var data = {
+                    sort: sort,
+                    order: orderSC
+                };
+                _initHelpTable(data);
+            });
+        });
+    }
+
     /**
      *
      * @private
@@ -443,7 +471,7 @@
             $(".ui-dialog-buttonpane button:contains('Next')").button("disable");
             _initImportPopupEvent();
             _bindSearchEvent();
-
+            _sortBulkImportSearchTable();
         });
     }
 
@@ -708,18 +736,19 @@
                 }
             }));
 
-        });
-
-        $("#new-patient-id").keydown(function (event) {
-                if (event.keyCode === 13) {
-                    if ($("#patient-id-form").valid()) {
-                        var patientId = $('#new-patient-id').val();
-                        _checkPatientExist(patientId);
-                        $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+            $("#new-patient-id").keydown(function (event) {
+                    if (event.keyCode === 13) {
+                        if ($("#patient-id-form").valid()) {
+                            var patientId = $('#new-patient-id').val();
+                            _checkPatientExist(patientId);
+                            $("#patient-id-form").dialog("destroy").addClass('ui-hidden');
+                        }
                     }
                 }
-            }
-        );
+            );
+
+        });
+
     }
 
     /**

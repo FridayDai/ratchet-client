@@ -22,12 +22,12 @@ class BaseController {
 
     def handleApiAccessException(ApiAccessException e) {
         log.error("API Access exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
-        def status = 500
-        def message = e.message ? e.message : g.message(code: 'default.error.500.message')
+        def status = 503
+        def message = e.message ? e.message : g.message(code: 'default.error.503.message')
         if (request.isXhr()) {
             render status: status, text: message
         } else {
-            render view: '/error/error404'
+            render view: '/error/error503'
         }
     }
 

@@ -233,6 +233,9 @@ class AccountService {
             if (resp.status == 200) {
                 log.info("Confirm code success, token: ${request.session.token}.")
                 return result
+            } else if (resp.status == 412) {
+                log.info("Invitation link is expired,token:${request.session.token}.")
+                return result
             } else {
                 return false
             }
@@ -328,7 +331,11 @@ class AccountService {
 
             if (resp.status == 200) {
                 log.info("Valid password code success, token: ${request.session.token}.")
-                return true
+                return resp.status
+            } else if (resp.status == 412) {
+                def result = JSON.parse(resp.body)
+                log.info("Reset password link is expired,token:${request.session.token}.")
+                return result
             } else {
                 def result = JSON.parse(resp.body)
                 def message = result?.error?.errorMessage
