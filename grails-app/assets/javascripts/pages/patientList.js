@@ -435,7 +435,6 @@
     function _bindBulkImportModel() {
         $("#bulk-important").on("click", function (e) {
             e.preventDefault();
-            $(".import-form ")[0].reset();
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
                 beforeClose: function () {

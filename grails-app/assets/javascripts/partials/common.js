@@ -595,8 +595,12 @@
                     $.each(elementList, function (index, element) {
                         RC.common.hideErrorTip(element);
                     });
-                    confirmFormArguments.element.validate().resetForm();
-                    confirmFormArguments.element[0].reset();
+
+                    if (confirmFormArguments.element.is('form')) {
+                        confirmFormArguments.element.validate().resetForm();
+                        confirmFormArguments.element[0].reset();
+                    }
+
                     var body = $(confirmFormArguments.element).parents().find("body");
                     if (body.css("overflow") === "hidden") {
                         body.css('overflow', 'auto');
