@@ -611,7 +611,7 @@
             dialogOpts.buttons[title] = function (e) {
                 var back = confirmFormArguments.okCallback(e);
                 if ($.isFunction(confirmFormArguments.okCallback)) {
-                    if ($.isFunction(back.promise)) {
+                    if (back && $.isFunction(back.promise)) {
                         $.when(back).done(function () {
                             dialog.dialog("close");
                         });
