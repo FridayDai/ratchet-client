@@ -221,7 +221,7 @@ class TreatmentService {
             throws ApiAccessException, ApiReturnException {
 
         String updateSurgeryTimeUrl = grailsApplication.config.ratchetv2.server.url.updateSurgeryTime
-        def url = String.format(updateSurgeryTimeUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
+        def url = String.format(updateSurgeryTimeUrl, request.session.clientId, params?.patientId, params?.medicalRecordId)
 
         try {
             log.info("Call backend service to update surgery date, token: ${request.session.token}.")
@@ -247,7 +247,7 @@ class TreatmentService {
             throws ApiAccessException, ApiReturnException {
 
         String archivedUrl = grailsApplication.config.ratchetv2.server.url.archived
-        def url = String.format(archivedUrl, params?.clientId, params?.patientId, params?.medicalRecordId)
+        def url = String.format(archivedUrl, request.session.clientId, params?.patientId, params?.medicalRecordId)
 
         try {
             log.info("Call backend service to archive medical record, token: ${request.session.token}.")

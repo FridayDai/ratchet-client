@@ -53,11 +53,11 @@
             }
         },
         sortType = {
-            "ID": "s_patient_id",
-            "Name": "s_first_name",
-            "Email Address": "s_email",
-            "Phone Number": "s_phone_number",
-            "Last Update": "d_updated_time"
+            "ID": "patientId",
+            "Name": "firstName",
+            "Email Address": "email",
+            "Phone Number": "phoneNumber",
+            "Last Update": "lastUpdated"
         },
         BulkImportSortType = {
             "Title": "title",
