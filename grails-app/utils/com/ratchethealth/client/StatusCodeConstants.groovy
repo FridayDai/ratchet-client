@@ -8,16 +8,16 @@ class StatusCodeConstants {
             ["ANESTHESIOLOGIST", "MEDICAL ASSISTANT", "MANAGEMENT", "NURSE", "PHYSICAL THERAPISTS", "PRIMARY PHYSICIAN", "SCHEDULER", "SURGEON"]
 
     //patient status
-    public static final String[] PATIENT_STATUS =
-            ["undefined", "invited", "normal", "uninvited", "deactive", "UNCONFIRMED_TO_INVITED"]
+//    public static final String[] PATIENT_STATUS =
+//            ["undefined", "invited", "normal", "uninvited", "deactive", "UNCONFIRMED_TO_INVITED"]
 
     //CareGiver relation type
     public static final String[] CAREGIVER_RELATION =
             ["OFFSPRING", "SPOUSE"]
 
     //CareGiver status
-    public static final String[] CAREGIVER_STATUS =
-            ["INVITED", "NORMAL", "UNINVITED"]
+//    public static final String[] CAREGIVER_STATUS =
+//            ["INVITED", "NORMAL", "UNINVITED"]
 
     // Task status
     public static final Integer TASK_STATUS_NEW = 1
@@ -34,10 +34,14 @@ class StatusCodeConstants {
             ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
 
     //Account constants
-    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "UNVERIFIED", "ACTIVE", "INACTIVE"]
+//    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "UNVERIFIED", "ACTIVE", "INACTIVE"]
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"]
     public static final String ACCOUNT_PATIENTS_M = "Patient Management"
     public static final String ACCOUNT_ACCOUNTS_M = "Administrator"
+
+    //common status
+    public static final String[] ACCOUNT_STATUS =
+            ["INVITED", "ACTIVE", "INACTIVE", "UNINVITED", "UNCONFIRMED_TO_INVITED"]
 }

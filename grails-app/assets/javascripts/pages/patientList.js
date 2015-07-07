@@ -53,11 +53,11 @@
             }
         },
         sortType = {
-            "ID": "s_patient_id",
-            "Name": "s_first_name",
-            "Email Address": "s_email",
-            "Phone Number": "s_phone_number",
-            "Last Update": "d_updated_time"
+            "ID": "patientId",
+            "Name": "firstName",
+            "Email Address": "email",
+            "Phone Number": "phoneNumber",
+            "Last Update": "lastUpdated"
         },
         BulkImportSortType = {
             "Title": "title",
@@ -435,7 +435,6 @@
     function _bindBulkImportModel() {
         $("#bulk-important").on("click", function (e) {
             e.preventDefault();
-            $(".import-form ")[0].reset();
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.importFormArguments, {
                 element: $(".import-form "),
                 beforeClose: function () {
@@ -587,7 +586,7 @@
                     "targets": 7,
                     "render": function (data, type, full) {
                         var surgeryTime = data === undefined ? full.surgeryTime : data;
-                        var formatDate = moment(surgeryTime).format('MMM D, YYYY');
+                        var formatDate = moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
                         return formatDate;
                     },
                     width: "170px"
@@ -746,9 +745,7 @@
                     }
                 }
             );
-
         });
-
     }
 
     /**

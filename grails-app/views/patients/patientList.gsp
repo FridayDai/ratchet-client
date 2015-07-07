@@ -188,7 +188,7 @@
             <label class="form-group required pull-right"><span>*</span>Required field</label>
         </g:form>
 
-        <g:form class="import-form ui-hidden" id="bulk-import-form" name="bulk-import-form">
+        <div class="import-form ui-hidden" id="bulk-import-form">
             <div class="import-content">
                 <p>Upload a <strong
                         class="strong">.csv</strong> file containing the patients you wish to create. Please note that a maximum of <strong
@@ -267,7 +267,7 @@
                     </thead>
                 </table>
             </div>
-        </g:form>
+        </div>
 
         <g:form class="warn ui-hidden">
 

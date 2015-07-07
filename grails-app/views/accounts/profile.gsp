@@ -6,7 +6,8 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title><g:if test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR} </g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
+        <title><g:if
+                test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR}</g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
     </head>
 
     <body>
@@ -48,7 +49,9 @@
 
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
-                    <td><span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                    <td>
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}"><span>UNVERIFIED</span></g:if>
+                        <g:else><span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span></g:else>
                     </td>
                 </tr>
 
@@ -98,6 +101,7 @@
             <input id="oldPass" name="oldPass" type="password" class="input-group"
                    placeholder="Enter old password"
                    required/>
+
             <div class="error-area error hide" id="old-password-error">
                 Old password is incorrect.
             </div>

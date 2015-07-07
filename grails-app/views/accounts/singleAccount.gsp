@@ -6,7 +6,8 @@
 <g:applyLayout name="main">
     <html>
     <head>
-        <title><g:if test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR} </g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
+        <title><g:if
+                test="${accountInfo.doctor}">${StatusCodeConstants.ACCOUNT_DOCTOR}</g:if>${accountInfo.firstName} ${accountInfo.lastName} - Ratchet Health</title>
     </head>
 
     <body>
@@ -57,9 +58,9 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "UNVERIFIED"}">
+                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}">
                             <span class="span-invited"
-                                  id="span-invited">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                                  id="span-invited">UNVERIFIED</span>
 
                             <div class="inline div-invite">
                                 <button id="invite-account" class="btn"
