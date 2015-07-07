@@ -328,12 +328,15 @@
                     .autocomplete($.extend({
                         minLength: 0,
                         focusSearch: true,
-                        open: function (event) {
+                        open: function (event,ui) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
                                 .addClass('ui-button-icon-primary');
-                            $(this).data("id", "");
+                            if (ui.item === null) {
+                                $(this).data("id", "");
+                                $(this).val("");
+                            }
                         },
                         close: function (event) {
                             event.preventDefault();
