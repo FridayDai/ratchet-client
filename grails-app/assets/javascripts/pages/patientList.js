@@ -801,6 +801,7 @@
      * @private
      */
     function _getAddData() {
+        var id = $("#hidden-id").val();
         var patientId = $("#patient-id-value").text();
         var firstName = $("#firstName").val() || $("#firstName").text();
         var lastName = $("#lastName").val() || $("#lastName").text();
@@ -820,6 +821,7 @@
         var groupId = $("#selectGroup").data('id');
 
         var data = {
+            id: id,
             patientId: patientId,
             firstName: firstName,
             lastName: lastName,
@@ -922,6 +924,7 @@
         var accountId = arguments[1];
         var data = arguments[2];
         if (arguments.length > 2) {
+            $("#hidden-id").val(data.id);
             _inputReplaceWithDiv(data);
         }
         $('#patient-id-value').text(patientId);

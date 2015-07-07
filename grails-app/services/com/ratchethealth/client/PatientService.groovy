@@ -15,6 +15,7 @@ class PatientService {
 
     def addPatients(HttpServletRequest request, params)
             throws ApiAccessException, ApiReturnException {
+        def id = params?.id
         def patientId = params?.patientId
         def firstName = params?.firstName
         def lastName = params?.lastName
@@ -37,6 +38,7 @@ class PatientService {
             log.info("Call backend service to add patient with clientId and patient info, token: ${request.session.token}.")
             def resp = Unirest.post(url)
                     .header("X-Auth-Token", request.session.token)
+                    .field("id", id)
                     .field("patientId", patientId)
                     .field("clientId", request.session.clientId)
                     .field("firstName", firstName)
