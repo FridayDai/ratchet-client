@@ -102,7 +102,7 @@
                 //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
                 //var date = new Date();
                 //var time = date.getTime() + data.sendTimeOffset;
-                var time = data.surgeryDate + data.sendTimeOffset
+                var time = data.surgeryDate + data.sendTimeOffset;
                 _initSurgeryTime(time);
             }
         });
