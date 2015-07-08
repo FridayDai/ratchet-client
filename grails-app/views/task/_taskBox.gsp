@@ -24,8 +24,10 @@
                     <g:each in="${firstSplit}" var="num">
                         <% secondSplit = num?.trim().split(':') %>
                         <span class="score">
-                            <label class="uppercase">${secondSplit[0]}:</label>
-                            <label>${secondSplit[1]}</label>
+                            <g:if test="${secondSplit?.size() == 2}">
+                                <label class="uppercase">${secondSplit[0]}:</label>
+                                <label>${secondSplit[1]}</label>
+                            </g:if>
                         </span>
                     </g:each>
                 </g:if>
