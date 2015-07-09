@@ -7,28 +7,26 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 import javax.servlet.http.HttpServletRequest
 
-class AccountService {
+class AccountService extends RatchetClientService {
 
     def grailsApplication
 
-    def getAccounts(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
-        def start = params?.start
-        def length = params?.length
-        def name = params?.name
-        def sort = params?.sort
-        def order = params?.order
+    def getAccounts(String token, clientId, AccountPagination accountPagination) {
+        def start = accountPagination?.start
+        def length = accountPagination?.length
+        def name = accountPagination?.name
+        def sort = accountPagination?.sort
+        def order = accountPagination?.order
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
+        log.info("Call backend service to get accounts with start, length, name and clientId, token: ${token}.")
 
-        try {
-            log.info("Call backend service to get accounts with start, length, name and clientId, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        withGet(token, url) { req ->
+            def resp = req
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("name", name)
-                    .queryString("clientId", request.session.clientId)
+                    .queryString("clientId", clientId)
                     .queryString("sorted", sort)
                     .queryString("order", order)
                     .asString()
@@ -42,152 +40,133 @@ class AccountService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
-                log.info("Get accounts success, token: ${request.session.token}.")
-                return map
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get accounts success, token: ${token}.")
+                return [resp, map]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
 
+            [resp, null]
+
+        }
 
     }
 
-    def getSingleAccount(HttpServletRequest request, accountId)
-            throws ApiAccessException, ApiReturnException {
+    def getSingleAccount(token, accountId) {
 
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
-
         def url = String.format(getSingleAccountUrl, accountId)
+        log.info("Call backend service to get sinle account, token: ${token}.")
 
-        try {
-            log.info("Call backend service to get sinle account, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
+
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Get single account success, token: ${request.session.token}.")
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get single account success, token: ${token}.")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+
+            [resp, null]
         }
+
     }
 
-    def createAccount(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
-        def firstName = params?.firstName
-        def lastName = params?.lastName
-        def email = params?.email
-        def type = params?.type
-        def isAccountManagement = params?.isAccountManagement
-        def isDoctor = params?.isDoctor
-        def groupId = params?.groupId
+    def createAccount(String token, clientId, Account account) {
+        def firstName = account?.firstName
+        def lastName = account?.lastName
+        def email = account?.email
+        def type = account?.type
+        def accountManagement = account?.accountManagement
+        def doctor = account?.doctor
+        def groupId = account?.groupId
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
+        log.info("Call backend service to add a new account with clientId and account personal info, token: ${token}.")
 
-        try {
-            log.info("Call backend service to add a new account with clientId and account personal info, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("clientId", request.session.clientId)
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("clientId", clientId)
                     .field("firstName", firstName)
                     .field("lastName", lastName)
                     .field("email", email)
                     .field("type", type)
                     .field("patientManagement", "true")
-                    .field("accountManagement", isAccountManagement)
-                    .field("doctor", isDoctor)
+                    .field("accountManagement", accountManagement)
+                    .field("doctor", doctor)
                     .field("groupIds", groupId)
                     .asString()
 
+            def result = JSON.parse(resp.body)
+
             if (resp.status == 201) {
-                log.info("Create account success, token: ${request.session.token}.")
-                return JSON.parse(resp.body)
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Create account success, token: ${token}.")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+
+            [resp, null]
         }
 
     }
 
-    def inviteAccount(HttpServletRequest request, Integer accountId)
-            throws ApiAccessException, ApiReturnException {
+    def inviteAccount(String token, accountId) {
 
         String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
         def url = String.format(inviteAccountUrl, accountId)
-        try {
-            log.info("Call backend service to invite account, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to invite account, token: ${token}.")
+
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Invite account success, token: ${request.session.token}.")
-                return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Invite account success, token: ${token}.")
+                return [resp, true]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+
+            [resp, null]
         }
 
     }
 
-    def updateAccount(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def updateAccount(String token, clientId, Account account) {
+
+        def firstName = account?.firstName
+        def lastName = account?.lastName
+        def email = account?.email
+        def type = account?.type
+        def accountManagement = account?.accountManagement
+        def doctor = account?.doctor
+        def groupId = account?.groupId
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
-        Integer accountId = params.int("accountId")
+        Integer accountId = account.accountId.toInteger()
         def url = String.format(updateAccountUrl, accountId)
+        log.info("Call backend service to update account with clientId and account info, token: ${token}.")
 
-        try {
-            log.info("Call backend service to update account with clientId and account info, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("clientId", request.session.clientId)
-                    .field("email", params?.email)
-                    .field("firstName", params?.firstName)
-                    .field("lastName", params?.lastName)
-                    .field("type", params?.type)
-                    .field("doctor", params?.doctor)
-                    .field("accountManagement", params?.accountManagement)
-                    .field("groupIds", params?.groupId)
+
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("clientId", clientId)
+                    .field("email", email)
+                    .field("firstName", firstName)
+                    .field("lastName", lastName)
+                    .field("type", type)
+                    .field("doctor", doctor)
+                    .field("accountManagement", accountManagement)
+                    .field("groupIds", groupId)
                     .asString()
 
+            def result = JSON.parse(resp.body)
+
             if (resp.status == 200) {
-                log.info("Update account success, token: ${request.session.token}.")
+                log.info("Update account success, token: ${token}.")
 
-                def result = JSON.parse(resp.body)
-
-                if (accountId == request.session.accountId) {
-                    request.session.firstName = result.firstName
-                    request.session.lastName = result.lastName
-                    request.session.accountManagement = result.accountManagement
-                }
-                return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
 
+            [resp, null]
+        }
     }
 
     def updatePassword(HttpServletRequest request, params)

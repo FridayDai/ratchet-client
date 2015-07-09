@@ -286,8 +286,8 @@
             lastName: lastName,
             email: email,
             type: type,
-            isAccountManagement: isAccountManagement,
-            isDoctor: isDoctor,
+            accountManagement: isAccountManagement,
+            doctor: isDoctor,
             groupId: groupId
         };
 

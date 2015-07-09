@@ -12,7 +12,7 @@ class ProfileController extends BaseController {
 
     def getProfile() {
         def accountId = params?.accountId
-        def accountProfile = accountService.getSingleAccount(request, accountId)
+        def accountProfile = accountService.getSingleAccount(session.token, accountId)
         render(view: '/accounts/profile', model: [accountInfo: accountProfile])
     }
 

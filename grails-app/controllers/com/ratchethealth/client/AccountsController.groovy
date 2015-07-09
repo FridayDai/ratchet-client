@@ -10,50 +10,52 @@ class AccountsController extends BaseController {
 
     def accountService
 
-    def getAccounts() {
+    def getAccounts(AccountPagination accountPagination) {
+        String token = session.token
+        def clientId = session.clientId
+
         if (request.isXhr()) {
-            def resp = accountService.getAccounts(request, params);
+            def resp = accountService.getAccounts(token, clientId, accountPagination)
             render resp as JSON
         } else {
-            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-            def accountList = accountService.getAccounts(request, params)
-            render(view: 'accounts', model: [accountList: accountList, pagesize: params.length])
+            accountPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            accountPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def accountList = accountService.getAccounts(token, clientId, accountPagination)
+            render(view: 'accounts', model: [accountList: accountList, pagesize: accountPagination.length])
         }
     }
 
-    def addAccount() {
-        def resp = accountService.createAccount(request, params)
+    def addAccount(Account account) {
+        def resp = accountService.createAccount(session.token, session.clientId, account)
         def result = [resp: resp]
         render result as JSON
     }
 
     def getSingleAccount() {
         def accountId = params?.id
-        def accountInfo = accountService.getSingleAccount(request, accountId)
+        def accountInfo = accountService.getSingleAccount(session.token, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
 
-    def updateAccount() {
-        def resp = accountService.updateAccount(request, params)
-        def result = [resp: resp]
+    def updateAccount(Account account) {
+        def resp = accountService.updateAccount(session.token, session.clientId, account)
+
+        if (account.accountId == session.accountId) {
+            session.firstName = resp.firstName
+            session.lastName = resp.lastName
+            session.accountManagement = resp.accountManagement
+        }
+
+        def result = [resp: true]
         render result as JSON
     }
-
 
     def inviteAccount() {
         Integer accountId = params.int("accountId")
-        def resp = accountService.inviteAccount(request, accountId)
+        def resp = accountService.inviteAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
     }
-
-//
-//    def updatePassword() {
-//        def resp = accountService.updatePassword(request, response, params)
-//        def result = [resp: resp]
-//        render result as JSON
-//    }
 
     def confirmCode() {
         def code = params?.code
