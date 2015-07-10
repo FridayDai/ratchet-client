@@ -1,12 +1,6 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.http.Unirest
-import com.mashape.unirest.http.exceptions.UnirestException
-import com.ratchethealth.client.exceptions.ApiAccessException
-import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
-
-import javax.servlet.http.HttpServletRequest
 
 class StaffService extends RatchetClientService {
 
