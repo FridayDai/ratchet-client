@@ -59,28 +59,24 @@ class AccountsController extends BaseController {
 
     def confirmCode() {
         def code = params?.code
-        def resp = accountService.confirmCode(request, code)
-        if (resp) {
-            if (resp.hasProfile == true) {
-                redirect(uri: '/login')
-            } else if (resp.error?.errorId == 412) {
-                render view: '/error/invitationExpired'
-            } else {
-                render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
-            }
+        def resp = accountService.confirmCode(session.token, code)
+        if (resp.hasProfile == true) {
+            redirect(uri: '/login')
+        } else if (resp.error?.errorId == 412) {
+            render view: '/error/invitationExpired'
         } else {
-            render view: '/error/error404'
+            render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
         }
 
     }
 
     def confirmPassword() {
-        def resp = accountService.activateStaff(request, params)
-        if (resp == true) {
-            redirect(uri: '/login')
-        } else {
-            render view: '/error/error404'
-        }
+        def code = params?.code
+        def hasProfile = params?.hasProfile
+        def password = params?.password
+        def confirmPassword = params?.confirmPassword
+        accountService.activateStaff(session.token, code, hasProfile, password, confirmPassword)
+        redirect(uri: '/login')
     }
 
     def getForgotPassword() {
@@ -88,13 +84,13 @@ class AccountsController extends BaseController {
     }
 
     def forgotPassword() {
-        accountService.askForResetPassword(request, params.email, "client")
+        accountService.askForResetPassword(session.token, params.email, "client")
         render view: '/forgotPassword/resettingIntroduction', model: [email: params.email]
     }
 
     def resetPassword() {
         def code = params?.code
-        def resp = accountService.validPasswordCode(request, code)
+        def resp = accountService.validPasswordCode(session.token, code)
 
         if (resp == 200) {
             render view: '/forgotPassword/resetPassword', model: [code: code]
@@ -104,7 +100,10 @@ class AccountsController extends BaseController {
     }
 
     def confirmResetPassword() {
-        def resp = accountService.resetPassword(request, params)
+        def code = params?.code
+        def newPassword = params?.newPassword
+        def confirmPassword = params?.confirmPassword
+        def resp = accountService.resetPassword(session.token, code, newPassword, confirmPassword)
         if (resp) {
             render view: '/login/login'
         }
@@ -112,20 +111,20 @@ class AccountsController extends BaseController {
 
     def deactivateAccount() {
         Integer accountId = params.int("accountId")
-        def resp = accountService.deactivateAccount(request, accountId)
+        def resp = accountService.deactivateAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
     }
 
     def activateAccount() {
         Integer accountId = params.int("accountId")
-        def resp = accountService.activateAccount(request, accountId)
+        def resp = accountService.activateAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
     }
 
     def checkAccountEmail() {
-        def data = accountService.checkEmail(request, params)
+        def data = accountService.checkEmail(session.token, params?.email)
         render data as JSON
     }
 

@@ -17,7 +17,7 @@ class ProfileController extends BaseController {
     }
 
     def updatePassword() {
-        def resp = accountService.updatePassword(request, params)
+        def resp = accountService.updatePassword(session.token, params?.oldPassword, params?.password, params?.confirmPassword)
         def result = [resp: resp]
         render result as JSON
     }

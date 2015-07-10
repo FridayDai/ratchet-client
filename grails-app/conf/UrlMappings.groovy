@@ -70,7 +70,7 @@ class UrlMappings {
         "/patients/$patientId?/group-and-provider/update"(controller: "team", action: "updateCareTeamSurgeon")
 
         //Patient activity
-        "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
+        "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")
 
         //Accounts
         "/accounts"(controller: "accounts") {

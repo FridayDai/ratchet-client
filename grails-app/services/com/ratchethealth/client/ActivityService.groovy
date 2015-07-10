@@ -1,86 +1,40 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.http.Unirest
-import com.mashape.unirest.http.exceptions.UnirestException
-import com.ratchethealth.client.exceptions.ApiAccessException
-import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
-import javax.servlet.http.HttpServletRequest
-
-class ActivityService {
+class ActivityService extends RatchetClientService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def messageSource
+    def getActivities(String token, activityPagination) {
 
-    def getActivity(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
-        def patientId = params?.patientId
-        def max = params?.max
-        def offset = params?.offset
-        def medicalRecordId = params?.medicalRecordId
-        def clientId = params?.clientId
-
-        String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
-        def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
-
-        try {
-            log.info("Call backend service to get activity with max and offset, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .queryString("max", max)
-                    .queryString("offset", offset)
-                    .asString()
-
-            def result = JSON.parse(resp.body)
-
-            if (resp.status == 200) {
-                log.info("Get activity success, token: ${request.session.token}.")
-                return result.items
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
-            }
-        }
-        catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
-
-    }
-
-    def getActivities(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
-        def patientId = params?.patientId
-        def start = params?.start
-        def length = params?.length
-        def order = params?.order
-        def columns = params?.columns
-        def search = params?.search
-        def draw = params?.draw
-        def medicalRecordId = params?.medicalRecordId
-        def clientId = params?.clientId
-        def senderId = params?.senderId
+        def patientId = activityPagination?.patientId
+        def start = activityPagination?.start
+        def length = activityPagination?.length
+        def order = activityPagination?.order
+        def columns = activityPagination?.columns
+        def search = activityPagination?.search
+        def draw = activityPagination?.draw
+        def medicalRecordId = activityPagination?.medicalRecordId
+        def clientId = activityPagination?.clientId
+        def senderId = activityPagination?.senderId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
         def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
+        log.info("Call backend service to get activities with max, offset and senderId, token: ${token}.")
 
-        try {
-            log.info("Call backend service to get activities with max, offset and senderId, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        withGet(token, url) { req ->
+            def resp = req
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("senderId", senderId)
                     .queryString("order", order)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
-
                 map.put(start, start)
                 map.put(length, length)
                 map.put(order, order)
@@ -90,17 +44,12 @@ class ActivityService {
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
-                log.info("Get activities success, token: ${request.session.token}.")
-                return map
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get activities success, token: ${token}.")
+                return [resp, map]
             }
-        }
-        catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
 
+            [resp, null]
+        }
     }
 
 }
