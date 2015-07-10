@@ -8,26 +8,20 @@ import grails.converters.JSON
 
 import javax.servlet.http.HttpServletRequest
 
-class TreatmentService {
+class TreatmentService extends RatchetClientService {
 
-    /** dependency injection for grailsApplication */
     def grailsApplication
-
     def messageSource
 
-    def getTreatments(HttpServletRequest request, params)
+    def getTreatments(String token, clientId, max, offset, treatmentTitle)
             throws ApiAccessException, ApiReturnException {
-        def max = params?.max
-        def offset = params?.offset
-        def treatmentTitle = params?.treatmentTitle
 
         String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
-        def url = String.format(getTreatmentsUrl, request.session.clientId)
+        def url = String.format(getTreatmentsUrl, clientId)
 
-        try {
-            log.info("Call backend service to get treatments with max, offset and treatmetnTitle, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to get treatments with max, offset and treatmetnTitle, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .queryString("max", max)
                     .queryString("offset", offset)
                     .queryString("treatmentTitle", treatmentTitle)
@@ -36,73 +30,62 @@ class TreatmentService {
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Get treatments success, token: ${request.session.token}")
-                return result.items
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get treatments success, token: ${token}")
+                def items = result.items
+                return [resp, items]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
-        }
 
+            [resp, null]
+        }
     }
 
-    def assignTreatmentToExistPatient(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def assignTreatmentToExistPatient(String token, treatment) {
 
         String assignTreatmentToExistPatientUrl = grailsApplication.config.ratchetv2.server.url.assignTreatmentToExistPatient
-        def url = String.format(assignTreatmentToExistPatientUrl, params?.clientId, params?.patientId)
+        def url = String.format(assignTreatmentToExistPatientUrl, treatment?.clientId, treatment?.patientId)
 
-        try {
-            log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("treatmentId", params?.treatmentId)
-                    .field("surgeonId", params?.staffIds)
-                    .field("surgeryTime", params?.surgeryTime)
-                    .field("ecFirstName", params?.ecFirstName)
-                    .field("ecLastName", params?.ecLastName)
-                    .field("relationship", params?.relationship)
-                    .field("ecEmail", params?.ecEmail)
-                    .field("groupId", params?.groupId)
+        log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${token}.")
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("treatmentId", treatment?.treatmentId)
+                    .field("surgeonId", treatment?.staffIds)
+                    .field("surgeryTime", treatment?.surgeryTime)
+                    .field("ecFirstName", treatment?.ecFirstName)
+                    .field("ecLastName", treatment?.ecLastName)
+                    .field("relationship", treatment?.relationship)
+                    .field("ecEmail", treatment?.ecEmail)
+                    .field("groupId", treatment?.groupId)
                     .asString()
+
             def result = JSON.parse(resp.body)
+
             if (resp.status == 201) {
-                log.info("Assign treatment to exist patient success, token: ${request.session.token}")
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Assign treatment to exist patient success, token: ${token}")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+
+            [resp, null]
         }
     }
 
-    def getTreatmentInfo(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def getTreatmentInfo(String token, treatment) {
 
         String getTreatmentInfoUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentInfo
-        def url = String.format(getTreatmentInfoUrl, params?.clientId, params?.treatmentId)
+        def url = String.format(getTreatmentInfoUrl, treatment?.clientId, treatment?.treatmentId)
 
-        try {
-            log.info("Call backend service to get treatment info, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to get treatment info, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
 
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Get treatment info success, token:${request.session.token}")
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get treatment info success, token:${token}")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+
+            [resp, null]
         }
 
     }

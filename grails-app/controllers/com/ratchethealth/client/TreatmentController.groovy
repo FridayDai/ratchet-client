@@ -24,10 +24,11 @@ class TreatmentController extends BaseController {
                         treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
     }
 
-    def assignTreatment() {
-        def resp = treatmentService.assignTreatmentToExistPatient(request, params)
+    def assignTreatment(Treatment treatment) {
+        def token = request.session.token
+        def resp = treatmentService.assignTreatmentToExistPatient(token, treatment)
         def medicalRecordId = resp?.medicalRecordId
-        def treatmentInfo = treatmentService.getTreatmentInfo(request, params)
+        def treatmentInfo = treatmentService.getTreatmentInfo(token, treatment)
         def medicalRecordInfo = [medicalRecordId: medicalRecordId,
                                  treatmentInfo  : treatmentInfo
         ]
@@ -35,7 +36,12 @@ class TreatmentController extends BaseController {
     }
 
     def getTreatments() {
-        def resp = treatmentService.getTreatments(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def max = params?.max
+        def offset = params?.offset
+        def treatmentTitle = params?.treatmentTitle
+        def resp = treatmentService.getTreatments(token, clientId, max, offset, treatmentTitle)
         render resp as JSON
     }
 

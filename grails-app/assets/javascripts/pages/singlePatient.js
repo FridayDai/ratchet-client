@@ -495,7 +495,8 @@
                                     label: item.title + ' ' + item.tmpTitle,
                                     value: item.id,
                                     surgeryTime: item.surgeryTimeRequired,
-                                    timeStamp: item.sendTimeOffset
+                                    timeStamp: item.sendTimeOffset,
+                                    surgeryDate: item.surgeryDate
                                 };
                             }));
                         }
@@ -524,8 +525,9 @@
                 } else {
                     $("#div-surgery-time").css("display", "none");
                 }
-                var date = new Date();
-                var time = date.getTime() + ui.item.timeStamp;
+                //var date = new Date();
+                //var time = date.getTime() + ui.item.timeStamp;
+                var time = ui.item.surgeryDate + ui.item.timeStamp;
                 $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
