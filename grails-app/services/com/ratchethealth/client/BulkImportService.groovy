@@ -9,7 +9,6 @@ class BulkImportService extends RatchetClientService {
     def messageSource
 
     def uploadPatients(String token, clientId, importFile) {
-
         String uploadUrl = grailsApplication.config.ratchetv2.server.url.uploadPatient
         def url = String.format(uploadUrl, clientId)
 
