@@ -44,8 +44,8 @@ class UrlMappings {
         "/patients/bulk-import/download-errors"(controller: "patients", action: "downloadErrors")
 
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
-        "/patients/check-id"(controller: "patients", action: "checkPatientExist")
-        "/patients/check-email"(controller: "patients", action: "checkPatientEmailExist")
+        "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
+        "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")

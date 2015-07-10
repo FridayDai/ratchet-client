@@ -1,22 +1,21 @@
 package com.ratchethealth.client
 
 class Patient {
-    String id
-    String emid
+    int id
+    int patientId
     String firstName
     String lastName
-    String email
     String phoneNumber
-    String treatments
-
-    def Patient(id, emid, firstName, lastName, email, phoneNumber, treatments) {
-        this.id = id
-        this.emid = emid
-        this.firstName = firstName
-        this.lastName = lastName
-        this.email = email
-        this.phoneNumber = phoneNumber
-        this.treatments = treatments
-    }
+    String email
+    String profilePhoto
+    int treatmentId
+    int staffId
+    Long surgeryTime
+    String ecFirstName
+    String ecLastName
+    String relationship
+    String ecEmail
+    int groupId
+    int clientId
 
 }
