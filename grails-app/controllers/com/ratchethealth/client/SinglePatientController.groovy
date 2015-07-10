@@ -47,7 +47,7 @@ class SinglePatientController extends BaseController {
     }
 
     def invitePatient() {
-        invitationService.invitePatient(request, params.id)
+        invitationService.invitePatient(session.token, params.id)
         render true
     }
 }

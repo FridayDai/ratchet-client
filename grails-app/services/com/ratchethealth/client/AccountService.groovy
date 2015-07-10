@@ -104,26 +104,6 @@ class AccountService extends RatchetClientService {
 
     }
 
-    def inviteAccount(String token, accountId) {
-
-        String inviteAccountUrl = grailsApplication.config.ratchetv2.server.url.inviteStaff
-        def url = String.format(inviteAccountUrl, accountId)
-        log.info("Call backend service to invite account, token: ${token}.")
-
-        withGet(token, url) { req ->
-            def resp = req
-                    .asString()
-
-            if (resp.status == 200) {
-                log.info("Invite account success, token: ${token}.")
-                return [resp, true]
-            }
-
-            [resp, null]
-        }
-
-    }
-
     def updateAccount(String token, clientId, Account account) {
 
         def firstName = account?.firstName
@@ -190,7 +170,7 @@ class AccountService extends RatchetClientService {
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
         log.info("Call backend service to get accounts with code and password, token: ${token}.")
 
-        withPost(null, url) { req ->
+        withPost(url) { req ->
             def resp = req
                     .field("code", code)
                     .field("hasProfile", hasProfile)
@@ -257,7 +237,7 @@ class AccountService extends RatchetClientService {
         def url = String.format(confirmCodeUrl, code)
         log.info("Call backend service to confirm code, token: ${token}.")
 
-        withPost(null, url) { req ->
+        withPost(url) { req ->
             def resp = req
                     .asString()
             def result = JSON.parse(resp.body)
@@ -281,7 +261,7 @@ class AccountService extends RatchetClientService {
 
         log.info("Call backend service to ask for reset password with email and client type, token: ${token}.")
 
-        withPost(null, url) { req ->
+        withPost(url) { req ->
             def resp = req
                     .field("email", email)
                     .field("clientType", clientType)
@@ -298,7 +278,7 @@ class AccountService extends RatchetClientService {
 
         log.info("Call backend service to reset password with code and password, token: ${token}.")
 
-        withPost(null, url) { req ->
+        withPost(url) { req ->
             def resp = req
                     .field("code", code)
                     .field("password", newPassword)
@@ -318,7 +298,7 @@ class AccountService extends RatchetClientService {
         def url = grailsApplication.config.ratchetv2.server.url.password.restCheck
         log.info("Call backend service to valid password code, token: ${token}.")
 
-        withGet(null, url) { req ->
+        withGet(url) { req ->
             def resp = req
                     .queryString("code", code)
                     .asString()
