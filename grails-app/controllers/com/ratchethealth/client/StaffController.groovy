@@ -7,8 +7,10 @@ class StaffController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
     def staffService
 
-    def getStaff() {
-        def resp = staffService.getStaffs(request, params)
+    def getStaff(Staff staff) {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def resp = staffService.getStaffs(token, clientId, staff)
         render resp as JSON
     }
 }

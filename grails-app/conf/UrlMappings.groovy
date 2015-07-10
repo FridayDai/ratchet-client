@@ -95,7 +95,7 @@ class UrlMappings {
             action = [GET: "getProfile", POST: "updatePassword"]
         }
 
-        // staffs (a type of account)
+        // staffs (a type of account) (for now means provider)
         "/staffs"(controller: "staff", action: "getStaff")
 
         // groups
