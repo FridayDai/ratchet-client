@@ -9,6 +9,7 @@ class AccountsController extends BaseController {
     static allowedMethods = [getAccounts: ['GET'], getSingleAccount: ['GET'], addAccount: ['POST'], updateAccount: ['POST']]
 
     def accountService
+    def invitationService
 
     def getAccounts(AccountPagination accountPagination) {
         String token = session.token
@@ -52,7 +53,7 @@ class AccountsController extends BaseController {
 
     def inviteAccount() {
         Integer accountId = params.int("accountId")
-        def resp = accountService.inviteAccount(session.token, accountId)
+        def resp = invitationService.inviteAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
     }
