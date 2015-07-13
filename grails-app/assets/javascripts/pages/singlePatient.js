@@ -103,7 +103,7 @@
             var lastName = parent.find(".last-name").text().trim();
             var email = parent.find("#patientEmail").text().trim();
             var phoneNum = parent.find(".phone").text().trim();
-            var phoneNumber = phoneNum.replace(/(-)/g, '')
+            var phoneNumber = phoneNum.replace(/(-)/g, '');
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
