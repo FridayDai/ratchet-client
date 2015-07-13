@@ -251,7 +251,7 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Confirm code success, token: ${token}.")
-                return [resp, result]
+                return result
             }
             if (resp.status == 412) {
                 log.info("Invitation link is expired,token:${token}.")
@@ -314,7 +314,7 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Valid password code success, token: ${token}.")
-                return [resp, resp.status]
+                return resp.status
             } else if (resp.status == 412) {
                 def result = JSON.parse(resp.body)
                 log.info("Reset password link is expired,token:${token}.")
@@ -342,7 +342,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("this account email already exist, token: ${token}")
                 result = [check: "true"]
-                return [resp, result]
+                return result
             } else if (resp.status == 404) {
                 log.info("this account email doesn't exist, token: ${token}")
                 result = [check: "false"]
