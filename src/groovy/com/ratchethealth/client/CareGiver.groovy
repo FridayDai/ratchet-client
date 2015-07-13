@@ -1,8 +1,8 @@
 package com.ratchethealth.client
 
 class CareGiver {
-    int medicalRecordId
-    int careGiverId
+    Long medicalRecordId
+    Long careGiverId
     String email
     String firstName
     String lastName

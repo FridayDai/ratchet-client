@@ -32,22 +32,29 @@ class TreatmentService extends RatchetClientService {
         }
     }
 
-    def assignTreatmentToExistPatient(String token, treatment) {
+    def assignTreatmentToExistPatient(String token, clientId, patient) {
 
-        String assignTreatmentToExistPatientUrl = grailsApplication.config.ratchetv2.server.url.assignTreatmentToExistPatient
-        def url = String.format(assignTreatmentToExistPatientUrl, treatment?.clientId, treatment?.patientId)
+        String assignTreatmentUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
+        def url = String.format(assignTreatmentUrl, clientId)
 
         log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${token}.")
         withPost(token, url) { req ->
             def resp = req
-                    .field("treatmentId", treatment?.treatmentId)
-                    .field("surgeonId", treatment?.staffIds)
-                    .field("surgeryTime", treatment?.surgeryTime)
-                    .field("ecFirstName", treatment?.ecFirstName)
-                    .field("ecLastName", treatment?.ecLastName)
-                    .field("relationship", treatment?.relationship)
-                    .field("ecEmail", treatment?.ecEmail)
-                    .field("groupId", treatment?.groupId)
+                    .field("id", patient?.patientId)
+                    .field("patientId", patient?.id)
+                    .field("firstName", patient?.firstName)
+                    .field("lastName", patient?.lastName)
+                    .field("phoneNumber", patient?.phoneNumber)
+                    .field("email", patient?.email)
+                    .field("profilePhoto", patient?.profilePhoto)
+                    .field("treatmentId", patient?.treatmentId)
+                    .field("surgeonId", patient?.staffId)
+                    .field("surgeryTime", patient?.surgeryTime)
+                    .field("ecFirstName", patient?.ecFirstName)
+                    .field("ecLastName", patient?.ecLastName)
+                    .field("relationship", patient?.relationship)
+                    .field("ecEmail", patient?.ecEmail)
+                    .field("groupId", patient?.groupId)
                     .asString()
 
             def result = JSON.parse(resp.body)

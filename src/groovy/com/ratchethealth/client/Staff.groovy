@@ -1,10 +1,10 @@
 package com.ratchethealth.client
 
 class Staff {
-    int max
-    int offset
-    int type
+    Long max
+    Long offset
+    Long type
     String name
-    int groupId
+    Long groupId
 }
 
