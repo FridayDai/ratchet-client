@@ -5,7 +5,7 @@ class PatientPagination extends Pagination{
     String search
     String draw
     String patientType
-    int treatmentId
-    int surgeonId
+    Long treatmentId
+    Long surgeonId
     String patientIdOrName
 }

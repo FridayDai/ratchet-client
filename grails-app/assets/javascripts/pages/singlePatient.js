@@ -99,10 +99,11 @@
 
             var parent = $(this).parents();
             var id = parent.find(".id").text();
-            var firstName = parent.find(".first-name").text();
-            var lastName = parent.find(".last-name").text();
-            var email = parent.find("#patientEmail").text();
-            var phoneNum = parent.find(".phone").text();
+            var firstName = parent.find(".first-name").text().trim();
+            var lastName = parent.find(".last-name").text().trim();
+            var email = parent.find("#patientEmail").text().trim();
+            var phoneNum = parent.find(".phone").text().trim();
+            var phoneNumber = phoneNum.replace(/(-)/g, '');
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmTreatmentFormArguments, {
                 element: $(".treatment-form"),
@@ -128,10 +129,10 @@
                             clientId: clientId,
                             firstName: firstName,
                             lastName: lastName,
-                            phoneNum: phoneNum,
+                            phoneNumber: phoneNumber,
                             email: email,
                             treatmentId: treatmentId,
-                            staffIds: staffIds,
+                            staffId: staffIds,
                             surgeryTime: surgeryTime,
                             ecFirstName: ecFirstName,
                             ecLastName: ecLastName,

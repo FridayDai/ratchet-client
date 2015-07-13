@@ -24,11 +24,13 @@ class TreatmentController extends BaseController {
                         treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
     }
 
-    def assignTreatment(Treatment treatment) {
-        def token = request.session.token
-        def resp = treatmentService.assignTreatmentToExistPatient(token, treatment)
+    def assignTreatment(Patient patient) {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def treatmentId = patient.treatmentId
+        def resp = treatmentService.assignTreatmentToExistPatient(token, clientId, patient)
         def medicalRecordId = resp?.medicalRecordId
-        def treatmentInfo = treatmentService.getTreatmentInfo(token, treatment)
+        def treatmentInfo = treatmentService.getTreatmentInfo(token, clientId, treatmentId)
         def medicalRecordInfo = [medicalRecordId: medicalRecordId,
                                  treatmentInfo  : treatmentInfo
         ]
