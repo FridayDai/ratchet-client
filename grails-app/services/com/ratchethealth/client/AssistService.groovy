@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class AssistService extends RatchetClientService {
+class AssistService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication

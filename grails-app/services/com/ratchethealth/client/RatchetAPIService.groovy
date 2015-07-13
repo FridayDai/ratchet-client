@@ -8,7 +8,7 @@ import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
-class RatchetClientService {
+class RatchetAPIService {
 
     def messageSource
 

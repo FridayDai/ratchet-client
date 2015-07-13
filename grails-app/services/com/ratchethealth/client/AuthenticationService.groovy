@@ -4,7 +4,7 @@ import com.ratchethealth.client.exceptions.AccountValidationException
 import grails.converters.JSON
 
 
-class AuthenticationService extends RatchetClientService {
+class AuthenticationService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication

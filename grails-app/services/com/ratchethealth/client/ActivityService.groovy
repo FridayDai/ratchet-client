@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class ActivityService extends RatchetClientService {
+class ActivityService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication

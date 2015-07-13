@@ -3,7 +3,7 @@ package com.ratchethealth.client
 import grails.converters.JSON
 
 
-class PatientService extends RatchetClientService {
+class PatientService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 

@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 
 
-class InvitationService extends RatchetClientService {
+class InvitationService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication

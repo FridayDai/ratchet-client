@@ -4,7 +4,7 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 
-class BulkImportService extends RatchetClientService {
+class BulkImportService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
