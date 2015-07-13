@@ -45,10 +45,11 @@ class ActivityService extends RatchetClientService {
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
                 log.info("Get activities success, token: ${token}.")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 

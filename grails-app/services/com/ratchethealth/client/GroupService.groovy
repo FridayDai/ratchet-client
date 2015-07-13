@@ -36,10 +36,11 @@ class GroupService extends RatchetClientService {
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
                 log.info("Get groups success, token: ${token}.")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -59,10 +60,11 @@ class GroupService extends RatchetClientService {
                 log.info("create groups success, token: ${token}.")
                 def result = JSON.parse(resp.body)
 
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -81,10 +83,11 @@ class GroupService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("update group success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -100,10 +103,11 @@ class GroupService extends RatchetClientService {
 
             if (resp.status == 204) {
                 log.info("delete a group success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -121,10 +125,11 @@ class GroupService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Get groups success, token: ${token}")
-                return [resp, JSON.parse(resp.body)]
+                return JSON.parse(resp.body)
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
