@@ -6,34 +6,38 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 class PatientsController extends BaseController {
-
-
     def beforeInterceptor = [action: this.&auth]
 
     def patientService
-    def singlePatientService
+    def bulkImportService
 
     static allowedMethods = [getPatients: ['GET'], addPatient: ['POST']]
 
-    def getPatients() {
+    def getPatients(PatientPagination patientPagination) {
+        String token = request.session.token
+        def clientId = request.session.clientId
         if (request.isXhr()) {
-            def resp = patientService.loadPatients(request, params)
+            def resp = patientService.loadPatients(token, clientId, patientPagination)
             render resp as JSON
         } else {
-            params.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-            params.length = RatchetConstants.DEFAULT_PAGE_SIZE
-            def patientList = patientService.loadPatients(request, params)
-            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: params.length])
+            patientPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            patientPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            def patientList = patientService.loadPatients(token, clientId, patientPagination)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: patientPagination.length])
         }
     }
 
-    def addPatient() {
-        def resp = patientService.addPatients(request, params)
+    def addPatient(Patient patient) {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def resp = patientService.addPatients(token, clientId, patient)
         render resp as JSON
     }
 
-    def lookup() {
-        def resp = patientService.lookup(request, params)
+    def lookup(BulkPagination bulkPagination) {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def resp = bulkImportService.lookup(token, clientId, bulkPagination)
         render resp as JSON
     }
 
@@ -56,27 +60,26 @@ class PatientsController extends BaseController {
     }
 
     def uploadFile() {
-        def data = patientService.uploadPatients(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def importFile = params?.file
+        def data = bulkImportService.uploadPatients(token, clientId, importFile)
         render data as JSON
     }
 
     def savePatients() {
-        def resp = patientService.savePatients(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def bulkList = JSON.parse(params?.bulkList)
+        def resp = bulkImportService.savePatients(token, clientId, bulkList)
         render resp as JSON
     }
 
-    def checkPatientExist() {
-        def data = singlePatientService.showPatientByPatientId(request, params)
-        render data as JSON
-    }
-
-    def checkPatientEmailExist() {
-        def data = singlePatientService.checkPatientEmail(request, params)
-        render data as JSON
-    }
 
     def downloadErrors() {
-        def errorFilePath = patientService.downloadErrors(request)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def errorFilePath = bulkImportService.downloadErrors(token, clientId)
 
         if (errorFilePath) {
             redirect url: errorFilePath

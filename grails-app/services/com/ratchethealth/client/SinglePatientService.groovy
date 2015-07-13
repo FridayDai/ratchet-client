@@ -1,152 +1,116 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.http.Unirest
-import com.mashape.unirest.http.exceptions.UnirestException
-import com.ratchethealth.client.exceptions.ApiAccessException
-import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
-import javax.servlet.http.HttpServletRequest
-
-class SinglePatientService {
+class SinglePatientService extends RatchetClientService {
 
     def grailsApplication
 
-    def showSinglePatient(HttpServletRequest request, patientId)
-            throws ApiAccessException, ApiReturnException {
+    def showSinglePatient(String token, patientId) {
 
         String showSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
         def url = String.format(showSinglePatientUrl, patientId)
 
-        try {
-            log.info("Call backend service to show single patient, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to show single patient, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Show single patient success, token: ${request.session.token}")
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Show single patient success, token: ${token}")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            [resp, null]
         }
     }
 
-    def showMedialRecords(HttpServletRequest request, patientId)
-            throws ApiAccessException, ApiReturnException {
-
+    def showMedialRecords(String token, clientId, patientId) {
         String showMedialRecordsUrl = grailsApplication.config.ratchetv2.server.url.showMedicalRecords
-        def url = String.format(showMedialRecordsUrl, request.session.clientId, patientId)
+        def url = String.format(showMedialRecordsUrl, clientId, patientId)
 
-        try {
-            log.info("Call backend service to show medical record, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to show medical record, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
 
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Show medical records success, token: ${request.session.token}")
-                return result
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Show medical records success, token: ${token}")
+                return [resp, result]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            [resp, null]
         }
     }
 
-    def updateSinglePatient(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def updateSinglePatient(String token, patient) {
         String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
-        def url = String.format(updateSinglePatientUrl, params?.patientId)
+        def url = String.format(updateSinglePatientUrl, patient?.patientId)
 
-        try {
-            log.info("Call backend service to update single patient with clientId and patient info, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("clientId", params?.clientId)
-                    .field("patientId", params?.id)
-                    .field("email", params?.email)
-                    .field("firstName", params?.firstName)
-                    .field("lastName", params?.lastName)
-                    .field("phoneNumber", params?.phoneNumber)
+        log.info("Call backend service to update single patient with clientId and patient info, token: ${token}.")
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("clientId", patient?.clientId)
+                    .field("patientId", patient?.id)
+                    .field("email", patient?.email)
+                    .field("firstName", patient?.firstName)
+                    .field("lastName", patient?.lastName)
+                    .field("phoneNumber", patient?.phoneNumber)
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Update single patient success, token: ${request.session.token}")
-                return resp.status
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Update single patient success, token: ${token}")
+                def status = resp.status
+                return [resp, status]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            [resp, null]
         }
     }
 
-    def showPatientByPatientId(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def checkPatientId(String token, patientId) {
         String showPatientUrl = grailsApplication.config.ratchetv2.server.url.showPatient
-        def url = String.format(showPatientUrl, params?.patientId)
+        def url = String.format(showPatientUrl, patientId)
 
-        try {
-            log.info("Call backend service to get patient info with patientId token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to get patient info with patientId token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
 
             if (resp.status == 200) {
-                log.info("get patient info success, token: ${request.session.token}")
+                log.info("get patient info success, token: ${token}")
                 def result = JSON.parse(resp.body)
-                return result
+                return [resp, result]
             } else if (resp.status == 404) {
-                log.info("get patient info failed, haven't this patientId, token: ${request.session.token}")
-                return [check: "false"]
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("get patient info failed, haven't this patientId, token: ${token}")
+                def check = [check: "false"]
+                return [resp, check]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            [resp, null]
         }
     }
 
-    def checkPatientEmail(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def checkPatientEmail(String token, clientId, email) {
         def url = grailsApplication.config.ratchetv2.server.url.checkPatientEmail
 
-        try {
-            log.info("Call backend service to check patient email, token: ${request.session.token}.")
-            def resp = Unirest.post(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .field("clientId", request.session.clientId)
-                    .field("email", params?.email)
+        log.info("Call backend service to check patient email, token: ${token}.")
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("clientId", clientId)
+                    .field("email", email)
                     .asString()
 
             if (resp.status == 200) {
-                log.info("this patient email already exist, token: ${request.session.token}")
+                log.info("this patient email already exist, token: ${token}")
                 def result = JSON.parse(resp.body)
-                return result
+                return [resp, result]
             } else if (resp.status == 404) {
-                log.info("this patient email doesn't exist, token: ${request.session.token}")
-                return [check: "false"]
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("this patient email doesn't exist, token: ${token}")
+                def check = [check: "false"]
+                return [resp, check]
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            [resp, null]
         }
     }
+
 }
