@@ -1,7 +1,7 @@
 package com.ratchethealth.client
 
 class Patient {
-    Long id
+    String id
     String patientId
     String firstName
     String lastName
