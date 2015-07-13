@@ -22,10 +22,11 @@ class TeamService extends RatchetClientService {
             if (resp.status == 200) {
                 log.info("Get care team success, token:${token}")
                 def items = result.items
-                return [resp, items]
+                return items
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -44,10 +45,11 @@ class TeamService extends RatchetClientService {
                 def map = [:]
                 map.put("data", result.items)
                 log.info("Get care giver success, token: ${token}")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -62,10 +64,11 @@ class TeamService extends RatchetClientService {
 
             if (resp.status == 204) {
                 log.info("Delete care giver success, token: ${token}")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -86,10 +89,11 @@ class TeamService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Add care giver success, token: ${token}")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -109,9 +113,11 @@ class TeamService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Update care giver success, token: ${token}")
-                return [resp, true]
+                return true
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -129,9 +135,11 @@ class TeamService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Update care team surgeon success, token: ${token}")
-                return [resp, result]
+                return result
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

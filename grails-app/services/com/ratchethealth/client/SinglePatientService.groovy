@@ -19,9 +19,11 @@ class SinglePatientService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Show single patient success, token: ${token}")
-                return [resp, result]
+                return result
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -38,9 +40,11 @@ class SinglePatientService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Show medical records success, token: ${token}")
-                return [resp, result]
+                return result
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -62,9 +66,11 @@ class SinglePatientService extends RatchetClientService {
             if (resp.status == 200) {
                 log.info("Update single patient success, token: ${token}")
                 def status = resp.status
-                return [resp, status]
+                return status
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -84,9 +90,11 @@ class SinglePatientService extends RatchetClientService {
             } else if (resp.status == 404) {
                 log.info("get patient info failed, haven't this patientId, token: ${token}")
                 def check = [check: "false"]
-                return [resp, check]
+                return check
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -107,9 +115,11 @@ class SinglePatientService extends RatchetClientService {
             } else if (resp.status == 404) {
                 log.info("this patient email doesn't exist, token: ${token}")
                 def check = [check: "false"]
-                return [resp, check]
+                return check
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
