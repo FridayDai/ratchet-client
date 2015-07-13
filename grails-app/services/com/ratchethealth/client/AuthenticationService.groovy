@@ -4,7 +4,7 @@ import com.ratchethealth.client.exceptions.AccountValidationException
 import grails.converters.JSON
 
 
-class AuthenticationService extends RatchetClientService {
+class AuthenticationService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
@@ -53,7 +53,7 @@ class AuthenticationService extends RatchetClientService {
                         result       : result
                 ]
                 log.info("Authenticate success, token: ${token}")
-                return [resp, data]
+                return data
             }
 
             if (resp.status == 403) {
@@ -91,10 +91,11 @@ class AuthenticationService extends RatchetClientService {
 
                 if (resp.status == 200) {
                     log.info("Logout success, token: ${token}")
-                    return [resp, true]
+                    return true
                 }
-
-                [resp, null]
+                else {
+                    handleError(resp)
+                }
             }
         }
     }

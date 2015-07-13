@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 
 
-class InvitationService extends RatchetClientService {
+class InvitationService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
@@ -17,10 +17,11 @@ class InvitationService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Invite patient success, token: ${token}")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -37,10 +38,11 @@ class InvitationService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Invite account success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }

@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class TaskService extends RatchetClientService{
+class TaskService extends RatchetAPIService{
 
     def grailsApplication
     def messageSource
@@ -21,10 +21,11 @@ class TaskService extends RatchetClientService{
 
             if (resp.status == 200) {
                 log.info("Get tasks success by medical record, token: ${token}")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -40,9 +41,11 @@ class TaskService extends RatchetClientService{
 
             if (resp.status == 200) {
                 log.info("Send task email to patient success, token: ${token}")
-                return [resp, true]
+                return true
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

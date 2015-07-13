@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class AccountService extends RatchetClientService {
+class AccountService extends RatchetAPIService {
 
     def grailsApplication
 
@@ -36,10 +36,11 @@ class AccountService extends RatchetClientService {
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
                 log.info("Get accounts success, token: ${token}.")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
 
         }
 
@@ -59,10 +60,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Get single account success, token: ${token}.")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -96,10 +98,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 201) {
                 log.info("Create account success, token: ${token}.")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -136,11 +139,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Update account success, token: ${token}.")
-
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -158,10 +161,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Update password success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -180,10 +184,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Active staff success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -201,10 +206,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Deactivate password success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -222,10 +228,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Activate password success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -248,10 +255,11 @@ class AccountService extends RatchetClientService {
             }
             if (resp.status == 412) {
                 log.info("Invitation link is expired,token:${token}.")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -268,7 +276,7 @@ class AccountService extends RatchetClientService {
                     .asString()
 
             log.info("Ask for reset password success, token: ${token}.")
-            return [resp, resp]
+            return resp
         }
 
     }
@@ -287,10 +295,11 @@ class AccountService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Reset password success, token: ${token}.")
-                return [resp, true]
+                return true
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -309,10 +318,11 @@ class AccountService extends RatchetClientService {
             } else if (resp.status == 412) {
                 def result = JSON.parse(resp.body)
                 log.info("Reset password link is expired,token:${token}.")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
@@ -336,10 +346,11 @@ class AccountService extends RatchetClientService {
             } else if (resp.status == 404) {
                 log.info("this account email doesn't exist, token: ${token}")
                 result = [check: "false"]
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }

@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class ActivityService extends RatchetClientService {
+class ActivityService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
@@ -45,10 +45,11 @@ class ActivityService extends RatchetClientService {
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
                 log.info("Get activities success, token: ${token}.")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 

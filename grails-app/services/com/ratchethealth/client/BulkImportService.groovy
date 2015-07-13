@@ -4,7 +4,7 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
 
-class BulkImportService extends RatchetClientService {
+class BulkImportService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
@@ -33,11 +33,13 @@ class BulkImportService extends RatchetClientService {
                 def map = [:]
                 map.put("data", result.items)
                 log.info("Bulk import patient success, token: ${token}")
-                return [resp, map]
+                return map
             } else if (resp.status == 209) {
                 throw new ApiReturnException(resp.status, '')
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -82,9 +84,11 @@ class BulkImportService extends RatchetClientService {
                 map.put("data", result.items)
 
                 log.info("Lookup success, token: ${token}")
-                return [resp, map]
+                return map
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -104,9 +108,11 @@ class BulkImportService extends RatchetClientService {
             if (resp.status == 200) {
                 log.info("Get bulk import patient error file link success, token: ${token}")
                 def errorPath = result?.errorFilePath
-                return [resp, errorPath]
+                return  errorPath
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
 
         }
     }
@@ -125,10 +131,11 @@ class BulkImportService extends RatchetClientService {
             if (resp.status == 200) {
                 def map = [:]
                 log.info("Save patient success, token: ${token}")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

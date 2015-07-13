@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class TreatmentService extends RatchetClientService {
+class TreatmentService extends RatchetAPIService {
 
     def grailsApplication
     def messageSource
@@ -25,10 +25,11 @@ class TreatmentService extends RatchetClientService {
             if (resp.status == 200) {
                 log.info("Get treatments success, token: ${token}")
                 def items = result.items
-                return [resp, items]
+                return items
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -61,10 +62,11 @@ class TreatmentService extends RatchetClientService {
 
             if (resp.status == 201) {
                 log.info("Assign treatment to exist patient success, token: ${token}")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -82,10 +84,11 @@ class TreatmentService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Get treatment info success, token:${token}")
-                return [resp, result]
+                return result
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -102,9 +105,11 @@ class TreatmentService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Update surgery date success, token: ${token}")
-                return [resp, true]
+                return true
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -119,9 +124,11 @@ class TreatmentService extends RatchetClientService {
 
             if (resp.status == 200) {
                 log.info("Archive medical record success, token: ${token}")
-                return [resp, true]
+                return true
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

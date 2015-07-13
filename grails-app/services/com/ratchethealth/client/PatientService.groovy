@@ -3,7 +3,7 @@ package com.ratchethealth.client
 import grails.converters.JSON
 
 
-class PatientService extends RatchetClientService {
+class PatientService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
@@ -52,9 +52,11 @@ class PatientService extends RatchetClientService {
                 def map = [:]
                 map.put("id", result.id)
                 log.info("Add patient success, token: ${token}")
-                return [resp, map]
+                return map
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 
@@ -102,9 +104,11 @@ class PatientService extends RatchetClientService {
                 map.put("data", result.items)
 
                 log.info("Get patients success, token: ${token}")
-                return [resp, map]
+                return map
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

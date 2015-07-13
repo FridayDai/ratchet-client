@@ -2,7 +2,7 @@ package com.ratchethealth.client
 
 import grails.converters.JSON
 
-class StaffService extends RatchetClientService {
+class StaffService extends RatchetAPIService {
 
     def grailsApplication
     def messageSource
@@ -31,9 +31,11 @@ class StaffService extends RatchetClientService {
             if (resp.status == 200) {
                 log.info("Get staffs success, token: ${token}")
                 def items = result.items
-                return [resp, items]
+                return items
             }
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
     }
 }

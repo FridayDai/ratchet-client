@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class AssistService extends RatchetClientService {
+class AssistService extends RatchetAPIService {
 
     /** dependency injection for grailsApplication */
     def grailsApplication
@@ -33,10 +33,11 @@ class AssistService extends RatchetClientService {
                 def map = [:]
                 map.put("status", "ok")
                 log.info("Add assist success, token: ${token}.")
-                return [resp, map]
+                return map
             }
-
-            [resp, null]
+            else {
+                handleError(resp)
+            }
         }
 
     }
