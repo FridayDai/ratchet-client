@@ -361,7 +361,6 @@ class AccountServiceSpec extends Specification {
             ]
         }
 
-
         when:
         service.confirmCode('token', '123456')
 
@@ -370,5 +369,161 @@ class AccountServiceSpec extends Specification {
         e.getMessage() == "body"
     }
 
+    def "test askForResetPassword with successful result"() {
+        given:
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : true
+            ]
+        }
+
+        when:
+        def result = service.askForResetPassword('token', 'email', 'client')
+
+        then:
+        result.status == 200
+    }
+
+    def "test resetPassword with successful result"() {
+        given:
+
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : true
+            ]
+        }
+
+        when:
+        def result = service.resetPassword('token', "123456", '1', '1')
+
+        then:
+        result == true
+    }
+
+    def "test resetPassword without successful result"() {
+        given:
+
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        service.resetPassword('token', "123456", '1', '1')
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
+
+    def "test validPasswordCode with successful result"() {
+        given:
+
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : '200'
+            ]
+        }
+
+
+        when:
+        def result = service.validPasswordCode('token', '123456')
+
+        then:
+        result == 200
+    }
+
+    def "test validPasswordCode with expire result"() {
+        given:
+        def jBuilder = new JsonBuilder()
+        jBuilder {
+            errorId '412'
+        }
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 412,
+                    body  : jBuilder.toString()
+            ]
+        }
+
+
+        when:
+        def result = service.validPasswordCode('token', '123456')
+
+        then:
+        result.errorId == '412'
+    }
+
+    def "test validPasswordCode without successful result"() {
+        given:
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        service.validPasswordCode('token', '123456')
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
+
+    def "test checkEmail with successful result"() {
+        given:
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : true
+            ]
+        }
+
+        when:
+        def result = service.checkEmail('token', 'email')
+
+        then:
+        result.check == "true"
+    }
+
+    def "test checkEmail with not find result"() {
+        given:
+
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 404,
+                    body  : false
+            ]
+        }
+
+        when:
+        def result = service.checkEmail('token', 'email')
+
+        then:
+        result.check == "false"
+    }
+
+    def "test checkEmail without successful result"() {
+        given:
+
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        service.checkEmail('token', 'email')
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
 
 }
