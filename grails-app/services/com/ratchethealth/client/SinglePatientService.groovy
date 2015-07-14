@@ -86,7 +86,7 @@ class SinglePatientService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("get patient info success, token: ${token}")
                 def result = JSON.parse(resp.body)
-                return [resp, result]
+                return result
             } else if (resp.status == 404) {
                 log.info("get patient info failed, haven't this patientId, token: ${token}")
                 def check = [check: "false"]
@@ -111,7 +111,7 @@ class SinglePatientService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("this patient email already exist, token: ${token}")
                 def result = JSON.parse(resp.body)
-                return [resp, result]
+                return result
             } else if (resp.status == 404) {
                 log.info("this patient email doesn't exist, token: ${token}")
                 def check = [check: "false"]
