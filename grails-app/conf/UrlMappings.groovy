@@ -44,8 +44,8 @@ class UrlMappings {
         "/patients/bulk-import/download-errors"(controller: "patients", action: "downloadErrors")
 
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
-        "/patients/check-id"(controller: "patients", action: "checkPatientExist")
-        "/patients/check-email"(controller: "patients", action: "checkPatientEmailExist")
+        "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
+        "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
@@ -70,7 +70,7 @@ class UrlMappings {
         "/patients/$patientId?/group-and-provider/update"(controller: "team", action: "updateCareTeamSurgeon")
 
         //Patient activity
-        "/patients/$patientId?/activities"(controller: "overview", action: "getActivities")
+        "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")
 
         //Accounts
         "/accounts"(controller: "accounts") {
@@ -95,7 +95,7 @@ class UrlMappings {
             action = [GET: "getProfile", POST: "updatePassword"]
         }
 
-        // staffs (a type of account)
+        // staffs (a type of account) (for now means provider)
         "/staffs"(controller: "staff", action: "getStaff")
 
         // groups

@@ -24,10 +24,13 @@ class TreatmentController extends BaseController {
                         treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
     }
 
-    def assignTreatment() {
-        def resp = treatmentService.assignTreatmentToExistPatient(request, params)
+    def assignTreatment(Patient patient) {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def treatmentId = patient.treatmentId
+        def resp = treatmentService.assignTreatmentToExistPatient(token, clientId, patient)
         def medicalRecordId = resp?.medicalRecordId
-        def treatmentInfo = treatmentService.getTreatmentInfo(request, params)
+        def treatmentInfo = treatmentService.getTreatmentInfo(token, clientId, treatmentId)
         def medicalRecordInfo = [medicalRecordId: medicalRecordId,
                                  treatmentInfo  : treatmentInfo
         ]
@@ -35,24 +38,41 @@ class TreatmentController extends BaseController {
     }
 
     def getTreatments() {
-        def resp = treatmentService.getTreatments(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def max = params?.max
+        def offset = params?.offset
+        def treatmentTitle = params?.treatmentTitle
+        def resp = treatmentService.getTreatments(token, clientId, max, offset, treatmentTitle)
         render resp as JSON
     }
 
     def updateSurgeryTime() {
-        def resp = treatmentService.updateSurgeryTime(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def medicalRecordId = params?.medicalRecordId
+        def patientId = params?.patientId
+        def surgeryTime = params?.surgeryTime
+        def resp = treatmentService.updateSurgeryTime(token, clientId, medicalRecordId, patientId, surgeryTime)
         def result = [resp: resp]
         render result as JSON
     }
 
     def archived() {
-        def resp = treatmentService.archived(request, params)
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def medicalRecordId = params?.medicalRecordId
+        def patientId = params?.patientId
+        def resp = treatmentService.archiveTreatment(token, clientId, medicalRecordId, patientId)
         def result = [resp: resp]
         render result as JSON
     }
 
     def getTreatmentInfo() {
-        def resp = treatmentService.getTreatmentInfo(request, params)
+        String token = request.session.token
+        def clientId = params?.clientId
+        def treatmentId = params?.treatmentId
+        def resp = treatmentService.getTreatmentInfo(token, clientId, treatmentId)
         render resp as JSON
     }
 }

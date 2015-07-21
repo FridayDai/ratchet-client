@@ -11,10 +11,13 @@ class SinglePatientController extends BaseController {
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
     def getSinglePatient() {
+        String token = request.session.token
+        def clientId = request.session.clientId
         def patientId = params?.patientId
-        def patientInfo = singlePatientService.showSinglePatient(request, patientId)
+        def patientInfo = singlePatientService.showSinglePatient(token, patientId)
+
         def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
-        def medicalRecords = singlePatientService.showMedialRecords(request, patientId)
+        def medicalRecords = singlePatientService.showMedialRecords(token, clientId, patientId)
         def num = patientInfo?.phoneNumber
         def length = num.length()
         def phoneNumber
@@ -40,14 +43,31 @@ class SinglePatientController extends BaseController {
                                                              medicalRecords: medicalRecords, phoneNumber: phoneNumber, treatmentLimit: treatmentLimit])
     }
 
-    def updateSinglePatient() {
-        def resp = singlePatientService.updateSinglePatient(request, params)
+    def updateSinglePatient(Patient patient) {
+        String token = request.session.token
+        def resp = singlePatientService.updateSinglePatient(token, patient)
         def status = [resp: resp]
         render status as JSON
     }
 
+
+    def checkPatientExist() {
+        String token = request.session.token
+        def patientId = params?.patientId
+        def data = singlePatientService.checkPatientId(token, patientId)
+        render data as JSON
+    }
+
+    def checkPatientEmailExist() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def email = params?.email
+        def data = singlePatientService.checkPatientEmail(token, clientId, email)
+        render data as JSON
+    }
+
     def invitePatient() {
-        invitationService.invitePatient(request, params.id)
+        invitationService.invitePatient(session.token, params.id)
         render true
     }
 }

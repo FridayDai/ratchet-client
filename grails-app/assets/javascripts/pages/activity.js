@@ -90,6 +90,7 @@
         //data.patientId = ele.find("#patientId").val();
         data.medicalRecordId = ele.find("#medicalRecordId").val();
         data.clientId = ele.find("#clientId").val();
+        data.order = "desc";
         _initTable(ele, element, data);
     }
 

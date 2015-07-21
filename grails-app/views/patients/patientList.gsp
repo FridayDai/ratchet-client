@@ -89,6 +89,7 @@
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
                 <div id="patient-id-value" class="patient-id-div"></div>
+                <g:hiddenField name="id" id="hidden-id"></g:hiddenField>
                 %{--<input id="patientId" name="patientId" type="text" class="input-group"--}%
                 %{--placeholder="1234567890"--}%
                 %{--required/>--}%

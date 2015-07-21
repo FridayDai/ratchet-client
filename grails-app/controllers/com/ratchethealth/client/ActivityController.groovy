@@ -1,6 +1,10 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
+
 class ActivityController extends BaseController{
+
+    def activityService
 
     def beforeInterceptor = [action: this.&auth]
 
@@ -15,5 +19,10 @@ class ActivityController extends BaseController{
         def clientId = params?.clientId
 
         render(view: '/activity/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
+    }
+
+    def getActivities(ActivityPagination activityPagination) {
+        def data = activityService.getActivities(session.token, activityPagination)
+        render data as JSON
     }
 }

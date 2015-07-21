@@ -100,8 +100,9 @@
             success: function (data) {
                 //var sendTimeOffset = data.sendTimeOffset;
                 //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
-                var date = new Date();
-                var time = date.getTime() + data.sendTimeOffset;
+                //var date = new Date();
+                //var time = date.getTime() + data.sendTimeOffset;
+                var time = data.surgeryDate + data.sendTimeOffset;
                 _initSurgeryTime(time);
             }
         });

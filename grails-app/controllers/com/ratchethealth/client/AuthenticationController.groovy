@@ -18,8 +18,25 @@ class AuthenticationController extends BaseController {
         if (request.method == "GET") {
             render(view: '/login/login')
         } else if (request.method == "POST") {
-            params?.email = params?.email.toLowerCase();
-            def resp = authenticationService.authenticate(request, params)
+
+            def email = params?.email.toLowerCase()
+            def password = params?.password
+            def resp = authenticationService.authenticate(session.token, email, password)
+            def result = resp?.result
+
+            if (result) {
+                session.token = result.token
+                session.accountId = result.id
+                session.clientId = result.clientId
+                session.clientPortalName = result.clientPortalName
+                session.clientName = result.clientName
+                session.firstName = result.firstName
+                session.lastName = result.lastName
+                session.email = email
+                session.patientManagement = result.patientManagement
+                session.accountManagement = result.accountManagement
+                session.isDoctor = result.doctor
+            }
 
             if (resp?.authenticated) {
                 redirect(uri: '/')
@@ -33,8 +50,9 @@ class AuthenticationController extends BaseController {
      * @return
      */
     def logout() {
-        def resp = authenticationService.logout(request)
+        def resp = authenticationService.logout(session.token)
         if (resp) {
+            session.invalidate()
             redirect(uri: '/login')
         } else {
             log.warn("logout failed")

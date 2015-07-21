@@ -8,8 +8,8 @@ class AssistController extends BaseController {
 
     def assistService
 
-    def addAssist() {
-        def resp = assistService.addAssist(request, params)
+    def addAssist(Assist assist) {
+        def resp = assistService.addAssist(session.token, session.accountId, session.clientId, assist)
         render resp as JSON
     }
 }

@@ -1,78 +1,51 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.http.Unirest
-import com.mashape.unirest.http.exceptions.UnirestException
-import com.ratchethealth.client.exceptions.ApiAccessException
-import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 
-import javax.servlet.http.HttpServletRequest
+class TaskService extends RatchetAPIService{
 
-class TaskService {
-
-    /** dependency injection for grailsApplication */
     def grailsApplication
-
     def messageSource
 
-    def getOverdueTasks(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def getTasks(String token, clientId, medicalRecordId) {
 
-        def max = params?.max
-        def offset = params?.offset
-        def patientId = params?.patientId
-        def medicalRecordId = params?.medicalRecordId
+        String showTasksUrl = grailsApplication.config.ratchetv2.server.url.medicalRecord.tasks
+        def url = String.format(showTasksUrl, clientId, medicalRecordId)
 
-        String getOverdueTasksUrl = grailsApplication.config.ratchetv2.server.url.getOverdueTask
-        def url = String.format(getOverdueTasksUrl, patientId, medicalRecordId)
+        log.info("Call backend service to show tasks by medical record, token: ${token}.")
 
-        try {
-            log.info("Call backend service to get overdue tasks with max and offset, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
-                    .queryString("max", max)
-                    .queryString("offset", offset)
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
-
             def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
-                log.info("Get overdue tasks success, token: ${request.session.token}")
-                return result.items
-            } else {
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
+                log.info("Get tasks success by medical record, token: ${token}")
+                return result
             }
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            else {
+                handleError(resp)
+            }
         }
-
     }
 
-    def sendTaskEmailToPatient(HttpServletRequest request, params)
-            throws ApiAccessException, ApiReturnException {
+    def sendTaskEmailToPatient(String token, clientId, patientId, medicalRecordId, taskId) {
 
-        def clientId = request.session.clientId
         String sendTaskEmailUrl = grailsApplication.config.ratchetv2.server.url.task.sendEmail
-        def url = String.format(sendTaskEmailUrl, clientId, params.patientId, params.medicalRecordId, params.taskId)
+        def url = String.format(sendTaskEmailUrl, clientId, patientId, medicalRecordId, taskId)
 
-        try {
-            log.info("Call backend service to send task email to patient, token: ${request.session.token}.")
-            def resp = Unirest.get(url)
-                    .header("X-Auth-Token", request.session.token)
+        log.info("Call backend service to send task email to patient, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Send task email to patient success, token: ${request.session.token}")
+                log.info("Send task email to patient success, token: ${token}")
                 return true
-            } else {
-                def result = JSON.parse(resp.body)
-                def message = result?.error?.errorMessage
-                throw new ApiReturnException(resp.status, message)
             }
-
-        } catch (UnirestException e) {
-            throw new ApiAccessException(e.message)
+            else {
+                handleError(resp)
+            }
         }
     }
 }
