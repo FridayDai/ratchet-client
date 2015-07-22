@@ -37,8 +37,7 @@ class AccountService extends RatchetAPIService {
                 map.put("data", result.items)
                 log.info("Get accounts success, token: ${token}.")
                 return map
-            }
-            else {
+            } else {
                 handleError(resp)
             }
 
@@ -61,8 +60,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get single account success, token: ${token}.")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -99,8 +97,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 201) {
                 log.info("Create account success, token: ${token}.")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -140,8 +137,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Update account success, token: ${token}.")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -161,9 +157,12 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Update password success, token: ${token}.")
-                return true
+                return resp.status
             }
-            else {
+            if (resp.status == 400) {
+                log.info("Update password fail, token: ${token}.")
+                return resp.status
+            } else {
                 handleError(resp)
             }
         }
@@ -185,8 +184,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Active staff success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -207,8 +205,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Deactivate password success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -229,8 +226,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Activate password success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -256,8 +252,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 412) {
                 log.info("Invitation link is expired,token:${token}.")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -296,8 +291,7 @@ class AccountService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Reset password success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -319,8 +313,7 @@ class AccountService extends RatchetAPIService {
                 def result = JSON.parse(resp.body)
                 log.info("Reset password link is expired,token:${token}.")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -347,8 +340,7 @@ class AccountService extends RatchetAPIService {
                 log.info("this account email doesn't exist, token: ${token}")
                 result = [check: "false"]
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
