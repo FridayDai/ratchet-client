@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -40,6 +42,6 @@ class TaskController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
         def resp = taskService.sendTaskEmailToPatient(token, clientId, patientId, medicalRecordId, taskId)
-        render resp
+        render resp as JSON
     }
 }
