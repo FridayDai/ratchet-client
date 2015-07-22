@@ -48,11 +48,11 @@ ratchet-v2-provider-desktop
        source ~/.bash_profile
 
        # Install Ruby 2.1.3 and set it as the default version
-       rbenv install jruby 1.7.9
-       rbenv global jruby 1.7.9
+       rbenv install jruby 2.1.3
+       rbenv global jruby 2.1.3
 
        ruby -v
-       # jruby-1.7.9
+       # jruby-2.1.3
     ```
 	 - Install **Compass**
 
