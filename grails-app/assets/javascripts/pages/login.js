@@ -67,6 +67,12 @@
         });
     }
 
+    function _closeOptimizePrompt() {
+        $(".btn-close").click(function () {
+            $(".optimize-prompt").css("display", "none");
+        });
+    }
+
     /**
      * page Initialization
      * @private
@@ -75,6 +81,7 @@
         _setValidate();
         _validLogin();
         loginLimit();
+        _closeOptimizePrompt();
     }
 
     _init();
