@@ -18,8 +18,6 @@ class AuthenticationController extends BaseController {
         if (request.method == "GET") {
             render(view: '/login/login')
         } else if (request.method == "POST") {
-            def a = [1,2,3]
-            a.length = 0
             def email = params?.email.toLowerCase()
             def password = params?.password
             def resp = authenticationService.authenticate(session.token, email, password)
