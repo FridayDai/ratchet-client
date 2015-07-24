@@ -82,6 +82,6 @@
         $('.log-out').click(function () {
             window.localStorage.clear();
         });
-    })()
+    })();
 
 })(jQuery);
