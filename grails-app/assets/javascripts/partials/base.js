@@ -74,4 +74,14 @@
         return self;
     }({}));
 
+    /**
+     * reset localStorage item 'storedEmail'
+     * @private
+     */
+    (function _logout() {
+        $('.log-out').click(function () {
+            window.localStorage.clear();
+        });
+    })()
+
 })(jQuery);

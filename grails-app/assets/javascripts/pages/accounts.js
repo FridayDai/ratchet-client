@@ -620,15 +620,7 @@
         });
     }
 
-    /**
-     * reset localStorage item 'storedEmail'
-     * @private
-     */
-    function _logout() {
-        $('.log-out').click(function () {
-            window.localStorage.clear();
-        });
-    }
+
 
     /**
      * go back to previous page
@@ -880,7 +872,6 @@
         _updateAccount();
         _validSetPassword();
         _bindSearchEvent();
-        _logout();
         _goBackToPrePage();
         _activateAndDeactivate();
         _sortAccountTable();
