@@ -1,6 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
 
 class ProfileController extends BaseController {
 
