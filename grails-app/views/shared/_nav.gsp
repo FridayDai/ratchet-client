@@ -18,20 +18,22 @@
                 </ul>
             </a>
         </li>
-        %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
-        %{--<g:else>class="nav-li"</g:else>>--}%
-        %{--<g:link controller="home" action="index">--}%
-        %{--<div class="ui-icon icon-home"></div>--}%
+    %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
+    %{--<g:else>class="nav-li"</g:else>>--}%
+    %{--<g:link controller="home" action="index">--}%
+    %{--<div class="ui-icon icon-home"></div>--}%
 
-        %{--<div class="home-title">HOME</div>--}%
-        %{--</g:link>--}%
-        %{--</li>--}%
-        <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
-            <g:else>class="nav-li"</g:else>>
-            <g:link controller="patients" class="icon-patient">
-                <div class="title">Patients</div>
-            </g:link>
-        </li>
+    %{--<div class="home-title">HOME</div>--}%
+    %{--</g:link>--}%
+    %{--</li>--}%
+        <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
+            <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
+                <g:else>class="nav-li"</g:else>>
+                <g:link controller="patients" class="icon-patient">
+                    <div class="title">Patients</div>
+                </g:link>
+            </li>
+        </g:if>
 
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if>

@@ -35,10 +35,16 @@ class AuthenticationController extends BaseController {
                 session.patientManagement = result.patientManagement
                 session.accountManagement = result.accountManagement
                 session.isDoctor = result.doctor
+                session.groupSize = result.groupSize
             }
 
             if (resp?.authenticated) {
-                redirect(uri: '/')
+
+                if (session.accountManagement == false && session.groupSize == 0) {
+                    redirect(uri: '/profile/' + session.accountId)
+                } else {
+                    redirect(uri: '/')
+                }
             }
 
         }
