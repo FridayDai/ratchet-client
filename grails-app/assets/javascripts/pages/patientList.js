@@ -1221,7 +1221,8 @@
                 }
                 //var date = new Date();
                 //var time = date.getTime() + ui.item.timeStamp;
-                var time = ui.item.surgeryDate + ui.item.timeStamp;
+                //var time = ui.item.surgeryDate + ui.item.timeStamp;
+                var time = ui.item.surgeryDate;
                 $("#surgeryTime").val("");
                 $("#surgeryTime").prop("disabled", false);
                 _initSurgeryTime(time);
