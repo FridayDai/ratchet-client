@@ -1,1 +1,30 @@
+.update-browser {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999999999;
+    text-align: center;
+    padding: 20px;
+    background-color: #288fa4;
+    font-family: Lato;
+    font-weight: 300;
 
+    .display-inline {
+        display: inline-block;
+        color: #ffffff;
+    }
+
+    .margin-left {
+        margin-left: 15px;
+    }
+
+    .close-hover:hover {
+        text-decoration: underline;
+    }
+
+    a {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+}
