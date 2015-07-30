@@ -15,7 +15,7 @@
 
             <p class="display-inline margin-left btn-close">x</p>
 
-            <p class="display-inline close-hover btn-close">close</p>
+            <p class="display-inline close-decoration btn-close">close</p>
         </div>
     </div>
 
