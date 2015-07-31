@@ -13,13 +13,13 @@ grails.project.fork = [
 
         // configure settings for the test-app JVM, uses the daemon by default
 //        test   : [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon: true],
-        // configure settings for the run-app JVM
+// configure settings for the run-app JVM
 //    run: false,
 //    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
 // configure settings for the run-war JVM
-        war    : [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve: false],
-        // configure settings for the Console UI JVM
-        console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+war    : [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve: false],
+// configure settings for the Console UI JVM
+console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
@@ -81,6 +81,7 @@ grails.project.dependency.resolution = {
         runtime ":cors:1.1.6"
         compile ":codenarc:0.23"
         //runtime ":jquery:1.11.1"
+        test ':code-coverage:2.0.3-3'
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
@@ -111,4 +112,44 @@ codenarc {
         CatchException.enabled = false
         GrailsDomainReservedSqlKeywordName.enabled = false
     }
+}
+
+coverage {
+    environments {
+        development {
+            enabledByDefault = true
+        }
+        production {
+            enabledByDefault = true
+        }
+        test {
+            enabledByDefault = false
+        }
+    }
+    xml = true
+    exclusions = [
+            "**/QuartzConfig*",
+            '**/Hstore*',
+            "**/*changelog*/**",
+            "**/*add_*/**",
+            "**/*update_*/**",
+            "**/*drop_*/**",
+            "**/*remove_*/**",
+            "**/*rename_*/**",
+            "**/*schedule_job*/**",
+            "**/*token_refactor*/**",
+            "**/*user_add_*/**",
+            "**/*BootStrap*",
+            "Config*",
+            "**/*DataSource*",
+            "**/*CodeNarcRuleSet*",
+            "**/*resources*",
+            "**/*UrlMappings*",
+            "**/*Tests*",
+            "**/grails/test/**",
+            "**/org/codehaus/groovy/grails/**",
+            "**/PreInit*",
+            "*GrailsPlugin*",
+            "**/domain/**"
+    ]
 }
