@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png')}" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
-    <!--[if IE 8 ]>    <asset:stylesheet src="css/ie.css"/> <![endif]-->
+    <!--[if lte IE 8 ]><asset:stylesheet src="css/ie.css"/><![endif]-->
     <g:if test="${cssPath}">
         <asset:stylesheet src="css/pages/${cssPath}"/>
     </g:if>
@@ -20,6 +20,7 @@
 </head>
 
 <body>
+<g:render template="/shared/updateBrowser" />
 
 <div>
     <g:layoutBody/>
