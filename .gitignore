@@ -46,4 +46,5 @@ target-eclipse
 .sass-cache
 .sonar
 grails-app/assets/javascripts/bower_components
+dist/
 grails-app/assets/stylesheets/css

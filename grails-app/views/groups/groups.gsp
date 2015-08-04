@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="groupsBundle"/>
+<g:set var="scriptPath" value="bundles/groupsBundle"/>
 <g:set var="cssPath" value="groups"/>
 <g:applyLayout name="main">
     <html>

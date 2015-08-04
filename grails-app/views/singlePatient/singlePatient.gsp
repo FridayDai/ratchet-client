@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
-<g:set var="scriptPath" value="singlePatientBundle"/>
+<g:set var="scriptPath" value="bundles/singlePatientBundle"/>
 <g:set var="cssPath" value="treatment"/>
 <g:applyLayout name="main">
     <html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<g:set var="scriptPath" value="patientListBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/patientList.bundle.js"/>
 <g:set var="cssPath" value="patientList"/>
 <g:applyLayout name="main">
     <html>
