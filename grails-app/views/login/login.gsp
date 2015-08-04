@@ -10,6 +10,15 @@
 
     <body>
 
+    <div class="optimize-prompt">
+        <div class="display-inline">This webpage is not optimized for mobile viewing.
+
+            <p class="display-inline margin-left btn-close">x</p>
+
+            <p class="display-inline close-decoration btn-close">close</p>
+        </div>
+    </div>
+
     <div class="site-wrapper">
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>

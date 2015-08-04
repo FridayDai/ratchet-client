@@ -189,14 +189,30 @@ class AccountServiceSpec extends Specification {
         def result = service.updatePassword('token', '1', '2', '2')
 
         then:
-        result == true
+        result == 200
+    }
+
+    def "test updatePassword without older password false result"() {
+        given:
+        MultipartBody.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        def result = service.updatePassword('token', '1', '2', '2')
+
+        then:
+        result == 400
     }
 
     def "test updatePassword without successful result"() {
         given:
         MultipartBody.metaClass.asString = { ->
             return [
-                    status: 400,
+                    status: 404,
                     body  : "body"
             ]
         }

@@ -10,8 +10,8 @@ class GroupService extends RatchetAPIService {
         def start = groupPagination?.start
         def length = groupPagination?.length
         def name = groupPagination?.name
-        def sort = groupPagination?.sort
-        def order = groupPagination?.order
+        def sort = groupPagination?.sort ?: "dateCreated"
+        def order = groupPagination?.order ?: "desc"
 
         String showGroupsUrl = grailsApplication.config.ratchetv2.server.url.showGroups
         def url = String.format(showGroupsUrl, clientId)
@@ -37,8 +37,7 @@ class GroupService extends RatchetAPIService {
                 map.put("data", result.items)
                 log.info("Get groups success, token: ${token}.")
                 return map
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -61,8 +60,7 @@ class GroupService extends RatchetAPIService {
                 def result = JSON.parse(resp.body)
 
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -84,8 +82,7 @@ class GroupService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("update group success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -104,8 +101,7 @@ class GroupService extends RatchetAPIService {
             if (resp.status == 204) {
                 log.info("delete a group success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -126,8 +122,7 @@ class GroupService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get groups success, token: ${token}")
                 return JSON.parse(resp.body)
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }

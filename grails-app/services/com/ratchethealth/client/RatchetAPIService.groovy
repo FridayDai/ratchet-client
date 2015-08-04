@@ -59,7 +59,7 @@ class RatchetAPIService {
             throw new ApiAccessException(errorMessage?:resp.body)
         } else if (resp.status >= 400 && resp.status < 500) {
             String errorMessage = body?.error?.errorMessage
-            throw new ApiReturnException(errorMessage?:resp.body)
+            throw new ApiReturnException(resp.status,errorMessage?:resp.body)
         }
     }
 

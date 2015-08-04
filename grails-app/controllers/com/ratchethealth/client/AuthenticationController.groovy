@@ -18,7 +18,6 @@ class AuthenticationController extends BaseController {
         if (request.method == "GET") {
             render(view: '/login/login')
         } else if (request.method == "POST") {
-
             def email = params?.email.toLowerCase()
             def password = params?.password
             def resp = authenticationService.authenticate(session.token, email, password)
@@ -36,10 +35,16 @@ class AuthenticationController extends BaseController {
                 session.patientManagement = result.patientManagement
                 session.accountManagement = result.accountManagement
                 session.isDoctor = result.doctor
+                session.groupSize = result.groupSize
             }
 
             if (resp?.authenticated) {
-                redirect(uri: '/')
+
+                if (session.accountManagement == false && session.groupSize == 0) {
+                    redirect(uri: '/profile/' + session.accountId)
+                } else {
+                    redirect(uri: '/')
+                }
             }
 
         }
