@@ -75,7 +75,8 @@
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived]">
+                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
+                                         treatmentCode  : medicalRecord?.treatmentCode]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
                             </g:if>
@@ -196,6 +197,9 @@
         </div>
     </g:form>
 
+    <g:form class="warn">
+
+    </g:form>
     </body>
     </html>
 </g:applyLayout>

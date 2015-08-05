@@ -219,22 +219,36 @@
                 font-family: Lato;
             }
         }
+
+        .code-generation{
+            position: absolute;
+            right: 150px;
+            line-height: 40px;
+
+            .btn-generate-code{
+                top: -2px;
+            }
+        }
     }
 
     .surgery-date {
+        background-color: $base-surgery-date-bgcolor;
+        line-height: 30px;
+
         span {
-            color: $base-color-medium-black;
+            margin-left: 13px;
+            color: $base-surgery-date-color;
             font-family: Lato;
             font-weight: 300;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         label {
             display: inline;
             padding-right: 10px;
-            color: $base-color-medium-black;
-            font-size: 14px;
-            font-weight: 400;
+            color: $base-surgery-date-color;
+            font-size: 15px;
+            font-weight: 300;
         }
 
         img {

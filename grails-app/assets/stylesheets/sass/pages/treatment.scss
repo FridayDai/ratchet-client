@@ -163,3 +163,19 @@
 .treatment-info-title {
     margin-top: 15px;
 }
+
+.msg-center {
+    text-align: center;
+    padding: 8px;
+    color: $base-color-dark-gray;
+    font-size: 16px;
+
+}
+
+.code {
+    background-color: $base-logo-color;
+    color: $base-color-white;
+    width: 200px;
+    padding: 15px;
+    margin: auto;
+}

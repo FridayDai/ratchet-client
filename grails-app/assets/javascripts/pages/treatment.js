@@ -25,7 +25,8 @@
             query: "/getProvider",
             editSurgeryTime: "/patients/{0}/surgery-time/{1}/{2}",
             archived: "/patients/{0}/records/{1}/archived",
-            getTreatmentInfo: "/treatments/{0}"
+            getTreatmentInfo: "/treatments/{0}",
+            generateTreatmentCode: "/treatments/{0}/generateCode"
         }
     };
 
@@ -98,11 +99,6 @@
             type: 'POST',
             data: {clientId: clientId},
             success: function (data) {
-                //var sendTimeOffset = data.sendTimeOffset;
-                //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
-                //var date = new Date();
-                //var time = date.getTime() + data.sendTimeOffset;
-                //var time = data.surgeryDate + data.sendTimeOffset;
                 var time = data.surgeryDate;
                 _initSurgeryTime(time);
             }
@@ -191,6 +187,46 @@
         });
     }
 
+
+    function _initGenerateTreatmentCode(element) {
+        element.find('#generateCode').click(function (e) {
+            e.preventDefault();
+            var treatmentId = $(this).data("treatmentId");
+
+            var data = {
+                medicalRecordId: $(this).data("medicalRecordId"),
+                patientId: $(this).data("patientId"),
+                clientId: $(this).data("clientId")
+            };
+
+            var ajaxPost = $.ajax({
+                url: opts.urls.generateTreatmentCode.format(treatmentId),
+                method: "POST",
+                data: data
+            });
+            ajaxPost.done(function (resp) {
+                var $ele = element;
+                var content = '<div class="msg-center">' + "Code generated successfully!" + '</div>' +
+                    '<div class="msg-center code">' + resp.treatmentCode + '</div>' +
+                    '<div class="msg-center">' + "Enter code on patient portal to start the task." + '</div> ' +
+                    '<div class="msg-center">' + "The code will expire in 24 hours!" + '</div>';
+
+                $('.generate-code-form').html('');
+                $('.generate-code-form').append(content);
+                RC.common.confirmForm(_.extend({}, {
+                    title: "TREATMENT CODE",
+                    okTitle: "Done",
+                    height: 200,
+                    width: 420
+                }, {
+                    element: $('.generate-code-form')
+                }));
+
+                $ele.find('.btn-generate-code').replaceWith(resp.treatmentCode);
+            });
+        })
+    }
+
     /**
      * page Initialization
      * @private
@@ -198,6 +234,8 @@
     function _init(element) {
         _initDatePicker(element);
         _initArchived(element);
+        _initGenerateTreatmentCode(element);
+
         $(element).tabs({
             cache: true,
             ajaxOptions: {cache: true},
@@ -235,7 +273,7 @@
                 }
 
             },
-            disabled: [4, 5]
+            //disabled: [4, 5]
 
         });
     }

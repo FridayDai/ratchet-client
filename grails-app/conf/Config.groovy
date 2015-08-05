@@ -218,7 +218,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.release.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
@@ -271,6 +271,7 @@ ratchetv2 {
             getTreatmentInfo = "${ratchetv2.server.url.base}/clients/%s/treatments/%s"
             updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
+            generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
 
             //task
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"

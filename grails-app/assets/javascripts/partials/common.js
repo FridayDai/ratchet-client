@@ -616,16 +616,17 @@
             };
 
             dialogOpts.buttons[title] = function (e) {
-                var back = confirmFormArguments.okCallback(e);
-                if ($.isFunction(confirmFormArguments.okCallback)) {
-                    if (back && $.isFunction(back.promise)) {
-                        $.when(back).done(function () {
+                if ($.isFunction(confirmFormArguments.okCallback && confirmFormArguments.okCallback(e))) {
+                    if (confirmFormArguments.okCallback(e) && $.isFunction(back.promise)) {
+                        $.when(confirmFormArguments.okCallback(e)).done(function () {
                             dialog.dialog("close");
                         });
                     }
-                    else if(back) {
+                    else if (confirmFormArguments.okCallback(e)) {
                         dialog.dialog("close");
                     }
+                } else {
+                    dialog.dialog("close");
                 }
             };
 
