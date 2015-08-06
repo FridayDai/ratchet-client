@@ -9,16 +9,33 @@
 
 
     <div class="items-title">
-        <h4 class="sent_items">SENT ITEMS</h4>
+        <h4 class="active-items">ACTIVE ITEMS</h4>
     </div>
 
     <div class="tasks-list list-bottom">
-        <div class="task-row ${archivedStatus}" id="task-row-sent">
-            <g:if test="${sentTasks == [] || sentTasks == null}">
-                <div class="no-item center no-item-sent"><p>No item has been sent yet.</p></div>
+        <div class="task-row ${archivedStatus}" id="task-row-active">
+            <g:if test="${activeTasks == [] || activeTasks == null}">
+                <div class="no-item center no-item-sent"><p>There are no active items</p></div>
             </g:if>
             <g:else>
-                <g:each in="${sentTasks}" var="task">
+                <g:each in="${activeTasks}" var="task">
+                    <g:render template="taskBox" model="['task': task]"></g:render>
+                </g:each>
+            </g:else>
+        </div>
+    </div>
+
+    <div class="items-title">
+        <h4 class="closed-items">CLOSED ITEMS</h4>
+    </div>
+
+    <div class="tasks-list list-bottom">
+        <div class="task-row ${archivedStatus}" id="task-row-closed">
+            <g:if test="${closedTasks == [] || closedTasks == null}">
+                <div class="no-item center no-item-sent"><p>There are no closed items</p></div>
+            </g:if>
+            <g:else>
+                <g:each in="${closedTasks}" var="task">
                     <g:render template="taskBox" model="['task': task]"></g:render>
                 </g:each>
             </g:else>

@@ -30,20 +30,32 @@
         margin-bottom: 7px;
         color: $base-logo-color;
         font-family: Lato;
-        color: $base-logo-color;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
     }
 
-    .sent_items {
-
+    .active-items {
         &:before {
             display: inline-block;
-            padding-right: 10px;
-            content: '\f473';
+            padding-right: 16px;
+            content: '\f3fe';
             color: $base-logo-color;
             font-weight: lighter;
-            font-size: 30px;
+            font-size: 26px;
+            font-family: ionicons;
+            vertical-align: middle;
+
+        }
+    }
+
+    .closed-items {
+        &:before {
+            display: inline-block;
+            padding-right: 16px;
+            content: '\f463';
+            color: $base-logo-color;
+            font-weight: lighter;
+            font-size: 26px;
             font-family: ionicons;
             vertical-align: middle;
 
@@ -54,7 +66,7 @@
 
         &:before {
             display: inline-block;
-            padding-right: 10px;
+            padding-right: 16px;
             content: '\f3c7';
             color: $base-logo-color;
             font-weight: lighter;
@@ -85,7 +97,8 @@
     width: 314px;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 3px $base-color-mid-grey solid;
+    border: 2px $base-color-mid-grey solid;
+    vertical-align: middle;
     font-family: "Lato";
 
     h5 {
@@ -106,52 +119,63 @@
 
     // change background and color according to status
     &.pending {
-        border: 3px $base-color-green solid;
+        border-color: $base-color-orange;
 
-        .box-item-header {
-            background-color: $base-color-green;
+        .box-item-footer {
+            background-color: $base-color-orange;
 
             &:before {
-                padding: 5px 8px 0;
                 content: 'PENDING';
-                font-size: 10pt;
             }
         }
     }
 
     &.overdue {
-        border: 3px $base-color-task-overdue solid;
+        border-color: $base-color-task-overdue;
 
-        .box-item-header {
+        .box-item-footer {
             background-color: $base-color-task-overdue;
 
             &:before {
-                padding: 5px 8px 0;
                 content: 'OVERDUE';
-                font-size: 10pt;
+            }
+        }
+        .btn-notify {
+            &:hover {
+                color: $base-color-task-overdue;
             }
         }
     }
 
     &.complete {
-        border: 3px $base-color-task-complete solid;
+        border-color: $base-color-green;
 
-        .box-item-header {
-            background-color: $base-color-task-complete;
+        .box-item-footer {
+            background-color: $base-color-green;
 
             &:before {
-                width: 10px;
-                padding: 5px 8px 0;
                 content: 'COMPLETE';
-                font-size: 10pt;
             }
         }
 
-        .box-item-content {
-            .complete-sent-time {
-                height: 25px;
-                padding: 0;
-                margin-top: 52px;
+//        .box-item-content {
+//            .complete-sent-time {
+//                height: 25px;
+//                padding: 0;
+//                margin-top: 52px;
+//            }
+//        }
+    }
+
+    &.expired {
+        border-color: $base-color-grey-expired;
+        background-color: $base-color-archived-bg;
+
+        .box-item-footer {
+            background-color: $base-color-grey-expired;
+
+            &:before {
+                content: 'EXPIRED';
             }
         }
     }
@@ -189,7 +213,8 @@
 
 .box-item-content {
     position: relative;
-    padding: 18px;
+    padding: 10px;
+    color: $base-a-default-color;
 
     .complete-score {
         position: absolute;
@@ -201,13 +226,11 @@
 
     .item-fist {
         height: 20px;
-        color: $base-font-color-dark;
     }
 
     .item-title {
         height: 50px;
         padding-top: 4px;
-        color: $base-logo-color;
         font-family: Lato;
         font-weight: 400;
         font-size: 13pt;
@@ -229,10 +252,6 @@
         }
     }
 
-    .numeral {
-        color: $base-color-blue;
-    }
-
     .label-space {
         padding-right: 10px;
     }
@@ -245,7 +264,6 @@
     .item-datetime {
         height: 28px;
         padding: 10px 0;
-        color: $base-color-medium-black;
         font-weight: 400;
         font-family: Lato;
     }
@@ -275,6 +293,7 @@
 
     .item-context {
         height: 72px;
+        color: $base-font-grey-dark;
         font-size: 14px;
 
         p {
@@ -284,8 +303,70 @@
             white-space: pre-wrap;
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
-            color: $base-font-grey-dark;
         }
+    }
+
+}
+
+.box-item-footer {
+    padding: 4px;
+    background: $base-color-mid-grey;
+    color: $base-color-white;
+
+    &:before {
+        width: 10px;
+        padding: 5px 8px 0;
+        content: 'SCHEDULED';
+        font-size: 10pt;
+    }
+
+    .task-date {
+        padding-left: 10px;
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        display: table;
+        height: 60px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .item-notify {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .btn-notify {
+        border: 1px  $base-color-bg-head solid;
+        color: $base-color-bg-head;
+
+        &:hover {
+            background-color: $base-color-bg-head;
+            color: $base-color-orange;
+        }
+    }
+
+    .complete-score {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 12px;
+    }
+
+    .score {
+        display: inline-block;
+        width: 24%;
+        padding: 0 12px;
+        &+.score{
+            border-left: 1px  $base-color-bg-head solid;
+        }
+    }
+
+    .score-number {
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 2px;
+        font-size: 21px;
     }
 
 }
@@ -296,29 +377,29 @@
     .box-item {
         border-color: $base-font-color;
 
-        .box-item-header {
+        .box-item-footer {
             background: $base-font-color;
+        }
+
+        .disabled {
+            background-color: transparent;
+            &:hover {
+                border: 1px  $base-color-bg-head solid;
+                background-color: transparent;
+                color: $base-color-bg-head;
+            }
         }
     }
 
     .box-item-content {
+        color: $base-font-color;
+
+        .item-context {
+            color: $base-font-color;
+        }
 
         .complete-score {
             background: $base-font-grey-dark;
-        }
-
-        .item-datetime {
-            color: $base-color-dark-gray;
-        }
-
-        .numeral {
-            color: $base-color-dark-gray;
-        }
-
-        .complete-sent-time {
-            height: 25px;
-            padding: 0;
-            margin-top: 52px;
         }
 
     }
