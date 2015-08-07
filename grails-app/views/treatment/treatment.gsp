@@ -3,9 +3,6 @@
     <div id="subTabs" class="sub-tabs">
 
         <li data-type="SurgeryTime" class="surgery-date">
-        %{--<g:if test="${archived == 'true'}">--}%
-        %{--<h4 class="archived-treatment-title">Archived Treatment</h4>--}%
-        %{--</g:if>--}%
             <g:if test="${surgeryTime}">
                 <span>Surgery Date:</span>
                 <label class="surgery-time-picker">
@@ -13,30 +10,7 @@
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                   format="MMM d, yyyy"></g:formatDate>
                 </label>
-                <button
-                    <g:if test="${archived == 'true'}">
-                        class="icon-edit surgeryTime-edit inline disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="icon-edit surgeryTime-edit inline "
-                    </g:else>
-                        data-patient-id="${patientId}"
-                        data-client-id="${clientId}" data-treatment-id="${treatmentId}"
-                        data-medical-record-id="${medicalRecordId}">
-                </button>
             </g:if>
-            <button
-                <g:if test="${archived == 'true'}">
-                    class="icon-archived archived-active inline disabled" disabled="disabled"
-                </g:if>
-                <g:else>
-                    class="icon-archived archived-active inline "
-                </g:else>
-                    data-patient-id="${patientId}"
-                    data-client-id="${clientId}"
-                    data-medical-record-id="${medicalRecordId}">
-            </button>
-
         </li>
 
         <ul class="tab-list">
@@ -70,6 +44,36 @@
                 <g:else>
                     ${treatmentCode}
                 </g:else>
+            </li>
+            <li class="more-drop-down" id="menu">
+                <label class="drop-down-toggle">More</label>
+
+                <div class="drop-down-lists">
+                    <option
+                        <g:if test="${archived == 'true'}">
+                            class="hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
+                        </g:if>
+                        <g:else>
+                            class="hidden drop-down-list icon-edit surgeryTime-edit inline "
+                        </g:else>
+                            data-patient-id="${patientId}"
+                            data-client-id="${clientId}" data-treatment-id="${treatmentId}"
+                            data-medical-record-id="${medicalRecordId}">
+                        Edit
+                    </option>
+                    <option
+                        <g:if test="${archived == 'true'}">
+                            class="hidden drop-down-list icon-archived archived-active inline disabled" disabled="disabled"
+                        </g:if>
+                        <g:else>
+                            class="hidden drop-down-list icon-archived archived-active inline "
+                        </g:else>
+                            data-patient-id="${patientId}"
+                            data-client-id="${clientId}"
+                            data-medical-record-id="${medicalRecordId}">
+                        Archive
+                    </option>
+                </div>
             </li>
         </ul>
 

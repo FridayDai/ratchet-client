@@ -54,7 +54,7 @@
     border: 0;
 
     .icon-archived {
-        padding: 0;
+        //        padding: 0;
         color: inherit;
 
         &:before {
@@ -220,14 +220,43 @@
             }
         }
 
-        .code-generation{
+        .code-generation {
             position: absolute;
             right: 150px;
             line-height: 40px;
 
-            .btn-generate-code{
+            .btn-generate-code {
                 top: -2px;
             }
+        }
+
+        .more-drop-down {
+            position: absolute;
+            right: 15px;
+            line-height: 40px;
+            width: 66px;
+
+            .drop-down-toggle {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .drop-down-lists {
+                position: relative;
+                right: 25px;
+                border-right: 1px solid $base-surgery-date-bgcolor;
+                border-left: 1px solid $base-surgery-date-bgcolor;
+
+                .drop-down-list {
+                    font-weight: 300;
+                    &:hover {
+                        color: $base-color-white;
+                        background-color: $base-surgery-date-bgcolor;
+                    }
+                }
+            }
+
         }
     }
 

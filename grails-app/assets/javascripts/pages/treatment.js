@@ -35,11 +35,11 @@
      * @private
      */
     function _initDatePicker(element) {
-        $(".surgeryTime-edit").click(function (e) {
+        element.find(".surgeryTime-edit").click(function (e) {
             e.preventDefault();
 
-            var parent = $(this).parent();
-            var time = parent.find('.surgery-time-picker').text();
+            var parent = $(this).parents();
+            var time = parent.prev().find('.surgery-time-picker').text();
             var surgeryTime = $.trim(time);
             $("#treatment-surgeryTime").attr('value', surgeryTime);
             var medicalRecordId = $(this).data("medicalRecordId");
@@ -224,7 +224,35 @@
 
                 $ele.find('.btn-generate-code').replaceWith(resp.treatmentCode);
             });
-        })
+        });
+    }
+
+    function _initdropdownMenu(element) {
+        $('.drop-down-toggle').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if ($('.drop-down-list').is(':visible')) {
+                $('.drop-down-list').hide();
+            } else {
+                $('.drop-down-list').show();
+            }
+            _initDatePicker(element);
+            _initArchived(element);
+        });
+
+        $(document).click(function (e) {
+            //e.preventDefault();
+            //e.stopPropagation();
+            if ($('.drop-down-list').is(':hidden')) {
+                return;
+            }
+            var target = $(e.target);
+            if (target.closest('.drop-down-lists').length === 0) {
+                $('.drop-down-list').hide();
+            }
+            _initDatePicker(element);
+            _initArchived(element);
+        });
     }
 
     /**
@@ -232,9 +260,10 @@
      * @private
      */
     function _init(element) {
-        _initDatePicker(element);
-        _initArchived(element);
+        //_initDatePicker(element);
+        //_initArchived(element);
         _initGenerateTreatmentCode(element);
+        _initdropdownMenu(element);
 
         $(element).tabs({
             cache: true,
@@ -273,7 +302,7 @@
                 }
 
             },
-            //disabled: [4, 5]
+            disabled: [4, 5]
 
         });
     }

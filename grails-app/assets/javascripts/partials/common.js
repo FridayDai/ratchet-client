@@ -328,7 +328,7 @@
                     .autocomplete($.extend({
                         minLength: 0,
                         focusSearch: true,
-                        open: function (event,ui) {
+                        open: function (event, ui) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
@@ -479,8 +479,8 @@
         progress: function (hide) {
             var elementStr = [
                 '<div id="msg-process">',
-                    '<div class="msg-process-background ui-tips ui-tips-center"></div>',
-                    '<span class="msg-process-loading"></span>',
+                '<div class="msg-process-background ui-tips ui-tips-center"></div>',
+                '<span class="msg-process-loading"></span>',
                 '</div>'
             ].join('');
 
@@ -617,8 +617,9 @@
 
             dialogOpts.buttons[title] = function (e) {
                 if ($.isFunction(confirmFormArguments.okCallback && confirmFormArguments.okCallback(e))) {
-                    if (confirmFormArguments.okCallback(e) && $.isFunction(back.promise)) {
-                        $.when(confirmFormArguments.okCallback(e)).done(function () {
+                    var back = confirmFormArguments.okCallback(e);
+                    if (back && $.isFunction(back.promise)) {
+                        $.when(back).done(function () {
                             dialog.dialog("close");
                         });
                     }
@@ -958,11 +959,11 @@
                 $(".display").css("display", "inline-table");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate
-                                    .find(".previous")
-                                    .hasClass("disabled") &&
-                                paginate
-                                    .find(".next")
-                                    .hasClass("disabled");
+                        .find(".previous")
+                        .hasClass("disabled") &&
+                    paginate
+                        .find(".next")
+                        .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }

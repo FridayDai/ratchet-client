@@ -15,8 +15,7 @@
 
 .icon-edit,
 .icon-archived {
-    padding: 5px 0;
-    border: 0;
+    //    padding: 5px 0;
     background-color: transparent;
 
     &:hover,
@@ -24,23 +23,32 @@
         background-color: transparent;
     }
 
-    &:before {
-        display: inline-block;
-        padding-left: 10px;
-        content: '\f417';
-        color: $base-font-color;
-        font-weight: lighter;
-        font-family: ionicons;
-        cursor: pointer;
-    }
+    //    &:before {
+    //        display: inline-block;
+    //        padding-left: 10px;
+    //        content: '\f417';
+    //        color: $base-font-color;
+    //        font-weight: lighter;
+    //        font-family: ionicons;
+    //        cursor: pointer;
+    //    }
+}
+
+.icon-edit {
+    border-top: 1px solid $base-surgery-date-bgcolor;
 }
 
 .icon-archived {
-
-    &:before {
-        content: '\f2c9';
-    }
+    border-bottom: 1px solid $base-surgery-date-bgcolor;
 }
+
+//
+//.icon-archived {
+//
+//    &:before {
+//        content: '\f2c9';
+//    }
+//}
 
 .icon-archived.disabled,
 .icon-edit.disabled {
@@ -178,4 +186,17 @@
     width: 200px;
     padding: 15px;
     margin: auto;
+}
+
+.more-drop-down {
+    &:before {
+        position: absolute;
+        top: 0;
+        left: -26px;
+        font-family: 'Ionicons';
+        display: inline-block;
+        content: '\f394';
+        font-size: 23px;
+        color: $base-font-grey;
+    }
 }
