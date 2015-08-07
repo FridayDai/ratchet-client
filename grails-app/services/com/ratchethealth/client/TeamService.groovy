@@ -142,4 +142,29 @@ class TeamService extends RatchetAPIService {
             }
         }
     }
+
+    def checkEmailForCareGiver(String token, medicalRecordId, email) {
+
+        String emailUrl = grailsApplication.config.ratchetv2.server.url.checkCareGiverEmail
+        def url = String.format(emailUrl, medicalRecordId)
+
+        log.info("Call backend service to check careGiver email, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                    .queryString("email", email)
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("this careGiver email already exist, token: ${token}")
+                return [existed: true]
+
+            } else if (resp.status == 404) {
+                log.info("this careGiver email doesn't exist, token: ${token}")
+                return [existed: false]
+            }
+            else {
+                handleError(resp)
+            }
+        }
+    }
 }

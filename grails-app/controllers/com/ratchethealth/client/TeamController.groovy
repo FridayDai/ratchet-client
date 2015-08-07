@@ -63,4 +63,12 @@ class TeamController extends BaseController {
         render resp as JSON
     }
 
+    def checkCareGiverEmail() {
+        String token = session.token
+        def medicalRecordId = params?.medicalRecordId
+        def email = params?.email
+        def data = teamService.checkEmailForCareGiver(token, medicalRecordId, email)
+        render data as JSON
+    }
+
 }

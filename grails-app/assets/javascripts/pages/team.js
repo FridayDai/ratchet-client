@@ -52,6 +52,7 @@
                 deleteCareGiver: "/patients/{0}/{1}/emergency-contact/{2}",
                 updateCareGiver: "/patients/{0}/emergency-contact/update",
                 updateCareTeamSurgeon: "/patients/{0}/group-and-provider/update",
+                checkCareGiverEmail: "/patients/{0}/emergency-contact/check-email",
                 getStaffs: "/staffs",
                 getGroups: "/accounts/{0}/groups"
             }
@@ -277,6 +278,55 @@
     }
 
     /**
+     * set remote validation with email and id
+     * @param form
+     * @private
+     */
+    function _setRemoteValidation(form, medicalRecordId) {
+
+        form.validate({
+            rules: {
+                email: {
+                    email: true,
+                    remote: {
+                        url: opts.urls.checkCareGiverEmail.format(medicalRecordId),
+                        type: "POST",
+                        beforeSend: function () {
+                            RC.common.progress(false);
+                        },
+                        data: {
+                            email: function () {
+                                return form.find("#giver-email").val();
+                            }
+                        },
+                        async: false,
+                        dataFilter: function (responseString) {
+                            var resp = JSON.parse(responseString);
+                            if (resp.existed) {
+                                return false;
+                            }
+                            else {
+                                return '"true"';
+                            }
+                        },
+                        error: function (jqXHR) {
+                            if (jqXHR.status === 500) {
+                                return;
+                            }
+                        }
+
+                    }
+                }
+            },
+            messages: {
+                email: {
+                    remote: RC.constants.emailExist
+                }
+            }
+        });
+    }
+
+    /**
      * bind invite giver event
      * @private
      */
@@ -285,16 +335,16 @@
         element.find("#invite-giver").on("click", function (e) {
             e.preventDefault();
             element.find('.inviteGiverForm')[0].reset();
-            $('.inviteGiverForm')[0].reset();
             var medicalRecordId = $(this).data("medicalRecordId");
             var clientId = $(this).data("clientId");
             var patientId = $(this).data("patientId");
             var form = element.find(".inviteGiverForm");
+            _setRemoteValidation(form, medicalRecordId);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmGiverFormArguments, {
                 element: form,
                 okCallback: function () {
-                    if (form.valid()) {
+                    if (form.valid() && form.valid()) {
 
                         var firstName = form.find("#giver-firstName").val();
                         var lastName = form.find("#giver-lastName").val();

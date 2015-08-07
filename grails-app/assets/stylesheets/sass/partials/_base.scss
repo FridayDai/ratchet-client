@@ -5,6 +5,7 @@
 @import 'compass/reset';
 @import 'compass/css3';
 
+//~= ionicons v2.0.0, source: http://ionicons.com/cheatsheet.html
 @font-face {
     font-family: 'Ionicons';
     src: url('../../../fonts/ionicons.eot');
@@ -35,15 +36,6 @@ html {
 
 body {
     margin-bottom: 36px;
-}
-
-h4,
-h5 {
-    color: $base-color-mid-grey;
-}
-
-p {
-    color: $base-font-color;
 }
 
 .inline {

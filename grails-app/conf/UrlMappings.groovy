@@ -69,6 +69,7 @@ class UrlMappings {
         "/patients/$patientId?/$medicalRecordId?/emergency-contact/$emergencyContactId?"(controller: "team", action: "deleteCareGiver")
         "/patients/$patientId?/emergency-contact/update"(controller: "team", action: "updateCareGiver")
         "/patients/$patientId?/group-and-provider/update"(controller: "team", action: "updateCareTeamSurgeon")
+        "/patients/$medicalRecordId?/emergency-contact/check-email"(controller: "team", action: "checkCareGiverEmail")
 
         //Patient activity
         "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")
