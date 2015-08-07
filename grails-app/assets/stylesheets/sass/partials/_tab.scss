@@ -220,6 +220,13 @@
             }
         }
 
+        .surgery-date-disabled {
+            background-color: $base-font-grey;
+        }
+        .disabled {
+            background-color: $base-font-grey;
+        }
+
         .code-generation {
             position: absolute;
             right: 150px;
@@ -237,23 +244,39 @@
             width: 66px;
 
             .drop-down-toggle {
+                background: none;
+                border: none;
+                color: $base-surgery-date-bgcolor;
+                font-size: 17px;
+                font-weight: 300;
+
                 &:hover {
                     text-decoration: underline;
                 }
             }
 
+            .btn-disabled {
+                color: $base-color-grey;
+            }
+
             .drop-down-lists {
                 position: relative;
-                right: 25px;
-                border-right: 1px solid $base-surgery-date-bgcolor;
-                border-left: 1px solid $base-surgery-date-bgcolor;
+                right: 20px;
 
                 .drop-down-list {
-                    font-weight: 300;
+                    font-weight: 400;
+                    height: 25px;
+                    padding: 5px;
+                    text-align: left;
+
                     &:hover {
                         color: $base-color-white;
                         background-color: $base-surgery-date-bgcolor;
                     }
+                }
+
+                .icon-archived {
+                    border-top: 0;
                 }
             }
 
@@ -265,7 +288,7 @@
         line-height: 30px;
 
         span {
-            margin-left: 13px;
+            margin-left: 30px;
             color: $base-surgery-date-color;
             font-family: Lato;
             font-weight: 300;
@@ -280,9 +303,19 @@
             font-weight: 300;
         }
 
+        .archived-treatment-title {
+            font-weight: 400;
+            margin-left: 15px;
+            color: $base-color-white;
+        }
+
         img {
             vertical-align: sub;
         }
+    }
+
+    .disabled {
+        background-color: $base-font-grey;
     }
 
 }

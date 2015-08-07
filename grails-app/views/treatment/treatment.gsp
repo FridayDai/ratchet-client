@@ -2,7 +2,13 @@
 
     <div id="subTabs" class="sub-tabs">
 
-        <li data-type="SurgeryTime" class="surgery-date">
+        <div data-type="SurgeryTime"
+            <g:if test="${archived == 'true'}">
+                class="surgery-date disabled"
+            </g:if>
+            <g:else>
+                class="surgery-date"
+            </g:else>>
             <g:if test="${surgeryTime}">
                 <span>Surgery Date:</span>
                 <label class="surgery-time-picker">
@@ -11,9 +17,18 @@
                                   format="MMM d, yyyy"></g:formatDate>
                 </label>
             </g:if>
-        </li>
+            <g:if test="${archived == 'true'}">
+                <label class="archived-treatment-title">Archived Treatment</label>
+            </g:if>
+        </div>
 
-        <ul class="tab-list">
+        <ul
+            <g:if test="${archived == 'true'}">
+                class="tab-list archived"
+            </g:if>
+            <g:else>
+                class="tab-list"
+            </g:else>>
             <li data-type="Task">
                 <g:link controller="task" action="getTasksAndTools"
                         params="[clientId: clientId, patientId: patientId, treatmentId: treatmentId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
@@ -26,35 +41,48 @@
                 <g:link controller="activity" action="index"
                         params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">ACTIVITIES</g:link>
             </li>
-            <li data-type="Code" class="code-generation">
-                <g:if test="${treatmentCode == "null" || treatmentCode == null}">
-                    <button id="generateCode"
-                        <g:if test="${archived == 'true'}">
-                            class="btn btn-generate-code disabled" disabled="disabled"
-                        </g:if>
-                        <g:else>
-                            class="btn btn-generate-code"
-                        </g:else>
-                            data-client-id="${clientId}"
-                            data-patient-id="${patientId}"
-                            data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
-                        Generate Code
-                    </button>
-                </g:if>
-                <g:else>
-                    ${treatmentCode}
-                </g:else>
-            </li>
+            %{--<li data-type="Code" class="code-generation">--}%
+            %{--<g:if test="${treatmentCode == "null" || treatmentCode == null}">--}%
+            %{--<button id="generateCode"--}%
+            %{--<g:if test="${archived == 'true'}">--}%
+            %{--class="btn btn-generate-code disabled" disabled="disabled"--}%
+            %{--</g:if>--}%
+            %{--<g:else>--}%
+            %{--class="btn btn-generate-code"--}%
+            %{--</g:else>--}%
+            %{--data-client-id="${clientId}"--}%
+            %{--data-patient-id="${patientId}"--}%
+            %{--data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">--}%
+            %{--Generate Code--}%
+            %{--</button>--}%
+            %{--</g:if>--}%
+            %{--<g:else>--}%
+            %{--${treatmentCode}--}%
+            %{--</g:else>--}%
+            %{--</li>--}%
             <li class="more-drop-down" id="menu">
-                <label class="drop-down-toggle">More</label>
+
+                <button
+                    <g:if test="${archived == 'true'}">
+                        class="drop-down-toggle disabled btn-disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="drop-down-toggle"
+                    </g:else>>
+                    More</button>
 
                 <div class="drop-down-lists">
+                    <label class="hidden-surgery-time-picker hidden">
+                        <g:formatDate date="${surgeryTime}"
+                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                      format="MMM d, yyyy"></g:formatDate>
+                    </label>
                     <option
                         <g:if test="${archived == 'true'}">
-                            class="hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
+                            class="btn hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
-                            class="hidden drop-down-list icon-edit surgeryTime-edit inline "
+                            class="btn hidden drop-down-list icon-edit surgeryTime-edit inline "
                         </g:else>
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}" data-treatment-id="${treatmentId}"
@@ -63,10 +91,10 @@
                     </option>
                     <option
                         <g:if test="${archived == 'true'}">
-                            class="hidden drop-down-list icon-archived archived-active inline disabled" disabled="disabled"
+                            class="btn hidden drop-down-list icon-archived archived-active inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
-                            class="hidden drop-down-list icon-archived archived-active inline "
+                            class="btn hidden drop-down-list icon-archived archived-active inline "
                         </g:else>
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}"

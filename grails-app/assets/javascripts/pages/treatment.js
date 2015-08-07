@@ -37,9 +37,10 @@
     function _initDatePicker(element) {
         element.find(".surgeryTime-edit").click(function (e) {
             e.preventDefault();
-
+            element.find('.drop-down-list').hide();
             var parent = $(this).parents();
-            var time = parent.prev().find('.surgery-time-picker').text();
+            var $ele = $(this).parent();
+            var time = $ele.find('.hidden-surgery-time-picker').text();
             var surgeryTime = $.trim(time);
             $("#treatment-surgeryTime").attr('value', surgeryTime);
             var medicalRecordId = $(this).data("medicalRecordId");
@@ -62,7 +63,8 @@
                                 medicalRecordId,
                                 surgeryTime,
                                 parent,
-                                newSurgeryTime
+                                newSurgeryTime,
+                                $ele
                             );
                         }
                     }
@@ -77,12 +79,15 @@
      * It will binds a warning pop up and to update surgery date when user confirmed.
      * @private
      */
-    function _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime) {
+    function _editSurgeryTime(element, clientId, patientId,
+                              medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele) {
         RC.common.warning(_.extend({}, opts.defaultConfirmArguments.surgeryTimeEditWaringArguments, {
             element: $(".warn"),
             yesCallback: function () {
-                _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
-                $("#treatment-time-form").dialog("destroy").addClass('ui-hidden');
+                _updateSurgeryTime(element, clientId, patientId,
+                    medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele);
+                $("#treatment-time-form").dialog().dialog("destroy").addClass('ui-hidden');
+                _initdropdownMenu(element)
             }
         }));
     }
@@ -129,7 +134,8 @@
      * @param selectedDate
      * @private
      */
-    function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
+    function _updateSurgeryTime(element, clientId, patientId,
+                                medicalRecordId, surgeryTime, parent, selectedDate, $ele) {
         $.ajax({
             url: opts.urls.editSurgeryTime.format(patientId, medicalRecordId, selectedDate),
             type: 'PUT',
@@ -137,6 +143,7 @@
                 if (data.resp === true) {
                     var formatDate = RC.common.formatVancouverTime(parseInt(selectedDate, 10));
                     parent.find('.surgery-time-picker').text(formatDate);
+                    $ele.find('.hidden-surgery-time-picker').text(formatDate);
                     $(element).tabs({
                         beforeLoad: function (event, ui) {
                             ui.tab.data("loaded", false);
@@ -152,9 +159,10 @@
      * init archived a treatment event
      * @private
      */
-    function _initArchived() {
+    function _initArchived(element) {
         $('.archived-active').click(function (e) {
             e.preventDefault();
+            element.find('.drop-down-list').hide();
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
@@ -240,18 +248,14 @@
             _initArchived(element);
         });
 
-        $(document).click(function (e) {
-            //e.preventDefault();
-            //e.stopPropagation();
-            if ($('.drop-down-list').is(':hidden')) {
+        $('.container').click(function (e) {
+            if (element.find('.drop-down-list').is(':hidden')) {
                 return;
             }
             var target = $(e.target);
             if (target.closest('.drop-down-lists').length === 0) {
                 $('.drop-down-list').hide();
             }
-            _initDatePicker(element);
-            _initArchived(element);
         });
     }
 
