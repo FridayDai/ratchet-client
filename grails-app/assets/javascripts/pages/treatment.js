@@ -87,7 +87,7 @@
                 _updateSurgeryTime(element, clientId, patientId,
                     medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele);
                 $("#treatment-time-form").dialog().dialog("destroy").addClass('ui-hidden');
-                _initdropdownMenu(element)
+                _initdropdownMenu(element);
             }
         }));
     }
