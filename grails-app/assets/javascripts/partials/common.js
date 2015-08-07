@@ -626,8 +626,6 @@
                     else if (confirmFormArguments.okCallback(e)) {
                         dialog.dialog("close");
                     }
-                } else {
-                    dialog.dialog("close");
                 }
             };
 
