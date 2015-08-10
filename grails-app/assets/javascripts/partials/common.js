@@ -616,14 +616,14 @@
             };
 
             dialogOpts.buttons[title] = function (e) {
-                if ($.isFunction(confirmFormArguments.okCallback && confirmFormArguments.okCallback(e))) {
+                if ($.isFunction(confirmFormArguments.okCallback)) {
                     var back = confirmFormArguments.okCallback(e);
                     if (back && $.isFunction(back.promise)) {
                         $.when(back).done(function () {
                             dialog.dialog("close");
                         });
                     }
-                    else if (confirmFormArguments.okCallback(e)) {
+                    else if (back) {
                         dialog.dialog("close");
                     }
                 }
