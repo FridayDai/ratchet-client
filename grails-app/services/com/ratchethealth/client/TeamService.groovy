@@ -143,7 +143,7 @@ class TeamService extends RatchetAPIService {
         }
     }
 
-    def checkEmailForCareGiver(String token, medicalRecordId, email) {
+    def checkEmailForCareGiver(String token, medicalRecordId, String email) {
 
         String emailUrl = grailsApplication.config.ratchetv2.server.url.checkCareGiverEmail
         def url = String.format(emailUrl, medicalRecordId)
@@ -151,7 +151,7 @@ class TeamService extends RatchetAPIService {
         log.info("Call backend service to check careGiver email, token: ${token}.")
         withGet(token, url) { req ->
             def resp = req
-                    .queryString("email", email)
+                    .queryString("email", email.toLowerCase())
                     .asString()
 
             if (resp.status == 200) {
