@@ -145,10 +145,21 @@
                 }, {
                     "targets": 4,
                     "render": function (data, type, full) {
-                        var lastUpdate = data === undefined ? full.lastUpdate : data;
-                        var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                        return formatDate;
+                        //var lastUpdate = data === undefined ? full.lastUpdate : data;
+                        //var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                        //return formatDate;
+                        var taskStatus = data === undefined ? full.taskStatus : data;
+                        if (taskStatus.indexOf("All complete") != -1) {
+                            return '<span class="task-status all-complete-status">' + taskStatus + '</span>'
+                        } else if (taskStatus.indexOf("Overdue") != -1 && taskStatus.indexOf("Pending") != -1) {
+                            return '<span class="task-status overdue-status">' + taskStatus + '</span>'
+                        } else if (taskStatus.indexOf("Pending") != -1) {
+                            return '<span class="task-status pending-status">' + taskStatus + '</span>'
+                        } else {
+                            return '<span class="task-status overdue-status">' + taskStatus + '</span>'
+                        }
                     },
+
                     width: "19%"
                 }, {
                     "targets": 5,
