@@ -262,11 +262,13 @@
             .drop-down-lists {
                 position: relative;
                 right: 20px;
+                z-index: 999;
+                background-color: $base-color-white;
 
                 .drop-down-list {
                     font-weight: 400;
                     height: 25px;
-                    padding: 5px;
+                    padding: 6px 5px 1px;
                     text-align: left;
 
                     &:hover {

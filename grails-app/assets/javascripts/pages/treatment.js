@@ -51,6 +51,9 @@
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
+                //beforeClass: function () {
+                //    $("#treatment-time-form").attr("style", "display:none!important")
+                //},
                 okCallback: function () {
                     if ($("#treatment-time-form").valid()) {
                         var newSurgeryTime = RC.common.parseVancouverTime($("#treatment-surgeryTime").val());
@@ -86,7 +89,7 @@
             yesCallback: function () {
                 _updateSurgeryTime(element, clientId, patientId,
                     medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele);
-                $("#treatment-time-form").dialog().dialog("destroy").addClass('ui-hidden');
+                $("#treatment-time-form").dialog("destroy").addClass('ui-hidden');
                 _initdropdownMenu(element);
             }
         }));

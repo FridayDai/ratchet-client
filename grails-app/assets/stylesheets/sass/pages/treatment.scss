@@ -188,15 +188,19 @@
     margin: auto;
 }
 
-.more-drop-down {
+.more-btn {
     &:before {
         position: absolute;
-        top: 0;
-        left: -26px;
+        top: 8px;
+        left: -17px;
         font-family: 'Ionicons';
         display: inline-block;
         content: '\f394';
         font-size: 23px;
         color: $base-font-grey;
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 }
