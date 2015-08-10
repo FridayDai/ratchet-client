@@ -190,6 +190,15 @@
 
 
         $("#relationshipName").combobox({
+            change:function (event, ui) {
+                event.preventDefault();
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    $(this).val("");
+                    _changeRequiredStatus(this);
+
+                }
+            },
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
@@ -672,47 +681,58 @@
     }
 
     function _checkEmergencyContact() {
+
+        $("#relationshipName").on("autocompleteselect", function () {
+            _changeRequiredStatus(this);
+
+        });
+
+
         _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
-                if ($(element).val() !== '') {
-                    $('#emergency-firstName').attr('required', true);
-                    $('#emergency-lastName').attr('required', true);
-                    $('#relationshipName').attr('required', true);
-                    $('#emergency-email').attr('required', true);
-                    $('.permission-confirm-check').attr('required', true);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).show();
-                    });
-
-                    $('.permission-confirm').addClass('visible');
-                    $('#ec-first-name').text($("#emergency-firstName").val());
-                }
-
-                var flagOptional = _.every($('.emergency-field'), function (element) {
-                    return $(element).val() === '';
-                });
-
-                if (flagOptional) {
-                    $('#emergency-firstName').attr('required', false);
-                    $('#emergency-lastName').attr('required', false);
-                    $('#relationshipName').attr('required', false);
-                    $('#emergency-email').attr('required', false);
-                    $('.permission-confirm-check').attr('required', false);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).hide();
-                    });
-
-                    $('.permission-confirm').removeClass('visible');
-
-                    var elementList = $('.emergency-contact-info').find('.form-group').children();
-                    $.each(elementList, function (index, element) {
-                        RC.common.hideErrorTip(element);
-                    });
-                }
+                _changeRequiredStatus(this);
             });
         });
+    }
+
+    function _changeRequiredStatus(element) {
+        if ($(element).val() !== '') {
+            $('#emergency-firstName').attr('required', true);
+            $('#emergency-lastName').attr('required', true);
+            $('#relationshipName').attr('required', true);
+            $('#emergency-email').attr('required', true);
+            $('.permission-confirm-check').attr('required', true);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).show();
+            });
+
+            $('.permission-confirm').addClass('visible');
+            $('#ec-first-name').text($("#emergency-firstName").val());
+        }
+
+        var flagOptional = _.every($('.emergency-field'), function (element) {
+            return $(element).val() === '';
+        });
+
+        if (flagOptional) {
+            $('#emergency-firstName').attr('required', false);
+            $('#emergency-lastName').attr('required', false);
+            $('#relationshipName').attr('required', false);
+            $('#emergency-email').attr('required', false);
+            $('.permission-confirm-check').attr('required', false);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).hide();
+            });
+
+            $('.permission-confirm').removeClass('visible');
+
+            var elementList = $('.emergency-contact-info').find('.form-group input');
+            $.each(elementList, function (index, element) {
+                RC.common.hideErrorTip(element);
+            });
+        }
     }
 
     /**

@@ -48,7 +48,7 @@
                     <th>Name</th>
                     <th>Email Address</th>
                     <th>Phone Number</th>
-                    <th>Last Update</th>
+                    <th>Task Status</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -59,7 +59,7 @@
                         <td>${patient.firstName} ${patient.lastName}</td>
                         <td>${patient.email}</td>
                         <td>${patient.phoneNumber}</td>
-                        <td>${patient.lastUpdate}</td>
+                        <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                     </tr>
                 </g:each>
@@ -139,7 +139,7 @@
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationship" class="input-group">
+                    <input id="relationship" name="relationship" class="input-group emergency-field">
                 </div>
 
                 <div class="form-group inline emr-email">

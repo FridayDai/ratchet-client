@@ -387,3 +387,31 @@
 #patient-list_wrapper {
     overflow: scroll;
 }
+
+.task-status {
+    &:before {
+        font-family: 'Ionicons';
+        padding-right: 5px;
+        font-size: 14px;
+        content: '\f21b';
+    }
+}
+
+.all-complete-status {
+    &:before {
+        color: $base-color-complete;
+    }
+}
+
+.overdue-status {
+    &:before {
+        color: $base-color-overdue;
+    }
+}
+
+.pending-status {
+    &:before {
+        color: $base-color-pending;
+    }
+}
+
