@@ -257,6 +257,10 @@
 
             .btn-disabled {
                 color: $base-color-grey;
+
+                &:hover {
+                    text-decoration: none;
+                }
             }
 
             .drop-down-lists {

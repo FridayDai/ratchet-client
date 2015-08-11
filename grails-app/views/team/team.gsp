@@ -68,7 +68,7 @@
             <img src="${assetPath(src: 'emergency_contact.png')}">
             <h4 class="ec-contact">EMERGENCY CONTACT</h4>
             <button <g:if
-                            test="${archived == 'true'}">class="btn btn-invite btn-position disabled" disabled="disabled"</g:if>
+                            test="${archived == 'true'}">class="btn btn-invite btn-position disabled btn-invite-disabled" disabled="disabled"</g:if>
                     <g:else>class="btn btn-invite btn-position"</g:else> id="invite-giver"
                     data-medical-record-id="${medicalRecordId}"
                     data-client-id="${clientId}" data-patient-id="${patientId}">
