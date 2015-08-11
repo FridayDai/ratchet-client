@@ -1054,6 +1054,7 @@
                 $ele.prop("type", "tel");
                 $ele.attr("placeholder", "777-777-7777");
                 $ele.attr("maxlength", "14");
+                $ele.attr("minlength", "13");
                 break;
         }
     }
@@ -1072,7 +1073,7 @@
         ];
 
         $("#relationship").combobox({
-            change:function (event, ui) {
+            change: function (event, ui) {
                 event.preventDefault();
                 if (ui.item === null) {
                     $(this).data("id", "");
