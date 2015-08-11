@@ -204,3 +204,9 @@
         cursor: pointer;
     }
 }
+
+.more-btn-disabled {
+    &:hover {
+        cursor: auto;
+    }
+}

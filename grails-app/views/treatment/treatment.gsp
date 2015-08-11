@@ -69,7 +69,13 @@
                     <g:else>
                         class="drop-down-toggle"
                     </g:else>>
-                    <span class="more-btn">More</span></button>
+                    <span
+                        <g:if test="${archived == 'true'}">
+                            class="more-btn more-btn-disabled"
+                        </g:if>
+                        <g:else>
+                            class="more-btn"
+                        </g:else>>More</span></button>
 
                 <div class="drop-down-lists">
                     <label class="hidden-surgery-time-picker hidden">
