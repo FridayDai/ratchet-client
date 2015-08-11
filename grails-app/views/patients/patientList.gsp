@@ -139,7 +139,7 @@
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationship" class="input-group">
+                    <input id="relationship" name="relationship" class="input-group emergency-field">
                 </div>
 
                 <div class="form-group inline emr-email">

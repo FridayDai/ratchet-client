@@ -1072,6 +1072,15 @@
         ];
 
         $("#relationship").combobox({
+            change:function (event, ui) {
+                event.preventDefault();
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    $(this).val("");
+                    _changeRequiredStatus(this);
+
+                }
+            },
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
@@ -1396,51 +1405,70 @@
     }
 
     function _checkEmergencyContact() {
+
+        $("#relationship").on("autocompleteselect", function () {
+            _changeRequiredStatus(this);
+
+        });
+
         _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
-                if ($(element).val() !== '') {
-                    $('#emergency-firstName').attr('required', true);
-                    $('#emergency-lastName').attr('required', true);
-                    $('#relationship').attr('required', true);
-                    $('#emergency-email').attr('required', true);
-                    $('.permission-confirm-check').attr('required', true);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).show();
-                    });
-
-                    $('.permission-confirm').addClass('visible');
-                    $('#ec-first-name').text($("#emergency-firstName").val());
-                    _resetToolTipPosition($('.re-position'));
-                    $('.permission-confirm').data("direction", "down");
-                }
-
-                var flagOptional = _.every($('.emergency-field'), function (element) {
-                    return $(element).val() === '';
-                });
-
-                if (flagOptional) {
-                    $('#emergency-firstName').attr('required', false);
-                    $('#emergency-lastName').attr('required', false);
-                    $('#relationship').attr('required', false);
-                    $('#emergency-email').attr('required', false);
-                    $('.permission-confirm-check').attr('required', false);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).hide();
-                    });
-
-                    $('.permission-confirm').removeClass('visible');
-                    _resetToolTipPosition($('.re-position'));
-                    $('.permission-confirm').data("direction", "up");
-
-                    var elementList = $('.emergency-contact-info').find('.form-group').children();
-                    $.each(elementList, function (index, element) {
-                        RC.common.hideErrorTip(element);
-                    });
-                }
+                _changeRequiredStatus(this);
             });
         });
+
+    }
+
+    /**
+     * check emergency contact status. If all of them is empty, they aren't required but when one of them has value
+     * all of them need to be filled value.
+     * @param element
+     * @private
+     */
+
+    function _changeRequiredStatus(element) {
+
+        if ($(element).val() !== '') {
+            $('#emergency-firstName').attr('required', true);
+            $('#emergency-lastName').attr('required', true);
+            $('#relationship').attr('required', true);
+            $('#emergency-email').attr('required', true);
+            $('.permission-confirm-check').attr('required', true);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).show();
+            });
+
+            $('.permission-confirm').addClass('visible');
+            $('#ec-first-name').text($("#emergency-firstName").val());
+            _resetToolTipPosition($('.re-position'));
+            $('.permission-confirm').data("direction", "down");
+        }
+
+        var flagOptional = _.every($('.emergency-field'), function (element) {
+            return $(element).val() === '';
+        });
+
+        if (flagOptional) {
+            $('#emergency-firstName').attr('required', false);
+            $('#emergency-lastName').attr('required', false);
+            $('#relationship').attr('required', false);
+            $('#emergency-email').attr('required', false);
+            $('.permission-confirm-check').attr('required', false);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).hide();
+            });
+
+            $('.permission-confirm').removeClass('visible');
+            _resetToolTipPosition($('.re-position'));
+            $('.permission-confirm').data("direction", "up");
+
+            var elementList = $('.emergency-contact-info').find('.form-group input');
+            $.each(elementList, function (index, element) {
+                RC.common.hideErrorTip(element);
+            });
+        }
     }
 
     function _resetToolTipPosition(elements) {
