@@ -1056,7 +1056,6 @@
                 $ele.prop("type", "tel");
                 $ele.attr("placeholder", "777-777-7777");
                 $ele.attr("maxlength", "14");
-                $ele.attr("minlength", "13");
                 break;
         }
     }
@@ -1583,7 +1582,7 @@
         $("#table-form").validate({
             rules: {
                 phoneNumber: {
-                    minlength: 13
+                    minlength: 14
                 }
             },
             messages: {

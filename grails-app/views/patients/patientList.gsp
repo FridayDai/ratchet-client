@@ -110,7 +110,6 @@
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
                 <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group input-convert" maxlength="14"
-                       minlength="13"
                        placeholder="777-777-7777" required/>
             </div>
 

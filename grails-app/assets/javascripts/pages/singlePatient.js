@@ -809,7 +809,7 @@
         $("#patient-form").validate({
             rules: {
                 phone: {
-                    minlength: 13
+                    minlength: 14
                 }
             },
             messages: {
