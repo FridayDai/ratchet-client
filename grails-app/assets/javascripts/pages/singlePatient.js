@@ -190,7 +190,7 @@
 
 
         $("#relationshipName").combobox({
-            change:function (event, ui) {
+            change: function (event, ui) {
                 event.preventDefault();
                 if (ui.item === null) {
                     $(this).data("id", "");
@@ -805,6 +805,21 @@
         });
     }
 
+    function _validatePhone() {
+        $("#patient-form").validate({
+            rules: {
+                phone: {
+                    minlength: 13
+                }
+            },
+            messages: {
+                phone: {
+                    minlength: RC.constants.phoneNumberMinLength
+                }
+            }
+        });
+    }
+
     /**
      * page Initialization
      * @private
@@ -817,6 +832,7 @@
         _goBackToPrePage();
         _initPlaceholder();
         _inviteAgain();
+        _validatePhone();
     }
 
     _init();
