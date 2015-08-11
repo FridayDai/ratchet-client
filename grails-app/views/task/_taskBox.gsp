@@ -52,14 +52,11 @@
     <div class="box-item-footer">
 
         <span class="task-date">
-            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "schedule"}">
-                <g:set var="taskDate" value="${task?.sendTime}"></g:set>
-            </g:if>
-            <g:elseif test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" || StatusCodeConstants.TASK_STATUS[task?.status] == "expired"}">
                 <g:set var="taskDate" value="${task?.completeTime}"></g:set>
-            </g:elseif>
+            </g:if>
             <g:else>
-                <g:set var="taskDate" value="${task?.updateDate}"></g:set>
+                <g:set var="taskDate" value="${task?.sendTime}"></g:set>
             </g:else>
             <g:formatDate date="${taskDate}"
                           timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
