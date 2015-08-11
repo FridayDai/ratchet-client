@@ -30,8 +30,8 @@
                 class="tab-list"
             </g:else>>
             <li data-type="Task">
-                <g:link controller="task" action="getTasksAndTools"
-                        params="[clientId: clientId, patientId: patientId, treatmentId: treatmentId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
+                <g:link controller="task" action="getTasks"
+                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="getTeam"
