@@ -25,10 +25,10 @@
 .items-title {
     padding: 12px 30px;
     border-bottom: 3px solid $base-color-white-grey;
+    color: $base-color-dark-grey;
 
     h4 {
         margin-bottom: 7px;
-        color: $base-logo-color;
         font-family: Lato;
         font-weight: 400;
         font-size: 15px;
@@ -39,7 +39,6 @@
             display: inline-block;
             padding-right: 16px;
             content: '\f3fe';
-            color: $base-logo-color;
             font-weight: lighter;
             font-size: 26px;
             font-family: ionicons;
@@ -53,7 +52,6 @@
             display: inline-block;
             padding-right: 16px;
             content: '\f463';
-            color: $base-logo-color;
             font-weight: lighter;
             font-size: 26px;
             font-family: ionicons;
@@ -68,7 +66,6 @@
             display: inline-block;
             padding-right: 16px;
             content: '\f3c7';
-            color: $base-logo-color;
             font-weight: lighter;
             font-size: 26px;
             font-family: ionicons;
@@ -373,6 +370,14 @@
 
 // box item archived
 .archived {
+
+    .items-title {
+        color: $base-color-dark-gray;
+    }
+
+    .no-item {
+        color: $base-color-dark-gray;
+    }
 
     .box-item {
         border-color: $base-font-color;
