@@ -753,6 +753,8 @@
                     }
                 }
             );
+
+            _validatePhone();
         });
     }
 
@@ -995,7 +997,7 @@
 
         _.each($(".input-convert"), function (element) {
             var key = element.id;
-            var html = "<div class='replace-input-div' id=" + key + ">" + data[key] + "</div>";
+            var html = "<div class='replace-input-div' id=" + key + " name=" + key + ">" + data[key] + "</div>";
             var edit = "<a class='icon-edit form-group-edit'>" + "</a>";
             if (key === "phoneNumber") {
                 if ($('#' + key).parent().hasClass("int-tel-input")) {
@@ -1575,6 +1577,21 @@
         if ($(window).height() < formHeight) {
             $(".container").css('min-height', formHeight - 41 + 'px');
         }
+    }
+
+    function _validatePhone() {
+        $("#table-form").validate({
+            rules: {
+                phoneNumber: {
+                    minlength: 13
+                }
+            },
+            messages: {
+                phoneNumber: {
+                    minlength: RC.constants.phoneNumberMinLength
+                }
+            }
+        });
     }
 
     /**

@@ -70,7 +70,10 @@
 
         //OTHERS
         patientIdExist: "ID already exists",
-        emailExist: "Email already exists"
+        emailExist: "Email already exists",
+
+        //PHONE NUMBER
+        phoneNumberMinLength:"Please enter at least 10 digits."
     });
 })(jQuery);
 /* jshint +W101 */
