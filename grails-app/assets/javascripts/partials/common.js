@@ -610,8 +610,8 @@
                     }
                     dialog.dialog("close");
                     $('.btn').blur();
-                    //dialogOwn.appendTo(containerParent);
-                    $(this).dialog("destroy").replaceWith(dialogOwn);
+                    var hiddenDialogOwn = dialogOwn.addClass('ui-hidden');
+                    $(this).dialog("destroy").replaceWith(hiddenDialogOwn);
                 }
             };
 
