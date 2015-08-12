@@ -1,8 +1,8 @@
-//= require ../../bower_components/jquery/jquery
+//= require ../../bower_components/jquery/dist/jquery
 //= require ../../bower_components/jquery-ui/jquery-ui
 //= require ../../bower_components/select2/select2
 //= require ../../bower_components/jquery-validation/dist/jquery.validate
-//= require ../../bower_components/underscore/underscore
+//= require ../../bower_components/lodash/lodash
 //= require ../../bower_components/DataTables/media/js/jquery.dataTables
 //= require ../../partials/base
 //= require ../../partials/constants

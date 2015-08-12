@@ -1,32 +1,68 @@
 require('jquery-ui-dialog');
-var flight = require('flight');
+require('velocity');
+require('velocity-ui');
 
-function withDialog() {
-    /* jshint validthis:true */
+var flight = require('flight');
+var WithOptions = require('./WithOptions');
+
+$.Velocity
+    .RegisterEffect("ratchet.slideDownIn", {
+        defaultDuration: 700,
+        calls: [
+            [ { opacity: [ 1, 0 ], translateY: [ 0, -80 ], translateZ: 0 } ]
+        ]
+    }).RegisterEffect("ratchet.slideUpOut", {
+        defaultDuration: 700,
+        calls: [
+            [ { opacity: [ 0, 1 ], translateY: -80, translateZ: 0 } ]
+        ],
+        reset: { translateY: 0 }
+    });
+
+function WithDialog() {
+    flight.compose.mixin(this, [
+        WithOptions
+    ]);
+
+    this.__delayingClose = 0;
 
     this.defaultOptions = {
         autoOpen: false,
         resizable: false,
-        modal: true
-    };
+        modal: true,
+        open: function() {
+            this.dialogEl.parent().velocity('ratchet.slideDownIn');
+        },
+        beforeClose: function () {
+            var me = this;
+            var $dialog = this.dialogEl;
 
-    this._init = function () {
-        if (!this._options && $.isFunction(this.getOptions)) {
-            this._options = this.getOptions();
+            if (this.__delayingClose !== 0) {
+                this.__delayingClose = 0;
+
+                return true;
+            }
+
+            $dialog.parent().velocity('ratchet.slideUpOut');
+
+            setTimeout(function () {
+                me.__delayingClose++;
+                $dialog.dialog('close');
+            }, 650);
+
+            if (this.__delayingClose === 0) {
+                return false;
+            }
         }
-
-        this._options = flight.merge(this.defaultOptions, this._options);
-
-        this.dialogEl = this.$node.dialog(this._options);
     };
 
-    this.options = function (obj) {
-        this._options = obj;
+    this._initDialog = function () {
+        this.dialogEl = this.$node.dialog(this.initOptions());
     };
 
     this.after('initialize', function () {
-        this._init();
+        this._initDialog();
     });
 }
 
-module.exports = withDialog;
+module.exports = WithDialog;

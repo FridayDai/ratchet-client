@@ -4,6 +4,7 @@
 @import '../partials/theme';
 @import '../partials/dialog';
 @import '../partials/timepicker';
+@import "../partials/combobox";
 
 //.add-patient,
 //.bulk-important {
@@ -386,6 +387,11 @@
 
 #patient-list_wrapper {
     overflow: scroll;
+}
+
+#patientsTable_filter,
+#patientsTable_info {
+    display: none;
 }
 
 .task-status {

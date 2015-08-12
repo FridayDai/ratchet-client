@@ -189,3 +189,15 @@
 .form-provider {
     margin-top: 20px;
 }
+
+.error-container {
+    position: relative;
+
+    .error-help-block {
+        position: absolute;
+        font-size: 13px;
+        color: $base-color-red;
+    }
+}
+
+

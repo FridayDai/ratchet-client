@@ -14,7 +14,7 @@
         "_": false,
         "moment": false,
         "d3": false,
-        "libphonenumber": false
+        "$": false
     },
     "maxparams": 4,
     "maxdepth": 4,

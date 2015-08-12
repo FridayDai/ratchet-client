@@ -68,9 +68,8 @@
     </ul>
 </div>
 
-<g:form class="assist-form ui-hidden" id="assist-form" name="assist-form">
-
-    <div class="form-group">
+<form action="/assist-me" method="post" id="assist-form" class="assist-form ui-hidden" name="assist-form" novalidate="novalidate">
+    <div class="form-group title">
         <label class="lbl-group">TITLE<span>*</span></label>
         <input id="assist-title" name="title" type="text" class="input-group title"
                placeholder="Please assist me on this" required/>
@@ -99,5 +98,4 @@
     <div class="align-center assist-tip">
         </label>We will respond to you as soon as we can!</label>
     </div>
-
-</g:form>
+</form>

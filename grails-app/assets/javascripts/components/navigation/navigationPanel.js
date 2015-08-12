@@ -1,8 +1,6 @@
 var flight = require('flight');
 
-function navigationPanel() {
-    /* jshint validthis:true */
-
+function NavigationPanel() {
     this.attributes({
         assistMeButton: '#assist-me'
     });
@@ -20,4 +18,4 @@ function navigationPanel() {
     });
 }
 
-module.exports = flight.component(navigationPanel);
+module.exports = flight.component(NavigationPanel);

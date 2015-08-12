@@ -63,7 +63,7 @@ class SinglePatientController extends BaseController {
         def clientId = request.session.clientId
         def email = params?.email
         def data = singlePatientService.checkPatientEmail(token, clientId, email)
-        render data as JSON
+        render data as String
     }
 
     def invitePatient() {

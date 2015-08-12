@@ -10,7 +10,7 @@
 
     <body>
     <div>
-        <div class="inner-header">
+        <div id="header-panel" class="inner-header">
             <label class="title patient-icon">PATIENTS</label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
@@ -19,7 +19,7 @@
             </g:if>
         </div>
 
-        <div class="inner-search">
+        <div id="patients-toolbar" class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
@@ -67,11 +67,10 @@
             </table>
         </div>
 
-        <g:form class="form ui-hidden" id="patient-id-form" name="patient-id-form">
-
+        <form action="/patients/check-id" method="post" id="patient-id-form" class="form ui-hidden">
             <div class="form-group inline">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
-                <input id="new-patient-id" name="new-patient-id" type="text" class="input-group input-only-one"
+                <input id="new-patient-id" name="patientId" type="text" class="input-group input-only-one"
                        placeholder="1234567890" required/>
             </div>
 
@@ -80,44 +79,46 @@
             <div class="required-field required-padding">
                 *Required field
             </div>
+        </form>
 
-        </g:form>
-
-        <g:form class="form ui-hidden" id="table-form" name="table-form">
-
+        <form action="/patients/check-id" method="post" id="table-form" class="form ui-hidden">
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
                 <div id="patient-id-value" class="patient-id-div"></div>
                 <g:hiddenField name="id" id="hidden-id"></g:hiddenField>
-                %{--<input id="patientId" name="patientId" type="text" class="input-group"--}%
-                %{--placeholder="1234567890"--}%
-                %{--required/>--}%
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
                 <input id="firstName" name="firstName" type="text" class="input-group input-convert" placeholder="John"
                        required/>
+                <div class='replace-input-div' id="firstName-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span>*</span></label>
                 <input id="lastName" name="lastName" type="text" class="input-group input-convert" placeholder="Smith"
                        required/>
+                <div class='replace-input-div' id="lastName-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
                 <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group input-convert" maxlength="14"
                        placeholder="777-777-7777" required/>
+                <div class='replace-input-div' id="phoneNumber-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
                        placeholder="john.smith@email.com" required/>
-
+                <div class='replace-input-div' id="email-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <h4>EMERGENCY CONTACT</h4>
@@ -187,7 +188,7 @@
 
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>
-        </g:form>
+        </form>
 
         <div class="import-form ui-hidden" id="bulk-import-form">
             <div class="import-content">
