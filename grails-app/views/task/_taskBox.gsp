@@ -15,10 +15,13 @@
 
         <div class="item-datetime relative-sent-time">
 
-            <% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>
-            <% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>
-            <% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>
-            <% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>
+            %{--<% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>--}%
+            %{--<% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>--}%
+            %{--<% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>--}%
+            %{--<% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>--}%
+
+            <% def timeOffset = task?.sendTimeOffset%>
+            <% def sentTimeDays = timeOffset/(24*60*60*1000)%>
             <g:if test="${task?.isBaseline}">
                 <label class="numeral">BASELINE</label>
             </g:if>
