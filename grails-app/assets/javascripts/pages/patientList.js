@@ -1583,12 +1583,12 @@
         $("#table-form").validate({
             rules: {
                 phoneNumber: {
-                    minlength: 13
+                    minlength: 14
                 }
             },
             messages: {
                 phoneNumber: {
-                    minlength: RC.constants.phoneNumberMinLength
+                    minlength: RC.constants.phoneNumberMsg
                 }
             }
         });

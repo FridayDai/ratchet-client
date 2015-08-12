@@ -809,12 +809,12 @@
         $("#patient-form").validate({
             rules: {
                 phone: {
-                    minlength: 13
+                    minlength: 14
                 }
             },
             messages: {
                 phone: {
-                    minlength: RC.constants.phoneNumberMinLength
+                    minlength: RC.constants.phoneNumberMsg
                 }
             }
         });
