@@ -367,6 +367,7 @@
             $("#phone").val(phoneNumber);
 
             var form = $(".patient-form");
+            _validatePhone();
             _setRemoteValidation(form, id, email);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
@@ -832,7 +833,6 @@
         _goBackToPrePage();
         _initPlaceholder();
         _inviteAgain();
-        _validatePhone();
     }
 
     _init();
