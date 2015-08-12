@@ -29,14 +29,14 @@
                 <label class="numeral">On Surgery Day</label>
             </g:elseif>
             <g:else>
-                <span class="numeral label-space number-font">${sentTimeDays}</span>
+                <span class="numeral label-space number-font">${sentTimeDays.abs()}</span>
                 <g:if test="${sentTimeDays == 1}">
                     <label class="label-space">Day</label>
                 </g:if>
                 <g:else>
                     <label class="label-space">Days</label>
                 </g:else>
-                <g:if test="${(task?.sendTime - task?.surgeryTime) > 0}">
+                <g:if test="${sentTimeDays > 0}">
                     <span class="numeral label-space number-font">After</span>
                 </g:if>
                 <g:else>
