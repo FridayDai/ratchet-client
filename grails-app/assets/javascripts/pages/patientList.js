@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+
 (function ($, undefined) {
     'use strict';
 
@@ -65,6 +66,7 @@
             "ID": "id"
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
+
 
     /**
      * init table with the data which loaded
@@ -938,9 +940,12 @@
             _inputReplaceWithDiv(data);
         }
         $('#patient-id-value').text(patientId);
+        var number = $("#phoneNumber").val() || $("#phoneNumber").text();
+        var phoneNumber = number.replace(/[\s\(\)-]/g, '');
         var form = $("#table-form");
         var email = $("#table-form #email").val() || $("#table-form #email").text().trim();
         _setValidate(form, email);
+        //_checkPhoneNumberRegion(phoneNumber);
 
         RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.confirmFormArguments, {
             element: form,
@@ -1583,7 +1588,8 @@
         $("#table-form").validate({
             rules: {
                 phoneNumber: {
-                    minlength: 14
+                    minlength: 14,
+                    checkPhoneNumberRegion: true
                 }
             },
             messages: {
