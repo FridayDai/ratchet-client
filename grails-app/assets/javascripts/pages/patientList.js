@@ -1072,8 +1072,8 @@
      */
     function _initRelationship() {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
