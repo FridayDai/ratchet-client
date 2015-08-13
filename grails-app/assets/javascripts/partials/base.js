@@ -77,7 +77,7 @@
         var isValid = phoneUtil.isValidNumber(phoneNumber);
         var regionCode = phoneUtil.getRegionCodeForNumber(phoneNumber);
         var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
-        return isPossible && isValid && regionCode;
+        return isPossible && isValid && regionCode && isValidRegionCode;
     }, 'Please enter a valid phone number.');
 
     RC.pages = (function (self) {
