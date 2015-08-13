@@ -76,8 +76,9 @@
         var isPossible = phoneUtil.isPossibleNumber(phoneNumber);
         var isValid = phoneUtil.isValidNumber(phoneNumber);
         var regionCode = phoneUtil.getRegionCodeForNumber(phoneNumber);
+        var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
         return isPossible && isValid && regionCode;
-    }, 'Please enter the correct area code.');
+    }, 'Please enter a valid phone number.');
 
     RC.pages = (function (self) {
         return self;
