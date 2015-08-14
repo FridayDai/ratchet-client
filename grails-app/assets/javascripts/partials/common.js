@@ -395,11 +395,11 @@
                             self.element.autocomplete("close");
                             return;
                         }
-
                         $(this).blur();
-
                         self.element.autocomplete("search", "");
                         self.element.focus();
+
+
                     });
                 if (self.element.is(":disabled")) {
                     self.element.parent().find("a").addClass('disable');
