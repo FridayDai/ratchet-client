@@ -825,7 +825,7 @@
     function _switchArchivedStyle(clickEle, showEle, archivedClass) {
         $(clickEle).click(function () {
             if ($(showEle).hasClass(archivedClass)) {
-                return
+                return;
             } else {
                 $(showEle).addClass(archivedClass);
             }
@@ -858,9 +858,9 @@
 
             $(firstLi).click(function () {
                 if ($(firstLi).hasClass(archivedTreatmentClass)) {
-                    $(firstLi).removeClass(archivedTreatmentClass)
+                    $(firstLi).removeClass(archivedTreatmentClass);
                 }
-            })
+            });
         } else {
             _clickTabSwitchArchiveStyle(archivedTreatmentClass);
         }
