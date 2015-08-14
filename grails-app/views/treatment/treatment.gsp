@@ -97,10 +97,10 @@
                     </option>
                     <option
                         <g:if test="${archived == 'true'}">
-                            class="btn hidden drop-down-list icon-archived archived-active inline disabled" disabled="disabled"
+                            class="btn hidden drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
-                            class="btn hidden drop-down-list icon-archived archived-active inline "
+                            class="btn hidden drop-down-list archived-active inline "
                         </g:else>
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}"
