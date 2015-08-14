@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+
 (function ($, undefined) {
     'use strict';
 
@@ -65,6 +66,7 @@
             "ID": "id"
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
+
 
     /**
      * init table with the data which loaded
@@ -1583,7 +1585,8 @@
         $("#table-form").validate({
             rules: {
                 phoneNumber: {
-                    minlength: 14
+                    minlength: 14,
+                    checkPhoneNumberRegion: true
                 }
             },
             messages: {

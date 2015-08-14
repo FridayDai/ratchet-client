@@ -810,7 +810,8 @@
         $("#patient-form").validate({
             rules: {
                 phone: {
-                    minlength: 14
+                    minlength: 14,
+                    checkPhoneNumberRegion: true
                 }
             },
             messages: {

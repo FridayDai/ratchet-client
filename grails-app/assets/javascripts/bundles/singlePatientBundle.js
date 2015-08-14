@@ -7,3 +7,4 @@
 //= require ../pages/treatment
 //= require ../pages/singlePatient
 //= require ../pages/team
+//= require ../bower_components/google-libphonenumber/dist/browser/libphonenumber.min
