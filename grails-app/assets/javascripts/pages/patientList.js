@@ -96,8 +96,8 @@
                 type: "get"
             }),
             columnDefs: [{
-                "targets": 5,
-                "orderable": false
+                "orderable": false,
+                "targets": [4, 5]
             },
                 {
                     "targets": 0,
@@ -323,7 +323,7 @@
      * @private
      */
     function _sortPatientTable() {
-        _.each($('#patientsTable th'), function (element) {
+        _.each($('#patientsTable th').not(".sorting_disabled"), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
