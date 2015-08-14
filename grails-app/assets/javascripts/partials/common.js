@@ -320,11 +320,11 @@
 
                 this.element
                     .addClass(classes)
-                    //.focus(function () {
-                    //    if ($(this).data('uiAutocomplete').options.focusSearch) {
-                    //        $(this).autocomplete("search");
-                    //    }
-                    //})
+                    .focus(function () {
+                        if ($(this).data('uiAutocomplete').options.focusSearch) {
+                            $(this).autocomplete("search");
+                        }
+                    })
                     .autocomplete($.extend({
                         minLength: 0,
                         focusSearch: true,
@@ -395,9 +395,10 @@
                             self.element.autocomplete("close");
                             return;
                         }
-                        //$(this).blur();
-                        self.element.focus();
+                        $(this).blur();
                         self.element.autocomplete("search", "");
+                        self.element.focus();
+
 
                     });
                 if (self.element.is(":disabled")) {
