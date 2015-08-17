@@ -755,8 +755,6 @@
                     }
                 }
             );
-
-            _validatePhone();
         });
     }
 
@@ -882,7 +880,9 @@
         form.validate({
                 rules: {
                     phoneNumber: {
-                        isPhone: true
+                        isPhone: true,
+                        minlength: 14,
+                        checkPhoneNumberRegion: true
                     },
                     email: {
                         email: true,
@@ -919,6 +919,9 @@
                     }
                 },
                 messages: {
+                    phoneNumber: {
+                        minlength: RC.constants.phoneNumberMsg
+                    },
                     provider: RC.constants.waringMessageProvider,
                     agent: RC.constants.waringMessageAgent
                 }
@@ -1579,22 +1582,6 @@
         if ($(window).height() < formHeight) {
             $(".container").css('min-height', formHeight - 41 + 'px');
         }
-    }
-
-    function _validatePhone() {
-        $("#table-form").validate({
-            rules: {
-                phoneNumber: {
-                    minlength: 14,
-                    checkPhoneNumberRegion: true
-                }
-            },
-            messages: {
-                phoneNumber: {
-                    minlength: RC.constants.phoneNumberMsg
-                }
-            }
-        });
     }
 
     /**

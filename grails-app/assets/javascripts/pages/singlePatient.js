@@ -269,6 +269,10 @@
     function _setRemoteValidation(form, primaryPatientId, primaryEmail) {
         form.validate({
             rules: {
+                phone: {
+                    minlength: 14,
+                    checkPhoneNumberRegion: true
+                },
                 id: {
                     required: true,
                     remote: {
@@ -336,6 +340,11 @@
 
                     }
                 }
+            },
+            messages: {
+                phone: {
+                    minlength: RC.constants.phoneNumberMsg
+                }
             }
         });
     }
@@ -367,7 +376,6 @@
             $("#phone").val(phoneNumber);
 
             var form = $(".patient-form");
-            _validatePhone();
             _setRemoteValidation(form, id, email);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.editPatientFormArguments, {
@@ -802,22 +810,6 @@
                 $("#selectSurgeons").prop("disabled", false);
                 _initStaffSelect($(this).data("id"));
                 return false;
-            }
-        });
-    }
-
-    function _validatePhone() {
-        $("#patient-form").validate({
-            rules: {
-                phone: {
-                    minlength: 14,
-                    checkPhoneNumberRegion: true
-                }
-            },
-            messages: {
-                phone: {
-                    minlength: RC.constants.phoneNumberMsg
-                }
             }
         });
     }
