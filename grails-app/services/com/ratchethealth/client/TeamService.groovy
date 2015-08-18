@@ -17,9 +17,8 @@ class TeamService extends RatchetAPIService {
                     .queryString("medicalRecordId", medicalRecordId)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get care team success, token:${token}")
                 def items = result.items
                 return items
@@ -39,9 +38,9 @@ class TeamService extends RatchetAPIService {
                     .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
                     .queryString("medicalRecordId", medicalRecordId)
                     .asString()
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put("data", result.items)
                 log.info("Get care giver success, token: ${token}")
@@ -131,9 +130,8 @@ class TeamService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Update care team surgeon success, token: ${token}")
                 return result
             }

@@ -46,9 +46,9 @@ class PatientService extends RatchetAPIService {
                     .field("ecEmail", ecEmail)
                     .field("groupId", groupId)
                     .asString()
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 201) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put("id", result.id)
                 log.info("Add patient success, token: ${token}")
@@ -88,9 +88,8 @@ class PatientService extends RatchetAPIService {
                     .queryString("sorted", sort)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
 
                 map.put(start, start)

@@ -43,7 +43,12 @@ class AuthenticationService extends RatchetAPIService {
 
             def result = null
             if (resp?.body) {
-                result = JSON.parse(resp.body)
+                try {
+                    result = JSON.parse(resp.body)
+                } catch (Exception e) {
+                    log.error("JSON parse failed" + e)
+                    throw new AccountValidationException('');
+                }
             }
 
             if (resp.status == 200) {
@@ -69,33 +74,32 @@ class AuthenticationService extends RatchetAPIService {
         }
     }
 
-        /**
-         * Logout user, Here is two step. Step one is call ratchet-v2-server restAPI logout and check returned status .
-         * Step two ,session in local needs to be invalidate.
-         *
-         * @param request
-         * @param response
-         */
-        def logout(String token) {
+    /**
+     * Logout user, Here is two step. Step one is call ratchet-v2-server restAPI logout and check returned status .
+     * Step two ,session in local needs to be invalidate.
+     *
+     * @param request
+     * @param response
+     */
+    def logout(String token) {
 
-            if (!token) {
-                log.error("There is no token.")
-                return false
-            }
+        if (!token) {
+            log.error("There is no token.")
+            return false
+        }
 
-            String url = grailsApplication.config.ratchetv2.server.url.logout
-            log.info("Call backend service to logout, token: ${token}.")
+        String url = grailsApplication.config.ratchetv2.server.url.logout
+        log.info("Call backend service to logout, token: ${token}.")
 
-            withPost(token, url) { req ->
-                def resp = req.asString()
+        withPost(token, url) { req ->
+            def resp = req.asString()
 
-                if (resp.status == 200) {
-                    log.info("Logout success, token: ${token}")
-                    return true
-                }
-                else {
-                    handleError(resp)
-                }
+            if (resp.status == 200) {
+                log.info("Logout success, token: ${token}")
+                return true
+            } else {
+                handleError(resp)
             }
         }
     }
+}
