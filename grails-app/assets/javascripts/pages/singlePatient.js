@@ -269,6 +269,10 @@
     function _setRemoteValidation(form, primaryPatientId, primaryEmail) {
         form.validate({
             rules: {
+                phone: {
+                    minlength: 14,
+                    checkPhoneNumberRegion: true
+                },
                 id: {
                     required: true,
                     remote: {
@@ -335,6 +339,11 @@
                         }
 
                     }
+                }
+            },
+            messages: {
+                phone: {
+                    minlength: RC.constants.phoneNumberMsg
                 }
             }
         });
@@ -805,19 +814,48 @@
         });
     }
 
-    function _validatePhone() {
-        $("#patient-form").validate({
-            rules: {
-                phone: {
-                    minlength: 13
-                }
-            },
-            messages: {
-                phone: {
-                    minlength: RC.constants.phoneNumberMinLength
-                }
+    function _switchArchivedStyle(clickEle, showEle, archivedClass) {
+        $(clickEle).click(function () {
+            if ($(showEle).hasClass(archivedClass)) {
+                return;
+            } else {
+                $(showEle).addClass(archivedClass);
             }
         });
+    }
+
+    function _clickTabSwitchArchiveStyle(archivedTreatmentClass){
+        $("#tabs li").click(function () {
+            var $this = this;
+            if ($($this).hasClass(archivedTreatmentClass)) {
+                $($this).removeClass(archivedTreatmentClass);
+
+                var siblings = $(this).siblings();
+
+                _switchArchivedStyle(siblings, $this, archivedTreatmentClass);
+            }
+        });
+    }
+
+    function _showArchivedTreatment() {
+        var firstLi = "#tabs li:first";
+        var notFirstLi = "#tabs li:not(:first-child)";
+        var archivedTreatmentClass = "archived-treatment";
+
+        if ($(firstLi).hasClass(archivedTreatmentClass)) {
+            $(firstLi).removeClass(archivedTreatmentClass);
+
+            _clickTabSwitchArchiveStyle(archivedTreatmentClass);
+            _switchArchivedStyle(notFirstLi, firstLi, archivedTreatmentClass);
+
+            $(firstLi).click(function () {
+                if ($(firstLi).hasClass(archivedTreatmentClass)) {
+                    $(firstLi).removeClass(archivedTreatmentClass);
+                }
+            });
+        } else {
+            _clickTabSwitchArchiveStyle(archivedTreatmentClass);
+        }
     }
 
     /**
@@ -832,7 +870,7 @@
         _goBackToPrePage();
         _initPlaceholder();
         _inviteAgain();
-        _validatePhone();
+        _showArchivedTreatment();
     }
 
     _init();

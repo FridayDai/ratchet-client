@@ -60,6 +60,8 @@
         &:before {
             padding-left: 0;
             color: inherit;
+            content: '\f2c9';
+            font-family: ionicons;
         }
     }
 
@@ -144,6 +146,14 @@
                 font-weight: 400;
                 font-family: Lato;
                 font-size: 17px;
+            }
+        }
+
+        .archived-treatment {
+            background-color: $base-font-color;
+
+            .icon-archived {
+                color: $base-font-grey;
             }
         }
     }
@@ -281,7 +291,7 @@
                     }
                 }
 
-                .icon-archived {
+                .archived-active {
                     border-top: 0;
                 }
             }
