@@ -8,31 +8,34 @@ class TaskController extends BaseController {
 
     def taskService
 
-    def getTasksAndTools() {
+    def getTasks() {
         String token = session.token
         def clientId = session.clientId
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
-        def archived = params?.archived
-        if (archived == null) {
-            archived = false
-        }
+        def archived = (params?.archived) ?: false
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
-        def sentTasks = []
-        def scheduleTasks = []
+        def activeTasks = [], closedTasks = [], scheduleTasks = []
         for (task in tasks) {
-            if (task?.isSent) {
-                sentTasks.add(task)
-            } else {
-                scheduleTasks.add(task)
+            switch (task?.status) {
+                case StatusCodeConstants.TASK_STATUS_SCHEDULE :
+                    scheduleTasks.add(task)
+                    continue
+                case StatusCodeConstants.TASK_STATUS_PENDING :
+                case StatusCodeConstants.TASK_STATUS_OVERDUE :
+                    activeTasks.add(task)
+                    continue
+                default:
+                    closedTasks.add(task)
             }
         }
 
         scheduleTasks = scheduleTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] })
-        sentTasks = sentTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+        activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+        closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
-        render view: 'task', model: [sentTasks: sentTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]
+        render view: 'task', model: [activeTasks: activeTasks, closedTasks: closedTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]
     }
 
     def sendTaskEmail() {

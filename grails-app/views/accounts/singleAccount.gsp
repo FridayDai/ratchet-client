@@ -189,9 +189,6 @@
 
     </g:form>
 
-    <g:form class="warn ui-hidden">
-
-    </g:form>
     </body>
     </html>
 </g:applyLayout>

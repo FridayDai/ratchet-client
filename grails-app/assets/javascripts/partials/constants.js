@@ -70,7 +70,10 @@
 
         //OTHERS
         patientIdExist: "ID already exists",
-        emailExist: "Email already exists"
+        emailExist: "Email already exists",
+
+        //PHONE NUMBER
+        phoneNumberMsg: "Please enter a valid phone number."
     });
 })(jQuery);
 /* jshint +W101 */

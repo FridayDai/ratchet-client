@@ -33,6 +33,14 @@
 
     }
 
+    .btn-invite-disabled {
+        background-color: $base-color-white-grey;
+
+        &:hover {
+            background-color: $base-color-white-grey;
+        }
+    }
+
     .surgeon {
         position: relative;
         margin-top: 15px;
@@ -281,3 +289,4 @@
 .show {
     display: inline-block;
 }
+

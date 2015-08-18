@@ -54,12 +54,14 @@
     border: 0;
 
     .icon-archived {
-        padding: 0;
+        //        padding: 0;
         color: inherit;
 
         &:before {
             padding-left: 0;
             color: inherit;
+            content: '\f2c9';
+            font-family: ionicons;
         }
     }
 
@@ -146,6 +148,14 @@
                 font-size: 17px;
             }
         }
+
+        .archived-treatment {
+            background-color: $base-font-color;
+
+            .icon-archived {
+                color: $base-font-grey;
+            }
+        }
     }
 
     .ui-tabs-panel {
@@ -219,27 +229,109 @@
                 font-family: Lato;
             }
         }
+
+        .surgery-date-disabled {
+            background-color: $base-font-grey;
+        }
+        .disabled {
+            background-color: $base-font-grey;
+        }
+
+        .code-generation {
+            position: absolute;
+            right: 150px;
+            line-height: 40px;
+
+            .btn-generate-code {
+                top: -2px;
+            }
+        }
+
+        .more-drop-down {
+            position: absolute;
+            right: 15px;
+            line-height: 40px;
+            width: 66px;
+
+            .drop-down-toggle {
+                background: none;
+                border: none;
+                color: $base-surgery-date-bgcolor;
+                font-size: 17px;
+                font-weight: 300;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .btn-disabled {
+                color: $base-color-grey;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+
+            .drop-down-lists {
+                position: relative;
+                right: 20px;
+                z-index: 999;
+                background-color: $base-color-white;
+
+                .drop-down-list {
+                    font-weight: 400;
+                    height: 25px;
+                    padding: 6px 5px 1px;
+                    text-align: left;
+
+                    &:hover {
+                        color: $base-color-white;
+                        background-color: $base-surgery-date-bgcolor;
+                    }
+                }
+
+                .archived-active {
+                    border-top: 0;
+                }
+            }
+
+        }
     }
 
     .surgery-date {
+        background-color: $base-surgery-date-bgcolor;
+        line-height: 30px;
+
         span {
-            color: $base-color-medium-black;
+            margin-left: 30px;
+            color: $base-surgery-date-color;
             font-family: Lato;
             font-weight: 300;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         label {
             display: inline;
             padding-right: 10px;
-            color: $base-color-medium-black;
-            font-size: 14px;
+            color: $base-surgery-date-color;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .archived-treatment-title {
             font-weight: 400;
+            margin-left: 15px;
+            color: $base-color-white;
         }
 
         img {
             vertical-align: sub;
         }
+    }
+
+    .disabled {
+        background-color: $base-font-grey;
     }
 
 }

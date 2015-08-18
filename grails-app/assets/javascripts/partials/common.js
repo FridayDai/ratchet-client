@@ -328,7 +328,7 @@
                     .autocomplete($.extend({
                         minLength: 0,
                         focusSearch: true,
-                        open: function (event,ui) {
+                        open: function (event, ui) {
                             event.preventDefault();
                             $(this).parent().find('.ui-icon')
                                 .removeClass('ui-button-icon-loading')
@@ -395,11 +395,11 @@
                             self.element.autocomplete("close");
                             return;
                         }
-
                         $(this).blur();
-
                         self.element.autocomplete("search", "");
                         self.element.focus();
+
+
                     });
                 if (self.element.is(":disabled")) {
                     self.element.parent().find("a").addClass('disable');
@@ -479,8 +479,8 @@
         progress: function (hide) {
             var elementStr = [
                 '<div id="msg-process">',
-                    '<div class="msg-process-background ui-tips ui-tips-center"></div>',
-                    '<span class="msg-process-loading"></span>',
+                '<div class="msg-process-background ui-tips ui-tips-center"></div>',
+                '<span class="msg-process-loading"></span>',
                 '</div>'
             ].join('');
 
@@ -610,20 +610,20 @@
                     }
                     dialog.dialog("close");
                     $('.btn').blur();
-                    //dialogOwn.appendTo(containerParent);
-                    $(this).dialog("destroy").replaceWith(dialogOwn);
+                    var hiddenDialogOwn = dialogOwn.addClass('ui-hidden');
+                    $(this).dialog("destroy").replaceWith(hiddenDialogOwn);
                 }
             };
 
             dialogOpts.buttons[title] = function (e) {
-                var back = confirmFormArguments.okCallback(e);
                 if ($.isFunction(confirmFormArguments.okCallback)) {
+                    var back = confirmFormArguments.okCallback(e);
                     if (back && $.isFunction(back.promise)) {
                         $.when(back).done(function () {
                             dialog.dialog("close");
                         });
                     }
-                    else if(back) {
+                    else if (back) {
                         dialog.dialog("close");
                     }
                 }
@@ -957,11 +957,11 @@
                 $(".display").css("display", "inline-table");
                 var paginate = $(this).siblings();
                 var bothDisabled = paginate
-                                    .find(".previous")
-                                    .hasClass("disabled") &&
-                                paginate
-                                    .find(".next")
-                                    .hasClass("disabled");
+                        .find(".previous")
+                        .hasClass("disabled") &&
+                    paginate
+                        .find(".next")
+                        .hasClass("disabled");
                 if (bothDisabled && paginate.find(".current").length === 0) {
                     paginate.hide();
                 }

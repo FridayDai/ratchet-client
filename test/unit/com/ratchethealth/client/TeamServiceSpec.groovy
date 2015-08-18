@@ -4,6 +4,7 @@ import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.HttpRequestWithBody
 import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
+import grails.converters.JSON
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
 import spock.lang.Specification
@@ -278,4 +279,54 @@ class TeamServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+    def "test checkCareGiverEmail with successful result"() {
+        given:
+
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        def result = service.checkEmailForCareGiver('token', 1, 'email')
+
+        then:
+        result.existed == true
+    }
+
+    def "test checkPatientEmail without successful result as 404"() {
+        given:
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 404,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        def result = service.checkEmailForCareGiver('token', 1, 'email')
+
+        then:
+        result.existed == false
+    }
+
+    def "test checkPatientEmail without successful result"() {
+        given:
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        service.checkEmailForCareGiver('token', 1, 'email')
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
 }

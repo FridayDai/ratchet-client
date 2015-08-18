@@ -12,6 +12,7 @@ class TreatmentController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def treatmentId = params?.treatmentId
+        def treatmentCode = params?.treatmentCode
         def clientId = params?.clientId
         def archived = params?.archived
         Long surgeryTime = null
@@ -21,7 +22,7 @@ class TreatmentController extends BaseController {
         }
         render view: '/treatment/treatment',
                 model: [patientId  : patientId, clientId: clientId, medicalRecordId: medicalRecordId,
-                        treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
+                        treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived, treatmentCode: treatmentCode]
     }
 
     def assignTreatment(Patient patient) {
@@ -73,6 +74,15 @@ class TreatmentController extends BaseController {
         def clientId = params?.clientId
         def treatmentId = params?.treatmentId
         def resp = treatmentService.getTreatmentInfo(token, clientId, treatmentId)
+        render resp as JSON
+    }
+
+    def generateTreatmentCode() {
+        String token = request.session.token
+        def clientId = params?.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def resp = treatmentService.generateTreatmentCode(token, clientId, patientId, medicalRecordId)
         render resp as JSON
     }
 }

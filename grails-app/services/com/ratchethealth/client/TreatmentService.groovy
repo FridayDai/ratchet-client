@@ -85,8 +85,7 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get treatment info success, token:${token}")
                 return result
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -106,8 +105,7 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Update surgery date success, token: ${token}")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -125,8 +123,27 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Archive medical record success, token: ${token}")
                 return true
+            } else {
+                handleError(resp)
             }
-            else {
+        }
+    }
+
+    def generateTreatmentCode(String token, clientId, patientId, medicalRecordId) {
+        String generateCodeUrl = grailsApplication.config.ratchetv2.server.url.generateCode
+        def url = String.format(generateCodeUrl, clientId, patientId, medicalRecordId)
+
+        log.info("Call backend service to generate treatment code, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                    .asString()
+
+            def result = JSON.parse(resp.body)
+
+            if (resp.status == 200) {
+                log.info("Archive medical record success, token: ${token}")
+                return result
+            } else {
                 handleError(resp)
             }
         }

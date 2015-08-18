@@ -71,11 +71,16 @@
             </g:if>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
-                    <li>
+                    <li
+                        <g:if test="${medicalRecord?.archived}">
+                            class="archived-treatment"
+                        </g:if>>
+                    %{--<li>--}%
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived]">
+                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
+                                         treatmentCode  : medicalRecord?.treatmentCode]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
                             </g:if>
@@ -108,7 +113,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-            <input id="phone" name="phone" type="text" maxlength="14" class="input-group"
+            <input id="phone" name="phone" type="text" maxlength="14" minlength="13" class="input-group"
                    placeholder="777-777-7777" required/>
         </div>
 
@@ -196,6 +201,9 @@
         </div>
     </g:form>
 
+    <g:form class="warn">
+
+    </g:form>
     </body>
     </html>
 </g:applyLayout>

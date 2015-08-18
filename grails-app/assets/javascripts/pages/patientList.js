@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+
 (function ($, undefined) {
     'use strict';
 
@@ -66,6 +67,7 @@
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
 
+
     /**
      * init table with the data which loaded
      * @param data
@@ -96,8 +98,8 @@
                 type: "get"
             }),
             columnDefs: [{
-                "targets": 5,
-                "orderable": false
+                "orderable": false,
+                "targets": [4, 5]
             },
                 {
                     "targets": 0,
@@ -145,10 +147,18 @@
                 }, {
                     "targets": 4,
                     "render": function (data, type, full) {
-                        var lastUpdate = data === undefined ? full.lastUpdate : data;
-                        var formatDate = moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
-                        return formatDate;
+                        var taskStatus = data === undefined ? full.taskStatus : data;
+                        if (taskStatus.indexOf("All complete") !== -1) {
+                            return '<span class="task-status all-complete-status">' + taskStatus + '</span>';
+                        } else if (taskStatus.indexOf("Overdue") !== -1 && taskStatus.indexOf("Pending") !== -1) {
+                            return '<span class="task-status overdue-status">' + taskStatus + '</span>';
+                        } else if (taskStatus.indexOf("Pending") !== -1) {
+                            return '<span class="task-status pending-status">' + taskStatus + '</span>';
+                        } else {
+                            return '<span class="task-status overdue-status">' + taskStatus + '</span>';
+                        }
                     },
+
                     width: "19%"
                 }, {
                     "targets": 5,
@@ -315,7 +325,7 @@
      * @private
      */
     function _sortPatientTable() {
-        _.each($('#patientsTable th'), function (element) {
+        _.each($('#patientsTable th').not(".sorting_disabled"), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
@@ -870,7 +880,9 @@
         form.validate({
                 rules: {
                     phoneNumber: {
-                        isPhone: true
+                        isPhone: true,
+                        minlength: 14,
+                        checkPhoneNumberRegion: true
                     },
                     email: {
                         email: true,
@@ -907,6 +919,9 @@
                     }
                 },
                 messages: {
+                    phoneNumber: {
+                        minlength: RC.constants.phoneNumberMsg
+                    },
                     provider: RC.constants.waringMessageProvider,
                     agent: RC.constants.waringMessageAgent
                 }
@@ -987,7 +1002,7 @@
 
         _.each($(".input-convert"), function (element) {
             var key = element.id;
-            var html = "<div class='replace-input-div' id=" + key + ">" + data[key] + "</div>";
+            var html = "<div class='replace-input-div' id=" + key + " name=" + key + ">" + data[key] + "</div>";
             var edit = "<a class='icon-edit form-group-edit'>" + "</a>";
             if (key === "phoneNumber") {
                 if ($('#' + key).parent().hasClass("int-tel-input")) {
@@ -1046,6 +1061,7 @@
                 $ele.prop("type", "tel");
                 $ele.attr("placeholder", "777-777-7777");
                 $ele.attr("maxlength", "14");
+                $ele.attr("minlength", "13");
                 break;
         }
     }
@@ -1056,14 +1072,23 @@
      */
     function _initRelationship() {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
         ];
 
         $("#relationship").combobox({
+            change: function (event, ui) {
+                event.preventDefault();
+                if (ui.item === null) {
+                    $(this).data("id", "");
+                    $(this).val("");
+                    _changeRequiredStatus(this);
+
+                }
+            },
             source: function (request, response) {
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
@@ -1388,51 +1413,70 @@
     }
 
     function _checkEmergencyContact() {
+
+        $("#relationship").on("autocompleteselect", function () {
+            _changeRequiredStatus(this);
+
+        });
+
         _.each($('.emergency-field'), function (element) {
             $(element).on('input', function () {
-                if ($(element).val() !== '') {
-                    $('#emergency-firstName').attr('required', true);
-                    $('#emergency-lastName').attr('required', true);
-                    $('#relationship').attr('required', true);
-                    $('#emergency-email').attr('required', true);
-                    $('.permission-confirm-check').attr('required', true);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).show();
-                    });
-
-                    $('.permission-confirm').addClass('visible');
-                    $('#ec-first-name').text($("#emergency-firstName").val());
-                    _resetToolTipPosition($('.re-position'));
-                    $('.permission-confirm').data("direction", "down");
-                }
-
-                var flagOptional = _.every($('.emergency-field'), function (element) {
-                    return $(element).val() === '';
-                });
-
-                if (flagOptional) {
-                    $('#emergency-firstName').attr('required', false);
-                    $('#emergency-lastName').attr('required', false);
-                    $('#relationship').attr('required', false);
-                    $('#emergency-email').attr('required', false);
-                    $('.permission-confirm-check').attr('required', false);
-
-                    _.each($('.emergency-required'), function (element) {
-                        $(element).hide();
-                    });
-
-                    $('.permission-confirm').removeClass('visible');
-                    _resetToolTipPosition($('.re-position'));
-                    $('.permission-confirm').data("direction", "up");
-
-                    var elementList = $('.emergency-contact-info').find('.form-group').children();
-                    $.each(elementList, function (index, element) {
-                        RC.common.hideErrorTip(element);
-                    });
-                }
+                _changeRequiredStatus(this);
             });
         });
+
+    }
+
+    /**
+     * check emergency contact status. If all of them is empty, they aren't required but when one of them has value
+     * all of them need to be filled value.
+     * @param element
+     * @private
+     */
+
+    function _changeRequiredStatus(element) {
+
+        if ($(element).val() !== '') {
+            $('#emergency-firstName').attr('required', true);
+            $('#emergency-lastName').attr('required', true);
+            $('#relationship').attr('required', true);
+            $('#emergency-email').attr('required', true);
+            $('.permission-confirm-check').attr('required', true);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).show();
+            });
+
+            $('.permission-confirm').addClass('visible');
+            $('#ec-first-name').text($("#emergency-firstName").val());
+            _resetToolTipPosition($('.re-position'));
+            $('.permission-confirm').data("direction", "down");
+        }
+
+        var flagOptional = _.every($('.emergency-field'), function (element) {
+            return $(element).val() === '';
+        });
+
+        if (flagOptional) {
+            $('#emergency-firstName').attr('required', false);
+            $('#emergency-lastName').attr('required', false);
+            $('#relationship').attr('required', false);
+            $('#emergency-email').attr('required', false);
+            $('.permission-confirm-check').attr('required', false);
+
+            _.each($('.emergency-required'), function (element) {
+                $(element).hide();
+            });
+
+            $('.permission-confirm').removeClass('visible');
+            _resetToolTipPosition($('.re-position'));
+            $('.permission-confirm').data("direction", "up");
+
+            var elementList = $('.emergency-contact-info').find('.form-group input');
+            $.each(elementList, function (index, element) {
+                RC.common.hideErrorTip(element);
+            });
+        }
     }
 
     function _resetToolTipPosition(elements) {

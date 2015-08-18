@@ -55,9 +55,10 @@ class UrlMappings {
         "/patients/$patientId?/treatment"(controller: "treatment", action: "index")
         "/treatments"(controller: "treatment", action: "getTreatments")
         "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
+        "/treatments/$treatmentId?/generateCode"(controller: "treatment", action: "generateTreatmentCode")
 
         //Patient task
-        "/patients/$patientId/treatments/$treatmentId/$medicalRecordId/tasks"(controller: "task", action: "getTasksAndTools")
+        "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/send-mail"(controller: "task", action: "sendTaskEmail")
 
         //Patient team
@@ -68,6 +69,7 @@ class UrlMappings {
         "/patients/$patientId?/$medicalRecordId?/emergency-contact/$emergencyContactId?"(controller: "team", action: "deleteCareGiver")
         "/patients/$patientId?/emergency-contact/update"(controller: "team", action: "updateCareGiver")
         "/patients/$patientId?/group-and-provider/update"(controller: "team", action: "updateCareTeamSurgeon")
+        "/patients/$medicalRecordId?/emergency-contact/check-email"(controller: "team", action: "checkCareGiverEmail")
 
         //Patient activity
         "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")

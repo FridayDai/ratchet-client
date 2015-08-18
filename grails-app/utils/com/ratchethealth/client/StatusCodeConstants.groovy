@@ -25,13 +25,11 @@ class StatusCodeConstants {
     public static final Integer TASK_STATUS_SCHEDULE = 3
     public static final Integer TASK_STATUS_PENDING = 4
     public static final Integer TASK_STATUS_COMPLETE = 5
+    public static final Integer TASK_STATUS_EXPIRED = 6
 
     public static final String[] TASK_STATUS =
-            ["undefined", "new", "overdue", "schedule", "pending", "complete"]
+            ["undefined", "new", "overdue", "schedule", "pending", "complete", "expired"]
 
-    // Tool type
-    public static final String[] TOOL_TYPE =
-            ["undefined", "outcome", "basic", "outcome", "outcome", "outcome"]
 
     //Account constants
 //    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "UNVERIFIED", "ACTIVE", "INACTIVE"]

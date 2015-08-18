@@ -271,6 +271,7 @@ ratchetv2 {
             getTreatmentInfo = "${ratchetv2.server.url.base}/clients/%s/treatments/%s"
             updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
+            generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
 
             //task
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"
@@ -278,11 +279,12 @@ ratchetv2 {
             //activity
             getActivity = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/activities"
 
-            //medical care
+            //careGiver and careTeam
             showMedicalCares = "${ratchetv2.server.url.base}/medicalCares"
             deleteCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s"
             deleteCareGiver = "${ratchetv2.server.url.base}/records/%s/caregiver/%s"
             updateCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s/groups/%s"
+            checkCareGiverEmail = "${ratchetv2.server.url.base}/records/%s/caregiver/check_email"
 
             //for toolService
             tools.loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"

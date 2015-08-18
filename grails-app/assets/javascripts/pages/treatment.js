@@ -25,7 +25,8 @@
             query: "/getProvider",
             editSurgeryTime: "/patients/{0}/surgery-time/{1}/{2}",
             archived: "/patients/{0}/records/{1}/archived",
-            getTreatmentInfo: "/treatments/{0}"
+            getTreatmentInfo: "/treatments/{0}",
+            generateTreatmentCode: "/treatments/{0}/generateCode"
         }
     };
 
@@ -34,11 +35,12 @@
      * @private
      */
     function _initDatePicker(element) {
-        $(".surgeryTime-edit").click(function (e) {
+        element.find(".surgeryTime-edit").click(function (e) {
             e.preventDefault();
-
-            var parent = $(this).parent();
-            var time = parent.find('.surgery-time-picker').text();
+            element.find('.drop-down-list').hide();
+            var parent = $(this).parents();
+            var $ele = $(this).parent();
+            var time = $ele.find('.hidden-surgery-time-picker').text();
             var surgeryTime = $.trim(time);
             $("#treatment-surgeryTime").attr('value', surgeryTime);
             var medicalRecordId = $(this).data("medicalRecordId");
@@ -49,6 +51,9 @@
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateSurgeryTimeArguments, {
                 element: $("#treatment-time-form"),
+                //beforeClass: function () {
+                //    $("#treatment-time-form").attr("style", "display:none!important")
+                //},
                 okCallback: function () {
                     if ($("#treatment-time-form").valid()) {
                         var newSurgeryTime = RC.common.parseVancouverTime($("#treatment-surgeryTime").val());
@@ -61,7 +66,8 @@
                                 medicalRecordId,
                                 surgeryTime,
                                 parent,
-                                newSurgeryTime
+                                newSurgeryTime,
+                                $ele
                             );
                         }
                     }
@@ -76,12 +82,15 @@
      * It will binds a warning pop up and to update surgery date when user confirmed.
      * @private
      */
-    function _editSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime) {
+    function _editSurgeryTime(element, clientId, patientId,
+                              medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele) {
         RC.common.warning(_.extend({}, opts.defaultConfirmArguments.surgeryTimeEditWaringArguments, {
             element: $(".warn"),
             yesCallback: function () {
-                _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, newSurgeryTime);
+                _updateSurgeryTime(element, clientId, patientId,
+                    medicalRecordId, surgeryTime, parent, newSurgeryTime, $ele);
                 $("#treatment-time-form").dialog("destroy").addClass('ui-hidden');
+                _initdropdownMenu(element);
             }
         }));
     }
@@ -98,11 +107,6 @@
             type: 'POST',
             data: {clientId: clientId},
             success: function (data) {
-                //var sendTimeOffset = data.sendTimeOffset;
-                //var time = Math.ceil(sendTimeOffset / 1000 / 60 / 60 / 24);
-                //var date = new Date();
-                //var time = date.getTime() + data.sendTimeOffset;
-                //var time = data.surgeryDate + data.sendTimeOffset;
                 var time = data.surgeryDate;
                 _initSurgeryTime(time);
             }
@@ -133,7 +137,8 @@
      * @param selectedDate
      * @private
      */
-    function _updateSurgeryTime(element, clientId, patientId, medicalRecordId, surgeryTime, parent, selectedDate) {
+    function _updateSurgeryTime(element, clientId, patientId,
+                                medicalRecordId, surgeryTime, parent, selectedDate, $ele) {
         $.ajax({
             url: opts.urls.editSurgeryTime.format(patientId, medicalRecordId, selectedDate),
             type: 'PUT',
@@ -141,6 +146,7 @@
                 if (data.resp === true) {
                     var formatDate = RC.common.formatVancouverTime(parseInt(selectedDate, 10));
                     parent.find('.surgery-time-picker').text(formatDate);
+                    $ele.find('.hidden-surgery-time-picker').text(formatDate);
                     $(element).tabs({
                         beforeLoad: function (event, ui) {
                             ui.tab.data("loaded", false);
@@ -156,9 +162,10 @@
      * init archived a treatment event
      * @private
      */
-    function _initArchived() {
+    function _initArchived(element) {
         $('.archived-active').click(function (e) {
             e.preventDefault();
+            element.find('.drop-down-list').hide();
             var medicalRecordId = $(this).data("medicalRecordId");
             var patientId = $(this).data("patientId");
             var clientId = $(this).data("clientId");
@@ -191,13 +198,80 @@
         });
     }
 
+
+    function _initGenerateTreatmentCode(element) {
+        element.find('#generateCode').click(function (e) {
+            e.preventDefault();
+            var treatmentId = $(this).data("treatmentId");
+
+            var data = {
+                medicalRecordId: $(this).data("medicalRecordId"),
+                patientId: $(this).data("patientId"),
+                clientId: $(this).data("clientId")
+            };
+
+            var ajaxPost = $.ajax({
+                url: opts.urls.generateTreatmentCode.format(treatmentId),
+                method: "POST",
+                data: data
+            });
+            ajaxPost.done(function (resp) {
+                var $ele = element;
+                var content = '<div class="msg-center">' + "Code generated successfully!" + '</div>' +
+                    '<div class="msg-center code">' + resp.treatmentCode + '</div>' +
+                    '<div class="msg-center">' + "Enter code on patient portal to start the task." + '</div> ' +
+                    '<div class="msg-center">' + "The code will expire in 24 hours!" + '</div>';
+
+                $('.generate-code-form').html('');
+                $('.generate-code-form').append(content);
+                RC.common.confirmForm(_.extend({}, {
+                    title: "TREATMENT CODE",
+                    okTitle: "Done",
+                    height: 200,
+                    width: 420
+                }, {
+                    element: $('.generate-code-form')
+                }));
+
+                $ele.find('.btn-generate-code').replaceWith(resp.treatmentCode);
+            });
+        });
+    }
+
+    function _initdropdownMenu(element) {
+        $('.drop-down-toggle').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if ($('.drop-down-list').is(':visible')) {
+                $('.drop-down-list').hide();
+            } else {
+                $('.drop-down-list').show();
+            }
+            _initDatePicker(element);
+            _initArchived(element);
+        });
+
+        $('.container').click(function (e) {
+            if (element.find('.drop-down-list').is(':hidden')) {
+                return;
+            }
+            var target = $(e.target);
+            if (target.closest('.drop-down-lists').length === 0) {
+                $('.drop-down-list').hide();
+            }
+        });
+    }
+
     /**
      * page Initialization
      * @private
      */
     function _init(element) {
-        _initDatePicker(element);
-        _initArchived(element);
+        //_initDatePicker(element);
+        //_initArchived(element);
+        _initGenerateTreatmentCode(element);
+        _initdropdownMenu(element);
+
         $(element).tabs({
             cache: true,
             ajaxOptions: {cache: true},
