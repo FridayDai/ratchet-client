@@ -71,7 +71,11 @@
             </g:if>
             <ul class="tab-treatment">
                 <g:each in="${medicalRecords}" var="medicalRecord" status="i">
-                    <li>
+                    <li
+                        <g:if test="${medicalRecord?.archived}">
+                            class="archived-treatment"
+                        </g:if>>
+                    %{--<li>--}%
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,

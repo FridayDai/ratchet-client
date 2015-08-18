@@ -73,7 +73,7 @@
         emailExist: "Email already exists",
 
         //PHONE NUMBER
-        phoneNumberMinLength:"Please enter at least 10 digits."
+        phoneNumberMsg: "Please enter a valid phone number."
     });
 })(jQuery);
 /* jshint +W101 */

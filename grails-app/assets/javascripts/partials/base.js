@@ -70,6 +70,16 @@
         return this.optional(element) || (tel.test(value));
     }, 'Please enter a valid phone number');
 
+    jQuery.validator.addMethod('checkPhoneNumberRegion', function (value) {
+        var phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+        var phoneNumber = phoneUtil.parse(value, 'US');
+        var isPossible = phoneUtil.isPossibleNumber(phoneNumber);
+        var isValid = phoneUtil.isValidNumber(phoneNumber);
+        var regionCode = phoneUtil.getRegionCodeForNumber(phoneNumber);
+        var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
+        return isPossible && isValid && regionCode && isValidRegionCode;
+    }, 'Please enter a valid phone number.');
+
     RC.pages = (function (self) {
         return self;
     }({}));
