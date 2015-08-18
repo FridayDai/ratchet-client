@@ -1,6 +1,9 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
+var WithChildren = require('../common/WithChildren');
 var STRINGS = require('../../constants/Strings');
+var URLS = require('../../constants/Urls');
+var Utility = require('../../utils/Utility');
 
 var NewPatientPhoneInputField = require('./NewPatientPhoneInputField');
 var NewPatientRelationshipCombobox = require('./NewPatientRelationshipCombobox');
@@ -9,14 +12,6 @@ var NewPatientProviderCombobox = require('./NewPatientProviderCombobox');
 var NewPatientTreatmentCombobox = require('./NewPatientTreatmentCombobox');
 var NewPatientSurgeryDate = require('./NewPatientSurgeryDate');
 
-NewPatientPhoneInputField.attachTo('#phoneNumber');
-NewPatientRelationshipCombobox.attachTo('#relationship');
-NewPatientGroupCombobox.attachTo('#selectGroup');
-NewPatientProviderCombobox.attachTo('#selectStaffs');
-NewPatientTreatmentCombobox.attachTo('#selectTreatment');
-NewPatientSurgeryDate.attachTo('#surgeryTime');
-
-// TODO: need to think: how to compose element
 
 var PATIENT_STATUS = [
     'NOT_EXISTING',
@@ -32,6 +27,10 @@ function NewPatientFormDialog() {
         lastNameFieldSelector: '#lastName',
         phoneNumberFieldSelector: '#phoneNumber',
         emailFieldSelector: '#email',
+        groupFieldSelector: '#selectGroup',
+        providerFieldSelector: '#selectStaffs',
+        treatmentFieldSelector: '#selectTreatment',
+        surgeryTimeFieldSelector: '#surgeryTime',
 
         inputFieldSelector: '.form-group input',
         basicEditButtonSelector: 'a.form-group-edit',
@@ -41,12 +40,22 @@ function NewPatientFormDialog() {
         emergencyContactPermissionSelector: '.permission-confirm',
         emergencyContactPermissionCheckSelector: '.permission-confirm-check',
         emergencyContactPermissionFirstNameSelector: '#ec-first-name',
+        emergencyContactRelationshipFieldSelector: '#relationship',
 
         patientIdStaticSelector: '#patient-id-value',
         firstNameStaticSelector: '#firstName-static',
         lastNameStaticSelector: '#lastName-static',
         phoneNumberStaticSelector: '#phoneNumber-static',
         emailStaticSelector: '#email-static'
+    });
+
+    this.children({
+        phoneNumberFieldSelector: NewPatientPhoneInputField,
+        emergencyContactRelationshipFieldSelector: NewPatientRelationshipCombobox,
+        groupFieldSelector: NewPatientGroupCombobox,
+        providerFieldSelector: NewPatientProviderCombobox,
+        treatmentFieldSelector: NewPatientTreatmentCombobox,
+        surgeryTimeFieldSelector: NewPatientSurgeryDate
     });
 
     this.options({
@@ -60,8 +69,6 @@ function NewPatientFormDialog() {
             var tel = /^[0-9\-\(\)\s]+$/;
             return this.optional(element) || (tel.test(value));
         }, STRINGS.PHONE_NUMBER_INVALID);
-
-        var me = this;
 
         return {
             rules: {
@@ -87,7 +94,7 @@ function NewPatientFormDialog() {
     this.onShow = function (e, data) {
         this.$node.removeClass('ui-hidden');
         this.prepare(data);
-        this.dialogEl.dialog('open');
+        this.show();
     };
 
     this.prepare = function (data) {
@@ -293,12 +300,43 @@ function NewPatientFormDialog() {
         }
     };
 
+    this.setExtraData = function () {
+        var $phoneNumber = this.select('phoneNumberFieldSelector');
+        var $phoneNumberStatic = this.select('phoneNumberStaticSelector');
+        var phoneNumber = $phoneNumber.val() || $phoneNumberStatic.text();
+        var $relationship = this.select('emergencyContactRelationshipFieldSelector');
+        var relationshipId = $relationship.data('id');
+        var $group = this.select('groupFieldSelector');
+        var groupId = $group.data('id');
+        var $provider = this.select('providerFieldSelector');
+        var providerId = $provider.data('id');
+        var $treatment = this.select('treatmentFieldSelector');
+        var treatmentId = $treatment.data('id');
+        var $surgeryTime = this.select('surgeryTimeFieldSelector');
+        var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+
+
+        return {
+            patientId: this.select('patientIdStaticSelector').text(),
+            phoneNumber: phoneNumber.replace(/[\s\(\)-]/g, ''),
+            relationship: relationshipId,
+            groupId: groupId,
+            staffId: providerId,
+            treatmentId: treatmentId,
+            surgeryTime: surgeryTime,
+            profilePhoto: ''
+        };
+    };
+
+    this.onAddPatientSuccess = function (e, data) {window.location.href = URLS.PAGE_PATIENT_DETAIL.format(data.id);
+    };
+
     this.after('initialize', function () {
-        this.on(document, 'showNewPatientDialog', this.onShow);
         this.on('newPatientRelationshipSelected', this.onEmergencyContactFieldInput);
         this.on('newPatientRelationshipCleared', this.onEmergencyContactFieldInput);
 
         this.on('dialogclose', this.onClose);
+        this.on('formSuccess', this.onAddPatientSuccess)
 
         this.on('click', {
             'basicEditButtonSelector': this.showBasicField
@@ -315,4 +353,4 @@ function NewPatientFormDialog() {
     });
 }
 
-module.exports = flight.component(WithFormDialog, NewPatientFormDialog);
+module.exports = flight.component(WithChildren, WithFormDialog, NewPatientFormDialog);

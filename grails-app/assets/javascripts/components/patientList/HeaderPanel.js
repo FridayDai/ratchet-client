@@ -2,7 +2,8 @@ var flight = require('flight');
 
 function HeaderPanel() {
     this.attributes({
-        newPatientButton: '#add-patient'
+        newPatientButton: '#add-patient',
+        bulkImportButton: '#bulk-import'
     });
 
     this.onNewPatientClicked = function (e) {
@@ -11,9 +12,16 @@ function HeaderPanel() {
         this.trigger('showPatientCheckIDDialog');
     };
 
+    this.onBulkImportClicked = function (e) {
+        e.preventDefault();
+
+        this.trigger('showBulkImportDialog');
+    };
+
     this.after('initialize', function () {
         this.on('click', {
-            newPatientButton: this.onNewPatientClicked
+            newPatientButton: this.onNewPatientClicked,
+            bulkImportButton: this.onBulkImportClicked
         })
     });
 }

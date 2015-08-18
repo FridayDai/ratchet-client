@@ -1,25 +1,22 @@
-function setErrorDialogMessage ($errorDialog, options) {
-    var $dialogParent = $errorDialog.parent().addClass('ui-size'),
-        $uiButton = $dialogParent.find('.ui-button').addClass('btn-position'),
-        $uiWindowTitle = $errorDialog.find('.window-title'),
-        $uiWindowMessage = $errorDialog.find('.window-message');
+require('jquery');
+require('moment');
 
-    $dialogParent.find('.ui-widget-header').addClass('ui-icon-show');
-
-    $($uiButton[1]).addClass('btn-ok');
-
-    $uiWindowTitle.html('<div class="window-error-title">' + options.title + '</div>');
-    $uiWindowMessage.html('');
-
-    if (options.message) {
-        $uiWindowMessage.append('<div class="window-error">' + options.message + '</div>');
-    }
-    if (options.errorMessage) {
-        $uiWindowMessage.append('<div class="window-error-message">' + options.errorMessage + '</div>');
-    }
-}
+var $window = $(window);
+var WINDOW_WIDTH = $window.width();
+var WINDOW_HEIGHT = $window.height();
 
 module.exports = {
+    getWindowSize: function () {
+        return {
+            width: WINDOW_WIDTH,
+            height: WINDOW_HEIGHT
+        }
+    },
+
+    toVancouverTime: function (time) {
+        return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+    },
+
     showFadeOutMsg: function (options) {
         if (_.isString(options)) {
             options = {
@@ -87,51 +84,5 @@ module.exports = {
 
             $process.show();
         }
-    },
-
-    showErrorDialog: function (options) {
-        var $errorDialog = $('#error-dialog');
-
-        if ($errorDialog.length === 0) {
-            var divArr = [
-                '<div id="error-dialog" class="window-container">',
-                '<div class="window-title"></div>',
-                '<div class="window-message"></div>',
-                '</div>'
-            ];
-
-            $errorDialog = $(divArr.join(''));
-
-            $(document.body).append($errorDialog);
-
-            $errorDialog.dialog({
-                autoOpen: false,
-                resizable: false,
-                height: 140,
-                width: 350,
-                modal: true,
-                open: function () {
-                    $(this).parent().removeClass('hideSweetAlert').addClass('showSweetAlert');
-                },
-                close: function () {
-                    $(this).parent().removeClass('showSweetAlert').addClass('hideSweetAlert');
-                },
-                buttons: {
-                    'Ok': function () {
-                        $errorDialog.dialog("close");
-                    }
-                }
-            });
-        }
-
-        if (_.isFunction(options.closeCallback)) {
-            $errorDialog.off('dialogbeforeclose');
-
-            $errorDialog.on("dialogbeforeclose", options.closeCallback);
-        }
-
-        setErrorDialogMessage($errorDialog, options);
-
-        $errorDialog.dialog("open");
     }
 };

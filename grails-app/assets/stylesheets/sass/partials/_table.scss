@@ -136,8 +136,9 @@
 
 .dataTables_wrapper {
 
-    .dataTables_filter {
-        padding: 40px;
+    .dataTables_filter,
+    .dataTables_info {
+        display: none;
     }
 
     .dataTables_paginate {

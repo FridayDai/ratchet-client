@@ -10,7 +10,6 @@ function AssistMeFormDialog() {
 
     this.options({
         title: 'ASSIST ME',
-        height: 300,
         width: 800,
         buttons: ['Send']
     });
@@ -28,12 +27,11 @@ function AssistMeFormDialog() {
 
     this.onShow = function () {
         this.$node.removeClass('ui-hidden');
-        this.dialogEl.dialog('open');
+        this.show();
     };
 
     this.after('initialize', function () {
-        this.on(document, 'showAssistMeDialog', this.onShow);
-        this.on('formSuccess', this.onSendAssistMeSuccess)
+        this.on('formSuccess', this.onSendAssistMeSuccess);
     });
 }
 

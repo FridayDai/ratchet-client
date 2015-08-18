@@ -159,7 +159,7 @@ function withDataTable() {
     this.tableEl = null;
 
     this.attributes({
-        initWithLoad: true,
+        initWithLoad: false,
 
         pageSizeField: 'pagesize',
         totalCountField: 'total'
@@ -171,7 +171,7 @@ function withDataTable() {
             lengthChange: false,
             serverSide: true,
             pageLength: this.getPageSize(),
-            fnDrawCallback: _.bind(this.drawCallback, this),
+            drawCallback: _.bind(this.drawCallback, this),
             ajax: this.getPipeline(),
             deferLoading: this.getTotalCount(),
             order: [[0, 'desc']],
@@ -191,12 +191,20 @@ function withDataTable() {
         return this.$node.data(this.attr.totalCountField);
     };
 
-    this.drawCallback = function () {
+    this.drawCallback = function (tableSetting) {
         var $parent = this.$node.parent();
 
         this.$node.show();
         $parent.find('.previous').text('');
         $parent.find('.next').text('');
+
+        var $pagination = $parent.find('.dataTables_paginate');
+
+        if (!tableSetting._iRecordsTotal) {
+            $pagination.hide();
+        } else {
+            $pagination.show();
+        }
     };
 
     this.getPipeline = function () {
@@ -215,12 +223,12 @@ function withDataTable() {
     this._rowCallback = function (rawRow, data) {
         var that = this;
 
-        if (_.isFunction(this.getRowClickUrl)) {
+        if (_.isFunction(this.setRowClickUrl)) {
             $(rawRow)
                 .click(function () {
                     var data = that.getRowData(rawRow);
 
-                    location.href = that.getRowClickUrl(data);
+                    location.href = that.setRowClickUrl(data);
                 });
         }
 
@@ -249,20 +257,29 @@ function withDataTable() {
         this.tableEl.ajax.reload();
     };
 
-    this.onPreXhr = function (e, settings, data) {
-        if (_.isFunction(this.setRequest)) {
-            _.extend(data.search, this.setRequest())
-        }
+    this.search = function (data) {
+        this._searchData = _.assign({}, this._searchData, data);
+        this.reload();
+    };
+
+    this._onPreXhr = function (e, settings, data) {
+        _.extend(data.search, this._searchData)
+    };
+
+    this.isDataTableInitialized = function () {
+        return !!this.tableEl;
     };
 
     this.after('initialize', function () {
-        this.initDataTable();
+        if (!this.attr.initWithoutRender) {
+            this.initDataTable();
+        }
 
         if (this.attr.initWithLoad) {
             this.reload();
         }
 
-        this.on('preXhr.dt', this.onPreXhr)
+        this.on('preXhr.dt', this._onPreXhr);
     });
 }
 

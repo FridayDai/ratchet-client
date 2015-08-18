@@ -6,5 +6,6 @@ module.exports = {
     GET_TREATMENTS: '/treatments',
     GET_PROVIDER: '/staffs',
     GET_MY_GROUPS: '/accounts/TODO/groups',
-    CHECK_PATIENT_EMAIL: '/patients/check-email'
+    CHECK_PATIENT_EMAIL: '/patients/check-email',
+    GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup'
 };

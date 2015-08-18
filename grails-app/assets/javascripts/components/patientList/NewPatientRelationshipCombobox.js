@@ -1,18 +1,11 @@
 var flight = require('flight');
 var WithCombobox = require('../common/WithCombobox');
-
-var DATA = [
-    {label: "Spouse", value: 1},
-    {label: "Parent", value: 2},
-    {label: "Child",  value: 3},
-    {label: "Friend", value: 4},
-    {label: "Other",  value: 5}
-];
+var PARAMs = require('../../constants/Params');
 
 function NewPatientRelationshipCombobox() {
     this.options({
         appendTo: ".container",
-        source: DATA
+        source: PARAMs.EMERGENCY_CONTACT_RELATIONSHIP
     });
 
     this.onSelect = function () {

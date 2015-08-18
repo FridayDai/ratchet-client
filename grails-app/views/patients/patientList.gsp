@@ -15,7 +15,7 @@
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
-                <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
+                <a href="#" id="bulk-import" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
         </div>
 
@@ -81,7 +81,7 @@
             </div>
         </form>
 
-        <form action="/patients/check-id" method="post" id="table-form" class="form ui-hidden">
+        <form action="/patients" method="post" id="table-form" class="form ui-hidden">
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
@@ -107,7 +107,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-                <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group input-convert" maxlength="14"
+                <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert" maxlength="14"
                        placeholder="777-777-7777" required/>
                 <div class='replace-input-div' id="phoneNumber-static"></div>
                 <a class='icon-edit form-group-edit'></a>
@@ -126,35 +126,34 @@
             <div class="emergency-contact-info">
                 <div class="form-group inline">
                     <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-firstName" name="emergency-firstName" type="text"
+                    <input id="emergency-firstName" name="ecFirstName" type="text"
                            class="input-group emergency-field"
                            placeholder="Grace"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-lastName" name="emergency-lastName" type="text"
+                    <input id="emergency-lastName" name="ecLastName" type="text"
                            class="input-group emergency-field"
                            placeholder="Smith"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationship" class="input-group emergency-field">
+                    <input id="relationship" name="relationshipVal" class="input-group emergency-field">
                 </div>
 
                 <div class="form-group inline emr-email">
                     <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                    <input id="emergency-email" name="emergency-email" type="email" class="input-group emergency-field"
+                    <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
                            placeholder="grace@email.com"/>
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">
-                    <label></label>
-                    <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
-                    <span>Patient would like to release his/her health information to
-                        <span id="ec-first-name"></span>.</span>
-
+                    <input id="permission-confirm-check" type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>
+                    <label for="permission-confirm-check">*
+                        Patient would like to release his/her health information to<span id="ec-first-name"></span>.
+                    </label>
                 </div>
             </div>
 
@@ -162,27 +161,27 @@
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text"
+                <input id="selectGroup" name="groupVal" type="text"
                        class="input-group patient-group re-position clear"
                        placeholder="Select group" required/>
             </div>
 
             <div class="form-group form-provider">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
-                <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
+                <input id="selectStaffs" name="staffVal" type="text" class="clear"
                        placeholder="" required disabled/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
-                <input id="selectTreatment" name="selectTreatment" type="text"
+                <input id="selectTreatment" name="treatmentVal" type="text"
                        class="input-group treatment re-position clear"
                        placeholder="Select treatment" required/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time re-position"
+                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time re-position"
                        placeholder="" required disabled/>
             </div>
 
@@ -221,7 +220,7 @@
                     <p class="search-tip">Lookup ID by typing in the name of treatment, provider or group in the above search box.</p>
                 </div>
 
-                <div class="clear">
+                <div class="import-file-panel clear">
                     <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
                         <input id="fileupload" type="file" name="file" data-url="/patients/bulk-import/upload"
@@ -232,7 +231,7 @@
                         <p class="upload-error"></p>
                     </div>
 
-                    <div class="progress-box">
+                    <div class="progress-box ui-hidden">
                         <div id="progress" class="progress">
                             <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
                         </div>
@@ -240,10 +239,9 @@
                         <div class="loading"></div>
                     </div>
 
-                    <div class="error-tip-box"><p
-                            class="error-tip">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p>
+                    <div class="error-tip-box">
+                        <p class="error-tip ui-hidden">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p>
                     </div>
-
 
                     <div id="files" class="files"></div>
                 </div>

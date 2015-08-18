@@ -152,8 +152,16 @@
 }
 
 .import-form {
+    position: relative;
     padding: 1em 1.8em !important;
     //    height: 80%!important;
+
+    .import-file-panel {
+        position: absolute;
+        left: 1.8em;
+        bottom: 0;
+        width: 100%;
+    }
 
     p {
         color: $base-dark-grey;

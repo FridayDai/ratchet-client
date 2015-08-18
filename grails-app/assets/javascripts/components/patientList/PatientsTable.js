@@ -7,7 +7,7 @@ var URLs = require('../../constants/Urls');
 
 function PatientsTable() {
     this.attributes({
-
+        url: URLs.GET_PATIENTS
     });
 
     this.options({
@@ -74,23 +74,8 @@ function PatientsTable() {
         ]
     });
 
-    this.getUrl = function () {
-        return URLs.GET_PATIENTS;
-    };
-
-    this.getRowClickUrl = function (data) {
+    this.setRowClickUrl = function (data) {
         return URLs.PAGE_PATIENT_DETAIL.format(data.id);
-    };
-
-    this.setRequest = function (data) {
-        this._searchData = this._searchData || {};
-
-        return _.assign(this._searchData, data);
-    };
-
-    this.search = function (data) {
-        this.setRequest(data);
-        this.reload();
     };
 
     this.onTreatmentSearch = function (e, data) {

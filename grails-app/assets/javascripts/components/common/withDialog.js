@@ -5,59 +5,40 @@ require('velocity-ui');
 var flight = require('flight');
 var WithOptions = require('./WithOptions');
 
-$.Velocity
-    .RegisterEffect("ratchet.slideDownIn", {
-        defaultDuration: 700,
-        calls: [
-            [ { opacity: [ 1, 0 ], translateY: [ 0, -80 ], translateZ: 0 } ]
-        ]
-    }).RegisterEffect("ratchet.slideUpOut", {
-        defaultDuration: 700,
-        calls: [
-            [ { opacity: [ 0, 1 ], translateY: -80, translateZ: 0 } ]
-        ],
-        reset: { translateY: 0 }
-    });
-
 function WithDialog() {
     flight.compose.mixin(this, [
         WithOptions
     ]);
 
-    this.__delayingClose = 0;
-
     this.defaultOptions = {
         autoOpen: false,
+        height: 'auto',
         resizable: false,
-        modal: true,
-        open: function() {
-            this.dialogEl.parent().velocity('ratchet.slideDownIn');
-        },
-        beforeClose: function () {
-            var me = this;
-            var $dialog = this.dialogEl;
+        modal: true
+    };
 
-            if (this.__delayingClose !== 0) {
-                this.__delayingClose = 0;
+    this._setAnimation = function ($element) {
+        $element
+            .on('dialogopen', function () {
+                var $parent = $(this).parent();
 
-                return true;
-            }
+                $parent.velocity('ratchet.slideDownIn');
+            })
+            .on('dialogbeforeclose', function () {
+                var $parent = $(this).parent();
 
-            $dialog.parent().velocity('ratchet.slideUpOut');
-
-            setTimeout(function () {
-                me.__delayingClose++;
-                $dialog.dialog('close');
-            }, 650);
-
-            if (this.__delayingClose === 0) {
-                return false;
-            }
-        }
+                $parent.velocity('ratchet.slideUpOut');
+            });
     };
 
     this._initDialog = function () {
         this.dialogEl = this.$node.dialog(this.initOptions());
+
+        this._setAnimation(this.$node);
+    };
+
+    this.show = function () {
+        this.dialogEl.dialog('open');
     };
 
     this.after('initialize', function () {

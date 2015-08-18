@@ -1,7 +1,6 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-
-var ENTER_KEY = 13;
+var KEYs = require('../../constants/Keys');
 
 function PatientIDCheckFormDialog() {
     this.attributes({
@@ -11,18 +10,17 @@ function PatientIDCheckFormDialog() {
 
     this.options({
         title: 'NEW PATIENT',
-        height: 200,
         width: 380,
         buttons: ['Next']
     });
 
     this.onShow = function () {
         this.$node.removeClass('ui-hidden');
-        this.dialogEl.dialog('open');
+        this.show();
     };
 
     this.keydown = function (e) {
-        if (e.which === ENTER_KEY) {
+        if (e.which === KEYs.ENTER) {
             e.preventDefault();
             this.formEl.submit();
         }
@@ -33,7 +31,6 @@ function PatientIDCheckFormDialog() {
     };
 
     this.after('initialize', function () {
-        this.on(document, 'showPatientCheckIDDialog', this.onShow);
         this.on('formSuccess', this.onCheckExistingPatientSuccess);
 
         this.on('keydown', {
