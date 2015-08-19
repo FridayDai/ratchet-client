@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+
 (function ($, undefined) {
     'use strict';
 
@@ -66,6 +67,7 @@
         },
         provideTable, helpTable, patientListTable, patientListTableData, isUploaded;
 
+
     /**
      * init table with the data which loaded
      * @param data
@@ -96,8 +98,8 @@
                 type: "get"
             }),
             columnDefs: [{
-                "targets": 5,
-                "orderable": false
+                "orderable": false,
+                "targets": [4, 5]
             },
                 {
                     "targets": 0,
@@ -323,7 +325,7 @@
      * @private
      */
     function _sortPatientTable() {
-        _.each($('#patientsTable th'), function (element) {
+        _.each($('#patientsTable th').not(".sorting_disabled"), function (element) {
             var flag = 0;
             $(element).on("click", function () {
                 var ele = $(element);
@@ -753,8 +755,6 @@
                     }
                 }
             );
-
-            _validatePhone();
         });
     }
 
@@ -880,7 +880,9 @@
         form.validate({
                 rules: {
                     phoneNumber: {
-                        isPhone: true
+                        isPhone: true,
+                        minlength: 14,
+                        checkPhoneNumberRegion: true
                     },
                     email: {
                         email: true,
@@ -917,6 +919,9 @@
                     }
                 },
                 messages: {
+                    phoneNumber: {
+                        minlength: RC.constants.phoneNumberMsg
+                    },
                     provider: RC.constants.waringMessageProvider,
                     agent: RC.constants.waringMessageAgent
                 }
@@ -1066,8 +1071,8 @@
      */
     function _initRelationship() {
         var data = [
-            {label: "Spouse", id: 1},
-            {label: "Parent", id: 2},
+            {label: "Parent", id: 1},
+            {label: "Spouse", id: 2},
             {label: "Child", id: 3},
             {label: "Friend", id: 4},
             {label: "Other", id: 5}
@@ -1576,21 +1581,6 @@
         if ($(window).height() < formHeight) {
             $(".container").css('min-height', formHeight - 41 + 'px');
         }
-    }
-
-    function _validatePhone() {
-        $("#table-form").validate({
-            rules: {
-                phoneNumber: {
-                    minlength: 14
-                }
-            },
-            messages: {
-                phoneNumber: {
-                    minlength: RC.constants.phoneNumberMinLength
-                }
-            }
-        });
     }
 
     /**

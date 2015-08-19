@@ -8,7 +8,7 @@ class TaskController extends BaseController {
 
     def taskService
 
-    def getTasksAndTools() {
+    def getTasks() {
         String token = session.token
         def clientId = session.clientId
         def patientId = params?.patientId
