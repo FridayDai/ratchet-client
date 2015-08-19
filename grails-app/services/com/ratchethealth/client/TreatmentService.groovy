@@ -20,9 +20,8 @@ class TreatmentService extends RatchetAPIService {
                     .queryString("treatmentTitle", treatmentTitle)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get treatments success, token: ${token}")
                 def items = result.items
                 return items
@@ -80,9 +79,8 @@ class TreatmentService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get treatment info success, token:${token}")
                 return result
             } else {
@@ -138,9 +136,8 @@ class TreatmentService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Archive medical record success, token: ${token}")
                 return result
             } else {

@@ -26,9 +26,8 @@ class AccountService extends RatchetAPIService {
                     .queryString("order", order)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put(start, start)
                 map.put(length, length)
@@ -55,9 +54,8 @@ class AccountService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get single account success, token: ${token}.")
                 return result
             } else {
@@ -92,9 +90,8 @@ class AccountService extends RatchetAPIService {
                     .field("groupIds", groupId)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 201) {
+                def result = JSON.parse(resp.body)
                 log.info("Create account success, token: ${token}.")
                 return result
             } else {
@@ -132,9 +129,8 @@ class AccountService extends RatchetAPIService {
                     .field("groupIds", groupId)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Update account success, token: ${token}.")
                 return result
             } else {
@@ -243,15 +239,14 @@ class AccountService extends RatchetAPIService {
         withPost(url) { req ->
             def resp = req
                     .asString()
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
                 log.info("Confirm code success, token: ${token}.")
-                return result
+                return JSON.parse(resp.body)
             }
             if (resp.status == 412) {
                 log.info("Invitation link is expired,token:${token}.")
-                return result
+                return JSON.parse(resp.body)
             } else {
                 handleError(resp)
             }

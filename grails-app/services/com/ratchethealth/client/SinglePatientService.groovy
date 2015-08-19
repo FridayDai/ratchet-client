@@ -36,9 +36,8 @@ class SinglePatientService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Show medical records success, token: ${token}")
                 return result
             }

@@ -23,13 +23,8 @@ class BulkImportService extends RatchetAPIService {
                     .field("fileName", importFile.fileItem.fileName)
                     .asString()
 
-            def result
-
-            if (resp.status != 209) {
-                result = JSON.parse(resp.body)
-            }
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put("data", result.items)
                 log.info("Bulk import patient success, token: ${token}")
@@ -68,9 +63,8 @@ class BulkImportService extends RatchetAPIService {
                     .field("order", order)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
 
                 map.put(start, start)
@@ -103,9 +97,8 @@ class BulkImportService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get bulk import patient error file link success, token: ${token}")
                 def errorPath = result?.errorFilePath
                 return  errorPath

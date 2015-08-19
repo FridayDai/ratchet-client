@@ -26,9 +26,8 @@ class GroupService extends RatchetAPIService {
                     .queryString("order", order)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put(start, start)
                 map.put(length, length)

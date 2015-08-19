@@ -17,9 +17,8 @@ class AnnouncementService {
 				.queryString("latest", true)
 				.asString()
 
-		def result = JSON.parse(resp.body)
-
 		if (resp.status == 200) {
+            def result = JSON.parse(resp.body)
 			log.info("Get announcement success")
 			return result?.items[0];
 		}
