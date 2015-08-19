@@ -216,7 +216,6 @@
                 data: data
             });
             ajaxPost.done(function (resp) {
-                var $ele = element;
                 var content = '<div class="msg-center msg-header">' + "Code generated successfully!" + '</div>' +
                     '<div class="msg-center code">' + resp.treatmentCode + '</div>' +
                     '<div class="msg-center">' +
