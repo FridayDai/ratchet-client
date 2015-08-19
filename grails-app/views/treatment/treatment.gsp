@@ -42,23 +42,19 @@
                         params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">ACTIVITIES</g:link>
             </li>
             <li data-type="Code" class="code-generation">
-                <g:if test="${treatmentCode == "null" || treatmentCode == null}">
-                    <button id="generateCode"
-                        <g:if test="${archived == 'true'}">
-                            class="btn btn-generate-code disabled" disabled="disabled"
-                        </g:if>
-                        <g:else>
-                            class="btn btn-generate-code"
-                        </g:else>
-                            data-client-id="${clientId}"
-                            data-patient-id="${patientId}"
-                            data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
-                        Generate Code
-                    </button>
-                </g:if>
-                <g:else>
-                    ${treatmentCode}
-                </g:else>
+                <button id="generateCode"
+                    <g:if test="${archived == 'true'}">
+                        class="btn btn-generate-code disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn btn-generate-code"
+                    </g:else>
+                        data-client-id="${clientId}"
+                        data-patient-id="${patientId}"
+                        data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
+                    Generate Code
+                </button>
+
             </li>
             <li class="more-drop-down" id="menu">
 

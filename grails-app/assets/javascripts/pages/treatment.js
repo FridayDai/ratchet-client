@@ -239,8 +239,6 @@
                         $(".generate-code-form").dialog("destroy").addClass('ui-hidden');
                     }
                 }));
-
-                $ele.find('.btn-generate-code').replaceWith(resp.treatmentCode);
             });
         });
     }
