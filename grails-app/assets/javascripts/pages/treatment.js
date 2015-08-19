@@ -221,7 +221,8 @@
                     '<div class="msg-center code">' + resp.treatmentCode + '</div>' +
                     '<div class="msg-center">' +
                     "Go to " +
-                    '<a target="_blank" class="link-to-patient" href=' + resp.patientPortalLink + '>' + resp.patientPortalLink + '</a>' +
+                    '<a target="_blank" class="link-to-patient" href=' + resp.patientPortalLink + '>' +
+                    resp.patientPortalLink + '</a>' +
                     " and enter code to start task." + '</div> ' +
                     '<div class="msg-center">' + "The code will expire in 24 hours!" + '</div>';
 

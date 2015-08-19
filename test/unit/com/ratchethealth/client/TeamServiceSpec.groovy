@@ -4,7 +4,6 @@ import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.HttpRequestWithBody
 import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
-import grails.converters.JSON
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
 import spock.lang.Specification
