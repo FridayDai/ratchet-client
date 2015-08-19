@@ -113,10 +113,5 @@
 
     </div>
 
-
-    <g:form class="generate-code-form warn ui-hidden">
-
-    </g:form>
-
 </div>
 

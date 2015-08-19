@@ -75,6 +75,7 @@
                         <g:if test="${medicalRecord?.archived}">
                             class="archived-treatment"
                         </g:if>>
+                    %{--<li>--}%
                         <g:link controller="treatment" action="index" data-id="sub${i}"
                                 params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
                                          medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
@@ -201,6 +202,10 @@
     </g:form>
 
     <g:form class="warn">
+
+    </g:form>
+
+    <g:form class="generate-code-form warn ui-hidden">
 
     </g:form>
     </body>
