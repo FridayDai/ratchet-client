@@ -238,8 +238,7 @@ class SinglePatientServiceSpec extends Specification {
 		def result = service.checkPatientEmail('token', 1, 'email')
 
 		then:
-		result.email == "email"
-		result.firstName == "firstName"
+		result == false
 	}
 
 	def "test checkPatientEmail without successful result as 404"() {
@@ -255,7 +254,7 @@ class SinglePatientServiceSpec extends Specification {
 		def result = service.checkPatientEmail('token', 1, 'email')
 
 		then:
-		result.check == 'false'
+		result == true
 	}
 
 	def "test checkPatientEmail without successful result"() {
