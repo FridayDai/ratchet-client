@@ -336,7 +336,7 @@ function NewPatientFormDialog() {
         this.on('newPatientRelationshipCleared', this.onEmergencyContactFieldInput);
 
         this.on('dialogclose', this.onClose);
-        this.on('formSuccess', this.onAddPatientSuccess)
+        this.on('formSuccess', this.onAddPatientSuccess);
 
         this.on('click', {
             'basicEditButtonSelector': this.showBasicField
@@ -349,7 +349,7 @@ function NewPatientFormDialog() {
         // TODO: can't use flight style to set focus and blur
         this.select('inputFieldSelector')
             .on('focus', this.onInputFieldFocus)
-            .on('blur', this.onInputFieldBlur)
+            .on('blur', this.onInputFieldBlur);
     });
 }
 

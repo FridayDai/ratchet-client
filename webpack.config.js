@@ -22,6 +22,8 @@ module.exports = {
             "jquery-ui-dialog": "bower_components/jquery-ui/ui/dialog.js",
             "jquery-ui-datepicker": "bower_components/jquery-ui/ui/datepicker.js",
             "jquery-ui-autocomplete": "bower_components/jquery-ui/ui/autocomplete.js",
+            "jquery.ui.widget": "bower_components/jquery-ui/ui/widget.js",
+            "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
             "velocity": "bower_components/velocity/velocity.js",
             "velocity-ui": "bower_components/velocity/velocity.ui.js",
             flight: "bower_components/flight/index.js",
@@ -30,7 +32,8 @@ module.exports = {
             moment: "bower_components/moment/min/moment.min.js",
             momentTZ: "bower_components/moment-timezone/builds/moment-timezone-with-data.js",
             intlTelInput: "bower_components/intl-tel-input/build/js/intlTelInput.js",
-            "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js"
+            "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
+            "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js"
         }
     },
     module: {
@@ -43,8 +46,7 @@ module.exports = {
             _: "lodash",
             jQuery: "jquery",
             "window.jQuery": "jquery",
-            "root.jQuery": "jquery",
-            moment: 'moment'
+            "root.jQuery": "jquery"
         }),
         new CommonsChunkPlugin("./dist/commons.chunk.js")
     ]

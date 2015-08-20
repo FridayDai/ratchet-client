@@ -231,7 +231,7 @@
                         <p class="upload-error"></p>
                     </div>
 
-                    <div class="progress-box ui-hidden">
+                    <div class="progress-box">
                         <div id="progress" class="progress">
                             <div class="progress-bar progress-bar-success" style="width: 0%;"></div>
                         </div>
@@ -240,7 +240,7 @@
                     </div>
 
                     <div class="error-tip-box">
-                        <p class="error-tip ui-hidden">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p>
+                        <p class="error-tip div-hidden"></p>
                     </div>
 
                     <div id="files" class="files"></div>
@@ -268,11 +268,6 @@
                 </table>
             </div>
         </div>
-
-        <g:form class="warn ui-hidden">
-
-        </g:form>
-
     </div>
     </body>
     </html>

@@ -22,7 +22,7 @@ function HeaderPanel() {
         this.on('click', {
             newPatientButton: this.onNewPatientClicked,
             bulkImportButton: this.onBulkImportClicked
-        })
+        });
     });
 }
 

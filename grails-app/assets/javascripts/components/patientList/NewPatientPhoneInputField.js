@@ -17,7 +17,7 @@ function NewPatientPhoneInputField() {
     };
 
     this.after('initialize', function () {
-        this.on('input', this.onInput)
+        this.on('input', this.onInput);
     });
 }
 

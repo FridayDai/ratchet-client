@@ -32,7 +32,7 @@ function WithFormDialog() {
 
     this.after('initialize', function () {
         this.on('dialogbeforeclose', this._onDialogBeforeClose);
-        this.on('formSuccess', this.closeDialog)
+        this.on('formSuccess', this.closeDialog);
     });
 }
 

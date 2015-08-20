@@ -19,12 +19,20 @@ function ToolbarPanel() {
     });
 
     this.triggerSearch = function () {
-        this.trigger('selectPatientIDNameForPatientTable', {
-            patientIdOrName: this.select('patientIDNameSearchField').val()
-        });
+        var currentVal = this.select('patientIDNameSearchField').val();
+
+        if (currentVal !== this.previousVal) {
+            this.previousVal = currentVal;
+
+            this.trigger('selectPatientIDNameForPatientTable', {
+                patientIdOrName: currentVal
+            });
+        }
     };
 
-    this.OnSearchPatientIDName = function () {
+    this.previousVal = '';
+
+    this.OnSearchPatientIDName = function (e) {
         if (e.which === KEYs.ENTER) {
             this.triggerSearch();
         }
@@ -37,7 +45,7 @@ function ToolbarPanel() {
 
         this.on('click', {
             patientIDNameSearchButton: this.triggerSearch
-        })
+        });
     });
 }
 

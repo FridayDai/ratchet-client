@@ -9,7 +9,7 @@ function NewPatientTreatmentCombobox() {
             return {
                 treatmentTitle: val,
                 max: 1000
-            }
+            };
         },
         itemFormat: function (data) {
             return {
@@ -18,7 +18,7 @@ function NewPatientTreatmentCombobox() {
                 surgeryTime: data.surgeryTimeRequired,
                 timeStamp: data.sendTimeOffset,
                 surgeryDate: data.surgeryDate
-            }
+            };
         },
         appendTo: ".container"
     });

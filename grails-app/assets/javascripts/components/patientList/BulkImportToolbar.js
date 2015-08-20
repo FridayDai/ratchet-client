@@ -19,12 +19,12 @@ function BulkImportToolbar() {
         }
     };
 
-    this.onBeforeDialogClose = function () {
+    this.onDialogReset = function () {
         this.select('searchFieldSelector').val('');
     };
 
     this.after('initialize', function () {
-        this.on(document, 'bulkImportDialogBeforeClose', this.onBeforeDialogClose);
+        this.on(document, 'bulkImportDialogReset', this.onDialogReset);
 
         this.on('keydown', {
             searchFieldSelector: this.OnSearchFieldKeydown
@@ -32,7 +32,7 @@ function BulkImportToolbar() {
 
         this.on('click', {
             searchButtonSelector: this.triggerSearch
-        })
+        });
     });
 }
 

@@ -20,7 +20,7 @@
     "moment-timezone": "~0.3.0",
     "intl-tel-input": "5.4.3",
     "jquery-file-upload": "9.9.3",
-    "zeroclipboard": "1.2.3",
+    "zeroclipboard": "~2.2.0",
     "lodash": "~3.10.0",
     "jquery-form": "~3.46.0",
     "flight": "~1.5.0",

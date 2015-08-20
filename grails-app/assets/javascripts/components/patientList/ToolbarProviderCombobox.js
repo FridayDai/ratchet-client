@@ -10,13 +10,13 @@ function ToolbarProviderCombobox() {
                 name: val,
                 type: 9,
                 max: 1000
-            }
+            };
         },
         itemFormat: function (data) {
             return {
                 label: data.firstName + " " + data.lastName,
                 value: data.id
-            }
+            };
         }
     });
 
@@ -28,10 +28,20 @@ function ToolbarProviderCombobox() {
         this.select(ui.item.value);
     };
 
+    this.previousVal = null;
+
     this.select = function (id) {
-        this.trigger('selectProviderForPatientTable', {
-            surgeonId: id
-        });
+        if (_.isUndefined(id)) {
+            id = null;
+        }
+
+        if (this.previousVal !== id) {
+            this.previousVal = id;
+
+            this.trigger('selectProviderForPatientTable', {
+                surgeonId: id
+            });
+        }
     };
 
     this.after('initialize', function () {

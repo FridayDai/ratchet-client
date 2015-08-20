@@ -61,12 +61,20 @@ $.Velocity
     .RegisterEffect("ratchet.slideDownIn", {
         defaultDuration: 700,
         calls: [
-            [ { opacity: [ 1, 0 ], translateY: [ 0, -80 ], translateZ: 0 } ]
+            [ {
+                opacity: [ 1, 0 ],
+                translateY: [ 0, -80 ],
+                translateZ: 0
+            } ]
         ]
     }).RegisterEffect("ratchet.slideUpOut", {
         defaultDuration: 700,
         calls: [
-            [ { opacity: [ 0, 1 ], translateY: -80, translateZ: 0 } ]
+            [ {
+                opacity: [ 0, 1 ],
+                translateY: -80,
+                translateZ: 0
+            } ]
         ],
         reset: { translateY: 0 }
     }).RegisterEffect("ratchet.bounceIn", {
@@ -79,7 +87,14 @@ $.Velocity
     }).RegisterEffect("ratchet.expandOut", {
         defaultDuration: 500,
         calls: [
-            [ { opacity: [ 0, 1 ], transformOriginX: [ "50%", "50%" ], transformOriginY: [ "50%", "50%" ], scaleX: 0.5, scaleY: 0.5, translateZ: 0 } ]
+            [ {
+                opacity: [ 0, 1 ],
+                transformOriginX: [ "50%", "50%" ],
+                transformOriginY: [ "50%", "50%" ],
+                scaleX: 0.5,
+                scaleY: 0.5,
+                translateZ: 0
+            } ]
         ],
         reset: { scaleX: 1, scaleY: 1 }
     });

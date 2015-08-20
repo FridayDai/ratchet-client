@@ -1,12 +1,17 @@
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
+var ZeroClipboard = require('ZeroClipboard');
+var Notification = require('../common/Notification');
 var URLs = require('../../constants/Urls');
 var PARAMs = require('../../constants/Params');
+var STRINGs = require('../../constants/Strings');
 
 function BulkImportTitleTable() {
     this.attributes({
         initWithoutRender: true,
-        url: URLs.GET_BULK_IMPORT_LOOKUP
+        url: URLs.GET_BULK_IMPORT_LOOKUP,
+
+        copyIconSelector: '.copy'
     });
 
     this.options({
@@ -50,7 +55,11 @@ function BulkImportTitleTable() {
     });
 
     this.toggleTable = function (show) {
-        this.$node.parent()[show ? 'show' : 'hide']();
+        var $parent = this.$node.parent();
+
+        if ($parent.hasClass('dataTables_wrapper')) {
+            $parent[show ? 'show' : 'hide']();
+        }
     };
 
     this.onTitleSearch = function (e, data) {
@@ -63,13 +72,43 @@ function BulkImportTitleTable() {
         this.search(data);
     };
 
-    this.onBeforeDialogClose = function () {
+    this.onDialogReset = function () {
         this.toggleTable(false);
+    };
+
+    this.initCopyIcon = function () {
+        ZeroClipboard.config({swfPath: "./assets/ZeroClipboard.swf"});
+
+        var client = new ZeroClipboard(this.select('copyIconSelector'));
+
+        client.on( 'ready', function() {
+            client.on('copy', function (e) {
+                client.setText($(e.target).parent().text());
+            });
+
+            client.on('aftercopy', function (e) {
+                var $self = $(e.target);
+
+                $self.addClass("active");
+
+                Notification.showFadeOutMsg(STRINGs.ID_COPY_SUCCESS);
+
+                setTimeout(function () {
+                    $self.removeClass("active");
+                }, 1500);
+            });
+        });
+    };
+
+    this.onDrawCallBack = function () {
+        this.initCopyIcon();
     };
 
     this.after('initialize', function () {
         this.on(document, 'searchTitleForBulkImportTitleTable', this.onTitleSearch);
-        this.on(document, 'bulkImportDialogBeforeClose', this.onBeforeDialogClose);
+        this.on(document, 'bulkImportDialogReset', this.onDialogReset);
+
+        this.on('drawCallback', this.onDrawCallBack);
     });
 }
 

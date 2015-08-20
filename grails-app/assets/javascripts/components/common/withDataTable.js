@@ -4,6 +4,7 @@ var flight = require('flight');
 var WithOptions = require('./WithOptions');
 
 function withDataTable() {
+
     /* jshint ignore:start */
     $.fn.dataTable.pipeline = function (opts) {
         // Configuration options
@@ -176,7 +177,7 @@ function withDataTable() {
             deferLoading: this.getTotalCount(),
             order: [[0, 'desc']],
             rowCallback: _.bind(this._rowCallback, this)
-        }
+        };
     };
 
     this.initDataTable = function () {
@@ -205,12 +206,14 @@ function withDataTable() {
         } else {
             $pagination.show();
         }
+
+        this.trigger('drawCallback');
     };
 
     this.getPipeline = function () {
         var url;
 
-        if (!(url = this.attr.url)) {
+        if (!(url = this.attr.url) && this.getUrl) {
             url = this.getUrl();
         }
 
@@ -263,7 +266,7 @@ function withDataTable() {
     };
 
     this._onPreXhr = function (e, settings, data) {
-        _.extend(data.search, this._searchData)
+        _.extend(data.search, this._searchData);
     };
 
     this.isDataTableInitialized = function () {

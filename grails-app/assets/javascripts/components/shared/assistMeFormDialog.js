@@ -1,7 +1,7 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-var Utility = require('../../utils/Utility');
 var STRINGS = require('../../constants/Strings');
+var Notification = require('../common/Notification');
 
 function AssistMeFormDialog() {
     this.attributes({
@@ -18,11 +18,11 @@ function AssistMeFormDialog() {
         return {
             browser: window.navigator.userAgent,
             url: window.location.href
-        }
+        };
     };
 
     this.onSendAssistMeSuccess = function () {
-        Utility.showFadeOutMsg(STRINGS.SEND_ASSIST_ME_SUCCESS);
+        Notification.showFadeOutMsg(STRINGS.SEND_ASSIST_ME_SUCCESS);
     };
 
     this.onShow = function () {

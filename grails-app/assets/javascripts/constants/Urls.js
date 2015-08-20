@@ -7,5 +7,7 @@ module.exports = {
     GET_PROVIDER: '/staffs',
     GET_MY_GROUPS: '/accounts/TODO/groups',
     CHECK_PATIENT_EMAIL: '/patients/check-email',
-    GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup'
+    GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',
+    DOWNLOAD_BULK_IMPORT_ERROR_FILE: '/patients/bulk-import/download-errors',
+    SAVE_BULK_IMPORT_DATA: '/patients/bulk-import/save'
 };

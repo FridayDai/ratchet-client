@@ -9,13 +9,13 @@ function ToolbarTreatmentCombobox() {
             return {
                 treatmentTitle: val,
                 max: 1000
-            }
+            };
         },
         itemFormat: function (data) {
             return {
                 label: data.title + ' ' + data.tmpTitle,
                 value: data.id
-            }
+            };
         }
     });
 
@@ -27,10 +27,20 @@ function ToolbarTreatmentCombobox() {
         this.select(ui.item.value);
     };
 
+    this.previousVal = null;
+
     this.select = function (id) {
-        this.trigger('selectTreatmentForPatientTable', {
-            treatmentId: id
-        });
+        if (_.isUndefined(id)) {
+            id = null;
+        }
+
+        if (this.previousVal !== id) {
+            this.previousVal = id;
+
+            this.trigger('selectTreatmentForPatientTable', {
+                treatmentId: id
+            });
+        }
     };
 
     this.after('initialize', function () {

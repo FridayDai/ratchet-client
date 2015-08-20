@@ -1,4 +1,9 @@
-function getErrorContent(contentOps) {
+require('jquery-ui-dialog');
+require('../../libs/dialog/dialog');
+require('velocity');
+require('velocity-ui');
+
+function getNotificationContent() {
     var divArr = [
         '<div class="window-container">',
             '<div class="window-title"></div>',
@@ -6,7 +11,11 @@ function getErrorContent(contentOps) {
         '</div>'
     ];
 
-    var $errorDialog = $(divArr.join(''));
+    return $(divArr.join(''));
+}
+
+function getErrorContent(contentOps) {
+    var $errorDialog = getNotificationContent();
     var $title = $errorDialog.find('.window-title');
     var $message = $errorDialog.find('.window-message');
 
@@ -25,7 +34,23 @@ function getErrorContent(contentOps) {
     return $errorDialog;
 }
 
-function createDialog ($content, options) {
+function getWarningContent(contentOps) {
+    var $warningDialog = getNotificationContent();
+    var $title = $warningDialog.find('.window-title');
+    var $message = $warningDialog.find('.window-message');
+
+    if (contentOps.title) {
+        $title.append('<div class="window-warning-title">{0}</div>'.format(contentOps.title));
+    }
+
+    if (contentOps.message) {
+        $message.append('<div class="window-warning">{0}</div>'.format(contentOps.message));
+    }
+
+    return $warningDialog;
+}
+
+function createDialog($content, options) {
      $content.dialog(_.assign({
         resizable: false,
         width: 350,
@@ -43,14 +68,14 @@ function setAnimation($element) {
 
             $parent.velocity('ratchet.bounceIn');
         })
-        .on('dialogbeforeclose', function () {
+        .on('dialogprepareclose', function () {
             var $parent = $(this).parent();
 
             $parent.velocity('ratchet.expandOut');
         });
 }
 
-function setErrorDefaultEvents($element) {
+function setNotificationDefaultEvents($element) {
     $element
         .on('dialogcreate', function() {
             var $parent = $(this).parent();
@@ -70,17 +95,73 @@ var ERROR_DEFAULT_OPTIONS = {
     }
 };
 
+var WARNING_DEFAULT_OPTIONS = {
+    buttons: [{
+        text: 'Cancel',
+        click: function () {
+            $(this).dialog("close");
+        }
+    }]
+};
+
 module.exports = {
     error: function (contentOps, dialogOps) {
         var $content = getErrorContent(contentOps);
 
-        setErrorDefaultEvents($content);
-
+        setNotificationDefaultEvents($content);
         setAnimation($content);
 
         createDialog($content, _.assign(ERROR_DEFAULT_OPTIONS, dialogOps));
     },
 
-    confirm: function (content, options) {
+    confirm: function (contentOps, dialogOps) {
+        var $content = getWarningContent(contentOps);
+
+        setNotificationDefaultEvents($content);
+        setAnimation($content);
+
+        createDialog($content, _.assign(WARNING_DEFAULT_OPTIONS, dialogOps));
+    },
+
+    showFadeOutMsg: function (options) {
+        if (_.isString(options)) {
+            options = {
+                msg: options
+            };
+        }
+
+        var top = options.top || '33%',
+            left = options.left || '50%',
+            remain = options.remain || 1000,
+            numRegExp = /\d+/,
+            marginLeft;
+
+        var $msgDiv = $("#msg-info");
+
+        if ($msgDiv.length === 0) {
+            $msgDiv = $('<div id="msg-info" class="ui-hide ui-tips ui-tips-center msg-info"></div>');
+
+            $(document.body).append($msgDiv);
+        }
+
+        $msgDiv = $msgDiv.text(options.msg).css({
+            position: 'fixed',
+            top: top,
+            left: left
+        });
+
+        marginLeft =
+            (parseInt(numRegExp.exec($msgDiv.css('width')), 10) +
+            parseInt(numRegExp.exec($msgDiv.css('padding-left')), 10)) / -2;
+
+        $msgDiv.css({
+            'margin-left':  marginLeft + 'px'
+        });
+
+        $msgDiv.fadeIn("slow");
+
+        setTimeout(function () {
+            $msgDiv.fadeOut("slow");
+        }, remain);
     }
 };

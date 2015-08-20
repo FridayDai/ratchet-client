@@ -11,13 +11,13 @@ function NewPatientProviderCombobox() {
                 type: 9,
                 groupId: this.getGroupId(),
                 max: 1000
-            }
+            };
         },
         itemFormat: function (data) {
             return {
                 label: data.firstName + " " + data.lastName,
                 value: data.id
-            }
+            };
         },
         appendTo: ".container"
     });

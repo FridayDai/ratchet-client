@@ -9,13 +9,13 @@ function NewPatientGroupCombobox() {
             return {
                 name: val,
                 length: 1000
-            }
+            };
         },
         itemFormat: function (data) {
             return {
                 label: data.name,
                 value: data.id
-            }
+            };
         },
         appendTo: ".container"
     });

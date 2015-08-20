@@ -1,4 +1,5 @@
 require('jquery-ui-dialog');
+require('../../libs/dialog/dialog');
 require('velocity');
 require('velocity-ui');
 
@@ -24,7 +25,7 @@ function WithDialog() {
 
                 $parent.velocity('ratchet.slideDownIn');
             })
-            .on('dialogbeforeclose', function () {
+            .on('dialogprepareclose', function () {
                 var $parent = $(this).parent();
 
                 $parent.velocity('ratchet.slideUpOut');
@@ -39,6 +40,10 @@ function WithDialog() {
 
     this.show = function () {
         this.dialogEl.dialog('open');
+    };
+
+    this.close = function () {
+        this.dialogEl.dialog('close');
     };
 
     this.after('initialize', function () {
