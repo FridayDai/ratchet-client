@@ -33,7 +33,8 @@ module.exports = {
             momentTZ: "bower_components/moment-timezone/builds/moment-timezone-with-data.js",
             intlTelInput: "bower_components/intl-tel-input/build/js/intlTelInput.js",
             "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-            "ZeroClipboard": "bower_components/zeroclipboard/ZeroClipboard.js"
+            "ZeroClipboard": "bower_components/zeroclipboard/ZeroClipboard.js",
+            "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js"
         }
     },
     module: {
@@ -46,7 +47,8 @@ module.exports = {
             _: "lodash",
             jQuery: "jquery",
             "window.jQuery": "jquery",
-            "root.jQuery": "jquery"
+            "root.jQuery": "jquery",
+            moment: 'moment'
         }),
         new CommonsChunkPlugin("./dist/commons.chunk.js")
     ]

@@ -1,8 +1,9 @@
 var flight = require('flight');
+var libPhoneNumber = require('libphonenumber');
 var WithFormDialog = require('../common/WithFormDialog');
 var WithChildren = require('../common/WithChildren');
-var STRINGS = require('../../constants/Strings');
-var URLS = require('../../constants/Urls');
+var STRINGs = require('../../constants/Strings');
+var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
 
 var NewPatientPhoneInputField = require('./NewPatientPhoneInputField');
@@ -68,12 +69,24 @@ function NewPatientFormDialog() {
         $.validator.addMethod('phoneNumberCheck', function (value, element) {
             var tel = /^[0-9\-\(\)\s]+$/;
             return this.optional(element) || (tel.test(value));
-        }, STRINGS.PHONE_NUMBER_INVALID);
+        }, STRINGs.PHONE_NUMBER_INVALID);
+
+        $.validator.addMethod('checkPhoneNumberRegion', function (value) {
+            var phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
+            var phoneNumber = phoneUtil.parse(value, 'US');
+            var isPossible = phoneUtil.isPossibleNumber(phoneNumber);
+            var isValid = phoneUtil.isValidNumber(phoneNumber);
+            var regionCode = phoneUtil.getRegionCodeForNumber(phoneNumber);
+            var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
+            return isPossible && isValid && regionCode && isValidRegionCode;
+        }, STRINGs.PHONE_NUMBER_INVALID);
 
         return {
             rules: {
                 phoneNumber: {
-                    phoneNumberCheck: true
+                    minlength: 14,
+                    phoneNumberCheck: true,
+                    checkPhoneNumberRegion: true
                 },
                 email: {
                     email: true,
@@ -84,8 +97,11 @@ function NewPatientFormDialog() {
                 }
             },
             messages: {
+                phoneNumber: {
+                    minlength: STRINGs.PHONE_NUMBER_INVALID
+                },
                 email: {
-                    remote: STRINGS.EMAIL_EXISTING_INVALID
+                    remote: STRINGs.EMAIL_EXISTING_INVALID
                 }
             }
         };
@@ -328,7 +344,7 @@ function NewPatientFormDialog() {
         };
     };
 
-    this.onAddPatientSuccess = function (e, data) {window.location.href = URLS.PAGE_PATIENT_DETAIL.format(data.id);
+    this.onAddPatientSuccess = function (e, data) {window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
     };
 
     this.after('initialize', function () {

@@ -32,7 +32,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return data === undefined ? full.email : data;
                 },
-                width: "26%"
+                width: "30%"
             }, {
                 targets: 3,
                 name: 'phoneNumber',
@@ -57,10 +57,19 @@ function PatientsTable() {
                 targets: 4,
                 name: 'lastUpdated',
                 render: function (data, type, full) {
-                    var lastUpdate = data === undefined ? full.lastUpdate : data;
-                    return moment(lastUpdate).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                    var taskStatus = data === undefined ? full.taskStatus : data;
+                    if (taskStatus.indexOf("All complete") !== -1) {
+                        return '<span class="task-status all-complete-status">' + taskStatus + '</span>';
+                    } else if (taskStatus.indexOf("Overdue") !== -1 && taskStatus.indexOf("Pending") !== -1) {
+                        return '<span class="task-status overdue-status">' + taskStatus + '</span>';
+                    } else if (taskStatus.indexOf("Pending") !== -1) {
+                        return '<span class="task-status pending-status">' + taskStatus + '</span>';
+                    } else {
+                        return '<span class="task-status overdue-status">' + taskStatus + '</span>';
+                    }
                 },
-                width: "19%"
+                width: "15%",
+                orderable: false
             }, {
                 targets: 5,
                 render: function (data, type, full) {
