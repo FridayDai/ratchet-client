@@ -12,7 +12,6 @@
         "RC": true,
         "JSON": false,
         "_": false,
-        "moment": false,
         "d3": false,
         "$": false
     },

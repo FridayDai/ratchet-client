@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+/* global moment */
 
 (function ($, undefined) {
     'use strict';

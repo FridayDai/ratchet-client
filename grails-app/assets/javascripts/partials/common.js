@@ -1,6 +1,7 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
 /* jshint -W074 */
+/* global moment */
 (function ($, undefined) {
     'use strict';
     var common = RC.common = RC.common || {};

@@ -1,5 +1,6 @@
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
+var moment = require('moment');
 
 function BulkImportResultTable() {
     this.options({

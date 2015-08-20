@@ -1,3 +1,4 @@
+/* global moment */
 (function ($, undefined) {
     'use strict';
 

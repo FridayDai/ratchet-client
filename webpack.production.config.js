@@ -8,7 +8,7 @@ module.exports = {
     devtool: 'source-map',
     context: contextUrl,
     entry: {
-        clients: "./pages/clients.js"
+        patientList: "./flightPages/patientList.js"
     },
     output: {
         path: absoluteContext,
@@ -24,7 +24,7 @@ module.exports = {
             "jquery-ui-autocomplete": "bower_components/jquery-ui/ui/autocomplete.js",
             "jquery.ui.widget": "bower_components/jquery-ui/ui/widget.js",
             "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
-            "velocity": "bower_components/velocity/velocity",
+            "velocity": "bower_components/velocity/velocity.js",
             "velocity-ui": "bower_components/velocity/velocity.ui.js",
             flight: "bower_components/flight/index.js",
             jForm: "bower_components/jquery-form/jquery.form.js",
@@ -33,7 +33,7 @@ module.exports = {
             momentTZ: "bower_components/moment-timezone/builds/moment-timezone-with-data.js",
             intlTelInput: "bower_components/intl-tel-input/build/js/intlTelInput.js",
             "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
-            "ZeroClipboard": "bower_components/zeroclipboard/ZeroClipboard.js",
+            "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js"
         }
     },
@@ -47,8 +47,7 @@ module.exports = {
             _: "lodash",
             jQuery: "jquery",
             "window.jQuery": "jquery",
-            "root.jQuery": "jquery",
-            moment: 'moment'
+            "root.jQuery": "jquery"
         }),
         new CommonsChunkPlugin("./dist/commons.chunk.js")
     ]

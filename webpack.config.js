@@ -47,8 +47,7 @@ module.exports = {
             _: "lodash",
             jQuery: "jquery",
             "window.jQuery": "jquery",
-            "root.jQuery": "jquery",
-            moment: 'moment'
+            "root.jQuery": "jquery"
         }),
         new CommonsChunkPlugin("./dist/commons.chunk.js")
     ]

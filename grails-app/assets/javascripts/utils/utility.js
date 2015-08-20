@@ -1,5 +1,6 @@
 require('jquery');
-require('moment');
+
+var moment = require('moment');
 
 var $window = $(window);
 
