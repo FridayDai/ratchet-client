@@ -1,7 +1,7 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
 var STRINGs = require('../../constants/Strings');
-var Notification = require('../common/Notification');
+var Notifications = require('../common/Notification');
 
 function AssistMeFormDialog() {
     this.attributes({
@@ -22,7 +22,7 @@ function AssistMeFormDialog() {
     };
 
     this.onSendAssistMeSuccess = function () {
-        Notification.showFadeOutMsg(STRINGs.SEND_ASSIST_ME_SUCCESS);
+        Notifications.showFadeOutMsg(STRINGs.SEND_ASSIST_ME_SUCCESS);
     };
 
     this.onShow = function () {

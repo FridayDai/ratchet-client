@@ -1,6 +1,6 @@
 var flight = require('flight');
 var WithDialog = require('../common/WithDialog');
-var Notification = require('../common/Notification');
+var Notifications = require('../common/Notification');
 var WithChildren = require('../common/WithChildren');
 var Utility = require('../../utils/Utility');
 var URLs = require('../../constants/Urls');
@@ -67,7 +67,7 @@ function BulkImportDialog() {
         var me = this;
 
         if (this.hasDataUploaded()) {
-            Notification.confirm({
+            Notifications.confirm({
                 title: 'ARE YOU SURE?',
                 message: 'Are you sure you want to discard the patient list?'
             }, {

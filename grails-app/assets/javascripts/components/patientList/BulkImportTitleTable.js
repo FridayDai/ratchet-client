@@ -1,7 +1,7 @@
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var ZeroClipboard = require('ZeroClipboard');
-var Notification = require('../common/Notification');
+var Notifications = require('../common/Notification');
 var URLs = require('../../constants/Urls');
 var PARAMs = require('../../constants/Params');
 var STRINGs = require('../../constants/Strings');
@@ -91,7 +91,7 @@ function BulkImportTitleTable() {
 
                 $self.addClass("active");
 
-                Notification.showFadeOutMsg(STRINGs.ID_COPY_SUCCESS);
+                Notifications.showFadeOutMsg(STRINGs.ID_COPY_SUCCESS);
 
                 setTimeout(function () {
                     $self.removeClass("active");

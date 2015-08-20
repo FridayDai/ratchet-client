@@ -3,7 +3,7 @@ require('velocity-ui');
 
 var Utility = require('../../utils/Utility');
 var Strings = require('../../constants/Strings');
-var Notification = require('./Notification');
+var Notifications = require('./Notification');
 
 window.$ = require('jquery');
 
@@ -25,13 +25,13 @@ $.ajaxSetup({
         if (jqXHR.status === 401) {
             window.location.href = "/login";
         } else if (jqXHR.status === 400) {
-            Notification.error({
+            Notifications.error({
                 title: Strings.ERROR_TITLE,
                 message: Strings.ERROR_MESSAGE_COMMON,
                 errorMessage: jqXHR.responseText
             });
         } else if (jqXHR.status === 403 || jqXHR.status >= 404) {
-            Notification.error({
+            Notifications.error({
                 title: Strings.ERROR_TITLE_404,
                 message: Strings.ERROR_MESSAGE_404
             });
@@ -98,3 +98,5 @@ $.Velocity
         ],
         reset: { scaleX: 1, scaleY: 1 }
     });
+
+module.exports = {};
