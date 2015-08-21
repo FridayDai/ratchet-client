@@ -13,7 +13,7 @@ function PatientsTable() {
         columnDefs: [
             {
                 targets: 0,
-                name: 'patientId',
+                data: 'patientId',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
                     return '<p class="source-id">' + id + '</p>';
@@ -21,21 +21,21 @@ function PatientsTable() {
                 width: "10%"
             }, {
                 targets: 1,
-                name: 'firstName',
+                data: 'firstName',
                 render: function (data, type, full) {
                     return data === undefined ? (full.firstName + " " + full.lastName) : data;
                 },
                 width: "20%"
             }, {
                 targets: 2,
-                name: 'email',
+                data: 'email',
                 render: function (data, type, full) {
                     return data === undefined ? full.email : data;
                 },
                 width: "30%"
             }, {
                 targets: 3,
-                name: 'phoneNumber',
+                data: 'phoneNumber',
                 render: function (data, type, full) {
                     var phoneNumber,
                         subNumber,
@@ -55,7 +55,7 @@ function PatientsTable() {
                 width: "15%"
             }, {
                 targets: 4,
-                name: 'lastUpdated',
+                data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
                     if (taskStatus.indexOf("All complete") !== -1) {
@@ -72,6 +72,7 @@ function PatientsTable() {
                 orderable: false
             }, {
                 targets: 5,
+                data: 'id',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
