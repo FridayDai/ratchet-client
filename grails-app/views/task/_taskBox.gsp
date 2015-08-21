@@ -61,9 +61,12 @@
             <g:else>
                 <g:set var="taskDate" value="${task?.sendTime}"></g:set>
             </g:else>
-            <g:formatDate date="${taskDate}"
-                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                          format="MMM dd, yyyy"></g:formatDate>
+            <g:if test="${taskDate}">
+                <g:formatDate date="${taskDate}"
+                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                              format="MMM dd, yyyy"></g:formatDate>
+            </g:if>
+
         </span>
 
         <div class="footer-bottom">

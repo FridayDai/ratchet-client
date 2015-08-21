@@ -50,8 +50,10 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}"><span>UNVERIFIED</span></g:if>
-                        <g:else><span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span></g:else>
+                        <g:if test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "INVITED"}">
+                            <span>UNVERIFIED</span>
+                        </g:if>
+                        <g:else><span>${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1]}</span></g:else>
                     </td>
                 </tr>
 

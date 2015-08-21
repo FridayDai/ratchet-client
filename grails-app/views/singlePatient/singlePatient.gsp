@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[patientInfo.status - 1] == "INVITED" || StatusCodeConstants.ACCOUNT_STATUS[patientInfo.status - 1] == "UNCONFIRMED_TO_INVITED"}">
+            <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                 <div class="inline div-invite">
                     <button id="invitePatient" class="btn invite-patient"
                             data-id="${patientInfo.id}">Invite Again</button>
