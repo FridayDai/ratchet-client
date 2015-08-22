@@ -43,8 +43,14 @@ function getWarningContent(contentOps) {
         $title.append('<div class="window-warning-title">{0}</div>'.format(contentOps.title));
     }
 
+    if (_.isString(contentOps.message)) {
+        contentOps.message = [contentOps.message];
+    }
+
     if (contentOps.message) {
-        $message.append('<div class="window-warning">{0}</div>'.format(contentOps.message));
+        _.each(contentOps.message, function (message) {
+            $message.append('<div class="window-warning">{0}</div>'.format(message));
+        });
     }
 
     return $warningDialog;

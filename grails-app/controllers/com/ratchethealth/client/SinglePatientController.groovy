@@ -16,6 +16,10 @@ class SinglePatientController extends BaseController {
         def patientId = params?.patientId
         def patientInfo = singlePatientService.showSinglePatient(token, patientId)
 
+        if (!patientInfo.email) {
+            patientInfo.email = ''
+        }
+
         def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         def medicalRecords = singlePatientService.showMedialRecords(token, clientId, patientId)
         def num = patientInfo?.phoneNumber

@@ -9,13 +9,11 @@
                 confirmTreatmentFormArguments: {
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
-                    height: 600,
                     width: 620
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
                 waringArguments: {
@@ -322,11 +320,7 @@
                         },
                         async: false,
                         dataFilter: function (responseString) {
-                            var resp = jQuery.parseJSON(responseString);
-                            if (primaryEmail === $('.patient-form #email').val()) {
-                                return '"true"';
-                            }
-                            else if (resp.check !== "false") {
+                            if (responseString === "false") {
                                 return "\"" + RC.constants.emailExist + "\"";
                             } else {
                                 return '"true"';

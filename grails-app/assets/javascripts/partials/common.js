@@ -562,7 +562,7 @@
             //    window.top.RC.common.confirmForm(confirmFormArguments);
             //    return;
             //}
-            var height = confirmFormArguments.height || 300,
+            var height = confirmFormArguments.height || 'auto',
                 width = confirmFormArguments.width || 350;
             var title = confirmFormArguments.okTitle || "Save";
 
@@ -674,7 +674,7 @@
                 $container.dialog({
                     autoOpen: false,
                     resizable: false,
-                    height: 140,
+                    height: 'auto',
                     width: 350,
                     modal: true,
                     open: function () {
@@ -728,7 +728,7 @@
             dialog = $container.dialog({
                 autoOpen: false,
                 resizable: false,
-                height: 140,
+                height: 'auto',
                 width: 350,
                 modal: true,
                 open: function () {
@@ -784,7 +784,7 @@
             dialog = $container.dialog({
                 autoOpen: false,
                 resizable: false,
-                height: 140,
+                height: 'auto',
                 width: 350,
                 modal: true,
                 open: function () {

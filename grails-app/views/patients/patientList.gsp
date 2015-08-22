@@ -57,7 +57,7 @@
                     <tr data-is-dom-data="true">
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
-                        <td>${patient.email}</td>
+                        <td>${patient.email?:''}</td>
                         <td>${patient.phoneNumber}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
@@ -116,7 +116,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com" required/>
+                       placeholder="john.smith@email.com(Optional)"/>
                 <div class='replace-input-div' id="email-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
@@ -128,14 +128,14 @@
                     <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
                     <input id="emergency-firstName" name="ecFirstName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Grace"/>
+                           placeholder="Grace(Optional)"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
                     <input id="emergency-lastName" name="ecLastName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Smith"/>
+                           placeholder="Smith(Optional)"/>
                 </div>
 
                 <div class="form-group inline">
@@ -146,7 +146,7 @@
                 <div class="form-group inline emr-email">
                     <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
                     <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
-                           placeholder="grace@email.com"/>
+                           placeholder="grace@email.com(Optional)"/>
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">

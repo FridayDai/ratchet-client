@@ -5,6 +5,7 @@ var WithChildren = require('../common/WithChildren');
 var STRINGs = require('../../constants/Strings');
 var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
+var Notifications = require('../common/Notification');
 
 var NewPatientPhoneInputField = require('./NewPatientPhoneInputField');
 var NewPatientRelationshipCombobox = require('./NewPatientRelationshipCombobox');
@@ -12,12 +13,6 @@ var NewPatientGroupCombobox = require('./NewPatientGroupCombobox');
 var NewPatientProviderCombobox = require('./NewPatientProviderCombobox');
 var NewPatientTreatmentCombobox = require('./NewPatientTreatmentCombobox');
 var NewPatientSurgeryDate = require('./NewPatientSurgeryDate');
-
-
-var PATIENT_STATUS = [
-    'NOT_EXISTING',
-    'EXISTING'
-];
 
 function NewPatientFormDialog() {
     this.attributes({
@@ -107,6 +102,47 @@ function NewPatientFormDialog() {
         };
     };
 
+    this.beforeSubmitForm = function () {
+        var me = this;
+
+        if (this.isEmailFieldBlank()) {
+            Notifications.confirm({
+                title: 'NO EMAIL ADDRESS',
+                message: [
+                    'Patient without email address will not receive any automated task reminder.',
+                    'Do you want to proceed?'
+                ]
+            }, {
+                buttons: [
+                    {
+                        text: 'Yes',
+                        'class': 'btn-agree',
+                        click: function () {
+                            // Warning dialog close
+                            $(this).dialog("close");
+
+                            // Bulk import dialog close
+                            me.submitForm();
+                        }
+                    }, {
+                        text: 'No',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+
+            return false;
+        }
+    };
+
+    this.isEmailFieldBlank = function () {
+        var $email = this.select('emailFieldSelector');
+
+        return $email.is(':visible') && $email.val() === '';
+    };
+
     this.onShow = function (e, data) {
         this.$node.removeClass('ui-hidden');
         this.prepare(data);
@@ -123,28 +159,18 @@ function NewPatientFormDialog() {
         this.select('patientIdStaticSelector').text(data.patientId);
     };
 
-    this._patientStatus = [];
-
     this.setPatientExisting = function (data) {
-        this._patientStatus[1] = PATIENT_STATUS[1];
-
         this.select('hiddenIdSelector').val(data.id);
-        this.toggleBasicFields();
+        this.toggleBasicFields(true);
         this.setBasicInfo(data);
     };
 
     this.setPatientNotExisting = function () {
-        this._patientStatus[1] = PATIENT_STATUS[0];
-
         this.select('hiddenIdSelector').val('');
-        this.toggleBasicFields();
+        this.toggleBasicFields(false);
     };
 
-    this.toggleBasicFields = function () {
-        if (this._patientStatus[0] === this._patientStatus[1]) {
-            return;
-        }
-
+    this.toggleBasicFields = function (isExisting) {
         var basicFields = [
             'firstNameFieldSelector',
             'lastNameFieldSelector',
@@ -154,12 +180,22 @@ function NewPatientFormDialog() {
         _.each(basicFields, function (selector) {
             var $selector = this.select(selector);
 
-            if (this._patientStatus[1] === PATIENT_STATUS[0]) {
+            if (!isExisting) {
                 $selector.removeAttr('disabled').show();
             } else {
                 $selector.attr('disabled', 'disabled').hide();
             }
         }, this);
+
+        var $phoneNumberField = this.select('phoneNumberFieldSelector');
+
+        if (!isExisting) {
+            $phoneNumberField.removeAttr('disabled');
+            $phoneNumberField.parent().show();
+        } else {
+            $phoneNumberField.attr('disabled', 'disabled');
+            $phoneNumberField.parent().hide();
+        }
 
         var baseStatics = [
             'firstNameStaticSelector',
@@ -172,7 +208,7 @@ function NewPatientFormDialog() {
             var $selector = this.select(selector);
             var $editButton = $selector.siblings('a.form-group-edit');
 
-            if (this._patientStatus[1] === PATIENT_STATUS[0]) {
+            if (!isExisting) {
                 $selector.hide();
                 $editButton.hide();
             } else {
@@ -180,16 +216,6 @@ function NewPatientFormDialog() {
                 $editButton.show();
             }
         }, this);
-
-        var $phoneNumberField = this.select('phoneNumberFieldSelector');
-
-        if (this._patientStatus[1] === PATIENT_STATUS[0]) {
-            $phoneNumberField.removeAttr('disabled');
-            $phoneNumberField.parent().show();
-        } else {
-            $phoneNumberField.attr('disabled', 'disabled');
-            $phoneNumberField.parent().hide();
-        }
     };
 
     this.showBasicField = function (e) {
@@ -216,7 +242,7 @@ function NewPatientFormDialog() {
     this.setBasicInfo = function (data) {
         this.select('firstNameStaticSelector').text(data.firstName);
         this.select('lastNameStaticSelector').text(data.lastName);
-        this.select('emailStaticSelector').text(data.email);
+        this.select('emailStaticSelector').text(data.email === null ? '' : data.email);
 
         this.select('phoneNumberStaticSelector').text(data.phoneNumber);
 
@@ -236,9 +262,6 @@ function NewPatientFormDialog() {
     };
 
     this.onClose = function () {
-        this._patientStatus[0] = this._patientStatus[1];
-        this._patientStatus[1] = '';
-
         this.setEmergencyContactRequired(false);
 
         this.trigger('newPatientReset');
@@ -320,6 +343,9 @@ function NewPatientFormDialog() {
         var $phoneNumber = this.select('phoneNumberFieldSelector');
         var $phoneNumberStatic = this.select('phoneNumberStaticSelector');
         var phoneNumber = $phoneNumber.val() || $phoneNumberStatic.text();
+        var $firstNameStatic = this.select('firstNameStaticSelector');
+        var $lastNameStatic = this.select('lastNameStaticSelector');
+        var $EmailStatic = this.select('emailStaticSelector');
         var $relationship = this.select('emergencyContactRelationshipFieldSelector');
         var relationshipId = $relationship.data('id');
         var $group = this.select('groupFieldSelector');
@@ -331,8 +357,7 @@ function NewPatientFormDialog() {
         var $surgeryTime = this.select('surgeryTimeFieldSelector');
         var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
 
-
-        return {
+        var result = {
             patientId: this.select('patientIdStaticSelector').text(),
             phoneNumber: phoneNumber.replace(/[\s\(\)-]/g, ''),
             relationship: relationshipId,
@@ -342,6 +367,20 @@ function NewPatientFormDialog() {
             surgeryTime: surgeryTime,
             profilePhoto: ''
         };
+
+        if ($firstNameStatic.is(':visible')) {
+            result.firstName = $firstNameStatic.text();
+        }
+
+        if ($lastNameStatic.is(':visible')) {
+            result.lastName = $lastNameStatic.text();
+        }
+
+        if ($EmailStatic.is(':visible')) {
+            result.email = $EmailStatic.text();
+        }
+
+        return result;
     };
 
     this.onAddPatientSuccess = function (e, data) {window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);

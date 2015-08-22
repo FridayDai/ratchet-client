@@ -30,7 +30,7 @@ function PatientsTable() {
                 targets: 2,
                 data: 'email',
                 render: function (data, type, full) {
-                    return data === undefined ? full.email : data;
+                    return data === null ? '' : data === undefined ? full.email : data;
                 },
                 width: "30%"
             }, {

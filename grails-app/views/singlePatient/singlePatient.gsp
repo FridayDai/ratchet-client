@@ -11,52 +11,41 @@
 
     <body>
     <div class="content">
-
         <div class="patient-detail">
-
-            <div class="inline info logo">
-                <img class="icon inline" src="${assetPath(src: 'patient_logo.png')}"/>
-            </div>
-
-            <div class="inline">
+            <div class="info-container">
                 <div class="info first-line clear">
                     <div class="pull-left name">
                         <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                         <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                     </div>
-
-                    <div class="id-info pull-left">
-                        ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                    <div class="edit inline">
+                        <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
+                           data-client-id="${patientInfo.client.id}">
+                        </a>
                     </div>
                 </div>
-
+                <hr />
                 <div class="info number clear">
-                    <div class="email patient-email pull-left" id="patientEmail"
+                    <div class="id-info inline">
+                        ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                    </div>
+                    <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
+                    <div class="email patient-email inline" id="patientEmail"
                          value="${patientInfo.email}">${patientInfo.email}
                     </div>
 
-                    <div class="phone pull-left" value="${patientInfo.phoneNumber}">${phoneNumber}
-                    </div>
+                    <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
+                        <div class="inline div-invite">
+                            <button id="invitePatient" class="btn invite-patient"
+                                    data-id="${patientInfo.id}">Invite Again</button>
+                        </div>
+                    </g:if>
+                    <g:else>
+                        <div class="inline div-invite invisible-invite">
+                            <button class="btn btn-invite invite-patient" data-id="${patientInfo.id}">Invite Again</button>
+                        </div>
+                    </g:else>
                 </div>
-            </div>
-
-            <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                <div class="inline div-invite">
-                    <button id="invitePatient" class="btn invite-patient"
-                            data-id="${patientInfo.id}">Invite Again</button>
-                </div>
-            </g:if>
-            <g:else>
-                <div class="inline div-invite invisible-invite">
-                    <button class="btn btn-invite invite-patient" data-id="${patientInfo.id}">Invite Again</button>
-                </div>
-            </g:else>
-
-            <div class="edit inline">
-                <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-                   data-client-id="${patientInfo.client.id}">
-                </a>
-                <a href="#" class="btn-close">Close</a>
             </div>
             <input type="hidden" name="clientId" value="${patientInfo.client.id}"/>
 
@@ -119,8 +108,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
-            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"
-                   required/>
+            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>

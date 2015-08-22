@@ -5,28 +5,27 @@
 .patient-detail {
     position: relative;
     min-width: 1024px;
-    padding: 30px;
+    padding: 15px 25px;
     color: $base-color-light-black;
 
-    .inline {
-        display: inline-block;
-        margin-left: 20px;
+    .info-container {
         font-weight: 300;
         font-family: Lato;
-
-        .id-info {
-            margin-top: 8px;
-            margin-left: 18px;
-            font-size: 12pt;
-        }
     }
 
     .first-line {
-        padding-bottom: 5px;
+        color: $base-color-dark-grey;
+        padding: 10px;
     }
 
     .number {
-        font-size: 13pt;
+        font-weight: 400;
+        font-size: 12pt;
+        padding-left: 10px;
+    }
+
+    hr {
+        border: 1px solid $base-color-white-grey;
     }
 
     .info {
@@ -63,8 +62,9 @@
     }
 
     .btn-edit-patient {
-        position: relative;
-        top: -33px;
+        position: absolute;
+        top: 28px;
+        right: 30px;
         vertical-align: middle;
 
         &:before {
@@ -101,6 +101,7 @@
     }
 
     .patient-email {
+        padding-left: 70px;
 
         &:before {
             display: inline-block;
@@ -108,13 +109,13 @@
             content: '\f422';
             vertical-align: middle;
             font-weight: lighter;
-            font-size: 28px;
+            font-size: 20px;
             font-family: ionicons;
         }
     }
 
     .phone {
-        padding-left: 22px;
+        padding-left: 70px;
 
         &:before {
             display: inline-block;
@@ -123,13 +124,13 @@
             content: '\f4b8';
             vertical-align: middle;
             font-weight: lighter;
-            font-size: 28px;
+            font-size: 20px;
             font-family: ionicons;
         }
     }
 
     .div-invite {
-        padding-top: 12px;
+        padding-left: 30px;
         vertical-align: top;
     }
 

@@ -21,11 +21,11 @@ function WithForm() {
         }
 
         this.formEl.validate(_.extend({
-            submitHandler: _.bind(this._submitForm, this)
+            submitHandler: _.bind(this._prepareSubmitForm, this)
         }, options));
     };
 
-    this._submitForm = function () {
+    this.submitForm = function () {
         var data;
 
         if (_.isFunction(this.setExtraData)) {
@@ -36,6 +36,16 @@ function WithForm() {
             data: data,
             success: _.bind(this._formSuccess, this)
         });
+    };
+
+    this._prepareSubmitForm = function () {
+        if (_.isFunction(this.beforeSubmitForm)) {
+            if (this.beforeSubmitForm() === false) {
+                return;
+            }
+        }
+
+        this.submitForm();
     };
 
     this._formSuccess = function (data) {
