@@ -138,7 +138,7 @@ module.exports = {
 
         var top = options.top || '33%',
             left = options.left || '50%',
-            remain = options.remain || 1000,
+            remain = options.remain || 2000,
             numRegExp = /\d+/,
             marginLeft;
 

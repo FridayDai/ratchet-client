@@ -3,6 +3,8 @@ require('momentTZ');
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
+var Notifications = require('../common/Notification');
+var STRINGs = require('../../constants/Strings');
 
 function PatientsTable() {
     this.attributes({
@@ -99,8 +101,10 @@ function PatientsTable() {
         this.search(data);
     };
 
-    this.onBulkImportSaved = function () {
+    this.onBulkImportSaved = function (e, data) {
         this.reload();
+
+        Notifications.showFadeOutMsg(STRINGs.BULK_IMPORT_ADD_SUCCESS_MESSAGE.format(data.number));
     };
 
     this.after('initialize', function () {

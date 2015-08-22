@@ -138,7 +138,9 @@ function BulkImportDialog() {
                 success: function () {
                     me.clearUploadedFlag();
                     me.close();
-                    me.trigger('bulkImportSavedSuccess');
+                    me.trigger('bulkImportSavedSuccess', {
+                        number: me._fileUploadData.length
+                    });
                 }
             });
         } else {
