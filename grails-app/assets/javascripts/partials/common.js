@@ -439,8 +439,23 @@
             $(uiButton[1]).addClass('btn-agree');
         }
 
+        if (warningArguments.secondText) {
+            $(uiButton[2])
+                .find('.ui-button-text')
+                .text(warningArguments.confirmText);
+        }
+
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
-        uiWindowMessage.html('<div class="window-warning">' + warningArguments.message + '</div>');
+
+        if (_.isString(warningArguments.message)) {
+            warningArguments.message = [warningArguments.message];
+        }
+
+        uiWindowMessage.html('');
+        _.each(warningArguments.message, function (message) {
+            uiWindowMessage.append('<div class="window-warning">' + message + '</div>');
+        });
+
         return $container;
     }
 

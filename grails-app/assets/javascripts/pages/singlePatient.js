@@ -264,7 +264,7 @@
      * @param form
      * @private
      */
-    function _setRemoteValidation(form, primaryPatientId, primaryEmail) {
+    function _setRemoteValidation(form, primaryPatientId) {
         form.validate({
             rules: {
                 phone: {
@@ -376,20 +376,13 @@
                     element: form,
                     okCallback: function () {
                         if (form.valid() && form.valid()) {
-                            var number = $("#phone").val();
-                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
-                            var patientInfo = {
-                                patientId: patientId,
-                                id: $("form #patientId").val(),
-                                firstName: $("#firstName").val(),
-                                lastName: $("#lastName").val(),
-                                email: $("#email").val(),
-                                number: number,
-                                phoneNumber: phoneNumber,
-                                clientId: clientId
-                                //phoneNum: $("#phone").val()
-                            };
-                            _updatePatient(patientId, clientId, patientInfo);
+                            var currentEmailVal = $("#email").val();
+                            if (currentEmailVal === '') {
+                                _confirmWithEmptyEmail();
+                                return false;
+                            }
+
+                            _submitUpdatePatient(clientId, patientId);
                             return true;
                         }
                         return false;
@@ -403,6 +396,41 @@
                 _initPhoneInput();
             }
         });
+    }
+
+    function _submitUpdatePatient(clientId, patientId) {
+        var number = $("#phone").val();
+        var phoneNumber = number.replace(/[\s\(\)-]/g, '');
+        var patientInfo = {
+            patientId: patientId,
+            id: $("form #patientId").val(),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            email: $("#email").val(),
+            number: number,
+            phoneNumber: phoneNumber,
+            clientId: clientId
+            //phoneNum: $("#phone").val()
+        };
+        _updatePatient(patientId, clientId, patientInfo);
+    }
+
+    function _confirmWithEmptyEmail() {
+        RC.common.warning(_.extend({
+            title: 'NO EMAIL ADDRESS',
+            message: [
+                'Patient without email address will not receive any automated task reminder.',
+                'Do you want to proceed?'
+            ]
+        }, {
+            element: $(".warn"),
+            confirmText: "Yes",
+            secondText: 'No',
+            yesCallback: function () {
+                _submitUpdatePatient();
+                return true;
+            }
+        }));
     }
 
     /**
@@ -440,6 +468,22 @@
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
         if (originalPatientEmail !== updatedEmail) {
             $('.invisible-invite').css('display', 'inline-block');
+        }
+
+        if ($('#patientEmail').text() === '') {
+            _toggleNotifyButton(false);
+        } else {
+            _toggleNotifyButton(true);
+        }
+    }
+
+    function _toggleNotifyButton(isVisible) {
+        var $notifyButton = $('.btn-notify.task-email');
+
+        if (isVisible) {
+            $notifyButton.show();
+        } else {
+            $notifyButton.hide();
         }
     }
 

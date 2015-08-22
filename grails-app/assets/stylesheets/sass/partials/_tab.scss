@@ -114,6 +114,7 @@
         border: 0;
         border-top: 3px solid $base-color-white-grey;
         background: $base-color-mid-grey;
+        overflow: hidden;
 
         .ui-state-default {
             max-height: 65px;

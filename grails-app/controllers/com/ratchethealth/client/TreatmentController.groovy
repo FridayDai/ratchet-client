@@ -14,14 +14,22 @@ class TreatmentController extends BaseController {
         def treatmentId = params?.treatmentId
         def clientId = params?.clientId
         def archived = params?.archived
+        def isEmailBlank = params?.isEmailBlank
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null") {
             surgeryTime = Long.valueOf(params?.surgeryTime)
         }
         render view: '/treatment/treatment',
-                model: [patientId  : patientId, clientId: clientId, medicalRecordId: medicalRecordId,
-                        treatmentId: treatmentId, surgeryTime: surgeryTime, archived: archived]
+                model: [
+                    patientId  : patientId,
+                    clientId: clientId,
+                    medicalRecordId: medicalRecordId,
+                    treatmentId: treatmentId,
+                    surgeryTime: surgeryTime,
+                    archived: archived,
+                    isEmailBlank: isEmailBlank
+                ]
     }
 
     def assignTreatment(Patient patient) {

@@ -31,7 +31,7 @@
             </g:else>>
             <li data-type="Task">
                 <g:link controller="task" action="getTasks"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
+                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, isEmailBlank: isEmailBlank]">TASKS</g:link>
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="getTeam"

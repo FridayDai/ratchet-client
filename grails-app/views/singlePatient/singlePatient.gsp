@@ -66,10 +66,13 @@
                         </g:if>>
                     %{--<li>--}%
                         <g:link controller="treatment" action="index" data-id="sub${i}"
-                                params="[patientId      : patientInfo.id, clientId: patientInfo.client.id,
-                                         medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
-                                         treatmentCode  : medicalRecord?.treatmentCode]">
+                                params="[
+                                        patientId      : patientInfo.id, clientId: patientInfo.client.id,
+                                        medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
+                                        surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
+                                        treatmentCode  : medicalRecord?.treatmentCode,
+                                        isEmailBlank   : !patientInfo?.email
+                                ]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
                             </g:if>
@@ -108,7 +111,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
-            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com"/>
+            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com(Optional)"/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>

@@ -57,7 +57,7 @@
                     <tr data-is-dom-data="true">
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
-                        <td>${patient.email?:''}</td>
+                        <td>${patient.email?:'Not Available'}</td>
                         <td>${patient.phoneNumber}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
