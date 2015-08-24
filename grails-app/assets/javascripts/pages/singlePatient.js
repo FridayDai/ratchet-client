@@ -264,7 +264,7 @@
      * @param form
      * @private
      */
-    function _setRemoteValidation(form, primaryPatientId) {
+    function _setRemoteValidation(form, primaryPatientId, primaryEmail) {
         form.validate({
             rules: {
                 phone: {
@@ -320,7 +320,9 @@
                         },
                         async: false,
                         dataFilter: function (responseString) {
-                            if (responseString === "false") {
+                            if (primaryEmail === $('.patient-form #email').val()) {
+                                return '"true"';
+                            } else if (responseString === "false") {
                                 return "\"" + RC.constants.emailExist + "\"";
                             } else {
                                 return '"true"';
