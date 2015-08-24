@@ -147,7 +147,6 @@
                 var args = {
                     title: 'ASSIST ME',
                     content: '',
-                    height: 300,
                     width: 800,
                     okTitle: 'Send'
                 };

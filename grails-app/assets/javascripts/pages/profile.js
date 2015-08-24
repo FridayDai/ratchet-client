@@ -8,7 +8,6 @@
             changePasswordFormArguments: {
                 title: RC.constants.changePasswordTitle,
                 content: RC.constants.confirmContent,
-                height: 300,
                 width: 320
             }
         },

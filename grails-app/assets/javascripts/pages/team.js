@@ -12,28 +12,24 @@
                 confirmTeamFormArguments: {
                     title: RC.constants.confirmTeamTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 400
                 },
 
                 confirmGiverFormArguments: {
                     title: RC.constants.confirmGiverTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
 
                 editSurgeonFormArguments: {
                     title: RC.constants.editSurgeonTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 400
                 },
 
                 editGiverFormArguments: {
                     title: RC.constants.editGiverTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
 

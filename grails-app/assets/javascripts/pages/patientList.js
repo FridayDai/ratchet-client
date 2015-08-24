@@ -16,7 +16,6 @@
                 confirmFormArguments: {
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
                 importFormArguments: {
@@ -29,7 +28,6 @@
                 newPatientIdConfirmArguments: {
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 380
                 },
                 showMsgArguments: {

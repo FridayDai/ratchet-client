@@ -9,7 +9,6 @@
             updateSurgeryTimeArguments: {
                 title: RC.constants.updateSurgeryTimeTitle,
                 content: RC.constants.confirmContent,
-                height: 200,
                 width: 420
             },
             waringArguments: {
@@ -230,7 +229,6 @@
                 RC.common.confirmForm(_.extend({}, {
                     title: "TREATMENT CODE",
                     okTitle: "Done",
-                    height: 200,
                     width: 500
                 }, {
                     element: $('.generate-code-form'),
