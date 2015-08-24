@@ -32,7 +32,7 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
-                render: function (data, type, full, meta) {
+                render: function (data, type, full) {
                     if (!full.email) {
                         return '<span class="email-status not-available">{0}</span>'
                                     .format(PARAMs.EMAIL_STATUS[full.status]);
@@ -99,8 +99,9 @@ function PatientsTable() {
         createdRow: function (row, data) {
             var status = PARAMs.EMAIL_STATUS[data.status];
 
-            if (data.email && status)
-            $(row).addClass('email-status-{0}'.format(status));
+            if (data.email && status) {
+                $(row).addClass('email-status-{0}'.format(status));
+            }
         }
     });
 

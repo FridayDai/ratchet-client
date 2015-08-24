@@ -9,7 +9,6 @@
             confirmFormArguments: {
                 title: RC.constants.confirmTaskTitle,
                 content: RC.constants.confirmContent,
-                height: 200,
                 width: 980
             },
             showMsgArguments: {
