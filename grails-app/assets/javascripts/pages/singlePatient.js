@@ -362,6 +362,10 @@
             var phoneNum = parent.find(".phone").text();
             var phoneNumber = $.trim(phoneNum);
 
+            if (email === 'Add Email') {
+                email = '';
+            }
+
             $("form #patientId").val(id);
             $("#patientId").blur();
             $("#firstName").val(firstName);
@@ -378,7 +382,7 @@
                         if (form.valid() && form.valid()) {
                             var currentEmailVal = $("#email").val();
                             if (currentEmailVal === '') {
-                                _confirmWithEmptyEmail(clientId, patientId);
+                                _confirmWithEmptyEmail(form, clientId, patientId);
                                 return false;
                             }
 
@@ -415,7 +419,7 @@
         _updatePatient(patientId, clientId, patientInfo);
     }
 
-    function _confirmWithEmptyEmail(clientId, patientId) {
+    function _confirmWithEmptyEmail($dialog, clientId, patientId) {
         RC.common.warning(_.extend({
             title: 'NO EMAIL ADDRESS',
             message: [
@@ -428,6 +432,8 @@
             secondText: 'No',
             yesCallback: function () {
                 _submitUpdatePatient(clientId, patientId);
+
+                $dialog.dialog('close');
                 return true;
             }
         }));
@@ -455,6 +461,8 @@
                     $('#patientEmail').text((patientInfo.email).toLowerCase());
                     $('.phone').text(patientInfo.number);
 
+                    $('#patientEmail').attr('value', patientInfo.email);
+
                     _checkEmailUpdated(originalPatientEmail, patientInfo.email);
                 }
             }
@@ -470,29 +478,27 @@
         var $emailStatus = $('.patient-detail .email-status');
 
         if (originalPatientEmail !== updatedEmail) {
-            $('.invisible-invite').css('display', 'inline-block');
-
-
             if (updatedEmail === '') {
+                $('.div-invite').css('display', 'none');
                 _toggleNotifyButton(false);
-            } else {
-                _toggleNotifyButton(true);
-            }
 
-            // Update email status
-            if (updatedEmail === '') {
                 $email
                     .text('Add Email')
                     .addClass('not-available');
 
                 $emailStatus.hide();
             } else {
+                $('.div-invite').css('display', 'inline-block');
+
+                _toggleNotifyButton(true);
+
                 $email.removeClass('not-available');
 
                 $emailStatus
                     .attr('class', '')
                     .addClass('email-status unverified')
-                    .text('Unverified');
+                    .text('Unverified')
+                    .show();
             }
         }
     }
