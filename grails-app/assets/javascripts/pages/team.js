@@ -607,35 +607,35 @@
                         }
                         else {
                             // normal response
-                            if (existSurgeonId) {
-                                var ids = {},
-                                    filterResult = [];
-                                ids[existSurgeonId] = true;
-
-                                var existResult = _.filter(data, function (data) {
-                                    return ids[data.id];
-                                });
-
-                                $.grep(data, function (e) {
-                                    if ($.inArray(e, existResult) === -1) {
-                                        filterResult.push(e);
-                                    }
-                                });
-
-                                response($.map(filterResult, function (item) {
-                                    return {
-                                        label: item.firstName + " " + item.lastName,
-                                        value: item.id
-                                    };
-                                }));
-                            } else {
-                                response($.map(data, function (item) {
-                                    return {
-                                        label: item.firstName + " " + item.lastName,
-                                        value: item.id
-                                    };
-                                }));
-                            }
+                            //if (existSurgeonId) {
+                            //    var ids = {},
+                            //        filterResult = [];
+                            //    ids[existSurgeonId] = true;
+							//
+                            //    var existResult = _.filter(data, function (data) {
+                            //        return ids[data.id];
+                            //    });
+							//
+                            //    $.grep(data, function (e) {
+                            //        if ($.inArray(e, existResult) === -1) {
+                            //            filterResult.push(e);
+                            //        }
+                            //    });
+							//
+                            //    response($.map(filterResult, function (item) {
+                            //        return {
+                            //            label: item.firstName + " " + item.lastName,
+                            //            value: item.id
+                            //        };
+                            //    }));
+                            //} else {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.firstName + " " + item.lastName,
+                                    value: item.id
+                                };
+                            }));
+                            //}
 
                         }
 
