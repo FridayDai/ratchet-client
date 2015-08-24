@@ -184,7 +184,7 @@
         <div class="form-group">
             <label class="lbl-group">GROUP<span class="hidden">*</span></label>
             <input id="groupSelect" name="selectGroup" type="text" class="input-group patient-group clear"
-                   placeholder=""/>
+                   placeholder="Select group"/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

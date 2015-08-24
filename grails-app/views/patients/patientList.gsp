@@ -141,7 +141,8 @@
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationshipVal" class="input-group emergency-field">
+                    <input id="relationship" name="relationshipVal" class="input-group emergency-field"
+                           placeholder="Select relationship">
                 </div>
 
                 <div class="form-group inline emr-email">
@@ -170,7 +171,7 @@
             <div class="form-group form-provider">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
                 <input id="selectStaffs" name="staffVal" type="text" class="clear"
-                       placeholder="" required disabled/>
+                       placeholder="Select provider" required disabled/>
             </div>
 
             <div class="form-group inline">
@@ -183,7 +184,7 @@
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
                 <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time re-position"
-                       placeholder="" required disabled/>
+                       placeholder="Select surgery date" required disabled/>
             </div>
 
 

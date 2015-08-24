@@ -712,6 +712,25 @@
                 $(form).find("#selectStaff").prop("disabled", false);
                 _initStaffSelect(form, existSurgeonId, $(this).data("id"));
                 return false;
+            },
+            change: function (event, ui) {
+                var $provider = $(form).find("#selectStaff");
+
+                if (!ui.item) {
+                    $provider
+                        .val("")
+                        .prop("disabled", true)
+                        .parent()
+                        .find('.ui-button')
+                        .addClass('disable');
+                } else {
+                    $provider
+                        .val("")
+                        .prop("disabled", false)
+                        .parent()
+                        .find('.ui-button')
+                        .removeClass('disable');
+                }
             }
         });
     }

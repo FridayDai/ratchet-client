@@ -145,7 +145,7 @@
 
         <div class="form-group form-provider">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder=""
+            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder="Select provider"
                    disabled/>
         </div>
 
@@ -159,7 +159,7 @@
         <div class="form-group inline">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time required"
-                   placeholder="" disabled>
+                   placeholder="Select surgery date" disabled>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>
@@ -172,25 +172,26 @@
                 <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
                 <input id="emergency-firstName" name="emergency-firstName" type="text"
                        class="input-group emergency-field"
-                       placeholder="Grace"/>
+                       placeholder="Grace(Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
                 <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group emergency-field"
-                       placeholder="Smith"/>
+                       placeholder="Smith(Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                <input id="relationshipName" name="relationshipName" class="input-group emergency-field">
+                <input id="relationshipName" name="relationshipName" class="input-group emergency-field"
+                       placeholder="Select relationship">
             </label>
             </div>
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
                 <input id="emergency-email" name="email" type="email" class="input-group emergency-field"
-                       placeholder="grace@email.com"/>
+                       placeholder="grace@email.com(Optional)"/>
             </div>
 
             <div class="form-group inline permission-confirm">
@@ -206,8 +207,11 @@
     <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY DATE</label>
-            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text" class="input-group surgery-time"
-                   placeholder="Surgery Time" tabindex="-1" required>
+            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
+                   class="input-group surgery-time"
+                   placeholder="Select surgery date"
+                   tabindex="-1"
+                   required>
         </div>
     </g:form>
 

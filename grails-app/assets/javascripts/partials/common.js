@@ -299,6 +299,31 @@
                     ul.width("").outerWidth(),
                     this.element.outerWidth() + 16
                 ));
+            },
+
+            _search: function( value ) {
+                this.pending++;
+                this.element.parent().find('.ui-icon').
+                    addClass( "ui-button-icon-loading" ).removeClass('ui-button-icon-primary');
+                this.cancelSearch = false;
+
+                this.source( { term: value }, this._response() );
+            },
+
+            _response: function() {
+                var index = ++this.requestIndex;
+
+                return $.proxy(function( content ) {
+                    if ( index === this.requestIndex ) {
+                        this.__response( content );
+                    }
+
+                    this.pending--;
+                    if ( !this.pending ) {
+                        this.element.parent().find('.ui-icon')
+                            .removeClass( "ui-button-icon-loading").addClass('ui-button-icon-primary');
+                    }
+                }, this );
             }
         });
 
@@ -318,64 +343,71 @@
 
                 this.element.wrap(wrapper);
 
+                $(this.element).data('saved', {
+                    label: '',
+                    value: ''
+                });
+
                 this.element
                     .addClass(classes)
                     .focus(function () {
-                        if ($(this).data('uiAutocomplete').options.focusSearch) {
+                        if ($(this).data('uiAutocomplete').options.focusSearch && $(this).val() === '') {
                             $(this).autocomplete("search");
                         }
                     })
                     .autocomplete($.extend({
                         minLength: 0,
                         focusSearch: true,
-                        open: function (event, ui) {
-                            event.preventDefault();
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-loading')
-                                .addClass('ui-button-icon-primary');
-                            if (ui.item === null) {
-                                $(this).data("id", "");
-                                $(this).val("");
-                            }
-                        },
-                        close: function (event) {
-                            event.preventDefault();
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-loading')
-                                .addClass('ui-button-icon-primary');
-                        },
                         select: function (event, ui) {
                             event.preventDefault();
-                            if (ui.item.value === "No matches found") {
-                                $(this).val("");
-                                return;
-                            }
-                            $(this).val(ui.item.label);
-                            $(this).data("id", ui.item.value);
-                        },
-                        search: function () {
-                            $(this).parent().find('.ui-icon')
-                                .removeClass('ui-button-icon-primary')
-                                .addClass('ui-button-icon-loading');
+
+                            $(this)
+                                .val(ui.item.label)
+                                .data("id", ui.item.value)
+                                .data("saved", ui.item);
                         },
                         change: function (event, ui) {
                             event.preventDefault();
-                            if (ui.item === null) {
-                                $(this).data("id", "");
-                                $(this).val("");
+
+                            var saved = $(this).data('saved');
+
+                            if (ui.item === null && saved && $(this).val() !== '') {
+                                $(this)
+                                    .val(saved.label)
+                                    .data('id', saved.value);
                             }
                         },
                         focus: function (event, ui) {
                             event.preventDefault();
-                            if (ui.item.value === "No matches found") {
-                                $(this).val("");
-                                return;
-                            }
-                            $(this).val(ui.item.label);
-                            $(this).data("id", ui.item.value);
-                            return false;
+                            $(this)
+                                .val(ui.item.label)
+                                .data("id", ui.item.value);
                         }
                     }, this.options));
+
+                function clear(element) {
+                    $(element).trigger('autocompleteclear');
+
+                    $(element)
+                        .val('')
+                        .data("id", '')
+                        .data("saved", {
+                            label: '',
+                            value: ''
+                        });
+                }
+
+                this.element.on('keyup', function (e) {
+                    if (e.which == 13 && $(this).val() === '') {
+                        clear(this);
+                    }
+                });
+
+                this.element.on('blur', function () {
+                    if ($(this).val() === '') {
+                        clear(this);
+                    }
+                });
 
                 $("<a />")
                     .insertAfter(this.element)
@@ -385,22 +417,23 @@
                         },
                         text: false
                     })
-                    .removeClass("ui-corner-all")
-                    .addClass("ui-corner-right ui-combobox-toggle")
+                    .addClass("ui-combobox-toggle")
                     .click(function () {
                         if (self.element.is(":disabled")) {
                             return;
                         }
+
                         if (self.element.autocomplete("widget").is(":visible")) {
                             self.element.autocomplete("close");
                             return;
                         }
-                        $(this).blur();
+
+                        $(self.element).data('uiAutocomplete').options.focusSearch = false;
                         self.element.autocomplete("search", "");
                         self.element.focus();
-
-
+                        $(self.element).data('uiAutocomplete').options.focusSearch = true;
                     });
+
                 if (self.element.is(":disabled")) {
                     self.element.parent().find("a").addClass('disable');
                 }
