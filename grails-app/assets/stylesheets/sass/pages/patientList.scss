@@ -429,3 +429,38 @@
     }
 }
 
+.email-status {
+    &.abnormal {
+        margin-left: 15px;
+        font-size: 12px;
+        color: #335d70;
+
+        &:before {
+            font-family: 'Ionicons';
+            padding-right: 5px;
+            font-size: 8px;
+            content: '\f21b';
+        }
+    }
+
+    &.not-available {
+        font-weight: 400;
+        color: $base-font-color;
+    }
+
+    &.unverified:before {
+        color: $base-color-pending;
+    }
+
+    &.nonexistent:before {
+        color: $base-color-overdue;
+    }
+}
+
+.email-status-unverified {
+    background-color: rgba(253, 193, 91, 0.07);
+}
+
+.email-status-nonexistent {
+    background-color: rgba(241, 91, 80, 0.07);
+}

@@ -111,6 +111,37 @@
             font-weight: lighter;
             font-size: 20px;
             font-family: ionicons;
+            color: #000;
+        }
+
+        &.not-available {
+            color: $base-font-color;
+            font-size: 13px;
+        }
+    }
+
+    .email-status {
+        margin-left: 15px;
+        font-size: 14px;
+        color: $base-color-dark-grey;
+
+        &:before {
+            font-family: 'Ionicons';
+            padding-right: 5px;
+            font-size: 10px;
+            content: '\f21b';
+        }
+
+        &.unverified:before {
+            color: $base-color-pending;
+        }
+
+        &.nonexistent:before {
+            color: $base-color-overdue;
+        }
+
+        &.verified:before {
+            color: $base-color-complete;
         }
     }
 

@@ -30,9 +30,28 @@
                         ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                     </div>
                     <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
-                    <div class="email patient-email inline" id="patientEmail"
-                         value="${patientInfo.email}">${patientInfo.email}
-                    </div>
+                    <g:if test="${patientInfo.email}">
+                        <div class="email patient-email inline" id="patientEmail"
+                             value="${patientInfo.email}">${patientInfo.email}
+                        </div>
+                    </g:if>
+                    <g:else>
+                        <div class="email patient-email inline not-available" id="patientEmail"
+                             value="${patientInfo.email}">Add Email
+                        </div>
+                    </g:else>
+                    <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
+                        <span class="email-status unverified">Unverified</span>
+                    </g:if>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
+                        <span class="email-status verified">Verified</span>
+                    </g:elseif>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
+                        <span class="email-status nonexistent">Nonexistent</span>
+                    </g:elseif>
+                    <g:else>
+                        <span class="email-status div-hidden"></span>
+                    </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                         <div class="inline div-invite">

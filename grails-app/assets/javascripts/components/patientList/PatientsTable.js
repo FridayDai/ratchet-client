@@ -5,6 +5,7 @@ var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
 var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
+var PARAMs = require('../../constants/Params');
 
 function PatientsTable() {
     this.attributes({
@@ -31,8 +32,16 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
-                render: function (data, type, full) {
-                    return data === null ? 'Not Available' : data === undefined ? full.email : data;
+                render: function (data, type, full, meta) {
+                    if (!full.email) {
+                        return '<span class="email-status not-available">{0}</span>'
+                                    .format(PARAMs.EMAIL_STATUS[full.status]);
+                    } else if (PARAMs.EMAIL_STATUS[full.status]) {
+                        return '{0}<span class="email-status abnormal {1}">{1}</span>'
+                                    .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
+                    } else {
+                        return full.email;
+                    }
                 },
                 width: "30%"
             }, {
@@ -81,8 +90,18 @@ function PatientsTable() {
                 },
                 width: "8%",
                 orderable: false
+            }, {
+                targets: 6,
+                data: 'status',
+                "visible": false
             }
-        ]
+        ],
+        createdRow: function (row, data) {
+            var status = PARAMs.EMAIL_STATUS[data.status];
+
+            if (data.email && status)
+            $(row).addClass('email-status-{0}'.format(status));
+        }
     });
 
     this.setRowClickUrl = function (data) {

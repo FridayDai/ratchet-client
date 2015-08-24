@@ -1,7 +1,7 @@
 module.exports = {
     SEND_ASSIST_ME_SUCCESS: "Message Sent!",
     ID_COPY_SUCCESS: "ID Copied",
-    BULK_IMPORT_ADD_SUCCESS_MESSAGE: "{0} patients added",
+    BULK_IMPORT_ADD_SUCCESS_MESSAGE: "{0} treatments have been added",
 
     //ERROR
     ERROR_TITLE: "ERROR",

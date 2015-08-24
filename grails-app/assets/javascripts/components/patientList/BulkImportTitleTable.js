@@ -73,6 +73,7 @@ function BulkImportTitleTable() {
     };
 
     this.onDialogReset = function () {
+        this.tableEl.order([0, 'desc']);
         this.toggleTable(false);
     };
 

@@ -378,7 +378,7 @@
                         if (form.valid() && form.valid()) {
                             var currentEmailVal = $("#email").val();
                             if (currentEmailVal === '') {
-                                _confirmWithEmptyEmail();
+                                _confirmWithEmptyEmail(clientId, patientId);
                                 return false;
                             }
 
@@ -415,7 +415,7 @@
         _updatePatient(patientId, clientId, patientInfo);
     }
 
-    function _confirmWithEmptyEmail() {
+    function _confirmWithEmptyEmail(clientId, patientId) {
         RC.common.warning(_.extend({
             title: 'NO EMAIL ADDRESS',
             message: [
@@ -427,7 +427,7 @@
             confirmText: "Yes",
             secondText: 'No',
             yesCallback: function () {
-                _submitUpdatePatient();
+                _submitUpdatePatient(clientId, patientId);
                 return true;
             }
         }));
@@ -466,14 +466,34 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
+        var $email =$('#patientEmail');
+        var $emailStatus = $('.patient-detail .email-status');
+
         if (originalPatientEmail !== updatedEmail) {
             $('.invisible-invite').css('display', 'inline-block');
-        }
 
-        if ($('#patientEmail').text() === '') {
-            _toggleNotifyButton(false);
-        } else {
-            _toggleNotifyButton(true);
+
+            if (updatedEmail === '') {
+                _toggleNotifyButton(false);
+            } else {
+                _toggleNotifyButton(true);
+            }
+
+            // Update email status
+            if (updatedEmail === '') {
+                $email
+                    .text('Add Email')
+                    .addClass('not-available');
+
+                $emailStatus.hide();
+            } else {
+                $email.removeClass('not-available');
+
+                $emailStatus
+                    .attr('class', '')
+                    .addClass('email-status unverified')
+                    .text('Unverified');
+            }
         }
     }
 

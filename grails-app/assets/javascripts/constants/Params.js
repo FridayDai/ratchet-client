@@ -6,9 +6,19 @@ module.exports = {
         {label: "Friend", value: 4},
         {label: "Other",  value: 5}
     ],
+
     BULK_IMPORT_TYPE: {
-        '1': 'Treatment',
-        '2': 'Group',
-        '3': 'Provider'
+        1: 'Treatment',
+        2: 'Group',
+        3: 'Provider'
+    },
+
+    // BE status: UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5)
+    EMAIL_STATUS: {
+        1: 'unverified',
+        2: 'unverified',
+        3: '',
+        4: 'Not Available',
+        5: 'nonexistent'
     }
 };

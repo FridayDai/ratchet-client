@@ -12,58 +12,51 @@ function BulkImportResultTable() {
             {
                 "targets": 0,
                 "render": function (data, type, full) {
-                    var id = data === undefined ? full.patientId : data;
-                    return id;
+                    return data === undefined ? full.patientId : data;
                 },
                 width: "90px"
             }, {
                 "targets": 1,
                 "render": function (data, type, full) {
-                    var name = data === undefined ? (full.firstName + " " + full.lastName) : data;
-                    return name;
+                    return data === undefined ? (full.firstName + " " + full.lastName) : data;
                 },
                 width: "120px"
             }, {
                 "targets": 2,
                 "render": function (data, type, full) {
-                    var email = data === undefined ? full.email : data;
-                    return email;
+                    return data === undefined ? full.email : data;
                 },
                 width: "260px"
             }, {
                 "targets": 3,
                 "render": function (data, type, full) {
-                    var phone = data === undefined ? full.phone : data;
-                    return phone;
+                    return data === undefined ? full.phone : data;
                 },
                 width: "120px"
             }, {
                 "targets": 4,
                 "render": function (data, type, full) {
-                    var groupName = data === undefined ? full.groupName : data;
-                    return groupName;
+                    return data === undefined ? full.groupName : data;
                 },
                 width: "200px"
             }, {
                 "targets": 5,
                 "render": function (data, type, full) {
-                    var providerName = data === undefined ? full.providerName : data;
-                    return providerName;
+                    return data === undefined ? full.providerName : data;
                 },
                 width: "150px"
             }, {
                 "targets": 6,
                 "render": function (data, type, full) {
-                    var treatmentName = data === undefined ? full.treatmentName : data;
-                    return treatmentName;
+                    return data === undefined ? full.treatmentName : data;
                 },
                 width: "150px"
             }, {
                 "targets": 7,
                 "render": function (data, type, full) {
                     var surgeryTime = data === undefined ? full.surgeryTime : data;
-                    var formatDate = moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
-                    return formatDate;
+
+                    return moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
                 },
                 width: "170px"
             }, {
@@ -78,15 +71,13 @@ function BulkImportResultTable() {
             }, {
                 "targets": 9,
                 "render": function (data, type, full) {
-                    var relationship = data === undefined ? full.relationshipName : data;
-                    return relationship;
+                    return data === undefined ? full.relationshipName : data;
                 },
                 width: "100px"
             }, {
                 "targets": 10,
                 "render": function (data, type, full) {
-                    var emergencyEmail = data === undefined ? full.emergencyEmail : data;
-                    return emergencyEmail;
+                    return data === undefined ? full.emergencyEmail : data;
                 },
                 width: "260px"
             }
@@ -104,7 +95,10 @@ function BulkImportResultTable() {
     };
 
     this.onDialogReset = function () {
-        this.tableEl.clear().draw();
+        this.tableEl
+            .order([0, 'desc'])
+            .clear()
+            .draw();
     };
 
     this.after('initialize', function () {
