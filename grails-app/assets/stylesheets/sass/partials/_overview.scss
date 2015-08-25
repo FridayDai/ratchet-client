@@ -114,11 +114,11 @@
             font-family: ionicons;
             color: #000;
         }
+    }
 
-        &.not-available {
-            color: $base-font-color;
-            font-size: 13px;
-        }
+    .add-email {
+        color: $base-font-color;
+        font-size: 13px;
     }
 
     .email-status {
@@ -326,5 +326,30 @@
     border: 2px solid $base-color-white-grey;
     border-top: 0;
     background-color: $base-color-white;
+}
+
+.add-email-form {
+    text-align: center;
+    font-size: 14px;
+
+    .form-group {
+        width: 72%;
+        display: inline-block;
+        margin: 10px 0;
+    }
+
+    .email-group {
+        margin-bottom: 0;
+    }
+
+    .description {
+        color: #000;
+    }
+}
+
+#add-email-field {
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
 }
 

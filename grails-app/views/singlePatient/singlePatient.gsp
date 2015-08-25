@@ -30,16 +30,16 @@
                         ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                     </div>
                     <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
-                    <g:if test="${patientInfo.email}">
-                        <div class="email patient-email inline" id="patientEmail"
-                             value="${patientInfo.email}">${patientInfo.email}
-                        </div>
+                    <div class="email patient-email inline" id="patientEmail"
+                         value="${patientInfo.email}">${patientInfo.email}
+                    </div>
+                    <g:if test="${!patientInfo.email}">
+                        <a href="#" class="add-email">Add Email</a>
                     </g:if>
                     <g:else>
-                        <div class="email patient-email inline not-available" id="patientEmail"
-                             value="${patientInfo.email}">Add Email
-                        </div>
+                        <a href="#" class="add-email div-hidden">Add Email</a>
                     </g:else>
+
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                         <span class="email-status unverified">Unverified</span>
                     </g:if>
@@ -212,6 +212,19 @@
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
+        </div>
+    </g:form>
+
+    <g:form class="add-email-form ui-hidden" name="add-email-form">
+        <div class="form-group description">
+            There is no email address for this patient. Do you want to add an email address?
+        </div>
+        <div class="form-group email-group">
+            <label class="lbl-group">EMAIL ADDRESS</label>
+            <input id="add-email-field" name="email" type="text"
+                   class="input-group"
+                   placeholder="john.smith@email.com (Optional)"
+                   tabindex="-1">
         </div>
     </g:form>
 

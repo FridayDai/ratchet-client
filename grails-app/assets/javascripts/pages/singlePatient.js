@@ -22,6 +22,11 @@
                 },
                 showMsgArguments: {
                     msg: RC.constants.invitePatientSuccess
+                },
+                addEmailFormArguments: {
+                    title: RC.constants.addEmailTitle,
+                    content: RC.constants.addEmailContent,
+                    width: 410
                 }
             },
             urls: {
@@ -259,6 +264,84 @@
         }
     }
 
+    function _getEmailValidate($field, primaryEmail) {
+        return {
+            email: true,
+            remote: {
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                data: {
+                    email: function () {
+                        return $field.val();
+                    }
+                },
+                async: false,
+                dataFilter: function (responseString) {
+                    if (primaryEmail === $field.val()) {
+                        return '"true"';
+                    } else if (responseString === "false") {
+                        return "\"" + RC.constants.emailExist + "\"";
+                    } else {
+                        return '"true"';
+                    }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return;
+                    }
+                }
+
+            }
+        };
+    }
+
+    function _initAddEmailFormDialog() {
+        $('.add-email').click(function (e) {
+            e.preventDefault();
+
+            var $form = $('#add-email-form');
+            var $editButon = $('.btn-edit-patient');
+            var patientId = $editButon.data("patientId");
+            var clientId = $editButon.data("clientId");
+
+            $form.validate({
+                rules: {
+                    email: _getEmailValidate($('#add-email-field'), $("#patientEmail").text().trim())
+                }
+            });
+
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.addEmailFormArguments, {
+                    element: $form,
+                    okCallback: function () {
+                        if ($form.valid() && $form.valid()) {
+
+                            var number = $(".info .phone").text();
+                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
+                            var patientInfo = {
+                                patientId: patientId,
+                                id: $(".id-info .id").text(),
+                                firstName: $(".info .first-name").text(),
+                                lastName: $(".info .last-name").text(),
+                                email: $("#add-email-field").val(),
+                                number: number,
+                                phoneNumber: phoneNumber,
+                                clientId: clientId
+                            };
+
+                            _updatePatient(patientId, clientId, patientInfo);
+                            return true;
+                        }
+                        return false;
+                    },
+                    secondTitle: 'No, next time'
+                }
+            ));
+        });
+    }
+
     /**
      * set remote validation with email and id
      * @param form
@@ -305,37 +388,7 @@
 
                     }
                 },
-                email: {
-                    email: true,
-                    remote: {
-                        url: opts.urls.checkPatientEmail,
-                        type: "POST",
-                        beforeSend: function () {
-                            RC.common.progress(false);
-                        },
-                        data: {
-                            email: function () {
-                                return $('.patient-form #email').val();
-                            }
-                        },
-                        async: false,
-                        dataFilter: function (responseString) {
-                            if (primaryEmail === $('.patient-form #email').val()) {
-                                return '"true"';
-                            } else if (responseString === "false") {
-                                return "\"" + RC.constants.emailExist + "\"";
-                            } else {
-                                return '"true"';
-                            }
-                        },
-                        error: function (jqXHR) {
-                            if (jqXHR.status === 500) {
-                                return;
-                            }
-                        }
-
-                    }
-                }
+                email: _getEmailValidate($('#email'), primaryEmail)
             },
             messages: {
                 phone: {
@@ -363,10 +416,6 @@
             var email = parent.find("#patientEmail").text().trim();
             var phoneNum = parent.find(".phone").text();
             var phoneNumber = $.trim(phoneNum);
-
-            if (email === 'Add Email') {
-                email = '';
-            }
 
             $("form #patientId").val(id);
             $("#patientId").blur();
@@ -476,7 +525,7 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
-        var $email =$('#patientEmail');
+        var $addEmail =$('.add-email');
         var $emailStatus = $('.patient-detail .email-status');
 
         if (originalPatientEmail !== updatedEmail) {
@@ -484,9 +533,7 @@
                 $('.div-invite').css('display', 'none');
                 _toggleNotifyButton(false);
 
-                $email
-                    .text('Add Email')
-                    .addClass('not-available');
+                $addEmail.show();
 
                 $emailStatus.hide();
             } else {
@@ -494,7 +541,7 @@
 
                 _toggleNotifyButton(true);
 
-                $email.removeClass('not-available');
+                $addEmail.hide();
 
                 $emailStatus
                     .attr('class', '')
@@ -937,6 +984,7 @@
         _initPlaceholder();
         _inviteAgain();
         _showArchivedTreatment();
+        _initAddEmailFormDialog();
     }
 
     _init();
