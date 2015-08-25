@@ -398,7 +398,7 @@
                 }
 
                 this.element.on('keyup', function (e) {
-                    if (e.which == 13 && $(this).val() === '') {
+                    if (e.which === 13 && $(this).val() === '') {
                         clear(this);
                     }
                 });
