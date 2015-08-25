@@ -45,7 +45,8 @@
         tabs,
         patientId,
         clientId,
-        tabTemplate;
+        tabTemplate,
+        _addTreatmentGroupId;
 
     /**
      * init treatment tab
@@ -206,16 +207,8 @@
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
-                if (!sources.length) {
-                    var result = [
-                        {
-                            label: 'No matches found',
-                            value: ''
-                        }
-                    ];
-                    response(result);
-                }
-                else {
+
+                if (sources.length) {
                     response($.map(sources, function (item) {
 
                         return {
@@ -611,16 +604,7 @@
                         max: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
+                        if (data.length) {
                             // normal response
                             response($.map(data, function (item) {
                                 return {
@@ -637,9 +621,6 @@
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
-                }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
@@ -650,6 +631,8 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $("#surgeryTime").val("");
+                    $("#surgeryTime").prop("disabled", true);
                     return;
                 }
                 if (ui.item.surgeryTime === true) {
@@ -672,10 +655,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(groupId) {
-        if (groupId) {
-            $("#selectSurgeons").combobox("destroy");
-        }
+    function _initStaffSelect() {
+        //if (groupId) {
+        //    $("#selectSurgeons").combobox("destroy");
+        //}
         $("#selectSurgeons").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -687,28 +670,17 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId,
+                        groupId: _addTreatmentGroupId,
                         max: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.firstName + " " + item.lastName,
-                                    value: item.id
-                                };
-                            }));
-                        }
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.firstName + " " + item.lastName,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
@@ -875,55 +847,38 @@
                         length: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.id
-                                };
-                            }));
-                        }
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.name,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
 
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
-                }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
                 $("#selectSurgeons").val("");
                 $("#selectSurgeons").prop("disabled", false);
-                _initStaffSelect($(this).data("id"));
+                $("#selectSurgeons").parent().find('.ui-button').removeClass('disable');
+                _addTreatmentGroupId = $(this).data("id");
             },
 
-            appendTo: ".container",
-            focus: function (event, ui) {
-                event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    $(this).val("");
-                    return;
+            change: function (data, ui) {
+                if (!ui.item) {
+                    $("#selectSurgeons").val("");
+                    $("#selectSurgeons").prop("disabled", true);
+                    $("#selectSurgeons").parent().find('.ui-button').addClass('disable');
+                    _addTreatmentGroupId = null;
                 }
-                $(this).val(ui.item.label);
-                $(this).data("id", ui.item.value);
-                $("#selectSurgeons").val("");
-                $("#selectSurgeons").prop("disabled", false);
-                _initStaffSelect($(this).data("id"));
-                return false;
-            }
+            },
+
+            appendTo: ".container"
         });
     }
 
