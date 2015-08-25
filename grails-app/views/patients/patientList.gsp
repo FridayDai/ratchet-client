@@ -115,7 +115,7 @@
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+                <label class="lbl-group">EMAIL ADDRESS</label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
                        placeholder="john.smith@email.com(Optional)"/>
                 <div class='replace-input-div' id="email-static"></div>

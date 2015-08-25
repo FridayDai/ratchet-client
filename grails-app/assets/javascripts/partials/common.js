@@ -474,7 +474,7 @@
         if (warningArguments.secondText) {
             $(uiButton[2])
                 .find('.ui-button-text')
-                .text(warningArguments.confirmText);
+                .text(warningArguments.secondText);
         }
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');

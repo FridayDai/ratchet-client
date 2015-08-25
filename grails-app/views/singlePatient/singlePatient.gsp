@@ -129,7 +129,7 @@
         </div>
 
         <div class="form-group inline">
-            <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+            <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com(Optional)"/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
