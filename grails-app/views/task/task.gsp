@@ -15,7 +15,7 @@
     <div class="tasks-list list-bottom">
         <div class="task-row ${archivedStatus}" id="task-row-active">
             <g:if test="${activeTasks == [] || activeTasks == null}">
-                <div class="no-item center no-item-sent"><p>There are no active items</p></div>
+                <div class="no-item center no-item-sent" id="no-active-item"><p>There are no active items</p></div>
             </g:if>
             <g:else>
                 <g:each in="${activeTasks}" var="task">

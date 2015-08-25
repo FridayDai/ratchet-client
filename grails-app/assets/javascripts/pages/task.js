@@ -121,6 +121,15 @@
         }
     }
 
+    function _switchGenerateCodeBtnStatus(element) {
+        if (element.find('#no-active-item').text() == "There are no active items") {
+            var codeEle = element.parent().find('.code-generation #generateCode');
+            codeEle.attr('disabled',true);
+            codeEle.addClass('btn-generate-code-disabled');
+        }
+    }
+
+
     /**
      * init for task page
      * @private
@@ -130,6 +139,7 @@
         _initTaskBox(element);
         _checkArchivedWindowSize(element);
         dropdownMenu();
+        _switchGenerateCodeBtnStatus(element);
     }
 
     $.extend(task, {
@@ -139,4 +149,5 @@
     });
 
 
-})(jQuery);
+})
+(jQuery);

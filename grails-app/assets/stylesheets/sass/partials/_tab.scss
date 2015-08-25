@@ -246,6 +246,17 @@
             .btn-generate-code {
                 top: 2px;
             }
+
+            .btn-generate-code-disabled {
+                color: $base-color-grey;
+                border-color: $base-color-grey;
+                cursor: auto;
+
+                &:hover {
+                    background-color: transparent;
+                    color: $base-color-grey;
+                }
+            }
         }
 
         .more-drop-down {
