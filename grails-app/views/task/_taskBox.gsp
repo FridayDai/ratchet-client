@@ -96,7 +96,12 @@
                             <span class="score">
                                 <g:if test="${secondSplit?.size() == 2}">
                                     <label class="score-number">${secondSplit[1]}</label>
-                                    <label class="capitalize">${secondSplit[0]} Result</label>
+                                    <g:if test="${task?.testId == 4 || task?.testId == 5}">
+                                        <label class="capitalize">${secondSplit[0]} Result</label>
+                                    </g:if>
+                                    <g:else>
+                                        <label class="capitalize">${secondSplit[0].replaceAll("_", "/" ).toLowerCase()}</label>
+                                    </g:else>
                                 </g:if>
                             </span>
                         </g:each>
