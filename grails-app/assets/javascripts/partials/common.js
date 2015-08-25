@@ -474,7 +474,7 @@
         if (warningArguments.secondText) {
             $(uiButton[2])
                 .find('.ui-button-text')
-                .text(warningArguments.confirmText);
+                .text(warningArguments.secondText);
         }
 
         uiWindowTitle.html('<div class="window-warning-title">' + warningArguments.title + '</div>');
@@ -620,6 +620,7 @@
 
             //var containerParent = $container.parent();
             var dialogOwn = $container.clone();
+            var secondTitle = confirmFormArguments.secondTitle;
 
             var dialogOpts = {
                 autoOpen: false,
@@ -676,6 +677,12 @@
                     }
                 }
             };
+
+            if (secondTitle) {
+                dialogOpts.buttons[secondTitle] = function () {
+                    dialog.dialog("close");
+                };
+            }
 
             if (cancel) {
                 dialogOpts.buttons.Cancel = function (e) {

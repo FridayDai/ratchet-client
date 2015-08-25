@@ -78,7 +78,7 @@ function NewPatientFormDialog() {
 
         return {
             rules: {
-                phoneNumber: {
+                phoneNumberVal: {
                     minlength: 14,
                     phoneNumberCheck: true,
                     checkPhoneNumberRegion: true
@@ -92,7 +92,7 @@ function NewPatientFormDialog() {
                 }
             },
             messages: {
-                phoneNumber: {
+                phoneNumberVal: {
                     minlength: STRINGs.PHONE_NUMBER_INVALID
                 },
                 email: {
