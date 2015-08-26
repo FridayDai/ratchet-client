@@ -295,7 +295,9 @@
                     font-weight: 400;
                     height: 25px;
                     padding: 6px 5px 1px;
-                    text-align: left;
+                    text-align: center;
+                    width: 60px;
+                    float: left;
 
                     &:hover {
                         color: $base-color-white;

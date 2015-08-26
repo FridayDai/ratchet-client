@@ -79,8 +79,7 @@
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                       format="MMM d, yyyy"></g:formatDate>
                     </label>
-                    <option
-                        <g:if test="${archived == 'true'}">
+                    <span <g:if test="${archived == 'true'}">
                             class="btn hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
@@ -90,9 +89,8 @@
                             data-client-id="${clientId}" data-treatment-id="${treatmentId}"
                             data-medical-record-id="${medicalRecordId}">
                         Edit
-                    </option>
-                    <option
-                        <g:if test="${archived == 'true'}">
+                    </span>
+                    <span <g:if test="${archived == 'true'}">
                             class="btn hidden drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
@@ -102,7 +100,7 @@
                             data-client-id="${clientId}"
                             data-medical-record-id="${medicalRecordId}">
                         Archive
-                    </option>
+                    </span>
                 </div>
             </li>
         </ul>
