@@ -34,7 +34,7 @@
 
 
         @include input-placeholder {
-            color: $base-font-grey;
+            color: #bebebe;
             font-size: 14px;
         }
     }
@@ -72,7 +72,6 @@
         .input-group {
             min-width: 232px;
             height: 29px;
-            color: $base-color-medium-black;
             font-family: Lato;
             font-weight: 400;
         }

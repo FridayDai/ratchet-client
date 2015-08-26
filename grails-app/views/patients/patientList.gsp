@@ -141,7 +141,7 @@
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationshipVal" class="input-group emergency-field"
+                    <input type="text" id="relationship" name="relationshipVal" class="input-group emergency-field"
                            placeholder="Spouse(Optional)">
                 </div>
 
