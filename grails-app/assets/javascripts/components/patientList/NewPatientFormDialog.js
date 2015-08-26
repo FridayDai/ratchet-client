@@ -309,7 +309,19 @@ function NewPatientFormDialog() {
             this._emergencyContactRequired = true;
 
             this.select('emergencyContactFieldSelector')
-                .attr('required', true);
+                .attr('required', true)
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
+
+                    if (placeholder.indexOf('(Optional)') >= 0) {
+                        $(this).attr('placeholder', placeholder.replace('(Optional)', ''));
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf('(Optional)') >= 0) {
+                        $(this).data('placeholder', dataPlaceholder.replace('(Optional)', ''));
+                    }
+                });
 
             this.select('emergencyContactPermissionSelector')
                 .addClass('visible');
@@ -323,9 +335,20 @@ function NewPatientFormDialog() {
             this._emergencyContactRequired = false;
 
             this.select('emergencyContactFieldSelector')
-                .attr('required', false);
+                .attr('required', false)
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
 
-            this.select('emergencyContactFieldSelector').valid();
+                    if (placeholder.indexOf('(Optional)') === -1 && !$(this).is(':focus')) {
+                        $(this).attr('placeholder', placeholder + '(Optional)');
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf('(Optional)') === -1) {
+                        $(this).data('placeholder', dataPlaceholder + '(Optional)');
+                    }
+                })
+                .valid();
 
             this.select('emergencyContactPermissionCheckSelector')
                 .attr('required', false);
