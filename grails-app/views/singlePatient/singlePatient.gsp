@@ -136,7 +136,7 @@
     </g:form>
 
     <g:form class="form treatment-form ui-hidden" id="treatment-form" name="treatment-form">
-
+        <input type="hidden" autofocus/>
         <div class="form-group">
             <label class="lbl-group">GROUP<span>*</span></label>
             <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
@@ -161,9 +161,6 @@
             <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time required"
                    placeholder="Select surgery date" disabled>
         </div>
-
-        <label class="form-group required pull-right"><span>*</span>Required field</label>
-
 
         <div class="emergency-contact-info">
             <h4>EMERGENCY CONTACT</h4>

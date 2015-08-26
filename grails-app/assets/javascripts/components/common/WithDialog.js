@@ -15,7 +15,8 @@ function WithDialog() {
         autoOpen: false,
         height: 'auto',
         resizable: false,
-        modal: true
+        modal: true,
+        delayFocus: 700
     };
 
     this._setAnimation = function ($element) {
