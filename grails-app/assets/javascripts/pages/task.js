@@ -122,7 +122,7 @@
     }
 
     function _switchGenerateCodeBtnStatus(element) {
-        if (element.find('#no-active-item').text() == "There are no active items") {
+        if (element.find('#no-active-item').text() === "There are no active items") {
             var codeEle = element.parent().find('.code-generation #generateCode');
             codeEle.attr('disabled',true);
             codeEle.addClass('btn-generate-code-disabled');
