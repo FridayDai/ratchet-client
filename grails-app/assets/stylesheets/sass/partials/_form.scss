@@ -32,9 +32,9 @@
         font-family: "Lato";
         font-weight: 400;
 
+
         @include input-placeholder {
             color: $base-font-grey;
-            opacity: .5;
             font-size: 14px;
         }
     }
