@@ -127,14 +127,14 @@
     <div class="form-group inline">
         <label class="lbl-group">FIRST NAME<span>*</span></label>
         <input id="giver-firstName" name="firstName" type="text" class="input-group"
-               placeholder="Grace(Optional)"
+               placeholder="Grace"
                required/>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">LAST NAME<span>*</span></label>
         <input id="giver-lastName" name="lastName" type="text" class="input-group"
-               placeholder="Smith(Optional)" required/>
+               placeholder="Smith" required/>
     </div>
 
     <div class="form-group inline">
@@ -146,7 +146,7 @@
     <div class="form-group inline">
         <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
         <input id="giver-email" name="email" type="email" class="input-group"
-               placeholder="grace@email.com(Optional)" required/>
+               placeholder="grace@email.com" required/>
     </div>
 
     <div class="form-group inline team-permission-confirm">
