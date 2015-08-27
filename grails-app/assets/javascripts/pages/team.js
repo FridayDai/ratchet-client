@@ -54,7 +54,7 @@
             }
         },
         careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
-        careGiverStatus = ["INACTIVE", "ACTIVE"],
+        careGiverStatus = ["ACTIVE", "INACTIVE"],//same to the STAFF_STATUS
         careGiverTable,
         _editGroupProviderGroupId;
 
