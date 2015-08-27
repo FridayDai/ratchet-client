@@ -264,9 +264,9 @@
         var groupId = $("#selectGroup").val();
         var isAccountManagement, isDoctor, type, isProvider;
 
-        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
-        isDoctor = $("#doctor").attr("checked") === "checked";
-        isProvider = $("#provider").attr("checked") === "checked";
+        isAccountManagement = $("#accountManagement").prop("checked") === true;
+        isDoctor = $("#doctor").prop("checked") === true;
+        isProvider = $("#provider").prop("checked") === true;
         if (isProvider) {
             type = 9;
         } else {
@@ -382,7 +382,7 @@
     function _checkAddIsProvider() {
         $("#provider").on("click", function () {
 
-            var isProvider = $("#provider").attr("checked") === "checked";
+            var isProvider = $("#provider").prop("checked") === true;
             if (isProvider) {
                 $('#selectGroup').attr('required', true);
                 $('.hidden').addClass('show');
@@ -465,14 +465,6 @@
             $("#lastName").val(lastName);
             $("#email").val(email);
 
-
-            //$("select option").filter(function () {
-            //    return $(this).text() === accountRole;
-            //}).prop('selected', true);
-
-            //$("#accountType").val(accountRole);
-            //$("#accountType").data("id", typeId);
-
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $("#updateAccount"),
 
@@ -499,9 +491,9 @@
 
                         var isAccountManagement, isDoctor, accountType, isProvider;
 
-                        isAccountManagement = $("#accountManagement").attr("checked") === "checked";
-                        isDoctor = $("#doctor").attr("checked") === "checked";
-                        isProvider = $("#accountProvider").attr("checked") === "checked";
+                        isAccountManagement = $("#accountManagement").prop("checked") === true;
+                        isDoctor = $("#doctor").prop("checked") === true;
+                        isProvider = $("#accountProvider").prop("checked") === true;
                         if (isProvider) {
                             accountType = 9;
                         } else {
@@ -536,7 +528,7 @@
 
         $("#accountProvider").on("click", function () {
 
-            var isProvider = $("#accountProvider").attr("checked") === "checked";
+            var isProvider = $("#accountProvider").prop("checked") === true;
             if (isProvider) {
                 $('#groupSelect').attr('required', true);
                 $('.hidden').addClass('show');
@@ -581,21 +573,6 @@
             }
         });
     }
-
-    ///**
-    // * set validate
-    // * @private
-    // */
-    //function _setValidate() {
-    //    $("#table-form").validate({
-    //            messages: {
-    //                provider: RC.constants.waringMessageProvider,
-    //                agent: RC.constants.waringMessageAgent,
-    //                email: RC.constants.waringMessageEmail
-    //            }
-    //        }
-    //    );
-    //}
 
     /**
      * add set password input valid
