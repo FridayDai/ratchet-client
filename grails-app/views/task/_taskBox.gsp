@@ -100,7 +100,7 @@
                                         <label class="capitalize">${secondSplit[0]} Result</label>
                                     </g:if>
                                     <g:else>
-                                        <label class="capitalize">${secondSplit[0].replaceAll("_", "/" ).toLowerCase()}</label>
+                                        <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
                                     </g:else>
                                 </g:if>
                             </span>
