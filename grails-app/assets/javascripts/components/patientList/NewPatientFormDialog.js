@@ -314,12 +314,12 @@ function NewPatientFormDialog() {
                     var placeholder = $(this).attr('placeholder');
                     var dataPlaceholder = $(this).data('placeholder');
 
-                    if (placeholder.indexOf('(Optional)') >= 0) {
-                        $(this).attr('placeholder', placeholder.replace('(Optional)', ''));
+                    if (placeholder.indexOf(' (Optional)') >= 0) {
+                        $(this).attr('placeholder', placeholder.replace(' (Optional)', ''));
                     }
 
-                    if (dataPlaceholder && dataPlaceholder.indexOf('(Optional)') >= 0) {
-                        $(this).data('placeholder', dataPlaceholder.replace('(Optional)', ''));
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') >= 0) {
+                        $(this).data('placeholder', dataPlaceholder.replace(' (Optional)', ''));
                     }
                 });
 
@@ -340,12 +340,12 @@ function NewPatientFormDialog() {
                     var placeholder = $(this).attr('placeholder');
                     var dataPlaceholder = $(this).data('placeholder');
 
-                    if (placeholder.indexOf('(Optional)') === -1 && !$(this).is(':focus')) {
-                        $(this).attr('placeholder', placeholder + '(Optional)');
+                    if (placeholder.indexOf(' (Optional)') === -1 && !$(this).is(':focus')) {
+                        $(this).attr('placeholder', placeholder + ' (Optional)');
                     }
 
-                    if (dataPlaceholder && dataPlaceholder.indexOf('(Optional)') === -1) {
-                        $(this).data('placeholder', dataPlaceholder + '(Optional)');
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') === -1) {
+                        $(this).data('placeholder', dataPlaceholder + ' (Optional)');
                     }
                 })
                 .valid();

@@ -4,18 +4,21 @@ var KEYs = require('../../constants/Keys');
 
 var TreatmentCombobox = require('./ToolbarTreatmentCombobox');
 var ProviderCombobox = require('./ToolbarProviderCombobox');
+var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 
 function ToolbarPanel() {
     this.attributes({
         patientIDNameSearchField: '#search-input',
         patientIDNameSearchButton: '#search-btn',
         treatmentFieldSelector: '#treatmentForSearchPatient',
-        providerFieldSelector: '#selectSurgeon'
+        providerFieldSelector: '#selectSurgeon',
+        emailStatusFieldSelector: '#emailStatusFilter'
     });
 
     this.children({
         treatmentFieldSelector: TreatmentCombobox,
-        providerFieldSelector: ProviderCombobox
+        providerFieldSelector: ProviderCombobox,
+        emailStatusFieldSelector: emailStatusCombobox
     });
 
     this.triggerSearch = function () {
