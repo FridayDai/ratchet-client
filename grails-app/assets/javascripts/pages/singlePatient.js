@@ -545,12 +545,11 @@
         }
     }
 
+    //if email not verified, button always hide. And we do not use socket, status only can turn show to hide.
     function _toggleNotifyButton(isVisible) {
         var $notifyButton = $('.btn-notify.task-email');
 
-        if (isVisible) {
-            $notifyButton.show();
-        } else {
+        if (!isVisible) {
             $notifyButton.hide();
         }
     }
