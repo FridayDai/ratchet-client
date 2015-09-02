@@ -803,6 +803,20 @@
 
             $('.permission-confirm').addClass('visible');
             $('#ec-first-name').text($("#emergency-firstName").val());
+
+            $('.emergency-field')
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
+
+                    if (placeholder.indexOf(' (Optional)') >= 0) {
+                        $(this).attr('placeholder', placeholder.replace(' (Optional)', ''));
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') >= 0) {
+                        $(this).data('placeholder', dataPlaceholder.replace(' (Optional)', ''));
+                    }
+                });
         }
 
         var flagOptional = _.every($('.emergency-field'), function (element) {
@@ -826,6 +840,20 @@
             $.each(elementList, function (index, element) {
                 RC.common.hideErrorTip(element);
             });
+
+            $('.emergency-field')
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
+
+                    if (placeholder.indexOf(' (Optional)') === -1 && !$(this).is(':focus')) {
+                        $(this).attr('placeholder', placeholder + ' (Optional)');
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') === -1) {
+                        $(this).data('placeholder', dataPlaceholder + ' (Optional)');
+                    }
+                });
         }
     }
 

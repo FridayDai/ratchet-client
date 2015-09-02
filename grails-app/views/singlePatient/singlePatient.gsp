@@ -182,7 +182,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
                 <input id="relationshipName" name="relationshipName" class="input-group emergency-field"
-                       placeholder="Select relationship">
+                       placeholder="Spouse (Optional)">
             </label>
             </div>
 
