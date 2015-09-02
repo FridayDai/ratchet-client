@@ -7,5 +7,6 @@ class PatientPagination extends Pagination{
     String patientType
     Long treatmentId
     Long surgeonId
+    int emailStatus
     String patientIdOrName
 }

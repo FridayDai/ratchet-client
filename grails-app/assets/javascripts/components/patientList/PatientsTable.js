@@ -121,6 +121,10 @@ function PatientsTable() {
         this.search(data);
     };
 
+    this.onEmailStatusSearch = function (e, data) {
+        this.search(data);
+    };
+
     this.onBulkImportSaved = function (e, data) {
         this.reload();
 
@@ -130,6 +134,7 @@ function PatientsTable() {
     this.after('initialize', function () {
         this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
         this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
+        this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);
         this.on(document, 'selectPatientIDNameForPatientTable', this.onPatientIDNameSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
     });

@@ -32,6 +32,11 @@
                     <input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>
                 </div>
 
+                <div class="filler-content">
+                    <label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>
+                    <input type="text" name="emailStatusFilter" id="emailStatusFilter" class="input-group input-auto-search"/>
+                </div>
+
                 <div class="filler-content right-search">
                     <input type="text" placeholder="Patient ID, Name" class="search-input" id="search-input">
                     <span class="search" id="search-btn"></span>
