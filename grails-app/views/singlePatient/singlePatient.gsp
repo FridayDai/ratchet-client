@@ -91,7 +91,8 @@
                                         medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
                                         treatmentCode  : medicalRecord?.treatmentCode,
-                                        isEmailBlank   : !patientInfo?.email
+                                        isEmailBlank   : !patientInfo?.email,
+                                        _: System.currentTimeMillis()
                                 ]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>

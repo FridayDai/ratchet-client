@@ -31,15 +31,15 @@
             </g:else>>
             <li data-type="Task">
                 <g:link controller="task" action="getTasks"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, isEmailBlank: isEmailBlank]">TASKS</g:link>
+                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, isEmailBlank: isEmailBlank, _: System.currentTimeMillis()]">TASKS</g:link>
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="getTeam"
-                        params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived]">TEAM</g:link>
+                        params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">TEAM</g:link>
             </li>
             <li data-type="Activity">
                 <g:link controller="activity" action="index"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">ACTIVITIES</g:link>
+                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, _: System.currentTimeMillis()]">ACTIVITIES</g:link>
             </li>
             <li data-type="Code" class="code-generation">
                 <button id="generateCode"
