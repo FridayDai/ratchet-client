@@ -15,6 +15,7 @@
             <div class="image-ratchet-health cover-inner-header"></div>
 
 			<form action="/confirm-password" method="post" class="form create-password-form">
+                <input type="hidden" name="email" value="${staff.email}"/>
 				<div class="form-style-content">
 					<div class="greeting color-black align-center">
 						<span>Hi</span>
