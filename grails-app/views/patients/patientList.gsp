@@ -122,7 +122,7 @@
             <div class="form-group inline">
                 <label class="lbl-group">EMAIL ADDRESS</label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com(Optional)"/>
+                       placeholder="john.smith@email.com (Optional)"/>
                 <div class='replace-input-div' id="email-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
@@ -134,26 +134,26 @@
                     <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
                     <input id="emergency-firstName" name="ecFirstName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Grace(Optional)"/>
+                           placeholder="Grace (Optional)"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
                     <input id="emergency-lastName" name="ecLastName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Smith(Optional)"/>
+                           placeholder="Smith (Optional)"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
                     <input type="text" id="relationship" name="relationshipVal" class="input-group emergency-field"
-                           placeholder="Spouse(Optional)">
+                           placeholder="Spouse (Optional)">
                 </div>
 
                 <div class="form-group inline emr-email">
                     <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
                     <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
-                           placeholder="grace@email.com(Optional)"/>
+                           placeholder="grace@email.com (Optional)"/>
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">
