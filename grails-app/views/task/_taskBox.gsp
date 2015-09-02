@@ -95,12 +95,12 @@
                             <% secondSplit = num?.trim().split(':') %>
                             <span class="score">
                                 <g:if test="${secondSplit?.size() == 2}">
-                                    <label class="score-number">${secondSplit[1]}</label>
+                                    <label class="score-number">${secondSplit[1]}</label><br>
                                     <g:if test="${task?.testId == 4 || task?.testId == 5}">
                                         <label class="capitalize">${secondSplit[0]} Result</label>
                                     </g:if>
                                     <g:else>
-                                        <label class="capitalize">${secondSplit[0].replaceAll("_", "/" ).toLowerCase()}</label>
+                                        <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
                                     </g:else>
                                 </g:if>
                             </span>
@@ -108,7 +108,7 @@
                     </g:if>
                     <g:else>
                         <span class="score">
-                            <label class="score-number">${task?.score}</label>
+                            <label class="score-number">${task?.score}</label><br>
                             <label>Total Result</label>
                         </span>
                     </g:else>

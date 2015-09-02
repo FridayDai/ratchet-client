@@ -29,7 +29,13 @@ class StatusCodeConstants {
 
     public static final String[] TASK_STATUS =
             ["undefined", "new", "overdue", "schedule", "pending", "complete", "expired"]
-
+    public static final Map TASK_OOS_SCORE = [
+            "SYMPTOMS": "Symptoms",
+            "PAIN": "Pain",
+            "ADL": "ADL",
+            "SPORT_REC": "Sport/Rec",
+            "QOL": "QOL"
+    ]
 
     //Account constants
     public static final String ACCOUNT_DOCTOR = "Dr."

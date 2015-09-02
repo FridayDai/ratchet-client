@@ -54,7 +54,7 @@
             }
         },
         careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
-        careGiverStatus = ["INACTIVE", "ACTIVE"],
+        careGiverStatus = ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED"],
         careGiverTable,
         _editGroupProviderGroupId;
 
@@ -129,10 +129,10 @@
                 {
                     data: function (source) {
 
-                        if (careGiverStatus[source.status - 1] === "ACTIVE") {
-                            return '<span class="status-active">ACTIVE</span>';
-                        } else {
+                        if (careGiverStatus[source.status - 1] === "INVITED") {
                             return '<span class="status-inactive">INACTIVE</span>';
+                        } else if (careGiverStatus[source.status - 1] === "VERIFIED") {
+                            return '<span class="status-active">ACTIVE</span>';
                         }
                     },
                     width: "15%"

@@ -22,6 +22,7 @@
                         <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
                            data-client-id="${patientInfo.client.id}">
                         </a>
+                        <a href="#" class="btn-close">Close</a>
                     </div>
                 </div>
                 <hr />
