@@ -26,6 +26,6 @@ module.exports = {
         {label: "Verified", value: 3},
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
-        {label: "Nonexistent", value: 5},
+        {label: "Nonexistent", value: 5}
     ]
 };
