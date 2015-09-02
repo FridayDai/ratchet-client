@@ -17,9 +17,9 @@ class TaskService extends RatchetAPIService{
         withGet(token, url) { req ->
             def resp = req
                     .asString()
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get tasks success by medical record, token: ${token}")
                 return result
             }

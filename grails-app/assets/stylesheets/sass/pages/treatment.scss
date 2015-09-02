@@ -107,7 +107,7 @@
 }
 
 .emergency-contact-info {
-    margin-top: 40px;
+    margin-top: 20px;
     height: 170px;
 }
 
@@ -176,8 +176,20 @@
     text-align: center;
     padding: 8px;
     color: $base-color-dark-gray;
-    font-size: 16px;
+    font-size: 17px;
+    font-style: italic;
 
+    .link-to-patient {
+        text-decoration: underline;
+        color: $base-font-grey-dark;
+        font-size: 17px;
+        font-style: italic;
+    }
+
+}
+
+.msg-header{
+    font-style: normal;
 }
 
 .code {
@@ -185,13 +197,14 @@
     color: $base-color-white;
     width: 200px;
     padding: 15px;
-    margin: auto;
+    margin: 15px auto;
+    font-style: normal;
 }
 
 .more-btn {
     &:before {
         position: absolute;
-        top: 8px;
+        top: 12px;
         left: -17px;
         font-family: 'Ionicons';
         display: inline-block;

@@ -106,13 +106,13 @@
     <div class="form-group">
         <label class="lbl-group">GROUP<span>*</span></label>
         <input id="groupSelect" name="groupSelect" type="text" class="team-group clear"
-               placeholder="" required/>
+               placeholder="Select group" required/>
     </div>
 
     <div class="form-group team-provider">
         <label class="lbl-group">PROVIDER<span>*</span></label>
         <input id="selectStaff" name="selectStaff" type="text" class="team-group clear"
-               placeholder="Surgeon" required/>
+               placeholder="Select provider" required/>
     </div>
 %{--<div class="form-group">--}%
 %{--<input type="checkbox" name="primaryCareTeam" id="primaryCareTeam">--}%
@@ -126,23 +126,27 @@
 
     <div class="form-group inline">
         <label class="lbl-group">FIRST NAME<span>*</span></label>
-        <input id="giver-firstName" name="firstName" type="text" class="input-group" placeholder="First Name"
+        <input id="giver-firstName" name="firstName" type="text" class="input-group"
+               placeholder="Grace"
                required/>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">LAST NAME<span>*</span></label>
-        <input id="giver-lastName" name="lastName" type="text" class="input-group" placeholder="Last Name" required/>
+        <input id="giver-lastName" name="lastName" type="text" class="input-group"
+               placeholder="Smith" required/>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">RELATIONSHIP<span>*</span></label>
-        <input id="relationships" name="relationships" class="select-body input-group" required>
+        <input id="relationships" name="relationships" class="select-body input-group"
+               placeholder="Select relationship" required>
     </div>
 
     <div class="form-group inline">
         <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
-        <input id="giver-email" name="email" type="email" class="input-group" placeholder="Email Address" required/>
+        <input id="giver-email" name="email" type="email" class="input-group"
+               placeholder="grace@email.com" required/>
     </div>
 
     <div class="form-group inline team-permission-confirm">

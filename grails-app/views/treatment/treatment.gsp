@@ -31,7 +31,7 @@
             </g:else>>
             <li data-type="Task">
                 <g:link controller="task" action="getTasks"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">TASKS</g:link>
+                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, isEmailBlank: isEmailBlank]">TASKS</g:link>
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="getTeam"
@@ -41,25 +41,21 @@
                 <g:link controller="activity" action="index"
                         params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]">ACTIVITIES</g:link>
             </li>
-            %{--<li data-type="Code" class="code-generation">--}%
-            %{--<g:if test="${treatmentCode == "null" || treatmentCode == null}">--}%
-            %{--<button id="generateCode"--}%
-            %{--<g:if test="${archived == 'true'}">--}%
-            %{--class="btn btn-generate-code disabled" disabled="disabled"--}%
-            %{--</g:if>--}%
-            %{--<g:else>--}%
-            %{--class="btn btn-generate-code"--}%
-            %{--</g:else>--}%
-            %{--data-client-id="${clientId}"--}%
-            %{--data-patient-id="${patientId}"--}%
-            %{--data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">--}%
-            %{--Generate Code--}%
-            %{--</button>--}%
-            %{--</g:if>--}%
-            %{--<g:else>--}%
-            %{--${treatmentCode}--}%
-            %{--</g:else>--}%
-            %{--</li>--}%
+            <li data-type="Code" class="code-generation">
+                <button id="generateCode"
+                    <g:if test="${archived == 'true'}">
+                        class="btn btn-generate-code disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn btn-generate-code"
+                    </g:else>
+                        data-client-id="${clientId}"
+                        data-patient-id="${patientId}"
+                        data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
+                    Generate Code
+                </button>
+
+            </li>
             <li class="more-drop-down" id="menu">
 
                 <button
@@ -83,8 +79,7 @@
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                       format="MMM d, yyyy"></g:formatDate>
                     </label>
-                    <option
-                        <g:if test="${archived == 'true'}">
+                    <span <g:if test="${archived == 'true'}">
                             class="btn hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
@@ -94,9 +89,8 @@
                             data-client-id="${clientId}" data-treatment-id="${treatmentId}"
                             data-medical-record-id="${medicalRecordId}">
                         Edit
-                    </option>
-                    <option
-                        <g:if test="${archived == 'true'}">
+                    </span>
+                    <span <g:if test="${archived == 'true'}">
                             class="btn hidden drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
@@ -106,17 +100,12 @@
                             data-client-id="${clientId}"
                             data-medical-record-id="${medicalRecordId}">
                         Archive
-                    </option>
+                    </span>
                 </div>
             </li>
         </ul>
 
     </div>
-
-
-    <g:form class="generate-code-form warn ui-hidden">
-
-    </g:form>
 
 </div>
 

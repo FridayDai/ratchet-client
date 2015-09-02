@@ -4,6 +4,7 @@
 @import '../partials/theme';
 @import '../partials/dialog';
 @import '../partials/timepicker';
+@import "../partials/combobox";
 
 //.add-patient,
 //.bulk-important {
@@ -151,8 +152,16 @@
 }
 
 .import-form {
+    position: relative;
     padding: 1em 1.8em !important;
     //    height: 80%!important;
+
+    .import-file-panel {
+        position: absolute;
+        left: 1.8em;
+        bottom: 0;
+        width: 100%;
+    }
 
     p {
         color: $base-dark-grey;
@@ -388,6 +397,11 @@
     overflow: scroll;
 }
 
+#patientsTable_filter,
+#patientsTable_info {
+    display: none;
+}
+
 .task-status {
     &:before {
         font-family: 'Ionicons';
@@ -415,3 +429,38 @@
     }
 }
 
+.email-status {
+    &.abnormal {
+        margin-left: 15px;
+        font-size: 12px;
+        color: #335d70;
+
+        &:before {
+            font-family: 'Ionicons';
+            padding-right: 5px;
+            font-size: 8px;
+            content: '\f21b';
+        }
+    }
+
+    &.not-available {
+        font-weight: 400;
+        color: $base-font-color;
+    }
+
+    &.unverified:before {
+        color: $base-color-pending;
+    }
+
+    &.nonexistent:before {
+        color: $base-color-overdue;
+    }
+}
+
+.email-status-unverified {
+    background-color: rgba(253, 193, 91, 0.07);
+}
+
+.email-status-nonexistent {
+    background-color: rgba(241, 91, 80, 0.07);
+}

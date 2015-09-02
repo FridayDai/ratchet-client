@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="accountsBundle"/>
+<g:set var="scriptPath" value="bundles/accountsBundle"/>
 <g:set var="cssPath" value="accounts"/>
 <g:applyLayout name="main">
     <html>
@@ -107,7 +107,7 @@
             <div class="form-group">
                 <label class="lbl-group">GROUP<span class="hidden">*</span></label>
                 <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
-                       placeholder=""/>
+                       placeholder="Select group"/>
             </div>
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>

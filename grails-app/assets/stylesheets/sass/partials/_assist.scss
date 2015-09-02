@@ -1,5 +1,9 @@
 .assist-form {
     .form-group {
+        &.title {
+            margin-bottom: 25px;
+        }
+
         &.center {
             text-align: center;
         }
@@ -12,10 +16,6 @@
         textarea {
             height: 180px;
             padding-top: 5px;
-        }
-
-        .input-group.title {
-            margin-bottom: 15px;
         }
     }
 

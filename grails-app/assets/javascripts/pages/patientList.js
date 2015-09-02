@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+/* global moment */
 
 (function ($, undefined) {
     'use strict';
@@ -15,7 +16,6 @@
                 confirmFormArguments: {
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
                 importFormArguments: {
@@ -28,7 +28,6 @@
                 newPatientIdConfirmArguments: {
                     title: RC.constants.confirmPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 380
                 },
                 showMsgArguments: {
@@ -1061,7 +1060,6 @@
                 $ele.prop("type", "tel");
                 $ele.attr("placeholder", "777-777-7777");
                 $ele.attr("maxlength", "14");
-                $ele.attr("minlength", "13");
                 break;
         }
     }

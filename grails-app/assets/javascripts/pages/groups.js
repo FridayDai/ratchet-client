@@ -1,5 +1,6 @@
 // TODO: This code should be removed after refactor
 /* jshint -W071 */
+/* global moment */
 (function ($, undefined) {
     'use strict';
 
@@ -12,13 +13,11 @@
                 addFormArguments: {
                     title: RC.constants.addGroupTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 380
                 },
                 editFormArguments: {
                     title: RC.constants.editGroupTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 385
                 },
                 deleteWarningArguments: {

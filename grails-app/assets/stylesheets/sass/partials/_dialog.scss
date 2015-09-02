@@ -56,7 +56,7 @@
         position: relative;
         overflow: auto;
         overflow-x: hidden;
-        height: auto !important;
+//        height: auto !important;
         padding: .5em 1em;
         border: 0;
         background-color: $base-color-white;
@@ -188,8 +188,8 @@
     text-align: center;
 }
 
-.ui-button {
-    width: 120px;
+.ui-dialog-buttonset .ui-button {
+    min-width: 120px;
     height: 35px;
     background: none;
 
@@ -263,7 +263,7 @@
 
             &:focus,
             &:hover {
-                border: 2px solid $base-color-dark-red;
+                border: 1px solid $base-color-dark-red;
                 color: $base-color-white;
                 background-color: $base-color-dark-red;
             }

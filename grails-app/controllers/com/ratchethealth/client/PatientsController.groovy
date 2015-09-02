@@ -22,6 +22,9 @@ class PatientsController extends BaseController {
         } else {
             patientPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
             patientPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            patientPagination.sortField = 'patientId'
+            patientPagination.sortDir = 'desc'
+
             def patientList = patientService.loadPatients(token, clientId, patientPagination)
             render(view: '/patients/patientList', model: [patientList: patientList, pagesize: patientPagination.length])
         }

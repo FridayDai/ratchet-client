@@ -26,9 +26,8 @@ class StaffService extends RatchetAPIService {
                     .queryString("groupId", groupId)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get staffs success, token: ${token}")
                 def items = result.items
                 return items

@@ -9,13 +9,11 @@
                 confirmTreatmentFormArguments: {
                     title: RC.constants.confirmTreatmentTitle,
                     content: RC.constants.confirmContent,
-                    height: 600,
                     width: 620
                 },
                 editPatientFormArguments: {
                     title: RC.constants.editPatientTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
                 waringArguments: {
@@ -24,6 +22,11 @@
                 },
                 showMsgArguments: {
                     msg: RC.constants.invitePatientSuccess
+                },
+                addEmailFormArguments: {
+                    title: RC.constants.addEmailTitle,
+                    content: RC.constants.addEmailContent,
+                    width: 410
                 }
             },
             urls: {
@@ -42,7 +45,8 @@
         tabs,
         patientId,
         clientId,
-        tabTemplate;
+        tabTemplate,
+        _addTreatmentGroupId;
 
     /**
      * init treatment tab
@@ -203,16 +207,8 @@
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
-                if (!sources.length) {
-                    var result = [
-                        {
-                            label: 'No matches found',
-                            value: ''
-                        }
-                    ];
-                    response(result);
-                }
-                else {
+
+                if (sources.length) {
                     response($.map(sources, function (item) {
 
                         return {
@@ -261,6 +257,84 @@
         }
     }
 
+    function _getEmailValidate($field, primaryEmail) {
+        return {
+            email: true,
+            remote: {
+                url: opts.urls.checkPatientEmail,
+                type: "POST",
+                beforeSend: function () {
+                    RC.common.progress(false);
+                },
+                data: {
+                    email: function () {
+                        return $field.val();
+                    }
+                },
+                async: false,
+                dataFilter: function (responseString) {
+                    if (primaryEmail === $field.val()) {
+                        return '"true"';
+                    } else if (responseString === "false") {
+                        return "\"" + RC.constants.emailExist + "\"";
+                    } else {
+                        return '"true"';
+                    }
+                },
+                error: function (jqXHR) {
+                    if (jqXHR.status === 500) {
+                        return;
+                    }
+                }
+
+            }
+        };
+    }
+
+    function _initAddEmailFormDialog() {
+        $('.add-email').click(function (e) {
+            e.preventDefault();
+
+            var $form = $('#add-email-form');
+            var $editButon = $('.btn-edit-patient');
+            var patientId = $editButon.data("patientId");
+            var clientId = $editButon.data("clientId");
+
+            $form.validate({
+                rules: {
+                    email: _getEmailValidate($('#add-email-field'), $("#patientEmail").text().trim())
+                }
+            });
+
+            RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.addEmailFormArguments, {
+                    element: $form,
+                    okCallback: function () {
+                        if ($form.valid() && $form.valid()) {
+
+                            var number = $(".info .phone").text();
+                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
+                            var patientInfo = {
+                                patientId: patientId,
+                                id: $(".id-info .id").text(),
+                                firstName: $(".info .first-name").text(),
+                                lastName: $(".info .last-name").text(),
+                                email: $("#add-email-field").val(),
+                                number: number,
+                                phoneNumber: phoneNumber,
+                                clientId: clientId
+                            };
+
+                            _updatePatient(patientId, clientId, patientInfo);
+                            return true;
+                        }
+                        return false;
+                    },
+                    secondTitle: 'No, next time'
+                }
+            ));
+        });
+    }
+
     /**
      * set remote validation with email and id
      * @param form
@@ -307,39 +381,7 @@
 
                     }
                 },
-                email: {
-                    email: true,
-                    remote: {
-                        url: opts.urls.checkPatientEmail,
-                        type: "POST",
-                        beforeSend: function () {
-                            RC.common.progress(false);
-                        },
-                        data: {
-                            email: function () {
-                                return $('.patient-form #email').val();
-                            }
-                        },
-                        async: false,
-                        dataFilter: function (responseString) {
-                            var resp = jQuery.parseJSON(responseString);
-                            if (primaryEmail === $('.patient-form #email').val()) {
-                                return '"true"';
-                            }
-                            else if (resp.check !== "false") {
-                                return "\"" + RC.constants.emailExist + "\"";
-                            } else {
-                                return '"true"';
-                            }
-                        },
-                        error: function (jqXHR) {
-                            if (jqXHR.status === 500) {
-                                return;
-                            }
-                        }
-
-                    }
-                }
+                email: _getEmailValidate($('#email'), primaryEmail)
             },
             messages: {
                 phone: {
@@ -382,20 +424,13 @@
                     element: form,
                     okCallback: function () {
                         if (form.valid() && form.valid()) {
-                            var number = $("#phone").val();
-                            var phoneNumber = number.replace(/[\s\(\)-]/g, '');
-                            var patientInfo = {
-                                patientId: patientId,
-                                id: $("form #patientId").val(),
-                                firstName: $("#firstName").val(),
-                                lastName: $("#lastName").val(),
-                                email: $("#email").val(),
-                                number: number,
-                                phoneNumber: phoneNumber,
-                                clientId: clientId
-                                //phoneNum: $("#phone").val()
-                            };
-                            _updatePatient(patientId, clientId, patientInfo);
+                            var currentEmailVal = $("#email").val();
+                            if (currentEmailVal === '') {
+                                _confirmWithEmptyEmail(form, clientId, patientId);
+                                return false;
+                            }
+
+                            _submitUpdatePatient(clientId, patientId);
                             return true;
                         }
                         return false;
@@ -409,6 +444,43 @@
                 _initPhoneInput();
             }
         });
+    }
+
+    function _submitUpdatePatient(clientId, patientId) {
+        var number = $("#phone").val();
+        var phoneNumber = number.replace(/[\s\(\)-]/g, '');
+        var patientInfo = {
+            patientId: patientId,
+            id: $("form #patientId").val(),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            email: $("#email").val(),
+            number: number,
+            phoneNumber: phoneNumber,
+            clientId: clientId
+            //phoneNum: $("#phone").val()
+        };
+        _updatePatient(patientId, clientId, patientInfo);
+    }
+
+    function _confirmWithEmptyEmail($dialog, clientId, patientId) {
+        RC.common.warning(_.extend({
+            title: 'NO EMAIL ADDRESS',
+            message: [
+                'Patient without email address will not receive any automated task reminder.',
+                'Do you want to proceed?'
+            ]
+        }, {
+            element: $(".warn"),
+            confirmText: "Yes",
+            secondText: 'No',
+            yesCallback: function () {
+                _submitUpdatePatient(clientId, patientId);
+
+                $dialog.dialog('close');
+                return true;
+            }
+        }));
     }
 
     /**
@@ -433,6 +505,8 @@
                     $('#patientEmail').text((patientInfo.email).toLowerCase());
                     $('.phone').text(patientInfo.number);
 
+                    $('#patientEmail').attr('value', patientInfo.email);
+
                     _checkEmailUpdated(originalPatientEmail, patientInfo.email);
                 }
             }
@@ -444,8 +518,40 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
+        var $addEmail =$('.add-email');
+        var $emailStatus = $('.patient-detail .email-status');
+
         if (originalPatientEmail !== updatedEmail) {
-            $('.invisible-invite').css('display', 'inline-block');
+            if (updatedEmail === '') {
+                $('.div-invite').css('display', 'none');
+                _toggleNotifyButton(false);
+
+                $addEmail.show();
+
+                $emailStatus.hide();
+            } else {
+                $('.div-invite').css('display', 'inline-block');
+
+                _toggleNotifyButton(true);
+
+                $addEmail.hide();
+
+                $emailStatus
+                    .attr('class', '')
+                    .addClass('email-status unverified')
+                    .text('Unverified')
+                    .show();
+            }
+        }
+    }
+
+    function _toggleNotifyButton(isVisible) {
+        var $notifyButton = $('.btn-notify.task-email');
+
+        if (isVisible) {
+            $notifyButton.show();
+        } else {
+            $notifyButton.hide();
         }
     }
 
@@ -498,16 +604,7 @@
                         max: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
+                        if (data.length) {
                             // normal response
                             response($.map(data, function (item) {
                                 return {
@@ -524,9 +621,6 @@
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
-                }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).data("surgeryTime", ui.item.surgeryTime);
@@ -537,6 +631,8 @@
             change: function (data, ui) {
                 if (ui.item === null) {
                     $(this).data("id", "");
+                    $("#surgeryTime").val("");
+                    $("#surgeryTime").prop("disabled", true);
                     return;
                 }
                 if (ui.item.surgeryTime === true) {
@@ -559,10 +655,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(groupId) {
-        if (groupId) {
-            $("#selectSurgeons").combobox("destroy");
-        }
+    function _initStaffSelect() {
+        //if (groupId) {
+        //    $("#selectSurgeons").combobox("destroy");
+        //}
         $("#selectSurgeons").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -574,28 +670,17 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId,
+                        groupId: _addTreatmentGroupId,
                         max: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.firstName + " " + item.lastName,
-                                    value: item.id
-                                };
-                            }));
-                        }
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.firstName + " " + item.lastName,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
@@ -762,55 +847,38 @@
                         length: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.id
-                                };
-                            }));
-                        }
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.name,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
 
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
-                }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
                 $("#selectSurgeons").val("");
                 $("#selectSurgeons").prop("disabled", false);
-                _initStaffSelect($(this).data("id"));
+                $("#selectSurgeons").parent().find('.ui-button').removeClass('disable');
+                _addTreatmentGroupId = $(this).data("id");
             },
 
-            appendTo: ".container",
-            focus: function (event, ui) {
-                event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    $(this).val("");
-                    return;
+            change: function (data, ui) {
+                if (!ui.item) {
+                    $("#selectSurgeons").val("");
+                    $("#selectSurgeons").prop("disabled", true);
+                    $("#selectSurgeons").parent().find('.ui-button').addClass('disable');
+                    _addTreatmentGroupId = null;
                 }
-                $(this).val(ui.item.label);
-                $(this).data("id", ui.item.value);
-                $("#selectSurgeons").val("");
-                $("#selectSurgeons").prop("disabled", false);
-                _initStaffSelect($(this).data("id"));
-                return false;
-            }
+            },
+
+            appendTo: ".container"
         });
     }
 
@@ -871,6 +939,7 @@
         _initPlaceholder();
         _inviteAgain();
         _showArchivedTreatment();
+        _initAddEmailFormDialog();
     }
 
     _init();

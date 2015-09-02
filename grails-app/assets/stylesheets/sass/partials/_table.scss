@@ -9,13 +9,20 @@
         }
 
         .sorting_asc {
-            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
+            background: url('../../../images/dataTable/sort_asc.png') no-repeat center right;
         }
 
         .sorting_desc {
-            background: url('../../../images/dataTable/sort_both.png') no-repeat center right;
+            background: url('../../../images/dataTable/sort_desc.png') no-repeat center right;
         }
 
+        .sorting_asc_disabled {
+            background: url("../../../images/dataTable/sort_asc_disabled.png") no-repeat center right;
+        }
+
+        .sorting_desc_disabled {
+            background: url("../../../images/dataTable/sort_desc_disabled.png") no-repeat center right;
+        }
     }
 
     th {
@@ -34,7 +41,7 @@
 
         td {
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 400;
             font-family: Lato;
         }
 
@@ -129,8 +136,9 @@
 
 .dataTables_wrapper {
 
-    .dataTables_filter {
-        padding: 40px;
+    .dataTables_filter,
+    .dataTables_info {
+        display: none;
     }
 
     .dataTables_paginate {

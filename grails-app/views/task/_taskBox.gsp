@@ -61,9 +61,12 @@
             <g:else>
                 <g:set var="taskDate" value="${task?.sendTime}"></g:set>
             </g:else>
-            <g:formatDate date="${taskDate}"
-                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                          format="MMM dd, yyyy"></g:formatDate>
+            <g:if test="${taskDate}">
+                <g:formatDate date="${taskDate}"
+                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                              format="MMM dd, yyyy"></g:formatDate>
+            </g:if>
+
         </span>
 
         <div class="footer-bottom">
@@ -72,6 +75,9 @@
                     <g:if test="${archivedStatus}">
                         <button class="btn btn-notify task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
                     </g:if>
+                    <g:elseif test="${isEmailBlank}">
+                        <button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>
+                    </g:elseif>
                     <g:else>
                         <button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>
                     </g:else>
@@ -89,15 +95,20 @@
                             <% secondSplit = num?.trim().split(':') %>
                             <span class="score">
                                 <g:if test="${secondSplit?.size() == 2}">
-                                    <label class="score-number">${secondSplit[1]}</label>
-                                    <label class="capitalize">${secondSplit[0]} Result</label>
+                                    <label class="score-number">${secondSplit[1]}</label><br>
+                                    <g:if test="${task?.testId == 4 || task?.testId == 5}">
+                                        <label class="capitalize">${secondSplit[0]} Result</label>
+                                    </g:if>
+                                    <g:else>
+                                        <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                    </g:else>
                                 </g:if>
                             </span>
                         </g:each>
                     </g:if>
                     <g:else>
                         <span class="score">
-                            <label class="score-number">${task?.score}</label>
+                            <label class="score-number">${task?.score}</label><br>
                             <label>Total Result</label>
                         </span>
                     </g:else>

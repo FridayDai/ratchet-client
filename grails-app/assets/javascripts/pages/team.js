@@ -12,28 +12,24 @@
                 confirmTeamFormArguments: {
                     title: RC.constants.confirmTeamTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 400
                 },
 
                 confirmGiverFormArguments: {
                     title: RC.constants.confirmGiverTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
 
                 editSurgeonFormArguments: {
                     title: RC.constants.editSurgeonTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 400
                 },
 
                 editGiverFormArguments: {
                     title: RC.constants.editGiverTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 620
                 },
 
@@ -58,8 +54,9 @@
             }
         },
         careGiverRelation = ["Parent", "Spouse", "Child", "Friend", "Other"],
-        careGiverStatus = ["INACTIVE", "ACTIVE"],
-        careGiverTable;
+        careGiverStatus = ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED"],
+        careGiverTable,
+        _editGroupProviderGroupId;
 
     /**
      *
@@ -132,10 +129,10 @@
                 {
                     data: function (source) {
 
-                        if (careGiverStatus[source.status - 1] === "ACTIVE") {
-                            return '<span class="status-active">ACTIVE</span>';
-                        } else {
+                        if (careGiverStatus[source.status - 1] === "INVITED") {
                             return '<span class="status-inactive">INACTIVE</span>';
+                        } else if (careGiverStatus[source.status - 1] === "VERIFIED") {
+                            return '<span class="status-active">ACTIVE</span>';
                         }
                     },
                     width: "15%"
@@ -244,7 +241,8 @@
                 }
             }));
 
-            _initStaffSelect(form, existSurgeonId, existGroupId);
+            _editGroupProviderGroupId = existGroupId;
+            _initStaffSelect(form);
             _initSelectGroup(form, existSurgeonId, accountId);
         });
     }
@@ -554,16 +552,7 @@
                 var sources = _.filter(data, function (num) {
                     return num.label.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
                 });
-                if (!sources.length) {
-                    var result = [
-                        {
-                            label: 'No matches found',
-                            value: ''
-                        }
-                    ];
-                    response(result);
-                }
-                else {
+                if (sources.length) {
                     response($.map(sources, function (item) {
 
                         return {
@@ -581,10 +570,10 @@
      * init select staff
      * @private
      */
-    function _initStaffSelect(form, existSurgeonId, groupId) {
-        if ($(form).find("#selectStaff").combobox()) {
-            $(form).find("#selectStaff").combobox("destroy");
-        }
+    function _initStaffSelect(form) {
+        //if ($(form).find("#selectStaff").combobox()) {
+        //    $(form).find("#selectStaff").combobox("destroy");
+        //}
         $(form).find("#selectStaff").combobox({
             source: function (request, response) {
                 $.ajax({
@@ -596,53 +585,17 @@
                     data: {
                         name: request.term,
                         type: 9,
-                        groupId: groupId,
+                        groupId: _editGroupProviderGroupId,
                         max: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            if (existSurgeonId) {
-                                var ids = {},
-                                    filterResult = [];
-                                ids[existSurgeonId] = true;
-
-                                var existResult = _.filter(data, function (data) {
-                                    return ids[data.id];
-                                });
-
-                                $.grep(data, function (e) {
-                                    if ($.inArray(e, existResult) === -1) {
-                                        filterResult.push(e);
-                                    }
-                                });
-
-                                response($.map(filterResult, function (item) {
-                                    return {
-                                        label: item.firstName + " " + item.lastName,
-                                        value: item.id
-                                    };
-                                }));
-                            } else {
-                                response($.map(data, function (item) {
-                                    return {
-                                        label: item.firstName + " " + item.lastName,
-                                        value: item.id
-                                    };
-                                }));
-                            }
-
-                        }
-
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.firstName + " " + item.lastName,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
@@ -670,52 +623,43 @@
                         length: 1000
                     },
                     success: function (data) {
-                        if (!data.length) {
-                            var result = [
-                                {
-                                    label: 'No matches found',
-                                    value: ''
-                                }
-                            ];
-                            response(result);
-                        }
-                        else {
-                            // normal response
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.name,
-                                    value: item.id
-                                };
-                            }));
-                        }
+                        // normal response
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.name,
+                                value: item.id
+                            };
+                        }));
                     }
                 });
             },
             select: function (event, ui) {
                 event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    return;
-                }
                 $(this).val(ui.item.label);
                 $(this).data("id", ui.item.value);
                 $(this).valid();
-                $(form).find("#selectStaff").val("");
+                $(form).find("#selectStaff")
+                    .val("")
+                    .parent()
+                    .find('.ui-button')
+                    .removeClass('disable');
                 $(form).find("#selectStaff").prop("disabled", false);
-                _initStaffSelect(form, existSurgeonId, $(this).data("id"));
+                _editGroupProviderGroupId = $(this).data("id");
             },
             appendTo: ".container",
-            focus: function (event, ui) {
-                event.preventDefault();
-                if (ui.item.value === "No matches found") {
-                    $(this).val("");
-                    return;
+
+            change: function (event, ui) {
+                var $provider = $(form).find("#selectStaff");
+
+                if (!ui.item) {
+                    $(this).val('');
+                    $provider
+                        .val("")
+                        .prop("disabled", true)
+                        .parent()
+                        .find('.ui-button')
+                        .addClass('disable');
                 }
-                $(this).val(ui.item.label);
-                $(this).data("id", ui.item.value);
-                $(form).find("#selectStaff").val("");
-                $(form).find("#selectStaff").prop("disabled", false);
-                _initStaffSelect(form, existSurgeonId, $(this).data("id"));
-                return false;
             }
         });
     }

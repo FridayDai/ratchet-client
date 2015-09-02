@@ -23,6 +23,7 @@
     "gulp": "^3.8.10",
     "gulp-jshint": "^1.9.0",
     "gulp-scss-lint": "^0.1.4",
-    "jshint-stylish": "^1.0.0"
+    "jshint-stylish": "^1.0.0",
+    "webpack": "^1.10.5"
   }
 }

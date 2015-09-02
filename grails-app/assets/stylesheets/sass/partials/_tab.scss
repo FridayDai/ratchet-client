@@ -67,8 +67,8 @@
 
     .add-tab {
         position: absolute;
-        top: 18px;
-        right: 15px;
+        top: 21px;
+        right: 30px;
         width: 142px;
         height: 30px;
         margin-right: 0;
@@ -114,6 +114,7 @@
         border: 0;
         border-top: 3px solid $base-color-white-grey;
         background: $base-color-mid-grey;
+        overflow: hidden;
 
         .ui-state-default {
             max-height: 65px;
@@ -123,7 +124,7 @@
         }
 
         .ui-tabs-anchor {
-            padding: 0 25px;
+            padding: 0 55px;
             border-right: 2px solid $base-color-mid-grey;
             border-bottom: 0;
             min-width: 150px;
@@ -183,7 +184,7 @@
 
     .tab-list {
         position: relative;
-        height: 40px;
+        height: 50px;
         padding: 0;
         border: 0;
         border-bottom: 2px solid $base-color-white-grey;
@@ -202,7 +203,7 @@
             border-bottom: 4px solid transparent;
             color: $base-color-medium-black;
             font-size: 15px;
-            line-height: 40px;
+            line-height: 50px;
             font-weight: 300;
             font-family: Lato;
         }
@@ -239,11 +240,22 @@
 
         .code-generation {
             position: absolute;
-            right: 150px;
+            right: 120px;
             line-height: 40px;
 
             .btn-generate-code {
-                top: -2px;
+                top: 2px;
+            }
+
+            .btn-generate-code-disabled {
+                color: $base-color-grey;
+                border-color: $base-color-grey;
+                cursor: auto;
+
+                &:hover {
+                    background-color: transparent;
+                    color: $base-color-grey;
+                }
             }
         }
 
@@ -254,11 +266,11 @@
             width: 66px;
 
             .drop-down-toggle {
+                padding-top: 13px;
                 background: none;
                 border: none;
                 color: $base-surgery-date-bgcolor;
                 font-size: 17px;
-                font-weight: 300;
 
                 &:hover {
                     text-decoration: underline;
@@ -283,7 +295,9 @@
                     font-weight: 400;
                     height: 25px;
                     padding: 6px 5px 1px;
-                    text-align: left;
+                    text-align: center;
+                    width: 60px;
+                    float: left;
 
                     &:hover {
                         color: $base-color-white;
@@ -308,14 +322,14 @@
             color: $base-surgery-date-color;
             font-family: Lato;
             font-weight: 300;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         label {
             display: inline;
             padding-right: 10px;
             color: $base-surgery-date-color;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 300;
         }
 

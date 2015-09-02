@@ -5,6 +5,7 @@ var paths = {
     js: [
         './grails-app/assets/javascripts/**/*.js',
         '!./grails-app/assets/javascripts/libs/**/*.js',
+        '!./grails-app/assets/javascripts/dist/**/*.js',
         '!./grails-app/assets/javascripts/bower_components/**/*.js'
     ]
 };

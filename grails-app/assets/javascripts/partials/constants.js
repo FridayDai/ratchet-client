@@ -28,6 +28,8 @@
         editGroupTitle: "EDIT GROUP",
         editSurgeonTitle: "EDIT GROUP AND PROVIDER",
         importFormTitle: "BULK IMPORT",
+        addEmailTitle: "ADDING EMAIL ADDRESS",
+        addEmailContent: "There is no email address for this patient. Do you want to add an email address?",
 
         //SUCCESS
         invitePatientSuccess: "An invitation e-mail has been sent.",

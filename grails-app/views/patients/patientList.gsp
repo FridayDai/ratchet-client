@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<g:set var="scriptPath" value="patientListBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/patientList.bundle.js"/>
 <g:set var="cssPath" value="patientList"/>
 <g:applyLayout name="main">
     <html>
@@ -10,16 +10,16 @@
 
     <body>
     <div>
-        <div class="inner-header">
+        <div id="header-panel" class="inner-header">
             <label class="title patient-icon">PATIENTS</label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
-                <a href="#" id="bulk-important" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
+                <a href="#" id="bulk-import" class="btn btn-add bulk-important"><span>Bulk Import</span></a>
             </g:if>
         </div>
 
-        <div class="inner-search">
+        <div id="patients-toolbar" class="inner-search">
             <div class="search-content clear">
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
@@ -57,21 +57,21 @@
                     <tr data-is-dom-data="true">
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
-                        <td>${patient.email}</td>
+                        <td>${patient.email?:''}</td>
                         <td>${patient.phoneNumber}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
+                        <td>${patient.status}</td>
                     </tr>
                 </g:each>
                 </tbody>
             </table>
         </div>
 
-        <g:form class="form ui-hidden" id="patient-id-form" name="patient-id-form">
-
+        <form action="/patients/check-id" method="post" id="patient-id-form" class="form ui-hidden">
             <div class="form-group inline">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
-                <input id="new-patient-id" name="new-patient-id" type="text" class="input-group input-only-one"
+                <input id="new-patient-id" name="patientId" type="text" class="input-group input-only-one"
                        placeholder="1234567890" required/>
             </div>
 
@@ -80,45 +80,46 @@
             <div class="required-field required-padding">
                 *Required field
             </div>
+        </form>
 
-        </g:form>
-
-        <g:form class="form ui-hidden" id="table-form" name="table-form">
-
+        <form action="/patients" method="post" id="table-form" class="form ui-hidden">
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
                 <div id="patient-id-value" class="patient-id-div"></div>
                 <g:hiddenField name="id" id="hidden-id"></g:hiddenField>
-                %{--<input id="patientId" name="patientId" type="text" class="input-group"--}%
-                %{--placeholder="1234567890"--}%
-                %{--required/>--}%
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
                 <input id="firstName" name="firstName" type="text" class="input-group input-convert" placeholder="John"
                        required/>
+                <div class='replace-input-div' id="firstName-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span>*</span></label>
                 <input id="lastName" name="lastName" type="text" class="input-group input-convert" placeholder="Smith"
                        required/>
+                <div class='replace-input-div' id="lastName-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-                <input id="phoneNumber" name="phoneNumber" type="tel" class="input-group input-convert" maxlength="14"
-                       minlength="13"
-                       placeholder="777-777-7777" required/>
+                <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert" maxlength="14"
+                       minlength="14" placeholder="777-777-7777" required/>
+                <div class='replace-input-div' id="phoneNumber-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+                <label class="lbl-group">EMAIL ADDRESS</label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
-                       placeholder="john.smith@email.com" required/>
-
+                       placeholder="john.smith@email.com(Optional)"/>
+                <div class='replace-input-div' id="email-static"></div>
+                <a class='icon-edit form-group-edit'></a>
             </div>
 
             <h4>EMERGENCY CONTACT</h4>
@@ -126,35 +127,35 @@
             <div class="emergency-contact-info">
                 <div class="form-group inline">
                     <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-firstName" name="emergency-firstName" type="text"
+                    <input id="emergency-firstName" name="ecFirstName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Grace"/>
+                           placeholder="Grace(Optional)"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-lastName" name="emergency-lastName" type="text"
+                    <input id="emergency-lastName" name="ecLastName" type="text"
                            class="input-group emergency-field"
-                           placeholder="Smith"/>
+                           placeholder="Smith(Optional)"/>
                 </div>
 
                 <div class="form-group inline">
                     <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input id="relationship" name="relationship" class="input-group emergency-field">
+                    <input type="text" id="relationship" name="relationshipVal" class="input-group emergency-field"
+                           placeholder="Spouse(Optional)">
                 </div>
 
                 <div class="form-group inline emr-email">
                     <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                    <input id="emergency-email" name="emergency-email" type="email" class="input-group emergency-field"
-                           placeholder="grace@email.com"/>
+                    <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
+                           placeholder="grace@email.com(Optional)"/>
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">
-                    <label></label>
-                    <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
-                    <span>Patient would like to release his/her health information to
-                        <span id="ec-first-name"></span>.</span>
-
+                    <input id="permission-confirm-check" type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>
+                    <label for="permission-confirm-check">*
+                        Patient would like to release his/her health information to<span id="ec-first-name"></span>.
+                    </label>
                 </div>
             </div>
 
@@ -162,33 +163,33 @@
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span>*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text"
+                <input id="selectGroup" name="groupVal" type="text"
                        class="input-group patient-group re-position clear"
                        placeholder="Select group" required/>
             </div>
 
             <div class="form-group form-provider">
                 <label class="lbl-group">PROVIDER<span>*</span></label>
-                <input id="selectStaffs" name="selectStaffs" type="text" class="clear"
-                       placeholder="" required disabled/>
+                <input id="selectStaffs" name="staffVal" type="text" class="clear"
+                       placeholder="Select provider" required disabled/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">TREATMENT<span>*</span></label>
-                <input id="selectTreatment" name="selectTreatment" type="text"
+                <input id="selectTreatment" name="treatmentVal" type="text"
                        class="input-group treatment re-position clear"
                        placeholder="Select treatment" required/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time re-position"
-                       placeholder="" required disabled/>
+                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time re-position"
+                       placeholder="Select surgery date" required disabled/>
             </div>
 
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>
-        </g:form>
+        </form>
 
         <div class="import-form ui-hidden" id="bulk-import-form">
             <div class="import-content">
@@ -221,7 +222,7 @@
                     <p class="search-tip">Lookup ID by typing in the name of treatment, provider or group in the above search box.</p>
                 </div>
 
-                <div class="clear">
+                <div class="import-file-panel clear">
                     <span id="bulk-important-file" class="btn btn-add bulk-important-file clear">
                         <span>Import File</span>
                         <input id="fileupload" type="file" name="file" data-url="/patients/bulk-import/upload"
@@ -240,10 +241,9 @@
                         <div class="loading"></div>
                     </div>
 
-                    <div class="error-tip-box"><p
-                            class="error-tip">We are not able to process this file due to a format problem. Please verify the file you uploaded.</p>
+                    <div class="error-tip-box">
+                        <p class="error-tip div-hidden"></p>
                     </div>
-
 
                     <div id="files" class="files"></div>
                 </div>
@@ -270,11 +270,6 @@
                 </table>
             </div>
         </div>
-
-        <g:form class="warn ui-hidden">
-
-        </g:form>
-
     </div>
     </body>
     </html>

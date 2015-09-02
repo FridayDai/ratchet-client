@@ -32,9 +32,9 @@
         font-family: "Lato";
         font-weight: 400;
 
+
         @include input-placeholder {
-            color: $base-font-grey;
-            opacity: .5;
+            color: #bebebe;
             font-size: 14px;
         }
     }
@@ -72,7 +72,6 @@
         .input-group {
             min-width: 232px;
             height: 29px;
-            color: $base-color-medium-black;
             font-family: Lato;
             font-weight: 400;
         }
@@ -189,3 +188,15 @@
 .form-provider {
     margin-top: 20px;
 }
+
+.error-container {
+    position: relative;
+
+    .error-help-block {
+        position: absolute;
+        font-size: 13px;
+        color: $base-color-red;
+    }
+}
+
+

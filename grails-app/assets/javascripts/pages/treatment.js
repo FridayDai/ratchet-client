@@ -9,7 +9,6 @@
             updateSurgeryTimeArguments: {
                 title: RC.constants.updateSurgeryTimeTitle,
                 content: RC.constants.confirmContent,
-                height: 200,
                 width: 420
             },
             waringArguments: {
@@ -216,10 +215,13 @@
                 data: data
             });
             ajaxPost.done(function (resp) {
-                var $ele = element;
-                var content = '<div class="msg-center">' + "Code generated successfully!" + '</div>' +
+                var content = '<div class="msg-center msg-header">' + "Code generated successfully!" + '</div>' +
                     '<div class="msg-center code">' + resp.treatmentCode + '</div>' +
-                    '<div class="msg-center">' + "Enter code on patient portal to start the task." + '</div> ' +
+                    '<div class="msg-center">' +
+                    "Go to " +
+                    '<a target="_blank" class="link-to-patient" href=' + resp.patientPortalLink + '>' +
+                    resp.patientPortalLink + '</a>' +
+                    " and enter code to start task." + '</div> ' +
                     '<div class="msg-center">' + "The code will expire in 24 hours!" + '</div>';
 
                 $('.generate-code-form').html('');
@@ -227,13 +229,13 @@
                 RC.common.confirmForm(_.extend({}, {
                     title: "TREATMENT CODE",
                     okTitle: "Done",
-                    height: 200,
-                    width: 420
+                    width: 500
                 }, {
-                    element: $('.generate-code-form')
+                    element: $('.generate-code-form'),
+                    okCallback: function () {
+                        $(".generate-code-form").dialog("destroy").addClass('ui-hidden');
+                    }
                 }));
-
-                $ele.find('.btn-generate-code').replaceWith(resp.treatmentCode);
             });
         });
     }

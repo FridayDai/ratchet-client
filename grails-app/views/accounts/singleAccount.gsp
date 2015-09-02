@@ -1,7 +1,7 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="accountsBundle"/>
+<g:set var="scriptPath" value="bundles/accountsBundle"/>
 <g:set var="cssPath" value="singleAccount"/>
 <g:applyLayout name="main">
     <html>
@@ -58,7 +58,7 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}">
+                        <g:if test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "INVITED"}">
                             <span class="span-invited"
                                   id="span-invited">UNVERIFIED</span>
 
@@ -68,17 +68,19 @@
                             </div>
                         </g:if>
 
-                        <g:elseif test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "ACTIVE"}">
+                        <g:elseif test="${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1] == "ACTIVE"}">
                             <span class="span-deactive span-activate-action"
-                                  id="span-deactive">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                                  id="span-deactive">${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1]}</span>
 
                             <a class="btn activate-action" id="btn-deactivate"
                                data-account-id="${accountInfo.id}">Deactivate</a>
                         </g:elseif>
 
-                        <g:else test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INACTIVE"}">
+                        <g:else test="${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1] == "INACTIVE"}">
                             <span class="span-active span-activate-action"
-                                  id="span-active">${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span>
+                                  id="span-active">
+                                ${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1]}
+                            </span>
 
                             <a class="btn activate-action" id="btn-activate"
                                data-account-id="${accountInfo.id}">Activate</a>
@@ -182,7 +184,7 @@
         <div class="form-group">
             <label class="lbl-group">GROUP<span class="hidden">*</span></label>
             <input id="groupSelect" name="selectGroup" type="text" class="input-group patient-group clear"
-                   placeholder=""/>
+                   placeholder="Select group"/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

@@ -7,7 +7,6 @@
                 confirmFormArguments: {
                     title: RC.constants.confirmTitle,
                     content: RC.constants.confirmContent,
-                    height: 200,
                     width: 400
                 },
                 waringArguments: {

@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sid
-  Date: 12/22/14
-  Time: 10:03 AM
---%>
-
-<g:set var="scriptPath" value="baseBundle" />
+<g:set var="scriptPath" value="bundles/baseBundle" />
 <g:set var="cssPath" value="home" />
 <g:applyLayout name="main">
     <html>

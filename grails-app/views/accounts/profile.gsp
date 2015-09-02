@@ -1,7 +1,7 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <!DOCTYPE html>
 
-<g:set var="scriptPath" value="profileInfoBundle"/>
+<g:set var="scriptPath" value="bundles/profileInfoBundle"/>
 <g:set var="cssPath" value="singleAccount"/>
 <g:applyLayout name="main">
     <html>
@@ -50,8 +50,10 @@
                 <tr class="tr-border">
                     <td class="td-width">Status</td>
                     <td>
-                        <g:if test="${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1] == "INVITED"}"><span>UNVERIFIED</span></g:if>
-                        <g:else><span>${StatusCodeConstants.ACCOUNT_STATUS[accountInfo.status - 1]}</span></g:else>
+                        <g:if test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "INVITED"}">
+                            <span>UNVERIFIED</span>
+                        </g:if>
+                        <g:else><span>${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1]}</span></g:else>
                     </td>
                 </tr>
 

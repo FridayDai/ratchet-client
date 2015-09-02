@@ -151,7 +151,7 @@
             background-color: $base-color-green;
 
             &:before {
-                content: 'COMPLETE';
+                content: 'COMPLETED';
             }
         }
 
@@ -325,7 +325,8 @@
     .footer-bottom {
         display: table;
         height: 60px;
-        width: 100%;
+        width: 104%;
+        margin-left: -6px;
         text-align: center;
     }
 
@@ -352,8 +353,8 @@
 
     .score {
         display: inline-block;
-        width: 24%;
-        padding: 0 12px;
+        padding: 0 6px;
+
         &+.score{
             border-left: 1px  $base-color-bg-head solid;
         }
@@ -361,9 +362,8 @@
 
     .score-number {
         display: inline-block;
-        width: 100%;
         padding-bottom: 2px;
-        font-size: 21px;
+        font-size: 19px;
     }
 
 }

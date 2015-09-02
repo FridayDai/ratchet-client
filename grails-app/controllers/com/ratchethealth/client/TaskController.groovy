@@ -14,6 +14,7 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def archived = (params?.archived) ?: false
+        def isEmailBlank = params?.isEmailBlank == 'true'
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
@@ -35,7 +36,17 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
-        render view: 'task', model: [activeTasks: activeTasks, closedTasks: closedTasks, scheduleTasks: scheduleTasks, clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived]
+        render view: 'task',
+            model: [
+                activeTasks: activeTasks,
+                closedTasks: closedTasks,
+                scheduleTasks: scheduleTasks,
+                clientId: clientId,
+                patientId: patientId,
+                medicalRecordId: medicalRecordId,
+                archived: archived,
+                isEmailBlank: isEmailBlank
+            ]
     }
 
     def sendTaskEmail() {

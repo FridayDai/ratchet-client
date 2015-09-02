@@ -23,13 +23,8 @@ class BulkImportService extends RatchetAPIService {
                     .field("fileName", importFile.fileItem.fileName)
                     .asString()
 
-            def result
-
-            if (resp.status != 209) {
-                result = JSON.parse(resp.body)
-            }
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
                 map.put("data", result.items)
                 log.info("Bulk import patient success, token: ${token}")
@@ -48,12 +43,9 @@ class BulkImportService extends RatchetAPIService {
 
         def start = bulkPagination?.start
         def length = bulkPagination?.length
-        def columns = bulkPagination?.columns
-        def search = bulkPagination?.search
-        def draw = bulkPagination?.draw
         def title = bulkPagination?.title
-        def order = bulkPagination?.order
-        def sort = bulkPagination?.sort
+        def sortDir = bulkPagination?.sortDir
+        def sortField = bulkPagination?.sortField
 
         String lookupUrl = grailsApplication.config.ratchetv2.server.url.lookup
         def url = String.format(lookupUrl, clientId)
@@ -64,21 +56,14 @@ class BulkImportService extends RatchetAPIService {
                     .field("max", length)
                     .field("offset", start)
                     .field("title", title)
-                    .field("sorted", sort)
-                    .field("order", order)
+                    .field("sorted", sortField)
+                    .field("order", sortDir)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 def map = [:]
 
-                map.put(start, start)
-                map.put(length, length)
-                map.put(order, order)
-                map.put(columns, columns)
-                map.put(search, search)
-                map.put(draw, draw)
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)
                 map.put("data", result.items)
@@ -103,9 +88,8 @@ class BulkImportService extends RatchetAPIService {
             def resp = req
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
                 log.info("Get bulk import patient error file link success, token: ${token}")
                 def errorPath = result?.errorFilePath
                 return  errorPath

@@ -20,7 +20,7 @@
     }
 
     .bottom-content {
-        padding: 50px 0;
+        padding-top: 50px;
     }
 
     .text-font {
@@ -33,6 +33,7 @@
     }
 
     .logo {
+        margin-top: 50px;
 
         &:before {
             content: url('../../../images/login/ratchet_health_cube.png');

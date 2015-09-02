@@ -29,17 +29,26 @@ class StatusCodeConstants {
 
     public static final String[] TASK_STATUS =
             ["undefined", "new", "overdue", "schedule", "pending", "complete", "expired"]
-
+    public static final Map TASK_OOS_SCORE = [
+            "SYMPTOMS": "Symptoms",
+            "PAIN": "Pain",
+            "ADL": "ADL",
+            "SPORT_REC": "Sport/Rec",
+            "QOL": "QOL"
+    ]
 
     //Account constants
-//    public static final String[] ACCOUNT_STATUS = ["UNINVITED", "UNVERIFIED", "ACTIVE", "INACTIVE"]
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
             ["Anesthesiologist", "Medical Assistant", "Management", "Nurse", "Physical therapists (PTs)", "Primary Physican", "Scheduler", "Surgeon", "Yes", "No"]
     public static final String ACCOUNT_PATIENTS_M = "Patient Management"
     public static final String ACCOUNT_ACCOUNTS_M = "Administrator"
 
+    // BE status is ACTIVE (1), INACTIVE (2)
+    public static final String[] STAFF_STATUS = ["ACTIVE", "INACTIVE"]
+
     //common status
-    public static final String[] ACCOUNT_STATUS =
-            ["INVITED", "ACTIVE", "INACTIVE", "UNINVITED", "UNCONFIRMED_TO_INVITED"]
+    // BE status is UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5)
+    public static final String[] EMAIL_STATUS =
+            ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED"]
 }
