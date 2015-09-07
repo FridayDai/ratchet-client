@@ -56,6 +56,6 @@ class TaskController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
         def resp = taskService.sendTaskEmailToPatient(token, clientId, patientId, medicalRecordId, taskId)
-        render resp as JSON
+        render resp
     }
 }
