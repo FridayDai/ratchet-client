@@ -181,7 +181,7 @@ function withDataTable() {
     };
 
     this.initDataTable = function () {
-        this.tableEl = $(this.$node).DataTable(this.initOptions());
+        this.tableEl = this.$node.DataTable(this.initOptions());
     };
 
     this.getPageSize = function () {
@@ -283,6 +283,13 @@ function withDataTable() {
         }
 
         this.on('preXhr.dt', this._onPreXhr);
+    });
+
+    this.before('teardown', function () {
+        if (!this.attr.initWithoutRender) {
+            this.tableEl.destroy();
+            this.tableEl = null;
+        }
     });
 }
 

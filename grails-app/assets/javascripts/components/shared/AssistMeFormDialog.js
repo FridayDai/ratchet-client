@@ -4,10 +4,6 @@ var STRINGs = require('../../constants/Strings');
 var Notifications = require('../common/Notification');
 
 function AssistMeFormDialog() {
-    this.attributes({
-        formSelector: '.'
-    });
-
     this.options({
         title: 'ASSIST ME',
         width: 800,

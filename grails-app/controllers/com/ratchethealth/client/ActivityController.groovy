@@ -18,7 +18,7 @@ class ActivityController extends BaseController{
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
 
-        render(view: '/activity/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
+        render(view: '/singlePatient/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
     }
 
     def getActivities(ActivityPagination activityPagination) {

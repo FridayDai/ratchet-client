@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithCombobox = require('../common/WithCombobox');
 var URLs = require('../../constants/Urls');
 
-function NewPatientTreatmentCombobox() {
+function PatientTreatmentCombobox() {
     this.options({
         url: URLs.GET_TREATMENTS,
         requestData: function (val) {
@@ -24,13 +24,13 @@ function NewPatientTreatmentCombobox() {
     });
 
     this.onSelect = function (e, ui) {
-        this.trigger('newPatientTreatmentSelected', {
+        this.trigger(this.attr.selectEvent, {
             surgeryDate: ui.item.surgeryDate
         });
     };
 
     this.onClear = function () {
-        this.trigger('newPatientTreatmentClear');
+        this.trigger(this.attr.clearEvent);
     };
 
     this.after('initialize', function () {
@@ -39,4 +39,4 @@ function NewPatientTreatmentCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, NewPatientTreatmentCombobox);
+module.exports = flight.component(WithCombobox, PatientTreatmentCombobox);

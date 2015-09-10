@@ -19,7 +19,7 @@
             </g:if>
             <g:else>
                 <g:each in="${activeTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>
@@ -36,7 +36,7 @@
             </g:if>
             <g:else>
                 <g:each in="${closedTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>
@@ -53,7 +53,7 @@
             </g:if>
             <g:else>
                 <g:each in="${scheduleTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>

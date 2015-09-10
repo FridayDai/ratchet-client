@@ -20,7 +20,7 @@ class TreatmentController extends BaseController {
         if (params?.surgeryTime != "null") {
             surgeryTime = Long.valueOf(params?.surgeryTime)
         }
-        render view: '/treatment/treatment',
+        render view: '/singlePatient/treatment',
                 model: [
                     patientId  : patientId,
                     clientId: clientId,

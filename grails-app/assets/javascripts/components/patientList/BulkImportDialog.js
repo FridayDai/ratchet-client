@@ -29,24 +29,26 @@ function BulkImportDialog() {
     });
 
     this.setWindowResize = function () {
-        var me = this;
+        this.onWindowResizeBind = _.bind(this.onWindowResize, this);
 
-        $(window).on('resize', function () {
-            var $dialog = me.$node.parent();
+        $(window).on('resize', this.onWindowResizeBind);
+    };
 
-            $dialog.css({
-                height: Utility.getWindowSize().height,
-                width: Utility.getWindowSize().width - 30,
-                left: 0,
-                top: 0
-            });
+    this.onWindowResize = function () {
+        var $dialog = this.$node.parent();
 
-            if ($dialog.height() <= 630) {
-                $dialog.css("overflow", "auto");
-            } else {
-                $dialog.css("overflow", "hidden");
-            }
+        $dialog.css({
+            height: Utility.getWindowSize().height,
+            width: Utility.getWindowSize().width - 30,
+            left: 0,
+            top: 0
         });
+
+        if ($dialog.height() <= 630) {
+            $dialog.css("overflow", "auto");
+        } else {
+            $dialog.css("overflow", "hidden");
+        }
     };
 
     this.setWindowNoScroll = function () {
@@ -215,6 +217,10 @@ function BulkImportDialog() {
 
         this.setWindowResize();
         this.toggleNextButton(false);
+    });
+
+    this.before('teardown', function () {
+        $(window).off('resize', this.onWindowResizeBind);
     });
 }
 

@@ -43,6 +43,17 @@ function WithPage() {
     this.after('initialize', function () {
         this._delegateDialogs();
     });
+
+    this.before('teardown', function () {
+        _.each(this._dialogs, function (item) {
+            var $node = this.$node.select(item.selector);
+            var instances = flight.registry.findInstanceInfoByNode($node[0]);
+
+            _.each(instances, function (instance) {
+                instance.instance.teardown();
+            });
+        }, this);
+    });
 }
 
 module.exports = WithPage;

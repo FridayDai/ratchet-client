@@ -72,13 +72,13 @@
         width: 142px;
         height: 30px;
         margin-right: 0;
-        padding: 0;
+        padding: 0 0 0 10px;
         border: 1px solid $base-color-white;
         color: $base-color-white;
 
         &:before {
             position: absolute;
-            top: 2px;
+            top: 3px;
             left: 8px;
             padding-left: 4px;
             content: '\f489';
@@ -134,7 +134,6 @@
             line-height: 65px;
             text-transform: uppercase;
             font-weight: 300;
-            font-family: Lato;
         }
 
         .ui-state-active {
@@ -145,13 +144,16 @@
                 height: 65px;
                 color: $base-color-dark-grey;
                 font-weight: 400;
-                font-family: Lato;
                 font-size: 17px;
             }
         }
 
         .archived-treatment {
             background-color: $base-font-color;
+
+            &.ui-state-active {
+                background-color: $base-color-white;
+            }
 
             .icon-archived {
                 color: $base-font-grey;
@@ -190,7 +192,6 @@
         border-bottom: 2px solid $base-color-white-grey;
         //        background-color: $base-color-tab-bg;
         font-weight: 300;
-        font-family: Lato;
 
         .ui-state-default {
             margin: 0;
@@ -204,8 +205,7 @@
             color: $base-color-medium-black;
             font-size: 15px;
             line-height: 50px;
-            font-weight: 300;
-            font-family: Lato;
+            font-weight: 400;
         }
 
         .ui-state-active {
@@ -213,7 +213,6 @@
                 border-color: $base-color-dark-grey;
                 color: $base-color-dark-grey;
                 font-weight: 400;
-                font-family: Lato;
             }
         }
 
@@ -227,7 +226,6 @@
                 margin-right: 40px;
                 color: $base-color-dark-grey;
                 font-weight: 400;
-                font-family: Lato;
             }
         }
 
@@ -320,7 +318,6 @@
         span {
             margin-left: 30px;
             color: $base-surgery-date-color;
-            font-family: Lato;
             font-weight: 300;
             font-size: 14px;
         }

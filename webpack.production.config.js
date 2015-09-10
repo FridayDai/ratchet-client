@@ -8,7 +8,8 @@ module.exports = {
     devtool: 'source-map',
     context: contextUrl,
     entry: {
-        patientList: "./flightPages/patientList.js"
+        patientList: "./flightPages/patientList.js",
+        patientDetail: "./flightPages/patientDetail.js"
     },
     output: {
         path: absoluteContext,
@@ -19,6 +20,7 @@ module.exports = {
         alias: {
             jquery: "bower_components/jquery/dist/jquery.js",
             lodash: "bower_components/lodash/lodash.js",
+            "jquery-ui-tabs": "bower_components/jquery-ui/ui/tabs.js",
             "jquery-ui-dialog": "bower_components/jquery-ui/ui/dialog.js",
             "jquery-ui-datepicker": "bower_components/jquery-ui/ui/datepicker.js",
             "jquery-ui-autocomplete": "bower_components/jquery-ui/ui/autocomplete.js",
