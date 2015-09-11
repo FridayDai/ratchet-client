@@ -71,11 +71,12 @@
      * add treatment tab
      * @private
      */
-    function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
+    function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime, emailStatus) {
         //var label = tabTitle,
         var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
         var url = "/patients/" + patientId + "/treatment?clientId=" + clientId +
-            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
+            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime +
+            "&PatientEmailStatus=" + emailStatus + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
         tabs.find(".tab-treatment").append(li);
@@ -126,6 +127,7 @@
                         var ecLastName = $('#emergency-lastName').val();
                         var relationship = $('#relationshipName').data("id");
                         var ecEmail = $('#emergency-email').val();
+                        var emailStatus = $(".info .email-status").attr("value");
 
                         var assignInfo = {
                             id: id,
@@ -142,7 +144,8 @@
                             ecLastName: ecLastName,
                             relationship: relationship,
                             ecEmail: ecEmail,
-                            groupId: groupId
+                            groupId: groupId,
+                            emailStatus: emailStatus
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -242,7 +245,8 @@
                 //var treatmentTitle = data.treatmentInfo.title;
                 var treatmentInfo = data.treatmentInfo;
                 var surgeryTime = assignInfo.surgeryTime;
-                _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime);
+
+                _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime, assignInfo.emailStatus);
                 _checkTreatmentBtn();
             }
         });
