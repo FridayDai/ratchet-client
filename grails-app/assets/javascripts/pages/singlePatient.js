@@ -71,12 +71,12 @@
      * add treatment tab
      * @private
      */
-    function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime, emailStatus) {
+    function _addTab(treatment, surgeryTime, emailStatus) {
         //var label = tabTitle,
-        var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
+        var label = treatment.treatmentInfo.title + " " + treatment.treatmentInfo.tmpTitle;
         var url = "/patients/" + patientId + "/treatment?clientId=" + clientId +
-            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime +
-            "&PatientEmailStatus=" + emailStatus + "";
+            "&medicalRecordId=" + treatment.medicalRecordId + "&treatmentId=" + treatment.treatmentId +
+            "&surgeryTime=" + surgeryTime + "&PatientEmailStatus=" + emailStatus + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
         tabs.find(".tab-treatment").append(li);
@@ -245,8 +245,13 @@
                 //var treatmentTitle = data.treatmentInfo.title;
                 var treatmentInfo = data.treatmentInfo;
                 var surgeryTime = assignInfo.surgeryTime;
+                var treatment = {
+                    medicalRecordId: medicalRecordId,
+                    treatmentId: treatmentId,
+                    treatmentInfo: treatmentInfo
+                };
 
-                _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime, assignInfo.emailStatus);
+                _addTab(treatment, surgeryTime, assignInfo.emailStatus);
                 _checkTreatmentBtn();
             }
         });
