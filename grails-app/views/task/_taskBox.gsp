@@ -75,11 +75,11 @@
                     <g:if test="${archivedStatus}">
                         <button class="btn btn-notify task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
                     </g:if>
-                    <g:elseif test="${isEmailBlank}">
-                        <button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] == "VERIFIED"}">
+                        <button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>
                     </g:elseif>
                     <g:else>
-                        <button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>
+                        <button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>
                     </g:else>
                 </div>
             </g:if>

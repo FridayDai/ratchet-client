@@ -26,7 +26,7 @@ function PatientsTable() {
                 targets: 1,
                 data: 'firstName',
                 render: function (data, type, full) {
-                    return data === undefined ? (full.firstName + " " + full.lastName) : data;
+                    return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
                 width: "20%"
             }, {
@@ -121,15 +121,28 @@ function PatientsTable() {
         this.search(data);
     };
 
+    this.onEmailStatusSearch = function (e, data) {
+        this.search(data);
+    };
+
     this.onBulkImportSaved = function (e, data) {
         this.reload();
 
-        Notifications.showFadeOutMsg(STRINGs.BULK_IMPORT_ADD_SUCCESS_MESSAGE.format(data.number));
+        var msg = '';
+
+        if (data.number === 1) {
+            msg = STRINGs.BULK_IMPORT_ADD_SUCCESS_MESSAGE_SINGLE;
+        } else {
+            msg = STRINGs.BULK_IMPORT_ADD_SUCCESS_MESSAGE;
+        }
+
+        Notifications.showFadeOutMsg(msg.format(data.number));
     };
 
     this.after('initialize', function () {
         this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
         this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
+        this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);
         this.on(document, 'selectPatientIDNameForPatientTable', this.onPatientIDNameSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
     });

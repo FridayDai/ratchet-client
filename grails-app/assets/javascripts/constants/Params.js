@@ -20,5 +20,12 @@ module.exports = {
         3: '',
         4: 'Not Available',
         5: 'nonexistent'
-    }
+    },
+
+    EMAIL_STATUS_FILTER: [
+        {label: "Verified", value: 3},
+        {label: "Unverified", value: 2},
+        {label: "Not Available", value: 4},
+        {label: "Nonexistent", value: 5}
+    ]
 };

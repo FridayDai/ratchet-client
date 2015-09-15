@@ -52,7 +52,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">GROUP NAME<span>*</span></label>
-                <input id="groupName" name="groupName" type="text" class="input-group input-only-one"
+                <input id="groupName" name="groupName" type="text" class="input-group input-only-one" maxlength="128"
                        placeholder="Enter group name" required/>
             </div>
 

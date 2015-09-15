@@ -71,11 +71,12 @@
      * add treatment tab
      * @private
      */
-    function _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime) {
+    function _addTab(treatment, surgeryTime, emailStatus) {
         //var label = tabTitle,
-        var label = treatmentInfo.title + " " + treatmentInfo.tmpTitle;
+        var label = treatment.treatmentInfo.title + " " + treatment.treatmentInfo.tmpTitle;
         var url = "/patients/" + patientId + "/treatment?clientId=" + clientId +
-            "&medicalRecordId=" + medicalRecordId + "&treatmentId=" + treatmentId + "&surgeryTime=" + surgeryTime + "";
+            "&medicalRecordId=" + treatment.medicalRecordId + "&treatmentId=" + treatment.treatmentId +
+            "&surgeryTime=" + surgeryTime + "&PatientEmailStatus=" + emailStatus + "";
         var li = $(tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
         //
         tabs.find(".tab-treatment").append(li);
@@ -126,6 +127,7 @@
                         var ecLastName = $('#emergency-lastName').val();
                         var relationship = $('#relationshipName').data("id");
                         var ecEmail = $('#emergency-email').val();
+                        var emailStatus = $(".info .email-status").attr("value");
 
                         var assignInfo = {
                             id: id,
@@ -142,7 +144,8 @@
                             ecLastName: ecLastName,
                             relationship: relationship,
                             ecEmail: ecEmail,
-                            groupId: groupId
+                            groupId: groupId,
+                            emailStatus: emailStatus
                         };
                         _assignTreatment(patientId, clientId, assignInfo);
 
@@ -242,7 +245,13 @@
                 //var treatmentTitle = data.treatmentInfo.title;
                 var treatmentInfo = data.treatmentInfo;
                 var surgeryTime = assignInfo.surgeryTime;
-                _addTab(medicalRecordId, treatmentId, treatmentInfo, surgeryTime);
+                var treatment = {
+                    medicalRecordId: medicalRecordId,
+                    treatmentId: treatmentId,
+                    treatmentInfo: treatmentInfo
+                };
+
+                _addTab(treatment, surgeryTime, assignInfo.emailStatus);
                 _checkTreatmentBtn();
             }
         });
@@ -545,12 +554,11 @@
         }
     }
 
+    //if email not verified, button always hide. And we do not use socket, status only can turn show to hide.
     function _toggleNotifyButton(isVisible) {
         var $notifyButton = $('.btn-notify.task-email');
 
-        if (isVisible) {
-            $notifyButton.show();
-        } else {
+        if (!isVisible) {
             $notifyButton.hide();
         }
     }
@@ -803,6 +811,20 @@
 
             $('.permission-confirm').addClass('visible');
             $('#ec-first-name').text($("#emergency-firstName").val());
+
+            $('.emergency-field')
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
+
+                    if (placeholder.indexOf(' (Optional)') >= 0) {
+                        $(this).attr('placeholder', placeholder.replace(' (Optional)', ''));
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') >= 0) {
+                        $(this).data('placeholder', dataPlaceholder.replace(' (Optional)', ''));
+                    }
+                });
         }
 
         var flagOptional = _.every($('.emergency-field'), function (element) {
@@ -826,6 +848,20 @@
             $.each(elementList, function (index, element) {
                 RC.common.hideErrorTip(element);
             });
+
+            $('.emergency-field')
+                .each(function () {
+                    var placeholder = $(this).attr('placeholder');
+                    var dataPlaceholder = $(this).data('placeholder');
+
+                    if (placeholder.indexOf(' (Optional)') === -1 && !$(this).is(':focus')) {
+                        $(this).attr('placeholder', placeholder + ' (Optional)');
+                    }
+
+                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') === -1) {
+                        $(this).data('placeholder', dataPlaceholder + ' (Optional)');
+                    }
+                });
         }
     }
 

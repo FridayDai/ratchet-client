@@ -29,6 +29,30 @@
         return _initLoginLimit();
     };
 
+    var searchPair = {};
+
+    function setEmailAddressInAdvance() {
+        var searchStr = location.search;
+        var tempArr;
+
+        if (searchStr) {
+            searchStr = searchStr.substring(1, searchStr.length);
+
+            _.each(searchStr.split('&'), function (search) {
+                tempArr = search.split('=');
+                if (tempArr[0]) {
+                    searchPair[tempArr[0]] = tempArr[1];
+                }
+            });
+        }
+
+        if (searchPair.email) {
+            $('.email').val(searchPair.email);
+        } else if (localStorage.getItem('storedEmail')) {
+            $('.email').val(localStorage.getItem('storedEmail'));
+        }
+    }
+
     /**
      * add login input valid
      */
@@ -40,10 +64,6 @@
             $(".login-form").valid();
             localStorage.setItem('storedEmail', storedEmail);
         });
-
-        if (localStorage.getItem('storedEmail')) {
-            $('.email').val(localStorage.getItem('storedEmail'));
-        }
 
         $(".input-control").each(function () {
             $(this).on('input', function () {
@@ -80,6 +100,7 @@
     function _init() {
         _setValidate();
         _validLogin();
+        setEmailAddressInAdvance();
         loginLimit();
         _closeOptimizePrompt();
     }

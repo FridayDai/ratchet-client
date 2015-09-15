@@ -16,6 +16,7 @@ class PatientsController extends BaseController {
     def getPatients(PatientPagination patientPagination) {
         String token = request.session.token
         def clientId = request.session.clientId
+
         if (request.isXhr()) {
             def resp = patientService.loadPatients(token, clientId, patientPagination)
             render resp as JSON

@@ -112,7 +112,6 @@
             url: opts.urls.updatePassword.format(accountId),
             type: "POST",
             data: passwords,
-            dataType: "json",
             success: function () {
                 deferred.resolve();
                 setTimeout(function () {

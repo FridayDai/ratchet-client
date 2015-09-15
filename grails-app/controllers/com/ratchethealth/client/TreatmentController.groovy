@@ -14,7 +14,7 @@ class TreatmentController extends BaseController {
         def treatmentId = params?.treatmentId
         def clientId = params?.clientId
         def archived = params?.archived
-        def isEmailBlank = params?.isEmailBlank
+        def PatientEmailStatus = params?.PatientEmailStatus
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null") {
@@ -28,7 +28,7 @@ class TreatmentController extends BaseController {
                     treatmentId: treatmentId,
                     surgeryTime: surgeryTime,
                     archived: archived,
-                    isEmailBlank: isEmailBlank
+                    PatientEmailStatus: PatientEmailStatus
                 ]
     }
 

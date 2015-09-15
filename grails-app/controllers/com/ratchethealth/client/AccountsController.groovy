@@ -76,8 +76,11 @@ class AccountsController extends BaseController {
         def hasProfile = params?.hasProfile
         def password = params?.password
         def confirmPassword = params?.confirmPassword
+        def email = params?.email
+
         accountService.activateStaff(session.token, code, hasProfile, password, confirmPassword)
-        redirect(uri: '/login')
+
+        redirect(uri: "/login?email=${email}")
     }
 
     def getForgotPassword() {

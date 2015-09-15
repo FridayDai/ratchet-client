@@ -69,6 +69,7 @@ class PatientService extends RatchetAPIService {
         def patientIdOrName = patientPagination?.patientIdOrName
         def sortDir = patientPagination?.sortDir
         def sortFiled = patientPagination?.sortField
+        def emailStatus = patientPagination?.emailStatus
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
@@ -81,6 +82,7 @@ class PatientService extends RatchetAPIService {
                     .queryString("treatmentId", treatmentId)
                     .queryString("surgeonId", surgeonId)
                     .queryString("patientIdOrName", patientIdOrName)
+                    .queryString("emailStatus", emailStatus)
                     .queryString("order", sortDir)
                     .queryString("sorted", sortFiled)
                     .asString()

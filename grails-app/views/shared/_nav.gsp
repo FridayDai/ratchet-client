@@ -77,7 +77,7 @@
 
     <div class="form-group">
         <label class="lbl-group">DESCRIPTION<span>*</span></label>
-        <textarea id="assist-desc" name="description" type="text" class="input-group description"
+        <textarea id="assist-desc" name="desc" type="text" class="input-group description"
                   placeholder="Description here" required></textarea>
     </div>
 

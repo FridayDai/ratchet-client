@@ -14,7 +14,7 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def archived = (params?.archived) ?: false
-        def isEmailBlank = params?.isEmailBlank == 'true'
+        def PatientEmailStatus = params?.PatientEmailStatus
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
@@ -45,7 +45,7 @@ class TaskController extends BaseController {
                 patientId: patientId,
                 medicalRecordId: medicalRecordId,
                 archived: archived,
-                isEmailBlank: isEmailBlank
+                PatientEmailStatus: PatientEmailStatus
             ]
     }
 
@@ -56,6 +56,6 @@ class TaskController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
         def resp = taskService.sendTaskEmailToPatient(token, clientId, patientId, medicalRecordId, taskId)
-        render resp as JSON
+        render resp
     }
 }

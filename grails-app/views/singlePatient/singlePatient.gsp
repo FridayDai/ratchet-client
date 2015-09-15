@@ -42,16 +42,16 @@
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                        <span class="email-status unverified">Unverified</span>
+                        <span class="email-status unverified" value="${patientInfo.status}">Unverified</span>
                     </g:if>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
-                        <span class="email-status verified">Verified</span>
+                        <span class="email-status verified" value="${patientInfo.status}">Verified</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent">Nonexistent</span>
+                        <span class="email-status nonexistent" value="${patientInfo.status}">Nonexistent</span>
                     </g:elseif>
                     <g:else>
-                        <span class="email-status div-hidden"></span>
+                        <span class="email-status div-hidden" value="${patientInfo.status}"></span>
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
@@ -91,7 +91,8 @@
                                         medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
                                         treatmentCode  : medicalRecord?.treatmentCode,
-                                        isEmailBlank   : !patientInfo?.email
+                                        PatientEmailStatus   : patientInfo?.status,
+                                        _: System.currentTimeMillis()
                                 ]">
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
@@ -131,7 +132,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">EMAIL ADDRESS</label>
-            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com(Optional)"/>
+            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </g:form>
@@ -170,26 +171,26 @@
                 <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
                 <input id="emergency-firstName" name="emergency-firstName" type="text"
                        class="input-group emergency-field"
-                       placeholder="Grace(Optional)"/>
+                       placeholder="Grace (Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
                 <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group emergency-field"
-                       placeholder="Smith(Optional)"/>
+                       placeholder="Smith (Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
                 <input id="relationshipName" name="relationshipName" class="input-group emergency-field"
-                       placeholder="Select relationship">
+                       placeholder="Spouse (Optional)">
             </label>
             </div>
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
                 <input id="emergency-email" name="email" type="email" class="input-group emergency-field"
-                       placeholder="grace@email.com(Optional)"/>
+                       placeholder="grace@email.com (Optional)"/>
             </div>
 
             <div class="form-group inline permission-confirm">

@@ -138,7 +138,8 @@
             }
         }
         .btn-notify {
-            &:hover {
+            &:hover,
+            &:focus {
                 color: $base-color-task-overdue;
             }
         }
@@ -339,7 +340,8 @@
         border: 1px  $base-color-bg-head solid;
         color: $base-color-bg-head;
 
-        &:hover {
+        &:hover,
+        &:focus {
             background-color: $base-color-bg-head;
             color: $base-color-orange;
         }
@@ -388,7 +390,8 @@
 
         .disabled {
             background-color: transparent;
-            &:hover {
+            &:hover,
+            &:focus {
                 border: 1px  $base-color-bg-head solid;
                 background-color: transparent;
                 color: $base-color-bg-head;

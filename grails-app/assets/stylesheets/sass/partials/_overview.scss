@@ -118,6 +118,12 @@
     .add-email {
         color: $base-font-color;
         font-size: 13px;
+
+        &:hover,
+        &:focus {
+            color: $base-color-dark-grey;
+            text-decoration: underline;
+        }
     }
 
     .email-status {
