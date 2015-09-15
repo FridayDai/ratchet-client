@@ -42,16 +42,16 @@
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                        <span class="email-status unverified">Unverified</span>
+                        <span class="email-status unverified" value="${patientInfo.status}">Unverified</span>
                     </g:if>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
-                        <span class="email-status verified">Verified</span>
+                        <span class="email-status verified" value="${patientInfo.status}">Verified</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent">Nonexistent</span>
+                        <span class="email-status nonexistent" value="${patientInfo.status}">Nonexistent</span>
                     </g:elseif>
                     <g:else>
-                        <span class="email-status div-hidden"></span>
+                        <span class="email-status div-hidden" value="${patientInfo.status}"></span>
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
