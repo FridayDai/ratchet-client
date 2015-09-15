@@ -26,7 +26,7 @@ function PatientsTable() {
                 targets: 1,
                 data: 'firstName',
                 render: function (data, type, full) {
-                    return data === undefined ? (full.firstName + " " + full.lastName) : data;
+                    return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
                 width: "20%"
             }, {
