@@ -245,4 +245,14 @@
             text-decoration: underline;
         }
     }
+
+    .more-info{
+        &:before {
+            padding-right: 4px;
+            content: '\f44c';
+            color: $base-font-grey;
+            font-size: 12px;
+            font-family: ionicons;
+        }
+    }
 }

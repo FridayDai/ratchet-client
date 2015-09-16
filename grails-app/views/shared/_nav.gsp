@@ -60,6 +60,12 @@
         </li>
 
         <li class="btn-bottom">
+            <a target="_blank" href="http://www.ratchethealth.com/" class="log-out more-info">
+                <span class="btn-logout">More Info</span>
+            </a>
+        </li>
+
+        <li class="btn-bottom">
             <a href="/logout" class="log-out">
                 <span class="btn-logout">Logout</span>
             </a>
