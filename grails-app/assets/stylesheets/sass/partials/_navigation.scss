@@ -220,6 +220,7 @@
     margin-top: 20px;
 
     .log-out {
+        margin-left: 12px;
 
         &:before {
             padding-right: 8px;
@@ -247,11 +248,13 @@
     }
 
     .more-info{
+        margin-left: 27px;
+
         &:before {
             padding-right: 4px;
             content: '\f44c';
             color: $base-font-grey;
-            font-size: 12px;
+            font-size: 14px;
             font-family: ionicons;
         }
     }
