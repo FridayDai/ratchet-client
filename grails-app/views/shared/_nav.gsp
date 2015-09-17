@@ -66,7 +66,7 @@
         </li>
 
         <li class="btn-bottom">
-            <a href="/logout" class="log-out">
+            <a href="/logout" class="log-out" id="logout">
                 <span class="btn-logout">Logout</span>
             </a>
         </li>
