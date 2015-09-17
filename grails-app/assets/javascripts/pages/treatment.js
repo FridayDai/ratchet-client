@@ -130,15 +130,15 @@
                 fixFocusIE: false,
 
                 /* blur needed to correctly handle placeholder text */
-                onSelect: function(dateText, inst) {
+                onSelect: function() {
                     this.fixFocusIE = true;
                     $(this).blur().change().focus();
                 },
-                onClose: function(dateText, inst) {
+                onClose: function() {
                     this.fixFocusIE = true;
                     this.focus();
                 },
-                beforeShow: function(input, inst) {
+                beforeShow: function() {
                     var result = /MSIE (\d+\.\d+);/.test(navigator.userAgent) ? !this.fixFocusIE : true;
                     this.fixFocusIE = false;
                     return result;
