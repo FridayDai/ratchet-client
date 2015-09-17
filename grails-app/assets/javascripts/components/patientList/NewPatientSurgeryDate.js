@@ -4,9 +4,35 @@ var flight = require('flight');
 
 function NewPatientSurgeryDate() {
     this._initDatePicker = function () {
-        $(this.$node).datepicker({
-            dateFormat: 'MM d, yy'
-        });
+
+        if(/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
+            $(this.$node).datepicker({
+                dateFormat: 'MM d, yy',
+
+                /* fix buggy IE focus functionality */
+                fixFocusIE: false,
+
+                /* blur needed to correctly handle placeholder text */
+                onSelect: function (dateText, inst) {
+                    this.fixFocusIE = true;
+                    $(this).blur().change().focus();
+                },
+                onClose: function (dateText, inst) {
+                    this.fixFocusIE = true;
+                    this.focus();
+                },
+                beforeShow: function (input, inst) {
+                    var result = /MSIE (\d+\.\d+);/.test(navigator.userAgent) ? !this.fixFocusIE : true;
+                    this.fixFocusIE = false;
+                    return result;
+                }
+            });
+        } else {
+            $(this.$node).datepicker({
+                dateFormat: 'MM d, yy'
+            });
+        }
+
     };
 
     this.onTreatmentSelected = function (e, data) {

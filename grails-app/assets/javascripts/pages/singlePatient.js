@@ -527,7 +527,7 @@
      * @private
      */
     function _checkEmailUpdated(originalPatientEmail, updatedEmail) {
-        var $addEmail =$('.add-email');
+        var $addEmail = $('.add-email');
         var $emailStatus = $('.patient-detail .email-status');
 
         if (originalPatientEmail !== updatedEmail) {
@@ -703,10 +703,38 @@
      */
     function _initSurgeryTime(time) {
         $("#surgeryTime").datepicker("destroy");
-        $("#surgeryTime").datepicker({
-            dateFormat: 'MM d, yy',
-            minDate: new Date(time)
-        });
+
+        /* fix buggy IE popup not close on select date */
+        if(/MSIE (\d+\.\d+);/.test(navigator.userAgent)){
+            $("#surgeryTime").datepicker({
+                dateFormat: 'MM d, yy',
+                minDate: new Date(time),
+
+                /* fix buggy IE focus functionality */
+                fixFocusIE: false,
+
+                /* blur needed to correctly handle placeholder text */
+                onSelect: function(dateText, inst) {
+                    this.fixFocusIE = true;
+                    $(this).blur().change().focus();
+                },
+                onClose: function(dateText, inst) {
+                    this.fixFocusIE = true;
+                    this.focus();
+                },
+                beforeShow: function(input, inst) {
+                    var result = /MSIE (\d+\.\d+);/.test(navigator.userAgent) ? !this.fixFocusIE : true;
+                    this.fixFocusIE = false;
+                    return result;
+                }
+            });
+        } else {
+            $("#surgeryTime").datepicker({
+                dateFormat: 'MM d, yy',
+                minDate: new Date(time)
+            });
+        }
+
     }
 
     /**
@@ -928,7 +956,7 @@
         });
     }
 
-    function _clickTabSwitchArchiveStyle(archivedTreatmentClass){
+    function _clickTabSwitchArchiveStyle(archivedTreatmentClass) {
         $("#tabs li").click(function () {
             var $this = this;
             if ($($this).hasClass(archivedTreatmentClass)) {

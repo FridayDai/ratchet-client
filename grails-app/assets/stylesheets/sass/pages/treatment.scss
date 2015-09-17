@@ -201,7 +201,7 @@
     font-style: normal;
 }
 
-.more-btn {
+.drop-down-toggle {
     &:before {
         position: absolute;
         top: 12px;
@@ -211,10 +211,14 @@
         content: '\f394';
         font-size: 23px;
         color: $base-font-grey;
+        overflow: hidden;
     }
+}
 
+.more-btn {
     &:hover {
         cursor: pointer;
+        text-decoration: underline;
     }
 }
 
