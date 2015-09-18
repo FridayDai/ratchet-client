@@ -1,9 +1,6 @@
 function EmergencyContactFieldRequired() {
     this.attributes({
         emergencyContactFieldSelector: '.emergency-field',
-        emergencyContactRelationshipFieldSelector: '#relationship',
-        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
-        emergencyContactPermissionFirstNameSelector: '#ec-first-name',
         emergencyContactPermissionSelector: '.permission-confirm',
         emergencyContactPermissionCheckSelector: '.permission-confirm-check',
         emergencyContactRequiredMarkSelector: '.emergency-required'
@@ -25,10 +22,6 @@ function EmergencyContactFieldRequired() {
             if (isAllEmpty) {
                 this.setEmergencyContactRequired(false);
             }
-        }
-
-        if ($target[0] === this.select('emergencyContactFirstNameFieldSelector')[0]) {
-            this.select('emergencyContactPermissionFirstNameSelector').text($target.val());
         }
     };
 

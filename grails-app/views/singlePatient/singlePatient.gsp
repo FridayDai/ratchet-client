@@ -194,10 +194,9 @@
             </div>
 
             <div class="form-group inline permission-confirm">
-                <label></label>
-                <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
-                <span>Patient would like to release his/her health information to
-                    <span id="ec-first-name"></span>.</span>
+                <input type="checkbox" name="permissionConfirm" id="permission-confirm-check" class="permission-confirm-check"/>
+                <label for="permission-confirm-check">*Patient would like to release his/her health information to
+                    <span id="ec-first-name"></span>.</label>
             </div>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
@@ -224,6 +223,56 @@
                    class="input-group"
                    placeholder="john.smith@email.com (Optional)" required>
         </div>
+    </form>
+
+    <form action="" method="post" class="edit-surgeon ui-hidden" id="edit-group-provider-form">
+        <input type="hidden" autofocus/>
+        <div class="form-group">
+            <label class="lbl-group">GROUP<span>*</span></label>
+            <input id="groupSelect" name="groupName" type="text" class="group-field team-group clear"
+                   placeholder="Select group" required/>
+        </div>
+
+        <div class="form-group team-provider">
+            <label class="lbl-group">PROVIDER<span>*</span></label>
+            <input id="selectStaff" name="providerName" type="text" class="provider-field team-group clear"
+                   placeholder="Select provider" required/>
+        </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
+    </form>
+
+    <form action="" method="post" class="inviteGiverForm ui-hidden" id="invite-emergency-contact-form">
+        <div class="form-group inline">
+            <label class="lbl-group">FIRST NAME<span>*</span></label>
+            <input id="giver-firstName" name="firstName" type="text" class="input-group"
+                   placeholder="Grace"
+                   required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">LAST NAME<span>*</span></label>
+            <input id="giver-lastName" name="lastName" type="text" class="input-group"
+                   placeholder="Smith" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">RELATIONSHIP<span>*</span></label>
+            <input id="relationships" name="relationships" class="select-body input-group"
+                   placeholder="Select relationship" required>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+            <input id="giver-email" name="email" type="email" class="input-group"
+                   placeholder="grace@email.com" required/>
+        </div>
+
+        <div class="form-group inline team-permission-confirm">
+            <input type="checkbox" id="permissionConfirm" name="permissionConfirm" required/>
+            <label for="permissionConfirm">*Patient would like to release his/her health information to
+                <span id="permission-ec-first-name"></span>.</label>
+        </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
     </form>
 
     <div id="generate-code-dialog" class="warn ui-hidden">

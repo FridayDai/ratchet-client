@@ -29,8 +29,6 @@ function BulkImportDialog() {
     });
 
     this.setWindowResize = function () {
-        this.onWindowResizeBind = _.bind(this.onWindowResize, this);
-
         $(window).on('resize', this.onWindowResizeBind);
     };
 
@@ -214,6 +212,8 @@ function BulkImportDialog() {
         this.on(document, 'searchTitleForBulkImportTitleTable', this.onTitleSearch);
         this.on(document, 'bulkImportFileUploadSuccess', this.onBulkImportFileUploadSuccess);
         this.on(document, 'bulkImportFileUploadFail', this.onBulkImportFileUploadFail);
+
+        this.onWindowResizeBind = _.bind(this.onWindowResize, this);
 
         this.setWindowResize();
         this.toggleNextButton(false);

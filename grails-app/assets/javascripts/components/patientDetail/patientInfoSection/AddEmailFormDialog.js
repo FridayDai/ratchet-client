@@ -22,9 +22,7 @@ function AddEmailDialog() {
     };
 
     this.initValidation = function () {
-        return _.defaultsDeep(
-            PatientEmailValidation.get()
-        );
+        return PatientEmailValidation.get();
     };
 
     this.setExtraData = function () {

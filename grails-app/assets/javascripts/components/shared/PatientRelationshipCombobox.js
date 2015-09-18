@@ -9,11 +9,15 @@ function PatientRelationshipCombobox() {
     });
 
     this.onSelect = function () {
-        this.trigger(this.attr.selectEvent);
+        if (this.attr.selectEvent) {
+            this.trigger(this.attr.selectEvent);
+        }
     };
 
     this.onClear = function () {
-        this.trigger(this.attr.clearEvent);
+        if (this.attr.clearEvent) {
+            this.trigger(this.attr.clearEvent);
+        }
     };
 
     this.after('initialize', function () {

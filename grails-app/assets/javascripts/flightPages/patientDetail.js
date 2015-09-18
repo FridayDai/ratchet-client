@@ -3,6 +3,9 @@ require('jquery-ui-tabs');
 
 var flight = require('flight');
 var WithPage = require('../components/common/WithPage');
+var STRINGs = require('../constants/Strings');
+var Utility = require('../utils/Utility');
+
 var PatientInfoSection = require('../components/patientDetail/patientInfoSection/PatientInfoSection');
 var Treatment = require('../components/patientDetail/treatmentSection/Treatment');
 var TreatmentPanel = require('../components/patientDetail/treatmentSection/TreatmentPanel');
@@ -11,7 +14,8 @@ var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
 var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
-var STRINGs = require('../constants/Strings');
+var EditGroupProviderFormDialog = require('../components/patientDetail/teamSection/EditGroupProviderFormDialog');
+var EmergencyContactFormDialog = require('../components/patientDetail/teamSection/EmergencyContactFormDialog');
 
 var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
 
@@ -27,7 +31,9 @@ function PatientDetailPage() {
         addEmailDialogSelector: '#add-email-form',
         addTreatmentDialogSelector: '#treatment-form',
         treatmentCodeDialogSelector: '#generate-code-dialog',
-        editSurgeryDateDialogSelector: '#treatment-time-form'
+        editSurgeryDateDialogSelector: '#treatment-time-form',
+        editGroupProviderDialogSelector: '#edit-group-provider-form',
+        addEmergencyContactDialogSelector: '#invite-emergency-contact-form'
     });
 
     this.children({
@@ -55,6 +61,14 @@ function PatientDetailPage() {
             selector: 'editSurgeryDateDialogSelector',
             event: 'showEditSurgeryDialog',
             dialog: EditSurgeryDateFormDialog
+        }, {
+            selector: 'editGroupProviderDialogSelector',
+            event: 'showEditGroupProviderDialog',
+            dialog: EditGroupProviderFormDialog
+        }, {
+            selector: 'addEmergencyContactDialogSelector',
+            event: 'showEmergencyContactDialog',
+            dialog: EmergencyContactFormDialog
         }
     ]);
 
@@ -81,8 +95,12 @@ function PatientDetailPage() {
                 ui.jqXHR.error(function () {
                     ui.panel.html(STRINGs.TAB_LOAD_ERROR);
                 });
+
+                Utility.progress(true);
             },
             load: function (e, ui) {
+                Utility.progress(false);
+
                 me.select('tabsContainerSelector').show();
 
                 treatmentPanelOnce(ui.panel.context);

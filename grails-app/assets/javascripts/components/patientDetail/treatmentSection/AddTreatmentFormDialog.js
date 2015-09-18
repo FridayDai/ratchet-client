@@ -19,7 +19,9 @@ function AddTreatmentFormDialog() {
         relationshipSelectEvent: 'addTreatmentRelationshipSelected',
         relationshipClearEvent: 'addTreatmentRelationshipCleared',
 
-        emergencyContactRelationshipFieldSelector: '#relationship'
+        emergencyContactRelationshipFieldSelector: '#relationship',
+        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
+        emergencyContactPermissionFirstNameSelector: '#ec-first-name'
     });
 
     this.options({
@@ -119,12 +121,21 @@ function AddTreatmentFormDialog() {
         }));
     };
 
+    this.onEmergencyContactFirstNameInput = function () {
+        this.select('emergencyContactPermissionFirstNameSelector')
+            .text(this.select('emergencyContactFirstNameFieldSelector').val());
+    };
+
     this.after('initialize', function () {
         this.on(document, 'patientInfoServed', this.onPatientInfoServed);
 
         this.on('formSuccess', this.onAddTreatmentSuccess);
 
         this.on('dialogclose', this.onClose);
+
+        this.on('input', {
+            emergencyContactFirstNameFieldSelector: this.onEmergencyContactFirstNameInput
+        });
     });
 }
 

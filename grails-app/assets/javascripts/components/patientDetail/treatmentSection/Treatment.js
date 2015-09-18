@@ -4,6 +4,7 @@ var TeamSection = require('../teamSection/TeamSection');
 var ActivitySection = require('../activitySection/ActivitySection');
 var URLs = require('../../../constants/Urls');
 var Notifications = require('../../common/Notification');
+var Utility = require('../../../utils/Utility');
 
 function Treatment() {
     this.attributes({
@@ -19,6 +20,8 @@ function Treatment() {
     });
 
     this.initSubTabs = function() {
+        var me = this;
+
         this.select('subTabsContainerSelector').tabs({
             cache: true,
             ajaxOptions: {cache: true},
@@ -32,25 +35,31 @@ function Treatment() {
                     ui.tab.data("loaded", true);
                 });
 
+                Utility.progress(true);
             },
             load: function (event, ui) {
                 var type = ui.tab.data("type");
                 if (type) {
                     switch (type) {
-                        case "Activity":
-                            //RC.pages.activity.init(ui.panel, ui.panel.find("#activityTable"));
-                            ActivitySection.attachTo(ui.panel);
-                            break;
-
                         case "Task":
+                            me.taskNode = ui.panel.get(0);
                             TaskSection.attachTo(ui.panel);
                             break;
 
                         case "Team":
+                            me.teamNode = ui.panel.get(0);
                             TeamSection.attachTo(ui.panel);
+                            break;
+
+                        case "Activity":
+                            //RC.pages.activity.init(ui.panel, ui.panel.find("#activityTable"));
+                            me.activityNode = ui.panel.get(0);
+                            ActivitySection.attachTo(ui.panel);
                             break;
                     }
                 }
+
+                Utility.progress(false);
             },
             disabled: [4, 5]
         });
@@ -88,8 +97,21 @@ function Treatment() {
 
         if ($dropdownList.is(':visible')) {
             $dropdownList.hide();
+            $('body').off('click', this.hideMoreDropdownListBind);
+
         } else {
             $dropdownList.show();
+
+            $('body').click(this.hideMoreDropdownListBind);
+        }
+    };
+
+    this.hideMoreDropdownList = function () {
+        var $dropdownList = this.select('moreDropdownListSelector');
+
+        if ($dropdownList.is(':visible')) {
+            $dropdownList.hide();
+            $('body').off('click', this.hideMoreDropdownListBind);
         }
     };
 
@@ -143,11 +165,16 @@ function Treatment() {
             type: 'POST',
             success: function (data) {
                 if (data.resp === true) {
-                    //window.location.reload();
                     me.trigger('archiveTreatmentSuccess');
                 }
             }
         });
+    };
+
+    this.onNoActiveTask = function () {
+        this.select('generateCodeButtonSelector')
+            .attr('disabled', true)
+            .addClass('btn-generate-code-disabled');
     };
 
     this.after('initialize', function () {
@@ -159,11 +186,24 @@ function Treatment() {
             editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
             archiveButtonSelector: this.onArchiveButtonClicked
         });
+
+        this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);
+
+        this.on('noActiveTask', this.onNoActiveTask);
     });
 
     this.before('teardown', function () {
-        //TODO: teardown task, team and activities section
         this.select('subTabsContainerSelector').tabs('destroy');
+
+        _.each([this.taskNode, this.teamNode, this.activityNode], function (node) {
+            if (node) {
+                var instances = flight.registry.findInstanceInfoByNode(node);
+
+                _.each(instances, function (instance) {
+                    instance.instance.teardown();
+                });
+            }
+        });
     });
 }
 
