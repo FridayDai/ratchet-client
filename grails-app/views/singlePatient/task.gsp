@@ -3,10 +3,9 @@
 </g:if>
 
 <div class="content ${archivedStatus}">
-    <g:hiddenField name="task-info-hidden" id="task-info-hidden" data-client-id="${clientId}"
+    <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
                    data-patient-id="${patientId}"
                    data-medical-record-id="${medicalRecordId}"></g:hiddenField>
-
 
     <div class="items-title">
         <h4 class="active-items">ACTIVE ITEMS</h4>
@@ -15,11 +14,11 @@
     <div class="tasks-list list-bottom">
         <div class="task-row ${archivedStatus}" id="task-row-active">
             <g:if test="${activeTasks == [] || activeTasks == null}">
-                <div class="no-item center no-item-sent" id="no-active-item"><p>There are no active items</p></div>
+                <div class="no-item center no-item-sent no-active-item" id="no-active-item"><p>There are no active items</p></div>
             </g:if>
             <g:else>
                 <g:each in="${activeTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>
@@ -36,7 +35,7 @@
             </g:if>
             <g:else>
                 <g:each in="${closedTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>
@@ -53,7 +52,7 @@
             </g:if>
             <g:else>
                 <g:each in="${scheduleTasks}" var="task">
-                    <g:render template="taskBox" model="['task': task]"></g:render>
+                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
                 </g:each>
             </g:else>
         </div>

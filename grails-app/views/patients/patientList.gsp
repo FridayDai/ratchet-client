@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/patientList.bundle.js"/>
 <g:set var="cssPath" value="patientList"/>
@@ -76,7 +75,7 @@
         <form action="/patients/check-id" method="post" id="patient-id-form" class="form ui-hidden">
             <div class="form-group inline">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
-                <input id="new-patient-id" name="patientId" type="text" class="input-group input-only-one"
+                <input id="new-patient-id" name="identify" type="text" class="input-group input-only-one"
                        placeholder="1234567890" required/>
             </div>
 

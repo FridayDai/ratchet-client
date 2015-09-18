@@ -29,7 +29,6 @@
 
     h4 {
         margin-bottom: 7px;
-        font-family: Lato;
         font-weight: 400;
         font-size: 15px;
     }
@@ -84,7 +83,6 @@
 
     p {
         font-weight: 300;
-        font-family: Lato;
     }
 }
 
@@ -96,7 +94,6 @@
     margin-bottom: 10px;
     border: 2px $base-color-mid-grey solid;
     vertical-align: middle;
-    font-family: "Lato";
 
     h5 {
         color: $base-color-light-black;
@@ -199,7 +196,6 @@
         padding: 6px 0;
         margin-right: -15px;
         color: $base-color-medium-black;
-        font-family: Lato;
         font-weight: 700;
         font-size: 12px;
         -webkit-transform: scale(0.8);
@@ -229,7 +225,6 @@
     .item-title {
         height: 50px;
         padding-top: 4px;
-        font-family: Lato;
         font-weight: 400;
         font-size: 13pt;
     }
@@ -263,7 +258,6 @@
         height: 28px;
         padding: 10px 0;
         font-weight: 400;
-        font-family: Lato;
     }
 
     .relative-sent-time {
@@ -340,8 +334,7 @@
         border: 1px  $base-color-bg-head solid;
         color: $base-color-bg-head;
 
-        &:hover,
-        &:focus {
+        &:hover, &:focus {
             background-color: $base-color-bg-head;
             color: $base-color-orange;
         }

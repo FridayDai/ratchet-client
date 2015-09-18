@@ -1264,6 +1264,10 @@
 
                 param = typeof param === "string" && { url: param } || param;
 
+                if ($.isFunction(param.urlFn)) {
+                    param.url = param.urlFn();
+                }
+
                 if ( previous.old === value ) {
                     return previous.valid;
                 }

@@ -73,17 +73,17 @@
                             class="more-btn"
                         </g:else>>More</span></button>
 
-                <div class="drop-down-lists">
+                <div class="drop-down-lists hidden">
                     <label class="hidden-surgery-time-picker hidden">
                         <g:formatDate date="${surgeryTime}"
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMM d, yyyy"></g:formatDate>
+                                      format="MMMM d, yyyy"></g:formatDate>
                     </label>
                     <span <g:if test="${archived == 'true'}">
-                            class="btn hidden drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
+                            class="btn drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
-                            class="btn hidden drop-down-list icon-edit surgeryTime-edit inline "
+                            class="btn drop-down-list icon-edit surgeryTime-edit inline "
                         </g:else>
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}" data-treatment-id="${treatmentId}"
@@ -91,10 +91,10 @@
                         Edit
                     </span>
                     <span <g:if test="${archived == 'true'}">
-                            class="btn hidden drop-down-list archived-active inline disabled" disabled="disabled"
+                            class="btn drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
-                            class="btn hidden drop-down-list archived-active inline "
+                            class="btn drop-down-list archived-active inline "
                         </g:else>
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}"

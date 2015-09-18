@@ -3,7 +3,7 @@ require('jForm');
 
 function WithForm() {
     this.attributes({
-        formSelector: 'form'
+        formSelector: '.'
     });
 
     this._initForm = function () {
@@ -63,6 +63,11 @@ function WithForm() {
 
     this.after('initialize', function () {
         this._initForm();
+    });
+
+    this.before('teardown', function () {
+        this.formEl.data('validator', null);
+        this.formEl = null;
     });
 }
 

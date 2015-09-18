@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="cssPath" value="resetPassword"/>
 <g:applyLayout name="form">
 

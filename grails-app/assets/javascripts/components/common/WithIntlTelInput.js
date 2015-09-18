@@ -5,13 +5,17 @@ function WithIntlTelInput() {
 
     this._initPhoneInput = function () {
         this.$node.intlTelInput({
-            onlyCountries: ["us"],
+            onlyCountries: ['us'],
             utilsScript: false
         });
     };
 
     this.after('initialize', function () {
         this._initPhoneInput();
+    });
+
+    this.before('teardown', function () {
+        this.$node.intlTelInput('destroy');
     });
 }
 

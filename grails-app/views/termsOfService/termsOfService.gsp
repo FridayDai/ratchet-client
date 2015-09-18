@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="cssPath" value="agreement"/>
 <g:applyLayout name="agreement">
     <html>

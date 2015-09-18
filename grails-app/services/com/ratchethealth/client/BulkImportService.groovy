@@ -25,10 +25,10 @@ class BulkImportService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-                map.put("data", result.items)
+
                 log.info("Bulk import patient success, token: ${token}")
-                return map
+
+                ["data": result.items]
             } else if (resp.status == 209) {
                 throw new ApiReturnException(resp.status, '')
             }
@@ -62,14 +62,14 @@ class BulkImportService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
 
                 log.info("Lookup success, token: ${token}")
-                return map
+
+                [
+                    "recordsTotal": result.totalCount,
+                    "recordsFiltered": result.totalCount,
+                    "data": result.items
+                ]
             }
             else {
                 handleError(resp)

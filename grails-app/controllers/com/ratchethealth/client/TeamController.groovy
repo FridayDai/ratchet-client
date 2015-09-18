@@ -19,7 +19,7 @@ class TeamController extends BaseController {
             archived = false
         }
         def surgeons = teamService.getCareTeam(token, medicalRecordId)
-        render(view: "/team/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived])
+        render(view: "/singlePatient/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived])
     }
 
     def getCareGiver() {

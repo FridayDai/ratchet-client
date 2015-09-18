@@ -36,7 +36,7 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
-        render view: 'task',
+        render view: '/singlePatient/task',
             model: [
                 activeTasks: activeTasks,
                 closedTasks: closedTasks,
