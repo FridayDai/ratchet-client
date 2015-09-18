@@ -2,8 +2,13 @@ var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 
 var EmergencyContackTable = require('./EmergencyContactTable');
+var CheckArchivedWindowSize = require('../../shared/CheckArchivedWindowSize');
 
 function TeamSection() {
+    flight.compose.mixin(this, [
+        CheckArchivedWindowSize
+    ]);
+
     this.attributes({
         medicalRecordIdHiddenSelector: '.hidden-medical-record',
         clientIdHiddenSelector: '.hidden-client-id',
