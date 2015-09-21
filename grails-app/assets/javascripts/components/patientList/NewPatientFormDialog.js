@@ -105,11 +105,11 @@ function NewPatientFormDialog() {
     this.prepareToShow = function (data) {
         if (data.check !== 'false') {
             this.setPatientExisting(data);
+            this.select('patientIdStaticSelector').text(data.patientId);
         } else {
             this.setPatientNotExisting();
+            this.select('patientIdStaticSelector').text(data.identify);
         }
-
-        this.select('patientIdStaticSelector').text(data.patientId);
     };
 
     this.setPatientExisting = function (data) {
