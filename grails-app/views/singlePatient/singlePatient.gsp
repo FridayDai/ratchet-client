@@ -48,7 +48,7 @@
                         <span class="email-status verified" value="${patientInfo.status}">Verified</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent" value="${patientInfo.status}">Nonexistent</span>
+                        <span class="email-status nonexistent" value="${patientInfo.status}">Undelivered</span>
                     </g:elseif>
                     <g:else>
                         <span class="email-status div-hidden" value="${patientInfo.status}"></span>

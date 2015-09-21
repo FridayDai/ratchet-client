@@ -451,7 +451,7 @@
         color: $base-color-pending;
     }
 
-    &.nonexistent:before {
+    &.undelivered:before {
         color: $base-color-overdue;
     }
 }
