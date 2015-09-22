@@ -4,33 +4,35 @@ var flight = require('flight');
 
 function PatientSurgeryDate() {
     this._initDatePicker = function () {
-        if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
-            $(this.$node).datepicker({
-                dateFormat: 'MM d, yy',
+        var el = $(this.$node);
+        var options = { dateFormat: 'MM d, yy'};
 
-                /* fix buggy IE focus functionality */
-                fixFocusIE: false,
+        if (/(MSIE |Trident\/|Edge\/)(\d+\.\d+);/.test(navigator.userAgent)) {
+            /* fix buggy IE focus functionality */
+            options.fixFocusIE = false;
 
-                /* blur needed to correctly handle placeholder text */
-                onSelect: function () {
-                    this.fixFocusIE = true;
-                    $(this).blur().change().focus();
-                },
-                onClose: function () {
-                    this.fixFocusIE = true;
-                    this.focus();
-                },
-                beforeShow: function () {
-                    var result = /MSIE (\d+\.\d+);/.test(navigator.userAgent) ? !this.fixFocusIE : true;
-                    this.fixFocusIE = false;
-                    return result;
-                }
-            });
-        } else {
-            this.$node.datepicker({
-                dateFormat: 'MM d, yy'
+            /* blur needed to correctly handle placeholder text */
+            options.onSelect = function () {
+                this.fixFocusIE = true;
+                $(this).blur().change().focus();
+            };
+            options.onClose = function () {
+                this.fixFocusIE = true;
+                this.focus();
+            };
+            options.beforeShow = function () {
+                var result =  !this.fixFocusIE ;
+                this.fixFocusIE = false;
+                return result;
+            };
+
+            /* help datepicker also can show when focusing the field for second time in IE */
+            el.blur(function() {
+                options.fixFocusIE = false;
             });
         }
+
+        el.datepicker(options);
     };
 
     this.onTreatmentSelected = function (e, data) {
