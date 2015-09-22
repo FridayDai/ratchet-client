@@ -105,6 +105,7 @@ function AddTreatmentFormDialog() {
             lastName: this.patientInfo.lastName,
             phoneNumber: this.patientInfo.phoneNumber.replace(/[\s\(\)-]/g, ''),
             email: this.patientInfo.email,
+            emailStatus: this.patientInfo.emailStatus,
             groupId: groupId,
             staffId: providerId,
             treatmentId: treatmentId,
@@ -117,7 +118,8 @@ function AddTreatmentFormDialog() {
     this.onAddTreatmentSuccess = function (e, data) {
         this.trigger('addTreatmentSuccess', _.assign(data, {
             clientId: this.patientInfo.clientId,
-            patientId: this.patientInfo.patientId
+            patientId: this.patientInfo.patientId,
+            emailStatus: this.patientInfo.emailStatus
         }));
     };
 

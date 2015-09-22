@@ -16,6 +16,7 @@ function PatientInfoSection() {
         firstNameStaticSelector: '.first-name',
         lastNameStaticSelector: '.last-name',
         emailStaticSelector: '#patientEmail',
+        emailStatusSelector: '.info .email-status',
         phoneNumberStaticSelector: '.phone'
     });
 
@@ -39,6 +40,7 @@ function PatientInfoSection() {
             firstName: this.select('firstNameStaticSelector').text().trim(),
             lastName: this.select('lastNameStaticSelector').text().trim(),
             email: this.originalEmail,
+            emailStatus: this.select('emailStatusSelector').attr("value"),
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim()
         };
     };

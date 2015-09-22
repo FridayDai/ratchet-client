@@ -33,6 +33,7 @@ function TreatmentPanel() {
                     options.medicalRecordId,
                     options.treatmentInfo.id,
                     options.treatmentInfo.surgeryDate,
+                    options.emailStatus,
                     Date.now()
                 );
 

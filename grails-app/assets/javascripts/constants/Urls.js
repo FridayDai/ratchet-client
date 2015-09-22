@@ -19,7 +19,7 @@ module.exports = {
     PAGE_PATIENT_DETAIL: '/patients/{0}',
 
     SECTION_TREATMENT_TAB: '/patients/{0}/treatment?clientId={1}' +
-    '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&_={5}',
+    '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&PatientEmailStatus={5}&_={6}',
 
     INVITE_PATIENT: '/patients/{0}/invite',
 
