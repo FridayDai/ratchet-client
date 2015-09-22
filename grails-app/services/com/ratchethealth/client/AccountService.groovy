@@ -112,8 +112,7 @@ class AccountService extends RatchetAPIService {
         def groupId = account?.groupId
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
-        Integer accountId = account.accountId.toInteger()
-        def url = String.format(updateAccountUrl, accountId)
+        def url = String.format(updateAccountUrl, account?.accountId)
         log.info("Call backend service to update account with clientId and account info, token: ${token}.")
 
 
