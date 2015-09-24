@@ -34,6 +34,8 @@ function NewPatientFormDialog() {
 
         basicEditButtonSelector: 'a.form-group-edit',
         emergencyContactRelationshipFieldSelector: '#relationship',
+        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
+        emergencyContactPermissionFirstNameSelector: '#ec-first-name',
 
         patientIdStaticSelector: '#patient-id-value',
         firstNameStaticSelector: '#firstName-static',
@@ -266,12 +268,21 @@ function NewPatientFormDialog() {
         window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
     };
 
+    this.onEmergencyContactFirstNameInput = function () {
+        this.select('emergencyContactPermissionFirstNameSelector')
+            .text(this.select('emergencyContactFirstNameFieldSelector').val());
+    };
+
     this.after('initialize', function () {
         this.on('dialogclose', this.onClose);
         this.on('formSuccess', this.onAddPatientSuccess);
 
         this.on('click', {
             'basicEditButtonSelector': this.showBasicField
+        });
+
+        this.on('input', {
+            emergencyContactFirstNameFieldSelector: this.onEmergencyContactFirstNameInput
         });
     });
 }
