@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 
 var EmergencyContackTable = require('./EmergencyContactTable');
-var CheckArchivedWindowSize = require('../../shared/CheckArchivedWindowSize');
+var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 
 function TeamSection() {
     flight.compose.mixin(this, [

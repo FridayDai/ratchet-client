@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 
 var ActivityTable = require('./ActivityTable');
-var CheckArchivedWindowSize = require('../../shared/CheckArchivedWindowSize');
+var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 
 function ActivitySection() {
     flight.compose.mixin(this, [

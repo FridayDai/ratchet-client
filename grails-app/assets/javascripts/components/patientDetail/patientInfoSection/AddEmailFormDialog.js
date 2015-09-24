@@ -1,6 +1,6 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
-var PatientEmailValidation = require('../../shared/PatientEmailValidation');
+var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 
 function AddEmailDialog() {
     this.attributes({

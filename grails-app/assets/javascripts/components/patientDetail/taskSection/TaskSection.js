@@ -3,7 +3,7 @@ var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
 
-var CheckArchivedWindowSize = require('../../shared/CheckArchivedWindowSize');
+var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 
 function TaskSection() {
     flight.compose.mixin(this, [

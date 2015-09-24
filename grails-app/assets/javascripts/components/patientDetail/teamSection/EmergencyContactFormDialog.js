@@ -3,8 +3,8 @@ var WithFormDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
 var URLs = require('../../../constants/Urls');
 
-var PatientRelationshipCombobox = require('../../shared/PatientRelationshipCombobox');
-var EmergencyContactEmailValidation = require('../../shared/EmergencyContactEmailValidation');
+var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
+var EmergencyContactEmailValidation = require('../../shared/validation/EmergencyContactEmailValidation');
 
 var UPDATE = 'updateModel';
 var ADD = 'addModel';

@@ -1,12 +1,12 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
-var WithEmergencyContactFieldRequired = require('../../shared/WithEmergencyContactFieldRequired');
-var PatientGroupCombobox = require('../../shared/PatientGroupCombobox');
-var PatientRelationshipCombobox = require('../../shared/PatientRelationshipCombobox');
-var PatientProviderCombobox = require('../../shared/PatientProviderCombobox');
-var PatientTreatmentCombobox = require('../../shared/PatientTreatmentCombobox');
-var PatientSurgeryDate = require('../../shared/PatientSurgeryDate');
+var WithEmergencyContactFieldRequired = require('../../shared/functional/WithEmergencyContactFieldRequired');
+var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
+var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
+var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
+var PatientTreatmentCombobox = require('../../shared/components/PatientTreatmentCombobox');
+var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
 var Utility = require('../../../utils/Utility');
 
 function AddTreatmentFormDialog() {

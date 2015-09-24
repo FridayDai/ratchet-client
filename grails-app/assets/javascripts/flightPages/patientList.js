@@ -11,8 +11,6 @@ var NewPatientFormDialog = require('../components/patientList/NewPatientFormDial
 var BulkImportDialog = require('../components/patientList/BulkImportDialog');
 
 function PatientListPage() {
-    require('../components/layout/Main');
-
     this.attributes({
         headerPanelSelector: '#header-panel',
         toolbarPanelSelector: '#patients-toolbar',

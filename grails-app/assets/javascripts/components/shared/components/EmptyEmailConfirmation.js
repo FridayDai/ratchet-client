@@ -1,4 +1,4 @@
-var Notifications = require('../common/Notification');
+var Notifications = require('../../common/Notification');
 
 function EmptyEmailConfirmation() {
     this.attributes({

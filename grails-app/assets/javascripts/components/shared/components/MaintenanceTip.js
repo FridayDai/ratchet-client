@@ -1,5 +1,5 @@
 var flight = require('flight');
-var URLs = require('../../constants/Urls');
+var URLs = require('../../../constants/Urls');
 
 function MaintenanceTip() {
     this.attributes({

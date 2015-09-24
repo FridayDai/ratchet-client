@@ -3,8 +3,8 @@ var WithChildren = require('../../common/WithChildren');
 var WithFormDialog = require('../../common/WithFormDialog');
 var URLs = require('../../../constants/Urls');
 
-var PatientGroupCombobox = require('../../shared/PatientGroupCombobox');
-var PatientProviderCombobox = require('../../shared/PatientProviderCombobox');
+var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
+var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
 
 function EditGroupProviderFormDialog() {
     this.attributes({

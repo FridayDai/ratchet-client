@@ -1,4 +1,5 @@
-<g:set var="scriptPath" value="bundles/accountsBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/accounts.bundle.js"/>
 <g:set var="cssPath" value="accounts"/>
 <g:applyLayout name="main">
     <html>
@@ -8,12 +9,12 @@
 
     <body>
     <div class="content">
-        <div class="inner-header">
+        <div class="inner-header" id="header-panel">
             <label class="title account-icon">ACCOUNTS</label>
             <a href="#" id="add-account" class="btn btn-add add-account"><span>New Account</span></a>
         </div>
 
-        <div class="inner-search">
+        <div class="inner-search" id="accounts-toolbar">
             <div class="search-content clear">
                 <div class="filler-content pull-right">
                     <input type="text" placeholder="Account ID, Name" class="search-input" id="search-input">
@@ -46,14 +47,15 @@
                         <td>${account.lastUpdateDate}</td>
                         <td>${account.id}</td>
                         <td>${account.doctor}</td>
+                        <td>${account.firstName}</td>
+                        <td>${account.lastName}</td>
                     </tr>
                 </g:each>
                 </tbody>
             </table>
         </div>
-        <span id="isDoctorImg" class="ui-hidden" data-img-path="${assetPath(src: 'isDoctor.png')}"></span>
-        <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
+        <form class="accounts-form ui-hidden" id="add-account-form" action="/accounts" method="post">
             <div class="form-group">
                 <label class="checkbox">
                     <input id="doctor" name="doctor" type="checkbox">Dr.
@@ -76,11 +78,6 @@
                 <input id="email" name="email" type="email" class="input-group" placeholder="john_smith@email.com"
                        required/>
             </div>
-
-        %{--<div class="form-group inline">--}%
-        %{--<label class="lbl-group">ROLE<span>*</span></label>--}%
-        %{--<input id="type" name="type" class="input-group" required>--}%
-        %{--</div>--}%
 
             <div class="form-group inline">
                 <label class="lbl-group">PROVIDER</label>
@@ -109,7 +106,7 @@
             </div>
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>
-        </g:form>
+        </form>
 
     </div>
     </body>

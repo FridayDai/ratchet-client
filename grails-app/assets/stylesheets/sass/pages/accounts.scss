@@ -51,10 +51,20 @@
     }
 }
 
-//.hidden {
-//    display: none;
-//}
-//
-//.show {
-//    display: inline-block;
-//}
+.doctor-mark {
+    display: inline-block;
+    height: 14px;
+    width: 25px;
+    vertical-align: middle;
+    background: no-repeat url('../../../images/isDoctor.png');
+}
+
+.form-group .checkbox {
+    margin-top: 0;
+    color: #333333;
+}
+
+input[type="checkbox"] {
+    height: 15px;
+    width: 15px;
+}

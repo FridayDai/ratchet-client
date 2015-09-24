@@ -1,7 +1,7 @@
-require('../../libs/jquery-validation/jquery.validate.js');
+require('../../../libs/jquery-validation/jquery.validate.js');
 require('intlTelInput-utils');
 
-var STRINGs = require('../../constants/Strings');
+var STRINGs = require('../../../constants/Strings');
 
 $.validator.addMethod('phoneNumberCheck', function (value, element) {
     var tel = /^[0-9\-\(\)\s]+$/;
