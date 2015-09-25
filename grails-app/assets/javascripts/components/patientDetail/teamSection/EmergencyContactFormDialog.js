@@ -100,7 +100,12 @@ function EmergencyContactFormDialog() {
         this.trigger('emergencyContactUpdateSuccess');
     };
 
+    this.onClose = function () {
+        this.select('emergencyContactPermissionFirstNameSelector').empty();
+    };
+
     this.after('initialize', function () {
+        this.on('dialogclose', this.onClose);
         this.on('formSuccess', this.onAddEmergencyContactSuccess);
 
         this.on('input', {

@@ -217,6 +217,8 @@ function NewPatientFormDialog() {
     };
 
     this.onClose = function () {
+        this.select('emergencyContactPermissionFirstNameSelector').empty();
+
         this.trigger('newPatientReset');
     };
 
