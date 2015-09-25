@@ -22,8 +22,12 @@ function EditSurgeryDateFormDialog() {
     });
 
     this.onShow = function (e, data) {
-        this.setCurrentSurgeryDate(data.currentSurgeryDate);
-        this.setMinSurgeryDate(data.clientId, data.treatmentId);
+        var me = this;
+
+        this.setMinSurgeryDate(data.clientId, data.treatmentId)
+            .then(function () {
+                me.setCurrentSurgeryDate(data.currentSurgeryDate);
+            });
 
         this.patientId = data.patientId;
         this.medicalRecordId = data.medicalRecordId;
@@ -32,7 +36,7 @@ function EditSurgeryDateFormDialog() {
     this.setMinSurgeryDate = function (clientId, treatmentId) {
         var me = this;
 
-        $.ajax({
+        return $.ajax({
             url: URLs.GET_TREATMENT_DETAIL.format(treatmentId),
             type: 'POST',
             data: { clientId: clientId }
@@ -48,7 +52,7 @@ function EditSurgeryDateFormDialog() {
     this.setCurrentSurgeryDate = function (current) {
         this.currentSurgeryDate = current;
 
-        this.select('surgeryTimeFieldSelector').attr('value', current);
+        this.select('surgeryTimeFieldSelector').val(current);
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
