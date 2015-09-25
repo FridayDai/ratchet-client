@@ -100,7 +100,7 @@
             </div>
 
             <div class="form-group">
-                <label class="lbl-group">GROUP<span class="hidden">*</span></label>
+                <label class="lbl-group">GROUP<span class="group-require-mark hidden">*</span></label>
                 <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
                        placeholder="Select group"/>
             </div>
