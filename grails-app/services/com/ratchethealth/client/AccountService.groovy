@@ -10,8 +10,8 @@ class AccountService extends RatchetAPIService {
         def start = accountPagination?.start
         def length = accountPagination?.length
         def name = accountPagination?.name
-        def sort = accountPagination?.sort
-        def order = accountPagination?.order
+        def sortField = accountPagination?.sortField
+        def sortDir = accountPagination?.sortDir
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
         log.info("Call backend service to get accounts with start, length, name and clientId, token: ${token}.")
@@ -22,26 +22,25 @@ class AccountService extends RatchetAPIService {
                     .queryString("offset", start)
                     .queryString("name", name)
                     .queryString("clientId", clientId)
-                    .queryString("sorted", sort)
-                    .queryString("order", order)
+                    .queryString("sorted", sortField)
+                    .queryString("order", sortDir)
                     .asString()
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-                map.put(start, start)
-                map.put(length, length)
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
                 log.info("Get accounts success, token: ${token}.")
-                return map
+
+                [
+                    'start': start,
+                    'length': length,
+                    'recordsTotal': result.totalCount,
+                    'recordsFiltered': result.totalCount,
+                    'data': result.items
+                ]
             } else {
                 handleError(resp)
             }
-
         }
-
     }
 
     def getSingleAccount(token, accountId) {

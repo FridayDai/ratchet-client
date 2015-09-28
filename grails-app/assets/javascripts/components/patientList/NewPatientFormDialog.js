@@ -3,17 +3,17 @@ var WithFormDialog = require('../common/WithFormDialog');
 var WithChildren = require('../common/WithChildren');
 var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
-var EmptyEmailConfirmation = require('../shared/EmptyEmailConfirmation');
-var WithEmergencyContactFieldRequired = require('../shared/WithEmergencyContactFieldRequired');
-var PhoneNumberValidation = require('../shared/PhoneNumberValidation');
-var PatientEmailValidation = require('../shared/PatientEmailValidation');
+var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
+var WithEmergencyContactFieldRequired = require('../shared/functional/WithEmergencyContactFieldRequired');
+var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
+var PatientEmailValidation = require('../shared/validation/PatientEmailValidation');
 
-var NewPatientPhoneInputField = require('../shared/PatientPhoneInputField');
-var NewPatientRelationshipCombobox = require('../shared/PatientRelationshipCombobox');
-var NewPatientGroupCombobox = require('../shared/PatientGroupCombobox');
-var NewPatientProviderCombobox = require('../shared/PatientProviderCombobox');
-var NewPatientTreatmentCombobox = require('../shared/PatientTreatmentCombobox');
-var NewPatientSurgeryDate = require('../shared/PatientSurgeryDate');
+var NewPatientPhoneInputField = require('../shared/components/PatientPhoneInputField');
+var NewPatientRelationshipCombobox = require('../shared/components/PatientRelationshipCombobox');
+var NewPatientGroupCombobox = require('../shared/components/PatientGroupCombobox');
+var NewPatientProviderCombobox = require('../shared/components/PatientProviderCombobox');
+var NewPatientTreatmentCombobox = require('../shared/components/PatientTreatmentCombobox');
+var NewPatientSurgeryDate = require('../shared/components/PatientSurgeryDate');
 
 function NewPatientFormDialog() {
     flight.compose.mixin(this, [

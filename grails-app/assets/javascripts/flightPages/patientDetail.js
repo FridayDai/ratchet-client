@@ -20,8 +20,6 @@ var EmergencyContactFormDialog = require('../components/patientDetail/teamSectio
 var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
 
 function PatientDetailPage() {
-    require('../components/layout/Main');
-
     this.attributes({
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#tabs',

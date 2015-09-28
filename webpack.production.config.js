@@ -9,7 +9,8 @@ module.exports = {
     context: contextUrl,
     entry: {
         patientList: "./flightPages/patientList.js",
-        patientDetail: "./flightPages/patientDetail.js"
+        patientDetail: "./flightPages/patientDetail.js",
+        accounts: "./flightPages/accounts.js"
     },
     output: {
         path: absoluteContext,
@@ -36,7 +37,8 @@ module.exports = {
             intlTelInput: "bower_components/intl-tel-input/build/js/intlTelInput.js",
             "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
             "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
-            "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js"
+            "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
+            select2: "bower_components/select2/select2.js"
         }
     },
     module: {

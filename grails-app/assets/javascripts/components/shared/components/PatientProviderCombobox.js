@@ -1,6 +1,6 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
-var URLs = require('../../constants/Urls');
+var WithCombobox = require('../../common/WithCombobox');
+var URLs = require('../../../constants/Urls');
 
 function PatientProviderCombobox() {
     this.options({

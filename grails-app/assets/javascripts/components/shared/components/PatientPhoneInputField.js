@@ -1,5 +1,5 @@
 var flight = require('flight');
-var WithIntlTelInput = require('../common/WithIntlTelInput');
+var WithIntlTelInput = require('../../common/WithIntlTelInput');
 
 function PatientPhoneInputField() {
     this.onInput = function () {

@@ -40,5 +40,13 @@ module.exports = {
     CHECK_EMERGENCY_CONTACT_EMAIL: '/patients/{0}/emergency-contact/check-email',
 
     //Activity
-    GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}'
+    GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}',
+
+    //Accounts
+    GET_ACCOUNTS: '/accounts',
+    CHECK_ACCOUNT_EMAIL: '/accounts/check-email',
+    GET_ALL_GROUPS: '/groups',
+
+    //Account detail
+    PAGE_ACCOUNT_DETAIL: '/accounts/{0}'
 };

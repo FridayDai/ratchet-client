@@ -1,7 +1,7 @@
 var flight = require('flight');
-var WithFormDialog = require('../common/WithFormDialog');
-var STRINGs = require('../../constants/Strings');
-var Notifications = require('../common/Notification');
+var WithFormDialog = require('../../common/WithFormDialog');
+var STRINGs = require('../../../constants/Strings');
+var Notifications = require('../../common/Notification');
 
 function AssistMeFormDialog() {
     this.options({

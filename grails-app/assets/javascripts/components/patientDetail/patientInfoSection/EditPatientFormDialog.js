@@ -1,12 +1,12 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
-var PhoneNumberValidation = require('../../shared/PhoneNumberValidation');
-var PatientEmailValidation = require('../../shared/PatientEmailValidation');
-var PatientIdentifyValidation = require('../../shared/PatientIdentifyValidation');
-var EmptyEmailConfirmation = require('../../shared/EmptyEmailConfirmation');
+var PhoneNumberValidation = require('../../shared/validation/PhoneNumberValidation');
+var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
+var PatientIdentifyValidation = require('../../shared/validation/PatientIdentifyValidation');
+var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
 
-var PatientPhoneInputField = require('../../shared/PatientPhoneInputField');
+var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
 
 function EditPatientFormDialog() {
     flight.compose.mixin(this, [

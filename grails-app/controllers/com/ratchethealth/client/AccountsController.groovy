@@ -21,6 +21,9 @@ class AccountsController extends BaseController {
         } else {
             accountPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
             accountPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            accountPagination.sortField = 'id'
+            accountPagination.sortDir = 'desc'
+
             def accountList = accountService.getAccounts(token, clientId, accountPagination)
             render(view: 'accounts', model: [accountList: accountList, pagesize: accountPagination.length])
         }
