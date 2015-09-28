@@ -91,6 +91,7 @@ function Treatment() {
 
     this.onMoreButtonClicked = function (e) {
         e.preventDefault();
+        e.stopPropagation();
 
         var $dropdownList = this.select('moreDropdownListSelector');
 
