@@ -92,7 +92,7 @@ function EmergencyContactFieldRequired() {
 
         this.on(this.attr.relationshipSelectEvent, this.onEmergencyContactFieldInput);
         this.on(this.attr.relationshipClearEvent, this.onEmergencyContactFieldInput);
-        this.on('input', {
+        this.on('keyup', {
             'emergencyContactFieldSelector': this.onEmergencyContactFieldInput
         });
     });
