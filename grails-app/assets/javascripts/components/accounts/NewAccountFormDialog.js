@@ -1,7 +1,6 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
 var WithChildren = require('../common/WithChildren');
-var URLs = require('../../constants/Urls');
 var PARAMs = require('../../constants/Params');
 
 var AccountEmailValidation = require('../shared/validation/AccountEmailValidation');
@@ -68,14 +67,16 @@ function NewAccountFormDialog() {
         if (isProvider) {
             $groupField.attr('required', true);
 
-            if ($requireMark.hasClass('hidden'))
+            if ($requireMark.hasClass('hidden')) {
                 $requireMark.removeClass('hidden');
+            }
         } else {
             $groupField.attr('required', false);
             $groupField.valid();
 
-            if (!$requireMark.hasClass('hidden'))
+            if (!$requireMark.hasClass('hidden')) {
                 $requireMark.addClass('hidden');
+            }
         }
     };
 
