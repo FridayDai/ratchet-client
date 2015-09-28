@@ -3,8 +3,6 @@ require('momentTZ');
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
-var Notifications = require('../common/Notification');
-var STRINGs = require('../../constants/Strings');
 var moment = require('moment');
 
 var ID_CONTAINER = '<p class="source-id">{0}</p>';

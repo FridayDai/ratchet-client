@@ -12,7 +12,7 @@ function AccountGroupSelectbox() {
     };
 
     this.after('initialize', function () {
-        this.on(document, this.attr.clearEvent, this.onClear)
+        this.on(document, this.attr.clearEvent, this.onClear);
     });
 }
 
