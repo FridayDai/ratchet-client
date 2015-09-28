@@ -87,8 +87,13 @@ function AccountsTable() {
         this.search(data);
     };
 
+    this.onAddAccountSuccess = function () {
+        this.reload();
+    };
+
     this.after('initialize', function () {
         this.on(document, 'selectAccountIDNameForAccountTable', this.onAccountIDNameSearch);
+        this.on(document, 'addAccountSuccess', this.onAddAccountSuccess);
     });
 }
 

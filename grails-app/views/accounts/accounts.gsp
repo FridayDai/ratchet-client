@@ -58,7 +58,7 @@
         <form class="accounts-form ui-hidden" id="add-account-form" action="/accounts" method="post">
             <div class="form-group">
                 <label class="checkbox">
-                    <input id="doctor" name="doctor" type="checkbox">Dr.
+                    <input id="doctor" name="doctorRaw" type="checkbox">Dr.
                 </label>
             </div>
 
@@ -82,9 +82,9 @@
             <div class="form-group inline">
                 <label class="lbl-group">PROVIDER</label>
 
-                <div class="group">
+                <div class="provider group">
                     <label class="checkbox">
-                        <input id="provider" name="provider" type="checkbox">Yes
+                        <input id="provider" name="providerRaw" type="checkbox">Yes
                     </label>
                 </div>
             </div>
@@ -92,16 +92,16 @@
             <div class="form-group inline">
                 <label class="lbl-group">PERMISSION</label>
 
-                <div class="group">
+                <div class="permission group">
                     <label class="checkbox">
-                        <input id="accountManagement" name="accountManagement" type="checkbox">Administrator
+                        <input id="accountManagement" name="accountManagementRaw" type="checkbox">Administrator
                     </label>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="lbl-group">GROUP<span class="group-require-mark hidden">*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                <input id="selectGroup" name="groupId" type="text" class="plugin-select-box input-group patient-group clear"
                        placeholder="Select group"/>
             </div>
 

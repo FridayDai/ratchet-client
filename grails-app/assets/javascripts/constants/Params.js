@@ -43,5 +43,10 @@ module.exports = {
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
         {label: "Undelivered", value: 5}
-    ]
+    ],
+
+    ACCOUNT_TYPE: {
+        PROVIDER: 9,
+        NON_PROVIDER: 10
+    }
 };

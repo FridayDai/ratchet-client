@@ -1,4 +1,5 @@
 require('select2');
+require('../../libs/jquery-validation/jquery.validate.js');
 
 var flight = require('flight');
 var WithOptions = require('./WithOptions');
@@ -46,7 +47,11 @@ function WithSelectbox() {
     ]);
 
     this._initSelectbox = function () {
-        this.$node.select2(composeOption(this._options, this));
+        this.$node
+            .select2(composeOption(this._options, this))
+            .change(function () {
+                $(this).valid();
+            });
     };
 
     this.clear = function () {

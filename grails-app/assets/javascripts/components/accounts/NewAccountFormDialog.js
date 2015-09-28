@@ -2,15 +2,17 @@ var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
 var WithChildren = require('../common/WithChildren');
 var URLs = require('../../constants/Urls');
-var Utility = require('../../utils/Utility');
+var PARAMs = require('../../constants/Params');
 
 var AccountEmailValidation = require('../shared/validation/AccountEmailValidation');
 var AccountGroupSelectbox = require('./AccountGroupSelectbox');
 
 function NewAccountFormDialog() {
     this.attributes({
+        doctorCheckboxSelector: '#doctor',
         groupFieldSelector: '#selectGroup',
         providerCheckboxSelector: '#provider',
+        administratorCheckboxSelector: '#accountManagement',
         groupRequireMarkSelector: '.group-require-mark'
     });
 
@@ -33,28 +35,29 @@ function NewAccountFormDialog() {
         return AccountEmailValidation.get();
     };
 
-    this.onShow = function (e, data) {
+    this.onShow = function () {
         this.$node.removeClass('ui-hidden');
-        //this.prepareToShow(data);
         this.show();
-    };
-
-    this.prepareToShow = function (data) {
-        if (data.check !== 'false') {
-            this.setPatientExisting(data);
-            this.select('patientIdStaticSelector').text(data.patientId);
-        } else {
-            this.setPatientNotExisting();
-            this.select('patientIdStaticSelector').text(data.identify);
-        }
     };
 
     this.onClose = function () {
         this.trigger('newAccountReset');
     };
 
-    this.onAddAccountSuccess = function (e, data) {
-        //window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
+    this.setExtraData = function () {
+        var isDoctor = this.select('doctorCheckboxSelector').prop('checked') === true;
+        var isAccountManagement = this.select('administratorCheckboxSelector').prop('checked') === true;
+        var isProvider = this.select('providerCheckboxSelector').prop("checked") === true;
+
+        return {
+            doctor: isDoctor,
+            accountManagement: isAccountManagement,
+            type: isProvider ? PARAMs.ACCOUNT_TYPE.PROVIDER : PARAMs.ACCOUNT_TYPE.NON_PROVIDER
+        };
+    };
+
+    this.onAddAccountSuccess = function () {
+        this.trigger('addAccountSuccess');
     };
 
     this.onProviderCheckboxClick = function () {

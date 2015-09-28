@@ -53,7 +53,7 @@
 
 .doctor-mark {
     display: inline-block;
-    height: 14px;
+    height: 18px;
     width: 25px;
     vertical-align: middle;
     background: no-repeat url('../../../images/isDoctor.png');
@@ -67,4 +67,11 @@
 input[type="checkbox"] {
     height: 15px;
     width: 15px;
+}
+
+.provider.group,
+.permission.group {
+    .checkbox {
+        margin-top: 0;
+    }
 }
