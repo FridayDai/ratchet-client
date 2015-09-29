@@ -40,7 +40,9 @@
                 <g:each var="account" in="${accountList.data}" status="i">
                     <tr data-is-dom-data="true">
                         <td>${account.id}</td>
-                        <td>${account.firstName} ${account.lastName}</td>
+                        <td>
+                            ${account.firstName} ${account.lastName}
+                        </td>
                         <td>${account.email}</td>
                         <td>${account.lastUpdateDate}</td>
                         <td>${account.id}</td>

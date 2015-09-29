@@ -3,6 +3,9 @@
         <li class="client-name">${request.session.clientName}</li>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
+            %{--<a class="" controller="profile"--}%
+            %{--action="getProfile"--}%
+            %{--params="[accountId: request.session.accountId]">--}%
             <a href="/profile/${request.session.accountId}">
                 <div class="user-photo">
                     <img src="${assetPath(src: 'user.png')}">
@@ -15,6 +18,14 @@
                 </ul>
             </a>
         </li>
+    %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
+    %{--<g:else>class="nav-li"</g:else>>--}%
+    %{--<g:link controller="home" action="index">--}%
+    %{--<div class="ui-icon icon-home"></div>--}%
+
+    %{--<div class="home-title">HOME</div>--}%
+    %{--</g:link>--}%
+    %{--</li>--}%
         <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
             <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
@@ -48,15 +59,15 @@
             </a>
         </li>
 
-        <li class="nav-icon-item">
-            <a target="_blank" href="http://www.ratchethealth.com/support/" class="nav-icon-link more-info">
-                <span class="text">More Info</span>
+        <li class="btn-bottom">
+            <a target="_blank" href="http://www.ratchethealth.com/" class="log-out more-info">
+                <span class="btn-logout">More Info</span>
             </a>
         </li>
 
-        <li class="nav-icon-item">
-            <a href="/logout" class="nav-icon-link log-out" id="logout">
-                <span class="text">Logout</span>
+        <li class="btn-bottom">
+            <a href="/logout" class="log-out" id="logout">
+                <span class="btn-logout">Logout</span>
             </a>
         </li>
 
