@@ -4,8 +4,13 @@ require('momentTZ');
 var moment = require('moment');
 
 var $window = $(window);
+var IS_OLD_IE = window.navigator.userAgent.indexOf("MSIE ") > 0;
 
 module.exports = {
+    isOldIE: function () {
+        return IS_OLD_IE;
+    },
+
     getWindowSize: function () {
         return {
             width: $window.width(),

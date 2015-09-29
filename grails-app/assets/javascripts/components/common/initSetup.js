@@ -99,5 +99,3 @@ $.Velocity
         ],
         reset: { scaleX: 1, scaleY: 1 }
     });
-
-module.exports = {};
