@@ -9,6 +9,9 @@ var EmergencyContactEmailValidation = require('../../shared/validation/Emergency
 var UPDATE = 'updateModel';
 var ADD = 'addModel';
 
+var ADD_TITLE = 'ADD EMERGENCY CONTACT';
+var EDIT_TITLE = 'EDIT EMERGENCY CONTACT';
+
 function EmergencyContactFormDialog() {
     this.options({
         title: 'ADD EMERGENCY CONTACT',
@@ -56,6 +59,8 @@ function EmergencyContactFormDialog() {
 
             this.emergencyContactId = updateData.emergencyContactId;
 
+            this.changeTitle(EDIT_TITLE);
+
             this.select('emergencyContactFirstNameFieldSelector').val(updateData.firstName);
             this.select('emergencyContactLastNameFieldSelector').val(updateData.lastName);
 
@@ -72,6 +77,8 @@ function EmergencyContactFormDialog() {
             this.formEl.attr('action', URLs.UPDATE_EMERGENCY_CONTACT.format(data.patientId));
         } else {
             this.model = ADD;
+
+            this.changeTitle(ADD_TITLE);
 
             this.formEl.attr('action', URLs.ADD_EMERGENCY_CONTACT.format(data.patientId, data.medicalRecordId));
         }

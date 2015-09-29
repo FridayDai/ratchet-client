@@ -62,6 +62,10 @@ function WithDialog() {
         this.dialogEl.dialog('close');
     };
 
+    this.changeTitle = function (title) {
+        this.dialogEl.dialog('option', 'title', title);
+    };
+
     this.after('initialize', function () {
         this._initDialog();
     });
