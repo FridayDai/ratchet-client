@@ -210,17 +210,13 @@
     }
 }
 
-.btn-bottom {
+.nav-icon-item {
     margin-top: 20px;
 
-    .log-out {
-        margin-left: 12px;
-
+    .nav-icon-link {
         &:before {
-            padding-right: 8px;
-            content: '\f29f';
+            padding-right: 4px;
             color: $base-font-grey;
-            font-size: 12px;
             font-family: ionicons;
         }
 
@@ -230,26 +226,27 @@
         }
     }
 
-    .btn-logout {
+    .log-out{
+        &:before {
+            content: '\f29f';
+            font-size: 12px;
+        }
+    }
+
+    .more-info{
+        &:before {
+            content: '\f44c';
+            font-size: 14px;
+        }
+    }
+
+    .text {
         color: $base-font-color;
-        padding-right: 22px;
 
         &:hover,
         &:focus {
             color: $base-color-dark-grey;
             text-decoration: underline;
-        }
-    }
-
-    .more-info{
-        margin-left: 27px;
-
-        &:before {
-            padding-right: 4px;
-            content: '\f44c';
-            color: $base-font-grey;
-            font-size: 14px;
-            font-family: ionicons;
         }
     }
 }
