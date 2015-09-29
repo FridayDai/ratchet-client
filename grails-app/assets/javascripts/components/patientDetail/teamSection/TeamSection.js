@@ -1,7 +1,7 @@
 var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 
-var EmergencyContackTable = require('./EmergencyContactTable');
+var EmergencyContactTable = require('./EmergencyContactTable');
 var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 
 function TeamSection() {
@@ -39,7 +39,7 @@ function TeamSection() {
     };
 
     this.children({
-        emergencyContactTableSelector: EmergencyContackTable
+        emergencyContactTableSelector: EmergencyContactTable
     }, this.getBasicIds);
 
     this.onEditGroupButtonClicked = function (e) {

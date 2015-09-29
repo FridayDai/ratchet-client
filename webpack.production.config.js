@@ -29,7 +29,7 @@ module.exports = {
             "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
             "velocity": "bower_components/velocity/velocity.js",
             "velocity-ui": "bower_components/velocity/velocity.ui.js",
-            flight: "bower_components/flight/index.js",
+            flight: "libs/flight/index.js",
             jForm: "bower_components/jquery-form/jquery.form.js",
             dataTable: "bower_components/DataTables/media/js/jquery.dataTables.js",
             moment: "bower_components/moment/min/moment.min.js",

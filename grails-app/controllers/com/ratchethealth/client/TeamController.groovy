@@ -15,7 +15,7 @@ class TeamController extends BaseController {
         def clientId = params?.clientId
         def patientId = params?.patientId
         def archived = params?.archived
-        if (archived == null) {
+        if (archived == null || archived == '') {
             archived = false
         }
         def surgeons = teamService.getCareTeam(token, medicalRecordId)

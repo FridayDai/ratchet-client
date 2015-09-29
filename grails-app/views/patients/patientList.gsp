@@ -158,7 +158,7 @@
                 <div class="form-group inline permission-confirm" data-direction="up">
                     <input id="permission-confirm-check" type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>
                     <label for="permission-confirm-check">*
-                        Patient would like to release his/her health information to<span id="ec-first-name"></span>.
+                        Patient would like to release his/her health information to <span id="ec-first-name"></span>.
                     </label>
                 </div>
             </div>
