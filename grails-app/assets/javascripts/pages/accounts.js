@@ -422,8 +422,11 @@
             e.preventDefault();
 
             $("#updateAccount")[0].reset();
-            var accountId = $(this).data("accountId");
+            _.each($("input[type='checkbox']"), function(element){
+                $(element).prop("checked", false);
+            });//reset checkbox in form.
 
+            var accountId = $(this).data("accountId");
             var parent = $(this).parents();
             var doctor = parent.find(".account-doctor").text();
             var isDoctor = $.trim(doctor);

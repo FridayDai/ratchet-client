@@ -59,9 +59,15 @@
             </a>
         </li>
 
-        <li class="btn-bottom">
-            <a href="/logout" class="log-out">
-                <span class="btn-logout">Logout</span>
+        <li class="nav-icon-item">
+            <a target="_blank" href="http://www.ratchethealth.com/support/" class="more-info nav-icon-link">
+                <span class="text">More Info</span>
+            </a>
+        </li>
+
+        <li class="nav-icon-item">
+            <a href="/logout" class="log-out nav-icon-link" id="logout">
+                <span class="text">Logout</span>
             </a>
         </li>
 

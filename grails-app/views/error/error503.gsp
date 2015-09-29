@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="cssPath" value="error"/>
 <g:applyLayout name="error">
     <html>

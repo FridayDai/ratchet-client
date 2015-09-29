@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="scriptPath" value="loginBundle"/>
 <g:set var="cssPath" value="login"/>
 <g:applyLayout name="form">

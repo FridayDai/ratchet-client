@@ -119,10 +119,37 @@
      */
     function _initSurgeryTime(time) {
         $("#treatment-surgeryTime").datepicker("destroy");
-        $("#treatment-surgeryTime").datepicker({
-            dateFormat: 'MM d, yy',
-            minDate: new Date(time)
-        });
+
+        /* fix buggy IE popup not close on select date */
+        if(/MSIE (\d+\.\d+);/.test(navigator.userAgent)){
+            $("#treatment-surgeryTime").datepicker({
+                dateFormat: 'MM d, yy',
+                minDate: new Date(time),
+
+                /* fix buggy IE focus functionality */
+                fixFocusIE: false,
+
+                /* blur needed to correctly handle placeholder text */
+                onSelect: function() {
+                    this.fixFocusIE = true;
+                    $(this).blur().change().focus();
+                },
+                onClose: function() {
+                    this.fixFocusIE = true;
+                    this.focus();
+                },
+                beforeShow: function() {
+                    var result = /MSIE (\d+\.\d+);/.test(navigator.userAgent) ? !this.fixFocusIE : true;
+                    this.fixFocusIE = false;
+                    return result;
+                }
+            });
+        } else {
+            $("#treatment-surgeryTime").datepicker({
+                dateFormat: 'MM d, yy',
+                minDate: new Date(time)
+            });
+        }
     }
 
 

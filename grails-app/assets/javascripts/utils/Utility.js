@@ -1,4 +1,5 @@
 require('jquery');
+require('momentTZ');
 
 var moment = require('moment');
 

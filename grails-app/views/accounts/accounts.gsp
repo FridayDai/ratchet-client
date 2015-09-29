@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="scriptPath" value="bundles/accountsBundle"/>
 <g:set var="cssPath" value="accounts"/>
 <g:applyLayout name="main">
@@ -41,9 +39,7 @@
                 <g:each var="account" in="${accountList.data}" status="i">
                     <tr data-is-dom-data="true">
                         <td>${account.id}</td>
-                        <td>
-                            ${account.firstName} ${account.lastName}
-                        </td>
+                        <td>${account.firstName} ${account.lastName}</td>
                         <td>${account.email}</td>
                         <td>${account.lastUpdateDate}</td>
                         <td>${account.id}</td>

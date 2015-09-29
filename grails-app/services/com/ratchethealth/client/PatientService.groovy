@@ -49,10 +49,10 @@ class PatientService extends RatchetAPIService {
 
             if (resp.status == 201) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-                map.put("id", result.id)
+
                 log.info("Add patient success, token: ${token}")
-                return map
+
+                ["id": result.id]
             }
             else {
                 handleError(resp)
@@ -89,14 +89,14 @@ class PatientService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
 
                 log.info("Get patients success, token: ${token}")
-                return map
+
+                [
+                    "recordsTotal": result.totalCount,
+                    "recordsFiltered": result.totalCount,
+                    "data": result.items
+                ]
             }
             else {
                 handleError(resp)

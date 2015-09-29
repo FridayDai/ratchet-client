@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="scriptPath" value="bundles/baseBundle" />
 <g:set var="cssPath" value="common" />
 <g:applyLayout name="main">

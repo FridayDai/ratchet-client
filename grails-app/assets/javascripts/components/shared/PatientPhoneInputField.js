@@ -1,7 +1,7 @@
 var flight = require('flight');
 var WithIntlTelInput = require('../common/WithIntlTelInput');
 
-function NewPatientPhoneInputField() {
+function PatientPhoneInputField() {
     this.onInput = function () {
         var val = this.$node.val(),
             firstNum,
@@ -21,4 +21,4 @@ function NewPatientPhoneInputField() {
     });
 }
 
-module.exports = flight.component(WithIntlTelInput, NewPatientPhoneInputField);
+module.exports = flight.component(WithIntlTelInput, PatientPhoneInputField);

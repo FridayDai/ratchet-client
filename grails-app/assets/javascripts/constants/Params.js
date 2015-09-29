@@ -7,6 +7,22 @@ module.exports = {
         {label: "Other",  value: 5}
     ],
 
+    EMERGENCY_CONTACT_RELATIONSHIP_MAP : {
+        1: 'Parent',
+        2: 'Spouse',
+        3: 'Child',
+        4: 'Friend',
+        5: 'Other'
+    },
+
+    EMERGENCY_CONTACT_RELATIONSHIP_REVERSE_MAP : {
+        'parent': 1,
+        'spouse': 2,
+        'child': 3,
+        'friend': 4,
+        'other': 5
+    },
+
     BULK_IMPORT_TYPE: {
         1: 'Treatment',
         2: 'Group',
@@ -19,13 +35,13 @@ module.exports = {
         2: 'unverified',
         3: '',
         4: 'Not Available',
-        5: 'nonexistent'
+        5: 'undelivered'
     },
 
     EMAIL_STATUS_FILTER: [
         {label: "Verified", value: 3},
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
-        {label: "Nonexistent", value: 5}
+        {label: "Undelivered", value: 5}
     ]
 };

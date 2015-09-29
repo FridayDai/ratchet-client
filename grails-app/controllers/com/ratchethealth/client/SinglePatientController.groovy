@@ -57,8 +57,8 @@ class SinglePatientController extends BaseController {
 
     def checkPatientExist() {
         String token = request.session.token
-        def patientId = params?.patientId
-        def data = singlePatientService.checkPatientId(token, patientId)
+        def identify = params?.identify
+        def data = singlePatientService.checkPatientId(token, identify)
         render data as JSON
     }
 

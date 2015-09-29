@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithCombobox = require('../common/WithCombobox');
 var URLs = require('../../constants/Urls');
 
-function NewPatientProviderCombobox() {
+function PatientProviderCombobox() {
     this.options({
         url: URLs.GET_PROVIDER,
         requestData: function (val) {
@@ -60,10 +60,10 @@ function NewPatientProviderCombobox() {
     };
 
     this.after('initialize', function () {
-        this.on(document, 'newPatientGroupSelected', this.onGroupSelected);
-        this.on(document, 'newPatientGroupClear', this.onReset);
-        this.on(document, 'newPatientReset', this.onReset);
+        this.on(document, this.attr.groupSelectEvent, this.onGroupSelected);
+        this.on(document, this.attr.groupClearEvent, this.onReset);
+        this.on(document, this.attr.resetEvent, this.onReset);
     });
 }
 
-module.exports = flight.component(WithCombobox, NewPatientProviderCombobox);
+module.exports = flight.component(WithCombobox, PatientProviderCombobox);

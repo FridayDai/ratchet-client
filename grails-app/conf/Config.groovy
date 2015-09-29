@@ -252,8 +252,8 @@ ratchetv2 {
             updatePassword = "${ratchetv2.server.url.base}/password/update"
             activeStaff = "${ratchetv2.server.url.base}/staff/confirm"
             confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
-            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
-            activateStaff = "${ratchetv2.server.url.base}/staff/activate/%s"
+            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%d"
+            activateStaff = "${ratchetv2.server.url.base}/staff/activate/%d"
             checkAccountEmail = "${ratchetv2.server.url.base}/staff/email/check"
 
             //Group

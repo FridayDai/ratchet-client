@@ -1,6 +1,6 @@
 function bindDeep(obj, scope) {
     _.each(obj, function (val, key) {
-        if (_.isPlainObject(val)) {
+        if (_.isPlainObject(val) || _.isArray(val)) {
             bindDeep(val, scope);
         } else if (_.isFunction(val)) {
             obj[key] = _.bind(val, scope);
@@ -24,9 +24,9 @@ function WithOptions() {
             this._options = this.getOptions();
         }
 
-        this._options = _.defaultsDeep( this._options, this.defaultOptions);
+        this._optionsDef = _.defaultsDeep(_.clone(this._options, true), this.defaultOptions);
 
-        return bindDeep(this._options, this);
+        return bindDeep(this._optionsDef, this);
     };
 }
 

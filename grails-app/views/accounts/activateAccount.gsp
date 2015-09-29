@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <g:set var="scriptPath" value="accountsBundle"/>
 <g:set var="cssPath" value="activateAccount"/>
 <g:applyLayout name="form">

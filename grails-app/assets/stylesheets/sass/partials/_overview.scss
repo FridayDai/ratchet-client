@@ -10,7 +10,6 @@
 
     .info-container {
         font-weight: 300;
-        font-family: Lato;
     }
 
     .first-line {
@@ -40,7 +39,6 @@
         .name {
             font-size: 18pt;
             font-weight: 400;
-            font-family: Lato;
         }
 
         .first-name {
@@ -86,7 +84,6 @@
         font-size: 16px;
         vertical-align: middle;
         font-weight: 400;
-        font-family: Lato;
 
         &:before {
             padding-right: 8px;
@@ -341,10 +338,6 @@
         width: 72%;
         display: inline-block;
         margin: 10px 0;
-    }
-
-    .email-group {
-        margin-bottom: 0;
     }
 
     .description {

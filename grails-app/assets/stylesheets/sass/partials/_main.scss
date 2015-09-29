@@ -8,6 +8,7 @@
     //    min-height: 835px;
     padding-top: 42px;
     padding-left: 220px;
+    background-color: #fdfdfd;
 }
 
 h3 {
@@ -24,7 +25,6 @@ h4 {
 h5 {
     font-weight: 700;
     font-size: 14px;
-    font-family: Lato;
 }
 
 .strong {
@@ -60,7 +60,6 @@ h5 {
         border-top: 6px solid $base-color-mid-grey;
         background-color: $form-color-background;
         font-weight: 400;
-        font-family: Lato;
     }
 
     .input-combination {
@@ -68,7 +67,6 @@ h5 {
         padding: 2% 0;
         font-weight: 400;
         font-size: 10pt;
-        font-family: Lato;
         text-align: center;
         vertical-align: middle;
 
@@ -112,6 +110,5 @@ h5 {
 .required-padding {
     padding-right: 21px;
     font-weight: 400;
-    font-family: Lato;
 }
 
