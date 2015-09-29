@@ -71,7 +71,7 @@ function PatientInfoSection() {
     };
 
     this.onPatientUpdatedSuccess = function (e, data) {
-        this.select('patientIdStaticSelector').text(data.identify);
+        this.select('patientIdStaticSelector').text(data.id);
         this.select('firstNameStaticSelector').text(data.firstName);
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email ? data.email.toLowerCase() : '');
