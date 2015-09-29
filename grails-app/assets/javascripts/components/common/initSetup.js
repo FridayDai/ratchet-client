@@ -21,6 +21,7 @@ $.ajaxSetup({
         }
     },
     global: true,
+    cache: false,
     error: function (jqXHR) {
         if (jqXHR.status === 401) {
             window.location.href = "/login";
