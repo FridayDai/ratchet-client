@@ -22,32 +22,30 @@ function EditSurgeryDateFormDialog() {
     });
 
     this.onShow = function (e, data) {
-        var me = this;
-
-        this.setMinSurgeryDate(data.clientId, data.treatmentId)
-            .then(function () {
-                me.setCurrentSurgeryDate(data.currentSurgeryDate);
-            });
+        this.setCurrentSurgeryDate(data.currentSurgeryDate);
 
         this.patientId = data.patientId;
         this.medicalRecordId = data.medicalRecordId;
+
+        this.$node.removeClass('ui-hidden');
+        this.show();
     };
 
-    this.setMinSurgeryDate = function (clientId, treatmentId) {
-        var me = this;
-
-        return $.ajax({
-            url: URLs.GET_TREATMENT_DETAIL.format(treatmentId),
-            type: 'POST',
-            data: { clientId: clientId }
-        }).done(function (data) {
-            me.select('surgeryTimeFieldSelector')
-                .datepicker('option', 'minDate', new Date(data.surgeryDate));
-        }).always(function() {
-            me.$node.removeClass('ui-hidden');
-            me.show();
-        });
-    };
+    //this.setMinSurgeryDate = function (clientId, treatmentId) {
+    //    var me = this;
+	//
+    //    return $.ajax({
+    //        url: URLs.GET_TREATMENT_DETAIL.format(treatmentId),
+    //        type: 'POST',
+    //        data: { clientId: clientId }
+    //    }).done(function (data) {
+    //        me.select('surgeryTimeFieldSelector')
+    //            .datepicker('option', 'minDate', new Date(data.surgeryDate));
+    //    }).always(function() {
+    //        me.$node.removeClass('ui-hidden');
+    //        me.show();
+    //    });
+    //};
 
     this.setCurrentSurgeryDate = function (current) {
         this.currentSurgeryDate = current;

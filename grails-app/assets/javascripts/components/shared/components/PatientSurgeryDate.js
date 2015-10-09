@@ -2,10 +2,10 @@ var flight = require('flight');
 var WithDatepicker = require('../../common/WithDatepicker');
 
 function PatientSurgeryDate() {
-    this.onTreatmentSelected = function (e, data) {
+    this.onTreatmentSelected = function () {
         this.clear();
         this.$node.prop("disabled", false);
-        this.$node.datepicker('option', 'minDate', new Date(data.surgeryDate));
+        //this.$node.datepicker('option', 'minDate', new Date(data.surgeryDate));
     };
 
     this.onReset = function () {
