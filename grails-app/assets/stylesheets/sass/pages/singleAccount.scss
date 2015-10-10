@@ -35,26 +35,26 @@
             font-weight: 400;
         }
 
-        .span-invited {
+        .email-status {
             padding: 2px 3px;
             color: $base-color-white;
-            background: $base-color-invited;
             vertical-align: sub;
+        }
+
+        .span-invited {
+            background: $base-color-invited;
         }
 
         .span-deactive {
-            padding: 2px 3px;
-            color: $base-color-white;
             background: $base-color-deactive;
-            vertical-align: sub;
+        }
+
+        .non-existent {
+            background: $base-color-error;
         }
 
         .span-active {
-            padding: 2px 3px;
-
-            color: $base-color-white;
             background: $base-light-grey-color;
-            vertical-align: sub;
         }
 
         .activate-action {
