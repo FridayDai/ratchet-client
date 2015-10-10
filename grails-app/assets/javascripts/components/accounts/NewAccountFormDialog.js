@@ -41,6 +41,14 @@ function NewAccountFormDialog() {
 
     this.onClose = function () {
         this.trigger('newAccountReset');
+
+        var $groupField = this.select('groupFieldSelector');
+        var $requireMark = this.select('groupRequireMarkSelector');
+
+        $groupField.attr('required', false);
+        if (!$requireMark.hasClass('hidden')) {
+            $requireMark.addClass('hidden');
+        }
     };
 
     this.setExtraData = function () {
