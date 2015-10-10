@@ -158,6 +158,7 @@
             success: function () {
 
             },
+            cache: false,
             global: true,
             error: function (jqXHR) {
                 if (jqXHR.status === 401) {
