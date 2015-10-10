@@ -36,6 +36,10 @@ class StatusCodeConstants {
             "SPORT_REC": "Sport/Rec",
             "QOL": "QOL"
     ]
+    public static final Map TASK_FAIRLEY_NASAL_SCORE_LABEL = [
+        "total": "Total Result",
+        "antibiotics": "Antibiotics"
+    ]
 
     //Account constants
     public static final String ACCOUNT_DOCTOR = "Dr."

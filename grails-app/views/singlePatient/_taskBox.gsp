@@ -93,17 +93,27 @@
                         <% } %>
                         <g:each in="${firstSplit}" var="num">
                             <% secondSplit = num?.trim().split(':') %>
-                            <span class="score">
+                            <g:if test="${task?.testId == 4 || task?.testId == 5 || task?.testId == 10}">
+                            <span class="score score-2-columns">
                                 <g:if test="${secondSplit?.size() == 2}">
                                     <label class="score-number">${secondSplit[1]}</label><br>
-                                    <g:if test="${task?.testId == 4 || task?.testId == 5}">
-                                        <label class="capitalize">${secondSplit[0]} Result</label>
+                                    <g:if test="${task?.testId == 10}">
+                                    <label>${StatusCodeConstants.TASK_FAIRLEY_NASAL_SCORE_LABEL[secondSplit[0]]}</label>
                                     </g:if>
                                     <g:else>
-                                        <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                    <label class="capitalize">${secondSplit[0]} Result</label>
                                     </g:else>
                                 </g:if>
                             </span>
+                            </g:if>
+                            <g:else>
+                            <span class="score">
+                                <g:if test="${secondSplit?.size() == 2}">
+                                    <label class="score-number">${secondSplit[1]}</label><br>
+                                    <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                </g:if>
+                            </span>
+                            </g:else>
                         </g:each>
                     </g:if>
                     <g:else>
