@@ -23,7 +23,7 @@
         %{--</div>--}%
 
         <div class="middle-content">
-            <div class="name-info">
+            <div class="name-info" id="account-name-info">
 
                 <span class="account-doctor row" id="isDoctor">
                     <g:if test="${accountInfo.doctor}">
@@ -33,6 +33,10 @@
 
                 <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
+
+                <g:if test="${accountInfo.npi}">
+                    <span id="accountInfo-npi" class="account-npi">NPI: ${accountInfo.npi}</span>
+                </g:if>
 
             </div>
 
@@ -154,11 +158,6 @@
                    readonly/>
         </div>
 
-    %{--<div class="form-group inline role-select">--}%
-    %{--<label class="lbl-group role">ROLE<span>*</span></label>--}%
-    %{--<input id="accountType" name="accountType" class="input-group" required>--}%
-    %{--</div>--}%
-
         <div class="form-group inline">
             <label class="lbl-group">PROVIDER</label>
 
@@ -177,6 +176,11 @@
                     <input id="accountManagement" name="accountManagement" type="checkbox">Administrator
                 </label>
             </div>
+        </div>
+
+        <div class="form-group inline hidden">
+            <label class="lbl-group">NPI<span>*</span></label>
+            <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10" required/>
         </div>
 
         <div class="form-group">

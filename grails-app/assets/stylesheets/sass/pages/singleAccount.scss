@@ -5,6 +5,13 @@
 @import '../partials/theme';
 @import '../partials/select2';
 
+.account-npi {
+    border-left: 2px solid $base-color-black;
+    padding-left: 19px;
+    margin-left: 17px;
+    font-size: 17px;
+}
+
 .account-info {
     padding: 20px;
     color: $base-color-dark-grey;

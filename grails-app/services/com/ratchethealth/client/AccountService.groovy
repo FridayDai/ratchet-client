@@ -110,6 +110,7 @@ class AccountService extends RatchetAPIService {
         def accountManagement = account?.accountManagement
         def doctor = account?.doctor
         def groupId = account?.groupId
+        def npi = account?.npi
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
         def url = String.format(updateAccountUrl, account?.accountId)
@@ -126,6 +127,7 @@ class AccountService extends RatchetAPIService {
                     .field("doctor", doctor)
                     .field("accountManagement", accountManagement)
                     .field("groupIds", groupId)
+                    .field("npi", npi)
                     .asString()
 
             if (resp.status == 200) {

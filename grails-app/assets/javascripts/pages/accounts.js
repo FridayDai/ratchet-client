@@ -479,6 +479,7 @@
                         //var accountType = $("#accountType").data("id");
                         var groupId = $("#groupSelect").val();
                         var selections = $("#groupSelect").select2('data');
+                        var npi = $('#npi').val();
                         var groupValue = '';
                         $.each(selections, function (index, item) {
                             groupValue = groupValue + '<p> ' + item.text + '</p> </br>';
@@ -508,9 +509,11 @@
                             lastName: lastName,
                             email: email,
                             type: accountType,
+                            isProvider: isProvider,
                             doctor: isDoctor,
                             accountManagement: isAccountManagement,
                             groupId: groupId,
+                            npi: npi,
                             newValue: newValue
                         };
 
@@ -534,9 +537,11 @@
             var isProvider = $("#accountProvider").prop("checked") === true;
             if (isProvider) {
                 $('#groupSelect').attr('required', true);
+                $('#npi').prop('required', true);
                 $('.hidden').addClass('show');
             } else {
                 $('#groupSelect').attr('required', false);
+                $('#npi').prop('required', false).val('');
                 $('.hidden').removeClass('show');
                 $('#groupSelect').valid();
             }
@@ -572,6 +577,23 @@
                     }
                     $("#groups").html(groupValue);
                     $("#groups").data("ids", accountInfo.newValue);
+
+                    //npi
+                    var npiElement = $("#accountInfo-npi");
+                    var npiParentElement  = $("#account-name-info");
+                    if(accountInfo.isProvider === true) {
+                        //add npi
+                        var content = 'NPI: ' + accountInfo.npi + '';
+                        if(npiElement.length > 0) {
+                            npiElement.text(content);
+                        } else {
+                            var html = '<span id="accountInfo-npi" class="account-npi">'+ content +'</span>';
+                            npiParentElement.append(html);
+                        }
+                    } else {
+                        //remove npi
+                        npiElement.remove();
+                    }
                 }
             }
         });
