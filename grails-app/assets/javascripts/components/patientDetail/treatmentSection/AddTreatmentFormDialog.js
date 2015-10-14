@@ -116,10 +116,14 @@ function AddTreatmentFormDialog() {
     };
 
     this.onAddTreatmentSuccess = function (e, data) {
+        var $surgeryTime = this.select('surgeryTimeFieldSelector');
+        var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+
         this.trigger('addTreatmentSuccess', _.assign(data, {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
-            emailStatus: this.patientInfo.emailStatus
+            emailStatus: this.patientInfo.emailStatus,
+            surgeryTime: surgeryTime
         }));
     };
 
