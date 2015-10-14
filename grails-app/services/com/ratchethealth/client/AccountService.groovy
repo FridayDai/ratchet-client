@@ -72,6 +72,7 @@ class AccountService extends RatchetAPIService {
         def accountManagement = account?.accountManagement
         def doctor = account?.doctor
         def groupId = account?.groupId
+        def npi = account?.npi
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
         log.info("Call backend service to add a new account with clientId and account personal info, token: ${token}.")
@@ -87,6 +88,7 @@ class AccountService extends RatchetAPIService {
                     .field("accountManagement", accountManagement)
                     .field("doctor", doctor)
                     .field("groupIds", groupId)
+                    .field("npi", npi)
                     .asString()
 
             if (resp.status == 201) {
@@ -97,7 +99,6 @@ class AccountService extends RatchetAPIService {
                 handleError(resp)
             }
         }
-
     }
 
     def updateAccount(String token, clientId, Account account) {

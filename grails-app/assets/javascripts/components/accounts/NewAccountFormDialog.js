@@ -11,6 +11,7 @@ function NewAccountFormDialog() {
         doctorCheckboxSelector: '#doctor',
         groupFieldSelector: '#selectGroup',
         providerCheckboxSelector: '#provider',
+        npiFieldSelector: '#npi',
         administratorCheckboxSelector: '#accountManagement',
         groupRequireMarkSelector: '.group-require-mark'
     });
@@ -31,7 +32,13 @@ function NewAccountFormDialog() {
     });
 
     this.initValidation = function () {
-        return AccountEmailValidation.get();
+        return _.defaultsDeep({
+            rules: {
+                npi: {
+                    'number': true
+                }
+            }
+        }, AccountEmailValidation.get());
     };
 
     this.onShow = function () {
@@ -44,10 +51,15 @@ function NewAccountFormDialog() {
 
         var $groupField = this.select('groupFieldSelector');
         var $requireMark = this.select('groupRequireMarkSelector');
+        var $npiParent = this.select('npiFieldSelector').parent();
 
         $groupField.attr('required', false);
         if (!$requireMark.hasClass('hidden')) {
             $requireMark.addClass('hidden');
+        }
+
+        if (!$npiParent.hasClass('hidden')) {
+            $npiParent.addClass('hidden');
         }
     };
 
@@ -71,9 +83,11 @@ function NewAccountFormDialog() {
         var isProvider = this.select('providerCheckboxSelector').prop('checked') === true;
         var $groupField = this.select('groupFieldSelector');
         var $requireMark = this.select('groupRequireMarkSelector');
+        var $npiParent = this.select('npiFieldSelector').parent();
 
         if (isProvider) {
             $groupField.attr('required', true);
+            $npiParent.removeClass('hidden');
 
             if ($requireMark.hasClass('hidden')) {
                 $requireMark.removeClass('hidden');
@@ -81,6 +95,8 @@ function NewAccountFormDialog() {
         } else {
             $groupField.attr('required', false);
             $groupField.valid();
+
+            $npiParent.addClass('hidden');
 
             if (!$requireMark.hasClass('hidden')) {
                 $requireMark.addClass('hidden');

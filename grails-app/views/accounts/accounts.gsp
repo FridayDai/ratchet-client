@@ -88,6 +88,11 @@
                 </div>
             </div>
 
+            <div class="form-group inline hidden">
+                <label class="lbl-group">NPI<span>*</span></label>
+                <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10" required/>
+            </div>
+
             <div class="form-group">
                 <label class="lbl-group">GROUP<span class="group-require-mark hidden">*</span></label>
                 <input id="selectGroup" name="groupId" type="text" class="plugin-select-box input-group patient-group clear"

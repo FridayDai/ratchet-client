@@ -9,6 +9,7 @@ class Account {
     String accountManagement
     String doctor
     String groupId
+    String npi
 }
 
 
