@@ -35,7 +35,7 @@
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
 
                 <g:if test="${accountInfo.npi}">
-                    <span id="accountInfo-npi" class="account-npi">NPI: ${accountInfo.npi}</span>
+                    <span id="accountInfo-npi" class="account-npi">NPI: <span >${accountInfo.npi}</span></span>
                 </g:if>
 
             </div>

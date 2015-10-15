@@ -4,6 +4,7 @@ var WithChildren = require('../common/WithChildren');
 var PARAMs = require('../../constants/Params');
 
 var AccountEmailValidation = require('../shared/validation/AccountEmailValidation');
+var AccountNPIValidation = require('./AccountNPIValidation');
 var AccountGroupSelectbox = require('./AccountGroupSelectbox');
 
 function NewAccountFormDialog() {
@@ -32,13 +33,7 @@ function NewAccountFormDialog() {
     });
 
     this.initValidation = function () {
-        return _.defaultsDeep({
-            rules: {
-                npi: {
-                    'number': true
-                }
-            }
-        }, AccountEmailValidation.get());
+        return _.defaultsDeep(AccountNPIValidation.get(), AccountEmailValidation.get());
     };
 
     this.onShow = function () {

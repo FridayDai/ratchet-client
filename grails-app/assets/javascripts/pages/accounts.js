@@ -37,7 +37,8 @@
                 activateAccount: "/accounts/{0}/activate",
                 deactivateAccount: "/accounts/{0}/deactivate",
                 getAllGroups: "/groups",
-                checkAccountEmail: "/accounts/check-email"
+                checkAccountEmail: "/accounts/check-email",
+                checkAccountNPI: "/accounts/check-npi"
             },
             img: {
                 isDoctor: ""
@@ -413,6 +414,55 @@
         });
     }
 
+    $.validator.addMethod('NPICheck', function (value, element) {
+        var regexp = /^[1-9]/;
+        return this.optional(element) || (regexp.test(value));
+    }, "Please enter a valid NPI");
+
+    function _setValidationForUpdateForm(form, currentNPI) {
+        form.validate({
+                rules: {
+                    npi: {
+                        minlength: 10,
+                        maxlength: 10,
+                        NPICheck: true,
+                        number: true,
+                        remote: {
+                            url: opts.urls.checkAccountNPI,
+                            type: "POST",
+                            beforeSend: function () {
+                                RC.common.progress(false);
+                            },
+                            data: {
+                                email: function () {
+                                    return $("#npi").val();
+                                }
+                            },
+                            async: false,
+                            dataFilter: function (responseString) {
+                                var resp = jQuery.parseJSON(responseString);
+
+                                if (currentNPI === $('#npi').val()) {
+                                    return '"true"';
+                                } else if (resp.check !== "false") {
+                                    return "\"" + RC.constants.npiExist + "\"";
+                                } else {
+                                    return '"true"';
+                                }
+                            },
+                            error: function (jqXHR) {
+                                if (jqXHR.status === 500) {
+                                    return;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        );
+    }
+
     /**
      * update account
      * @private
@@ -438,6 +488,7 @@
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
             var groups = parent.find(".groups").data("ids");
+            var npi = parent.find(".account-npi span").text();
 
             var selectResults = [];
             $.each(groups, function (index, item) {
@@ -467,6 +518,9 @@
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
+            $("#npi").val(npi);
+
+            _setValidationForUpdateForm($("#updateAccount"), npi);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $("#updateAccount"),
@@ -583,11 +637,16 @@
                     var npiParentElement  = $("#account-name-info");
                     if(accountInfo.isProvider === true) {
                         //add npi
-                        var content = 'NPI: ' + accountInfo.npi + '';
                         if(npiElement.length > 0) {
-                            npiElement.text(content);
+                            npiElement.find('span').text(accountInfo.npi);
                         } else {
-                            var html = '<span id="accountInfo-npi" class="account-npi">'+ content +'</span>';
+                            var html = [
+                                '<span id="accountInfo-npi" class="account-npi">',
+                                    'NPI: ',
+                                    '<span>',
+                                        accountInfo.npi,
+                                    '</span>',
+                                '</span>'].join('');
                             npiParentElement.append(html);
                         }
                     } else {

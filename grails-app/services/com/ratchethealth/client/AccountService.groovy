@@ -340,6 +340,30 @@ class AccountService extends RatchetAPIService {
                 handleError(resp)
             }
         }
+    }
 
+    def checkNPI(token, npi) {
+
+        def result
+        def url = grailsApplication.config.ratchetv2.server.url.checkNPI
+        log.info("Call backend service to check account npi, token: ${token}.")
+
+        withGet(token, url) { req ->
+            def resp = req
+                .queryString("npi", npi)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("this account npi already exist, token: ${token}")
+                result = [check: "true"]
+                return result
+            } else if (resp.status == 404) {
+                log.info("this account npi doesn't exist, token: ${token}")
+                result = [check: "false"]
+                return result
+            } else {
+                handleError(resp)
+            }
+        }
     }
 }
