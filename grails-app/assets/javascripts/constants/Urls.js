@@ -45,6 +45,7 @@ module.exports = {
     //Accounts
     GET_ACCOUNTS: '/accounts',
     CHECK_ACCOUNT_EMAIL: '/accounts/check-email',
+    CHECK_ACCOUNT_NPI: '/accounts/check-npi',
     GET_ALL_GROUPS: '/groups',
 
     //Account detail

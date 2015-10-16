@@ -135,4 +135,10 @@ class AccountsController extends BaseController {
         render data as JSON
     }
 
+    def checkAccountNPI() {
+        def clientId = session.clientId
+
+        def data = accountService.checkNPI(session.token, params?.npi, clientId)
+        render data as JSON
+    }
 }

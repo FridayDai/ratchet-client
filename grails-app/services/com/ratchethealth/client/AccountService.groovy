@@ -318,8 +318,6 @@ class AccountService extends RatchetAPIService {
 
 
     def checkEmail(token, email) {
-
-        def result
         def url = grailsApplication.config.ratchetv2.server.url.checkAccountEmail
         log.info("Call backend service to check account email, token: ${token}.")
 
@@ -330,16 +328,39 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("this account email already exist, token: ${token}")
-                result = [check: "true"]
-                return result
+
+                [check: "true"]
             } else if (resp.status == 404) {
                 log.info("this account email doesn't exist, token: ${token}")
-                result = [check: "false"]
-                return result
+
+                [check: "false"]
             } else {
                 handleError(resp)
             }
         }
+    }
 
+    def checkNPI(token, npi, clientId) {
+        def url = grailsApplication.config.ratchetv2.server.url.checkNPI
+        log.info("Call backend service to check account npi, token: ${token}.")
+
+        withGet(token, url) { req ->
+            def resp = req
+                .queryString("npi", npi)
+                .queryString("clientId", clientId)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("this account npi already exist, token: ${token}")
+
+                [check: "true"]
+            } else if (resp.status == 404) {
+                log.info("this account npi doesn't exist, token: ${token}")
+
+                [check: "false"]
+            } else {
+                handleError(resp)
+            }
+        }
     }
 }

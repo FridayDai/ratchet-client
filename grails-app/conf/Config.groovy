@@ -255,6 +255,7 @@ ratchetv2 {
             deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%d"
             activateStaff = "${ratchetv2.server.url.base}/staff/activate/%d"
             checkAccountEmail = "${ratchetv2.server.url.base}/staff/email/check"
+            checkNPI = "${ratchetv2.server.url.base}/staff/npi/check"
 
             //Group
             createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"
