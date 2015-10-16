@@ -35,7 +35,7 @@
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
 
                 <g:if test="${accountInfo.npi}">
-                    <span id="accountInfo-npi" class="account-npi">NPI: ${accountInfo.npi}</span>
+                    <span id="accountInfo-npi" class="account-npi" data-npi="${accountInfo.npi}">NPI: ${accountInfo.npi}</span>
                 </g:if>
 
             </div>
@@ -180,7 +180,7 @@
 
         <div class="form-group inline hidden">
             <label class="lbl-group">NPI<span>*</span></label>
-            <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10" required/>
+            <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10"/>
         </div>
 
         <div class="form-group">

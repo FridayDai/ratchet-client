@@ -438,6 +438,7 @@
             var accountManage = parent.find(".accountManage").text();
             var isAccountManage = $.trim(accountManage);
             var groups = parent.find(".groups").data("ids");
+            var npi = $("#accountInfo-npi").data("npi");
 
             var selectResults = [];
             $.each(groups, function (index, item) {
@@ -458,15 +459,18 @@
             if (accountRole === "Yes") {
                 $("#accountProvider").prop("checked", true);
                 $('#groupSelect').attr('required', true);
+                $('#npi').prop('required', true);
                 $('.hidden').addClass('show');
             } else {
                 $("#accountProvider").prop("checked", false);
                 $('#groupSelect').attr('required', false);
+                $('#npi').prop('required', false);
                 $('.hidden').removeClass('show');
             }
             $("#firstName").val(firstName);
             $("#lastName").val(lastName);
             $("#email").val(email);
+            $("#npi").val(npi);
 
             RC.common.confirmForm(_.extend({}, opts.defaultConfirmArguments.updateFormArguments, {
                 element: $("#updateAccount"),
@@ -587,7 +591,8 @@
                         if(npiElement.length > 0) {
                             npiElement.text(content);
                         } else {
-                            var html = '<span id="accountInfo-npi" class="account-npi">'+ content +'</span>';
+                            var html = '<span id="accountInfo-npi" class="account-npi" data-npi=' + accountInfo.npi +
+                                '>'+ content +'</span>';
                             npiParentElement.append(html);
                         }
                     } else {
