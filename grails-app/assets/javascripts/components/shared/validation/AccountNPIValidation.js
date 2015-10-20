@@ -1,7 +1,7 @@
-require('../../libs/jquery-validation/jquery.validate.js');
+require('../../../libs/jquery-validation/jquery.validate.js');
 
-var STRINGs = require('../../constants/Strings');
-var URLs = require('../../constants/Urls');
+var STRINGs = require('../../../constants/Strings');
+var URLs = require('../../../constants/Urls');
 
 $.validator.addMethod('NPICheck', function (value, element) {
     var regexp = /^[1-9]/;
