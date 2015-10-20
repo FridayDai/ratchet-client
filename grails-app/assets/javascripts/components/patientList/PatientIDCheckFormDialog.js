@@ -4,7 +4,6 @@ var KEYs = require('../../constants/Keys');
 
 function PatientIDCheckFormDialog() {
     this.attributes({
-        formSelector: '.',
         patientIDField: '#new-patient-id'
     });
 

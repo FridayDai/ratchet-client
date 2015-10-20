@@ -4,13 +4,11 @@
     margin-bottom: 10px;
     margin-left: 20px;
     text-align: left;
-    font-family: Lato;
     font-weight: 400;
 
     .lbl-group {
         display: table-row-group;
         color: $base-color-medium-black;
-        font-family: Lato;
         font-weight: 400;
         font-size: 14px;
 
@@ -29,7 +27,6 @@
         color: $base-color-medium-black;
         background-color: $base-mid-grey-color;
         font-size: 14px;
-        font-family: "Lato";
         font-weight: 400;
 
 
@@ -72,7 +69,6 @@
         .input-group {
             min-width: 232px;
             height: 29px;
-            font-family: Lato;
             font-weight: 400;
         }
 
@@ -142,7 +138,7 @@
 
     .select2-search-field {
         input {
-            height: 24px;
+            height: 27px;
         }
     }
 
@@ -176,7 +172,6 @@
     margin-top: 10px;
     margin-bottom: 0;
     text-align: right;
-    font-family: Lato;
     font-weight: 400;
     font-size: 14px;
 }

@@ -218,7 +218,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.release.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
@@ -252,9 +252,10 @@ ratchetv2 {
             updatePassword = "${ratchetv2.server.url.base}/password/update"
             activeStaff = "${ratchetv2.server.url.base}/staff/confirm"
             confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
-            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%s"
-            activateStaff = "${ratchetv2.server.url.base}/staff/activate/%s"
+            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%d"
+            activateStaff = "${ratchetv2.server.url.base}/staff/activate/%d"
             checkAccountEmail = "${ratchetv2.server.url.base}/staff/email/check"
+            checkNPI = "${ratchetv2.server.url.base}/staff/npi/check"
 
             //Group
             createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"

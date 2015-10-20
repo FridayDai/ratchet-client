@@ -11,7 +11,6 @@
     background-color: $base-color-mid-grey;
     font-weight: 300;
     font-size: 12px;
-    font-family: Lato;
 
     .content {
         margin-top: 5px;
@@ -20,7 +19,6 @@
     .copyright-year {
         margin-top: 7px;
         margin-left: 10px;
-        font-family: Lato;
         font-weight: 400;
     }
 
@@ -48,12 +46,10 @@
             margin: 0;
             padding: 0 10px 0 0;
             line-height: 30px;
-            font-family: Lato;
             font-weight: 400;
 
             a {
                 color: $base-color-white;
-                font-family: Lato;
                 font-weight: 300;
                 font-size: 12px;
             }

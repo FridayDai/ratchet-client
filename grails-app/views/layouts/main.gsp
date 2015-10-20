@@ -24,7 +24,7 @@
 <g:render template="/shared/announcement" />
 <g:render template="/shared/header" />
 <g:render template="/shared/nav" />
-
+<input type="hidden" id="back-button-flag" value="no">
 <div class="container" id="main">
     <g:layoutBody/>
 </div>
@@ -41,6 +41,5 @@
 <g:else>
     <asset:javascript src="bundles/defaultBundle"/>
 </g:else>
-
 </body>
 </html>

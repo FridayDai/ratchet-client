@@ -12,7 +12,6 @@
 }
 
 input[type="text"], input[type="textarea"], input[type="email"], input[type="tel"] {
-    font-family: Lato;
     font-weight: 400;
 }
 
@@ -31,7 +30,6 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-header {
     border: 1px solid $base-color-dark-grey;
     color: $base-color-dark-grey;
-    font-family: Lato;
     font-weight: bold;
 
     a {
@@ -42,7 +40,6 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-    font-family: Lato;
     font-weight: 400;
 }
 
@@ -135,7 +132,6 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-priority-primary,
 .ui-widget-content .ui-priority-primary,
 .ui-widget-header .ui-priority-primary {
-    font-family: Lato;
     font-weight: 400;
 }
 
@@ -144,7 +140,6 @@ input[type="text"], input[type="textarea"], input[type="email"], input[type="tel
 .ui-widget-header .ui-priority-secondary {
     filter: Alpha(Opacity=70);
     opacity: .7;
-    font-family: Lato;
     font-weight: 300;
 }
 

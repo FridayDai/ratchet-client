@@ -21,6 +21,9 @@ class AccountsController extends BaseController {
         } else {
             accountPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
             accountPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            accountPagination.sortField = 'id'
+            accountPagination.sortDir = 'desc'
+
             def accountList = accountService.getAccounts(token, clientId, accountPagination)
             render(view: 'accounts', model: [accountList: accountList, pagesize: accountPagination.length])
         }
@@ -52,7 +55,7 @@ class AccountsController extends BaseController {
     }
 
     def inviteAccount() {
-        Integer accountId = params.int("accountId")
+        Long accountId = params?.accountId as long
         def resp = invitationService.inviteAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
@@ -114,14 +117,14 @@ class AccountsController extends BaseController {
     }
 
     def deactivateAccount() {
-        Integer accountId = params.int("accountId")
+        Long accountId = params?.accountId as long
         def resp = accountService.deactivateAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
     }
 
     def activateAccount() {
-        Integer accountId = params.int("accountId")
+        Long accountId = params?.accountId as long
         def resp = accountService.activateAccount(session.token, accountId)
         def result = [resp: resp]
         render result as JSON
@@ -132,4 +135,10 @@ class AccountsController extends BaseController {
         render data as JSON
     }
 
+    def checkAccountNPI() {
+        def clientId = session.clientId
+
+        def data = accountService.checkNPI(session.token, params?.npi, clientId)
+        render data as JSON
+    }
 }

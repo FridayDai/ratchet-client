@@ -10,8 +10,8 @@ class AccountService extends RatchetAPIService {
         def start = accountPagination?.start
         def length = accountPagination?.length
         def name = accountPagination?.name
-        def sort = accountPagination?.sort
-        def order = accountPagination?.order
+        def sortField = accountPagination?.sortField
+        def sortDir = accountPagination?.sortDir
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
         log.info("Call backend service to get accounts with start, length, name and clientId, token: ${token}.")
@@ -22,26 +22,25 @@ class AccountService extends RatchetAPIService {
                     .queryString("offset", start)
                     .queryString("name", name)
                     .queryString("clientId", clientId)
-                    .queryString("sorted", sort)
-                    .queryString("order", order)
+                    .queryString("sorted", sortField)
+                    .queryString("order", sortDir)
                     .asString()
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
-                def map = [:]
-                map.put(start, start)
-                map.put(length, length)
-                map.put("recordsTotal", result.totalCount)
-                map.put("recordsFiltered", result.totalCount)
-                map.put("data", result.items)
                 log.info("Get accounts success, token: ${token}.")
-                return map
+
+                [
+                    'start': start,
+                    'length': length,
+                    'recordsTotal': result.totalCount,
+                    'recordsFiltered': result.totalCount,
+                    'data': result.items
+                ]
             } else {
                 handleError(resp)
             }
-
         }
-
     }
 
     def getSingleAccount(token, accountId) {
@@ -73,6 +72,7 @@ class AccountService extends RatchetAPIService {
         def accountManagement = account?.accountManagement
         def doctor = account?.doctor
         def groupId = account?.groupId
+        def npi = account?.npi
 
         def url = grailsApplication.config.ratchetv2.server.url.staffs
         log.info("Call backend service to add a new account with clientId and account personal info, token: ${token}.")
@@ -88,6 +88,7 @@ class AccountService extends RatchetAPIService {
                     .field("accountManagement", accountManagement)
                     .field("doctor", doctor)
                     .field("groupIds", groupId)
+                    .field("npi", npi)
                     .asString()
 
             if (resp.status == 201) {
@@ -98,7 +99,6 @@ class AccountService extends RatchetAPIService {
                 handleError(resp)
             }
         }
-
     }
 
     def updateAccount(String token, clientId, Account account) {
@@ -110,10 +110,10 @@ class AccountService extends RatchetAPIService {
         def accountManagement = account?.accountManagement
         def doctor = account?.doctor
         def groupId = account?.groupId
+        def npi = account?.npi
 
         def updateAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
-        Integer accountId = account.accountId.toInteger()
-        def url = String.format(updateAccountUrl, accountId)
+        def url = String.format(updateAccountUrl, account?.accountId)
         log.info("Call backend service to update account with clientId and account info, token: ${token}.")
 
 
@@ -127,6 +127,7 @@ class AccountService extends RatchetAPIService {
                     .field("doctor", doctor)
                     .field("accountManagement", accountManagement)
                     .field("groupIds", groupId)
+                    .field("npi", npi)
                     .asString()
 
             if (resp.status == 200) {
@@ -317,8 +318,6 @@ class AccountService extends RatchetAPIService {
 
 
     def checkEmail(token, email) {
-
-        def result
         def url = grailsApplication.config.ratchetv2.server.url.checkAccountEmail
         log.info("Call backend service to check account email, token: ${token}.")
 
@@ -329,16 +328,39 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("this account email already exist, token: ${token}")
-                result = [check: "true"]
-                return result
+
+                [check: "true"]
             } else if (resp.status == 404) {
                 log.info("this account email doesn't exist, token: ${token}")
-                result = [check: "false"]
-                return result
+
+                [check: "false"]
             } else {
                 handleError(resp)
             }
         }
+    }
 
+    def checkNPI(token, npi, clientId) {
+        def url = grailsApplication.config.ratchetv2.server.url.checkNPI
+        log.info("Call backend service to check account npi, token: ${token}.")
+
+        withGet(token, url) { req ->
+            def resp = req
+                .queryString("npi", npi)
+                .queryString("clientId", clientId)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("this account npi already exist, token: ${token}")
+
+                [check: "true"]
+            } else if (resp.status == 404) {
+                log.info("this account npi doesn't exist, token: ${token}")
+
+                [check: "false"]
+            } else {
+                handleError(resp)
+            }
+        }
     }
 }

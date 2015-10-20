@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-
-<g:set var="scriptPath" value="bundles/accountsBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/accounts.bundle.js"/>
 <g:set var="cssPath" value="accounts"/>
 <g:applyLayout name="main">
     <html>
@@ -10,12 +9,12 @@
 
     <body>
     <div class="content">
-        <div class="inner-header">
+        <div class="inner-header" id="header-panel">
             <label class="title account-icon">ACCOUNTS</label>
             <a href="#" id="add-account" class="btn btn-add add-account"><span>New Account</span></a>
         </div>
 
-        <div class="inner-search">
+        <div class="inner-search" id="accounts-toolbar">
             <div class="search-content clear">
                 <div class="filler-content pull-right">
                     <input type="text" placeholder="Account ID, Name" class="search-input" id="search-input">
@@ -39,26 +38,16 @@
                 </thead>
                 <tbody>
                 <g:each var="account" in="${accountList.data}" status="i">
-                    <tr data-is-dom-data="true">
-                        <td>${account.id}</td>
-                        <td>
-                            ${account.firstName} ${account.lastName}
-                        </td>
-                        <td>${account.email}</td>
-                        <td>${account.lastUpdateDate}</td>
-                        <td>${account.id}</td>
-                        <td>${account.doctor}</td>
-                    </tr>
+                    <tr data-is-dom-data="true"><td>${account.id}</td><td>${account.firstName} ${account.lastName}</td><td>${account.email}</td><td>${account.lastUpdateDate}</td><td>${account.id}</td><td>${account.doctor}</td><td>${account.firstName}</td><td>${account.lastName}</td></tr>
                 </g:each>
                 </tbody>
             </table>
         </div>
-        <span id="isDoctorImg" class="ui-hidden" data-img-path="${assetPath(src: 'isDoctor.png')}"></span>
-        <g:form class="accounts-form ui-hidden" id="table-form" name="table-form">
 
+        <form class="accounts-form ui-hidden" id="add-account-form" action="/accounts" method="post">
             <div class="form-group">
                 <label class="checkbox">
-                    <input id="doctor" name="doctor" type="checkbox">Dr.
+                    <input id="doctor" name="doctorRaw" type="checkbox">Dr.
                 </label>
             </div>
 
@@ -79,17 +68,12 @@
                        required/>
             </div>
 
-        %{--<div class="form-group inline">--}%
-        %{--<label class="lbl-group">ROLE<span>*</span></label>--}%
-        %{--<input id="type" name="type" class="input-group" required>--}%
-        %{--</div>--}%
-
             <div class="form-group inline">
                 <label class="lbl-group">PROVIDER</label>
 
-                <div class="group">
+                <div class="provider group">
                     <label class="checkbox">
-                        <input id="provider" name="provider" type="checkbox">Yes
+                        <input id="provider" name="providerRaw" type="checkbox">Yes
                     </label>
                 </div>
             </div>
@@ -97,21 +81,26 @@
             <div class="form-group inline">
                 <label class="lbl-group">PERMISSION</label>
 
-                <div class="group">
+                <div class="permission group">
                     <label class="checkbox">
-                        <input id="accountManagement" name="accountManagement" type="checkbox">Administrator
+                        <input id="accountManagement" name="accountManagementRaw" type="checkbox">Administrator
                     </label>
                 </div>
             </div>
 
+            <div class="form-group inline hidden">
+                <label class="lbl-group">NPI<span>*</span></label>
+                <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10" required/>
+            </div>
+
             <div class="form-group">
-                <label class="lbl-group">GROUP<span class="hidden">*</span></label>
-                <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+                <label class="lbl-group">GROUP<span class="group-require-mark hidden">*</span></label>
+                <input id="selectGroup" name="groupId" type="text" class="plugin-select-box input-group patient-group clear"
                        placeholder="Select group"/>
             </div>
 
             <label class="form-group required pull-right"><span>*</span>Required field</label>
-        </g:form>
+        </form>
 
     </div>
     </body>

@@ -247,7 +247,6 @@ html[dir="rtl"] .select2-container .select2-choice .select2-arrow b {
     margin: 0;
 
     outline: 0;
-    font-family: Lato;
     font-size: 1em;
 
     border: 1px solid #aaa;
@@ -563,7 +562,6 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
     padding: 5px;
     margin: 1px 0;
 
-    font-family: Lato;
     font-size: 100%;
     color: #666;
     outline: 0;
@@ -578,7 +576,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
 }
 
 .select2-default {
-    color: #999 !important;
+    color: #bebebe !important;
 }
 
 .select2-container-multi .select2-choices .select2-search-choice {
@@ -820,6 +818,13 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
             border: 0;
         }
     }
+}
+
+input[type='text'].plugin-select-box {
+    display: block!important;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
 }
 
 //end of select2

@@ -139,7 +139,12 @@ function PatientsTable() {
         Notifications.showFadeOutMsg(msg.format(data.number));
     };
 
+    this.onPageInBackButtonStatus = function () {
+        this.reload();
+    };
+
     this.after('initialize', function () {
+        this.on(document, 'pageInBackButtonStatus', this.onPageInBackButtonStatus);
         this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
         this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
         this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);

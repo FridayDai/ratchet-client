@@ -21,6 +21,7 @@ $.ajaxSetup({
         }
     },
     global: true,
+    cache: false,
     error: function (jqXHR) {
         if (jqXHR.status === 401) {
             window.location.href = "/login";
@@ -98,5 +99,3 @@ $.Velocity
         ],
         reset: { scaleX: 1, scaleY: 1 }
     });
-
-module.exports = {};

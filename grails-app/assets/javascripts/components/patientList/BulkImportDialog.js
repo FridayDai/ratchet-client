@@ -29,24 +29,24 @@ function BulkImportDialog() {
     });
 
     this.setWindowResize = function () {
-        var me = this;
+        $(window).on('resize', this.onWindowResizeBind);
+    };
 
-        $(window).on('resize', function () {
-            var $dialog = me.$node.parent();
+    this.onWindowResize = function () {
+        var $dialog = this.$node.parent();
 
-            $dialog.css({
-                height: Utility.getWindowSize().height,
-                width: Utility.getWindowSize().width - 30,
-                left: 0,
-                top: 0
-            });
-
-            if ($dialog.height() <= 630) {
-                $dialog.css("overflow", "auto");
-            } else {
-                $dialog.css("overflow", "hidden");
-            }
+        $dialog.css({
+            height: Utility.getWindowSize().height,
+            width: Utility.getWindowSize().width - 30,
+            left: 0,
+            top: 0
         });
+
+        if ($dialog.height() <= 630) {
+            $dialog.css("overflow", "auto");
+        } else {
+            $dialog.css("overflow", "hidden");
+        }
     };
 
     this.setWindowNoScroll = function () {
@@ -213,8 +213,14 @@ function BulkImportDialog() {
         this.on(document, 'bulkImportFileUploadSuccess', this.onBulkImportFileUploadSuccess);
         this.on(document, 'bulkImportFileUploadFail', this.onBulkImportFileUploadFail);
 
+        this.onWindowResizeBind = _.bind(this.onWindowResize, this);
+
         this.setWindowResize();
         this.toggleNextButton(false);
+    });
+
+    this.before('teardown', function () {
+        $(window).off('resize', this.onWindowResizeBind);
     });
 }
 

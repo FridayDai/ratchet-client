@@ -124,7 +124,6 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 }
             },
             input: function( event ) {
-                console.log('beforeinput');
                 if ( suppressInput ) {
                     suppressInput = false;
                     event.preventDefault();

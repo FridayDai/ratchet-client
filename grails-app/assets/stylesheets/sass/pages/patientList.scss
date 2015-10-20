@@ -104,7 +104,6 @@
 .select-tip {
     font-size: 11px;
     font-weight: 700;
-    font-family: Lato;
 }
 
 // for new patient inline edit
@@ -452,7 +451,7 @@
         color: $base-color-pending;
     }
 
-    &.nonexistent:before {
+    &.undelivered:before {
         color: $base-color-overdue;
     }
 }

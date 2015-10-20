@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
-<g:set var="scriptPath" value="bundles/singlePatientBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/patientDetail.bundle.js"/>
 <g:set var="cssPath" value="treatment"/>
 <g:applyLayout name="main">
     <html>
@@ -28,7 +28,7 @@
                 <hr />
                 <div class="info number clear">
                     <div class="id-info inline">
-                        ID: <span class="id" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                        ID: <span class="identify" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                     </div>
                     <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
                     <div class="email patient-email inline" id="patientEmail"
@@ -48,7 +48,7 @@
                         <span class="email-status verified" value="${patientInfo.status}">Verified</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent" value="${patientInfo.status}">Nonexistent</span>
+                        <span class="email-status nonexistent" value="${patientInfo.status}">Undelivered</span>
                     </g:elseif>
                     <g:else>
                         <span class="email-status div-hidden" value="${patientInfo.status}"></span>
@@ -57,12 +57,12 @@
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                         <div class="inline div-invite">
                             <button id="invitePatient" class="btn invite-patient"
-                                    data-id="${patientInfo.id}">Invite Again</button>
+                                    data-patient-id="${patientInfo.id}">Invite Again</button>
                         </div>
                     </g:if>
                     <g:else>
                         <div class="inline div-invite invisible-invite">
-                            <button class="btn btn-invite invite-patient" data-id="${patientInfo.id}">Invite Again</button>
+                            <button class="btn btn-invite invite-patient" data-patient-id="${patientInfo.id}">Invite Again</button>
                         </div>
                     </g:else>
                 </div>
@@ -97,7 +97,7 @@
                             <g:if test="${medicalRecord?.archived}">
                                 <i class="icon-archived"></i>
                             </g:if>
-                            ${medicalRecord.title} ${medicalRecord.tmpTitle}
+                            <span>${medicalRecord.title} ${medicalRecord.tmpTitle}</span>
                         </g:link>
                     </li>
                 </g:each>
@@ -105,10 +105,10 @@
         </div>
     </div>
 
-    <g:form class="patient-form ui-hidden" id="patient-form" name="patient-form">
+    <form action="/patients/${patientInfo.id}" method="post" class="patient-form ui-hidden" id="patient-form">
         <div class="form-group">
             <label class="lbl-group">PATIENT ID<span>*</span></label>
-            <input id="patientId" name="id" type="text" class="input-group"
+            <input id="identify" name="identify" type="text" class="input-group"
                    placeholder="1234567890"
                    required/>
         </div>
@@ -116,7 +116,7 @@
         <div class="form-group inline">
             <label class="lbl-group">FIRST NAME<span>*</span></label>
             <input id="firstName" name="firstName" type="text" class="input-group" placeholder="John"
-                   required/>
+                   required autofocus="autofocus"/>
         </div>
 
         <div class="form-group inline">
@@ -126,7 +126,7 @@
 
         <div class="form-group inline">
             <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-            <input id="phone" name="phone" type="text" maxlength="14" class="input-group"
+            <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
                    placeholder="777-777-7777" required/>
         </div>
 
@@ -135,32 +135,32 @@
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
-    </g:form>
+    </form>
 
-    <g:form class="form treatment-form ui-hidden" id="treatment-form" name="treatment-form">
+    <form action="/patients/${patientInfo.id}/treatments" method="post" class="form treatment-form ui-hidden" id="treatment-form">
         <input type="hidden" autofocus/>
         <div class="form-group">
             <label class="lbl-group">GROUP<span>*</span></label>
-            <input id="selectGroup" name="selectGroup" type="text" class="input-group patient-group clear"
+            <input id="selectGroup" name="groupVal" type="text" class="input-group patient-group clear"
                    placeholder="Select group" required/>
         </div>
 
         <div class="form-group form-provider">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="selectSurgeons" type="text" class="required" placeholder="Select provider"
+            <input id="selectSurgeons" name="staffVal" type="text" class="required" placeholder="Select provider"
                    disabled/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
-            <input id="selectTreatment" name="selectTreatment" type="text" class=" required"
+            <input id="selectTreatment" name="treatmentVal" type="text" class=" required"
                    placeholder="Select treatment"/>
         </div>
 
     %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="surgeryTime" name="surgeryTime" type="text" class="input-group surgery-time required"
+            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -169,41 +169,40 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                <input id="emergency-firstName" name="emergency-firstName" type="text"
+                <input id="emergency-firstName" name="ecFirstName" type="text"
                        class="input-group emergency-field"
                        placeholder="Grace (Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
-                <input id="emergency-lastName" name="emergency-lastName" type="text" class="input-group emergency-field"
+                <input id="emergency-lastName" name="ecLastName" type="text" class="input-group emergency-field"
                        placeholder="Smith (Optional)"/>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                <input id="relationshipName" name="relationshipName" class="input-group emergency-field"
+                <input id="relationship" name="relationshipVal" class="input-group emergency-field"
                        placeholder="Spouse (Optional)">
             </label>
             </div>
 
             <div class="form-group inline emr-email">
                 <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                <input id="emergency-email" name="email" type="email" class="input-group emergency-field"
+                <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
                        placeholder="grace@email.com (Optional)"/>
             </div>
 
             <div class="form-group inline permission-confirm">
-                <label></label>
-                <input type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>*
-                <span>Patient would like to release his/her health information to
-                    <span id="ec-first-name"></span>.</span>
+                <input type="checkbox" name="permissionConfirm" id="permission-confirm-check" class="permission-confirm-check"/>
+                <label for="permission-confirm-check">*Patient would like to release his/her health information to
+                    <span id="ec-first-name"></span>.</label>
             </div>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
-    </g:form>
+    </form>
 
-    <g:form class="treatment-time-form ui-hidden" id="treatment-time-form" name="treatment-time-form">
+    <form action="" method="post" class="treatment-time-form ui-hidden" id="treatment-time-form">
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY DATE</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
@@ -212,9 +211,9 @@
                    tabindex="-1"
                    required>
         </div>
-    </g:form>
+    </form>
 
-    <g:form class="add-email-form ui-hidden" name="add-email-form">
+    <form action="/patients/${patientInfo.id}" method="post" class="add-email-form ui-hidden" id="add-email-form">
         <div class="form-group description">
             There is no email address for this patient. Do you want to add an email address?
         </div>
@@ -222,18 +221,68 @@
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="add-email-field" name="email" type="text"
                    class="input-group"
-                   placeholder="john.smith@email.com (Optional)"
-                   tabindex="-1">
+                   placeholder="john.smith@email.com (Optional)" required>
         </div>
-    </g:form>
+    </form>
 
-    <g:form class="warn">
+    <form action="" method="post" class="edit-surgeon ui-hidden" id="edit-group-provider-form">
+        <input type="hidden" autofocus/>
+        <div class="form-group">
+            <label class="lbl-group">GROUP<span>*</span></label>
+            <input id="groupSelect" name="groupName" type="text" class="group-field team-group clear"
+                   placeholder="Select group" required/>
+        </div>
 
-    </g:form>
+        <div class="form-group team-provider">
+            <label class="lbl-group">PROVIDER<span>*</span></label>
+            <input id="selectStaff" name="providerName" type="text" class="provider-field team-group clear"
+                   placeholder="Select provider" required/>
+        </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
+    </form>
 
-    <g:form class="generate-code-form warn ui-hidden">
+    <form action="" method="post" class="inviteGiverForm ui-hidden" id="invite-emergency-contact-form">
+        <div class="form-group inline">
+            <label class="lbl-group">FIRST NAME<span>*</span></label>
+            <input id="giver-firstName" name="firstName" type="text" class="input-group"
+                   placeholder="Grace"
+                   required/>
+        </div>
 
-    </g:form>
+        <div class="form-group inline">
+            <label class="lbl-group">LAST NAME<span>*</span></label>
+            <input id="giver-lastName" name="lastName" type="text" class="input-group"
+                   placeholder="Smith" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">RELATIONSHIP<span>*</span></label>
+            <input id="relationships" name="relationships" class="select-body input-group"
+                   placeholder="Select relationship" required>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">EMAIL ADDRESS<span>*</span></label>
+            <input id="giver-email" name="email" type="email" class="input-group"
+                   placeholder="grace@email.com" required/>
+        </div>
+
+        <div class="form-group inline team-permission-confirm">
+            <input type="checkbox" id="permissionConfirm" name="permissionConfirm" required/>
+            <label for="permissionConfirm">*Patient would like to release his/her health information to
+                <span id="permission-ec-first-name"></span>.</label>
+        </div>
+        <label class="form-group required pull-right"><span>*</span>Required field</label>
+    </form>
+
+    <div id="generate-code-dialog" class="warn ui-hidden">
+        <div class="msg-center msg-header">Code generated successfully!</div>
+        <div class="msg-center code"></div>
+        <div class="msg-center">
+            Go to <a target="_blank" class="link-to-patient" href=""></a> and enter code to start task.
+        </div>
+        <div class="msg-center">The code will expire in 24 hours!</div>
+    </div>
     </body>
     </html>
 </g:applyLayout>

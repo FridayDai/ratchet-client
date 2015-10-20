@@ -1,22 +1,26 @@
 var flight = require('flight');
-var libPhoneNumber = require('libphonenumber');
 var WithFormDialog = require('../common/WithFormDialog');
 var WithChildren = require('../common/WithChildren');
-var STRINGs = require('../../constants/Strings');
 var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
-var Notifications = require('../common/Notification');
+var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
+var WithEmergencyContactFieldRequired = require('../shared/functional/WithEmergencyContactFieldRequired');
+var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
+var PatientEmailValidation = require('../shared/validation/PatientEmailValidation');
 
-var NewPatientPhoneInputField = require('./NewPatientPhoneInputField');
-var NewPatientRelationshipCombobox = require('./NewPatientRelationshipCombobox');
-var NewPatientGroupCombobox = require('./NewPatientGroupCombobox');
-var NewPatientProviderCombobox = require('./NewPatientProviderCombobox');
-var NewPatientTreatmentCombobox = require('./NewPatientTreatmentCombobox');
-var NewPatientSurgeryDate = require('./NewPatientSurgeryDate');
+var NewPatientPhoneInputField = require('../shared/components/PatientPhoneInputField');
+var NewPatientRelationshipCombobox = require('../shared/components/PatientRelationshipCombobox');
+var NewPatientGroupCombobox = require('../shared/components/PatientGroupCombobox');
+var NewPatientProviderCombobox = require('../shared/components/PatientProviderCombobox');
+var NewPatientTreatmentCombobox = require('../shared/components/PatientTreatmentCombobox');
+var NewPatientSurgeryDate = require('../shared/components/PatientSurgeryDate');
 
 function NewPatientFormDialog() {
+    flight.compose.mixin(this, [
+        EmptyEmailConfirmation
+    ]);
+
     this.attributes({
-        formSelector: '.',
         hiddenIdSelector: '#hidden-id',
 
         firstNameFieldSelector: '#firstName',
@@ -28,30 +32,19 @@ function NewPatientFormDialog() {
         treatmentFieldSelector: '#selectTreatment',
         surgeryTimeFieldSelector: '#surgeryTime',
 
-        inputFieldSelector: '.form-group input',
         basicEditButtonSelector: 'a.form-group-edit',
-        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
-        emergencyContactFieldSelector: '.emergency-field',
-        emergencyContactRequiredMarkSelector: '.emergency-required',
-        emergencyContactPermissionSelector: '.permission-confirm',
-        emergencyContactPermissionCheckSelector: '.permission-confirm-check',
-        emergencyContactPermissionFirstNameSelector: '#ec-first-name',
         emergencyContactRelationshipFieldSelector: '#relationship',
+        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
+        emergencyContactPermissionFirstNameSelector: '#ec-first-name',
 
         patientIdStaticSelector: '#patient-id-value',
         firstNameStaticSelector: '#firstName-static',
         lastNameStaticSelector: '#lastName-static',
         phoneNumberStaticSelector: '#phoneNumber-static',
-        emailStaticSelector: '#email-static'
-    });
+        emailStaticSelector: '#email-static',
 
-    this.children({
-        phoneNumberFieldSelector: NewPatientPhoneInputField,
-        emergencyContactRelationshipFieldSelector: NewPatientRelationshipCombobox,
-        groupFieldSelector: NewPatientGroupCombobox,
-        providerFieldSelector: NewPatientProviderCombobox,
-        treatmentFieldSelector: NewPatientTreatmentCombobox,
-        surgeryTimeFieldSelector: NewPatientSurgeryDate
+        relationshipSelectEvent: 'newPatientRelationshipSelected',
+        relationshipClearEvent: 'newPatientRelationshipCleared'
     });
 
     this.options({
@@ -60,103 +53,65 @@ function NewPatientFormDialog() {
         buttons: ['Save']
     });
 
-    this.initValidation = function () {
-        $.validator.addMethod('phoneNumberCheck', function (value, element) {
-            var tel = /^[0-9\-\(\)\s]+$/;
-            return this.optional(element) || (tel.test(value));
-        }, STRINGs.PHONE_NUMBER_INVALID);
-
-        $.validator.addMethod('checkPhoneNumberRegion', function (value) {
-            var phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
-            var phoneNumber = phoneUtil.parse(value, 'US');
-            var isPossible = phoneUtil.isPossibleNumber(phoneNumber);
-            var isValid = phoneUtil.isValidNumber(phoneNumber);
-            var regionCode = phoneUtil.getRegionCodeForNumber(phoneNumber);
-            var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
-            return isPossible && isValid && regionCode && isValidRegionCode;
-        }, STRINGs.PHONE_NUMBER_INVALID);
-
-        return {
-            rules: {
-                phoneNumberVal: {
-                    minlength: 14,
-                    phoneNumberCheck: true,
-                    checkPhoneNumberRegion: true
-                },
-                email: {
-                    email: true,
-                    remote: {
-                        url: '/patients/check-email',
-                        dropProcess: true
-                    }
-                }
-            },
-            messages: {
-                phoneNumberVal: {
-                    minlength: STRINGs.PHONE_NUMBER_INVALID
-                },
-                email: {
-                    remote: STRINGs.EMAIL_EXISTING_INVALID
-                }
+    this.children({
+        phoneNumberFieldSelector: NewPatientPhoneInputField,
+        emergencyContactRelationshipFieldSelector: {
+            child: NewPatientRelationshipCombobox,
+            attributes: {
+                selectEvent: 'newPatientRelationshipSelected',
+                clearEvent: 'newPatientRelationshipCleared'
             }
-        };
-    };
-
-    this.beforeSubmitForm = function () {
-        var me = this;
-
-        if (this.isEmailFieldBlank()) {
-            Notifications.confirm({
-                title: 'NO EMAIL ADDRESS',
-                message: [
-                    'Patient without email address will not receive any automated task reminder.',
-                    'Do you want to proceed?'
-                ]
-            }, {
-                buttons: [
-                    {
-                        text: 'Yes',
-                        'class': 'btn-agree',
-                        click: function () {
-                            // Warning dialog close
-                            $(this).dialog("close");
-
-                            // Bulk import dialog close
-                            me.submitForm();
-                        }
-                    }, {
-                        text: 'No',
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }
-                ]
-            });
-
-            return false;
+        },
+        groupFieldSelector: {
+            child: NewPatientGroupCombobox,
+            attributes: {
+                selectEvent: 'patientGroupSelected',
+                clearEvent: 'patientGroupClear'
+            }
+        },
+        providerFieldSelector:{
+            child: NewPatientProviderCombobox,
+            attributes: {
+                groupSelectEvent: 'patientGroupSelected',
+                groupClearEvent: 'patientGroupClear',
+                resetEvent: 'newPatientReset'
+            }
+        },
+        treatmentFieldSelector: {
+            child: NewPatientTreatmentCombobox,
+            attributes: {
+                selectEvent: 'newPatientTreatmentSelected',
+                clearEvent: 'newPatientTreatmentClear'
+            }
+        },
+        surgeryTimeFieldSelector: {
+            child: NewPatientSurgeryDate,
+            attributes: {
+                treatmentSelectEvent: 'newPatientTreatmentSelected',
+                treatmentClearEvent: 'newPatientTreatmentClear',
+                resetEvent: 'newPatientReset'
+            }
         }
-    };
+    });
 
-    this.isEmailFieldBlank = function () {
-        var $email = this.select('emailFieldSelector');
-
-        return $email.is(':visible') && $email.val() === '';
+    this.initValidation = function () {
+        return _.defaultsDeep(PhoneNumberValidation.get(), PatientEmailValidation.get());
     };
 
     this.onShow = function (e, data) {
         this.$node.removeClass('ui-hidden');
-        this.prepare(data);
+        this.prepareToShow(data);
         this.show();
     };
 
-    this.prepare = function (data) {
+    this.prepareToShow = function (data) {
         if (data.check !== 'false') {
             this.setPatientExisting(data);
+            this.select('patientIdStaticSelector').text(data.patientId);
         } else {
             this.setPatientNotExisting();
+            this.select('patientIdStaticSelector').text(data.identify);
         }
-
-        this.select('patientIdStaticSelector').text(data.patientId);
     };
 
     this.setPatientExisting = function (data) {
@@ -262,104 +217,9 @@ function NewPatientFormDialog() {
     };
 
     this.onClose = function () {
-        this.setEmergencyContactRequired(false);
+        this.select('emergencyContactPermissionFirstNameSelector').empty();
 
         this.trigger('newPatientReset');
-    };
-
-    this.onInputFieldFocus = function (e) {
-        var $element = $(e.target);
-
-        $element
-            .data('placeholder', $element.attr('placeholder'))
-            .attr('placeholder', '');
-    };
-
-    this.onInputFieldBlur = function (e) {
-        var $element = $(e.target);
-
-        $element.attr('placeholder', $element.data('placeholder'));
-    };
-
-    this._emergencyContactRequired = false;
-    this.onEmergencyContactFieldInput = function (e) {
-        var $target = $(e.target);
-
-        if ($target.val() !== '' && !this._emergencyContactRequired) {
-            this.setEmergencyContactRequired(true);
-        }
-
-        if ($target.val() === '') {
-            var isAllEmpty = _.every(this.select('emergencyContactFieldSelector'), function (element) {
-                return $(element).val() === '';
-            });
-
-            if (isAllEmpty) {
-                this.setEmergencyContactRequired(false);
-            }
-        }
-
-        if ($target[0] === this.select('emergencyContactFirstNameFieldSelector')[0]) {
-            this.select('emergencyContactPermissionFirstNameSelector').text($target.val());
-        }
-    };
-
-    this.setEmergencyContactRequired = function (isRequired) {
-        if (isRequired) {
-            this._emergencyContactRequired = true;
-
-            this.select('emergencyContactFieldSelector')
-                .attr('required', true)
-                .each(function () {
-                    var placeholder = $(this).attr('placeholder');
-                    var dataPlaceholder = $(this).data('placeholder');
-
-                    if (placeholder.indexOf(' (Optional)') >= 0) {
-                        $(this).attr('placeholder', placeholder.replace(' (Optional)', ''));
-                    }
-
-                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') >= 0) {
-                        $(this).data('placeholder', dataPlaceholder.replace(' (Optional)', ''));
-                    }
-                });
-
-            this.select('emergencyContactPermissionSelector')
-                .addClass('visible');
-
-            this.select('emergencyContactPermissionCheckSelector')
-                .attr('required', true);
-
-            this.select('emergencyContactRequiredMarkSelector')
-                .show();
-        } else {
-            this._emergencyContactRequired = false;
-
-            this.select('emergencyContactFieldSelector')
-                .attr('required', false)
-                .each(function () {
-                    var placeholder = $(this).attr('placeholder');
-                    var dataPlaceholder = $(this).data('placeholder');
-
-                    if (placeholder.indexOf(' (Optional)') === -1 && !$(this).is(':focus')) {
-                        $(this).attr('placeholder', placeholder + ' (Optional)');
-                    }
-
-                    if (dataPlaceholder && dataPlaceholder.indexOf(' (Optional)') === -1) {
-                        $(this).data('placeholder', dataPlaceholder + ' (Optional)');
-                    }
-                })
-                .valid();
-
-            this.select('emergencyContactPermissionCheckSelector')
-                .attr('required', false);
-            this.select('emergencyContactPermissionCheckSelector').valid();
-
-            this.select('emergencyContactPermissionSelector')
-                .removeClass('visible');
-
-            this.select('emergencyContactRequiredMarkSelector')
-                .hide();
-        }
     };
 
     this.setExtraData = function () {
@@ -406,13 +266,16 @@ function NewPatientFormDialog() {
         return result;
     };
 
-    this.onAddPatientSuccess = function (e, data) {window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
+    this.onAddPatientSuccess = function (e, data) {
+        window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
+    };
+
+    this.onEmergencyContactFirstNameInput = function () {
+        this.select('emergencyContactPermissionFirstNameSelector')
+            .text(this.select('emergencyContactFirstNameFieldSelector').val());
     };
 
     this.after('initialize', function () {
-        this.on('newPatientRelationshipSelected', this.onEmergencyContactFieldInput);
-        this.on('newPatientRelationshipCleared', this.onEmergencyContactFieldInput);
-
         this.on('dialogclose', this.onClose);
         this.on('formSuccess', this.onAddPatientSuccess);
 
@@ -421,14 +284,14 @@ function NewPatientFormDialog() {
         });
 
         this.on('input', {
-            'emergencyContactFieldSelector': this.onEmergencyContactFieldInput
+            emergencyContactFirstNameFieldSelector: this.onEmergencyContactFirstNameInput
         });
-
-        // TODO: can't use flight style to set focus and blur
-        this.select('inputFieldSelector')
-            .on('focus', this.onInputFieldFocus)
-            .on('blur', this.onInputFieldBlur);
     });
 }
 
-module.exports = flight.component(WithChildren, WithFormDialog, NewPatientFormDialog);
+module.exports = flight.component(
+    WithEmergencyContactFieldRequired,
+    WithChildren,
+    WithFormDialog,
+    NewPatientFormDialog
+);

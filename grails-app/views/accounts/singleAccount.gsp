@@ -1,6 +1,4 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
-<!DOCTYPE html>
-
 <g:set var="scriptPath" value="bundles/accountsBundle"/>
 <g:set var="cssPath" value="singleAccount"/>
 <g:applyLayout name="main">
@@ -25,7 +23,7 @@
         %{--</div>--}%
 
         <div class="middle-content">
-            <div class="name-info">
+            <div class="name-info" id="account-name-info">
 
                 <span class="account-doctor row" id="isDoctor">
                     <g:if test="${accountInfo.doctor}">
@@ -35,6 +33,10 @@
 
                 <span class="account-name account-first-name" id="accountFirstName">${accountInfo.firstName}</span>
                 <span class="account-name account-last-name" id="accountLastName">${accountInfo.lastName}</span>
+
+                <g:if test="${accountInfo.npi}">
+                    <span id="accountInfo-npi" class="account-npi">NPI: <span >${accountInfo.npi}</span></span>
+                </g:if>
 
             </div>
 
@@ -59,32 +61,32 @@
                     <td class="td-width">Status</td>
                     <td>
                         <g:if test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "INVITED"}">
-                            <span class="span-invited"
-                                  id="span-invited">UNVERIFIED</span>
+                            <span class="email-status span-invited" id="span-invited">UNVERIFIED</span>
 
                             <div class="inline div-invite">
-                                <button id="invite-account" class="btn"
-                                        data-id="${accountInfo.id}">Invite Again</button>
+                                <button id="invite-account" class="btn" data-id="${accountInfo.id}">Invite Again</button>
                             </div>
                         </g:if>
 
-                        <g:elseif test="${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1] == "ACTIVE"}">
-                            <span class="span-deactive span-activate-action"
-                                  id="span-deactive">${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1]}</span>
+                        <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "VERIFIED"}">
+                            <g:if test="${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1] == "INACTIVE"}">
+                                <span class="email-status span-active span-activate-action" id="span-active">INACTIVE</span>
+
+                                <a class="btn activate-action" id="btn-activate"
+                                   data-account-id="${accountInfo.id}">Activate</a>
+                            </g:if>
+                            <g:else>
+                            <span class="email-status span-deactive span-activate-action"
+                                  id="span-deactive">ACTIVE</span>
 
                             <a class="btn activate-action" id="btn-deactivate"
                                data-account-id="${accountInfo.id}">Deactivate</a>
+                            </g:else>
                         </g:elseif>
 
-                        <g:else test="${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1] == "INACTIVE"}">
-                            <span class="span-active span-activate-action"
-                                  id="span-active">
-                                ${StatusCodeConstants.STAFF_STATUS[accountInfo.staffStatus - 1]}
-                            </span>
-
-                            <a class="btn activate-action" id="btn-activate"
-                               data-account-id="${accountInfo.id}">Activate</a>
-                        </g:else>
+                        <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[accountInfo.emailStatus - 1] == "BOUNCED"}">
+                            <span class="email-status non-existent" id="span-active">NONEXISTENT</span>
+                        </g:elseif>
                     </td>
                 </tr>
 
@@ -156,11 +158,6 @@
                    readonly/>
         </div>
 
-    %{--<div class="form-group inline role-select">--}%
-    %{--<label class="lbl-group role">ROLE<span>*</span></label>--}%
-    %{--<input id="accountType" name="accountType" class="input-group" required>--}%
-    %{--</div>--}%
-
         <div class="form-group inline">
             <label class="lbl-group">PROVIDER</label>
 
@@ -179,6 +176,11 @@
                     <input id="accountManagement" name="accountManagement" type="checkbox">Administrator
                 </label>
             </div>
+        </div>
+
+        <div class="form-group inline hidden">
+            <label class="lbl-group">NPI<span>*</span></label>
+            <input id="npi" name="npi" type="text" class="input-group" placeholder="0123456789" maxlength="10"/>
         </div>
 
         <div class="form-group">

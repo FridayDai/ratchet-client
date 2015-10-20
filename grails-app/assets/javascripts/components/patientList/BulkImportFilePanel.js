@@ -118,6 +118,10 @@ function BulkImportFilePanel() {
 
         this.on(document, 'bulkImportDialogReset', this.onDialogReset);
     });
+
+    this.before('teardown', function () {
+        this.select('fileUploadButtonSelector').fileupload('destroy');
+    });
 }
 
 module.exports = flight.component(BulkImportFilePanel);
