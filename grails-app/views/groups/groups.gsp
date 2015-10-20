@@ -8,12 +8,12 @@
 
     <body>
     <div>
-        <div class="inner-header">
+        <div class="inner-header" id="header-panel">
             <label class="title group-icon">GROUPS</label>
             <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 
-        <div class="inner-search">
+        <div class="inner-search" id="groups-toolbar">
             <div class="search-content clear">
                 <div class="filler-content right-search">
                     <input type="text" placeholder="Name" class="search-input" id="search-input">

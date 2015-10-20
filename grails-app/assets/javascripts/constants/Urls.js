@@ -49,5 +49,10 @@ module.exports = {
     GET_ALL_GROUPS: '/groups',
 
     //Account detail
-    PAGE_ACCOUNT_DETAIL: '/accounts/{0}'
+    PAGE_ACCOUNT_DETAIL: '/accounts/{0}',
+
+    //Groups
+    GET_GROUPS: '/groups',
+    UPDATE_GROUP: '/groups/{0}'
+
 };
