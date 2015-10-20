@@ -54,7 +54,7 @@ function PatientInfoSection() {
     this.closePage = function (e) {
         e.preventDefault();
 
-        window.location.href = "/patients";
+        window.location.href = URLs.PAGE_PATIENTS;
     };
 
     this.inviteAgain = function () {

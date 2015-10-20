@@ -79,7 +79,7 @@ class UrlMappings {
             action = [GET: "getAccounts", POST: "addAccount"]
         }
 
-        "/accounts/$id?"(controller: "accounts") {
+        "/accounts/$accountId?"(controller: "accounts") {
             action = [GET: "getSingleAccount", POST: "updateAccount"]
         }
 
