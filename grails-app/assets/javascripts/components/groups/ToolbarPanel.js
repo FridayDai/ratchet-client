@@ -28,11 +28,11 @@ function ToolbarPanel() {
 
     this.after('initialize', function () {
         this.on('keydown', {
-            accountIDNameSearchField: this.onSearchGroupName
+            groupNameSearchField: this.onSearchGroupName
         });
 
         this.on('click', {
-            accountIDNameSearchButton: this.triggerSearch
+            groupNameSearchField: this.triggerSearch
         });
     });
 }

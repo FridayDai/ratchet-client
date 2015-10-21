@@ -4,6 +4,8 @@ var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
 var moment = require('moment');
+var Notifications = require('../common/Notification');
+
 
 function GroupsTable() {
     this.attributes({
@@ -85,12 +87,45 @@ function GroupsTable() {
 
         var $target = $(e.target);
         var groupId = $target.data("groupId");
+        var $row = $target.parents('tr');
+        var me = this;
 
-        this.trigger('showDeleteGroupNotification', {
-            groupId: groupId
+        Notifications.confirm({
+            title: 'DELETE GROUP',
+            message: 'Warning: This action cannot be undone.'
+        }, {
+            buttons: [
+                {
+                    text: 'Delete',
+                    'class': 'btn-agree',
+                    click: function () {
+                        // Warning dialog close
+                        $(this).dialog("close");
+
+                        me.deleteSingleGroup(groupId, $row);
+                    }
+                }, {
+                    text: 'Cancel',
+                    click: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
         });
     };
 
+    this.deleteSingleGroup = function (groupId, $row) {
+        var me = this;
+
+        $.ajax({
+            url: URLs.DELETE_GROUP,
+            type: 'POST',
+            data: {groupId: groupId},
+            success: function () {
+                me.deleteRow($row);
+            }
+        });
+    };
 
     this.onGroupNameSearch = function (e, data) {
         this.search(data);
@@ -104,16 +139,15 @@ function GroupsTable() {
         this.reload();
     };
 
-    this.onDeleteGroupSuccess = function() {
-
-    };
-
     this.after('initialize', function () {
         this.on(document, 'selectGroupNameForGroupTable', this.onGroupNameSearch);
         this.on(document, 'addGroupSuccess', this.onAddGroupSuccess);
         this.on(document, 'updateGroupSuccess', this.onEditGroupSuccess);
-        this.on(document, 'deleteGroupSuccess', this.onDeleteGroupSuccess);
+    });
 
+    this.before('teardown', function () {
+        this.$node.find('a.btn-edit-group').off('click');
+        this.$node.find('a.a.btn-remove-group').off('click');
     });
 }
 

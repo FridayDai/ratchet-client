@@ -8,10 +8,9 @@ var ToolbarPanel = require('../components/groups/ToolbarPanel');
 var GroupsTable = require('../components/groups/GroupsTable');
 
 var GroupFormDialog = require('../components/groups/GroupFormDialog');
-var DeleteGroupNotification = require('../components/groups/DeleteGroupNotification');
 
 function GroupsPage() {
-    this.attribute({
+    this.attributes({
         headerPanelSelector: '#header-panel',
         toolbarPanelSelector: '#groups-toolbar',
         groupsTableSelector: '#groupsTable',
@@ -33,4 +32,4 @@ function GroupsPage() {
     ]);
 }
 
-flight.component(WithPage, GroupsPage).attachTo('#main');
+flight.component(WithPage,GroupsPage).attachTo('#main');

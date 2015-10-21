@@ -1,10 +1,6 @@
 var flight = require('flight');
-var WithFormDialog = require('../../common/WithFormDialog');
-//var WithChildren = require('../../common/WithChildren');
-var URLs = require('../../../constants/Urls');
-
-//var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
-//var EmergencyContactEmailValidation = require('../../shared/validation/EmergencyContactEmailValidation');
+var WithFormDialog = require('../common/WithFormDialog');
+var URLs = require('../../constants/Urls');
 
 var UPDATE = 'updateModel';
 var ADD = 'addModel';
@@ -31,7 +27,7 @@ function GroupFormDialog() {
 
     this.prepareForShow = function (data) {
 
-        var updateData = data.update;
+        var updateData = data? data.update: null;
 
         if (updateData) {
             this.model = UPDATE;
@@ -47,32 +43,16 @@ function GroupFormDialog() {
         }
     };
 
-
-    //this.setExtraData = function () {
-    //    if (this.model === UPDATE) {
-    //        return {
-    //            medicalRecordId: this.medicalRecordId,
-    //            careGiverId: this.emergencyContactId,
-    //            relationship: this.select('emergencyContactRelationshipFieldSelector').data('id')
-    //        };
-    //    } else {
-    //        return {
-    //            relationship: this.select('emergencyContactRelationshipFieldSelector').data('id')
-    //        };
-    //    }
-    //};
-
-    this.onAddGroupSuccess = function () {
-        this.trigger('addGroupSuccess');
+    this.onChangeGroupSuccess = function () {
+        if(this.model === UPDATE) {
+            this.trigger('updateGroupSuccess');
+        } else {
+            this.trigger('addGroupSuccess');
+        }
     };
 
-    //this.onClose = function () {
-    //    this.select('emergencyContactPermissionFirstNameSelector').empty();
-    //};
-
     this.after('initialize', function () {
-        //this.on('dialogclose', this.onClose);
-        this.on('formSuccess', this.onAddGroupSuccess);
+        this.on('formSuccess', this.onChangeGroupSuccess);
 
     });
 }

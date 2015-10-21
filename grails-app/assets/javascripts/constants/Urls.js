@@ -53,6 +53,7 @@ module.exports = {
 
     //Groups
     GET_GROUPS: '/groups',
-    UPDATE_GROUP: '/groups/{0}'
+    UPDATE_GROUP: '/groups/{0}',
+    DELETE_GROUP: "/groups/delete"
 
 };
