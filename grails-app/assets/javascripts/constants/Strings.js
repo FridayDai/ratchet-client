@@ -7,6 +7,10 @@ module.exports = {
 
     SEND_NOTIFY_EMAIL_SUCCESS: "The task has been sent.",
 
+    // Account
+    ACCOUNT_ACTIVATED: "The account is activated.",
+    ACCOUNT_DEACTIVATED: "The account is deactivated.",
+
     //ERROR
     ERROR_TITLE: "ERROR",
     ERROR_TITLE_404: "ERROR : 404",

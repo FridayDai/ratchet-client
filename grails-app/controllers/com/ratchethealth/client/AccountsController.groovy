@@ -36,7 +36,7 @@ class AccountsController extends BaseController {
     }
 
     def getSingleAccount() {
-        def accountId = params?.id
+        def accountId = params?.accountId
         def accountInfo = accountService.getSingleAccount(session.token, accountId)
         render(view: '/accounts/singleAccount', model: [accountInfo: accountInfo])
     }
