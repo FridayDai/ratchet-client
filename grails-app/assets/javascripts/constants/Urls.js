@@ -54,5 +54,11 @@ module.exports = {
     ACCOUNT_DEACTIVATE: '/accounts/{0}/deactivate',
 
     //Account detail
-    PAGE_ACCOUNT_DETAIL: '/accounts/{0}'
+    PAGE_ACCOUNT_DETAIL: '/accounts/{0}',
+
+    //Groups
+    GET_GROUPS: '/groups',
+    UPDATE_GROUP: '/groups/{0}',
+    DELETE_GROUP: "/groups/delete"
+
 };

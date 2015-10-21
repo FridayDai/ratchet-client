@@ -27,7 +27,7 @@
             },
             urls: {
                 groups: "/groups",
-                updateGroup: "/groups/update",
+                updateGroup: "/groups/update",//have change that style.
                 deleteGroup: "/groups/delete"
             }
         },

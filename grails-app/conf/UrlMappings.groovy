@@ -105,7 +105,7 @@ class UrlMappings {
         "/groups"(controller: "groups") {
             action = [GET: "getGroups", POST: "addGroup"]
         }
-        "/groups/update"(controller: "groups", action: "updateGroup")
+        "/groups/$groupId"(controller: "groups", action: "updateGroup")
         "/groups/delete"(controller: "groups", action: "deleteGroup")
 
         // announcement
