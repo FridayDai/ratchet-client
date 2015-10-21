@@ -53,7 +53,6 @@ function GroupFormDialog() {
 
     this.after('initialize', function () {
         this.on('formSuccess', this.onChangeGroupSuccess);
-
     });
 }
 

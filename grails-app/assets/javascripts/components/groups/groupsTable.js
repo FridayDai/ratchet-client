@@ -1,11 +1,15 @@
-require('momentTZ');
 
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
-var moment = require('moment');
 var Notifications = require('../common/Notification');
+var Utility = require('../../utils/Utility');
 
+var ID_P_FORMAT = '<p class="source-id">{0}</p>';
+var EDIT_DELETE_BUTTON_FORMAT = [
+    '<a href="#" class="btn-edit btn-edit-group" data-group-id="{0}" ></a>',
+    '<a href="#" class="btn-remove-team btn-remove-group" data-group-id="{0}"></a>'
+].join('');
 
 function GroupsTable() {
     this.attributes({
@@ -18,8 +22,7 @@ function GroupsTable() {
                 targets: 0,
                 data: 'id',
                 render: function (data, type, full) {
-                    var id = data === undefined ? full.id : data;
-                    return '<p class="source-id">' + id + '</p>';
+                    return ID_P_FORMAT.format(data === undefined ? full.id : data);
                 },
                 width: "15%"
             },
@@ -27,10 +30,7 @@ function GroupsTable() {
                 targets: 1,
                 data: 'name',
                 render: function (data, type, full) {
-
-                    var name = data === undefined ? full.name : data;
-
-                    return name;
+                    return data === undefined ? full.name : data;
                 },
                 width: "50%"
             },
@@ -40,16 +40,14 @@ function GroupsTable() {
                 render: function (data, type, full) {
                     var lastUpdateStr = data === undefined ? full.lastUpdated : data;
                     var lastUpdateTime = new Date(parseInt(lastUpdateStr, 10));
-                    return moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                    return Utility.toVancouverTimeHour(lastUpdateTime);
                 },
                 width: "25%"
             },
             {
                 targets: 3,
                 render: function (data, type, full) {
-                    var id = data === undefined ? full.id : data;
-                    return '<a href="#" class="btn-edit btn-edit-group" data-group-id="' + id + '" ></a>' +
-                        '<a href="#" class="btn-remove-team btn-remove-group" data-group-id="' + id + '" > </a>';
+                    return EDIT_DELETE_BUTTON_FORMAT.format(data === undefined ? full.id : data);
                 },
                 orderable: false,
                 width: "10%"

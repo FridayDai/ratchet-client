@@ -22,6 +22,10 @@ module.exports = {
         return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
     },
 
+    toVancouverTimeHour: function (time) {
+        return moment(time).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+    },
+
     progress: function (hide) {
         var elementStr = [
                 '<div id="msg-process">',
