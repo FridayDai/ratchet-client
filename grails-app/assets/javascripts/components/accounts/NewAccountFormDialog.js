@@ -1,6 +1,5 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-var WithChildren = require('../common/WithChildren');
 var PARAMs = require('../../constants/Params');
 
 var AccountEmailValidation = require('../shared/validation/AccountEmailValidation');
@@ -82,7 +81,6 @@ function NewAccountFormDialog() {
 }
 
 module.exports = flight.component(
-    WithChildren,
     WithFormDialog,
     AccountFormDialog,
     NewAccountFormDialog

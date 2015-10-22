@@ -46,6 +46,7 @@ class UrlMappings {
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
         "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
         "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")
+        "/patients/$id?/delete"(controller: "singlePatient", action: "deletePatient")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")

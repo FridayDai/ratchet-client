@@ -120,4 +120,20 @@ class SinglePatientService extends RatchetAPIService {
         }
     }
 
+    def deletePatient(String token, patientId) {
+        String patientUrl = grailsApplication.config.ratchetv2.server.url.patient
+        def url = String.format(patientUrl, patientId)
+
+        withDelete(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 204) {
+                log.info("delete a patient success, token: ${token}.")
+                return true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
 }

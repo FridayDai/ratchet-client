@@ -1,6 +1,5 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-var WithChildren = require('../common/WithChildren');
 
 var PARAMs = require('../../constants/Params');
 
@@ -140,7 +139,6 @@ function EditAccountFormDialog() {
 }
 
 module.exports = flight.component(
-    WithChildren,
     WithFormDialog,
     AccountFormDialog,
     EditAccountFormDialog
