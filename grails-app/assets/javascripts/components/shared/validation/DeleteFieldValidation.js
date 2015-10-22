@@ -10,7 +10,7 @@ module.exports = {
     get: function () {
         return {
             rules: {
-                delete: {
+                deleteField: {
                     DELETECheck: true
                 }
             }

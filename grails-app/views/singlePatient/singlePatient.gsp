@@ -231,7 +231,7 @@
         </div>
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
-            <input id="delete-patient-field" name="delete" type="text"
+            <input id="delete-patient-field" name="deleteField" type="text"
                    class="input-group" required>
         </div>
     </form>
