@@ -1,7 +1,7 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/profile.bundle.js"/>
-<g:set var="cssPath" value="singleAccount"/>
+<g:set var="cssPath" value="profile"/>
 <g:applyLayout name="main">
     <html>
     <head>
