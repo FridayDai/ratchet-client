@@ -4,7 +4,7 @@ var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
 var STRINGs = require('../../constants/Strings');
 
-function EditSurgeryDateFormDialog() {
+function changePasswordFormDialog() {
     this.options({
         title: 'CHANGE PASSWORD',
         width: 320,
@@ -40,4 +40,4 @@ function EditSurgeryDateFormDialog() {
     };
 }
 
-module.exports = flight.component(WithFormDialog, EditSurgeryDateFormDialog);
+module.exports = flight.component(WithFormDialog, changePasswordFormDialog);

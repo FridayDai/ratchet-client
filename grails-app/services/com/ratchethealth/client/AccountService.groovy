@@ -154,7 +154,7 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Update password success, token: ${token}.")
-                return resp.status
+                return resp
             } else {
                 handleError(resp)
             }
