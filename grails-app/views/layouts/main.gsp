@@ -41,5 +41,7 @@
 <g:else>
     <asset:javascript src="bundles/defaultBundle"/>
 </g:else>
+
+<g:render template="/shared/googleAnalytics" />
 </body>
 </html>
