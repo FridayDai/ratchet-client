@@ -127,7 +127,7 @@ class SinglePatientService extends RatchetAPIService {
         withDelete(token, url) { req ->
             def resp = req.asString()
 
-            if (resp.status == 204) {
+            if (resp.status == 200) {
                 log.info("delete a patient success, token: ${token}.")
                 return true
             } else {

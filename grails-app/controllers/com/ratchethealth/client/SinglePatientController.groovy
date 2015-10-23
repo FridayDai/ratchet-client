@@ -77,6 +77,7 @@ class SinglePatientController extends BaseController {
 
     def deletePatient() {
         singlePatientService.deletePatient(session.token, params.id)
-        render true
+
+        render status: 200
     }
 }

@@ -1,7 +1,5 @@
 var flight = require('flight');
 
-var URLs = require('../../../constants/Urls');
-
 var WithFormDialog = require('../../common/WithFormDialog');
 var DeleteFieldValidation = require('../../shared/validation/DeleteFieldValidation');
 
@@ -29,7 +27,9 @@ function DeletePatientFormDialog() {
     };
 
     this.onDeletePatientSuccess = function () {
-        window.location.href = URLs.PAGE_PATIENTS;
+        this.trigger('deletePatientSuccess');
+
+        this.close();
     };
 
     this.after('initialize', function() {
