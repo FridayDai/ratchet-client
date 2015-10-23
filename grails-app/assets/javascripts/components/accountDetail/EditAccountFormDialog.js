@@ -37,7 +37,11 @@ function EditAccountFormDialog() {
     });
 
     this.initValidation = function () {
-        return AccountNPIValidation.get();
+        return AccountNPIValidation.get(this.originalNPICheck, this);
+    };
+
+    this.originalNPICheck = function () {
+        return this._originalnpi === this.select('npiFieldSelector').val().trim();
     };
 
     this.onShow = function (e, data) {
@@ -59,10 +63,12 @@ function EditAccountFormDialog() {
                 .parent()
                 .removeClass('hidden')
                 .end()
-                .val(data.npi);
+                .val(data.npi === 'null' ? '' : data.npi);
 
             this.select('groupFieldSelector').attr('required', true);
             this.select('groupRequireMarkSelector').removeClass('hidden');
+
+            this._originalnpi = data.npi;
         }
 
         var groupItems = [];
