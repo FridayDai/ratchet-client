@@ -36,6 +36,7 @@ class AuthenticationController extends BaseController {
                 session.accountManagement = result.accountManagement
                 session.isDoctor = result.doctor
                 session.groupSize = result.groupSize
+                session.isTesting =result.isTesting
             }
 
             if (resp?.authenticated) {

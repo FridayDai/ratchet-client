@@ -1,6 +1,14 @@
 <div class="nav">
     <ul id="menu" class="list">
-        <li class="client-name">${request.session.clientName}</li>
+        <g:if test="${request.session.isTesting}">
+            <li class="client-name testing">
+                <div>TESTING</div>
+                <div>${request.session.clientName}</div>
+            </li>
+        </g:if>
+        <g:else>
+            <li class="client-name">${request.session.clientName}</li>
+        </g:else>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
             %{--<a class="" controller="profile"--}%
