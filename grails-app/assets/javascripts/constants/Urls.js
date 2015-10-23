@@ -56,6 +56,9 @@ module.exports = {
     //Account detail
     PAGE_ACCOUNT_DETAIL: '/accounts/{0}',
 
+    //Profile
+    UPDATE_PASSWORD: "/profile/{0}/",
+
     //Groups
     GET_GROUPS: '/groups',
     UPDATE_GROUP: '/groups/{0}',

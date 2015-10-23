@@ -31,11 +31,11 @@ class AccountService extends RatchetAPIService {
                 log.info("Get accounts success, token: ${token}.")
 
                 [
-                    'start': start,
-                    'length': length,
-                    'recordsTotal': result.totalCount,
-                    'recordsFiltered': result.totalCount,
-                    'data': result.items
+                        'start'          : start,
+                        'length'         : length,
+                        'recordsTotal'   : result.totalCount,
+                        'recordsFiltered': result.totalCount,
+                        'data'           : result.items
                 ]
             } else {
                 handleError(resp)
@@ -154,10 +154,6 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Update password success, token: ${token}.")
-                return resp.status
-            }
-            if (resp.status == 400) {
-                log.info("Update password fail, token: ${token}.")
                 return resp.status
             } else {
                 handleError(resp)
@@ -346,9 +342,9 @@ class AccountService extends RatchetAPIService {
 
         withGet(token, url) { req ->
             def resp = req
-                .queryString("npi", npi)
-                .queryString("clientId", clientId)
-                .asString()
+                    .queryString("npi", npi)
+                    .queryString("clientId", clientId)
+                    .asString()
 
             if (resp.status == 200) {
                 log.info("this account npi already exist, token: ${token}")

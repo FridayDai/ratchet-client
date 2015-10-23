@@ -1,5 +1,6 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
-<g:set var="scriptPath" value="bundles/profileInfoBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/profile.bundle.js"/>
 <g:set var="cssPath" value="singleAccount"/>
 <g:applyLayout name="main">
     <html>
@@ -98,32 +99,32 @@
 
         <div class="form-group password-group">
             <label class="lbl-group">OLD PASSWORD<span>*</span></label>
-            <input id="oldPass" name="oldPass" type="password" class="input-group"
+            <input id="oldPass" name="oldPassword" type="password" class="input-group"
                    placeholder="Enter old password"
                    required/>
 
-            <div class="error-area error hide" id="old-password-error">
-                Old password is incorrect.
-            </div>
+            %{--<div class="error-area error hide" id="old-password-error">--}%
+                %{--Old password is incorrect.--}%
+            %{--</div>--}%
         </div>
 
         <div class="form-group password-group new-password">
             <label class="lbl-group">NEW PASSWORD<span>*</span></label>
-            <input id="newPass" name="newPass" type="password" class="input-group"
+            <input id="newPass" name="password" type="password" class="input-group"
                    placeholder="Enter new password"
                    required/>
         </div>
 
         <div class="form-group password-group confirm-password">
             <label class="lbl-group">CONFIRM PASSWORD<span>*</span></label>
-            <input id="confirmPass" name="confirmPass" type="password" class="input-group"
+            <input id="confirmPass" name="confirmPassword" type="password" class="input-group"
                    placeholder="Enter new password again"
                    required/>
         </div>
 
-        <div class="error-area error hide error-password" id="confirmPass-error">
-            Passwords do not match, please retype.
-        </div>
+        %{--<div class="error-area error hide error-password" id="confirmPass-error">--}%
+            %{--Passwords do not match, please retype.--}%
+        %{--</div>--}%
         <label class="form-group required pull-right"><span>*</span>Required field</label>
 
     </g:form>
