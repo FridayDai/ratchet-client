@@ -12,7 +12,8 @@ module.exports = {
         patientDetail: "./flightPages/patientDetail.js",
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
-        accountDetail: "./flightPages/accountDetail.js"
+        accountDetail: "./flightPages/accountDetail.js",
+        profile: "./flightPages/profile.js"
     },
     output: {
         path: absoluteContext,

@@ -1,5 +1,6 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
 
 class ProfileController extends BaseController {
 
@@ -16,7 +17,7 @@ class ProfileController extends BaseController {
     }
 
     def updatePassword() {
-        def status = accountService.updatePassword(session.token, params?.oldPassword, params?.password, params?.confirmPassword)
-        render status: status
+        def resp = accountService.updatePassword(session.token, params?.oldPassword, params?.password, params?.confirmPassword)
+        render resp as JSON
     }
 }
