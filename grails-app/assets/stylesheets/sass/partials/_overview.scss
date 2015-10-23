@@ -330,7 +330,7 @@
     background-color: $base-color-white;
 }
 
-.add-email-form {
+.add-email-form, .delete-patient-form {
     text-align: center;
     font-size: 14px;
 
@@ -345,7 +345,7 @@
     }
 }
 
-#add-email-field {
+#add-email-field, #delete-patient-field {
     width: 100%;
     box-sizing: border-box;
     height: 30px;

@@ -1,6 +1,5 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-var WithChildren = require('../common/WithChildren');
 var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
 var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
@@ -291,7 +290,6 @@ function NewPatientFormDialog() {
 
 module.exports = flight.component(
     WithEmergencyContactFieldRequired,
-    WithChildren,
     WithFormDialog,
     NewPatientFormDialog
 );

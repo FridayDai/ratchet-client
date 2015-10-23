@@ -225,6 +225,17 @@
         </div>
     </form>
 
+    <form action="/patients/${patientInfo.id}/delete" method="post" class="delete-patient-form ui-hidden" id="delete-patient-form">
+        <div class="form-group description">
+            In order to permanently remove the patient, please type "<strong>DELETE</strong>" in the textbox below.
+        </div>
+        <div class="form-group email-group">
+            <label class="lbl-group">TYPE DELETE</label>
+            <input id="delete-patient-field" name="deleteField" type="text"
+                   class="input-group" required>
+        </div>
+    </form>
+
     <form action="" method="post" class="edit-surgeon ui-hidden" id="edit-group-provider-form">
         <input type="hidden" autofocus/>
         <div class="form-group">

@@ -1,12 +1,17 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
-var WithChildren = require('../../common/WithChildren');
 var PhoneNumberValidation = require('../../shared/validation/PhoneNumberValidation');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 var PatientIdentifyValidation = require('../../shared/validation/PatientIdentifyValidation');
 var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
 
 var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
+
+var FOOTER_PANEL = [
+    '<div class="dialog-footer-panel ui-dialog-content ui-widget-content">',
+        '<a href="#" class="delete-patient-btn">Delete Patient</a>',
+    '</div>'
+].join('');
 
 function EditPatientFormDialog() {
     flight.compose.mixin(this, [
@@ -37,7 +42,11 @@ function EditPatientFormDialog() {
         this.show();
     };
 
+    this.footerRendered = false;
+
     this.prepareForShow = function (data) {
+        var me = this;
+
         this.select('identifyFieldSelector').val(data.identify);
         this.select('firstNameFieldSelector').val(data.firstName);
         this.select('lastNameFieldSelector').val(data.lastName);
@@ -49,6 +58,24 @@ function EditPatientFormDialog() {
 
         this.patientId = data.patientId;
         this.clientId = data.clientId;
+
+        if (!this.footerRendered) {
+            this.footerRendered = true;
+
+            $(FOOTER_PANEL)
+                .find('.delete-patient-btn')
+                .click(_.bind(me.onDeletePatientClicked, me))
+                .end()
+                .appendTo(this.$node.parent());
+        }
+    };
+
+    this.onDeletePatientClicked = function (e) {
+        e.preventDefault();
+
+        this.trigger('showDeletePatientDialog');
+
+        this.close();
     };
 
     this.originalEmailCheck = function () {
@@ -98,6 +125,12 @@ function EditPatientFormDialog() {
     this.after('initialize', function () {
         this.on('formSuccess', this.onEditPatientSuccess);
     });
+
+    this.before('teardown', function () {
+        this.$node.parent()
+            .find('.delete-patient-btn')
+            .off('click');
+    });
 }
 
-module.exports = flight.component(WithChildren, WithFormDialog, EditPatientFormDialog);
+module.exports = flight.component(WithFormDialog, EditPatientFormDialog);

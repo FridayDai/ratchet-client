@@ -49,6 +49,10 @@ function WithForm() {
     };
 
     this._formSuccess = function (data) {
+        if (!data || _.isString(data)) {
+            data = {resp: data};
+        }
+
         this.trigger('formSuccess', data);
     };
 
