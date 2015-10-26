@@ -2,7 +2,7 @@
     <ul id="menu" class="list">
         <g:if test="${request.session.isTesting}">
             <li class="client-name testing">
-                <div>TESTING</div>
+                <div>Testing Client</div>
                 <div>${request.session.clientName}</div>
             </li>
         </g:if>
