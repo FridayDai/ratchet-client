@@ -22,26 +22,13 @@
 
             <% def timeOffset = task?.sendTimeOffset%>
             <% def sentTimeDays = timeOffset/(24*60*60*1000)%>
-            <g:if test="${task?.isBaseline}">
-                <label class="numeral">BASELINE</label>
-            </g:if>
-            <g:elseif test="${sentTimeDays == 0}">
+            <g:if test="${sentTimeDays == 0}">
                 <label class="numeral">On Surgery Day</label>
-            </g:elseif>
+            </g:if>
             <g:else>
                 <span class="numeral label-space number-font">${sentTimeDays.abs()}</span>
-                <g:if test="${sentTimeDays == 1}">
-                    <label class="label-space">Day</label>
-                </g:if>
-                <g:else>
-                    <label class="label-space">Days</label>
-                </g:else>
-                <g:if test="${sentTimeDays > 0}">
-                    <span class="numeral label-space number-font">After</span>
-                </g:if>
-                <g:else>
-                    <span class="numeral label-space number-font">Before</span>
-                </g:else>
+                <label class="label-space">${sentTimeDays.abs() == 1? 'Day' : 'Days'}</label>
+                <span class="numeral label-space number-font">${sentTimeDays > 0? 'After' : 'Before'}</span>
                 <label>Surgery</label>
             </g:else>
         </div>
@@ -56,17 +43,14 @@
 
         <span class="task-date">
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" || StatusCodeConstants.TASK_STATUS[task?.status] == "expired"}">
-                <g:set var="taskDate" value="${task?.completeTime}"></g:set>
+                <g:set var="taskDate" value="${task?.completeTime}"/>
             </g:if>
             <g:else>
-                <g:set var="taskDate" value="${task?.sendTime}"></g:set>
+                <g:set var="taskDate" value="${task?.sendTime}"/>
             </g:else>
             <g:if test="${taskDate}">
-                <g:formatDate date="${taskDate}"
-                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd, yyyy"></g:formatDate>
+                <g:formatDate date="${taskDate}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}" format="MMM dd, yyyy"/>
             </g:if>
-
         </span>
 
         <div class="footer-bottom">
