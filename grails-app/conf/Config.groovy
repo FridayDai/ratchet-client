@@ -273,6 +273,7 @@ ratchetv2 {
             updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
             generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
+            notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
 
             //task
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"

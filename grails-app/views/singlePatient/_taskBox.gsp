@@ -54,20 +54,20 @@
         </span>
 
         <div class="footer-bottom">
-            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "overdue" || StatusCodeConstants.TASK_STATUS[task?.status] == "pending"}">
-                <div class="item-notify">
-                    <g:if test="${archivedStatus}">
-                        <button class="btn btn-notify task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>
-                    </g:if>
-                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] == "VERIFIED"}">
-                        <button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>
-                    </g:elseif>
-                    <g:else>
-                        <button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>
-                    </g:else>
-                </div>
-            </g:if>
-            <g:elseif test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            %{--<g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "overdue" || StatusCodeConstants.TASK_STATUS[task?.status] == "pending"}">--}%
+                %{--<div class="item-notify">--}%
+                    %{--<g:if test="${archivedStatus}">--}%
+                        %{--<button class="btn btn-notify task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>--}%
+                    %{--</g:if>--}%
+                    %{--<g:elseif test="${StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] == "VERIFIED"}">--}%
+                        %{--<button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>--}%
+                    %{--</g:elseif>--}%
+                    %{--<g:else>--}%
+                        %{--<button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>--}%
+                    %{--</g:else>--}%
+                %{--</div>--}%
+            %{--</g:if>--}%
+            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
                 <div class="complete-score">
                     <g:if test="${task?.otherScore}">
                         <% def firstSplit = "" %>
@@ -108,7 +108,7 @@
                     </g:else>
 
                 </div>
-            </g:elseif>
+            </g:if>
 
         </div>
 

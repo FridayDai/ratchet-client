@@ -92,4 +92,14 @@ class TreatmentController extends BaseController {
         def resp = treatmentService.generateTreatmentCode(token, clientId, patientId, medicalRecordId)
         render resp as JSON
     }
+
+    def notifyTreatmentTasks() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def resp = treatmentService.sendTreatmentTasksEmail(token, clientId, patientId, medicalRecordId)
+        render resp as JSON
+
+    }
 }

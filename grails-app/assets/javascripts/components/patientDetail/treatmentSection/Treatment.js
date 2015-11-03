@@ -3,6 +3,7 @@ var TaskSection = require('../taskSection/TaskSection');
 var TeamSection = require('../teamSection/TeamSection');
 var ActivitySection = require('../activitySection/ActivitySection');
 var URLs = require('../../../constants/Urls');
+var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
 
@@ -10,6 +11,8 @@ function Treatment() {
     this.attributes({
         subTabsContainerSelector: '.sub-tabs',
 
+        treatmentToolListSelector: "#treatment-tool",
+        notifyButtonSelector: "#notifyTasks",
         generateCodeButtonSelector: '#generateCode',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
@@ -66,7 +69,7 @@ function Treatment() {
     };
 
     this.getBasicIds = function () {
-        var $button = this.select('generateCodeButtonSelector');
+        var $button = this.select('treatmentToolListSelector');
 
         if (!this.treatmentId) {
             this.treatmentId = $button.data("treatmentId");
@@ -87,6 +90,16 @@ function Treatment() {
         e.preventDefault();
 
         this.trigger('showGenerateCodeDialog', this.getBasicIds());
+    };
+
+    this.onNotifyButtonClicked = function() {
+        var basicIds = this.getBasicIds();
+
+        $.ajax({
+            url: URLs.NOTIFY_TREATMENT_TASKS.format(basicIds.patientId, basicIds.medicalRecordId)
+        }).done(function () {
+            Notifications.showFadeOutMsg(STRINGs.SEND_NOTIFY_EMAIL_SUCCESS);
+        });
     };
 
     this.onMoreButtonClicked = function (e) {
@@ -175,12 +188,16 @@ function Treatment() {
         this.select('generateCodeButtonSelector')
             .attr('disabled', true)
             .addClass('btn-generate-code-disabled');
+        this.select('notifyButtonSelector')
+            .attr('disabled', true)
+            .addClass('btn-generate-code-disabled');
     };
 
     this.after('initialize', function () {
         this.initSubTabs();
 
         this.on('click', {
+            notifyButtonSelector: this.onNotifyButtonClicked,
             generateCodeButtonSelector: this.onGenerateCodeButtonClicked,
             moreDropdownButtonSelector: this.onMoreButtonClicked,
             editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
