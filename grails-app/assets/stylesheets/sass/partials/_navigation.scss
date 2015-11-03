@@ -21,11 +21,14 @@
         text-align: center;
 
         .client-name {
-            height: 12px;
             background-color: $base-a-default-color;
             color: white;
             font-size: 12px;
             padding: 10px;
+
+            &.testing {
+                background-color: #F15B50;
+            }
         }
     }
 }

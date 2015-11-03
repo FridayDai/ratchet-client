@@ -1,6 +1,6 @@
 var flight = require('flight');
-var WithSelectbox = require('../common/WithSelectbox');
-var URLs = require('../../constants/Urls');
+var WithSelectbox = require('../../common/WithSelectbox');
+var URLs = require('../../../constants/Urls');
 
 function AccountGroupSelectbox() {
     this.options({

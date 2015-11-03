@@ -1,11 +1,11 @@
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
-var WithChildren = require('../common/WithChildren');
 var PARAMs = require('../../constants/Params');
 
 var AccountEmailValidation = require('../shared/validation/AccountEmailValidation');
-var AccountNPIValidation = require('./AccountNPIValidation');
-var AccountGroupSelectbox = require('./AccountGroupSelectbox');
+var AccountNPIValidation = require('./../shared/validation/AccountNPIValidation');
+var AccountGroupSelectbox = require('./../shared/components/AccountGroupSelectbox');
+var AccountFormDialog = require('./../shared/components/AccountFormDialog');
 
 function NewAccountFormDialog() {
     this.attributes({
@@ -74,43 +74,14 @@ function NewAccountFormDialog() {
         this.trigger('addAccountSuccess');
     };
 
-    this.onProviderCheckboxClick = function () {
-        var isProvider = this.select('providerCheckboxSelector').prop('checked') === true;
-        var $groupField = this.select('groupFieldSelector');
-        var $requireMark = this.select('groupRequireMarkSelector');
-        var $npiParent = this.select('npiFieldSelector').parent();
-
-        if (isProvider) {
-            $groupField.attr('required', true);
-            $npiParent.removeClass('hidden');
-
-            if ($requireMark.hasClass('hidden')) {
-                $requireMark.removeClass('hidden');
-            }
-        } else {
-            $groupField.attr('required', false);
-            $groupField.valid();
-
-            $npiParent.addClass('hidden');
-
-            if (!$requireMark.hasClass('hidden')) {
-                $requireMark.addClass('hidden');
-            }
-        }
-    };
-
     this.after('initialize', function () {
         this.on('dialogclose', this.onClose);
         this.on('formSuccess', this.onAddAccountSuccess);
-
-        this.on('click', {
-            providerCheckboxSelector: this.onProviderCheckboxClick
-        });
     });
 }
 
 module.exports = flight.component(
-    WithChildren,
     WithFormDialog,
+    AccountFormDialog,
     NewAccountFormDialog
 );

@@ -10,8 +10,8 @@ class GroupService extends RatchetAPIService {
         def start = groupPagination?.start
         def length = groupPagination?.length
         def name = groupPagination?.name
-        def sort = groupPagination?.sort ?: "dateCreated"
-        def order = groupPagination?.order ?: "desc"
+        def sort = groupPagination?.sortField ?: "dateCreated"
+        def order = groupPagination?.sortDir ?: "desc"
 
         String showGroupsUrl = grailsApplication.config.ratchetv2.server.url.showGroups
         def url = String.format(showGroupsUrl, clientId)

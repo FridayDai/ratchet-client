@@ -10,7 +10,10 @@ module.exports = {
     entry: {
         patientList: "./flightPages/patientList.js",
         patientDetail: "./flightPages/patientDetail.js",
-        accounts: "./flightPages/accounts.js"
+        accounts: "./flightPages/accounts.js",
+        groups: './flightPages/groups.js',
+        accountDetail: "./flightPages/accountDetail.js",
+        profile: "./flightPages/profile.js"
     },
     output: {
         path: absoluteContext,

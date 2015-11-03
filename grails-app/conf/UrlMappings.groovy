@@ -46,6 +46,7 @@ class UrlMappings {
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
         "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
         "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")
+        "/patients/$id?/delete"(controller: "singlePatient", action: "deletePatient")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
@@ -79,7 +80,7 @@ class UrlMappings {
             action = [GET: "getAccounts", POST: "addAccount"]
         }
 
-        "/accounts/$id?"(controller: "accounts") {
+        "/accounts/$accountId?"(controller: "accounts") {
             action = [GET: "getSingleAccount", POST: "updateAccount"]
         }
 
@@ -105,7 +106,7 @@ class UrlMappings {
         "/groups"(controller: "groups") {
             action = [GET: "getGroups", POST: "addGroup"]
         }
-        "/groups/update"(controller: "groups", action: "updateGroup")
+        "/groups/$groupId"(controller: "groups", action: "updateGroup")
         "/groups/delete"(controller: "groups", action: "deleteGroup")
 
         // announcement

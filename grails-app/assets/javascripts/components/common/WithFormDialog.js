@@ -1,6 +1,7 @@
 var flight = require('flight');
 var WithForm = require('./WithForm');
 var WithDialog = require('./WithDialog');
+var WithChildren = require('./WithChildren');
 
 function WithFormDialog() {
     this.attributes({
@@ -8,6 +9,7 @@ function WithFormDialog() {
     });
 
     flight.compose.mixin(this, [
+        WithChildren,
         WithForm,
         WithDialog
     ]);

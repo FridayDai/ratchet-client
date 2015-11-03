@@ -1,6 +1,5 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
-var WithChildren = require('../../common/WithChildren');
 var URLs = require('../../../constants/Urls');
 var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
 var Notifications = require('../../common/Notification');
@@ -112,4 +111,4 @@ function EditSurgeryDateFormDialog() {
     });
 }
 
-module.exports = flight.component(WithChildren, WithFormDialog, EditSurgeryDateFormDialog);
+module.exports = flight.component(WithFormDialog, EditSurgeryDateFormDialog);

@@ -3,14 +3,7 @@
 @import '../partials/dialog';
 @import '../partials/overview';
 @import '../partials/theme';
-@import '../partials/select2';
 
-.account-npi {
-    border-left: 2px solid $base-color-black;
-    padding-left: 19px;
-    margin-left: 17px;
-    font-size: 17px;
-}
 
 .account-info {
     padding: 30px 40px;
@@ -18,6 +11,10 @@
 
     .account-table {
         width: 100%;
+
+        tbody {
+            font-size: 14px;
+        }
 
         td {
             font-weight: 400;
@@ -96,10 +93,6 @@
             font-family: ionicons;
         }
     }
-}
-
-.color {
-    color: $base-font-grey;
 }
 
 .inner-header {
@@ -224,21 +217,12 @@
     margin-left: 20px;
     text-align: left;
 
-    .dr {
-        margin-left: -15px;
-        color: $base-color-medium-black;
-        font-weight: 400;
-        font-size: 24px;
+    .input-group {
+        width: 262px;
     }
 
-    .readonly-email {
-        padding-left: 0;
-        border: 0;
-        background: 0;
-    }
-
-    .account-management {
-        color: $base-color-dark-gray;
+    &.required {
+        margin-right: 12px;
     }
 }
 
@@ -246,29 +230,13 @@
     margin-left: 18px;
 }
 
-.ui-dialog {
-    .ui-dialog-titlebar {
-        .ui-dialog-title {
-            margin-left: 10px;
-        }
-    }
-}
-
-.account-table {
-    tbody {
-        font-size: 14px;
-    }
-}
-
 .password-group {
-    width: 60%;
-    margin-top: 30px;
+    width: 90%;
+    margin-bottom: 22px;
     margin-left: 7px;
-    &.new-password {
-        margin-top: 2px;
-    }
+
     &.confirm-password {
-        margin-bottom: 6px;
+        margin-bottom: 10px;
     }
 }
 
@@ -278,11 +246,6 @@
 
 .show {
     visibility: visible;
-}
-
-.form-group.required {
-    margin: 0;
-    margin-right: 15px;
 }
 
 .error-password {
@@ -299,22 +262,5 @@
         width: 10px;
         height: 25px;
         content: url('../../../images/profile_icon.png');
-    }
-}
-
-.form-group .checkbox {
-    margin-top: 0;
-    color: #333333;
-}
-
-input[type="checkbox"] {
-    height: 15px;
-    width: 15px;
-}
-
-.provider.group,
-.permission.group {
-    .checkbox {
-        margin-top: 0;
     }
 }

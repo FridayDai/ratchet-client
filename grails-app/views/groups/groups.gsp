@@ -1,4 +1,5 @@
-<g:set var="scriptPath" value="bundles/groupsBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/groups.bundle.js"/>
 <g:set var="cssPath" value="groups"/>
 <g:applyLayout name="main">
     <html>
@@ -8,12 +9,12 @@
 
     <body>
     <div>
-        <div class="inner-header">
+        <div class="inner-header" id="header-panel">
             <label class="title group-icon">GROUPS</label>
             <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 
-        <div class="inner-search">
+        <div class="inner-search" id="groups-toolbar">
             <div class="search-content clear">
                 <div class="filler-content right-search">
                     <input type="text" placeholder="Name" class="search-input" id="search-input">
@@ -35,12 +36,14 @@
                 </thead>
                 <tbody>
                 <g:each var="group" in="${groupList.data}" status="i">
-                    <tr data-is-dom-data="true">
-                        <td>${group.id}</td>
-                        <td>${group.name}</td>
-                        <td>${group.lastUpdated}</td>
-                        <td>${group.id}</td>
-                    </tr>
+                    <tr data-is-dom-data="true"><td>
+                            ${group.id}
+                        </td><td>
+                            ${group.name}
+                        </td><td>
+                            ${group.lastUpdated}
+                        </td><td>
+                            ${group.id}</td></tr>
                 </g:each>
                 </tbody>
             </table>
@@ -50,7 +53,7 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">GROUP NAME<span>*</span></label>
-                <input id="groupName" name="groupName" type="text" class="input-group input-only-one" maxlength="128"
+                <input id="groupName" name="name" type="text" class="input-group input-only-one" maxlength="128"
                        placeholder="Enter group name" required/>
             </div>
 

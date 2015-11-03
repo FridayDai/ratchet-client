@@ -1,5 +1,4 @@
 var flight = require('flight');
-var WithChildren = require('../../common/WithChildren');
 var WithFormDialog = require('../../common/WithFormDialog');
 var URLs = require('../../../constants/Urls');
 
@@ -101,4 +100,4 @@ function EditGroupProviderFormDialog() {
     });
 }
 
-module.exports = flight.component(WithChildren, WithFormDialog, EditGroupProviderFormDialog);
+module.exports = flight.component(WithFormDialog, EditGroupProviderFormDialog);

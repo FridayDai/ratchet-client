@@ -54,7 +54,7 @@ function PatientInfoSection() {
     this.closePage = function (e) {
         e.preventDefault();
 
-        window.location.href = "/patients";
+        window.location.href = URLs.PAGE_PATIENTS;
     };
 
     this.inviteAgain = function () {
@@ -117,10 +117,15 @@ function PatientInfoSection() {
         this.trigger('patientInfoServed', this.getBasicInfo());
     };
 
+    this.onPatientDeleteSuccess = function () {
+        window.location.href = URLs.PAGE_PATIENTS;
+    };
+
     this.after('initialize', function () {
         this.on(document, 'updatePatientSuccess', this.onPatientUpdatedSuccess);
         this.on(document, 'addEmailSuccess', this.onPatientUpdatedSuccess);
         this.on(document, 'patientInfoRequest', this.onPatientInfoRequest);
+        this.on(document, 'deletePatientSuccess', this.onPatientDeleteSuccess);
 
         this.on('click', {
             editPatientButtonSelector: this.showEditPatientDialog,

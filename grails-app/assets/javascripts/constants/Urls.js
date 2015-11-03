@@ -2,6 +2,7 @@ module.exports = {
     UPDATE_MAINTENANCE: '/announcement/close?announcementLastUpdated={0}',
 
     //Patients
+    PAGE_PATIENTS: '/patients',
     GET_PATIENTS: '/patients',
     GET_TREATMENTS: '/treatments',
     GET_TREATMENT_DETAIL: '/treatments/{0}',
@@ -43,11 +44,24 @@ module.exports = {
     GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}',
 
     //Accounts
+    PAGE_ACCOUNTS: '/accounts',
     GET_ACCOUNTS: '/accounts',
     CHECK_ACCOUNT_EMAIL: '/accounts/check-email',
     CHECK_ACCOUNT_NPI: '/accounts/check-npi',
     GET_ALL_GROUPS: '/groups',
+    ACCOUNT_INVITE_AGAIN: '/accounts/{0}/invite',
+    ACCOUNT_ACTIVATE: '/accounts/{0}/activate',
+    ACCOUNT_DEACTIVATE: '/accounts/{0}/deactivate',
 
     //Account detail
-    PAGE_ACCOUNT_DETAIL: '/accounts/{0}'
+    PAGE_ACCOUNT_DETAIL: '/accounts/{0}',
+
+    //Profile
+    UPDATE_PASSWORD: "/profile/{0}/",
+
+    //Groups
+    GET_GROUPS: '/groups',
+    UPDATE_GROUP: '/groups/{0}',
+    DELETE_GROUP: "/groups/delete"
+
 };

@@ -11,6 +11,7 @@ var Treatment = require('../components/patientDetail/treatmentSection/Treatment'
 var TreatmentPanel = require('../components/patientDetail/treatmentSection/TreatmentPanel');
 var EditPatientFormDialog = require('../components/patientDetail/patientInfoSection/EditPatientFormDialog');
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
+var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
 var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
@@ -27,6 +28,7 @@ function PatientDetailPage() {
 
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
+        deletePatientDialogSelector: '#delete-patient-form',
         addTreatmentDialogSelector: '#treatment-form',
         treatmentCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
@@ -47,6 +49,10 @@ function PatientDetailPage() {
             selector: 'addEmailDialogSelector',
             event: 'showAddEmailDialog',
             dialog: AddEmailFormDialog
+        }, {
+            selector: 'deletePatientDialogSelector',
+            event: 'showDeletePatientDialog',
+            dialog: DeletePatientFormDialog
         }, {
             selector: 'addTreatmentDialogSelector',
             event: 'showAddTreatmentDialog',

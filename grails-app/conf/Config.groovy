@@ -313,4 +313,8 @@ ratchetv2 {
 
         patientTreatmentLimit = 3
     }
+
+    googleAnalytics {
+        trackingId = System.getProperty("GA_CLIENT_CODE") ?: "UA-60192214-2"
+    }
 }

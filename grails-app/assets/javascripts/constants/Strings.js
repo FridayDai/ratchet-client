@@ -7,6 +7,10 @@ module.exports = {
 
     SEND_NOTIFY_EMAIL_SUCCESS: "The task has been sent.",
 
+    // Account
+    ACCOUNT_ACTIVATED: "The account is activated.",
+    ACCOUNT_DEACTIVATED: "The account is deactivated.",
+
     //ERROR
     ERROR_TITLE: "ERROR",
     ERROR_TITLE_404: "ERROR : 404",
@@ -15,9 +19,11 @@ module.exports = {
 
     PHONE_NUMBER_INVALID: "Please enter a valid phone number",
     NPI_INVALID: "Please enter a valid NPI",
+    DELETE_INVALID: "Enter the text exactly as displayed to confirm",
     EMAIL_EXISTING_INVALID: "Email already exists",
     NPI_EXISTING_INVALID: "NPI already exists",
     ID_EXISTING_INVALID: "ID already exists",
+    PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",

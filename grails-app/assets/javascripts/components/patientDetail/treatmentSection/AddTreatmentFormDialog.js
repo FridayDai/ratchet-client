@@ -1,6 +1,6 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
-var WithChildren = require('../../common/WithChildren');
+
 var WithEmergencyContactFieldRequired = require('../../shared/functional/WithEmergencyContactFieldRequired');
 var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
 var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
@@ -147,7 +147,6 @@ function AddTreatmentFormDialog() {
 
 module.exports = flight.component(
     WithEmergencyContactFieldRequired,
-    WithChildren,
     WithFormDialog,
     AddTreatmentFormDialog
 );
