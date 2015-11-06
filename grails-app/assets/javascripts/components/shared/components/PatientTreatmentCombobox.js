@@ -15,7 +15,7 @@ function PatientTreatmentCombobox() {
             return {
                 label: data.title + ' ' + data.tmpTitle,
                 value: data.id,
-                surgeryTime: data.surgeryTimeRequired,
+                surgeryDateRequired: data.surgeryTimeRequired,
                 timeStamp: data.sendTimeOffset,
                 surgeryDate: data.surgeryDate
             };
@@ -25,7 +25,8 @@ function PatientTreatmentCombobox() {
 
     this.onSelect = function (e, ui) {
         this.trigger(this.attr.selectEvent, {
-            surgeryDate: ui.item.surgeryDate
+            surgeryDate: ui.item.surgeryDate,
+            surgeryDateRequired: ui.item.surgeryDateRequired
         });
     };
 

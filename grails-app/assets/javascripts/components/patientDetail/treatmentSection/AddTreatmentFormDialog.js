@@ -15,6 +15,7 @@ function AddTreatmentFormDialog() {
         providerFieldSelector: '#selectSurgeons',
         treatmentFieldSelector: '#selectTreatment',
         surgeryTimeFieldSelector: '#surgeryTime',
+        surgeryDateFieldGroupSelector: '#surgery-date-group',
 
         relationshipSelectEvent: 'addTreatmentRelationshipSelected',
         relationshipClearEvent: 'addTreatmentRelationshipCleared',
@@ -74,6 +75,8 @@ function AddTreatmentFormDialog() {
         this.trigger('patientInfoRequest');
 
         this.$node.removeClass('ui-hidden');
+        this.select('surgeryDateFieldGroupSelector').hide();
+
         this.show();
     };
 
@@ -95,9 +98,8 @@ function AddTreatmentFormDialog() {
         var $treatment = this.select('treatmentFieldSelector');
         var treatmentId = $treatment.data('id');
         var $surgeryTime = this.select('surgeryTimeFieldSelector');
-        var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
 
-        return {
+        var result = {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             id: this.patientInfo.identify,
@@ -109,10 +111,15 @@ function AddTreatmentFormDialog() {
             groupId: groupId,
             staffId: providerId,
             treatmentId: treatmentId,
-            surgeryTime: surgeryTime,
             relationship: relationshipId,
             profilePhoto: ''
         };
+
+        if ($surgeryTime.is(':visible')) {
+            result.surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+        }
+
+        return result;
     };
 
     this.onAddTreatmentSuccess = function (e, data) {
