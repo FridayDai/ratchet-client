@@ -87,7 +87,8 @@
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                       format="MMMM d, yyyy"></g:formatDate>
                     </label>
-                    <span <g:if test="${archived == 'true' || !surgeryTime}">
+                    <g:if test="${surgeryTime}">
+                    <span <g:if test="${archived == 'true'}">
                             class="btn drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
                         <g:else>
@@ -98,6 +99,7 @@
                             data-medical-record-id="${medicalRecordId}">
                         Edit
                     </span>
+                    </g:if>
                     <span <g:if test="${archived == 'true'}">
                             class="btn drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>
