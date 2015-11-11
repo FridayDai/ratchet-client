@@ -23,7 +23,7 @@ function ActivityTable() {
                 render: function (data, type, full) {
                     var dateCreated = data === undefined ? full.dateCreated : data;
 
-                    return moment(dateCreated).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss a');
+                    return moment(dateCreated).tz("America/Vancouver").format('MMM D, YYYY, h:mm:ss A');
                 },
                 width: "16%"
             }
