@@ -43,22 +43,32 @@
             </li>
             <li data-type="Tool" id="treatment-tool" class="code-generation" data-client-id="${clientId}"
                 data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
-                <button id="notifyTasks"
+                <button id="addTasks"
                     <g:if test="${archived == 'true'}">
-                        class="btn btn-notify disabled" disabled="disabled"
+                        class="btn btn-treatment-level btn-add-task disabled" disabled="disabled"
                     </g:if>
                     <g:else>
-                        class="btn btn-notify"
+                        class="btn btn-treatment-level btn-add-task"
+                    </g:else>>
+                    <span class="text-span">Add Task</span>
+                </button>
+
+                <button id="notifyTasks"
+                    <g:if test="${archived == 'true'}">
+                        class="btn btn-treatment-level btn-notify disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn btn-treatment-level btn-notify"
                     </g:else>>
                     <span class="text-span">Notify</span>
                 </button>
 
                 <button id="generateCode"
                     <g:if test="${archived == 'true'}">
-                        class="btn btn-generate-code disabled" disabled="disabled"
+                        class="btn btn-treatment-level btn-generate-code disabled" disabled="disabled"
                     </g:if>
                     <g:else>
-                        class="btn btn-generate-code"
+                        class="btn btn-treatment-level btn-generate-code"
                     </g:else>>
                     <span class="text-span">Get Code</span>
                 </button>

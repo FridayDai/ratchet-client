@@ -100,6 +100,26 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def resp = treatmentService.sendTreatmentTasksEmail(token, clientId, patientId, medicalRecordId)
         render resp as JSON
+    }
 
+    def getTasksInTreatment() {
+        def token = request.session.token
+        def treatmentId = params?.treatmentId
+
+        def resp = treatmentService.getTasksInTreatment(token, treatmentId)
+
+        render resp as JSON
+    }
+
+    def addAdhocTasks() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def toolIds = params?.toolIds
+        def scheduleTime = params?.scheduleTime
+
+        def resp = treatmentService.addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime)
+        render resp as JSON
     }
 }
