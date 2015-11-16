@@ -20,7 +20,7 @@
             %{--<% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>--}%
             %{--<% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>--}%
 
-            <% Long timeOffset = task?.sendTimeOffset%>
+            <% Long timeOffset = Long.valueOf((task?.sendTimeOffset)?: 0)%>
             <% Long sentTimeDays = timeOffset/(24*60*60*1000)%>
             <g:if test="${sentTimeDays == 0}">
                 <label class="numeral">On Surgery Day</label>
