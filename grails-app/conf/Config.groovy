@@ -172,10 +172,10 @@ grails.assets.excludes = [
         '.sass-cache/**',
         'sass/**',
         'config.rb',
-        'javascripts/components/**',
-        'javascripts/constants/**',
-        'javascripts/libs/**',
-        'javascripts/utils/**',
+        'components/**',
+        'constants/**',
+        'libs/**',
+        'utils/**',
 ]
 
 grails.assets.plugin."resources".excludes = ["**"]
