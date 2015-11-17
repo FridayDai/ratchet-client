@@ -57,7 +57,11 @@ class UrlMappings {
         "/treatments"(controller: "treatment", action: "getTreatments")
         "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
         "/treatments/$treatmentId?/generateCode"(controller: "treatment", action: "generateTreatmentCode")
+        "/treatments/$treatmentId?/available-tasks"(controller: "treatment") {
+            action = [GET: "getTasksInTreatment"]
+        }
         "/patients/$patientId/treatments/$medicalRecordId/notify"(controller: "treatment", action: "notifyTreatmentTasks")
+        "/patients/$patientId/treatments/$medicalRecordId/add-ad-hoc-tasks"(controller: "treatment", action: "addAdhocTasks")
 
         //Patient task
         "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")

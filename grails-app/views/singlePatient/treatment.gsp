@@ -44,12 +44,22 @@
             </li>
             <li data-type="Tool" id="treatment-tool" class="code-generation" data-client-id="${clientId}"
                 data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
+                <button id="addTasks"
+                    <g:if test="${archived == 'true'}">
+                        class="btn btn-treatment-level btn-add-task disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn btn-treatment-level btn-add-task"
+                    </g:else>>
+                    <span class="text-span">Add Task</span>
+                </button>
+
                 <button id="notifyTasks"
                     <g:if test="${archived == 'true'|| StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] != 'VERIFIED'}">
                         class="btn btn-notify btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
-                        class="btn btn-notify"
+                        class="btn btn-treatment-level btn-notify"
                     </g:else>>
                     <span class="text-span">Notify</span>
                 </button>
@@ -59,7 +69,7 @@
                         class="btn btn-generate-code btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
-                        class="btn btn-generate-code"
+                        class="btn btn-treatment-level btn-generate-code"
                     </g:else>>
                     <span class="text-span">Get Code</span>
                 </button>

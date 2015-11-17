@@ -172,10 +172,10 @@ grails.assets.excludes = [
         '.sass-cache/**',
         'sass/**',
         'config.rb',
-        'share/*.js',
+        'components/**',
+        'constants/**',
         'libs/**',
-        'pages/*.js',
-        'partials/*.js'
+        'utils/**',
 ]
 
 grails.assets.plugin."resources".excludes = ["**"]
@@ -226,9 +226,11 @@ ratchetv2 {
             validateSessionId = "${ratchetv2.server.url.base}/check_token"
 
             //forgotPassword
-            password.reset = "${ratchetv2.server.url.base}/password/reset"
-            password.restCheck = "${ratchetv2.server.url.base}/password/reset/check"
-            password.confirm = "${ratchetv2.server.url.base}/password/confirm"
+            password {
+                reset = "${ratchetv2.server.url.base}/password/reset"
+                restCheck = "${ratchetv2.server.url.base}/password/reset/check"
+                confirm = "${ratchetv2.server.url.base}/password/confirm"
+            }
 
             // Patients URL
             patients = "${ratchetv2.server.url.base}/patients"
@@ -274,9 +276,16 @@ ratchetv2 {
             archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
             generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
             notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
+            getToolsOfTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+            adhocTasksToTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/ad-hoc"
 
             //task
+            //for taskService
+            task {
+                sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
+            }
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"
+
 
             //activity
             getActivity = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/activities"
@@ -289,17 +298,18 @@ ratchetv2 {
             checkCareGiverEmail = "${ratchetv2.server.url.base}/records/%s/caregiver/check_email"
 
             //for toolService
-            tools.loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+            tools {
+                loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+            }
 
             //for medicalRecord
             showMedicalRecords = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s"
-            medicalRecord.tasks = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s/tasks"
-            medicalRecord.assignTask = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks"
+            medicalRecord {
+                tasks = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s/tasks"
+                assignTask = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks"
+            }
 
             addAssist = "${ratchetv2.server.url.base}/assist"
-
-            //for taskService
-            task.sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
 
             //Announcement
             announcements = "${ratchetv2.server.url.base}/announcements"

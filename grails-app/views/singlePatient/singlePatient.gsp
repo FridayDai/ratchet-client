@@ -157,7 +157,6 @@
                    placeholder="Select treatment"/>
         </div>
 
-    %{--<div class="form-group div-hidden" id="div-surgery-time">--}%
         <div class="form-group inline" id="surgery-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time required"
@@ -200,6 +199,30 @@
             </div>
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
+    </form>
+
+    <form action="" method="post" class="form ui-hidden add-tasks-dialog" id="add-tasks-dialog">
+        <input type="hidden" autofocus/>
+        <div class="has-tasks">
+            <div class="section section-1">
+                <div class="section-desc">Select a tool or tools from the list below</div>
+                <button class="btn select-all">Select all</button>
+                <ul class="task-list"></ul>
+            </div>
+        </div>
+        <div class="no-tasks">
+            <div class="icon"></div>
+            <div class="title">No tools available</div>
+            <div class="description">There are no tools available for this<br/>treatment yet</div>
+        </div>
+        <div class="section section-2">
+            <div class="section-desc">Select when you would like the task(s) to become active</div>
+            <div class="form-group schedule-date-group">
+                <label class="lbl-group">SCHEDULE TASK(S)</label>
+                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date">
+                <div class="surgery-date-relative-indicator"></div>
+            </div>
+        </div>
     </form>
 
     <form action="" method="post" class="treatment-time-form ui-hidden" id="treatment-time-form">

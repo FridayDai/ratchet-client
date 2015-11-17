@@ -326,3 +326,22 @@
     text-align: center;
     box-shadow: #6d8a93 2px 2px 8px;
 }
+
+.ui-dialog .ui-dialog-buttonpane .ui-button.disabled {
+    border-color: #cacaca;
+
+    .ui-button-text {
+        color: #cacaca;
+    }
+
+    &:hover,
+    &:focus {
+        background: none;
+        border: 1px solid #cacaca;
+        cursor: inherit;
+
+        .ui-button-text {
+            color: #cacaca;
+        }
+    }
+}

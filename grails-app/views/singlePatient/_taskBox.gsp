@@ -13,6 +13,7 @@
             ${task?.title}
         </div>
 
+        <g:if test="${task?.sendTimeOffset}">
         <div class="item-datetime relative-sent-time">
 
             %{--<% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>--}%
@@ -32,6 +33,7 @@
                 <label>Surgery</label>
             </g:else>
         </div>
+        </g:if>
 
         <div class="item-context">
             <p>${task?.description}</p>

@@ -57,5 +57,11 @@ module.exports = {
 
             $process.show();
         }
+    },
+
+    durationInDays: function (targetDateStr, compareDateStr, format) {
+        format = format || 'MMM D, YYYY';
+
+        return moment(compareDateStr, format).diff(moment(targetDateStr, format), 'days');
     }
 };

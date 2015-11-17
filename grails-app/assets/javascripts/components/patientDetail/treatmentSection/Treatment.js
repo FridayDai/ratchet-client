@@ -12,7 +12,8 @@ function Treatment() {
         subTabsContainerSelector: '.sub-tabs',
 
         treatmentToolListSelector: "#treatment-tool",
-        notifyButtonSelector: "#notifyTasks",
+        addTaskButtonSelector: '#addTasks',
+        notifyButtonSelector: '#notifyTasks',
         generateCodeButtonSelector: '#generateCode',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
@@ -84,6 +85,14 @@ function Treatment() {
             patientId: this.patientId,
             clientId: this.clientId
         };
+    };
+
+    this.onAddTaskButtonClicked = function (e) {
+        e.preventDefault();
+
+        this.trigger('showAddTasksDialog', _.extend(this.getBasicIds(), {
+            currentSurgeryDate: this.select('surgeryDateHiddenSelector').text().trim()
+        }));
     };
 
     this.onGenerateCodeButtonClicked = function (e) {
@@ -197,6 +206,7 @@ function Treatment() {
         this.initSubTabs();
 
         this.on('click', {
+            addTaskButtonSelector: this.onAddTaskButtonClicked,
             notifyButtonSelector: this.onNotifyButtonClicked,
             generateCodeButtonSelector: this.onGenerateCodeButtonClicked,
             moreDropdownButtonSelector: this.onMoreButtonClicked,
