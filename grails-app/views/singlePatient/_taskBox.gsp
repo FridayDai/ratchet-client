@@ -13,26 +13,26 @@
             ${task?.title}
         </div>
 
+        <g:if test="${task?.sendTimeOffset}">
         <div class="item-datetime relative-sent-time">
 
             %{--<% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>--}%
             %{--<% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>--}%
             %{--<% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>--}%
             %{--<% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>--}%
-            <g:if test="${task?.sendTimeOffset}">
-                <% def timeOffset = task?.sendTimeOffset%>
-                <% def sentTimeDays = timeOffset/(24*60*60*1000)%>
-                <g:if test="${sentTimeDays == 0}">
-                    <label class="numeral">On Surgery Day</label>
-                </g:if>
-                <g:else>
-                    <span class="numeral label-space number-font">${sentTimeDays.abs()}</span>
-                    <label class="label-space">${sentTimeDays.abs() == 1? 'Day' : 'Days'}</label>
-                    <span class="numeral label-space number-font">${sentTimeDays > 0? 'After' : 'Before'}</span>
-                    <label>Surgery</label>
-                </g:else>
+            <% def timeOffset = task?.sendTimeOffset%>
+            <% def sentTimeDays = timeOffset/(24*60*60*1000)%>
+            <g:if test="${sentTimeDays == 0}">
+                <label class="numeral">On Surgery Day</label>
             </g:if>
+            <g:else>
+                <span class="numeral label-space number-font">${sentTimeDays.abs()}</span>
+                <label class="label-space">${sentTimeDays.abs() == 1? 'Day' : 'Days'}</label>
+                <span class="numeral label-space number-font">${sentTimeDays > 0? 'After' : 'Before'}</span>
+                <label>Surgery</label>
+            </g:else>
         </div>
+        </g:if>
 
         <div class="item-context">
             <p>${task?.description}</p>
