@@ -1,3 +1,4 @@
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <div class="content">
 
     <div id="subTabs" class="sub-tabs">
@@ -41,18 +42,26 @@
                 <g:link controller="activity" action="index"
                         params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, _: System.currentTimeMillis()]">ACTIVITIES</g:link>
             </li>
-            <li data-type="Code" class="code-generation">
+            <li data-type="Tool" id="treatment-tool" class="code-generation" data-client-id="${clientId}"
+                data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
+                <button id="notifyTasks"
+                    <g:if test="${archived == 'true'|| StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] != 'VERIFIED'}">
+                        class="btn btn-notify btn-generate-code-disabled" disabled="disabled"
+                    </g:if>
+                    <g:else>
+                        class="btn btn-notify"
+                    </g:else>>
+                    <span class="text-span">Notify</span>
+                </button>
+
                 <button id="generateCode"
                     <g:if test="${archived == 'true'}">
-                        class="btn btn-generate-code disabled" disabled="disabled"
+                        class="btn btn-generate-code btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
                         class="btn btn-generate-code"
-                    </g:else>
-                        data-client-id="${clientId}"
-                        data-patient-id="${patientId}"
-                        data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
-                    Generate Code
+                    </g:else>>
+                    <span class="text-span">Get Code</span>
                 </button>
 
             </li>
@@ -79,6 +88,7 @@
                                       timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                       format="MMMM d, yyyy"></g:formatDate>
                     </label>
+                    <g:if test="${surgeryTime}">
                     <span <g:if test="${archived == 'true'}">
                             class="btn drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
@@ -90,6 +100,7 @@
                             data-medical-record-id="${medicalRecordId}">
                         Edit
                     </span>
+                    </g:if>
                     <span <g:if test="${archived == 'true'}">
                             class="btn drop-down-list archived-active inline disabled" disabled="disabled"
                         </g:if>

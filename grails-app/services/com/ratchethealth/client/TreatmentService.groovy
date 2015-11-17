@@ -145,4 +145,22 @@ class TreatmentService extends RatchetAPIService {
             }
         }
     }
+
+    def sendTreatmentTasksEmail(String token, clientId, patientId, medicalRecordId) {
+        String TreatmentTasksUrl = grailsApplication.config.ratchetv2.server.url.notifyTreatmentTasks
+        def url = String.format(TreatmentTasksUrl, clientId, patientId, medicalRecordId)
+
+        log.info("Call backend service to notify treatment tasks, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("Notify treatment tasks success, token: ${token}")
+                return resp
+            } else {
+                handleError(resp)
+            }
+        }
+    }
 }

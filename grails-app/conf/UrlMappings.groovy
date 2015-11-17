@@ -57,6 +57,7 @@ class UrlMappings {
         "/treatments"(controller: "treatment", action: "getTreatments")
         "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
         "/treatments/$treatmentId?/generateCode"(controller: "treatment", action: "generateTreatmentCode")
+        "/patients/$patientId/treatments/$medicalRecordId/notify"(controller: "treatment", action: "notifyTreatmentTasks")
 
         //Patient task
         "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")

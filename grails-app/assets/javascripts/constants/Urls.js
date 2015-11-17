@@ -28,6 +28,7 @@ module.exports = {
     GET_TREATMENT_CODE: '/treatments/{0}/generateCode',
     UPDATE_SURGERY_DATE: '/patients/{0}/surgery-time/{1}/{2}',
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
+    NOTIFY_TREATMENT_TASKS: '/patients/{0}/treatments/{1}/notify',
 
     //Tasks
     SEND_NOTIFY_EMAIL: '/patients/{0}/treatments/{1}/task/{2}/send-mail',

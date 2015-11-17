@@ -235,4 +235,38 @@ class TreatmentServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+    def "test sendTreatmentTasksEmail with successful result"() {
+        given:
+
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 200,
+                    body  : 'ok'
+            ]
+        }
+
+        when:
+        def result = service.sendTreatmentTasksEmail('token', 1, 2, 3)
+
+        then:
+        result.body == 'ok'
+    }
+
+    def "test sendTreatmentTasksEmail without successful result"() {
+        given:
+        GetRequest.metaClass.asString = { ->
+            return [
+                    status: 400,
+                    body  : "body"
+            ]
+        }
+
+        when:
+        service.sendTreatmentTasksEmail('token', 1, 2, 3)
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
 }

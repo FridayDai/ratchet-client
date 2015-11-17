@@ -236,27 +236,6 @@
             background-color: $base-font-grey;
         }
 
-        .code-generation {
-            position: absolute;
-            right: 120px;
-            line-height: 40px;
-
-            .btn-generate-code {
-                top: 2px;
-            }
-
-            .btn-generate-code-disabled {
-                color: $base-color-grey;
-                border-color: $base-color-grey;
-                cursor: auto;
-
-                &:hover {
-                    background-color: transparent;
-                    color: $base-color-grey;
-                }
-            }
-        }
-
         .more-drop-down {
             position: absolute;
             right: 15px;
@@ -299,8 +278,8 @@
                     }
                 }
 
-                .archived-active {
-                    border-top: 0;
+                .surgeryTime-edit {
+                    border-bottom: 0;
                 }
             }
 

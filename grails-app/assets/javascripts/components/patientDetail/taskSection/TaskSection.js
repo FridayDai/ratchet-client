@@ -1,8 +1,4 @@
 var flight = require('flight');
-var URLs = require('../../../constants/Urls');
-var STRINGs = require('../../../constants/Strings');
-var Notifications = require('../../common/Notification');
-
 var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 
 function TaskSection() {
@@ -27,16 +23,6 @@ function TaskSection() {
         }
     };
 
-    this.onNotifyButtonClicked = function (e) {
-        var taskId = $(e.target).data('taskId');
-
-        $.ajax({
-            url: URLs.SEND_NOTIFY_EMAIL.format(this.patientId, this.medicalRecordId, taskId)
-        }).done(function () {
-            Notifications.showFadeOutMsg(STRINGs.SEND_NOTIFY_EMAIL_SUCCESS);
-        });
-    };
-
     this.checkActiveItemStatus = function () {
         if (this.select('noActiveItemLabelSelector').length >= 1) {
             this.trigger('noActiveTask');
@@ -50,11 +36,6 @@ function TaskSection() {
     this.after('initialize', function () {
         this.setBasicIds();
         this.checkActiveItemStatus();
-
-        this.on('click', {
-            notifyButtonSelector: this.onNotifyButtonClicked
-        });
-
         this.on(document, 'emailStatusUpdated', this.onEmailStatusUpdated);
     });
 }

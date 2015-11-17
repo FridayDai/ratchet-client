@@ -34,22 +34,6 @@
     //    }
 }
 
-//.icon-edit {
-//    border-top: 1px solid $base-surgery-date-bgcolor;
-//}
-//
-//.icon-archived {
-//    border-bottom: 1px solid $base-surgery-date-bgcolor;
-//}
-
-//
-//.icon-archived {
-//
-//    &:before {
-//        content: '\f2c9';
-//    }
-//}
-
 .icon-archived.disabled,
 .icon-edit.disabled {
     background-color: transparent;
@@ -227,4 +211,54 @@
         cursor: auto;
         text-decoration: none;
     }
+}
+
+.ui-tabs .ui-tabs-nav {
+    .code-generation {
+        position: absolute;
+        right: 120px;
+        line-height: 40px;
+        padding: 2px 0;
+
+        .btn-generate-code-disabled {
+            color: $base-color-grey;
+            border-color: $base-color-grey;
+            cursor: auto;
+
+            &:hover {
+                background-color: transparent;
+                color: $base-color-grey;
+            }
+        }
+    }
+}
+
+
+.btn-notify {
+    padding: 1px 8px;
+    margin-right: 12px;
+
+    &:before {
+        font-family: 'Ionicons';
+        display: inline-block;
+        content: '\f399';
+        font-size: 20px;
+    }
+}
+
+.btn-generate-code {
+    padding: 1px 8px;
+
+    &:before {
+        font-family: 'Ionicons';
+        display: inline-block;
+        content: '\f457';
+        font-size: 20px;
+    }
+}
+
+.text-span {
+    position: relative;
+    padding-left: 2px;
+    top: -2px;
 }

@@ -42,6 +42,8 @@ function NewPatientFormDialog() {
         phoneNumberStaticSelector: '#phoneNumber-static',
         emailStaticSelector: '#email-static',
 
+        surgeryDateFormGroupSelector: '#div-surgery-time',
+
         relationshipSelectEvent: 'newPatientRelationshipSelected',
         relationshipClearEvent: 'newPatientRelationshipCleared'
     });
@@ -111,6 +113,8 @@ function NewPatientFormDialog() {
             this.setPatientNotExisting();
             this.select('patientIdStaticSelector').text(data.identify);
         }
+
+        this.select('surgeryDateFormGroupSelector').hide();
     };
 
     this.setPatientExisting = function (data) {
@@ -237,7 +241,6 @@ function NewPatientFormDialog() {
         var $treatment = this.select('treatmentFieldSelector');
         var treatmentId = $treatment.data('id');
         var $surgeryTime = this.select('surgeryTimeFieldSelector');
-        var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
 
         var result = {
             patientId: this.select('patientIdStaticSelector').text(),
@@ -246,7 +249,6 @@ function NewPatientFormDialog() {
             groupId: groupId,
             staffId: providerId,
             treatmentId: treatmentId,
-            surgeryTime: surgeryTime,
             profilePhoto: ''
         };
 
@@ -260,6 +262,10 @@ function NewPatientFormDialog() {
 
         if ($EmailStatic.is(':visible')) {
             result.email = $EmailStatic.text();
+        }
+
+        if ($surgeryTime.is(':visible')) {
+            result.surgeryTime = Utility.toVancouverTime($surgeryTime.val());
         }
 
         return result;

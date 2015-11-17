@@ -17,7 +17,7 @@ class TreatmentController extends BaseController {
         def PatientEmailStatus = params?.PatientEmailStatus
         Long surgeryTime = null
 
-        if (params?.surgeryTime != "null") {
+        if (params?.surgeryTime != "null" || !params?.surgeryTime) {
             surgeryTime = Long.valueOf(params?.surgeryTime)
         }
         render view: '/singlePatient/treatment',
@@ -91,5 +91,15 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def resp = treatmentService.generateTreatmentCode(token, clientId, patientId, medicalRecordId)
         render resp as JSON
+    }
+
+    def notifyTreatmentTasks() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def resp = treatmentService.sendTreatmentTasksEmail(token, clientId, patientId, medicalRecordId)
+        render resp as JSON
+
     }
 }

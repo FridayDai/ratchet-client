@@ -5,7 +5,7 @@ module.exports = {
     BULK_IMPORT_ADD_SUCCESS_MESSAGE_SINGLE: "{0} treatment have been added",
     INVITE_EMAIL_SUCCESS: "An invitation e-mail has been sent.",
 
-    SEND_NOTIFY_EMAIL_SUCCESS: "The task has been sent.",
+    SEND_NOTIFY_EMAIL_SUCCESS: "These tasks has been sent.",
 
     // Account
     ACCOUNT_ACTIVATED: "The account is activated.",
