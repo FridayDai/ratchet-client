@@ -1,3 +1,4 @@
+<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 <div class="content">
 
     <div id="subTabs" class="sub-tabs">
@@ -44,8 +45,8 @@
             <li data-type="Tool" id="treatment-tool" class="code-generation" data-client-id="${clientId}"
                 data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
                 <button id="notifyTasks"
-                    <g:if test="${archived == 'true'}">
-                        class="btn btn-notify disabled" disabled="disabled"
+                    <g:if test="${archived == 'true'|| StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] != 'VERIFIED'}">
+                        class="btn btn-notify btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
                         class="btn btn-notify"
@@ -55,7 +56,7 @@
 
                 <button id="generateCode"
                     <g:if test="${archived == 'true'}">
-                        class="btn btn-generate-code disabled" disabled="disabled"
+                        class="btn btn-generate-code btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
                         class="btn btn-generate-code"

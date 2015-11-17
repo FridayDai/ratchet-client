@@ -55,8 +55,11 @@ function BulkImportResultTable() {
                 "targets": 7,
                 "render": function (data, type, full) {
                     var surgeryTime = data === undefined ? full.surgeryTime : data;
-
-                    return moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
+                    if(surgeryTime) {
+                        return moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
+                    } else {
+                        return '';
+                    }
                 },
                 width: "170px"
             }, {

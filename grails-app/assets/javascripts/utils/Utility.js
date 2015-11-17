@@ -19,11 +19,19 @@ module.exports = {
     },
 
     toVancouverTime: function (time) {
-        return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+        if (time) {
+            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+        } else {
+            return null;
+        }
     },
 
     toVancouverTimeHour: function (time) {
-        return moment(time).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+        if (time) {
+            return moment(time).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+        } else {
+            return null;
+        }
     },
 
     progress: function (hide) {

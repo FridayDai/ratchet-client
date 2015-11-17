@@ -17,7 +17,7 @@ class TreatmentController extends BaseController {
         def PatientEmailStatus = params?.PatientEmailStatus
         Long surgeryTime = null
 
-        if (params?.surgeryTime != "null") {
+        if (params?.surgeryTime != "null" || !params?.surgeryTime) {
             surgeryTime = Long.valueOf(params?.surgeryTime)
         }
         render view: '/singlePatient/treatment',
