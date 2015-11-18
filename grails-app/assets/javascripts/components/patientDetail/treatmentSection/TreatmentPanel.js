@@ -5,7 +5,7 @@ var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
 
 function TreatmentPanel() {
     this.attributes({
-        addTreatmentButtonSelector: '#addTab',
+        addTreatmentButtonSelector: '.add-treatment',
 
         tabsContainerSelector: '.tab-treatment',
         tabLabelSelector: '.tab-treatment li'

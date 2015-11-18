@@ -73,7 +73,7 @@
 
         <div id="tabs" class="patient-tab">
             <g:if test="${medicalRecords.size() < treatmentLimit}">
-                <button id="addTab" class="btn add-tab" data-patient-id="${patientInfo.id}"
+                <button id="addTab" class="btn add-treatment" data-patient-id="${patientInfo.id}"
                         data-id="${patientInfo.patientId}"
                         data-client-id="${patientInfo.client.id}"
                         data-account-id="${request.session.accountId}">Add Treatment</button>
@@ -102,6 +102,17 @@
                     </li>
                 </g:each>
             </ul>
+            <g:if test="${medicalRecords.size() == 0}">
+                <div class="no-treatment-container">
+                    <div class="icon"></div>
+                    <div class="title">This patient has no treatment</div>
+                    <div class="description">Assign this patient a treatment using the<br/>button below</div>
+                    <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
+                            data-id="${patientInfo.patientId}"
+                            data-client-id="${patientInfo.client.id}"
+                            data-account-id="${request.session.accountId}">Add Treatment</button>
+                </div>
+            </g:if>
         </div>
     </div>
 

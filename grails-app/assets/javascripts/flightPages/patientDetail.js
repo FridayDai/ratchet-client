@@ -26,6 +26,7 @@ function PatientDetailPage() {
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#tabs',
         tabTitleSelector: '#tabs .tab-treatment li',
+        noTreatmentContainerSelector: '.no-treatment-container',
 
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
@@ -82,12 +83,18 @@ function PatientDetailPage() {
         }
     ]);
 
-    this.initTreatmentTabs = function () {
+    this.initTreatmentSection = function () {
         var me = this;
 
-        var treatmentPanelOnce = _.once(function(selector) {
-            TreatmentPanel.attachTo(selector);
-        });
+        this.select('tabsContainerSelector').show();
+
+        _.once(function() {
+            TreatmentPanel.attachTo(me.select('tabsContainerSelector'));
+        })();
+    };
+
+    this.initTreatmentTabs = function () {
+        var me = this;
 
         this.select('tabsContainerSelector').tabs({
             cache: true,
@@ -111,12 +118,15 @@ function PatientDetailPage() {
             load: function (e, ui) {
                 Utility.progress(false);
 
-                me.select('tabsContainerSelector').show();
-
-                treatmentPanelOnce(ui.panel.context);
                 Treatment.attachTo(ui.panel);
+
+                me.initTreatmentSection();
             }
         });
+
+        if (!this.select('tabTitleSelector').length) {
+            this.initTreatmentSection();
+        }
     };
 
     this.onEditSurgeryDateSuccess = function (e, data) {
