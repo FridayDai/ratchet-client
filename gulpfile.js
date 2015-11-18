@@ -72,6 +72,7 @@ gulp.task('styles', function() {
     return gulp.src(paths.sass)
         .pipe(plumber(plumberErrorHandler))
         .pipe(compass({
+            sourcemap: true,
             project: path.join(__dirname, 'grails-app', 'assets', 'stylesheets'),
             config_file: './config.rb'
         }));

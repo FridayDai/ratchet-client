@@ -1,37 +1,37 @@
 {
-    "name": "ratchet-v2-provider-desktop",
-    "version": "0.0.0",
-    "description": "This is Ratchet v2 provider desktop.",
-    "main": "gulpfile.js",
-    "directories": {
-        "test": "test"
-    },
-    "scripts": {
-        "test": "gulp js-lint && ./grailsw test test-app",
-        "start": "gulp live"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:xplusz/ratchet-client.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/xplusz/ratchet-client/issues"
-    },
-    "homepage": "https://github.com/xplusz/ratchet-client",
-    "devDependencies": {
-        "gulp": "^3.8.10",
-        "gulp-compass": "^2.1.0",
-        "gulp-jshint": "^1.9.0",
-        "gulp-livereload": "^3.8.1",
-        "gulp-notify": "^2.2.0",
-        "gulp-plumber": "^1.0.1",
-        "gulp-scss-lint": "^0.1.4",
-        "gulp-util": "^3.0.7",
-        "jshint-stylish": "^1.0.0",
-        "webpack": "^1.10.5",
-        "webpack-stream": "^2.1.1"
-    },
-    "dependencies": {}
+  "name": "ratchet-v2-provider-desktop",
+  "version": "0.0.0",
+  "description": "This is Ratchet v2 provider desktop.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp js-lint && ./grailsw test test-app",
+    "start": "gulp live"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xplusz/ratchet-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xplusz/ratchet-client/issues"
+  },
+  "homepage": "https://github.com/xplusz/ratchet-client",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-compass": "^2.1.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-scss-lint": "^0.1.4",
+    "gulp-util": "^3.0.7",
+    "jshint-stylish": "^1.0.0",
+    "webpack": "^1.12.6",
+    "webpack-stream": "^2.1.1"
+  },
+  "dependencies": {}
 }
