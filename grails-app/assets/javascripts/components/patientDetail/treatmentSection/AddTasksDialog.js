@@ -26,6 +26,8 @@ var AFTER_SURGERY_DAYS = '{0} DAYS AFTER SURGERY';
 var ONE_DAY_AFTER_SURGERY_DAY = '1 DAY AFTER SURGERY';
 var SELECT_ALL = 'Select all';
 var DESELECT_ALL = 'Deselect all';
+var TASKS_ADDED = '{0} tasks has been added';
+var ONE_TASK_ADDED = '1 task has been added';
 
 var availableTasksCache = {};
 
@@ -164,6 +166,7 @@ function AddTasksDialog() {
         e.preventDefault();
 
         var $button = $(e.target).closest('button');
+        var me = this;
 
         if (!$button.hasClass('disabled')) {
             var toolIds = _.reduce(
@@ -189,12 +192,14 @@ function AddTasksDialog() {
                     toolIds: toolIds.join(','),
                     scheduleTime: scheduleTime
                 }
-            }).done(_.bind(this.addTaskSuccessful, this));
+            }).done(function () {
+                me.addTaskSuccessful(toolIds.length);
+            });
         }
     };
 
-    this.addTaskSuccessful = function () {
-        Notifications.showFadeOutMsg('tasks has been added');
+    this.addTaskSuccessful = function (taskSize) {
+        Notifications.showFadeOutMsg(taskSize > 1 ? TASKS_ADDED.format(taskSize) : ONE_TASK_ADDED);
 
         this.close();
     };
