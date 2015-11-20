@@ -6,7 +6,7 @@
 
         <div class="item-fist middle-font">
             <label>ID:</label>
-            <span class="number-font">${task?.id}</span>
+            <span class="id number-font">${task?.id}</span>
         </div>
 
         <div class="item-title">
@@ -49,7 +49,10 @@
             </g:if>
         </span>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.testId == 2}">
-        <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results">View Results</a>
+        <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
+        </g:if>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
+            <span class="delete"></span>
         </g:if>
 
         <div class="footer-bottom">

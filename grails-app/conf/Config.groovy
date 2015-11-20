@@ -284,6 +284,7 @@ ratchetv2 {
             task {
                 sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
                 getResult = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/result"
+                delete = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s"
             }
             getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"
 

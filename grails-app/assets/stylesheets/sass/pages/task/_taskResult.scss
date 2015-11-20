@@ -4,6 +4,9 @@
 
 $result-main-color: #335d70;
 
+html, body, div, span {
+    font: $base-font-utility;
+}
 
 .sticky-header {
     background-color: white;

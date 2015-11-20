@@ -34,6 +34,7 @@ module.exports = {
     //Tasks
     SEND_NOTIFY_EMAIL: '/patients/{0}/treatments/{1}/task/{2}/send-mail',
     GET_AVAILABLE_TASKS: '/treatments/{0}/available-tasks',
+    DELETE_TASK: '/patients/{0}/treatments/{1}/task/{2}/delete',
 
     //Team
     GET_EMERGENCY_CONTACT_LIST: '/patients/{0}/emergency-contact?medicalRecordId={1}',

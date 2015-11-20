@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.mashape.unirest.request.GetRequest
+import com.mashape.unirest.request.HttpRequestWithBody
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
@@ -81,6 +82,39 @@ class TaskServiceSpec extends Specification {
 
 		when:
 		service.sendTaskEmailToPatient('token', 1, 2, 3, 4)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test deleteTask with successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+					status: 204,
+					body  : ''
+			]
+		}
+
+		when:
+		def result = service.deleteTask('token', 1, 2, 3, 4)
+
+		then:
+		result == true
+	}
+
+	def "test deleteTask without successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+					status: 400,
+					body  : "body"
+			]
+		}
+
+		when:
+		service.deleteTask('token', 1, 2, 3, 4)
 
 		then:
 		ApiReturnException e = thrown()

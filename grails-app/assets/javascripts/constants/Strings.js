@@ -11,6 +11,9 @@ module.exports = {
     ACCOUNT_ACTIVATED: "The account is activated.",
     ACCOUNT_DEACTIVATED: "The account is deactivated.",
 
+    // Task
+    TASK_DELETE: "{0} has been deleted.",
+
     //ERROR
     ERROR_TITLE: "ERROR",
     ERROR_TITLE_404: "ERROR : 404",
