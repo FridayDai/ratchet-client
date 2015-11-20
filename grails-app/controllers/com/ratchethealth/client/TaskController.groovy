@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -57,5 +55,27 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.sendTaskEmailToPatient(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    def getTaskResult() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def taskId = params?.taskId
+
+        def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+
+        def view = ''
+        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
+            view = '/taskResult/ODILike'
+        } else {
+            render status: 404
+            return
+        }
+
+        render view: view, model: [
+                Task: result
+        ]
     }
 }

@@ -35,7 +35,13 @@
             </g:if>
             <g:else>
                 <g:each in="${closedTasks}" var="task">
-                    <g:render template="/singlePatient/taskBox" model="['task': task]" />
+                    <g:render template="/singlePatient/taskBox" model="[
+                            'task': task,
+                            'patientId': patientId,
+                            'clientId': clientId,
+                            'medicalRecordId': medicalRecordId,
+                            'taskId': task.id
+                    ]" />
                 </g:each>
             </g:else>
         </div>

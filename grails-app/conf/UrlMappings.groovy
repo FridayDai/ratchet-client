@@ -66,6 +66,7 @@ class UrlMappings {
         //Patient task
         "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/send-mail"(controller: "task", action: "sendTaskEmail")
+        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/result"(controller: "task", action: "getTaskResult")
 
         //Patient team
         "/patients/$patientId?/emergency-contact"(controller: "team") {

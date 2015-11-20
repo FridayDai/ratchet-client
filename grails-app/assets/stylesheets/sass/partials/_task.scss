@@ -308,14 +308,29 @@
 
     &:before {
         width: 10px;
-        padding: 5px 8px 0;
+        padding: 5px 5px 0;
         content: 'SCHEDULED';
         font-size: 10pt;
     }
 
     .task-date {
-        padding-left: 10px;
         font-size: 13px;
+    }
+
+    .view-results {
+        float: right;
+        margin: 5px 5px 0 0;
+        color: $base-color-white;
+        font-size: 11px;
+        font-weight: 300;
+
+        &:before {
+            content: '\f425';
+            font-family: ionicons;
+            font-size: 13px;
+            margin-right: 2px;
+            vertical-align: middle;
+        }
     }
 
     .footer-bottom {

@@ -1,0 +1,46 @@
+@import 'taskResult';
+
+.question-list {
+    margin: 0 0 30px 35px;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+    color: $result-main-color;
+}
+
+.answer {
+    position: relative;
+    margin-top: 10px;
+
+    .text {
+        font-size: 16px;
+    }
+}
+
+.result-circle-radio {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.result-circle-radio.checked:before {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    content: '';
+    background-color: $result-main-color;
+}
+
+
