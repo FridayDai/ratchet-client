@@ -121,6 +121,16 @@ function GroupsTable() {
             data: {groupId: groupId},
             success: function () {
                 me.deleteRow($row);
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status === 400 && jqXHR.responseText.indexOf('cannot be deleted')) {
+                    var errMsg = jqXHR.responseText.replace('. ', '.<br/>');
+
+                    Notifications.error({
+                        title: 'CANNOT DELETE GROUP',
+                        message: errMsg
+                    });
+                }
             }
         });
     };
