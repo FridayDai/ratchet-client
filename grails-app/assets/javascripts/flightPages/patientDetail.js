@@ -129,6 +129,10 @@ function PatientDetailPage() {
         }
     };
 
+    this.onAddTasksSuccess = function () {
+        this.updateTreatment();
+    };
+
     this.onEditSurgeryDateSuccess = function (e, data) {
         this.updateTreatment({
             key: 'surgeryTime',
@@ -165,9 +169,12 @@ function PatientDetailPage() {
 
     this.updateTreatmentUrl = function ($activeTab, param) {
         var oldUrl = $activeTab.find('a').attr('href');
-        var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
 
-        $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
+        if (param) {
+            var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
+
+            $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
+        }
     };
 
     this.teardownTreatment = function ($activeTab) {
@@ -177,6 +184,7 @@ function PatientDetailPage() {
     };
 
     this.after('initialize', function () {
+        this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
         this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
 

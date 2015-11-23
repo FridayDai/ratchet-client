@@ -201,6 +201,8 @@ function AddTasksDialog() {
     this.addTaskSuccessful = function (taskSize) {
         Notifications.showFadeOutMsg(taskSize > 1 ? TASKS_ADDED.format(taskSize) : ONE_TASK_ADDED);
 
+        this.trigger('addTasksSuccess');
+
         this.close();
     };
 
