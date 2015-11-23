@@ -395,9 +395,17 @@
     }
 }
 
-.btn-add-task {
-    &:before {
-        content: '\f489';
+.code-generation {
+    .btn-add-task {
+        &:before {
+            content: '\f489';
+        }
+
+        &.disabled {
+            background: none;
+            color: #ccc;
+            border: 1px solid #ccc;
+        }
     }
 }
 

@@ -257,12 +257,12 @@ function AddTasksDialog() {
         title: 'ADD TASKS',
         width: 986,
         buttons: [{
-            text: 'Cancel',
-            click: this.cancelHandler
-        }, {
             text: 'Add',
             'class': 'add-button disabled',
             click: this.confirmHandler
+        }, {
+            text: 'Cancel',
+            click: this.cancelHandler
         }]
     });
 

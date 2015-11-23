@@ -56,7 +56,7 @@
 
                 <button id="notifyTasks"
                     <g:if test="${archived == 'true'|| StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] != 'VERIFIED'}">
-                        class="btn btn-notify btn-generate-code-disabled" disabled="disabled"
+                        class="btn btn-treatment-level btn-notify btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
                         class="btn btn-treatment-level btn-notify"
@@ -66,7 +66,7 @@
 
                 <button id="generateCode"
                     <g:if test="${archived == 'true'}">
-                        class="btn btn-generate-code btn-generate-code-disabled" disabled="disabled"
+                        class="btn btn-treatment-level btn-generate-code btn-generate-code-disabled" disabled="disabled"
                     </g:if>
                     <g:else>
                         class="btn btn-treatment-level btn-generate-code"
