@@ -26,7 +26,7 @@ var AFTER_SURGERY_DAYS = '{0} DAYS AFTER SURGERY';
 var ONE_DAY_AFTER_SURGERY_DAY = '1 DAY AFTER SURGERY';
 var SELECT_ALL = 'Select all';
 var DESELECT_ALL = 'Deselect all';
-var TASKS_ADDED = '{0} tasks has been added';
+var TASKS_ADDED = '{0} tasks have been added';
 var ONE_TASK_ADDED = '1 task has been added';
 
 var availableTasksCache = {};
