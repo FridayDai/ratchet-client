@@ -26,6 +26,7 @@ function TaskSection() {
         contentSelector: '.content',
 
         activeItemsContainerSelector: '#task-row-active',
+        activeItemBoxSelector: '#task-row-active .box-item',
         scheduleItemsContainerSelector: '#task-row-schedule',
 
         notifyButtonSelector: '.btn-notify.task-email',
@@ -33,6 +34,10 @@ function TaskSection() {
         noActiveItemLabelSelector: '.no-active-item',
         deleteTaskButtonSelector: '.box-item .delete'
     });
+
+    this.getActiveItemCount = function () {
+        return this.select('activeItemBoxSelector').size();
+    };
 
     this.setBasicIds = function () {
         var $taskInfoHidden = this.select('taskInfoHiddenSelector');

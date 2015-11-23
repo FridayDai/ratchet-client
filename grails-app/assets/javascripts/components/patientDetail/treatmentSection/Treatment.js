@@ -101,13 +101,22 @@ function Treatment() {
         this.trigger('showGenerateCodeDialog', this.getBasicIds());
     };
 
+    this.getTaskSection = function () {
+        return flight.registry.findInstanceInfoByNode(this.taskNode)[0].instance;
+    };
+
     this.onNotifyButtonClicked = function() {
         var basicIds = this.getBasicIds();
+        var activeCount = this.getTaskSection().getActiveItemCount();
 
         $.ajax({
             url: URLs.NOTIFY_TREATMENT_TASKS.format(basicIds.patientId, basicIds.medicalRecordId)
         }).done(function () {
-            Notifications.showFadeOutMsg(STRINGs.SEND_NOTIFY_EMAIL_SUCCESS);
+            Notifications.showFadeOutMsg(
+                activeCount === 1 ?
+                STRINGs.SEND_NOTIFY_ONE_TASKS_SUCCESS :
+                STRINGs.SEND_NOTIFY_TASKS_SUCCESS
+            );
         });
     };
 
