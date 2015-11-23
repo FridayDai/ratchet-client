@@ -127,7 +127,7 @@ function GroupsTable() {
                     var errMsg = jqXHR.responseText.replace('. ', '.<br/>');
 
                     Notifications.error({
-                        title: 'CANNOT DELETE GROUP',
+                        title: '<strong>CANNOT DELETE GROUP</strong>',
                         message: errMsg
                     });
                 }

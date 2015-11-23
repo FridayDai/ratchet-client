@@ -54,7 +54,12 @@ function AddTasksDialog() {
     });
 
     this.onShow = function (e, basicIds) {
+        this.prepareToShow();
         this.getAvailableTasks(basicIds);
+    };
+
+    this.prepareToShow = function () {
+        this.select('selectAllButtonSelector').text(SELECT_ALL);
     };
 
     this.getAvailableTasks = function (params) {
