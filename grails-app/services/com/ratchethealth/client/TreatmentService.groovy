@@ -157,7 +157,12 @@ class TreatmentService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Notify treatment tasks success, token: ${token}")
-                return resp
+
+                [success: true]
+            } else if (resp.status == 406) {
+                log.info("Notify treatment tasks failed within 30 seconds, token: ${token}")
+
+                [success: true]
             } else {
                 handleError(resp)
             }
