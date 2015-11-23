@@ -26,7 +26,6 @@ function PatientDetailPage() {
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#tabs',
         tabTitleSelector: '#tabs .tab-treatment li',
-        noTreatmentContainerSelector: '.no-treatment-container',
 
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',

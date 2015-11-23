@@ -5,6 +5,7 @@ var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
 
 function TreatmentPanel() {
     this.attributes({
+        noTreatmentContainerSelector: '.no-treatment-container',
         addTreatmentButtonSelector: '.add-treatment',
 
         tabsContainerSelector: '.tab-treatment',
@@ -21,6 +22,12 @@ function TreatmentPanel() {
         this.addTab(data);
 
         this.updateAddTreatmentButtonStatus();
+
+        var $noTreatmentContainer = this.select('noTreatmentContainerSelector');
+
+        if ($noTreatmentContainer.is(':visible')) {
+            $noTreatmentContainer.hide();
+        }
     };
 
     this.addTab = function (options) {
