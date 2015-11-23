@@ -250,8 +250,25 @@ class TreatmentServiceSpec extends Specification {
         def result = service.sendTreatmentTasksEmail('token', 1, 2, 3)
 
         then:
-        result.body == 'ok'
+        result.success == true
     }
+
+	def "test sendTreatmentTasksEmail within 30 seconds"() {
+		given:
+
+		GetRequest.metaClass.asString = { ->
+			return [
+					status: 406,
+					body  : 'ok'
+			]
+		}
+
+		when:
+		def result = service.sendTreatmentTasksEmail('token', 1, 2, 3)
+
+		then:
+		result.success == true
+	}
 
     def "test sendTreatmentTasksEmail without successful result"() {
         given:

@@ -30,7 +30,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Group Name</th>
-                    <th>Last Update</th>
+                    <th>Last Updated</th>
                     <th></th>
                 </tr>
                 </thead>

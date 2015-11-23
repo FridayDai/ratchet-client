@@ -6,7 +6,7 @@
             <tr>
                 <th class="nosort">Description</th>
                 <th>By</th>
-                <th id="sortLastUpdate">Last Update</th>
+                <th id="sortLastUpdate">Last Updated</th>
             </tr>
             </thead>
         </table>
