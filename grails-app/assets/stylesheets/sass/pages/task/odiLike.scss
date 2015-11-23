@@ -1,5 +1,9 @@
 @import 'taskResult';
 
+body {
+    margin-bottom: 0;
+}
+
 .question-list {
     margin: 0 0 30px 35px;
 }
@@ -41,6 +45,27 @@
     border-radius: 50%;
     content: '';
     background-color: $result-main-color;
+}
+
+.task-list-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 30px;
+    }
+
+    &.part-1 {
+        padding-left: 30px;
+        border-left: 1px solid #333;
+    }
 }
 
 

@@ -10,20 +10,26 @@
     <div class="odi task-result-content">
         <div class="task-list-wrapper container">
             <g:each var="question" in="${Task.questions}" status="i">
-                <div class="question-list">
-                    <div class="question">SECTION ${i + 1}: ${question.title}</div>
+                <g:if test="${i == 0 || i == 5}">
+                <div class="task-list-part part-${i % 4}">
+                </g:if>
+                    <div class="question-list">
+                        <div class="question">SECTION ${i + 1}: ${question.title}</div>
 
-                    <div class="answer-list">
-                        <ul class="list">
-                            <g:each var="choice" in="${question.choices}">
-                                <li class="answer">
-                                    <span class="result-circle-radio <g:if test="${choice.id == question.answerChoiceId}">checked</g:if>"></span>
-                                    <span class="text">${choice.content}</span>
-                                </li>
-                            </g:each>
-                        </ul>
+                        <div class="answer-list">
+                            <ul class="list">
+                                <g:each var="choice" in="${question.choices}">
+                                    <li class="answer">
+                                        <span class="result-circle-radio <g:if test="${choice.id == question.answerChoiceId}">checked</g:if>"></span>
+                                        <span class="text">${choice.content}</span>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </div>
                     </div>
+                <g:if test="${i == 4 || i == 9}">
                 </div>
+                </g:if>
             </g:each>
         </div>
     </div>
