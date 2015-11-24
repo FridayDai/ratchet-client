@@ -88,6 +88,46 @@ class TaskServiceSpec extends Specification {
 		e.getMessage() == "body"
 	}
 
+	def "test getResult with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			totalCount 2
+			items 1, 2
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+					status: 200,
+					body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getResult('token', 1, 2, 3, 4)
+
+		then:
+		result.totalCount == 2
+		result.items == [1, 2]
+	}
+
+	def "test getResult without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+					status: 400,
+					body  : "body"
+			]
+		}
+
+		when:
+		service.getResult('token', 1, 2, 3, 4)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
 	def "test deleteTask with successful result"() {
 		given:
 		HttpRequestWithBody.metaClass.asString = { ->

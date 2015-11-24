@@ -1,4 +1,4 @@
-@import 'taskResult';
+@import '../taskResult';
 
 body {
     margin-bottom: 0;
@@ -35,7 +35,7 @@ body {
     border-radius: 50%;
 }
 
-.result-circle-radio.checked:before {
+.result-circle-radio-checked {
     position: absolute;
     top: 2px;
     left: 2px;
@@ -43,7 +43,6 @@ body {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    content: '';
     background-color: $result-main-color;
 }
 
@@ -64,8 +63,7 @@ body {
 
     &.part-1 {
         padding-left: 30px;
-        border-left: 1px solid #333;
+        border-left: 1px solid #8e8e8e;
     }
 }
-
 

@@ -53,13 +53,13 @@ class TaskService extends RatchetAPIService{
         String getTaskResultUrl = grailsApplication.config.ratchetv2.server.url.task.getResult
         def url = String.format(getTaskResultUrl, clientId, patientId, medicalRecordId, taskId)
 
-        log.info("Call backend service to send task email to patient, token: ${token}.")
+        log.info("Call backend service to get task result, token: ${token}.")
         withGet(token, url) { req ->
             def resp = req
                     .asString()
 
             if (resp.status == 200) {
-                log.info("Send task email to patient success, token: ${token}")
+                log.info("Get task result success, token: ${token}")
 
                 JSON.parse(resp.body)
             }
