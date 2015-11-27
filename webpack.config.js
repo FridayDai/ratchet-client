@@ -13,7 +13,8 @@ module.exports = {
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
-        profile: "./flightPages/profile.js"
+        profile: "./flightPages/profile.js",
+        painChart: "./flightPages/painChart.js"
     },
     output: {
         path: absoluteContext,
@@ -41,12 +42,17 @@ module.exports = {
             "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
             "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
-            select2: "bower_components/select2/select2.js"
+            select2: "bower_components/select2/select2.js",
+            "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js"
         }
     },
     module: {
         noParse: [
-        ]
+        ],
+        loaders: [{
+            test: require.resolve(absoluteContext + '/bower_components/Snap.svg/dist/snap.svg.js'),
+            loader: __dirname + '/node_modules/imports-loader?this=>window,fix=>module.exports=0'
+        }]
     },
     plugins: [
         new webpack.ProvidePlugin({

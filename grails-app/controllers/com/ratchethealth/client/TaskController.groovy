@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -69,13 +71,18 @@ class TaskController extends BaseController {
         def view = ''
         if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
             view = '/taskResult/ODILike'
-        } else {
+        } else if(RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK) {
+            view = '/taskResult/painChartNeck'
+        }
+        else {
             render status: 404
             return
         }
+        def mixedResult = result.mixedResult? JSON.parse(result.mixedResult): null
 
         render view: view, model: [
-                Task: result
+                Task: result,
+                mixedResult: mixedResult
         ]
     }
 

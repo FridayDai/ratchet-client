@@ -20,10 +20,12 @@
                 <span class="status">Completed - <g:formatDate date="${new java.util.Date(Task.completeTime)}"
                                            timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                            format="MMM d, yyyy" /></span>
-                <span class="score">
-                    <div class="score-num">${Task.score}</div>
-                    <div class="score-des">Total Result</div>
-                </span>
+                <g:if test="${!mixedResult}">
+                    <span class="score">
+                        <div class="score-num">${Task.score}</div>
+                        <div class="score-des">Total Result</div>
+                    </span>
+                </g:if>
             </div>
         </div>
     </div>

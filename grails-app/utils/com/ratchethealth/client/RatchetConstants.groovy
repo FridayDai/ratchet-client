@@ -16,19 +16,30 @@ class RatchetConstants {
     public static final String TOOL_NAME_HOOS = 'HOOS';
     public static final String TOOL_NAME_HARRIS_HIP_SCORE = 'Harris Hip Score';
     public static final String TOOL_NAME_FAIRLEY_NASAL_SYMPTOM = 'Fairley Nasal Symptom';
+    public static final String TOOL_NAME_PAIN_CHART_REFERENCE_NECK = 'Pain Chart Reference - Neck';
 
     //1.DASH 2.ODI 3.NDI 4.NRS-BACK 5.NRS-NECK 6.QuickDASH 7.KOOS 8.HOOS
-    // 9.Harris Hip Score 10.Fairley Nasal Symptom
+    // 9.Harris Hip Score 10.Fairley Nasal Symptom 11.Pain Chart Reference - Neck
     public static final Map TOOL_TYPE = [
-            1: TOOL_NAME_DASH,
-            2: TOOL_NAME_ODI,
-            3: TOOL_NAME_NDI,
-            4: TOOL_NAME_NRS_BACK,
-            5: TOOL_NAME_NRS_NECK,
-            6: TOOL_NAME_QUICK_DASH,
-            7: TOOL_NAME_KOOS,
-            8: TOOL_NAME_HOOS,
-            9: TOOL_NAME_HARRIS_HIP_SCORE,
-            10: TOOL_NAME_FAIRLEY_NASAL_SYMPTOM
+            1 : TOOL_NAME_DASH,
+            2 : TOOL_NAME_ODI,
+            3 : TOOL_NAME_NDI,
+            4 : TOOL_NAME_NRS_BACK,
+            5 : TOOL_NAME_NRS_NECK,
+            6 : TOOL_NAME_QUICK_DASH,
+            7 : TOOL_NAME_KOOS,
+            8 : TOOL_NAME_HOOS,
+            9 : TOOL_NAME_HARRIS_HIP_SCORE,
+            10: TOOL_NAME_FAIRLEY_NASAL_SYMPTOM,
+            11: TOOL_NAME_PAIN_CHART_REFERENCE_NECK
+    ]
+
+    public static final String[] PAIN_FREQUENCY = [
+            "Never",
+            "Monthly",
+            "Weekly",
+            "Daily",
+            "Hourly",
+            "Constant"
     ]
 }
