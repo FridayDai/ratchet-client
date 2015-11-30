@@ -70,15 +70,11 @@ function PainChartPage() {
     };
 
     this.disabledChart = function () {
-        _.forEach($('.human'), function (svg) {
-            var s = snap(svg);
-            _.forEach($.merge($('.body'), ($('.body-inline'))), function (ele) {
-                snap(ele).attr({
-                    fill: '#E6E6E6'
-                });
+        _.forEach($.merge($('.body'), ($('.body-inline'))), function (ele) {
+            snap(ele).attr({
+                fill: '#E6E6E6'
             });
         });
-
     };
 
     this.disabledPercentage = function () {
