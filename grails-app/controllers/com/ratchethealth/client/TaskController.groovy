@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import grails.converters.JSON
+
 class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
@@ -18,11 +20,11 @@ class TaskController extends BaseController {
         def activeTasks = [], closedTasks = [], scheduleTasks = []
         for (task in tasks) {
             switch (task?.status) {
-                case StatusCodeConstants.TASK_STATUS_SCHEDULE :
+                case StatusCodeConstants.TASK_STATUS_SCHEDULE:
                     scheduleTasks.add(task)
                     continue
-                case StatusCodeConstants.TASK_STATUS_PENDING :
-                case StatusCodeConstants.TASK_STATUS_OVERDUE :
+                case StatusCodeConstants.TASK_STATUS_PENDING:
+                case StatusCodeConstants.TASK_STATUS_OVERDUE:
                     activeTasks.add(task)
                     continue
                 default:
@@ -35,16 +37,16 @@ class TaskController extends BaseController {
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
         render view: '/singlePatient/task',
-            model: [
-                activeTasks: activeTasks,
-                closedTasks: closedTasks,
-                scheduleTasks: scheduleTasks,
-                clientId: clientId,
-                patientId: patientId,
-                medicalRecordId: medicalRecordId,
-                archived: archived,
-                PatientEmailStatus: PatientEmailStatus
-            ]
+                model: [
+                        activeTasks       : activeTasks,
+                        closedTasks       : closedTasks,
+                        scheduleTasks     : scheduleTasks,
+                        clientId          : clientId,
+                        patientId         : patientId,
+                        medicalRecordId   : medicalRecordId,
+                        archived          : archived,
+                        PatientEmailStatus: PatientEmailStatus
+                ]
     }
 
     def sendTaskEmail() {
@@ -69,13 +71,19 @@ class TaskController extends BaseController {
         def view = ''
         if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
             view = '/taskResult/ODILike'
+        } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK) {
+            view = '/taskResult/painChartNeck'
+        } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_BACK) {
+            view = '/taskResult/painChartBack'
         } else {
             render status: 404
             return
         }
+        def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
         render view: view, model: [
-                Task: result
+                Task       : result,
+                mixedResult: mixedResult
         ]
     }
 
