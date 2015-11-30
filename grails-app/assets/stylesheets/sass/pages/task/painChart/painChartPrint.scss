@@ -1,4 +1,4 @@
-@import '../taskResult';
+@import '../taskResultPrint';
 
 @font-face {
     font-family: 'Ionicons';
@@ -11,16 +11,17 @@
     font-style: normal;
 }
 
-body {
-    margin-bottom: 0;
-}
-
 .pain-draw {
+
+    .human {
+        width: 185px;
+        height: 485px;
+    }
 
     .draw-board {
         position: relative;
         width: 600px;
-        padding-bottom: 30px;
+        padding-bottom: 16px;
         margin: 0 auto;
     }
 
@@ -42,15 +43,16 @@ body {
     .chart-direction {
         position: absolute;
         width: 250px;
-        top: 570px;
-        left: 196px;
+        top: 442px;
+        left: 172px;
         font-size: 12px;
     }
 
     .group-direction {
         display: inline-block;
-        width: 114px;
+        width: 86px;
         padding: 3px 0;
+        font-size: 11px;
     }
 
     .icon-direction {
@@ -76,13 +78,13 @@ body {
 
 .answer-title {
     color: $result-main-color;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .answer-list {
     display: inline-block;
     width: 48%;
-    padding: 20px 0;
+    padding: 12px 0 0;
     vertical-align: top;
 
     .answer-title {
@@ -95,13 +97,13 @@ body {
     }
 
     .answer-box {
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
 
     .answer-line {
         width: 85%;
         padding: 3px 0;
-        font-size: 16px;
+        font-size: 12px;
 
         span {
             float: right;
@@ -116,7 +118,6 @@ body {
 
         label {
             float: right;
-            padding-right: 3px;
         }
     }
 }

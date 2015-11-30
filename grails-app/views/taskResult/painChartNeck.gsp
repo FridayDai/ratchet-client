@@ -1,5 +1,6 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants" %>
 <g:set var="cssPath" value="task/painChart/painChart"/>
+<g:set var="printSheetPath" value="task/painChart/painChartPrint"/>
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/painChart.bundle.js"/>
 
