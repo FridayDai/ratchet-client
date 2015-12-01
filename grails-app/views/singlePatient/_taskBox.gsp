@@ -6,20 +6,15 @@
 
         <div class="item-fist middle-font">
             <label>ID:</label>
-            <span class="number-font">${task?.id}</span>
+            <span class="id number-font">${task?.id}</span>
         </div>
 
         <div class="item-title">
             ${task?.title}
         </div>
 
+        <g:if test="${task?.sendTimeOffset && task.sendTimeOffset != 'null'}">
         <div class="item-datetime relative-sent-time">
-
-            %{--<% DateTimeZone Vancouver = DateTimeZone.forID("America/Vancouver") %>--}%
-            %{--<% LocalDate start = new LocalDate(task?.sendTime, Vancouver) %>--}%
-            %{--<% LocalDate end = new LocalDate(task?.surgeryTime, Vancouver) %>--}%
-            %{--<% def sentTimeDays = Days.daysBetween(start, end).getDays().abs() %>--}%
-
             <% Long timeOffset = Long.valueOf((task?.sendTimeOffset)?: 0)%>
             <% Long sentTimeDays = timeOffset/(24*60*60*1000)%>
             <g:if test="${sentTimeDays == 0}">
@@ -32,6 +27,7 @@
                 <label>Surgery</label>
             </g:else>
         </div>
+        </g:if>
 
         <div class="item-context">
             <p>${task?.description}</p>
@@ -52,21 +48,14 @@
                 <g:formatDate date="${taskDate}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}" format="MMM dd, yyyy"/>
             </g:if>
         </span>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.testId == 2}">
+        <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
+        </g:if>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
+            <span class="delete"></span>
+        </g:if>
 
         <div class="footer-bottom">
-            %{--<g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "overdue" || StatusCodeConstants.TASK_STATUS[task?.status] == "pending"}">--}%
-                %{--<div class="item-notify">--}%
-                    %{--<g:if test="${archivedStatus}">--}%
-                        %{--<button class="btn btn-notify task-email disabled" data-task-id="${task?.id}" disabled>Click to notify</button>--}%
-                    %{--</g:if>--}%
-                    %{--<g:elseif test="${StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] == "VERIFIED"}">--}%
-                        %{--<button class="btn btn-notify task-email" data-task-id="${task?.id}">Click to notify</button>--}%
-                    %{--</g:elseif>--}%
-                    %{--<g:else>--}%
-                        %{--<button class="btn btn-notify task-email div-hidden" data-task-id="${task?.id}">Click to notify</button>--}%
-                    %{--</g:else>--}%
-                %{--</div>--}%
-            %{--</g:if>--}%
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
                 <div class="complete-score">
                     <g:if test="${task?.otherScore}">

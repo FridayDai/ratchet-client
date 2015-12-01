@@ -207,6 +207,7 @@
 
 .box-item-content {
     position: relative;
+    height: 193px;
     padding: 10px;
     color: $base-a-default-color;
 
@@ -307,14 +308,54 @@
 
     &:before {
         width: 10px;
-        padding: 5px 8px 0;
+        padding: 5px 5px 0;
         content: 'SCHEDULED';
         font-size: 10pt;
     }
 
     .task-date {
-        padding-left: 10px;
         font-size: 13px;
+    }
+
+    .view-results {
+        float: right;
+        margin: 1px 5px 0 0;
+        color: $base-color-white;
+        position: relative;
+
+        &:before {
+            position: absolute;
+            top: 4px;
+            left: -12px;
+            content: '\f425';
+            font-family: ionicons;
+            font-size: 13px;
+        }
+
+        span {
+            font-size: 11px;
+        }
+
+        &:hover span {
+            text-decoration: underline;
+        }
+    }
+
+    .delete {
+        float: right;
+        margin: 1px 5px 0 0;
+        color: $base-color-white;
+        cursor: pointer;
+
+        &:before {
+            content: '\f253';
+            font-family: ionicons;
+            font-size: 13px;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     .footer-bottom {

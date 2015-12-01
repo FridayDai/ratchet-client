@@ -31,7 +31,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email Address</th>
-                    <th>Last Update</th>
+                    <th>Last Updated</th>
                     <th></th>
                     <th>isDoctor</th>
                 </tr>

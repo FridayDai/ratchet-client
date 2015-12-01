@@ -211,7 +211,7 @@
     }
 }
 
-.ui-size {
+.ui-dialog-warning {
     min-width: 450px;
 
     .btn-position {
@@ -226,7 +226,18 @@
         background-color: $base-color-warn;
 
         .ui-dialog-title {
-            display: none;
+            float: none;
+            display: block;
+            margin: auto;
+            text-align: center;
+
+            &:before {
+                content: '\f100';
+                color: $base-color-white;
+                font-weight: lighter;
+                font-size: 27px;
+                font-family: ionicons;
+            }
         }
     }
 
@@ -294,17 +305,6 @@
             }
         }
     }
-
-    .ui-icon-show {
-        &:before {
-            margin: auto;
-            content: '\f100';
-            color: $base-color-white;
-            font-weight: lighter;
-            font-size: 27px;
-            font-family: ionicons;
-        }
-    }
 }
 
 .ui-dialog-titlebar {
@@ -325,4 +325,23 @@
     font-size: 16px;
     text-align: center;
     box-shadow: #6d8a93 2px 2px 8px;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-button.disabled {
+    border-color: #cacaca;
+
+    .ui-button-text {
+        color: #cacaca;
+    }
+
+    &:hover,
+    &:focus {
+        background: none;
+        border: 1px solid #cacaca;
+        cursor: inherit;
+
+        .ui-button-text {
+            color: #cacaca;
+        }
+    }
 }

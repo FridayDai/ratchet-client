@@ -7,10 +7,6 @@ $.datepicker.setDefaults({
     fixFocusIE: false,
 
     /* blur needed to correctly handle placeholder text */
-    onSelect: function () {
-        this.fixFocusIE = true;
-    },
-
     onClose: function () {
         this.fixFocusIE = true;
     },
@@ -24,8 +20,15 @@ $.datepicker.setDefaults({
 
 function WithDatepicker() {
     this._initDatePicker = function () {
+        var me = this;
+
         this.$node.datepicker({
-            dateFormat: 'MM d, yy'
+            dateFormat: 'MM d, yy',
+            onSelect: function () {
+                this.fixFocusIE = true;
+
+                me.trigger('rc.datePickerSelect');
+            }
         });
     };
 

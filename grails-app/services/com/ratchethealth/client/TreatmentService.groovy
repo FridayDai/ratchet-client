@@ -157,7 +157,53 @@ class TreatmentService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Notify treatment tasks success, token: ${token}")
-                return resp
+
+                [success: true]
+            } else if (resp.status == 406) {
+                log.info("Notify treatment tasks failed within 30 seconds, token: ${token}")
+
+                [success: true]
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getTasksInTreatment(String token, treatmentId) {
+        log.info("Call backend service to get tasks in treatment, token: ${token}.")
+
+        String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.getToolsOfTreatment
+        String url = String.format(getAvailableTaskUrl, treatmentId)
+
+        withGet(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 200) {
+                log.info("Get tasks in treatment success, token: ${token}")
+
+                JSON.parse(resp.body)
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime) {
+        log.info("Call backend service to add ad-hoc tasks to treatment, token: ${token}.")
+
+        String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.adhocTasksToTreatment
+        String url = String.format(getAvailableTaskUrl, clientId, patientId, medicalRecordId)
+
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("toolIds", toolIds)
+                    .field("scheduleTime", scheduleTime)
+                    .asString()
+
+            if (resp.status == 201) {
+                log.info("Get tasks add ad-hoc tasks to treatment, token: ${token}")
+
+                JSON.parse(resp.body)
             } else {
                 handleError(resp)
             }

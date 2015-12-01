@@ -48,4 +48,41 @@ class TaskService extends RatchetAPIService{
             }
         }
     }
+
+    def getResult(String token, clientId, patientId, medicalRecordId, taskId) {
+        String getTaskResultUrl = grailsApplication.config.ratchetv2.server.url.task.getResult
+        def url = String.format(getTaskResultUrl, clientId, patientId, medicalRecordId, taskId)
+
+        log.info("Call backend service to get task result, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("Get task result success, token: ${token}")
+
+                JSON.parse(resp.body)
+            }
+            else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def deleteTask(String token, clientId, patientId, medicalRecordId, taskId) {
+        String deleteTaskUrl = grailsApplication.config.ratchetv2.server.url.task.delete
+        def url = String.format(deleteTaskUrl, clientId, patientId, medicalRecordId, taskId)
+
+        log.info("Call backend service to delete a task, token: ${token}.")
+        withDelete(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 204) {
+                log.info("delete a task success, token: ${token}.")
+                return true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
 }

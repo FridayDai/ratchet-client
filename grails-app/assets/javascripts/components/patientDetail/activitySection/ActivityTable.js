@@ -10,12 +10,12 @@ function ActivityTable() {
             {
                 targets: 0,
                 data: "description",
-                width: "70%",
+                width: "60%",
                 orderable: false
             }, {
                 targets: 1,
                 data: 'createdBy',
-                width: "14%",
+                width: "16%",
                 orderable: false
             }, {
                 targets: 2,
@@ -25,7 +25,7 @@ function ActivityTable() {
 
                     return moment(dateCreated).tz("America/Vancouver").format('MMM D, YYYY, h:mm:ss A');
                 },
-                width: "16%"
+                width: "24%"
             }
         ]
     });

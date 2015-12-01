@@ -13,6 +13,7 @@ var EditPatientFormDialog = require('../components/patientDetail/patientInfoSect
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
 var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
+var AddTasksDialog = require('../components/patientDetail/treatmentSection/AddTasksDialog');
 var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
 var EditGroupProviderFormDialog = require('../components/patientDetail/teamSection/EditGroupProviderFormDialog');
@@ -30,6 +31,7 @@ function PatientDetailPage() {
         addEmailDialogSelector: '#add-email-form',
         deletePatientDialogSelector: '#delete-patient-form',
         addTreatmentDialogSelector: '#treatment-form',
+        addTaskDialogSelector: '#add-tasks-dialog',
         treatmentCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
         editGroupProviderDialogSelector: '#edit-group-provider-form',
@@ -58,6 +60,10 @@ function PatientDetailPage() {
             event: 'showAddTreatmentDialog',
             dialog: AddTreatmentFormDialog
         }, {
+            selector: 'addTaskDialogSelector',
+            event: 'showAddTasksDialog',
+            dialog: AddTasksDialog
+        }, {
             selector: 'treatmentCodeDialogSelector',
             event: 'showGenerateCodeDialog',
             dialog: TreatmentCodeDialog
@@ -76,12 +82,18 @@ function PatientDetailPage() {
         }
     ]);
 
-    this.initTreatmentTabs = function () {
+    this.initTreatmentSection = function () {
         var me = this;
 
-        var treatmentPanelOnce = _.once(function(selector) {
-            TreatmentPanel.attachTo(selector);
-        });
+        this.select('tabsContainerSelector').show();
+
+        _.once(function() {
+            TreatmentPanel.attachTo(me.select('tabsContainerSelector'));
+        })();
+    };
+
+    this.initTreatmentTabs = function () {
+        var me = this;
 
         this.select('tabsContainerSelector').tabs({
             cache: true,
@@ -105,12 +117,19 @@ function PatientDetailPage() {
             load: function (e, ui) {
                 Utility.progress(false);
 
-                me.select('tabsContainerSelector').show();
-
-                treatmentPanelOnce(ui.panel.context);
                 Treatment.attachTo(ui.panel);
+
+                me.initTreatmentSection();
             }
         });
+
+        if (!this.select('tabTitleSelector').length) {
+            this.initTreatmentSection();
+        }
+    };
+
+    this.onAddTasksSuccess = function () {
+        this.updateTreatment();
     };
 
     this.onEditSurgeryDateSuccess = function (e, data) {
@@ -149,9 +168,12 @@ function PatientDetailPage() {
 
     this.updateTreatmentUrl = function ($activeTab, param) {
         var oldUrl = $activeTab.find('a').attr('href');
-        var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
 
-        $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
+        if (param) {
+            var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
+
+            $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
+        }
     };
 
     this.teardownTreatment = function ($activeTab) {
@@ -161,6 +183,7 @@ function PatientDetailPage() {
     };
 
     this.after('initialize', function () {
+        this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
         this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
 

@@ -12,7 +12,8 @@ function Treatment() {
         subTabsContainerSelector: '.sub-tabs',
 
         treatmentToolListSelector: "#treatment-tool",
-        notifyButtonSelector: "#notifyTasks",
+        addTaskButtonSelector: '#addTasks',
+        notifyButtonSelector: '#notifyTasks',
         generateCodeButtonSelector: '#generateCode',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
@@ -86,19 +87,36 @@ function Treatment() {
         };
     };
 
+    this.onAddTaskButtonClicked = function (e) {
+        e.preventDefault();
+
+        this.trigger('showAddTasksDialog', _.extend(this.getBasicIds(), {
+            currentSurgeryDate: this.select('surgeryDateHiddenSelector').text().trim()
+        }));
+    };
+
     this.onGenerateCodeButtonClicked = function (e) {
         e.preventDefault();
 
         this.trigger('showGenerateCodeDialog', this.getBasicIds());
     };
 
+    this.getTaskSection = function () {
+        return flight.registry.findInstanceInfoByNode(this.taskNode)[0].instance;
+    };
+
     this.onNotifyButtonClicked = function() {
         var basicIds = this.getBasicIds();
+        var activeCount = this.getTaskSection().getActiveItemCount();
 
         $.ajax({
             url: URLs.NOTIFY_TREATMENT_TASKS.format(basicIds.patientId, basicIds.medicalRecordId)
         }).done(function () {
-            Notifications.showFadeOutMsg(STRINGs.SEND_NOTIFY_EMAIL_SUCCESS);
+            Notifications.showFadeOutMsg(
+                activeCount === 1 ?
+                STRINGs.SEND_NOTIFY_ONE_TASKS_SUCCESS :
+                STRINGs.SEND_NOTIFY_TASKS_SUCCESS
+            );
         });
     };
 
@@ -197,6 +215,7 @@ function Treatment() {
         this.initSubTabs();
 
         this.on('click', {
+            addTaskButtonSelector: this.onAddTaskButtonClicked,
             notifyButtonSelector: this.onNotifyButtonClicked,
             generateCodeButtonSelector: this.onGenerateCodeButtonClicked,
             moreDropdownButtonSelector: this.onMoreButtonClicked,
