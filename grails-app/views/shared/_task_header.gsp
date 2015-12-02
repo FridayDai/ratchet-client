@@ -3,7 +3,7 @@
         <div class="toolbar">
             <div class="pull-left">
                 <a href="/" class="logo">
-                    <img src="${assetPath(src: 'ratchet_health_logo.png')}">
+                    <img src="${assetPath(src: 'ratchet_health_logo.png', absolute: true)}">
                 </a>
             </div>
         </div>
@@ -11,6 +11,9 @@
     <div class="info-container">
         <div class="title">${Task.title} Results</div>
         <div class="sub-info-panel">
+            <g:if test="${!download}">
+                <div class="download"><g:link uri="/task/downloadPDF.pdf">↓Download PDF</g:link></div>
+            </g:if>
             <div class="patient-info">
                 <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
                 |

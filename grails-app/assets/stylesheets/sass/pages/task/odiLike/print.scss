@@ -53,6 +53,7 @@
 }
 
 #main {
+    display:inline-block;
     margin-top: 132px;
     padding: 20px 20px 0;
     border-width: 15px;
@@ -126,3 +127,7 @@ body {
     }
 }
 
+
+.download {
+    display: none;
+}

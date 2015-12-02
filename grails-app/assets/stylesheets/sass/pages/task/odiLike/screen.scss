@@ -67,3 +67,13 @@ body {
     }
 }
 
+.download {
+    display: inline-block;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    a {
+        color: #7b8994;
+    }
+}
+
