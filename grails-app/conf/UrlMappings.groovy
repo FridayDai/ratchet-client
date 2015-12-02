@@ -68,6 +68,8 @@ class UrlMappings {
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/send-mail"(controller: "task", action: "sendTaskEmail")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/result"(controller: "task", action: "getTaskResult")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/delete"(controller: "task", action: "deleteTask")
+        //Download PDF
+        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/download.pdf"(controller: "task", action: "downloadPDF")
 
         //Patient team
         "/patients/$patientId?/emergency-contact"(controller: "team") {

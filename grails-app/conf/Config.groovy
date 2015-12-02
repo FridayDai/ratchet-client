@@ -28,7 +28,8 @@ grails.mime.types = [ // the first one is the default format
                       rss          : 'application/rss+xml',
                       text         : 'text/plain',
                       hal          : ['application/hal+json', 'application/hal+xml'],
-                      xml          : ['text/xml', 'application/xml']
+                      xml          : ['text/xml', 'application/xml'],
+                      pdf          : 'application/pdf'
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
@@ -84,6 +85,9 @@ grails.hibernate.cache.queries = false
 grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
+
+//Config wkhtmltopdf plugin
+grails.plugin.wkhtmltox.binary = System.getProperty("WKHTMLTOPDF_DIR")?:"/usr/local/bin/wkhtmltopdf"
 
 environments {
     development {
