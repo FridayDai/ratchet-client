@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="answer-container">
+        <div class="answer-container clear">
             <div class="answer-list">
                 <div class="answer-box">
                     <div class="answer-title">

@@ -8,6 +8,10 @@ html, body, div, span {
     font: $base-font-utility;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .sticky-header {
     background-color: white;
     border-bottom: 2px solid #335d70;
@@ -47,7 +51,7 @@ html, body, div, span {
 
     .questionnaire-info {
         position: absolute;
-        top: -13px;
+        bottom: -13px;
         right: 0;
 
         .status,
@@ -68,9 +72,17 @@ html, body, div, span {
 
         .score {
             display: inline-block;
-            border-left: 2px solid #ddd;
+            position: relative;
             padding-left: 20px;
             text-align: center;
+        }
+
+        .divider {
+            height: 33px;
+            position: absolute;
+            left: 0;
+            top: 7px;
+            border-left: 1px solid #ddd;
         }
     }
 }
@@ -79,4 +91,14 @@ html, body, div, span {
     margin-top: 143px;
     border: 20px solid #e6e8e8;
     padding: 30px;
+}
+
+.download {
+    display: inline-block;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    a {
+        color: #7b8994;
+    }
 }

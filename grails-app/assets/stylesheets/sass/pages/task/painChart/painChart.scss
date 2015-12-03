@@ -19,7 +19,7 @@ body {
 
     .draw-board {
         position: relative;
-        width: 600px;
+        width: 700px;
         padding-bottom: 30px;
         margin: 0 auto;
     }
@@ -29,7 +29,7 @@ body {
     }
 
     .chart-left {
-        margin-right: 130px;
+        margin-right: 232px;
     }
 
     .chart-title {
@@ -43,7 +43,7 @@ body {
         position: absolute;
         width: 250px;
         top: 570px;
-        left: 196px;
+        left: 243px;
         font-size: 12px;
     }
 
@@ -81,7 +81,8 @@ body {
 
 .answer-list {
     display: inline-block;
-    width: 48%;
+    float: left;
+    width: 50%;
     padding: 20px 0;
     vertical-align: top;
 

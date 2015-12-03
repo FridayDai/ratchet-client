@@ -1,3 +1,4 @@
+<%@ page import="com.ratchethealth.client.RatchetConstants" %>
 <div class="sticky-header">
     <div role="banner" class="header">
         <div class="toolbar">
@@ -23,8 +24,9 @@
                 <span class="status">Completed - <g:formatDate date="${new java.util.Date(Task.completeTime)}"
                                            timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                            format="MMM d, yyyy" /></span>
-                <g:if test="${!mixedResult}">
+                <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(Task.type)}">
                     <span class="score">
+                        <div class="divider"></div>
                         <div class="score-num">${Task.score}</div>
                         <div class="score-des">Total Result</div>
                     </span>
