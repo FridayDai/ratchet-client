@@ -20,17 +20,24 @@
 
     .draw-board {
         position: relative;
-        width: 600px;
-        padding-bottom: 16px;
+        min-width: 685px;
+        max-width: 992px;
+        padding-bottom: 15px;
         margin: 0 auto;
     }
 
     .chart-content {
         display: inline-block;
+        width: 40%;
+        float: left;
+        text-align: center;
     }
 
-    .chart-left {
-        margin-right: 130px;
+    .chart-content-middle {
+        display: inline-block;
+        width: 20%;
+        float: left;
+        text-align: center;
     }
 
     .chart-title {
@@ -41,25 +48,36 @@
     }
 
     .chart-direction {
-        position: absolute;
+        display: inline-block;
+        position: relative;
+        top: 450px;
         width: 250px;
-        top: 442px;
-        left: 172px;
         font-size: 12px;
+        text-align: left;
     }
 
     .group-direction {
         display: inline-block;
+        position: relative;
         width: 86px;
         padding: 3px 0;
         font-size: 11px;
     }
 
+    .border-background {
+        display: inline-block;
+        border: 6px solid $base-color-red;
+        width: 0;
+        height: 0;
+    }
+
     .icon-direction {
         display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 3px;
         padding: 0 2px;
-        width: 7px;
-        background-color: $base-color-red;
+        width: 12px;
         color: $base-color-white;
         font-size: 10px;
         text-align: center;
