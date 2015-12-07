@@ -82,6 +82,16 @@
         font-size: 10px;
         text-align: center;
     }
+
+    .svg-text {
+        width: 10px;
+        height: 10px;
+    }
+
+    .direction-text {
+        text-anchor: middle;
+        font-size: 12px;
+    }
 }
 
 .active-part {
@@ -101,7 +111,8 @@
 
 .answer-list {
     display: inline-block;
-    width: 48%;
+    float: left;
+    width: 50%;
     padding: 12px 0 0;
     vertical-align: top;
 

@@ -12,6 +12,10 @@
         height: 50px;
         border-bottom: 4px solid $result-main-color;
 
+        .toolbar {
+            visibility: hidden;
+        }
+
         .logo {
             margin: 29px 0 0 25px;
         }
@@ -55,7 +59,7 @@
 #main {
     margin-top: 118px;
     padding: 20px;
-    border-width: 15px;
+    border: 15px solid $base-color-white;
 }
 
 body {

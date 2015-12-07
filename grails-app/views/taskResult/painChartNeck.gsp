@@ -23,45 +23,7 @@
                 </div>
 
                 <div class="chart-content-middle">
-                    <div class="chart-direction">
-                        <div>Symptoms:</div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">N</span>
-                            <label>Numbness</label>
-                        </div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">A</span>
-                            <label>Ache</label>
-                        </div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">S</span>
-                            <label>Stabbing</label>
-                        </div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">B</span>
-                            <label>Burning</label>
-                        </div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">C</span>
-                            <label>Cramping</label>
-                        </div>
-
-                        <div class="group-direction">
-                            <span class="border-background"></span>
-                            <span class="icon-direction">P</span>
-                            <label>Pins & Needles</label>
-                        </div>
-                    </div>
+                    <g:render template="/taskResult/template/symptomsDirection"></g:render>
                 </div>
 
                 <div class="chart-content">
