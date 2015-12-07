@@ -72,7 +72,8 @@ class TaskController extends BaseController {
         def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
 
         def view = ''
-        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
+        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI
+                || RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_NDI ) {
             view = '/taskResult/ODILike'
         } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK) {
             view = '/taskResult/painChartNeck'
