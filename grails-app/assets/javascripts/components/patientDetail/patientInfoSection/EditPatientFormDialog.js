@@ -59,7 +59,7 @@ function EditPatientFormDialog() {
         this.patientId = data.patientId;
         this.clientId = data.clientId;
 
-        if (!this.footerRendered) {
+        if (!this.footerRendered && data.accountIsAdmin) {
             this.footerRendered = true;
 
             $(FOOTER_PANEL)

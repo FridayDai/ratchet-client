@@ -41,7 +41,8 @@ function PatientInfoSection() {
             lastName: this.select('lastNameStaticSelector').text().trim(),
             email: this.originalEmail,
             emailStatus: this.select('emailStatusSelector').attr("value"),
-            phoneNumber: this.select('phoneNumberStaticSelector').text().trim()
+            phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
+            accountIsAdmin: this.$node.data('accountIsAdmin')
         };
     };
 
