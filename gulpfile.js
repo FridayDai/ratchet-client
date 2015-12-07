@@ -79,7 +79,7 @@ gulp.task('styles', function() {
 });
 
 //watch
-gulp.task('live', function() {
+gulp.task('live', ['webpack', 'styles'], function() {
     livereload.listen();
 
     //watch .scss files
