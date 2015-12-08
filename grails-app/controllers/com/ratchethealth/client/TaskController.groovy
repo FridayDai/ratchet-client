@@ -65,11 +65,15 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
+        request.session.setAttribute('patientId', patientId)
+        request.session.setAttribute('medicalRecordId', medicalRecordId)
+        request.session.setAttribute('taskId', taskId)
 
         def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
 
         def view = ''
-        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
+        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI
+                || RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_NDI ) {
             view = '/taskResult/ODILike'
         } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK) {
             view = '/taskResult/painChartNeck'
@@ -85,6 +89,35 @@ class TaskController extends BaseController {
                 Task       : result,
                 mixedResult: mixedResult
         ]
+    }
+
+    def downloadPDF() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = request.session.patientId
+        def medicalRecordId = request.session.medicalRecordId
+        def taskId = request.session.taskId
+
+        def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+
+        def view = ''
+        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
+            view = '/taskResult/ODILike'
+        } else {
+            render status: 404
+            return
+        }
+
+        render( filename: "${patientId}_${taskId}.pdf",
+                view: view,
+                model: [Task: result,
+                        'download' : true],
+                marginLeft: 2,
+                marginTop: 0,
+                marginBottom: 0,
+                marginRight: 2,
+                headerSpacing: 0
+        )
     }
 
     def deleteTask() {

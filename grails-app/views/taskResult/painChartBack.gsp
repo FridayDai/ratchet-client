@@ -1,6 +1,6 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants" %>
-<g:set var="cssPath" value="task/painChart/painChart"/>
-<g:set var="printSheetPath" value="task/painChart/painChartPrint"/>
+<g:set var="cssPath" value="task/painChart/painChart.css"/>
+<g:set var="printSheetPath" value="task/painChart/painChartPrint.css"/>
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/painChart.bundle.js"/>
 
@@ -14,50 +14,20 @@
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
             <div class="answer-title">PAIN DRAWING</div>
-            <div id="draw-board" class="draw-board">
-                <span class="chart-content chart-left">
+            <div id="draw-board" class="draw-board clear">
+                <span class="chart-content">
                     <div class="chart-title">Front</div>
                     <g:render template="/taskResult/template/backFront"></g:render>
                 </span>
+
+                <div class="chart-content-middle">
+                    <g:render template="/taskResult/template/symptomsDirection"></g:render>
+                </div>
 
                 <span class="chart-content">
                     <div class="chart-title">Back</div>
                     <g:render template="/taskResult/template/backBack"></g:render>
                 </span>
-
-                <div class="chart-direction">
-                    <div>Symptoms:</div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">N</span>
-                        <label>Numbness</label>
-                    </div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">A</span>
-                        <label>Ache</label>
-                    </div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">S</span>
-                        <label>Stabbing</label>
-                    </div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">B</span>
-                        <label>Burning</label>
-                    </div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">C</span>
-                        <label>Cramping</label>
-                    </div>
-
-                    <div class="group-direction">
-                        <span class="icon-direction">P</span>
-                        <label>Pins & Needles</label>
-                    </div>
-                </div>
             </div>
 
             <div id="svg-choice-result">
@@ -71,7 +41,7 @@
             </div>
         </div>
 
-        <div class="answer-container">
+        <div class="answer-container clear">
             <div class="answer-list">
                 <div class="answer-box">
                     <div class="answer-title">

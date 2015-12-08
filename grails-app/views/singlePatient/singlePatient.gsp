@@ -11,7 +11,7 @@
 
     <body>
     <div class="content">
-        <div class="patient-detail">
+        <div class="patient-detail" data-account-is-admin="${AccountIsAdmin}">
             <div class="info-container">
                 <div class="info first-line clear">
                     <div class="pull-left name">

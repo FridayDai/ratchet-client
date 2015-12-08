@@ -9,10 +9,15 @@
     border-bottom: 1px solid #335d70;
 
     .header {
+        height: 50px;
         border-bottom: 4px solid $result-main-color;
 
+        .toolbar {
+            visibility: hidden;
+        }
+
         .logo {
-            margin: 15px 0 0 25px;
+            margin: 29px 0 0 25px;
         }
 
         img {
@@ -54,10 +59,14 @@
 #main {
     margin-top: 118px;
     padding: 20px;
-    border-width: 15px;
+    border: 15px solid $base-color-white;
 }
 
 body {
     margin-bottom: 0;
     -webkit-print-color-adjust: exact;
+}
+
+.download {
+    display: none;
 }

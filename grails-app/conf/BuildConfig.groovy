@@ -81,7 +81,7 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.23"
         //runtime ":jquery:1.11.1"
         test ':code-coverage:2.0.3-3'
-
+        compile ":wkhtmltopdf:0.1.10"
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"

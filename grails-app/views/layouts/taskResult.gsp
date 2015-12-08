@@ -9,16 +9,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><g:layoutTitle default="Grails"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png')}" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
-    <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
+    <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png', absolute: true)}" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png', absolute: true)}">
+    <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png', absolute: true)}">
     <!--[if lte IE 8]><asset:stylesheet src="css/ie.css"/><![endif]-->
-    <g:if test="${cssPath}">
-        <asset:stylesheet src="css/pages/${cssPath}" media="screen"/>
+    <g:if test="${!download}">
+        <g:if test="${cssPath}">
+            <link rel="stylesheet" href="${assetPath(src: "css/pages/${cssPath}", absolute: true)}" media="screen" />
+        </g:if>
+        <g:if test="${printSheetPath}">
+            <link rel="stylesheet" href="${assetPath(src: "css/pages/${printSheetPath}", absolute: true)}" media="print" />
+        </g:if>
     </g:if>
-    <g:if test="${printSheetPath}">
-        <asset:stylesheet src="css/pages/${printSheetPath}" media="print"/>
-    </g:if>
+    <g:else>
+        <link rel="stylesheet" href="${assetPath(src: "css/pages/${printSheetPath}", absolute: true)}" media="screen" />
+    </g:else>
     <g:layoutHead/>
 </head>
 
