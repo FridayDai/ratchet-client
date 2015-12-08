@@ -42,7 +42,7 @@ function changePasswordFormDialog() {
 
     this.after('initialize', function() {
         this.on('formSuccess', function() {
-            Notifications.showFadeOutMsg(STRINGs.PASSWORD_CHANGED)
+            Notifications.showFadeOutMsg(STRINGs.PASSWORD_CHANGED);
         });
     });
 }
