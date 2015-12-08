@@ -15,6 +15,9 @@ module.exports = {
     // Task
     TASK_DELETE: "{0} has been deleted.",
 
+    //profile
+    PASSWORD_CHANGED: "Password Changed",
+
     //ERROR
     ERROR_TITLE: "ERROR",
     ERROR_TITLE_404: "ERROR : 404",
