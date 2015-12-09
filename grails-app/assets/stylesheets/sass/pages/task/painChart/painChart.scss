@@ -122,6 +122,16 @@ body {
         padding-bottom: 20px;
     }
 
+    .rc-checkbox {
+        position: relative;
+        display: inline-block;
+        box-sizing: content-box;
+        width: 16px;
+        height: 16px;
+        border: 2px solid $base-font-color;
+        cursor: default;
+    }
+
     .answer-line {
         width: 85%;
         padding: 3px 0;
