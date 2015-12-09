@@ -65,11 +65,13 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
-        request.session.setAttribute('patientId', patientId)
+
         request.session.setAttribute('medicalRecordId', medicalRecordId)
         request.session.setAttribute('taskId', taskId)
 
         def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+
+        request.session.setAttribute('patientId', result.patientId)
 
         def view = ''
         if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI
