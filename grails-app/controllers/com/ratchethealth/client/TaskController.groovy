@@ -68,10 +68,11 @@ class TaskController extends BaseController {
 
         request.session.setAttribute('medicalRecordId', medicalRecordId)
         request.session.setAttribute('taskId', taskId)
+        request.session.setAttribute('patientId', patientId)
 
         def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
 
-        request.session.setAttribute('patientId', result.patientId)
+        request.session.setAttribute('patientIdentity', result.patientId)
 
         def view = ''
         if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI
@@ -99,6 +100,7 @@ class TaskController extends BaseController {
         def patientId = request.session.patientId
         def medicalRecordId = request.session.medicalRecordId
         def taskId = request.session.taskId
+        def patientIdentity = request.session.patientIdentity
 
         def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
 
@@ -110,7 +112,7 @@ class TaskController extends BaseController {
             return
         }
 
-        render( filename: "${patientId}_${taskId}.pdf",
+        render( filename: "${patientIdentity}_${taskId}.pdf",
                 view: view,
                 model: [Task: result,
                         'download' : true],
