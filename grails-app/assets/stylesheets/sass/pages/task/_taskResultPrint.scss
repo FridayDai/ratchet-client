@@ -53,14 +53,18 @@
             font-size: 14px;
             font-weight: 400;
         }
+
+        .divider {
+            height: 25px;
+        }
     }
 }
 
 #main {
     display:inline-block;
-    margin-top: 118px;
-    padding: 20px;
-    border: 15px solid $base-color-white;
+    margin-top: 145px;
+    padding: 0 15px;
+    border: 0;
 }
 
 body {

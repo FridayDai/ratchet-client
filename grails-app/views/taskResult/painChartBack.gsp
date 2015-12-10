@@ -1,8 +1,6 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants" %>
 <g:set var="cssPath" value="task/painChart/painChart.css"/>
 <g:set var="printSheetPath" value="task/painChart/painChartPrint.css"/>
-<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
-<g:set var="scriptPath" value="dist/painChart.bundle.js"/>
 
 <g:applyLayout name="taskResult">
     <html>
@@ -17,7 +15,7 @@
             <div id="draw-board" class="draw-board clear">
                 <span class="chart-content">
                     <div class="chart-title">Front</div>
-                    <g:render template="/taskResult/template/backFront"></g:render>
+                    <g:render template="/taskResult/template/backFront" model="['taskResult': mixedResult]"></g:render>
                 </span>
 
                 <div class="chart-content-middle">
@@ -26,18 +24,8 @@
 
                 <span class="chart-content">
                     <div class="chart-title">Back</div>
-                    <g:render template="/taskResult/template/backBack"></g:render>
+                    <g:render template="/taskResult/template/backBack" model="['taskResult': mixedResult]"></g:render>
                 </span>
-            </div>
-
-            <div id="svg-choice-result">
-                <input type="hidden" id="Front-Right-Leg-hidden" class="Front-Right-Leg" name="choices.0" value="${mixedResult['0']}"/>
-                <input type="hidden" id="Front-Left-Leg-hidden" class="Front-Left-Leg" name="choices.1" value="${mixedResult['1']}"/>
-
-                <input type="hidden" id="Back-hidden" class="Back" name="choices.2" value="${mixedResult['2']}"/>
-                <input type="hidden" id="Buttock-hidden" class="Buttock" name="choices.3" value="${mixedResult['3']}"/>
-                <input type="hidden" id="Back-Right-Leg-hidden" class="Back-Right-Leg" name="choices.4" value="${mixedResult['4']}"/>
-                <input type="hidden" id="Back-Left-Leg-hidden" class="Back-Left-Leg" name="choices.5" value="${mixedResult['5']}"/>
             </div>
         </div>
 
@@ -49,15 +37,15 @@
                     </div>
                     <div class="answer-line">
                         Neck pain
-                        <span class="pain-percent">${mixedResult['6']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['6']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Shoulder pain
-                        <span class="pain-percent">${mixedResult['7']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['7']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Arm pain
-                        <span class="pain-percent">${mixedResult['8']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['8']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         The user has no neck, shoulder or arm pain
