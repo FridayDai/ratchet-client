@@ -4,12 +4,13 @@
     margin: 0cm;
 }
 
-body {
+html,body {
     margin-bottom: 0;
+    overflow: hidden;
 }
 
 .question-list {
-    margin: 0 0 15px 20px;
+    margin: 0 0 10px 12px;
 }
 
 .question {
@@ -23,7 +24,7 @@ body {
     margin-top: 3px;
 
     .text {
-        font-size: 11px;
+        font-size: 10px;
     }
 }
 
