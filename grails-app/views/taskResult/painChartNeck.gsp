@@ -11,7 +11,7 @@
     <body>
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
-            <div class="answer-title">PAIN DRAWING</div>
+            <div class="answer-title">Pain Drawing</div>
 
             <div id="draw-board" class="draw-board clear">
 
@@ -35,7 +35,7 @@
             <div class="answer-list">
                 <div class="answer-box">
                     <div class="answer-title">
-                        PERCENTAGE OF PAIN
+                        Percentage of pain
                     </div>
 
                     <div class="answer-line">
@@ -71,7 +71,7 @@
             <div class="answer-list list-right">
                 <div class="answer-box">
                     <div class="answer-title">
-                        NECK PAIN
+                        Neck Pain
                     </div>
 
                     <div class="answer-line">
@@ -87,7 +87,7 @@
 
                 <div class="answer-box">
                     <div class="answer-title">
-                        SHOULDER PAIN
+                        Shoulder Pain
                     </div>
 
                     <div class="answer-line">
@@ -103,7 +103,7 @@
 
                 <div class="answer-box">
                     <div class="answer-title">
-                        ARM PAIN
+                        Arm Pain
                     </div>
 
                     <div class="answer-line">
