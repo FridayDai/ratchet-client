@@ -37,15 +37,15 @@
                     </div>
                     <div class="answer-line">
                         Back Pain
-                        <span class="pain-percent">${mixedResult['6']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['6']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Buttock Pain
-                        <span class="pain-percent">${mixedResult['7']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['7']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Leg Pain
-                        <span class="pain-percent">${mixedResult['8']}%</span>
+                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['8']}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         The user has no back, buttock or leg pain
