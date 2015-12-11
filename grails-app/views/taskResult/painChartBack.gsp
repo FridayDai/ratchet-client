@@ -13,7 +13,7 @@
     <body>
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
-            <div class="answer-title">PAIN DRAWING</div>
+            <div class="answer-title">Pain Drawing</div>
             <div id="draw-board" class="draw-board clear">
                 <span class="chart-content">
                     <div class="chart-title">Front</div>
@@ -45,22 +45,22 @@
             <div class="answer-list">
                 <div class="answer-box">
                     <div class="answer-title">
-                        PERCENTAGE OF PAIN
+                        Percentage of pain
                     </div>
                     <div class="answer-line">
-                        Neck pain
+                        Back Pain
                         <span class="pain-percent">${mixedResult['6']}%</span>
                     </div>
                     <div class="answer-line">
-                        Shoulder pain
+                        Buttock Pain
                         <span class="pain-percent">${mixedResult['7']}%</span>
                     </div>
                     <div class="answer-line">
-                        Arm pain
+                        Leg Pain
                         <span class="pain-percent">${mixedResult['8']}%</span>
                     </div>
                     <div class="answer-line">
-                        The user has no neck, shoulder or arm pain
+                        The user has no back, buttock or leg pain
                         <label>
                             <g:if test="${mixedResult['9']}">
                                 <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked />
@@ -77,40 +77,40 @@
             <div class="answer-list list-right">
                 <div class="answer-box">
                     <div class="answer-title">
-                        NECK PAIN
+                        Back Pain
                     </div>
                     <div class="answer-line">
-                        Average level of neck pain
+                        Average level of back pain
                         <span>${mixedResult['10']} / 10</span>
                     </div>
                     <div class="answer-line">
-                        Frequency of neck pain
+                        Frequency of back pain
                         <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['11']?.toInteger()]}</span>
                     </div>
                 </div>
                 <div class="answer-box">
                     <div class="answer-title">
-                        SHOULDER PAIN
+                        Buttock Pain
                     </div>
                     <div class="answer-line">
-                        Average level of shoulder pain
+                        Average level of buttock pain
                         <span>${mixedResult['12']} / 10</span>
                     </div>
                     <div class="answer-line">
-                        Frequency of shoulder pain
+                        Frequency of buttock pain
                         <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['13']?.toInteger()]}</span>
                     </div>
                 </div>
                 <div class="answer-box">
                     <div class="answer-title">
-                        ARM PAIN
+                        Leg Pain
                     </div>
                     <div class="answer-line">
-                        Average level of arm pain
+                        Average level of leg pain
                         <span>${mixedResult['14']} / 10</span>
                     </div>
                     <div class="answer-line">
-                        Frequency of arm pain
+                        Frequency of leg pain
                         <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['15']?.toInteger()]}</span>
                     </div>
                 </div>
