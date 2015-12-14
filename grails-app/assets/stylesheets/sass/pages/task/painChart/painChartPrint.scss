@@ -11,8 +11,19 @@
     font-style: normal;
 }
 
+.sticky-header {
+    .questionnaire-info {
+        top: 1px;
+
+        .status {
+            padding-right: 0;
+        }
+    }
+}
+
 #main {
     padding: 0 40px;
+    width: 100%;
 }
 
 .pain-draw {
@@ -63,7 +74,7 @@
     .group-direction {
         display: inline-block;
         position: relative;
-        width: 86px;
+        width: 100px;
         padding: 3px 0;
         font-size: 11px;
     }

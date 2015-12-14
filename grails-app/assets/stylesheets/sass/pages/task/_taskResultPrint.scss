@@ -1,11 +1,7 @@
 @import 'taskResult';
 
-@page {
-    margin: 0cm;
-}
-
 .sticky-header {
-    width: 780px;
+    position: static;
     border-bottom: 1px solid #335d70;
 
     .header {
@@ -62,7 +58,7 @@
 
 #main {
     display:inline-block;
-    margin-top: 145px;
+    margin-top: 20px;
     padding: 0 15px;
     border: 0;
 }
