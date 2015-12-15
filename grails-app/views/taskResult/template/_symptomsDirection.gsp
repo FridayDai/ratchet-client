@@ -5,7 +5,7 @@
         <svg class="svg-text" viewBox="0 0 12 12" width="12" height="12">
             <rect height="12" width="12" fill="#ff0000"></rect>
             <text x="6" y="11" fill="#ffffff" class="direction-text">N</text>
-        </svg>
+        </svg>&nbsp;
         <label>Numbness</label>
     </div>
 
