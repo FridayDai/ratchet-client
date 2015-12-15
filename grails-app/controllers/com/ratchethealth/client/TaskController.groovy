@@ -68,29 +68,13 @@ class TaskController extends BaseController {
 
         request.session.setAttribute('medicalRecordId', medicalRecordId)
         request.session.setAttribute('taskId', taskId)
+        request.session.setAttribute('patientId', patientId)
 
-        def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+        def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
-        request.session.setAttribute('patientId', result.patientId)
-
-        def view = ''
-        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI
-                || RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_NDI ) {
-            view = '/taskResult/ODILike'
-        } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK) {
-            view = '/taskResult/painChartNeck'
-        } else if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_BACK) {
-            view = '/taskResult/painChartBack'
-        } else {
-            render status: 404
-            return
-        }
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render view: view, model: [
-                Task       : result,
-                mixedResult: mixedResult
-        ]
+        render view: view, model: [Task: result, mixedResult: mixedResult]
     }
 
     def downloadPDF() {
@@ -100,26 +84,46 @@ class TaskController extends BaseController {
         def medicalRecordId = request.session.medicalRecordId
         def taskId = request.session.taskId
 
-        def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+        def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
-        def view = ''
-        if (RatchetConstants.TOOL_TYPE[result.type] == RatchetConstants.TOOL_NAME_ODI) {
-            view = '/taskResult/ODILike'
-        } else {
-            render status: 404
-            return
-        }
+        def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render( filename: "${patientId}_${taskId}.pdf",
+        render( filename: "${result.patientId}_${taskId}.pdf",
                 view: view,
-                model: [Task: result,
-                        'download' : true],
+                model: [Task: result, mixedResult: mixedResult, 'download' : true],
                 marginLeft: 2,
                 marginTop: 0,
                 marginBottom: 0,
                 marginRight: 2,
                 headerSpacing: 0
         )
+    }
+
+    def getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId) {
+        def result = taskService.getResult(token, clientId, patientId, medicalRecordId, taskId)
+
+        def view = ''
+
+        switch (RatchetConstants.TOOL_TYPE[result.type]) {
+            case RatchetConstants.TOOL_NAME_ODI:
+            case RatchetConstants.TOOL_NAME_NDI:
+                view = '/taskResult/ODILike'
+                break
+
+            case RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_BACK:
+                view = '/taskResult/painChartBack'
+                break
+
+            case RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK:
+                view = '/taskResult/painChartNeck'
+                break
+
+            default:
+                render status: 404
+                return
+        }
+
+        [result, view]
     }
 
     def deleteTask() {

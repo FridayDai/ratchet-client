@@ -5,7 +5,7 @@
 }
 
 .sticky-header {
-    width: 780px;
+    position: static;
     border-bottom: 1px solid #335d70;
 
     .header {
@@ -53,14 +53,18 @@
             font-size: 14px;
             font-weight: 400;
         }
+
+        .divider {
+            height: 25px;
+        }
     }
 }
 
 #main {
     display:inline-block;
-    margin-top: 118px;
-    padding: 20px;
-    border: 15px solid $base-color-white;
+    margin-top: 20px;
+    padding: 0 15px;
+    border: 0;
 }
 
 body {

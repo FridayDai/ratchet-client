@@ -2,7 +2,7 @@
      x="0px" y="0px"
      width="232px" height="613px" viewBox="0 0 232 613" enable-background="new 0 0 232 613" xml:space="preserve">
     <g id="back-back-body">
-        <path class="body" fill="#DFB28B" d="M2.834,328.127c1.732-1.539,4.234-5.387,6.35-11.928c2.116-6.541,11.156-9.617,13.656-14.618
+        <path class="body" fill="<g:if test="${taskResult['9']}">#e6e6e6</g:if><g:else>#DFB28B</g:else>" d="M2.834,328.127c1.732-1.539,4.234-5.387,6.35-11.928c2.116-6.541,11.156-9.617,13.656-14.618
 	c2.502-5.002,4.426-20.393,4.618-36.937c0.192-16.544,3.463-35.589,6.348-43.861c2.886-8.272,5.772-17.313,4.81-27.702
 	c-0.961-10.388-0.576-20.776,0.77-26.163c1.348-5.387,1.924-5.001-0.191-15.967c-2.117-10.966,2.115-23.085,8.655-34.628
 	c6.541-11.542,20.585-11.735,24.239-14.428c3.656-2.693,10.773-4.232,17.507-8.08c6.733-3.848,11.157-5.001,11.157-7.694
@@ -52,18 +52,30 @@
 
     <g id="back-back-part">
         <g class="part-group" data-parameter="[98,125]">
-            <path id="Back" class="human-part" opacity="0.6" fill="none" d="M132.691,86.724c0,0-6.317,5.098-15.947,5.765c-9.629,0.667-15.948-5.765-15.948-5.765
+            <path id="Back" class="<g:if test="${!taskResult['9'] && taskResult['2']}">active-part</g:if><g:else>human-part</g:else>" opacity="0.6" fill="<g:if test="${!taskResult['9'] && taskResult['2']}">url('#patternBackBack')</g:if><g:else>none</g:else>" d="M132.691,86.724c0,0-6.317,5.098-15.947,5.765c-9.629,0.667-15.948-5.765-15.948-5.765
 	c0,0.497-0.153,0.941-0.441,1.36l-33.77,104.145c1.42-1.42,9.663,25.014,6.252,38.941c-3.41,13.928-3.694,20.75-3.979,23.308
 	c-0.284,2.559-1.421,13.075-2.842,24.729c-0.01,0.084-0.024,0.168-0.035,0.252l50.763,18.364l54.138-18.615
 	c-1.421-11.654-5.969-22.171-6.253-24.729c-0.284-2.558-0.568-9.38-3.979-23.308c-3.411-13.927,4.832-40.361,6.253-38.941
 	L133.132,88.083C132.844,87.665,132.691,87.221,132.691,86.724z"/>
+			<g:each in="${taskResult['2'] == '' ? [] : taskResult['2'].split(',')}" var="symptoms" status="i">
+				<g transform="matrix(1,0,0,1,${98 + Math.floor(i % 2) * 20},${125 + Math.floor(i / 2) * 20})">
+					<rect x="0" y="0" width="14" height="14" fill="#ff0000"></rect>
+					<text x="7" y="11" fill="#ffffff" style="text-anchor: middle; font-size: 13px;">${symptoms}</text>
+				</g>
+			</g:each>
         </g>
         <g class="part-group" data-parameter="[80,300,6,3]">
-            <path id="Buttock" class="human-part part-buttock" opacity="0.6" fill="none" d="M170.539,279.199l0.001,0.008c1.201,9.853,5.044,20.32,3.453,47.716l-0.393,0.24
+            <path id="Buttock" class="part-buttock <g:if test="${!taskResult['9'] && taskResult['3']}">active-part</g:if><g:else>human-part</g:else>" opacity="0.6" fill="<g:if test="${!taskResult['9'] && taskResult['3']}">url('#patternBackBack')</g:if><g:else>none</g:else>" d="M170.539,279.199l0.001,0.008c1.201,9.853,5.044,20.32,3.453,47.716l-0.393,0.24
 	l-56.942,12.742l-57.296-6.253c-2.162-32.229,4.899-43.644,6.275-54.194l51.107,18.364L170.539,279.199z"/>
+			<g:each in="${taskResult['3'] == '' ? [] : taskResult['3'].split(',')}" var="symptoms" status="i">
+				<g transform="matrix(1,0,0,1,${80 + Math.floor(i % 3) * 20 + Math.floor(i / 3) * 6},${300 + Math.floor(i / 3) * 20})">
+					<rect x="0" y="0" width="14" height="14" fill="#ff0000"></rect>
+					<text x="7" y="11" fill="#ffffff" style="text-anchor: middle; font-size: 13px;">${symptoms}</text>
+				</g>
+			</g:each>
         </g>
         <g class="part-group" data-parameter="[126,360,3]">
-            <path id="Back-Right-Leg" class="human-part" opacity="0.6" fill="none" d="M117.431,339.905c0.703,0.854,1.941,3.295,2.34,10.076c0.568,9.664,3.98,19.328,2.843,36.949
+            <path id="Back-Right-Leg" class="<g:if test="${!taskResult['9'] && taskResult['4']}">active-part</g:if><g:else>human-part</g:else>" opacity="0.6" fill="<g:if test="${!taskResult['9'] && taskResult['4']}">url('#patternBackBack')</g:if><g:else>none</g:else>" d="M117.431,339.905c0.703,0.854,1.941,3.295,2.34,10.076c0.568,9.664,3.98,19.328,2.843,36.949
 	c-1.138,17.625,3.979,23.877,3.695,42.922c-0.037,2.449,0.046,4.54,0.206,6.373c1.083,12.423,5.784,12.772,2.069,28.871
 	c-4.264,18.475,0,24.162-0.569,31.551c-0.569,7.391,2.558,25.867,3.411,31.268c0.853,5.4,1.227,24.375,0.975,26.385
 	c-0.252,2.01-2.765,7.035-1.257,11.307c1.508,4.272-0.126,6.533-0.88,14.449s4.272,7.037,4.146,11.561
@@ -75,9 +87,15 @@
 	c0-3.412,1.705-21.604,9.379-53.154c7.674-31.551,0.852-47.467,0.568-52.016c-0.285-4.549-1.706-10.516-1.989-14.779
 	c-0.284-4.264-0.285-25.867,0.568-34.109c0.853-8.244,8.243-21.602,12.791-61.965c0.053-0.469,0.098-0.915,0.148-1.377
 	c0.607-5.577,1.031-10.622,1.3-15.188L117.431,339.905z"/>
+			<g:each in="${taskResult['4'] == '' ? [] : taskResult['4'].split(',')}" var="symptoms" status="i">
+				<g transform="matrix(1,0,0,1,${126 + Math.floor(i % 2) * 20 + Math.floor(i / 2) * 3},${360 + Math.floor(i / 2) * 20})">
+					<rect x="0" y="0" width="14" height="14" fill="#ff0000"></rect>
+					<text x="7" y="11" fill="#ffffff" style="text-anchor: middle; font-size: 13px;">${symptoms}</text>
+				</g>
+			</g:each>
         </g>
         <g class="part-group" data-parameter="[62,360,2]">
-            <path id="Back-Left-Leg" class="human-part" opacity="0.6" fill="none" d="M59.955,333.61c0.212,3.168,0.509,6.528,0.913,10.117
+            <path id="Back-Left-Leg" class="<g:if test="${!taskResult['9'] && taskResult['5']}">active-part</g:if><g:else>human-part</g:else>" opacity="0.6" fill="<g:if test="${!taskResult['9'] && taskResult['5']}">url('#patternBackBack')</g:if><g:else>none</g:else>" d="M59.955,333.61c0.212,3.168,0.509,6.528,0.913,10.117
 	c4.548,40.363,11.938,53.721,12.791,61.965c0.853,8.242,2.558,29.846,2.272,34.109c-0.283,4.264-1.705,10.231-1.988,14.779
 	c-0.284,4.549-5.4,20.465,2.273,52.016c7.675,31.551,9.381,49.742,9.381,53.154c0,3.41-1.706,3.98,0,8.527
 	c1.705,4.549-4.541,14.166-9.19,18.06c-4.649,3.895-6.407,6.91-7.036,8.922c-0.629,2.01-0.377,4.145,1.257,4.145
@@ -89,7 +107,17 @@
 	c0.854-5.4,5.685-23.877,5.117-31.268c-0.568-7.389,1.989-13.076-2.274-31.551c-4.264-18.475,2.558-16.201,2.273-35.244
 	c-0.283-19.045,3.127-25.297,1.99-42.922c-1.137-17.621,1.422-28.137,1.99-37.803c0.365-6.217,1.788-8.432,2.758-9.223
 	L59.955,333.61z"/>
+			<g:each in="${taskResult['5'] == '' ? [] : taskResult['5'].split(',')}" var="symptoms" status="i">
+				<g transform="matrix(1,0,0,1,${62 + Math.floor(i % 2) * 20 + Math.floor(i / 2) * 2},${360 + Math.floor(i / 2) * 20})">
+					<rect x="0" y="0" width="14" height="14" fill="#ff0000"></rect>
+					<text x="7" y="11" fill="#ffffff" style="text-anchor: middle; font-size: 13px;">${symptoms}</text>
+				</g>
+			</g:each>
         </g>
     </g>
-
+	<defs>
+		<pattern x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse" id="patternBackBack" viewBox="0 0 10 10">
+			<path d="M10-5-10,15M15,0,0,15M0-5-20,15" fill="none" stroke="#e82831" style="stroke-width: 2px;"></path>
+		</pattern>
+	</defs>
 </svg>

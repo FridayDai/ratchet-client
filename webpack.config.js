@@ -13,8 +13,7 @@ module.exports = {
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
-        profile: "./flightPages/profile.js",
-        painChart: "./flightPages/painChart.js"
+        profile: "./flightPages/profile.js"
     },
     output: {
         path: absoluteContext,
