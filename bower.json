@@ -1,29 +1,30 @@
 {
-  "name": "ratchet-v2-provider-desktop",
-  "version": "0.0.0",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "1.11.3",
-    "jquery-ui": "1.11.2",
-    "jquery-validation": "1.13.1",
-    "DataTables": "1.10.4",
-    "select2": "3.5.2",
-    "d3": "v3.5.3",
-    "moment": "2.9.0",
-    "moment-timezone": "~0.3.0",
-    "intl-tel-input": "5.4.3",
-    "jquery-file-upload": "9.9.3",
-    "zeroclipboard": "~2.2.0",
-    "lodash": "~3.10.0",
-    "jquery-form": "~3.46.0",
-    "velocity": "~1.2.2",
-    "google-libphonenumber": "~1.0.4"
-  }
+    "name": "ratchet-v2-provider-desktop",
+    "version": "0.0.0",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "1.11.3",
+        "jquery-ui": "1.11.2",
+        "jquery-validation": "1.13.1",
+        "DataTables": "1.10.4",
+        "select2": "3.5.2",
+        "d3": "v3.5.3",
+        "moment": "2.9.0",
+        "moment-timezone": "~0.3.0",
+        "intl-tel-input": "5.4.3",
+        "jquery-file-upload": "9.9.3",
+        "zeroclipboard": "~2.2.0",
+        "lodash": "~3.10.0",
+        "jquery-form": "~3.46.0",
+        "velocity": "~1.2.2",
+        "google-libphonenumber": "~1.0.4",
+        "Snap.svg": "snap.svg#~0.4.1"
+    }
 }

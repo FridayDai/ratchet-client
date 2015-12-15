@@ -2,6 +2,7 @@ require('../../libs/jquery-validation/jquery.validate.js');
 var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
+var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 
 function changePasswordFormDialog() {
@@ -38,6 +39,12 @@ function changePasswordFormDialog() {
             }
         });
     };
+
+    this.after('initialize', function() {
+        this.on('formSuccess', function() {
+            Notifications.showFadeOutMsg(STRINGs.PASSWORD_CHANGED);
+        });
+    });
 }
 
 module.exports = flight.component(WithFormDialog, changePasswordFormDialog);

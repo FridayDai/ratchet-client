@@ -43,8 +43,13 @@ class SinglePatientController extends BaseController {
             phoneNumber = String.format("%s%s%s", isUS, space, phoneNumber)
         }
 
-        render(view: '/singlePatient/singlePatient', model: [patientInfo   : patientInfo,
-                                                             medicalRecords: medicalRecords, phoneNumber: phoneNumber, treatmentLimit: treatmentLimit])
+        render(view: '/singlePatient/singlePatient', model: [
+                patientInfo   : patientInfo,
+                medicalRecords: medicalRecords,
+                phoneNumber: phoneNumber,
+                treatmentLimit: treatmentLimit,
+                AccountIsAdmin: request.session.accountManagement
+        ])
     }
 
     def updateSinglePatient(Patient patient) {

@@ -1,5 +1,5 @@
-<g:set var="cssPath" value="task/odiLike/screen"/>
-<g:set var="printSheetPath" value="task/odiLike/print"/>
+<g:set var="cssPath" value="task/odiLike/screen.css"/>
+<g:set var="printSheetPath" value="task/odiLike/print.css"/>
 
 <g:applyLayout name="taskResult">
     <html>

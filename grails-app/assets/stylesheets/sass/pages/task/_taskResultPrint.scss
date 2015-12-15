@@ -1,0 +1,77 @@
+@import 'taskResult';
+
+@page {
+    margin: 0cm;
+}
+
+.sticky-header {
+    position: static;
+    border-bottom: 1px solid #335d70;
+
+    .header {
+        height: 50px;
+        border-bottom: 4px solid $result-main-color;
+
+        .toolbar {
+            visibility: hidden;
+        }
+
+        .logo {
+            margin: 29px 0 0 25px;
+        }
+
+        img {
+            width: 113px;
+            height: 13px;
+        }
+    }
+
+    .info-container {
+        padding: 15px 30px;
+
+        .title {
+            font-size: 16px;
+        }
+
+        .sub-info-panel {
+            margin-top: 10px;
+        }
+
+        .patient-info, .name, .id {
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+
+    .questionnaire-info {
+        top: -8px;
+        right: 20px;
+
+        .status,
+        .score-num,
+        .score-des {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .divider {
+            height: 25px;
+        }
+    }
+}
+
+#main {
+    display:inline-block;
+    margin-top: 20px;
+    padding: 0 15px;
+    border: 0;
+}
+
+body {
+    margin-bottom: 0;
+    -webkit-print-color-adjust: exact;
+}
+
+.download {
+    display: none;
+}

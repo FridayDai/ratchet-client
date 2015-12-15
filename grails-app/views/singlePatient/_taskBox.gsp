@@ -1,4 +1,4 @@
-<%@ page import="org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.ratchethealth.client.StatusCodeConstants " %>
+<%@ page import="com.ratchethealth.client.RatchetConstants; org.joda.time.LocalDate; org.joda.time.Days; org.joda.time.DateTime; org.joda.time.DateTimeZone; org.codehaus.groovy.grails.web.json.JSONObject; com.ratchethealth.client.StatusCodeConstants " %>
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
@@ -48,15 +48,17 @@
                 <g:formatDate date="${taskDate}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}" format="MMM dd, yyyy"/>
             </g:if>
         </span>
-        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.testId == 2}">
-        <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12}">
+                <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
+            </g:if>
         </g:if>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
             <span class="delete"></span>
         </g:if>
 
         <div class="footer-bottom">
-            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
+            <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && !RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
                 <div class="complete-score">
                     <g:if test="${task?.otherScore}">
                         <% def firstSplit = "" %>
