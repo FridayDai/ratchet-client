@@ -61,10 +61,11 @@
 }
 
 #main {
-    display:inline-block;
+    display: block;
     margin-top: 20px;
     padding: 0 15px;
     border: 0;
+    float: none;
 }
 
 body {
@@ -73,5 +74,15 @@ body {
 }
 
 .download {
+    display: none;
+}
+
+.page-break {
+    display: block;
+    break-after: always;
+    page-break-after: always;
+}
+
+.page-footer {
     display: none;
 }
