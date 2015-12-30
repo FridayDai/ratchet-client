@@ -49,7 +49,7 @@
             </g:if>
         </span>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 13}">
+            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 13 || task?.testId == 14}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
