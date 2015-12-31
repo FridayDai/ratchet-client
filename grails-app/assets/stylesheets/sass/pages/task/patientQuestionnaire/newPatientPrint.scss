@@ -21,10 +21,21 @@ html,body {
 }
 
 .question {
-    margin-left: -18px;
-    font-size: 13px;
-    font-weight: 700;
     color: $result-main-color;
+
+    span {
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .question-number {
+        display: inline-block;
+        width: 19px;
+        text-align: center;
+        margin-left: -22px;
+        font-size: 13px;
+        vertical-align: top;
+    }
 }
 
 .sub-question {

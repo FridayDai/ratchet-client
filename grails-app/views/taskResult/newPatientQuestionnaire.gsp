@@ -14,7 +14,10 @@
             <div class="page page-1 clear">
                 <div class="task-list-part part-0">
                     <div class="question-list">
-                        <div class="question">1. How did you first hear of us?</div>
+                        <div class="question">
+                            <span class="question-number">1.</span>
+                            <span>How did you first hear of us?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -72,7 +75,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">2. What is the primary reason for your visit?</div>
+                        <div class="question">
+                            <span class="question-number">2.</span>
+                            <span> What is the primary reason for your visit?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -118,7 +124,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">3. How long ago did your current symptoms begin?</div>
+                        <div class="question">
+                            <span class="question-number">3.</span>
+                            <span> How long ago did your current symptoms begin?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -185,7 +194,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">4. Please describe your current problem/ sysmptoms</div>
+                        <div class="question">
+                            <span class="question-number">4.</span>
+                            <span> Please describe your current problem/ sysmptoms</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -198,7 +210,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">5. What is your CURRENT work status?</div>
+                        <div class="question">
+                            <span class="question-number">5.</span>
+                            <span> What is your CURRENT work status?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -235,7 +250,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">6. Is this a work-related injury?</div>
+                        <div class="question">
+                            <span class="question-number">6.</span>
+                            <span> Is this a work-related injury?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -263,7 +281,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">7. Have you filed a Worker’s Compensation claim for your back/ neck symptoms?</div>
+                        <div class="question">
+                            <span class="question-number">7.</span>
+                            <span> Have you filed a Worker’s Compensation claim for your back/ neck symptoms?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -292,7 +313,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">8. Have you worked with a lawyer as a result of your injury?</div>
+                        <div class="question">
+                            <span class="question-number">8.</span>
+                            <span>Have you worked with a lawyer as a result of your injury?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -322,7 +346,10 @@
 
                 <div class="task-list-part part-1">
                     <div class="question-list">
-                        <div class="question">9. Did your pain begin after a car accident?</div>
+                        <div class="question">
+                            <span class="question-number">9.</span>
+                            <span>Did your pain begin after a car accident?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -486,7 +513,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">10. Have you ever been involved in a previous car accident?</div>
+                        <div class="question">
+                            <span class="question-number">10.</span>
+                            <span>Have you ever been involved in a previous car accident?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -596,7 +626,10 @@
             <div class="page page-2 clear">
                 <div class="task-list-part part-0">
                     <div class="question-list">
-                        <div class="question">11. Is your pain due to an injury not covered in the questions above?</div>
+                        <div class="question">
+                            <span class="question-number">11.</span>
+                            <span>Is your pain due to an injury not covered in the questions above?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -630,7 +663,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">12. How do each of the following activities affect your pain?</div>
+                        <div class="question">
+                            <span class="question-number">12.</span>
+                            <span>How do each of the following activities affect your pain?</span>
+                        </div>
 
                         <div class="answer-list">
                             <table class="answer-table">
@@ -685,7 +721,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">13. What other activities, motions, or positions affect your symptoms?</div>
+                        <div class="question">
+                            <span class="question-number">13.</span>
+                            <span>What other activities, motions, or positions affect your symptoms?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -698,7 +737,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">14. What do you do to relieve your pain?</div>
+                        <div class="question">
+                            <span class="question-number">14.</span>
+                            <span>What do you do to relieve your pain?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -711,7 +753,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">15. Bladder function:</div>
+                        <div class="question">
+                            <span class="question-number">15.</span>
+                            <span>Bladder function:</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -766,7 +811,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">16. Bowel function:</div>
+                        <div class="question">
+                            <span class="question-number">16.</span>
+                            <span>Bowel function:</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -803,7 +851,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">17. Problem with sexual function:</div>
+                        <div class="question">
+                            <span class="question-number">17.</span>
+                            <span>Problem with sexual function:</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -840,7 +891,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">18. Loss of sensation around the groin, genitals, or buttocks?</div>
+                        <div class="question">
+                            <span class="question-number">18.</span>
+                            <span>Loss of sensation around the groin, genitals, or buttocks?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -871,7 +925,10 @@
                 <div class="task-list-part part-1">
 
                     <div class="question-list">
-                        <div class="question">19. Weakness in leg/foot:</div>
+                        <div class="question">
+                            <span class="question-number">19.</span>
+                            <span>Weakness in leg/foot:</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -917,7 +974,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">20. Weakness in arm/hand:</div>
+                        <div class="question">
+                            <span class="question-number">20.</span>
+                            <span>Weakness in arm/hand:</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -963,7 +1023,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">21. Does your pain interfere with your sleep?</div>
+                        <div class="question">
+                            <span class="question-number">21.</span>
+                            <span>Does your pain interfere with your sleep?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="list">
@@ -991,7 +1054,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">22. Which of the folowing treatments have you had and what was the outcome?</div>
+                        <div class="question">
+                            <span class="question-number">22.</span>
+                            <span>Which of the folowing treatments have you had and what was the outcome?</span>
+                        </div>
 
                         <div class="answer-list">
                             <table class="answer-table">
@@ -1047,7 +1113,10 @@
                     </div>
 
                     <div class="question-list">
-                        <div class="question">23. Please list the dates of any of the following tests you have had for your current condition in the last 2 years?</div>
+                        <div class="question">
+                            <span class="question-number">23.</span>
+                            <span>Please list the dates of any of the following tests you have had for your current condition in the last 2 years?</span>
+                        </div>
 
                         <div class="answer-list">
                             <ul class="special-ul">
