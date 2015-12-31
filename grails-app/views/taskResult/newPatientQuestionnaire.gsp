@@ -797,15 +797,15 @@
                                     </span>
                                     <span class="text">Sense of urgency</span>
                                 </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['15'] == 5.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Rather not answer</span>
-                                </li>
+                                %{--<li class="answer">--}%
+                                    %{--<span class="result-circle-radio">--}%
+                                        %{--<g:if test="${mixedResult['15'] == 5.toString()}">--}%
+                                            %{--<span class="result-circle-radio-checked">--}%
+                                            %{--</span>--}%
+                                        %{--</g:if>--}%
+                                    %{--</span>--}%
+                                    %{--<span class="text">Rather not answer</span>--}%
+                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
@@ -837,15 +837,15 @@
                                     </span>
                                     <span class="text">Loss of control or accidents</span>
                                 </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['16'] == 3.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Rather not answer</span>
-                                </li>
+                                %{--<li class="answer">--}%
+                                    %{--<span class="result-circle-radio">--}%
+                                        %{--<g:if test="${mixedResult['16'] == 3.toString()}">--}%
+                                            %{--<span class="result-circle-radio-checked">--}%
+                                            %{--</span>--}%
+                                        %{--</g:if>--}%
+                                    %{--</span>--}%
+                                    %{--<span class="text">Rather not answer</span>--}%
+                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
@@ -866,7 +866,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes</span>
+                                    <span class="text">No</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -875,17 +875,17 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">No</span>
+                                    <span class="text">Yes</span>
                                 </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['17'] == 3.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Rather not answer</span>
-                                </li>
+                                %{--<li class="answer">--}%
+                                    %{--<span class="result-circle-radio">--}%
+                                        %{--<g:if test="${mixedResult['17'] == 3.toString()}">--}%
+                                            %{--<span class="result-circle-radio-checked">--}%
+                                            %{--</span>--}%
+                                        %{--</g:if>--}%
+                                    %{--</span>--}%
+                                    %{--<span class="text">Rather not answer</span>--}%
+                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
@@ -906,7 +906,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes</span>
+                                    <span class="text">No</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -915,7 +915,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">No</span>
+                                    <span class="text">Yes</span>
                                 </li>
                             </ul>
                         </div>
@@ -940,7 +940,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - right leg</span>
+                                    <span class="text">No</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -949,7 +949,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - left leg</span>
+                                    <span class="text">Yes - right leg</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -958,7 +958,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - both legs</span>
+                                    <span class="text">Yes - left leg</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -967,7 +967,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">No</span>
+                                    <span class="text">Yes - both legs</span>
                                 </li>
                             </ul>
                         </div>
@@ -989,7 +989,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - right arm</span>
+                                    <span class="text">No</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -998,7 +998,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - left arm</span>
+                                    <span class="text">Yes - right arm</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -1007,7 +1007,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes - both arms</span>
+                                    <span class="text">Yes - left arm</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -1016,7 +1016,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">No</span>
+                                    <span class="text">Yes - both arms</span>
                                 </li>
                             </ul>
                         </div>
@@ -1038,7 +1038,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Yes</span>
+                                    <span class="text">No</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -1047,7 +1047,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">No</span>
+                                    <span class="text">Yes</span>
                                 </li>
                             </ul>
                         </div>
