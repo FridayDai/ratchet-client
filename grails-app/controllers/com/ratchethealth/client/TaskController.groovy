@@ -10,6 +10,7 @@ class TaskController extends BaseController {
 
     def getTasks() {
         String token = session.token
+        def accountId = session.accountId
         def clientId = session.clientId
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
@@ -45,7 +46,8 @@ class TaskController extends BaseController {
                         patientId         : patientId,
                         medicalRecordId   : medicalRecordId,
                         archived          : archived,
-                        PatientEmailStatus: PatientEmailStatus
+                        PatientEmailStatus: PatientEmailStatus,
+                        accountId         : accountId
                 ]
     }
 

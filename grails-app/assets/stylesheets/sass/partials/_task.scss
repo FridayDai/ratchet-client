@@ -305,6 +305,7 @@
     padding: 4px;
     background: $base-color-mid-grey;
     color: $base-color-white;
+    position: relative;
 
     &:before {
         width: 10px;
@@ -341,21 +342,72 @@
         }
     }
 
-    .delete {
-        float: right;
-        margin: 1px 5px 0 0;
-        color: $base-color-white;
+    .begin-task,.delete {
+        position: absolute;
+        top: 5px;
+        right: 28px;
+        font-size: 0;
+        color: $base-color-white-grey-dark;
         cursor: pointer;
+        z-index: 10;
 
         &:before {
-            content: '\f253';
+            content: '\f12c';
             font-family: ionicons;
-            font-size: 13px;
+            font-size: 16px;
+        }
+        &:hover {
+            color: $base-color-white;
+        }
+        &:hover+.delete-tip {
+            display: block;
+        }
+        &:hover+.begin-tip {
+            display: block;
+        }
+    }
+
+    .begin-task {
+        text-decoration: none;
+    }
+
+    .delete {
+        right: 8px;
+
+        &:before {
+            content: '\f4c4';
+        }
+    }
+
+    .begin-tip,.delete-tip {
+        position: absolute;
+        background: $base-color-black;
+        text-align: center;
+        font-size: 0;
+        height: 20px;
+        line-height: 20px;
+        right: -5px;
+        top: -17px;
+        display: none;
+
+        &:after {
+            content: '\f104';
+            font-family: ionicons;
+            font-size: 12px;
+            position: absolute;
+            left: 50%;
+            top: 12px;
+            color: $base-color-black;
         }
 
-        &:hover {
-            text-decoration: underline;
+        span {
+            font-size: 12px;
+            padding: 0 4px;
         }
+    }
+
+    .begin-tip {
+        right: 18px;
     }
 
     .footer-bottom {

@@ -54,8 +54,17 @@
             </g:if>
         </g:if>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
+            <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}" class="begin-task" target="_blank"></a>
+        </g:if>
+        <div class="begin-tip">
+            <span>Begin</span>
+        </div>
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
             <span class="delete"></span>
         </g:if>
+        <div class="delete-tip">
+            <span>Delete</span>
+        </div>
 
         <div class="footer-bottom">
             <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && !RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
