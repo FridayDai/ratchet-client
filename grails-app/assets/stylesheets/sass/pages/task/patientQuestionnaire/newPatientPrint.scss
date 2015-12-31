@@ -60,12 +60,14 @@ html,body {
 
     .text {
         font-size: 8pt;
+        word-wrap: break-word;
     }
 
     .underline-text {
         font-size: 8pt;
         padding: 0 4px;
         text-decoration: underline;
+        word-wrap: break-word;
     }
 }
 

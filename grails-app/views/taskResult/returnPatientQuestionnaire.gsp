@@ -82,7 +82,6 @@
                     </div>
 
                     <div class="question-list special-question-list">
-                    <div class="question-list special-question-list">
                         <div class="question">2. Compared to your last visit, are your symptoms?</div>
                         <div class="answer-list">
                             <ul class="list">
@@ -315,7 +314,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['3-c'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-2'] == 1.toString()}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -324,7 +323,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['3-c'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-2'] == 2.toString()}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -811,7 +810,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">joint swelling
+                                        <span class="text">bruise easily
                                         </span>
                                     </li>
                                     <li class="answer">
@@ -821,7 +820,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">joint pain</span>
+                                        <span class="text">abnormal lumps</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -830,7 +829,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">weakness of muscles or joints</span>
+                                        <span class="text">painful breasts</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -839,7 +838,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">muscle pain or cramps</span>
+                                        <span class="text">change of skin color</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -848,16 +847,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">back pain</span>
-                                    </li>
-                                    <li class="answer">
-                                        <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 8.toString()}">
-                                                <span class="result-circle-radio-checked">
-                                                </span>
-                                            </g:if>
-                                        </span>
-                                        <span class="text">difficulty walking</span>
+                                        <span class="text">change in hair or nails</span>
                                     </li>
                                 </ul>
                             </div>
@@ -962,6 +952,10 @@
                                         <span class="text">unusual stress in work life</span>
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="answer-list">
+                                <div class="sub-question">Other:</div>
+                                <p></p>
                             </div>
                         </div>
                     </div>

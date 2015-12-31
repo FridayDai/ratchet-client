@@ -60,11 +60,13 @@ body {
 
     .text {
         font-size: 16px;
+        word-wrap: break-word;
     }
 
     .underline-text {
         padding: 0 8px;
         text-decoration: underline;
+        word-wrap: break-word;
     }
 }
 
