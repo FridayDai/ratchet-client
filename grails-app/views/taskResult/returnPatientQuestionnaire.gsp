@@ -955,10 +955,27 @@
                             </div>
                             <div class="answer-list">
                                 <div class="sub-question">Other:</div>
-                                <p></p>
+                                <p class="text">${mixedResult['4-14']}</p>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <g:set var="result"
+                       value="[mixedResult['4-0'], mixedResult['4-1'], mixedResult['4-2'], mixedResult['4-3'], mixedResult['4-4'], mixedResult['4-5'], mixedResult['4-6'], mixedResult['4-7'], mixedResult['4-8'], mixedResult['4-9'], mixedResult['4-10'], mixedResult['4-11'], mixedResult['4-12'], mixedResult['4-13']]"/>
+                <g:set var="standard" value="['8','7','3','6','8','5','4','6','7','9','9','8','5','7']"/>
+
+                <div class="answer-line">
+                    I have not had ANY of the above symptoms in the last 6 months.
+                    <label class="left-checkbox">
+                        <g:if test="${result == standard}">
+                            <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked/>
+                        </g:if>
+                        <g:else>
+                            <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled/>
+                        </g:else>
+                        <span class="rc-checkbox"></span>
+                    </label>
                 </div>
             </div>
         </div>
