@@ -93,7 +93,8 @@
                                         </g:if>
                                     </span>
                                     <span class="text">Improved, by</span>
-                                    <span class="underline-text">${mixedResult['2-1s']}</span>
+                                    <g:set var="percentResult" value="['', '0% - 24%', '25% - 49%', '50% - 74%', '75% - 100%']"/>
+                                    <span class="underline-text">${mixedResult['2-e-1']? percentResult[mixedResult['2-e-1'].toInteger()] : ''}</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -185,7 +186,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -194,7 +195,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -203,7 +204,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -213,7 +214,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -222,7 +223,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -231,7 +232,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -240,7 +241,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-0'] == 7.toString()}">
+                                            <g:if test="${mixedResult['4-0'].contains(7.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -254,7 +255,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -263,7 +264,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -272,7 +273,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -281,7 +282,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -291,7 +292,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -300,7 +301,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-1'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-1'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -314,7 +315,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-2'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-2'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -323,7 +324,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-2'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-2'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -337,7 +338,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-3'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-3'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -346,7 +347,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-3'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-3'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -355,7 +356,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-3'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-3'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -364,7 +365,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-3'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-3'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -374,7 +375,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-3'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-3'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -390,7 +391,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -399,7 +400,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -408,7 +409,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -418,7 +419,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -427,7 +428,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -436,7 +437,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -445,7 +446,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-4'] == 7.toString()}">
+                                            <g:if test="${mixedResult['4-4'].contains(7.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -459,7 +460,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-5'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-5'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -468,7 +469,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-5'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-5'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -477,7 +478,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-5'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-5'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -487,7 +488,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-5'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-5'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -501,7 +502,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-6'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-6'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -510,7 +511,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-6'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-6'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -519,7 +520,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-6'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-6'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -534,7 +535,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-7'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-7'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -543,7 +544,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-7'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-7'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -552,7 +553,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-7'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-7'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -562,7 +563,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-7'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-7'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -571,7 +572,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-7'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-7'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -587,7 +588,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -596,7 +597,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -605,7 +606,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -615,7 +616,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -624,7 +625,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -633,7 +634,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-8'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-8'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -647,7 +648,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -656,7 +657,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -665,7 +666,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -675,7 +676,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -684,7 +685,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -693,7 +694,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-9'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-9'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -707,7 +708,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -716,7 +717,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -725,7 +726,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -735,7 +736,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -744,7 +745,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -753,7 +754,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -762,7 +763,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 7.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(7.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -771,7 +772,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-10'] == 8.toString()}">
+                                            <g:if test="${mixedResult['4-10'].contains(8.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -787,7 +788,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -796,7 +797,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -805,7 +806,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -815,7 +816,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -824,7 +825,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -833,7 +834,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -842,7 +843,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-11'] == 7.toString()}">
+                                            <g:if test="${mixedResult['4-11'].contains(7.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -856,7 +857,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-12'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-12'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -865,7 +866,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-12'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-12'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -874,7 +875,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-12'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-12'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -884,7 +885,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-12'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-12'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -898,7 +899,7 @@
                                 <ul class="list">
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 1.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(1.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -907,7 +908,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 2.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(2.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -916,7 +917,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 3.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(3.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -926,7 +927,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 4.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(4.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -935,7 +936,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 5.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(5.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>
@@ -944,7 +945,7 @@
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
-                                            <g:if test="${mixedResult['4-13'] == 6.toString()}">
+                                            <g:if test="${mixedResult['4-13'].contains(6.toString())}">
                                                 <span class="result-circle-radio-checked">
                                                 </span>
                                             </g:if>

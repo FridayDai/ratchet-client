@@ -38,11 +38,11 @@ class RatchetConstants {
             11: TOOL_NAME_PAIN_CHART_REFERENCE_NECK,
             12: TOOL_NAME_PAIN_CHART_REFERENCE_BACK,
             13: TOOL_NAME_NEW_PATIENT_QUESTIONNAIRE,
-            14: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE
+            17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE
     ]
 
     //Task type which hasn't task score.
-    public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 14]
+    public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 17]
 
     public static final String[] PAIN_FREQUENCY = [
             "Never",
