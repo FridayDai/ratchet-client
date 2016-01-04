@@ -1123,32 +1123,32 @@
                                 <li class="special-list">
                                     <div class="special-question-title">Regular x-rays</div>
 
-                                    <div class="text">${mixedResult["23-1"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-1"] ? mixedResult["23-1"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                                 <li class="special-list">
                                     <div class="special-question-title">MRI</div>
 
-                                    <div class="text">${mixedResult["23-2"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-2"] ? mixedResult["23-2"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                                 <li class="special-list">
                                     <div class="special-question-title">CT scan</div>
 
-                                    <div class="text">${mixedResult["23-3"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-3"] ? mixedResult["23-3"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                                 <li class="special-list">
                                     <div class="special-question-title">Myelogram</div>
 
-                                    <div class="text">${mixedResult["23-4"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-4"] ? mixedResult["23-4"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                                 <li class="special-list">
                                     <div class="special-question-title">Bone scan</div>
 
-                                    <div class="text">${mixedResult["23-5"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-5"] ? mixedResult["23-5"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                                 <li class="special-list">
                                     <div class="special-question-title">EMG/NCV</div>
 
-                                    <div class="text">${mixedResult["23-6"] ?: 'N/A'}</div>
+                                    <div class="text">${mixedResult["23-6"] ? mixedResult["23-6"].replaceAll(/&/,' / ') : 'N/A'}</div>
                                 </li>
                             </ul>
                         </div>
