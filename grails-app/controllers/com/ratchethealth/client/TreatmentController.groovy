@@ -106,7 +106,7 @@ class TreatmentController extends BaseController {
         def token = request.session.token
         def treatmentId = params?.treatmentId
 
-        def resp = treatmentService.getTasksInTreatment(token, treatmentId)
+        def resp = treatmentService.getTasksInTreatment(token, treatmentId, 100)
 
         render resp as JSON
     }
