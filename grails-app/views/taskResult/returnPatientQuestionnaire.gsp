@@ -52,7 +52,11 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Physician</span>
+                                    <span class="text">Post-operative follow-up (Surgery date:
+                                        <span class="underline-text">${mixedResult['1-4s']}</span>
+                                        )
+                                    </span>
+
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -61,11 +65,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Post-operative follow-up (Surgery date:
-                                        <span class="underline-text">${mixedResult['1-5s']}</span>
-                                        )
-                                    </span>
-
+                                    <span class="text">Medication renewal</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -287,7 +287,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">vision lost
+                                        <span class="text">vision loss
                                         </span>
                                     </li>
                                     <li class="answer">
@@ -297,7 +297,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">hearing lost</span>
+                                        <span class="text">hearing loss</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -653,7 +653,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">nausea/ vomiting</span>
+                                        <span class="text">blood in your urine</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -662,7 +662,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">constipation</span>
+                                        <span class="text">increased frequency of urination</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -671,7 +671,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">diarrhea
+                                        <span class="text">urgency of urination
                                         </span>
                                     </li>
                                     <li class="answer">
@@ -681,7 +681,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">blood in your stool</span>
+                                        <span class="text">painful urination</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -690,7 +690,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">loss of bowel control</span>
+                                        <span class="text">loss of bladder control</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
@@ -699,7 +699,25 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">abdominal pain</span>
+                                        <span class="text">kidney stones</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-9'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked">
+                                                </span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">incontinence</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-9'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked">
+                                                </span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">sexual difficulty</span>
                                     </li>
                                 </ul>
                             </div>
@@ -839,7 +857,7 @@
                                                 </span>
                                             </g:if>
                                         </span>
-                                        <span class="text">change of skin color</span>
+                                        <span class="text">change in skin color</span>
                                     </li>
                                     <li class="answer">
                                         <span class="result-circle-radio">
