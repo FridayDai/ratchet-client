@@ -641,7 +641,7 @@
                                         </g:if>
                                     </span>
                                     <span class="text">Yes, date of injury:</span>
-                                    <span class="underline-text">${mixedResult['11-e-1']}</span>
+                                    <span class="underline-text">${mixedResult['11-1s']}</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -657,7 +657,7 @@
                             <div class="sub-question">
                                 <div class="sub-question-title">Describe the injury:</div>
 
-                                <p class="sub-description">${mixedResult['10-e-1'] ?: 'N/A'}</p>
+                                <p class="sub-description">${mixedResult['11-e-1'] ?: 'N/A'}</p>
                             </div>
                         </div>
                     </div>
