@@ -169,14 +169,16 @@ class TreatmentService extends RatchetAPIService {
         }
     }
 
-    def getTasksInTreatment(String token, treatmentId) {
+    def getTasksInTreatment(String token, treatmentId, max) {
         log.info("Call backend service to get tasks in treatment, token: ${token}.")
 
         String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.getToolsOfTreatment
         String url = String.format(getAvailableTaskUrl, treatmentId)
 
         withGet(token, url) { req ->
-            def resp = req.asString()
+            def resp = req
+                    .queryString("max", max)
+                    .asString()
 
             if (resp.status == 200) {
                 log.info("Get tasks in treatment success, token: ${token}")

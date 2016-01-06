@@ -41,6 +41,12 @@ class StatusCodeConstants {
         "antibiotics": "Antibiotics"
     ]
 
+    public static final Map TASK_OOS_JR_SCORE_LABEL = [
+            "STIFFNESS": "Stiffness",
+            "PAIN": "Pain",
+            "ADL": "ADL"
+    ]
+
     //Account constants
     public static final String ACCOUNT_DOCTOR = "Dr."
     public static final String[] ACCOUNT_ROLE =
