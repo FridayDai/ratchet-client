@@ -48,6 +48,10 @@ class RatchetConstants {
     //Task type which hasn't task score.
     public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 17]
 
+    //Task type which has multiple task score
+    public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 15, 1000]
+
+    //For pain neck and pain back.
     public static final String[] PAIN_FREQUENCY = [
             "Never",
             "Monthly",

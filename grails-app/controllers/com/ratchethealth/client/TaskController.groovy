@@ -126,6 +126,10 @@ class TaskController extends BaseController {
             case RatchetConstants.TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE:
                 view = '/taskResult/returnPatientQuestionnaire'
                 break
+            case RatchetConstants.TOOL_NAME_KOOS_JR:
+            case RatchetConstants.TOOL_NAME_HOOS_JR:
+                view = '/taskResult/KOOSJRlike'
+                break
 
             default:
                 render status: 404
