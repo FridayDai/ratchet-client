@@ -120,6 +120,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/painChartNeck'
                 break
 
+            case RatchetConstants.TOOL_NAME_PROMIS:
+                view = '/taskResult/promis'
+                break
+
             default:
                 render status: 404
                 return

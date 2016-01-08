@@ -18,10 +18,12 @@ class RatchetConstants {
     public static final String TOOL_NAME_FAIRLEY_NASAL_SYMPTOM = 'Fairley Nasal Symptom';
     public static final String TOOL_NAME_PAIN_CHART_REFERENCE_NECK = 'Pain Chart Reference - Neck';
     public static final String TOOL_NAME_PAIN_CHART_REFERENCE_BACK = 'Pain Chart Reference - Back';
+    public static final String TOOL_NAME_PROMIS = 'promis';
 
     //1.DASH 2.ODI 3.NDI 4.NRS-BACK 5.NRS-NECK 6.QuickDASH 7.KOOS 8.HOOS
     // 9.Harris Hip Score 10.Fairley Nasal Symptom 11.Pain Chart Reference - Neck
     // 12.Pain Chart Reference - Neck
+    //13.newPatientQuestionnaire 14.Promis
     public static final Map TOOL_TYPE = [
             1 : TOOL_NAME_DASH,
             2 : TOOL_NAME_ODI,
@@ -34,7 +36,8 @@ class RatchetConstants {
             9 : TOOL_NAME_HARRIS_HIP_SCORE,
             10: TOOL_NAME_FAIRLEY_NASAL_SYMPTOM,
             11: TOOL_NAME_PAIN_CHART_REFERENCE_NECK,
-            12: TOOL_NAME_PAIN_CHART_REFERENCE_BACK
+            12: TOOL_NAME_PAIN_CHART_REFERENCE_BACK,
+            14: TOOL_NAME_PROMIS
     ]
 
     //Task type which hasn't task score.

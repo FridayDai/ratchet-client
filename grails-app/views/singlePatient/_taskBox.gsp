@@ -28,10 +28,17 @@
             </g:else>
         </div>
         </g:if>
+        <g:if test="${task?.testId == 14}">
+            <div class="item-context">
+                <p>General questionnaire to access information about patient's health</p>
+            </div>
+        </g:if>
+        <g:else>
+            <div class="item-context">
+                <p>${task?.description}</p>
+            </div>
+        </g:else>
 
-        <div class="item-context">
-            <p>${task?.description}</p>
-        </div>
 
     </div>
 
@@ -49,7 +56,7 @@
             </g:if>
         </span>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12}">
+            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 14}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
@@ -91,12 +98,22 @@
                             </span>
                             </g:if>
                             <g:else>
-                            <span class="score">
-                                <g:if test="${secondSplit?.size() == 2}">
-                                    <label class="score-number">${secondSplit[1]}</label><br>
-                                    <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                <g:if test="${task?.testId == 14}">
+                                    <span class="score">
+                                        <g:if test="${secondSplit?.size() == 2}">
+                                            <label class="score-number">${secondSplit[1]}</label><br>
+                                            <label>${secondSplit[0]}</label>
+                                        </g:if>
+                                    </span>
                                 </g:if>
-                            </span>
+                                <g:else>
+                                    <span class="score">
+                                        <g:if test="${secondSplit?.size() == 2}">
+                                            <label class="score-number">${secondSplit[1]}</label><br>
+                                            <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                        </g:if>
+                                    </span>
+                                </g:else>
                             </g:else>
                         </g:each>
                     </g:if>
