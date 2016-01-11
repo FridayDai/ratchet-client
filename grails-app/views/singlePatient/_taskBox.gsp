@@ -89,9 +89,6 @@
                                 <span class="score score-2-columns">
                                     <g:if test="${secondSplit?.size() == 2}">
                                         <label class="score-number">${secondSplit[1]}</label><br>
-                                        <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FAIRLEY_NASAL_SYMPTOM}">
-                                            <label>${StatusCodeConstants.TASK_FAIRLEY_NASAL_SCORE_LABEL[secondSplit[0]]}</label>
-                                        </g:if>
                                         <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_KOOS_JR || RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_HOOS_JR}">
                                             <label>${StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL[secondSplit[0]]}</label>
                                         </g:if>
