@@ -1,0 +1,225 @@
+@import '../taskResult';
+
+body {
+    margin-bottom: 0;
+}
+
+.question-list {
+    margin: 0 0 30px 35px;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+    color: $result-main-color;
+    margin-left: -35px;
+}
+
+
+.answer {
+    position: relative;
+    margin-top: 10px;
+
+    .text {
+        font-size: 16px;
+    }
+}
+
+.result-circle-radio {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.result-circle-radio-checked {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $result-main-color;
+}
+
+.task-list-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 30px;
+        border-right: 1px solid #8e8e8e;
+    }
+
+    &.part-1 {
+        padding-left: 30px;
+    }
+}
+
+.download {
+    display: inline-block;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    a {
+        color: #7b8994;
+    }
+}
+
+
+
+.answer-nrs {
+    display: inline-block;
+}
+
+.list-nrs {
+    margin: 40px 0 0 -35px;
+    position: relative;
+    width: 600px;
+}
+
+.no-pain,.severe-pain {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.no-pain {
+    position: absolute;
+    left: 0;
+    top: -25px;
+}
+
+.severe-pain {
+    position: absolute;
+    right: 78px;
+    top: -25px;
+}
+
+.choice-number {
+    .rc-radio {
+        text-align: center;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 20px;
+        line-height: 40px;
+        background: #fff;
+        margin-right: 5px;
+    }
+
+    .rc-radio:before {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 20px;
+        line-height: 40px;
+        color: #BABACC;
+        border: 1px solid #BABACC
+    }
+
+    .rc-choice-hidden:checked + .rc-radio:before {
+            position: static;
+            width: 40px;
+            height: 40px;
+            color: #fff;
+            background-color: $result-main-color;
+
+    }
+}
+
+.choice-number-0 {
+    .rc-radio:before {
+        content: '0' !important;
+    }
+}
+
+.choice-number-1 {
+    .rc-radio:before {
+        content: '1' !important;
+    }
+}
+
+.choice-number-2 {
+    .rc-radio:before {
+        content: '2' !important;
+    }
+}
+
+.choice-number-3 {
+    .rc-radio:before {
+        content: '3' !important;
+    }
+}
+
+.choice-number-4 {
+    .rc-radio:before {
+        content: '4' !important;
+    }
+}
+
+.choice-number-5 {
+    .rc-radio:before {
+        content: '5' !important;
+    }
+}
+
+.choice-number-6 {
+    .rc-radio:before {
+        content: '6' !important;
+    }
+}
+
+.choice-number-7 {
+    .rc-radio:before {
+        content: '7' !important;
+    }
+}
+
+.choice-number-8 {
+    .rc-radio:before {
+        content: '8' !important;
+    }
+}
+
+.choice-number-9 {
+    .rc-radio:before {
+        content: '9' !important;
+    }
+}
+
+.choice-number-10 {
+    .rc-radio:before {
+        content: '10' !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

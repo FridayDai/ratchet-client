@@ -28,10 +28,16 @@
             </g:else>
         </div>
         </g:if>
-
-        <div class="item-context">
-            <p>${task?.description}</p>
-        </div>
+        <g:if test="${task?.testId == 14}">
+            <div class="item-context">
+                <p>General questionnaire to access information about patient's health</p>
+            </div>
+        </g:if>
+        <g:else>
+            <div class="item-context">
+                <p>${task?.description}</p>
+            </div>
+        </g:else>
 
     </div>
 
@@ -49,7 +55,7 @@
             </g:if>
         </span>
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 13 || task?.testId == 17 || task?.testId == 15 || task?.testId == 1000}">
+            <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 13 || task?.testId == 14 || task?.testId == 17 || task?.testId == 15 || task?.testId == 1000}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
@@ -77,29 +83,26 @@
                         <% } %>
                         <g:each in="${firstSplit}" var="num">
                             <% secondSplit = num?.trim().split(':') %>
-                            <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_KOOS || RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_HOOS}">
-                                <span class="score">
-                                    <g:if test="${secondSplit?.size() == 2}">
-                                        <label class="score-number">${secondSplit[1]}</label><br>
-                                        <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                            <g:if test="${task?.testId == 4 || task?.testId == 5 || task?.testId == 10}">
+                            <span class="score score-2-columns">
+                                <g:if test="${secondSplit?.size() == 2}">
+                                    <label class="score-number">${secondSplit[1]}</label><br>
+                                    <g:if test="${task?.testId == 10}">
+                                    <label>${StatusCodeConstants.TASK_FAIRLEY_NASAL_SCORE_LABEL[secondSplit[0]]}</label>
                                     </g:if>
-                                </span>
+                                    <g:else>
+                                    <label class="capitalize">${secondSplit[0]} Result</label>
+                                    </g:else>
+                                </g:if>
+                            </span>
                             </g:if>
                             <g:else>
-                                <span class="score score-2-columns">
-                                    <g:if test="${secondSplit?.size() == 2}">
-                                        <label class="score-number">${secondSplit[1]}</label><br>
-                                        <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FAIRLEY_NASAL_SYMPTOM}">
-                                            <label>${StatusCodeConstants.TASK_FAIRLEY_NASAL_SCORE_LABEL[secondSplit[0]]}</label>
-                                        </g:if>
-                                        <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_KOOS_JR || RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_HOOS_JR}">
-                                            <label>${StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL[secondSplit[0]]}</label>
-                                        </g:if>
-                                        <g:else>
-                                            <label class="capitalize">${secondSplit[0]} Result</label>
-                                        </g:else>
-                                    </g:if>
-                                </span>
+                            <span class="score">
+                                <g:if test="${secondSplit?.size() == 2}">
+                                    <label class="score-number">${secondSplit[1]}</label><br>
+                                    <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                </g:if>
+                            </span>
                             </g:else>
                         </g:each>
                     </g:if>
