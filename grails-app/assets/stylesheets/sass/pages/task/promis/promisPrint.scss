@@ -88,20 +88,18 @@ html,body {
 }
 
 .no-pain,.severe-pain {
+    position: absolute;
     font-size: 12px;
     font-weight: 500;
+    top: -25px;
 }
 
 .no-pain {
-    position: absolute;
     left: 0;
-    top: -25px;
 }
 
 .severe-pain {
-    position: absolute;
     right: 20px;
-    top: -25px;
 }
 
 .choice-number {

@@ -59,7 +59,7 @@
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
-        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "expired"}">
+        <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] != "complete" && StatusCodeConstants.TASK_STATUS[task?.status] != "schedule"}">
             <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}" class="begin-task" target="_blank"></a>
         </g:if>
         <div class="begin-tip">
@@ -100,7 +100,12 @@
                             <span class="score">
                                 <g:if test="${secondSplit?.size() == 2}">
                                     <label class="score-number">${secondSplit[1]}</label><br>
+                                    <g:if test="${task?.testId == 14}">
+                                    <label>${secondSplit[0]}</label>
+                                    </g:if>
+                                    <g:else>
                                     <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
+                                    </g:else>
                                 </g:if>
                             </span>
                             </g:else>
