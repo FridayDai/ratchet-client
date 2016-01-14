@@ -110,10 +110,10 @@
                                     <g:else>
                                     <label>${StatusCodeConstants.TASK_OOS_SCORE[secondSplit[0]]}</label>
                                     </g:else>
-                                </g:if>
                             </span>
                             </g:else>
                         </g:each>
+                    </g:if>
                     <g:else>
                         <span class="score">
                             <label class="score-number">${task?.score}</label><br>
