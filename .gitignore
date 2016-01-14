@@ -32,6 +32,7 @@
 
 .idea/
 
+*.log
 # IDE
 *.iml
 *.ipr

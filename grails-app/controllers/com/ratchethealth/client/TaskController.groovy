@@ -10,6 +10,7 @@ class TaskController extends BaseController {
 
     def getTasks() {
         String token = session.token
+        def accountId = session.accountId
         def clientId = session.clientId
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
@@ -45,7 +46,8 @@ class TaskController extends BaseController {
                         patientId         : patientId,
                         medicalRecordId   : medicalRecordId,
                         archived          : archived,
-                        PatientEmailStatus: PatientEmailStatus
+                        PatientEmailStatus: PatientEmailStatus,
+                        accountId         : accountId
                 ]
     }
 
@@ -123,6 +125,10 @@ class TaskController extends BaseController {
                 break
             case RatchetConstants.TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE:
                 view = '/taskResult/returnPatientQuestionnaire'
+                break
+            case RatchetConstants.TOOL_NAME_KOOS_JR:
+            case RatchetConstants.TOOL_NAME_HOOS_JR:
+                view = '/taskResult/KOOSJRlike'
                 break
 
             default:
