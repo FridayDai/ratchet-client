@@ -114,7 +114,6 @@
                             </span>
                             </g:else>
                         </g:each>
-                    </g:if>
                     <g:else>
                         <span class="score">
                             <label class="score-number">${task?.score}</label><br>
