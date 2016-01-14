@@ -26,15 +26,14 @@
                 </ul>
             </a>
         </li>
-    %{--<li <g:if test="${controllerName == 'home'}">class="nav-li active"</g:if>--}%
-    %{--<g:else>class="nav-li"</g:else>>--}%
-    %{--<g:link controller="home" action="index">--}%
-    %{--<div class="ui-icon icon-home"></div>--}%
 
-    %{--<div class="home-title">HOME</div>--}%
-    %{--</g:link>--}%
-    %{--</li>--}%
         <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
+            <li <g:if test="${controllerName == 'reports'}">class="nav-li active"</g:if>
+                <g:else>class="nav-li"</g:else>>
+                <g:link controller="reports" action="renderTaskCompletionReport">
+                    <div class="text">Task Completion</div>
+                </g:link>
+            </li>
             <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
                 <g:link controller="patients" class="icon-patient">
