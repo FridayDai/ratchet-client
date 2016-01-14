@@ -62,7 +62,7 @@
                                     <g:each var="choice" in="${question.choices}" status="k">
                                         <li class="answer-nrs">
                                             <label class="choice choice-number choice-number-${k}">
-                                                <input type="radio" class="rc-choice-hidden" disabled="true"
+                                                <input type="radio" class="rc-choice-hidden back" disabled="true"
                                                        name="choices.${10 + 2 * i}"
                                                        <g:if test="${choice.id == question.answerChoiceId}">checked</g:if>
                                                        value="${k}"/>

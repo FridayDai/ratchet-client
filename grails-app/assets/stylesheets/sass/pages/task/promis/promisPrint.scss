@@ -131,9 +131,18 @@ html,body {
         width: 20px;
         height: 20px;
         color: #fff;
-        background-color: $result-main-color;
-
+        background-color: $result-main-color !important;
     }
+/*    .back:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: -1;
+        border-bottom: 1000px solid #eee; *//* Make it fit your needs *//*
+    }*/
 }
 
 .choice-number-0 {
