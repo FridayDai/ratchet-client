@@ -45,12 +45,17 @@
         padding-left: 25px;
         color: $base-font-color;
         text-align: left;
+        font-size: 14px;
 
         .title {
             position: absolute;
             top: 20px;
             left: 70px;
-            font-size: 14px;
+        }
+
+        .text {
+            position: absolute;
+            top: 20px;
         }
     }
 
@@ -61,7 +66,7 @@
             margin-top: 20px;
             width: 10px;
             height: 25px;
-            content: url('../../../images/patients/patients_icon.png');
+            content: image-url('./patients/patients_icon.png');
         }
     }
 
@@ -84,16 +89,8 @@
             margin-left: 4px;
             width: 10px;
             height: 25px;
-            content: url('../../../images/groups/groups_icon.png');
+            content: image-url('./groups/groups_icon.png');
         }
-        //        font-family: 'Ionicons';
-        //
-        //        &:before {
-        //            display: inline-block;
-        //            margin-top: 10px;
-        //            content: '\f47d';
-        //            font-size: 30px;
-        //        }
     }
 
     &:hover,
@@ -105,11 +102,11 @@
         }
 
         .icon-patient:before {
-            content: url('../../../images/patients/patients_icon_active.png');
+            content: image-url('./patients/patients_icon_active.png');
         }
 
         .icon-group:before {
-            content: url('../../../images/groups/groups_icon_active.png');
+            content: image-url('./groups/groups_icon_active.png');
         }
     }
 }

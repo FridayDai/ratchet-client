@@ -13,7 +13,8 @@ module.exports = {
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
-        profile: "./flightPages/profile.js"
+        profile: "./flightPages/profile.js",
+        taskCompletion: "./flightPages/taskCompletion.js"
     },
     output: {
         path: absoluteContext,
@@ -42,7 +43,8 @@ module.exports = {
             "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
             select2: "bower_components/select2/select2.js",
-            "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js"
+            "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
+            d3: __dirname + '/node_modules/d3/d3.js'
         }
     },
     module: {

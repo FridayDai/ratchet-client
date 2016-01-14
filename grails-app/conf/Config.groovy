@@ -247,8 +247,10 @@ ratchetv2 {
             downloadErrors = "${ratchetv2.server.url.base}/clients/%s/bulk/error/link"
             savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
-
             checkPatientEmail = "${ratchetv2.server.url.base}/patients/check_email"
+
+            //Report URL
+            taskConversion = "${ratchetv2.server.url.base}/clients/conversion"
 
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/staffs"

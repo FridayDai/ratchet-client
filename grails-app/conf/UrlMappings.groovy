@@ -122,6 +122,10 @@ class UrlMappings {
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")
 
+        //Reports
+        "/reports/task-completion"(controller: "reports", action: "renderTaskCompletionReport")
+        "/reports/conversion"(controller: 'reports', action: "updateTaskCompletionReport")
+
         "500"(view: '/error/error')
         "404"(view: '/error/error404')
     }
