@@ -338,3 +338,14 @@ ratchetv2 {
         trackingId = System.getProperty("GA_CLIENT_CODE") ?: "UA-60192214-2"
     }
 }
+
+grails.plugin.awssdk.accessKey = PropertyUtils.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
+grails.plugin.awssdk.secretKey = PropertyUtils.getProperty("AWS_SECRET_KEY") ?: "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"
+grails.plugin.awssdk.region = PropertyUtils.getProperty("AWS_REGION") ?: "us-east-1"
+
+ratchet {
+    s3 {
+        scanned_pdf_bucket = PropertyUtils.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
+    }
+
+}

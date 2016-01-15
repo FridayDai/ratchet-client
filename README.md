@@ -74,4 +74,8 @@ ratchet-v2-provider-desktop
 - SERVER_URL
 - CDN_ENABLE    // true | false | not define
 - CDN_ASSET_DOMAIN_CLIENT    // just cloudfront url like: ```https://d1gdqclzwn7f9.cloudfront.net```
+- AWS_ACCESS_KEY
+- AWS_SECRET_KEY
+- AWS_REGION
+- SCANNED_PDF_BUCKET
 
