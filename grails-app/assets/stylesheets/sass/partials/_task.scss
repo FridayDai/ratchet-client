@@ -446,16 +446,16 @@
         &+.score{
             border-left: 1px  $base-color-bg-head solid;
         }
-
-        &.score-2-columns {
-            padding: 0 30px;
-        }
     }
 
     .score-number {
         display: inline-block;
         padding-bottom: 2px;
         font-size: 19px;
+    }
+
+    .score-label {
+        text-transform: capitalize;
     }
 
 }
