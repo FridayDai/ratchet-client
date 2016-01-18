@@ -29,6 +29,14 @@ class StatusCodeConstants {
 
     public static final String[] TASK_STATUS =
             ["undefined", "new", "overdue", "schedule", "pending", "complete", "expired"]
+
+    public static final Map TASK_NRS_SCORE = [
+            "neck": "Neck Result",
+            "arm": "Arm Result",
+            "back": "Back Result",
+            "leg": "Leg Result"
+    ]
+
     public static final Map TASK_OOS_SCORE = [
             "SYMPTOMS": "Symptoms",
             "PAIN": "Pain",
