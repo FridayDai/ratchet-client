@@ -37,8 +37,10 @@
 
                 </g:if>
             </div>
-
         </g:if>
+        <g:else>
+            <div class="footer-bottom"></div>
+        </g:else>
     </div>
 
 </div>
