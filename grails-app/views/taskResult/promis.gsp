@@ -61,13 +61,14 @@
                                     <span class="severe-pain">Severe Pain</span>
                                     <g:each var="choice" in="${question.choices}" status="k">
                                         <li class="answer-nrs">
-                                            <label class="choice choice-number choice-number-${k}">
-                                                <input type="radio" class="rc-choice-hidden back" disabled="true"
-                                                       name="choices.${10 + 2 * i}"
-                                                       <g:if test="${choice.id == question.answerChoiceId}">checked</g:if>
-                                                       value="${k}"/>
-                                                <span class="rc-radio"></span>
-                                            </label>
+                                            <span class="result-circle-radio-nrs">
+                                                <g:if test="${choice.id == question.answerChoiceId}">
+                                                    <span class="result-circle-radio-checked-nrs"><i class="content-number-checked">${k}</i></span>
+                                                </g:if>
+                                                <g:else>
+                                                    <i class="content-number">${k}</i>
+                                                </g:else>
+                                            </span>
                                         </li>
                                     </g:each>
                                 </ul>

@@ -28,17 +28,9 @@
             </g:else>
         </div>
         </g:if>
-        <g:if test="${task?.testId == 14}">
-            <div class="item-context">
-                <p>General questionnaire to access information about patient's health</p>
-            </div>
-        </g:if>
-        <g:else>
-            <div class="item-context">
-                <p>${task?.description}</p>
-            </div>
-        </g:else>
-
+        <div class="item-context">
+            <p>${task?.description}</p>
+        </div>
     </div>
 
     <div class="box-item-footer">
@@ -103,6 +95,9 @@
                                         <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_KOOS_JR || RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_HOOS_JR}">
                                             <label>${StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL[secondSplit[0]]}</label>
                                         </g:if>
+                                        <g:elseif test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_PROMIS}">
+                                            <label>${secondSplit[0]}</label>
+                                        </g:elseif>
                                         <g:else>
                                             <label class="capitalize">${secondSplit[0]} Result</label>
                                         </g:else>
