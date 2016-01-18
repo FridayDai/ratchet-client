@@ -187,7 +187,7 @@
                                     <span class="text">More than 12 months ago:
                                         <span class="underline-text">${mixedResult['3-6s']}
                                         </span>
-                                        years ago.</span>
+                                        year(s) ago.</span>
                                 </li>
                             </ul>
                         </div>
