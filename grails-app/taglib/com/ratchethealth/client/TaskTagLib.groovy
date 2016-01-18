@@ -5,7 +5,7 @@ class TaskTagLib {
     def scoreTemplate(name, number, padding) {
         def html = '<span class="score" style="padding: 0 ' + padding + 'px">' +
                 '<div class="score-number">' + number + '</div>' +
-                '<div class="capitalize">' + name + '</div>' +
+                '<div class="score-label">' + name + '</div>' +
                 '</span>'
         return html
     }
