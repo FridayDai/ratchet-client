@@ -24,10 +24,6 @@ class RatchetConstants {
     public static final String TOOL_NAME_HOOS_JR = 'HOSS, JR.';
     public static final String TOOL_NAME_PROMIS = 'promis';
 
-    //1.DASH 2.ODI 3.NDI 4.NRS-BACK 5.NRS-NECK 6.QuickDASH 7.KOOS 8.HOOS
-    // 9.Harris Hip Score 10.Fairley Nasal Symptom 11.Pain Chart Reference - Neck
-    // 12.Pain Chart Reference - Neck 13.New Patient Questionnaire Tool 
-    // 14.Promis
     public static final Map TOOL_TYPE = [
             1 : TOOL_NAME_DASH,
             2 : TOOL_NAME_ODI,
@@ -53,7 +49,10 @@ class RatchetConstants {
     public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 17]
 
     //Task type which has multiple task score
-    public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 15, 1000]
+    public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 1000]
+
+    //Task type that has view result.
+    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 1000]
 
     //For pain neck and pain back.
     public static final String[] PAIN_FREQUENCY = [
