@@ -63,8 +63,16 @@
                                         <li class="answer-nrs">
                                             <span class="result-circle-radio-nrs">
                                                 <g:if test="${choice.id == question.answerChoiceId}">
-                                                    <span class="result-circle-radio-checked-nrs"><i class="content-number-checked">${k}</i></span>
+                                                    <g:if test="${k == 10}">
+                                                        <span class="result-circle-radio-checked-nrs"><i class="content-number-checked-10">${k}</i></span>
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="result-circle-radio-checked-nrs"><i class="content-number-checked">${k}</i></span>
+                                                    </g:else>
                                                 </g:if>
+                                                <g:elseif test="${k == 10}">
+                                                    <i class="content-number-10">${k}</i>
+                                                </g:elseif>
                                                 <g:else>
                                                     <i class="content-number">${k}</i>
                                                 </g:else>

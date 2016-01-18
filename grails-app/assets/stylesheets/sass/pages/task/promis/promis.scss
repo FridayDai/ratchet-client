@@ -58,20 +58,27 @@ body {
     position: relative;
     margin-right: 13px;
 
-    .content-number {
+    .content-number, .content-number-checked, .content-number-10, .content-number-checked-10 {
         position: absolute;
-        left: 9px;
+        left: 12px;
         top: 7px;
         color: #b3b3b3;
         font-family: sans-serif;
     }
 
     .content-number-checked {
-        position: absolute;
-        left: 9px;
-        top: 7px;
+        left: 11px;
         color: #fff;
-        font-family: sans-serif;
+    }
+
+    .content-number-10 {
+        left: 7px;
+        color: #b3b3b3;
+    }
+
+    .content-number-checked-10 {
+        left: 7px;
+        color: #fff;
     }
 }
 
