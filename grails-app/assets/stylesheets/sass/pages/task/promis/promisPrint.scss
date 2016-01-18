@@ -57,6 +57,46 @@ html,body {
     background-color: $result-main-color;
 }
 
+.result-circle-radio-nrs {
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 18px;
+    height: 18px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    margin-right: 5px;
+
+    .content-number {
+        position: absolute;
+        left: 2px;
+        top: 0px;
+        color: #000;
+        font-size: 10px;
+        padding: 3px;
+    }
+
+    .content-number-checked {
+        position: absolute;
+        left: -4px;
+        top: -7px;
+        color: #fff;
+        font-size: 10px;
+    }
+}
+
+.result-circle-radio-checked-nrs {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border: 9px solid $result-main-color;
+}
+
+
+
 .task-list-wrapper:after {
     content: '';
     display: table;
@@ -99,115 +139,6 @@ html,body {
 }
 
 .severe-pain {
-    right: 20px;
-}
-
-.choice-number {
-    .rc-radio {
-        text-align: center;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        font-size: 12px;
-        line-height: 20px;
-        background: #fff;
-        margin-right: 5px;
-    }
-
-    .rc-radio:before {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        font-size: 12px;
-        line-height: 20px;
-        color: #000;
-        border: 1px solid gray
-    }
-
-    .rc-choice-hidden:checked + .rc-radio:before {
-        position: static;
-        width: 20px;
-        height: 20px;
-        color: #fff;
-        background-color: $result-main-color !important;
-    }
-/*    .back:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: -1;
-        border-bottom: 1000px solid #eee; *//* Make it fit your needs *//*
-    }*/
-}
-
-.choice-number-0 {
-    .rc-radio:before {
-        content: '0' !important;
-    }
-}
-
-.choice-number-1 {
-    .rc-radio:before {
-        content: '1' !important;
-    }
-}
-
-.choice-number-2 {
-    .rc-radio:before {
-        content: '2' !important;
-    }
-}
-
-.choice-number-3 {
-    .rc-radio:before {
-        content: '3' !important;
-    }
-}
-
-.choice-number-4 {
-    .rc-radio:before {
-        content: '4' !important;
-    }
-}
-
-.choice-number-5 {
-    .rc-radio:before {
-        content: '5' !important;
-    }
-}
-
-.choice-number-6 {
-    .rc-radio:before {
-        content: '6' !important;
-    }
-}
-
-.choice-number-7 {
-    .rc-radio:before {
-        content: '7' !important;
-    }
-}
-
-.choice-number-8 {
-    .rc-radio:before {
-        content: '8' !important;
-    }
-}
-
-.choice-number-9 {
-    .rc-radio:before {
-        content: '9' !important;
-    }
-}
-
-.choice-number-10 {
-    .rc-radio:before {
-        content: '10' !important;
-    }
+    right: 28px;
 }
 

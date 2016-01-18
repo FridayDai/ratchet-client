@@ -48,6 +48,42 @@ body {
     background-color: $result-main-color;
 }
 
+.result-circle-radio-nrs {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 13px;
+
+    .content-number {
+        position: absolute;
+        left: 9px;
+        top: 7px;
+        color: #b3b3b3;
+        font-family: sans-serif;
+    }
+
+    .content-number-checked {
+        position: absolute;
+        left: 9px;
+        top: 7px;
+        color: #fff;
+        font-family: sans-serif;
+    }
+}
+
+.result-circle-radio-checked-nrs {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $result-main-color;
+    position: absolute;
+}
+
 .task-list-wrapper:after {
     content: '';
     display: table;
@@ -103,121 +139,7 @@ body {
 }
 
 .severe-pain {
-    right: 78px;
+    right: 90px;
 }
-
-.choice-number {
-    .rc-radio {
-        text-align: center;
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        font-size: 20px;
-        line-height: 40px;
-        background: #fff;
-        margin-right: 5px;
-    }
-
-    .rc-radio:before {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        font-size: 20px;
-        line-height: 40px;
-        color: #BABACC;
-        border: 1px solid #BABACC
-    }
-
-    .rc-choice-hidden:checked + .rc-radio:before {
-            position: static;
-            width: 40px;
-            height: 40px;
-            color: #fff;
-            background-color: $result-main-color;
-
-    }
-}
-
-.choice-number-0 {
-    .rc-radio:before {
-        content: '0' !important;
-    }
-}
-
-.choice-number-1 {
-    .rc-radio:before {
-        content: '1' !important;
-    }
-}
-
-.choice-number-2 {
-    .rc-radio:before {
-        content: '2' !important;
-    }
-}
-
-.choice-number-3 {
-    .rc-radio:before {
-        content: '3' !important;
-    }
-}
-
-.choice-number-4 {
-    .rc-radio:before {
-        content: '4' !important;
-    }
-}
-
-.choice-number-5 {
-    .rc-radio:before {
-        content: '5' !important;
-    }
-}
-
-.choice-number-6 {
-    .rc-radio:before {
-        content: '6' !important;
-    }
-}
-
-.choice-number-7 {
-    .rc-radio:before {
-        content: '7' !important;
-    }
-}
-
-.choice-number-8 {
-    .rc-radio:before {
-        content: '8' !important;
-    }
-}
-
-.choice-number-9 {
-    .rc-radio:before {
-        content: '9' !important;
-    }
-}
-
-.choice-number-10 {
-    .rc-radio:before {
-        content: '10' !important;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
