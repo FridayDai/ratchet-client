@@ -341,7 +341,7 @@
         left: 350px;
         top: 20px;
         position: absolute;
-        background: #fff url('../../../images/select2-spinner.gif') no-repeat 100% !important;
+        background: #fff image-url('select2-spinner.gif', false, false) no-repeat 100% !important;
     }
 }
 
@@ -388,7 +388,7 @@
         left: -35px;
         width: 10px;
         height: 25px;
-        content: url('../../../images/patients/patients_icon_active.png');
+        content: image-url('patients/patients_icon_active.png', false, false);
     }
 }
 

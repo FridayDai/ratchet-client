@@ -1,0 +1,276 @@
+@import '../../partials/common';
+@import '../../partials/theme';
+@import '../../partials/select2';
+@import '../../partials/dialog';
+
+$main-color: #225f6f;
+$line-color-0: #55A9C3;
+$line-color-1: #DA718E;
+$line-color-2: #D89853;
+$line-color-3: #85A649;
+$line-color-4: #885AAD;
+
+.report-icon {
+    &:before {
+        position: absolute;
+        display: inline-block;
+        top: 2px;
+        left: -30px;
+        width: 10px;
+        height: 25px;
+        content: image-url('nav/reports_active.png', false, false);
+    }
+}
+
+.inner-search {
+    .search-content {
+        margin-bottom: 10px;
+    }
+
+    .select-tip {
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .ui-combobox input {
+        min-width: 220px;
+    }
+
+    .filler-content {
+        max-width: 270px;
+    }
+}
+
+.view-score-bar {
+    display: none;
+    margin: 0 40px 20px;
+    font-size: 16px;
+    color: $main-color;
+
+    .score-item {
+        margin: 0 8px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        color: white;
+        cursor: pointer;
+        border: 1px solid transparent;
+
+        &.inactive {
+            background-color: white;
+            color: #999;
+            border-color: #999;
+        }
+    }
+
+    .score-item-0 {
+        background-color: $line-color-0;
+    }
+
+    .score-item-1 {
+        background-color: $line-color-1;
+    }
+
+    .score-item-2 {
+        background-color: $line-color-2;
+    }
+
+    .score-item-3 {
+        background-color: $line-color-3;
+    }
+
+    .score-item-4 {
+        background-color: $line-color-4;
+    }
+}
+
+.chart-group {
+    position: relative;
+}
+
+.chart-panel {
+    display: none;
+    margin-top: 30px;
+
+    .chart {
+        height: 550px;
+    }
+
+    line {
+        stroke: #818181;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    text {
+        fill: #666;
+    }
+
+    .axis {
+        path {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .domain {
+            display: none;
+        }
+
+        &.y.right-one {
+            .tick line {
+                display: none;
+            }
+        }
+
+        &.x {
+            .tick line {
+                display: none;
+            }
+
+            .surgery-date-x {
+                line {
+                    display: block;
+                    stroke: $main-color;
+                }
+
+                rect {
+                    fill: white;
+                }
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .triangle {
+                stroke: $main-color;
+                fill: $main-color;
+                shape-rendering: initial;
+            }
+        }
+    }
+
+    .axis-unit {
+        font-size: 12px;
+
+        line {
+            stroke-width: 2;
+        }
+    }
+
+    .line-group {
+        .average-line {
+            stroke-width: 2;
+            shape-rendering: initial;
+            stroke: $line-color-0;
+        }
+
+        circle {
+            fill: $line-color-0;
+        }
+
+        &.active {
+            .average-line {
+                stroke-width: 3;
+            }
+        }
+
+        &.disable {
+            opacity: 0.4;
+        }
+
+        &.line-group-1 {
+            .average-line {
+                stroke: $line-color-1;
+            }
+
+            circle {
+                fill: $line-color-1;
+            }
+        }
+
+        &.line-group-2 {
+            .average-line {
+                stroke: $line-color-2;
+            }
+
+            circle {
+                fill: $line-color-2;
+            }
+        }
+
+        &.line-group-3 {
+            .average-line {
+                stroke: $line-color-3;
+            }
+
+            circle {
+                fill: $line-color-3;
+            }
+        }
+
+        &.line-group-4 {
+            .average-line {
+                stroke: $line-color-4;
+            }
+
+            circle {
+                fill: $line-color-4;
+            }
+        }
+    }
+
+    .tip-group {
+        display: none;
+
+        rect {
+            fill: $main-color;
+        }
+
+        line {
+            stroke: $main-color;
+        }
+
+        text {
+            fill: white;
+            font-size: 12px;
+        }
+
+        &.active {
+            display: block;
+        }
+    }
+}
+
+.chart-update-tip {
+    margin: 40px 40px 0;
+    text-align: right;
+
+    span {
+        font-weight: 700;
+    }
+}
+
+.not-available {
+    display: none;
+    text-align: center;
+    padding-top: 60px;
+
+    .icon {
+        font-size: 120px;
+        color: #EBEBEB;
+    }
+
+    .desc {
+        margin-top: 20px;
+    }
+}
+
+.no-data {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    margin-left: -58px;
+    font-size: 15px;
+    font-weight: 700;
+}

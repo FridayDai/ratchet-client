@@ -1,6 +1,6 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
-var URLs = require('../../constants/Urls');
+var WithCombobox = require('../../common/WithCombobox');
+var URLs = require('../../../constants/Urls');
 
 function ToolbarTreatmentCombobox() {
     this.options({
@@ -21,7 +21,8 @@ function ToolbarTreatmentCombobox() {
 
     this.attributes({
         selectDataKey: 'treatmentId',
-        selectEvent: 'selectTreatmentForPatientTable'
+        selectEvent: 'selectTreatmentForReportOverview',
+        clearEvent: 'clearTreatmentForReportOverview'
     });
 }
 

@@ -6,11 +6,52 @@ import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
 @TestFor(ReportService)
 class ReportServiceSpec extends Specification {
+
+    def setup() {
+    }
+
+    def cleanup() {
+    }
+
+    def "test getProviderAverageOnOverview with successful result"() {
+        given:
+        def jBuilder = new JsonBuilder()
+        jBuilder {
+            id 1
+        }
+
+        MultipartBody.metaClass.asString = { ->
+            return [
+                status: 200,
+                body  : jBuilder.toString()
+            ]
+        }
+
+        when:
+        def result = service.getProviderAverageOnOverview('token', 1, 1, 1, 1, 2015)
+
+        then:
+        result.id == 1
+    }
+
+    def "test getProviderAverageOnOverview without successful result"() {
+        given:
+        MultipartBody.metaClass.asString = { ->
+            return [
+                status: 400,
+                body  : "body"
+            ]
+        }
+
+        when:
+        service.getProviderAverageOnOverview('token', 1, 1, 1, 1, 2015)
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
 
     def "test task completion conversion with successful result"() {
         given:
@@ -21,8 +62,8 @@ class ReportServiceSpec extends Specification {
 
         MultipartBody.metaClass.asString = { ->
             return [
-                    status: 200,
-                    body  : jBuilder.toString()
+                status: 200,
+                body  : jBuilder.toString()
             ]
         }
 
@@ -38,8 +79,8 @@ class ReportServiceSpec extends Specification {
 
         MultipartBody.metaClass.asString = { ->
             return [
-                    status: 400,
-                    body  : "body"
+                status: 400,
+                body  : "body"
             ]
         }
 

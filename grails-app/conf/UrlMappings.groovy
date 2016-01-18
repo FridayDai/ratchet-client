@@ -119,12 +119,23 @@ class UrlMappings {
         // announcement
         "/announcement/close"(controller: "announcement", action: "close")
 
+        // report
+        "/reports/overview"(controller: "report") {
+            action = [GET: "getOverviewPage"]
+        }
+
+        "/reports/overview/provider-average"(controller: "report") {
+            action = [POST: "getProviderAverageOverview"]
+        }
+
+        "/reports/task-completion"(controller: "report") {
+            action = [GET: "renderTaskCompletionReport"]
+        }
+
+        "/reports/conversion"(controller: 'reports', action: "updateTaskCompletionReport")
+
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")
-
-        //Reports
-        "/reports/task-completion"(controller: "reports", action: "renderTaskCompletionReport")
-        "/reports/conversion"(controller: 'reports', action: "updateTaskCompletionReport")
 
         "500"(view: '/error/error')
         "404"(view: '/error/error404')

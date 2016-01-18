@@ -34,7 +34,7 @@
         margin-top: 50px;
 
         &:before {
-            content: url('../../../images/login/ratchet_health_cube.png');
+            content: image-url('login/ratchet_health_cube.png', false, false);
         }
     }
 }

@@ -1,6 +1,6 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
-var URLs = require('../../constants/Urls');
+var WithCombobox = require('../../common/WithCombobox');
+var URLs = require('../../../constants/Urls');
 
 function ToolbarProviderCombobox() {
     this.options({
@@ -21,8 +21,8 @@ function ToolbarProviderCombobox() {
     });
 
     this.attributes({
-        selectDataKey: 'surgeonId',
-        selectEvent: 'selectProviderForPatientTable'
+        selectDataKey: 'providerId',
+        selectEvent: 'selectProviderForReportOverview'
     });
 }
 

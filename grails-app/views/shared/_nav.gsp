@@ -11,9 +11,6 @@
         </g:else>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
             <g:else>class="login-info nav-li"</g:else>>
-            %{--<a class="" controller="profile"--}%
-            %{--action="getProfile"--}%
-            %{--params="[accountId: request.session.accountId]">--}%
             <a href="/profile/${request.session.accountId}">
                 <div class="user-photo">
                     <img src="${assetPath(src: 'user.png')}">
@@ -26,14 +23,26 @@
                 </ul>
             </a>
         </li>
+        <li class="nav-li expendable-nav <g:if test="${controllerName == 'report'}">expended</g:if><g:else>collapsed</g:else>">
+            <a href="#" class="nav-button icon-report">
+                <div class="title">Reports</div>
+                <span class="expend-icon"></span>
+            </a>
+            <ul class="sub-nav-list">
+                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getOverview'}">active</g:if>">
+                    <a href="/reports/overview">
+                        <div class="title">Overview</div>
+                    </a>
+                </li>
+                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getTaskCompletion'}">active</g:if>">
+                    <a href="/reports/task-completion">
+                        <div class="title">Task Completion</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
-            <li <g:if test="${controllerName == 'reports'}">class="nav-li active"</g:if>
-                <g:else>class="nav-li"</g:else>>
-                <g:link controller="reports" action="renderTaskCompletionReport">
-                    <div class="text">Task Completion</div>
-                </g:link>
-            </li>
             <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
                 <g:else>class="nav-li"</g:else>>
                 <g:link controller="patients" class="icon-patient">

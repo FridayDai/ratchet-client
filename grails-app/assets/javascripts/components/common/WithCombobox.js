@@ -31,12 +31,50 @@ function WithCombobox() {
         WithOptions
     ]);
 
+    this.attributes({
+        selectEvent: 'select',
+        selectDataKey: 'key'
+    });
+
     this._initCombobox = function () {
-        this.$node.combobox(composeOption(this._options, this));
+        composeOption(this._options, this);
+        this.$node.combobox(this.initOptions());
+    };
+
+    this.onClear = function () {
+        this.select();
+
+        if (this.attr.clearEvent) {
+            this.trigger(this.attr.clearEvent);
+        }
+    };
+
+    this.onSelect = function (e, ui) {
+        this.select(ui.item.value);
+    };
+
+    this.previousVal = null;
+
+    this.select = function (id) {
+        if (_.isUndefined(id)) {
+            id = null;
+        }
+
+        if (this.previousVal !== id) {
+            this.previousVal = id;
+
+            var data = {};
+
+            data[this.attr.selectDataKey] = id;
+            this.trigger(this.attr.selectEvent, data);
+        }
     };
 
     this.after('initialize', function () {
         this._initCombobox();
+
+        this.on('autocompleteselect', this.onSelect);
+        this.on('autocompleteclear', this.onClear);
     });
 
     this.before('teardown', function () {

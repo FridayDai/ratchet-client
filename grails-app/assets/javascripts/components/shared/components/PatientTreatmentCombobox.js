@@ -33,11 +33,6 @@ function PatientTreatmentCombobox() {
     this.onClear = function () {
         this.trigger(this.attr.clearEvent);
     };
-
-    this.after('initialize', function () {
-        this.on('autocompleteselect', this.onSelect);
-        this.on('autocompleteclear', this.onClear);
-    });
 }
 
 module.exports = flight.component(WithCombobox, PatientTreatmentCombobox);
