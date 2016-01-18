@@ -54,6 +54,7 @@
                 <g:formatDate date="${taskDate}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}" format="MMM dd, yyyy"/>
             </g:if>
         </span>
+
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
             <g:if test="${task?.testId == 2 || task?.testId == 3 || task?.testId == 11 || task?.testId == 12 || task?.testId == 13 || task?.testId == 14 || task?.testId == 17 || task?.testId == 15 || task?.testId == 1000}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank" class="view-results"><span>View Results</span></a>
