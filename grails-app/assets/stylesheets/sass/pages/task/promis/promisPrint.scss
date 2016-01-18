@@ -68,21 +68,29 @@ html,body {
     border-radius: 50%;
     margin-right: 5px;
 
-    .content-number {
+    .content-number, .content-number-10 {
         position: absolute;
-        left: 2px;
-        top: 0px;
+        left: 3px;
+        top: 0;
         color: #000;
         font-size: 10px;
         padding: 3px;
     }
 
-    .content-number-checked {
+    .content-number-checked, .content-number-checked-10 {
         position: absolute;
         left: -4px;
         top: -7px;
         color: #fff;
         font-size: 10px;
+    }
+
+    .content-number-10 {
+        left: 0;
+    }
+
+    .content-number-checked-10 {
+        left: -6px;
     }
 }
 
@@ -92,7 +100,7 @@ html,body {
     width: 0;
     height: 0;
     border-radius: 50%;
-    border: 9px solid $result-main-color;
+    border: 9px solid #AED2E2;
 }
 
 
