@@ -216,7 +216,7 @@ function ToolbarPanel() {
             }
 
             if (bbox.width) {
-                d3.select(this.parentElement)
+                d3.select($(this).parent().get(0))
                     .insert('rect', 'text')
                     .attr('x', bbox.x - hPadding)
                     .attr('y', bbox.y - vPadding)
@@ -254,7 +254,7 @@ function ToolbarPanel() {
                 var cx = me.scales.x(d.offset),
                     cy = me.scales.y(d.score);
 
-                var lineGroup = d3.select(this.parentElement);
+                var lineGroup = d3.select($(this).parent().get(0));
 
                 var tip = me.chartObject.select('g.tip-group-{0}'.format(lineGroup.datum()))
                     .append('g')
@@ -307,13 +307,13 @@ function ToolbarPanel() {
 
         lineGroup.selectAll('circle, path')
             .on('mouseover', function (d, i) {
-                me.onLineMouseover(d, i, this.parentElement);
+                me.onLineMouseover(d, i, $(this).parent().get(0));
             })
             .on('mouseout', function (d, i) {
-                me.onLineMouseout(d, i, this.parentElement);
+                me.onLineMouseout(d, i, $(this).parent().get(0));
             })
             .on('click', function (d, i) {
-                me.onLineClicked(d, i, this.parentElement);
+                me.onLineClicked(d, i, $(this).parent().get(0));
             });
     };
 
