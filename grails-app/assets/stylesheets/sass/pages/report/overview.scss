@@ -2,6 +2,7 @@
 @import '../../partials/theme';
 @import "../../partials/combobox";
 @import '../../partials/dialog';
+@import 'report';
 
 $main-color: #225f6f;
 $line-color-0: #55A9C3;
@@ -10,34 +11,9 @@ $line-color-2: #D89853;
 $line-color-3: #85A649;
 $line-color-4: #885AAD;
 
-.report-icon {
-    &:before {
-        position: absolute;
-        display: inline-block;
-        top: 2px;
-        left: -30px;
-        width: 10px;
-        height: 25px;
-        content: image-url('nav/reports_active.png', false, false);
-    }
-}
-
 .inner-search {
     .search-content {
         margin-bottom: 10px;
-    }
-
-    .select-tip {
-        font-size: 11px;
-        font-weight: 700;
-    }
-
-    .ui-combobox input {
-        min-width: 220px;
-    }
-
-    .filler-content {
-        max-width: 270px;
     }
 }
 

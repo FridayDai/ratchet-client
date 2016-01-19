@@ -26,14 +26,19 @@ function composeOption (options, scope) {
     return _.assign(options, result);
 }
 
+var DEFAULT_SELECT_EVENT = 'select';
+var DEFAULT_CLEAR_EVENT = 'clear';
+var DEFAULT_SELECT_DATA_KEY = 'key';
+
 function WithCombobox() {
     flight.compose.mixin(this, [
         WithOptions
     ]);
 
     this.attributes({
-        selectEvent: 'select',
-        selectDataKey: 'key'
+        selectEvent: DEFAULT_SELECT_EVENT,
+        clearEvent: DEFAULT_CLEAR_EVENT,
+        selectDataKey: DEFAULT_SELECT_DATA_KEY
     });
 
     this._initCombobox = function () {
@@ -44,9 +49,15 @@ function WithCombobox() {
     this.onClear = function () {
         this.select();
 
-        if (this.attr.clearEvent) {
+        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
             this.trigger(this.attr.clearEvent);
         }
+    };
+
+    this.clear = function () {
+        $(this.$node)
+            .val('')
+            .data("id", '');
     };
 
     this.onSelect = function (e, ui) {
@@ -66,7 +77,10 @@ function WithCombobox() {
             var data = {};
 
             data[this.attr.selectDataKey] = id;
-            this.trigger(this.attr.selectEvent, data);
+
+            if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
+                this.trigger(this.attr.selectEvent, data);
+            }
         }
     };
 

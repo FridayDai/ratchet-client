@@ -29,12 +29,12 @@
                 <span class="expend-icon"></span>
             </a>
             <ul class="sub-nav-list">
-                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getOverview'}">active</g:if>">
+                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getOverviewPage'}">active</g:if>">
                     <a href="/reports/overview">
                         <div class="title">Overview</div>
                     </a>
                 </li>
-                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getTaskCompletion'}">active</g:if>">
+                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'renderTaskCompletionReport'}">active</g:if>">
                     <a href="/reports/task-completion">
                         <div class="title">Task Completion</div>
                     </a>

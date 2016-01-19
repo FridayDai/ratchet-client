@@ -22,6 +22,12 @@ function PatientProviderCombobox() {
         appendTo: ".container"
     });
 
+    this.attributes({
+        groupSelectEvent: 'groupSelectEvent',
+        groupClearEvent: 'groupClearEvent',
+        resetEvent: 'resetEvent'
+    });
+
     this._previousGroupId = null;
 
     this.onGroupSelected = function (e, data) {
@@ -43,12 +49,6 @@ function PatientProviderCombobox() {
 
     this.getGroupId = function () {
         return this._groupId;
-    };
-
-    this.clear = function () {
-        $(this.$node)
-            .val('')
-            .data("id", '');
     };
 
     this.onReset = function () {
