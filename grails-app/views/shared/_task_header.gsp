@@ -47,6 +47,9 @@
                                             <g:if test="${RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_KOOS_JR || RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_HOOS_JR}">
                                                 <div class="score-des">${StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL[secondSplit[0]]}</div>
                                             </g:if>
+                                            <g:else test="${RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_PROMIS}">
+                                                <div class="score-des">${secondSplit[0]}</div>
+                                            </g:else>
                                         </div>
                                     </g:if>
                             </g:each>

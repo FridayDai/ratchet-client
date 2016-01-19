@@ -135,6 +135,7 @@ html,body {
     position: relative;
 }
 
+//special
 .no-pain,.severe-pain {
     position: absolute;
     font-size: 12px;
@@ -148,5 +149,10 @@ html,body {
 
 .severe-pain {
     right: 28px;
+}
+
+.score-wrap {
+    display: inline-block;
+    padding: 0 6px;
 }
 
