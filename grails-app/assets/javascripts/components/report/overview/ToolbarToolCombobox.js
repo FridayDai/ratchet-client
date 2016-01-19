@@ -35,6 +35,7 @@ function ToolbarToolCombobox() {
         }
 
         if (data.treatmentId !== this._previousTreatmentId) {
+            this.clear();
             this.setTreatmentId(data.treatmentId);
             this._previousTreatmentId = data.treatmentId;
         }
@@ -49,6 +50,7 @@ function ToolbarToolCombobox() {
     };
 
     this.onReset = function () {
+        this.clear();
         this.$node.prop("disabled", true);
         this.$node.parent().find('.ui-button').addClass('disable');
         this.setTreatmentId('');

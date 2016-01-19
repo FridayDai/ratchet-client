@@ -1,10 +1,10 @@
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
-<g:set var="scriptPath" value="dist/reportsOverview.bundle.js"/>
+<g:set var="scriptPath" value="dist/reportOverview.bundle.js"/>
 <g:set var="cssPath" value="report/overview.css"/>
 <g:applyLayout name="main">
     <html>
     <head>
-        <title>Reports - Outcome - Ratchet Health</title>
+        <title>Reports - Outcome</title>
     </head>
     <body>
     <div class="content">

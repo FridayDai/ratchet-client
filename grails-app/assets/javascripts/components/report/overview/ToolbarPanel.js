@@ -38,6 +38,7 @@ function ToolbarPanel() {
     };
 
     this.onTreatmentSelect = function (e, data) {
+        this.searchFields.toolId = null;
         this.triggerSearch(data);
     };
 
@@ -59,6 +60,8 @@ function ToolbarPanel() {
 
     this.search = function () {
         var me = this;
+
+        this.trigger('startGettingProviderAverageOverview');
 
         $.ajax({
             url: URLs.PROVIDER_AVERAGE_OVERVIEW,

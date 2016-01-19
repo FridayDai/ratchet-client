@@ -414,18 +414,12 @@ function ToolbarPanel() {
     };
 
     this.onRender = function (e, data) {
-        this.clearSVG();
         this.$node.show();
 
         if (data.range === UNSUPPORTED) {
             this.select('noAvailableSelector').show();
-            this.select('chartGroupSelector').hide();
-            this.select('noDataSelector').hide();
         } else {
-            this.select('noAvailableSelector').hide();
             this.select('chartGroupSelector').show();
-            this.select('noDataSelector').hide();
-            this.select('scoreBarSelector').hide();
 
             this.drawFrame(data.range);
 
@@ -444,8 +438,18 @@ function ToolbarPanel() {
         }
     };
 
+    this.onClear = function () {
+        this.$node.hide();
+        this.clearSVG();
+        this.select('noAvailableSelector').hide();
+        this.select('chartGroupSelector').hide();
+        this.select('noDataSelector').hide();
+        this.select('scoreBarSelector').hide();
+    };
+
     this.after('initialize', function () {
         this.on(document, 'getProviderAverageOverviewSuccessful', this.onRender);
+        this.on(document, 'startGettingProviderAverageOverview', this.onClear);
     });
 }
 

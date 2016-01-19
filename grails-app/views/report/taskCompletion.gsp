@@ -10,7 +10,7 @@
     <body>
     <div class="content">
         <div class="inner-header" id="header-panel">
-            <label class="title account-icon">REPORTS - TASK COMPLETION</label>
+            <label class="title report-icon">REPORTS - TASK COMPLETION</label>
         </div>
 
         <div class="inner-search" id="filter-panel">

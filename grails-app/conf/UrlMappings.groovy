@@ -132,7 +132,7 @@ class UrlMappings {
             action = [GET: "renderTaskCompletionReport"]
         }
 
-        "/reports/conversion"(controller: 'reports', action: "updateTaskCompletionReport")
+        "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
 
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")
