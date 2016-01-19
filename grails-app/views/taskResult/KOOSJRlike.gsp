@@ -11,7 +11,7 @@
     <div class="odi task-result-content">
         <div class="task-list-wrapper container">
 
-            <div class="task-list-part part-0">
+            <div class= "<g:if test="${Task.sections.size() > 2}">task-list-part</g:if> part-0">
                 <g:each var="section" in="${Task.sections}" status="j">
                     <g:if test="${j < 2}">
                         <div class="section-title">${raw(section.title.find(/<h3>.*h3>/))}</div>
