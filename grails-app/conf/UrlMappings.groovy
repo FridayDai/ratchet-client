@@ -120,8 +120,8 @@ class UrlMappings {
         "/announcement/close"(controller: "announcement", action: "close")
 
         // report
-        "/reports/overview"(controller: "report") {
-            action = [GET: "getOverviewPage"]
+        "/reports/outcome"(controller: "report") {
+            action = [GET: "getOutcomePage"]
         }
 
         "/reports/overview/provider-average"(controller: "report") {

@@ -86,6 +86,7 @@ function WithCombobox() {
 
     this.after('initialize', function () {
         this._initCombobox();
+        this.clear();
 
         this.on('autocompleteselect', this.onSelect);
         this.on('autocompleteclear', this.onClear);

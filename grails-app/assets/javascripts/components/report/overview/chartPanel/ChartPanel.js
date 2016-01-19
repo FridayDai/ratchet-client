@@ -75,7 +75,7 @@ function ToolbarPanel() {
         var xScale = this.setXScale(xDomain);
 
         var yScale = this.scales.y = d3.scale.linear()
-            .domain([0, 100])
+            .domain([0, 60])
             .range([chartHeight, 0]);
 
         var xScaleDomain = xScale.domain();
@@ -111,7 +111,8 @@ function ToolbarPanel() {
         var yAxis = d3.svg.axis()
             .scale(yScale)
             .tickSize(chartWidth)
-            .orient('right');
+            .orient('right')
+            .tickValues(this.getYTickValues());
 
         var svg = this.chartObject = d3.select(this.$node.find(this.attr.chartSelector).get(0))
             .append('svg')
@@ -340,6 +341,10 @@ function ToolbarPanel() {
         if (!lineGroup.classed('hold') && !lineGroup.classed('disable')) {
             this.resetLines(lineGroup);
         }
+    };
+
+    this.getYTickValues = function () {
+
     };
 
     this.resetLines = function (d3LineGroup) {

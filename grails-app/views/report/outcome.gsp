@@ -1,5 +1,5 @@
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
-<g:set var="scriptPath" value="dist/reportOverview.bundle.js"/>
+<g:set var="scriptPath" value="dist/reportOutcome.bundle.js"/>
 <g:set var="cssPath" value="report/overview.css"/>
 <g:applyLayout name="main">
     <html>

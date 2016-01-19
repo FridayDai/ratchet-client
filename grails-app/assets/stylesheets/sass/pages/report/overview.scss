@@ -197,7 +197,7 @@ $line-color-4: #885AAD;
     }
 
     .tip-group {
-        display: none;
+        visibility: hidden;
 
         rect {
             fill: $main-color;
@@ -213,7 +213,7 @@ $line-color-4: #885AAD;
         }
 
         &.active {
-            display: block;
+            visibility: visible;
         }
     }
 }

@@ -7,8 +7,8 @@ class ReportController extends BaseController {
 
     def reportService
 
-    def getOverviewPage() {
-        render(view: '/report/overview')
+    def getOutcomePage() {
+        render(view: '/report/outcome')
     }
 
     def getProviderAverageOverview() {
