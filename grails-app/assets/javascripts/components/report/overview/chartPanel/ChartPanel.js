@@ -7,6 +7,8 @@ var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
 var UNSUPPORTED = 'UNSUPPORTED';
 
+var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
+
 function ToolbarPanel() {
     this.attributes({
         chartGroupSelector: '.chart-group',
@@ -65,7 +67,7 @@ function ToolbarPanel() {
         return this.scales.x;
     };
 
-    this.drawFrame = function (xDomain) {
+    this.drawFrame = function (xDomain, yVal) {
         var margin = {top: 50, right: 70, bottom: 140, left: 70},
             svgWidth = this.$node.width(),
             svgHeight = this.$node.height(),
@@ -75,7 +77,7 @@ function ToolbarPanel() {
         var xScale = this.setXScale(xDomain);
 
         var yScale = this.scales.y = d3.scale.linear()
-            .domain([0, 60])
+            .domain([0, yVal])
             .range([chartHeight, 0]);
 
         var xScaleDomain = xScale.domain();
@@ -112,7 +114,7 @@ function ToolbarPanel() {
             .scale(yScale)
             .tickSize(chartWidth)
             .orient('right')
-            .tickValues(this.getYTickValues());
+            .tickValues(this.getYTickValues(yVal));
 
         var svg = this.chartObject = d3.select(this.$node.find(this.attr.chartSelector).get(0))
             .append('svg')
@@ -343,8 +345,21 @@ function ToolbarPanel() {
         }
     };
 
-    this.getYTickValues = function () {
+    this.getYTickValues = function (val) {
+        var minOffset = 100;
 
+        _.each(Y_TICK_OFFSET_ARRAY, function (offset) {
+            var number = val / offset;
+
+            if (number <= 10 && number < minOffset) {
+                minOffset = number;
+            }
+        });
+
+        var result = _.range(0, val, minOffset);
+        result.push(val);
+
+        return result;
     };
 
     this.resetLines = function (d3LineGroup) {
@@ -421,12 +436,12 @@ function ToolbarPanel() {
     this.onRender = function (e, data) {
         this.$node.show();
 
-        if (data.range === UNSUPPORTED) {
+        if (data.xRange === UNSUPPORTED) {
             this.select('noAvailableSelector').show();
         } else {
             this.select('chartGroupSelector').show();
 
-            this.drawFrame(data.range);
+            this.drawFrame(data.xRange, data.yRange);
 
             if (!data.dataSet && !data.items) {
                 this.select('noDataSelector').show();
