@@ -1,4 +1,4 @@
-require('d3');
+var d3 = require('d3');
 
 function BarChart(selector, options) {
     var defaultOptions = {

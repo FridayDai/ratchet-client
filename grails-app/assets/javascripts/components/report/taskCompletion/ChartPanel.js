@@ -1,6 +1,6 @@
 var flight = require('flight');
 
-var URLs = require('../../constants/Urls');
+var URLs = require('../../../constants/Urls');
 var barChart = require('./charts/BarChart');
 var donutPlot = require('./charts/DonutPlot');
 

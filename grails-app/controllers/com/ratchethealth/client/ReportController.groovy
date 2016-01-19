@@ -23,7 +23,7 @@ class ReportController extends BaseController {
     }
 
     def renderTaskCompletionReport() {
-        render view: 'taskCompletion'
+        render view: '/report/taskCompletion'
     }
 
     def updateTaskCompletionReport() {

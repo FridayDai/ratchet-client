@@ -1,5 +1,5 @@
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
-<g:set var="scriptPath" value="dist/taskCompletion.bundle.js"/>
+<g:set var="scriptPath" value="dist/reportTaskCompletion.bundle.js"/>
 <g:set var="cssPath" value="report/taskCompletion.css"/>
 <g:applyLayout name="main">
     <html>

@@ -1,10 +1,10 @@
-require('../components/layout/Main');
+require('../../components/layout/Main');
 
 var flight = require('flight');
-var WithPage = require('../components/common/WithPage');
+var WithPage = require('../../components/common/WithPage');
 
-var ChartPanel = require('../components/taskCompletionReport/ChartPanel');
-var ProviderFilter = require('../components/taskCompletionReport/ProviderFilter');
+var ChartPanel = require('../../components/report/taskCompletion/ChartPanel');
+var ProviderFilter = require('../../components/report/taskCompletion/ProviderFilter');
 
 function TaskCompletionPage() {
     this.attributes({

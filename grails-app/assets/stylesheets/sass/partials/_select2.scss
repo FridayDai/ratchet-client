@@ -828,15 +828,4 @@ input[type='text'].plugin-select-box {
     top: -9999px;
 }
 
-.ui-combobox {
-    .input-group:disabled {
-        background-color: $base-color-white-grey-dark;
-    }
-
-    .ui-combobox-toggle.disable {
-        background-color: $base-color-white-grey-dark;
-        cursor: inherit;
-    }
-}
-
 //end of select2
