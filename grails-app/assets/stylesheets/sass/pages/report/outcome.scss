@@ -60,11 +60,11 @@ $line-color-4: #885AAD;
 }
 
 .chart-group {
+    display: none;
     position: relative;
 }
 
 .chart-panel {
-    display: none;
     margin-top: 30px;
 
     .chart {
@@ -196,7 +196,7 @@ $line-color-4: #885AAD;
         }
     }
 
-    .tip-group {
+    .status-tip-group {
         visibility: hidden;
 
         rect {
@@ -215,6 +215,46 @@ $line-color-4: #885AAD;
         &.active {
             visibility: visible;
         }
+
+        .mark-tip {
+            path {
+                fill: $line-color-0;
+                shape-rendering: initial;
+                stroke: none;
+            }
+        }
+    }
+
+    .status-tip-group-1 {
+        .mark-tip {
+            path {
+                fill: $line-color-1;
+            }
+        }
+    }
+
+    .status-tip-group-2 {
+        .mark-tip {
+            path {
+                fill: $line-color-2;
+            }
+        }
+    }
+
+    .status-tip-group-3 {
+        .mark-tip {
+            path {
+                fill: $line-color-3;
+            }
+        }
+    }
+
+    .status-tip-group-4 {
+        .mark-tip {
+            path {
+                fill: $line-color-4;
+            }
+        }
     }
 }
 
@@ -227,26 +267,33 @@ $line-color-4: #885AAD;
     }
 }
 
-.not-available {
-    display: none;
-    text-align: center;
-    padding-top: 60px;
+.chart-panel {
+    .not-available, .default {
+        text-align: center;
+        padding-top: 60px;
 
-    .icon {
-        font-size: 120px;
-        color: #EBEBEB;
+        .icon {
+            font-size: 120px;
+            color: #EBEBEB;
+        }
+
+        .desc {
+            margin-top: 20px;
+            font-size: 15px;
+            font-weight: 700;
+        }
     }
 
-    .desc {
-        margin-top: 20px;
+    .not-available {
+        display: none;
     }
-}
 
-.no-data {
-    position: absolute;
-    top: 38%;
-    left: 50%;
-    margin-left: -58px;
-    font-size: 15px;
-    font-weight: 700;
+    .no-data {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        margin-left: -58px;
+        font-size: 15px;
+        font-weight: 700;
+    }
 }

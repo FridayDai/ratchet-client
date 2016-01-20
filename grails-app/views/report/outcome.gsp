@@ -1,6 +1,6 @@
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/reportOutcome.bundle.js"/>
-<g:set var="cssPath" value="report/overview.css"/>
+<g:set var="cssPath" value="report/outcome.css"/>
 <g:applyLayout name="main">
     <html>
     <head>
@@ -49,6 +49,10 @@
                 <div class="chart"></div>
                 <div class="chart-update-tip"><span>Note:</span> Chart will be updated every 24 hours</div>
                 <div class="no-data">No data available</div>
+            </div>
+            <div class="default">
+                <i class="icon fa fa-question"></i>
+                <div class="desc">Please select all filters to view report</div>
             </div>
         </div>
     </div>
