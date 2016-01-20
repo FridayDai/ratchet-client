@@ -9,17 +9,17 @@ var UNSUPPORTED = 'UNSUPPORTED';
 
 var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
 
-function roundedRect(x, y, width, height, radius) {
-    return 'M' + (x + radius) + ',' + y
-        + 'h' + (width - radius * 2)
-        + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + radius
-        + 'v' + (height - 2 * radius)
-        + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + radius
-        + 'h' + (2 * radius - width)
-        + 'a' + radius + ',' + radius + ' 0 0 1 ' + -radius + ',' + -radius
-        + 'v' + (2 * radius - height)
-        + 'a' + radius + ',' + radius + ' 0 0 1 ' + radius + ',' + -radius
-        + 'z';
+function roundedRect(opts) {
+    return 'M' + (opts.x + opts.radius) + ',' + opts.y +
+        'h' + (opts.width - opts.radius * 2) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + opts.radius + ',' + opts.radius +
+        'v' + (opts.height - 2 * opts.radius) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + -opts.radius + ',' + opts.radius +
+        'h' + (2 * opts.radius - opts.width) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + -opts.radius + ',' + -opts.radius +
+        'v' + (2 * opts.radius - opts.height) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + opts.radius + ',' + -opts.radius +
+        'z';
 }
 
 function ToolbarPanel() {
@@ -313,9 +313,18 @@ function ToolbarPanel() {
 
                 if (scoreType) {
                     if (i === 0) {
-                        me.drawMark(scoreType, cx, cy, lineGroup);
+                        me.drawMark(scoreType, {
+                            cx: cx,
+                            cy: cy,
+                            index: lineGroup.datum()
+                        });
                     } else if (i === circleLength - 1) {
-                        me.drawMark(scoreType, cx, cy, lineGroup, true);
+                        me.drawMark(scoreType, {
+                            cx: cx,
+                            cy: cy,
+                            index: lineGroup.datum(),
+                            isRight: true
+                        });
                     }
                 }
             });
@@ -341,8 +350,8 @@ function ToolbarPanel() {
             });
     };
 
-    this.drawMark = function (text, cx, cy, lineGroup, isRight) {
-        var markTip = this.chartObject.select('g.status-tip-group-{0}'.format(lineGroup.datum()))
+    this.drawMark = function (text, opts) {
+        var markTip = this.chartObject.select('g.status-tip-group-{0}'.format(opts.index))
             .append('g')
             .classed('mark-tip', true);
 
@@ -354,25 +363,25 @@ function ToolbarPanel() {
         var markTextVPadding = 4;
 
         markTip.insert('path', 'text')
-            .attr('d', roundedRect(
-                markTextBBox.x - markTextHPadding,
-                markTextBBox.y - markTextVPadding,
-                markTextBBox.width + markTextHPadding * 2,
-                markTextBBox.height + markTextVPadding * 2,
-                3
-            ));
+            .attr('d', roundedRect({
+                x: markTextBBox.x - markTextHPadding,
+                y: markTextBBox.y - markTextVPadding,
+                width: markTextBBox.width + markTextHPadding * 2,
+                height: markTextBBox.height + markTextVPadding * 2,
+                radius: 3
+            }));
 
         var markTipBBox = markTip.node().getBBox(),
             markTipWidth = markTipBBox.width,
             markTipMargin = 10;
 
-        var x = cx - markTipWidth - markTipMargin + markTextHPadding;
+        var x = opts.cx - markTipWidth - markTipMargin + markTextHPadding;
 
-        if (isRight) {
-            x = cx + markTipMargin + markTextHPadding;
+        if (opts.isRight) {
+            x = opts.cx + markTipMargin + markTextHPadding;
         }
 
-        markTip.attr('transform', 'translate({0}, {1})'.format(x, cy + markTextBBox.height / 2));
+        markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
     };
 
     this.onLineMouseover = function (d, i, elem) {
