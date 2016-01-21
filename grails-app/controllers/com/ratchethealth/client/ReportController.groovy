@@ -21,7 +21,14 @@ class ReportController extends BaseController {
         def toolId = params?.toolId as long
         def providerId = params?.providerId as long
         def year = params?.year as int
-        def resp = reportService.getProviderAverageOnOverview(token, clientId, treatmentId, toolId, providerId, year)
+        def showAll = false
+
+        if (providerId == -1 as long) {
+            providerId = null
+            showAll = true
+        }
+
+        def resp = reportService.getProviderAverageOnOverview(token, clientId, treatmentId, toolId, providerId, showAll, year)
 
         if (resp?.dataSet) {
             if (resp.toolType == 14) {

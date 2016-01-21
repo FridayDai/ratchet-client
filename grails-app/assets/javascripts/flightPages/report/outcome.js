@@ -3,8 +3,8 @@ require('../../components/layout/Main');
 var flight = require('flight');
 var WithPage = require('../../components/common/WithPage');
 
-var ToolbarPanel = require('../../components/report/overview/ToolbarPanel');
-var ChartPanel = require('../../components/report/overview/chartPanel/ChartPanel');
+var ToolbarPanel = require('../../components/report/outcome/ToolbarPanel');
+var ChartPanel = require('../../components/report/outcome/chartPanel/ChartPanel');
 
 function OverviewPage() {
     this.attributes({
