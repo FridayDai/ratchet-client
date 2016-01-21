@@ -41,8 +41,8 @@ function ProviderFilter() {
             id = null;
         }
 
-        if (this.previousVal !== id) {
-            this.previousVal = id;
+        if (this.__previousVal !== id) {
+            this.__previousVal = id;
 
             this.trigger('selectProviderForTaskCompletion', {
                 surgeonId: id
