@@ -29,9 +29,9 @@
                 <span class="expend-icon"></span>
             </a>
             <ul class="sub-nav-list">
-                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getOverviewPage'}">active</g:if>">
-                    <a href="/reports/overview">
-                        <div class="title">Overview</div>
+                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'getOutcomePage'}">active</g:if>">
+                    <a href="/reports/outcome">
+                        <div class="title">Outcome</div>
                     </a>
                 </li>
                 <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'renderTaskCompletionReport'}">active</g:if>">

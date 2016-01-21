@@ -60,14 +60,16 @@ function NewPatientFormDialog() {
             child: NewPatientRelationshipCombobox,
             attributes: {
                 selectEvent: 'newPatientRelationshipSelected',
-                clearEvent: 'newPatientRelationshipCleared'
+                clearEvent: 'newPatientRelationshipCleared',
+                resetEvent: 'newPatientReset'
             }
         },
         groupFieldSelector: {
             child: NewPatientGroupCombobox,
             attributes: {
                 selectEvent: 'patientGroupSelected',
-                clearEvent: 'patientGroupClear'
+                clearEvent: 'patientGroupClear',
+                resetEvent: 'newPatientReset'
             }
         },
         providerFieldSelector:{
@@ -82,7 +84,8 @@ function NewPatientFormDialog() {
             child: NewPatientTreatmentCombobox,
             attributes: {
                 selectEvent: 'newPatientTreatmentSelected',
-                clearEvent: 'newPatientTreatmentClear'
+                clearEvent: 'newPatientTreatmentClear',
+                resetEvent: 'newPatientReset'
             }
         },
         surgeryTimeFieldSelector: {

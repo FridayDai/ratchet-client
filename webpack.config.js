@@ -14,7 +14,7 @@ module.exports = {
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
         profile: "./flightPages/profile.js",
-        reportOverview: "./flightPages/report/overview.js",
+        reportOutcome: "./flightPages/report/outcome.js",
         reportTaskCompletion: "./flightPages/report/taskCompletion.js"
     },
     output: {

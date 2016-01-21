@@ -7,6 +7,21 @@ var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
 var UNSUPPORTED = 'UNSUPPORTED';
 
+var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
+
+function roundedRect(opts) {
+    return 'M' + (opts.x + opts.radius) + ',' + opts.y +
+        'h' + (opts.width - opts.radius * 2) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + opts.radius + ',' + opts.radius +
+        'v' + (opts.height - 2 * opts.radius) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + -opts.radius + ',' + opts.radius +
+        'h' + (2 * opts.radius - opts.width) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + -opts.radius + ',' + -opts.radius +
+        'v' + (2 * opts.radius - opts.height) +
+        'a' + opts.radius + ',' + opts.radius + ' 0 0 1 ' + opts.radius + ',' + -opts.radius +
+        'z';
+}
+
 function ToolbarPanel() {
     this.attributes({
         chartGroupSelector: '.chart-group',
@@ -14,6 +29,7 @@ function ToolbarPanel() {
         scoreBarSelector: '.view-score-bar',
         scoreItemSelector: '.score-item',
         noAvailableSelector: '.not-available',
+        defaultPanelSelector: '.default',
         noDataSelector: '.no-data',
         lineGroupSelector: '.line-group'
     });
@@ -65,7 +81,7 @@ function ToolbarPanel() {
         return this.scales.x;
     };
 
-    this.drawFrame = function (xDomain) {
+    this.drawFrame = function (xDomain, yVal) {
         var margin = {top: 50, right: 70, bottom: 140, left: 70},
             svgWidth = this.$node.width(),
             svgHeight = this.$node.height(),
@@ -75,7 +91,7 @@ function ToolbarPanel() {
         var xScale = this.setXScale(xDomain);
 
         var yScale = this.scales.y = d3.scale.linear()
-            .domain([0, 100])
+            .domain([0, yVal])
             .range([chartHeight, 0]);
 
         var xScaleDomain = xScale.domain();
@@ -111,7 +127,8 @@ function ToolbarPanel() {
         var yAxis = d3.svg.axis()
             .scale(yScale)
             .tickSize(chartWidth)
-            .orient('right');
+            .orient('right')
+            .tickValues(this.getYTickValues(yVal));
 
         var svg = this.chartObject = d3.select(this.$node.find(this.attr.chartSelector).get(0))
             .append('svg')
@@ -213,7 +230,7 @@ function ToolbarPanel() {
             }
 
             if (bbox.width) {
-                d3.select(this.parentElement)
+                d3.select($(this).parent().get(0))
                     .insert('rect', 'text')
                     .attr('x', bbox.x - hPadding)
                     .attr('y', bbox.y - vPadding)
@@ -229,15 +246,17 @@ function ToolbarPanel() {
             .addClass('right-one');
     };
 
-    this.drawLineGroup = function (data, index) {
+    this.drawLineGroup = function (data, index, scoreType) {
         var me = this,
-            lineGroup = this.chartObject.insert('g', 'g.tip-group')
+            lineGroup = this.chartObject.insert('g', 'g.status-tip-group')
                 .classed('line-group line-group-{0}'.format(index), true)
                 .datum(index);
 
         this.chartObject.append('g')
-            .classed('tip-group tip-group-{0}'.format(index), true)
+            .classed('status-tip-group status-tip-group-{0}'.format(index), true)
             .datum(0);
+
+        var circleLength = data.length;
 
         lineGroup.selectAll('circle')
             .data(data)
@@ -247,17 +266,17 @@ function ToolbarPanel() {
             .attr('cx', function (d) { return me.scales.x(d.offset); })
             .attr('cy', function (d) { return me.scales.y(d.score); })
             .attr('r', 3)
-            .each(function (d) {
+            .each(function (d, i) {
                 var cx = me.scales.x(d.offset),
                     cy = me.scales.y(d.score);
 
-                var lineGroup = d3.select(this.parentElement);
+                var lineGroup = d3.select($(this).parent().get(0));
 
-                var tip = me.chartObject.select('g.tip-group-{0}'.format(lineGroup.datum()))
+                var statusTip = me.chartObject.select('g.status-tip-group-{0}'.format(lineGroup.datum()))
                     .append('g')
                     .classed('tip', true);
 
-                var textGroup = tip.append('g')
+                var textGroup = statusTip.append('g')
                     .classed('tip-text-group', true);
 
                 var scoreText = textGroup.append('text')
@@ -274,23 +293,40 @@ function ToolbarPanel() {
                 var textGroupHPadding = 8;
                 var textGroupVPadding = 4;
 
-                tip.insert('rect', 'g.tip-text-group')
+                statusTip.insert('rect', 'g.tip-text-group')
                     .attr('width', textGroupBBox.width + textGroupHPadding * 2)
                     .attr('height', textGroupBBox.height + textGroupVPadding * 2)
                     .attr('x',  textGroupBBox.x - textGroupHPadding)
                     .attr('y', textGroupBBox.y - textGroupVPadding);
 
                 var tipGroupMargin = 20;
-                var halfTipGroupWidth = tip.node().getBBox().width / 2;
+                var halfTipGroupWidth = statusTip.node().getBBox().width / 2;
 
-                tip
+                statusTip
                     .append('line')
                     .attr('x1', halfTipGroupWidth)
                     .attr('y1', 0)
                     .attr('x2', halfTipGroupWidth)
                     .attr('y2', tipGroupMargin - 4);
 
-                tip.attr('transform', 'translate({0}, {1})'.format(cx - halfTipGroupWidth, cy - tipGroupMargin));
+                statusTip.attr('transform', 'translate({0}, {1})'.format(cx - halfTipGroupWidth, cy - tipGroupMargin));
+
+                if (scoreType) {
+                    if (i === 0) {
+                        me.drawMark(scoreType, {
+                            cx: cx,
+                            cy: cy,
+                            index: lineGroup.datum()
+                        });
+                    } else if (i === circleLength - 1) {
+                        me.drawMark(scoreType, {
+                            cx: cx,
+                            cy: cy,
+                            index: lineGroup.datum(),
+                            isRight: true
+                        });
+                    }
+                }
             });
 
         var line = d3.svg.line()
@@ -304,14 +340,48 @@ function ToolbarPanel() {
 
         lineGroup.selectAll('circle, path')
             .on('mouseover', function (d, i) {
-                me.onLineMouseover(d, i, this.parentElement);
+                me.onLineMouseover(d, i, $(this).parent().get(0));
             })
             .on('mouseout', function (d, i) {
-                me.onLineMouseout(d, i, this.parentElement);
+                me.onLineMouseout(d, i, $(this).parent().get(0));
             })
             .on('click', function (d, i) {
-                me.onLineClicked(d, i, this.parentElement);
+                me.onLineClicked(d, i, $(this).parent().get(0));
             });
+    };
+
+    this.drawMark = function (text, opts) {
+        var markTip = this.chartObject.select('g.status-tip-group-{0}'.format(opts.index))
+            .append('g')
+            .classed('mark-tip', true);
+
+        var markText = markTip.append('text')
+            .text(PARAMs.SCORE_TYPE[text]);
+
+        var markTextBBox = markText.node().getBBox();
+        var markTextHPadding = 8;
+        var markTextVPadding = 4;
+
+        markTip.insert('path', 'text')
+            .attr('d', roundedRect({
+                x: markTextBBox.x - markTextHPadding,
+                y: markTextBBox.y - markTextVPadding,
+                width: markTextBBox.width + markTextHPadding * 2,
+                height: markTextBBox.height + markTextVPadding * 2,
+                radius: 3
+            }));
+
+        var markTipBBox = markTip.node().getBBox(),
+            markTipWidth = markTipBBox.width,
+            markTipMargin = 10;
+
+        var x = opts.cx - markTipWidth - markTipMargin + markTextHPadding;
+
+        if (opts.isRight) {
+            x = opts.cx + markTipMargin + markTextHPadding;
+        }
+
+        markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
     };
 
     this.onLineMouseover = function (d, i, elem) {
@@ -329,7 +399,7 @@ function ToolbarPanel() {
                 })
                 .addClass('disable');
 
-            d3.select('g.tip-group-{0}'.format(lineGroup.datum()))
+            d3.select('g.status-tip-group-{0}'.format(lineGroup.datum()))
                 .classed('active', true);
         }
     };
@@ -342,6 +412,23 @@ function ToolbarPanel() {
         }
     };
 
+    this.getYTickValues = function (val) {
+        var minOffset = 100;
+
+        _.each(Y_TICK_OFFSET_ARRAY, function (offset) {
+            var number = val / offset;
+
+            if (number <= 10 && number < minOffset) {
+                minOffset = number;
+            }
+        });
+
+        var result = _.range(0, val, minOffset);
+        result.push(val);
+
+        return result;
+    };
+
     this.resetLines = function (d3LineGroup) {
         d3LineGroup
             .classed('active', false)
@@ -351,7 +438,7 @@ function ToolbarPanel() {
         $('.line-group.disable')
             .removeClass('disable');
 
-        d3.select('g.tip-group-{0}'.format(d3LineGroup.datum()))
+        d3.select('g.status-tip-group-{0}'.format(d3LineGroup.datum()))
             .classed('active', false);
     };
 
@@ -414,33 +501,33 @@ function ToolbarPanel() {
     };
 
     this.onRender = function (e, data) {
-        this.$node.show();
+        this.select('defaultPanelSelector').hide();
 
-        if (data.range === UNSUPPORTED) {
+        if (data.xRange === UNSUPPORTED) {
             this.select('noAvailableSelector').show();
         } else {
             this.select('chartGroupSelector').show();
 
-            this.drawFrame(data.range);
+            this.drawFrame(data.xRange, data.yRange);
 
             if (!data.dataSet && !data.items) {
                 this.select('noDataSelector').show();
             } else if (data.items) {
-                this.drawLineGroup(data.items, 0);
+                this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
             } else {
                 this.select('scoreBarSelector').show();
                 this.drawScoreBar(_.map(data.dataSet, 'type'));
 
                 _.each(data.dataSet, function (dataGroup, index) {
-                    this.drawLineGroup(dataGroup.items, index);
+                    this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
                 }, this);
             }
         }
     };
 
     this.onClear = function () {
-        this.$node.hide();
         this.clearSVG();
+        this.select('defaultPanelSelector').show();
         this.select('noAvailableSelector').hide();
         this.select('chartGroupSelector').hide();
         this.select('noDataSelector').hide();

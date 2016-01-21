@@ -59,6 +59,9 @@ module.exports = {
         'neck': 'Neck',
         'arm': 'Arm',
         'back': 'Back',
-        'leg': 'Leg'
+        'leg': 'Leg',
+        'STIFFNESS': 'Stiffness',
+        'Physical': 'Physical',
+        'Mental': 'Mental'
     }
 };

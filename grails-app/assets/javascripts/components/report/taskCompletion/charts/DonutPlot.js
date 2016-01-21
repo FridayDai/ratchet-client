@@ -31,8 +31,8 @@ function DonutPlot(selector, options) {
     }
 
     instance.render = function (dataSet) {
-        var legendVert = 8;
-        var legendSpacing = 16;
+        var legendVert = 10;
+        var legendSpacing = 14;
 
         var color = d3.scale.ordinal()
             .range([definedColor.cyan, definedColor.gray]);
