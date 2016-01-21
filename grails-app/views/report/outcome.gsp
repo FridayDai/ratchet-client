@@ -52,7 +52,7 @@
             </div>
             <div class="default">
                 <i class="icon fa fa-question"></i>
-                <div class="desc">Please select all filters to view report</div>
+                <div class="desc">Please select treatment, tool, provider and year.</div>
             </div>
         </div>
     </div>
