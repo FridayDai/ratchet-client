@@ -47,7 +47,6 @@
                     <span>View score:</span>
                 </div>
                 <div class="chart"></div>
-                <div class="chart-update-tip"><span>Note:</span> Chart will be updated every 24 hours</div>
                 <div class="no-data">No data available</div>
             </div>
             <div class="default">
