@@ -86,6 +86,10 @@
     }
 }
 
+@mixin auto-padding($row) {
+    padding: 0 -8 * $row + 46 + px
+}
+
 // box item for task
 .box-item {
     display: inline-block;
@@ -445,6 +449,22 @@
 
         &+.score{
             border-left: 1px  $base-color-bg-head solid;
+        }
+
+        &.row-2-padding {
+            @include auto-padding(2)
+        }
+
+        &.row-3-padding {
+            @include auto-padding(3)
+        }
+
+        &.row-4-padding {
+            @include auto-padding(4)
+        }
+
+        &.row-5-padding {
+            @include auto-padding(5)
         }
     }
 
