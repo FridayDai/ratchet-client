@@ -24,7 +24,7 @@ function GroupsTable() {
                 render: function (data, type, full) {
                     return ID_P_FORMAT.format(data === undefined ? full.id : data);
                 },
-                width: "15%"
+                width: "10%"
             },
             {
                 targets: 1,
@@ -32,20 +32,29 @@ function GroupsTable() {
                 render: function (data, type, full) {
                     return data === undefined ? full.name : data;
                 },
-                width: "50%"
+                width: "35%"
             },
             {
                 targets: 2,
+                data: 'treatments',
+                render: function (data, type, full) {
+                    return '';
+                },
+                orderable: false,
+                width: "25%"
+            },
+            {
+                targets: 3,
                 data: 'lastUpdated',
                 render: function (data, type, full) {
                     var lastUpdateStr = data === undefined ? full.lastUpdated : data;
                     var lastUpdateTime = new Date(parseInt(lastUpdateStr, 10));
                     return Utility.toVancouverTimeHour(lastUpdateTime);
                 },
-                width: "25%"
+                width: "20%"
             },
             {
-                targets: 3,
+                targets: 4,
                 render: function (data, type, full) {
                     return EDIT_DELETE_BUTTON_FORMAT.format(data === undefined ? full.id : data);
                 },

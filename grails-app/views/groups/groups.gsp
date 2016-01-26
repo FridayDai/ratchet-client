@@ -30,6 +30,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Group Name</th>
+                    <th>Treatment(s)</th>
                     <th>Last Updated</th>
                     <th></th>
                 </tr>
@@ -41,6 +42,8 @@
                         </td><td>
                             ${group.name}
                         </td><td>
+                            ${group.treatments}
+                        </td><td>
                             ${group.lastUpdated}
                         </td><td>
                             ${group.id}</td></tr>
@@ -51,13 +54,17 @@
 
         <g:form class="form ui-hidden" id="group-form" name="group-form">
 
-            <div class="form-group inline">
+            <div class="form-group">
                 <label class="lbl-group">GROUP NAME<span>*</span></label>
-                <input id="groupName" name="name" type="text" class="input-group input-only-one" maxlength="128"
+                <input id="groupName" name="name" type="text" class="input-group input-only-one group-name" maxlength="128"
                        placeholder="Enter group name" required/>
             </div>
 
-        %{--<label class="form-group required pull-right"><span>*</span>Required field</label>--}%
+            <div class="form-group">
+                <label class="lbl-group">TREATMENT(S)<span>*</span></label>
+                <input id="treatments" name="treatments" type="text" class="plugin-select-box input-group treatments clear" maxlength="128"
+                       placeholder="Select treatment(s)" required/>
+            </div>
 
             <div class="required-field required-padding">
                 *Required field

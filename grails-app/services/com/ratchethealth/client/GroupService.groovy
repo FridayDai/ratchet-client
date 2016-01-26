@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
+import groovy.json.JsonOutput
 
 class GroupService extends RatchetAPIService {
 
@@ -105,6 +106,26 @@ class GroupService extends RatchetAPIService {
             }
         }
 
+    }
+
+    def updateTreatmentsOnGroup(String token, clientId, groupId, treatmentIds) {
+        String updateTreatmentsOnGroupUrl = grailsApplication.config.ratchetv2.server.url.updateTreatmentsOnGroup
+        def url = String.format(updateTreatmentsOnGroupUrl, clientId, groupId)
+        log.info("Call backend service to attach treatments to a group with groupId and clientId, token: ${token}.")
+
+        withPost(token, url) { req ->
+            def resp = req.body(JsonOutput.toJson([
+                treatmentIds: treatmentIds?.split(',')
+            ])).asJson()
+
+            if (resp.status == 200) {
+                log.info("attach treatments to a group success, token: ${token}.")
+
+                true
+            } else {
+                handleError(resp)
+            }
+        }
     }
 
     def getStaffGroups(String token, clientId, name) {

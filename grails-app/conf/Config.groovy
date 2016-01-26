@@ -273,6 +273,7 @@ ratchetv2 {
             deleteGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
             showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
             getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
+            updateTreatmentsOnGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s/treatments"
 
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
