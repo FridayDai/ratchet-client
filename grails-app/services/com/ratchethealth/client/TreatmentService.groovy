@@ -211,4 +211,22 @@ class TreatmentService extends RatchetAPIService {
             }
         }
     }
+
+    def deleteTreatment(token, clientId, patientId, medicalRecordId) {
+        String deleteTreatmentUrl = grailsApplication.config.ratchetv2.server.url.deleteTreatment
+        def url = String.format(deleteTreatmentUrl, clientId, patientId, medicalRecordId)
+
+        log.info("Call backend service to delete a treatment, token: ${token}.")
+        withDelete(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 204) {
+                log.info("delete a treatment success, token: ${token}.")
+
+                true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
 }

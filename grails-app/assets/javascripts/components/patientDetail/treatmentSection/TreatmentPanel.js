@@ -30,6 +30,10 @@ function TreatmentPanel() {
         }
     };
 
+    this.showNoTreatmentContainer = function () {
+        this.select('noTreatmentContainerSelector').show();
+    };
+
     this.addTab = function (options) {
 
         var title = options.treatmentInfo.title + " " + options.treatmentInfo.tmpTitle;
@@ -64,6 +68,7 @@ function TreatmentPanel() {
         });
 
         this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);
+        this.on(document, 'refreshForNoMoreTreatmentTab', this.showNoTreatmentContainer);
     });
 }
 

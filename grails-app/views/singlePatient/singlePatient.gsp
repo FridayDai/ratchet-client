@@ -102,17 +102,15 @@
                     </li>
                 </g:each>
             </ul>
-            <g:if test="${medicalRecords.size() == 0}">
-                <div class="no-treatment-container">
-                    <div class="icon"></div>
-                    <div class="title">This patient has no treatment</div>
-                    <div class="description">Assign this patient a treatment using the<br/>button below</div>
-                    <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
-                            data-id="${patientInfo.patientId}"
-                            data-client-id="${patientInfo.client.id}"
-                            data-account-id="${request.session.accountId}">Add Treatment</button>
-                </div>
-            </g:if>
+            <div class="no-treatment-container <g:if test="${medicalRecords.size() != 0}">hide</g:if>">
+                <div class="icon"></div>
+                <div class="title">This patient has no treatment</div>
+                <div class="description">Assign this patient a treatment using the<br/>button below</div>
+                <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
+                        data-id="${patientInfo.patientId}"
+                        data-client-id="${patientInfo.client.id}"
+                        data-account-id="${request.session.accountId}">Add Treatment</button>
+            </div>
         </div>
     </div>
 
@@ -266,6 +264,17 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-patient-field" name="deleteField" type="text"
+                   class="input-group" required>
+        </div>
+    </form>
+
+    <form action="/patients/${patientInfo.id}/treatments/" method="post" class="delete-treatment-form ui-hidden" id="delete-treatment-form">
+        <div class="form-group description">
+            In order to permanently remove the treatment, please type "<strong>DELETE</strong>" in the textbox below.
+        </div>
+        <div class="form-group email-group">
+            <label class="lbl-group">TYPE DELETE</label>
+            <input id="delete-treatment-field" name="deleteField" type="text"
                    class="input-group" required>
         </div>
     </form>

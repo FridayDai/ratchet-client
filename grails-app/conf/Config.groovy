@@ -286,6 +286,7 @@ ratchetv2 {
             notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
             adhocTasksToTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/ad-hoc"
+            deleteTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
 
             //task
             //for taskService
