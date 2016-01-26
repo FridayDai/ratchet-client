@@ -58,6 +58,8 @@ function ToolbarToolCombobox() {
     };
 
     this.after('initialize', function () {
+        this.onReset();
+
         this.on(document, this.attr.treatmentSelectEvent, this.onTreatmentSelected);
         this.on(document, this.attr.treatmentClearEvent, this.onReset);
     });

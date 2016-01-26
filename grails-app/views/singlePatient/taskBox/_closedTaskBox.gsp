@@ -23,8 +23,11 @@
 
                     <div class="complete-score">
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                            <g:multipleScore score="${task?.otherScore}" type="${task?.testId}">
-
+                            <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score" padding="auto">
+                                <span class="score ${auto}">
+                                    <div class="score-number">${score[1]}</div>
+                                    <div class="score-label">${score[0]}</div>
+                                </span>
                             </g:multipleScore>
                         </g:if>
                         <g:else>

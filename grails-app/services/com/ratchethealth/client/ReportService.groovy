@@ -6,7 +6,7 @@ class ReportService extends RatchetAPIService {
 
     def grailsApplication
 
-    def getProviderAverageOnOverview(String token, clientId, treatmentId, toolId, providerId, year) {
+    def getProviderAverageOnOverview(String token, clientId, treatmentId, toolId, providerId, showAll, year) {
 
         def url = grailsApplication.config.ratchetv2.server.url.providerAverage
 
@@ -18,6 +18,7 @@ class ReportService extends RatchetAPIService {
                 .field("toolId", toolId)
                 .field("providerId", providerId)
                 .field("surgeryYear", year)
+                .field("showAll", showAll)
                 .asString()
 
             if (resp.status == 200) {

@@ -30,7 +30,7 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getProviderAverageOnOverview('token', 1, 1, 1, 1, 2015)
+        def result = service.getProviderAverageOnOverview('token', 1, 1, 1, 1, false, 2015)
 
         then:
         result.id == 1
@@ -46,7 +46,7 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        service.getProviderAverageOnOverview('token', 1, 1, 1, 1, 2015)
+        service.getProviderAverageOnOverview('token', 1, 1, 1, 1, false, 2015)
 
         then:
         ApiReturnException e = thrown()
