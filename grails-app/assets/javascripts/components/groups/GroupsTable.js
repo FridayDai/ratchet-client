@@ -38,7 +38,13 @@ function GroupsTable() {
                 targets: 2,
                 data: 'treatments',
                 render: function (data, type, full) {
-                    return '';
+                    if (!_.isArray(data)) {
+                        full.treatments = JSON.parse(data);
+                    }
+
+                    return _.map(full.treatments, function (item) {
+                        return item.title + ' ' + item.tmpTitle;
+                    }).join(', ');
                 },
                 orderable: false,
                 width: "25%"
@@ -77,15 +83,13 @@ function GroupsTable() {
 
         var $target = $(e.target);
         var $row = $target.parents('tr');
-        var groupId = $target.data("groupId");
-        var groupName = $row.find('td:eq(1)').text().trim();
+        var rowData = this.getRowData($row);
+        //var groupId = $target.data("groupId");
+        //var groupName = $row.find('td:eq(1)').text().trim();
 
 
         this.trigger('showGroupFormDialog', {
-            update: {
-                groupId: groupId,
-                groupName: groupName
-            }
+            update: rowData
         });
     };
 

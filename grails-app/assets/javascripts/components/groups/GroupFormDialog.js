@@ -33,6 +33,7 @@ function GroupFormDialog() {
 
     this.onShow = function (e, data) {
         this.$node.removeClass('ui-hidden');
+        this.clearDialog();
         this.prepareForShow(data);
         this.show();
     };
@@ -45,14 +46,28 @@ function GroupFormDialog() {
             this.model = UPDATE;
             this.changeTitle(EDIT_TITLE);
 
-            this.select('groupNameFieldSelector').val(updateData.groupName);
-            this.formEl.attr('action', URLs.UPDATE_GROUP.format(updateData.groupId));
+            this.select('groupNameFieldSelector').val(updateData.name);
+            this.formEl.attr('action', URLs.UPDATE_GROUP.format(updateData.id));
+
+            var treatments = [];
+            $.each(data.update.treatments, function (index, item) {
+                treatments.push({
+                    id: item.id,
+                    text: item.title + ' ' + item.tmpTitle
+                });
+            });
+
+            this.select('treatmentsFieldSelector').select2('data', treatments);
         } else {
             this.model = ADD;
             this.changeTitle(ADD_TITLE);
 
             this.formEl.attr('action', URLs.GET_GROUPS);
         }
+    };
+
+    this.clearDialog = function () {
+        this.select('treatmentsFieldSelector').select2('data', null);
     };
 
     this.onChangeGroupSuccess = function () {
