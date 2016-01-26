@@ -2,6 +2,8 @@ var flight = require('flight');
 var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
 
+var GroupTreatmentsSelectbox = require('./GroupTreatmentsSelectbox');
+
 var UPDATE = 'updateModel';
 var ADD = 'addModel';
 
@@ -11,12 +13,22 @@ var EDIT_TITLE = 'EDIT GROUP';
 function GroupFormDialog() {
     this.options({
         title: ADD_TITLE,
-        width: 385,
+        width: 620,
         buttons: ['Save']
     });
 
     this.attributes({
-        groupNameFieldSelector: '#groupName'
+        groupNameFieldSelector: '#groupName',
+        treatmentsFieldSelector: '#treatments'
+    });
+
+    this.children({
+        treatmentsFieldSelector: {
+            child: GroupTreatmentsSelectbox,
+            attributes: {
+                clearEvent: 'newGroupReset'
+            }
+        }
     });
 
     this.onShow = function (e, data) {
