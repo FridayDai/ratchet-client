@@ -62,6 +62,7 @@ class UrlMappings {
         }
         "/patients/$patientId/treatments/$medicalRecordId/notify"(controller: "treatment", action: "notifyTreatmentTasks")
         "/patients/$patientId/treatments/$medicalRecordId/add-ad-hoc-tasks"(controller: "treatment", action: "addAdhocTasks")
+        "/patients/$patientId/treatments/$medicalRecordId/delete"(controller: "treatment", action: "deleteTreatment")
 
         //Patient task
         "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")

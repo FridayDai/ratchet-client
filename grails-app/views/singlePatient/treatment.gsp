@@ -122,6 +122,12 @@
                             data-medical-record-id="${medicalRecordId}">
                         Archive
                     </span>
+                    <span class="btn drop-down-list treatment-delete inline"
+                            data-patient-id="${patientId}"
+                            data-client-id="${clientId}"
+                            data-medical-record-id="${medicalRecordId}">
+                        Delete
+                    </span>
                 </div>
             </li>
         </ul>

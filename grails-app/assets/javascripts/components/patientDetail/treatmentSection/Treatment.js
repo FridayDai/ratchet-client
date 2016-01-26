@@ -19,6 +19,7 @@ function Treatment() {
         moreDropdownListSelector: '.drop-down-lists',
         editSurgeryButtonSelector: '.surgeryTime-edit',
         archiveButtonSelector: '.archived-active',
+        treatmentButtonSelector: '.treatment-delete',
 
         surgeryDateHiddenSelector: '.hidden-surgery-time-picker'
     });
@@ -187,6 +188,14 @@ function Treatment() {
         });
     };
 
+    this.onDeleteButtonClicked = function (e) {
+        e.preventDefault();
+
+        this.trigger('showDeleteTreatmentDialog', {
+            ids: this.getBasicIds()
+        });
+    };
+
     this.archiveTreatment = function () {
         var basicIds = this.getBasicIds();
         var me = this;
@@ -220,7 +229,8 @@ function Treatment() {
             generateCodeButtonSelector: this.onGenerateCodeButtonClicked,
             moreDropdownButtonSelector: this.onMoreButtonClicked,
             editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
-            archiveButtonSelector: this.onArchiveButtonClicked
+            archiveButtonSelector: this.onArchiveButtonClicked,
+            treatmentButtonSelector: this.onDeleteButtonClicked
         });
 
         this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);

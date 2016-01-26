@@ -13,6 +13,7 @@ var EditPatientFormDialog = require('../components/patientDetail/patientInfoSect
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
 var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
+var DeleteTreatmentFormDialog = require('../components/patientDetail/treatmentSection/DeleteTreatmentFormDialog');
 var AddTasksDialog = require('../components/patientDetail/treatmentSection/AddTasksDialog');
 var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
@@ -30,6 +31,7 @@ function PatientDetailPage() {
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
         deletePatientDialogSelector: '#delete-patient-form',
+        deleteTreatmentDialogSelector: '#delete-treatment-form',
         addTreatmentDialogSelector: '#treatment-form',
         addTaskDialogSelector: '#add-tasks-dialog',
         treatmentCodeDialogSelector: '#generate-code-dialog',
@@ -59,6 +61,10 @@ function PatientDetailPage() {
             selector: 'addTreatmentDialogSelector',
             event: 'showAddTreatmentDialog',
             dialog: AddTreatmentFormDialog
+        }, {
+            selector: 'deleteTreatmentDialogSelector',
+            event: 'showDeleteTreatmentDialog',
+            dialog: DeleteTreatmentFormDialog
         }, {
             selector: 'addTaskDialogSelector',
             event: 'showAddTasksDialog',
@@ -176,6 +182,22 @@ function PatientDetailPage() {
         }
     };
 
+    this.onDeleteTreatmentSuccess = function () {
+        var activeIndex = this.select('tabsContainerSelector').tabs('option', 'active');
+        var $activeTab = $(this.select('tabTitleSelector').get(activeIndex));
+
+        this.teardownTreatment($activeTab);
+
+        var activeTabPanelId = $activeTab.attr('aria-controls');
+        $activeTab.remove();
+        $('#' + activeTabPanelId).remove();
+        this.select('tabsContainerSelector').tabs('refresh');
+
+        if (this.select('tabTitleSelector').length === 0) {
+            this.trigger('refreshForNoMoreTreatmentTab');
+        }
+    };
+
     this.teardownTreatment = function ($activeTab) {
         var tabPanelId = $activeTab.attr('aria-controls');
 
@@ -186,6 +208,7 @@ function PatientDetailPage() {
         this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
         this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
+        this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
 
         this.initTreatmentTabs();
     });
