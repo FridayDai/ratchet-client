@@ -324,4 +324,37 @@ class TreatmentServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+	def "test deleteTreatment with successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+				status: 204,
+				body  : ''
+			]
+		}
+
+		when:
+		def result = service.deleteTreatment('token', 1, 2, 3)
+
+		then:
+		result == true
+	}
+
+	def "test deleteTreatment without successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.deleteTreatment('token', 1, 2, 3)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
 }
