@@ -48,9 +48,18 @@ class GroupsController extends BaseController {
     }
 
     def updateGroup() {
-        def resp = groupService.updateGroup(session.token, session.clientId, params.name, params.groupId)
-        def result = [resp: resp]
-        render result as JSON
+        def name = params?.name
+        def groupId = params?.groupId
+        def treatmentIds = params?.treatments
+
+        def resp = groupService.updateGroup(session.token, session.clientId, name, groupId)
+
+        if (resp) {
+            resp = groupService.updateTreatmentsOnGroup(session.token, session.clientId, groupId, treatmentIds)
+
+            def result = [resp: resp]
+            render result as JSON
+        }
     }
 
     def deleteGroup() {

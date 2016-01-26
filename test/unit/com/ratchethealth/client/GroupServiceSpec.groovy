@@ -3,6 +3,7 @@ package com.ratchethealth.client
 import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.HttpRequestWithBody
 import com.mashape.unirest.request.body.MultipartBody
+import com.mashape.unirest.request.body.RequestBodyEntity
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
@@ -171,6 +172,49 @@ class GroupServiceSpec extends Specification {
         then:
         ApiReturnException e = thrown()
         e.getMessage() == "body"
+    }
+
+    def "test updateTreatmentsOnGroup with successful result"() {
+        given:
+        def jBuilder = new JsonBuilder()
+        jBuilder {
+            update true
+        }
+
+        RequestBodyEntity.metaClass.asJson = { ->
+            return [
+                status: 200,
+                body  : jBuilder.toString()
+            ]
+        }
+
+        when:
+        def result = service.updateTreatmentsOnGroup('token', 1, 2, '3, 4, 5')
+
+        then:
+        result == true
+    }
+
+    def "test updateTreatmentsOnGroup without successful result"() {
+        given:
+        def jBuilder = new JsonBuilder()
+        jBuilder {
+            update false
+        }
+
+        RequestBodyEntity.metaClass.asJson = { ->
+            return [
+                status: 400,
+                body  : jBuilder.toString()
+            ]
+        }
+
+        when:
+        service.updateTreatmentsOnGroup('token', 1, 2, '3, 4, 5')
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "{\"update\":false}"
     }
 
     def "test getStaffGroups with successful result"() {
