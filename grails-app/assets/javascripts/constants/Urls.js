@@ -30,6 +30,7 @@ module.exports = {
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
     NOTIFY_TREATMENT_TASKS: '/patients/{0}/treatments/{1}/notify',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
+    DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',
 
     //Tasks
     SEND_NOTIFY_EMAIL: '/patients/{0}/treatments/{1}/task/{2}/send-mail',

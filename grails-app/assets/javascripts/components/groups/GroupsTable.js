@@ -24,7 +24,7 @@ function GroupsTable() {
                 render: function (data, type, full) {
                     return ID_P_FORMAT.format(data === undefined ? full.id : data);
                 },
-                width: "15%"
+                width: "10%"
             },
             {
                 targets: 1,
@@ -32,20 +32,35 @@ function GroupsTable() {
                 render: function (data, type, full) {
                     return data === undefined ? full.name : data;
                 },
-                width: "50%"
+                width: "35%"
             },
             {
                 targets: 2,
+                data: 'treatments',
+                render: function (data, type, full) {
+                    if (!_.isArray(data)) {
+                        full.treatments = JSON.parse(data);
+                    }
+
+                    return _.map(full.treatments, function (item) {
+                        return item.title + ' ' + item.tmpTitle;
+                    }).join(', ');
+                },
+                orderable: false,
+                width: "25%"
+            },
+            {
+                targets: 3,
                 data: 'lastUpdated',
                 render: function (data, type, full) {
                     var lastUpdateStr = data === undefined ? full.lastUpdated : data;
                     var lastUpdateTime = new Date(parseInt(lastUpdateStr, 10));
                     return Utility.toVancouverTimeHour(lastUpdateTime);
                 },
-                width: "25%"
+                width: "20%"
             },
             {
-                targets: 3,
+                targets: 4,
                 render: function (data, type, full) {
                     return EDIT_DELETE_BUTTON_FORMAT.format(data === undefined ? full.id : data);
                 },
@@ -68,15 +83,13 @@ function GroupsTable() {
 
         var $target = $(e.target);
         var $row = $target.parents('tr');
-        var groupId = $target.data("groupId");
-        var groupName = $row.find('td:eq(1)').text().trim();
+        var rowData = this.getRowData($row);
+        //var groupId = $target.data("groupId");
+        //var groupName = $row.find('td:eq(1)').text().trim();
 
 
         this.trigger('showGroupFormDialog', {
-            update: {
-                groupId: groupId,
-                groupName: groupName
-            }
+            update: rowData
         });
     };
 

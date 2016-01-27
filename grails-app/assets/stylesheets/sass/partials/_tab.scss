@@ -223,16 +223,17 @@
                     padding: 6px 5px 1px;
                     text-align: center;
                     width: 60px;
+                    border-bottom: 0;
                     float: left;
 
                     &:hover {
                         color: $base-color-white;
                         background-color: $base-surgery-date-bgcolor;
                     }
-                }
 
-                .surgeryTime-edit {
-                    border-bottom: 0;
+                    &:last-child {
+                        border-bottom: 1px solid;
+                    }
                 }
             }
 

@@ -273,6 +273,7 @@ ratchetv2 {
             deleteGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
             showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
             getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
+            updateTreatmentsOnGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s/treatments"
 
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
@@ -285,6 +286,7 @@ ratchetv2 {
             notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
             adhocTasksToTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/ad-hoc"
+            deleteTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
 
             //task
             //for taskService
