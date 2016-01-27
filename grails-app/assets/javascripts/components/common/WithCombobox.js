@@ -26,17 +26,81 @@ function composeOption (options, scope) {
     return _.assign(options, result);
 }
 
+var DEFAULT_SELECT_EVENT = 'select';
+var DEFAULT_CLEAR_EVENT = 'clear';
+var DEFAULT_SELECT_DATA_KEY = 'key';
+var DEFAULT_RESET_KEY = 'reset';
+
 function WithCombobox() {
     flight.compose.mixin(this, [
         WithOptions
     ]);
 
+    this.attributes({
+        selectEvent: DEFAULT_SELECT_EVENT,
+        clearEvent: DEFAULT_CLEAR_EVENT,
+        selectDataKey: DEFAULT_SELECT_DATA_KEY,
+        resetEvent: DEFAULT_RESET_KEY
+    });
+
     this._initCombobox = function () {
-        this.$node.combobox(composeOption(this._options, this));
+        composeOption(this._options, this);
+        this.$node.combobox(this.initOptions());
+    };
+
+    this.onClear = function () {
+        this.select();
+
+        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
+            this.trigger(this.attr.clearEvent);
+        }
+    };
+
+    this.clear = function () {
+        $(this.$node)
+            .val('')
+            .data("id", '');
+    };
+
+    this.onSelect = function (e, ui) {
+        this.select(ui.item.value);
+    };
+
+    this.__previousVal = null;
+
+    this.select = function (id) {
+        if (_.isUndefined(id)) {
+            id = null;
+        }
+
+        if (this.__previousVal !== id) {
+            this.__previousVal = id;
+
+            var data = {};
+
+            data[this.attr.selectDataKey] = id;
+
+            if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
+                this.trigger(this.attr.selectEvent, data);
+            }
+        }
+    };
+
+    this.__onReset = function () {
+        this.clear();
+        this.__previousVal = null;
     };
 
     this.after('initialize', function () {
         this._initCombobox();
+        this.clear();
+
+        this.on('autocompleteselect', this.onSelect);
+        this.on('autocompleteclear', this.onClear);
+
+        if (this.attr.resetEvent !== DEFAULT_RESET_KEY) {
+            this.on(document, this.attr.resetEvent, this.__onReset);
+        }
     });
 
     this.before('teardown', function () {

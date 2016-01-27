@@ -8,33 +8,9 @@ function ToolbarEmailStatusCombobox() {
         source: PARAMs.EMAIL_STATUS_FILTER
     });
 
-    this.onClear = function () {
-        this.select();
-    };
-
-    this.onSelect = function (e, ui) {
-        this.select(ui.item.value);
-    };
-
-    this.previousVal = null;
-
-    this.select = function (id) {
-        if (_.isUndefined(id)) {
-            id = null;
-        }
-
-        if (this.previousVal !== id) {
-            this.previousVal = id;
-
-            this.trigger('selectEmailStatusForPatientTable', {
-                emailStatus: id
-            });
-        }
-    };
-
-    this.after('initialize', function () {
-        this.on('autocompleteselect', this.onSelect);
-        this.on('autocompleteclear', this.onClear);
+    this.attributes({
+        selectDataKey: 'emailStatus',
+        selectEvent: 'selectEmailStatusForPatientTable'
     });
 }
 

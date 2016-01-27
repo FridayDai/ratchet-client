@@ -53,7 +53,7 @@
             position: absolute;
             top: -7px;
             left: -35px;
-            content: url('../../../images/surgeon.png');
+            content: image-url('surgeon.png', false, false);
         }
     }
 
@@ -174,7 +174,7 @@
         right: 35px;
         width: 20px;
         height: 20px;
-        background: url('../../../images/edit.png') no-repeat 0 0;
+        background: image-url('edit.png', false, false) no-repeat 0 0;
         background-size: cover;
     }
 

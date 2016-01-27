@@ -16,6 +16,6 @@
         left: -35px;
         width: 10px;
         height: 25px;
-        content: url('../../../images/groups/groups_icon_active.png');
+        content: image-url('groups/groups_icon_active.png', false, false);
     }
 }

@@ -13,14 +13,19 @@ module.exports = {
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
-        profile: "./flightPages/profile.js"
+        profile: "./flightPages/profile.js",
+        reportOutcome: "./flightPages/report/outcome.js",
+        reportTaskCompletion: "./flightPages/report/taskCompletion.js"
     },
     output: {
         path: absoluteContext,
         filename: "./dist/[name].bundle.js"
     },
     resolve: {
-        root: absoluteContext,
+        root: [
+            __dirname,
+            absoluteContext
+        ],
         alias: {
             jquery: "bower_components/jquery/dist/jquery.js",
             lodash: "bower_components/lodash/lodash.js",
@@ -42,7 +47,8 @@ module.exports = {
             "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
             select2: "bower_components/select2/select2.js",
-            "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js"
+            "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
+            d3: "node_modules/d3/d3.js"
         }
     },
     module: {

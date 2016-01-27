@@ -27,6 +27,7 @@ module.exports = {
     PHONE_NUMBER_INVALID: "Please enter a valid phone number",
     NPI_INVALID: "Please enter a valid NPI",
     DELETE_INVALID: "Enter the text exactly as displayed to confirm",
+    EMAIL_INVALID: "Please enter a valid email address.",
     EMAIL_EXISTING_INVALID: "Email already exists",
     NPI_EXISTING_INVALID: "NPI already exists",
     ID_EXISTING_INVALID: "ID already exists",

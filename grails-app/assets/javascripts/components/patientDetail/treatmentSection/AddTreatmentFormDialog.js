@@ -36,14 +36,16 @@ function AddTreatmentFormDialog() {
             child: PatientRelationshipCombobox,
             attributes: {
                 selectEvent: 'addTreatmentRelationshipSelected',
-                clearEvent: 'addTreatmentRelationshipCleared'
+                clearEvent: 'addTreatmentRelationshipCleared',
+                resetEvent: 'addTreatmentReset'
             }
         },
         groupFieldSelector: {
             child: PatientGroupCombobox,
             attributes: {
                 selectEvent: 'addTreatmentGroupSelected',
-                clearEvent: 'addTreatmentGroupClear'
+                clearEvent: 'addTreatmentGroupClear',
+                resetEvent: 'addTreatmentReset'
             }
         },
         providerFieldSelector:{
@@ -58,7 +60,8 @@ function AddTreatmentFormDialog() {
             child: PatientTreatmentCombobox,
             attributes: {
                 selectEvent: 'addTreatmentTreatmentSelected',
-                clearEvent: 'addTreatmentTreatmentClear'
+                clearEvent: 'addTreatmentTreatmentClear',
+                resetEvent: 'addTreatmentReset'
             }
         },
         surgeryTimeFieldSelector: {

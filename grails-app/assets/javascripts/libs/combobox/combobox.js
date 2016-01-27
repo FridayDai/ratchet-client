@@ -300,6 +300,47 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                     .removeClass( "ui-button-icon-loading").addClass('ui-button-icon-primary');
             }
         }, this );
+    },
+
+    __response: function( content ) {
+        if ( content ) {
+            content = this._normalize( content );
+        }
+        this._trigger( "response", null, { content: content } );
+        if ( !this.options.disabled && content && content.length && !this.cancelSearch ) {
+            this._suggest( content );
+            this._trigger( "open" );
+        } else if (!this.options.disabled && content && content.length === 0 && !this.cancelSearch ) {
+            this.__noResult();
+            this._trigger( "open" );
+        } else {
+            // use ._close() instead of .close() so we don't cancel future searches
+            this._close();
+        }
+    },
+
+    __noResult: function () {
+        var noResults = this.options.noResults || 'No Result';
+        var ul = this.menu.element.empty();
+
+        $( "<li>" )
+            .addClass('ui-state-disabled')
+            .text(noResults)
+            .appendTo(ul);
+
+        this.isNewMenu = true;
+        this.menu.refresh();
+
+        // size and position menu
+        ul.show();
+        this._resizeMenu();
+        ul.position( $.extend({
+            of: this.element
+        }, this.options.position ) );
+
+        if ( this.options.autoFocus ) {
+            this.menu.next();
+        }
     }
 });
 

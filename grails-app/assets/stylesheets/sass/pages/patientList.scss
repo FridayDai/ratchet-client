@@ -6,32 +6,6 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 
-//.add-patient,
-//.bulk-important {
-//    padding-left: 32px;
-//    display: inline-block;
-//    float: right;
-//    margin-top: 10px;
-//    font-weight: lighter;
-//    font-size: 16px;
-//    font-family: 'Ionicons';
-//
-//    &:before {
-//        display: inline-block;
-//        margin-right: 10px;
-//        content: '\f2c7';
-//        position: absolute;
-//        left: 15px;
-//        top: 7px;
-//    }
-//
-//    span {
-//        vertical-align: middle;
-//        font: $base-font-utility;
-//        font-size: 13px;
-//    }
-//}
-
 .add-patient {
     margin-left: 10px;
 }
@@ -341,7 +315,7 @@
         left: 350px;
         top: 20px;
         position: absolute;
-        background: #fff url('../../../images/select2-spinner.gif') no-repeat 100% !important;
+        background: #fff image-url('select2-spinner.gif', false, false) no-repeat 100% !important;
     }
 }
 
@@ -388,7 +362,7 @@
         left: -35px;
         width: 10px;
         height: 25px;
-        content: url('../../../images/patients/patients_icon_active.png');
+        content: image-url('patients/patients_icon_active.png', false, false);
     }
 }
 

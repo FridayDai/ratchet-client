@@ -19,3 +19,14 @@
         }
     }
 }
+
+.ui-combobox {
+    .input-group:disabled {
+        background-color: $base-color-white-grey-dark;
+    }
+
+    .ui-combobox-toggle.disable {
+        background-color: $base-color-white-grey-dark;
+        cursor: inherit;
+    }
+}

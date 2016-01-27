@@ -298,7 +298,7 @@
         left: -35px;
         width: 10px;
         height: 25px;
-        content: url('../../../images/profile_icon.png');
+        content: image-url('profile_icon.png', false, false);
     }
 }
 

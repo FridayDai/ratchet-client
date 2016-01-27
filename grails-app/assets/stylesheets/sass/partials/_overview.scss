@@ -235,7 +235,7 @@
             right: 10px;
             width: 15px;
             height: 15px;
-            background: url('../../../images/patients/refresh.png') no-repeat 0 0;
+            background: image-url('patients/refresh.png', false, false) no-repeat 0 0;
             background-size: cover;
         }
     }

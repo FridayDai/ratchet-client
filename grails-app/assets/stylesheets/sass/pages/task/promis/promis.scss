@@ -1,0 +1,158 @@
+@import '../taskResult';
+
+body {
+    margin-bottom: 0;
+}
+
+.question-list {
+    margin: 0 0 30px 35px;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+    color: $result-main-color;
+    margin-left: -35px;
+}
+
+
+.answer {
+    position: relative;
+    margin-top: 10px;
+
+    .text {
+        font-size: 16px;
+    }
+}
+
+.result-circle-radio {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.result-circle-radio-checked {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $result-main-color;
+}
+
+.result-circle-radio-nrs {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 13px;
+
+    .content-number, .content-number-checked, .content-number-10, .content-number-checked-10 {
+        position: absolute;
+        left: 12px;
+        top: 7px;
+        color: #b3b3b3;
+        font-family: sans-serif;
+    }
+
+    .content-number-checked {
+        left: 11px;
+        color: #fff;
+    }
+
+    .content-number-10 {
+        left: 7px;
+        color: #b3b3b3;
+    }
+
+    .content-number-checked-10 {
+        left: 7px;
+        color: #fff;
+    }
+}
+
+.result-circle-radio-checked-nrs {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $result-main-color;
+    position: absolute;
+}
+
+.task-list-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 30px;
+        border-right: 1px solid #8e8e8e;
+    }
+
+    &.part-1 {
+        padding-left: 30px;
+    }
+}
+
+.download {
+    display: inline-block;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    a {
+        color: #7b8994;
+    }
+}
+
+
+
+.answer-nrs {
+    display: inline-block;
+}
+
+.list-nrs {
+    margin: 40px 0 0 -35px;
+    position: relative;
+    width: 600px;
+}
+
+.no-pain,.severe-pain {
+    position: absolute;
+    top: -32px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.no-pain {
+    left: 0;
+}
+
+.severe-pain {
+    right: 90px;
+}
+
+.score-wrap {
+    display: inline-block;
+    padding: 0 6px;
+}
+
+
+

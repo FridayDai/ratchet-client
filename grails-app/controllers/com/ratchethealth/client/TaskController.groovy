@@ -68,23 +68,19 @@ class TaskController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
 
-        request.session.setAttribute('medicalRecordId', medicalRecordId)
-        request.session.setAttribute('taskId', taskId)
-        request.session.setAttribute('patientId', patientId)
-
         def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render view: view, model: [Task: result, mixedResult: mixedResult]
+        render view: view, model: [Task: result, mixedResult: mixedResult, patientId: patientId, medicalRecordId: medicalRecordId, taskId: taskId]
     }
 
     def downloadPDF() {
         def token = request.session.token
         def clientId = request.session.clientId
-        def patientId = request.session.patientId
-        def medicalRecordId = request.session.medicalRecordId
-        def taskId = request.session.taskId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def taskId = params?.taskId
 
         def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
@@ -129,6 +125,10 @@ class TaskController extends BaseController {
             case RatchetConstants.TOOL_NAME_KOOS_JR:
             case RatchetConstants.TOOL_NAME_HOOS_JR:
                 view = '/taskResult/KOOSJRlike'
+                break
+
+            case RatchetConstants.TOOL_NAME_PROMIS:
+                view = '/taskResult/promis'
                 break
 
             default:

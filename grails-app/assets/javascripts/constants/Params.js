@@ -48,5 +48,20 @@ module.exports = {
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10
+    },
+
+    SCORE_TYPE: {
+        'SYMPTOMS': 'Symptoms',
+        'PAIN': 'Pain',
+        'ADL': 'ADL',
+        'SPORT_REC': 'Sports/Rec',
+        'QOL': 'QOL',
+        'neck': 'Neck',
+        'arm': 'Arm',
+        'back': 'Back',
+        'leg': 'Leg',
+        'STIFFNESS': 'Stiffness',
+        'Physical': 'Physical',
+        'Mental': 'Mental'
     }
 };

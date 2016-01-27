@@ -223,7 +223,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.release.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/login"
@@ -247,8 +247,10 @@ ratchetv2 {
             downloadErrors = "${ratchetv2.server.url.base}/clients/%s/bulk/error/link"
             savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
-
             checkPatientEmail = "${ratchetv2.server.url.base}/patients/check_email"
+
+            //Report URL
+            taskConversion = "${ratchetv2.server.url.base}/clients/conversion"
 
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/staffs"
@@ -321,6 +323,8 @@ ratchetv2 {
             //Announcement
             announcements = "${ratchetv2.server.url.base}/announcements"
 
+            //Report
+            providerAverage = "${ratchetv2.server.url.base}/report/outcome"
         }
 
         clientPlatform = "ancient"
@@ -335,4 +339,15 @@ ratchetv2 {
     googleAnalytics {
         trackingId = System.getProperty("GA_CLIENT_CODE") ?: "UA-60192214-2"
     }
+}
+
+grails.plugin.awssdk.accessKey = PropertyUtils.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
+grails.plugin.awssdk.secretKey = PropertyUtils.getProperty("AWS_SECRET_KEY") ?: "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"
+grails.plugin.awssdk.region = PropertyUtils.getProperty("AWS_REGION") ?: "us-east-1"
+
+ratchet {
+    s3 {
+        scanned_pdf_bucket = PropertyUtils.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
+    }
+
 }
