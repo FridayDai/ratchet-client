@@ -66,7 +66,7 @@ function BulkImportDialog() {
     this.onBeforeClose = function () {
         var me = this;
 
-        if (this.hasDataUploaded()) {
+        if (this.hasDataUploaded() && !this.finalDialog) {
             Notifications.confirm({
                 title: 'ARE YOU SURE?',
                 message: 'Are you sure you want to discard the patient list?'
@@ -125,24 +125,68 @@ function BulkImportDialog() {
         this.trigger('bulkImportDialogReset');
     };
 
+    this.formatBulkList = function () {
+        var data = [];
+        data.push(_.omit(this._fileUploadData[0], 'hasDuplicates'));
+        return JSON.stringify(data);
+    };
+
+    this.ajaxConfirm = function() {
+        var me = this;
+        $.ajax({
+            url: URLs.SAVE_BULK_IMPORT_DATA,
+            type: "post",
+            data: {
+                bulkList: this.formatBulkList()
+            },
+            success: function () {
+                me.clearUploadedFlag();
+                me.close();
+                me.trigger('bulkImportSavedSuccess', {
+                    number: me._fileUploadData.length
+                });
+            }
+        });
+    };
+
     this.confirmHandler = function () {
         var me = this;
 
         if (this.select('importResultTableSelector').is(":visible")) {
-            $.ajax({
-                url: URLs.SAVE_BULK_IMPORT_DATA,
-                type: "post",
-                data: {
-                    bulkList: JSON.stringify(this._fileUploadData)
-                },
-                success: function () {
-                    me.clearUploadedFlag();
-                    me.close();
-                    me.trigger('bulkImportSavedSuccess', {
-                        number: me._fileUploadData.length
-                    });
-                }
-            });
+            if(this._fileUploadData[0].hasDuplicates) {
+                this.finalDialog = null;
+
+                Notifications.confirm({
+                    title: 'ARE YOU SURE?',
+                    message: 'You are about to import patient(s) with duplicated treatments. Do you want to proceed?'
+                }, {
+                    buttons: [
+                        {
+                            text: 'Yes',
+                            'class': 'btn-agree',
+                            click: function () {
+                                me.ajaxConfirm();
+
+                                // Warning dialog close
+                                $(this).dialog("close");
+
+                                //set final dialog for close
+                                me.finalDialog = true;
+
+                                // Bulk import dialog close
+                                me.close();
+                            }
+                        }, {
+                            text: 'Cancel',
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+            } else {
+                this.ajaxConfirm();
+            }
         } else {
             this.select('importPanelSelector').hide();
             this.select('afterImportPanelSelector').show();

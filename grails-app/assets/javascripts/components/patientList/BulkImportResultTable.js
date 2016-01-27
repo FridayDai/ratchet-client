@@ -8,6 +8,12 @@ function BulkImportResultTable() {
         searching: false,
         serverSide: false,
         ajax: false,
+        fnRowCallback: function (nRow, aData) {
+            if (aData.hasDuplicates) {
+                $('td', nRow).addClass('error-background');
+                $('#duplicated-error').show();
+            }
+        },
         columnDefs: [
             {
                 "targets": 0,
@@ -48,14 +54,20 @@ function BulkImportResultTable() {
             }, {
                 "targets": 6,
                 "render": function (data, type, full) {
-                    return data === undefined ? full.treatmentName : data;
+                    var name = data === undefined ? full.treatmentName : data;
+                    var hasDuplicates = data === undefined ? full.hasDuplicates : data;
+                    if (hasDuplicates) {
+                        return '<div class="alert">' + name + '</div>';
+                    } else {
+                        return name;
+                    }
                 },
                 width: "150px"
             }, {
                 "targets": 7,
                 "render": function (data, type, full) {
                     var surgeryTime = data === undefined ? full.surgeryTime : data;
-                    if(surgeryTime) {
+                    if (surgeryTime) {
                         return moment(surgeryTime, 'D-MMM-YY').format('MMM D, YYYY');
                     } else {
                         return '';
@@ -94,6 +106,7 @@ function BulkImportResultTable() {
             data = [data];
         }
 
+        $('#duplicated-error').hide();
         this.tableEl.rows.add(data).draw();
     };
 
