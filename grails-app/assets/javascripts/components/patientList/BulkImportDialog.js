@@ -102,7 +102,7 @@ function BulkImportDialog() {
     };
 
     this.hasDataUploaded = function () {
-          return this._isFileUploaded;
+        return this._isFileUploaded;
     };
 
     this.onClose = function () {
@@ -127,11 +127,13 @@ function BulkImportDialog() {
 
     this.formatBulkList = function () {
         var data = [];
-        data.push(_.omit(this._fileUploadData[0], 'hasDuplicates'));
+        _.each(this._fileUploadData, function (value) {
+            data.push(_.omit(value, 'hasDuplicates'));
+        });
         return JSON.stringify(data);
     };
 
-    this.ajaxConfirm = function() {
+    this.ajaxConfirm = function () {
         var me = this;
         $.ajax({
             url: URLs.SAVE_BULK_IMPORT_DATA,
@@ -149,11 +151,21 @@ function BulkImportDialog() {
         });
     };
 
+    this.hasDuplicates = function () {
+        var flag = false;
+        _.each(this._fileUploadData, function (value) {
+            if (value.hasDuplicates) {
+                flag = true;
+            }
+        });
+        return flag;
+    };
+
     this.confirmHandler = function () {
         var me = this;
 
         if (this.select('importResultTableSelector').is(":visible")) {
-            if(this._fileUploadData[0].hasDuplicates) {
+            if (this.hasDuplicates()) {
                 this.finalDialog = null;
 
                 Notifications.confirm({
@@ -172,9 +184,6 @@ function BulkImportDialog() {
 
                                 //set final dialog for close
                                 me.finalDialog = true;
-
-                                // Bulk import dialog close
-                                me.close();
                             }
                         }, {
                             text: 'Cancel',
@@ -242,7 +251,7 @@ function BulkImportDialog() {
         title: 'BULK IMPORT',
         height: Utility.getWindowSize().height,
         width: Utility.getWindowSize().width - 30,
-        position: { my: "left top", at: "left top", of: window },
+        position: {my: "left top", at: "left top", of: window},
         buttons: {
             Next: this.confirmHandler,
             Cancel: this.cancelHandler
