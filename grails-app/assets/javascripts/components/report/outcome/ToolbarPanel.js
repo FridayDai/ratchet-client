@@ -39,6 +39,8 @@ function ToolbarPanel() {
 
     this.onTreatmentSelect = function (e, data) {
         this.searchFields.toolId = null;
+        this.searchFields.year = null;
+
         this.triggerSearch(data);
     };
 

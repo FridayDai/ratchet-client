@@ -133,4 +133,14 @@ class TreatmentController extends BaseController {
         def result = [resp: resp]
         render result as JSON
     }
+
+    def getTreatmentAvailableYears() {
+        def token = request.session.token
+        def clientId = request.session?.clientId
+        def treatmentId = params?.treatmentId
+
+        def resp = treatmentService.getTreatmentAvailableYears(token, clientId, treatmentId)
+
+        render resp as JSON
+    }
 }

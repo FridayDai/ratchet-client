@@ -49,7 +49,7 @@ function WithCombobox() {
     };
 
     this.onClear = function () {
-        this.select();
+        this.clear();
 
         if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
             this.trigger(this.attr.clearEvent);
@@ -60,6 +60,7 @@ function WithCombobox() {
         $(this.$node)
             .val('')
             .data("id", '');
+        this.__previousVal = null;
     };
 
     this.onSelect = function (e, ui) {
@@ -88,7 +89,6 @@ function WithCombobox() {
 
     this.__onReset = function () {
         this.clear();
-        this.__previousVal = null;
     };
 
     this.after('initialize', function () {
