@@ -229,4 +229,25 @@ class TreatmentService extends RatchetAPIService {
             }
         }
     }
+
+    def getTreatmentAvailableYears(String token, clientId, treatmentId) {
+        log.info("Call backend service to get treatment available years, token: ${token}.")
+
+        String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentAvailabelYears
+
+        withGet(token, getAvailableTaskUrl) { req ->
+            def resp = req
+                .queryString("clientId", clientId)
+                .queryString("treatmentId", treatmentId)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("Get treatment available years success, token: ${token}")
+
+                JSON.parse(resp.body)
+            } else {
+                handleError(resp)
+            }
+        }
+    }
 }

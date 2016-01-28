@@ -32,7 +32,7 @@
 
                 <div class="filler-content">
                     <label for="yearFilter" class="select-tip">SURGERY IN</label>
-                    <input type="text" name="yearFilter" id="yearFilter" class="input-group input-auto-search"/>
+                    <input type="text" name="yearFilter" id="yearFilter" class="input-group input-auto-search" disabled/>
                 </div>
             </div>
         </div>

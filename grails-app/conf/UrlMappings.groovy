@@ -60,6 +60,7 @@ class UrlMappings {
         "/treatments/$treatmentId?/available-tasks"(controller: "treatment") {
             action = [GET: "getTasksInTreatment"]
         }
+        "/treatments/$treatmentId?/available-years"(controller: "treatment", action: "getTreatmentAvailableYears")
         "/patients/$patientId/treatments/$medicalRecordId/notify"(controller: "treatment", action: "notifyTreatmentTasks")
         "/patients/$patientId/treatments/$medicalRecordId/add-ad-hoc-tasks"(controller: "treatment", action: "addAdhocTasks")
         "/patients/$patientId/treatments/$medicalRecordId/delete"(controller: "treatment", action: "deleteTreatment")
@@ -124,15 +125,12 @@ class UrlMappings {
         "/reports/outcome"(controller: "report") {
             action = [GET: "getOutcomePage"]
         }
-
-        "/reports/overview/provider-average"(controller: "report") {
+        "/reports/outcome/provider-average"(controller: "report") {
             action = [POST: "getProviderAverageOverview"]
         }
-
         "/reports/task-completion"(controller: "report") {
             action = [GET: "renderTaskCompletionReport"]
         }
-
         "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
 
         // Help

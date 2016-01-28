@@ -285,6 +285,7 @@ ratchetv2 {
             generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
             notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+            getTreatmentAvailabelYears = "${ratchetv2.server.url.base}/report/availableYears"
             adhocTasksToTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/ad-hoc"
             deleteTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
 

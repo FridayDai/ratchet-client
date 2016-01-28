@@ -357,4 +357,80 @@ class TreatmentServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+	def "test getTasksInTreatment with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTasksInTreatment without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test getTreatmentAvailableYears with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTreatmentAvailableYears('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTreatmentAvailableYears without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTreatmentAvailableYears('token', 1, 1)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
 }
