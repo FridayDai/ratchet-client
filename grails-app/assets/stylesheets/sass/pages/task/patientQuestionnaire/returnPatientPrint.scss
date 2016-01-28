@@ -65,6 +65,42 @@ html, body {
     background-color: $result-main-color;
 }
 
+.rc-checkbox {
+    top: -2px;
+}
+
+.result-checkbox {
+    position: absolute;
+    top: 3px;
+    left: -34px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 13px;
+    height: 13px;
+    border: 1px solid $base-font-color;
+    cursor: default;
+}
+
+.result-checkbox-checked {
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    background-color: $result-main-color;
+    box-shadow: inset 0 0 0 1px $base-color-white;
+}
+
+.result-checkbox-checked:before {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 2px;
+    content: '\f383';
+    font-family: 'Ionicons';
+    font-size: 14px;
+    color: $base-color-white;
+    text-align: center;
+}
+
 .task-list-wrapper:after {
     content: '';
     display: table;
