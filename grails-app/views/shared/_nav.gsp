@@ -23,6 +23,15 @@
                 </ul>
             </a>
         </li>
+        <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
+            <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
+                <g:else>class="nav-li"</g:else>>
+                <g:link controller="patients" class="icon-patient">
+                    <div class="title">Patients</div>
+                </g:link>
+            </li>
+        </g:if>
+
         <li class="nav-li expendable-nav <g:if test="${controllerName == 'report'}">expended</g:if><g:else>collapsed</g:else>">
             <a href="#" class="nav-button icon-report">
                 <div class="title">Reports</div>
@@ -41,15 +50,6 @@
                 </li>
             </ul>
         </li>
-
-        <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
-            <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
-                <g:else>class="nav-li"</g:else>>
-                <g:link controller="patients" class="icon-patient">
-                    <div class="title">Patients</div>
-                </g:link>
-            </li>
-        </g:if>
 
         <g:if test="${request.session.accountManagement == true}">
             <li <g:if test="${controllerName == 'accounts'}">class="nav-li active"</g:if>
