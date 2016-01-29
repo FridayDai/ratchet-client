@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name" class="search-input" id="search-input">
+                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
                     <span class="search" id="search-btn"></span>
                 </div>
             </div>
