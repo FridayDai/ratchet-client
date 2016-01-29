@@ -285,9 +285,12 @@ function ToolbarPanel() {
                 var scoreTextBBox = scoreText.node().getBBox();
                 var textPadding = 10;
 
-                textGroup.append('text')
-                    .text('Data Count: {0}'.format(d.count))
-                    .attr('x', scoreTextBBox.width + textPadding);
+                if (d.count) {
+                    textGroup.append('text')
+                        .text('Data Count: {0}'.format(d.count))
+                        .attr('x', scoreTextBBox.width + textPadding);
+
+                }
 
                 var textGroupBBox = textGroup.node().getBBox();
                 var textGroupHPadding = 8;
