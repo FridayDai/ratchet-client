@@ -1,0 +1,21 @@
+@import "report_chart";
+
+.treatment-report {
+    .inner-search {
+        .search-content {
+            margin: 20px;
+        }
+    }
+
+    .select-tip {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .chart-panel {
+        .default {
+            display: none!important;
+        }
+    }
+}

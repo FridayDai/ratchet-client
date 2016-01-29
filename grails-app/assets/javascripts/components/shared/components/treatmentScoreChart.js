@@ -1,7 +1,7 @@
 var flight = require('flight');
 var d3 = require('d3');
 
-var PARAMs = require('../../../../constants/Params');
+var PARAMs = require('../../../constants/Params');
 
 var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{0}</span>';
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
@@ -535,8 +535,8 @@ function ToolbarPanel() {
     };
 
     this.after('initialize', function () {
-        this.on(document, 'getProviderAverageOverviewSuccessful', this.onRender);
-        this.on(document, 'startGettingProviderAverageOverview', this.onClear);
+        this.on(document, 'renderTreatmentScoreChart', this.onRender);
+        this.on(document, 'clearTreatmentScoreChart', this.onClear);
     });
 }
 

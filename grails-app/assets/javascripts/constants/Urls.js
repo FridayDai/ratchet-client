@@ -46,6 +46,9 @@ module.exports = {
     UPDATE_GROUP_PROVIDER_CONTACT: '/patients/{0}/group-and-provider/update?medicalRecordId={1}',
     CHECK_EMERGENCY_CONTACT_EMAIL: '/patients/{0}/emergency-contact/check-email',
 
+    //Report
+    GET_INDIVIDUAL_REPORT: '/patients/{0}/treatments/{1}/tools/{2}/report',
+
     //Activity
     GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}',
 

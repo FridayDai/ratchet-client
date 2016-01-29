@@ -38,6 +38,10 @@
                 <g:link controller="team" action="getTeam"
                         params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">TEAM</g:link>
             </li>
+            <li data-type="Report">
+                <g:link controller="singlePatient" action="getPatientReportTab"
+                        params="[treatmentId: treatmentId, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">REPORT</g:link>
+            </li>
             <li data-type="Activity">
                 <g:link controller="activity" action="index"
                         params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, _: System.currentTimeMillis()]">ACTIVITIES</g:link>
