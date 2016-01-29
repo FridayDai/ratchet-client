@@ -32,7 +32,7 @@
             </div>
 
             <div class="panel" id="email-panel">
-                <div class="panel-title">By Email</div>
+                <div class="panel-title">Has Email</div>
                 <div class="panel-content">
                     <div class="donut"></div>
                     <div class="bar"></div>
