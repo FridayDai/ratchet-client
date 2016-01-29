@@ -17,7 +17,7 @@ function WithChildren() {
             if (_.isPlainObject(child)) {
                 var obj = child;
 
-                obj.child.attachTo(this.attr[selector], _.assign(this._childrenAttrs, obj.attributes));
+                obj.child.attachTo(this.attr[selector], _.defaults( obj.attributes, this._childrenAttrs));
             } else {
                 child.attachTo(this.attr[selector], this._childrenAttrs);
             }

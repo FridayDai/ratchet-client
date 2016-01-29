@@ -83,6 +83,8 @@ function NewPatientFormDialog() {
         treatmentFieldSelector: {
             child: NewPatientTreatmentCombobox,
             attributes: {
+                groupSelectEvent: 'patientGroupSelected',
+                groupClearEvent: 'patientGroupClear',
                 selectEvent: 'newPatientTreatmentSelected',
                 clearEvent: 'newPatientTreatmentClear',
                 resetEvent: 'newPatientReset'

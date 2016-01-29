@@ -156,14 +156,14 @@
 
         <div class="form-group form-provider">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="staffVal" type="text" class="required" placeholder="Select provider"
-                   disabled/>
+            <input id="selectSurgeons" name="staffVal" type="text" class="required"
+                   placeholder="Select provider" disabled/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
-            <input id="selectTreatment" name="treatmentVal" type="text" class=" required"
-                   placeholder="Select treatment"/>
+            <input id="selectTreatment" name="treatmentVal" type="text" class="required"
+                   placeholder="Select treatment" disabled/>
         </div>
 
         <div class="form-group inline" id="surgery-date-group">
