@@ -1,0 +1,29 @@
+var flight = require('flight');
+var WithCombobox = require('../../common/WithCombobox');
+var URLs = require('../../../constants/Urls');
+
+function ToolbarToolCombobox() {
+    this.options({
+        source: function (request, response) {
+            $.ajax({
+                dropProcess: true,
+                url: URLs.GET_AVAILABLE_TASKS.format(this.$node.data('treatmentId'))
+            }).done(function (data) {
+                response($.map(data, function (item) {
+                    return {
+                        label: item.title,
+                        value: item.id
+                    };
+                }));
+            });
+        },
+        appendTo: ".container"
+    });
+
+    this.attributes({
+        selectEvent: 'selectToolForIndividualReport',
+        selectDataKey: 'toolId'
+    });
+}
+
+module.exports = flight.component(WithCombobox, ToolbarToolCombobox);
