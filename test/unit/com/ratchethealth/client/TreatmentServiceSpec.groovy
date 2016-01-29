@@ -25,7 +25,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.getTreatments('token', 1, 1, 1, 'title')
+		def result = service.getTreatments('token', 1, 1, 1, 1, 'title')
 
 		then:
 		result == [1, 2]
@@ -41,7 +41,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.getTreatments('token', 1, 1, 1, 'title')
+		service.getTreatments('token', 1, 1, 1, 1, 'title')
 
 		then:
 		ApiReturnException e = thrown()
