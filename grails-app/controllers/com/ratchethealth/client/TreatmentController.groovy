@@ -51,7 +51,9 @@ class TreatmentController extends BaseController {
         def max = params?.max
         def offset = params?.offset
         def treatmentTitle = params?.treatmentTitle
-        def resp = treatmentService.getTreatments(token, clientId, max, offset, treatmentTitle)
+        def groupId = params?.groupId
+
+        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle)
         render resp as JSON
     }
 
@@ -132,5 +134,15 @@ class TreatmentController extends BaseController {
         def resp = treatmentService.deleteTreatment(token, clientId, patientId, medicalRecordId)
         def result = [resp: resp]
         render result as JSON
+    }
+
+    def getTreatmentAvailableYears() {
+        def token = request.session.token
+        def clientId = request.session?.clientId
+        def treatmentId = params?.treatmentId
+
+        def resp = treatmentService.getTreatmentAvailableYears(token, clientId, treatmentId)
+
+        render resp as JSON
     }
 }

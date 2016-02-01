@@ -1,7 +1,7 @@
 var flight = require('flight');
 var d3 = require('d3');
 
-var PARAMs = require('../../../../constants/Params');
+var PARAMs = require('../../../constants/Params');
 
 var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{0}</span>';
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
@@ -285,9 +285,12 @@ function ToolbarPanel() {
                 var scoreTextBBox = scoreText.node().getBBox();
                 var textPadding = 10;
 
-                textGroup.append('text')
-                    .text('Data Count: {0}'.format(d.count))
-                    .attr('x', scoreTextBBox.width + textPadding);
+                if (d.count) {
+                    textGroup.append('text')
+                        .text('Data Count: {0}'.format(d.count))
+                        .attr('x', scoreTextBBox.width + textPadding);
+
+                }
 
                 var textGroupBBox = textGroup.node().getBBox();
                 var textGroupHPadding = 8;
@@ -535,8 +538,8 @@ function ToolbarPanel() {
     };
 
     this.after('initialize', function () {
-        this.on(document, 'getProviderAverageOverviewSuccessful', this.onRender);
-        this.on(document, 'startGettingProviderAverageOverview', this.onClear);
+        this.on(document, 'renderTreatmentScoreChart', this.onRender);
+        this.on(document, 'clearTreatmentScoreChart', this.onClear);
     });
 }
 

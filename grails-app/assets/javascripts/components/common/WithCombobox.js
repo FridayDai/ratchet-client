@@ -48,8 +48,8 @@ function WithCombobox() {
         this.$node.combobox(this.initOptions());
     };
 
-    this.onClear = function () {
-        this.select();
+    this.__onClear = function () {
+        this.clear();
 
         if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
             this.trigger(this.attr.clearEvent);
@@ -60,9 +60,10 @@ function WithCombobox() {
         $(this.$node)
             .val('')
             .data("id", '');
+        this.__previousVal = null;
     };
 
-    this.onSelect = function (e, ui) {
+    this.__onSelect = function (e, ui) {
         this.select(ui.item.value);
     };
 
@@ -80,6 +81,10 @@ function WithCombobox() {
 
             data[this.attr.selectDataKey] = id;
 
+            if (this.beforeSelect) {
+                this.beforeSelect.call(this, data);
+            }
+
             if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
                 this.trigger(this.attr.selectEvent, data);
             }
@@ -88,15 +93,14 @@ function WithCombobox() {
 
     this.__onReset = function () {
         this.clear();
-        this.__previousVal = null;
     };
 
     this.after('initialize', function () {
         this._initCombobox();
         this.clear();
 
-        this.on('autocompleteselect', this.onSelect);
-        this.on('autocompleteclear', this.onClear);
+        this.on('autocompleteselect', this.__onSelect);
+        this.on('autocompleteclear', this.__onClear);
 
         if (this.attr.resetEvent !== DEFAULT_RESET_KEY) {
             this.on(document, this.attr.resetEvent, this.__onReset);

@@ -1,0 +1,278 @@
+$main-color: #225f6f;
+$line-color-0: #55A9C3;
+$line-color-1: #DA718E;
+$line-color-2: #D89853;
+$line-color-3: #85A649;
+$line-color-4: #885AAD;
+
+.view-score-bar {
+    display: none;
+    margin: 0 40px 20px;
+    font-size: 16px;
+    color: $main-color;
+
+    .score-item {
+        margin: 0 8px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        color: white;
+        cursor: pointer;
+        border: 1px solid transparent;
+
+        &.inactive {
+            background-color: white;
+            color: #999;
+            border-color: #999;
+        }
+    }
+
+    .score-item-0 {
+        background-color: $line-color-0;
+    }
+
+    .score-item-1 {
+        background-color: $line-color-1;
+    }
+
+    .score-item-2 {
+        background-color: $line-color-2;
+    }
+
+    .score-item-3 {
+        background-color: $line-color-3;
+    }
+
+    .score-item-4 {
+        background-color: $line-color-4;
+    }
+}
+
+.chart-group {
+    display: none;
+    position: relative;
+}
+
+.chart-panel {
+    margin-top: 30px;
+
+    .chart {
+        height: 550px;
+    }
+
+    line {
+        stroke: #818181;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+    }
+
+    text {
+        fill: #666;
+    }
+
+    .axis {
+        path {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .domain {
+            display: none;
+        }
+
+        &.y.right-one {
+            .tick line {
+                display: none;
+            }
+        }
+
+        &.x {
+            .tick line {
+                display: none;
+            }
+
+            .surgery-date-x {
+                line {
+                    display: block;
+                    stroke: $main-color;
+                }
+
+                rect {
+                    fill: white;
+                }
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .triangle {
+                stroke: $main-color;
+                fill: $main-color;
+                shape-rendering: initial;
+            }
+        }
+    }
+
+    .axis-unit {
+        font-size: 12px;
+
+        line {
+            stroke-width: 2;
+        }
+    }
+
+    .line-group {
+        .average-line {
+            stroke-width: 2;
+            shape-rendering: initial;
+            stroke: $line-color-0;
+        }
+
+        circle {
+            fill: $line-color-0;
+        }
+
+        &.active {
+            .average-line {
+                stroke-width: 3;
+            }
+        }
+
+        &.disable {
+            opacity: 0.4;
+        }
+
+        &.line-group-1 {
+            .average-line {
+                stroke: $line-color-1;
+            }
+
+            circle {
+                fill: $line-color-1;
+            }
+        }
+
+        &.line-group-2 {
+            .average-line {
+                stroke: $line-color-2;
+            }
+
+            circle {
+                fill: $line-color-2;
+            }
+        }
+
+        &.line-group-3 {
+            .average-line {
+                stroke: $line-color-3;
+            }
+
+            circle {
+                fill: $line-color-3;
+            }
+        }
+
+        &.line-group-4 {
+            .average-line {
+                stroke: $line-color-4;
+            }
+
+            circle {
+                fill: $line-color-4;
+            }
+        }
+    }
+
+    .status-tip-group {
+        visibility: hidden;
+
+        rect {
+            fill: $main-color;
+        }
+
+        line {
+            stroke: $main-color;
+        }
+
+        text {
+            fill: white;
+            font-size: 12px;
+        }
+
+        &.active {
+            visibility: visible;
+        }
+
+        .mark-tip {
+            path {
+                fill: $line-color-0;
+                shape-rendering: initial;
+                stroke: none;
+            }
+        }
+    }
+
+    .status-tip-group-1 {
+        .mark-tip {
+            path {
+                fill: $line-color-1;
+            }
+        }
+    }
+
+    .status-tip-group-2 {
+        .mark-tip {
+            path {
+                fill: $line-color-2;
+            }
+        }
+    }
+
+    .status-tip-group-3 {
+        .mark-tip {
+            path {
+                fill: $line-color-3;
+            }
+        }
+    }
+
+    .status-tip-group-4 {
+        .mark-tip {
+            path {
+                fill: $line-color-4;
+            }
+        }
+    }
+}
+
+.chart-panel {
+    .not-available, .default {
+        text-align: center;
+        padding-top: 60px;
+
+        .icon {
+            font-size: 120px;
+            color: #EBEBEB;
+        }
+
+        .desc {
+            margin-top: 20px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+    }
+
+    .not-available {
+        display: none;
+    }
+
+    .no-data {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        margin-left: -58px;
+        font-size: 15px;
+        font-weight: 700;
+    }
+}

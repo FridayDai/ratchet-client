@@ -59,6 +59,8 @@ function AddTreatmentFormDialog() {
         treatmentFieldSelector: {
             child: PatientTreatmentCombobox,
             attributes: {
+                groupSelectEvent: 'addTreatmentGroupSelected',
+                groupClearEvent: 'addTreatmentGroupClear',
                 selectEvent: 'addTreatmentTreatmentSelected',
                 clearEvent: 'addTreatmentTreatmentClear',
                 resetEvent: 'addTreatmentReset'

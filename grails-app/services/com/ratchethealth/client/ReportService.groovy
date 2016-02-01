@@ -22,11 +22,9 @@ class ReportService extends RatchetAPIService {
                 .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
-
                 log.info("Get provider average data for report overview success, token: ${token}")
 
-                result
+                JSON.parse(resp.body)
             }
             else {
                 handleError(resp)
@@ -48,6 +46,26 @@ class ReportService extends RatchetAPIService {
                 def result = JSON.parse(resp.body)
                 log.info("Get task completion conversion success, token: ${token}")
                 return result
+            }
+            else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getIndividualReport(String token, clientId, patientId, medicalRecordId, baseToolId) {
+
+        def tempUrl = grailsApplication.config.ratchetv2.server.url.individualReport
+        String url = String.format(tempUrl, clientId, medicalRecordId, baseToolId, patientId)
+
+        log.info("Call backend service to get report for individual patient, token: ${token}.")
+        withPost(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 200) {
+                log.info("Get report for individual patient success, token: ${token}")
+
+                JSON.parse(resp.body)
             }
             else {
                 handleError(resp)

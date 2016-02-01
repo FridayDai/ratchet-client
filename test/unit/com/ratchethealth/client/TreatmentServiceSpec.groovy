@@ -25,7 +25,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.getTreatments('token', 1, 1, 1, 'title')
+		def result = service.getTreatments('token', 1, 1, 1, 1, 'title')
 
 		then:
 		result == [1, 2]
@@ -41,7 +41,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.getTreatments('token', 1, 1, 1, 'title')
+		service.getTreatments('token', 1, 1, 1, 1, 'title')
 
 		then:
 		ApiReturnException e = thrown()
@@ -352,6 +352,82 @@ class TreatmentServiceSpec extends Specification {
 
 		when:
 		service.deleteTreatment('token', 1, 2, 3)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test getTasksInTreatment with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTasksInTreatment without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test getTreatmentAvailableYears with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTreatmentAvailableYears('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTreatmentAvailableYears without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTreatmentAvailableYears('token', 1, 1)
 
 		then:
 		ApiReturnException e = thrown()

@@ -31,6 +31,7 @@ module.exports = {
     NOTIFY_TREATMENT_TASKS: '/patients/{0}/treatments/{1}/notify',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',
+    GET_TREATMENT_AVAILABLE_YEARS: '/treatments/{0}/available-years',
 
     //Tasks
     SEND_NOTIFY_EMAIL: '/patients/{0}/treatments/{1}/task/{2}/send-mail',
@@ -44,6 +45,9 @@ module.exports = {
     DELETE_EMERGENCY_CONTACT: '/patients/{0}/{1}/emergency-contact/{2}',
     UPDATE_GROUP_PROVIDER_CONTACT: '/patients/{0}/group-and-provider/update?medicalRecordId={1}',
     CHECK_EMERGENCY_CONTACT_EMAIL: '/patients/{0}/emergency-contact/check-email',
+
+    //Report
+    GET_INDIVIDUAL_REPORT: '/patients/{0}/treatments/{1}/tools/{2}/report',
 
     //Activity
     GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}',
@@ -70,6 +74,6 @@ module.exports = {
     DELETE_GROUP: "/groups/delete",
 
     //Report
-    PROVIDER_AVERAGE_OVERVIEW: '/reports/overview/provider-average',
+    PROVIDER_AVERAGE_OVERVIEW: '/reports/outcome/provider-average',
     GET_TASK_COMPLETION:'/reports/conversion'
 };

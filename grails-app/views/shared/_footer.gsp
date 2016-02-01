@@ -1,6 +1,6 @@
 <div role="banner" class="footer">
     <div class="content clear">
-        <span class="copyright-year pull-left">© 2015</span>
+        <span class="copyright-year pull-left">© 2016</span>
         <div class="copyright pull-left">
             <a href="/" class="logo">
                 <img class="footer-logo" src="${assetPath(src: 'footer_logo.png')}">

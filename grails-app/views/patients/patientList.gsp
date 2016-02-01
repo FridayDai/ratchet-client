@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name" class="search-input" id="search-input">
+                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
                     <span class="search" id="search-btn"></span>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                 <label class="lbl-group">TREATMENT<span>*</span></label>
                 <input id="selectTreatment" name="treatmentVal" type="text"
                        class="input-group treatment re-position clear"
-                       placeholder="Select treatment" required/>
+                       placeholder="Select treatment" required disabled/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">

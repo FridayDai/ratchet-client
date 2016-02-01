@@ -85,4 +85,26 @@ class SinglePatientController extends BaseController {
 
         render status: 200
     }
+
+    def getPatientReportTab() {
+        def medicalRecordId = params?.medicalRecordId
+        def treatmentId = params?.treatmentId
+        def clientId = params?.clientId
+        def patientId = params?.patientId
+        def archived = params?.archived
+        if (archived == null || archived == '') {
+            archived = false
+        }
+
+        render(
+            view: "/singlePatient/report",
+            model: [
+                treatmentId: treatmentId,
+                medicalRecordId: medicalRecordId,
+                clientId: clientId,
+                patientId: patientId,
+                archived: archived
+            ]
+        )
+    }
 }
