@@ -21,7 +21,8 @@ function ToolbarTreatmentCombobox() {
 
     this.attributes({
         selectDataKey: 'treatmentId',
-        selectEvent: 'selectTreatmentForPatientTable'
+        selectEvent: 'selectTreatmentForPatientTable',
+        clearEvent: 'clearTreatmentForPatientTable'
     });
 }
 

@@ -42,6 +42,8 @@ function ToolbarPanel() {
         this.searchFields.year = null;
 
         this.triggerSearch(data);
+
+        this.trigger('clearTreatmentScoreChart');
     };
 
     this.onYearSelect = function (e, data) {
@@ -76,11 +78,19 @@ function ToolbarPanel() {
         });
     };
 
+    this.onFilterClear = function () {
+        this.trigger('clearTreatmentScoreChart');
+    };
+
     this.after('initialize', function () {
         this.on(document, 'selectProviderForReportOverview', this.onProviderSelect);
+        this.on(document, 'clearProviderForReportOverview', this.onFilterClear);
         this.on(document, 'selectToolForReportOverview', this.onToolSelect);
+        this.on(document, 'clearToolForReportOverview', this.onFilterClear);
         this.on(document, 'selectTreatmentForReportOverview', this.onTreatmentSelect);
+        this.on(document, 'clearTreatmentForReportOverview', this.onFilterClear);
         this.on(document, 'selectYearForReportOverview', this.onYearSelect);
+        this.on(document, 'clearYearForReportOverview', this.onFilterClear);
     });
 }
 
