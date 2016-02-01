@@ -21,6 +21,12 @@
     }
 }
 
+.inner-search {
+    .right-search {
+        margin-top: 0;
+    }
+}
+
 #group-form {
     .form-group {
         margin-bottom: 20px;
@@ -37,7 +43,7 @@
         }
 
         .treatments {
-            height: 100px;
+            height: 112px;
         }
 
         .select2-container.select2-container-multi .select2-choices {

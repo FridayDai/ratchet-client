@@ -1,17 +1,27 @@
 var flight = require('flight');
 var TaskSection = require('../taskSection/TaskSection');
 var TeamSection = require('../teamSection/TeamSection');
+var ReportSection = require('../reportSection/ReportSection');
 var ActivitySection = require('../activitySection/ActivitySection');
 var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
 
+var TYPE_SECTION_MAPPING = {
+    'Task': TaskSection,
+    'Team': TeamSection,
+    'Report': ReportSection,
+    'Activity': ActivitySection
+};
+
+var NODE_NAME_TEMP = '{0}Node';
+
 function Treatment() {
     this.attributes({
         subTabsContainerSelector: '.sub-tabs',
 
-        treatmentToolListSelector: "#treatment-tool",
+        treatmentToolListSelector: '#treatment-tool',
         addTaskButtonSelector: '#addTasks',
         notifyButtonSelector: '#notifyTasks',
         generateCodeButtonSelector: '#generateCode',
@@ -31,38 +41,19 @@ function Treatment() {
             cache: true,
             ajaxOptions: {cache: true},
             beforeLoad: function (event, ui) {
-                if (ui.tab.data("loaded")) {
+                if (ui.tab.data('loaded')) {
                     event.preventDefault();
                     return;
                 }
 
                 ui.jqXHR.success(function () {
-                    ui.tab.data("loaded", true);
+                    ui.tab.data('loaded', true);
                 });
 
                 Utility.progress(true);
             },
             load: function (event, ui) {
-                var type = ui.tab.data("type");
-                if (type) {
-                    switch (type) {
-                        case "Task":
-                            me.taskNode = ui.panel.get(0);
-                            TaskSection.attachTo(ui.panel);
-                            break;
-
-                        case "Team":
-                            me.teamNode = ui.panel.get(0);
-                            TeamSection.attachTo(ui.panel);
-                            break;
-
-                        case "Activity":
-                            //RC.pages.activity.init(ui.panel, ui.panel.find("#activityTable"));
-                            me.activityNode = ui.panel.get(0);
-                            ActivitySection.attachTo(ui.panel);
-                            break;
-                    }
-                }
+                me.attachToTabs(ui.panel, ui.tab.data('type'));
 
                 Utility.progress(false);
             },
@@ -70,14 +61,23 @@ function Treatment() {
         });
     };
 
+    this.attachToTabs = function (panel, type) {
+        if (!(type in TYPE_SECTION_MAPPING)) {
+            throw 'Tab type is invalid in TYPE_SECTION_MAPPING';
+        }
+
+        this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
+        TYPE_SECTION_MAPPING[type].attachTo(panel);
+    };
+
     this.getBasicIds = function () {
         var $button = this.select('treatmentToolListSelector');
 
         if (!this.treatmentId) {
-            this.treatmentId = $button.data("treatmentId");
-            this.medicalRecordId = $button.data("medicalRecordId");
-            this.patientId = $button.data("patientId");
-            this.clientId = $button.data("clientId");
+            this.treatmentId = $button.data('treatmentId');
+            this.medicalRecordId = $button.data('medicalRecordId');
+            this.patientId = $button.data('patientId');
+            this.clientId = $button.data('clientId');
         }
 
         return {
@@ -102,8 +102,12 @@ function Treatment() {
         this.trigger('showGenerateCodeDialog', this.getBasicIds());
     };
 
+    this.getNodeWithType = function (type) {
+        return this[NODE_NAME_TEMP.format(type.toLowerCase())];
+    };
+
     this.getTaskSection = function () {
-        return flight.registry.findInstanceInfoByNode(this.taskNode)[0].instance;
+        return flight.registry.findInstanceInfoByNode(this.getNodeWithType('Task'))[0].instance;
     };
 
     this.onNotifyButtonClicked = function() {
@@ -173,7 +177,7 @@ function Treatment() {
                     'class': 'btn-agree',
                     click: function () {
                         // Warning dialog close
-                        $(this).dialog("close");
+                        $(this).dialog('close');
 
                         // Bulk import dialog close
                         me.archiveTreatment();
@@ -181,7 +185,7 @@ function Treatment() {
                 }, {
                     text: 'Cancel',
                     click: function () {
-                        $(this).dialog("close");
+                        $(this).dialog('close');
                     }
                 }
             ]
@@ -239,17 +243,22 @@ function Treatment() {
     });
 
     this.before('teardown', function () {
+        var me = this;
         this.select('subTabsContainerSelector').tabs('destroy');
 
-        _.each([this.taskNode, this.teamNode, this.activityNode], function (node) {
-            if (node) {
-                var instances = flight.registry.findInstanceInfoByNode(node);
+        _.each(
+            _.map(_.keys(TYPE_SECTION_MAPPING), function (key) {
+                return me[NODE_NAME_TEMP.format(key.toLowerCase())];
+            }),
+            function (node) {
+                if (node) {
+                    var instances = flight.registry.findInstanceInfoByNode(node);
 
-                _.each(instances, function (instance) {
-                    instance.instance.teardown();
-                });
-            }
-        });
+                    _.each(instances, function (instance) {
+                        instance.instance.teardown();
+                    });
+                }
+            });
     });
 }
 

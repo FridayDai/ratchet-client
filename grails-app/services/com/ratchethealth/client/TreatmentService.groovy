@@ -7,7 +7,7 @@ class TreatmentService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
-    def getTreatments(String token, clientId, max, offset, treatmentTitle) {
+    def getTreatments(String token, clientId, groupId, max, offset, treatmentTitle) {
 
         String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
         def url = String.format(getTreatmentsUrl, clientId)
@@ -17,6 +17,7 @@ class TreatmentService extends RatchetAPIService {
             def resp = req
                     .queryString("max", max)
                     .queryString("offset", offset)
+                    .queryString("groupId", groupId)
                     .queryString("treatmentTitle", treatmentTitle)
                     .asString()
 
@@ -224,6 +225,27 @@ class TreatmentService extends RatchetAPIService {
                 log.info("delete a treatment success, token: ${token}.")
 
                 true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getTreatmentAvailableYears(String token, clientId, treatmentId) {
+        log.info("Call backend service to get treatment available years, token: ${token}.")
+
+        String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentAvailabelYears
+
+        withGet(token, getAvailableTaskUrl) { req ->
+            def resp = req
+                .queryString("clientId", clientId)
+                .queryString("treatmentId", treatmentId)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("Get treatment available years success, token: ${token}")
+
+                JSON.parse(resp.body)
             } else {
                 handleError(resp)
             }

@@ -3,7 +3,7 @@
     <div class="agreement-footer clear" >
         <div class="copyright pull-left">
             <ul>
-                <li><span class="copyright-field">© 2015</span></li>
+                <li><span class="copyright-field">© 2016</span></li>
                 <li>
                     <div class="copyright-field">
                         <a href="/" class="logo">

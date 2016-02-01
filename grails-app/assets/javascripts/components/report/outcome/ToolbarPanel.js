@@ -39,6 +39,8 @@ function ToolbarPanel() {
 
     this.onTreatmentSelect = function (e, data) {
         this.searchFields.toolId = null;
+        this.searchFields.year = null;
+
         this.triggerSearch(data);
     };
 
@@ -61,7 +63,7 @@ function ToolbarPanel() {
     this.search = function () {
         var me = this;
 
-        this.trigger('startGettingProviderAverageOverview');
+        this.trigger('clearTreatmentScoreChart');
 
         $.ajax({
             url: URLs.PROVIDER_AVERAGE_OVERVIEW,
@@ -69,7 +71,7 @@ function ToolbarPanel() {
             dataType: "json",
             data: this.searchFields,
             success: function (data) {
-                me.trigger('getProviderAverageOverviewSuccessful', data);
+                me.trigger('renderTreatmentScoreChart', data);
             }
         });
     };
