@@ -2,6 +2,7 @@ require('../components/layout/Main');
 
 var flight = require('flight');
 var WithPage = require('../components/common/WithPage');
+var PAGEs = require('../constants/Pages');
 
 var HeaderPanel = require('../components/patientList/HeaderPanel');
 var ToolbarPanel = require('../components/patientList/ToolbarPanel');
@@ -11,6 +12,8 @@ var NewPatientFormDialog = require('../components/patientList/NewPatientFormDial
 var BulkImportDialog = require('../components/patientList/BulkImportDialog');
 
 function PatientListPage() {
+    this.setPath(PAGEs.PATIENT_LIST);
+
     this.attributes({
         headerPanelSelector: '#header-panel',
         toolbarPanelSelector: '#patients-toolbar',
@@ -41,6 +44,25 @@ function PatientListPage() {
             dialog: BulkImportDialog
         }
     ]);
+
+    this.onBeforeUnload = function () {
+        this.saveParams2Router(PAGEs.PATIENT_LIST, {
+            patientsTable: this.child.patientTableSelector.getCurrentState(),
+            toolbar: this.child.toolbarPanelSelector.getCurrentState()
+        });
+    };
+
+    this.recoveryFromRouter = function () {
+        if (this.getLastPath() === PAGEs.PATIENT_DETAIL) {
+            this.trigger('loadDataFromSessionRouter', this.getParamsFromRoute(PAGEs.PATIENT_LIST));
+        }
+    };
+
+    this.after('initialize', function () {
+        $(window).on('beforeunload', _.bind(this.onBeforeUnload, this));
+
+        this.recoveryFromRouter();
+    });
 }
 
 flight.component(WithPage, PatientListPage).attachTo('#main');

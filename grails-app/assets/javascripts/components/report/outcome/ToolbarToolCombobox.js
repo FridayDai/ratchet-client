@@ -23,6 +23,7 @@ function ToolbarToolCombobox() {
     this.attributes({
         selectDataKey: 'toolId',
         selectEvent: 'selectToolForReportOverview',
+        clearEvent: 'clearToolForReportOverview',
         treatmentSelectEvent: 'selectTreatmentForReportOverview',
         treatmentClearEvent: 'clearTreatmentForReportOverview'
     });

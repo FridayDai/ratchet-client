@@ -50,14 +50,18 @@ define(
       var options = utils.merge.apply(utils, args);
       var componentInfo = registry.findComponentInfo(this);
 
+      var instances = [];
+
       $(selector).each(function(i, node) {
         if (componentInfo && componentInfo.isAttachedTo(node)) {
           // already attached
           return;
         }
 
-        (new this).initialize(node, options);
+          instances.push((new this).initialize(node, options));
       }.bind(this));
+
+      return instances.length === 1 ? instances[0] : instances;
     }
 
     function prettyPrintMixins() {
