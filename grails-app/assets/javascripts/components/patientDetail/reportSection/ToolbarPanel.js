@@ -21,7 +21,19 @@ function ToolbarPanel() {
     };
 
     this.onToolSelect = function (e, data) {
-        this.search(data.toolId);
+        // Note: Since we cached all treatments nodes in browser,
+        // events maybe trigger when treatment nodes not available.
+        if (this.$node.is(':visible')) {
+            this.search(data.toolId);
+        }
+    };
+
+    this.onToolClear = function () {
+        // Note: Since we cached all treatments nodes in browser,
+        // events maybe trigger when treatment nodes not available.
+        if (this.$node.is(':visible')) {
+            this.trigger('clearTreatmentScoreChart');
+        }
     };
 
     this.search = function (toolId) {
@@ -41,6 +53,7 @@ function ToolbarPanel() {
         this.initIds();
 
         this.on(document, 'selectToolForIndividualReport', this.onToolSelect);
+        this.on(document, 'clearToolForIndividualReport', this.onToolClear);
     });
 }
 
