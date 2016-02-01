@@ -2,6 +2,8 @@ var flight = require('flight');
 var WithCombobox = require('../../common/WithCombobox');
 var URLs = require('../../../constants/Urls');
 
+var DEFAULT_SELECT_EVENT = 'select';
+
 function PatientTreatmentCombobox() {
     this.options({
         url: URLs.GET_TREATMENTS,
@@ -27,7 +29,8 @@ function PatientTreatmentCombobox() {
     this.attributes({
         groupSelectEvent: 'groupSelectEvent',
         groupClearEvent: 'groupClearEvent',
-        resetEvent: 'resetEvent'
+        resetEvent: 'resetEvent',
+        surgeryDateRequired: 'surgeryDateRequired'
     });
 
     this._previousGroupId = null;
@@ -53,11 +56,33 @@ function PatientTreatmentCombobox() {
         return this._groupId;
     };
 
-    this.onSelect = function (e, ui) {
-        this.trigger(this.attr.selectEvent, {
-            surgeryDate: ui.item.surgeryDate,
-            surgeryDateRequired: ui.item.surgeryDateRequired
-        });
+    this.__onSelect = function (e, ui) {
+        this.select(ui.item);
+    };
+
+    this.__previousVal = null;
+
+    this.select = function (item) {
+        if (_.isUndefined(item)) {
+            item = null;
+        }
+
+        if (this.__previousVal !== item.value) {
+            this.__previousVal = item.value;
+
+            var data = {};
+
+            data[this.attr.selectDataKey] = item.value;
+            data[this.attr.surgeryDateRequired] =  item.surgeryDateRequired;
+
+            if (this.beforeSelect) {
+                this.beforeSelect.call(this, data);
+            }
+
+            if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
+                this.trigger(this.attr.selectEvent, data);
+            }
+        }
     };
 
     this.onClear = function () {
