@@ -328,6 +328,7 @@ ratchetv2 {
 
             //Report
             providerAverage = "${ratchetv2.server.url.base}/report/outcome"
+            individualReport = "${ratchetv2.server.url.base}/client/%s/record/%s/tool/%s/patient/%s/report"
         }
 
         clientPlatform = "ancient"

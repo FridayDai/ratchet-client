@@ -30,16 +30,7 @@ class ReportController extends BaseController {
 
         def resp = reportService.getProviderAverageOnOverview(token, clientId, treatmentId, toolId, providerId, showAll, year)
 
-        if (resp?.dataSet) {
-            if (resp.toolType == 14) {
-                // Hard code to remove 'total result' in PROMIS
-                resp.dataSet.removeAll { it.type == PROMIS_TOTLE_TYPE }
-            } else if (resp.toolType == 10) {
-                // Hard code to replace 'total' with dataSet in FNS
-                resp.items = (resp.dataSet.find { it.type == FNS_TOTLE_TYPE }).items
-                resp.remove('dataSet')
-            }
-        }
+        updateReportResp(resp)
 
         render resp as JSON
     }
@@ -55,5 +46,32 @@ class ReportController extends BaseController {
 
         def conversion = reportService.taskCompletionConversion(token, clientId, providerId)
         render conversion as JSON
+    }
+
+    def getIndividualReport() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId as long
+        def medicalRecordId = params?.medicalRecordId as long
+        def baseToolId = params?.baseToolId as long
+
+        def resp = reportService.getIndividualReport(token, clientId, patientId, medicalRecordId, baseToolId)
+
+        updateReportResp(resp)
+
+        render resp as JSON
+    }
+
+    def updateReportResp(resp) {
+        if (resp?.dataSet) {
+            if (resp.toolType == 14) {
+                // Hard code to remove 'total result' in PROMIS
+                resp.dataSet.removeAll { it.type == PROMIS_TOTLE_TYPE }
+            } else if (resp.toolType == 10) {
+                // Hard code to replace 'total' with dataSet in FNS
+                resp.items = (resp.dataSet.find { it.type == FNS_TOTLE_TYPE }).items
+                resp.remove('dataSet')
+            }
+        }
     }
 }
