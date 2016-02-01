@@ -22,6 +22,7 @@ function ToolbarToolCombobox() {
 
     this.attributes({
         selectEvent: 'selectToolForIndividualReport',
+        clearEvent: 'clearToolForIndividualReport',
         selectDataKey: 'toolId'
     });
 }
