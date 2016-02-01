@@ -69,6 +69,8 @@ function AddTreatmentFormDialog() {
         surgeryTimeFieldSelector: {
             child: PatientSurgeryDate,
             attributes: {
+                groupSelectEvent: 'addTreatmentGroupSelected',
+                groupClearEvent: 'addTreatmentGroupClear',
                 treatmentSelectEvent: 'addTreatmentTreatmentSelected',
                 treatmentClearEvent: 'addTreatmentTreatmentClear',
                 resetEvent: 'addTreatmentReset'
