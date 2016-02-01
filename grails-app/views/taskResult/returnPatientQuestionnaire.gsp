@@ -176,7 +176,7 @@
             </div>
 
             <div class="lower-part">
-                <div class="question-list">
+                <div class="question-list-bottom">
                     <div class="question">4. Review of Systems– Please mark the circle next to ANY symptoms you have experienced in the past 6 months:</div>
 
                     <div class="answer-part clear">

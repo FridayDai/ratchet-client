@@ -5,11 +5,10 @@ body {
 }
 
 .question-list {
-    margin: 0 0 30px 35px;
+    margin-bottom: 30px;
 }
 
 .question {
-    margin-left: -35px;
     font-size: 18px;
     font-weight: 700;
     color: $result-main-color;
@@ -21,6 +20,7 @@ body {
 
     .text {
         font-size: 16px;
+        margin-left: 35px;
         word-wrap: break-word;
     }
 
@@ -34,7 +34,7 @@ body {
 .result-circle-radio {
     position: absolute;
     top: 0;
-    left: -35px;
+    left: 0;
     display: inline-block;
     box-sizing: content-box;
     width: 20px;
@@ -67,7 +67,7 @@ body {
 .result-checkbox {
     position: absolute;
     top: 2px;
-    left: -34px;
+    left: 0;
     display: inline-block;
     box-sizing: content-box;
     width: 18px;
@@ -153,7 +153,6 @@ body {
 }
 
 .sub-question {
-    margin-left: -35px;
     padding: 5px 0;
     font-size: 16px;
     font-weight: 700;
@@ -162,6 +161,7 @@ body {
 .answer-line {
     font-size: 16px;
     font-weight: 700;
+    padding: 20px 0 20px;
 
     .left-checkbox {
         float: left;
