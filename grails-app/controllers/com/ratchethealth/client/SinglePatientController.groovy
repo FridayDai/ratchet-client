@@ -87,7 +87,6 @@ class SinglePatientController extends BaseController {
     }
 
     def getPatientReportTab() {
-        String token = request.session.token
         def medicalRecordId = params?.medicalRecordId
         def treatmentId = params?.treatmentId
         def clientId = params?.clientId
