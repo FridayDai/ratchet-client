@@ -50,8 +50,9 @@
                 <div class="no-data">No data available</div>
             </div>
             <div class="default">
-                <i class="icon fa fa-question"></i>
-                <div class="desc">Please select treatment, tool, provider and year.</div>
+                <i class="icon fa fa-line-chart"></i>
+                <div class="title">Outcome Report</div>
+                <div class="desc">Pick from the filters above to view patient outcomes</div>
             </div>
         </div>
     </div>

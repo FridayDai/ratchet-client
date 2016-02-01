@@ -6,6 +6,12 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 
+.inner-search {
+    .right-search {
+        margin-top: 15px;
+    }
+}
+
 .add-patient {
     margin-left: 10px;
 }
