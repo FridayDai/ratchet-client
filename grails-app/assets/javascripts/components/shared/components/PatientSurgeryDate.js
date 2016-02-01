@@ -41,6 +41,8 @@ function PatientSurgeryDate() {
     };
 
     this.after('initialize', function () {
+        this.on(document, this.attr.groupSelectEvent, this.onReset);
+        this.on(document, this.attr.groupClearEvent, this.onReset);
         this.on(document, this.attr.treatmentSelectEvent, this.onTreatmentSelected);
         this.on(document, this.attr.treatmentClearEvent, this.onReset);
         this.on(document, this.attr.resetEvent, this.onReset);
