@@ -6,14 +6,6 @@ var defaultRoute = {
     previousPath: ''
 };
 
-(function initRouter() {
-    if (!window.sessionStorage) {
-        throw 'This browser don\'t support sessionStorage';
-    }
-
-    Router = _.defaults(loadRouter() || {}, defaultRoute);
-})();
-
 function saveRouter() {
     sessionStorage.setItem(ROUTER_NAME, JSON.stringify(Router));
 }
@@ -21,6 +13,14 @@ function saveRouter() {
 function loadRouter() {
     return JSON.parse(sessionStorage.getItem(ROUTER_NAME));
 }
+
+(function initRouter() {
+    if (!window.sessionStorage) {
+        throw 'This browser don\'t support sessionStorage';
+    }
+
+    Router = _.defaults(loadRouter() || {}, defaultRoute);
+})();
 
 function WithSessionRouter() {
     this.setPath = function (path) {
