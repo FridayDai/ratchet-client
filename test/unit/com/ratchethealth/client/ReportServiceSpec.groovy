@@ -9,13 +9,6 @@ import spock.lang.Specification
 
 @TestFor(ReportService)
 class ReportServiceSpec extends Specification {
-
-    def setup() {
-    }
-
-    def cleanup() {
-    }
-
     def "test getProviderAverageOnOverview with successful result"() {
         given:
         def jBuilder = new JsonBuilder()
