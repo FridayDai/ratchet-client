@@ -25,7 +25,7 @@ html, body {
 }
 
 .question.margin-left {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 .answer {
@@ -44,6 +44,10 @@ html, body {
         text-decoration: underline;
         word-break: break-all;
     }
+}
+
+.upper-part .text {
+    margin-left: 0;
 }
 
 .result-circle-radio {
