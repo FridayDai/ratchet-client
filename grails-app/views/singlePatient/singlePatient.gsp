@@ -92,6 +92,7 @@
                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
                                         treatmentCode  : medicalRecord?.treatmentCode,
                                         PatientEmailStatus   : patientInfo?.status,
+                                        isAdmin: AccountIsAdmin,
                                         _: System.currentTimeMillis()
                                 ]">
                             <g:if test="${medicalRecord?.archived}">

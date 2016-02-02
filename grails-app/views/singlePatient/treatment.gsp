@@ -126,12 +126,14 @@
                             data-medical-record-id="${medicalRecordId}">
                         Archive
                     </span>
+                    <g:if test="${isAdmin == 'true'}">
                     <span class="btn drop-down-list treatment-delete inline"
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}"
                             data-medical-record-id="${medicalRecordId}">
                         Delete
                     </span>
+                    </g:if>
                 </div>
             </li>
         </ul>
