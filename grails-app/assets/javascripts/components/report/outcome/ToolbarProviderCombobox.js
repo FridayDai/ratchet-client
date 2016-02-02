@@ -36,7 +36,8 @@ function ToolbarProviderCombobox() {
 
     this.attributes({
         selectDataKey: 'providerId',
-        selectEvent: 'selectProviderForReportOverview'
+        selectEvent: 'selectProviderForReportOverview',
+        clearEvent: 'clearProviderForReportOverview'
     });
 }
 

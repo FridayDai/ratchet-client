@@ -2,6 +2,7 @@ var flight = require('flight');
 
 function WithChildren() {
     this.children = function (options, attributes) {
+        this.child = {};
         this._children = options;
         this._childrenAttrs = attributes;
     };
@@ -17,9 +18,12 @@ function WithChildren() {
             if (_.isPlainObject(child)) {
                 var obj = child;
 
-                obj.child.attachTo(this.attr[selector], _.defaults( obj.attributes, this._childrenAttrs));
+                this.child[selector] = obj.child.attachTo(
+                    this.attr[selector],
+                    _.defaults( obj.attributes, this._childrenAttrs)
+                );
             } else {
-                child.attachTo(this.attr[selector], this._childrenAttrs);
+                this.child[selector] = child.attachTo(this.attr[selector], this._childrenAttrs);
             }
         }, this);
     };

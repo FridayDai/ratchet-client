@@ -1,6 +1,7 @@
 require('../components/layout/Main');
 
 var flight = require('flight');
+var PAGEs = require('../constants/Pages');
 var WithPage = require('../components/common/WithPage');
 
 var HeaderPanel = require('../components/accounts/HeaderPanel');
@@ -9,6 +10,8 @@ var AccountsTable = require('../components/accounts/AccountsTable');
 var NewAccountFormDialog = require('../components/accounts/NewAccountFormDialog');
 
 function AccountsPage() {
+    this.setPath(PAGEs.ACCOUNT_LIST);
+
     this.attributes({
         headerPanelSelector: '#header-panel',
         toolbarPanelSelector: '#accounts-toolbar',

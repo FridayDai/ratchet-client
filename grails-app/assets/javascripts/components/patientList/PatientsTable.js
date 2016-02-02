@@ -143,13 +143,21 @@ function PatientsTable() {
         this.reload();
     };
 
+    this.onLoadDataFromSessionRouter = function (e, data) {
+        this.loadData(data.patientsTable);
+    };
+
     this.after('initialize', function () {
         this.on(document, 'pageInBackButtonStatus', this.onPageInBackButtonStatus);
         this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
+        this.on(document, 'clearTreatmentForPatientTable', this.onTreatmentSearch);
         this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
+        this.on(document, 'clearProviderForPatientTable', this.onProviderSearch);
         this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);
+        this.on(document, 'clearEmailStatusForPatientTable', this.onEmailStatusSearch);
         this.on(document, 'selectPatientIDNameForPatientTable', this.onPatientIDNameSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
+        this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
     });
 }
 

@@ -4,6 +4,7 @@ require('jquery-ui-tabs');
 var flight = require('flight');
 var WithPage = require('../components/common/WithPage');
 var STRINGs = require('../constants/Strings');
+var PAGEs = require('../constants/Pages');
 var Utility = require('../utils/Utility');
 
 var PatientInfoSection = require('../components/patientDetail/patientInfoSection/PatientInfoSection');
@@ -23,6 +24,8 @@ var EmergencyContactFormDialog = require('../components/patientDetail/teamSectio
 var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
 
 function PatientDetailPage() {
+    this.setPath(PAGEs.PATIENT_DETAIL);
+
     this.attributes({
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#tabs',
