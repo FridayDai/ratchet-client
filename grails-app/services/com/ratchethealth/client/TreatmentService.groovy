@@ -7,7 +7,7 @@ class TreatmentService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
-    def getTreatments(String token, clientId, groupId, max, offset, treatmentTitle) {
+    def getTreatments(String token, clientId, groupId, max, offset, treatmentTitle, showAll) {
 
         String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
         def url = String.format(getTreatmentsUrl, clientId)
@@ -19,6 +19,7 @@ class TreatmentService extends RatchetAPIService {
                     .queryString("offset", offset)
                     .queryString("groupId", groupId)
                     .queryString("treatmentTitle", treatmentTitle)
+                    .queryString("showAll", showAll)
                     .asString()
 
             if (resp.status == 200) {

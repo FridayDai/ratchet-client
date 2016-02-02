@@ -54,8 +54,9 @@ class TreatmentController extends BaseController {
         def offset = params?.offset
         def treatmentTitle = params?.treatmentTitle
         def groupId = params?.groupId
+        def showAll = params?.showAll
 
-        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle)
+        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle, showAll)
         render resp as JSON
     }
 
