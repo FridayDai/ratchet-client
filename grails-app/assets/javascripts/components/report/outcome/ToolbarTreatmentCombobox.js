@@ -8,6 +8,7 @@ function ToolbarTreatmentCombobox() {
         requestData: function (val) {
             return {
                 treatmentTitle: val,
+                showAll: true,
                 max: 1000
             };
         },
