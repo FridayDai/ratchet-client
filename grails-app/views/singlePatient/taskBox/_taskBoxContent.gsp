@@ -11,7 +11,7 @@
 
     <g:if test="${task?.sendTimeOffset && task.sendTimeOffset != 'null'}">
         <div class="item-datetime relative-sent-time">
-            <g:if test="${!task?.immediate}">
+            <g:if test="${!(task?.immediate && !task?.surgeryTime)}">
                 <% Long timeOffset = Long.valueOf((task?.sendTimeOffset) ?: 0) %>
                 <% Long sentTimeDays = timeOffset / (24 * 60 * 60 * 1000) %>
                 <g:if test="${sentTimeDays == 0}">
