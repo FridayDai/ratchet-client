@@ -23,6 +23,7 @@ function ToolbarYearCombobox() {
     this.attributes({
         selectDataKey: 'year',
         selectEvent: 'selectYearForReportOverview',
+        clearEvent: 'clearYearForReportOverview',
         treatmentSelectEvent: 'selectTreatmentForReportOverview',
         treatmentClearEvent: 'clearTreatmentForReportOverview'
     });

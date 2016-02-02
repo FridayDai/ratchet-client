@@ -15,6 +15,7 @@ class TreatmentController extends BaseController {
         def clientId = params?.clientId
         def archived = params?.archived
         def PatientEmailStatus = params?.PatientEmailStatus
+        def isAdmin = params?.isAdmin
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null" || !params?.surgeryTime) {
@@ -28,7 +29,8 @@ class TreatmentController extends BaseController {
                     treatmentId: treatmentId,
                     surgeryTime: surgeryTime,
                     archived: archived,
-                    PatientEmailStatus: PatientEmailStatus
+                    PatientEmailStatus: PatientEmailStatus,
+                    isAdmin: isAdmin
                 ]
     }
 
@@ -52,8 +54,9 @@ class TreatmentController extends BaseController {
         def offset = params?.offset
         def treatmentTitle = params?.treatmentTitle
         def groupId = params?.groupId
+        def showAll = params?.showAll
 
-        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle)
+        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle, showAll)
         render resp as JSON
     }
 

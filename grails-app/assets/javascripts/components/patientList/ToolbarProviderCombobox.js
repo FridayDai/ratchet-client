@@ -22,7 +22,8 @@ function ToolbarProviderCombobox() {
 
     this.attributes({
         selectDataKey: 'surgeonId',
-        selectEvent: 'selectProviderForPatientTable'
+        selectEvent: 'selectProviderForPatientTable',
+        clearEvent: 'clearProviderForPatientTable'
     });
 }
 

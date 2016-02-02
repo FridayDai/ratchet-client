@@ -52,7 +52,10 @@ function WithCombobox() {
         this.clear();
 
         if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
-            this.trigger(this.attr.clearEvent);
+            var data = {};
+            data[this.attr.selectDataKey] = null;
+
+            this.trigger(this.attr.clearEvent, data);
         }
     };
 
@@ -89,6 +92,15 @@ function WithCombobox() {
                 this.trigger(this.attr.selectEvent, data);
             }
         }
+    };
+
+    this.getDisplayItem = function () {
+        return this.$node.data('saved');
+    };
+
+    this.setDisplayItem = function (item) {
+        this.__previousVal = item.value;
+        this.$node.val(item.label);
     };
 
     this.__onReset = function () {

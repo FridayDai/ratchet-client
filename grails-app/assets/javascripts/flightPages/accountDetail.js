@@ -1,6 +1,7 @@
 require('../components/layout/Main');
 
 var flight = require('flight');
+var PAGEs = require('../constants/Pages');
 var WithPage = require('../components/common/WithPage');
 
 var HeaderPanel = require('../components/accountDetail/HeaderPanel');
@@ -8,6 +9,8 @@ var InfoPanel = require('../components/accountDetail/InfoPanel');
 var EditAccountFormDialog = require('../components/accountDetail/EditAccountFormDialog');
 
 function AccountDetailPage() {
+    this.setPath(PAGEs.ACCOUNT_DETAIL);
+
     this.attributes({
         headerPanelSelector: '#header-panel',
         infoPanelSelector: '.info-panel',
