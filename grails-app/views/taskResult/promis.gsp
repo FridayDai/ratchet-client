@@ -64,10 +64,10 @@
                                             <span class="result-circle-radio-nrs">
                                                 <g:if test="${choice.id == question.answerChoiceId}">
                                                     <g:if test="${k == 10}">
-                                                    <svg id="svg-bg"><circle r="15" cx="15" cy="15" fill="#335d70" class="circle-bg"></circle><text x="21%" y="60%" fill="white"  class="circle-number">${k}</text></svg>
+                                                        <span class="result-circle-radio-checked-nrs"><i class="content-number-checked-10">${k}</i></span>
                                                     </g:if>
                                                     <g:else>
-                                                    <svg id="svg-bg"><circle r="15" cx="15" cy="15" fill="#335d70" class="circle-bg"></circle><text x="32%" y="60%" fill="white" class="circle-number">${k}</text></svg>
+                                                        <span class="result-circle-radio-checked-nrs"><i class="content-number-checked">${k}</i></span>
                                                     </g:else>
                                                 </g:if>
                                                 <g:elseif test="${k == 10}">
