@@ -10,6 +10,7 @@ function TeamSection() {
     ]);
 
     this.attributes({
+        treatmentIdHiddenSelector: '.hidden-treatment-id',
         medicalRecordIdHiddenSelector: '.hidden-medical-record',
         clientIdHiddenSelector: '.hidden-client-id',
         patientIdHiddenSelector: '.hidden-patient-id',
@@ -46,6 +47,7 @@ function TeamSection() {
         e.preventDefault();
 
         this.trigger('showEditGroupProviderDialog', {
+            treatmentId: this.select('treatmentIdHiddenSelector').val(),
             patientId: this.select('patientIdHiddenSelector').val(),
             medicalRecordId: this.select('medicalRecordIdHiddenSelector').val(),
             groupId: this.select('groupIdHiddenSelector').val(),

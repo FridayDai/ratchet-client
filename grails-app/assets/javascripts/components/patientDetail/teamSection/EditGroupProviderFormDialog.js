@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var URLs = require('../../../constants/Urls');
 
-var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
+var PatientGroupCombobox = require('./PatientGroupCombobox');
 var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
 
 function EditGroupProviderFormDialog() {
@@ -52,6 +52,8 @@ function EditGroupProviderFormDialog() {
 
         this.select('groupFieldSelector').val(data.groupName);
         this.select('providerFieldSelector').val(data.providerName);
+
+        this.child.groupFieldSelector.setTreatmentId(data.treatmentId);
 
         this.formEl.attr(
             'action',
