@@ -4,6 +4,7 @@ var URLs = require('../../../constants/Urls');
 
 var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
 var EmergencyContactEmailValidation = require('../../shared/validation/EmergencyContactEmailValidation');
+var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
 
 var UPDATE = 'updateModel';
 var ADD = 'addModel';
@@ -38,7 +39,10 @@ function EmergencyContactFormDialog() {
     };
 
     this.initValidation = function () {
-        return EmergencyContactEmailValidation.get(this.emailChangeCheck, this);
+        return [
+            EmergencyContactEmailValidation.get(this.emailChangeCheck, this),
+            ComboboxInputValidation.get()
+        ];
     };
 
     this.emailChangeCheck = function () {

@@ -105,24 +105,19 @@ function PatientsTable() {
         }
     });
 
+    this.searchFields = {
+        treatmentId: null,
+        surgeonId: null,
+        emailStatus: null,
+        patientIdOrName: null
+    };
+
     this.setRowClickUrl = function (data) {
         return URLs.PAGE_PATIENT_DETAIL.format(data.id);
     };
 
-    this.onTreatmentSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onProviderSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onPatientIDNameSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onEmailStatusSearch = function (e, data) {
-        this.search(data);
+    this.onTriggerSearch = function (e, data) {
+        this.search(_.assign(this.searchFields, data));
     };
 
     this.onBulkImportSaved = function (e, data) {
@@ -149,13 +144,13 @@ function PatientsTable() {
 
     this.after('initialize', function () {
         this.on(document, 'pageInBackButtonStatus', this.onPageInBackButtonStatus);
-        this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
-        this.on(document, 'clearTreatmentForPatientTable', this.onTreatmentSearch);
-        this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
-        this.on(document, 'clearProviderForPatientTable', this.onProviderSearch);
-        this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);
-        this.on(document, 'clearEmailStatusForPatientTable', this.onEmailStatusSearch);
-        this.on(document, 'selectPatientIDNameForPatientTable', this.onPatientIDNameSearch);
+        this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
     });

@@ -26,7 +26,7 @@ function changePasswordFormDialog() {
     };
 
     this.initValidation = function () {
-        return _.defaultsDeep({
+        return {
             rules: {
                 confirmPassword: {
                     equalTo: '#newPass'
@@ -37,7 +37,7 @@ function changePasswordFormDialog() {
                     equalTo: STRINGs.PASSWORD_NOT_MATCH
                 }
             }
-        });
+        };
     };
 
     this.after('initialize', function() {

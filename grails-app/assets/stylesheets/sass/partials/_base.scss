@@ -587,6 +587,11 @@ a {
         background-color: $base-color-white-grey;
         font-weight: normal;
     }
+
+    &.no-children {
+        padding: 0!important;
+        border: 0!important;
+    }
 }
 
 .container .ui-autocomplete.ui-widget-content {

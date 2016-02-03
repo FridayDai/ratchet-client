@@ -6,6 +6,7 @@ var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmatio
 var WithEmergencyContactFieldRequired = require('../shared/functional/WithEmergencyContactFieldRequired');
 var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
 var PatientEmailValidation = require('../shared/validation/PatientEmailValidation');
+var ComboboxInputValidation = require('../shared/validation/ComboboxInputValidation');
 
 var NewPatientPhoneInputField = require('../shared/components/PatientPhoneInputField');
 var NewPatientRelationshipCombobox = require('../shared/components/PatientRelationshipCombobox');
@@ -103,7 +104,11 @@ function NewPatientFormDialog() {
     });
 
     this.initValidation = function () {
-        return _.defaultsDeep(PhoneNumberValidation.get(), PatientEmailValidation.get());
+        return [
+            PhoneNumberValidation.get(),
+            PatientEmailValidation.get(),
+            ComboboxInputValidation.get()
+        ];
     };
 
     this.onShow = function (e, data) {

@@ -49,13 +49,15 @@ function WithCombobox() {
     };
 
     this.__onClear = function () {
-        this.clear();
+        if (this.__previousVal !== null) {
+            this.clear();
 
-        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
-            var data = {};
-            data[this.attr.selectDataKey] = null;
+            if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
+                var data = {};
+                data[this.attr.selectDataKey] = null;
 
-            this.trigger(this.attr.clearEvent, data);
+                this.trigger(this.attr.clearEvent, data);
+            }
         }
     };
 
@@ -101,6 +103,9 @@ function WithCombobox() {
     this.setDisplayItem = function (item) {
         this.__previousVal = item.value;
         this.$node.val(item.label);
+        this.$node
+            .data('saved', item)
+            .data('id', item.value);
     };
 
     this.__onReset = function () {

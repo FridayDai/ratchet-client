@@ -87,11 +87,11 @@ function EditPatientFormDialog() {
     };
 
     this.initValidation = function () {
-        return _.defaultsDeep(
+        return [
             PatientIdentifyValidation.get(this.originalIdentifyCheck, this),
             PhoneNumberValidation.get(),
             PatientEmailValidation.get(this.originalEmailCheck, this)
-        );
+        ];
     };
 
     this.setExtraData = function () {

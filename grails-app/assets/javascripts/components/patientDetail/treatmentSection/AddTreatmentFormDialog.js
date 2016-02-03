@@ -7,6 +7,7 @@ var PatientRelationshipCombobox = require('../../shared/components/PatientRelati
 var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
 var PatientTreatmentCombobox = require('../../shared/components/PatientTreatmentCombobox');
 var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
+var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
 var Utility = require('../../../utils/Utility');
 
 function AddTreatmentFormDialog() {
@@ -77,6 +78,10 @@ function AddTreatmentFormDialog() {
             }
         }
     });
+
+    this.initValidation = function () {
+        return ComboboxInputValidation.get();
+    };
 
     this.onShow = function () {
         this.trigger('patientInfoRequest');

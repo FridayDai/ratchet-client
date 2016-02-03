@@ -7,6 +7,8 @@ function WithForm() {
     });
 
     this._initForm = function () {
+        var me = this;
+
         if (this.attr.formSelector === '.') {
             this.formEl = $(this.$node);
         } else {
@@ -17,12 +19,42 @@ function WithForm() {
 
         var options;
         if ($.isFunction(this.initValidation)) {
-            options = this.initValidation();
+            options = this.__getValidations(this.initValidation());
         }
 
         this.formEl.validate(_.extend({
             submitHandler: _.bind(this._prepareSubmitForm, this)
         }, options));
+
+        _.each(this.__validationFunctions, function (fn) {
+            fn.call(me, me.formEl);
+        });
+    };
+
+    this.__getValidations = function (validations) {
+        var plainObjects = [];
+        var functions = [];
+
+        if (_.isPlainObject(validations)) {
+            return validations;
+        }
+
+        if (_.isFunction(validations)) {
+            this.__validationFunctions = [validations];
+            return;
+        }
+
+        _.each(validations, function (item) {
+            if (_.isPlainObject(item)) {
+                plainObjects.push(item);
+            } else if (_.isFunction(item)) {
+                functions.push(item);
+            }
+        });
+
+        this.__validationFunctions = functions;
+
+        return _.defaultsDeep.apply(this, plainObjects);
     };
 
     this.submitForm = function () {

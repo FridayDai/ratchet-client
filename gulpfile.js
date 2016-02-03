@@ -12,7 +12,6 @@ var paths = {
     sass: ['./grails-app/assets/stylesheets/**/*.scss'],
     js: [
         './grails-app/assets/javascripts/**/*.js',
-        '!./grails-app/assets/javascripts/libs/**/*.js',
         '!./grails-app/assets/javascripts/dist/**/*.js',
         '!./grails-app/assets/javascripts/bower_components/**/*.js',
         '!./grails-app/assets/javascripts/pages/**/*.js',
@@ -25,8 +24,12 @@ var jshint = require('gulp-jshint');
 var jshintStylish = require('jshint-stylish');
 var jshintConfigPath = '.jshintrc';
 
+var jsHintPath = paths.js.concat([
+    '!./grails-app/assets/javascripts/libs/**/*.js'
+]);
+
 gulp.task('js-lint', function () {
-    return gulp.src(paths.js)
+    return gulp.src(jsHintPath)
         .pipe(jshint(jshintConfigPath))
         .pipe(jshint.reporter(jshintStylish))
         .pipe(jshint.reporter('fail'));
