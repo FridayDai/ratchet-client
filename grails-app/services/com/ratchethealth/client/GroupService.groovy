@@ -128,7 +128,7 @@ class GroupService extends RatchetAPIService {
         }
     }
 
-    def getStaffGroups(String token, clientId, name) {
+    def getStaffGroups(String token, clientId, treatmentId, name) {
 
         String getStaffGroupsUrl = grailsApplication.config.ratchetv2.server.url.getStaffGroups
         def url = String.format(getStaffGroupsUrl, clientId)
@@ -137,6 +137,7 @@ class GroupService extends RatchetAPIService {
         withGet(token, url) { req ->
             def resp = req
                     .queryString("groupName", name)
+                    .queryString("treatmentId", treatmentId)
                     .asString()
 
             if (resp.status == 200) {
