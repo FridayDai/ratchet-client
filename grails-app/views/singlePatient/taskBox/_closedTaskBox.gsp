@@ -2,6 +2,12 @@
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
+    <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
+        <div class="new-flag-ribbon-wrapper">
+            <div class="ribbon">NEW</div>
+        </div>
+    </g:if>
+
     <g:render template="/singlePatient/taskBox/taskBoxContent"/>
 
     <div class="box-item-footer">
