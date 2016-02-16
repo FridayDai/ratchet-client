@@ -233,7 +233,7 @@ class GroupServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getStaffGroups('token', 1, 'GroupTest')
+        def result = service.getStaffGroups('token', 1, 1, 'GroupTest')
 
         then:
         result.totalCount == 2
@@ -250,7 +250,7 @@ class GroupServiceSpec extends Specification {
         }
 
         when:
-        service.getStaffGroups('token', 1, 'GroupTest')
+        service.getStaffGroups('token', 1, 1, 'GroupTest')
 
         then:
         ApiReturnException e = thrown()

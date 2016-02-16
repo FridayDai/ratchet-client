@@ -36,7 +36,7 @@
             </li>
             <li data-type="Team">
                 <g:link controller="team" action="getTeam"
-                        params="[medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">TEAM</g:link>
+                        params="[treatmentId: treatmentId, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">TEAM</g:link>
             </li>
             <li data-type="Report">
                 <g:link controller="singlePatient" action="getPatientReportTab"
@@ -126,7 +126,7 @@
                             data-medical-record-id="${medicalRecordId}">
                         Archive
                     </span>
-                    <g:if test="${isAdmin == 'true'}">
+                    <g:if test="${isAdmin.toString() == 'true'}">
                     <span class="btn drop-down-list treatment-delete inline"
                             data-patient-id="${patientId}"
                             data-client-id="${clientId}"

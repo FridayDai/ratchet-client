@@ -15,7 +15,7 @@ class TreatmentController extends BaseController {
         def clientId = params?.clientId
         def archived = params?.archived
         def PatientEmailStatus = params?.PatientEmailStatus
-        def isAdmin = params?.isAdmin
+        def isAdmin = request.session.accountManagement
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null" || !params?.surgeryTime) {

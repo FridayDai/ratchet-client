@@ -3,6 +3,7 @@
 <div <g:if test="${archived == 'true'}">class="content archived"</g:if> <g:else>class="content"</g:else>>
     <div class="care-team-content">
 
+        <input type="hidden" class="hidden-treatment-id" value="${treatmentId}"/>
         <input type="hidden" class="hidden-medical-record" value="${medicalRecordId}"/>
         <input type="hidden" class="hidden-client-id" value="${clientId}"/>
         <input type="hidden" class="hidden-patient-id" value="${patientId}"/>

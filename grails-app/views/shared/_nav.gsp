@@ -32,7 +32,7 @@
             </li>
         </g:if>
 
-        <g:if test="${request.session.groupSize != 0}">
+        <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
         <li class="nav-li expendable-nav <g:if test="${controllerName == 'report'}">expended</g:if><g:else>collapsed</g:else>">
             <a href="#" class="nav-button icon-report">
                 <div class="title">Reports</div>

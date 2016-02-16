@@ -24,13 +24,14 @@ class GroupsController extends BaseController {
 
     def getStaffGroups(GroupPagination groupPagination) {
         def resp, clientId = session.clientId
-//        params.length = RatchetConstants.DEFAULT_MAX_OFFSET
-        if (request.session.accountManagement == true) {
-            def response = groupService.showGroupsList(session.token, clientId, groupPagination)
-            resp = response.data
-        } else {
-            resp = groupService.getStaffGroups(session.token, clientId, groupPagination.name)
+        def treatmentId = params?.treatmentId
+
+        if (treatmentId) {
+            treatmentId = treatmentId as long
         }
+
+        resp = groupService.getStaffGroups(session.token, clientId, treatmentId, groupPagination.name)
+
         render resp as JSON
     }
 
