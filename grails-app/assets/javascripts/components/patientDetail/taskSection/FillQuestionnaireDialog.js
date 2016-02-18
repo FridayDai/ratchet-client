@@ -1,17 +1,14 @@
+require('../../common/WithDatepicker');
+
 var flight = require('flight');
 
 var WithFormDialog = require('../../common/WithFormDialog');
-var WithDatepicker = require('../../common/WithDatepicker');
 
 var Utility = require('../../../utils/Utility');
 
 function FillQuestionnaireDialog() {
     this.attributes({
         dateSelector: '#fill-questionnaire-date-field'
-    });
-
-    this.children({
-        dateSelector: flight.component(WithDatepicker)
     });
 
     this.onShow = function (e, data) {
@@ -66,7 +63,16 @@ function FillQuestionnaireDialog() {
         }]
     });
 
+    this.initDatePicker = function () {
+        this.select('dateSelector')
+            .datepicker({
+            dateFormat: 'MM d, yy',
+            maxDate: 0
+        });
+    };
+
     this.after('initialize', function() {
+        this.initDatePicker();
     });
 }
 
