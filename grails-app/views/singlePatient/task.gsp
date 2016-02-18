@@ -42,6 +42,7 @@
                             'task': task,
                             'patientId': patientId,
                             'clientId': clientId,
+                            'accountId': accountId,
                             'medicalRecordId': medicalRecordId,
                             'taskId': task.id
                     ]" />

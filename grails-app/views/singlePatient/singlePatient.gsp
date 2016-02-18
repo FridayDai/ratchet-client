@@ -280,6 +280,17 @@
         </div>
     </form>
 
+    <form class="fill-questionnaire-dialog ui-hidden" id="fill-questionnaire-dialog">
+        <div class="form-group description">
+            When did the patient fill the questionnaire?
+        </div>
+        <div class="form-group email-group">
+            <input type="hidden" autofocus/>
+            <label class="lbl-group">DATE</label>
+            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker" placeholder="Jan 31, 2015" required>
+        </div>
+    </form>
+
     <form action="" method="post" class="edit-surgeon ui-hidden" id="edit-group-provider-form">
         <input type="hidden" autofocus/>
         <div class="form-group">
