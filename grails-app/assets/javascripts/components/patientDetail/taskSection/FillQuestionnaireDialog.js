@@ -21,16 +21,11 @@ function FillQuestionnaireDialog() {
 
     this.confirmHandler = function (e) {
         var me = this;
-        e.preventDefault();
 
         if (this.$node.valid()) {
-            this.completeDate = Utility.toVancouverTime(this.select('dateSelector').val());
-
             this.close();
 
-            setTimeout(function () {
-                window.open(me.addCompleteDate(me.taskUrl, me.completeDate), '_blank');
-            }, 300);
+            window.open(me.addCompleteDate(me.taskUrl, Utility.toVancouverTime(this.select('dateSelector').val())), '_blank');
         }
     };
 
