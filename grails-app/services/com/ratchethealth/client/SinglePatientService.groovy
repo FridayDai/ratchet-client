@@ -60,6 +60,7 @@ class SinglePatientService extends RatchetAPIService {
                     .field("firstName", patient?.firstName)
                     .field("lastName", patient?.lastName)
                     .field("phoneNumber", patient?.phoneNumber)
+                    .field("birthday", patient?.birthday)
                     .asString()
 
             if (resp.status == 200) {

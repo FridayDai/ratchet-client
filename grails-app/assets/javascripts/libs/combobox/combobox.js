@@ -353,7 +353,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         if ( !this.options.disabled && content && content.length && !this.cancelSearch ) {
             this._suggest( content );
             this._trigger( "open" );
-        } else if (!this.options.disabled && content && content.length === 0 && !this.cancelSearch ) {
+        } else if (!this.options.disabled && !this.options.hideNoResult && content && content.length === 0 && !this.cancelSearch ) {
             this.__noResult();
             this._trigger( "open" );
         } else {

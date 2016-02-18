@@ -4,7 +4,7 @@ require('momentTZ');
 var moment = require('moment');
 
 var $window = $(window);
-var IS_OLD_IE = window.navigator.userAgent.indexOf("MSIE ") > 0;
+var IS_OLD_IE = window.navigator.userAgent.indexOf('MSIE ') > 0;
 
 module.exports = {
     isOldIE: function () {
@@ -18,17 +18,37 @@ module.exports = {
         };
     },
 
-    toVancouverTime: function (time) {
+    parseBirthdayFromSeparate: function (str) {
+        return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('MMM Do, YYYY');
+    },
+
+    parseBirthday: function (ms) {
+        return moment(ms).tz('America/Vancouver').format('MMM Do, YYYY');
+    },
+
+    toBirthdayMoment: function (str) {
+        return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver');
+    },
+
+    toBirthday: function (str) {
+        return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('x');
+    },
+
+    toVancouverTime: function (time, format) {
+        format = format || 'MMM D, YYYY';
+
         if (time) {
-            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+            return moment.tz(time, format, 'America/Vancouver').format('x');
         } else {
             return null;
         }
     },
 
-    toVancouverTimeHour: function (time) {
+    toVancouverTimeHour: function (time, format) {
+        format = format || 'MMM D, YYYY h:mm:ss A';
+
         if (time) {
-            return moment(time).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+            return moment(time).tz('America/Vancouver').format(format);
         } else {
             return null;
         }
@@ -42,7 +62,7 @@ module.exports = {
                 '</div>'
             ].join('');
 
-        var $process = $("#msg-process");
+        var $process = $('#msg-process');
 
         if (hide === undefined || hide === false) {
             if ($process.length > 0) {

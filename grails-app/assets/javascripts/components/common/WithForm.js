@@ -92,7 +92,16 @@ function WithForm() {
         $.validator.setDefaults({
             errorClass: 'error-help-block',
             errorPlacement: function(error, element) {
-                $("<div class='error-container'></div>").appendTo(element.parent()).append(error);
+                var errorContainer = element.parent();
+                var $form = element.closest('form');
+                var validator = $form.data('validator');
+
+                if (element.data('groupValidation')) {
+                    var $groupPatient = element.closest('.' + validator.groups[element.attr('name')] + '-groups');
+                    errorContainer = $groupPatient.parent();
+                }
+
+                $("<div class='error-container'></div>").appendTo(errorContainer).append(error);
             }
         });
     };

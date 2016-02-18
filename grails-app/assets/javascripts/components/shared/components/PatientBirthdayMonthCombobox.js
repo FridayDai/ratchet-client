@@ -2,11 +2,12 @@ var flight = require('flight');
 var WithCombobox = require('../../common/WithCombobox');
 var PARAMs = require('../../../constants/Params');
 
-function PatientRelationshipCombobox() {
+function PatientBirthdayMonthCombobox() {
     this.options({
         appendTo: ".container",
-        source: PARAMs.EMERGENCY_CONTACT_RELATIONSHIP
+        source: PARAMs.BIRTHDAY_MONTH,
+        hideNoResult: true
     });
 }
 
-module.exports = flight.component(WithCombobox, PatientRelationshipCombobox);
+module.exports = flight.component(WithCombobox, PatientBirthdayMonthCombobox);

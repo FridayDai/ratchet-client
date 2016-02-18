@@ -134,8 +134,8 @@ function PatientsTable() {
         Notifications.showFadeOutMsg(msg.format(data.number));
     };
 
-    this.onPageInBackButtonStatus = function () {
-        this.reload();
+    this.onTableRefresh = function (e, data) {
+        this.reload(data.callback);
     };
 
     this.onLoadDataFromSessionRouter = function (e, data) {
@@ -143,7 +143,7 @@ function PatientsTable() {
     };
 
     this.after('initialize', function () {
-        this.on(document, 'pageInBackButtonStatus', this.onPageInBackButtonStatus);
+        this.on(document, 'refreshPatientsTable', this.onTableRefresh);
         this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
         this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
         this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);

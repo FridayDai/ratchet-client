@@ -23,6 +23,7 @@ class PatientService extends RatchetAPIService {
         def relationship = patient?.relationship
         def ecEmail = patient?.ecEmail
         def groupId = patient?.groupId
+        def birthday = patient?.birthday
 
         String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(addPatientsUrl, clientId)
@@ -36,6 +37,7 @@ class PatientService extends RatchetAPIService {
                     .field("lastName", lastName)
                     .field("phoneNumber", phoneNumber)
                     .field("email", email)
+                    .field("birthday", birthday)
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)

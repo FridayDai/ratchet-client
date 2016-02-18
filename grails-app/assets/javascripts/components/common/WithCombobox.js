@@ -93,6 +93,15 @@ function WithCombobox() {
             if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
                 this.trigger(this.attr.selectEvent, data);
             }
+
+            var validator = this.$node.closest('form').data('validator');
+
+            if (validator) {
+                var me = this;
+                setTimeout(function () {
+                    validator.element(me.$node);
+                }, 0);
+            }
         }
     };
 

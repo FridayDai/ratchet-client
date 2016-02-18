@@ -17,7 +17,9 @@ function PatientInfoSection() {
         lastNameStaticSelector: '.last-name',
         emailStaticSelector: '#patientEmail',
         emailStatusSelector: '.info .email-status',
-        phoneNumberStaticSelector: '.phone'
+        phoneNumberStaticSelector: '.phone',
+        birthdayStaticSelector: '.birthday',
+        birthdayTextSelector: '.birthday span'
     });
 
     this.showEditPatientDialog = function (e) {
@@ -42,7 +44,8 @@ function PatientInfoSection() {
             email: this.originalEmail,
             emailStatus: this.select('emailStatusSelector').attr("value"),
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
-            accountIsAdmin: this.$node.data('accountIsAdmin')
+            accountIsAdmin: this.$node.data('accountIsAdmin'),
+            birthday: this.select('birthdayTextSelector').text().trim()
         };
     };
 
@@ -79,6 +82,20 @@ function PatientInfoSection() {
         this.select('phoneNumberStaticSelector').text(data.number);
 
         this.updateEmailStatus(data.email);
+        this.updateBirthday(data.birthday);
+    };
+
+    this.updateBirthday = function (birthday) {
+        var $birthday = this.select('birthdayStaticSelector');
+        var $birthdayText = this.select('birthdayTextSelector');
+
+        if (birthday) {
+            $birthdayText.text(birthday);
+            $birthday.css('display', 'inline-block');
+        } else {
+            $birthdayText.text('');
+            $birthday.css('display', 'none');
+        }
     };
 
     this.updateEmailStatus = function (currentEmail) {

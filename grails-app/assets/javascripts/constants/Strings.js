@@ -33,6 +33,7 @@ module.exports = {
     ID_EXISTING_INVALID: "ID already exists",
     PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
     COMBOBOX_EMPTY_VALUE: "Please select item from list.",
+    BIRTHDAY_INVALID_VALUE: "Please select valid date.",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",

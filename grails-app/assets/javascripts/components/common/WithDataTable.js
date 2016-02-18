@@ -250,8 +250,14 @@ function withDataTable() {
         this.tableEl.row(rowSelector).remove().draw();
     };
 
-    this.reload = function () {
-        this.tableEl.ajax.reload();
+    this.reload = function (cb) {
+        if (cb) {
+            this.tableEl.ajax.reload(function () {
+                cb.call(this);
+            });
+        } else {
+            this.tableEl.ajax.reload();
+        }
     };
 
     this.getSetting = function () {
