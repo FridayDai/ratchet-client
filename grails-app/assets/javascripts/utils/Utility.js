@@ -6,6 +6,8 @@ var moment = require('moment');
 var $window = $(window);
 var IS_OLD_IE = window.navigator.userAgent.indexOf("MSIE ") > 0;
 
+var PARAMs = require('../constants/Params');
+
 module.exports = {
     isOldIE: function () {
         return IS_OLD_IE;
@@ -20,7 +22,13 @@ module.exports = {
 
     toVancouverTime: function (time) {
         if (time) {
-            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+            var validFormat = _.filter(PARAMs.DATE_FORMAT, function (format) { return moment(time, format, true).isValid(); });
+
+            if (validFormat.length > 0) {
+                return moment.tz(time, validFormat[0], "America/Vancouver").format('x');
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

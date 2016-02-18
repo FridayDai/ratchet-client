@@ -32,6 +32,7 @@ module.exports = {
     NPI_EXISTING_INVALID: "NPI already exists",
     ID_EXISTING_INVALID: "ID already exists",
     PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
+    WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",

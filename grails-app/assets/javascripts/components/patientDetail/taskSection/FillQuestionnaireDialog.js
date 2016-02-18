@@ -53,7 +53,7 @@ function FillQuestionnaireDialog() {
 
     this.options({
         title: 'FILL QUESTIONNAIRE',
-        width: 420,
+        width: 430,
         buttons: [{
             text: 'Start',
             click: this.confirmHandler

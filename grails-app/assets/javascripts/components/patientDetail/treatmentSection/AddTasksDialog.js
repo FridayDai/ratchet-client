@@ -1,5 +1,5 @@
 var flight = require('flight');
-var WithDialog = require('../../common/WithDialog');
+var WithDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
 
 var ScheduleTaskDatePicker = require('./ScheduleTasksDatePicker');
@@ -148,7 +148,9 @@ function AddTasksDialog() {
                 return $($checkbox).prop('checked');
             });
 
-        var dateValid = this.select('scheduleTaskFieldSelector').val();
+        var validator = this.$node.data('validator');
+
+        var dateValid = validator.element(this.select('scheduleTaskFieldSelector'));
 
         var $addButton = this.$node.closest('.ui-dialog').find('.add-button');
 

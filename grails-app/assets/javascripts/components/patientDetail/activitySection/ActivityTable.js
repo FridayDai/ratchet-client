@@ -2,6 +2,7 @@ var flight = require('flight');
 var WithDataTable = require('../../common/WithDataTable');
 var URLs = require('../../../constants/Urls');
 var moment = require('moment');
+var Utility = require('../../../utils/Utility');
 
 function ActivityTable() {
     this.options({
@@ -23,7 +24,7 @@ function ActivityTable() {
                 render: function (data, type, full) {
                     var dateCreated = data === undefined ? full.dateCreated : data;
 
-                    return moment(dateCreated).tz("America/Vancouver").format('MMM D, YYYY, h:mm:ss A');
+                    return Utility.toVancouverTimeHour(dateCreated);
                 },
                 width: "24%"
             }
