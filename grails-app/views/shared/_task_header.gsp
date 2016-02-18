@@ -16,7 +16,7 @@
         <div class="sub-info-panel">
             <g:if test="${!download}">
                 <div class="download"><g:link uri="/task/downloadPDF.pdf"
-                                              params="[patientId: patientId, medicalRecordId: medicalRecordId, taskId: taskId]">↓Download PDF</g:link></div>
+                                              params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></div>
             </g:if>
             <div class="patient-info">
                 <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
