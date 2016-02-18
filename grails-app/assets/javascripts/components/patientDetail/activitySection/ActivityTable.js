@@ -1,7 +1,6 @@
 var flight = require('flight');
 var WithDataTable = require('../../common/WithDataTable');
 var URLs = require('../../../constants/Urls');
-var moment = require('moment');
 var Utility = require('../../../utils/Utility');
 
 function ActivityTable() {

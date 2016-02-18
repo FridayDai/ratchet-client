@@ -22,7 +22,10 @@ module.exports = {
 
     toVancouverTime: function (time) {
         if (time) {
-            var validFormat = _.filter(PARAMs.DATE_FORMAT, function (format) { return moment(time, format, true).isValid(); });
+            var validFormat = _.filter(PARAMs.DATE_FORMAT,
+                function (format) {
+                    return moment(time, format, true).isValid();
+                });
 
             if (validFormat.length > 0) {
                 return moment.tz(time, validFormat[0], "America/Vancouver").format('x');
