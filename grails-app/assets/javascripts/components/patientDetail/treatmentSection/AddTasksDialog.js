@@ -148,9 +148,7 @@ function AddTasksDialog() {
                 return $($checkbox).prop('checked');
             });
 
-        var validator = this.$node.data('validator');
-
-        var dateValid = validator.element(this.select('scheduleTaskFieldSelector'));
+        var dateValid = this.select('scheduleTaskFieldSelector').val();
 
         var $addButton = this.$node.closest('.ui-dialog').find('.add-button');
 
@@ -175,7 +173,7 @@ function AddTasksDialog() {
         var $button = $(e.target).closest('button');
         var me = this;
 
-        if (!$button.hasClass('disabled')) {
+        if (!$button.hasClass('disabled') && this.$node.valid()) {
             var toolIds = _.reduce(
                 this.select('taskItemSelector'),
                 function (result, item) {
@@ -282,6 +280,8 @@ function AddTasksDialog() {
             taskItemSelector: this.clickTaskItemBody,
             selectAllButtonSelector: this.selectAllTasks
         });
+
+        this.$node.find('[name=scheduleTaskDate]').blur(_.bind(this.onScheduleTasksDateSelected, this));
 
         this.on('dialogclose', this.onClose);
     });

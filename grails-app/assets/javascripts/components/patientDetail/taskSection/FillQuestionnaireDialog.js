@@ -19,13 +19,14 @@ function FillQuestionnaireDialog() {
         this.show();
     };
 
-    this.confirmHandler = function (e) {
-        var me = this;
-
+    this.confirmHandler = function () {
         if (this.$node.valid()) {
             this.close();
 
-            window.open(me.addCompleteDate(me.taskUrl, Utility.toVancouverTime(this.select('dateSelector').val())), '_blank');
+            window.open(
+                this.addCompleteDate(this.taskUrl, Utility.toVancouverTime(this.select('dateSelector').val())),
+                '_blank'
+            );
         }
     };
 

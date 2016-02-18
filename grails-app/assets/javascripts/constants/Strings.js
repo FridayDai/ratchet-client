@@ -33,6 +33,8 @@ module.exports = {
     ID_EXISTING_INVALID: "ID already exists",
     PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
+    MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
+    MAX_DATE_RANGE: "Please input date before {0} year.",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",
