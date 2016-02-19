@@ -37,7 +37,7 @@ module.exports = {
         if (time) {
             var validFormat = guessDateFormat(time);
 
-            if (!validFormat) {
+            if (validFormat) {
                 return moment.tz(time, validFormat, "America/Vancouver").format('x');
             } else {
                 return null;
