@@ -396,13 +396,14 @@ function ToolbarPanel() {
                 .selectAll('circle')
                 .attr('r', 4);
 
-            $('.line-group')
+            this.$node.find('.line-group')
                 .filter(function () {
                     return !$(this).hasClass('active');
                 })
                 .addClass('disable');
 
-            d3.select('g.status-tip-group-{0}'.format(lineGroup.datum()))
+            d3.select(this.$node[0])
+                .select('g.status-tip-group-{0}'.format(lineGroup.datum()))
                 .classed('active', true);
         }
     };
@@ -438,10 +439,11 @@ function ToolbarPanel() {
             .selectAll('circle')
             .attr('r', 3);
 
-        $('.line-group.disable')
+        this.$node.find('.line-group.disable')
             .removeClass('disable');
 
-        d3.select('g.status-tip-group-{0}'.format(d3LineGroup.datum()))
+        d3.select(this.$node[0])
+            .select('g.status-tip-group-{0}'.format(d3LineGroup.datum()))
             .classed('active', false);
     };
 
@@ -461,14 +463,14 @@ function ToolbarPanel() {
                 $bar.append(SCORE_TEMPLATE.format(PARAMs.SCORE_TYPE[type], index));
             });
 
-            $(this.attr.scoreItemSelector).click(_.bind(this.onScoreItemClicked, this));
+            this.select('scoreItemSelector').click(_.bind(this.onScoreItemClicked, this));
         }
     };
 
     this.onScoreItemClicked = function (e) {
         var $target = $(e.target),
             index = $target.data('index'),
-            $lineGroup = $(LINE_GROUP_SELECTOR.format(index));
+            $lineGroup = this.$node.find(LINE_GROUP_SELECTOR.format(index));
 
         if ($target.hasClass('inactive')) {
             $target.removeClass('inactive');
@@ -492,7 +494,8 @@ function ToolbarPanel() {
     };
 
     this.clearSVG = function () {
-        d3.selectAll(this.attr.lineGroupSelector)
+        d3.select(this.$node[0])
+            .selectAll(this.attr.lineGroupSelector)
             .selectAll('circle, path')
             .on('mouseover', null)
             .on('mouseout', null)
@@ -504,37 +507,41 @@ function ToolbarPanel() {
     };
 
     this.onRender = function (e, data) {
-        this.select('defaultPanelSelector').hide();
+        if (this.$node.is(':visible')) {
+            this.select('defaultPanelSelector').hide();
 
-        if (data.xRange === UNSUPPORTED) {
-            this.select('noAvailableSelector').show();
-        } else {
-            this.select('chartGroupSelector').show();
-
-            this.drawFrame(data.xRange, data.yRange);
-
-            if (!data.dataSet && !data.items) {
-                this.select('noDataSelector').show();
-            } else if (data.items) {
-                this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
+            if (data.xRange === UNSUPPORTED) {
+                this.select('noAvailableSelector').show();
             } else {
-                this.select('scoreBarSelector').show();
-                this.drawScoreBar(_.map(data.dataSet, 'type'));
+                this.select('chartGroupSelector').show();
 
-                _.each(data.dataSet, function (dataGroup, index) {
-                    this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
-                }, this);
+                this.drawFrame(data.xRange, data.yRange);
+
+                if (!data.dataSet && !data.items) {
+                    this.select('noDataSelector').show();
+                } else if (data.items) {
+                    this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
+                } else {
+                    this.select('scoreBarSelector').show();
+                    this.drawScoreBar(_.map(data.dataSet, 'type'));
+
+                    _.each(data.dataSet, function (dataGroup, index) {
+                        this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
+                    }, this);
+                }
             }
         }
     };
 
     this.onClear = function () {
-        this.clearSVG();
-        this.select('defaultPanelSelector').show();
-        this.select('noAvailableSelector').hide();
-        this.select('chartGroupSelector').hide();
-        this.select('noDataSelector').hide();
-        this.select('scoreBarSelector').hide();
+        if (this.$node.is(':visible')) {
+            this.clearSVG();
+            this.select('defaultPanelSelector').show();
+            this.select('noAvailableSelector').hide();
+            this.select('chartGroupSelector').hide();
+            this.select('noDataSelector').hide();
+            this.select('scoreBarSelector').hide();
+        }
     };
 
     this.after('initialize', function () {
