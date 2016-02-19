@@ -32,7 +32,8 @@ function TaskSection() {
         notifyButtonSelector: '.btn-notify.task-email',
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
-        deleteTaskButtonSelector: '.box-item .delete'
+        deleteTaskButtonSelector: '.box-item .delete',
+        beginTaskButtonSelector: '.box-item .begin-task'
     });
 
     this.getActiveItemCount = function () {
@@ -91,6 +92,16 @@ function TaskSection() {
         });
     };
 
+    this.onTaskBeginButtonClicked = function (e) {
+        e.preventDefault();
+
+        var $button = $(e.target).closest('.begin-task');
+
+        this.trigger('showFillQuestionnaireDialog', {
+            taskUrl: $button.attr('href')
+        });
+    };
+
     this.deleteTask = function (taskId, taskTitle, $taskBox) {
         var me = this;
 
@@ -130,7 +141,8 @@ function TaskSection() {
         this.on(document, 'emailStatusUpdated', this.onEmailStatusUpdated);
 
         this.on('click', {
-            deleteTaskButtonSelector: this.onTaskDeleteButtonClicked
+            deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
+            beginTaskButtonSelector: this.onTaskBeginButtonClicked
         });
     });
 }

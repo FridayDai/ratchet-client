@@ -49,15 +49,13 @@ function WithCombobox() {
     };
 
     this.__onClear = function () {
-        if (this.__previousVal !== null) {
-            this.clear();
+        this.clear();
 
-            if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
-                var data = {};
-                data[this.attr.selectDataKey] = null;
+        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
+            var data = {};
+            data[this.attr.selectDataKey] = null;
 
-                this.trigger(this.attr.clearEvent, data);
-            }
+            this.trigger(this.attr.clearEvent, data);
         }
     };
 

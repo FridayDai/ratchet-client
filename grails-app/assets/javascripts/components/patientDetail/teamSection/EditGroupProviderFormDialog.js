@@ -66,6 +66,8 @@ function EditGroupProviderFormDialog() {
 
         this.child.groupFieldSelector.setTreatmentId(data.treatmentId);
 
+        this.child.groupFieldSelector.setTreatmentId(data.treatmentId);
+
         this.formEl.attr(
             'action',
             URLs.UPDATE_GROUP_PROVIDER_CONTACT.format(this.patientId, this.medicalRecordId)

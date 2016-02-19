@@ -48,6 +48,13 @@
             </div>
         </g:if>
         <g:else>
+            <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
+               class="begin-task" target="_blank"></a>
+
+            <div class="begin-tip">
+                <span>Begin</span>
+            </div>
+
             <div class="footer-bottom"></div>
         </g:else>
     </div>

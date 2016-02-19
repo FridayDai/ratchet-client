@@ -15,7 +15,10 @@ function WithFormDialog() {
     ]);
 
     this.options = function (options) {
-        if (_.isArray(options.buttons) && options.buttons.length <= 2) {
+        if (_.isArray(options.buttons) &&
+            options.buttons.length <= 2 &&
+            _.every(options.buttons, function(item) { return !_.isPlainObject(item);})
+        ) {
             var originButtons = options.buttons;
             var primaryButtonStr = originButtons[0];
 

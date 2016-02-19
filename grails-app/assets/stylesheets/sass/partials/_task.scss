@@ -567,3 +567,34 @@
         }
     }
 }
+
+.expired {
+    .box-item-footer {
+        .begin-task {
+            right: 8px;
+        }
+
+        .begin-tip {
+            right: -1px;
+        }
+    }
+}
+
+.fill-questionnaire-dialog {
+    text-align: center;
+    font-size: 14px;
+
+    .form-group {
+        width: 72%;
+        display: inline-block;
+        margin: 10px 0;
+    }
+
+    .description {
+        color: #000;
+    }
+
+    .date-picker {
+        width: 272px;
+    }
+}

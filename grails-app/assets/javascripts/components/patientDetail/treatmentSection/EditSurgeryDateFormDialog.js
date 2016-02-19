@@ -8,7 +8,7 @@ var Utility = require('../../../utils/Utility');
 function EditSurgeryDateFormDialog() {
     this.options({
         title: 'EDIT SURGERY DATE',
-        width: 420,
+        width: 430,
         buttons: ['Save']
     });
 
@@ -29,22 +29,6 @@ function EditSurgeryDateFormDialog() {
         this.$node.removeClass('ui-hidden');
         this.show();
     };
-
-    //this.setMinSurgeryDate = function (clientId, treatmentId) {
-    //    var me = this;
-	//
-    //    return $.ajax({
-    //        url: URLs.GET_TREATMENT_DETAIL.format(treatmentId),
-    //        type: 'POST',
-    //        data: { clientId: clientId }
-    //    }).done(function (data) {
-    //        me.select('surgeryTimeFieldSelector')
-    //            .datepicker('option', 'minDate', new Date(data.surgeryDate));
-    //    }).always(function() {
-    //        me.$node.removeClass('ui-hidden');
-    //        me.show();
-    //    });
-    //};
 
     this.setCurrentSurgeryDate = function (current) {
         this.currentSurgeryDate = current;

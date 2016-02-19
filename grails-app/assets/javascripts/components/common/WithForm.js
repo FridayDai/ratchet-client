@@ -1,6 +1,8 @@
 require('../../libs/jquery-validation/jquery.validate.js');
 require('jForm');
 
+var DateDefaultValidation = require('../shared/validation/DateDefaultValidation');
+
 function WithForm() {
     this.attributes({
         formSelector: '.'
@@ -29,6 +31,8 @@ function WithForm() {
         _.each(this.__validationFunctions, function (fn) {
             fn.call(me, me.formEl);
         });
+
+        DateDefaultValidation.addIn(this.formEl);
     };
 
     this.__getValidations = function (validations) {
