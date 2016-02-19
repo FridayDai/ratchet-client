@@ -4,16 +4,18 @@ import java.text.SimpleDateFormat
 
 
 class Utils {
-    static formatBirthday(ms) {
-        if (!ms) {
+    static formatBirthday(dateStr) {
+        if (!dateStr) {
             return ''
         }
 
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone('America/Vancouver'))
 
+        SimpleDateFormat sd1 = new SimpleDateFormat("yyyyMMdd")
+
         cal.clear()
 
-        cal.setTimeInMillis(ms)
+        cal.setTime(sd1.parse(dateStr))
 
         SimpleDateFormat sd = new SimpleDateFormat("MMM d'th', yyyy")
 

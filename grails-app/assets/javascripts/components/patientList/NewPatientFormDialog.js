@@ -333,7 +333,7 @@ function NewPatientFormDialog() {
 
         if ($birthdayMonth.val()) {
             result.birthday =
-                Utility.toVancouverTime(
+                Utility.toBirthdayFromSeparate(
                     $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
                 );
         }

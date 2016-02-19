@@ -19,19 +19,43 @@ module.exports = {
     },
 
     parseBirthdayFromSeparate: function (str) {
-        return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('MMM Do, YYYY');
+        if (str) {
+            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('MMM Do, YYYY');
+        } else {
+            return '';
+        }
     },
 
-    parseBirthday: function (ms) {
-        return moment(ms).tz('America/Vancouver').format('MMM Do, YYYY');
+    parseBirthday: function (dataStr) {
+        if (dataStr) {
+            return moment(dataStr, 'YYYYMMDD').format('MMM Do, YYYY');
+        } else {
+            return '';
+        }
     },
 
     toBirthdayMoment: function (str) {
-        return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver');
+        if (str) {
+            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver');
+        } else {
+            return null;
+        }
+    },
+
+    toBirthdayFromSeparate: function (str) {
+        if (str) {
+            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYYMMDD');
+        } else {
+            return '';
+        }
     },
 
     toBirthday: function (str) {
-        return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('x');
+        if (str) {
+            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('YYYYMMDD');
+        } else {
+            return '';
+        }
     },
 
     toVancouverTime: function (time, format) {
