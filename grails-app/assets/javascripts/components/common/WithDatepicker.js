@@ -2,6 +2,19 @@ require('jquery-ui-datepicker');
 
 var Utility = require('../../utils/Utility');
 
+function validate(dateText, inst) {
+    var $input = inst.input;
+
+    if ($input) {
+        var $form = $input.closest('form');
+        var validator = $form.data('validator');
+
+        if (validator) {
+            validator.element($input);
+        }
+    }
+}
+
 $.datepicker.setDefaults({
     /* fix buggy IE focus functionality */
     fixFocusIE: false,
@@ -9,6 +22,10 @@ $.datepicker.setDefaults({
     /* blur needed to correctly handle placeholder text */
     onClose: function () {
         this.fixFocusIE = true;
+    },
+
+    onSelect: function (dateText, inst) {
+        validate(dateText, inst);
     },
 
     beforeShow: function () {
@@ -24,8 +41,10 @@ function WithDatepicker() {
 
         this.$node.datepicker({
             dateFormat: 'MM d, yy',
-            onSelect: function () {
+            onSelect: function (dateText, inst) {
                 this.fixFocusIE = true;
+
+                validate(dateText, inst);
 
                 me.trigger('rc.datePickerSelect');
             }

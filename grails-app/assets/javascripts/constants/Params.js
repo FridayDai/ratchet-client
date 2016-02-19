@@ -63,5 +63,13 @@ module.exports = {
         'STIFFNESS': 'Stiffness',
         'Physical': 'Physical',
         'Mental': 'Mental'
-    }
+    },
+
+    DATE_FORMAT: [
+        'MM-DD-YYYY',
+        'MM/DD/YYYY',
+        'M-D-YYYY',
+        'M/D/YYYY',
+        'MMMM D, YYYY'
+    ]
 };

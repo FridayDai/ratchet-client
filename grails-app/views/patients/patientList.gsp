@@ -194,7 +194,7 @@
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time re-position"
+                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time re-position"
                        placeholder="Select surgery date" required disabled/>
             </div>
 

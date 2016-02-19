@@ -6,6 +6,21 @@ var moment = require('moment');
 var $window = $(window);
 var IS_OLD_IE = window.navigator.userAgent.indexOf("MSIE ") > 0;
 
+var PARAMs = require('../constants/Params');
+
+function guessDateFormat (dateStr) {
+    var validFormat = _.filter(PARAMs.DATE_FORMAT,
+        function (format) {
+            return moment(dateStr, format, true).isValid();
+        });
+
+    if (validFormat.length > 0) {
+        return validFormat[0];
+    } else {
+        return null;
+    }
+}
+
 module.exports = {
     isOldIE: function () {
         return IS_OLD_IE;
@@ -20,7 +35,13 @@ module.exports = {
 
     toVancouverTime: function (time) {
         if (time) {
-            return moment.tz(time, "MMM D, YYYY", "America/Vancouver").format('x');
+            var validFormat = guessDateFormat(time);
+
+            if (validFormat) {
+                return moment.tz(time, validFormat, "America/Vancouver").format('x');
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -59,9 +80,15 @@ module.exports = {
         }
     },
 
-    durationInDays: function (targetDateStr, compareDateStr, format) {
-        format = format || 'MMM D, YYYY';
+    durationInDays: function (targetDateStr, compareDateStr) {
+       var targetValidFormat = guessDateFormat(targetDateStr);
+       var compareValidFormat = guessDateFormat(compareDateStr);
 
-        return moment(compareDateStr, format).diff(moment(targetDateStr, format), 'days');
+        if (!targetValidFormat || !compareValidFormat) {
+            return null;
+        } else {
+            return moment(compareDateStr, compareValidFormat)
+                .diff(moment(targetDateStr, targetValidFormat), 'days');
+        }
     }
 };

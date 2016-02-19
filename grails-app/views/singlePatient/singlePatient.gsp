@@ -169,7 +169,7 @@
 
         <div class="form-group inline" id="surgery-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time required"
+            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -229,7 +229,7 @@
             <div class="section-desc">Select when you would like the task(s) to become active</div>
             <div class="form-group schedule-date-group">
                 <label class="lbl-group">SCHEDULE TASK(S)</label>
-                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date">
+                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date" required>
                 <div class="surgery-date-relative-indicator"></div>
             </div>
         </div>
@@ -239,7 +239,7 @@
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY DATE</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
-                   class="input-group surgery-time"
+                   class="input-group date-picker surgery-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
@@ -277,6 +277,17 @@
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-treatment-field" name="deleteField" type="text"
                    class="input-group" required>
+        </div>
+    </form>
+
+    <form action="" class="fill-questionnaire-dialog ui-hidden" id="fill-questionnaire-dialog">
+        <div class="form-group description">
+            When did the patient fill the questionnaire?
+        </div>
+        <div class="form-group email-group">
+            <input type="hidden" autofocus/>
+            <label class="lbl-group">DATE</label>
+            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker" placeholder="Jan 31, 2015" required>
         </div>
     </form>
 
