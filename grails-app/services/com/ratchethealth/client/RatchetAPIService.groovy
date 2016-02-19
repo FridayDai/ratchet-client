@@ -49,7 +49,7 @@ class RatchetAPIService {
 
         def body
         try {
-            body = JSON.parse(resp.body)
+            body = JSON.parse(resp?.body?.toString())
         } catch (e) {
             body = [:]
         }
