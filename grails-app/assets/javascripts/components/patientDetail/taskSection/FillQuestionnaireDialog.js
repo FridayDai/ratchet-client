@@ -21,10 +21,12 @@ function FillQuestionnaireDialog() {
 
     this.confirmHandler = function () {
         if (this.$node.valid()) {
+            this.completeDate = Utility.toVancouverTime(this.select('dateSelector').val());
+
             this.close();
 
             window.open(
-                this.addCompleteDate(this.taskUrl, Utility.toVancouverTime(this.select('dateSelector').val())),
+                this.addCompleteDate(this.taskUrl, this.completeDate),
                 '_blank'
             );
         }
