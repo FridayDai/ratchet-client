@@ -375,6 +375,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.menu.refresh();
 
         ul.removeClass('no-children');
+
+        this._resizeMenu();
     },
 
     _suggest: function( items ) {
@@ -384,6 +386,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.menu.refresh();
 
         ul.removeClass('no-children');
+
+        this._resizeMenu();
     },
 
     _selectMatched: function () {
