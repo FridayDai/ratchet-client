@@ -14,7 +14,11 @@ $.validator.addMethod("birthdayValueCheck", function(value, elem){
     if (!month && !day && !year) {
         return true;
     } else {
-        return moment(BIRTHDAY_FORMAT.format(month, day, year), 'MMM-D-YYYY', true).isValid();
+        if (this.formChecking || (month && day && year)) {
+            return moment(BIRTHDAY_FORMAT.format(month, day, year), 'MMM-D-YYYY', true).isValid();
+        } else {
+            return true;
+        }
     }
 
 }, STRINGs.BIRTHDAY_INVALID_VALUE);
