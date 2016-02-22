@@ -62,7 +62,7 @@ class AuthenticationService extends RatchetAPIService {
             }
 
             if (resp.status == 401 && result?.error?.errorID == 403) {
-                def rateLimit = result?.error?.errorMessage ?: '3'
+                def rateLimit = result?.error?.errorMessage.toString() ?: '3'
                 String[] args = [rateLimit]
                 def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", args, Locale.default)
                 throw new AccountValidationException(errorMessage, rateLimit)
