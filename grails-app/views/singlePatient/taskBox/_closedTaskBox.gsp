@@ -25,26 +25,34 @@
             </g:if>
 
             <div class="footer-bottom">
-                <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
-
+                <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId) }">
                     <div class="complete-score">
-                        <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                            <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score" padding="auto">
-                                <span class="score ${auto}">
-                                    <div class="score-number">${score[1]}</div>
-                                    <div class="score-label">${score[0]}</div>
-                                </span>
-                            </g:multipleScore>
-                        </g:if>
-                        <g:else>
-                            <span class="score">
-                                <label class="score-number">${task?.score}</label><br>
-                                <label>Total Result</label>
-                            </span>
-                        </g:else>
+                        <g:render template="/singlePatient/taskBox/mixedScore" model="['task': task]"/>
                     </div>
-
                 </g:if>
+                <g:else>
+                    <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
+
+                        <div class="complete-score">
+                            <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
+                                <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score" padding="auto">
+                                    <span class="score ${auto}">
+                                        <div class="score-number">${score[1]}</div>
+                                        <div class="score-label">${score[0]}</div>
+                                    </span>
+                                </g:multipleScore>
+                            </g:if>
+                            <g:else>
+                                <span class="score">
+                                    <label class="score-number">${task?.score}</label><br>
+                                    <label>Total Result</label>
+                                </span>
+                            </g:else>
+                        </div>
+
+                    </g:if>
+                </g:else>
+
             </div>
         </g:if>
         <g:else>
