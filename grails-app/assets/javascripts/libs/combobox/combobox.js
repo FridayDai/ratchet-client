@@ -172,24 +172,20 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 this.element.select();
             },
             blur: function( event ) {
-                if ( this.cancelBlur ) {
-                    delete this.cancelBlur;
-                    return;
-                }
-
                 this.menu.active = null;
 
                 this._selectMatched();
 
                 if (this.menu.active) {
-                    this.menu.select(event);
+                    var item = this.menu.active.data("ui-autocomplete-item");
+                    this.element
+                        .val(item.label)
+                        .data("id", item.value)
+                        .data("saved", item);
                 }
 
-                this.close( event );
+                this.close(event);
                 this.cancelSearch = false;
-
-                this.cancelBlur = true;
-                this.element.blur();
             }
         });
 

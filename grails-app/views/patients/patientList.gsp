@@ -286,6 +286,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Birthday</th>
                         <th>Email Address</th>
                         <th>Phone Number</th>
                         <th>Group</th>

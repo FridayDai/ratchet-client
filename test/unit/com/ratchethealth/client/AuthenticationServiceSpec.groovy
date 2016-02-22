@@ -41,12 +41,13 @@ class AuthenticationServiceSpec extends Specification {
         jBuilder {
             error {
                 errorMessage 20
+                errorID 403
             }
         }
 
         MultipartBody.metaClass.asString = { ->
             return [
-                    status: 403,
+                    status: 401,
                     body  : jBuilder.toString()
             ]
         }
