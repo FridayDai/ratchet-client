@@ -233,11 +233,17 @@ function NewPatientFormDialog() {
             $static.hide();
             $inputField.find('.ui-combobox').show();
 
+            $birthdayMonth.removeAttr('disabled');
+            $birthdayDay.removeAttr('disabled');
+            $birthdayYear.removeAttr('disabled');
+
             var momentBirthDay = Utility.toBirthdayMoment($birthdayStatic.text());
 
-            $birthdayMonth.removeAttr('disabled').val(momentBirthDay.format('MMM'));
-            $birthdayDay.removeAttr('disabled').val(momentBirthDay.date());
-            $birthdayYear.removeAttr('disabled').val(momentBirthDay.year());
+            if (momentBirthDay) {
+                $birthdayMonth.val(momentBirthDay.format('MMM'));
+                $birthdayDay.val(momentBirthDay.date());
+                $birthdayYear.val(momentBirthDay.year());
+            }
         } else {
             if ($inputField.is(':visible')) {
                 return;
