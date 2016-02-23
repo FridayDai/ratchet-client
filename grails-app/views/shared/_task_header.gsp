@@ -1,4 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants; com.ratchethealth.client.RatchetConstants" %>
+<%@ page import="com.ratchethealth.client.Utils" %>
 <div class="sticky-header">
     <div role="banner" class="header">
         <div class="toolbar">
@@ -22,6 +23,9 @@
                 <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
                 |
                 <span class="id">ID: ${Task.patientId}</span>
+                <g:if test="${Task?.birthday}">
+                    <span class="birthday"><i class="fa fa-birthday-cake"></i>${Utils.formatBirthday(Task?.birthday)}</span>
+                </g:if>
             </div>
 
             <div class="questionnaire-info">
