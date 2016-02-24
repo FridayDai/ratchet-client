@@ -1,7 +1,6 @@
 require('../../../libs/jquery-validation/jquery.validate.js');
 
 var STRINGs = require('../../../constants/Strings');
-var PARAMs = require('../../../constants/Params');
 var moment = require('moment');
 
 var SURGERY_DATE_FORMAT = 'MMMM D, YYYY';
