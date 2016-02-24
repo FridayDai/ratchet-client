@@ -1,5 +1,6 @@
 var flight = require('flight');
 var WithDatepicker = require('../../common/WithDatepicker');
+var PatientSurgeryDateValidation = require('../validation/PatientSurgeryDateValidation');
 
 function PatientSurgeryDate() {
     this.onTreatmentSelected = function (e, data) {
@@ -40,7 +41,17 @@ function PatientSurgeryDate() {
         this.hideElementGroup();
     };
 
+    this.__surgeryDateInit = function () {
+        this.$node.datepicker('option', {
+            minDate: new Date(2015, 0, 1),
+            maxDate: "+1y"
+        });
+
+        this.__setValidation(PatientSurgeryDateValidation.rules);
+    };
+
     this.after('initialize', function () {
+        this.__surgeryDateInit();
         this.on(document, this.attr.groupSelectEvent, this.onReset);
         this.on(document, this.attr.groupClearEvent, this.onReset);
         this.on(document, this.attr.treatmentSelectEvent, this.onTreatmentSelected);

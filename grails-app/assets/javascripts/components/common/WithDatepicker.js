@@ -1,6 +1,8 @@
 require('jquery-ui-datepicker');
 
+var flight = require('flight');
 var Utility = require('../../utils/Utility');
+var WithElementValidation = require('./WithElementValidation');
 
 function validate(dateText, inst) {
     var $input = inst.input;
@@ -36,6 +38,10 @@ $.datepicker.setDefaults({
 });
 
 function WithDatepicker() {
+    flight.compose.mixin(this, [
+        WithElementValidation
+    ]);
+
     this._initDatePicker = function () {
         var me = this;
 
