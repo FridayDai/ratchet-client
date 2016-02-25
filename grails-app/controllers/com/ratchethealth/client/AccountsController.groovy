@@ -69,7 +69,6 @@ class AccountsController extends BaseController {
         } else {
             render(view: "/accounts/activateAccount", model: [staff: resp, code: code])
         }
-
     }
 
     def confirmPassword() {
@@ -106,7 +105,7 @@ class AccountsController extends BaseController {
 
     def confirmResetPassword() {
         def code = params?.code
-        def newPassword = params?.newPassword
+        def newPassword = params?.password
         def confirmPassword = params?.confirmPassword
         def resp = accountService.resetPassword(session.token, code, newPassword, confirmPassword)
         if (resp) {

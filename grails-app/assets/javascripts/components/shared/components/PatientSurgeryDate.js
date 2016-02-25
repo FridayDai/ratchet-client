@@ -47,7 +47,7 @@ function PatientSurgeryDate() {
             maxDate: "+1y"
         });
 
-        this.__setValidation(PatientSurgeryDateValidation.rules);
+        this.setElementValidation(this.$node, PatientSurgeryDateValidation.rules);
     };
 
     this.after('initialize', function () {
