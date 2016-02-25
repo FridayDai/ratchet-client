@@ -1,17 +1,22 @@
 function WithElementValidation() {
-    this.__setValidation = function (rules) {
-        if (this.$node) {
-            var $form = this.$node.closest('form');
+    this.setElementValidation = function (element, rules) {
+        if (element) {
+            var $form = element.closest('form');
 
             if ($form.length > 0) {
-                var componentRules = $form.data('componentRules') || [];
+                var validator = $form.data('validator');
+                if (validator) {
+                    element.rules('add', rules);
+                } else {
+                    var componentRules = $form.data('componentRules') || [];
 
-                componentRules.push({
-                    element: this.$node,
-                    rules: rules
-                });
+                    componentRules.push({
+                        element: element,
+                        rules: rules
+                    });
 
-                $form.data('componentRules', componentRules);
+                    $form.data('componentRules', componentRules);
+                }
             }
         }
     };

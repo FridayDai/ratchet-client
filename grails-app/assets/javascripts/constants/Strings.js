@@ -37,8 +37,8 @@ module.exports = {
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
     MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
     MAX_DATE_RANGE: "Please input date before {0} year.",
-    MINIMUM_SURGERY_DATE: "Surgery date is too far in the past.",
-    MAX_SURGERY_DATE: "Surgery date is too far in the future.",
+    MINIMUM_SURGERY_DATE: "That surgery date is too far in the past.",
+    MAX_SURGERY_DATE: "That surgery date is too far in the future.",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",

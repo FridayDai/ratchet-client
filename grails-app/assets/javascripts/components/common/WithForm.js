@@ -25,7 +25,7 @@ function WithForm() {
         }
 
         this.formEl.validate(_.extend({
-            submitHandler: _.bind(this._prepareSubmitForm, this)
+            submitHandler: this.attr.nativeForm ? null : _.bind(this._prepareSubmitForm, this)
         }, options));
 
         _.each(this.__validationFunctions, function (fn) {
