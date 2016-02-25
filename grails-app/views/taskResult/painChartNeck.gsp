@@ -38,17 +38,17 @@
 
                     <div class="answer-line">
                         Neck pain
-                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['17']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['17']?: '0' }%</g:else></span>
                     </div>
 
                     <div class="answer-line">
                         Shoulder pain
-                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['18']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['18']?: '0'}%</g:else></span>
                     </div>
 
                     <div class="answer-line">
                         Arm pain
-                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['19']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['20']}">- -</g:if><g:else>${mixedResult['19']?: '0'}%</g:else></span>
                     </div>
 
                     <div class="answer-line">
