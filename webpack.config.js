@@ -16,7 +16,8 @@ module.exports = {
         profile: "./flightPages/profile.js",
         reportOutcome: "./flightPages/report/outcome.js",
         reportTaskCompletion: "./flightPages/report/taskCompletion.js",
-        activateAccount: './flightPages/activateAccount.js'
+        activateAccount: './flightPages/activateAccount.js',
+        login: './flightPages/login.js'
     },
     output: {
         path: absoluteContext,

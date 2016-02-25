@@ -132,5 +132,30 @@ module.exports = {
             return moment(compareDateStr, compareValidFormat)
                 .diff(moment(targetDateStr, targetValidFormat), 'days');
         }
+    },
+
+    parseSecondsToMinutes: function (seconds) {
+        var minute = Math.floor(seconds / 60),
+            second = seconds - minute * 60;
+
+        var result = '';
+
+        if (minute === 1) {
+            result += '1 minute';
+        } else if (minute > 1) {
+            result += '{0} minutes'.format(minute);
+        }
+
+        if (result) {
+            result += ' ';
+        }
+
+        if (second === 1) {
+            result += '1 second';
+        } else if (second > 1) {
+            result += '{0} seconds'.format(second);
+        }
+
+        return result;
     }
 };
