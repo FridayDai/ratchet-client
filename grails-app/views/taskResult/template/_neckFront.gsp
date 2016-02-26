@@ -402,8 +402,11 @@
 
     <g:if test="${!taskResult['20']}">
         <g class="indication">
-            <text id="XMLID_260_" transform="matrix(1 0 0 1 254.6971 165.1315)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Shoulder</text>
-            <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="252.647" y1="163.419" x2="218.335" y2="186.066"/>
+            <g>
+                <text id="XMLID_260_" transform="matrix(1 0 0 1 254.6971 165.1315)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Shoulder</text>
+                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="252.647" y1="163.419" x2="218.335" y2="186.066"/>
+            </g>
+
             <g>
                 <text id="XMLID_259_" transform="matrix(1 0 0 1 262.0341 262.3239)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Upperarm</text>
                 <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="259.604" y1="258.38" x2="251.589" y2="262.324"/>
