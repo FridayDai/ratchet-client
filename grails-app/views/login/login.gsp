@@ -1,4 +1,5 @@
-<g:set var="scriptPath" value="loginBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/login.bundle.js"/>
 <g:set var="cssPath" value="login"/>
 <g:applyLayout name="form">
     <html>
@@ -37,7 +38,10 @@
 
                     <div class="error-area">
                         <g:if test="${errorMsg}">
-                            <p class="error" id="error-login" rateLimit="${rateLimit}">${errorMsg}</p>
+                            <p class="error" id="error-login">${errorMsg}</p>
+                        </g:if>
+                        <g:if test="${rateLimit}">
+                            <p class="error error-rate-limit" data-rate-limit="${rateLimit}"></p>
                         </g:if>
                     </div>
 

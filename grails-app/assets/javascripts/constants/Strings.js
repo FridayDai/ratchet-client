@@ -44,5 +44,6 @@ module.exports = {
                             "Please download and fix the error file and try again.",
     BULK_IMPORT_FORMAT_ERROR:   "We are not able to process this file due to a format problem. " +
                                 "Please verify the file you uploaded.",
-    TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible."
+    TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
+    RATE_LIMIT_LOGIN: "You will be able to try again in {0}."
 };

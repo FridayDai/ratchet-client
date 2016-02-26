@@ -1,7 +1,6 @@
 require('jquery-ui-dialog');
 require('../../libs/dialog/dialog');
-require('velocity');
-require('velocity-ui');
+require('./WithVelocity');
 
 function getNotificationContent() {
     var divArr = [

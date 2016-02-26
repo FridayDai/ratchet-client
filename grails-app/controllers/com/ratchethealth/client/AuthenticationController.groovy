@@ -84,7 +84,6 @@ class AuthenticationController extends BaseController {
 
         def msg = e.getMessage()
         render(view: '/login/login', model: [errorMsg: msg, rateLimit: time])
-
     }
 
 }
