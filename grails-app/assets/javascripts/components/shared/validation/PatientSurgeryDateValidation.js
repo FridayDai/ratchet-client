@@ -4,8 +4,6 @@ var STRINGs = require('../../../constants/Strings');
 var moment = require('moment');
 var Utility = require('../../../utils/Utility');
 
-var SURGERY_DATE_FORMAT = 'MMMM D, YYYY';
-
 $.validator.addMethod('SurgeryDateMinCheck', function (value) {
     var guessFormat = Utility.guessDateFormat(value);
 
