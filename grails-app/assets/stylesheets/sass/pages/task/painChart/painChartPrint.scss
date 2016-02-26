@@ -18,8 +18,8 @@
 .pain-draw {
 
     .human {
-        width: 230px;
-        height: 530px;
+        width: 270px;
+        height: 500px;
     }
 
     .draw-board {
@@ -32,7 +32,7 @@
 
     .chart-content {
         display: inline-block;
-        width: 35%;
+        width: 40%;
         float: left;
         text-align: center;
     }
@@ -55,7 +55,7 @@
         display: inline-block;
         position: relative;
         top: 361px;
-        width: 250px;
+        width: 100%;
         padding-left: 10px;
         font-size: 12px;
         text-align: left;
@@ -159,15 +159,4 @@
 
 text {
     font-family: $base-font-family;
-}
-
-.indication {
-    g {
-        @include transform(scale(0.84));
-        @include transform-origin(center);
-    }
-
-    text {
-        font-size: 12px;
-    }
 }
