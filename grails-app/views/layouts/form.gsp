@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png')}" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!--[if lte IE 8 ]><asset:stylesheet src="css/ie.css"/><![endif]-->
     <g:if test="${cssPath}">
         <asset:stylesheet src="css/pages/${cssPath}"/>
@@ -27,9 +28,14 @@
 </div>
 <g:render template="/shared/footer" />
 
-<g:if test="${scriptPath}">
-    <asset:javascript src="bundles/${scriptPath}"/>
+<g:if test="${commonScriptPath}">
+    <asset:javascript src="${commonScriptPath}"/>
 </g:if>
+
+<g:if test="${scriptPath}">
+    <asset:javascript src="${scriptPath}"/>
+</g:if>
+
 <g:else>
     <asset:javascript src="bundles/defaultBundle"/>
 </g:else>

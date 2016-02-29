@@ -1,4 +1,5 @@
-<g:set var="scriptPath" value="resetPasswordBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/activateAccount.bundle.js"/>
 <g:set var="cssPath" value="resetPassword"/>
 <g:applyLayout name="form">
 
@@ -12,7 +13,7 @@
   <div class="site-wrapper">
     <div class="cover-container">
       <div class="image-ratchet-health cover-inner-header"></div>
-      <g:form class="form password-form" controller="accounts" method="post" action="confirmResetPassword">
+      <g:form class="form password-form" controller="accounts" method="post" action="confirmResetPassword" novalidate="novalidate">
 
         <div class="form-style-content">
 
@@ -22,7 +23,7 @@
 
           <div class="input-combination">
             <div class="align-left">NEW PASSWORD</div>
-            <input name="newPassword" id="newPassword" type="password" class="input-control" placeholder="Enter Password" required/>
+            <input name="password" id="password" type="password" class="input-control" placeholder="Enter Password"/>
           </div>
 
           <div class="input-combination">

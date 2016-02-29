@@ -8,22 +8,23 @@ var IS_OLD_IE = window.navigator.userAgent.indexOf('MSIE ') > 0;
 
 var PARAMs = require('../constants/Params');
 
-function guessDateFormat (dateStr) {
-    var validFormat = _.filter(PARAMs.DATE_FORMAT,
-        function (format) {
-            return moment(dateStr, format, true).isValid();
-        });
-
-    if (validFormat.length > 0) {
-        return validFormat[0];
-    } else {
-        return null;
-    }
-}
 
 module.exports = {
     isOldIE: function () {
         return IS_OLD_IE;
+    },
+
+    guessDateFormat: function (dateStr) {
+        var validFormat = _.filter(PARAMs.DATE_FORMAT,
+            function (format) {
+                return moment(dateStr, format, true).isValid();
+            });
+
+        if (validFormat.length > 0) {
+            return validFormat[0];
+        } else {
+            return null;
+        }
     },
 
     getWindowSize: function () {
@@ -75,7 +76,7 @@ module.exports = {
 
     toVancouverTime: function (time) {
         if (time) {
-            var validFormat = guessDateFormat(time);
+            var validFormat = this.guessDateFormat(time);
 
             if (validFormat) {
                 return moment.tz(time, validFormat, "America/Vancouver").format('x');
@@ -123,8 +124,8 @@ module.exports = {
     },
 
     durationInDays: function (targetDateStr, compareDateStr) {
-       var targetValidFormat = guessDateFormat(targetDateStr);
-       var compareValidFormat = guessDateFormat(compareDateStr);
+       var targetValidFormat = this.guessDateFormat(targetDateStr);
+       var compareValidFormat = this.guessDateFormat(compareDateStr);
 
         if (!targetValidFormat || !compareValidFormat) {
             return null;
@@ -132,5 +133,30 @@ module.exports = {
             return moment(compareDateStr, compareValidFormat)
                 .diff(moment(targetDateStr, targetValidFormat), 'days');
         }
+    },
+
+    parseSecondsToMinutes: function (seconds) {
+        var minute = Math.floor(seconds / 60),
+            second = seconds - minute * 60;
+
+        var result = '';
+
+        if (minute === 1) {
+            result += '1 minute';
+        } else if (minute > 1) {
+            result += '{0} minutes'.format(minute);
+        }
+
+        if (result) {
+            result += ' ';
+        }
+
+        if (second === 1) {
+            result += '1 second';
+        } else if (second > 1) {
+            result += '{0} seconds'.format(second);
+        }
+
+        return result;
     }
 };

@@ -24,6 +24,7 @@
     <g:else>
         <link rel="stylesheet" href="${assetPath(src: "css/pages/${printSheetPath}", absolute: true)}" media="screen" />
     </g:else>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <g:layoutHead/>
 </head>
 

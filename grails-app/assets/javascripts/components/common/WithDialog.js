@@ -1,6 +1,5 @@
 require('../../libs/dialog/dialog');
-require('velocity');
-require('velocity-ui');
+require('./WithVelocity');
 
 var flight = require('flight');
 var WithOptions = require('./WithOptions');

@@ -25,7 +25,7 @@ function WithForm() {
         }
 
         this.formEl.validate(_.extend({
-            submitHandler: _.bind(this._prepareSubmitForm, this)
+            submitHandler: this.attr.nativeForm ? null : _.bind(this._prepareSubmitForm, this)
         }, options));
 
         _.each(this.__validationFunctions, function (fn) {
@@ -33,6 +33,14 @@ function WithForm() {
         });
 
         DateDefaultValidation.addIn(this.formEl);
+
+        var componentValidations = this.formEl.data('componentRules');
+
+        _.each(componentValidations, function (item) {
+            if (item.element) {
+                item.element.rules('add', item.rules);
+            }
+        });
     };
 
     this.__getValidations = function (validations) {
