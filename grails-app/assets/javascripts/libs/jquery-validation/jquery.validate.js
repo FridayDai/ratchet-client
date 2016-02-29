@@ -388,7 +388,9 @@
 
             // http://jqueryvalidation.org/Validator.form/
             form: function() {
+                this.formChecking = true;
                 this.checkForm();
+                this.formChecking = false;
                 $.extend( this.submitted, this.errorMap );
                 this.invalid = $.extend({}, this.errorMap );
                 if ( !this.valid() ) {

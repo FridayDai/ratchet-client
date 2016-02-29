@@ -35,18 +35,19 @@ class AuthenticationServiceSpec extends Specification {
 
     def "test authenticate with 403 result"() {
         given:
-        service.messageSource = [getMessage: { key, args, locale -> return ("message " + args[0]) }]
+        service.messageSource = [getMessage: { key, args, locale -> return ("message") }]
 
         def jBuilder = new JsonBuilder()
         jBuilder {
             error {
                 errorMessage 20
+                errorID 403
             }
         }
 
         MultipartBody.metaClass.asString = { ->
             return [
-                    status: 403,
+                    status: 401,
                     body  : jBuilder.toString()
             ]
         }
@@ -56,7 +57,8 @@ class AuthenticationServiceSpec extends Specification {
 
         then:
         AccountValidationException e = thrown()
-        e.getMessage() == 'message 20'
+        e.getMessage() == 'message'
+        e.limitSeconds == 20
     }
 
     def "test authenticate with 401 result"() {

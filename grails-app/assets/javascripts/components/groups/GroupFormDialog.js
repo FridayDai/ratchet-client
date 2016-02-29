@@ -53,7 +53,8 @@ function GroupFormDialog() {
             $.each(data.update.treatments, function (index, item) {
                 treatments.push({
                     id: item.id,
-                    text: _.unescape(item.title + ' ' + item.tmpTitle)
+                    text: _.unescape(item.title + ' ' + item.tmpTitle),
+                    locked: item.locked
                 });
             });
 

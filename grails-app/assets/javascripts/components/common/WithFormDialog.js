@@ -51,12 +51,19 @@ function WithFormDialog() {
         }, 0);
     };
 
+    this.savePlaceholder = function () {
+        this.select('inputFieldSelector')
+            .each(function (index, element) {
+                var $element = $(element);
+
+                $element.data('placeholder', $element.attr('placeholder'));
+            });
+    };
+
     this.onInputFieldFocus = function (e) {
         var $element = $(e.target);
 
-        $element
-            .data('placeholder', $element.attr('placeholder'))
-            .attr('placeholder', '');
+        $element.attr('placeholder', '');
     };
 
     this.onInputFieldBlur = function (e) {
@@ -66,6 +73,8 @@ function WithFormDialog() {
     };
 
     this.after('initialize', function () {
+        this.savePlaceholder();
+
         this.on('dialogbeforeclose', this._onDialogBeforeClose);
         this.on('formSuccess', this.closeDialog);
 

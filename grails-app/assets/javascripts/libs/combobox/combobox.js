@@ -62,13 +62,15 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                         break;
                     case keyCode.ENTER:
                         // when menu is open and has focus
+                        this._selectMatched();
                         if ( this.menu.active ) {
                             // #6055 - Opera still allows the keypress to occur
                             // which causes forms to submit
                             suppressKeyPress = true;
                             event.preventDefault();
-                            this.menu.select( event );
+                            this.menu.select(event);
                         }
+                        this.element.select();
                         break;
                     case keyCode.TAB:
                         if ( this.menu.active ) {
@@ -124,6 +126,10 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 }
             },
             input: function( event ) {
+                this.element
+                    .data('saved', null)
+                    .data("id", null);
+
                 if ( suppressInput ) {
                     suppressInput = false;
                     event.preventDefault();
@@ -137,16 +143,49 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
             focus: function() {
                 this.selectedItem = null;
                 this.previous = this._value();
-            },
-            blur: function( event ) {
-                if ( this.cancelBlur ) {
-                    delete this.cancelBlur;
-                    return;
+
+                if (this.menu) {
+                    var ul = this.menu.element;
+
+                    if (ul) {
+
+                        if (ul.children().length === 0) {
+                              ul.addClass('no-children');
+                        }
+
+                        this.menu.refresh();
+
+                        ul.show();
+                        this._resizeMenu();
+                        ul.position($.extend({
+                            of: this.element
+                        }, this.options.position));
+
+                        if (this.options.autoFocus) {
+                            this.menu.next();
+                        }
+
+                        this._trigger("open");
+                    }
                 }
 
-                clearTimeout( this.searching );
-                this.close( event );
-                this._change( event );
+                this.element.select();
+            },
+            blur: function( event ) {
+                this.menu.active = null;
+
+                this._selectMatched();
+
+                if (this.menu.active) {
+                    var item = this.menu.active.data("ui-autocomplete-item");
+                    this.element
+                        .val(item.label)
+                        .data("id", item.value)
+                        .data("saved", item);
+                }
+
+                this.close(event);
+                this.cancelSearch = false;
             }
         });
 
@@ -209,12 +248,12 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 }
 
                 item = ui.item.data( "ui-autocomplete-item" );
-                if ( false !== this._trigger( "focus", event, { item: item } ) ) {
-                    // use value to match what will end up in the input, if it was a key event
-                    if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
-                        this._value( item.value );
-                    }
-                }
+                //if ( false !== this._trigger( "focus", event, { item: item } ) ) {
+                //    // use value to match what will end up in the input, if it was a key event
+                //    if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
+                //        this._value( item.value );
+                //    }
+                //}
 
                 // Announce the value in the liveRegion
                 label = ui.item.attr( "aria-label" ) || item.value;
@@ -310,7 +349,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         if ( !this.options.disabled && content && content.length && !this.cancelSearch ) {
             this._suggest( content );
             this._trigger( "open" );
-        } else if (!this.options.disabled && content && content.length === 0 && !this.cancelSearch ) {
+        } else if (!this.options.disabled && !this.options.hideNoResult && content && content.length === 0 && !this.cancelSearch ) {
             this.__noResult();
             this._trigger( "open" );
         } else {
@@ -331,15 +370,30 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.isNewMenu = true;
         this.menu.refresh();
 
-        // size and position menu
-        ul.show();
-        this._resizeMenu();
-        ul.position( $.extend({
-            of: this.element
-        }, this.options.position ) );
+        ul.removeClass('no-children');
 
-        if ( this.options.autoFocus ) {
-            this.menu.next();
+        this._resizeMenu();
+    },
+
+    _suggest: function( items ) {
+        var ul = this.menu.element.empty();
+        this._renderMenu( ul, items );
+        this.isNewMenu = true;
+        this.menu.refresh();
+
+        ul.removeClass('no-children');
+
+        this._resizeMenu();
+    },
+
+    _selectMatched: function () {
+        var currentVal = this.element.val().toLowerCase();
+        var matched = _.filter(this.menu.element.children(), function (elem) {
+            return $(elem).text().toLowerCase() === currentVal;
+        });
+
+        if (matched.length > 0) {
+            this.menu.active = $(matched[0]);
         }
     }
 });
@@ -367,11 +421,6 @@ $.widget("ui.combobox", {
 
         this.element
             .addClass(classes)
-            .focus(function () {
-                if ($(this).data('uiAutocomplete').options.focusSearch && $(this).val() === '') {
-                    $(this).autocomplete("search");
-                }
-            })
             .autocomplete($.extend({
                 minLength: 0,
                 focusSearch: true,

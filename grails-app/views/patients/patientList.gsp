@@ -87,7 +87,7 @@
             </div>
         </form>
 
-        <form action="/patients" method="post" id="table-form" class="form ui-hidden">
+        <form action="/patients" method="post" id="table-form" class="form ui-hidden new-patient-form">
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
@@ -129,6 +129,20 @@
                        placeholder="john.smith@email.com (Optional)"/>
 
                 <div class='replace-input-div' id="email-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">BIRTHDAY</label>
+                <div class="birthday-groups">
+                    <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group input-convert"
+                           placeholder="Month"/>
+                    <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group input-convert"
+                           placeholder="Day"/>
+                    <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group input-convert"
+                           placeholder="Year"/>
+                </div>
+                <div class='replace-input-div' id="birthday-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
 
@@ -272,6 +286,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Birthday</th>
                         <th>Email Address</th>
                         <th>Phone Number</th>
                         <th>Group</th>

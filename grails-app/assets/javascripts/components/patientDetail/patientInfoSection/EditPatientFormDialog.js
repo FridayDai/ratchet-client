@@ -3,9 +3,16 @@ var WithFormDialog = require('../../common/WithFormDialog');
 var PhoneNumberValidation = require('../../shared/validation/PhoneNumberValidation');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 var PatientIdentifyValidation = require('../../shared/validation/PatientIdentifyValidation');
+var PatientBirthdayValidation = require('../../shared/validation/PatientBirthdayValidation');
+
 var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
 
+var EditPatientBirthdayDayCombobox = require('../../shared/components/PatientBirthdayDayCombobox');
+var EditPatientBirthdayMonthCombobox = require('../../shared/components/PatientBirthdayMonthCombobox');
+var EditPatientBirthdayYearCombobox = require('../../shared/components/PatientBirthdayYearCombobox');
 var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
+
+var Utility = require('../../../utils/Utility');
 
 var FOOTER_PANEL = [
     '<div class="dialog-footer-panel ui-dialog-content ui-widget-content">',
@@ -23,11 +30,17 @@ function EditPatientFormDialog() {
         firstNameFieldSelector: '#firstName',
         lastNameFieldSelector: '#lastName',
         phoneNumberFieldSelector: '#phone',
-        emailFieldSelector: '#email'
+        emailFieldSelector: '#email',
+        birthdayMonthFieldSelector: '#birthdayMonth',
+        birthdayDayFieldSelector: '#birthdayDay',
+        birthdayYearFieldSelector: '#birthdayYear'
     });
 
     this.children({
-        phoneNumberFieldSelector: PatientPhoneInputField
+        phoneNumberFieldSelector: PatientPhoneInputField,
+        birthdayMonthFieldSelector: EditPatientBirthdayMonthCombobox,
+        birthdayDayFieldSelector: EditPatientBirthdayDayCombobox,
+        birthdayYearFieldSelector: EditPatientBirthdayYearCombobox
     });
 
     this.options({
@@ -52,6 +65,17 @@ function EditPatientFormDialog() {
         this.select('lastNameFieldSelector').val(data.lastName);
         this.select('phoneNumberFieldSelector').intlTelInput('setNumber', data.phoneNumber);
         this.select('emailFieldSelector').val(data.email);
+
+        if (data.birthday) {
+            var momentBirthDay = Utility.toBirthdayMoment(data.birthday);
+            var $birthdayMonth = this.select('birthdayMonthFieldSelector');
+            var $birthdayDay = this.select('birthdayDayFieldSelector');
+            var $birthdayYear = this.select('birthdayYearFieldSelector');
+
+            $birthdayMonth.val(momentBirthDay.format('MMM'));
+            $birthdayDay.val(momentBirthDay.date());
+            $birthdayYear.val(momentBirthDay.year());
+        }
 
         this._originalEmail = data.email;
         this._originalIdentify = data.identify;
@@ -87,28 +111,44 @@ function EditPatientFormDialog() {
     };
 
     this.initValidation = function () {
-        return _.defaultsDeep(
+        return [
             PatientIdentifyValidation.get(this.originalIdentifyCheck, this),
             PhoneNumberValidation.get(),
-            PatientEmailValidation.get(this.originalEmailCheck, this)
-        );
+            PatientEmailValidation.get(this.originalEmailCheck, this),
+            PatientBirthdayValidation.get()
+        ];
     };
 
     this.setExtraData = function () {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
+        var $birthdayMonth = this.select('birthdayMonthFieldSelector');
+        var $birthdayDay = this.select('birthdayDayFieldSelector');
+        var $birthdayYear = this.select('birthdayYearFieldSelector');
 
-        return {
+        var result = {
             patientId: this.patientId,
             id: this.select('identifyFieldSelector').val(),
             phoneNumber: phoneNumber,
             clientId: this.clientId
         };
+
+        if ($birthdayMonth.val()) {
+            result.birthday =
+                Utility.toBirthdayFromSeparate(
+                    $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
+                );
+        }
+
+        return result;
     };
 
     this.onEditPatientSuccess = function () {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
+        var $birthdayMonth = this.select('birthdayMonthFieldSelector');
+        var $birthdayDay = this.select('birthdayDayFieldSelector');
+        var $birthdayYear = this.select('birthdayYearFieldSelector');
 
         this.trigger('updatePatientSuccess', {
             patientId: this.patientId,
@@ -118,7 +158,11 @@ function EditPatientFormDialog() {
             email: this.select('emailFieldSelector').val(),
             number: rawNumber,
             phoneNumber: phoneNumber,
-            clientId: this.clientId
+            clientId: this.clientId,
+            birthday: $birthdayMonth.val() ?
+                Utility.parseBirthdayFromSeparate(
+                    $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
+                ) : null
         });
     };
 

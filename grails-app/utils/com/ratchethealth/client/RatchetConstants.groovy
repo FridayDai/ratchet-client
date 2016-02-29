@@ -54,6 +54,9 @@ class RatchetConstants {
     //Task type that has view result.
     public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 1000]
 
+    //Task type mixedResult(score and view result).
+    public static Integer[] TOOL_TYPE_MiXED_RESULT = [11, 12]
+
     //For pain neck and pain back.
     public static final String[] PAIN_FREQUENCY = [
             "Never",

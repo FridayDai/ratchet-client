@@ -6,12 +6,17 @@ var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmatio
 var WithEmergencyContactFieldRequired = require('../shared/functional/WithEmergencyContactFieldRequired');
 var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
 var PatientEmailValidation = require('../shared/validation/PatientEmailValidation');
+var ComboboxInputValidation = require('../shared/validation/ComboboxInputValidation');
+var PatientBirthdayValidation = require('../shared/validation/PatientBirthdayValidation');
 
 var NewPatientPhoneInputField = require('../shared/components/PatientPhoneInputField');
 var NewPatientRelationshipCombobox = require('../shared/components/PatientRelationshipCombobox');
 var NewPatientGroupCombobox = require('../shared/components/PatientGroupCombobox');
 var NewPatientProviderCombobox = require('../shared/components/PatientProviderCombobox');
 var NewPatientTreatmentCombobox = require('../shared/components/PatientTreatmentCombobox');
+var NewPatientBirthdayDayCombobox = require('../shared/components/PatientBirthdayDayCombobox');
+var NewPatientBirthdayMonthCombobox = require('../shared/components/PatientBirthdayMonthCombobox');
+var NewPatientBirthdayYearCombobox = require('../shared/components/PatientBirthdayYearCombobox');
 var NewPatientSurgeryDate = require('../shared/components/PatientSurgeryDate');
 
 function NewPatientFormDialog() {
@@ -30,6 +35,9 @@ function NewPatientFormDialog() {
         providerFieldSelector: '#selectStaffs',
         treatmentFieldSelector: '#selectTreatment',
         surgeryTimeFieldSelector: '#surgeryTime',
+        birthdayMonthFieldSelector: '#birthdayMonth',
+        birthdayDayFieldSelector: '#birthdayDay',
+        birthdayYearFieldSelector: '#birthdayYear',
 
         basicEditButtonSelector: 'a.form-group-edit',
         emergencyContactRelationshipFieldSelector: '#relationship',
@@ -41,6 +49,7 @@ function NewPatientFormDialog() {
         lastNameStaticSelector: '#lastName-static',
         phoneNumberStaticSelector: '#phoneNumber-static',
         emailStaticSelector: '#email-static',
+        birthdayStaticSelector: '#birthday-static',
 
         surgeryDateFormGroupSelector: '#div-surgery-time',
 
@@ -56,6 +65,9 @@ function NewPatientFormDialog() {
 
     this.children({
         phoneNumberFieldSelector: NewPatientPhoneInputField,
+        birthdayMonthFieldSelector: NewPatientBirthdayMonthCombobox,
+        birthdayDayFieldSelector: NewPatientBirthdayDayCombobox,
+        birthdayYearFieldSelector: NewPatientBirthdayYearCombobox,
         emergencyContactRelationshipFieldSelector: {
             child: NewPatientRelationshipCombobox,
             attributes: {
@@ -103,7 +115,12 @@ function NewPatientFormDialog() {
     });
 
     this.initValidation = function () {
-        return _.defaultsDeep(PhoneNumberValidation.get(), PatientEmailValidation.get());
+        return [
+            PhoneNumberValidation.get(),
+            PatientEmailValidation.get(),
+            PatientBirthdayValidation.get(),
+            ComboboxInputValidation.get()
+        ];
     };
 
     this.onShow = function (e, data) {
@@ -152,21 +169,34 @@ function NewPatientFormDialog() {
             }
         }, this);
 
-        var $phoneNumberField = this.select('phoneNumberFieldSelector');
+        var complexFields = [
+            'phoneNumberFieldSelector',
+            'birthdayMonthFieldSelector',
+            'birthdayDayFieldSelector',
+            'birthdayYearFieldSelector'
+        ];
 
-        if (!isExisting) {
-            $phoneNumberField.removeAttr('disabled');
-            $phoneNumberField.parent().show();
-        } else {
-            $phoneNumberField.attr('disabled', 'disabled');
-            $phoneNumberField.parent().hide();
-        }
+        _.each(complexFields, function (selector) {
+            var $selector = this.select(selector);
+
+            if (!isExisting) {
+                $selector
+                    .removeAttr('disabled')
+                    .parent()
+                    .show();
+            } else {
+                $selector.attr('disabled', 'disabled')
+                    .parent()
+                    .hide();
+            }
+        }, this);
 
         var baseStatics = [
             'firstNameStaticSelector',
             'lastNameStaticSelector',
             'phoneNumberStaticSelector',
-            'emailStaticSelector'
+            'emailStaticSelector',
+            'birthdayStaticSelector'
         ];
 
         _.each(baseStatics, function (selector) {
@@ -190,18 +220,44 @@ function NewPatientFormDialog() {
         var $static = $editButton.prev();
         var $inputField = $static.prev();
 
-        if ($inputField.is(':visible')) {
-            return;
+        if ($inputField.is('.birthday-groups')) {
+            var $birthdayMonth = this.select('birthdayMonthFieldSelector');
+            var $birthdayDay = this.select('birthdayDayFieldSelector');
+            var $birthdayYear = this.select('birthdayYearFieldSelector');
+            var $birthdayStatic = this.select('birthdayStaticSelector');
+
+            if ($birthdayMonth.is(':visible')) {
+                return;
+            }
+
+            $static.hide();
+            $inputField.find('.ui-combobox').show();
+
+            $birthdayMonth.removeAttr('disabled');
+            $birthdayDay.removeAttr('disabled');
+            $birthdayYear.removeAttr('disabled');
+
+            var momentBirthDay = Utility.toBirthdayMoment($birthdayStatic.text());
+
+            if (momentBirthDay) {
+                $birthdayMonth.val(momentBirthDay.format('MMM'));
+                $birthdayDay.val(momentBirthDay.date());
+                $birthdayYear.val(momentBirthDay.year());
+            }
+        } else {
+            if ($inputField.is(':visible')) {
+                return;
+            }
+
+            $static.hide();
+            $inputField.show();
+
+            if (!$inputField.is('input')) {
+                $inputField = $inputField.find('input');
+            }
+
+            $inputField.removeAttr('disabled').val($static.text());
         }
-
-        $static.hide();
-        $inputField.show();
-
-        if (!$inputField.is('input')) {
-            $inputField = $inputField.find('input');
-        }
-
-        $inputField.removeAttr('disabled').val($static.text());
     };
 
     this.setBasicInfo = function (data) {
@@ -224,6 +280,8 @@ function NewPatientFormDialog() {
         }
 
         this.select('phoneNumberStaticSelector').text(phoneNumber);
+
+        this.select('birthdayStaticSelector').text(Utility.parseBirthday(data.birthday));
     };
 
     this.onClose = function () {
@@ -233,21 +291,25 @@ function NewPatientFormDialog() {
     };
 
     this.setExtraData = function () {
-        var $phoneNumber = this.select('phoneNumberFieldSelector');
-        var $phoneNumberStatic = this.select('phoneNumberStaticSelector');
-        var phoneNumber = $phoneNumber.val() || $phoneNumberStatic.text();
-        var $firstNameStatic = this.select('firstNameStaticSelector');
-        var $lastNameStatic = this.select('lastNameStaticSelector');
-        var $EmailStatic = this.select('emailStaticSelector');
-        var $relationship = this.select('emergencyContactRelationshipFieldSelector');
-        var relationshipId = $relationship.data('id');
-        var $group = this.select('groupFieldSelector');
-        var groupId = $group.data('id');
-        var $provider = this.select('providerFieldSelector');
-        var providerId = $provider.data('id');
-        var $treatment = this.select('treatmentFieldSelector');
-        var treatmentId = $treatment.data('id');
-        var $surgeryTime = this.select('surgeryTimeFieldSelector');
+        var $phoneNumber = this.select('phoneNumberFieldSelector'),
+            $phoneNumberStatic = this.select('phoneNumberStaticSelector'),
+            phoneNumber = $phoneNumber.val() || $phoneNumberStatic.text(),
+            $firstNameStatic = this.select('firstNameStaticSelector'),
+            $lastNameStatic = this.select('lastNameStaticSelector'),
+            $EmailStatic = this.select('emailStaticSelector'),
+            $birthdayStatic = this.select('birthdayStaticSelector'),
+            $relationship = this.select('emergencyContactRelationshipFieldSelector'),
+            relationshipId = $relationship.data('id'),
+            $group = this.select('groupFieldSelector'),
+            groupId = $group.data('id'),
+            $provider = this.select('providerFieldSelector'),
+            providerId = $provider.data('id'),
+            $treatment = this.select('treatmentFieldSelector'),
+            treatmentId = $treatment.data('id'),
+            $surgeryTime = this.select('surgeryTimeFieldSelector'),
+            $birthdayMonth = this.select('birthdayMonthFieldSelector'),
+            $birthdayDay = this.select('birthdayDayFieldSelector'),
+            $birthdayYear = this.select('birthdayYearFieldSelector');
 
         var result = {
             patientId: this.select('patientIdStaticSelector').text(),
@@ -271,6 +333,17 @@ function NewPatientFormDialog() {
             result.email = $EmailStatic.text();
         }
 
+        if ($birthdayStatic.is(':visible')) {
+            result.birthday = Utility.toBirthday($birthdayStatic.text());
+        }
+
+        if ($birthdayMonth.val()) {
+            result.birthday =
+                Utility.toBirthdayFromSeparate(
+                    $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
+                );
+        }
+
         if ($surgeryTime.is(':visible')) {
             result.surgeryTime = Utility.toVancouverTime($surgeryTime.val());
         }
@@ -279,7 +352,11 @@ function NewPatientFormDialog() {
     };
 
     this.onAddPatientSuccess = function (e, data) {
-        window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
+        this.trigger('refreshPatientsTable', {
+            callback: function () {
+                window.location.href = URLs.PAGE_PATIENT_DETAIL.format(data.id);
+            }
+        });
     };
 
     this.onEmergencyContactFirstNameInput = function () {

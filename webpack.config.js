@@ -15,7 +15,9 @@ module.exports = {
         accountDetail: "./flightPages/accountDetail.js",
         profile: "./flightPages/profile.js",
         reportOutcome: "./flightPages/report/outcome.js",
-        reportTaskCompletion: "./flightPages/report/taskCompletion.js"
+        reportTaskCompletion: "./flightPages/report/taskCompletion.js",
+        activateAccount: './flightPages/activateAccount.js',
+        login: './flightPages/login.js'
     },
     output: {
         path: absoluteContext,
@@ -33,6 +35,7 @@ module.exports = {
             "jquery-ui-dialog": "bower_components/jquery-ui/ui/dialog.js",
             "jquery-ui-datepicker": "bower_components/jquery-ui/ui/datepicker.js",
             "jquery-ui-autocomplete": "bower_components/jquery-ui/ui/autocomplete.js",
+            "jquery-ui-tooltip": "bower_components/jquery-ui/ui/tooltip.js",
             "jquery.ui.widget": "bower_components/jquery-ui/ui/widget.js",
             "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
             "velocity": "bower_components/velocity/velocity.js",
@@ -48,7 +51,8 @@ module.exports = {
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
             select2: "bower_components/select2/select2.js",
             "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
-            d3: "node_modules/d3/d3.js"
+            d3: "node_modules/d3/d3.js",
+            tooltipster: "bower_components/tooltipster/js/jquery.tooltipster.js"
         }
     },
     module: {

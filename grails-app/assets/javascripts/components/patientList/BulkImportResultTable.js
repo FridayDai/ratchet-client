@@ -1,6 +1,7 @@
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var moment = require('moment');
+var Utility = require('../../utils/Utility');
 
 function BulkImportResultTable() {
     this.options({
@@ -30,29 +31,40 @@ function BulkImportResultTable() {
             }, {
                 "targets": 2,
                 "render": function (data, type, full) {
+                    var birthday = data === undefined ? full.birthday : data;
+                    if (birthday) {
+                        return Utility.parseBirthday(birthday);
+                    } else {
+                        return '';
+                    }
+                },
+                width: "120px"
+            }, {
+                "targets": 3,
+                "render": function (data, type, full) {
                     return data === undefined ? full.email : data;
                 },
                 width: "260px"
             }, {
-                "targets": 3,
+                "targets": 4,
                 "render": function (data, type, full) {
                     return data === undefined ? full.phone : data;
                 },
                 width: "120px"
             }, {
-                "targets": 4,
+                "targets": 5,
                 "render": function (data, type, full) {
                     return data === undefined ? full.groupName : data;
                 },
                 width: "200px"
             }, {
-                "targets": 5,
+                "targets": 6,
                 "render": function (data, type, full) {
                     return data === undefined ? full.providerName : data;
                 },
                 width: "150px"
             }, {
-                "targets": 6,
+                "targets": 7,
                 "render": function (data, type, full) {
                     var name = data === undefined ? full.treatmentName : data;
                     var hasDuplicates = data === undefined ? full.hasDuplicates : data;
@@ -64,7 +76,7 @@ function BulkImportResultTable() {
                 },
                 width: "150px"
             }, {
-                "targets": 7,
+                "targets": 8,
                 "render": function (data, type, full) {
                     var surgeryTime = data === undefined ? full.surgeryTime : data;
                     if (surgeryTime) {
@@ -75,7 +87,7 @@ function BulkImportResultTable() {
                 },
                 width: "170px"
             }, {
-                "targets": 8,
+                "targets": 9,
                 "render": function (data, type, full) {
                     var emergencyName;
                     emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') +
@@ -84,13 +96,13 @@ function BulkImportResultTable() {
                 },
                 width: "180px"
             }, {
-                "targets": 9,
+                "targets": 10,
                 "render": function (data, type, full) {
                     return data === undefined ? full.relationshipName : data;
                 },
                 width: "100px"
             }, {
-                "targets": 10,
+                "targets": 11,
                 "render": function (data, type, full) {
                     return data === undefined ? full.emergencyEmail : data;
                 },

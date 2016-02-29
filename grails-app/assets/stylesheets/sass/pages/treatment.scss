@@ -525,3 +525,23 @@
         }
     }
 }
+
+.patient-form {
+    .intl-tel-input {
+        margin-top: 3px;
+    }
+
+    .ui-combobox {
+        .birthday-month {
+            min-width: 50px;
+        }
+
+        .birthday-day {
+            min-width: 35px;
+        }
+
+        .birthday-year {
+            min-width: 60px;
+        }
+    }
+}

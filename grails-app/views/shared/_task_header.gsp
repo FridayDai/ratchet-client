@@ -1,4 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants; com.ratchethealth.client.RatchetConstants" %>
+<%@ page import="com.ratchethealth.client.Utils" %>
 <div class="sticky-header">
     <div role="banner" class="header">
         <div class="toolbar">
@@ -16,12 +17,15 @@
         <div class="sub-info-panel">
             <g:if test="${!download}">
                 <div class="download"><g:link uri="/task/downloadPDF.pdf"
-                                              params="[patientId: patientId, medicalRecordId: medicalRecordId, taskId: taskId]">↓Download PDF</g:link></div>
+                                              params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></div>
             </g:if>
             <div class="patient-info">
                 <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
                 |
                 <span class="id">ID: ${Task.patientId}</span>
+                <g:if test="${Task?.birthday}">
+                    <span class="birthday"><i class="fa fa-birthday-cake"></i>${Utils.formatBirthday(Task?.birthday)}</span>
+                </g:if>
             </div>
 
             <div class="questionnaire-info">

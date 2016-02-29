@@ -91,6 +91,15 @@ function WithCombobox() {
             if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
                 this.trigger(this.attr.selectEvent, data);
             }
+
+            var validator = this.$node.closest('form').data('validator');
+
+            if (validator) {
+                var me = this;
+                setTimeout(function () {
+                    validator.element(me.$node);
+                }, 0);
+            }
         }
     };
 
@@ -101,6 +110,9 @@ function WithCombobox() {
     this.setDisplayItem = function (item) {
         this.__previousVal = item.value;
         this.$node.val(item.label);
+        this.$node
+            .data('saved', item)
+            .data('id', item.value);
     };
 
     this.__onReset = function () {

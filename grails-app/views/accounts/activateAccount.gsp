@@ -1,5 +1,6 @@
-<g:set var="scriptPath" value="accountsBundle"/>
 <g:set var="cssPath" value="activateAccount"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/activateAccount.bundle.js"/>
 <g:applyLayout name="form">
     <html>
     <head>
@@ -29,7 +30,7 @@
                         <div class="input-combination">
                             <div class="align-left">NEW PASSWORD</div>
                             <input name="password" type="password" id="password" class="input-control"
-                                   placeholder="Enter Password" required/>
+                                   placeholder="Enter Password"/>
                         </div>
 
                         <div class="input-combination">

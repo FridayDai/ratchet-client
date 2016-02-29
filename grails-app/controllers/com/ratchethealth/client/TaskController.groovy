@@ -81,12 +81,18 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
+        def lastName = params.lastName
+        def toolName = params.toolName
+        def birthday = params.birthday
+        if (birthday == 'null') {
+            birthday = null
+        }
 
         def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render( filename: "${result.patientId.replaceAll("\\s+","")}_${taskId}.pdf",
+        render( filename: "${lastName}_${result.patientId.replaceAll("\\s+","")}_${birthday?(birthday+'_'):''}${toolName.replaceAll(" ","_")}_${taskId}.pdf",
                 view: view,
                 model: [Task: result, mixedResult: mixedResult, 'download' : true],
                 marginLeft: 2,

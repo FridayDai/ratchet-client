@@ -1,4 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.Utils" %>
 
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/patientDetail.bundle.js"/>
@@ -29,6 +30,9 @@
                 <div class="info number clear">
                     <div class="id-info inline">
                         ID: <span class="identify" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                    </div>
+                    <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
+                        <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
                     </div>
                     <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
                     <div class="email patient-email inline" id="patientEmail"
@@ -144,6 +148,19 @@
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
         </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">BIRTHDAY</label>
+            <div class="birthday-groups">
+                <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group"
+                       placeholder="Month"/>
+                <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group"
+                       placeholder="Day"/>
+                <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group"
+                       placeholder="Year"/>
+            </div>
+        </div>
+
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </form>
 
