@@ -9,7 +9,7 @@
 
         <div class="number-id">
             <label>ID:</label>
-            <span class="number-font">${task?.id}</span>
+            <span class="id number-font">${task?.id}</span>
         </div>
 
     </div>

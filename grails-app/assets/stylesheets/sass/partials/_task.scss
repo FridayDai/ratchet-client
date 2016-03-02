@@ -99,7 +99,6 @@
     margin-bottom: 10px;
     border-top: 5px $base-color-mid-grey solid;
     box-shadow: 0 0 0.5em $base-font-color;
-    overflow: hidden;
 
     h5 {
         color: $base-color-light-black;
@@ -181,6 +180,7 @@
     color: $base-font-grey-dark;
     font-size: 16px;
     box-shadow: 0 0 0.5em $base-font-color;
+    overflow: hidden;
 
     .item-title {
         padding: 6px 0;
@@ -439,7 +439,7 @@
     height: 100px;
     overflow: hidden;
     position: absolute;
-    top: -6px;
+    top: -9px;
     right: -6px;
 
     .ribbon {
