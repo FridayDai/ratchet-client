@@ -92,13 +92,13 @@
 
 // box item for task
 .box-item {
-    position: relative;
     display: inline-block;
     width: 314px;
     margin-right: 10px;
     margin-bottom: 10px;
-    border: 2px $base-color-mid-grey solid;
-    vertical-align: middle;
+    border-top: 5px $base-color-mid-grey solid;
+    box-shadow: 0 0 0.5em $base-font-color;
+    overflow: hidden;
 
     h5 {
         color: $base-color-light-black;
@@ -157,14 +157,6 @@
                 content: 'COMPLETED';
             }
         }
-
-//        .box-item-content {
-//            .complete-sent-time {
-//                height: 25px;
-//                padding: 0;
-//                margin-top: 52px;
-//            }
-//        }
     }
 
     &.expired {
@@ -183,131 +175,72 @@
 }
 
 .box-item-header {
-    height: 20px;
-    padding-bottom: 7px;
-    background: $base-color-mid-grey;
-
-    &:before {
-        display: inline-block;
-        padding: 2px 8px 0;
-        content: '\f3c7';
-        color: $base-color-white;
-        font-weight: lighter;
-        font-size: 22px;
-        font-family: ionicons;
-    }
-
-    .complete-time {
-        padding: 6px 0;
-        margin-right: -15px;
-        color: $base-color-medium-black;
-        font-weight: 700;
-        font-size: 12px;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-    }
-
-}
-
-.box-item-content {
-    position: relative;
-    height: 193px;
-    padding: 10px;
-    color: $base-a-default-color;
-
-    .complete-score {
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        padding: 2px;
-        background: $base-logo-color;
-    }
-
-    .item-fist {
-        height: 20px;
-    }
+    height: 75px;
+    padding: 6px 12px;
+    color: $base-font-grey-dark;
+    font-size: 16px;
+    box-shadow: 0 0 0.5em $base-font-color;
 
     .item-title {
-        height: 50px;
-        padding-top: 4px;
-        font-weight: 400;
-        font-size: 13pt;
+        padding: 6px 0;
     }
 
-    .score {
-        padding: 0 8px;
-        color: $base-color-white;
-        font-size: 9pt;
+    .number-id {
+        display: inline-block;
+        padding-left: 14px;
+        font-size: 15px;
+        color: $base-light-grey-color;
+    }
 
-        &:before {
-            display: inline-block;
-            padding: 0 2px;
-            content: '\f42c';
-            font-weight: lighter;
-            font-size: 18px;
-            font-family: ionicons;
-            vertical-align: sub;
-        }
+    .task-date {
+        font-weight: 600;
+        color: $base-color-medium-black;
     }
 
     .label-space {
-        padding-right: 10px;
+        padding-right: 4px;
+    }
+}
+
+.box-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -ms-flex-wrap: wrap;
+
+    height: 190px;
+    padding-left: 10px;
+    background-color: $base-color-archived-bg;
+    box-shadow: 0 0 0.5em $base-font-color;
+
+    .sub-item {
+        display: inline-block;
+        padding-right: 30px;
+        text-align: center;
     }
 
-    .status-background {
-        padding: 2px 4px;
-        color: $base-color-white;
+    .score-number {
+        display: inline-block;
+        padding-bottom: 2px;
+        font-size: 19px;
+        color: $base-color-green;
     }
 
-    .item-datetime {
-        height: 28px;
-        padding: 10px 0;
-        font-weight: 400;
-    }
-
-    .relative-sent-time {
-        font-size: 11pt;
-    }
-
-    .task-email {
-        font-size: 11pt;
-    }
-
-    .send-time {
-        height: 25px;
-        padding: 0;
-        margin-top: 52px;
-    }
-
-    button {
-        padding: 5px 8px;
-
-        &:hover,
-        &:focus {
-            padding: 5px 8px;
-        }
-    }
-
-    .item-context {
-        height: 72px;
-        color: $base-font-grey-dark;
+    .score-label {
+        text-transform: capitalize;
+        color: $base-color-medium-black;
         font-size: 14px;
-
-        p {
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-        }
+        font-weight: 600;
     }
-
 }
 
 .box-item-footer {
-    padding: 4px;
+    padding: 7px 12px;
     background: $base-color-mid-grey;
     color: $base-color-white;
     position: relative;
@@ -347,95 +280,82 @@
         }
     }
 
-    .begin-task,.delete {
+    .operation {
         position: absolute;
-        top: 5px;
-        right: 28px;
+        top: 0;
+        right: 0;
+        width: 42px;
+        height: 100%;
+        border-left: 1px solid $base-color-white;
         font-size: 0;
         color: $base-color-white-grey-dark;
         cursor: pointer;
+        text-align: center;
         z-index: 10;
 
         &:before {
-            content: '\f12c';
+            position: relative;
+            top: 7px;
+            content: '';
             font-family: ionicons;
-            font-size: 16px;
+            font-size: 18px;
         }
+
         &:hover {
             color: $base-color-white;
         }
-        &:hover+.delete-tip {
-            display: block;
-        }
-        &:hover+.begin-tip {
+
+        &:hover+.tip {
             display: block;
         }
     }
 
     .begin-task {
+        right: 42px;
         text-decoration: none;
+
+        &:before {
+            content: '\f12c';
+        }
     }
 
     .delete {
-        right: 8px;
-
         &:before {
             content: '\f4c4';
         }
     }
 
-    .begin-tip,.delete-tip {
+    .tip {
+        display: none;
         position: absolute;
+        right: 1px;
+        top: -23px;
+        height: 20px;
+        line-height: 20px;
         background: $base-color-black;
         text-align: center;
         font-size: 0;
-        height: 20px;
-        line-height: 20px;
-        right: -5px;
-        top: -17px;
-        display: none;
 
         &:after {
             content: '\f104';
             font-family: ionicons;
             font-size: 12px;
             position: absolute;
-            left: 50%;
+            left: 42%;
             top: 12px;
             color: $base-color-black;
         }
 
         span {
+            display: inline-block;
+            min-width: 25px;
             font-size: 12px;
             padding: 0 4px;
         }
     }
 
     .begin-tip {
-        right: 18px;
-    }
-
-    .footer-bottom {
-        display: table;
-        height: 60px;
-        width: 104%;
-        margin-left: -6px;
-        text-align: center;
-    }
-
-    .item-notify {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .btn-notify {
-        border: 1px  $base-color-bg-head solid;
-        color: $base-color-bg-head;
-
-        &:hover, &:focus {
-            background-color: $base-color-bg-head;
-            color: $base-color-orange;
-        }
+        right: 49px;
     }
 
     .complete-score {
@@ -468,17 +388,6 @@
             @include auto-padding(5)
         }
     }
-
-    .score-number {
-        display: inline-block;
-        padding-bottom: 2px;
-        font-size: 19px;
-    }
-
-    .score-label {
-        text-transform: capitalize;
-    }
-
 }
 
 // box item archived
@@ -568,17 +477,6 @@
     }
 }
 
-.expired {
-    .box-item-footer {
-        .begin-task {
-            right: 8px;
-        }
-
-        .begin-tip {
-            right: -1px;
-        }
-    }
-}
 
 .fill-questionnaire-dialog {
     text-align: center;
