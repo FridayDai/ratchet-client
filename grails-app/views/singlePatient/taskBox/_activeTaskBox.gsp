@@ -2,29 +2,28 @@
 <div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
-    <g:render template="/singlePatient/taskBox/taskBoxContent"/>
+    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
+
+    <div class="box-item-content">
+        <div class="sub-item">
+            To be completed
+        </div>
+    </div>
 
     <div class="box-item-footer">
 
-        <span class="task-date">
-            <g:formatDate date="${task?.sendTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                          format="MMM dd, yyyy"/>
-        </span>
-
         <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
-           class="begin-task" target="_blank"></a>
+           class="operation begin-task" target="_blank"></a>
 
-        <div class="begin-tip">
-            <span>Begin</span>
+        <div class="tip begin-tip">
+            <span>Fill</span>
         </div>
 
-        <span class="delete"></span>
+        <span class="operation delete"></span>
 
-        <div class="delete-tip">
+        <div class="tip delete-tip">
             <span>Delete</span>
         </div>
-
-        <div class="footer-bottom"></div>
 
     </div>
 
