@@ -339,45 +339,4 @@
         <text transform="matrix(1 0 0 1 245.7103 95.9969)" fill="#0095E0" font-family="'Lato-Heavy'" font-size="36" letter-spacing="1">R</text>
     </g>
 
-    <g:if test="${!taskResult['20']}">
-        <g class="indication">
-            <g>
-                <text id="XMLID_268_" transform="matrix(1 0 0 1 259.7288 163.6014)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Shoulder</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="257.678" y1="161.889" x2="223.366" y2="184.536"/>
-            </g>
-            <g>
-                <text id="XMLID_267_" transform="matrix(1 0 0 1 255.4046 244.7455)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Upperarm</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="259.728" y1="252.102" x2="251.397" y2="260.794"/>
-            </g>
-            <g>
-                <text id="XMLID_266_" transform="matrix(1 0 0 1 249.8421 476.3453)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Hand</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="271.412" y1="466.069" x2="267.405" y2="446.298"/>
-            </g>
-            <g>
-                <text id="XMLID_265_" transform="matrix(1 0 0 1 261.8802 299.3451)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Forearm</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="269.408" y1="306.766" x2="259.453" y2="318.189"/>
-            </g>
-            <g>
-                <text id="XMLID_264_" transform="matrix(1 0 0 1 3.1609 255.6981)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Upperarm</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="69.574" y1="259.198" x2="85.604" y2="271.747"/>
-            </g>
-            <g>
-                <text id="XMLID_263_" transform="matrix(1 0 0 1 41.4085 476.3453)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Hand</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="70.269" y1="466.069" x2="74.276" y2="446.298"/>
-            </g>
-            <g>
-                <text id="XMLID_262_" transform="matrix(1 0 0 1 3.1614 318.8844)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Forearm</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="63.622" y1="322.484" x2="74.089" y2="337.402"/>
-            </g>
-            <g>
-                <text id="XMLID_261_" transform="matrix(1 0 0 1 20.223 156.0863)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Shoulder</text>
-                <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="95.165" y1="156.858" x2="125.715" y2="177.02"/>
-            </g>
-            <text id="XMLID_269_" transform="matrix(1 0 0 1 157.0843 59.9481)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Neck</text>
-            <line fill="none" stroke="#333333" stroke-miterlimit="10" x1="170.037" y1="63.472" x2="170.037" y2="120.903"/>
-
-        </g>
-    </g:if>
-
-
 </svg>
