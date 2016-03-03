@@ -1,5 +1,5 @@
 <%@ page import="grails.converters.JSON; com.ratchethealth.client.RatchetConstants" %>
-<g:set var="mixedResult" value="${JSON.parse(task?.mixedResult)}"/>
+<g:set var="mixedResult" value="${task?.mixedResult ? JSON.parse(task?.mixedResult) : [:]}"/>
 
 <g:if test="${RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_PAIN_CHART_REFERENCE_NECK}">
     <span class="sub-item">
