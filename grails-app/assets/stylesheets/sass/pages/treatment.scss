@@ -89,9 +89,14 @@
     text-align: center;
 
     .form-group {
-        width: 70%;
+        width: 71%;
     }
 }
+
+.treatment-time-form.ui-dialog-content {
+    overflow-y: hidden;
+}
+
 
 .surgery {
     position: relative;
