@@ -18,25 +18,34 @@
                 <g:render template="/singlePatient/taskBox/shared/mixedScore" model="['task': task]"/>
             </g:if>
 
-            <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
+            <g:else>
+                <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
 
-                <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                    <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
+                    <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
+                        <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
+                            <span class="sub-item">
+                                <div class="score-number">${score[1]}</div>
+
+                                <div class="score-label">${score[0]}</div>
+                            </span>
+                        </g:multipleScore>
+                    </g:if>
+                    <g:else>
                         <span class="sub-item">
-                            <div class="score-number">${score[1]}</div>
-
-                            <div class="score-label">${score[0]}</div>
+                            <div class="score-number">${task?.score}</div>
+                            <div class="score-label">Total Result</div>
                         </span>
-                    </g:multipleScore>
-                </g:if>
-                <g:else>
-                    <span class="sub-item">
-                        <label class="score-number">${task?.score}</label><br>
-                        <label>Total Result</label>
-                    </span>
-                </g:else>
+                    </g:else>
 
-            </g:if>
+                </g:if>
+
+                <g:else>
+                    <div class="sub-item">
+                        Completed
+                    </div>
+                </g:else>
+            </g:else>
+
         </g:if>
 
         <g:else>
