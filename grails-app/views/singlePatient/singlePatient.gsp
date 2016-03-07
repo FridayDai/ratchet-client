@@ -304,7 +304,7 @@
         <div class="form-group email-group">
             <input type="hidden" autofocus/>
             <label class="lbl-group">DATE</label>
-            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker" placeholder="Jan 31, 2015" required>
+            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker" placeholder="Jan 31, 2015" autocomplete="off" required>
         </div>
     </form>
 
