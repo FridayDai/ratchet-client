@@ -60,7 +60,7 @@ module.exports = {
 
     toBirthdayFromSeparate: function (str) {
         if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('D-MMM-YY');
+            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
         } else {
             return '';
         }
@@ -68,7 +68,7 @@ module.exports = {
 
     toBirthday: function (str) {
         if (str) {
-            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('D-MMM-YY');
+            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
         } else {
             return '';
         }
