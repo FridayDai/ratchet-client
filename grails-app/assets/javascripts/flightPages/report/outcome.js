@@ -4,7 +4,7 @@ var flight = require('flight');
 var WithPage = require('../../components/common/WithPage');
 
 var ToolbarPanel = require('../../components/report/outcome/ToolbarPanel');
-var ChartPanel = require('../../components/shared/components/TreatmentScoreChart');
+var ChartPanel = require('../../components/report/outcome/TreatmentScoreChart');
 
 function OverviewPage() {
     this.attributes({

@@ -2,12 +2,15 @@ var flight = require('flight');
 var d3 = require('d3');
 
 var PARAMs = require('../../../constants/Params');
+var Utility = require('../../../utils/Utility');
 
 var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{0}</span>';
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
 var UNSUPPORTED = 'UNSUPPORTED';
 
 var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
+
+var DATE_FORMAT = 'MMM D, YYYY';
 
 function roundedRect(opts) {
     return 'M' + (opts.x + opts.radius) + ',' + opts.y +
@@ -22,7 +25,7 @@ function roundedRect(opts) {
         'z';
 }
 
-function ToolbarPanel() {
+function ScoreChart() {
     this.attributes({
         chartGroupSelector: '.chart-group',
         chartSelector: '.chart',
@@ -43,7 +46,13 @@ function ToolbarPanel() {
 
     this.scales = {
         x: null,
-        y: null
+        y: null,
+        meta: {
+            xRange: [],
+            maxY: 0,
+            type: [],
+            dataGroup: {}
+        }
     };
 
     this.setXScale = function (data) {
@@ -52,31 +61,12 @@ function ToolbarPanel() {
         }
 
         var newDomain = data.slice();
-        var first = _.first(data);
+        newDomain.unshift(0);
+        newDomain.push(1);
 
-        if (first < 0) {
-            newDomain.unshift(first * 2);
-        } else {
-            newDomain.unshift(-50);
-        }
-
-        newDomain.push(_.last(data) + 200);
-
-        // 5 fixed points: [1st, -45, 0, 30, ..., last]
-        var domainSize = newDomain.length,
-            regularSize = domainSize - 5,
-            rangArray = [0, 100, 200, 275],
-            regularWidth = (this.chartSize.chartWidth - 350) / regularSize;
-
-        for (var i = 0; i < regularSize; i++) {
-            rangArray.push(_.last(rangArray) + regularWidth);
-        }
-
-        rangArray.push(this.chartSize.chartWidth);
-
-        this.scales.x = d3.scale.linear()
+        this.scales.x = d3.scale.ordinal()
             .domain(newDomain)
-            .range(rangArray);
+            .rangePoints([0, this.chartSize.chartWidth]);
 
         return this.scales.x;
     };
@@ -100,28 +90,8 @@ function ToolbarPanel() {
             .scale(xScale)
             .orient('bottom')
             .tickValues(xScaleDomain)
-            .tickFormat(function (d) {
-                var tick = '';
-
-                switch (d) {
-                    case xScaleDomain[1]:
-                        tick = 'Baseline';
-                        break;
-
-                    case 0:
-                        tick = 'Surgery Date';
-                        break;
-
-                    case _.first(xScaleDomain):
-                    case _.last(xScaleDomain):
-                        tick = '';
-                        break;
-
-                    default:
-                        tick = d;
-                }
-
-                return tick;
+            .tickFormat(function () {
+                return '';
             });
 
         var yAxis = d3.svg.axis()
@@ -187,34 +157,6 @@ function ToolbarPanel() {
             .attr('x2', chartWidth)
             .attr('y2', 39);
 
-        // Setup Surgery Date
-        var surgeryDateX = gx.selectAll('g')
-            .filter(function (d) { return d === 0;})
-            .classed('surgery-date-x', true);
-
-        surgeryDateX.insert('rect', ':first-child')
-            .attr('width', 10)
-            .attr('height', 6)
-            .attr('x', -5)
-            .attr('y', 36);
-
-        surgeryDateX.select('line')
-            .attr('x1', 0)
-            .attr('y1', -chartHeight)
-            .attr('x2', 0)
-            .attr('y2', 60);
-
-        surgeryDateX.select('text')
-            .attr('x', 0)
-            .attr('y', 75);
-
-        surgeryDateX.append('path')
-            .classed('triangle', true)
-            .attr('transform', 'translate(0, 60)')
-            .attr('d', d3.svg.symbol()
-                .size(24)
-                .type('triangle-up'));
-
         // Insert white rect for each text
         svg.selectAll('text').each(function () {
             var bbox = this.getBBox();
@@ -263,11 +205,11 @@ function ToolbarPanel() {
             .enter()
             .append('circle')
             .attr('class', 'point')
-            .attr('cx', function (d) { return me.scales.x(d.offset); })
+            .attr('cx', function (d) { return me.scales.x(d.date); })
             .attr('cy', function (d) { return me.scales.y(d.score); })
             .attr('r', 3)
             .each(function (d, i) {
-                var cx = me.scales.x(d.offset),
+                var cx = me.scales.x(d.date),
                     cy = me.scales.y(d.score);
 
                 var lineGroup = d3.select($(this).parent().get(0));
@@ -279,18 +221,15 @@ function ToolbarPanel() {
                 var textGroup = statusTip.append('g')
                     .classed('tip-text-group', true);
 
-                var scoreText = textGroup.append('text')
-                    .text('Score: {0}'.format(d.score));
+                var dateText = textGroup.append('text')
+                    .text(Utility.toVancouverTimeHour(d.date, DATE_FORMAT));
 
-                var scoreTextBBox = scoreText.node().getBBox();
+                var dateTextBBox = dateText.node().getBBox();
                 var textPadding = 10;
 
-                if (d.count) {
-                    textGroup.append('text')
-                        .text('Data Count: {0}'.format(d.count))
-                        .attr('x', scoreTextBBox.width + textPadding);
-
-                }
+                textGroup.append('text')
+                    .text('Score: {0}'.format(d.score))
+                    .attr('x', dateTextBBox.width + textPadding);
 
                 var textGroupBBox = textGroup.node().getBBox();
                 var textGroupHPadding = 8;
@@ -333,7 +272,7 @@ function ToolbarPanel() {
             });
 
         var line = d3.svg.line()
-            .x(function(d) { return me.scales.x(d.offset); })
+            .x(function(d) { return me.scales.x(d.date); })
             .y(function(d) { return me.scales.y(d.score); });
 
         lineGroup.insert('path', ':first-child')
@@ -385,6 +324,77 @@ function ToolbarPanel() {
         }
 
         markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
+    };
+
+    this.drawSurgeryDate = function(surgeryDate) {
+        var surgeryDateX = this.chartObject
+            .append('g')
+            .classed('surgery-date-x', true)
+            .attr('transform', 'translate({0}, {1})'.format(this.scales.x(surgeryDate), this.chartSize.chartHeight));
+
+        var vPadding = 4;
+        var hPadding = 10;
+        var color = '#305e6e';
+
+        var textGroup = surgeryDateX.append('g')
+            .classed('text-group', true)
+            .attr('transform', 'translate({0}, {1})'.format(0, 45));
+
+        var surgeryDateText = textGroup.append('text')
+            .text('Surgery Date');
+
+        var surgeryDateBBox = surgeryDateText.node().getBBox();
+
+        textGroup.append('text')
+            .text(Utility.toVancouverTimeHour(surgeryDate, DATE_FORMAT))
+            .attr('y', surgeryDateBBox.height + 3)
+            .attr('x', 0);
+
+        var textGroupBBox = textGroup.node().getBBox();
+
+        surgeryDateX.insert('rect', 'g')
+            .attr('x', textGroupBBox.x - hPadding)
+            .attr('y', textGroupBBox.y - vPadding)
+            .attr('width', textGroupBBox.width + hPadding * 2)
+            .attr('height', textGroupBBox.height + vPadding * 2)
+            .attr('transform', 'translate({0}, {1})'.format(0, 45))
+            .style('fill', color);
+
+        surgeryDateX.append('line')
+            .attr('x1', 0)
+            .attr('y1', -this.chartSize.chartHeight)
+            .attr('x2', 0)
+            .attr('y2', 20);
+
+        surgeryDateX.append('path')
+            .classed('triangle', true)
+            .attr('transform', 'translate(0, 20)')
+            .attr('d', d3.svg.symbol()
+                .size(24)
+                .type('triangle-up'));
+
+        var beforeSurgerySpace = this.scales.x(surgeryDate) - textGroupBBox.width / 2 - hPadding;
+
+        if (beforeSurgerySpace >= 130) {
+            this.chartObject
+                .append('text')
+                .text('BEFORE SURGERY')
+                .classed('surgery-text before', true)
+                .attr('x', beforeSurgerySpace / 2)
+                .attr('y', this.chartSize.chartHeight + 65)
+                .attr('dx', -55);
+        }
+
+        var afterSurgerySpace = this.chartSize.chartWidth - this.scales.x(surgeryDate) - textGroupBBox.width / 2 - hPadding;
+
+        if (afterSurgerySpace >= 130) {
+            this.chartObject
+                .append('text')
+                .text('AFTER SURGERY')
+                .classed('surgery-text after', true)
+                .attr('x', this.scales.x(surgeryDate) + afterSurgerySpace / 2)
+                .attr('y', this.chartSize.chartHeight + 65);
+        }
     };
 
     this.onLineMouseover = function (d, i, elem) {
@@ -506,29 +516,62 @@ function ToolbarPanel() {
         this.$node.find('svg').remove();
     };
 
+    this.organizeData = function(data) {
+        var meta = this.scales.meta;
+
+        _.each(data.data, function(point) {
+            if (!_.contains(meta.xRange, point.date)) {
+                meta.xRange.push(point.date);
+            }
+
+            if (point.score > meta.maxY) {
+                meta.maxY = point.score;
+            }
+
+            if (!_.contains(meta.type, point.type)) {
+                meta.type.push(point.type);
+                meta.dataGroup[point.type] = [];
+            }
+
+            meta.dataGroup[point.type].push(point);
+        });
+
+        if (data.surgeryDate && !_.contains(meta.xRange, data.surgeryDate)) {
+            meta.xRange.push(data.surgeryDate);
+        }
+
+        meta.xRange = _.sortBy(meta.xRange);
+    };
+
     this.onRender = function (e, data) {
         if (this.$node.is(':visible')) {
             this.select('defaultPanelSelector').hide();
 
-            if (data.xRange === UNSUPPORTED) {
+            if (!data) {
                 this.select('noAvailableSelector').show();
             } else {
                 this.select('chartGroupSelector').show();
+                this.organizeData(data);
 
-                this.drawFrame(data.xRange, data.yRange);
+                this.drawFrame(this.scales.meta.xRange, 100);
+                this.drawLineGroup(this.scales.meta.dataGroup['SIMPLE'], 0);
 
-                if (!data.dataSet && !data.items) {
-                    this.select('noDataSelector').show();
-                } else if (data.items) {
-                    this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
-                } else {
-                    this.select('scoreBarSelector').show();
-                    this.drawScoreBar(_.map(data.dataSet, 'type'));
-
-                    _.each(data.dataSet, function (dataGroup, index) {
-                        this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
-                    }, this);
+                if (data.surgeryDate) {
+                    this.drawSurgeryDate(data.surgeryDate);
                 }
+
+                //if (!data.dataSet && !data.items) {
+                //    this.select('noDataSelector').show();
+                //} else if (data.items) {
+                //    this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
+                //} else {
+                //    this.select('scoreBarSelector').show();
+                //    this.drawScoreBar(_.map(data.dataSet, 'type'));
+                //
+                //    _.each(data.dataSet, function (dataGroup, index) {
+                //        this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
+                //    }, this);
+                //}
             }
         }
     };
@@ -550,4 +593,4 @@ function ToolbarPanel() {
     });
 }
 
-module.exports = flight.component(ToolbarPanel);
+module.exports = flight.component(ScoreChart);

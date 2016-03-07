@@ -18,4 +18,35 @@
             display: none!important;
         }
     }
+
+    .surgery-date-x {
+        line {
+            display: block;
+            stroke: $main-color;
+        }
+
+        rect {
+            fill: white;
+        }
+
+        text {
+            fill: white;
+            font-size: 14px;
+        }
+
+        .triangle {
+            stroke: $main-color;
+            fill: $main-color;
+            shape-rendering: initial;
+        }
+
+        .text-group {
+            text-anchor: middle;
+        }
+    }
+
+    .surgery-text {
+        font-size: 13px;
+        font-weight: 700;
+    }
 }

@@ -244,7 +244,6 @@ function Treatment() {
 
     this.before('teardown', function () {
         var me = this;
-        this.select('subTabsContainerSelector').tabs('destroy');
 
         _.each(
             _.map(_.keys(TYPE_SECTION_MAPPING), function (key) {
@@ -259,6 +258,8 @@ function Treatment() {
                     });
                 }
             });
+
+        this.select('subTabsContainerSelector').tabs('destroy');
     });
 }
 
