@@ -6,9 +6,6 @@ var Utility = require('../../../utils/Utility');
 
 var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{0}</span>';
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
-var UNSUPPORTED = 'UNSUPPORTED';
-
-var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
 
 var DATE_FORMAT = 'MMM D, YYYY';
 
@@ -71,7 +68,7 @@ function ScoreChart() {
         return this.scales.x;
     };
 
-    this.drawFrame = function (xDomain, yVal) {
+    this.drawFrame = function (xDomain, yVal, yPace) {
         var margin = {top: 50, right: 70, bottom: 140, left: 70},
             svgWidth = this.$node.width(),
             svgHeight = this.$node.height(),
@@ -98,7 +95,7 @@ function ScoreChart() {
             .scale(yScale)
             .tickSize(chartWidth)
             .orient('right')
-            .tickValues(this.getYTickValues(yVal));
+            .tickValues(this.getYTickValues(yVal, yPace));
 
         var svg = this.chartObject = d3.select(this.$node.find(this.attr.chartSelector).get(0))
             .append('svg')
@@ -298,7 +295,7 @@ function ScoreChart() {
             .classed('mark-tip', true);
 
         var markText = markTip.append('text')
-            .text(PARAMs.SCORE_TYPE[text]);
+            .text(text);
 
         var markTextBBox = markText.node().getBBox();
         var markTextHPadding = 8;
@@ -385,7 +382,10 @@ function ScoreChart() {
                 .attr('dx', -55);
         }
 
-        var afterSurgerySpace = this.chartSize.chartWidth - this.scales.x(surgeryDate) - textGroupBBox.width / 2 - hPadding;
+        var afterSurgerySpace = this.chartSize.chartWidth -
+                                    this.scales.x(surgeryDate) -
+                                    textGroupBBox.width / 2 -
+                                    hPadding;
 
         if (afterSurgerySpace >= 130) {
             this.chartObject
@@ -426,18 +426,8 @@ function ScoreChart() {
         }
     };
 
-    this.getYTickValues = function (val) {
-        var minOffset = 100;
-
-        _.each(Y_TICK_OFFSET_ARRAY, function (offset) {
-            var number = val / offset;
-
-            if (number <= 10 && number < minOffset) {
-                minOffset = number;
-            }
-        });
-
-        var result = _.range(0, val, minOffset);
+    this.getYTickValues = function (val, pace) {
+        var result = _.range(0, val, pace);
         result.push(val);
 
         return result;
@@ -470,7 +460,7 @@ function ScoreChart() {
             $bar.show();
 
             _.each(types, function (type, index) {
-                $bar.append(SCORE_TEMPLATE.format(PARAMs.SCORE_TYPE[type], index));
+                $bar.append(SCORE_TEMPLATE.format(type, index));
             });
 
             this.select('scoreItemSelector').click(_.bind(this.onScoreItemClicked, this));
@@ -518,6 +508,20 @@ function ScoreChart() {
 
     this.organizeData = function(data) {
         var meta = this.scales.meta;
+        var hasScoreType = false;
+        var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+        var availableTypes = reportSetting.type;
+        var scoreAtType = reportSetting.scoreAt;
+
+        if (availableTypes) {
+            hasScoreType = true;
+
+            _.each(availableTypes, function (type) {
+                meta.dataGroup[type] = [];
+            });
+        } else {
+            meta.dataGroup[scoreAtType] = [];
+        }
 
         _.each(data.data, function(point) {
             if (!_.contains(meta.xRange, point.date)) {
@@ -528,12 +532,11 @@ function ScoreChart() {
                 meta.maxY = point.score;
             }
 
-            if (!_.contains(meta.type, point.type)) {
-                meta.type.push(point.type);
-                meta.dataGroup[point.type] = [];
+            if (hasScoreType && _.contains(availableTypes, PARAMs.SCORE_TYPE[point.type])) {
+                meta.dataGroup[PARAMs.SCORE_TYPE[point.type]].push(point);
+            } else if (!hasScoreType && scoreAtType === point.type) {
+                meta.dataGroup[scoreAtType].push(point);
             }
-
-            meta.dataGroup[point.type].push(point);
         });
 
         if (data.surgeryDate && !_.contains(meta.xRange, data.surgeryDate)) {
@@ -541,37 +544,47 @@ function ScoreChart() {
         }
 
         meta.xRange = _.sortBy(meta.xRange);
+
+        _.each(meta.dataGroup, function (value) {
+            _.sortBy(value, 'date');
+        });
     };
 
     this.onRender = function (e, data) {
         if (this.$node.is(':visible')) {
             this.select('defaultPanelSelector').hide();
 
-            if (!data) {
+            var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+            if (!data || !reportSetting) {
                 this.select('noAvailableSelector').show();
             } else {
                 this.select('chartGroupSelector').show();
                 this.organizeData(data);
 
-                this.drawFrame(this.scales.meta.xRange, 100);
-                this.drawLineGroup(this.scales.meta.dataGroup['SIMPLE'], 0);
+                this.drawFrame(this.scales.meta.xRange, reportSetting.maxScore, reportSetting.pace);
+
+                var dataGroup = this.scales.meta.dataGroup;
+                var availableTypes = reportSetting.type;
+                var scoreAtType = reportSetting.scoreAt;
+
+                if (data.data.length === 0) {
+                    this.select('noDataSelector').show();
+                } else {
+                    if (!availableTypes) {
+                        this.drawLineGroup(dataGroup[scoreAtType], 0);
+                    } else {
+                        this.select('scoreBarSelector').show();
+                        this.drawScoreBar(availableTypes);
+
+                        _.each(availableTypes, function (type, index) {
+                            this.drawLineGroup(dataGroup[type], index, type);
+                        }, this);
+                    }
+                }
 
                 if (data.surgeryDate) {
                     this.drawSurgeryDate(data.surgeryDate);
                 }
-
-                //if (!data.dataSet && !data.items) {
-                //    this.select('noDataSelector').show();
-                //} else if (data.items) {
-                //    this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
-                //} else {
-                //    this.select('scoreBarSelector').show();
-                //    this.drawScoreBar(_.map(data.dataSet, 'type'));
-                //
-                //    _.each(data.dataSet, function (dataGroup, index) {
-                //        this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
-                //    }, this);
-                //}
             }
         }
     };

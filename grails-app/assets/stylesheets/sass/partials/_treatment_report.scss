@@ -14,8 +14,8 @@
     }
 
     .chart-panel {
-        .default {
-            display: none!important;
+        .not-available, .default {
+            padding-bottom: 100px;
         }
     }
 
