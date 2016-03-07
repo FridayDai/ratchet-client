@@ -451,30 +451,6 @@ $.widget("ui.combobox", {
                 }
             }, this.options));
 
-        function clear(element) {
-            $(element).trigger('autocompleteclear');
-
-            $(element)
-                .val('')
-                .data("id", '')
-                .data("saved", {
-                    label: '',
-                    value: ''
-                });
-        }
-
-        this.element.on('keyup', function (e) {
-            if (e.which == 13 && $(this).val() === '') {
-                clear(this);
-            }
-        });
-
-        this.element.on('blur', function () {
-            if ($(this).val() === '') {
-                clear(this);
-            }
-        });
-
         $("<a />")
             .insertAfter(this.element)
             .button({

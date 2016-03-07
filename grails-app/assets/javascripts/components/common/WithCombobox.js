@@ -48,22 +48,12 @@ function WithCombobox() {
         this.$node.combobox(this.initOptions());
     };
 
-    this.__onClear = function () {
-        this.clear();
-
-        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
-            var data = {};
-            data[this.attr.selectDataKey] = null;
-
-            this.trigger(this.attr.clearEvent, data);
-        }
-    };
-
     this.clear = function () {
         $(this.$node)
             .val('')
             .data("id", '');
         this.__previousVal = null;
+        this.$node.autocomplete( "widget").empty();
     };
 
     this.__onSelect = function (e, ui) {
@@ -124,7 +114,6 @@ function WithCombobox() {
         this.clear();
 
         this.on('autocompleteselect', this.__onSelect);
-        this.on('autocompleteclear', this.__onClear);
 
         if (this.attr.resetEvent !== DEFAULT_RESET_KEY) {
             this.on(document, this.attr.resetEvent, this.__onReset);
