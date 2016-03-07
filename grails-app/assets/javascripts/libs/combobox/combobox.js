@@ -372,6 +372,10 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
         ul.removeClass('no-children');
 
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
+
         this._resizeMenu();
     },
 
@@ -382,6 +386,10 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.menu.refresh();
 
         ul.removeClass('no-children');
+
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
 
         this._resizeMenu();
     },
