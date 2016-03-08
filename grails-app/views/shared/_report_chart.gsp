@@ -1,7 +1,7 @@
 <div class="chart-panel">
     <div class="not-available">
         <i class="icon fa fa-ban"></i>
-        <div class="desc">There is no report available</div>
+        <div class="desc">There is no report available for this tool</div>
     </div>
     <div class="chart-group">
         <div class="view-score-bar">
