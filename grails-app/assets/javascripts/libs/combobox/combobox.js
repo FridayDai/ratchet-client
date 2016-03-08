@@ -369,6 +369,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
         this.isNewMenu = true;
         this.menu.refresh();
+        ul.show();
 
         ul.removeClass('no-children');
 
@@ -384,6 +385,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this._renderMenu( ul, items );
         this.isNewMenu = true;
         this.menu.refresh();
+        ul.show();
 
         ul.removeClass('no-children');
 
