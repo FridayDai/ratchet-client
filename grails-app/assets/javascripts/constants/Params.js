@@ -176,7 +176,7 @@ module.exports = {
         },
         15: {
             maxScore: 100,
-            type: ['Symptoms', 'Pain', 'ADL'],
+            type: ['Stiffness', 'Pain', 'ADL'],
             pace: 10
         },
         1000: {
