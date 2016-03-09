@@ -9,7 +9,10 @@ class SecureFilters {
 
             }
             after = { Map model ->
-                def cdnDomain = grailsApplication.config?.cdn_domain
+                def config = grailsApplication.config
+                def cdnDomain = config?.cdn_domain
+                def notSupportHTTPS = config?.NOT_SUPPORT_HTTPS
+
                 if (response?.contentType?.indexOf('text/html') == 0) {
                     response.setHeader('Cache-Control', 'no-store')
                     response.setHeader('X-Frame-Options', 'DENY')
@@ -23,6 +26,10 @@ class SecureFilters {
                                             (cdnDomain ? cdnDomain + ' ' : '') +
                         "form-action 'self'; frame-ancestors 'none';"
                     )
+
+                    if (!notSupportHTTPS) {
+                        response.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+                    }
                 }
             }
             afterView = { Exception e ->
