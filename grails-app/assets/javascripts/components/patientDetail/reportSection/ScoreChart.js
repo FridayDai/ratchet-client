@@ -545,8 +545,8 @@ function ScoreChart() {
 
         meta.xRange = _.sortBy(meta.xRange);
 
-        _.each(meta.dataGroup, function (value) {
-            _.sortBy(value, 'date');
+        _.each(meta.dataGroup, function (value, key) {
+            meta.dataGroup[key] = _.sortBy(value, 'date');
         });
     };
 
