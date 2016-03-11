@@ -22,6 +22,7 @@ class SecureFilters {
                         "default-src 'self' 'unsafe-eval' 'unsafe-inline' " +
                                             "https://fonts.googleapis.com " +
                                             "https://fonts.gstatic.com " +
+                                            "https://www.google-analytics.com " +
                                             "https://maxcdn.bootstrapcdn.com " +
                                             (cdnDomain ? cdnDomain + ' ' : '') +
                         "form-action 'self'; frame-ancestors 'none';"
