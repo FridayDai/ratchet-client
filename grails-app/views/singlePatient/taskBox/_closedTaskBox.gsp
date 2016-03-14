@@ -8,7 +8,7 @@
         </div>
     </g:if>
 
-    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.completeTime]"/>
+    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
 
     <div class="box-item-content">
 
