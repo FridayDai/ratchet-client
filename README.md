@@ -81,4 +81,5 @@ ratchet-v2-provider-desktop
 - AWS_REGION
 - SCANNED_PDF_BUCKET
 - NOT_SUPPORT_HTTPS    # true | false | not define
+- RUM_ENABLE    # true | false | not define
 
