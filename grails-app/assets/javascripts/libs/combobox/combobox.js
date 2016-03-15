@@ -125,6 +125,36 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                         break;
                 }
             },
+            click: function () {
+                var currentVal = this.element.val();
+
+                if (!currentVal && !this.menu.element.children().length) {
+                    this.search(currentVal);
+                } else if (this.menu) {
+                    var ul = this.menu.element;
+
+                    if (ul) {
+
+                        if (ul.children().length === 0) {
+                            ul.addClass('no-children');
+                        }
+
+                        this.menu.refresh();
+
+                        ul.show();
+                        this._resizeMenu();
+                        ul.position($.extend({
+                            of: this.element
+                        }, this.options.position));
+
+                        if (this.options.autoFocus) {
+                            this.menu.next();
+                        }
+
+                        this._trigger("open");
+                    }
+                }
+            },
             input: function( event ) {
                 this.element
                     .data('saved', null)
@@ -143,31 +173,6 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
             focus: function() {
                 this.selectedItem = null;
                 this.previous = this._value();
-
-                if (this.menu) {
-                    var ul = this.menu.element;
-
-                    if (ul) {
-
-                        if (ul.children().length === 0) {
-                              ul.addClass('no-children');
-                        }
-
-                        this.menu.refresh();
-
-                        ul.show();
-                        this._resizeMenu();
-                        ul.position($.extend({
-                            of: this.element
-                        }, this.options.position));
-
-                        if (this.options.autoFocus) {
-                            this.menu.next();
-                        }
-
-                        this._trigger("open");
-                    }
-                }
 
                 this.element.select();
             },
@@ -256,10 +261,17 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 //}
 
                 // Announce the value in the liveRegion
-                label = ui.item.attr( "aria-label" ) || item.value;
-                if ( label && $.trim( label ).length ) {
-                    this.liveRegion.children().hide();
-                    $( "<div>" ).text( label ).appendTo( this.liveRegion );
+                if (item) {
+                    label = ui.item.attr("aria-label") || item.value;
+                    if (label && $.trim(label).length) {
+                        this.liveRegion.children().hide();
+                        $("<div>").text(label).appendTo(this.liveRegion);
+                    }
+
+                    ui.item
+                        .addClass('rt-ui-state-active')
+                        .siblings('.rt-ui-state-active')
+                        .removeClass('rt-ui-state-active ui-state-focus');
                 }
             },
             menuselect: function( event, ui ) {
@@ -288,6 +300,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
                 this.close( event );
                 this.selectedItem = item;
+
+                this.element.select();
             }
         });
 
@@ -394,6 +408,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         }, this.options.position));
 
         this._resizeMenu();
+
+        this._move( "next" );
     },
 
     _selectMatched: function () {
@@ -404,6 +420,48 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
         if (matched.length > 0) {
             this.menu.active = $(matched[0]);
+        }
+    },
+
+    _move: function( direction, event ) {
+        var ul = this.menu.element;
+        var activeItem = ul.find('.rt-ui-state-active');
+        var items = ul.children();
+
+        if ( items.length === 0 ) {
+            this.search( null, event );
+            return;
+        } else {
+            ul.show();
+            ul.position($.extend({
+                of: this.element
+            }, this.options.position));
+
+            this._resizeMenu();
+        }
+
+        var action = 'next';
+
+        if (/^previous/.test( direction )) {
+            action = 'prev';
+        }
+
+        if (activeItem.length > 0) {
+            var nextItem = $(activeItem[0])[action]();
+
+            if (/^previous/.test( direction ) && nextItem.length === 0) {
+                nextItem = items.last();
+            } else if (/^next/.test( direction ) && nextItem.length === 0) {
+                nextItem = items.first();
+            }
+
+            this.menu.focus(event, nextItem);
+        } else if (items.length > 0) {
+            var validItems = items.not('.ui-state-disabled');
+
+            if (validItems.length > 0) {
+                this.menu.focus(event, $(validItems[0]));
+            }
         }
     }
 });
@@ -480,10 +538,12 @@ $.widget("ui.combobox", {
                     return;
                 }
 
-                $(self.element).data('uiAutocomplete').options.focusSearch = false;
-                self.element.autocomplete("search", "");
+                //$(self.element).data('uiAutocomplete').options.focusSearch = false;
+                //self.element.autocomplete("search", self.element.val());
+                //self.element.focus();
+                //$(self.element).data('uiAutocomplete').options.focusSearch = true;
+                self.element.trigger('click');
                 self.element.focus();
-                $(self.element).data('uiAutocomplete').options.focusSearch = true;
             });
 
         if (self.element.is(":disabled")) {
