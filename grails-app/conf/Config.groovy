@@ -348,13 +348,16 @@ ratchetv2 {
     }
 }
 
-grails.plugin.awssdk.accessKey = PropertyUtils.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
-grails.plugin.awssdk.secretKey = PropertyUtils.getProperty("AWS_SECRET_KEY") ?: "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"
-grails.plugin.awssdk.region = PropertyUtils.getProperty("AWS_REGION") ?: "us-east-1"
+grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
+grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY") ?: "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"
+grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 
 ratchet {
     s3 {
-        scanned_pdf_bucket = PropertyUtils.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
+        scanned_pdf_bucket = System.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
     }
+}
 
+Pingdom {
+    real_user_monitor = System.getProperty("RUM_ENABLE")?.toBoolean() ?: false
 }

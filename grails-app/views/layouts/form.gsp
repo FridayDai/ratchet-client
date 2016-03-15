@@ -18,6 +18,7 @@
         <asset:stylesheet src="css/pages/${cssPath}"/>
     </g:if>
     <g:layoutHead/>
+    <g:render template="/shared/pingdomRUM" />
 </head>
 <body>
 <g:render template="/shared/updateBrowser" />
