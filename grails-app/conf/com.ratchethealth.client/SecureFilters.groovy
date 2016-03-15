@@ -11,7 +11,7 @@ class SecureFilters {
             after = { Map model ->
                 def config = grailsApplication.config
                 def cdnDomain = config?.cdn_domain
-                def notSupportHTTPS = config?.NOT_SUPPORT_HTTPS
+                def notSupportHTTPS = System.getProperty("NOT_SUPPORT_HTTPS")?.toBoolean()
 
                 if (response?.contentType?.indexOf('text/html') == 0) {
                     response.setHeader('Cache-Control', 'private, max-age=0, no-cache, no-store')
