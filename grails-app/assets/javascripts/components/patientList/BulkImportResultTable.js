@@ -33,7 +33,7 @@ function BulkImportResultTable() {
                 "render": function (data, type, full) {
                     var birthday = data === undefined ? full.birthday : data;
                     if (birthday) {
-                        return Utility.parseBirthday(birthday);
+                        return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
                     } else {
                         return '';
                     }
