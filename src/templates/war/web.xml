@@ -50,6 +50,8 @@
         <url-pattern>*.svg</url-pattern>
         <url-pattern>*.ttf</url-pattern>
         <url-pattern>*.woff</url-pattern>
+        <url-pattern>*.xml</url-pattern>
+        <url-pattern>*.txt</url-pattern>
     </filter-mapping>
 
     <listener>
