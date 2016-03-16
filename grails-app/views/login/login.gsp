@@ -21,7 +21,7 @@
     <div class="site-wrapper">
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>
-            <g:form class="form login-form" controller="authentication" method="post" action="login">
+            <g:form class="form login-form" controller="authentication" method="post" action="login" autocomplete="off">
 
                 <div class="form-style-content">
                     <div class="input-combination">
