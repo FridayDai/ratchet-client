@@ -368,29 +368,4 @@
         <text transform="matrix(1 0 0 1 244.6474 100.8674)" fill="#0095E0" font-family="'Lato-Heavy'" font-size="36" letter-spacing="1">R</text>
     </g>
 
-    <g:if test="${!taskResult['19']}">
-        <g>
-            <text class="indication" id="XMLID_619_" transform="matrix(1 0 0 1 35.3931 512.9378)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Thigh</text>
-            <text class="indication" id="XMLID_618_" transform="matrix(1 0 0 1 45.3931 576.7185)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Calf</text>
-            <text class="indication" id="XMLID_617_" transform="matrix(1 0 0 1 46.7266 674.8521)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Feet</text>
-            <text class="indication" id="XMLID_616_" transform="matrix(1 0 0 1 256.7261 512.9378)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Thigh</text>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="253.814" y1="509.946" x2="215.647" y2="510.946"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="121.035" y1="329.068" x2="63.783" y2="327.749"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="129.814" y1="238.446" x2="69.622" y2="241.791"/>
-            <text class="indication" id="XMLID_615_" transform="matrix(1 0 0 1 256.7261 576.7185)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Calf</text>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="254.676" y1="573.634" x2="220.364" y2="579.124"/>
-            <text class="indication" id="XMLID_614_" transform="matrix(1 0 0 1 257.3931 464.7185)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Buttock</text>
-            <text class="indication" id="XMLID_613_" transform="matrix(1 0 0 1 42.3936 245.2185)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Back</text>
-            <text class="indication" id="XMLID_612_" transform="matrix(1 0 0 1 27.3936 464.7185)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Buttock</text>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="253.647" y1="457.612" x2="229.697" y2="395.79"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="89.647" y1="455.612" x2="108.263" y2="395.79"/>
-            <text class="indication" id="XMLID_611_" transform="matrix(1 0 0 1 256.7261 674.8521)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Feet</text>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="254.676" y1="671.767" x2="216.314" y2="676.946"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="87.814" y1="507.946" x2="121.255" y2="511.871"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="88.435" y1="573.634" x2="122.748" y2="579.124"/>
-            <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="91.642" y1="671.767" x2="125.955" y2="677.257"/>
-            <text class="indication" id="XMLID_610_" transform="matrix(1 0 0 1 34.2281 320.9373)"><tspan x="0" y="0" fill="#333333" font-family="'Lato-Bold'" font-size="11">Lower </tspan><tspan x="0" y="14" fill="#333333" font-family="'Lato-Bold'" font-size="11">Back</tspan></text>
-        </g>
-    </g:if>
-
 </svg>

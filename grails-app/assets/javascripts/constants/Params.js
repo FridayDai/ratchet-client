@@ -73,8 +73,10 @@ module.exports = {
         'QOL': 'QOL',
         'neck': 'Neck',
         'arm': 'Arm',
+        'shoulder': 'Shoulder',
         'back': 'Back',
         'leg': 'Leg',
+        'buttock': 'Buttock',
         'STIFFNESS': 'Stiffness',
         'Physical': 'Physical',
         'Mental': 'Mental'
@@ -86,5 +88,101 @@ module.exports = {
         'M-D-YYYY',
         'M/D/YYYY',
         'MMMM D, YYYY'
-    ]
+    ],
+
+    TOOL_TYPE_DASH: 1,
+    TOOL_TYPE_ODI: 2,
+    TOOL_TYPE_NDI: 3,
+    TOOL_TYPE_NRS_BACK: 4,
+    TOOL_TYPE_NRS_NECK: 5,
+    TOOL_TYPE_QUICK_DASH: 6,
+    TOOL_TYPE_KOOS: 7,
+    TOOL_TYPE_HOOS: 8,
+    TOOL_TYPE_HARRIS_HIP_SCORE: 9,
+    TOOL_TYPE_FAIRLEY_NASAL_SYMPTOM: 10,
+    TOOL_TYPE_PAIN_CHART_REFERENCE_NECK: 11,
+    TOOL_TYPE_PAIN_CHART_REFERENCE_BACK: 12,
+    TOOL_TYPE_NEW_PATIENT_QUESTIONNAIRE: 13,
+    TOOL_TYPE_PROMIS: 14,
+    TOOL_TYPE_RETURN_PATIENT_QUESTIONNAIRE: 17,
+    TOOL_TYPE_KOOS_JR: 15,
+    TOOL_TYPE_HOOS_JR: 1000,
+
+    REPORT_CHART_SETTING: {
+        1: {
+            maxScore: 100,
+            scoreAt: 'SIMPLE',
+            pace: 10
+        },
+        2: {
+            maxScore: 100,
+            scoreAt: 'SIMPLE',
+            pace: 10
+        },
+        3: {
+            maxScore: 100,
+            scoreAt: 'SIMPLE',
+            pace: 10
+        },
+        4: {
+            maxScore: 10,
+            type: ['Back', 'Leg'],
+            pace: 1
+        },
+        5: {
+            maxScore: 10,
+            type: ['Neck', 'Arm'],
+            pace: 1
+        },
+        6: {
+            maxScore: 100,
+            scoreAt: 'SIMPLE',
+            pace: 10
+        },
+        7: {
+            maxScore: 100,
+            type: ['Symptoms', 'Pain', 'ADL', 'Sports/Rec', 'QOL'],
+            pace: 10
+        },
+        8: {
+            maxScore: 100,
+            type: ['Symptoms', 'Pain', 'ADL', 'Sports/Rec', 'QOL'],
+            pace: 10
+        },
+        9: {
+            maxScore: 100,
+            scoreAt: 'SIMPLE',
+            pace: 10
+        },
+        10: {
+            maxScore: 60,
+            scoreAt: 'total',
+            pace: 10
+        },
+        11: {
+            maxScore: 10,
+            type: ['Neck', 'Shoulder', 'Arm'],
+            pace: 1
+        },
+        12: {
+            maxScore: 10,
+            type: ['Back', 'Buttock', 'Leg'],
+            pace: 1
+        },
+        14: {
+            maxScore: 20,
+            type: ['Physical', 'Mental'],
+            pace: 5
+        },
+        15: {
+            maxScore: 100,
+            type: ['Stiffness', 'Pain', 'ADL'],
+            pace: 10
+        },
+        1000: {
+            maxScore: 100,
+            type: ['Pain', 'ADL'],
+            pace: 10
+        }
+    }
 };

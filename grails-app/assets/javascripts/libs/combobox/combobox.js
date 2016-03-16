@@ -369,8 +369,13 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
         this.isNewMenu = true;
         this.menu.refresh();
+        ul.show();
 
         ul.removeClass('no-children');
+
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
 
         this._resizeMenu();
     },
@@ -380,8 +385,13 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this._renderMenu( ul, items );
         this.isNewMenu = true;
         this.menu.refresh();
+        ul.show();
 
         ul.removeClass('no-children');
+
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
 
         this._resizeMenu();
     },
@@ -450,30 +460,6 @@ $.widget("ui.combobox", {
                         .data("id", ui.item.value);
                 }
             }, this.options));
-
-        function clear(element) {
-            $(element).trigger('autocompleteclear');
-
-            $(element)
-                .val('')
-                .data("id", '')
-                .data("saved", {
-                    label: '',
-                    value: ''
-                });
-        }
-
-        this.element.on('keyup', function (e) {
-            if (e.which == 13 && $(this).val() === '') {
-                clear(this);
-            }
-        });
-
-        this.element.on('blur', function () {
-            if ($(this).val() === '') {
-                clear(this);
-            }
-        });
 
         $("<a />")
             .insertAfter(this.element)

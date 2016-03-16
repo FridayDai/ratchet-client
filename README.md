@@ -54,6 +54,8 @@ ratchet-v2-provider-desktop
 
 	```
         grails run-app
+        //If running on localhost should add NOT_SUPPORT_HTTPS ENV variable to true, as:
+        grails run-app -DNOT_SUPPORT_HTTPS=true
     ```
     
     ```
@@ -78,4 +80,5 @@ ratchet-v2-provider-desktop
 - AWS_SECRET_KEY
 - AWS_REGION
 - SCANNED_PDF_BUCKET
+- NOT_SUPPORT_HTTPS    # true | false | not define
 

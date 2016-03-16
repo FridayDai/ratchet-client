@@ -2,7 +2,7 @@ var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 
 var ToolbarPanel = require('./ToolbarPanel');
-var ChartPanel = require('../../shared/components/TreatmentScoreChart');
+var ChartPanel = require('./ScoreChart');
 
 function ReportSection() {
     this.attributes({

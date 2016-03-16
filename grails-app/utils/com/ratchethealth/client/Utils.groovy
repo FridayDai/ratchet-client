@@ -11,7 +11,7 @@ class Utils {
 
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone('America/Vancouver'))
 
-        SimpleDateFormat sd1 = new SimpleDateFormat("yyyyMMdd")
+        SimpleDateFormat sd1 = new SimpleDateFormat("yyyy-MM-dd")
 
         cal.clear()
 

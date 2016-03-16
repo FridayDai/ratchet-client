@@ -62,7 +62,7 @@
 
             <div class="form-group">
                 <label class="lbl-group">TREATMENT(S)<span>*</span></label>
-                <input id="treatments" name="treatments" type="text" class="plugin-select-box input-group treatments clear" maxlength="128"
+                <input id="treatments" name="treatments" type="text" class="plugin-select-box input-group treatments clear" maxlength="1024"
                        placeholder="Select treatment(s)" required/>
             </div>
 

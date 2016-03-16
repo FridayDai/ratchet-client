@@ -247,19 +247,4 @@
         <text transform="matrix(1 0 0 1 72.8198 100.8673)" fill="#0095E0" font-family="'Lato-Heavy'" font-size="36" letter-spacing="1">R</text>
     </g>
 
-    <g:if test="${!taskResult['19']}">
-        <text class="indication" id="XMLID_609_" transform="matrix(1 0 0 1 249.3236 485.792)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Thigh</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="247.273" y1="484.079" x2="212.961" y2="506.726"/>
-        <text class="indication" id="XMLID_608_" transform="matrix(1 0 0 1 249.3236 571.5728)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Calf</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="247.273" y1="568.488" x2="212.961" y2="573.978"/>
-        <text class="indication" id="XMLID_607_" transform="matrix(1 0 0 1 249.3236 669.7061)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Left Feet</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="247.273" y1="666.621" x2="212.961" y2="672.111"/>
-        <text class="indication" id="XMLID_606_" transform="matrix(1 0 0 1 29.9554 485.792)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Thigh</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="87.539" y1="484.079" x2="121.852" y2="506.726"/>
-        <text class="indication" id="XMLID_605_" transform="matrix(1 0 0 1 33.7356 571.5728)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Calf</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="84.366" y1="568.488" x2="118.678" y2="573.978"/>
-        <text class="indication" id="XMLID_604_" transform="matrix(1 0 0 1 30.2103 669.7061)" fill="#333333" font-family="'Lato-Bold'" font-size="11">Right Feet</text>
-        <line class="indication" fill="none" stroke="#333333" stroke-miterlimit="10" x1="83.573" y1="666.621" x2="117.885" y2="672.111"/>
-    </g:if>
-
 </svg>

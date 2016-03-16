@@ -22,7 +22,7 @@ function roundedRect(opts) {
         'z';
 }
 
-function ToolbarPanel() {
+function TreatmentScoreChart() {
     this.attributes({
         chartGroupSelector: '.chart-group',
         chartSelector: '.chart',
@@ -550,4 +550,4 @@ function ToolbarPanel() {
     });
 }
 
-module.exports = flight.component(ToolbarPanel);
+module.exports = flight.component(TreatmentScoreChart);
