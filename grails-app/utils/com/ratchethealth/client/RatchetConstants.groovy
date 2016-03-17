@@ -5,6 +5,10 @@ class RatchetConstants {
     public static final DEFAULT_PAGE_SIZE = 20
     public static final DEFAULT_PAGE_OFFSET = 0
 
+    public static final Map BASE_TOOL_TYPE = [
+            2: "OUTCOME",
+            4: "VOICE"
+    ]
 
     public static final String TOOL_NAME_DASH = 'DASH';
     public static final String TOOL_NAME_ODI = 'ODI';

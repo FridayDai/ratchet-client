@@ -33,7 +33,8 @@ function TaskSection() {
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
         deleteTaskButtonSelector: '.box-item .delete',
-        beginTaskButtonSelector: '.box-item .begin-task'
+        beginTaskButtonSelector: '.box-item .begin-task',
+        callTaskButtonSelector: '.box-item .call-task'
     });
 
     this.getActiveItemCount = function () {
@@ -102,6 +103,25 @@ function TaskSection() {
         });
     };
 
+    this.onTaskVoiceCallButtonClicked = function (e) {
+        e.preventDefault();
+        var $taskBox = $(e.target).closest('.box-item');
+        var taskId = $taskBox.find('.id').text();
+        this.callTask(taskId);
+    };
+
+    this.callTask = function(taskId) {
+        $.ajax({
+            url: URLs.CALL_TASK.format(this.patientId, this.medicalRecordId, taskId),
+            type: "POST",
+            success: function (data) {
+                if (data === 'true') {
+                    Notifications.showFadeOutMsg(STRINGs.TASK_CALL);
+                }
+            }
+        });
+    };
+
     this.deleteTask = function (taskId, taskTitle, $taskBox) {
         var me = this;
 
@@ -142,7 +162,9 @@ function TaskSection() {
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
-            beginTaskButtonSelector: this.onTaskBeginButtonClicked
+            beginTaskButtonSelector: this.onTaskBeginButtonClicked,
+            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
+
         });
     });
 }
