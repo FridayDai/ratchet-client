@@ -44,7 +44,7 @@ module.exports = {
 
     parseBirthday: function (dataStr) {
         if (dataStr) {
-            return moment(dataStr, 'YYYYMMDD').format('MMM Do, YYYY');
+            return moment(dataStr, 'YYYY-MM-DD').format('MMM Do, YYYY');
         } else {
             return '';
         }

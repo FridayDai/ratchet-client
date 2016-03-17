@@ -142,5 +142,8 @@ class UrlMappings {
 
         "500"(view: '/error/error')
         "404"(view: '/error/error404')
+
+        "/robots.txt" (view: "/robots")
+        "/sitemap.xml" (view: "/sitemap")
     }
 }

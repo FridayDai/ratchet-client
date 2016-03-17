@@ -41,15 +41,17 @@ function ScoreChart() {
         chartHeight: 0
     };
 
-    this.scales = {
-        x: null,
-        y: null,
-        meta: {
-            xRange: [],
-            maxY: 0,
-            type: [],
-            dataGroup: {}
-        }
+    this.initScalesData = function () {
+        this.scales = {
+            x: null,
+            y: null,
+            meta: {
+                xRange: [],
+                maxY: 0,
+                type: [],
+                dataGroup: {}
+            }
+        };
     };
 
     this.setXScale = function (data) {
@@ -545,8 +547,8 @@ function ScoreChart() {
 
         meta.xRange = _.sortBy(meta.xRange);
 
-        _.each(meta.dataGroup, function (value) {
-            _.sortBy(value, 'date');
+        _.each(meta.dataGroup, function (value, key) {
+            meta.dataGroup[key] = _.sortBy(value, 'date');
         });
     };
 
@@ -597,6 +599,7 @@ function ScoreChart() {
             this.select('chartGroupSelector').hide();
             this.select('noDataSelector').hide();
             this.select('scoreBarSelector').hide();
+            this.initScalesData();
         }
     };
 
