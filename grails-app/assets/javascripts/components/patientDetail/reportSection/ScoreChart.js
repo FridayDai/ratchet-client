@@ -41,15 +41,17 @@ function ScoreChart() {
         chartHeight: 0
     };
 
-    this.scales = {
-        x: null,
-        y: null,
-        meta: {
-            xRange: [],
-            maxY: 0,
-            type: [],
-            dataGroup: {}
-        }
+    this.initScalesData = function () {
+        this.scales = {
+            x: null,
+            y: null,
+            meta: {
+                xRange: [],
+                maxY: 0,
+                type: [],
+                dataGroup: {}
+            }
+        };
     };
 
     this.setXScale = function (data) {
@@ -597,6 +599,7 @@ function ScoreChart() {
             this.select('chartGroupSelector').hide();
             this.select('noDataSelector').hide();
             this.select('scoreBarSelector').hide();
+            this.initScalesData();
         }
     };
 
