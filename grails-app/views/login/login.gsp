@@ -27,6 +27,7 @@
                     <div class="input-combination">
                         <div class="align-left">EMAIL ADDRESS</div>
                         <input name="email" type="text" class="input-control email" placeholder="Enter E-mail"
+                            value="${email}"
                                required/>
                     </div>
 
