@@ -7,6 +7,16 @@ var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
 
+var ALL_ACTIVE_PATIENT_FILTER = [
+    '<div class="all-active-patient-filter">',
+        '<div class="inner">',
+            '<span class="filter" data-active-treatment-only="false">All</span>',
+            ' - ',
+            '<span class="filter active" data-active-treatment-only="true">Active Patients</span>',
+        '</div>',
+    '</div>'
+].join('');
+
 function PatientsTable() {
     this.attributes({
         url: URLs.GET_PATIENTS
@@ -109,7 +119,8 @@ function PatientsTable() {
         treatmentId: null,
         surgeonId: null,
         emailStatus: null,
-        patientIdOrName: null
+        patientIdOrName: null,
+        activeTreatmentOnly: true
     };
 
     this.setRowClickUrl = function (data) {
@@ -140,9 +151,53 @@ function PatientsTable() {
 
     this.onLoadDataFromSessionRouter = function (e, data) {
         this.loadData(data.patientsTable);
+
+        this.setActivePatientFilter(data.patientsTable.activeTreatmentOnly);
+    };
+
+    this.setActivePatientFilter = function (activeOnly) {
+        this.allActivePatientFilter.find('.filter')
+            .removeClass('active')
+            .filter('[data-active-treatment-only={0}]'.format(activeOnly))
+            .addClass('active');
+    };
+
+    this.getCurrentState = function () {
+        return {
+            data: this.tableEl.rows().data().splice(0),
+            pageInfo: this.tableEl.page.info(),
+            sorting: this.tableEl.order(),
+            search: this.getSetting().aaRHSearch,
+            activeTreatmentOnly: this.searchFields.activeTreatmentOnly
+        };
+    };
+
+    this.initAllActivePatientFilter = function () {
+        var me = this;
+        this.allActivePatientFilter = $(ALL_ACTIVE_PATIENT_FILTER);
+
+        this.allActivePatientFilter.find('.filter')
+            .click(function (e) {
+                var $target = $(e.target);
+
+                if (!$target.hasClass('active')) {
+                    me.onTriggerSearch(e, {
+                        activeTreatmentOnly: $target.data('activeTreatmentOnly')
+                    });
+
+                    $target
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active');
+                }
+            });
+
+        this.allActivePatientFilter.insertAfter(this.$node);
     };
 
     this.after('initialize', function () {
+        this.initAllActivePatientFilter();
+
         this.on(document, 'refreshPatientsTable', this.onTableRefresh);
         this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
         this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
@@ -153,6 +208,10 @@ function PatientsTable() {
         this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+    });
+
+    this.before('teardown', function () {
+        this.allActivePatientFilter.find('.filter').off();
     });
 }
 
