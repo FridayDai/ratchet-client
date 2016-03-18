@@ -484,3 +484,35 @@
         }
     }
 }
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+}
+
+.all-active-patient-filter {
+    margin: 20px 0;
+
+    &:after {
+        content: '';
+        clear: both;
+        display: table;
+    }
+
+    .inner {
+        float: right;
+    }
+
+    .filter {
+        color: #b3b3b3;
+        cursor: pointer;
+
+        &.active {
+            color: #225f6f;
+            cursor: default;
+        }
+
+        &:hover {
+            color: #225f6f;
+        }
+    }
+}

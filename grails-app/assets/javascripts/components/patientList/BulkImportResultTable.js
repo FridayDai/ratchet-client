@@ -1,7 +1,6 @@
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var moment = require('moment');
-var Utility = require('../../utils/Utility');
 
 function BulkImportResultTable() {
     this.options({
@@ -33,7 +32,7 @@ function BulkImportResultTable() {
                 "render": function (data, type, full) {
                     var birthday = data === undefined ? full.birthday : data;
                     if (birthday) {
-                        return Utility.parseBirthday(birthday);
+                        return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
                     } else {
                         return '';
                     }

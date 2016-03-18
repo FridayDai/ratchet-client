@@ -1,5 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
-<div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
+<div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
@@ -8,7 +8,7 @@
         <div class="sub-item">
             Scheduled
         </div>
-     </div>
+    </div>
 
     <div class="box-item-footer">
 

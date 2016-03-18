@@ -120,6 +120,10 @@
     &.pending {
         border-color: $base-color-orange;
 
+        .box-item-content {
+            color: $base-color-orange;
+        }
+
         .box-item-footer {
             background-color: $base-color-orange;
 
@@ -132,6 +136,10 @@
     &.overdue {
         border-color: $base-color-task-overdue;
 
+        .box-item-content {
+            color: $base-color-task-overdue;
+        }
+
         .box-item-footer {
             background-color: $base-color-task-overdue;
 
@@ -139,16 +147,14 @@
                 content: 'OVERDUE';
             }
         }
-        .btn-notify {
-            &:hover,
-            &:focus {
-                color: $base-color-task-overdue;
-            }
-        }
     }
 
     &.complete {
         border-color: $base-color-green;
+
+        .box-item-content {
+            color: $base-color-green;
+        }
 
         .box-item-footer {
             background-color: $base-color-green;
@@ -162,6 +168,10 @@
     &.expired {
         border-color: $base-color-grey-expired;
         background-color: $base-color-archived-bg;
+
+        .box-item-content {
+            color: $base-color-grey-expired;
+        }
 
         .box-item-footer {
             background-color: $base-color-grey-expired;
@@ -320,6 +330,14 @@
         }
     }
 
+    .call-task {
+        right: 42px;
+
+        &:before {
+            content: '\f4b8';
+        }
+    }
+
     .delete {
         &:before {
             content: '\f4c4';
@@ -355,7 +373,7 @@
         }
     }
 
-    .begin-tip {
+    .begin-tip, .call-tip {
         right: 49px;
     }
 
@@ -496,4 +514,31 @@
     .date-picker {
         width: 272px;
     }
+}
+
+//filter
+.quick-filter {
+}
+
+.quick-filter-label {
+    display: inline-block;
+    padding-right: 10px;
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.quick-filter-button {
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    line-height: 1;
+    margin: 0 5px 0 0;
+    padding: 5px 8px;
+
+    &.active {
+        color: $base-color-white;
+        background-color: $base-color-dark-grey;
+    }
+
 }

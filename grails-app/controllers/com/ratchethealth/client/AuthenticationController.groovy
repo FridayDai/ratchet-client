@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.ratchethealth.client.exceptions.AccountValidationException
+import org.codehaus.groovy.grails.web.util.WebUtils
 
 /**
  * Authentication controller for login/logout
@@ -16,10 +17,17 @@ class AuthenticationController extends BaseController {
 
     def login() {
         if (request.method == "GET") {
-            render(view: '/login/login')
+            render(view: '/login/login', model: [
+                email: flash?.email,
+                errorMsg: flash?.errorMsg,
+                rateLimit: flash?.rateLimit
+            ])
         } else if (request.method == "POST") {
             def email = params?.email.toLowerCase()
             def password = params?.password
+
+            flash.email = email
+
             def resp = authenticationService.authenticate(session.token, email, password)
             def result = resp?.result
 
@@ -83,7 +91,10 @@ class AuthenticationController extends BaseController {
         }
 
         def msg = e.getMessage()
-        render(view: '/login/login', model: [errorMsg: msg, rateLimit: time])
-    }
 
+        flash.errorMsg = msg
+        flash.rateLimit = time
+
+        redirect(action: 'login')
+    }
 }

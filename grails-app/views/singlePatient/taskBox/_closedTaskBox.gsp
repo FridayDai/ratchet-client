@@ -1,5 +1,5 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
-<div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
+<div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
@@ -8,7 +8,7 @@
         </div>
     </g:if>
 
-    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.completeTime]"/>
+    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
 
     <div class="box-item-content">
 
@@ -33,6 +33,7 @@
                     <g:else>
                         <span class="sub-item">
                             <div class="score-number">${task?.score}</div>
+
                             <div class="score-label">Total Result</div>
                         </span>
                     </g:else>
@@ -67,12 +68,22 @@
             </g:if>
         </g:if>
         <g:else>
-            <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
-               class="operation begin-task" target="_blank"></a>
 
-            <div class="tip begin-tip">
-                <span>Fill</span>
-            </div>
+            <g:if test="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE"}">
+                <span class="operation call-task"></span>
+
+                <div class="tip call-tip">
+                    <span>Call</span>
+                </div>
+            </g:if>
+            <g:else>
+                <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
+                   class="operation begin-task" target="_blank"></a>
+
+                <div class="tip begin-tip">
+                    <span>Fill</span>
+                </div>
+            </g:else>
 
             <span class="operation delete"></span>
 

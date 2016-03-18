@@ -14,6 +14,7 @@ module.exports = {
 
     // Task
     TASK_DELETE: "{0} has been deleted.",
+    TASK_CALL: "Voice call has been done.",
 
     //profile
     PASSWORD_CHANGED: "Password Changed",
