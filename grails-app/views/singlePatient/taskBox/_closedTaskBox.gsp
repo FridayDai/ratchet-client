@@ -1,5 +1,5 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
-<div class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
+<div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
@@ -33,6 +33,7 @@
                     <g:else>
                         <span class="sub-item">
                             <div class="score-number">${task?.score}</div>
+
                             <div class="score-label">Total Result</div>
                         </span>
                     </g:else>
