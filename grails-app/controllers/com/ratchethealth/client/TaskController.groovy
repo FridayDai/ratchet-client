@@ -202,4 +202,14 @@ class TaskController extends BaseController {
         def resp = taskService.voiceCall(token, clientId, patientId, medicalRecordId, taskId)
         render resp
     }
+
+    def resolveVoiceTask() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def taskId = params?.taskId
+        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+        render resp
+    }
 }

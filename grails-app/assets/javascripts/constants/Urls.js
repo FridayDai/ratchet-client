@@ -38,6 +38,7 @@ module.exports = {
     GET_AVAILABLE_TASKS: '/treatments/{0}/available-tasks',
     DELETE_TASK: '/patients/{0}/treatments/{1}/task/{2}/delete',
     CALL_TASK: '/patients/{0}/treatments/{1}/task/{2}/voice-call',
+    RESOLVE_VOICE_TASK: '/patients/{0}/treatments/{1}/task/{2}/attention/resolve',
 
     //Team
     GET_EMERGENCY_CONTACT_LIST: '/patients/{0}/emergency-contact?medicalRecordId={1}',

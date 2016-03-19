@@ -515,6 +515,55 @@
         width: 272px;
     }
 }
+//attention tip
+.box-item {
+    .attention-menu {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .ui-widget-content{
+        border: 0;
+    }
+
+    ul.ui-menu {
+        padding: 24px 4px 10px;
+        background-color: $base-color-white;
+        box-shadow: 0 0 0.5em $base-font-color;
+    }
+}
+
+.attention {
+    position: absolute;
+    top:0;
+    right: 0;
+
+    .attention-icon {
+        position: absolute;
+        top: -25px;
+        right: -19px;
+        width: 45px;
+        height: 45px;
+        background: image-url('patients/attention.png', false, false) no-repeat center right !important;
+        z-index: 110;
+    }
+
+    .title {
+        padding-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .sub-title {
+        padding-bottom: 4px;
+        font-size: 13px;
+    }
+
+    .btn {
+        padding: 4px 20px;
+        font-size: 12px;
+    }
+
+}
 
 //filter
 .quick-filter {

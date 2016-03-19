@@ -38,6 +38,7 @@ module.exports = {
             "jquery-ui-tooltip": "bower_components/jquery-ui/ui/tooltip.js",
             "jquery.ui.widget": "bower_components/jquery-ui/ui/widget.js",
             "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
+            "jquery-ui-menu": "bower_components/jquery-ui/ui/menu.js",
             "velocity": "bower_components/velocity/velocity.js",
             "velocity-ui": "bower_components/velocity/velocity.ui.js",
             flight: "libs/flight/index.js",

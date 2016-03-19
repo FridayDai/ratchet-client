@@ -1,5 +1,6 @@
 var flight = require('flight');
 var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
+var AttentionResolveTip = require('./AttentionResolveTip');
 
 var Notifications = require('../../common/Notification');
 var URLs = require('../../../constants/Urls');
@@ -19,7 +20,8 @@ var NO_MORE_IN_SCHEDULE = [
 
 function TaskSection() {
     flight.compose.mixin(this, [
-        CheckArchivedWindowSize
+        CheckArchivedWindowSize,
+        AttentionResolveTip
     ]);
 
     this.attributes({
