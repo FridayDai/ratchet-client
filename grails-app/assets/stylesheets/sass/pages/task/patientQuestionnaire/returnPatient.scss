@@ -169,3 +169,10 @@ body {
     }
 }
 
+.rc-choice-hidden:checked {
+    & + .rc-checkbox:before {
+        top: 4px;
+        left: 5px;
+    }
+}
+

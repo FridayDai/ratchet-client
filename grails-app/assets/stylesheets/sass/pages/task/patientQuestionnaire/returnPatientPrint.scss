@@ -74,6 +74,16 @@ html, body {
     background-color: $result-main-color;
 }
 
+.question-list-bottom {
+    .result-circle-radio {
+        left: 0;
+    }
+
+    .answer {
+        margin-top: 0;
+    }
+}
+
 .rc-checkbox {
     top: -2px;
 }
@@ -84,15 +94,15 @@ html, body {
     left: 0px;
     display: inline-block;
     box-sizing: content-box;
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
     border: 1px solid $base-font-color;
     cursor: default;
 }
 
 .result-checkbox-checked {
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
     position: absolute;
     background-color: $result-main-color;
     box-shadow: inset 0 0 0 1px $base-color-white;
@@ -105,7 +115,7 @@ html, body {
     left: 2px;
     content: '\f383';
     font-family: 'Ionicons';
-    font-size: 14px;
+    font-size: 11px;
     color: $base-color-white;
     text-align: center;
 }
@@ -169,7 +179,7 @@ html, body {
 }
 
 .answer-line {
-    margin-left: -8px;
+    margin-left: 0px;
     font-size: 13px;
     font-weight: 700;
     padding: 10px 0 10px;
