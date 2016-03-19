@@ -11,7 +11,7 @@
     <body>
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
-            <div class="answer-title">Pain Drawing</div>
+            <div class="answer-title">Pain Diagram</div>
             <div id="draw-board" class="draw-board clear">
                 <span class="chart-content">
                     <g:render template="/taskResult/template/backFront" model="['taskResult': mixedResult]"></g:render>
@@ -48,7 +48,7 @@
                         <span class="pain-percent"><g:if test="${mixedResult['19']}">- -</g:if><g:else>${mixedResult['18']?: '0'}%</g:else></span>
                     </div>
                     <div class="answer-line">
-                        The user has no back, buttock or leg pain
+                        The patient no back, buttock or leg pain
                         <label>
                             <g:if test="${mixedResult['19']}">
                                 <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked />

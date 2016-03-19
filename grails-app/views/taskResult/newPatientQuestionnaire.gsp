@@ -29,7 +29,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Patient of us:</span>
+                                    <span class="text">Patient of ProOrtho:</span>
                                     <span class="underline-text">${mixedResult['1-1s']}</span>
                                 </li>
                                 <li class="answer">
@@ -58,7 +58,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Physician</span>
+                                    <span class="text">Physician:</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -77,55 +77,6 @@
                     <div class="question-list">
                         <div class="question">
                             <span class="question-number">2.</span>
-                            <span> What is the primary reason for your visit?</span>
-                        </div>
-
-                        <div class="answer-list">
-                            <ul class="list">
-
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['2'] == 1.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Evaluation/ diagnosis/ treatment</span>
-                                </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['2'] == 2.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Second opinion</span>
-                                </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['2'] == 3.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Education/ information</span>
-                                </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['2'] == 4.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Surgical planning</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="question-list">
-                        <div class="question">
-                            <span class="question-number">3.</span>
                             <span> How long ago did your current symptoms begin?</span>
                         </div>
 
@@ -195,8 +146,8 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">4.</span>
-                            <span> Please describe your current problem/ sysmptoms</span>
+                            <span class="question-number">3.</span>
+                            <span> Please describe your current problem/ symptoms</span>
                         </div>
 
                         <div class="answer-list">
@@ -211,7 +162,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">5.</span>
+                            <span class="question-number">4.</span>
                             <span> What is your CURRENT work status?</span>
                         </div>
 
@@ -251,7 +202,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">6.</span>
+                            <span class="question-number">5.</span>
                             <span> Is this a work-related injury?</span>
                         </div>
 
@@ -282,7 +233,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">7.</span>
+                            <span class="question-number">6.</span>
                             <span> Have you filed a Worker’s Compensation claim for your back/ neck symptoms?</span>
                         </div>
 
@@ -314,7 +265,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">8.</span>
+                            <span class="question-number">7.</span>
                             <span>Have you worked with a lawyer as a result of your injury?</span>
                         </div>
 
@@ -347,8 +298,8 @@
                 <div class="task-list-part part-1">
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">9.</span>
-                            <span>Did your pain begin after a car accident?</span>
+                            <span class="question-number">8.</span>
+                            <span>Did your symptoms begin after a car accident?</span>
                         </div>
 
                         <div class="answer-list">
@@ -387,13 +338,13 @@
                                 </div>
 
                                 <div class="sub-question">
-                                    <div class="sub-question-title">Describe the pattern of symptoms over the first 1-4 weeks after the accident:</div>
+                                    <div class="sub-question-title">Describe the pattern of symptoms over the first 1-4 weeks after the accident: (Optional)</div>
 
                                     <p class="sub-description">${mixedResult['9-e-3'] ?: 'N/A'}</p>
                                 </div>
 
                                 <div class="sub-question">
-                                    <div class="sub-question-title">When did you first notice symptoms?</div>
+                                    <div class="sub-question-title">When did you first notice symptoms? (Optional)</div>
 
                                     <div class="sub-answer-list">
                                         <ul class="list">
@@ -462,13 +413,13 @@
                                 </div>
 
                                 <div class="sub-question">
-                                    <div class="sub-question-title">When did you first report these to a doctor?</div>
+                                    <div class="sub-question-title">When did you first report these to a doctor? (Optional)</div>
 
                                     <p class="sub-description">${mixedResult['9-e-5'] ?: 'N/A'}</p>
                                 </div>
 
                                 <div class="sub-question">
-                                    <div class="sub-question-title">If there was a delay between the symptoms starting and your first report, please explain:</div>
+                                    <div class="sub-question-title">If there was a delay between the symptoms starting and your first report, please explain: (Optional)</div>
 
                                     <p class="sub-description">${mixedResult['9-e-6'] ?: 'N/A'}</p>
                                 </div>
@@ -514,157 +465,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">10.</span>
-                            <span>Have you ever been involved in a previous car accident?</span>
-                        </div>
-
-                        <div class="answer-list">
-                            <ul class="list">
-
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['10-c'] == 1.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Yes, date:</span>
-                                    <span class="underline-text">${mixedResult['10-1s']}</span>
-                                </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['10-c'] == 2.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">No</span>
-                                </li>
-                            </ul>
-
-                            <div class="sub-question-list">
-                                <div class="sub-question">
-                                    <div class="sub-question-title">Was your back or neck injured?</div>
-
-                                    <div class="sub-answer-list">
-                                        <ul class="list">
-
-                                            <li class="answer">
-                                                <span class="result-circle-radio">
-                                                    <g:if test="${mixedResult['10-e-1-c'] == 1.toString()}">
-                                                        <span class="result-circle-radio-checked">
-                                                        </span>
-                                                    </g:if>
-                                                </span>
-                                                <span class="text">Yes</span>
-                                            </li>
-                                        </ul>
-
-                                        <ul class="list">
-
-                                            <li class="answer">
-                                                <span class="result-circle-radio">
-                                                    <g:if test="${mixedResult['10-e-1-c'] == 2.toString()}">
-                                                        <span class="result-circle-radio-checked">
-                                                        </span>
-                                                    </g:if>
-                                                </span>
-                                                <span class="text">No</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="sub-question">
-                                    <div class="sub-question-title">If yes, did the injury resolve?</div>
-
-                                    <div class="sub-answer-list">
-                                        <ul class="list">
-
-                                            <li class="answer">
-                                                <span class="result-circle-radio">
-                                                    <g:if test="${mixedResult['10-e-2-c'] == 1.toString()}">
-                                                        <span class="result-circle-radio-checked">
-                                                        </span>
-                                                    </g:if>
-                                                </span>
-                                                <span class="text">Yes</span>
-                                            </li>
-                                        </ul>
-
-                                        <ul class="list">
-
-                                            <li class="answer">
-                                                <span class="result-circle-radio">
-                                                    <g:if test="${mixedResult['10-e-2-c'] == 2.toString()}">
-                                                        <span class="result-circle-radio-checked">
-                                                        </span>
-                                                    </g:if>
-                                                </span>
-                                                <span class="text">No</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="sub-question">
-                                    <div class="sub-question-title">If that injury did NOT resolve, what treatment(s), if any, did you require on an ongoing basis?</div>
-
-                                    <p class="sub-description">${mixedResult['10-e-3'] ?: 'N/A'}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="page-footer">Page 1</div>
-
-            <div class="page-break"></div>
-
-            <div class="page page-2 clear">
-                <div class="task-list-part part-0">
-                    <div class="question-list">
-                        <div class="question">
-                            <span class="question-number">11.</span>
-                            <span>Is your pain due to an injury not covered in the questions above?</span>
-                        </div>
-
-                        <div class="answer-list">
-                            <ul class="list">
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['11-c'] == 1.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">Yes, date of injury:</span>
-                                    <span class="underline-text">${mixedResult['11-1s']}</span>
-                                </li>
-                                <li class="answer">
-                                    <span class="result-circle-radio">
-                                        <g:if test="${mixedResult['11-c'] == 2.toString()}">
-                                            <span class="result-circle-radio-checked">
-                                            </span>
-                                        </g:if>
-                                    </span>
-                                    <span class="text">No</span>
-                                </li>
-                            </ul>
-
-                            <div class="sub-question">
-                                <div class="sub-question-title">Describe the injury:</div>
-
-                                <p class="sub-description">${mixedResult['11-e-1'] ?: 'N/A'}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="question-list">
-                        <div class="question">
-                            <span class="question-number">12.</span>
+                            <span class="question-number">9.</span>
                             <span>How do each of the following activities affect your pain?</span>
                         </div>
 
@@ -676,7 +477,7 @@
                                     <th>NO <br> Change</th>
                                     <th>Relieves <br> Pain</th>
                                     <th>Increases <br> Pain</th>
-                                    <th>After <br> HowLong?</th>
+                                    <th>After <br> HowLong?<br>(Optional)</th>
                                 </tr>
                                 </thead>
 
@@ -719,10 +520,19 @@
                             </table>
                         </div>
                     </div>
+                </div>
 
+            </div>
+
+            <div class="page-footer">Page 1</div>
+
+            <div class="page-break"></div>
+
+            <div class="page page-2 clear">
+                <div class="task-list-part part-0">
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">13.</span>
+                            <span class="question-number">10.</span>
                             <span>What other activities, motions, or positions affect your symptoms?</span>
                         </div>
 
@@ -738,7 +548,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">14.</span>
+                            <span class="question-number">11.</span>
                             <span>What do you do to relieve your pain?</span>
                         </div>
 
@@ -754,7 +564,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">15.</span>
+                            <span class="question-number">12.</span>
                             <span>Bladder function:</span>
                         </div>
 
@@ -797,22 +607,13 @@
                                     </span>
                                     <span class="text">Sense of urgency</span>
                                 </li>
-                                %{--<li class="answer">--}%
-                                    %{--<span class="result-circle-radio">--}%
-                                        %{--<g:if test="${mixedResult['15'] == 5.toString()}">--}%
-                                            %{--<span class="result-circle-radio-checked">--}%
-                                            %{--</span>--}%
-                                        %{--</g:if>--}%
-                                    %{--</span>--}%
-                                    %{--<span class="text">Rather not answer</span>--}%
-                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">16.</span>
+                            <span class="question-number">13.</span>
                             <span>Bowel function:</span>
                         </div>
 
@@ -837,22 +638,13 @@
                                     </span>
                                     <span class="text">Loss of control or accidents</span>
                                 </li>
-                                %{--<li class="answer">--}%
-                                    %{--<span class="result-circle-radio">--}%
-                                        %{--<g:if test="${mixedResult['16'] == 3.toString()}">--}%
-                                            %{--<span class="result-circle-radio-checked">--}%
-                                            %{--</span>--}%
-                                        %{--</g:if>--}%
-                                    %{--</span>--}%
-                                    %{--<span class="text">Rather not answer</span>--}%
-                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">17.</span>
+                            <span class="question-number">14.</span>
                             <span>Problem with sexual function:</span>
                         </div>
 
@@ -877,22 +669,13 @@
                                     </span>
                                     <span class="text">Yes</span>
                                 </li>
-                                %{--<li class="answer">--}%
-                                    %{--<span class="result-circle-radio">--}%
-                                        %{--<g:if test="${mixedResult['17'] == 3.toString()}">--}%
-                                            %{--<span class="result-circle-radio-checked">--}%
-                                            %{--</span>--}%
-                                        %{--</g:if>--}%
-                                    %{--</span>--}%
-                                    %{--<span class="text">Rather not answer</span>--}%
-                                %{--</li>--}%
                             </ul>
                         </div>
                     </div>
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">18.</span>
+                            <span class="question-number">15.</span>
                             <span>Loss of sensation around the groin, genitals, or buttocks?</span>
                         </div>
 
@@ -920,13 +703,10 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-
-                <div class="task-list-part part-1">
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">19.</span>
+                            <span class="question-number">16.</span>
                             <span>Weakness in leg/foot:</span>
                         </div>
 
@@ -975,7 +755,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">20.</span>
+                            <span class="question-number">17.</span>
                             <span>Weakness in arm/hand:</span>
                         </div>
 
@@ -1024,7 +804,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">21.</span>
+                            <span class="question-number">18.</span>
                             <span>Does your pain interfere with your sleep?</span>
                         </div>
 
@@ -1052,10 +832,13 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+
+                <div class="task-list-part part-1">
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">22.</span>
+                            <span class="question-number">19.</span>
                             <span>Which of the folowing treatments have you had and what was the outcome?</span>
                         </div>
 
@@ -1114,7 +897,7 @@
 
                     <div class="question-list">
                         <div class="question">
-                            <span class="question-number">23.</span>
+                            <span class="question-number">20.</span>
                             <span>Please list the dates of any of the following tests you have had for your current condition in the last 2 years?</span>
                         </div>
 

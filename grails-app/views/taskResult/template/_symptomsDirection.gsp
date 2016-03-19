@@ -14,7 +14,7 @@
             <rect height="12" width="12" fill="#ff0000"></rect>
             <text x="6" y="11" fill="#ffffff" class="direction-text">A</text>
         </svg>&nbsp;
-        <label>Ache</label>
+        <label>Aching</label>
     </div>
 
     <div class="group-direction">

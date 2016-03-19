@@ -248,6 +248,14 @@
                                         </span>
                                         <span class="text">night sweats</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-0'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -308,6 +316,14 @@
                                         </span>
                                         <span class="text">ringing in the ears</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-1'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -330,6 +346,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">nose bleeds</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-2'].contains(3.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -381,6 +405,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">swollen glands in the neck</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-3'].contains(6.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -453,6 +485,14 @@
                                         </span>
                                         <span class="text">swelling of the feet/ ankles</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-4'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -495,6 +535,14 @@
                                         </span>
                                         <span class="text">COPD/ emphysema</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-5'].contains(5.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -527,6 +575,14 @@
                                         </span>
                                         <span class="text">recurrent infections
                                         </span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-6'].contains(4.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -578,6 +634,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">glandular or hormone problems</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-7'].contains(6.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -640,6 +704,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">abdominal pain</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-8'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -719,6 +791,14 @@
                                         </span>
                                         <span class="text">sexual difficulty</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-9'].contains(9.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -797,6 +877,14 @@
                                         </span>
                                         <span class="text">difficulty walking</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-10'].contains(9.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -868,6 +956,14 @@
                                         </span>
                                         <span class="text">change in hair or nails</span>
                                     </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-11'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="answer-list">
@@ -909,6 +1005,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">loss of consciousness</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-12'].contains(5.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -969,6 +1073,14 @@
                                             </g:if>
                                         </span>
                                         <span class="text">unusual stress in work life</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-13'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>

@@ -11,7 +11,7 @@
     <body>
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
-            <div class="answer-title">Pain Drawing</div>
+            <div class="answer-title">Pain Diagram</div>
 
             <div id="draw-board" class="draw-board clear">
 
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="answer-line">
-                        The user has no neck, shoulder or arm pain
+                        The patient has no neck, shoulder or arm pain
                         <label>
                             <g:if test="${mixedResult['20']}">
                                 <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked/>
