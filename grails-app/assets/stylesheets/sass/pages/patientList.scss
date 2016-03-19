@@ -47,7 +47,18 @@
 }
 
 .source-id {
+    position: relative;
     color: $base-font-grey;
+}
+
+.attention-icon {
+    position: absolute;
+    top: -11px;
+    left: -56px;
+    height: 40px;
+    width: 40px;
+    background: image-url('patients/attention.png', false, false) no-repeat center right;
+    background-size: 40%;
 }
 
 //.treatment-search-patient {
@@ -516,3 +527,5 @@
         }
     }
 }
+
+

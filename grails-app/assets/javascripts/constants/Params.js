@@ -60,6 +60,11 @@ module.exports = {
         {label: "Undelivered", value: 5}
     ],
 
+    ATTENTION_STATUS_FILTER: [
+        {label: "Required", value: 1},
+        {label: "Not Required", value: 2}
+    ],
+
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10

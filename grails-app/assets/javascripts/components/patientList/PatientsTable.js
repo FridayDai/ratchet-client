@@ -29,6 +29,16 @@ function PatientsTable() {
                 data: 'patientId',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
+
+                    if (full.isAttentionNeeded === "true" || full.isAttentionNeeded === true) {
+                        return [
+                            '<div class="source-id">',
+                            id,
+                            '<div class="attention-icon"></div>',
+                            '</div>'
+                        ].join('');
+
+                    }
                     return '<p class="source-id">' + id + '</p>';
                 },
                 width: "10%"
@@ -45,10 +55,10 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     if (!full.email) {
                         return '<span class="email-status not-available">{0}</span>'
-                                    .format(PARAMs.EMAIL_STATUS[full.status]);
+                            .format(PARAMs.EMAIL_STATUS[full.status]);
                     } else if (PARAMs.EMAIL_STATUS[full.status]) {
                         return '{0}<span class="email-status abnormal {1}">{1}</span>'
-                                    .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
+                            .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
                     } else {
                         return full.email;
                     }
@@ -103,6 +113,10 @@ function PatientsTable() {
             }, {
                 targets: 6,
                 data: 'status',
+                "visible": false
+            }, {
+                targets: 7,
+                data: 'isAttentionNeeded',
                 "visible": false
             }
         ],
@@ -205,6 +219,8 @@ function PatientsTable() {
         this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
         this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
         this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectAttentionStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearAttentionStatusForPatientTable', this.onTriggerSearch);
         this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);

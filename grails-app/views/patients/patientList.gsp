@@ -37,6 +37,12 @@
                            class="input-group input-auto-search"/>
                 </div>
 
+                <div class="filler-content">
+                    <label for="attentionStatusFilter" class="select-tip">ATTENTION</label>
+                    <input type="text" name="attentionStatusFilter" id="attentionStatusFilter"
+                           class="input-group input-auto-search"/>
+                </div>
+
                 <div class="filler-content right-search">
                     <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
                     <span class="search" id="search-btn"></span>
@@ -67,6 +73,7 @@
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
+                        <td>${patient.isAttentionNeeded}</td>
                     </tr>
                 </g:each>
                 </tbody>

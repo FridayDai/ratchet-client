@@ -10,4 +10,5 @@ class PatientPagination extends Pagination{
     int emailStatus
     String patientIdOrName
     Boolean activeTreatmentOnly = true
+    int attentionStatus
 }

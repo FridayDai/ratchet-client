@@ -5,6 +5,7 @@ var KEYs = require('../../constants/Keys');
 var TreatmentCombobox = require('./ToolbarTreatmentCombobox');
 var ProviderCombobox = require('./ToolbarProviderCombobox');
 var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
+var attentionStatusCombobox = require('./ToolbarAttentionStatusCombobox');
 
 function ToolbarPanel() {
     this.attributes({
@@ -12,13 +13,15 @@ function ToolbarPanel() {
         patientIDNameSearchButton: '#search-btn',
         treatmentFieldSelector: '#treatmentForSearchPatient',
         providerFieldSelector: '#selectSurgeon',
-        emailStatusFieldSelector: '#emailStatusFilter'
+        emailStatusFieldSelector: '#emailStatusFilter',
+        attentionStatusFieldSelector: '#attentionStatusFilter'
     });
 
     this.children({
         treatmentFieldSelector: TreatmentCombobox,
         providerFieldSelector: ProviderCombobox,
-        emailStatusFieldSelector: emailStatusCombobox
+        emailStatusFieldSelector: emailStatusCombobox,
+        attentionStatusFieldSelector: attentionStatusCombobox
     });
 
     this.getCurrentState = function () {
