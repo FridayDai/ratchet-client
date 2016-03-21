@@ -33,36 +33,54 @@
 
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
 
-            <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">
-                <g:render template="/singlePatient/taskBox/shared/mixedScore" model="['task': task]"/>
+            <g:if test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE"}">
+                <g:if test="${task?.isAttentionNeeded}">
+                    <span class="sub-item">
+                        <div>Follow up requested on</div>
+                        <div class="bold">
+                            <g:formatDate date="${task?.completeTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                          format="MMM dd, yyyy"/>
+                        </div>
+                    </span>
+                </g:if>
+                <g:else>
+                    <div>Follow up not requested</div>
+                </g:else>
+
             </g:if>
 
             <g:else>
-                <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
-
-                    <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                        <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
-                            <span class="sub-item">
-                                <div class="score-number">${score[1]}</div>
-
-                                <div class="score-label">${score[0]}</div>
-                            </span>
-                        </g:multipleScore>
-                    </g:if>
-                    <g:else>
-                        <span class="sub-item">
-                            <div class="score-number">${task?.score}</div>
-
-                            <div class="score-label">Total Result</div>
-                        </span>
-                    </g:else>
-
+                <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">
+                    <g:render template="/singlePatient/taskBox/shared/mixedScore" model="['task': task]"/>
                 </g:if>
 
                 <g:else>
-                    <div class="sub-item">
-                        Completed
-                    </div>
+                    <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
+
+                        <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
+                            <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
+                                <span class="sub-item">
+                                    <div class="score-number">${score[1]}</div>
+
+                                    <div class="score-label">${score[0]}</div>
+                                </span>
+                            </g:multipleScore>
+                        </g:if>
+                        <g:else>
+                            <span class="sub-item">
+                                <div class="score-number">${task?.score}</div>
+
+                                <div class="score-label">Total Result</div>
+                            </span>
+                        </g:else>
+
+                    </g:if>
+
+                    <g:else>
+                        <div class="sub-item">
+                            Completed
+                        </div>
+                    </g:else>
                 </g:else>
             </g:else>
 

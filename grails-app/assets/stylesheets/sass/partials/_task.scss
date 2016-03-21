@@ -22,6 +22,10 @@
     padding: 30px;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 .items-title {
     padding: 12px 30px;
     border-bottom: 3px solid $base-color-white-grey;
@@ -95,8 +99,8 @@
     display: inline-block;
     position: relative;
     width: 314px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-right: 40px;
+    margin-bottom: 40px;
     border-top: 5px $base-color-mid-grey solid;
     box-shadow: 0 0 0.5em $base-font-color;
 
@@ -316,7 +320,7 @@
             color: $base-color-white;
         }
 
-        &:hover+.tip {
+        &:hover + .tip {
             display: block;
         }
     }
@@ -387,8 +391,8 @@
         display: inline-block;
         padding: 0 6px;
 
-        &+.score{
-            border-left: 1px  $base-color-bg-head solid;
+        & + .score {
+            border-left: 1px $base-color-bg-head solid;
         }
 
         &.row-2-padding {
@@ -431,7 +435,7 @@
             background-color: transparent;
             &:hover,
             &:focus {
-                border: 1px  $base-color-bg-head solid;
+                border: 1px $base-color-bg-head solid;
                 background-color: transparent;
                 color: $base-color-bg-head;
             }
@@ -465,9 +469,9 @@
         font-weight: 700;
         text-align: center;
         -webkit-transform: rotate(45deg);
-        -moz-transform:    rotate(45deg);
-        -ms-transform:     rotate(45deg);
-        -o-transform:      rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
         position: relative;
         padding: 5px 0;
         left: -5px;
@@ -479,10 +483,10 @@
         &:before,
         &:after {
             content: "";
-            border-top:   3px solid #a32317;
-            border-left:  3px solid transparent;
+            border-top: 3px solid #a32317;
+            border-left: 3px solid transparent;
             border-right: 3px solid transparent;
-            position:absolute;
+            position: absolute;
             bottom: -3px;
         }
 
@@ -495,7 +499,6 @@
         }
     }
 }
-
 
 .fill-questionnaire-dialog {
     text-align: center;
@@ -515,6 +518,7 @@
         width: 272px;
     }
 }
+
 //attention tip
 .box-item {
     .attention-menu {
@@ -522,20 +526,26 @@
         font-size: 13px;
     }
 
-    .ui-widget-content{
+    .ui-widget-content {
         border: 0;
+
+        .ui-state-focus {
+            color: $base-color-dark-grey;
+        }
     }
 
     ul.ui-menu {
         padding: 24px 4px 10px;
         background-color: $base-color-white;
         box-shadow: 0 0 0.5em $base-font-color;
+        border-radius: 5px;
     }
+
 }
 
 .attention {
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
 
     .attention-icon {
