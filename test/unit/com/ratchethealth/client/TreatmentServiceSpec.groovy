@@ -6,10 +6,17 @@ import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(TreatmentService)
 class TreatmentServiceSpec extends Specification {
+	def setupSpec() {
+		WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+			return null
+		}
+	}
+
 	def "test getTreatments with success result"() {
 		given:
 		def jBuilder = new JsonBuilder()

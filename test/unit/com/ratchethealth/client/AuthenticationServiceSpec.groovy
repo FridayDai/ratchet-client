@@ -6,10 +6,16 @@ import com.ratchethealth.client.exceptions.AccountValidationException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(AuthenticationService)
 class AuthenticationServiceSpec extends Specification {
+    def setupSpec() {
+        WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+            return null
+        }
+    }
 
     def "test authenticate with successful result"() {
         given:

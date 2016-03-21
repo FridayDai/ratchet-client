@@ -67,14 +67,15 @@ class RatchetAPIService {
         }
     }
 
-    def withReq(req, String token, Closure reqHandler)
-    throws ApiIpBlockException, ApiReturnException, ApiAccessException{
+    def withReq(req, String token, Closure reqHandler) {
         try {
             def reqObj
 
-            def request = WebUtils.retrieveGrailsWebRequest().getCurrentRequest()
+            def request = WebUtils?.retrieveGrailsWebRequest()?.getCurrentRequest()
 
-            req.header("X-Forwarded-For", request.getRemoteAddr())
+            if (request) {
+                req.header("X-Forwarded-For", request.getRemoteAddr())
+            }
 
             if (token) {
                 reqObj = req.header("X-Auth-Token", token)

@@ -7,11 +7,17 @@ import com.mashape.unirest.request.body.RequestBodyEntity
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 
 @TestFor(GroupService)
 class GroupServiceSpec extends Specification {
+    def setupSpec() {
+        WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+            return null
+        }
+    }
 
     def "test showGroupsList with successful result"() {
         given:

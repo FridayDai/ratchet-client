@@ -94,7 +94,6 @@ class PatientService extends RatchetAPIService {
                         .queryString("isAttentionNeeded", attentionStatus == 1)
                         .asString()
 
-
                 if (resp.status == 200) {
                     def result = JSON.parse(resp.body)
 
