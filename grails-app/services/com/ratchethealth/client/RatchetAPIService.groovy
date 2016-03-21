@@ -5,8 +5,10 @@ import com.mashape.unirest.http.exceptions.UnirestException
 import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.HttpRequestWithBody
 import com.ratchethealth.client.exceptions.ApiAccessException
+import com.ratchethealth.client.exceptions.ApiIpBlockException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
+import org.codehaus.groovy.grails.web.util.WebUtils
 
 class RatchetAPIService {
 
@@ -54,28 +56,33 @@ class RatchetAPIService {
             body = [:]
         }
 
-        if (resp.status >= 500) {
+        if (resp.status == 506) {
+            throw new ApiIpBlockException()
+        } else if (resp.status >= 500) {
             String errorMessage = body?.errors?.message
             throw new ApiAccessException(errorMessage?:resp.body)
         } else if (resp.status >= 400 && resp.status < 500) {
             String errorMessage = body?.error?.errorMessage
-            throw new ApiReturnException(resp.status,errorMessage?:resp.body)
+            throw new ApiReturnException(resp.status, errorMessage?:resp.body)
         }
     }
 
     def withReq(req, String token, Closure reqHandler)
-            throws ApiAccessException
-    {
+    throws ApiIpBlockException, ApiReturnException, ApiAccessException{
         try {
             def reqObj
 
-            if (token)
+            def request = WebUtils.retrieveGrailsWebRequest().getCurrentRequest()
+
+            req.header("X-Forwarded-For", request.getRemoteAddr())
+
+            if (token) {
                 reqObj = req.header("X-Auth-Token", token)
-            else
+            } else {
                 reqObj = req
+            }
 
             reqHandler.call(reqObj)
-
         } catch (UnirestException e) {
             throw new ApiAccessException(e.message, e)
         }

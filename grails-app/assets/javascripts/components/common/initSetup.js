@@ -24,6 +24,17 @@ $.ajaxSetup({
     error: function (jqXHR) {
         if (jqXHR.status === 401) {
             window.location.href = "/login";
+        } if (jqXHR.status === 506){
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.ERROR_MESSAGE_506
+            }, {
+                buttons: {
+                    'Ok': function () {
+                        window.location.href = "/login";
+                    }
+                }
+            });
         } else if (jqXHR.status === 400) {
             Notifications.error({
                 title: Strings.ERROR_TITLE,

@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.ratchethealth.client.exceptions.AccountValidationException
+import com.ratchethealth.client.exceptions.ApiIpBlockException
 import grails.converters.JSON
 
 
@@ -61,7 +62,9 @@ class AuthenticationService extends RatchetAPIService {
                 return data
             }
 
-            if (resp.status == 401 && result?.error?.errorID == 403) {
+            if (resp.status == 506) {
+                throw new ApiIpBlockException()
+            } else if (resp.status == 401 && result?.error?.errorID == 403) {
                 def seconds = result?.error?.errorMessage
 
                 def errorMessage = messageSource.getMessage("security.errors.login.rateLimit", null, Locale.default)
@@ -76,7 +79,6 @@ class AuthenticationService extends RatchetAPIService {
                 def errorMessage = result?.error?.errorMessage ?: ''
                 throw new AccountValidationException(errorMessage)
             }
-
         }
     }
 

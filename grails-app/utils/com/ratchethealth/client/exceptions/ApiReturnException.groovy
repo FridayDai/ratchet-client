@@ -1,6 +1,6 @@
 package com.ratchethealth.client.exceptions
 
-class ApiReturnException extends Exception {
+class ApiReturnException extends RuntimeException {
 
     private Integer statusId;
     private String errorFileName;
@@ -27,5 +27,9 @@ class ApiReturnException extends Exception {
         super(message);
         this.statusId = status;
         this.errorFileName = errorFileName
+    }
+
+    public ApiReturnException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

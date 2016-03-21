@@ -23,6 +23,7 @@ module.exports = {
     ERROR_TITLE: "ERROR",
     ERROR_TITLE_404: "ERROR : 404",
     ERROR_MESSAGE_COMMON: "Something wrong, Please check messages below.",
+    ERROR_MESSAGE_506: "Service is not available for your IP address now!",
     ERROR_MESSAGE_404: "Something has gone wrong. Please try again!",
 
     PHONE_NUMBER_INVALID: "Please enter a valid phone number",

@@ -1,6 +1,6 @@
 package com.ratchethealth.client.exceptions;
 
-class AccountValidationException extends Exception {
+class AccountValidationException extends RuntimeException {
 
     int limitSeconds;
 

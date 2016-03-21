@@ -1,7 +1,6 @@
 package com.ratchethealth.client
 
 import com.ratchethealth.client.exceptions.AccountValidationException
-import org.codehaus.groovy.grails.web.util.WebUtils
 
 /**
  * Authentication controller for login/logout

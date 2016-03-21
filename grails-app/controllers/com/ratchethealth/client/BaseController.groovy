@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.ratchethealth.client.exceptions.ApiAccessException
+import com.ratchethealth.client.exceptions.ApiIpBlockException
 import com.ratchethealth.client.exceptions.ApiReturnException
 
 /**
@@ -20,6 +21,19 @@ class BaseController {
         }
     }
 
+    def handleApiIpBlockException(ApiIpBlockException e) {
+        log.error("API IP block exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
+        def status = 506
+        def message = g.message(code: 'default.error.506.message')
+        if (request.isXhr()) {
+            render status: status, text: message
+        } else {
+            flash.errorMsg = message
+            redirect(uri: "/login")
+        }
+        return
+    }
+
     def handleApiAccessException(ApiAccessException e) {
         log.error("API Access exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
         def status = 503
@@ -29,6 +43,7 @@ class BaseController {
         } else {
             render view: '/error/error503'
         }
+        return
     }
 
     def handleApiReturnException(ApiReturnException e) {
