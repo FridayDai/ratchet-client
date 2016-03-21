@@ -339,6 +339,23 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.source( { term: value }, this._response() );
     },
 
+    _searchTimeout: function( event ) {
+
+        clearTimeout( this.searching );
+        this.searching = this._delay(function() {
+
+            // Search if the value has changed, or if the user retypes the same value (see #7434)
+            var equalValues = this.term === this._value(),
+                menuVisible = this.menu.element.is( ":visible" ),
+                modifierKey = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+
+            if ( this._value() && (!equalValues || ( equalValues && !menuVisible && !modifierKey ))) {
+                this.selectedItem = null;
+                this.search( null, event );
+            }
+        }, this.options.delay );
+    },
+
     _response: function() {
         var index = ++this.requestIndex;
 
@@ -519,6 +536,24 @@ $.widget("ui.combobox", {
                 }
             }, this.options));
 
+        function clear(element) {
+            $(element).trigger('autocompleteclear');
+
+            $(element)
+                .val('')
+                .data("id", '')
+                .data("saved", {
+                    label: '',
+                    value: ''
+                });
+        }
+
+        this.element.on('blur', function () {
+            if ($(this).val() === '') {
+                clear(this);
+            }
+        });
+
         $("<a />")
             .insertAfter(this.element)
             .button({
@@ -533,7 +568,9 @@ $.widget("ui.combobox", {
                     return;
                 }
 
-                if (self.element.autocomplete("widget").is(":visible")) {
+                var $menu = self.element.autocomplete("widget");
+
+                if ($menu.is(":visible")) {
                     self.element.autocomplete("close");
                     return;
                 }
@@ -542,7 +579,13 @@ $.widget("ui.combobox", {
                 //self.element.autocomplete("search", self.element.val());
                 //self.element.focus();
                 //$(self.element).data('uiAutocomplete').options.focusSearch = true;
-                self.element.trigger('click');
+
+                if ($menu.children().length > 0) {
+                    self.element.trigger('click');
+                } else {
+                    self.element.autocomplete("search", self.element.val());
+                }
+
                 self.element.focus();
             });
 
