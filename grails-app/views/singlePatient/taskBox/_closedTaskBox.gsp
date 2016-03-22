@@ -18,7 +18,7 @@
                             <div class="title">ATTENTION!</div>
 
                             <div class="sub-title">This item needs attention.</div>
-                            <button class="btn resolve">Click to Resolve.</button>
+                            <button class="btn resolve">Click to Resolve</button>
                         </div>
                     </li>
                 </ul>
