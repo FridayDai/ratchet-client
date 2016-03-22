@@ -59,6 +59,7 @@
                                         </g:if>
                                     </span>
                                     <span class="text">Physician:</span>
+                                    <span class="underline-text">${mixedResult['1-4s']}</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
