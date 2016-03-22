@@ -48,7 +48,7 @@
                         <span class="pain-percent"><g:if test="${mixedResult['19']}">- -</g:if><g:else>${mixedResult['18']?: '0'}%</g:else></span>
                     </div>
                     <div class="answer-line">
-                        The patient no back, buttock or leg pain
+                        The patient has no back, buttock or leg pain
                         <label>
                             <g:if test="${mixedResult['19']}">
                                 <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked />
