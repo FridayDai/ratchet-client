@@ -25,8 +25,11 @@ function attentionResolveTip(){
 
     this.after('initialize', function () {
         $('.attention-menu').menu({
-            position: {my: "top center", at: "right center"}
-            //position: {my: "right center", at: "right bottom"}
+            position: {
+                my: "top center",
+                at: "right center",
+                collision: "fit"
+            }
         });
 
         this.on('click', {
