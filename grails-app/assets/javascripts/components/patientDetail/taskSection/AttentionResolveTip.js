@@ -1,6 +1,8 @@
 require("jquery-ui-menu");
 var URLs = require('../../../constants/Urls');
 
+var NO_FOLLOW_REQUESTED = "<div>Follow up not requested</div>";
+
 function attentionResolveTip(){
 
     this.attributes({
@@ -17,6 +19,7 @@ function attentionResolveTip(){
             success: function (data) {
                 if (data === 'true') {
                     $taskBox.find('.attention').remove();
+                    $taskBox.find('.box-item-content').html(NO_FOLLOW_REQUESTED);
                 }
             }
         });
