@@ -240,6 +240,7 @@ function Treatment() {
         this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);
 
         this.on('noActiveTask', this.onNoActiveTask);
+        this.on('onlyVoiceTaskInActive', this.onNoActiveTask);
     });
 
     this.before('teardown', function () {

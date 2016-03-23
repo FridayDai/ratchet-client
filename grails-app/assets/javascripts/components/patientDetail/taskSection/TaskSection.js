@@ -135,21 +135,21 @@ function TaskSection() {
             type: "POST",
             success: function (data) {
                 if (data === 'true') {
-                    var $taskRow = $taskBox.closest('.task-row');
+                    //var $taskRow = $taskBox.closest('.task-row');
+                    //var item = $taskRow.get(0).id.replace(/.*-(\w+)$/, "$1");
 
-                    var item = $taskRow.get(0).id.replace(/.*-(\w+)$/, "$1");
-
-                    _.remove(me.taskBoxData[item].all, function (n) {
-                        return n === +taskId;
-                    });
-
-                    if (_.indexOf(me.taskBoxData[item].voice, taskId) > 0) {
-                        _.remove(me.taskBoxData[item].voice, function (n) {
-                            return n === +taskId;
-                        });
-                    }
+                    //_.remove(me.taskBoxData[item].all, function (n) {
+                    //    return n === +taskId;
+                    //});
+                    //
+                    //if (_.indexOf(me.taskBoxData[item].voice, taskId) > 0) {
+                    //    _.remove(me.taskBoxData[item].voice, function (n) {
+                    //        return n === +taskId;
+                    //    });
+                    //}
 
                     $taskBox.remove();
+                    me.countActiveTasks();
                     me.checkIfHasTasks($taskRow);
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
                 }
@@ -172,81 +172,96 @@ function TaskSection() {
     };
 
     //Filter component
-    this.onFilterButtonClicked = function (e) {
-        var me = this;
-        var button = $(e.target);
-        var item = button.closest('.task-row').get(0).id;
+    //this.onFilterButtonClicked = function (e) {
+    //    var me = this;
+    //    var button = $(e.target);
+    //    var item = button.closest('.task-row').get(0).id;
+    //
+    //    var tasks = this.taskBoxData[item.replace(/.*-(\w+)$/, "$1")];
+    //    button.toggleClass('active');
+    //
+    //    if (this.filterClicked) {
+    //        this.filterClicked = false;
+    //        me.renderTaskBox(tasks.all, tasks.all);
+    //    } else {
+    //        this.filterClicked = true;
+    //        me.renderTaskBox(tasks.all, tasks.voice);
+    //    }
+    //};
+    //
+    //this.renderTaskBox = function (all, show) {
+    //    var showBox, hideBox;
+    //    if (all === show) {
+    //        showBox = _.reduce(_.map(all, function (id) {
+    //            return $('#' + id);
+    //        }), function (pre, current) {
+    //            return $.merge(pre, current);
+    //        });
+    //
+    //        if (showBox) {
+    //            showBox.show();
+    //        }
+    //    } else {
+    //        var exclude = _.difference(all, show);
+    //        hideBox = _.reduce(_.map(exclude, function (id) {
+    //            return $('#' + id);
+    //        }), function (pre, current) {
+    //            return $.merge(pre, current);
+    //        });
+    //
+    //        if (hideBox) {
+    //            hideBox.hide();
+    //        }
+    //    }
+    //
+    //};
 
-        var tasks = this.taskBoxData[item.replace(/.*-(\w+)$/, "$1")];
-        button.toggleClass('active');
+    //this.storeTaskBox = function () {
+    //    this.taskBoxData = {};
+    //    this.taskBoxData.active = {
+    //        all: this.select('activeRowSelector').data('tasksId'),
+    //        voice: this.select('activeRowSelector').data('tasksVoice')
+    //    };
+    //
+    //    this.taskBoxData.closed = {
+    //        all: this.select('closedRowSelector').data('tasksId'),
+    //        voice: this.select('closedRowSelector').data('tasksVoice')
+    //    };
+    //
+    //    this.taskBoxData.schedule = {
+    //        all: this.select('scheduleItemsContainerSelector').data('tasksId'),
+    //        voice: this.select('scheduleItemsContainerSelector').data('tasksVoice')
+    //    };
+    //};
 
-        if (this.filterClicked) {
-            this.filterClicked = false;
-            me.renderTaskBox(tasks.all, tasks.all);
-        } else {
-            this.filterClicked = true;
-            me.renderTaskBox(tasks.all, tasks.voice);
-        }
-    };
-
-    this.renderTaskBox = function (all, show) {
-        var showBox, hideBox;
-        if (all === show) {
-            showBox = _.reduce(_.map(all, function (id) {
-                return $('#' + id);
-            }), function (pre, current) {
-                return $.merge(pre, current);
-            });
-
-            if (showBox) {
-                showBox.show();
+    this.countActiveTasks = function() {
+        var tasks = this.select('activeItemsContainerSelector').find('.box-item') || [];
+        var voiceTaskSize = 0;
+        _.forEach(tasks, function (task) {
+            if($(task).data('toolType') == "VOICE") {
+                voiceTaskSize++;
             }
-        } else {
-            var exclude = _.difference(all, show);
-            hideBox = _.reduce(_.map(exclude, function (id) {
-                return $('#' + id);
-            }), function (pre, current) {
-                return $.merge(pre, current);
-            });
+        });
 
-            if (hideBox) {
-                hideBox.hide();
-            }
+        if( tasks.length === voiceTaskSize) {
+            this.trigger('onlyVoiceTaskInActive');
         }
-
-    };
-
-    this.storeTaskBox = function () {
-        this.taskBoxData = {};
-        this.taskBoxData.active = {
-            all: this.select('activeRowSelector').data('tasksId'),
-            voice: this.select('activeRowSelector').data('tasksVoice')
-        };
-
-        this.taskBoxData.closed = {
-            all: this.select('closedRowSelector').data('tasksId'),
-            voice: this.select('closedRowSelector').data('tasksVoice')
-        };
-
-        this.taskBoxData.schedule = {
-            all: this.select('scheduleItemsContainerSelector').data('tasksId'),
-            voice: this.select('scheduleItemsContainerSelector').data('tasksVoice')
-        };
     };
 
 
     this.after('initialize', function () {
         this.setBasicIds();
         this.checkActiveItemStatus();
-        this.storeTaskBox();
+        this.countActiveTasks();
+        //this.storeTaskBox();
 
         this.on(document, 'emailStatusUpdated', this.onEmailStatusUpdated);
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
             beginTaskButtonSelector: this.onTaskBeginButtonClicked,
-            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
-            filterButtonSelector: this.onFilterButtonClicked
+            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
+            //filterButtonSelector: this.onFilterButtonClicked
         });
     });
 }

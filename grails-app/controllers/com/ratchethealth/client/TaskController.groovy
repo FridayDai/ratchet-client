@@ -19,33 +19,18 @@ class TaskController extends BaseController {
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
-        def allTasksId
-        def activeTasksId = [], closedTasksId = [], scheduleTasksId = [],
-                activeVoiceTasksId = [], closedVoiceTasksId = [], scheduleVoiceTasksId = []
 
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
                     scheduleTasks.add(task)
-                    scheduleTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        scheduleVoiceTasksId.add(task.id)
-                    }
                     continue
                 case StatusCodeConstants.TASK_STATUS_PENDING:
                 case StatusCodeConstants.TASK_STATUS_OVERDUE:
                     activeTasks.add(task)
-                    activeTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        activeVoiceTasksId.add(task.id)
-                    }
                     continue
                 default:
                     closedTasks.add(task)
-                    closedTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        closedVoiceTasksId.add(task.id)
-                    }
             }
         }
 
@@ -53,39 +38,18 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
-        def activeTasksIdArray = [
-                all: activeTasksId,
-                voice: activeVoiceTasksId
-        ]
-
-        def closedTasksIdArray = [
-                all: closedTasksId,
-                voice: closedVoiceTasksId
-        ]
-
-        def scheduleTasksIdArray = [
-                all: scheduleTasksId,
-                voice: scheduleVoiceTasksId
-        ]
-
-        allTasksId = [
-                activeTasksId  : activeTasksIdArray,
-                closedTasksId  : closedTasksIdArray,
-                scheduleTasksId: scheduleTasksIdArray
-        ]
 
         render view: '/singlePatient/task',
                 model: [
-                        activeTasks       : activeTasks,
-                        closedTasks       : closedTasks,
-                        scheduleTasks     : scheduleTasks,
-                        allTasksId        : allTasksId,
-                        clientId          : clientId,
-                        patientId         : patientId,
-                        medicalRecordId   : medicalRecordId,
-                        archived          : archived,
-                        PatientEmailStatus: PatientEmailStatus,
-                        accountId         : accountId
+                        activeTasks        : activeTasks,
+                        closedTasks        : closedTasks,
+                        scheduleTasks      : scheduleTasks,
+                        clientId           : clientId,
+                        patientId          : patientId,
+                        medicalRecordId    : medicalRecordId,
+                        archived           : archived,
+                        PatientEmailStatus : PatientEmailStatus,
+                        accountId          : accountId
                 ]
     }
 
