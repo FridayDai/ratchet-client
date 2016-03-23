@@ -135,7 +135,8 @@ function TaskSection() {
             type: "POST",
             success: function (data) {
                 if (data === 'true') {
-                    //var $taskRow = $taskBox.closest('.task-row');
+                    var $taskRow = $taskBox.closest('.task-row');
+
                     //var item = $taskRow.get(0).id.replace(/.*-(\w+)$/, "$1");
 
                     //_.remove(me.taskBoxData[item].all, function (n) {
@@ -238,7 +239,7 @@ function TaskSection() {
         var tasks = this.select('activeItemsContainerSelector').find('.box-item') || [];
         var voiceTaskSize = 0;
         _.forEach(tasks, function (task) {
-            if($(task).data('toolType') == "VOICE") {
+            if($(task).data('toolType') === "VOICE") {
                 voiceTaskSize++;
             }
         });
