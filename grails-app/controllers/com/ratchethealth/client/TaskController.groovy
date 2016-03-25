@@ -19,33 +19,23 @@ class TaskController extends BaseController {
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
-        def allTasksId
-        def activeTasksId = [], closedTasksId = [], scheduleTasksId = [],
-                activeVoiceTasksId = [], closedVoiceTasksId = [], scheduleVoiceTasksId = []
+        def activeTaskTypeArray = [], closedTaskTypeArray = [], scheduleTaskTypeArray = []
+        def taskType
 
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
                     scheduleTasks.add(task)
-                    scheduleTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        scheduleVoiceTasksId.add(task.id)
-                    }
+                    unionTaskType(task.testId, scheduleTaskTypeArray)
                     continue
                 case StatusCodeConstants.TASK_STATUS_PENDING:
                 case StatusCodeConstants.TASK_STATUS_OVERDUE:
                     activeTasks.add(task)
-                    activeTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        activeVoiceTasksId.add(task.id)
-                    }
+                    unionTaskType(task.testId, activeTaskTypeArray)
                     continue
                 default:
                     closedTasks.add(task)
-                    closedTasksId.add(task.id)
-                    if(RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
-                        closedVoiceTasksId.add(task.id)
-                    }
+                    unionTaskType(task.testId, closedTaskTypeArray)
             }
         }
 
@@ -53,25 +43,10 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
-        def activeTasksIdArray = [
-                all: activeTasksId,
-                voice: activeVoiceTasksId
-        ]
-
-        def closedTasksIdArray = [
-                all: closedTasksId,
-                voice: closedVoiceTasksId
-        ]
-
-        def scheduleTasksIdArray = [
-                all: scheduleTasksId,
-                voice: scheduleVoiceTasksId
-        ]
-
-        allTasksId = [
-                activeTasksId  : activeTasksIdArray,
-                closedTasksId  : closedTasksIdArray,
-                scheduleTasksId: scheduleTasksIdArray
+        taskType = [
+                activeType  : activeTaskTypeArray,
+                closedType  : closedTaskTypeArray,
+                scheduleType: scheduleTaskTypeArray
         ]
 
         render view: '/singlePatient/task',
@@ -79,7 +54,7 @@ class TaskController extends BaseController {
                         activeTasks       : activeTasks,
                         closedTasks       : closedTasks,
                         scheduleTasks     : scheduleTasks,
-                        allTasksId        : allTasksId,
+                        taskType          : taskType,
                         clientId          : clientId,
                         patientId         : patientId,
                         medicalRecordId   : medicalRecordId,
@@ -211,5 +186,12 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    private static unionTaskType(taskType, typeArray) {
+        if (!typeArray.contains(taskType)) {
+            typeArray.add(taskType)
+        }
+        return typeArray
     }
 }

@@ -32,9 +32,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Review injection results (Injection date:
-                                        <span class="underline-text">${mixedResult['1-2s']}</span>
-                                        )</span>
+                                    <span class="text">Review injection results</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -52,10 +50,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Post-operative follow-up (Surgery date:
-                                        <span class="underline-text">${mixedResult['1-4s']}</span>
-                                        )
-                                    </span>
+                                    <span class="text">Post-operative follow-up</span>
 
                                 </li>
                                 <li class="answer">

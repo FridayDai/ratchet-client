@@ -1,6 +1,8 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
+     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
+     data-tool-type="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType]}"
+     data-task-type="${task?.testId}">
 
     <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
 

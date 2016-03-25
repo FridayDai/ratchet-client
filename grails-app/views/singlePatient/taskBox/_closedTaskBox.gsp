@@ -1,6 +1,7 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
+     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
+     data-task-type="${task?.testId}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
         <div class="new-flag-ribbon-wrapper">
@@ -18,7 +19,7 @@
                             <div class="title">ATTENTION!</div>
 
                             <div class="sub-title">This item needs attention.</div>
-                            <button class="btn resolve">Click to Resolve.</button>
+                            <button class="btn resolve">Click to Resolve</button>
                         </div>
                     </li>
                 </ul>

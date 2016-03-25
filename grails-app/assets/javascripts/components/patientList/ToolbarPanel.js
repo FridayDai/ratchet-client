@@ -29,6 +29,7 @@ function ToolbarPanel() {
             treatment: this.child.treatmentFieldSelector.getDisplayItem(),
             provider: this.child.providerFieldSelector.getDisplayItem(),
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
+            attention: this.child.attentionStatusFieldSelector.getDisplayItem(),
             patientIdOrName: this._patientIdOrNamePreviousVal
         };
     };
@@ -62,6 +63,7 @@ function ToolbarPanel() {
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
         this.child.providerFieldSelector.setDisplayItem(toolbarData.provider);
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);
+        this.child.attentionStatusFieldSelector.setDisplayItem(toolbarData.attention);
     };
 
     this.after('initialize', function () {
