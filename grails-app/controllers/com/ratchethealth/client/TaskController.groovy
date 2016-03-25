@@ -19,18 +19,23 @@ class TaskController extends BaseController {
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
+        def activeTaskTypeArray = [], closedTaskTypeArray = [], scheduleTaskTypeArray = []
+        def taskType
 
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
                     scheduleTasks.add(task)
+                    unionTaskType(task.testId, scheduleTaskTypeArray)
                     continue
                 case StatusCodeConstants.TASK_STATUS_PENDING:
                 case StatusCodeConstants.TASK_STATUS_OVERDUE:
                     activeTasks.add(task)
+                    unionTaskType(task.testId, activeTaskTypeArray)
                     continue
                 default:
                     closedTasks.add(task)
+                    unionTaskType(task.testId, closedTaskTypeArray)
             }
         }
 
@@ -38,18 +43,24 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
+        taskType = [
+                activeType  : activeTaskTypeArray,
+                closedType  : closedTaskTypeArray,
+                scheduleType: scheduleTaskTypeArray
+        ]
 
         render view: '/singlePatient/task',
                 model: [
-                        activeTasks        : activeTasks,
-                        closedTasks        : closedTasks,
-                        scheduleTasks      : scheduleTasks,
-                        clientId           : clientId,
-                        patientId          : patientId,
-                        medicalRecordId    : medicalRecordId,
-                        archived           : archived,
-                        PatientEmailStatus : PatientEmailStatus,
-                        accountId          : accountId
+                        activeTasks       : activeTasks,
+                        closedTasks       : closedTasks,
+                        scheduleTasks     : scheduleTasks,
+                        taskType          : taskType,
+                        clientId          : clientId,
+                        patientId         : patientId,
+                        medicalRecordId   : medicalRecordId,
+                        archived          : archived,
+                        PatientEmailStatus: PatientEmailStatus,
+                        accountId         : accountId
                 ]
     }
 
@@ -175,5 +186,12 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    private static unionTaskType(taskType, typeArray) {
+        if (!typeArray.contains(taskType)) {
+            typeArray.add(taskType)
+        }
+        return typeArray
     }
 }

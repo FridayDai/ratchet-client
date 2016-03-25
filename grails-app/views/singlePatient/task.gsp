@@ -1,3 +1,4 @@
+<%@ page import="com.ratchethealth.client.RatchetConstants" %>
 <g:if test="${archived == 'true'}">
     <g:set var="archivedStatus" value="archived"></g:set>
 </g:if>
@@ -17,10 +18,14 @@
                 <div class="no-item center no-item-sent no-active-item" id="no-active-item"><p>There are no active items</p></div>
             </g:if>
             <g:else>
-                %{--<div class="quick-filter">--}%
-                    %{--<span class="quick-filter-label">Filter:</span>--}%
-                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
-                %{--</div>--}%
+                <div class="quick-filter">
+                    <span class="quick-filter-label">Filter:</span>
+                    <g:each in="${taskType.activeType}" var="type">
+                        <span class="btn quick-filter-button" data-type="${type}">
+                            ${RatchetConstants.TOOL_TYPE[type]}
+                        </span>
+                    </g:each>
+                </div>
                 <g:each in="${activeTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/activeTaskBox" model="[
                             'task'     : task,
@@ -41,10 +46,14 @@
                 <div class="no-item center no-item-sent"><p>There are no closed items</p></div>
             </g:if>
             <g:else>
-                %{--<div class="quick-filter">--}%
-                    %{--<span class="quick-filter-label">Filter:</span>--}%
-                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
-                %{--</div>--}%
+                <div class="quick-filter">
+                    <span class="quick-filter-label">Filter:</span>
+                    <g:each in="${taskType.closedType}" var="type">
+                        <span class="btn quick-filter-button"  data-type="${type}">
+                            ${RatchetConstants.TOOL_TYPE[type]}
+                        </span>
+                    </g:each>
+                </div>
                 <g:each in="${closedTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/closedTaskBox" model="[
                             'task': task,
@@ -69,10 +78,14 @@
                 <div class="no-item center no-item-schedule"><p>No item has been scheduled yet.</p></div>
             </g:if>
             <g:else>
-                %{--<div class="quick-filter">--}%
-                    %{--<span class="quick-filter-label">Filter:</span>--}%
-                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
-                %{--</div>--}%
+                <div class="quick-filter">
+                    <span class="quick-filter-label">Filter:</span>
+                    <g:each in="${taskType.scheduleType}" var="type">
+                        <span class="btn quick-filter-button"  data-type="${type}">
+                            ${RatchetConstants.TOOL_TYPE[type]}
+                        </span>
+                    </g:each>
+                </div>
                 <g:each in="${scheduleTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/schduleTaskBox" model="['task': task]" />
                 </g:each>

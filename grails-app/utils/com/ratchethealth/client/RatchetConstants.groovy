@@ -26,7 +26,8 @@ class RatchetConstants {
     public static final String TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE = 'Return Patient Questionnaire';
     public static final String TOOL_NAME_KOOS_JR = 'KOSS, JR.';
     public static final String TOOL_NAME_HOOS_JR = 'HOSS, JR.';
-    public static final String TOOL_NAME_PROMIS = 'promis';
+    public static final String TOOL_NAME_PROMIS = 'PROMIS Global Health';
+    public static final String TOOL_NAME_VOICE_CALL = 'Voice Call';
 
     public static final Map TOOL_TYPE = [
             1 : TOOL_NAME_DASH,
@@ -46,6 +47,7 @@ class RatchetConstants {
             17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE,
             15: TOOL_NAME_KOOS_JR,
             1000: TOOL_NAME_HOOS_JR,
+            22: TOOL_NAME_VOICE_CALL
             
     ]
 

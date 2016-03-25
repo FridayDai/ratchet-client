@@ -535,7 +535,7 @@
     }
 
     ul.ui-menu {
-        padding: 24px 4px 10px;
+        padding: 24px 8px 10px;
         background-color: $base-color-white;
         box-shadow: 0 0 0.5em $base-font-color;
         border-radius: 5px;
@@ -568,12 +568,12 @@
     }
 
     .sub-title {
-        padding-bottom: 4px;
+        padding-bottom: 7px;
         font-size: 13px;
     }
 
     .btn {
-        padding: 4px 20px;
+        padding: 4px 32px;
         font-size: 12px;
     }
 
@@ -581,6 +581,7 @@
 
 //filter
 .quick-filter {
+    margin-bottom: 30px;
 }
 
 .quick-filter-label {
@@ -593,11 +594,13 @@
 }
 
 .quick-filter-button {
-    border-radius: 3px 3px 3px 3px;
     display: inline-block;
-    line-height: 1;
     margin: 0 5px 0 0;
     padding: 5px 8px;
+    border: 1px $base-light-grey-color solid;
+    border-radius: 3px 3px 3px 3px;
+    color: $base-light-grey-color;
+    line-height: 1;
 
     &.active {
         color: $base-color-white;
