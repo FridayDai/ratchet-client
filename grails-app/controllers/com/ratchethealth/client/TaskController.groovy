@@ -30,6 +30,11 @@ class TaskController extends BaseController {
                     activeTasks.add(task)
                     continue
                 default:
+                    //Todo: after api update, need to use taskType
+                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
+                        def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
+                        task = task << viewResult
+                    }
                     closedTasks.add(task)
             }
         }
@@ -41,15 +46,15 @@ class TaskController extends BaseController {
 
         render view: '/singlePatient/task',
                 model: [
-                        activeTasks        : activeTasks,
-                        closedTasks        : closedTasks,
-                        scheduleTasks      : scheduleTasks,
-                        clientId           : clientId,
-                        patientId          : patientId,
-                        medicalRecordId    : medicalRecordId,
-                        archived           : archived,
-                        PatientEmailStatus : PatientEmailStatus,
-                        accountId          : accountId
+                        activeTasks       : activeTasks,
+                        closedTasks       : closedTasks,
+                        scheduleTasks     : scheduleTasks,
+                        clientId          : clientId,
+                        patientId         : patientId,
+                        medicalRecordId   : medicalRecordId,
+                        archived          : archived,
+                        PatientEmailStatus: PatientEmailStatus,
+                        accountId         : accountId
                 ]
     }
 
@@ -175,5 +180,12 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    private getVoiceResult(patientId, medicalRecordId, taskId) {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
+        return resp
     }
 }

@@ -103,6 +103,26 @@ class TaskService extends RatchetAPIService{
         }
     }
 
+    def viewVoiceResult(String token, clientId, patientId, medicalRecordId, taskId) {
+        String voiceTaskUrl = grailsApplication.config.ratchetv2.server.url.task.callVoice
+        def url = String.format(voiceTaskUrl, clientId, patientId, medicalRecordId, taskId)
+
+        log.info("Call backend service to view voice result task, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                    .asString()
+
+            if (resp.status == 200) {
+                log.info("Get task result success, token: ${token}")
+
+                JSON.parse(resp.body)
+            }
+            else {
+                handleError(resp)
+            }
+        }
+    }
+
     def resolveAttention(String token, clientId, patientId, medicalRecordId, taskId) {
         String resolveVoiceUrl = grailsApplication.config.ratchetv2.server.url.task.resolveVoice
         def url = String.format(resolveVoiceUrl, clientId, patientId, medicalRecordId, taskId)
