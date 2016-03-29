@@ -19,7 +19,12 @@
         </div>
 
         <div id="patients-toolbar" class="inner-search">
+
             <div class="search-content clear">
+                <div class="filler-content combined-search">
+                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
+                    <span class="search" id="search-btn"></span>
+                </div>
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
                     <input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"
@@ -43,10 +48,6 @@
                            class="input-group input-auto-search"/>
                 </div>
 
-                <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
-                    <span class="search" id="search-btn"></span>
-                </div>
             </div>
         </div>
 
