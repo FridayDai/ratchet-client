@@ -31,7 +31,6 @@ class BaseController {
             flash.errorMsg = message
             redirect(uri: "/login")
         }
-        return
     }
 
     def handleApiAccessException(ApiAccessException e) {
@@ -43,7 +42,6 @@ class BaseController {
         } else {
             render view: '/error/error503'
         }
-        return
     }
 
     def handleApiReturnException(ApiReturnException e) {
