@@ -102,7 +102,7 @@
 
             <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank"
-                   class="view-results"><span>View Results</span></a>
+                   class="operation view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
         <g:else>

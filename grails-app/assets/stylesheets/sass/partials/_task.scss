@@ -233,6 +233,24 @@
     background-color: $base-color-archived-bg;
     box-shadow: 0 0 0.5em $base-font-color;
 
+    .item-column {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        //only in IE10
+        -ms-flex-pack: distribute;
+
+        width: 100%;
+        padding-left: 7px;
+    }
+
+    .column-bottom {
+        padding-bottom: 10px;
+    }
+
     .sub-item {
         display: inline-block;
         padding-right: 30px;
@@ -271,30 +289,6 @@
         font-size: 13px;
     }
 
-    .view-results {
-        float: right;
-        margin: 1px 5px 0 0;
-        color: $base-color-white;
-        position: relative;
-
-        &:before {
-            position: absolute;
-            top: 4px;
-            left: -12px;
-            content: '\f425';
-            font-family: ionicons;
-            font-size: 13px;
-        }
-
-        span {
-            font-size: 11px;
-        }
-
-        &:hover span {
-            text-decoration: underline;
-        }
-    }
-
     .operation {
         position: absolute;
         top: 0;
@@ -322,6 +316,24 @@
 
         &:hover + .tip {
             display: block;
+        }
+    }
+
+    .view-results {
+        width: 104px;
+
+        &:before {
+            content: '\f425';
+            left: -5px;
+        }
+
+        span {
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        &:hover span {
+            text-decoration: underline;
         }
     }
 
