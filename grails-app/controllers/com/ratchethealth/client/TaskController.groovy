@@ -31,7 +31,7 @@ class TaskController extends BaseController {
                     continue
                 default:
                     //Todo: after api update, need to use taskType
-                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE") {
+                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
                         def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
                         task = task << viewResult
                     }
