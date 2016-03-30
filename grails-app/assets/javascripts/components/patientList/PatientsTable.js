@@ -18,6 +18,20 @@ var ALL_ACTIVE_PATIENT_FILTER = [
     '</div>'
 ].join('');
 
+var TABLE_SEARCH_EVENTS = [
+    'selectTreatmentForPatientTable',
+    'clearTreatmentForPatientTable',
+    'selectProviderForPatientTable',
+    'clearProviderForPatientTable',
+    'selectEmailStatusForPatientTable',
+    'clearEmailStatusForPatientTable',
+    'selectAttentionStatusForPatientTable',
+    'clearAttentionStatusForPatientTable',
+    'selectTreatmentStatusForPatientTable',
+    'clearTreatmentStatusForPatientTable',
+    'selectPatientIDNameForPatientTable'
+];
+
 function PatientsTable() {
     this.attributes({
         url: URLs.GET_PATIENTS
@@ -148,6 +162,8 @@ function PatientsTable() {
         surgeonId: null,
         emailStatus: null,
         patientIdOrName: null,
+        attentionStatus: null,
+        treatmentStatus: null,
         activeTreatmentOnly: true
     };
 
@@ -227,17 +243,12 @@ function PatientsTable() {
         this.initAllActivePatientFilter();
 
         this.on(document, 'refreshPatientsTable', this.onTableRefresh);
-        this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+
+        _.each(TABLE_SEARCH_EVENTS, function(event) {
+            this.on(document, event, this.onTriggerSearch);
+        }, this);
     });
 
     this.before('teardown', function () {

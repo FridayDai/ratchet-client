@@ -16,6 +16,11 @@
     .combined-search {
         margin-top: 32px;
         margin-right: 28px;
+        max-width: 280px;
+
+        input {
+            min-width: 220px;
+        }
     }
     .ui-combobox{
         input {
@@ -541,19 +546,6 @@
 
         &:hover {
             color: #225f6f;
-        }
-    }
-}
-
-#patients-toolbar {
-    @media screen and (max-width: 1510px) {
-        .filler-content.right-search {
-            float: left;
-            max-width: inherit;
-
-            .search-input {
-                width: 250px;
-            }
         }
     }
 }

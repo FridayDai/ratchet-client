@@ -65,6 +65,14 @@ module.exports = {
         {label: "Not Required", value: 2}
     ],
 
+    TREATMENT_STATUS_FILTER: [
+        {label: "Pre-Op", value: 1},
+        {label: "Post-Op 0-3 days", value: 2},
+        {label: "Post-Op 0-9 days", value: 3},
+        {label: "Post-Op 90 days +", value: 4},
+        {label: "No Surgery Date", value: 5}
+    ],
+
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10

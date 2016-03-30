@@ -48,6 +48,11 @@
                            class="input-group input-auto-search"/>
                 </div>
 
+                <div class="filler-content">
+                    <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
+                    <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
+                           class="input-group input-auto-search"/>
+                </div>
             </div>
         </div>
 

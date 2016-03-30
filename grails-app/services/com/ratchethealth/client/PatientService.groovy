@@ -73,75 +73,50 @@ class PatientService extends RatchetAPIService {
         def emailStatus = patientPagination?.emailStatus
         def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
         def attentionStatus = patientPagination?.attentionStatus
+        def treatmentStatus = patientPagination?.treatmentStatus
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
 
+        def queryStrings = [
+            'max': length,
+            'offset': start,
+            "clientId": clientId,
+            "patientType": patientType,
+            "treatmentId": treatmentId,
+            "surgeonId": surgeonId,
+            "patientIdOrName": patientIdOrName,
+            "emailStatus": emailStatus,
+            "order": sortDir,
+            "sorted": sortFiled,
+            "treatmentStatus": treatmentStatus,
+            "activeTreatmentOnly": activeTreatmentOnly
+        ];
+
         if (attentionStatus) {
-            withGet(token, url) { req ->
-                def resp = req
-                        .queryString("max", length)
-                        .queryString("offset", start)
-                        .queryString("clientId", clientId)
-                        .queryString("patientType", patientType)
-                        .queryString("treatmentId", treatmentId)
-                        .queryString("surgeonId", surgeonId)
-                        .queryString("patientIdOrName", patientIdOrName)
-                        .queryString("emailStatus", emailStatus)
-                        .queryString("order", sortDir)
-                        .queryString("sorted", sortFiled)
-                        .queryString("activeTreatmentOnly", activeTreatmentOnly)
-                        .queryString("isAttentionNeeded", attentionStatus == 1)
-                        .asString()
-
-                if (resp.status == 200) {
-                    def result = JSON.parse(resp.body)
-
-                    log.info("Get patients success, token: ${token}")
-
-                    [
-                            "recordsTotal"   : result.totalCount,
-                            "recordsFiltered": result.totalCount,
-                            "data"           : result.items
-                    ]
-                } else {
-                    handleError(resp)
-                }
-            }
-
-        } else {
-
-            withGet(token, url) { req ->
-                def resp = req
-                        .queryString("max", length)
-                        .queryString("offset", start)
-                        .queryString("clientId", clientId)
-                        .queryString("patientType", patientType)
-                        .queryString("treatmentId", treatmentId)
-                        .queryString("surgeonId", surgeonId)
-                        .queryString("patientIdOrName", patientIdOrName)
-                        .queryString("emailStatus", emailStatus)
-                        .queryString("order", sortDir)
-                        .queryString("sorted", sortFiled)
-                        .queryString("activeTreatmentOnly", activeTreatmentOnly)
-                        .asString()
-
-
-                if (resp.status == 200) {
-                    def result = JSON.parse(resp.body)
-
-                    log.info("Get patients success, token: ${token}")
-
-                    [
-                            "recordsTotal"   : result.totalCount,
-                            "recordsFiltered": result.totalCount,
-                            "data"           : result.items
-                    ]
-                } else {
-                    handleError(resp)
-                }
-            }
+            queryStrings['isAttentionNeeded'] = attentionStatus == 1
         }
 
+        queryStrings = queryStrings.findAll { key, value -> value != null }
+
+        withGet(token, url) { req ->
+            def resp = req
+                    .queryString(queryStrings)
+                    .asString()
+
+            if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
+
+                log.info("Get patients success, token: ${token}")
+
+                [
+                        "recordsTotal"   : result.totalCount,
+                        "recordsFiltered": result.totalCount,
+                        "data"           : result.items
+                ]
+            } else {
+                handleError(resp)
+            }
+        }
     }
 }
