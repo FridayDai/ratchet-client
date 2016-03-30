@@ -25,17 +25,18 @@ class TaskController extends BaseController {
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
+                    unionTaskType(task, scheduleTaskTypeArray)
                     scheduleTasks.add(task)
-                    unionTaskType(task.testId, scheduleTaskTypeArray)
                     continue
                 case StatusCodeConstants.TASK_STATUS_PENDING:
                 case StatusCodeConstants.TASK_STATUS_OVERDUE:
+                    unionTaskType(task, activeTaskTypeArray)
                     activeTasks.add(task)
-                    unionTaskType(task.testId, activeTaskTypeArray)
                     continue
                 default:
+                    unionTaskType(task, closedTaskTypeArray)
                     closedTasks.add(task)
-                    unionTaskType(task.testId, closedTaskTypeArray)
+
             }
         }
 
@@ -188,10 +189,16 @@ class TaskController extends BaseController {
         render resp
     }
 
-    private static unionTaskType(taskType, typeArray) {
-        if (!typeArray.contains(taskType)) {
-            typeArray.add(taskType)
+    private static unionTaskType(task, typeArray) {
+        //Todo: we need defined taskType in api!
+        if(RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE") {
+            task.taskType = RatchetConstants.TASK_TYPE_VOICE_CALL
+        } else {
+            task.taskType = task.testId
         }
-        return typeArray
+
+        if (!typeArray.contains(task.taskType)) {
+            typeArray.add(task.taskType)
+        }
     }
 }

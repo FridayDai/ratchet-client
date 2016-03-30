@@ -5,6 +5,9 @@ class RatchetConstants {
     public static final DEFAULT_PAGE_SIZE = 20
     public static final DEFAULT_PAGE_OFFSET = 0
 
+    // Task
+    public static final TASK_TYPE_VOICE_CALL = 101
+
     public static final Map BASE_TOOL_TYPE = [
             2: "OUTCOME",
             4: "VOICE"
@@ -47,8 +50,7 @@ class RatchetConstants {
             17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE,
             15: TOOL_NAME_KOOS_JR,
             1000: TOOL_NAME_HOOS_JR,
-            22: TOOL_NAME_VOICE_CALL
-            
+            101: TOOL_NAME_VOICE_CALL
     ]
 
     //Task type which hasn't task score.
