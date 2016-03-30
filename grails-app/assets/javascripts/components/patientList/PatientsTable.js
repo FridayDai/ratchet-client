@@ -93,7 +93,7 @@ function PatientsTable() {
                     if (birthday) {
                         return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
                     } else {
-                        return '<span class="not-available">Not Available</span>'
+                        return '<span class="not-available">Not Available</span>';
                     }
                 },
                 width: "10%"
