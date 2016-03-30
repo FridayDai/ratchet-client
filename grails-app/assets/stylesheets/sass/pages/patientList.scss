@@ -449,11 +449,6 @@
         }
     }
 
-    &.not-available {
-        font-weight: 400;
-        color: $base-font-color;
-    }
-
     &.unverified:before {
         color: $base-color-pending;
     }
@@ -462,6 +457,12 @@
         color: $base-color-overdue;
     }
 }
+
+.not-available {
+    font-weight: 400;
+    color: $base-font-color;
+}
+
 
 .email-status-unverified {
     background-color: rgba(253, 193, 91, 0.07);

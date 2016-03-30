@@ -6,6 +6,7 @@ var URLs = require('../../constants/Urls');
 var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
+var moment = require('moment');
 
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
@@ -48,7 +49,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
-                width: "20%"
+                width: "18%"
             }, {
                 targets: 2,
                 data: 'email',
@@ -63,7 +64,7 @@ function PatientsTable() {
                         return full.email;
                     }
                 },
-                width: "30%"
+                width: "25%"
             }, {
                 targets: 3,
                 data: 'phoneNumber',
@@ -83,9 +84,22 @@ function PatientsTable() {
 
                     return phoneNumber;
                 },
-                width: "15%"
+                width: "12%"
             }, {
                 targets: 4,
+                data: 'birthday',
+                render: function (data, type, full) {
+                    var birthday = data === undefined ? full.birthday : data;
+                    if (birthday) {
+                        return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
+                    } else {
+                        return '<span class="not-available">Not Available</span>'
+                    }
+                },
+                width: "10%"
+            },
+            {
+                targets: 5,
                 data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
@@ -102,7 +116,7 @@ function PatientsTable() {
                 width: "15%",
                 orderable: false
             }, {
-                targets: 5,
+                targets: 6,
                 data: 'id',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
@@ -111,11 +125,11 @@ function PatientsTable() {
                 width: "8%",
                 orderable: false
             }, {
-                targets: 6,
+                targets: 7,
                 data: 'status',
                 "visible": false
             }, {
-                targets: 7,
+                targets: 8,
                 data: 'isAttentionNeeded',
                 "visible": false
             }

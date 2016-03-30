@@ -60,6 +60,7 @@
                     <th>Name</th>
                     <th>Email Address</th>
                     <th>Phone Number</th>
+                    <th>Birthday</th>
                     <th>Task Status</th>
                     <th></th>
                 </tr>
@@ -71,6 +72,7 @@
                         <td>${patient.firstName} ${patient.lastName}</td>
                         <td>${patient.email ?: ''}</td>
                         <td>${patient.phoneNumber}</td>
+                        <td>${patient.birthday ?: ''}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
