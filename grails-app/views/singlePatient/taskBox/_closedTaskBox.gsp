@@ -1,6 +1,7 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
+     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
+     data-task-type="${task?.taskType}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
         <div class="new-flag-ribbon-wrapper">
@@ -8,7 +9,14 @@
         </div>
     </g:if>
 
-    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.completeTime]"/>
+    <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.isAttentionNeeded}">
+        <div class="attention-menu">
+            <div class="attention">
+                <span class="attention-icon"></span>
+                <ul>
+                    <li>
+                        <div class="attention-tip">
+                            <div class="title">ATTENTION!</div>
 
                             <div class="sub-title">This item needs attention.</div>
                             <button class="btn resolve">Click to Resolve</button>
@@ -94,7 +102,7 @@
 
             <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank"
-                   class="view-results"><span>View Results</span></a>
+                   class="operation view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
         <g:else>
