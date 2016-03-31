@@ -35,6 +35,11 @@ class TaskController extends BaseController {
                     continue
                 default:
                     unionTaskType(task, closedTaskTypeArray)
+                    //Todo: after api update, need to use taskType
+                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
+                        def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
+                        task = task << viewResult
+                    }
                     closedTasks.add(task)
 
             }
@@ -200,5 +205,12 @@ class TaskController extends BaseController {
         if (!typeArray.contains(task.taskType)) {
             typeArray.add(task.taskType)
         }
+    }
+
+    private getVoiceResult(patientId, medicalRecordId, taskId) {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
+        return resp
     }
 }

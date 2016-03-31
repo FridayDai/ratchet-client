@@ -35,7 +35,7 @@
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
 
             <g:if test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE"}">
-                <g:if test="${task?.isAttentionNeeded}">
+                <g:if test="${task?.questions[0].choice.toInteger() == 1}">
                     <span class="sub-item">
                         <div>Follow up requested on</div>
                         <div class="bold">
