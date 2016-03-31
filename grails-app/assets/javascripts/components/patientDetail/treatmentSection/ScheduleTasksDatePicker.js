@@ -4,7 +4,7 @@ var flight = require('flight');
 var WithDatepicker = require('../../common/WithDatepicker');
 var moment = require('moment');
 
-function PatientSurgeryDate() {
+function ScheduleTasksDatePicker() {
     this.onReset = function () {
         this.clear();
     };
@@ -25,4 +25,4 @@ function PatientSurgeryDate() {
     });
 }
 
-module.exports = flight.component(WithDatepicker, PatientSurgeryDate);
+module.exports = flight.component(WithDatepicker, ScheduleTasksDatePicker);

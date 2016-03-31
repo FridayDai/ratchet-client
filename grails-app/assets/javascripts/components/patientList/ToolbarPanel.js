@@ -6,6 +6,7 @@ var TreatmentCombobox = require('./ToolbarTreatmentCombobox');
 var ProviderCombobox = require('./ToolbarProviderCombobox');
 var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 var attentionStatusCombobox = require('./ToolbarAttentionStatusCombobox');
+var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
 
 function ToolbarPanel() {
     this.attributes({
@@ -14,14 +15,16 @@ function ToolbarPanel() {
         treatmentFieldSelector: '#treatmentForSearchPatient',
         providerFieldSelector: '#selectSurgeon',
         emailStatusFieldSelector: '#emailStatusFilter',
-        attentionStatusFieldSelector: '#attentionStatusFilter'
+        attentionStatusFieldSelector: '#attentionStatusFilter',
+        treatmentStatusFieldSelector: '#treatmentStatusFilter'
     });
 
     this.children({
         treatmentFieldSelector: TreatmentCombobox,
         providerFieldSelector: ProviderCombobox,
         emailStatusFieldSelector: emailStatusCombobox,
-        attentionStatusFieldSelector: attentionStatusCombobox
+        attentionStatusFieldSelector: attentionStatusCombobox,
+        treatmentStatusFieldSelector: treatmentStatusCombobox
     });
 
     this.getCurrentState = function () {
@@ -30,7 +33,8 @@ function ToolbarPanel() {
             provider: this.child.providerFieldSelector.getDisplayItem(),
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
             attention: this.child.attentionStatusFieldSelector.getDisplayItem(),
-            patientIdOrName: this._patientIdOrNamePreviousVal
+            patientIdOrName: this._patientIdOrNamePreviousVal,
+            treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem()
         };
     };
 
@@ -64,6 +68,7 @@ function ToolbarPanel() {
         this.child.providerFieldSelector.setDisplayItem(toolbarData.provider);
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);
         this.child.attentionStatusFieldSelector.setDisplayItem(toolbarData.attention);
+        this.child.treatmentStatusFieldSelector.setDisplayItem(toolbarData.treatmentStatus);
     };
 
     this.after('initialize', function () {

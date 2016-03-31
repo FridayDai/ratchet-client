@@ -6,7 +6,7 @@ var URLs = require('../../constants/Urls');
 var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
-var moment = require('moment');
+var Utility = require('../../utils/Utility');
 
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
@@ -17,6 +17,20 @@ var ALL_ACTIVE_PATIENT_FILTER = [
         '</div>',
     '</div>'
 ].join('');
+
+var TABLE_SEARCH_EVENTS = [
+    'selectTreatmentForPatientTable',
+    'clearTreatmentForPatientTable',
+    'selectProviderForPatientTable',
+    'clearProviderForPatientTable',
+    'selectEmailStatusForPatientTable',
+    'clearEmailStatusForPatientTable',
+    'selectAttentionStatusForPatientTable',
+    'clearAttentionStatusForPatientTable',
+    'selectTreatmentStatusForPatientTable',
+    'clearTreatmentStatusForPatientTable',
+    'selectPatientIDNameForPatientTable'
+];
 
 function PatientsTable() {
     this.attributes({
@@ -91,7 +105,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     var birthday = data === undefined ? full.birthday : data;
                     if (birthday) {
-                        return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
+                        return Utility.parseBirthday(birthday);
                     } else {
                         return '<span class="not-available">Not Available</span>';
                     }
@@ -148,6 +162,8 @@ function PatientsTable() {
         surgeonId: null,
         emailStatus: null,
         patientIdOrName: null,
+        attentionStatus: null,
+        treatmentStatus: null,
         activeTreatmentOnly: true
     };
 
@@ -227,17 +243,12 @@ function PatientsTable() {
         this.initAllActivePatientFilter();
 
         this.on(document, 'refreshPatientsTable', this.onTableRefresh);
-        this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+
+        _.each(TABLE_SEARCH_EVENTS, function(event) {
+            this.on(document, event, this.onTriggerSearch);
+        }, this);
     });
 
     this.before('teardown', function () {

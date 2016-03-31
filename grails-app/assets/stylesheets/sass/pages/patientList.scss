@@ -16,6 +16,11 @@
     .combined-search {
         margin-top: 32px;
         margin-right: 28px;
+        max-width: 280px;
+
+        input {
+            min-width: 220px;
+        }
     }
     .ui-combobox{
         input {

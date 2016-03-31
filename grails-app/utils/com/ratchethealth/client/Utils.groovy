@@ -17,11 +17,8 @@ class Utils {
 
         cal.setTime(sd1.parse(dateStr))
 
-        SimpleDateFormat sd = new SimpleDateFormat("MMM d'th', yyyy")
+        SimpleDateFormat sd = new SimpleDateFormat("MMM d, yyyy")
 
         return sd.format(cal.time)
-            .replace("1th", "1st")
-            .replace("2th", "2nd")
-            .replace("3th", "3rd")
     }
 }

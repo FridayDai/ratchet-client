@@ -1,3 +1,3 @@
 Patient ID,First Name,Last Name,Birthday,Email Address,Phone Number,Group ID,Provider ID,Treatment ID,Surgery Date,Emergency Contact First Name,Emergency Contact Last Name,Emergency Contact Email,Emergency Contact Relationship,Patient's Permission
 TY78AK83,Staci,Guzzi,19500420,samplepatient1@ratchethealth.com,447-123-1234,8184,8188,8177,5-Jan-15,,,,,
-1241GW23,Amie,Hillier,,samplepatient2@ratchethealth.com,447-123-1234,8184,8188,8177,20-Oct-15,Hermina,Hartranft,sampleec@ratchethealth.com,child,Yes
+1241GW23,Amie,Hillier,19730701,samplepatient2@ratchethealth.com,447-123-1234,8184,8188,8177,20-Oct-15,Hermina,Hartranft,sampleec@ratchethealth.com,child,Yes
