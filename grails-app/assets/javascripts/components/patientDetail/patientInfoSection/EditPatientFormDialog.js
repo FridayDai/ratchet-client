@@ -6,11 +6,8 @@ var PatientIdentifyValidation = require('../../shared/validation/PatientIdentify
 var PatientBirthdayValidation = require('../../shared/validation/PatientBirthdayValidation');
 
 var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
-
-var EditPatientBirthdayDayCombobox = require('../../shared/components/PatientBirthdayDayCombobox');
-var EditPatientBirthdayMonthCombobox = require('../../shared/components/PatientBirthdayMonthCombobox');
-var EditPatientBirthdayYearCombobox = require('../../shared/components/PatientBirthdayYearCombobox');
 var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
+var PatientBirthday = require('../../shared/components/PatientBirthday');
 
 var Utility = require('../../../utils/Utility');
 
@@ -31,16 +28,12 @@ function EditPatientFormDialog() {
         lastNameFieldSelector: '#lastName',
         phoneNumberFieldSelector: '#phone',
         emailFieldSelector: '#email',
-        birthdayMonthFieldSelector: '#birthdayMonth',
-        birthdayDayFieldSelector: '#birthdayDay',
-        birthdayYearFieldSelector: '#birthdayYear'
+        birthdayFieldSelector: '#birthday'
     });
 
     this.children({
         phoneNumberFieldSelector: PatientPhoneInputField,
-        birthdayMonthFieldSelector: EditPatientBirthdayMonthCombobox,
-        birthdayDayFieldSelector: EditPatientBirthdayDayCombobox,
-        birthdayYearFieldSelector: EditPatientBirthdayYearCombobox
+        birthdayFieldSelector: PatientBirthday
     });
 
     this.options({
@@ -65,17 +58,7 @@ function EditPatientFormDialog() {
         this.select('lastNameFieldSelector').val(data.lastName);
         this.select('phoneNumberFieldSelector').intlTelInput('setNumber', data.phoneNumber);
         this.select('emailFieldSelector').val(data.email);
-
-        if (data.birthday) {
-            var momentBirthDay = Utility.toBirthdayMoment(data.birthday);
-            var $birthdayMonth = this.select('birthdayMonthFieldSelector');
-            var $birthdayDay = this.select('birthdayDayFieldSelector');
-            var $birthdayYear = this.select('birthdayYearFieldSelector');
-
-            $birthdayMonth.val(momentBirthDay.format('MMM'));
-            $birthdayDay.val(momentBirthDay.date());
-            $birthdayYear.val(momentBirthDay.year());
-        }
+        this.select('birthdayFieldSelector').val(data.birthday);
 
         this._originalEmail = data.email;
         this._originalIdentify = data.identify;
@@ -122,33 +105,20 @@ function EditPatientFormDialog() {
     this.setExtraData = function () {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
-        var $birthdayMonth = this.select('birthdayMonthFieldSelector');
-        var $birthdayDay = this.select('birthdayDayFieldSelector');
-        var $birthdayYear = this.select('birthdayYearFieldSelector');
+        var birthday = this.select('birthdayFieldSelector').val();
 
-        var result = {
+        return {
             patientId: this.patientId,
             id: this.select('identifyFieldSelector').val(),
             phoneNumber: phoneNumber,
-            clientId: this.clientId
+            clientId: this.clientId,
+            birthdayValue: Utility.toBirthday(birthday)
         };
-
-        if ($birthdayMonth.val()) {
-            result.birthday =
-                Utility.toBirthdayFromSeparate(
-                    $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
-                );
-        }
-
-        return result;
     };
 
     this.onEditPatientSuccess = function () {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
-        var $birthdayMonth = this.select('birthdayMonthFieldSelector');
-        var $birthdayDay = this.select('birthdayDayFieldSelector');
-        var $birthdayYear = this.select('birthdayYearFieldSelector');
 
         this.trigger('updatePatientSuccess', {
             patientId: this.patientId,
@@ -159,10 +129,7 @@ function EditPatientFormDialog() {
             number: rawNumber,
             phoneNumber: phoneNumber,
             clientId: this.clientId,
-            birthday: $birthdayMonth.val() ?
-                Utility.parseBirthdayFromSeparate(
-                    $birthdayMonth.val() + ' ' + $birthdayDay.val() + ', ' + $birthdayYear.val()
-                ) : null
+            birthday: this.select('birthdayFieldSelector').val()
         });
     };
 

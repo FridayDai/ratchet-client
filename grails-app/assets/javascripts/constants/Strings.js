@@ -35,7 +35,7 @@ module.exports = {
     ID_EXISTING_INVALID: "ID already exists",
     PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
     COMBOBOX_EMPTY_VALUE: "Please select item from list.",
-    BIRTHDAY_INVALID_VALUE: "Please select valid date.",
+    BIRTHDAY_RANGE_VALUE: "Please input date before today.",
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
     MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
     MAX_DATE_RANGE: "Please input date before {0} year.",

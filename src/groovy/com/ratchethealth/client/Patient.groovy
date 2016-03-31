@@ -11,7 +11,7 @@ class Patient {
     Long treatmentId
     Long staffId
     Long surgeryTime
-    String birthday
+    String birthdayValue
     String ecFirstName
     String ecLastName
     String relationship

@@ -100,7 +100,8 @@ module.exports = {
         'MM/DD/YYYY',
         'M-D-YYYY',
         'M/D/YYYY',
-        'MMMM D, YYYY'
+        'MMMM D, YYYY',
+        'MMM D, YYYY'
     ],
 
     TOOL_TYPE_DASH: 1,

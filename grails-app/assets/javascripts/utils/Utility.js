@@ -34,33 +34,9 @@ module.exports = {
         };
     },
 
-    parseBirthdayFromSeparate: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('MMM Do, YYYY');
-        } else {
-            return '';
-        }
-    },
-
     parseBirthday: function (dataStr) {
         if (dataStr) {
-            return moment(dataStr, 'YYYY-MM-DD').format('MMM Do, YYYY');
-        } else {
-            return '';
-        }
-    },
-
-    toBirthdayMoment: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver');
-        } else {
-            return null;
-        }
-    },
-
-    toBirthdayFromSeparate: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
+            return moment(dataStr, 'YYYY-MM-DD').format('MMM D, YYYY');
         } else {
             return '';
         }
@@ -68,7 +44,7 @@ module.exports = {
 
     toBirthday: function (str) {
         if (str) {
-            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
+            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
         } else {
             return '';
         }

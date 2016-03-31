@@ -6,7 +6,7 @@ var URLs = require('../../constants/Urls');
 var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
-var moment = require('moment');
+var Utility = require('../../utils/Utility');
 
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
@@ -105,7 +105,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     var birthday = data === undefined ? full.birthday : data;
                     if (birthday) {
-                        return moment(birthday, 'YYYYMMDD').format('MMM D, YYYY');
+                        return Utility.parseBirthday(birthday);
                     } else {
                         return '<span class="not-available">Not Available</span>';
                     }
