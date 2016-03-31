@@ -8,14 +8,7 @@
         </div>
     </g:if>
 
-    <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.isAttentionNeeded}">
-        <div class="attention-menu">
-            <div class="attention">
-                <span class="attention-icon"></span>
-                <ul>
-                    <li>
-                        <div class="attention-tip">
-                            <div class="title">ATTENTION!</div>
+    <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.completeTime]"/>
 
                             <div class="sub-title">This item needs attention.</div>
                             <button class="btn resolve">Click to Resolve</button>
