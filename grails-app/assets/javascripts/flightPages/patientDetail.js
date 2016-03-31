@@ -4,6 +4,7 @@ require('jquery-ui-tabs');
 var flight = require('flight');
 var WithPage = require('../components/common/WithPage');
 var STRINGs = require('../constants/Strings');
+var PAGEs = require('../constants/Pages');
 var Utility = require('../utils/Utility');
 
 var PatientInfoSection = require('../components/patientDetail/patientInfoSection/PatientInfoSection');
@@ -12,7 +13,9 @@ var TreatmentPanel = require('../components/patientDetail/treatmentSection/Treat
 var EditPatientFormDialog = require('../components/patientDetail/patientInfoSection/EditPatientFormDialog');
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
 var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
+var FillQuestionnaireDialog = require('../components/patientDetail/taskSection/FillQuestionnaireDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
+var DeleteTreatmentFormDialog = require('../components/patientDetail/treatmentSection/DeleteTreatmentFormDialog');
 var AddTasksDialog = require('../components/patientDetail/treatmentSection/AddTasksDialog');
 var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
@@ -22,6 +25,8 @@ var EmergencyContactFormDialog = require('../components/patientDetail/teamSectio
 var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
 
 function PatientDetailPage() {
+    this.setPath(PAGEs.PATIENT_DETAIL);
+
     this.attributes({
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#tabs',
@@ -30,6 +35,8 @@ function PatientDetailPage() {
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
         deletePatientDialogSelector: '#delete-patient-form',
+        deleteTreatmentDialogSelector: '#delete-treatment-form',
+        fillQuestionnaireDialogSelector: '#fill-questionnaire-dialog',
         addTreatmentDialogSelector: '#treatment-form',
         addTaskDialogSelector: '#add-tasks-dialog',
         treatmentCodeDialogSelector: '#generate-code-dialog',
@@ -56,9 +63,17 @@ function PatientDetailPage() {
             event: 'showDeletePatientDialog',
             dialog: DeletePatientFormDialog
         }, {
+            selector: 'fillQuestionnaireDialogSelector',
+            event: 'showFillQuestionnaireDialog',
+            dialog: FillQuestionnaireDialog
+        }, {
             selector: 'addTreatmentDialogSelector',
             event: 'showAddTreatmentDialog',
             dialog: AddTreatmentFormDialog
+        }, {
+            selector: 'deleteTreatmentDialogSelector',
+            event: 'showDeleteTreatmentDialog',
+            dialog: DeleteTreatmentFormDialog
         }, {
             selector: 'addTaskDialogSelector',
             event: 'showAddTasksDialog',
@@ -176,6 +191,22 @@ function PatientDetailPage() {
         }
     };
 
+    this.onDeleteTreatmentSuccess = function () {
+        var activeIndex = this.select('tabsContainerSelector').tabs('option', 'active');
+        var $activeTab = $(this.select('tabTitleSelector').get(activeIndex));
+
+        this.teardownTreatment($activeTab);
+
+        var activeTabPanelId = $activeTab.attr('aria-controls');
+        $activeTab.remove();
+        $('#' + activeTabPanelId).remove();
+        this.select('tabsContainerSelector').tabs('refresh');
+
+        if (this.select('tabTitleSelector').length === 0) {
+            this.trigger('refreshForNoMoreTreatmentTab');
+        }
+    };
+
     this.teardownTreatment = function ($activeTab) {
         var tabPanelId = $activeTab.attr('aria-controls');
 
@@ -186,6 +217,7 @@ function PatientDetailPage() {
         this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
         this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
+        this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
 
         this.initTreatmentTabs();
     });

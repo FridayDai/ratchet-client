@@ -3,10 +3,16 @@ package com.ratchethealth.client
 import com.mashape.unirest.request.GetRequest
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(InvitationService)
 class InvitationServiceSpec extends Specification {
+    def setupSpec() {
+        WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+            return null
+        }
+    }
 
     def "test invitePatient with successful result"() {
         given:

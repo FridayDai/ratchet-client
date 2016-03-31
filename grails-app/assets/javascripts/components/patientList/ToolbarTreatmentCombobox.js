@@ -8,6 +8,7 @@ function ToolbarTreatmentCombobox() {
         requestData: function (val) {
             return {
                 treatmentTitle: val,
+                showAll: true,
                 max: 1000
             };
         },
@@ -21,7 +22,8 @@ function ToolbarTreatmentCombobox() {
 
     this.attributes({
         selectDataKey: 'treatmentId',
-        selectEvent: 'selectTreatmentForPatientTable'
+        selectEvent: 'selectTreatmentForPatientTable',
+        clearEvent: 'clearTreatmentForPatientTable'
     });
 }
 

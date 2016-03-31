@@ -10,7 +10,8 @@ function ToolbarEmailStatusCombobox() {
 
     this.attributes({
         selectDataKey: 'emailStatus',
-        selectEvent: 'selectEmailStatusForPatientTable'
+        selectEvent: 'selectEmailStatusForPatientTable',
+        clearEvent: 'clearEmailStatusForPatientTable'
     });
 }
 

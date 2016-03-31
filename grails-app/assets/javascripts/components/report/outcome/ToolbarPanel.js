@@ -39,7 +39,11 @@ function ToolbarPanel() {
 
     this.onTreatmentSelect = function (e, data) {
         this.searchFields.toolId = null;
+        this.searchFields.year = null;
+
         this.triggerSearch(data);
+
+        this.trigger('clearTreatmentScoreChart');
     };
 
     this.onYearSelect = function (e, data) {
@@ -61,7 +65,7 @@ function ToolbarPanel() {
     this.search = function () {
         var me = this;
 
-        this.trigger('startGettingProviderAverageOverview');
+        this.trigger('clearTreatmentScoreChart');
 
         $.ajax({
             url: URLs.PROVIDER_AVERAGE_OVERVIEW,
@@ -69,16 +73,24 @@ function ToolbarPanel() {
             dataType: "json",
             data: this.searchFields,
             success: function (data) {
-                me.trigger('getProviderAverageOverviewSuccessful', data);
+                me.trigger('renderTreatmentScoreChart', data);
             }
         });
     };
 
+    this.onFilterClear = function () {
+        this.trigger('clearTreatmentScoreChart');
+    };
+
     this.after('initialize', function () {
         this.on(document, 'selectProviderForReportOverview', this.onProviderSelect);
+        this.on(document, 'clearProviderForReportOverview', this.onFilterClear);
         this.on(document, 'selectToolForReportOverview', this.onToolSelect);
+        this.on(document, 'clearToolForReportOverview', this.onFilterClear);
         this.on(document, 'selectTreatmentForReportOverview', this.onTreatmentSelect);
+        this.on(document, 'clearTreatmentForReportOverview', this.onFilterClear);
         this.on(document, 'selectYearForReportOverview', this.onYearSelect);
+        this.on(document, 'clearYearForReportOverview', this.onFilterClear);
     });
 }
 

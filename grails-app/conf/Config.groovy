@@ -184,9 +184,11 @@ grails.assets.excludes = [
 
 grails.assets.plugin."resources".excludes = ["**"]
 grails.assets.plugin."cookie-session".excludes = ["**"]
+grails.plugin.cookiesession.httponly = true
+grails.plugin.cookiesession.setsecure = !System.getProperty("NOT_SUPPORT_HTTPS")?.toBoolean()
 
 
-if (System.getProperty("CDN_ENABLE")?.toBoolean() == true) {
+if (System.getProperty("CDN_ENABLE")?.toBoolean()) {
     cdn_domain = System.getProperty("CDN_ASSET_DOMAIN_CLIENT") ?: "https://d3pngev0rteoe.cloudfront.net"
     grails.assets.url = "${cdn_domain}/assets/"
 }
@@ -223,108 +225,115 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com"
 
             // Authentication
-            login = "${ratchetv2.server.url.base}/login"
-            logout = "${ratchetv2.server.url.base}/logout"
-            validateSessionId = "${ratchetv2.server.url.base}/check_token"
+            login = "${ratchetv2.server.url.base}/api/v1/login"
+            logout = "${ratchetv2.server.url.base}/api/v1/logout"
+            validateSessionId = "${ratchetv2.server.url.base}/api/v1/check_token"
 
             //forgotPassword
             password {
-                reset = "${ratchetv2.server.url.base}/password/reset"
-                restCheck = "${ratchetv2.server.url.base}/password/reset/check"
-                confirm = "${ratchetv2.server.url.base}/password/confirm"
+                reset = "${ratchetv2.server.url.base}/api/v1/password/reset"
+                restCheck = "${ratchetv2.server.url.base}/api/v1/password/reset/check"
+                confirm = "${ratchetv2.server.url.base}/api/v1/password/confirm"
             }
 
             // Patients URL
-            patients = "${ratchetv2.server.url.base}/patients"
-            patient = "${ratchetv2.server.url.base}/patients/%s"
-            addPatient = "${ratchetv2.server.url.base}/patients/%d/records"
-            invitePatient = "${ratchetv2.server.url.base}/patient/invite/%s"
-            showPatient = "${ratchetv2.server.url.base}/patients/patientId/%s"
-            uploadPatient = "${ratchetv2.server.url.base}/clients/%s/bulk/import"
-            downloadErrors = "${ratchetv2.server.url.base}/clients/%s/bulk/error/link"
-            savePatient = "${ratchetv2.server.url.base}/clients/%s/bulk/save"
-            lookup = "${ratchetv2.server.url.base}/clients/%s/bulk/lookup"
-            checkPatientEmail = "${ratchetv2.server.url.base}/patients/check_email"
+            patients = "${ratchetv2.server.url.base}/api/v1/patients"
+            patient = "${ratchetv2.server.url.base}/api/v1/patients/%s"
+            addPatient = "${ratchetv2.server.url.base}/api/v1/patients/%d/records"
+            invitePatient = "${ratchetv2.server.url.base}/api/v1/patient/invite/%s"
+            showPatient = "${ratchetv2.server.url.base}/api/v1/patients/patientId/%s"
+            uploadPatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/import"
+            downloadErrors = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/error/link"
+            savePatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/save"
+            lookup = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/lookup"
+            checkPatientEmail = "${ratchetv2.server.url.base}/api/v1/patients/check_email"
 
             //Report URL
-            taskConversion = "${ratchetv2.server.url.base}/clients/conversion"
+            taskConversion = "${ratchetv2.server.url.base}/api/v1/clients/conversion"
 
             // Staff URL
-            staffs = "${ratchetv2.server.url.base}/staffs"
+            staffs = "${ratchetv2.server.url.base}/api/v1/staffs"
 
             //Account
-            getAccount = "${ratchetv2.server.url.base}/staffs/%s"
-            inviteStaff = "${ratchetv2.server.url.base}/staff/invite/%d"
-            updatePassword = "${ratchetv2.server.url.base}/password/update"
-            activeStaff = "${ratchetv2.server.url.base}/staff/confirm"
-            confirmCode = "${ratchetv2.server.url.base}/staff/validation/%s"
-            deactivateStaff = "${ratchetv2.server.url.base}/staff/deactivate/%d"
-            activateStaff = "${ratchetv2.server.url.base}/staff/activate/%d"
-            checkAccountEmail = "${ratchetv2.server.url.base}/staff/email/check"
-            checkNPI = "${ratchetv2.server.url.base}/staff/npi/check"
+            getAccount = "${ratchetv2.server.url.base}/api/v1/staffs/%s"
+            inviteStaff = "${ratchetv2.server.url.base}/api/v1/staff/invite/%d"
+            updatePassword = "${ratchetv2.server.url.base}/api/v1/password/update"
+            activeStaff = "${ratchetv2.server.url.base}/api/v1/staff/confirm"
+            confirmCode = "${ratchetv2.server.url.base}/api/v1/staff/validation/%s"
+            deactivateStaff = "${ratchetv2.server.url.base}/api/v1/staff/deactivate/%d"
+            activateStaff = "${ratchetv2.server.url.base}/api/v1/staff/activate/%d"
+            checkAccountEmail = "${ratchetv2.server.url.base}/api/v1/staff/email/check"
+            checkNPI = "${ratchetv2.server.url.base}/api/v1/staff/npi/check"
 
             //Group
-            createGroup = "${ratchetv2.server.url.base}/clients/%s/groups"
-            updateGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
-            showGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
-            deleteGroup = "${ratchetv2.server.url.base}/clients/%s/groups/%s"
-            showGroups = "${ratchetv2.server.url.base}/clients/%s/groups"
-            getStaffGroups = "${ratchetv2.server.url.base}/clients/%s/groups/myGroups"
+            createGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups"
+            updateGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s"
+            showGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s"
+            deleteGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s"
+            showGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups"
+            getStaffGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/myGroups"
+            updateTreatmentsOnGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments"
+            checkTreatmentUsed = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments/%s/used"
 
             // Treatment URL
-            getTreatments = "${ratchetv2.server.url.base}/clients/%s/treatments"
-            assignTreatments = "${ratchetv2.server.url.base}/clients/%s/patients/assign/record"
-            assignTreatmentToExistPatient = "${ratchetv2.server.url.base}/clients/%s/patients/%s/assign/record"
-            getTreatmentInfo = "${ratchetv2.server.url.base}/clients/%s/treatments/%s"
-            updateSurgeryTime = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s"
-            archived = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/archived"
-            generateCode = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/generate/treatment/code"
-            notifyTreatmentTasks = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/sendMail"
-            getToolsOfTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
-            adhocTasksToTreatment = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/ad-hoc"
+            getTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments"
+            assignTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/assign/record"
+            assignTreatmentToExistPatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/assign/record"
+            getTreatmentInfo = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments/%s"
+            updateSurgeryTime = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
+            archived = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/archived"
+            generateCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/generate/treatment/code"
+            notifyTreatmentTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/sendMail"
+            getToolsOfTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
+            getTreatmentAvailabelYears = "${ratchetv2.server.url.base}/api/v1/report/availableYears"
+            adhocTasksToTreatment = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/ad-hoc"
+            deleteTreatment = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
 
             //task
             //for taskService
             task {
-                sendEmail = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
-                getResult = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s/result"
-                delete = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks/%s"
+                sendEmail = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/sendMail"
+                getResult = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/result"
+                delete = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s"
+                callVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/call"
+                resolveVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/attention/resolve"
             }
-            getOverdueTask = "${ratchetv2.server.url.base}/patients/%s/records/%s/overdue"
+            getOverdueTask = "${ratchetv2.server.url.base}/api/v1/patients/%s/records/%s/overdue"
 
 
             //activity
-            getActivity = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/activities"
+            getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/activities"
 
             //careGiver and careTeam
-            showMedicalCares = "${ratchetv2.server.url.base}/medicalCares"
-            deleteCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s"
-            deleteCareGiver = "${ratchetv2.server.url.base}/records/%s/caregiver/%s"
-            updateCareTeam = "${ratchetv2.server.url.base}/records/%s/careteam/%s/groups/%s"
-            checkCareGiverEmail = "${ratchetv2.server.url.base}/records/%s/caregiver/check_email"
+            showMedicalCares = "${ratchetv2.server.url.base}/api/v1/medicalCares"
+            deleteCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s"
+            deleteCareGiver = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/%s"
+            updateCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s/groups/%s"
+            checkCareGiverEmail = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/check_email"
 
             //for toolService
             tools {
-                loadToolByTreatment = "${ratchetv2.server.url.base}/treatments/%s/tools/loadToolByTreatment"
+                loadToolByTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
             }
 
             //for medicalRecord
-            showMedicalRecords = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s"
+            showMedicalRecords = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/records/%s"
             medicalRecord {
-                tasks = "${ratchetv2.server.url.base}/clients/%s/patients/records/%s/tasks"
-                assignTask = "${ratchetv2.server.url.base}/clients/%s/patients/%s/records/%s/tasks"
+                tasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/records/%s/tasks"
+                assignTask = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks"
             }
 
-            addAssist = "${ratchetv2.server.url.base}/assist"
+            addAssist = "${ratchetv2.server.url.base}/api/v1/assist"
 
             //Announcement
-            announcements = "${ratchetv2.server.url.base}/announcements"
+            announcements = "${ratchetv2.server.url.base}/api/v1/announcements"
 
             //Report
-            providerAverage = "${ratchetv2.server.url.base}/report/outcome"
+            providerAverage = "${ratchetv2.server.url.base}/api/v1/report/outcome"
+            individualReport = "${ratchetv2.server.url.base}/api/v1/client/%s/record/%s/tool/%s/patient/%s/report"
         }
 
         clientPlatform = "ancient"
@@ -341,13 +350,16 @@ ratchetv2 {
     }
 }
 
-grails.plugin.awssdk.accessKey = PropertyUtils.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
-grails.plugin.awssdk.secretKey = PropertyUtils.getProperty("AWS_SECRET_KEY") ?: "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"
-grails.plugin.awssdk.region = PropertyUtils.getProperty("AWS_REGION") ?: "us-east-1"
+grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
+grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY") ?: "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"
+grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 
 ratchet {
     s3 {
-        scanned_pdf_bucket = PropertyUtils.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
+        scanned_pdf_bucket = System.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
     }
+}
 
+Pingdom {
+    real_user_monitor = System.getProperty("RUM_ENABLE")?.toBoolean() ?: false
 }

@@ -3,6 +3,7 @@
 @import '../partials/form';
 @import '../partials/theme';
 @import '../partials/dialog';
+@import '../partials/select2';
 
 .div-hidden {
     display: none;
@@ -17,5 +18,38 @@
         width: 10px;
         height: 25px;
         content: image-url('groups/groups_icon_active.png', false, false);
+    }
+}
+
+.inner-search {
+    .right-search {
+        margin-top: 0;
+    }
+}
+
+#group-form {
+    .form-group {
+        margin-bottom: 20px;
+
+        .group-name {
+            width: 550px;
+            padding-right: 6px;
+            box-sizing: border-box;
+            height: 32px;
+        }
+
+        .select2-container {
+            margin-top: 3px;
+        }
+
+        .treatments {
+            height: 112px;
+        }
+
+        .select2-container.select2-container-multi .select2-choices {
+            height: 100px!important;
+            background-position-y: 10px;
+            padding: 5px;
+        }
     }
 }

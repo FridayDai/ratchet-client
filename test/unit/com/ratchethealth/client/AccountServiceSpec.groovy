@@ -7,10 +7,17 @@ import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.converters.JSON
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(AccountService)
 class AccountServiceSpec extends Specification {
+    def setupSpec() {
+        WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+            return null
+        }
+    }
+
     def "test getAccounts with success result"() {
         given:
         def jBuilder = new JsonBuilder()

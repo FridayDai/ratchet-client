@@ -5,13 +5,14 @@
 @import '../partials/tab';
 @import '../partials/overview';
 @import '../partials/activity';
+@import '../partials/treatment_report';
 @import '../partials/task';
 @import '../partials/dropdown';
 @import '../partials/team';
 @import '../partials/selector';
 @import '../partials/timepicker';
-@import '../partials/chart';
 @import '../partials/theme';
+@import "../partials/combobox";
 
 .icon-edit,
 .icon-archived {
@@ -89,9 +90,14 @@
     text-align: center;
 
     .form-group {
-        width: 70%;
+        width: 71%;
     }
 }
+
+.treatment-time-form.ui-dialog-content {
+    overflow-y: hidden;
+}
+
 
 .surgery {
     position: relative;
@@ -522,6 +528,26 @@
             &:before {
                 color: $base-color-dark-grey;
             }
+        }
+    }
+}
+
+.patient-form {
+    .intl-tel-input {
+        margin-top: 3px;
+    }
+
+    .ui-combobox {
+        .birthday-month {
+            min-width: 50px;
+        }
+
+        .birthday-day {
+            min-width: 35px;
+        }
+
+        .birthday-year {
+            min-width: 60px;
         }
     }
 }

@@ -18,8 +18,8 @@
 .pain-draw {
 
     .human {
-        width: 185px;
-        height: 485px;
+        width: 270px;
+        height: 500px;
     }
 
     .draw-board {
@@ -54,8 +54,9 @@
     .chart-direction {
         display: inline-block;
         position: relative;
-        top: 450px;
-        width: 250px;
+        top: 361px;
+        width: 100%;
+        padding-left: 10px;
         font-size: 12px;
         text-align: left;
     }
@@ -109,6 +110,7 @@
 }
 
 .answer-title {
+    padding-bottom: 10px;
     color: $result-main-color;
     font-size: 14px;
 }
@@ -154,4 +156,8 @@
             padding-right: 3px;
         }
     }
+}
+
+text {
+    font-family: $base-font-family;
 }

@@ -51,6 +51,16 @@ function WithSelectbox() {
             .select2(composeOption(this._options, this))
             .change(function () {
                 $(this).valid();
+            })
+            .on('select2-open', function () {
+                var $container = $(this).select2('container');
+
+                if (!$container.hasClass('opening')) {
+                    $container.addClass('opening');
+                }
+            }).on('select2-loaded', function () {
+                $(this).select2('container')
+                    .removeClass('opening');
             });
     };
 

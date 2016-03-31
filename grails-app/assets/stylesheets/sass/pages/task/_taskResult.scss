@@ -35,7 +35,7 @@ html, body, div, span {
             margin-top: 10px;
         }
 
-        .patient-info, .name, .id {
+        .patient-info, .name, .id, .birthday {
             font-size: 18px;
             font-weight: 700;
         }
@@ -46,6 +46,13 @@ html, body, div, span {
 
         .id {
             margin-left: 10px;
+            margin-right: 30px;
+        }
+
+        .birthday {
+            i {
+                margin-right: 5px;
+            }
         }
     }
 

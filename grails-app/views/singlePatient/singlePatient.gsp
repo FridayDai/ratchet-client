@@ -1,4 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
+<%@ page import="com.ratchethealth.client.Utils" %>
 
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/patientDetail.bundle.js"/>
@@ -29,6 +30,9 @@
                 <div class="info number clear">
                     <div class="id-info inline">
                         ID: <span class="identify" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                    </div>
+                    <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
+                        <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
                     </div>
                     <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
                     <div class="email patient-email inline" id="patientEmail"
@@ -92,6 +96,7 @@
                                         surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
                                         treatmentCode  : medicalRecord?.treatmentCode,
                                         PatientEmailStatus   : patientInfo?.status,
+                                        isAdmin: AccountIsAdmin,
                                         _: System.currentTimeMillis()
                                 ]">
                             <g:if test="${medicalRecord?.archived}">
@@ -102,17 +107,15 @@
                     </li>
                 </g:each>
             </ul>
-            <g:if test="${medicalRecords.size() == 0}">
-                <div class="no-treatment-container">
-                    <div class="icon"></div>
-                    <div class="title">This patient has no treatment</div>
-                    <div class="description">Assign this patient a treatment using the<br/>button below</div>
-                    <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
-                            data-id="${patientInfo.patientId}"
-                            data-client-id="${patientInfo.client.id}"
-                            data-account-id="${request.session.accountId}">Add Treatment</button>
-                </div>
-            </g:if>
+            <div class="no-treatment-container <g:if test="${medicalRecords.size() != 0}">hide</g:if>">
+                <div class="icon"></div>
+                <div class="title">This patient has no treatment</div>
+                <div class="description">Assign this patient a treatment using the<br/>button below</div>
+                <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
+                        data-id="${patientInfo.patientId}"
+                        data-client-id="${patientInfo.client.id}"
+                        data-account-id="${request.session.accountId}">Add Treatment</button>
+            </div>
         </div>
     </div>
 
@@ -145,6 +148,19 @@
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
         </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">BIRTHDAY</label>
+            <div class="birthday-groups">
+                <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group"
+                       placeholder="Month"/>
+                <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group"
+                       placeholder="Day"/>
+                <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group"
+                       placeholder="Year"/>
+            </div>
+        </div>
+
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </form>
 
@@ -158,19 +174,19 @@
 
         <div class="form-group form-provider">
             <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectSurgeons" name="staffVal" type="text" class="required" placeholder="Select provider"
-                   disabled/>
+            <input id="selectSurgeons" name="staffVal" type="text" class="required"
+                   placeholder="Select provider" disabled/>
         </div>
 
         <div class="form-group inline">
             <label class="lbl-group">TREATMENT<span>*</span></label>
-            <input id="selectTreatment" name="treatmentVal" type="text" class=" required"
-                   placeholder="Select treatment"/>
+            <input id="selectTreatment" name="treatmentVal" type="text" class="required"
+                   placeholder="Select treatment" disabled/>
         </div>
 
         <div class="form-group inline" id="surgery-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time required"
+            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -230,7 +246,7 @@
             <div class="section-desc">Select when you would like the task(s) to become active</div>
             <div class="form-group schedule-date-group">
                 <label class="lbl-group">SCHEDULE TASK(S)</label>
-                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date">
+                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date" required>
                 <div class="surgery-date-relative-indicator"></div>
             </div>
         </div>
@@ -240,7 +256,7 @@
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY DATE</label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
-                   class="input-group surgery-time"
+                   class="input-group date-picker surgery-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
@@ -267,6 +283,28 @@
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-patient-field" name="deleteField" type="text"
                    class="input-group" required>
+        </div>
+    </form>
+
+    <form action="/patients/${patientInfo.id}/treatments/" method="post" class="delete-treatment-form ui-hidden" id="delete-treatment-form">
+        <div class="form-group description">
+            In order to permanently remove the treatment, please type "<strong>DELETE</strong>" in the textbox below.
+        </div>
+        <div class="form-group email-group">
+            <label class="lbl-group">TYPE DELETE</label>
+            <input id="delete-treatment-field" name="deleteField" type="text"
+                   class="input-group" required>
+        </div>
+    </form>
+
+    <form action="" class="fill-questionnaire-dialog ui-hidden" id="fill-questionnaire-dialog">
+        <div class="form-group description">
+            When did the patient fill the questionnaire?
+        </div>
+        <div class="form-group email-group">
+            <input type="hidden" autofocus/>
+            <label class="lbl-group">DATE</label>
+            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker" placeholder="Jan 31, 2015" autocomplete="off" required>
         </div>
     </form>
 

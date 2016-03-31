@@ -5,11 +5,10 @@ body {
 }
 
 .question-list {
-    margin: 0 0 30px 35px;
+    margin-bottom: 30px;
 }
 
 .question {
-    margin-left: -35px;
     font-size: 18px;
     font-weight: 700;
     color: $result-main-color;
@@ -21,6 +20,7 @@ body {
 
     .text {
         font-size: 16px;
+        margin-left: 35px;
         word-wrap: break-word;
     }
 
@@ -34,13 +34,18 @@ body {
 .result-circle-radio {
     position: absolute;
     top: 0;
-    left: -35px;
+    left: 0;
     display: inline-block;
     box-sizing: content-box;
     width: 20px;
     height: 20px;
     border: 1px solid gray;
     border-radius: 50%;
+}
+
+.rc-checkbox {
+    cursor: default;
+    top: -2px;
 }
 
 .result-circle-radio-checked {
@@ -53,6 +58,44 @@ body {
     border-radius: 50%;
     background-color: $result-main-color;
 }
+
+.rc-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.result-checkbox {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 18px;
+    height: 18px;
+    border: 1px solid $base-font-color;
+    cursor: default;
+}
+
+.result-checkbox-checked {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background-color: $result-main-color;
+    box-shadow: inset 0 0 0 1px $base-color-white;
+}
+
+.result-checkbox-checked:before {
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    content: '\f383';
+    font-family: 'Ionicons';
+    font-size: 14px;
+    color: $base-color-white;
+    text-align: center;
+}
+
 
 .task-list-wrapper:after {
     content: '';
@@ -110,7 +153,6 @@ body {
 }
 
 .sub-question {
-    margin-left: -35px;
     padding: 5px 0;
     font-size: 16px;
     font-weight: 700;
@@ -119,10 +161,18 @@ body {
 .answer-line {
     font-size: 16px;
     font-weight: 700;
+    padding: 20px 0 20px;
 
     .left-checkbox {
         float: left;
         margin-right: 16px;
+    }
+}
+
+.rc-choice-hidden:checked {
+    & + .rc-checkbox:before {
+        top: 4px;
+        left: 5px;
     }
 }
 

@@ -7,7 +7,7 @@ class TreatmentService extends RatchetAPIService {
     def grailsApplication
     def messageSource
 
-    def getTreatments(String token, clientId, max, offset, treatmentTitle) {
+    def getTreatments(String token, clientId, groupId, max, offset, treatmentTitle, showAll) {
 
         String getTreatmentsUrl = grailsApplication.config.ratchetv2.server.url.getTreatments
         def url = String.format(getTreatmentsUrl, clientId)
@@ -17,7 +17,9 @@ class TreatmentService extends RatchetAPIService {
             def resp = req
                     .queryString("max", max)
                     .queryString("offset", offset)
+                    .queryString("groupId", groupId)
                     .queryString("treatmentTitle", treatmentTitle)
+                    .queryString("showAll", showAll)
                     .asString()
 
             if (resp.status == 200) {
@@ -204,6 +206,45 @@ class TreatmentService extends RatchetAPIService {
 
             if (resp.status == 201) {
                 log.info("Get tasks add ad-hoc tasks to treatment, token: ${token}")
+
+                JSON.parse(resp.body)
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def deleteTreatment(token, clientId, patientId, medicalRecordId) {
+        String deleteTreatmentUrl = grailsApplication.config.ratchetv2.server.url.deleteTreatment
+        def url = String.format(deleteTreatmentUrl, clientId, patientId, medicalRecordId)
+
+        log.info("Call backend service to delete a treatment, token: ${token}.")
+        withDelete(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 204) {
+                log.info("delete a treatment success, token: ${token}.")
+
+                true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getTreatmentAvailableYears(String token, clientId, treatmentId) {
+        log.info("Call backend service to get treatment available years, token: ${token}.")
+
+        String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.getTreatmentAvailabelYears
+
+        withGet(token, getAvailableTaskUrl) { req ->
+            def resp = req
+                .queryString("clientId", clientId)
+                .queryString("treatmentId", treatmentId)
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("Get treatment available years success, token: ${token}")
 
                 JSON.parse(resp.body)
             } else {

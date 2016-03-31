@@ -19,6 +19,7 @@ class TaskController extends BaseController {
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
+
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
@@ -29,6 +30,11 @@ class TaskController extends BaseController {
                     activeTasks.add(task)
                     continue
                 default:
+                    //Todo: after api update, need to use taskType
+                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
+                        def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
+                        task = task << viewResult
+                    }
                     closedTasks.add(task)
             }
         }
@@ -36,6 +42,7 @@ class TaskController extends BaseController {
         scheduleTasks = scheduleTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] })
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
+
 
         render view: '/singlePatient/task',
                 model: [
@@ -81,14 +88,20 @@ class TaskController extends BaseController {
         def patientId = params?.patientId
         def medicalRecordId = params?.medicalRecordId
         def taskId = params?.taskId
+        def lastName = params.lastName
+        def toolName = params.toolName
+        def birthday = params.birthday
+        if (birthday == 'null') {
+            birthday = null
+        }
 
         def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render( filename: "${result.patientId}_${taskId}.pdf",
+        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName.replaceAll(" ", "_")}_${taskId}.pdf",
                 view: view,
-                model: [Task: result, mixedResult: mixedResult, 'download' : true],
+                model: [Task: result, mixedResult: mixedResult, 'download': true],
                 marginLeft: 2,
                 marginTop: 0,
                 marginBottom: 0,
@@ -147,5 +160,32 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.deleteTask(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    def callVoiceTask() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def taskId = params?.taskId
+        def resp = taskService.voiceCall(token, clientId, patientId, medicalRecordId, taskId)
+        render resp
+    }
+
+    def resolveVoiceTask() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+        def taskId = params?.taskId
+        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+        render resp
+    }
+
+    private getVoiceResult(patientId, medicalRecordId, taskId) {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
+        return resp
     }
 }

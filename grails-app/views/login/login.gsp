@@ -1,4 +1,5 @@
-<g:set var="scriptPath" value="loginBundle"/>
+<g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
+<g:set var="scriptPath" value="dist/login.bundle.js"/>
 <g:set var="cssPath" value="login"/>
 <g:applyLayout name="form">
     <html>
@@ -20,12 +21,13 @@
     <div class="site-wrapper">
         <div class="cover-container">
             <div class="image-ratchet-health cover-inner-header"></div>
-            <g:form class="form login-form" controller="authentication" method="post" action="login">
+            <g:form class="form login-form" controller="authentication" method="post" action="login" autocomplete="off">
 
                 <div class="form-style-content">
                     <div class="input-combination">
                         <div class="align-left">EMAIL ADDRESS</div>
                         <input name="email" type="text" class="input-control email" placeholder="Enter E-mail"
+                            value="${email}"
                                required/>
                     </div>
 
@@ -37,7 +39,10 @@
 
                     <div class="error-area">
                         <g:if test="${errorMsg}">
-                            <p class="error" id="error-login" rateLimit="${rateLimit}">${errorMsg}</p>
+                            <p class="error" id="error-login">${errorMsg}</p>
+                        </g:if>
+                        <g:if test="${rateLimit}">
+                            <p class="error error-rate-limit" data-rate-limit="${rateLimit}"></p>
                         </g:if>
                     </div>
 

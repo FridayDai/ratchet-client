@@ -23,6 +23,7 @@ class PatientService extends RatchetAPIService {
         def relationship = patient?.relationship
         def ecEmail = patient?.ecEmail
         def groupId = patient?.groupId
+        def birthday = patient?.birthday
 
         String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(addPatientsUrl, clientId)
@@ -36,6 +37,7 @@ class PatientService extends RatchetAPIService {
                     .field("lastName", lastName)
                     .field("phoneNumber", phoneNumber)
                     .field("email", email)
+                    .field("birthday", birthday)
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)
@@ -53,8 +55,7 @@ class PatientService extends RatchetAPIService {
                 log.info("Add patient success, token: ${token}")
 
                 ["id": result.id]
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }
@@ -70,37 +71,77 @@ class PatientService extends RatchetAPIService {
         def sortDir = patientPagination?.sortDir
         def sortFiled = patientPagination?.sortField
         def emailStatus = patientPagination?.emailStatus
+        def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
+        def attentionStatus = patientPagination?.attentionStatus
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
-        withGet(token, url) { req ->
-            def resp = req
-                    .queryString("max", length)
-                    .queryString("offset", start)
-                    .queryString("clientId", clientId)
-                    .queryString("patientType", patientType)
-                    .queryString("treatmentId", treatmentId)
-                    .queryString("surgeonId", surgeonId)
-                    .queryString("patientIdOrName", patientIdOrName)
-                    .queryString("emailStatus", emailStatus)
-                    .queryString("order", sortDir)
-                    .queryString("sorted", sortFiled)
-                    .asString()
 
-            if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+        if (attentionStatus) {
+            withGet(token, url) { req ->
+                def resp = req
+                        .queryString("max", length)
+                        .queryString("offset", start)
+                        .queryString("clientId", clientId)
+                        .queryString("patientType", patientType)
+                        .queryString("treatmentId", treatmentId)
+                        .queryString("surgeonId", surgeonId)
+                        .queryString("patientIdOrName", patientIdOrName)
+                        .queryString("emailStatus", emailStatus)
+                        .queryString("order", sortDir)
+                        .queryString("sorted", sortFiled)
+                        .queryString("activeTreatmentOnly", activeTreatmentOnly)
+                        .queryString("isAttentionNeeded", attentionStatus == 1)
+                        .asString()
 
-                log.info("Get patients success, token: ${token}")
+                if (resp.status == 200) {
+                    def result = JSON.parse(resp.body)
 
-                [
-                    "recordsTotal": result.totalCount,
-                    "recordsFiltered": result.totalCount,
-                    "data": result.items
-                ]
+                    log.info("Get patients success, token: ${token}")
+
+                    [
+                            "recordsTotal"   : result.totalCount,
+                            "recordsFiltered": result.totalCount,
+                            "data"           : result.items
+                    ]
+                } else {
+                    handleError(resp)
+                }
             }
-            else {
-                handleError(resp)
+
+        } else {
+
+            withGet(token, url) { req ->
+                def resp = req
+                        .queryString("max", length)
+                        .queryString("offset", start)
+                        .queryString("clientId", clientId)
+                        .queryString("patientType", patientType)
+                        .queryString("treatmentId", treatmentId)
+                        .queryString("surgeonId", surgeonId)
+                        .queryString("patientIdOrName", patientIdOrName)
+                        .queryString("emailStatus", emailStatus)
+                        .queryString("order", sortDir)
+                        .queryString("sorted", sortFiled)
+                        .queryString("activeTreatmentOnly", activeTreatmentOnly)
+                        .asString()
+
+
+                if (resp.status == 200) {
+                    def result = JSON.parse(resp.body)
+
+                    log.info("Get patients success, token: ${token}")
+
+                    [
+                            "recordsTotal"   : result.totalCount,
+                            "recordsFiltered": result.totalCount,
+                            "data"           : result.items
+                    ]
+                } else {
+                    handleError(resp)
+                }
             }
         }
+
     }
 }

@@ -17,6 +17,10 @@
                 <div class="no-item center no-item-sent no-active-item" id="no-active-item"><p>There are no active items</p></div>
             </g:if>
             <g:else>
+                %{--<div class="quick-filter">--}%
+                    %{--<span class="quick-filter-label">Filter:</span>--}%
+                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
+                %{--</div>--}%
                 <g:each in="${activeTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/activeTaskBox" model="[
                             'task'     : task,
@@ -37,11 +41,16 @@
                 <div class="no-item center no-item-sent"><p>There are no closed items</p></div>
             </g:if>
             <g:else>
+                %{--<div class="quick-filter">--}%
+                    %{--<span class="quick-filter-label">Filter:</span>--}%
+                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
+                %{--</div>--}%
                 <g:each in="${closedTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/closedTaskBox" model="[
                             'task': task,
                             'patientId': patientId,
                             'clientId': clientId,
+                            'accountId': accountId,
                             'medicalRecordId': medicalRecordId,
                             'taskId': task.id
                     ]" />
@@ -60,6 +69,10 @@
                 <div class="no-item center no-item-schedule"><p>No item has been scheduled yet.</p></div>
             </g:if>
             <g:else>
+                %{--<div class="quick-filter">--}%
+                    %{--<span class="quick-filter-label">Filter:</span>--}%
+                    %{--<span class="btn quick-filter-button">Voice Call</span>--}%
+                %{--</div>--}%
                 <g:each in="${scheduleTasks}" var="task">
                     <g:render template="/singlePatient/taskBox/schduleTaskBox" model="['task': task]" />
                 </g:each>

@@ -7,6 +7,16 @@ var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
 
+var ALL_ACTIVE_PATIENT_FILTER = [
+    '<div class="all-active-patient-filter">',
+        '<div class="inner">',
+            '<span class="filter" data-active-treatment-only="false">All</span>',
+            ' - ',
+            '<span class="filter active" data-active-treatment-only="true">Active Patients</span>',
+        '</div>',
+    '</div>'
+].join('');
+
 function PatientsTable() {
     this.attributes({
         url: URLs.GET_PATIENTS
@@ -19,6 +29,16 @@ function PatientsTable() {
                 data: 'patientId',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
+
+                    if (full.isAttentionNeeded === "true" || full.isAttentionNeeded === true) {
+                        return [
+                            '<div class="source-id">',
+                            id,
+                            '<div class="attention-icon"></div>',
+                            '</div>'
+                        ].join('');
+
+                    }
                     return '<p class="source-id">' + id + '</p>';
                 },
                 width: "10%"
@@ -35,10 +55,10 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     if (!full.email) {
                         return '<span class="email-status not-available">{0}</span>'
-                                    .format(PARAMs.EMAIL_STATUS[full.status]);
+                            .format(PARAMs.EMAIL_STATUS[full.status]);
                     } else if (PARAMs.EMAIL_STATUS[full.status]) {
                         return '{0}<span class="email-status abnormal {1}">{1}</span>'
-                                    .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
+                            .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
                     } else {
                         return full.email;
                     }
@@ -94,6 +114,10 @@ function PatientsTable() {
                 targets: 6,
                 data: 'status',
                 "visible": false
+            }, {
+                targets: 7,
+                data: 'isAttentionNeeded',
+                "visible": false
             }
         ],
         createdRow: function (row, data) {
@@ -105,24 +129,20 @@ function PatientsTable() {
         }
     });
 
+    this.searchFields = {
+        treatmentId: null,
+        surgeonId: null,
+        emailStatus: null,
+        patientIdOrName: null,
+        activeTreatmentOnly: true
+    };
+
     this.setRowClickUrl = function (data) {
         return URLs.PAGE_PATIENT_DETAIL.format(data.id);
     };
 
-    this.onTreatmentSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onProviderSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onPatientIDNameSearch = function (e, data) {
-        this.search(data);
-    };
-
-    this.onEmailStatusSearch = function (e, data) {
-        this.search(data);
+    this.onTriggerSearch = function (e, data) {
+        this.search(_.assign(this.searchFields, data));
     };
 
     this.onBulkImportSaved = function (e, data) {
@@ -139,17 +159,75 @@ function PatientsTable() {
         Notifications.showFadeOutMsg(msg.format(data.number));
     };
 
-    this.onPageInBackButtonStatus = function () {
-        this.reload();
+    this.onTableRefresh = function (e, data) {
+        this.reload(data.callback);
+    };
+
+    this.onLoadDataFromSessionRouter = function (e, data) {
+        this.loadData(data.patientsTable);
+
+        this.setActivePatientFilter(data.patientsTable.activeTreatmentOnly);
+    };
+
+    this.setActivePatientFilter = function (activeOnly) {
+        this.allActivePatientFilter.find('.filter')
+            .removeClass('active')
+            .filter('[data-active-treatment-only={0}]'.format(activeOnly))
+            .addClass('active');
+    };
+
+    this.getCurrentState = function () {
+        return {
+            data: this.tableEl.rows().data().splice(0),
+            pageInfo: this.tableEl.page.info(),
+            sorting: this.tableEl.order(),
+            search: this.getSetting().aaRHSearch,
+            activeTreatmentOnly: this.searchFields.activeTreatmentOnly
+        };
+    };
+
+    this.initAllActivePatientFilter = function () {
+        var me = this;
+        this.allActivePatientFilter = $(ALL_ACTIVE_PATIENT_FILTER);
+
+        this.allActivePatientFilter.find('.filter')
+            .click(function (e) {
+                var $target = $(e.target);
+
+                if (!$target.hasClass('active')) {
+                    me.onTriggerSearch(e, {
+                        activeTreatmentOnly: $target.data('activeTreatmentOnly')
+                    });
+
+                    $target
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active');
+                }
+            });
+
+        this.allActivePatientFilter.insertAfter(this.$node);
     };
 
     this.after('initialize', function () {
-        this.on(document, 'pageInBackButtonStatus', this.onPageInBackButtonStatus);
-        this.on(document, 'selectTreatmentForPatientTable', this.onTreatmentSearch);
-        this.on(document, 'selectProviderForPatientTable', this.onProviderSearch);
-        this.on(document, 'selectEmailStatusForPatientTable', this.onEmailStatusSearch);
-        this.on(document, 'selectPatientIDNameForPatientTable', this.onPatientIDNameSearch);
+        this.initAllActivePatientFilter();
+
+        this.on(document, 'refreshPatientsTable', this.onTableRefresh);
+        this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectAttentionStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'clearAttentionStatusForPatientTable', this.onTriggerSearch);
+        this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
+        this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+    });
+
+    this.before('teardown', function () {
+        this.allActivePatientFilter.find('.filter').off();
     });
 }
 

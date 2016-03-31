@@ -11,6 +11,7 @@ class TeamController extends BaseController {
 
     def getTeam() {
         String token = request.session.token
+        def treatmentId = params?.treatmentId
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
         def patientId = params?.patientId
@@ -19,7 +20,14 @@ class TeamController extends BaseController {
             archived = false
         }
         def surgeons = teamService.getCareTeam(token, medicalRecordId)
-        render(view: "/singlePatient/team", model: [surgeons: surgeons, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived])
+        render(view: "/singlePatient/team", model: [
+            surgeons: surgeons,
+            treatmentId: treatmentId,
+            medicalRecordId: medicalRecordId,
+            clientId: clientId,
+            patientId: patientId,
+            archived: archived
+        ])
     }
 
     def getCareGiver() {

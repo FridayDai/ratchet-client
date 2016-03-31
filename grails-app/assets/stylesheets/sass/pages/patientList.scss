@@ -6,6 +6,12 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 
+.inner-search {
+    .right-search {
+        margin-top: 15px;
+    }
+}
+
 .add-patient {
     margin-left: 10px;
 }
@@ -41,7 +47,18 @@
 }
 
 .source-id {
+    position: relative;
     color: $base-font-grey;
+}
+
+.attention-icon {
+    position: absolute;
+    top: -11px;
+    left: -56px;
+    height: 40px;
+    width: 40px;
+    background: image-url('patients/attention.png', false, false) no-repeat center right;
+    background-size: 40%;
 }
 
 //.treatment-search-patient {
@@ -136,7 +153,7 @@
         width: 100%;
     }
 
-    p {
+    p, .part-title {
         color: $base-dark-grey;
         min-height: 36px;
         width: 680px;
@@ -437,3 +454,78 @@
 .email-status-nonexistent {
     background-color: rgba(241, 91, 80, 0.07);
 }
+
+//bulk import error
+.error-background {
+    background-color: $base-color-pink;
+}
+
+.alert-span {
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.alert {
+    &:before {
+        display: inline-block;
+        font-family: ionicons;
+        content: '\f101';
+        color: $base-color-red;
+        width: 9px;
+        font-size: 13px;
+    }
+}
+
+.new-patient-form {
+    .intl-tel-input {
+        margin-top: 3px;
+    }
+
+    .ui-combobox {
+        .birthday-month {
+            min-width: 50px;
+        }
+
+        .birthday-day {
+            min-width: 35px;
+        }
+
+        .birthday-year {
+            min-width: 60px;
+        }
+    }
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+}
+
+.all-active-patient-filter {
+    margin: 20px 0;
+
+    &:after {
+        content: '';
+        clear: both;
+        display: table;
+    }
+
+    .inner {
+        float: right;
+    }
+
+    .filter {
+        color: #b3b3b3;
+        cursor: pointer;
+
+        &.active {
+            color: #225f6f;
+            cursor: default;
+        }
+
+        &:hover {
+            color: #225f6f;
+        }
+    }
+}
+
+

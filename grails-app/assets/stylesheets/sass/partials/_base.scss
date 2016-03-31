@@ -334,7 +334,6 @@ a {
     display: block;
     float: left;
     max-width: 230px;
-    margin-top: 10px;
 
     label {
         width: 100%;
@@ -391,7 +390,6 @@ a {
 
 .right-search {
     float: right;
-    margin-top: 25px;
 }
 
 .inner-header {
@@ -588,6 +586,11 @@ a {
         color: $base-color-dark-grey;
         background-color: $base-color-white-grey;
         font-weight: normal;
+    }
+
+    &.no-children {
+        padding: 0!important;
+        border: 0!important;
     }
 }
 

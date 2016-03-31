@@ -148,6 +148,15 @@
         }
     }
 
+    .birthday {
+        padding-left: 50px;
+
+        .fa-birthday-cake {
+            margin-right: 5px;
+            font-size: 13px;
+        }
+    }
+
     .phone {
         padding-left: 50px;
 
@@ -330,7 +339,9 @@
     background-color: $base-color-white;
 }
 
-.add-email-form, .delete-patient-form {
+.add-email-form,
+.delete-patient-form,
+.delete-treatment-form {
     text-align: center;
     font-size: 14px;
 
@@ -345,7 +356,9 @@
     }
 }
 
-#add-email-field, #delete-patient-field {
+#add-email-field,
+#delete-patient-field,
+#delete-treatment-field {
     width: 100%;
     box-sizing: border-box;
     height: 30px;

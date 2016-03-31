@@ -10,7 +10,6 @@ class LoggingFilters {
             after = { Map model ->
             }
             afterView = { Exception e ->
-
             }
         }
     }

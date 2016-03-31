@@ -31,6 +31,8 @@ function withDataTable() {
             requestLength = request.length,
             requestEnd = requestStart + requestLength;
 
+        request.search = settings.aaRHSearch;
+
         if (settings.clearCache) {
             // API requested that the cache be cleared
             ajax = true;
@@ -248,17 +250,58 @@ function withDataTable() {
         this.tableEl.row(rowSelector).remove().draw();
     };
 
-    this.reload = function () {
-        this.tableEl.ajax.reload();
+    this.reload = function (cb) {
+        if (cb) {
+            this.tableEl.ajax.reload(function () {
+                cb.call(this);
+            });
+        } else {
+            this.tableEl.ajax.reload();
+        }
+    };
+
+    this.getSetting = function () {
+        return this.tableEl.settings()[0];
+    };
+
+    this.loadData = function (data) {
+        var setting = this.getSetting();
+        setting.bAjaxDataGet = false;
+
+        this.tableEl
+            .clear()
+            .rows
+            .add(data.data);
+
+        setting.aiDisplay = setting.aiDisplayMaster.slice();
+        setting._iDisplayLength = data.pageInfo.length;
+        setting._iDisplayStart = data.pageInfo.start;
+        setting._iRecordsDisplay = data.pageInfo.recordsDisplay;
+        setting._iRecordsTotal = data.pageInfo.recordsTotal;
+        setting.aaSorting = data.sorting;
+        setting.aaRHSearch = data.search;
+
+        this.tableEl.draw(false);
+
+        setting.bAjaxDataGet = true;
+    };
+
+    this.getCurrentState = function () {
+        return {
+            data: this.tableEl.rows().data().splice(0),
+            pageInfo: this.tableEl.page.info(),
+            sorting: this.tableEl.order(),
+            search: this.getSetting().aaRHSearch
+        };
     };
 
     this.search = function (data) {
-        this._searchData = _.assign({}, this._searchData, data);
-        this.reload();
-    };
+        var setting = this.getSetting();
+        setting.aaRHSearch = setting.aaRHSearch || {};
 
-    this._onPreXhr = function (e, settings, data) {
-        _.extend(data.search, this._searchData);
+        _.assign(setting.aaRHSearch, data);
+
+        this.reload();
     };
 
     this.isDataTableInitialized = function () {
@@ -279,8 +322,6 @@ function withDataTable() {
         if (this.attr.initWithLoad) {
             this.reload();
         }
-
-        this.on('preXhr.dt', this._onPreXhr);
     });
 
     this.before('teardown', function () {

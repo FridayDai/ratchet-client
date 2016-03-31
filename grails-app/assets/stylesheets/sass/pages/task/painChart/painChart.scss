@@ -85,7 +85,7 @@ body {
 }
 
 .active-part {
-    stroke: $base-color-red;
+    fill: $base-font-color;
 }
 
 //answer
@@ -95,6 +95,7 @@ body {
 }
 
 .answer-title {
+    padding-bottom: 10px;
     color: $result-main-color;
     font-size: 18px;
 }
@@ -150,4 +151,8 @@ body {
             padding-right: 3px;
         }
     }
+}
+
+text {
+    font-family: $base-font-family;
 }

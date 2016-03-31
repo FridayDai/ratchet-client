@@ -45,6 +45,7 @@ target-eclipse
 .project
 .DS_Store
 .sass-cache
+.slcache
 .sonar
 grails-app/assets/javascripts/bower_components
 dist/

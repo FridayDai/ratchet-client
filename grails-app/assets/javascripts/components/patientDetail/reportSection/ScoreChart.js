@@ -1,13 +1,13 @@
 var flight = require('flight');
 var d3 = require('d3');
 
-var PARAMs = require('../../../../constants/Params');
+var PARAMs = require('../../../constants/Params');
+var Utility = require('../../../utils/Utility');
 
 var SCORE_TEMPLATE = '<span class="score-item score-item-{1}" data-index="{1}">{0}</span>';
 var LINE_GROUP_SELECTOR = '.line-group-{0}';
-var UNSUPPORTED = 'UNSUPPORTED';
 
-var Y_TICK_OFFSET_ARRAY = [1, 5, 10];
+var DATE_FORMAT = 'MMM D, YYYY';
 
 function roundedRect(opts) {
     return 'M' + (opts.x + opts.radius) + ',' + opts.y +
@@ -22,7 +22,7 @@ function roundedRect(opts) {
         'z';
 }
 
-function ToolbarPanel() {
+function ScoreChart() {
     this.attributes({
         chartGroupSelector: '.chart-group',
         chartSelector: '.chart',
@@ -41,9 +41,17 @@ function ToolbarPanel() {
         chartHeight: 0
     };
 
-    this.scales = {
-        x: null,
-        y: null
+    this.initScalesData = function () {
+        this.scales = {
+            x: null,
+            y: null,
+            meta: {
+                xRange: [],
+                maxY: 0,
+                type: [],
+                dataGroup: {}
+            }
+        };
     };
 
     this.setXScale = function (data) {
@@ -52,36 +60,17 @@ function ToolbarPanel() {
         }
 
         var newDomain = data.slice();
-        var first = _.first(data);
+        newDomain.unshift(0);
+        newDomain.push(1);
 
-        if (first < 0) {
-            newDomain.unshift(first * 2);
-        } else {
-            newDomain.unshift(-50);
-        }
-
-        newDomain.push(_.last(data) + 200);
-
-        // 5 fixed points: [1st, -45, 0, 30, ..., last]
-        var domainSize = newDomain.length,
-            regularSize = domainSize - 5,
-            rangArray = [0, 100, 200, 275],
-            regularWidth = (this.chartSize.chartWidth - 350) / regularSize;
-
-        for (var i = 0; i < regularSize; i++) {
-            rangArray.push(_.last(rangArray) + regularWidth);
-        }
-
-        rangArray.push(this.chartSize.chartWidth);
-
-        this.scales.x = d3.scale.linear()
+        this.scales.x = d3.scale.ordinal()
             .domain(newDomain)
-            .range(rangArray);
+            .rangePoints([0, this.chartSize.chartWidth]);
 
         return this.scales.x;
     };
 
-    this.drawFrame = function (xDomain, yVal) {
+    this.drawFrame = function (xDomain, yVal, yPace) {
         var margin = {top: 50, right: 70, bottom: 140, left: 70},
             svgWidth = this.$node.width(),
             svgHeight = this.$node.height(),
@@ -100,35 +89,15 @@ function ToolbarPanel() {
             .scale(xScale)
             .orient('bottom')
             .tickValues(xScaleDomain)
-            .tickFormat(function (d) {
-                var tick = '';
-
-                switch (d) {
-                    case xScaleDomain[1]:
-                        tick = 'Baseline';
-                        break;
-
-                    case 0:
-                        tick = 'Surgery Date';
-                        break;
-
-                    case _.first(xScaleDomain):
-                    case _.last(xScaleDomain):
-                        tick = '';
-                        break;
-
-                    default:
-                        tick = d;
-                }
-
-                return tick;
+            .tickFormat(function () {
+                return '';
             });
 
         var yAxis = d3.svg.axis()
             .scale(yScale)
             .tickSize(chartWidth)
             .orient('right')
-            .tickValues(this.getYTickValues(yVal));
+            .tickValues(this.getYTickValues(yVal, yPace));
 
         var svg = this.chartObject = d3.select(this.$node.find(this.attr.chartSelector).get(0))
             .append('svg')
@@ -187,34 +156,6 @@ function ToolbarPanel() {
             .attr('x2', chartWidth)
             .attr('y2', 39);
 
-        // Setup Surgery Date
-        var surgeryDateX = gx.selectAll('g')
-            .filter(function (d) { return d === 0;})
-            .classed('surgery-date-x', true);
-
-        surgeryDateX.insert('rect', ':first-child')
-            .attr('width', 10)
-            .attr('height', 6)
-            .attr('x', -5)
-            .attr('y', 36);
-
-        surgeryDateX.select('line')
-            .attr('x1', 0)
-            .attr('y1', -chartHeight)
-            .attr('x2', 0)
-            .attr('y2', 60);
-
-        surgeryDateX.select('text')
-            .attr('x', 0)
-            .attr('y', 75);
-
-        surgeryDateX.append('path')
-            .classed('triangle', true)
-            .attr('transform', 'translate(0, 60)')
-            .attr('d', d3.svg.symbol()
-                .size(24)
-                .type('triangle-up'));
-
         // Insert white rect for each text
         svg.selectAll('text').each(function () {
             var bbox = this.getBBox();
@@ -263,11 +204,11 @@ function ToolbarPanel() {
             .enter()
             .append('circle')
             .attr('class', 'point')
-            .attr('cx', function (d) { return me.scales.x(d.offset); })
+            .attr('cx', function (d) { return me.scales.x(d.date); })
             .attr('cy', function (d) { return me.scales.y(d.score); })
             .attr('r', 3)
             .each(function (d, i) {
-                var cx = me.scales.x(d.offset),
+                var cx = me.scales.x(d.date),
                     cy = me.scales.y(d.score);
 
                 var lineGroup = d3.select($(this).parent().get(0));
@@ -279,15 +220,15 @@ function ToolbarPanel() {
                 var textGroup = statusTip.append('g')
                     .classed('tip-text-group', true);
 
-                var scoreText = textGroup.append('text')
-                    .text('Score: {0}'.format(d.score));
+                var dateText = textGroup.append('text')
+                    .text(Utility.toVancouverTimeHour(d.date, DATE_FORMAT));
 
-                var scoreTextBBox = scoreText.node().getBBox();
+                var dateTextBBox = dateText.node().getBBox();
                 var textPadding = 10;
 
                 textGroup.append('text')
-                    .text('Data Count: {0}'.format(d.count))
-                    .attr('x', scoreTextBBox.width + textPadding);
+                    .text('Score: {0}'.format(d.score))
+                    .attr('x', dateTextBBox.width + textPadding);
 
                 var textGroupBBox = textGroup.node().getBBox();
                 var textGroupHPadding = 8;
@@ -330,7 +271,7 @@ function ToolbarPanel() {
             });
 
         var line = d3.svg.line()
-            .x(function(d) { return me.scales.x(d.offset); })
+            .x(function(d) { return me.scales.x(d.date); })
             .y(function(d) { return me.scales.y(d.score); });
 
         lineGroup.insert('path', ':first-child')
@@ -356,7 +297,7 @@ function ToolbarPanel() {
             .classed('mark-tip', true);
 
         var markText = markTip.append('text')
-            .text(PARAMs.SCORE_TYPE[text]);
+            .text(text);
 
         var markTextBBox = markText.node().getBBox();
         var markTextHPadding = 8;
@@ -384,6 +325,80 @@ function ToolbarPanel() {
         markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
     };
 
+    this.drawSurgeryDate = function(surgeryDate) {
+        var surgeryDateX = this.chartObject
+            .append('g')
+            .classed('surgery-date-x', true)
+            .attr('transform', 'translate({0}, {1})'.format(this.scales.x(surgeryDate), this.chartSize.chartHeight));
+
+        var vPadding = 4;
+        var hPadding = 10;
+        var color = '#305e6e';
+
+        var textGroup = surgeryDateX.append('g')
+            .classed('text-group', true)
+            .attr('transform', 'translate({0}, {1})'.format(0, 45));
+
+        var surgeryDateText = textGroup.append('text')
+            .text('Surgery Date');
+
+        var surgeryDateBBox = surgeryDateText.node().getBBox();
+
+        textGroup.append('text')
+            .text(Utility.toVancouverTimeHour(surgeryDate, DATE_FORMAT))
+            .attr('y', surgeryDateBBox.height + 3)
+            .attr('x', 0);
+
+        var textGroupBBox = textGroup.node().getBBox();
+
+        surgeryDateX.insert('rect', 'g')
+            .attr('x', textGroupBBox.x - hPadding)
+            .attr('y', textGroupBBox.y - vPadding)
+            .attr('width', textGroupBBox.width + hPadding * 2)
+            .attr('height', textGroupBBox.height + vPadding * 2)
+            .attr('transform', 'translate({0}, {1})'.format(0, 45))
+            .style('fill', color);
+
+        surgeryDateX.append('line')
+            .attr('x1', 0)
+            .attr('y1', -this.chartSize.chartHeight)
+            .attr('x2', 0)
+            .attr('y2', 20);
+
+        surgeryDateX.append('path')
+            .classed('triangle', true)
+            .attr('transform', 'translate(0, 20)')
+            .attr('d', d3.svg.symbol()
+                .size(24)
+                .type('triangle-up'));
+
+        var beforeSurgerySpace = this.scales.x(surgeryDate) - textGroupBBox.width / 2 - hPadding;
+
+        if (beforeSurgerySpace >= 130) {
+            this.chartObject
+                .append('text')
+                .text('BEFORE SURGERY')
+                .classed('surgery-text before', true)
+                .attr('x', beforeSurgerySpace / 2)
+                .attr('y', this.chartSize.chartHeight + 65)
+                .attr('dx', -55);
+        }
+
+        var afterSurgerySpace = this.chartSize.chartWidth -
+                                    this.scales.x(surgeryDate) -
+                                    textGroupBBox.width / 2 -
+                                    hPadding;
+
+        if (afterSurgerySpace >= 130) {
+            this.chartObject
+                .append('text')
+                .text('AFTER SURGERY')
+                .classed('surgery-text after', true)
+                .attr('x', this.scales.x(surgeryDate) + afterSurgerySpace / 2)
+                .attr('y', this.chartSize.chartHeight + 65);
+        }
+    };
+
     this.onLineMouseover = function (d, i, elem) {
         var lineGroup = d3.select(elem);
 
@@ -393,13 +408,14 @@ function ToolbarPanel() {
                 .selectAll('circle')
                 .attr('r', 4);
 
-            $('.line-group')
+            this.$node.find('.line-group')
                 .filter(function () {
                     return !$(this).hasClass('active');
                 })
                 .addClass('disable');
 
-            d3.select('g.status-tip-group-{0}'.format(lineGroup.datum()))
+            d3.select(this.$node[0])
+                .select('g.status-tip-group-{0}'.format(lineGroup.datum()))
                 .classed('active', true);
         }
     };
@@ -412,18 +428,8 @@ function ToolbarPanel() {
         }
     };
 
-    this.getYTickValues = function (val) {
-        var minOffset = 100;
-
-        _.each(Y_TICK_OFFSET_ARRAY, function (offset) {
-            var number = val / offset;
-
-            if (number <= 10 && number < minOffset) {
-                minOffset = number;
-            }
-        });
-
-        var result = _.range(0, val, minOffset);
+    this.getYTickValues = function (val, pace) {
+        var result = _.range(0, val, pace);
         result.push(val);
 
         return result;
@@ -435,10 +441,11 @@ function ToolbarPanel() {
             .selectAll('circle')
             .attr('r', 3);
 
-        $('.line-group.disable')
+        this.$node.find('.line-group.disable')
             .removeClass('disable');
 
-        d3.select('g.status-tip-group-{0}'.format(d3LineGroup.datum()))
+        d3.select(this.$node[0])
+            .select('g.status-tip-group-{0}'.format(d3LineGroup.datum()))
             .classed('active', false);
     };
 
@@ -455,17 +462,17 @@ function ToolbarPanel() {
             $bar.show();
 
             _.each(types, function (type, index) {
-                $bar.append(SCORE_TEMPLATE.format(PARAMs.SCORE_TYPE[type], index));
+                $bar.append(SCORE_TEMPLATE.format(type, index));
             });
 
-            $(this.attr.scoreItemSelector).click(_.bind(this.onScoreItemClicked, this));
+            this.select('scoreItemSelector').click(_.bind(this.onScoreItemClicked, this));
         }
     };
 
     this.onScoreItemClicked = function (e) {
         var $target = $(e.target),
             index = $target.data('index'),
-            $lineGroup = $(LINE_GROUP_SELECTOR.format(index));
+            $lineGroup = this.$node.find(LINE_GROUP_SELECTOR.format(index));
 
         if ($target.hasClass('inactive')) {
             $target.removeClass('inactive');
@@ -489,7 +496,8 @@ function ToolbarPanel() {
     };
 
     this.clearSVG = function () {
-        d3.selectAll(this.attr.lineGroupSelector)
+        d3.select(this.$node[0])
+            .selectAll(this.attr.lineGroupSelector)
             .selectAll('circle, path')
             .on('mouseover', null)
             .on('mouseout', null)
@@ -500,44 +508,105 @@ function ToolbarPanel() {
         this.$node.find('svg').remove();
     };
 
-    this.onRender = function (e, data) {
-        this.select('defaultPanelSelector').hide();
+    this.organizeData = function(data) {
+        var meta = this.scales.meta;
+        var hasScoreType = false;
+        var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+        var availableTypes = reportSetting.type;
+        var scoreAtType = reportSetting.scoreAt;
 
-        if (data.xRange === UNSUPPORTED) {
-            this.select('noAvailableSelector').show();
+        if (availableTypes) {
+            hasScoreType = true;
+
+            _.each(availableTypes, function (type) {
+                meta.dataGroup[type] = [];
+            });
         } else {
-            this.select('chartGroupSelector').show();
+            meta.dataGroup[scoreAtType] = [];
+        }
 
-            this.drawFrame(data.xRange, data.yRange);
+        _.each(data.data, function(point) {
+            if (!_.contains(meta.xRange, point.date)) {
+                meta.xRange.push(point.date);
+            }
 
-            if (!data.dataSet && !data.items) {
-                this.select('noDataSelector').show();
-            } else if (data.items) {
-                this.drawLineGroup(_.sortBy(data.items, 'offset'), 0);
+            if (point.score > meta.maxY) {
+                meta.maxY = point.score;
+            }
+
+            if (hasScoreType && _.contains(availableTypes, PARAMs.SCORE_TYPE[point.type])) {
+                meta.dataGroup[PARAMs.SCORE_TYPE[point.type]].push(point);
+            } else if (!hasScoreType && scoreAtType === point.type) {
+                meta.dataGroup[scoreAtType].push(point);
+            }
+        });
+
+        if (data.surgeryDate && !_.contains(meta.xRange, data.surgeryDate)) {
+            meta.xRange.push(data.surgeryDate);
+        }
+
+        meta.xRange = _.sortBy(meta.xRange);
+
+        _.each(meta.dataGroup, function (value, key) {
+            meta.dataGroup[key] = _.sortBy(value, 'date');
+        });
+    };
+
+    this.onRender = function (e, data) {
+        if (this.$node.is(':visible')) {
+            this.select('defaultPanelSelector').hide();
+
+            var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+            if (!data || !reportSetting) {
+                this.select('noAvailableSelector').show();
             } else {
-                this.select('scoreBarSelector').show();
-                this.drawScoreBar(_.map(data.dataSet, 'type'));
+                this.select('chartGroupSelector').show();
+                this.organizeData(data);
 
-                _.each(data.dataSet, function (dataGroup, index) {
-                    this.drawLineGroup(_.sortBy(dataGroup.items, 'offset'), index, dataGroup.type);
-                }, this);
+                this.drawFrame(this.scales.meta.xRange, reportSetting.maxScore, reportSetting.pace);
+
+                var dataGroup = this.scales.meta.dataGroup;
+                var availableTypes = reportSetting.type;
+                var scoreAtType = reportSetting.scoreAt;
+
+                if (data.data.length === 0) {
+                    this.select('noDataSelector').show();
+                } else {
+                    if (!availableTypes) {
+                        this.drawLineGroup(dataGroup[scoreAtType], 0);
+                    } else {
+                        this.select('scoreBarSelector').show();
+                        this.drawScoreBar(availableTypes);
+
+                        _.each(availableTypes, function (type, index) {
+                            this.drawLineGroup(dataGroup[type], index, type);
+                        }, this);
+                    }
+                }
+
+                if (data.surgeryDate) {
+                    this.drawSurgeryDate(data.surgeryDate);
+                }
             }
         }
     };
 
     this.onClear = function () {
-        this.clearSVG();
-        this.select('defaultPanelSelector').show();
-        this.select('noAvailableSelector').hide();
-        this.select('chartGroupSelector').hide();
-        this.select('noDataSelector').hide();
-        this.select('scoreBarSelector').hide();
+        if (this.$node.is(':visible')) {
+            this.clearSVG();
+            this.select('defaultPanelSelector').show();
+            this.select('noAvailableSelector').hide();
+            this.select('chartGroupSelector').hide();
+            this.select('noDataSelector').hide();
+            this.select('scoreBarSelector').hide();
+            this.initScalesData();
+        }
     };
 
     this.after('initialize', function () {
-        this.on(document, 'getProviderAverageOverviewSuccessful', this.onRender);
-        this.on(document, 'startGettingProviderAverageOverview', this.onClear);
+        this.on(document, 'renderTreatmentScoreChart', this.onRender);
+        this.on(document, 'clearTreatmentScoreChart', this.onClear);
     });
 }
 
-module.exports = flight.component(ToolbarPanel);
+module.exports = flight.component(ScoreChart);

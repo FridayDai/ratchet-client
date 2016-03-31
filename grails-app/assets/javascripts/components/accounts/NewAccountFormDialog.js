@@ -33,7 +33,7 @@ function NewAccountFormDialog() {
     });
 
     this.initValidation = function () {
-        return _.defaultsDeep(AccountNPIValidation.get(), AccountEmailValidation.get());
+        return [AccountNPIValidation.get(), AccountEmailValidation.get()];
     };
 
     this.onShow = function () {

@@ -6,10 +6,17 @@ import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(TreatmentService)
 class TreatmentServiceSpec extends Specification {
+	def setupSpec() {
+		WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+			return null
+		}
+	}
+
 	def "test getTreatments with success result"() {
 		given:
 		def jBuilder = new JsonBuilder()
@@ -25,7 +32,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.getTreatments('token', 1, 1, 1, 'title')
+		def result = service.getTreatments('token', 1, 1, 1, 1, 'title', true)
 
 		then:
 		result == [1, 2]
@@ -41,7 +48,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.getTreatments('token', 1, 1, 1, 'title')
+		service.getTreatments('token', 1, 1, 1, 1, 'title', true)
 
 		then:
 		ApiReturnException e = thrown()
@@ -319,6 +326,115 @@ class TreatmentServiceSpec extends Specification {
 
 		when:
 		service.addAdhocTasks('token', 1, 2, 3, '1,2,3', 123)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test deleteTreatment with successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+				status: 204,
+				body  : ''
+			]
+		}
+
+		when:
+		def result = service.deleteTreatment('token', 1, 2, 3)
+
+		then:
+		result == true
+	}
+
+	def "test deleteTreatment without successful result"() {
+		given:
+		HttpRequestWithBody.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.deleteTreatment('token', 1, 2, 3)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test getTasksInTreatment with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTasksInTreatment without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTasksInTreatment('token', 1, 1)
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+	def "test getTreatmentAvailableYears with success result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hello 'world'
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.getTreatmentAvailableYears('token', 1, 1)
+
+		then:
+		result['hello'] == 'world'
+	}
+
+	def "test getTreatmentAvailableYears without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.getTreatmentAvailableYears('token', 1, 1)
 
 		then:
 		ApiReturnException e = thrown()

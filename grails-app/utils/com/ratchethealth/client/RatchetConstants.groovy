@@ -5,6 +5,10 @@ class RatchetConstants {
     public static final DEFAULT_PAGE_SIZE = 20
     public static final DEFAULT_PAGE_OFFSET = 0
 
+    public static final Map BASE_TOOL_TYPE = [
+            2: "OUTCOME",
+            4: "VOICE"
+    ]
 
     public static final String TOOL_NAME_DASH = 'DASH';
     public static final String TOOL_NAME_ODI = 'ODI';
@@ -53,6 +57,9 @@ class RatchetConstants {
 
     //Task type that has view result.
     public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 1000]
+
+    //Task type mixedResult(score and view result).
+    public static Integer[] TOOL_TYPE_MiXED_RESULT = [11, 12]
 
     //For pain neck and pain back.
     public static final String[] PAIN_FREQUENCY = [

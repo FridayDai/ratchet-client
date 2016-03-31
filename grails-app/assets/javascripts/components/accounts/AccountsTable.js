@@ -3,7 +3,7 @@ require('momentTZ');
 var flight = require('flight');
 var WithDataTable = require('../common/WithDataTable');
 var URLs = require('../../constants/Urls');
-var moment = require('moment');
+var Utility = require('../../utils/Utility');
 
 var ID_CONTAINER = '<p class="source-id">{0}</p>';
 var VIEW_LINK = '<a href="/accounts/{0}" data-id="{0}" class="view"><span>View</span></a>';
@@ -51,7 +51,7 @@ function AccountsTable() {
                 render: function (data, type, full) {
                     var lastUpdate = data === undefined ? full.lastUpdateDate : data;
                     var lastUpdateTime = new Date(parseInt(lastUpdate, 10));
-                    return moment(lastUpdateTime).tz("America/Vancouver").format('MMM D, YYYY h:mm:ss A');
+                    return Utility.toVancouverTimeHour(lastUpdateTime);
                 },
                 width: "19%"
             }, {

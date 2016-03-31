@@ -4,10 +4,16 @@ import com.mashape.unirest.http.exceptions.UnirestException
 import com.ratchethealth.client.exceptions.ApiAccessException
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
+import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
 
 @TestFor(RatchetAPIService)
 class RatchetAPIServiceSpec extends Specification {
+    def setupSpec() {
+        WebUtils.metaClass.'static'.retrieveGrailsWebRequest = { ->
+            return null
+        }
+    }
 
     def "test handle error with resp as null"() {
         given: "Set resp null"

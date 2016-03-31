@@ -1,12 +1,16 @@
 require('../../libs/jquery-validation/jquery.validate.js');
 require('jForm');
 
+var DateDefaultValidation = require('../shared/validation/DateDefaultValidation');
+
 function WithForm() {
     this.attributes({
         formSelector: '.'
     });
 
     this._initForm = function () {
+        var me = this;
+
         if (this.attr.formSelector === '.') {
             this.formEl = $(this.$node);
         } else {
@@ -17,12 +21,52 @@ function WithForm() {
 
         var options;
         if ($.isFunction(this.initValidation)) {
-            options = this.initValidation();
+            options = this.__getValidations(this.initValidation());
         }
 
         this.formEl.validate(_.extend({
-            submitHandler: _.bind(this._prepareSubmitForm, this)
+            submitHandler: this.attr.nativeForm ? null : _.bind(this._prepareSubmitForm, this)
         }, options));
+
+        _.each(this.__validationFunctions, function (fn) {
+            fn.call(me, me.formEl);
+        });
+
+        DateDefaultValidation.addIn(this.formEl);
+
+        var componentValidations = this.formEl.data('componentRules');
+
+        _.each(componentValidations, function (item) {
+            if (item.element) {
+                item.element.rules('add', item.rules);
+            }
+        });
+    };
+
+    this.__getValidations = function (validations) {
+        var plainObjects = [];
+        var functions = [];
+
+        if (_.isPlainObject(validations)) {
+            return validations;
+        }
+
+        if (_.isFunction(validations)) {
+            this.__validationFunctions = [validations];
+            return;
+        }
+
+        _.each(validations, function (item) {
+            if (_.isPlainObject(item)) {
+                plainObjects.push(item);
+            } else if (_.isFunction(item)) {
+                functions.push(item);
+            }
+        });
+
+        this.__validationFunctions = functions;
+
+        return _.defaultsDeep.apply(this, plainObjects);
     };
 
     this.submitForm = function () {
@@ -60,7 +104,16 @@ function WithForm() {
         $.validator.setDefaults({
             errorClass: 'error-help-block',
             errorPlacement: function(error, element) {
-                $("<div class='error-container'></div>").appendTo(element.parent()).append(error);
+                var errorContainer = element.parent();
+                var $form = element.closest('form');
+                var validator = $form.data('validator');
+
+                if (element.data('groupValidation')) {
+                    var $groupPatient = element.closest('.' + validator.groups[element.attr('name')] + '-groups');
+                    errorContainer = $groupPatient.parent();
+                }
+
+                $("<div class='error-container'></div>").appendTo(errorContainer).append(error);
             }
         });
     };

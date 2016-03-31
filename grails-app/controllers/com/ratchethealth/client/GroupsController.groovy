@@ -24,26 +24,43 @@ class GroupsController extends BaseController {
 
     def getStaffGroups(GroupPagination groupPagination) {
         def resp, clientId = session.clientId
-//        params.length = RatchetConstants.DEFAULT_MAX_OFFSET
-        if (request.session.accountManagement == true) {
-            def response = groupService.showGroupsList(session.token, clientId, groupPagination)
-            resp = response.data
-        } else {
-            resp = groupService.getStaffGroups(session.token, clientId, groupPagination.name)
+        def treatmentId = params?.treatmentId
+
+        if (treatmentId) {
+            treatmentId = treatmentId as long
         }
+
+        resp = groupService.getStaffGroups(session.token, clientId, treatmentId, groupPagination.name)
+
         render resp as JSON
     }
 
     def addGroup() {
-        def resp = groupService.createGroup(session.token, session.clientId, params.name)
-        def result = [resp: resp]
-        render result as JSON
+        def name = params?.name
+        def treatmentIds = params?.treatments
+
+        def resp = groupService.createGroup(session.token, session.clientId, name)
+        if (resp.id) {
+            groupService.updateTreatmentsOnGroup(session.token, session.clientId, resp.id, treatmentIds)
+
+            def result = [resp: resp]
+            render result as JSON
+        }
     }
 
     def updateGroup() {
-        def resp = groupService.updateGroup(session.token, session.clientId, params.name, params.groupId)
-        def result = [resp: resp]
-        render result as JSON
+        def name = params?.name
+        def groupId = params?.groupId
+        def treatmentIds = params?.treatments
+
+        def resp = groupService.updateGroup(session.token, session.clientId, name, groupId)
+
+        if (resp) {
+            resp = groupService.updateTreatmentsOnGroup(session.token, session.clientId, groupId, treatmentIds)
+
+            def result = [resp: resp]
+            render result as JSON
+        }
     }
 
     def deleteGroup() {
@@ -51,5 +68,4 @@ class GroupsController extends BaseController {
         def result = [resp: resp]
         render result as JSON
     }
-
 }

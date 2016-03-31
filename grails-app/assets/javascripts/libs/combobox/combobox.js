@@ -62,13 +62,15 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                         break;
                     case keyCode.ENTER:
                         // when menu is open and has focus
+                        this._selectMatched();
                         if ( this.menu.active ) {
                             // #6055 - Opera still allows the keypress to occur
                             // which causes forms to submit
                             suppressKeyPress = true;
                             event.preventDefault();
-                            this.menu.select( event );
+                            this.menu.select(event);
                         }
+                        this.element.select();
                         break;
                     case keyCode.TAB:
                         if ( this.menu.active ) {
@@ -123,7 +125,41 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                         break;
                 }
             },
+            click: function () {
+                var currentVal = this.element.val();
+
+                if (!currentVal && !this.menu.element.children().length) {
+                    this.search(currentVal);
+                } else if (this.menu) {
+                    var ul = this.menu.element;
+
+                    if (ul) {
+
+                        if (ul.children().length === 0) {
+                            ul.addClass('no-children');
+                        }
+
+                        this.menu.refresh();
+
+                        ul.show();
+                        this._resizeMenu();
+                        ul.position($.extend({
+                            of: this.element
+                        }, this.options.position));
+
+                        if (this.options.autoFocus) {
+                            this.menu.next();
+                        }
+
+                        this._trigger("open");
+                    }
+                }
+            },
             input: function( event ) {
+                this.element
+                    .data('saved', null)
+                    .data("id", null);
+
                 if ( suppressInput ) {
                     suppressInput = false;
                     event.preventDefault();
@@ -137,16 +173,24 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
             focus: function() {
                 this.selectedItem = null;
                 this.previous = this._value();
+
+                this.element.select();
             },
             blur: function( event ) {
-                if ( this.cancelBlur ) {
-                    delete this.cancelBlur;
-                    return;
+                this.menu.active = null;
+
+                this._selectMatched();
+
+                if (this.menu.active) {
+                    var item = this.menu.active.data("ui-autocomplete-item");
+                    this.element
+                        .val(item.label)
+                        .data("id", item.value)
+                        .data("saved", item);
                 }
 
-                clearTimeout( this.searching );
-                this.close( event );
-                this._change( event );
+                this.close(event);
+                this.cancelSearch = false;
             }
         });
 
@@ -209,18 +253,25 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 }
 
                 item = ui.item.data( "ui-autocomplete-item" );
-                if ( false !== this._trigger( "focus", event, { item: item } ) ) {
-                    // use value to match what will end up in the input, if it was a key event
-                    if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
-                        this._value( item.value );
-                    }
-                }
+                //if ( false !== this._trigger( "focus", event, { item: item } ) ) {
+                //    // use value to match what will end up in the input, if it was a key event
+                //    if ( event.originalEvent && /^key/.test( event.originalEvent.type ) ) {
+                //        this._value( item.value );
+                //    }
+                //}
 
                 // Announce the value in the liveRegion
-                label = ui.item.attr( "aria-label" ) || item.value;
-                if ( label && $.trim( label ).length ) {
-                    this.liveRegion.children().hide();
-                    $( "<div>" ).text( label ).appendTo( this.liveRegion );
+                if (item) {
+                    label = ui.item.attr("aria-label") || item.value;
+                    if (label && $.trim(label).length) {
+                        this.liveRegion.children().hide();
+                        $("<div>").text(label).appendTo(this.liveRegion);
+                    }
+
+                    ui.item
+                        .addClass('rt-ui-state-active')
+                        .siblings('.rt-ui-state-active')
+                        .removeClass('rt-ui-state-active ui-state-focus');
                 }
             },
             menuselect: function( event, ui ) {
@@ -249,6 +300,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
                 this.close( event );
                 this.selectedItem = item;
+
+                this.element.select();
             }
         });
 
@@ -286,6 +339,23 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         this.source( { term: value }, this._response() );
     },
 
+    _searchTimeout: function( event ) {
+
+        clearTimeout( this.searching );
+        this.searching = this._delay(function() {
+
+            // Search if the value has changed, or if the user retypes the same value (see #7434)
+            var equalValues = this.term === this._value(),
+                menuVisible = this.menu.element.is( ":visible" ),
+                modifierKey = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+
+            if ( this._value() && (!equalValues || ( equalValues && !menuVisible && !modifierKey ))) {
+                this.selectedItem = null;
+                this.search( null, event );
+            }
+        }, this.options.delay );
+    },
+
     _response: function() {
         var index = ++this.requestIndex;
 
@@ -310,7 +380,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
         if ( !this.options.disabled && content && content.length && !this.cancelSearch ) {
             this._suggest( content );
             this._trigger( "open" );
-        } else if (!this.options.disabled && content && content.length === 0 && !this.cancelSearch ) {
+        } else if (!this.options.disabled && !this.options.hideNoResult && content && content.length === 0 && !this.cancelSearch ) {
             this.__noResult();
             this._trigger( "open" );
         } else {
@@ -330,16 +400,85 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
 
         this.isNewMenu = true;
         this.menu.refresh();
-
-        // size and position menu
         ul.show();
-        this._resizeMenu();
-        ul.position( $.extend({
-            of: this.element
-        }, this.options.position ) );
 
-        if ( this.options.autoFocus ) {
-            this.menu.next();
+        ul.removeClass('no-children');
+
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
+
+        this._resizeMenu();
+    },
+
+    _suggest: function( items ) {
+        var ul = this.menu.element.empty();
+        this._renderMenu( ul, items );
+        this.isNewMenu = true;
+        this.menu.refresh();
+        ul.show();
+
+        ul.removeClass('no-children');
+
+        ul.position($.extend({
+            of: this.element
+        }, this.options.position));
+
+        this._resizeMenu();
+
+        this._move( "next" );
+    },
+
+    _selectMatched: function () {
+        var currentVal = this.element.val().toLowerCase();
+        var matched = _.filter(this.menu.element.children(), function (elem) {
+            return $(elem).text().toLowerCase() === currentVal;
+        });
+
+        if (matched.length > 0) {
+            this.menu.active = $(matched[0]);
+        }
+    },
+
+    _move: function( direction, event ) {
+        var ul = this.menu.element;
+        var activeItem = ul.find('.rt-ui-state-active');
+        var items = ul.children();
+
+        if ( items.length === 0 ) {
+            this.search( null, event );
+            return;
+        } else {
+            ul.show();
+            ul.position($.extend({
+                of: this.element
+            }, this.options.position));
+
+            this._resizeMenu();
+        }
+
+        var action = 'next';
+
+        if (/^previous/.test( direction )) {
+            action = 'prev';
+        }
+
+        if (activeItem.length > 0) {
+            var nextItem = $(activeItem[0])[action]();
+
+            if (/^previous/.test( direction ) && nextItem.length === 0) {
+                nextItem = items.last();
+            } else if (/^next/.test( direction ) && nextItem.length === 0) {
+                nextItem = items.first();
+            }
+
+            this.menu.focus(event, nextItem);
+        } else if (items.length > 0) {
+            var validItems = items.not('.ui-state-disabled');
+
+            if (validItems.length > 0) {
+                this.menu.focus(event, $(validItems[0]));
+            }
         }
     }
 });
@@ -367,11 +506,6 @@ $.widget("ui.combobox", {
 
         this.element
             .addClass(classes)
-            .focus(function () {
-                if ($(this).data('uiAutocomplete').options.focusSearch && $(this).val() === '') {
-                    $(this).autocomplete("search");
-                }
-            })
             .autocomplete($.extend({
                 minLength: 0,
                 focusSearch: true,
@@ -414,12 +548,6 @@ $.widget("ui.combobox", {
                 });
         }
 
-        this.element.on('keyup', function (e) {
-            if (e.which == 13 && $(this).val() === '') {
-                clear(this);
-            }
-        });
-
         this.element.on('blur', function () {
             if ($(this).val() === '') {
                 clear(this);
@@ -440,15 +568,25 @@ $.widget("ui.combobox", {
                     return;
                 }
 
-                if (self.element.autocomplete("widget").is(":visible")) {
+                var $menu = self.element.autocomplete("widget");
+
+                if ($menu.is(":visible")) {
                     self.element.autocomplete("close");
                     return;
                 }
 
-                $(self.element).data('uiAutocomplete').options.focusSearch = false;
-                self.element.autocomplete("search", "");
+                //$(self.element).data('uiAutocomplete').options.focusSearch = false;
+                //self.element.autocomplete("search", self.element.val());
+                //self.element.focus();
+                //$(self.element).data('uiAutocomplete').options.focusSearch = true;
+
+                if ($menu.children().length > 0) {
+                    self.element.trigger('click');
+                } else {
+                    self.element.autocomplete("search", self.element.val());
+                }
+
                 self.element.focus();
-                $(self.element).data('uiAutocomplete').options.focusSearch = true;
             });
 
         if (self.element.is(":disabled")) {

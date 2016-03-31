@@ -15,6 +15,7 @@ class TreatmentController extends BaseController {
         def clientId = params?.clientId
         def archived = params?.archived
         def PatientEmailStatus = params?.PatientEmailStatus
+        def isAdmin = request.session.accountManagement
         Long surgeryTime = null
 
         if (params?.surgeryTime != "null" || !params?.surgeryTime) {
@@ -28,7 +29,8 @@ class TreatmentController extends BaseController {
                     treatmentId: treatmentId,
                     surgeryTime: surgeryTime,
                     archived: archived,
-                    PatientEmailStatus: PatientEmailStatus
+                    PatientEmailStatus: PatientEmailStatus,
+                    isAdmin: isAdmin
                 ]
     }
 
@@ -51,7 +53,10 @@ class TreatmentController extends BaseController {
         def max = params?.max
         def offset = params?.offset
         def treatmentTitle = params?.treatmentTitle
-        def resp = treatmentService.getTreatments(token, clientId, max, offset, treatmentTitle)
+        def groupId = params?.groupId
+        def showAll = params?.showAll
+
+        def resp = treatmentService.getTreatments(token, clientId, groupId, max, offset, treatmentTitle, showAll)
         render resp as JSON
     }
 
@@ -120,6 +125,27 @@ class TreatmentController extends BaseController {
         def scheduleTime = params?.scheduleTime
 
         def resp = treatmentService.addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime)
+        render resp as JSON
+    }
+
+    def deleteTreatment() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def medicalRecordId = params?.medicalRecordId
+
+        def resp = treatmentService.deleteTreatment(token, clientId, patientId, medicalRecordId)
+        def result = [resp: resp]
+        render result as JSON
+    }
+
+    def getTreatmentAvailableYears() {
+        def token = request.session.token
+        def clientId = request.session?.clientId
+        def treatmentId = params?.treatmentId
+
+        def resp = treatmentService.getTreatmentAvailableYears(token, clientId, treatmentId)
+
         render resp as JSON
     }
 }

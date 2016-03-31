@@ -1,19 +1,14 @@
 package com.ratchethealth.client
 
 import groovy.util.logging.Log4j
-import org.apache.http.client.utils.DateUtils
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import java.security.InvalidKeyException
 import java.security.SecureRandom
 import org.apache.http.client.utils.DateUtils
 
-/**
- * Created by sky on 1/15/16.
- */
 @Log4j
 class HMACUtils {
-
     static hmac_sha256(String secretKey, String data) {
         try {
             Mac mac = Mac.getInstance('HmacSHA256')

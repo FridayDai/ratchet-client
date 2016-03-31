@@ -1,4 +1,5 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants; com.ratchethealth.client.RatchetConstants" %>
+<%@ page import="com.ratchethealth.client.Utils" %>
 <div class="sticky-header">
     <div role="banner" class="header">
         <div class="toolbar">
@@ -15,12 +16,16 @@
 
         <div class="sub-info-panel">
             <g:if test="${!download}">
-                <div class="download"><g:link uri="/task/downloadPDF.pdf" params="[patientId: patientId, medicalRecordId: medicalRecordId, taskId: taskId]">↓Download PDF</g:link></div>
+                <div class="download"><g:link uri="/task/downloadPDF.pdf"
+                                              params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></div>
             </g:if>
             <div class="patient-info">
                 <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
                 |
                 <span class="id">ID: ${Task.patientId}</span>
+                <g:if test="${Task?.birthday}">
+                    <span class="birthday"><i class="fa fa-birthday-cake"></i>${Utils.formatBirthday(Task?.birthday)}</span>
+                </g:if>
             </div>
 
             <div class="questionnaire-info">
@@ -33,29 +38,17 @@
                         <div class="divider"></div>
 
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
-                            <% def firstSplit = "" %>
-                            <% def secondSplit %>
-                            <% if (Task?.nrsScore != null) { %>
-                            <% firstSplit = Task?.nrsScore?.split(',') %>
-                            <% } %>
-                            <g:each in="${firstSplit}" var="num">
-                                <% secondSplit = num?.trim().split(':') %>
+                            <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+                                <span class="score-wrap">
+                                    <div class="score-num">${score[1]}</div>
 
-                                    <g:if test="${secondSplit?.size() == 2}">
-                                        <div class="score-wrap">
-                                            <div class="score-num">${secondSplit[1]}</div>
-                                            <g:if test="${RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_KOOS_JR || RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_HOOS_JR}">
-                                                <div class="score-des">${StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL[secondSplit[0]]}</div>
-                                            </g:if>
-                                            <g:else test="${RatchetConstants.TOOL_TYPE[Task.type] == RatchetConstants.TOOL_NAME_PROMIS}">
-                                                <div class="score-des">${secondSplit[0]}</div>
-                                            </g:else>
-                                        </div>
-                                    </g:if>
-                            </g:each>
+                                    <div class="score-des">${score[0]}</div>
+                                </span>
+                            </g:multipleScore>
                         </g:if>
                         <g:else>
                             <div class="score-num">${Task.score}</div>
+
                             <div class="score-des">Total Result</div>
                         </g:else>
                     </span>

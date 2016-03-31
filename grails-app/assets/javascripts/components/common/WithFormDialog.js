@@ -15,7 +15,10 @@ function WithFormDialog() {
     ]);
 
     this.options = function (options) {
-        if (_.isArray(options.buttons) && options.buttons.length <= 2) {
+        if (_.isArray(options.buttons) &&
+            options.buttons.length <= 2 &&
+            _.every(options.buttons, function(item) { return !_.isPlainObject(item);})
+        ) {
             var originButtons = options.buttons;
             var primaryButtonStr = originButtons[0];
 
@@ -48,12 +51,19 @@ function WithFormDialog() {
         }, 0);
     };
 
+    this.savePlaceholder = function () {
+        this.select('inputFieldSelector')
+            .each(function (index, element) {
+                var $element = $(element);
+
+                $element.data('placeholder', $element.attr('placeholder'));
+            });
+    };
+
     this.onInputFieldFocus = function (e) {
         var $element = $(e.target);
 
-        $element
-            .data('placeholder', $element.attr('placeholder'))
-            .attr('placeholder', '');
+        $element.attr('placeholder', '');
     };
 
     this.onInputFieldBlur = function (e) {
@@ -63,6 +73,8 @@ function WithFormDialog() {
     };
 
     this.after('initialize', function () {
+        this.savePlaceholder();
+
         this.on('dialogbeforeclose', this._onDialogBeforeClose);
         this.on('formSuccess', this.closeDialog);
 

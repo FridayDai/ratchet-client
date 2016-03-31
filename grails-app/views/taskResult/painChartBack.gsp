@@ -11,21 +11,21 @@
     <body>
     <div class="pain-chart task-result-content">
         <div class="pain-draw">
-            <div class="answer-title">Pain Drawing</div>
+            <div class="answer-title">Pain Diagram</div>
             <div id="draw-board" class="draw-board clear">
                 <span class="chart-content">
-                    <div class="chart-title">Front</div>
                     <g:render template="/taskResult/template/backFront" model="['taskResult': mixedResult]"></g:render>
+                </span>
+
+                <span class="chart-content">
+                    <g:render template="/taskResult/template/backBack" model="['taskResult': mixedResult]"></g:render>
                 </span>
 
                 <div class="chart-content-middle">
                     <g:render template="/taskResult/template/symptomsDirection"></g:render>
                 </div>
 
-                <span class="chart-content">
-                    <div class="chart-title">Back</div>
-                    <g:render template="/taskResult/template/backBack" model="['taskResult': mixedResult]"></g:render>
-                </span>
+
             </div>
         </div>
 
@@ -37,20 +37,20 @@
                     </div>
                     <div class="answer-line">
                         Back Pain
-                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['6']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['19']}">- -</g:if><g:else>${mixedResult['16']?: '0'}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Buttock Pain
-                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['7']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['19']}">- -</g:if><g:else>${mixedResult['17']?: '0'}%</g:else></span>
                     </div>
                     <div class="answer-line">
                         Leg Pain
-                        <span class="pain-percent"><g:if test="${mixedResult['9']}">- -</g:if><g:else>${mixedResult['8']}%</g:else></span>
+                        <span class="pain-percent"><g:if test="${mixedResult['19']}">- -</g:if><g:else>${mixedResult['18']?: '0'}%</g:else></span>
                     </div>
                     <div class="answer-line">
-                        The user has no back, buttock or leg pain
+                        The patient has no back, buttock or leg pain
                         <label>
-                            <g:if test="${mixedResult['9']}">
+                            <g:if test="${mixedResult['19']}">
                                 <input id="painToggle" type="checkbox" class="rc-choice-hidden" disabled checked />
                             </g:if>
                             <g:else>
@@ -69,11 +69,11 @@
                     </div>
                     <div class="answer-line">
                         Average level of back pain
-                        <span>${mixedResult['10']} / 10</span>
+                        <span>${mixedResult['20']} / 10</span>
                     </div>
                     <div class="answer-line">
                         Frequency of back pain
-                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['11']?.toInteger()]}</span>
+                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['21']?.toInteger()]}</span>
                     </div>
                 </div>
                 <div class="answer-box">
@@ -82,11 +82,11 @@
                     </div>
                     <div class="answer-line">
                         Average level of buttock pain
-                        <span>${mixedResult['12']} / 10</span>
+                        <span>${mixedResult['22']} / 10</span>
                     </div>
                     <div class="answer-line">
                         Frequency of buttock pain
-                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['13']?.toInteger()]}</span>
+                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['23']?.toInteger()]}</span>
                     </div>
                 </div>
                 <div class="answer-box">
@@ -95,11 +95,11 @@
                     </div>
                     <div class="answer-line">
                         Average level of leg pain
-                        <span>${mixedResult['14']} / 10</span>
+                        <span>${mixedResult['24']} / 10</span>
                     </div>
                     <div class="answer-line">
                         Frequency of leg pain
-                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['15']?.toInteger()]}</span>
+                        <span>${RatchetConstants.PAIN_FREQUENCY[mixedResult['25']?.toInteger()]}</span>
                     </div>
                 </div>
             </div>

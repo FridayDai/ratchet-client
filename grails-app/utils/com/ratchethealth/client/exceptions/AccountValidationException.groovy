@@ -1,8 +1,8 @@
 package com.ratchethealth.client.exceptions;
 
-class AccountValidationException extends Exception {
+class AccountValidationException extends RuntimeException {
 
-    private Integer limitSeconds;
+    int limitSeconds;
 
     public AccountValidationException() {
         super();
@@ -12,7 +12,7 @@ class AccountValidationException extends Exception {
         super(message);
     }
 
-    public AccountValidationException(String message, Integer time) {
+    public AccountValidationException(String message, int time) {
         super(message);
         this.limitSeconds = time;
     }

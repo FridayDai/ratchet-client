@@ -1,6 +1,7 @@
 require('../components/layout/Main');
 
 var flight = require('flight');
+var PAGEs = require('../constants/Pages');
 var WithPage = require('../components/common/WithPage');
 
 var HeaderPanel = require('../components/groups/HeaderPanel');
@@ -10,6 +11,8 @@ var GroupsTable = require('../components/groups/GroupsTable');
 var GroupFormDialog = require('../components/groups/GroupFormDialog');
 
 function GroupsPage() {
+    this.setPath(PAGEs.GROUP_LIST);
+
     this.attributes({
         headerPanelSelector: '#header-panel',
         toolbarPanelSelector: '#groups-toolbar',

@@ -48,11 +48,14 @@ function WithCombobox() {
         this.$node.combobox(this.initOptions());
     };
 
-    this.onClear = function () {
-        this.select();
+    this.__onClear = function () {
+        this.clear();
 
         if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
-            this.trigger(this.attr.clearEvent);
+            var data = {};
+            data[this.attr.selectDataKey] = null;
+
+            this.trigger(this.attr.clearEvent, data);
         }
     };
 
@@ -60,9 +63,11 @@ function WithCombobox() {
         $(this.$node)
             .val('')
             .data("id", '');
+        this.__previousVal = null;
+        this.$node.autocomplete( "widget").empty();
     };
 
-    this.onSelect = function (e, ui) {
+    this.__onSelect = function (e, ui) {
         this.select(ui.item.value);
     };
 
@@ -80,23 +85,55 @@ function WithCombobox() {
 
             data[this.attr.selectDataKey] = id;
 
+            if (this.beforeSelect) {
+                this.beforeSelect.call(this, data);
+            }
+
             if (this.attr.selectEvent !== DEFAULT_SELECT_EVENT) {
                 this.trigger(this.attr.selectEvent, data);
+            }
+
+            var validator = this.$node.closest('form').data('validator');
+
+            if (validator) {
+                var me = this;
+                setTimeout(function () {
+                    validator.element(me.$node);
+                }, 0);
             }
         }
     };
 
+    this.getDisplayItem = function () {
+        var saved = this.$node.data('saved');
+        if (saved) {
+            return saved;
+        } else {
+            return {
+                label: '',
+                value: ''
+            };
+        }
+    };
+
+    this.setDisplayItem = function (item) {
+        this.__previousVal = item.value;
+        this.$node.val(item.label);
+        this.$node
+            .data('saved', item)
+            .data('id', item.value);
+    };
+
     this.__onReset = function () {
         this.clear();
-        this.__previousVal = null;
     };
 
     this.after('initialize', function () {
         this._initCombobox();
         this.clear();
 
-        this.on('autocompleteselect', this.onSelect);
-        this.on('autocompleteclear', this.onClear);
+        this.on('autocompleteselect', this.__onSelect);
+        this.on('autocompleteclear', this.__onClear);
 
         if (this.attr.resetEvent !== DEFAULT_RESET_KEY) {
             this.on(document, this.attr.resetEvent, this.__onReset);

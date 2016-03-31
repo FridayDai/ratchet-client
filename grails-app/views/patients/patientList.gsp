@@ -33,11 +33,18 @@
 
                 <div class="filler-content">
                     <label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>
-                    <input type="text" name="emailStatusFilter" id="emailStatusFilter" class="input-group input-auto-search"/>
+                    <input type="text" name="emailStatusFilter" id="emailStatusFilter"
+                           class="input-group input-auto-search"/>
+                </div>
+
+                <div class="filler-content">
+                    <label for="attentionStatusFilter" class="select-tip">ATTENTION</label>
+                    <input type="text" name="attentionStatusFilter" id="attentionStatusFilter"
+                           class="input-group input-auto-search"/>
                 </div>
 
                 <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name" class="search-input" id="search-input">
+                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
                     <span class="search" id="search-btn"></span>
                 </div>
             </div>
@@ -61,11 +68,12 @@
                     <tr data-is-dom-data="true">
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
-                        <td>${patient.email?:''}</td>
+                        <td>${patient.email ?: ''}</td>
                         <td>${patient.phoneNumber}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
+                        <td>${patient.isAttentionNeeded}</td>
                     </tr>
                 </g:each>
                 </tbody>
@@ -79,14 +87,14 @@
                        placeholder="1234567890" required/>
             </div>
 
-        %{--<label class="form-group required pull-right"><span>*</span>Required field</label>--}%
+            %{--<label class="form-group required pull-right"><span>*</span>Required field</label>--}%
 
             <div class="required-field required-padding">
                 *Required field
             </div>
         </form>
 
-        <form action="/patients" method="post" id="table-form" class="form ui-hidden">
+        <form action="/patients" method="post" id="table-form" class="form ui-hidden new-patient-form">
             <div class="form-group">
                 <label class="lbl-group">PATIENT ID<span>*</span></label>
 
@@ -98,6 +106,7 @@
                 <label class="lbl-group">FIRST NAME<span>*</span></label>
                 <input id="firstName" name="firstName" type="text" class="input-group input-convert" placeholder="John"
                        required/>
+
                 <div class='replace-input-div' id="firstName-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
@@ -106,14 +115,17 @@
                 <label class="lbl-group">LAST NAME<span>*</span></label>
                 <input id="lastName" name="lastName" type="text" class="input-group input-convert" placeholder="Smith"
                        required/>
+
                 <div class='replace-input-div' id="lastName-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
 
             <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER<span>*</span></label>
-                <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert" maxlength="14"
+                <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert"
+                       maxlength="14"
                        minlength="14" placeholder="777-777-7777" required/>
+
                 <div class='replace-input-div' id="phoneNumber-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
@@ -122,7 +134,22 @@
                 <label class="lbl-group">EMAIL ADDRESS</label>
                 <input id="email" name="email" type="email" class="input-group input-convert"
                        placeholder="john.smith@email.com (Optional)"/>
+
                 <div class='replace-input-div' id="email-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">BIRTHDAY</label>
+                <div class="birthday-groups">
+                    <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group input-convert"
+                           placeholder="Month"/>
+                    <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group input-convert"
+                           placeholder="Day"/>
+                    <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group input-convert"
+                           placeholder="Year"/>
+                </div>
+                <div class='replace-input-div' id="birthday-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
 
@@ -156,9 +183,10 @@
                 </div>
 
                 <div class="form-group inline permission-confirm" data-direction="up">
-                    <input id="permission-confirm-check" type="checkbox" name="permissionConfirm" class="permission-confirm-check"/>
+                    <input id="permission-confirm-check" type="checkbox" name="permissionConfirm"
+                           class="permission-confirm-check"/>
                     <label for="permission-confirm-check">*
-                        Patient would like to release his/her health information to <span id="ec-first-name"></span>.
+                    Patient would like to release his/her health information to <span id="ec-first-name"></span>.
                     </label>
                 </div>
             </div>
@@ -182,12 +210,12 @@
                 <label class="lbl-group">TREATMENT<span>*</span></label>
                 <input id="selectTreatment" name="treatmentVal" type="text"
                        class="input-group treatment re-position clear"
-                       placeholder="Select treatment" required/>
+                       placeholder="Select treatment" required disabled/>
             </div>
 
             <div class="form-group inline" id="div-surgery-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group surgery-time re-position"
+                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time re-position"
                        placeholder="Select surgery date" required disabled/>
             </div>
 
@@ -254,12 +282,18 @@
             </div>
 
             <div class="after-important div-hidden">
-                <p>Please confirm the patient list.</p>
+                <div class="part-title">Please confirm the patient list.
+                    <div id="duplicated-error" class="alert alert-span error div-hidden">
+                        Patient with duplicated treatments.
+                    </div>
+                </div>
+
                 <table id="patient-list" class="patient-display div-hidden">
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Birthday</th>
                         <th>Email Address</th>
                         <th>Phone Number</th>
                         <th>Group</th>

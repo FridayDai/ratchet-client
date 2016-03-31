@@ -2,8 +2,9 @@ var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var URLs = require('../../../constants/Urls');
 
-var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
+var PatientGroupCombobox = require('./PatientGroupCombobox');
 var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
+var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
 
 function EditGroupProviderFormDialog() {
     this.attributes({
@@ -34,6 +35,10 @@ function EditGroupProviderFormDialog() {
         }
     });
 
+    this.initValidation = function () {
+        return ComboboxInputValidation.get();
+    };
+
     this.onShow = function (e, data) {
         this.$node.removeClass('ui-hidden');
         this.prepareForShow(data);
@@ -50,8 +55,18 @@ function EditGroupProviderFormDialog() {
             groupId: this.currentGroupId
         });
 
-        this.select('groupFieldSelector').val(data.groupName);
-        this.select('providerFieldSelector').val(data.providerName);
+        this.child.groupFieldSelector.setDisplayItem({
+            label: data.groupName,
+            value: data.groupId
+        });
+        this.child.providerFieldSelector.setDisplayItem({
+            label: data.providerName,
+            value: data.providerId
+        });
+
+        this.child.groupFieldSelector.setTreatmentId(data.treatmentId);
+
+        this.child.groupFieldSelector.setTreatmentId(data.treatmentId);
 
         this.formEl.attr(
             'action',

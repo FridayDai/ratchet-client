@@ -66,7 +66,7 @@ function BulkImportDialog() {
     this.onBeforeClose = function () {
         var me = this;
 
-        if (this.hasDataUploaded()) {
+        if (this.hasDataUploaded() && !this.finalDialog) {
             Notifications.confirm({
                 title: 'ARE YOU SURE?',
                 message: 'Are you sure you want to discard the patient list?'
@@ -102,7 +102,7 @@ function BulkImportDialog() {
     };
 
     this.hasDataUploaded = function () {
-          return this._isFileUploaded;
+        return this._isFileUploaded;
     };
 
     this.onClose = function () {
@@ -125,24 +125,77 @@ function BulkImportDialog() {
         this.trigger('bulkImportDialogReset');
     };
 
+    this.formatBulkList = function () {
+        var data = [];
+        _.each(this._fileUploadData, function (value) {
+            data.push(_.omit(value, 'hasDuplicates'));
+        });
+        return JSON.stringify(data);
+    };
+
+    this.ajaxConfirm = function () {
+        var me = this;
+        $.ajax({
+            url: URLs.SAVE_BULK_IMPORT_DATA,
+            type: "post",
+            data: {
+                bulkList: this.formatBulkList()
+            },
+            success: function () {
+                me.clearUploadedFlag();
+                me.close();
+                me.trigger('bulkImportSavedSuccess', {
+                    number: me._fileUploadData.length
+                });
+            }
+        });
+    };
+
+    this.hasDuplicates = function () {
+        var flag = false;
+        _.each(this._fileUploadData, function (value) {
+            if (value.hasDuplicates) {
+                flag = true;
+            }
+        });
+        return flag;
+    };
+
     this.confirmHandler = function () {
         var me = this;
 
         if (this.select('importResultTableSelector').is(":visible")) {
-            $.ajax({
-                url: URLs.SAVE_BULK_IMPORT_DATA,
-                type: "post",
-                data: {
-                    bulkList: JSON.stringify(this._fileUploadData)
-                },
-                success: function () {
-                    me.clearUploadedFlag();
-                    me.close();
-                    me.trigger('bulkImportSavedSuccess', {
-                        number: me._fileUploadData.length
-                    });
-                }
-            });
+            if (this.hasDuplicates()) {
+                this.finalDialog = null;
+
+                Notifications.confirm({
+                    title: 'ARE YOU SURE?',
+                    message: 'You are about to import patient(s) with duplicated treatments. Do you want to proceed?'
+                }, {
+                    buttons: [
+                        {
+                            text: 'Yes',
+                            'class': 'btn-agree',
+                            click: function () {
+                                me.ajaxConfirm();
+
+                                // Warning dialog close
+                                $(this).dialog("close");
+
+                                //set final dialog for close
+                                me.finalDialog = true;
+                            }
+                        }, {
+                            text: 'Cancel',
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ]
+                });
+            } else {
+                this.ajaxConfirm();
+            }
         } else {
             this.select('importPanelSelector').hide();
             this.select('afterImportPanelSelector').show();
@@ -198,7 +251,7 @@ function BulkImportDialog() {
         title: 'BULK IMPORT',
         height: Utility.getWindowSize().height,
         width: Utility.getWindowSize().width - 30,
-        position: { my: "left top", at: "left top", of: window },
+        position: {my: "left top", at: "left top", of: window},
         buttons: {
             Next: this.confirmHandler,
             Cancel: this.cancelHandler

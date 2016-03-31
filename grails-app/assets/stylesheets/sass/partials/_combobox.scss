@@ -30,3 +30,11 @@
         cursor: inherit;
     }
 }
+
+.ui-autocomplete.ui-widget-content {
+    .rt-ui-state-active.ui-menu-item {
+        color: $base-color-dark-grey;
+        background-color: $base-color-white-grey;
+        font-weight: normal;
+    }
+}

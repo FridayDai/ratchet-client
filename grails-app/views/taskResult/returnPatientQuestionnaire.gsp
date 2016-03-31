@@ -32,9 +32,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Review injection results (Injection date:
-                                        <span class="underline-text">${mixedResult['1-2s']}</span>
-                                        )</span>
+                                    <span class="text">Review injection results</span>
                                 </li>
                                 <li class="answer">
                                     <span class="result-circle-radio">
@@ -52,10 +50,7 @@
                                             </span>
                                         </g:if>
                                     </span>
-                                    <span class="text">Post-operative follow-up (Surgery date:
-                                        <span class="underline-text">${mixedResult['1-4s']}</span>
-                                        )
-                                    </span>
+                                    <span class="text">Post-operative follow-up</span>
 
                                 </li>
                                 <li class="answer">
@@ -176,8 +171,8 @@
             </div>
 
             <div class="lower-part">
-                <div class="question-list">
-                    <div class="question">4. Review of Systems– Please mark the circle next to ANY symptoms you have experienced in the past 6 months:</div>
+                <div class="question-list-bottom">
+                    <div class="question margin-left">4. Review of Systems– Please mark the circle next to ANY symptoms you have experienced in the past 6 months:</div>
 
                     <div class="answer-part clear">
                         <div class="small-part">
@@ -185,27 +180,27 @@
                                 <div class="sub-question">Constitutional</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">recent weight gain > 10 lbs</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">recent weight loss > 10 lbs</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -213,40 +208,48 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">fatigue</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">insomnia</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">fever/ chills</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-0'].contains(7.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">night sweats</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-0'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -254,36 +257,36 @@
                                 <div class="sub-question">Eyes/ Ears</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">eye disease</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">glasses or contacts</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">blurred or double vision</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -291,22 +294,30 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">hearing loss</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-1'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">ringing in the ears</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-1'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -314,22 +325,30 @@
                                 <div class="sub-question">Nose</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-2'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">sinus problems</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-2'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">nose bleeds</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-2'].contains(3.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -337,36 +356,36 @@
                                 <div class="sub-question">Throat/ Mouth</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-3'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">sore throat</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-3'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">mouth sore</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-3'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">hoarseness</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-3'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -374,13 +393,21 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-3'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">swollen glands in the neck</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-3'].contains(6.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -390,27 +417,27 @@
                                 <div class="sub-question">Cardiovascular</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">heart trouble</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">chest pain</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -418,40 +445,48 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">palpitations</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">irregular heartbeat</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">varicose veins</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-4'].contains(7.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">swelling of the feet/ ankles</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-4'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -459,27 +494,27 @@
                                 <div class="sub-question">Respiratory</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-5'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">shortness of breath</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-5'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">wheezing</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-5'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -487,13 +522,21 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-5'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">COPD/ emphysema</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-5'].contains(5.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -501,32 +544,40 @@
                                 <div class="sub-question">Hematologic</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-6'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">bleeding tendency</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-6'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">anemia</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-6'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">recurrent infections
                                         </span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-6'].contains(4.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -534,27 +585,27 @@
                                 <div class="sub-question">Endocrine</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-7'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">thyroid problems</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-7'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">heat or cold intolerance</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-7'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -562,22 +613,30 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-7'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">diabetes</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-7'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">glandular or hormone problems</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-7'].contains(6.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -587,27 +646,27 @@
                                 <div class="sub-question">Gastrointestinal</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">nausea/ vomiting</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">constipation</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -615,31 +674,39 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">blood in your stool</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">loss of bowel control</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-8'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">abdominal pain</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-8'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -647,27 +714,27 @@
                                 <div class="sub-question">Genitourinary</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">blood in your urine</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">increased frequency of urination</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -675,49 +742,57 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">painful urination</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">loss of bladder control</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">kidney stones</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(7.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">incontinence</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-9'].contains(8.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">sexual difficulty</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-9'].contains(9.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -725,27 +800,27 @@
                                 <div class="sub-question">Musculoskeletal</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">fractures/ sprains</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">osteoporosis</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -753,49 +828,57 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">joint pain</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">weakness of muscles or joints</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">muscle pain or cramps</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(7.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">back pain</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-10'].contains(8.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">difficulty walking</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-10'].contains(9.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -805,27 +888,27 @@
                                 <div class="sub-question">Skin</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">rashes</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">psoriasis</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -833,40 +916,48 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">abnormal lumps</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">painful breasts</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">change in skin color</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-11'].contains(7.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">change in hair or nails</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-11'].contains(8.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -874,27 +965,27 @@
                                 <div class="sub-question">Neurologic</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-12'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">headache/ migraine</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-12'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">dizziness</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-12'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -902,13 +993,21 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-12'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">loss of consciousness</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-12'].contains(5.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>
@@ -916,27 +1015,27 @@
                                 <div class="sub-question">Mental Health</div>
                                 <ul class="list">
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(1.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">depression</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(2.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">nervousness</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(3.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
@@ -944,31 +1043,39 @@
                                         </span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(4.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">anxiety</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(5.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">unusual stress in home life</span>
                                     </li>
                                     <li class="answer">
-                                        <span class="result-circle-radio">
+                                        <span class="result-checkbox">
                                             <g:if test="${mixedResult['4-13'].contains(6.toString())}">
-                                                <span class="result-circle-radio-checked">
+                                                <span class="result-checkbox-checked">
                                                 </span>
                                             </g:if>
                                         </span>
                                         <span class="text">unusual stress in work life</span>
+                                    </li>
+                                    <li class="answer">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${mixedResult['4-13'].contains(7.toString())}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="text">none of the above</span>
                                     </li>
                                 </ul>
                             </div>

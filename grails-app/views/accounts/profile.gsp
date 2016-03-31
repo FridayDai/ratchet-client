@@ -111,8 +111,7 @@
         <div class="form-group password-group new-password">
             <label class="lbl-group">NEW PASSWORD<span>*</span></label>
             <input id="newPass" name="password" type="password" class="input-group"
-                   placeholder="Enter new password"
-                   required/>
+                   placeholder="Enter new password"/>
         </div>
 
         <div class="form-group password-group confirm-password">

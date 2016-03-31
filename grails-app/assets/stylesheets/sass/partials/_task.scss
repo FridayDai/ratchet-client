@@ -22,6 +22,10 @@
     padding: 30px;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 .items-title {
     padding: 12px 30px;
     border-bottom: 3px solid $base-color-white-grey;
@@ -86,14 +90,19 @@
     }
 }
 
+@mixin auto-padding($row) {
+    padding: 0 -8 * $row + 46 + px
+}
+
 // box item for task
 .box-item {
     display: inline-block;
+    position: relative;
     width: 314px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: 2px $base-color-mid-grey solid;
-    vertical-align: middle;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    border-top: 5px $base-color-mid-grey solid;
+    box-shadow: 0 0 0.5em $base-font-color;
 
     h5 {
         color: $base-color-light-black;
@@ -115,6 +124,10 @@
     &.pending {
         border-color: $base-color-orange;
 
+        .box-item-content {
+            color: $base-color-orange;
+        }
+
         .box-item-footer {
             background-color: $base-color-orange;
 
@@ -127,6 +140,10 @@
     &.overdue {
         border-color: $base-color-task-overdue;
 
+        .box-item-content {
+            color: $base-color-task-overdue;
+        }
+
         .box-item-footer {
             background-color: $base-color-task-overdue;
 
@@ -134,16 +151,14 @@
                 content: 'OVERDUE';
             }
         }
-        .btn-notify {
-            &:hover,
-            &:focus {
-                color: $base-color-task-overdue;
-            }
-        }
     }
 
     &.complete {
         border-color: $base-color-green;
+
+        .box-item-content {
+            color: $base-color-green;
+        }
 
         .box-item-footer {
             background-color: $base-color-green;
@@ -152,19 +167,15 @@
                 content: 'COMPLETED';
             }
         }
-
-//        .box-item-content {
-//            .complete-sent-time {
-//                height: 25px;
-//                padding: 0;
-//                margin-top: 52px;
-//            }
-//        }
     }
 
     &.expired {
         border-color: $base-color-grey-expired;
         background-color: $base-color-archived-bg;
+
+        .box-item-content {
+            color: $base-color-grey-expired;
+        }
 
         .box-item-footer {
             background-color: $base-color-grey-expired;
@@ -178,131 +189,73 @@
 }
 
 .box-item-header {
-    height: 20px;
-    padding-bottom: 7px;
-    background: $base-color-mid-grey;
-
-    &:before {
-        display: inline-block;
-        padding: 2px 8px 0;
-        content: '\f3c7';
-        color: $base-color-white;
-        font-weight: lighter;
-        font-size: 22px;
-        font-family: ionicons;
-    }
-
-    .complete-time {
-        padding: 6px 0;
-        margin-right: -15px;
-        color: $base-color-medium-black;
-        font-weight: 700;
-        font-size: 12px;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-    }
-
-}
-
-.box-item-content {
-    position: relative;
-    height: 193px;
-    padding: 10px;
-    color: $base-a-default-color;
-
-    .complete-score {
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        padding: 2px;
-        background: $base-logo-color;
-    }
-
-    .item-fist {
-        height: 20px;
-    }
+    height: 75px;
+    padding: 6px 12px;
+    color: $base-font-grey-dark;
+    font-size: 16px;
+    box-shadow: 0 0 0.5em $base-font-color;
+    overflow: hidden;
 
     .item-title {
-        height: 50px;
-        padding-top: 4px;
-        font-weight: 400;
-        font-size: 13pt;
+        padding: 6px 0;
     }
 
-    .score {
-        padding: 0 8px;
-        color: $base-color-white;
-        font-size: 9pt;
+    .number-id {
+        display: inline-block;
+        padding-left: 14px;
+        font-size: 15px;
+        color: $base-light-grey-color;
+    }
 
-        &:before {
-            display: inline-block;
-            padding: 0 2px;
-            content: '\f42c';
-            font-weight: lighter;
-            font-size: 18px;
-            font-family: ionicons;
-            vertical-align: sub;
-        }
+    .task-date {
+        font-weight: 600;
+        color: $base-color-medium-black;
     }
 
     .label-space {
-        padding-right: 10px;
+        padding-right: 4px;
+    }
+}
+
+.box-item-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    display: -ms-flexbox;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -ms-flex-wrap: wrap;
+
+    height: 190px;
+    padding-left: 10px;
+    background-color: $base-color-archived-bg;
+    box-shadow: 0 0 0.5em $base-font-color;
+
+    .sub-item {
+        display: inline-block;
+        padding-right: 30px;
+        text-align: center;
     }
 
-    .status-background {
-        padding: 2px 4px;
-        color: $base-color-white;
+    .score-number {
+        display: inline-block;
+        padding-bottom: 2px;
+        font-size: 19px;
+        color: $base-color-green;
     }
 
-    .item-datetime {
-        height: 28px;
-        padding: 10px 0;
-        font-weight: 400;
-    }
-
-    .relative-sent-time {
-        font-size: 11pt;
-    }
-
-    .task-email {
-        font-size: 11pt;
-    }
-
-    .send-time {
-        height: 25px;
-        padding: 0;
-        margin-top: 52px;
-    }
-
-    button {
-        padding: 5px 8px;
-
-        &:hover,
-        &:focus {
-            padding: 5px 8px;
-        }
-    }
-
-    .item-context {
-        height: 72px;
-        color: $base-font-grey-dark;
+    .score-label {
+        text-transform: capitalize;
+        color: $base-color-medium-black;
         font-size: 14px;
-
-        p {
-            display: -webkit-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-        }
+        font-weight: 600;
     }
-
 }
 
 .box-item-footer {
-    padding: 4px;
+    padding: 7px 12px;
     background: $base-color-mid-grey;
     color: $base-color-white;
     position: relative;
@@ -342,95 +295,90 @@
         }
     }
 
-    .begin-task,.delete {
+    .operation {
         position: absolute;
-        top: 5px;
-        right: 28px;
+        top: 0;
+        right: 0;
+        width: 42px;
+        height: 100%;
+        border-left: 1px solid $base-color-white;
         font-size: 0;
         color: $base-color-white-grey-dark;
         cursor: pointer;
+        text-align: center;
         z-index: 10;
 
         &:before {
-            content: '\f12c';
+            position: relative;
+            top: 7px;
+            content: '';
             font-family: ionicons;
-            font-size: 16px;
+            font-size: 18px;
         }
+
         &:hover {
             color: $base-color-white;
         }
-        &:hover+.delete-tip {
-            display: block;
-        }
-        &:hover+.begin-tip {
+
+        &:hover + .tip {
             display: block;
         }
     }
 
     .begin-task {
+        right: 42px;
         text-decoration: none;
+
+        &:before {
+            content: '\f12c';
+        }
+    }
+
+    .call-task {
+        right: 42px;
+
+        &:before {
+            content: '\f4b8';
+        }
     }
 
     .delete {
-        right: 8px;
-
         &:before {
             content: '\f4c4';
         }
     }
 
-    .begin-tip,.delete-tip {
+    .tip {
+        display: none;
         position: absolute;
+        right: 1px;
+        top: -23px;
+        height: 20px;
+        line-height: 20px;
         background: $base-color-black;
         text-align: center;
         font-size: 0;
-        height: 20px;
-        line-height: 20px;
-        right: -5px;
-        top: -17px;
-        display: none;
 
         &:after {
             content: '\f104';
             font-family: ionicons;
             font-size: 12px;
             position: absolute;
-            left: 50%;
+            left: 42%;
             top: 12px;
             color: $base-color-black;
         }
 
         span {
+            display: inline-block;
+            min-width: 25px;
             font-size: 12px;
             padding: 0 4px;
         }
     }
 
-    .begin-tip {
-        right: 18px;
-    }
-
-    .footer-bottom {
-        display: table;
-        height: 60px;
-        width: 104%;
-        margin-left: -6px;
-        text-align: center;
-    }
-
-    .item-notify {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .btn-notify {
-        border: 1px  $base-color-bg-head solid;
-        color: $base-color-bg-head;
-
-        &:hover, &:focus {
-            background-color: $base-color-bg-head;
-            color: $base-color-orange;
-        }
+    .begin-tip, .call-tip {
+        right: 49px;
     }
 
     .complete-score {
@@ -443,21 +391,26 @@
         display: inline-block;
         padding: 0 6px;
 
-        &+.score{
-            border-left: 1px  $base-color-bg-head solid;
+        & + .score {
+            border-left: 1px $base-color-bg-head solid;
+        }
+
+        &.row-2-padding {
+            @include auto-padding(2)
+        }
+
+        &.row-3-padding {
+            @include auto-padding(3)
+        }
+
+        &.row-4-padding {
+            @include auto-padding(4)
+        }
+
+        &.row-5-padding {
+            @include auto-padding(5)
         }
     }
-
-    .score-number {
-        display: inline-block;
-        padding-bottom: 2px;
-        font-size: 19px;
-    }
-
-    .score-label {
-        text-transform: capitalize;
-    }
-
 }
 
 // box item archived
@@ -482,7 +435,7 @@
             background-color: transparent;
             &:hover,
             &:focus {
-                border: 1px  $base-color-bg-head solid;
+                border: 1px $base-color-bg-head solid;
                 background-color: transparent;
                 color: $base-color-bg-head;
             }
@@ -501,6 +454,154 @@
         }
 
     }
+}
+
+.new-flag-ribbon-wrapper {
+    width: 89px;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    top: -9px;
+    right: -6px;
+
+    .ribbon {
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        position: relative;
+        padding: 5px 0;
+        left: -5px;
+        top: 21px;
+        width: 120px;
+        background-color: #f93220;
+        color: white;
+
+        &:before,
+        &:after {
+            content: "";
+            border-top: 3px solid #a32317;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            position: absolute;
+            bottom: -3px;
+        }
+
+        &:before {
+            left: 0;
+        }
+
+        &:after {
+            right: 0;
+        }
+    }
+}
+
+.fill-questionnaire-dialog {
+    text-align: center;
+    font-size: 14px;
+
+    .form-group {
+        width: 72%;
+        display: inline-block;
+        margin: 10px 0;
+    }
+
+    .description {
+        color: #000;
+    }
+
+    .date-picker {
+        width: 272px;
+    }
+}
+
+//attention tip
+.box-item {
+    .attention-menu {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .ui-widget-content {
+        border: 0;
+
+        .ui-state-focus {
+            color: $base-color-dark-grey;
+        }
+    }
+
+    ul.ui-menu {
+        padding: 24px 4px 10px;
+        background-color: $base-color-white;
+        box-shadow: 0 0 0.5em $base-font-color;
+        border-radius: 5px;
+    }
 
 }
 
+.attention {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .attention-icon {
+        position: absolute;
+        top: -25px;
+        right: -19px;
+        width: 45px;
+        height: 45px;
+        background: image-url('patients/attention.png', false, false) no-repeat center right !important;
+        z-index: 20;
+    }
+
+    .ui-front {
+        z-index: 10;
+    }
+
+    .title {
+        padding-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .sub-title {
+        padding-bottom: 4px;
+        font-size: 13px;
+    }
+
+    .btn {
+        padding: 4px 20px;
+        font-size: 12px;
+    }
+
+}
+
+//filter
+.quick-filter {
+}
+
+.quick-filter-label {
+    display: inline-block;
+    padding-right: 10px;
+    margin: 0 0 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.quick-filter-button {
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    line-height: 1;
+    margin: 0 5px 0 0;
+    padding: 5px 8px;
+
+    &.active {
+        color: $base-color-white;
+        background-color: $base-color-dark-grey;
+    }
+
+}
