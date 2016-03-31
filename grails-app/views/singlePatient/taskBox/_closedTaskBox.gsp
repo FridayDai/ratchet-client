@@ -1,7 +1,6 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-task-type="${task?.taskType}">
+     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
         <div class="new-flag-ribbon-wrapper">
@@ -102,7 +101,7 @@
 
             <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
                 <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank"
-                   class="operation view-results"><span>View Results</span></a>
+                   class="view-results"><span>View Results</span></a>
             </g:if>
         </g:if>
         <g:else>
