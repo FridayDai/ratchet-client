@@ -50,9 +50,9 @@ class TaskController extends BaseController {
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
         taskType = [
-                activeType  : activeTaskTypeArray,
-                closedType  : closedTaskTypeArray,
-                scheduleType: scheduleTaskTypeArray
+                activeType  : activeTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
+                closedType  : closedTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
+                scheduleType: scheduleTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] }
         ]
 
         render view: '/singlePatient/task',

@@ -120,6 +120,7 @@ function AddTreatmentFormDialog() {
             phoneNumber: this.patientInfo.phoneNumber.replace(/[\s\(\)-]/g, ''),
             email: this.patientInfo.email,
             emailStatus: this.patientInfo.emailStatus,
+            birthdayValue: Utility.toBirthday(this.patientInfo.birthday),
             groupId: groupId,
             staffId: providerId,
             treatmentId: treatmentId,

@@ -48,6 +48,7 @@ class TreatmentService extends RatchetAPIService {
                     .field("lastName", patient?.lastName)
                     .field("phoneNumber", patient?.phoneNumber)
                     .field("email", patient?.email)
+                    .field("birthday", patient?.birthdayValue)
                     .field("profilePhoto", patient?.profilePhoto)
                     .field("treatmentId", patient?.treatmentId)
                     .field("surgeonId", patient?.staffId)

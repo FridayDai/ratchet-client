@@ -1,6 +1,7 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
+var Utility = require('../../../utils/Utility');
 
 function AddEmailDialog() {
     this.attributes({
@@ -34,7 +35,8 @@ function AddEmailDialog() {
             firstName: this.patientInfo.firstName,
             lastName: this.patientInfo.lastName,
             phoneNumber: phoneNumber,
-            clientId: this.patientInfo.clientId
+            clientId: this.patientInfo.clientId,
+            birthdayValue: Utility.toBirthday(this.patientInfo.birthday)
         };
     };
 
