@@ -47,5 +47,7 @@ module.exports = {
     BULK_IMPORT_FORMAT_ERROR:   "We are not able to process this file due to a format problem. " +
                                 "Please verify the file you uploaded.",
     TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
-    RATE_LIMIT_LOGIN: "You will be able to try again in {0}."
+    RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
+    BIRTHDAY_IS_REQUIRED: "The birthday of patient is required," +
+                            " please add birthday for this patient firstly."
 };

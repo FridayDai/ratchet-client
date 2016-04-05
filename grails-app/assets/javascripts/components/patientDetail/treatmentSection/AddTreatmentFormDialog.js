@@ -8,7 +8,9 @@ var PatientProviderCombobox = require('../../shared/components/PatientProviderCo
 var PatientTreatmentCombobox = require('../../shared/components/PatientTreatmentCombobox');
 var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
 var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
+var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
+var Strings = require('../../../constants/Strings');
 
 function AddTreatmentFormDialog() {
     this.attributes({
@@ -150,6 +152,16 @@ function AddTreatmentFormDialog() {
     this.onEmergencyContactFirstNameInput = function () {
         this.select('emergencyContactPermissionFirstNameSelector')
             .text(this.select('emergencyContactFirstNameFieldSelector').val());
+    };
+
+    this.beforeSubmitForm = function () {
+        if (!this.patientInfo.birthday) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.BIRTHDAY_IS_REQUIRED
+            });
+            return false;
+        }
     };
 
     this.after('initialize', function () {
