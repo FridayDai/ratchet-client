@@ -2,6 +2,7 @@ var flight = require('flight');
 var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
+var Utility = require('../../../utils/Utility');
 
 function PatientInfoSection() {
     this.attributes({
@@ -82,7 +83,7 @@ function PatientInfoSection() {
         this.select('phoneNumberStaticSelector').text(data.number);
 
         this.updateEmailStatus(data.email);
-        this.updateBirthday(data.birthday);
+        this.updateBirthday(Utility.toBirthday(data.birthday, 'MMM D, YYYY'));
     };
 
     this.updateBirthday = function (birthday) {
