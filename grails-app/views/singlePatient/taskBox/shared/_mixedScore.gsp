@@ -42,7 +42,7 @@
     <g:each in="${frequency}" var="single">
         <span class="sub-item">
             <div class="score-number">
-                ${RatchetConstants.PAIN_FREQUENCY[mixedResult[single]?.toInteger()]}
+                ${mixedResult[single] ? RatchetConstants.PAIN_FREQUENCY[mixedResult[single]?.toInteger()] : ''}
             </div>
         </span>
     </g:each>
