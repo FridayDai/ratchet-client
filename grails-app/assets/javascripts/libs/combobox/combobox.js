@@ -174,14 +174,6 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 this.selectedItem = null;
                 this.previous = this._value();
 
-                if (this.menu) {
-                    var ul = this.menu.element;
-
-                    if (!ul.children().length) {
-                        this._searchTimeout(event)
-                    }
-                }
-
                 this.element.select();
             },
             blur: function( event ) {
