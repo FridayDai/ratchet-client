@@ -89,14 +89,18 @@ function PatientsTable() {
 
                     num = data === undefined ? full.phoneNumber : data;
 
-                    if (num.charAt(0) === '1') {
-                        subNumber = num.slice(1, num.length);
-                        phoneNumber = '1 ' + subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                    } else {
-                        phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                    if (num) {
+                        if (num.charAt(0) === '1') {
+                            subNumber = num.slice(1, num.length);
+                            phoneNumber = '1 ' + subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        } else {
+                            phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        }
+
+                        return phoneNumber;
                     }
 
-                    return phoneNumber;
+                    return '';
                 },
                 width: "12%"
             }, {

@@ -23,24 +23,29 @@ class SinglePatientController extends BaseController {
         def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         def medicalRecords = singlePatientService.showMedialRecords(token, clientId, patientId)
         def num = patientInfo?.phoneNumber
-        def length = num.length()
         def phoneNumber
-        def subNumber = num
-        def isUS = num.charAt(0)
-        def space = ' '
 
-        if (isUS == '1') {
-            subNumber = num.substring(1, length)
-            length = subNumber.length()
-        }
-        if (length > 6) {
-            phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, 6),
+        if (num) {
+            def length = num.length()
+            def subNumber = num
+            def isUS = num.charAt(0)
+            def space = ' '
+
+            if (isUS == '1') {
+                subNumber = num.substring(1, length)
+                length = subNumber.length()
+            }
+            if (length > 6) {
+                phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, 6),
                     subNumber.substring(6, length))
-        } else if (length > 3) {
-            phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, length))
-        }
-        if (isUS == '1') {
-            phoneNumber = String.format("%s%s%s", isUS, space, phoneNumber)
+            } else if (length > 3) {
+                phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, length))
+            }
+            if (isUS == '1') {
+                phoneNumber = String.format("%s%s%s", isUS, space, phoneNumber)
+            }
+        } else {
+            phoneNumber = null
         }
 
         render(view: '/singlePatient/singlePatient', model: [
