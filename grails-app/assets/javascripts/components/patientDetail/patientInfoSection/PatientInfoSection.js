@@ -80,10 +80,24 @@ function PatientInfoSection() {
         this.select('firstNameStaticSelector').text(data.firstName);
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email ? data.email.toLowerCase() : '');
-        this.select('phoneNumberStaticSelector').text(data.number);
 
+        this.updatePhoneNumber(data.number);
         this.updateEmailStatus(data.email);
         this.updateBirthday(Utility.toBirthday(data.birthday, 'MMM D, YYYY'));
+    };
+
+    this.updatePhoneNumber = function (number) {
+        var $phoneNumber = this.select('phoneNumberStaticSelector');
+
+        if (number) {
+            $phoneNumber
+                .text(number)
+                .css('display', 'inline-block');
+        } else {
+            $phoneNumber
+                .text('')
+                .css('display', 'none');
+        }
     };
 
     this.updateBirthday = function (birthday) {

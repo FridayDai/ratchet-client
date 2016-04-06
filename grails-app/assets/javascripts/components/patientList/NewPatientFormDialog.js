@@ -236,13 +236,16 @@ function NewPatientFormDialog() {
         var subNumber,
             phoneNumber,
             num = data.phoneNumber;
-
-        if (num.charAt(0) === '1') {
-            subNumber = num.slice(1, num.length);
-            phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-            phoneNumber = '1 ' + phoneNumber;
+        if (num) {
+            if (num.charAt(0) === '1') {
+                subNumber = num.slice(1, num.length);
+                phoneNumber = subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                phoneNumber = '1 ' + phoneNumber;
+            } else {
+                phoneNumber = num.replace(/(\d{3})(\d{3})/, "($1) $2-");
+            }
         } else {
-            phoneNumber = num.replace(/(\d{3})(\d{3})/, "($1) $2-");
+            phoneNumber = '';
         }
 
         this.select('phoneNumberStaticSelector').text(phoneNumber);
