@@ -42,9 +42,17 @@ module.exports = {
         }
     },
 
-    toBirthday: function (str) {
+    toBirthday: function (str, toFormat) {
+        toFormat = toFormat || 'YYYY-MM-DD';
+
         if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
+            var validFormat = this.guessDateFormat(str);
+
+            if (validFormat) {
+                return moment.tz(str, validFormat, 'America/Vancouver').format(toFormat);
+            } else {
+                return '';
+            }
         } else {
             return '';
         }

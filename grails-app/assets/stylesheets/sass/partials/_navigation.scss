@@ -66,9 +66,8 @@
     }
 
     .icon-account {
-        font-family: 'Ionicons';
-
         &:before {
+            font-family: 'Ionicons';
             display: inline-block;
             margin-top: 10px;
             content: '\f47b';

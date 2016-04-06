@@ -20,7 +20,7 @@ function PatientBirthday() {
             changeMonth: true,
             dateFormat: 'M d, yy',
             maxDate: '0',
-            defaultDate: new Date('1970-01-01'),
+            defaultDate: new Date(1970, 0, 1),
             yearRange: "1900:" + now.getFullYear()
         });
     });
