@@ -196,7 +196,9 @@ function PatientsTable() {
     this.onLoadDataFromSessionRouter = function (e, data) {
         this.loadData(data.patientsTable);
 
-        this.setActivePatientFilter(data.patientsTable.activeTreatmentOnly);
+        this.setActivePatientFilter(data.patientsTable.searchFields.activeTreatmentOnly);
+
+        this.searchFields = data.patientsTable.searchFields;
     };
 
     this.setActivePatientFilter = function (activeOnly) {
@@ -212,7 +214,7 @@ function PatientsTable() {
             pageInfo: this.tableEl.page.info(),
             sorting: this.tableEl.order(),
             search: this.getSetting().aaRHSearch,
-            activeTreatmentOnly: this.searchFields.activeTreatmentOnly
+            searchFields: this.searchFields
         };
     };
 
