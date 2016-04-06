@@ -21,7 +21,7 @@
                 <div class="quick-filter">
                     <span class="quick-filter-label">Filter:</span>
                     <g:each in="${taskType.activeType}" var="type">
-                        <span class="btn quick-filter-button" data-type="${type}">
+                        <span class="btn btn-filter quick-filter-button" data-type="${type}">
                             ${RatchetConstants.TOOL_TYPE[type]}
                         </span>
                     </g:each>
@@ -49,7 +49,7 @@
                 <div class="quick-filter">
                     <span class="quick-filter-label">Filter:</span>
                     <g:each in="${taskType.closedType}" var="type">
-                        <span class="btn quick-filter-button"  data-type="${type}">
+                        <span class="btn btn-filter quick-filter-button"  data-type="${type}">
                             ${RatchetConstants.TOOL_TYPE[type]}
                         </span>
                     </g:each>
@@ -81,7 +81,7 @@
                 <div class="quick-filter">
                     <span class="quick-filter-label">Filter:</span>
                     <g:each in="${taskType.scheduleType}" var="type">
-                        <span class="btn quick-filter-button"  data-type="${type}">
+                        <span class="btn btn-filter quick-filter-button"  data-type="${type}">
                             ${RatchetConstants.TOOL_TYPE[type]}
                         </span>
                     </g:each>

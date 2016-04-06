@@ -612,15 +612,4 @@
     border-radius: 3px 3px 3px 3px;
     color: $base-light-grey-color;
     line-height: 1;
-
-    &:hover, &:focus {
-        color: $base-light-grey-color;
-        background-color: transparent;
-    }
-
-    &.active {
-        color: $base-color-white;
-        background-color: $base-color-dark-grey;
-    }
-
 }

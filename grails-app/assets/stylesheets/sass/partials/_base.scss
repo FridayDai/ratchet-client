@@ -116,6 +116,21 @@ a {
 
 }
 
+.btn.btn-filter {
+    &:hover,
+    &:focus {
+        color: $base-color-white;
+        background-color: $base-a-default-color;
+    }
+}
+
+.btn-filter {
+    &.active {
+        color: $base-color-white;
+        background-color: $base-logo-color;
+    }
+}
+
 .btn.btn-large {
     min-width: 132px;
     min-height: 42px;

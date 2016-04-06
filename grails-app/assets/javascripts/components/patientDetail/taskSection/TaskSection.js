@@ -165,6 +165,7 @@ function TaskSection() {
     this.onFilterButtonClicked = function (e) {
         var button = $(e.target);
         button.toggleClass('active');
+        button.blur();
 
         var typeValue = button.data('type');
         var item = button.closest('.task-row').get(0).id.replace(/.*-(\w+)$/, "$1");
