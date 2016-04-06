@@ -256,6 +256,32 @@ function NewPatientFormDialog() {
         this.trigger('newPatientReset');
     };
 
+    this.beforeSubmitForm = function () {
+        var $phoneNumberStatic = this.select('phoneNumberStaticSelector'),
+            $firstNameStatic = this.select('firstNameStaticSelector'),
+            $lastNameStatic = this.select('lastNameStaticSelector'),
+            $birthdayStatic = this.select('birthdayStaticSelector'),
+            isValid = true,
+            firstInValid = null;
+
+        _.each([$phoneNumberStatic, $firstNameStatic, $lastNameStatic, $birthdayStatic], function ($item) {
+            if (!$item.text().trim()) {
+                $item.siblings('.icon-edit').trigger('click');
+                isValid = false;
+
+                if (!firstInValid) {
+                    firstInValid = $item;
+                }
+            }
+        });
+
+        if (!isValid) {
+            this.formEl.valid();
+            firstInValid.siblings('input').focus();
+            return false;
+        }
+    };
+
     this.setExtraData = function () {
         var $phoneNumber = this.select('phoneNumberFieldSelector'),
             $phoneNumberStatic = this.select('phoneNumberStaticSelector'),
