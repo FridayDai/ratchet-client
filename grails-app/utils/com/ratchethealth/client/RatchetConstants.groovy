@@ -27,8 +27,8 @@ class RatchetConstants {
     public static final String TOOL_NAME_PAIN_CHART_REFERENCE_BACK = 'Pain Chart Reference - Back';
     public static final String TOOL_NAME_NEW_PATIENT_QUESTIONNAIRE = 'New Patient Questionnaire';
     public static final String TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE = 'Return Patient Questionnaire';
-    public static final String TOOL_NAME_KOOS_JR = 'KOSS, JR.';
-    public static final String TOOL_NAME_HOOS_JR = 'HOSS, JR.';
+    public static final String TOOL_NAME_KOOS_JR = 'KOOS, JR.';
+    public static final String TOOL_NAME_HOOS_JR = 'HOOS, JR.';
     public static final String TOOL_NAME_PROMIS = 'PROMIS Global Health';
     public static final String TOOL_NAME_VOICE_CALL = 'Voice Call';
 
