@@ -17,6 +17,11 @@ var NO_MORE_IN_SCHEDULE = [
     '<p>No item has been scheduled yet.</p>',
     '</div>'
 ].join('');
+var NO_MORE_IN_CLOSED = [
+    '<div class="no-item center no-item-sent">',
+    '<p>There are no closed items</p>',
+    '</div>'
+].join('');
 
 function TaskSection() {
     flight.compose.mixin(this, [
@@ -155,9 +160,11 @@ function TaskSection() {
                 noMoreItemTemp = NO_MORE_IN_ACTIVE;
             } else if ($taskRow.is(this.attr.scheduleItemsContainerSelector)) {
                 noMoreItemTemp = NO_MORE_IN_SCHEDULE;
+            } else {
+                noMoreItemTemp = NO_MORE_IN_CLOSED;
             }
 
-            $taskRow.append(noMoreItemTemp);
+            $taskRow.html(noMoreItemTemp);
         }
     };
 
