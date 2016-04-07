@@ -76,7 +76,7 @@
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
                         <td>${patient.email ?: ''}</td>
-                        <td>${patient.phoneNumber}</td>
+                        <td>${patient.phoneNumber ?: ''}</td>
                         <td>${patient.birthday ?: ''}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
