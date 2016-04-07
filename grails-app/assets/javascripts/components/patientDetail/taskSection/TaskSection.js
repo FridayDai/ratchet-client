@@ -243,6 +243,8 @@ function TaskSection() {
 
             $taskRow.find('.btn[data-type='+ type +']').remove();
         }
+
+        this.renderTaskBox(this.taskBoxData[item], this.filterActiveStatus[item]);
     };
 
     this.buildTaskIdList = function ($item) {
