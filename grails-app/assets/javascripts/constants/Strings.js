@@ -48,6 +48,6 @@ module.exports = {
                                 "Please verify the file you uploaded.",
     TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
     RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
-    BIRTHDAY_IS_REQUIRED: "The birthday of patient is required," +
-                            " please add birthday for this patient firstly."
+    BIRTHDAY_IS_REQUIRED: "Please add birthday to patient's profile before adding a treatment.",
+    PHONE_NUMBER_IS_REQUIRED: "Please add phone number to patient's profile before adding a treatment."
 };

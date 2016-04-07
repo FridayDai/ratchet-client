@@ -34,7 +34,7 @@
                     <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
                         <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
                     </div>
-                    <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
+                    <div class="phone inline <g:if test="${!patientInfo?.phoneNumber}">hide</g:if>"" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
                     <div class="email patient-email inline" id="patientEmail"
                          value="${patientInfo.email}">${patientInfo.email}
                     </div>
