@@ -268,7 +268,7 @@ function NewPatientFormDialog() {
             firstInValid = null;
 
         _.each([$phoneNumberStatic, $firstNameStatic, $lastNameStatic, $birthdayStatic], function ($item) {
-            if (!$item.text().trim()) {
+            if ($item.is(':visible') && !$item.text().trim()) {
                 $item.siblings('.icon-edit').trigger('click');
                 isValid = false;
 
