@@ -76,7 +76,7 @@ class SinglePatientService extends RatchetAPIService {
 
     def checkPatientId(String token, identify) {
         String showPatientUrl = grailsApplication.config.ratchetv2.server.url.showPatient
-        def url = String.format(showPatientUrl, identify)
+        def url = String.format(showPatientUrl, URLEncoder.encode(identify, 'UTF-8'))
 
         log.info("Call backend service to get patient info with patientId token: ${token}.")
         withGet(token, url) { req ->

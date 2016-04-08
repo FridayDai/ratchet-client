@@ -211,12 +211,23 @@ function TaskSection() {
         hideBox = this.mapTaskBox(hideArray);
 
         if (showBox) {
-            showBox.show();
+            showBox.fadeIn(60);
             if (hideBox) {
-                hideBox.hide();
+                hideBox.fadeOut();
             }
         } else {
-            hideBox.show();
+            hideBox.fadeIn(60);
+        }
+    };
+
+    this.renderFilter = function(tasks, type, $taskRow) {
+        if(_.keys(tasks).length < 3) {
+            $taskRow.find('.quick-filter').remove();
+            return;
+        }
+
+        if (!tasks[type]) {
+            $taskRow.find('.btn[data-type=' + type + ']').remove();
         }
     };
 
@@ -235,15 +246,16 @@ function TaskSection() {
             return n === taskId;
         });
 
-        //remove type in filter
+        //remove type in filter, when none of this type exist.
         if (tasks[type].length === 0) {
+            delete tasks[type];
+
             _.remove(this.filterActiveStatus[item], function (n) {
                 return n === +type;
             });
-
-            $taskRow.find('.btn[data-type='+ type +']').remove();
         }
 
+        this.renderFilter(tasks, type, $taskRow);
         this.renderTaskBox(this.taskBoxData[item], this.filterActiveStatus[item]);
     };
 
