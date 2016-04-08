@@ -215,7 +215,7 @@ function TaskSection() {
             if (hideBox) {
                 hideBox.fadeOut();
             }
-        } else {
+        } else if(hideBox) {
             hideBox.fadeIn(60);
         }
     };
