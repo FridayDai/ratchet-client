@@ -1,4 +1,5 @@
 module.exports = {
+    LOGIN: 'client login page',
     PATIENT_LIST: 'client patient list page',
     PATIENT_DETAIL: 'client patient detail page',
     ACCOUNT_LIST: 'client account list page',

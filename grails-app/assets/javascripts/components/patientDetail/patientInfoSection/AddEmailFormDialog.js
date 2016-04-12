@@ -43,16 +43,6 @@ function AddEmailDialog() {
         };
     };
 
-    this.beforeSubmitForm = function () {
-        if (!this.patientInfo.phoneNumber) {
-            Notifications.error({
-                title: Strings.ERROR_TITLE,
-                message: Strings.PHONE_NUMBER_IS_REQUIRED_ADD_EMAIL
-            });
-            return false;
-        }
-    };
-
     this.onAddEmailSuccess = function () {
         this.trigger('addEmailSuccess', _.assign(this.patientInfo, {
             email: this.select('emailFieldSelector').val().trim(),

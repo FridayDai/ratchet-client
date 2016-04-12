@@ -5,8 +5,10 @@ var flight = require('flight');
 var WithForm = require('../components/common/WithForm');
 var STRINGs = require('../constants/Strings');
 var Utility = require('../utils/Utility');
+var PAGEs = require('../constants/Pages');
 
 function LoginPage() {
+    this.setPath(PAGEs.LOGIN);
 
     this.attributes({
         nativeForm: true,
