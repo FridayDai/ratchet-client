@@ -19,7 +19,12 @@
         </div>
 
         <div id="patients-toolbar" class="inner-search">
+
             <div class="search-content clear">
+                <div class="filler-content combined-search">
+                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
+                    <span class="search" id="search-btn"></span>
+                </div>
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
                     <input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"
@@ -43,9 +48,10 @@
                            class="input-group input-auto-search"/>
                 </div>
 
-                <div class="filler-content right-search">
-                    <input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">
-                    <span class="search" id="search-btn"></span>
+                <div class="filler-content">
+                    <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
+                    <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
+                           class="input-group input-auto-search"/>
                 </div>
             </div>
         </div>
@@ -59,6 +65,7 @@
                     <th>Name</th>
                     <th>Email Address</th>
                     <th>Phone Number</th>
+                    <th>Birthday</th>
                     <th>Task Status</th>
                     <th></th>
                 </tr>
@@ -69,7 +76,8 @@
                         <td>${patient.patientId}</td>
                         <td>${patient.firstName} ${patient.lastName}</td>
                         <td>${patient.email ?: ''}</td>
-                        <td>${patient.phoneNumber}</td>
+                        <td>${patient.phoneNumber ?: ''}</td>
+                        <td>${patient.birthday ?: ''}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
@@ -140,15 +148,9 @@
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">BIRTHDAY</label>
-                <div class="birthday-groups">
-                    <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group input-convert"
-                           placeholder="Month"/>
-                    <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group input-convert"
-                           placeholder="Day"/>
-                    <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group input-convert"
-                           placeholder="Year"/>
-                </div>
+                <label class="lbl-group">BIRTHDAY<span>*</span></label>
+                <input id="birthday" name="birthday" type="text" class="input-group date-picker birthday re-position"
+                       placeholder="Jan 1, 1990" required />
                 <div class='replace-input-div' id="birthday-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>

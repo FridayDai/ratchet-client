@@ -233,9 +233,27 @@
     background-color: $base-color-archived-bg;
     box-shadow: 0 0 0.5em $base-font-color;
 
+    .item-column {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        display: -ms-flexbox;
+        -ms-flex-align: center;
+        //only in IE10
+        -ms-flex-pack: distribute;
+
+        width: 100%;
+        padding-left: 7px;
+    }
+
+    .column-bottom {
+        padding-bottom: 10px;
+    }
+
     .sub-item {
         display: inline-block;
-        padding-right: 30px;
+        padding-right: 22px;
         text-align: center;
     }
 
@@ -271,30 +289,6 @@
         font-size: 13px;
     }
 
-    .view-results {
-        float: right;
-        margin: 1px 5px 0 0;
-        color: $base-color-white;
-        position: relative;
-
-        &:before {
-            position: absolute;
-            top: 4px;
-            left: -12px;
-            content: '\f425';
-            font-family: ionicons;
-            font-size: 13px;
-        }
-
-        span {
-            font-size: 11px;
-        }
-
-        &:hover span {
-            text-decoration: underline;
-        }
-    }
-
     .operation {
         position: absolute;
         top: 0;
@@ -322,6 +316,24 @@
 
         &:hover + .tip {
             display: block;
+        }
+    }
+
+    .view-results {
+        width: 104px;
+
+        &:before {
+            content: '\f425';
+            left: -5px;
+        }
+
+        span {
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        &:hover span {
+            text-decoration: underline;
         }
     }
 
@@ -535,7 +547,7 @@
     }
 
     ul.ui-menu {
-        padding: 24px 4px 10px;
+        padding: 24px 8px 10px;
         background-color: $base-color-white;
         box-shadow: 0 0 0.5em $base-font-color;
         border-radius: 5px;
@@ -568,12 +580,12 @@
     }
 
     .sub-title {
-        padding-bottom: 4px;
+        padding-bottom: 7px;
         font-size: 13px;
     }
 
     .btn {
-        padding: 4px 20px;
+        padding: 4px 32px;
         font-size: 12px;
     }
 
@@ -581,27 +593,23 @@
 
 //filter
 .quick-filter {
+    margin-bottom: 30px;
 }
 
 .quick-filter-label {
     display: inline-block;
     padding-right: 10px;
-    margin: 0 0 10px 0;
     font-size: 15px;
     font-weight: bold;
     line-height: 1.6;
 }
 
 .quick-filter-button {
-    border-radius: 3px 3px 3px 3px;
     display: inline-block;
-    line-height: 1;
-    margin: 0 5px 0 0;
+    margin: 0 5px 5px 0;
     padding: 5px 8px;
-
-    &.active {
-        color: $base-color-white;
-        background-color: $base-color-dark-grey;
-    }
-
+    border: 1px $base-light-grey-color solid;
+    border-radius: 3px 3px 3px 3px;
+    color: $base-light-grey-color;
+    line-height: 1;
 }

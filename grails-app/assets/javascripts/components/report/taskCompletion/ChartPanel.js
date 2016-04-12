@@ -90,6 +90,7 @@ function ChartPanel() {
     this.after('initialize', function () {
         this.init();
         this.on(document, 'selectProviderForTaskCompletion', this.updateChart);
+        this.on(document, 'clearProviderForTaskCompletion', this.updateChart);
     });
 }
 

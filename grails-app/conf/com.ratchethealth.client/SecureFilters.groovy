@@ -12,6 +12,7 @@ class SecureFilters {
                 def config = grailsApplication.config
                 def cdnDomain = config?.cdn_domain
                 def notSupportHTTPS = System.getProperty("NOT_SUPPORT_HTTPS")?.toBoolean()
+                def RUMEnabled = System.getProperty("RUM_ENABLE")?.toBoolean()
 
                 if (response?.contentType?.indexOf('text/html') == 0) {
                     response.setHeader('Cache-Control', 'no-store')
@@ -25,6 +26,7 @@ class SecureFilters {
                                             "https://www.google-analytics.com " +
                                             "https://maxcdn.bootstrapcdn.com " +
                                             (cdnDomain ? cdnDomain + ' ' : '') +
+                                            (RUMEnabled ? 'https://rum-static.pingdom.net https://rum-collector.pingdom.net ' : '') +
                         "form-action 'self'; frame-ancestors 'none';"
                     )
 

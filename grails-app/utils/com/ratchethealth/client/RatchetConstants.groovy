@@ -5,6 +5,9 @@ class RatchetConstants {
     public static final DEFAULT_PAGE_SIZE = 20
     public static final DEFAULT_PAGE_OFFSET = 0
 
+    // Task
+    public static final TASK_TYPE_VOICE_CALL = 101
+
     public static final Map BASE_TOOL_TYPE = [
             2: "OUTCOME",
             4: "VOICE"
@@ -24,9 +27,10 @@ class RatchetConstants {
     public static final String TOOL_NAME_PAIN_CHART_REFERENCE_BACK = 'Pain Chart Reference - Back';
     public static final String TOOL_NAME_NEW_PATIENT_QUESTIONNAIRE = 'New Patient Questionnaire';
     public static final String TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE = 'Return Patient Questionnaire';
-    public static final String TOOL_NAME_KOOS_JR = 'KOSS, JR.';
-    public static final String TOOL_NAME_HOOS_JR = 'HOSS, JR.';
-    public static final String TOOL_NAME_PROMIS = 'promis';
+    public static final String TOOL_NAME_KOOS_JR = 'KOOS, JR.';
+    public static final String TOOL_NAME_HOOS_JR = 'HOOS, JR.';
+    public static final String TOOL_NAME_PROMIS = 'PROMIS Global Health';
+    public static final String TOOL_NAME_VOICE_CALL = 'Voice Call';
 
     public static final Map TOOL_TYPE = [
             1 : TOOL_NAME_DASH,
@@ -46,7 +50,7 @@ class RatchetConstants {
             17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE,
             15: TOOL_NAME_KOOS_JR,
             1000: TOOL_NAME_HOOS_JR,
-            
+            101: TOOL_NAME_VOICE_CALL
     ]
 
     //Task type which hasn't task score.

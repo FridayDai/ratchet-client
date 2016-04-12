@@ -186,7 +186,7 @@ class SinglePatientServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.checkPatientId('token', 1)
+		def result = service.checkPatientId('token', '1')
 
 		then:
 		result.email == "email"
@@ -203,7 +203,7 @@ class SinglePatientServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.checkPatientId('token', 1)
+		def result = service.checkPatientId('token', '1')
 
 		then:
 		result.check == 'false'
@@ -219,7 +219,7 @@ class SinglePatientServiceSpec extends Specification {
 		}
 
 		when:
-		service.checkPatientId('token', 1)
+		service.checkPatientId('token', '1')
 
 		then:
 		ApiReturnException e = thrown()

@@ -1,6 +1,10 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
+var Utility = require('../../../utils/Utility');
+
+var Notifications = require('../../common/Notification');
+var Strings = require('../../../constants/Strings');
 
 function AddEmailDialog() {
     this.attributes({
@@ -34,8 +38,19 @@ function AddEmailDialog() {
             firstName: this.patientInfo.firstName,
             lastName: this.patientInfo.lastName,
             phoneNumber: phoneNumber,
-            clientId: this.patientInfo.clientId
+            clientId: this.patientInfo.clientId,
+            birthdayValue: Utility.toBirthday(this.patientInfo.birthday)
         };
+    };
+
+    this.beforeSubmitForm = function () {
+        if (!this.patientInfo.phoneNumber) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.PHONE_NUMBER_IS_REQUIRED_ADD_EMAIL
+            });
+            return false;
+        }
     };
 
     this.onAddEmailSuccess = function () {

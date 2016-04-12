@@ -34,7 +34,7 @@
                     <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
                         <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
                     </div>
-                    <div class="phone inline" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
+                    <div class="phone inline <g:if test="${!patientInfo?.phoneNumber}">hide</g:if>"" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
                     <div class="email patient-email inline" id="patientEmail"
                          value="${patientInfo.email}">${patientInfo.email}
                     </div>
@@ -150,15 +150,9 @@
         </div>
 
         <div class="form-group inline">
-            <label class="lbl-group">BIRTHDAY</label>
-            <div class="birthday-groups">
-                <input id="birthdayMonth" name="birthdayMonth" type="text" data-group-validation="true" class="birthday birthday-month input-group"
-                       placeholder="Month"/>
-                <input id="birthdayDay" name="birthdayDay" type="text" data-group-validation="true" class="birthday birthday-day input-group"
-                       placeholder="Day"/>
-                <input id="birthdayYear" name="birthdayYear" type="text" data-group-validation="true" class="birthday birthday-year input-group"
-                       placeholder="Year"/>
-            </div>
+            <label class="lbl-group">BIRTHDAY<span>*</span></label>
+            <input id="birthday" name="birthday" type="text" class="input-group date-picker birthday re-position"
+                   placeholder="Jan 1, 1990" required />
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

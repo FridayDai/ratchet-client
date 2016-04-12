@@ -3,37 +3,21 @@ var WithCombobox = require('../../common/WithCombobox');
 var URLs = require('../../../constants/Urls');
 
 function ProviderFilter() {
-    var defaultName = {
-        firstName: 'All',
-        lastName: 'Providers'
-    };
-
     this.options({
-        source: function (request, response) {
-            $.ajax({
-                dropProcess: true,
-                url: URLs.GET_PROVIDER,
-                data: {
-                    name: request.term,
-                    type: 9,
-                    max: 1000
-                }
-            }).done(function (data) {
-                data.unshift({
-                    id: -1,
-                    firstName: defaultName.firstName,
-                    lastName: defaultName.lastName
-                });
-
-                response($.map(data, function (item) {
-                    return {
-                        label: item.firstName + " " + item.lastName,
-                        value: item.id
-                    };
-                }));
-            });
+        url: URLs.GET_PROVIDER,
+        requestData: function (val) {
+            return {
+                name: val,
+                type: 9,
+                max: 1000
+            };
         },
-        appendTo: ".container"
+        itemFormat: function (data) {
+            return {
+                label: data.firstName + ' ' + data.lastName,
+                value: data.id
+            };
+        }
     });
 
     this.select = function (id) {
@@ -50,12 +34,8 @@ function ProviderFilter() {
         }
     };
 
-    this.init = function () {
-        this.$node.val(defaultName.firstName + ' ' + defaultName.lastName);
-    };
-
-    this.after('initialize', function () {
-        this.init();
+    this.attributes({
+        clearEvent: 'clearProviderForTaskCompletion'
     });
 }
 

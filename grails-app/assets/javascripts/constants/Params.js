@@ -65,6 +65,13 @@ module.exports = {
         {label: "Not Required", value: 2}
     ],
 
+    TREATMENT_STATUS_FILTER: [
+        {label: "Pre-Op", value: 1},
+        {label: "Post-Op 0-3 days", value: 2},
+        {label: "Post-Op 0-90 days", value: 3},
+        {label: "Post-Op 90 days +", value: 4}
+    ],
+
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10
@@ -92,7 +99,8 @@ module.exports = {
         'MM/DD/YYYY',
         'M-D-YYYY',
         'M/D/YYYY',
-        'MMMM D, YYYY'
+        'MMMM D, YYYY',
+        'MMM D, YYYY'
     ],
 
     TOOL_TYPE_DASH: 1,

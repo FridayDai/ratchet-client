@@ -170,7 +170,7 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                     this._searchTimeout(event);
                 }
             },
-            focus: function() {
+            focus: function(event) {
                 this.selectedItem = null;
                 this.previous = this._value();
 
@@ -187,6 +187,18 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                         .val(item.label)
                         .data("id", item.value)
                         .data("saved", item);
+                }
+
+                if (this.previous !== '' && this._value() === '') {
+                    this.element.trigger('autocompleteclear');
+
+                    this.element
+                        .val('')
+                        .data("id", '')
+                        .data("saved", {
+                            label: '',
+                            value: ''
+                        });
                 }
 
                 this.close(event);
@@ -302,6 +314,8 @@ $.widget("ui.autocomplete", $.ui.autocomplete, {
                 this.selectedItem = item;
 
                 this.element.select();
+
+                this.previous = this._value();
             }
         });
 
@@ -536,24 +550,6 @@ $.widget("ui.combobox", {
                 }
             }, this.options));
 
-        function clear(element) {
-            $(element).trigger('autocompleteclear');
-
-            $(element)
-                .val('')
-                .data("id", '')
-                .data("saved", {
-                    label: '',
-                    value: ''
-                });
-        }
-
-        this.element.on('blur', function () {
-            if ($(this).val() === '') {
-                clear(this);
-            }
-        });
-
         $("<a />")
             .insertAfter(this.element)
             .button({
@@ -575,15 +571,10 @@ $.widget("ui.combobox", {
                     return;
                 }
 
-                //$(self.element).data('uiAutocomplete').options.focusSearch = false;
-                //self.element.autocomplete("search", self.element.val());
-                //self.element.focus();
-                //$(self.element).data('uiAutocomplete').options.focusSearch = true;
-
                 if ($menu.children().length > 0) {
                     self.element.trigger('click');
                 } else {
-                    self.element.autocomplete("search", self.element.val());
+                    self.element.autocomplete("search", '');
                 }
 
                 self.element.focus();

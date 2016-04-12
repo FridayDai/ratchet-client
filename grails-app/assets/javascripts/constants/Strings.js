@@ -35,7 +35,7 @@ module.exports = {
     ID_EXISTING_INVALID: "ID already exists",
     PASSWORD_NOT_MATCH: "Passwords do not match, please retype.",
     COMBOBOX_EMPTY_VALUE: "Please select item from list.",
-    BIRTHDAY_INVALID_VALUE: "Please select valid date.",
+    BIRTHDAY_RANGE_VALUE: "Please input date before today.",
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
     MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
     MAX_DATE_RANGE: "Please input date before {0} year.",
@@ -47,5 +47,10 @@ module.exports = {
     BULK_IMPORT_FORMAT_ERROR:   "We are not able to process this file due to a format problem. " +
                                 "Please verify the file you uploaded.",
     TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
-    RATE_LIMIT_LOGIN: "You will be able to try again in {0}."
+    RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
+    BIRTHDAY_IS_REQUIRED: "Please add birthday to patient's profile before adding a treatment.",
+
+    // todo: this need to be removed after phone number is optional.
+    PHONE_NUMBER_IS_REQUIRED: "Please add phone number to patient's profile before adding a treatment.",
+    PHONE_NUMBER_IS_REQUIRED_ADD_EMAIL: "Please add phone number to patient's profile before adding email."
 };

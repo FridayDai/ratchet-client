@@ -34,41 +34,25 @@ module.exports = {
         };
     },
 
-    parseBirthdayFromSeparate: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('MMM Do, YYYY');
-        } else {
-            return '';
-        }
-    },
-
     parseBirthday: function (dataStr) {
         if (dataStr) {
-            return moment(dataStr, 'YYYY-MM-DD').format('MMM Do, YYYY');
+            return moment(dataStr, 'YYYY-MM-DD').format('MMM D, YYYY');
         } else {
             return '';
         }
     },
 
-    toBirthdayMoment: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver');
-        } else {
-            return null;
-        }
-    },
+    toBirthday: function (str, toFormat) {
+        toFormat = toFormat || 'YYYY-MM-DD';
 
-    toBirthdayFromSeparate: function (str) {
         if (str) {
-            return moment.tz(str, 'MMM D, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
-        } else {
-            return '';
-        }
-    },
+            var validFormat = this.guessDateFormat(str);
 
-    toBirthday: function (str) {
-        if (str) {
-            return moment.tz(str, 'MMM Do, YYYY', 'America/Vancouver').format('YYYY-MM-DD');
+            if (validFormat) {
+                return moment.tz(str, validFormat, 'America/Vancouver').format(toFormat);
+            } else {
+                return '';
+            }
         } else {
             return '';
         }

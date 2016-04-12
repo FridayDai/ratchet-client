@@ -6,6 +6,7 @@ var URLs = require('../../constants/Urls');
 var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
+var Utility = require('../../utils/Utility');
 
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
@@ -16,6 +17,20 @@ var ALL_ACTIVE_PATIENT_FILTER = [
         '</div>',
     '</div>'
 ].join('');
+
+var TABLE_SEARCH_EVENTS = [
+    'selectTreatmentForPatientTable',
+    'clearTreatmentForPatientTable',
+    'selectProviderForPatientTable',
+    'clearProviderForPatientTable',
+    'selectEmailStatusForPatientTable',
+    'clearEmailStatusForPatientTable',
+    'selectAttentionStatusForPatientTable',
+    'clearAttentionStatusForPatientTable',
+    'selectTreatmentStatusForPatientTable',
+    'clearTreatmentStatusForPatientTable',
+    'selectPatientIDNameForPatientTable'
+];
 
 function PatientsTable() {
     this.attributes({
@@ -48,7 +63,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
-                width: "20%"
+                width: "18%"
             }, {
                 targets: 2,
                 data: 'email',
@@ -63,7 +78,7 @@ function PatientsTable() {
                         return full.email;
                     }
                 },
-                width: "30%"
+                width: "25%"
             }, {
                 targets: 3,
                 data: 'phoneNumber',
@@ -74,18 +89,35 @@ function PatientsTable() {
 
                     num = data === undefined ? full.phoneNumber : data;
 
-                    if (num.charAt(0) === '1') {
-                        subNumber = num.slice(1, num.length);
-                        phoneNumber = '1 ' + subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
-                    } else {
-                        phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                    if (num) {
+                        if (num.charAt(0) === '1') {
+                            subNumber = num.slice(1, num.length);
+                            phoneNumber = '1 ' + subNumber.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        } else {
+                            phoneNumber = num.replace(/(\d{3})(?=\d{2,}$)/g, '$1-');
+                        }
+
+                        return phoneNumber;
                     }
 
-                    return phoneNumber;
+                    return '';
                 },
-                width: "15%"
+                width: "12%"
             }, {
                 targets: 4,
+                data: 'birthday',
+                render: function (data, type, full) {
+                    var birthday = data === undefined ? full.birthday : data;
+                    if (birthday) {
+                        return Utility.parseBirthday(birthday);
+                    } else {
+                        return '<span class="not-available">Not Available</span>';
+                    }
+                },
+                width: "10%"
+            },
+            {
+                targets: 5,
                 data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
@@ -102,7 +134,7 @@ function PatientsTable() {
                 width: "15%",
                 orderable: false
             }, {
-                targets: 5,
+                targets: 6,
                 data: 'id',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
@@ -111,11 +143,11 @@ function PatientsTable() {
                 width: "8%",
                 orderable: false
             }, {
-                targets: 6,
+                targets: 7,
                 data: 'status',
                 "visible": false
             }, {
-                targets: 7,
+                targets: 8,
                 data: 'isAttentionNeeded',
                 "visible": false
             }
@@ -134,6 +166,8 @@ function PatientsTable() {
         surgeonId: null,
         emailStatus: null,
         patientIdOrName: null,
+        attentionStatus: null,
+        treatmentStatus: null,
         activeTreatmentOnly: true
     };
 
@@ -166,7 +200,9 @@ function PatientsTable() {
     this.onLoadDataFromSessionRouter = function (e, data) {
         this.loadData(data.patientsTable);
 
-        this.setActivePatientFilter(data.patientsTable.activeTreatmentOnly);
+        this.setActivePatientFilter(data.patientsTable.searchFields.activeTreatmentOnly);
+
+        this.searchFields = data.patientsTable.searchFields;
     };
 
     this.setActivePatientFilter = function (activeOnly) {
@@ -182,7 +218,7 @@ function PatientsTable() {
             pageInfo: this.tableEl.page.info(),
             sorting: this.tableEl.order(),
             search: this.getSetting().aaRHSearch,
-            activeTreatmentOnly: this.searchFields.activeTreatmentOnly
+            searchFields: this.searchFields
         };
     };
 
@@ -213,17 +249,12 @@ function PatientsTable() {
         this.initAllActivePatientFilter();
 
         this.on(document, 'refreshPatientsTable', this.onTableRefresh);
-        this.on(document, 'selectTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearTreatmentForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearProviderForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearEmailStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'clearAttentionStatusForPatientTable', this.onTriggerSearch);
-        this.on(document, 'selectPatientIDNameForPatientTable', this.onTriggerSearch);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
         this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+
+        _.each(TABLE_SEARCH_EVENTS, function(event) {
+            this.on(document, event, this.onTriggerSearch);
+        }, this);
     });
 
     this.before('teardown', function () {

@@ -7,8 +7,29 @@
 @import "../partials/combobox";
 
 .inner-search {
-    .right-search {
+    .search-content {
+        padding: 5px 20px 27px;
+    }
+    .filler-content {
         margin-top: 15px;
+    }
+    .combined-search {
+        margin-top: 32px;
+        margin-right: 28px;
+        max-width: 280px;
+
+        input {
+            min-width: 220px;
+        }
+    }
+    .ui-combobox{
+        input {
+            padding: 1px 1px 1px 10px;
+        }
+
+        .ui-combobox-toggle {
+            height: 27px;
+        }
     }
 }
 
@@ -433,11 +454,6 @@
         }
     }
 
-    &.not-available {
-        font-weight: 400;
-        color: $base-font-color;
-    }
-
     &.unverified:before {
         color: $base-color-pending;
     }
@@ -446,6 +462,12 @@
         color: $base-color-overdue;
     }
 }
+
+.not-available {
+    font-weight: 400;
+    color: $base-font-color;
+}
+
 
 .email-status-unverified {
     background-color: rgba(253, 193, 91, 0.07);

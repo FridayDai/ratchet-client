@@ -19,23 +19,29 @@ class TaskController extends BaseController {
 
         def tasks = taskService.getTasks(token, clientId, medicalRecordId)
         def activeTasks = [], closedTasks = [], scheduleTasks = []
+        def activeTaskTypeArray = [], closedTaskTypeArray = [], scheduleTaskTypeArray = []
+        def taskType
 
         for (task in tasks) {
             switch (task?.status) {
                 case StatusCodeConstants.TASK_STATUS_SCHEDULE:
+                    unionTaskType(task, scheduleTaskTypeArray)
                     scheduleTasks.add(task)
                     continue
                 case StatusCodeConstants.TASK_STATUS_PENDING:
                 case StatusCodeConstants.TASK_STATUS_OVERDUE:
+                    unionTaskType(task, activeTaskTypeArray)
                     activeTasks.add(task)
                     continue
                 default:
+                    unionTaskType(task, closedTaskTypeArray)
                     //Todo: after api update, need to use taskType
                     if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
                         def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
                         task = task << viewResult
                     }
                     closedTasks.add(task)
+
             }
         }
 
@@ -43,12 +49,18 @@ class TaskController extends BaseController {
         activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
+        taskType = [
+                activeType  : activeTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
+                closedType  : closedTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
+                scheduleType: scheduleTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] }
+        ]
 
         render view: '/singlePatient/task',
                 model: [
                         activeTasks       : activeTasks,
                         closedTasks       : closedTasks,
                         scheduleTasks     : scheduleTasks,
+                        taskType          : taskType,
                         clientId          : clientId,
                         patientId         : patientId,
                         medicalRecordId   : medicalRecordId,
@@ -180,6 +192,19 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
         render resp
+    }
+
+    private static unionTaskType(task, typeArray) {
+        //Todo: we need defined taskType in api!
+        if(RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE") {
+            task.taskType = RatchetConstants.TASK_TYPE_VOICE_CALL
+        } else {
+            task.taskType = task.testId
+        }
+
+        if (!typeArray.contains(task.taskType)) {
+            typeArray.add(task.taskType)
+        }
     }
 
     private getVoiceResult(patientId, medicalRecordId, taskId) {
