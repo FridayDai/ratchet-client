@@ -139,9 +139,9 @@
         </div>
 
         <div class="form-group inline">
-            <label class="lbl-group">PHONE NUMBER<span>*</span></label>
+            <label class="lbl-group">PHONE NUMBER</label>
             <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
-                   placeholder="777-777-7777" required/>
+                   placeholder="777-777-7777"/>
         </div>
 
         <div class="form-group inline">

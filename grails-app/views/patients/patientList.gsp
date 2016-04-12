@@ -129,10 +129,9 @@
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">PHONE NUMBER<span>*</span></label>
+                <label class="lbl-group">PHONE NUMBER</label>
                 <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert"
-                       maxlength="14"
-                       minlength="14" placeholder="777-777-7777" required/>
+                       maxlength="14" minlength="14" placeholder="777-777-7777"/>
 
                 <div class='replace-input-div' id="phoneNumber-static"></div>
                 <a class='icon-edit form-group-edit'></a>
