@@ -162,6 +162,14 @@ function AddTreatmentFormDialog() {
             });
             return false;
         }
+
+        if (!this.patientInfo.phoneNumber) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.PHONE_NUMBER_IS_REQUIRED
+            });
+            return false;
+        }
     };
 
     this.after('initialize', function () {
