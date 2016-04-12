@@ -3,6 +3,9 @@ var WithFormDialog = require('../../common/WithFormDialog');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 var Utility = require('../../../utils/Utility');
 
+var Notifications = require('../../common/Notification');
+var Strings = require('../../../constants/Strings');
+
 function AddEmailDialog() {
     this.attributes({
         emailFieldSelector: '#add-email-field'
@@ -38,6 +41,16 @@ function AddEmailDialog() {
             clientId: this.patientInfo.clientId,
             birthdayValue: Utility.toBirthday(this.patientInfo.birthday)
         };
+    };
+
+    this.beforeSubmitForm = function () {
+        if (!this.patientInfo.phoneNumber) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.PHONE_NUMBER_IS_REQUIRED
+            });
+            return false;
+        }
     };
 
     this.onAddEmailSuccess = function () {
