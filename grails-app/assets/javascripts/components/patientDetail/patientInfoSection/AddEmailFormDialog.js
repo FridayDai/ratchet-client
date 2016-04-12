@@ -3,9 +3,6 @@ var WithFormDialog = require('../../common/WithFormDialog');
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 var Utility = require('../../../utils/Utility');
 
-var Notifications = require('../../common/Notification');
-var Strings = require('../../../constants/Strings');
-
 function AddEmailDialog() {
     this.attributes({
         emailFieldSelector: '#add-email-field'
