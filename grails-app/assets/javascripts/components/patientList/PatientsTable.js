@@ -18,6 +18,8 @@ var ALL_ACTIVE_PATIENT_FILTER = [
     '</div>'
 ].join('');
 
+var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
+
 var TABLE_SEARCH_EVENTS = [
     'selectTreatmentForPatientTable',
     'clearTreatmentForPatientTable',
@@ -98,9 +100,9 @@ function PatientsTable() {
                         }
 
                         return phoneNumber;
+                    } else {
+                        return NOT_AVAILABLE_TEMP;
                     }
-
-                    return '';
                 },
                 width: "12%"
             }, {
@@ -111,7 +113,7 @@ function PatientsTable() {
                     if (birthday) {
                         return Utility.parseBirthday(birthday);
                     } else {
-                        return '<span class="not-available">Not Available</span>';
+                        return NOT_AVAILABLE_TEMP;
                     }
                 },
                 width: "10%"
