@@ -44,6 +44,14 @@ function AddEmailDialog() {
     };
 
     this.beforeSubmitForm = function () {
+        if (!this.patientInfo.birthday) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE,
+                message: Strings.BIRTHDAY_IS_REQUIRED_ADD_EMAIL
+            });
+            return false;
+        }
+
         if (!this.patientInfo.phoneNumber) {
             Notifications.error({
                 title: Strings.ERROR_TITLE,
