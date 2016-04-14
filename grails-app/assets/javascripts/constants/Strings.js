@@ -49,6 +49,7 @@ module.exports = {
     TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
     RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
     BIRTHDAY_IS_REQUIRED: "Please add birthday to patient's profile before adding a treatment.",
+    BIRTHDAY_IS_REQUIRED_ADD_EMAIL: "Please add birthday to patient's profile before adding email.",
 
     // todo: this need to be removed after phone number is optional.
     PHONE_NUMBER_IS_REQUIRED: "Please add phone number to patient's profile before adding a treatment.",
