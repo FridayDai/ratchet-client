@@ -50,6 +50,12 @@
 
             </g:if>
 
+            <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "BASIC"}">
+                <div class="sub-item">
+                    Completed
+                </div>
+            </g:elseif>
+
             <g:else>
                 <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">
                     <g:render template="/singlePatient/taskBox/shared/mixedScore" model="['task': task]"/>

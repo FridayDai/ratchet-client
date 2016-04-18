@@ -198,6 +198,8 @@ class TaskController extends BaseController {
         //Todo: we need defined taskType in api!
         if(RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE") {
             task.taskType = RatchetConstants.TASK_TYPE_VOICE_CALL
+        } else if (RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "BASIC") {
+            task.taskType = RatchetConstants.TASK_TYPE_BASIC
         } else {
             task.taskType = task.testId
         }
