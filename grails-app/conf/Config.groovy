@@ -350,8 +350,8 @@ ratchetv2 {
     }
 }
 
-grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY") ?: "AKIAIWTB37MOKO6FLJEA"
-grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY") ?: "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"
+grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY")
+grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY")
 grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 
 ratchet {
