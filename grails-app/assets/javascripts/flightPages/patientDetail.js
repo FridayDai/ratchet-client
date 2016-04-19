@@ -12,6 +12,7 @@ var Treatment = require('../components/patientDetail/treatmentSection/Treatment'
 var TreatmentPanel = require('../components/patientDetail/treatmentSection/TreatmentPanel');
 var EditPatientFormDialog = require('../components/patientDetail/patientInfoSection/EditPatientFormDialog');
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
+var AddPhoneNumberFormDialog = require('../components/patientDetail/patientInfoSection/AddPhoneNumberFormDialog');
 var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
 var FillQuestionnaireDialog = require('../components/patientDetail/taskSection/FillQuestionnaireDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
@@ -34,6 +35,7 @@ function PatientDetailPage() {
 
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
+        addPhoneNumberDialogSelector: '#add-phone-number-form',
         deletePatientDialogSelector: '#delete-patient-form',
         deleteTreatmentDialogSelector: '#delete-treatment-form',
         fillQuestionnaireDialogSelector: '#fill-questionnaire-dialog',
@@ -58,6 +60,10 @@ function PatientDetailPage() {
             selector: 'addEmailDialogSelector',
             event: 'showAddEmailDialog',
             dialog: AddEmailFormDialog
+        }, {
+            selector: 'addPhoneNumberDialogSelector',
+            event: 'showAddPhoneNumberDialog',
+            dialog: AddPhoneNumberFormDialog
         }, {
             selector: 'deletePatientDialogSelector',
             event: 'showDeletePatientDialog',

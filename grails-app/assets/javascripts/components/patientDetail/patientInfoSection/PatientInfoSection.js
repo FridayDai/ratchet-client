@@ -11,6 +11,7 @@ function PatientInfoSection() {
         inviteAgainButtonSelector: '.invite-patient',
         inviteAgainContainerSelector: '.div-invite',
         addEmailButtonSelector: '.add-email',
+        addPhoneNumberButtonSelector: '.add-phone-number',
         emailStatusLabelSelector: '.email-status',
 
         patientIdStaticSelector: '.identify',
@@ -35,6 +36,7 @@ function PatientInfoSection() {
         this.clientId = $editButton.data('clientId');
         this.patientId = $editButton.data('patientId');
         this.originalEmail = this.select('emailStaticSelector').text().trim();
+        this.originalPhoneNumber = this.select('phoneNumberStaticSelector').text().trim();
 
         return {
             clientId: this.clientId,
@@ -54,6 +56,12 @@ function PatientInfoSection() {
         e.preventDefault();
 
         this.trigger('showAddEmailDialog', this.getBasicInfo());
+    };
+
+    this.showAddPhoneNumberDialog = function (e) {
+        e.preventDefault();
+
+        this.trigger('showAddPhoneNumberDialog', this.getBasicInfo());
     };
 
     this.closePage = function (e) {
@@ -87,16 +95,25 @@ function PatientInfoSection() {
     };
 
     this.updatePhoneNumber = function (number) {
-        var $phoneNumber = this.select('phoneNumberStaticSelector');
+        var $addPhoneNumber = this.select('addPhoneNumberButtonSelector');
+        var $phoneNumberStatic = this.select('phoneNumberStaticSelector');
 
-        if (number) {
-            $phoneNumber
-                .text(number)
-                .css('display', 'inline-block');
-        } else {
-            $phoneNumber
-                .text('')
-                .css('display', 'none');
+        if (this.originalPhoneNumber !== number) {
+            if (number === '') {
+                this.trigger('phoneNumberUpdated', {
+                    blank: true
+                });
+
+                $addPhoneNumber.show();
+            } else {
+                this.trigger('phoneNumberUpdated', {
+                    blank: false
+                });
+
+                $addPhoneNumber.hide();
+            }
+
+            $phoneNumberStatic.text(number);
         }
     };
 
@@ -121,21 +138,20 @@ function PatientInfoSection() {
         if (this.originalEmail !== currentEmail) {
             if (currentEmail === '') {
                 $inviteContainer.css('display', 'none');
+                $addEmail.show();
+
                 this.trigger('emailStatusUpdated', {
                     blank: true
                 });
 
-                $addEmail.show();
-
                 $emailStatus.hide();
             } else {
                 $inviteContainer.css('display', 'inline-block');
+                $addEmail.hide();
 
                 this.trigger('emailStatusUpdated', {
                     blank: false
                 });
-
-                $addEmail.hide();
 
                 $emailStatus
                     .attr('class', '')
@@ -154,15 +170,24 @@ function PatientInfoSection() {
         window.location.href = URLs.PAGE_PATIENTS;
     };
 
+    this.onPhoneNumberStatusFeedback = function () {
+        this.trigger('feedbackPhoneNumberStatus', {
+            blank: !this.select('phoneNumberStaticSelector').text().trim()
+        });
+    };
+
     this.after('initialize', function () {
         this.on(document, 'updatePatientSuccess', this.onPatientUpdatedSuccess);
         this.on(document, 'addEmailSuccess', this.onPatientUpdatedSuccess);
+        this.on(document, 'addPhoneNumberSuccess', this.onPatientUpdatedSuccess);
         this.on(document, 'patientInfoRequest', this.onPatientInfoRequest);
         this.on(document, 'deletePatientSuccess', this.onPatientDeleteSuccess);
+        this.on(document, 'getPhoneNumberStatusFromPatientInfo', this.onPhoneNumberStatusFeedback);
 
         this.on('click', {
             editPatientButtonSelector: this.showEditPatientDialog,
             addEmailButtonSelector: this.showAddEmailDialog,
+            addPhoneNumberButtonSelector: this.showAddPhoneNumberDialog,
             closePageButtonSelector: this.closePage,
             inviteAgainButtonSelector: this.inviteAgain
         });
