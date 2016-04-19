@@ -50,9 +50,9 @@ class TaskController extends BaseController {
         closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
 
         taskType = [
-                activeType  : activeTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
-                closedType  : closedTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] },
-                scheduleType: scheduleTaskTypeArray.sort { a, b -> RatchetConstants.TOOL_TYPE[a] <=> RatchetConstants.TOOL_TYPE[b] }
+                activeType  : activeTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
+                closedType  : closedTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
+                scheduleType: scheduleTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() }
         ]
 
         render view: '/singlePatient/task',
@@ -197,15 +197,15 @@ class TaskController extends BaseController {
     private static unionTaskType(task, typeArray) {
         //Todo: we need defined taskType in api!
         if(RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE") {
-            task.taskType = RatchetConstants.TASK_TYPE_VOICE_CALL
+            task.taskFilterType = RatchetConstants.TOOL_NAME_VOICE_CALL
         } else if (RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "BASIC") {
-            task.taskType = RatchetConstants.TASK_TYPE_BASIC
+            task.taskFilterType = task.title
         } else {
-            task.taskType = task.testId
+            task.taskFilterType = RatchetConstants.TOOL_TYPE[task.testId]
         }
 
-        if (!typeArray.contains(task.taskType)) {
-            typeArray.add(task.taskType)
+        if (!typeArray.contains(task.taskFilterType)) {
+            typeArray.add(task.taskFilterType)
         }
     }
 

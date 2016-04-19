@@ -232,7 +232,7 @@ function TaskSection() {
 
     this.updateTaskBoxAndFilter = function ($taskBox, $taskRow) {
         var item = $taskRow.get(0).id.replace(/.*-(\w+)$/, "$1");
-        var type = $taskBox.data('taskType');
+        var type = $taskBox.data('taskFilterType');
         var taskId = $taskBox.get(0).id;
         var tasks = this.taskBoxData[item];
 
@@ -267,7 +267,7 @@ function TaskSection() {
         tasks.each(function () {
             allArr.push(this.id);
 
-            var taskType = $(this).data('taskType');
+            var taskType = $(this).data('taskFilterType');
 
             if (taskTypeArray.indexOf(taskType) === -1) {
                 taskIdList[taskType] = [];

@@ -2,7 +2,7 @@
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-tool-type="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType]}"
-     data-task-type="${task?.taskType}">
+     data-task-filter-type="${task?.taskFilterType}">
 
     <g:render template="/singlePatient/taskBox/shared/boxHeader" model="[taskTime: task?.sendTime]"/>
 
