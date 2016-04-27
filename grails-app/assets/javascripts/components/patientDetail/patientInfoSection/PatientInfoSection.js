@@ -91,7 +91,7 @@ function PatientInfoSection() {
 
         this.updatePhoneNumber(data.number);
         this.updateEmailStatus(data.email);
-        this.updateBirthday(Utility.toBirthday(data.birthday, 'MMM D, YYYY'));
+        this.updateBirthday(Utility.toBirthday(data.birthday, 'MM/DD/YYYY'));
     };
 
     this.updatePhoneNumber = function (number) {

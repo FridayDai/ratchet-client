@@ -148,8 +148,8 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">BIRTHDAY<span>*</span></label>
-                <input id="birthday" name="birthday" type="text" class="input-group date-picker birthday re-position"
-                       placeholder="Jan 1, 1990" required />
+                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                       placeholder="MM/DD/YYYY" required />
                 <div class='replace-input-div' id="birthday-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
