@@ -1,7 +1,7 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-task-type="${task?.taskType}">
+     data-task-filter-type="${task?.taskFilterType}">
 
     <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && (System.currentTimeMillis() - task?.completeTime <= 259200000)}">
         <div class="new-flag-ribbon-wrapper">
@@ -49,6 +49,12 @@
                 </g:else>
 
             </g:if>
+
+            <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "BASIC"}">
+                <div class="sub-item">
+                    Completed
+                </div>
+            </g:elseif>
 
             <g:else>
                 <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">

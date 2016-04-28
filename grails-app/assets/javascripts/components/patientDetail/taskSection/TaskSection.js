@@ -38,7 +38,6 @@ function TaskSection() {
         closedRowSelector: '#task-row-closed',
         scheduleItemsContainerSelector: '#task-row-schedule',
 
-        notifyButtonSelector: '.btn-notify.task-email',
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
         deleteTaskButtonSelector: '.box-item .delete',
@@ -64,10 +63,6 @@ function TaskSection() {
         if (this.select('noActiveItemLabelSelector').length >= 1) {
             this.trigger('noActiveTask');
         }
-    };
-
-    this.onEmailStatusUpdated = function () {
-        this.select('notifyButtonSelector').hide();
     };
 
     this.onTaskDeleteButtonClicked = function (e) {
@@ -115,9 +110,13 @@ function TaskSection() {
 
     this.onTaskVoiceCallButtonClicked = function (e) {
         e.preventDefault();
-        var $taskBox = $(e.target).closest('.box-item');
+        var $target = $(e.target);
+        var $taskBox = $target.closest('.box-item');
         var taskId = $taskBox.find('.id').text();
-        this.callTask(taskId);
+
+        if (!$target.hasClass('not-available')) {
+            this.callTask(taskId);
+        }
     };
 
     this.callTask = function (taskId) {
@@ -233,7 +232,7 @@ function TaskSection() {
 
     this.updateTaskBoxAndFilter = function ($taskBox, $taskRow) {
         var item = $taskRow.get(0).id.replace(/.*-(\w+)$/, "$1");
-        var type = $taskBox.data('taskType');
+        var type = $taskBox.data('taskFilterType');
         var taskId = $taskBox.get(0).id;
         var tasks = this.taskBoxData[item];
 
@@ -268,7 +267,7 @@ function TaskSection() {
         tasks.each(function () {
             allArr.push(this.id);
 
-            var taskType = $(this).data('taskType');
+            var taskType = $(this).data('taskFilterType');
 
             if (taskTypeArray.indexOf(taskType) === -1) {
                 taskIdList[taskType] = [];
@@ -314,6 +313,19 @@ function TaskSection() {
         }
     };
 
+    this.checkPhoneNumberStatus = function () {
+        this.trigger('getPhoneNumberStatusFromPatientInfo');
+    };
+
+    this.onPhoneNumberFeedback = function (event, data) {
+        var callButtons = this.select('callTaskButtonSelector');
+
+        if (data.blank) {
+            callButtons.addClass('not-available');
+        } else {
+            callButtons.removeClass('not-available');
+        }
+    };
 
     this.after('initialize', function () {
         this.setBasicIds();
@@ -323,7 +335,8 @@ function TaskSection() {
         this.storeTaskBox();
         this.initFilter();
 
-        this.on(document, 'emailStatusUpdated', this.onEmailStatusUpdated);
+        this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
+        this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
@@ -331,6 +344,8 @@ function TaskSection() {
             callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
             filterButtonSelector: this.onFilterButtonClicked
         });
+
+        this.checkPhoneNumberStatus();
     });
 }
 

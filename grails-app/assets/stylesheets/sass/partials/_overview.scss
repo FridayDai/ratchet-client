@@ -112,7 +112,7 @@
         }
     }
 
-    .add-email {
+    .add-email, .add-phone-number {
         color: $base-font-color;
         font-size: 13px;
 
@@ -339,6 +339,7 @@
     background-color: $base-color-white;
 }
 
+.add-phone-number-form,
 .add-email-form,
 .delete-patient-form,
 .delete-treatment-form {

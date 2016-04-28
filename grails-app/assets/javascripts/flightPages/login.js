@@ -2,11 +2,14 @@ require('../components/common/WithString');
 require('../components/layout/WithMaintenance');
 
 var flight = require('flight');
+var router = require('../components/common/WithSessionRouter');
 var WithForm = require('../components/common/WithForm');
 var STRINGs = require('../constants/Strings');
 var Utility = require('../utils/Utility');
+var PAGEs = require('../constants/Pages');
 
 function LoginPage() {
+    this.setPath(PAGEs.LOGIN);
 
     this.attributes({
         nativeForm: true,
@@ -65,6 +68,7 @@ function LoginPage() {
 }
 
 flight.component(
+    router,
     WithForm,
     LoginPage
 ).attachTo('form');

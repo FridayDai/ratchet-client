@@ -17,7 +17,11 @@ $.validator.addMethod('checkPhoneNumberRegion', function (value) {
     //var isValidRegionCode = phoneUtil.isValidNumberForRegion(phoneNumber, 'US');
     //return isPossible && isValid && regionCode && isValidRegionCode;
     //return intlTelInputUtils.isValidNumber(intlTelInputUtils.formatNumber(value, 'US'), 'US');
-    return intlTelInputUtils.isValidNumber(value, 'US');
+    if (value) {
+        return intlTelInputUtils.isValidNumber(value, 'US');
+    }
+
+    return true;
 }, STRINGs.PHONE_NUMBER_INVALID);
 
 module.exports = {

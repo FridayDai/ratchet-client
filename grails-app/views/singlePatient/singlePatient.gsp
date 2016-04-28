@@ -34,7 +34,14 @@
                     <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
                         <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
                     </div>
-                    <div class="phone inline <g:if test="${!patientInfo?.phoneNumber}">hide</g:if>"" value="${patientInfo.phoneNumber}">${phoneNumber}</div>
+                    <div class="phone inline">${phoneNumber}</div>
+                    <g:if test="${!phoneNumber}">
+                        <a href="#" class="add-phone-number">Add Phone Number</a>
+                    </g:if>
+                    <g:else>
+                        <a href="#" class="add-phone-number div-hidden">Add Phone Number</a>
+                    </g:else>
+
                     <div class="email patient-email inline" id="patientEmail"
                          value="${patientInfo.email}">${patientInfo.email}
                     </div>
@@ -139,9 +146,9 @@
         </div>
 
         <div class="form-group inline">
-            <label class="lbl-group">PHONE NUMBER<span>*</span></label>
+            <label class="lbl-group">PHONE NUMBER</label>
             <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
-                   placeholder="777-777-7777" required/>
+                   placeholder="777-777-7777 (Optional)"/>
         </div>
 
         <div class="form-group inline">
@@ -265,7 +272,18 @@
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="add-email-field" name="email" type="text"
                    class="input-group"
-                   placeholder="john.smith@email.com (Optional)" required>
+                   placeholder="john.smith@email.com" required>
+        </div>
+    </form>
+
+    <form action="/patients/${patientInfo.id}" method="post" class="add-phone-number-form ui-hidden" id="add-phone-number-form">
+        <div class="form-group description">
+            There is no phone number for this patient. Do you want to add a phone number?
+        </div>
+        <div class="form-group email-group">
+            <label class="lbl-group">PHONE NUMBER</label>
+            <input id="add-phone-number-field" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
+                   placeholder="777-777-7777" required/>
         </div>
     </form>
 

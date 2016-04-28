@@ -1,6 +1,8 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
-var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
+var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
+
+var PhoneNumberValidation = require('../../shared/validation/PhoneNumberValidation');
 var Utility = require('../../../utils/Utility');
 
 var Notifications = require('../../common/Notification');
@@ -8,11 +10,11 @@ var Strings = require('../../../constants/Strings');
 
 function AddEmailDialog() {
     this.attributes({
-        emailFieldSelector: '#add-email-field'
+        phoneNumberFieldSelector: '#add-phone-number-field'
     });
 
     this.options({
-        title: 'ADDING EMAIL ADDRESS',
+        title: 'ADDING PHONE NUMBER',
         width: 410,
         buttons: ['Save', 'No, next time']
     });
@@ -25,19 +27,26 @@ function AddEmailDialog() {
         this.show();
     };
 
+    this.children({
+        phoneNumberFieldSelector: PatientPhoneInputField
+    });
+
     this.initValidation = function () {
-        return PatientEmailValidation.get();
+        return PhoneNumberValidation.get();
     };
 
     this.setExtraData = function () {
-        var phoneNumber = this.patientInfo.phoneNumber.replace(/[\s\(\)-]/g, '');
+        var $field = this.select('phoneNumberFieldSelector');
+
+        this.patientInfo.phoneNumber = $field.val();
 
         return {
             patientId: this.patientInfo.patientId,
             id: this.patientInfo.identify,
             firstName: this.patientInfo.firstName,
             lastName: this.patientInfo.lastName,
-            phoneNumber: phoneNumber,
+            email: this.patientInfo.email,
+            phoneNumber: this.patientInfo.phoneNumber.replace(/[\s\(\)-]/g, ''),
             clientId: this.patientInfo.clientId,
             birthdayValue: Utility.toBirthday(this.patientInfo.birthday)
         };
@@ -53,15 +62,14 @@ function AddEmailDialog() {
         }
     };
 
-    this.onAddEmailSuccess = function () {
-        this.trigger('addEmailSuccess', _.assign(this.patientInfo, {
-            email: this.select('emailFieldSelector').val().trim(),
+    this.onAddPhoneNumberSuccess = function () {
+        this.trigger('addPhoneNumberSuccess', _.assign(this.patientInfo, {
             number: this.patientInfo.phoneNumber
         }));
     };
 
     this.after('initialize', function() {
-        this.on('formSuccess', this.onAddEmailSuccess);
+        this.on('formSuccess', this.onAddPhoneNumberSuccess);
     });
 }
 

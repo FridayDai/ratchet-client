@@ -7,8 +7,10 @@ class RatchetConstants {
 
     // Task
     public static final TASK_TYPE_VOICE_CALL = 101
+    public static final TASK_TYPE_BASIC = 102
 
     public static final Map BASE_TOOL_TYPE = [
+            1: "BASIC",
             2: "OUTCOME",
             4: "VOICE"
     ]
@@ -31,6 +33,7 @@ class RatchetConstants {
     public static final String TOOL_NAME_HOOS_JR = 'HOOS, JR.';
     public static final String TOOL_NAME_PROMIS = 'PROMIS Global Health';
     public static final String TOOL_NAME_VOICE_CALL = 'Voice Call';
+    public static final String TOOL_NAME_BASIC = 'Basic';
 
     public static final Map TOOL_TYPE = [
             1 : TOOL_NAME_DASH,
@@ -50,7 +53,10 @@ class RatchetConstants {
             17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE,
             15: TOOL_NAME_KOOS_JR,
             1000: TOOL_NAME_HOOS_JR,
-            101: TOOL_NAME_VOICE_CALL
+
+            // These are not real exist
+            101: TOOL_NAME_VOICE_CALL,
+            102: TOOL_NAME_BASIC
     ]
 
     //Task type which hasn't task score.
