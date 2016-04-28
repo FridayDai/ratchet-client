@@ -278,7 +278,7 @@
 
     <form action="/patients/${patientInfo.id}" method="post" class="add-phone-number-form ui-hidden" id="add-phone-number-form">
         <div class="form-group description">
-            There is no phone number for this patient. Do you want to add an phone number?
+            There is no phone number for this patient. Do you want to add a phone number?
         </div>
         <div class="form-group email-group">
             <label class="lbl-group">PHONE NUMBER</label>

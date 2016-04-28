@@ -104,12 +104,12 @@ log4j.main = {
     // Example of changing the log pattern for the default console appender:
     //
     //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%d %c{2} %m%n')
+    //    console name:'stdout', layout:pattern(conversionPattern: '%d %level %c{2} %m%n')
     //}
 
     if (System.getProperty("ELK_TCP_ADDR")) {
         appenders {
-            console name: 'stdout', layout: pattern(conversionPattern: '%d %c{2} %m%n')
+            console name: 'stdout', layout: pattern(conversionPattern: '%d %level %c{2} %m%n')
             appender new biz.paluch.logging.gelf.log4j.GelfLogAppender(name: 'central',
                     host: System.getProperty("ELK_TCP_ADDR"), port: 12201, additionalFields: "app_type=client")
         }
@@ -225,7 +225,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com"
+            base = System.getProperty("SERVER_URL") ?: "http://localhost:8099/api/v1"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/api/v1/login"
