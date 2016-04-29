@@ -24,7 +24,6 @@ var DeleteTreatmentFormDialog = require('../components/patientDetail/treatment/D
 var AddTasksDialog = require('../components/patientDetail/treatment/AddTasksDialog');
 var InClinicCodeDialog = require('../components/patientDetail/InClinicCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatment/EditSurgeryDateFormDialog');
-// var EditGroupProviderFormDialog = require('../components/patientDetail/careGiverSection/EditGroupProviderFormDialog');
 var CareGiverFormDialog = require('../components/patientDetail/careGiverSection/CareGiverFormDialog');
 
 var TYPE_SECTION_MAPPING = {

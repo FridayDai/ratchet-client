@@ -252,6 +252,7 @@ ratchetv2 {
             checkPatientEmail = "${ratchetv2.server.url.base}/api/v1/patients/check_email"
             notify = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/notify-now"
             generateInClinicCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/generate/in-clinic/code"
+            hasActiveTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/has-active-tasks"
 
             //Report URL
             taskConversion = "${ratchetv2.server.url.base}/api/v1/clients/conversion"

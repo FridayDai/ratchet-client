@@ -49,6 +49,7 @@ class UrlMappings {
         "/patients/bulk-import/save"(controller: "patients", action: "savePatients")
         "/patients/bulk-import/download-errors"(controller: "patients", action: "downloadErrors")
 
+        "/patients/$patientId?/has-active-tasks"(controller: "singlePatient", action: "hasActiveTasks")
         "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
         "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
         "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")

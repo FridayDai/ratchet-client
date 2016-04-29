@@ -12,6 +12,7 @@ module.exports = {
     CHECK_PATIENT_ID: '/patients/check-id',
     NOTIFY_REQUEST: '/patients/{0}/notify',
     GET_IN_CLINIC_CODE: '/patients/{0}/in-clinic/code',
+    PATIENT_HAS_ACTIVE_TASK: '/patients/{0}/has-active-tasks',
 
     //Bulk import
     GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',
@@ -22,7 +23,7 @@ module.exports = {
     PAGE_PATIENT_DETAIL: '/patients/{0}',
 
     SECTION_TREATMENT_TAB: '/patients/{0}/getTreatmentTab?clientId={1}' +
-    '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&PatientEmailStatus={5}&_={6}',
+    '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&PatientEmailStatus={5}&archived={6}&_={7}',
 
     INVITE_PATIENT: '/patients/{0}/invite',
 

@@ -9,26 +9,26 @@ class TeamController extends BaseController {
 
     static allowedMethods = [getCareGiver: ['GET'], addCareGiver: ['POST']]
 
-    def getTeam() {
-        String token = request.session.token
-        def treatmentId = params?.treatmentId
-        def medicalRecordId = params?.medicalRecordId
-        def clientId = params?.clientId
-        def patientId = params?.patientId
-        def archived = params?.archived
-        if (archived == null || archived == '') {
-            archived = false
-        }
-        def surgeons = teamService.getCareTeam(token, medicalRecordId)
-        render(view: "/singlePatient/team", model: [
-            surgeons: surgeons,
-            treatmentId: treatmentId,
-            medicalRecordId: medicalRecordId,
-            clientId: clientId,
-            patientId: patientId,
-            archived: archived
-        ])
-    }
+//    def getTeam() {
+//        String token = request.session.token
+//        def treatmentId = params?.treatmentId
+//        def medicalRecordId = params?.medicalRecordId
+//        def clientId = params?.clientId
+//        def patientId = params?.patientId
+//        def archived = params?.archived
+//        if (archived == null || archived == '') {
+//            archived = false
+//        }
+//        def surgeons = teamService.getCareTeam(token, medicalRecordId)
+//        render(view: "/singlePatient/team", model: [
+//            surgeons: surgeons,
+//            treatmentId: treatmentId,
+//            medicalRecordId: medicalRecordId,
+//            clientId: clientId,
+//            patientId: patientId,
+//            archived: archived
+//        ])
+//    }
 
     def getCareGiver(CareGiverFilterFields filterFields) {
         String token = request.session.token

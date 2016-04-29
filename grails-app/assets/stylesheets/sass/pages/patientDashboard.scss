@@ -545,8 +545,16 @@
             padding-top: 2px;
             padding-left: 5px;
 
+            &.not-available {
+                &:hover {
+                    color: #b3b3b3;
+                    background-color: transparent;
+                    cursor: default;
+                }
+            }
+
             &:hover {
-                background: #225f6f;
+                background-color: #225f6f;
                 color: #fdfdfd;
             }
         }

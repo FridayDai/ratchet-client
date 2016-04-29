@@ -105,7 +105,12 @@
                     </g:link>
                 </li>
                 <li data-type="Caregiver">
-                    <g:link controller="singlePatient" action="getCareGiverTab">
+                    <g:link controller="singlePatient"
+                            action="getCareGiverTab"
+                            params="[
+                                    patientId: patientInfo.id
+                            ]"
+                    >
                         CAREGIVER
                     </g:link>
                 </li>
@@ -116,14 +121,14 @@
                 </li>
             </ul>
             <div class="patient-tab-tool" data-patient-id="${patientInfo.id}">
-                <span class="notify-button icon-button">
+                <span class="notify-button icon-button <g:if test="${!hasActiveTasks}">not-available</g:if>">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </span>
                 <div class="notify-button-tip icon-button-tip begin-tip">
                     <span>Notify</span>
                 </div>
 
-                <span class="get-code-button icon-button">
+                <span class="get-code-button icon-button <g:if test="${!hasActiveTasks}">not-available</g:if>">
                     <i class="fa fa-link" aria-hidden="true"></i>
                 </span>
                 <div class="get-code-button-tip icon-button-tip begin-tip">

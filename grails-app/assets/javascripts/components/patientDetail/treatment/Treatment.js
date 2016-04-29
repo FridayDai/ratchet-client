@@ -149,6 +149,8 @@ function TaskSection() {
                     me.countActiveTasks();
                     me.checkIfHasTasks($taskRow);
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
+
+                    me.trigger('deleteTaskSuccessful');
                 }
             }
         });
@@ -354,7 +356,7 @@ function TaskSection() {
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
 
 
-        if (this.$node.children('.archived').length ==0) {
+        if (this.$node.children('.archived').length === 0) {
             this.on('click', {
                 deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
                 beginTaskButtonSelector: this.onTaskBeginButtonClicked,

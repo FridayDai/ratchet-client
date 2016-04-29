@@ -280,4 +280,42 @@ class SinglePatientServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+	def "test hasActiveTasks with successful result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			hasActivtyTasks false
+		}
+
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 200,
+				body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.hasActiveTasks('token', '1', '2')
+
+		then:
+		result == false
+	}
+
+	def "test hasActiveTasks without successful result"() {
+		given:
+		GetRequest.metaClass.asString = { ->
+			return [
+				status: 400,
+				body  : "body"
+			]
+		}
+
+		when:
+		service.hasActiveTasks('token', '1', '2')
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
 }

@@ -15,7 +15,10 @@ class SinglePatientController extends BaseController {
         String token = request.session.token
 
         def patientId = params?.patientId
+        def clientId = request.session.clientId
+
         def patientInfo = singlePatientService.showSinglePatient(token, patientId)
+        def hasActiveTasks = singlePatientService.hasActiveTasks(token, clientId, patientId)
 
         if (!patientInfo.email) {
             patientInfo.email = ''
@@ -50,7 +53,8 @@ class SinglePatientController extends BaseController {
         render(view: '/singlePatient/singlePatient', model: [
                 patientInfo   : patientInfo,
                 phoneNumber: phoneNumber,
-                AccountIsAdmin: request.session.accountManagement
+                AccountIsAdmin: request.session.accountManagement,
+                hasActiveTasks: hasActiveTasks
         ])
     }
 
@@ -127,7 +131,7 @@ class SinglePatientController extends BaseController {
             clientId: clientId,
             PatientEmailStatus: PatientEmailStatus,
             medicalRecords: medicalRecords,
-            treatmentLimit: treatmentLimit,
+            treatmentLimit: treatmentLimit
         ])
     }
 
@@ -145,6 +149,16 @@ class SinglePatientController extends BaseController {
         def patientId = params?.patientId
         def resp = singlePatientService.generateInClinicCode(token, clientId, patientId)
         render resp as JSON
+    }
+
+    def hasActiveTasks() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+
+        def resp = singlePatientService.hasActiveTasks(token, clientId, patientId)
+
+        render (['hasActiveTasks': resp] as JSON)
     }
 
     def getReportTab() {

@@ -10,7 +10,7 @@
 
         <div class="table-group">
             <div class="inner-body" id="careGiverBody">
-                <table class="ec-table team-table display cursorAuto">
+                <table class="ec-table team-table display cursorAuto" data-total="${careGiverList.size()}">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -22,13 +22,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each var="caregiver" in="${careGiverList.data}" status="i">
+                    <g:each var="caregiver" in="${careGiverList}" status="i">
                         <tr data-is-dom-data="true">
                             <td>${caregiver.id}</td>
-                            <td>${caregiver.firstName} ${patient.lastName}</td>
-                            <td>${patient.relationShip}</td>
-                            <td>${patient.email}</td>
-                            <td>${patient.status}</td>
+                            <td>${caregiver.firstName} ${caregiver.lastName}</td>
+                            <td>${caregiver.relationShip}</td>
+                            <td>${caregiver.email}</td>
+                            <td>${caregiver.status}</td>
                             <td></td>
                         </tr>
                     </g:each>

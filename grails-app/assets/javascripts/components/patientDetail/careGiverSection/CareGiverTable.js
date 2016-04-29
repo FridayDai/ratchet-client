@@ -148,9 +148,9 @@ function EmergencyContactTable() {
         });
     };
 
-    this.getUrl = function () {
-        return URLs.GET_EMERGENCY_CONTACT_LIST.format(this.attr.patientId, this.attr.medicalRecordId);
-    };
+    // this.getUrl = function () {
+    //     return URLs.GET_EMERGENCY_CONTACT_LIST.format(this.attr.patientId, this.attr.medicalRecordId);
+    // };
 
     this.after('initialize', function () {
         this.on(document, 'emergencyContactUpdateSuccess', this.reload);

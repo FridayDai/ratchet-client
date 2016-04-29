@@ -60,15 +60,6 @@ function TreatmentList() {
         })();
     };
 
-    // this.onNoActiveTask = function () {
-    //     this.select('generateCodeButtonSelector')
-    //         .attr('disabled', true)
-    //         .addClass('btn-generate-code-disabled');
-    //     this.select('notifyButtonSelector')
-    //         .attr('disabled', true)
-    //         .addClass('btn-generate-code-disabled');
-    // };
-
     this.onAddTreatmentSuccess = function (e, data) {
         this.addTab(data);
 
@@ -92,6 +83,7 @@ function TreatmentList() {
             options.treatmentInfo.id,
             options.treatmentDate,
             options.emailStatus,
+            false,
             Date.now()
         );
 
@@ -106,7 +98,7 @@ function TreatmentList() {
     this.updateAddTreatmentButtonStatus = function () {
         this.trigger('updateAddTreatmentButton', {
             show: this.select('tabSelector').length < 3
-        })
+        });
     };
 
     this.showNoTreatmentContainer = function () {
@@ -197,9 +189,6 @@ function TreatmentList() {
         this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
         this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
-
-        // this.on('noActiveTask', this.onNoActiveTask);
-        // this.on('onlyVoiceTaskInActive', this.onNoActiveTask);
     });
 
     this.before('teardown', function () {

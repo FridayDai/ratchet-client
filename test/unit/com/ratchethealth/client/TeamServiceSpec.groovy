@@ -16,48 +16,6 @@ class TeamServiceSpec extends Specification {
 			return null
 		}
 	}
-	
-	def "test getCareTeam with successful result"() {
-		given:
-		def jBuilder = new JsonBuilder()
-		jBuilder {
-			items {
-				email "email"
-				firstName "firstName"
-			}
-		}
-
-		GetRequest.metaClass.asString = { ->
-			return [
-					status: 200,
-					body  : jBuilder.toString()
-			]
-		}
-
-		when:
-		def result = service.getCareTeam('token', 1)
-
-		then:
-		result.email == "email"
-		result.firstName == "firstName"
-	}
-
-	def "test getCareTeam without successful result"() {
-		given:
-		GetRequest.metaClass.asString = { ->
-			return [
-					status: 400,
-					body  : "body"
-			]
-		}
-
-		when:
-		service.getCareTeam('token', 1)
-
-		then:
-		ApiReturnException e = thrown()
-		e.getMessage() == "body"
-	}
 
 	def "test getCareGiver with successful result"() {
 		given:
@@ -77,11 +35,11 @@ class TeamServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.getCareGiver('token', 1)
+		def result = service.getCareGiver('token', 1, 2, null)
 
 		then:
-		result.data.email == "email"
-		result.data.firstName == "firstName"
+		result.items.email == "email"
+		result.items.firstName == "firstName"
 	}
 
 	def "test getCareGiver without successful result"() {
@@ -94,7 +52,7 @@ class TeamServiceSpec extends Specification {
 		}
 
 		when:
-		service.getCareGiver('token', 1)
+		service.getCareGiver('token', 1, 2, null)
 
 		then:
 		ApiReturnException e = thrown()

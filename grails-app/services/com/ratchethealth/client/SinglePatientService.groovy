@@ -47,6 +47,26 @@ class SinglePatientService extends RatchetAPIService {
         }
     }
 
+    def hasActiveTasks(token, clientId, patientId) {
+        String hasActiveTasksUrl = grailsApplication.config.ratchetv2.server.url.hasActiveTasks
+        def url = String.format(hasActiveTasksUrl, clientId, patientId)
+
+        log.info("Call backend service to get if has active tasks, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                .asString()
+
+            if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
+                log.info("Get active tasks flag success, token: ${token}")
+                return result.hasActivtyTasks
+            }
+            else {
+                handleError(resp)
+            }
+        }
+    }
+
     def updateSinglePatient(String token, patient) {
         String updateSinglePatientUrl = grailsApplication.config.ratchetv2.server.url.patient
         def url = String.format(updateSinglePatientUrl, patient?.patientId)
