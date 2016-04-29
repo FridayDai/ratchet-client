@@ -11,7 +11,7 @@ class AccountsController extends BaseController {
     def accountService
     def invitationService
 
-    def getAccounts(AccountPagination accountPagination) {
+    def getAccounts(AccountFilterFields accountPagination) {
         String token = session.token
         def clientId = session.clientId
 

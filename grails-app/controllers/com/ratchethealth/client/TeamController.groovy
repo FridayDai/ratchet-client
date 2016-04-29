@@ -30,11 +30,21 @@ class TeamController extends BaseController {
         ])
     }
 
-    def getCareGiver() {
+    def getCareGiver(CareGiverFilterFields filterFields) {
         String token = request.session.token
-        def medicalRecordId = params?.medicalRecordId
-        def careGivers = teamService.getCareGiver(token, medicalRecordId)
-        render careGivers as JSON
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+
+        if (request.isXhr()) {
+            def resp = teamService.getCareGiver(token, clientId, patientId, filterFields)
+            render resp as JSON
+        } else {
+            filterFields.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            filterFields.length = RatchetConstants.DEFAULT_PAGE_SIZE
+
+            def patientList = teamService.getCareGiver(token, clientId, patientId, filterFields)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: patientPagination.length])
+        }
     }
 
     def addCareGiver(CareGiver careGiver) {

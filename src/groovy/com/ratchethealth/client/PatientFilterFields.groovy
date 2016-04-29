@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class PatientPagination extends Pagination{
+class PatientFilterFields extends FilterFields {
     String columns
     String search
     String draw

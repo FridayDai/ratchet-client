@@ -137,4 +137,45 @@ class SinglePatientService extends RatchetAPIService {
         }
     }
 
+    def sendNotifyRequest(String token, clientId, patientId) {
+        String notifyUrl = grailsApplication.config.ratchetv2.server.url.notify
+        def url = String.format(notifyUrl, clientId, patientId)
+
+        log.info("Call backend service to notify tasks, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                .asString()
+
+            if (resp.status == 200) {
+                log.info("Notify tasks success, token: ${token}")
+
+                [success: true]
+            } else if (resp.status == 406) {
+                log.info("Notify tasks failed within 30 seconds, token: ${token}")
+
+                [success: true]
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def generateInClinicCode(String token, clientId, patientId) {
+        String generateCodeUrl = grailsApplication.config.ratchetv2.server.url.generateInClinicCode
+        def url = String.format(generateCodeUrl, clientId, patientId)
+
+        log.info("Call backend service to generate in-clinic code, token: ${token}.")
+        withGet(token, url) { req ->
+            def resp = req
+                .asString()
+
+            if (resp.status == 200) {
+                def result = JSON.parse(resp.body)
+                log.info("Call backend service to generate in-clinic code success, token: ${token}")
+                return result
+            } else {
+                handleError(resp)
+            }
+        }
+    }
 }

@@ -10,6 +10,8 @@ module.exports = {
     GET_MY_GROUPS: '/accounts/TODO/groups',
     CHECK_PATIENT_EMAIL: '/patients/check-email',
     CHECK_PATIENT_ID: '/patients/check-id',
+    NOTIFY_REQUEST: '/patients/{0}/notify',
+    GET_IN_CLINIC_CODE: '/patients/{0}/in-clinic/code',
 
     //Bulk import
     GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',
@@ -19,16 +21,14 @@ module.exports = {
     //Patient detail
     PAGE_PATIENT_DETAIL: '/patients/{0}',
 
-    SECTION_TREATMENT_TAB: '/patients/{0}/treatment?clientId={1}' +
+    SECTION_TREATMENT_TAB: '/patients/{0}/getTreatmentTab?clientId={1}' +
     '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&PatientEmailStatus={5}&_={6}',
 
     INVITE_PATIENT: '/patients/{0}/invite',
 
     //Treatment
-    GET_TREATMENT_CODE: '/treatments/{0}/generateCode',
     UPDATE_SURGERY_DATE: '/patients/{0}/surgery-time/{1}/{2}',
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
-    NOTIFY_TREATMENT_TASKS: '/patients/{0}/treatments/{1}/notify',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',
     GET_TREATMENT_AVAILABLE_YEARS: '/treatments/{0}/available-years',

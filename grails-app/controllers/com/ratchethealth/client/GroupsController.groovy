@@ -9,7 +9,7 @@ class GroupsController extends BaseController {
 
     static allowedMethods = [getGroups: ['GET'], addGroup: ['POST']]
 
-    def getGroups(GroupPagination groupPagination) {
+    def getGroups(GroupFilterFields groupPagination) {
         def clientId = session.clientId
         if (request.isXhr()) {
             def resp = groupService.showGroupsList(session.token, clientId, groupPagination)
@@ -22,7 +22,7 @@ class GroupsController extends BaseController {
         }
     }
 
-    def getStaffGroups(GroupPagination groupPagination) {
+    def getStaffGroups(GroupFilterFields groupPagination) {
         def resp, clientId = session.clientId
         def treatmentId = params?.treatmentId
 

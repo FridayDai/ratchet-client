@@ -13,9 +13,9 @@
 
     <div class="box-item-footer">
 
-        <span class="operation delete"></span>
+        <span class="icon-button delete"></span>
 
-        <div class="tip delete-tip">
+        <div class="icon-button-tip delete-tip">
             <span>Delete</span>
         </div>
 

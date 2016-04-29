@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class ActivityPagination extends Pagination {
+class ActivityFilterFields extends FilterFields {
     String patientId
     String medicalRecordId
     String clientId

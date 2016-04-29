@@ -29,15 +29,13 @@ class TeamService extends RatchetAPIService {
         }
     }
 
-    def getCareGiver(String token, medicalRecordId) {
-        def url = grailsApplication.config.ratchetv2.server.url.showMedicalCares
+    def getCareGiver(String token, clientId, patientId, filterFields) {
+        def careGiverUrl = grailsApplication.config.ratchetv2.server.url.caregivers
+        def url = String.format(careGiverUrl, clientId, patientId)
 
-        log.info("Call backend service to get care giver with type and medicalRecordId, token: ${token}.")
+        log.info("Call backend service to get care giver, token: ${token}.")
         withGet(token, url) { req ->
-            def resp = req
-                    .queryString("type", grailsApplication.config.ratchetv2.server.careGiverType)
-                    .queryString("medicalRecordId", medicalRecordId)
-                    .asString()
+            def resp = req.asString()
 
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)

@@ -15,24 +15,24 @@
     <div class="box-item-footer">
 
         <g:if test="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE"}">
-            <span class="operation call-task"></span>
+            <span class="icon-button call-task"></span>
 
-            <div class="tip call-tip">
+            <div class="icon-button-tip call-tip">
                 <span>Call</span>
             </div>
         </g:if>
         <g:else>
             <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
-               class="operation begin-task" target="_blank"></a>
+               class="icon-button begin-task" target="_blank"></a>
 
-            <div class="tip begin-tip">
+            <div class="icon-button-tip begin-tip">
                 <span>Fill</span>
             </div>
         </g:else>
 
-        <span class="operation delete"></span>
+        <span class="icon-button delete"></span>
 
-        <div class="tip delete-tip">
+        <div class="icon-button-tip delete-tip">
             <span>Delete</span>
         </div>
 

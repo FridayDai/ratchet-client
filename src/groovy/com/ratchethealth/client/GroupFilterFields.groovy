@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class AccountPagination extends Pagination{
+class GroupFilterFields extends FilterFields{
 
     //for search attribute
     String name

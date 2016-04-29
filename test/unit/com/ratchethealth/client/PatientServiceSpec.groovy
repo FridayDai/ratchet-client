@@ -72,7 +72,7 @@ class PatientServiceSpec extends Specification {
         }
 
         when:
-        def result = service.loadPatients('token', 1, new PatientPagination())
+        def result = service.loadPatients('token', 1, new PatientFilterFields())
 
         then:
         result.recordsTotal == 2
@@ -90,7 +90,7 @@ class PatientServiceSpec extends Specification {
         }
 
         when:
-        service.loadPatients('token', 1, new PatientPagination())
+        service.loadPatients('token', 1, new PatientFilterFields())
 
         then:
         ApiReturnException e = thrown()

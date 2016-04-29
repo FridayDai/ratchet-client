@@ -34,7 +34,7 @@ class GroupServiceSpec extends Specification {
             ]
         }
 
-        GroupPagination groupPagination = new GroupPagination()
+        GroupFilterFields groupPagination = new GroupFilterFields()
         groupPagination.start = 0
         groupPagination.length = 20
         groupPagination.name = 'name'
@@ -59,7 +59,7 @@ class GroupServiceSpec extends Specification {
             ]
         }
 
-        GroupPagination groupPagination = new GroupPagination()
+        GroupFilterFields groupPagination = new GroupFilterFields()
         groupPagination.start = 0
         groupPagination.length = 20
         groupPagination.name = 'name'

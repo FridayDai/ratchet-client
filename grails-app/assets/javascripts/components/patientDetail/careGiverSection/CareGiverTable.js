@@ -13,10 +13,7 @@ var INACTIVE_STATUS = '<span class="status-inactive">INACTIVE</span>';
 
 function EmergencyContactTable() {
     this.attributes({
-        archived: 'false',
-        patientId: null,
-        clientId: null,
-        medicalRecordId: null
+        patientId: null
     });
 
     this.options({
@@ -27,16 +24,21 @@ function EmergencyContactTable() {
                 orderable: false,
                 width: "10%"
             }, {
-                data: "firstName",
+                data: "name",
+                render: function (data) {
+                    return data.firstName + ' ' + data.lastName;
+                },
                 className: "firstName",
                 orderable: false,
                 width: "15%"
-            }, {
-                data: "lastName",
-                className: "lastName",
-                orderable: false,
-                width: "15%"
-            }, {
+            },
+            // {
+            //     data: "lastName",
+            //     className: "lastName",
+            //     orderable: false,
+            //     width: "15%"
+            // },
+            {
                 data: 'relationShip',
                 render: function (data) {
                     return PARAMs.EMERGENCY_CONTACT_RELATIONSHIP_MAP[data];
@@ -87,7 +89,7 @@ function EmergencyContactTable() {
         var $row = $(e.target).parents('tr');
         var relationship = $row.find('.relationship').text().trim();
 
-        this.trigger('showEmergencyContactDialog', {
+        this.trigger('showCareGiverDialog', {
             patientId: this.attr.patientId,
             medicalRecordId: this.attr.medicalRecordId,
             update: {
