@@ -7,21 +7,23 @@ class SinglePatientController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
     def singlePatientService
     def invitationService
+    def teamService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
     def getSinglePatient() {
         String token = request.session.token
-        def clientId = request.session.clientId
+
         def patientId = params?.patientId
+        def clientId = request.session.clientId
+
         def patientInfo = singlePatientService.showSinglePatient(token, patientId)
+        def hasActiveTasks = singlePatientService.hasActiveTasks(token, clientId, patientId)
 
         if (!patientInfo.email) {
             patientInfo.email = ''
         }
 
-        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
-        def medicalRecords = singlePatientService.showMedialRecords(token, clientId, patientId)
         def num = patientInfo?.phoneNumber
         def phoneNumber
 
@@ -50,10 +52,9 @@ class SinglePatientController extends BaseController {
 
         render(view: '/singlePatient/singlePatient', model: [
                 patientInfo   : patientInfo,
-                medicalRecords: medicalRecords,
                 phoneNumber: phoneNumber,
-                treatmentLimit: treatmentLimit,
-                AccountIsAdmin: request.session.accountManagement
+                AccountIsAdmin: request.session.accountManagement,
+                hasActiveTasks: hasActiveTasks
         ])
     }
 
@@ -111,5 +112,78 @@ class SinglePatientController extends BaseController {
                 archived: archived
             ]
         )
+    }
+
+    def getTreatmentListTab() {
+        String token = request.session.token
+
+        def patientId = params?.patientId
+        def PatientEmailStatus = params?.PatientEmailStatus
+        def clientId = request.session.clientId
+
+        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
+        def medicalRecords = singlePatientService.showMedialRecords(token, clientId, patientId)
+
+        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
+
+        render(view: '/singlePatient/treatmentList',  model: [
+            patientId: patientId,
+            clientId: clientId,
+            PatientEmailStatus: PatientEmailStatus,
+            medicalRecords: medicalRecords,
+            treatmentLimit: treatmentLimit
+        ])
+    }
+
+    def notifyTasks() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def resp = singlePatientService.sendNotifyRequest(token, clientId, patientId)
+        render resp as JSON
+    }
+
+    def getInClinicCode() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+        def resp = singlePatientService.generateInClinicCode(token, clientId, patientId)
+        render resp as JSON
+    }
+
+    def hasActiveTasks() {
+        String token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+
+        def resp = singlePatientService.hasActiveTasks(token, clientId, patientId)
+
+        render (['hasActiveTasks': resp] as JSON)
+    }
+
+    def getReportTab() {
+        render(view: '/singlePatient/report')
+    }
+
+    def getGroupTab() {
+        render(view: '/singlePatient/group')
+    }
+
+    def getCareGiverTab() {
+        String token = request.session.token
+        def patientId = params?.patientId
+        def clientId = request.session.clientId
+
+        def careGiverList = teamService.getCareGiver(token, clientId, patientId, null)
+
+        render(view: '/singlePatient/careGiver', model: [
+            patientId: patientId,
+            clientId: clientId,
+            careGiverList: careGiverList
+        ])
+    }
+
+    def getActivitiesTab() {
+        render(view: '/singlePatient/activities')
     }
 }

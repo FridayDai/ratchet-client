@@ -243,57 +243,6 @@ class TreatmentServiceSpec extends Specification {
 		e.getMessage() == "body"
 	}
 
-    def "test sendTreatmentTasksEmail with successful result"() {
-        given:
-
-        GetRequest.metaClass.asString = { ->
-            return [
-                    status: 200,
-                    body  : 'ok'
-            ]
-        }
-
-        when:
-        def result = service.sendTreatmentTasksEmail('token', 1, 2, 3)
-
-        then:
-        result.success == true
-    }
-
-	def "test sendTreatmentTasksEmail within 30 seconds"() {
-		given:
-
-		GetRequest.metaClass.asString = { ->
-			return [
-					status: 406,
-					body  : 'ok'
-			]
-		}
-
-		when:
-		def result = service.sendTreatmentTasksEmail('token', 1, 2, 3)
-
-		then:
-		result.success == true
-	}
-
-    def "test sendTreatmentTasksEmail without successful result"() {
-        given:
-        GetRequest.metaClass.asString = { ->
-            return [
-                    status: 400,
-                    body  : "body"
-            ]
-        }
-
-        when:
-        service.sendTreatmentTasksEmail('token', 1, 2, 3)
-
-        then:
-        ApiReturnException e = thrown()
-        e.getMessage() == "body"
-    }
-
 	def "test addAdhocTasks with successful result"() {
 		given:
 		def jBuilder = new JsonBuilder()

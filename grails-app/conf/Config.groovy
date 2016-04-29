@@ -250,6 +250,9 @@ ratchetv2 {
             savePatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/lookup"
             checkPatientEmail = "${ratchetv2.server.url.base}/api/v1/patients/check_email"
+            notify = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/notify-now"
+            generateInClinicCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/generate/in-clinic/code"
+            hasActiveTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/has-active-tasks"
 
             //Report URL
             taskConversion = "${ratchetv2.server.url.base}/api/v1/clients/conversion"
@@ -285,8 +288,6 @@ ratchetv2 {
             getTreatmentInfo = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments/%s"
             updateSurgeryTime = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/archived"
-            generateCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/generate/treatment/code"
-            notifyTreatmentTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/sendMail"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
             getTreatmentAvailabelYears = "${ratchetv2.server.url.base}/api/v1/report/availableYears"
             adhocTasksToTreatment = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/ad-hoc"
@@ -308,7 +309,7 @@ ratchetv2 {
             getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/activities"
 
             //careGiver and careTeam
-            showMedicalCares = "${ratchetv2.server.url.base}/api/v1/medicalCares"
+            caregivers = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers"
             deleteCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s"
             deleteCareGiver = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/%s"
             updateCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s/groups/%s"

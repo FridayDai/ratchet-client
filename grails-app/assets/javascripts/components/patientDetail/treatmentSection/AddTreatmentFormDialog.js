@@ -145,7 +145,7 @@ function AddTreatmentFormDialog() {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             emailStatus: this.patientInfo.emailStatus,
-            surgeryTime: surgeryTime
+            treatmentDate: surgeryTime
         }));
     };
 

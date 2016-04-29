@@ -1,6 +1,7 @@
 var flight = require('flight');
 var CheckArchivedWindowSize = require('../../shared/functional/CheckArchivedWindowSize');
 var AttentionResolveTip = require('./AttentionResolveTip');
+var TreatmentToolbar = require('./TreatmentToolbar');
 
 var Notifications = require('../../common/Notification');
 var URLs = require('../../../constants/Urls');
@@ -31,6 +32,8 @@ function TaskSection() {
 
     this.attributes({
         contentSelector: '.content',
+
+        treatmentToolbarSelector: '.treatment-tool-bar',
 
         activeItemsContainerSelector: '#task-row-active',
         activeItemBoxSelector: '#task-row-active .box-item',
@@ -146,6 +149,8 @@ function TaskSection() {
                     me.countActiveTasks();
                     me.checkIfHasTasks($taskRow);
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
+
+                    me.trigger('deleteTaskSuccessful');
                 }
             }
         });
@@ -327,6 +332,16 @@ function TaskSection() {
         }
     };
 
+    this.initTreatmentToolbar = function () {
+        TreatmentToolbar.attachTo(this.select('treatmentToolbarSelector'));
+    };
+
+    this.disableTaskLink = function () {
+        this.$node.find('.begin-task').click(function (e) {
+            e.preventDefault();
+        });
+    };
+
     this.after('initialize', function () {
         this.setBasicIds();
         this.checkActiveItemStatus();
@@ -335,13 +350,23 @@ function TaskSection() {
         this.storeTaskBox();
         this.initFilter();
 
+        this.initTreatmentToolbar();
+
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
 
+
+        if (this.$node.children('.archived').length === 0) {
+            this.on('click', {
+                deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
+                beginTaskButtonSelector: this.onTaskBeginButtonClicked,
+                callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
+            });
+        } else {
+            this.disableTaskLink();
+        }
+
         this.on('click', {
-            deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
-            beginTaskButtonSelector: this.onTaskBeginButtonClicked,
-            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
             filterButtonSelector: this.onFilterButtonClicked
         });
 

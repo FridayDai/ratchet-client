@@ -3,7 +3,7 @@
 
 <g:set var="commonScriptPath" value="dist/commons.chunk.js"/>
 <g:set var="scriptPath" value="dist/patientDetail.bundle.js"/>
-<g:set var="cssPath" value="treatment"/>
+<g:set var="cssPath" value="patientDashboard"/>
 <g:applyLayout name="main">
     <html>
     <head>
@@ -26,10 +26,9 @@
                         <a href="#" class="btn-close">Close</a>
                     </div>
                 </div>
-                <hr />
                 <div class="info number clear">
                     <div class="id-info inline">
-                        ID: <span class="identify" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
+                        <i class="id-text">ID</i><span class="identify" value="${patientInfo.patientId}">${patientInfo.patientId}</span>
                     </div>
                     <div class="birthday inline <g:if test="${!patientInfo?.birthday}">hide</g:if>">
                         <i class="fa fa-birthday-cake"></i><span>${Utils.formatBirthday(patientInfo?.birthday)}</span>
@@ -53,13 +52,13 @@
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                        <span class="email-status unverified" value="${patientInfo.status}">Unverified</span>
+                        <span class="email-status unverified" value="${patientInfo.status}">UNVERIFIED</span>
                     </g:if>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
-                        <span class="email-status verified" value="${patientInfo.status}">Verified</span>
+                        <span class="email-status verified" value="${patientInfo.status}">VERIFIED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent" value="${patientInfo.status}">Undelivered</span>
+                        <span class="email-status nonexistent" value="${patientInfo.status}">UNDELIVERED</span>
                     </g:elseif>
                     <g:else>
                         <span class="email-status div-hidden" value="${patientInfo.status}"></span>
@@ -82,46 +81,59 @@
 
         </div>
 
-        <div id="tabs" class="patient-tab">
-            <g:if test="${medicalRecords.size() < treatmentLimit}">
-                <button id="addTab" class="btn add-treatment" data-patient-id="${patientInfo.id}"
-                        data-id="${patientInfo.patientId}"
-                        data-client-id="${patientInfo.client.id}"
-                        data-account-id="${request.session.accountId}">Add Treatment</button>
-            </g:if>
-            <ul class="tab-treatment">
-                <g:each in="${medicalRecords}" var="medicalRecord" status="i">
-                    <li
-                        <g:if test="${medicalRecord?.archived}">
-                            class="archived-treatment"
-                        </g:if>>
-                    %{--<li>--}%
-                        <g:link controller="treatment" action="index" data-id="sub${i}"
-                                params="[
-                                        patientId      : patientInfo.id, clientId: patientInfo.client.id,
-                                        medicalRecordId: medicalRecord?.id, treatmentId: medicalRecord?.treatmentId,
-                                        surgeryTime    : medicalRecord?.surgeryTime, archived: medicalRecord?.archived,
-                                        treatmentCode  : medicalRecord?.treatmentCode,
-                                        PatientEmailStatus   : patientInfo?.status,
-                                        isAdmin: AccountIsAdmin,
-                                        _: System.currentTimeMillis()
-                                ]">
-                            <g:if test="${medicalRecord?.archived}">
-                                <i class="icon-archived"></i>
-                            </g:if>
-                            <span>${medicalRecord.title} ${medicalRecord.tmpTitle}</span>
-                        </g:link>
-                    </li>
-                </g:each>
+        <div id="top-tabs" class="top-tabs-container">
+            <ul class="tab-list">
+                <li data-type="Treatment">
+                    <g:link controller="singlePatient"
+                            action="getTreatmentListTab"
+                            params="[
+                                    patientId: patientInfo.id,
+                                    PatientEmailStatus: patientInfo.status
+                            ]"
+                    >
+                        TREATMENT
+                    </g:link>
+                </li>
+                <li data-type="Report">
+                    <g:link controller="singlePatient" action="getReportTab">
+                        REPORT
+                    </g:link>
+                </li>
+                <li data-type="Group">
+                    <g:link controller="singlePatient" action="getGroupTab">
+                        GROUP
+                    </g:link>
+                </li>
+                <li data-type="Caregiver">
+                    <g:link controller="singlePatient"
+                            action="getCareGiverTab"
+                            params="[
+                                    patientId: patientInfo.id
+                            ]"
+                    >
+                        CAREGIVER
+                    </g:link>
+                </li>
+                <li data-type="Activities">
+                    <g:link controller="singlePatient" action="getActivitiesTab">
+                        ACTIVITIES
+                    </g:link>
+                </li>
             </ul>
-            <div class="no-treatment-container <g:if test="${medicalRecords.size() != 0}">hide</g:if>">
-                <div class="icon"></div>
-                <div class="title">This patient has no treatment</div>
-                <div class="description">Assign this patient a treatment using the<br/>button below</div>
-                <button class="btn add-treatment" data-patient-id="${patientInfo.id}"
-                        data-id="${patientInfo.patientId}"
-                        data-client-id="${patientInfo.client.id}"
-                        data-account-id="${request.session.accountId}">Add Treatment</button>
+            <div class="patient-tab-tool" data-patient-id="${patientInfo.id}">
+                <span class="notify-button icon-button <g:if test="${!hasActiveTasks}">not-available</g:if>">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </span>
+                <div class="notify-button-tip icon-button-tip begin-tip">
+                    <span>Notify</span>
+                </div>
+
+                <span class="get-code-button icon-button <g:if test="${!hasActiveTasks}">not-available</g:if>">
+                    <i class="fa fa-link" aria-hidden="true"></i>
+                </span>
+                <div class="get-code-button-tip icon-button-tip begin-tip">
+                    <span>Get Code</span>
+                </div>
             </div>
         </div>
     </div>
@@ -320,22 +332,6 @@
         </div>
     </form>
 
-    <form action="" method="post" class="edit-surgeon ui-hidden" id="edit-group-provider-form">
-        <input type="hidden" autofocus/>
-        <div class="form-group">
-            <label class="lbl-group">GROUP<span>*</span></label>
-            <input id="groupSelect" name="groupName" type="text" class="group-field team-group clear"
-                   placeholder="Select group" required/>
-        </div>
-
-        <div class="form-group team-provider">
-            <label class="lbl-group">PROVIDER<span>*</span></label>
-            <input id="selectStaff" name="providerName" type="text" class="provider-field team-group clear"
-                   placeholder="Select provider" required/>
-        </div>
-        <label class="form-group required pull-right"><span>*</span>Required field</label>
-    </form>
-
     <form action="" method="post" class="inviteGiverForm ui-hidden" id="invite-emergency-contact-form">
         <div class="form-group inline">
             <label class="lbl-group">FIRST NAME<span>*</span></label>
@@ -371,11 +367,12 @@
     </form>
 
     <div id="generate-code-dialog" class="warn ui-hidden">
-        <div class="msg-center msg-header">Code generated successfully!</div>
-        <div class="msg-center code"></div>
-        <div class="msg-center">
-            Go to <a target="_blank" class="link-to-patient" href=""></a> and enter code to start task.
+        <div class="msg-center msg-header">
+            To get the patient to complete the active tasks in clinic,
+            go to <a target="_blank" class="link-to-patient" href=""></a> and enter the following
+            code on a device that the patient has access to.
         </div>
+        <div class="msg-center code"></div>
         <div class="msg-center">The code will expire in 24 hours!</div>
     </div>
     </body>

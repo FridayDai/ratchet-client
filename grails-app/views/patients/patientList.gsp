@@ -58,7 +58,7 @@
 
         <div class="table-group">
             <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
-                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered} ">
+                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}">
                 <thead>
                 <tr>
                     <th>ID</th>

@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-class Pagination {
+class FilterFields {
     String start
     String length
     // TODO: should remove

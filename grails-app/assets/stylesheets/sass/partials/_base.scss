@@ -659,3 +659,49 @@ a {
         color: $base-color-white;
     }
 }
+
+.icon-button {
+    cursor: pointer;
+
+    &:hover + .icon-button-tip {
+        display: block;
+    }
+
+    &.not-available {
+        opacity: 0.5;
+
+        &:hover + .icon-button-tip {
+            display: none;
+        }
+    }
+}
+
+.icon-button-tip {
+    display: none;
+    position: absolute;
+    right: 1px;
+    top: -23px;
+    height: 20px;
+    line-height: 20px;
+    background: $base-color-black;
+    color: white;
+    text-align: center;
+    font-size: 0;
+
+    &:after {
+        content: '\f104';
+        font-family: ionicons;
+        font-size: 12px;
+        position: absolute;
+        left: 42%;
+        top: 12px;
+        color: $base-color-black;
+    }
+
+    span {
+        display: inline-block;
+        min-width: 25px;
+        font-size: 12px;
+        padding: 0 4px;
+    }
+}

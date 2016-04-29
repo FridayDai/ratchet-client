@@ -9,32 +9,42 @@ class TeamController extends BaseController {
 
     static allowedMethods = [getCareGiver: ['GET'], addCareGiver: ['POST']]
 
-    def getTeam() {
-        String token = request.session.token
-        def treatmentId = params?.treatmentId
-        def medicalRecordId = params?.medicalRecordId
-        def clientId = params?.clientId
-        def patientId = params?.patientId
-        def archived = params?.archived
-        if (archived == null || archived == '') {
-            archived = false
-        }
-        def surgeons = teamService.getCareTeam(token, medicalRecordId)
-        render(view: "/singlePatient/team", model: [
-            surgeons: surgeons,
-            treatmentId: treatmentId,
-            medicalRecordId: medicalRecordId,
-            clientId: clientId,
-            patientId: patientId,
-            archived: archived
-        ])
-    }
+//    def getTeam() {
+//        String token = request.session.token
+//        def treatmentId = params?.treatmentId
+//        def medicalRecordId = params?.medicalRecordId
+//        def clientId = params?.clientId
+//        def patientId = params?.patientId
+//        def archived = params?.archived
+//        if (archived == null || archived == '') {
+//            archived = false
+//        }
+//        def surgeons = teamService.getCareTeam(token, medicalRecordId)
+//        render(view: "/singlePatient/team", model: [
+//            surgeons: surgeons,
+//            treatmentId: treatmentId,
+//            medicalRecordId: medicalRecordId,
+//            clientId: clientId,
+//            patientId: patientId,
+//            archived: archived
+//        ])
+//    }
 
-    def getCareGiver() {
+    def getCareGiver(CareGiverFilterFields filterFields) {
         String token = request.session.token
-        def medicalRecordId = params?.medicalRecordId
-        def careGivers = teamService.getCareGiver(token, medicalRecordId)
-        render careGivers as JSON
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+
+        if (request.isXhr()) {
+            def resp = teamService.getCareGiver(token, clientId, patientId, filterFields)
+            render resp as JSON
+        } else {
+            filterFields.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            filterFields.length = RatchetConstants.DEFAULT_PAGE_SIZE
+
+            def patientList = teamService.getCareGiver(token, clientId, patientId, filterFields)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: patientPagination.length])
+        }
     }
 
     def addCareGiver(CareGiver careGiver) {

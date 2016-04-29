@@ -1,86 +1,37 @@
-<%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
-<div class="content">
+<%@ page import="com.ratchethealth.client.RatchetConstants" %>
+<g:if test="${archived == 'true'}">
+    <g:set var="archivedStatus" value="archived"/>
+</g:if>
 
-    <div id="subTabs" class="sub-tabs">
-
-        <div data-type="SurgeryTime"
-            <g:if test="${archived == 'true'}">
-                class="surgery-date disabled"
-            </g:if>
-            <g:else>
-                class="surgery-date"
-            </g:else>>
+<div class="content ${archivedStatus}">
+    <div class="treatment-tool-bar">
+        <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
+                       data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}"
+                       data-treatment-id="${treatmentId}"/>
+        <div class="treatment-date">
             <g:if test="${surgeryTime}">
-                <span>Surgery Date:</span>
-                <label class="surgery-time-picker">
+                <span>Treatment Date:</span>
+                <label class="treatment-time-picker">
                     <g:formatDate date="${surgeryTime}"
                                   timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                  format="MMM d, yyyy"></g:formatDate>
+                                  format="MMM d, yyyy" />
                 </label>
             </g:if>
-            <g:if test="${archived == 'true'}">
-                <label class="archived-treatment-title">Archived Treatment</label>
-            </g:if>
         </div>
-
-        <ul
-            <g:if test="${archived == 'true'}">
-                class="tab-list archived"
-            </g:if>
-            <g:else>
-                class="tab-list"
-            </g:else>>
-            <li data-type="Task">
-                <g:link controller="task" action="getTasks"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, PatientEmailStatus: PatientEmailStatus, _: System.currentTimeMillis()]">TASKS</g:link>
-            </li>
-            <li data-type="Team">
-                <g:link controller="team" action="getTeam"
-                        params="[treatmentId: treatmentId, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">TEAM</g:link>
-            </li>
-            <li data-type="Report">
-                <g:link controller="singlePatient" action="getPatientReportTab"
-                        params="[treatmentId: treatmentId, medicalRecordId: medicalRecordId, clientId: clientId, patientId: patientId, archived: archived, _: System.currentTimeMillis()]">REPORT</g:link>
-            </li>
-            <li data-type="Activity">
-                <g:link controller="activity" action="index"
-                        params="[clientId: clientId, patientId: patientId, medicalRecordId: medicalRecordId, archived: archived, _: System.currentTimeMillis()]">ACTIVITIES</g:link>
-            </li>
-            <li data-type="Tool" id="treatment-tool" class="code-generation" data-client-id="${clientId}"
-                data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}" data-treatment-id="${treatmentId}">
-                <button id="addTasks"
-                    <g:if test="${archived == 'true'}">
-                        class="btn btn-treatment-level btn-add-task disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="btn btn-treatment-level btn-add-task"
-                    </g:else>>
-                    <span class="text-span">Add Task</span>
-                </button>
-
-                <button id="notifyTasks"
-                    <g:if test="${archived == 'true'|| StatusCodeConstants.EMAIL_STATUS[PatientEmailStatus.toInteger() - 1] != 'VERIFIED'}">
-                        class="btn btn-treatment-level btn-notify btn-generate-code-disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="btn btn-treatment-level btn-notify"
-                    </g:else>>
-                    <span class="text-span">Notify</span>
-                </button>
-
-                <button id="generateCode"
-                    <g:if test="${archived == 'true'}">
-                        class="btn btn-treatment-level btn-generate-code btn-generate-code-disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="btn btn-treatment-level btn-generate-code"
-                    </g:else>>
-                    <span class="text-span">Get Code</span>
-                </button>
-
-            </li>
-            <li class="more-drop-down" id="menu">
-
+        <g:if test="${archived == 'true'}">
+            <div class="archived-treatment-title">ARCHIVED TREATMENT</div>
+        </g:if>
+        <div class="pull-right right-part">
+            <button id="addTasks"
+                <g:if test="${archived == 'true'}">
+                    class="btn btn-treatment-level btn-add-task disabled" disabled="disabled"
+                </g:if>
+                <g:else>
+                    class="btn btn-treatment-level btn-add-task"
+                </g:else>>
+                <span class="text-span">Add Task</span>
+            </button>
+            <div class="more-button">
                 <button
                     <g:if test="${archived == 'true'}">
                         class="drop-down-toggle disabled btn-disabled" disabled="disabled"
@@ -94,30 +45,25 @@
                         </g:if>
                         <g:else>
                             class="more-btn"
-                        </g:else>>More</span></button>
-
+                        </g:else>>More</span>
+                </button>
                 <div class="drop-down-lists hidden">
-                    <label class="hidden-surgery-time-picker hidden">
-                        <g:formatDate date="${surgeryTime}"
-                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMMM d, yyyy"></g:formatDate>
-                    </label>
                     <g:if test="${surgeryTime}">
-                    <span <g:if test="${archived == 'true'}">
+                        <span <g:if test="${archived == 'true'}">
                             class="btn drop-down-list icon-edit surgeryTime-edit inline disabled" disabled="disabled"
                         </g:if>
-                        <g:else>
-                            class="btn drop-down-list icon-edit surgeryTime-edit inline "
-                        </g:else>
-                            data-patient-id="${patientId}"
-                            data-client-id="${clientId}" data-treatment-id="${treatmentId}"
-                            data-medical-record-id="${medicalRecordId}">
-                        Edit
-                    </span>
+                            <g:else>
+                                class="btn drop-down-list icon-edit surgeryTime-edit inline "
+                            </g:else>
+                                data-patient-id="${patientId}"
+                                data-client-id="${clientId}" data-treatment-id="${treatmentId}"
+                                data-medical-record-id="${medicalRecordId}">
+                            Edit
+                        </span>
                     </g:if>
                     <span <g:if test="${archived == 'true'}">
-                            class="btn drop-down-list archived-active inline disabled" disabled="disabled"
-                        </g:if>
+                        class="btn drop-down-list archived-active inline disabled" disabled="disabled"
+                    </g:if>
                         <g:else>
                             class="btn drop-down-list archived-active inline "
                         </g:else>
@@ -127,18 +73,108 @@
                         Archive
                     </span>
                     <g:if test="${isAdmin.toString() == 'true'}">
-                    <span class="btn drop-down-list treatment-delete inline"
-                            data-patient-id="${patientId}"
-                            data-client-id="${clientId}"
-                            data-medical-record-id="${medicalRecordId}">
-                        Delete
-                    </span>
+                        <span class="btn drop-down-list treatment-delete inline"
+                              data-patient-id="${patientId}"
+                              data-client-id="${clientId}"
+                              data-medical-record-id="${medicalRecordId}">
+                            Delete
+                        </span>
                     </g:if>
                 </div>
-            </li>
-        </ul>
-
+            </div>
+        </div>
+    </div>
+    <div class="items-title list-top">
+        <h4 class="active-items">ACTIVE ITEMS</h4>
     </div>
 
-</div>
+    <div class="tasks-list">
+        <div class="task-row ${archivedStatus}" id="task-row-active">
+            <g:if test="${activeTasks == [] || activeTasks == null}">
+                <div class="no-item center no-item-sent no-active-item" id="no-active-item"><p>There are no active items</p></div>
+            </g:if>
+            <g:else>
+                <g:if test="${taskType.activeType?.size() > 1}">
+                    <div class="quick-filter">
+                        <span class="quick-filter-label">Filter:</span>
+                        <g:each in="${taskType.activeType}" var="type">
+                            <span class="btn btn-filter quick-filter-button" data-type="${type}">
+                                ${type}
+                            </span>
+                        </g:each>
+                    </div>
+                </g:if>
 
+                <g:each in="${activeTasks}" var="task">
+                    <g:render template="/singlePatient/taskBox/activeTaskBox" model="[
+                            'task'     : task,
+                            'accountId': accountId
+                    ]" />
+                </g:each>
+            </g:else>
+        </div>
+    </div>
+
+    <div class="items-title list-top">
+        <h4 class="closed-items">CLOSED ITEMS</h4>
+    </div>
+
+    <div class="tasks-list">
+        <div class="task-row ${archivedStatus}" id="task-row-closed">
+            <g:if test="${closedTasks == [] || closedTasks == null}">
+                <div class="no-item center no-item-sent"><p>There are no closed items</p></div>
+            </g:if>
+            <g:else>
+                <g:if test="${taskType.closedType?.size() > 1}">
+                    <div class="quick-filter">
+                        <span class="quick-filter-label">Filter:</span>
+                        <g:each in="${taskType.closedType}" var="type">
+                            <span class="btn btn-filter quick-filter-button"  data-type="${type}">
+                                ${type}
+                            </span>
+                        </g:each>
+                    </div>
+                </g:if>
+
+                <g:each in="${closedTasks}" var="task">
+                    <g:render template="/singlePatient/taskBox/closedTaskBox" model="[
+                            'task': task,
+                            'patientId': patientId,
+                            'clientId': clientId,
+                            'accountId': accountId,
+                            'medicalRecordId': medicalRecordId,
+                            'taskId': task.id
+                    ]" />
+                </g:each>
+            </g:else>
+        </div>
+    </div>
+
+    <div class="items-title list-top">
+        <h4 class="scheduled_items">SCHEDULED ITEMS</h4>
+    </div>
+
+    <div class="tasks-list">
+        <div class="task-row ${archivedStatus}" id="task-row-schedule">
+            <g:if test="${scheduleTasks == [] || scheduleTasks == null}">
+                <div class="no-item center no-item-schedule"><p>No item has been scheduled yet.</p></div>
+            </g:if>
+            <g:else>
+                <g:if test="${taskType.scheduleType?.size() > 1}">
+                    <div class="quick-filter">
+                        <span class="quick-filter-label">Filter:</span>
+                        <g:each in="${taskType.scheduleType}" var="type">
+                            <span class="btn btn-filter quick-filter-button"  data-type="${type}">
+                                ${type}
+                            </span>
+                        </g:each>
+                    </div>
+                </g:if>
+
+                <g:each in="${scheduleTasks}" var="task">
+                    <g:render template="/singlePatient/taskBox/schduleTaskBox" model="['task': task]" />
+                </g:each>
+            </g:else>
+        </div>
+    </div>
+</div>

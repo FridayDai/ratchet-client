@@ -8,30 +8,42 @@ var PAGEs = require('../constants/Pages');
 var Utility = require('../utils/Utility');
 
 var PatientInfoSection = require('../components/patientDetail/patientInfoSection/PatientInfoSection');
-var Treatment = require('../components/patientDetail/treatmentSection/Treatment');
-var TreatmentPanel = require('../components/patientDetail/treatmentSection/TreatmentPanel');
+var TreatmentList = require('../components/patientDetail/treatmentSection/TreatmentList');
+var PatientLevelTabToolbar = require('../components/patientDetail/PatientLevelTabToolbar');
+var GroupSection = require('../components/patientDetail/groupSection/GroupSection');
+var TeamSection = require('../components/patientDetail/careGiverSection/CareGiverSection');
+var ReportSection = require('../components/patientDetail/reportSection/ReportSection');
+var ActivitySection = require('../components/patientDetail/activitySection/ActivitySection');
 var EditPatientFormDialog = require('../components/patientDetail/patientInfoSection/EditPatientFormDialog');
 var AddEmailFormDialog = require('../components/patientDetail/patientInfoSection/AddEmailFormDialog');
 var AddPhoneNumberFormDialog = require('../components/patientDetail/patientInfoSection/AddPhoneNumberFormDialog');
 var DeletePatientFormDialog = require('../components/patientDetail/patientInfoSection/DeletePatientFormDialog');
-var FillQuestionnaireDialog = require('../components/patientDetail/taskSection/FillQuestionnaireDialog');
+var FillQuestionnaireDialog = require('../components/patientDetail/treatment/FillQuestionnaireDialog');
 var AddTreatmentFormDialog = require('../components/patientDetail/treatmentSection/AddTreatmentFormDialog');
-var DeleteTreatmentFormDialog = require('../components/patientDetail/treatmentSection/DeleteTreatmentFormDialog');
-var AddTasksDialog = require('../components/patientDetail/treatmentSection/AddTasksDialog');
-var TreatmentCodeDialog = require('../components/patientDetail/treatmentSection/TreatmentCodeDialog');
-var EditSurgeryDateFormDialog = require('../components/patientDetail/treatmentSection/EditSurgeryDateFormDialog');
-var EditGroupProviderFormDialog = require('../components/patientDetail/teamSection/EditGroupProviderFormDialog');
-var EmergencyContactFormDialog = require('../components/patientDetail/teamSection/EmergencyContactFormDialog');
+var DeleteTreatmentFormDialog = require('../components/patientDetail/treatment/DeleteTreatmentFormDialog');
+var AddTasksDialog = require('../components/patientDetail/treatment/AddTasksDialog');
+var InClinicCodeDialog = require('../components/patientDetail/InClinicCodeDialog');
+var EditSurgeryDateFormDialog = require('../components/patientDetail/treatment/EditSurgeryDateFormDialog');
+var CareGiverFormDialog = require('../components/patientDetail/careGiverSection/CareGiverFormDialog');
 
-var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
+var TYPE_SECTION_MAPPING = {
+    'Treatment': TreatmentList,
+    'Report': ReportSection,
+    'Group': GroupSection,
+    'Caregiver': TeamSection,
+    'Activities': ActivitySection
+};
+
+var NODE_NAME_TEMP = '{0}Node';
 
 function PatientDetailPage() {
     this.setPath(PAGEs.PATIENT_DETAIL);
 
     this.attributes({
         patientInfoSectionSelector: '.patient-detail',
-        tabsContainerSelector: '#tabs',
-        tabTitleSelector: '#tabs .tab-treatment li',
+        tabsContainerSelector: '#top-tabs',
+        tabTitleSelector: '#top-tabs .tab-treatment li',
+        tabToolbarSelector: '#top-tabs .patient-tab-tool',
 
         editPatientDialogSelector: '#patient-form',
         addEmailDialogSelector: '#add-email-form',
@@ -41,9 +53,8 @@ function PatientDetailPage() {
         fillQuestionnaireDialogSelector: '#fill-questionnaire-dialog',
         addTreatmentDialogSelector: '#treatment-form',
         addTaskDialogSelector: '#add-tasks-dialog',
-        treatmentCodeDialogSelector: '#generate-code-dialog',
+        inClinicCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
-        editGroupProviderDialogSelector: '#edit-group-provider-form',
         addEmergencyContactDialogSelector: '#invite-emergency-contact-form'
     });
 
@@ -85,35 +96,27 @@ function PatientDetailPage() {
             event: 'showAddTasksDialog',
             dialog: AddTasksDialog
         }, {
-            selector: 'treatmentCodeDialogSelector',
+            selector: 'inClinicCodeDialogSelector',
             event: 'showGenerateCodeDialog',
-            dialog: TreatmentCodeDialog
+            dialog: InClinicCodeDialog
         }, {
             selector: 'editSurgeryDateDialogSelector',
             event: 'showEditSurgeryDialog',
             dialog: EditSurgeryDateFormDialog
         }, {
-            selector: 'editGroupProviderDialogSelector',
-            event: 'showEditGroupProviderDialog',
-            dialog: EditGroupProviderFormDialog
-        }, {
-            selector: 'addEmergencyContactDialogSelector',
-            event: 'showEmergencyContactDialog',
-            dialog: EmergencyContactFormDialog
+            selector: 'addCareGiverDialogSelector',
+            event: 'showCareGiverDialog',
+            dialog: CareGiverFormDialog
         }
     ]);
 
-    this.initTreatmentSection = function () {
-        var me = this;
-
+    this.initPatientLevelTabToolbar = function () {
         this.select('tabsContainerSelector').show();
 
-        _.once(function() {
-            TreatmentPanel.attachTo(me.select('tabsContainerSelector'));
-        })();
+        PatientLevelTabToolbar.attachTo(this.select('tabToolbarSelector'));
     };
 
-    this.initTreatmentTabs = function () {
+    this.initTabs = function () {
         var me = this;
 
         this.select('tabsContainerSelector').tabs({
@@ -138,94 +141,44 @@ function PatientDetailPage() {
             load: function (e, ui) {
                 Utility.progress(false);
 
-                Treatment.attachTo(ui.panel);
-
-                me.initTreatmentSection();
+                me.attachToTabs(ui.panel, ui.tab.data('type'));
             }
         });
 
-        if (!this.select('tabTitleSelector').length) {
-            this.initTreatmentSection();
+        this.initPatientLevelTabToolbar();
+    };
+
+    this.attachToTabs = function (panel, type) {
+        if (!(type in TYPE_SECTION_MAPPING)) {
+            throw 'Tab type is invalid in TYPE_SECTION_MAPPING';
         }
-    };
 
-    this.onAddTasksSuccess = function () {
-        this.updateTreatment();
-    };
-
-    this.onEditSurgeryDateSuccess = function (e, data) {
-        this.updateTreatment({
-            key: 'surgeryTime',
-            value: data.newDate
-        });
-    };
-
-    this.onArchiveTreatmentSuccess = function () {
-        var activeIndex = this.select('tabsContainerSelector').tabs('option', 'active');
-        var $activeTab = $(this.select('tabTitleSelector').get(activeIndex));
-
-        this.updateTreatment({
-            key: 'archived',
-            value: true
-        });
-
-        $activeTab
-            .addClass('archived-treatment')
-            .find('a')
-            .prepend(ARCHIVED_ICON_TEMPLATE);
-    };
-
-    this.updateTreatment = function (param) {
-        var activeIndex = this.select('tabsContainerSelector').tabs('option', 'active');
-        var $activeTab = $(this.select('tabTitleSelector').get(activeIndex));
-
-        this.updateTreatmentUrl($activeTab, param);
-        this.teardownTreatment($activeTab);
-
-        $activeTab.data("loaded", false);
-
-        this.select('tabsContainerSelector').tabs('load', activeIndex);
-    };
-
-    this.updateTreatmentUrl = function ($activeTab, param) {
-        var oldUrl = $activeTab.find('a').attr('href');
-
-        if (param) {
-            var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
-
-            $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
-        }
-    };
-
-    this.onDeleteTreatmentSuccess = function () {
-        var activeIndex = this.select('tabsContainerSelector').tabs('option', 'active');
-        var $activeTab = $(this.select('tabTitleSelector').get(activeIndex));
-
-        this.teardownTreatment($activeTab);
-
-        var activeTabPanelId = $activeTab.attr('aria-controls');
-        $activeTab.remove();
-        $('#' + activeTabPanelId).remove();
-        this.select('tabsContainerSelector').tabs('refresh');
-
-        if (this.select('tabTitleSelector').length === 0) {
-            this.trigger('refreshForNoMoreTreatmentTab');
-        }
-    };
-
-    this.teardownTreatment = function ($activeTab) {
-        var tabPanelId = $activeTab.attr('aria-controls');
-
-        flight.registry.findInstanceInfoByNode($('#' + tabPanelId).get(0))[0].instance.teardown();
+        this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
+        TYPE_SECTION_MAPPING[type].attachTo(panel);
     };
 
     this.after('initialize', function () {
-        this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
-        this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
-        this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
-        this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
+        this.initTabs();
+    });
 
-        this.initTreatmentTabs();
+    this.before('teardown', function () {
+        var me = this;
+
+        _.each(
+            _.map(_.keys(TYPE_SECTION_MAPPING), function (key) {
+                return me[NODE_NAME_TEMP.format(key.toLowerCase())];
+            }),
+            function (node) {
+                if (node) {
+                    var instances = flight.registry.findInstanceInfoByNode(node);
+
+                    _.each(instances, function (instance) {
+                        instance.instance.teardown();
+                    });
+                }
+            });
+
+        this.select('tabsContainerSelector').tabs('destroy');
     });
 }
 

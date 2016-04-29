@@ -1,6 +1,6 @@
 var flight = require('flight');
-var WithDialog = require('../../common/WithDialog');
-var URLs = require('../../../constants/Urls');
+var WithDialog = require('../common/WithDialog');
+var URLs = require('../../constants/Urls');
 
 function TreatmentCodeDialog() {
     this.attributes({
@@ -9,7 +9,7 @@ function TreatmentCodeDialog() {
     });
 
     this.options({
-        title: 'TREATMENT CODE',
+        title: 'ONE-TIME CODE',
         width: 500,
         buttons: ['Done']
     });
@@ -20,7 +20,7 @@ function TreatmentCodeDialog() {
 
     this.getCodeFromServer = function (data) {
         $.ajax({
-            url: URLs.GET_TREATMENT_CODE.format(data.treatmentId),
+            url: URLs.GET_IN_CLINIC_CODE.format(data.patientId),
             method: "POST",
             data: data
         }).done(_.bind(this.getCodeSuccess, this));
@@ -34,10 +34,14 @@ function TreatmentCodeDialog() {
     };
 
     this.setCodeData = function (data) {
-        this.select('codeLabelSelector').text(data.treatmentCode);
+        var regexp = /https?:\/\/(.*\.ratchethealth\.com)/ig;
+
+        var host = regexp.exec(data.patientPortalLink);
+
+        this.select('codeLabelSelector').text(data.inClinicCode);
         this.select('linkSelector')
             .attr('href', data.patientPortalLink)
-            .text(data.patientPortalLink);
+            .text(host[1]);
     };
 }
 
