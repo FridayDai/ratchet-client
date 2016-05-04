@@ -86,6 +86,10 @@ class UrlMappings {
             action = [GET: "getCareGiver", POST: "addCareGiver"]
         }
 
+        //patient group
+        "/patients/$patientId/groups"(controller: "groups", action: "getPatientGroups")
+        "/patients/$patientId/groups/$groupId"(controller: "groups", action: "deletePatientGroup")
+
         //Patient report
         "/patients/$patientId?/treatments/$medicalRecordId/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
 

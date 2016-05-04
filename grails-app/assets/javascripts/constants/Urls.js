@@ -75,6 +75,8 @@ module.exports = {
     GET_GROUPS: '/groups',
     UPDATE_GROUP: '/groups/{0}',
     DELETE_GROUP: "/groups/delete",
+    GET_PATIENT_GROUP: "/patients/{0}/groups",
+    DELETE_PATIENT_GROUP: "/patients/{0}/groups/{1}",
 
     //Report
     PROVIDER_AVERAGE_OVERVIEW: '/reports/outcome/provider-average',

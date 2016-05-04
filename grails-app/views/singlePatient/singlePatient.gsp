@@ -100,7 +100,11 @@
                     </g:link>
                 </li>
                 <li data-type="Group">
-                    <g:link controller="singlePatient" action="getGroupTab">
+                    <g:link controller="singlePatient" action="getGroupTab"
+                            params="[
+                                    patientId: patientInfo.id
+                            ]"
+                    >
                         GROUP
                     </g:link>
                 </li>
@@ -365,6 +369,21 @@
         </div>
         <label class="form-group required pull-right"><span>*</span>Required field</label>
     </form>
+
+    <g:form controller="groups" action="addGroupsToPatient" method="POST" class="form add-group-form ui-hidden" id="add-group-form" name="add-group-form">
+
+        <div class="title">
+            Select a group or multiple groups from the list:
+        </div>
+
+        <div class="form-group">
+            <label class="lbl-group">GROUPS</label>
+            <input id="groups" name="groups" type="text" class="plugin-select-box input-group groups clear" maxlength="1024"
+                   placeholder="Select group" multiple="multiple" required/>
+        </div>
+
+        <input type="hidden" name="patientId" value="${patientInfo.id}">
+    </g:form>
 
     <div id="generate-code-dialog" class="warn ui-hidden">
         <div class="msg-center msg-header">

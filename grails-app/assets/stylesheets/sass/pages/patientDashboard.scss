@@ -13,6 +13,7 @@
 @import '../partials/timepicker';
 @import '../partials/theme';
 @import "../partials/combobox";
+@import '../partials/select2';
 
 .icon-edit,
 .icon-archived {
@@ -804,5 +805,38 @@
         padding-left: 20px;
         color: $base-color-white;
         font-size: 14px;
+    }
+}
+
+.top-tabs-content {
+
+    .toolbar {
+        margin: 22px 40px 0;
+    }
+
+}
+
+.add-group-form  {
+    color: $base-color-medium-black;
+
+    .title {
+        margin: 20px;
+        font-weight: $bold;
+        font-size: 17px;
+    }
+
+    .lbl-group {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: $bold;
+        font-size: 13px;
+    }
+
+    .form-group {
+        .select2-container.select2-container-multi {
+            width: 482px;
+        }
+
     }
 }

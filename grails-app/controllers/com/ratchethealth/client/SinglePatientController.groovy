@@ -8,6 +8,7 @@ class SinglePatientController extends BaseController {
     def singlePatientService
     def invitationService
     def teamService
+    def groupService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -39,7 +40,7 @@ class SinglePatientController extends BaseController {
             }
             if (length > 6) {
                 phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, 6),
-                    subNumber.substring(6, length))
+                        subNumber.substring(6, length))
             } else if (length > 3) {
                 phoneNumber = String.format("%s-%s-%s", subNumber.substring(0, 3), subNumber.substring(3, length))
             }
@@ -52,7 +53,7 @@ class SinglePatientController extends BaseController {
 
         render(view: '/singlePatient/singlePatient', model: [
                 patientInfo   : patientInfo,
-                phoneNumber: phoneNumber,
+                phoneNumber   : phoneNumber,
                 AccountIsAdmin: request.session.accountManagement,
                 hasActiveTasks: hasActiveTasks
         ])
@@ -103,14 +104,14 @@ class SinglePatientController extends BaseController {
         }
 
         render(
-            view: "/singlePatient/report",
-            model: [
-                treatmentId: treatmentId,
-                medicalRecordId: medicalRecordId,
-                clientId: clientId,
-                patientId: patientId,
-                archived: archived
-            ]
+                view: "/singlePatient/report",
+                model: [
+                        treatmentId    : treatmentId,
+                        medicalRecordId: medicalRecordId,
+                        clientId       : clientId,
+                        patientId      : patientId,
+                        archived       : archived
+                ]
         )
     }
 
@@ -126,12 +127,12 @@ class SinglePatientController extends BaseController {
 
         medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
-        render(view: '/singlePatient/treatmentList',  model: [
-            patientId: patientId,
-            clientId: clientId,
-            PatientEmailStatus: PatientEmailStatus,
-            medicalRecords: medicalRecords,
-            treatmentLimit: treatmentLimit
+        render(view: '/singlePatient/treatmentList', model: [
+                patientId         : patientId,
+                clientId          : clientId,
+                PatientEmailStatus: PatientEmailStatus,
+                medicalRecords    : medicalRecords,
+                treatmentLimit    : treatmentLimit
         ])
     }
 
@@ -158,7 +159,7 @@ class SinglePatientController extends BaseController {
 
         def resp = singlePatientService.hasActiveTasks(token, clientId, patientId)
 
-        render (['hasActiveTasks': resp] as JSON)
+        render(['hasActiveTasks': resp] as JSON)
     }
 
     def getReportTab() {
@@ -166,7 +167,18 @@ class SinglePatientController extends BaseController {
     }
 
     def getGroupTab() {
-        render(view: '/singlePatient/group')
+        String token = request.session.token
+        def patientId = params?.patientId
+        def clientId = request.session.clientId
+
+        def groupList = groupService.getGroupsPatientBelongsTo(token, clientId, patientId)
+
+        render(view: '/singlePatient/group', model: [
+                patientId: patientId,
+                clientId : clientId,
+                groupList: groupList
+        ])
+
     }
 
     def getCareGiverTab() {
@@ -177,9 +189,9 @@ class SinglePatientController extends BaseController {
         def careGiverList = teamService.getCareGiver(token, clientId, patientId, null)
 
         render(view: '/singlePatient/careGiver', model: [
-            patientId: patientId,
-            clientId: clientId,
-            careGiverList: careGiverList
+                patientId    : patientId,
+                clientId     : clientId,
+                careGiverList: careGiverList
         ])
     }
 

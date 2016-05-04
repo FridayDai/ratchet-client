@@ -25,6 +25,7 @@ var AddTasksDialog = require('../components/patientDetail/treatment/AddTasksDial
 var InClinicCodeDialog = require('../components/patientDetail/InClinicCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDetail/treatment/EditSurgeryDateFormDialog');
 var CareGiverFormDialog = require('../components/patientDetail/careGiverSection/CareGiverFormDialog');
+var GroupFormDialog = require('../components/patientDetail/groupSection/GroupFormDialog');
 
 var TYPE_SECTION_MAPPING = {
     'Treatment': TreatmentList,
@@ -55,7 +56,8 @@ function PatientDetailPage() {
         addTaskDialogSelector: '#add-tasks-dialog',
         inClinicCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
-        addEmergencyContactDialogSelector: '#invite-emergency-contact-form'
+        addEmergencyContactDialogSelector: '#invite-emergency-contact-form',
+        addGroupDialogSelector: '#add-group-form'
     });
 
     this.children({
@@ -107,6 +109,10 @@ function PatientDetailPage() {
             selector: 'addCareGiverDialogSelector',
             event: 'showCareGiverDialog',
             dialog: CareGiverFormDialog
+        }, {
+            selector: 'addGroupDialogSelector',
+            event: 'showAddGroupDialog',
+            dialog: GroupFormDialog
         }
     ]);
 
@@ -141,20 +147,25 @@ function PatientDetailPage() {
             load: function (e, ui) {
                 Utility.progress(false);
 
-                me.attachToTabs(ui.panel, ui.tab.data('type'));
+                me.attachToTabs(ui.panel, ui.tab);
             }
         });
 
         this.initPatientLevelTabToolbar();
     };
 
-    this.attachToTabs = function (panel, type) {
+    this.attachToTabs = function (panel, tab) {
+        var type = tab.data('type');
+
         if (!(type in TYPE_SECTION_MAPPING)) {
             throw 'Tab type is invalid in TYPE_SECTION_MAPPING';
         }
 
         this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
-        TYPE_SECTION_MAPPING[type].attachTo(panel);
+        TYPE_SECTION_MAPPING[type].attachTo(panel, {
+            'TabElement': tab[0],
+            'type': type
+        });
     };
 
     this.after('initialize', function () {

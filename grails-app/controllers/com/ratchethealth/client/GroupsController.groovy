@@ -68,4 +68,28 @@ class GroupsController extends BaseController {
         def result = [resp: resp]
         render result as JSON
     }
+
+    def getPatientGroups() {
+        String token = request.session.token
+        def patientId = params?.patientId
+        def clientId = request.session.clientId
+
+        def resp = groupService.getGroupsPatientBelongsTo(token, clientId, patientId)
+        render resp.items as JSON
+    }
+
+    def addGroupsToPatient() {
+        def patientId = params?.patientId
+        def groupIds = params?.groups
+
+        def resp = groupService.addGroupToPatient(session.token, session.clientId, patientId, groupIds)
+        render resp
+    }
+
+    def deletePatientGroup() {
+        def patientId = params?.patientId
+        def groupId = params?.groupId
+        def resp = groupService.deleteGroupOfPatient(session.token, session.clientId, patientId, groupId)
+        render resp
+    }
 }

@@ -279,7 +279,9 @@ ratchetv2 {
             showGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups"
             getStaffGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/myGroups"
             updateTreatmentsOnGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments"
-            checkTreatmentUsed = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments/%s/used"
+            checkTreatmentUsed = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments/%s/used" //deprecated
+            patientGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups"
+            deletePatientGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups/%s"
 
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments"

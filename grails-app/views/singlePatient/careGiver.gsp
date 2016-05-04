@@ -1,9 +1,9 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
 <div class="content">
-    <div class="care-giver-content">
+    <div class="top-tabs-content care-giver-content">
         <div class="toolbar">
-            <button class="btn btn-invite btn-position" id="invite-giver" data-patient-id="${patientId}">
+            <button class="btn btn-add btn-invite btn-position" id="invite-giver" data-patient-id="${patientId}">
                 <span>Invite</span>
             </button>
         </div>
