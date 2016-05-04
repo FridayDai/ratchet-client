@@ -9,7 +9,7 @@ module.exports = {
     context: contextUrl,
     entry: {
         patientList: "./flightPages/patientList.js",
-        patientDetail: "./flightPages/patientDetail.js",
+        patientDashboard: "./flightPages/patientDashboard.js",
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",

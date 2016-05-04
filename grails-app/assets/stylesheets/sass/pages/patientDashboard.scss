@@ -8,7 +8,7 @@
 @import '../partials/treatment_report';
 @import '../partials/task';
 @import '../partials/dropdown';
-@import '../partials/team';
+@import '../partials/caregiver';
 @import '../partials/selector';
 @import '../partials/timepicker';
 @import '../partials/theme';
@@ -77,11 +77,7 @@
     min-width: 950px;
 }
 
-.emergency-caption {
-    margin: 16px 20px;
-}
-
-.emergency-contact-info {
+.caregiver-info {
     margin-top: 20px;
     height: 170px;
 }
@@ -144,7 +140,7 @@
     width: 95%;
 }
 
-.emergency-required {
+.caregiver-required {
     display: none;
 }
 

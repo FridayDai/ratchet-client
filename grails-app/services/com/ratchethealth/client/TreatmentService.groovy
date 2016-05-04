@@ -39,7 +39,7 @@ class TreatmentService extends RatchetAPIService {
         String assignTreatmentUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(assignTreatmentUrl, clientId)
 
-        log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${token}.")
+        log.info("Call backend service to assign treatment to exist patient, token: ${token}.")
         withPost(token, url) { req ->
             def resp = req
                     .field("id", patient?.patientId)

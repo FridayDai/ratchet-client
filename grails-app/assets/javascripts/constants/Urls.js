@@ -41,13 +41,12 @@ module.exports = {
     CALL_TASK: '/patients/{0}/treatments/{1}/task/{2}/voice-call',
     RESOLVE_VOICE_TASK: '/patients/{0}/treatments/{1}/task/{2}/attention/resolve',
 
-    //Team
-    GET_EMERGENCY_CONTACT_LIST: '/patients/{0}/emergency-contact?medicalRecordId={1}',
-    ADD_EMERGENCY_CONTACT: '/patients/{0}/emergency-contact?medicalRecordId={1}',
-    UPDATE_EMERGENCY_CONTACT: '/patients/{0}/emergency-contact/update',
-    DELETE_EMERGENCY_CONTACT: '/patients/{0}/{1}/emergency-contact/{2}',
-    UPDATE_GROUP_PROVIDER_CONTACT: '/patients/{0}/group-and-provider/update?medicalRecordId={1}',
-    CHECK_EMERGENCY_CONTACT_EMAIL: '/patients/{0}/emergency-contact/check-email',
+    //Caregiver
+    GET_CARE_GIVER_LIST: '/patients/{0}/caregivers',
+    ADD_CAREGIVER: '/patients/{0}/caregivers',
+    UPDATE_CAREGIVER: '/patients/{0}/caregivers/{1}/update',
+    DELETE_CAREGIVER: '/patients/{0}/caregivers/{1}/delete',
+    CHECK_CAREGIVER_EMAIL: '/patients/{0}/caregivers/check-email',
 
     //Report
     GET_INDIVIDUAL_REPORT: '/patients/{0}/treatments/{1}/tools/{2}/report',

@@ -64,7 +64,7 @@ class TreatmentController extends BaseController {
             scheduleType: scheduleTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() }
         ]
 
-        render view: '/singlePatient/treatment',
+        render view: '/patientDashboard/treatment',
             model: [
                 activeTasks       : activeTasks,
                 closedTasks       : closedTasks,

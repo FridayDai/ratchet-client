@@ -88,10 +88,8 @@ function BulkImportResultTable() {
             }, {
                 "targets": 9,
                 "render": function (data, type, full) {
-                    var emergencyName;
-                    emergencyName = data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') +
+                    return data === undefined ? ((full.emergencyFirstName ? full.emergencyFirstName : '') +
                     " " + (full.emergencyLastName ? full.emergencyLastName : '')) : data;
-                    return emergencyName;
                 },
                 width: "180px"
             }, {

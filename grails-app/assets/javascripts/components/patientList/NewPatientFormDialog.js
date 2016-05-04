@@ -3,7 +3,7 @@ var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
 var Utility = require('../../utils/Utility');
 var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
-var WithEmergencyContactFieldRequired = require('../shared/functional/WithEmergencyContactFieldRequired');
+var WithCaregiverFieldRequired = require('../shared/functional/WithCaregiverFieldRequired');
 var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
 var PatientEmailValidation = require('../shared/validation/PatientEmailValidation');
 var ComboboxInputValidation = require('../shared/validation/ComboboxInputValidation');
@@ -36,9 +36,9 @@ function NewPatientFormDialog() {
         birthdayFieldSelector: '#birthday',
 
         basicEditButtonSelector: 'a.form-group-edit',
-        emergencyContactRelationshipFieldSelector: '#relationship',
-        emergencyContactFirstNameFieldSelector: '#emergency-firstName',
-        emergencyContactPermissionFirstNameSelector: '#ec-first-name',
+        caregiverRelationshipFieldSelector: '#relationship',
+        caregiverFirstNameFieldSelector: '#caregiver-firstName',
+        caregiverPermissionFirstNameSelector: '#ec-first-name',
 
         patientIdStaticSelector: '#patient-id-value',
         firstNameStaticSelector: '#firstName-static',
@@ -62,7 +62,7 @@ function NewPatientFormDialog() {
     this.children({
         phoneNumberFieldSelector: NewPatientPhoneInputField,
         birthdayFieldSelector: NewPatientBirthday,
-        emergencyContactRelationshipFieldSelector: {
+        caregiverRelationshipFieldSelector: {
             child: NewPatientRelationshipCombobox,
             attributes: {
                 selectEvent: 'newPatientRelationshipSelected',
@@ -254,7 +254,7 @@ function NewPatientFormDialog() {
     };
 
     this.onClose = function () {
-        this.select('emergencyContactPermissionFirstNameSelector').empty();
+        this.select('caregiverPermissionFirstNameSelector').empty();
 
         this.trigger('newPatientReset');
     };
@@ -292,7 +292,7 @@ function NewPatientFormDialog() {
             $lastNameStatic = this.select('lastNameStaticSelector'),
             $EmailStatic = this.select('emailStaticSelector'),
             $birthdayStatic = this.select('birthdayStaticSelector'),
-            $relationship = this.select('emergencyContactRelationshipFieldSelector'),
+            $relationship = this.select('caregiverRelationshipFieldSelector'),
             relationshipId = $relationship.data('id'),
             $group = this.select('groupFieldSelector'),
             groupId = $group.data('id'),
@@ -345,9 +345,9 @@ function NewPatientFormDialog() {
         });
     };
 
-    this.onEmergencyContactFirstNameInput = function () {
-        this.select('emergencyContactPermissionFirstNameSelector')
-            .text(this.select('emergencyContactFirstNameFieldSelector').val());
+    this.onCaregiverFirstNameInput = function () {
+        this.select('caregiverPermissionFirstNameSelector')
+            .text(this.select('caregiverFirstNameFieldSelector').val());
     };
 
     this.after('initialize', function () {
@@ -359,13 +359,13 @@ function NewPatientFormDialog() {
         });
 
         this.on('input', {
-            emergencyContactFirstNameFieldSelector: this.onEmergencyContactFirstNameInput
+            caregiverFirstNameFieldSelector: this.onCaregiverFirstNameInput
         });
     });
 }
 
 module.exports = flight.component(
-    WithEmergencyContactFieldRequired,
+    WithCaregiverFieldRequired,
     WithFormDialog,
     NewPatientFormDialog
 );

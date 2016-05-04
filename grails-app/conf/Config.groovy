@@ -310,12 +310,10 @@ ratchetv2 {
             //activity
             getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/activities"
 
-            //careGiver and careTeam
+            //caregiver and careTeam
             caregivers = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers"
-            deleteCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s"
-            deleteCareGiver = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/%s"
-            updateCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s/groups/%s"
-            checkCareGiverEmail = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/check_email"
+            caregiver = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/%s"
+            checkCaregiverEmail = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/email"
 
             //for toolService
             tools {
@@ -342,7 +340,7 @@ ratchetv2 {
         clientPlatform = "ancient"
         clientType = "client"
 
-        careGiverType = 1
+        caregiverType = 1
         careTeamType = 2
 
         patientTreatmentLimit = 3
