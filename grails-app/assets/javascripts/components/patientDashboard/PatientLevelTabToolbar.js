@@ -98,7 +98,7 @@ function PatientLevelTabToolbar() {
             me.on(document, event, me.onActiveTasksStatusUpdate);
         });
 
-        this.on(document, 'patientLevelTabBeforeLoad', this.onPatientLevelTabBeforeLoad)
+        this.on(document, 'patientLevelTabBeforeLoad', this.onPatientLevelTabBeforeLoad);
     });
 }
 

@@ -75,7 +75,7 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.deleteCaregiver('token', 1, 2)
+		def result = service.deleteCaregiver('token', 1, 2, 3)
 
 		then:
 		result == true
@@ -91,7 +91,7 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		when:
-		service.deleteCaregiver('token', 1, 2)
+		service.deleteCaregiver('token', 1, 2, 3)
 
 		then:
 		ApiReturnException e = thrown()
@@ -113,7 +113,6 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		Caregiver caregiver = new Caregiver()
-		caregiver.medicalRecordId = 111111
 		caregiver.caregiverId = 222222
 		caregiver.email = 'email'
 		caregiver.firstName = 'firstName'
@@ -121,7 +120,7 @@ class CaregiverServiceSpec extends Specification {
 		caregiver.relationship = 'relationship'
 
 		when:
-		def result = service.addCaregiver('token', caregiver)
+		def result = service.addCaregiver('token', 1, 2, caregiver)
 
 		then:
 		result == true
@@ -137,7 +136,6 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		Caregiver caregiver = new Caregiver()
-		caregiver.medicalRecordId = 111111
 		caregiver.caregiverId = 222222
 		caregiver.email = 'email'
 		caregiver.firstName = 'firstName'
@@ -145,7 +143,7 @@ class CaregiverServiceSpec extends Specification {
 		caregiver.relationship = 'relationship'
 
 		when:
-		service.addCaregiver('token', caregiver)
+		service.addCaregiver('token', 1, 2, caregiver)
 
 		then:
 		ApiReturnException e = thrown()
@@ -167,7 +165,6 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		Caregiver caregiver = new Caregiver()
-		caregiver.medicalRecordId = 111111
 		caregiver.caregiverId = 222222
 		caregiver.email = 'email'
 		caregiver.firstName = 'firstName'
@@ -175,7 +172,7 @@ class CaregiverServiceSpec extends Specification {
 		caregiver.relationship = 'relationship'
 
 		when:
-		def result = service.updateCaregiver('token', caregiver)
+		def result = service.updateCaregiver('token', 1, 2, caregiver)
 
 		then:
 		result == true
@@ -191,7 +188,6 @@ class CaregiverServiceSpec extends Specification {
 		}
 
 		Caregiver caregiver = new Caregiver()
-		caregiver.medicalRecordId = 111111
 		caregiver.caregiverId = 222222
 		caregiver.email = 'email'
 		caregiver.firstName = 'firstName'
@@ -199,7 +195,7 @@ class CaregiverServiceSpec extends Specification {
 		caregiver.relationship = 'relationship'
 
 		when:
-		service.updateCaregiver('token', caregiver)
+		service.updateCaregiver('token', 1, 2, caregiver)
 
 		then:
 		ApiReturnException e = thrown()
@@ -217,7 +213,7 @@ class CaregiverServiceSpec extends Specification {
         }
 
         when:
-        def result = service.checkEmailForCaregiver('token', 1, 'email')
+        def result = service.checkEmailForCaregiver('token', 1, 2, 'email')
 
         then:
         result.existed == true
@@ -233,7 +229,7 @@ class CaregiverServiceSpec extends Specification {
         }
 
         when:
-        def result = service.checkEmailForCaregiver('token', 1, 'email')
+        def result = service.checkEmailForCaregiver('token', 1, 2, 'email')
 
         then:
         result.existed == false
@@ -249,7 +245,7 @@ class CaregiverServiceSpec extends Specification {
         }
 
         when:
-        service.checkEmailForCaregiver('token', 1, 'email')
+        service.checkEmailForCaregiver('token', 1, 2, 'email')
 
         then:
         ApiReturnException e = thrown()

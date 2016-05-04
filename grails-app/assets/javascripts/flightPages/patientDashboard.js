@@ -25,7 +25,7 @@ var AddTasksDialog = require('../components/patientDashboard/treatment/AddTasksD
 var InClinicCodeDialog = require('../components/patientDashboard/InClinicCodeDialog');
 var EditSurgeryDateFormDialog = require('../components/patientDashboard/treatment/EditSurgeryDateFormDialog');
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
-var GroupFormDialog = require('../components/patientDetail/groupSection/GroupFormDialog');
+var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
 
 var TYPE_SECTION_MAPPING = {
     'Treatment': TreatmentList,
