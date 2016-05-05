@@ -18,10 +18,10 @@ class ActivityController extends BaseController{
         def medicalRecordId = params?.medicalRecordId
         def clientId = params?.clientId
 
-        render(view: '/singlePatient/activity', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
+        render(view: '/patientDashboard/activities', model: [patientId: patientId, medicalRecordId: medicalRecordId, clientId: clientId, archived: archived])
     }
 
-    def getActivities(ActivityPagination activityPagination) {
+    def getActivities(ActivityFilterFields activityPagination) {
         def data = activityService.getActivities(session.token, activityPagination)
         render data as JSON
     }

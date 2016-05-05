@@ -9,7 +9,7 @@ class GroupsController extends BaseController {
 
     static allowedMethods = [getGroups: ['GET'], addGroup: ['POST']]
 
-    def getGroups(GroupPagination groupPagination) {
+    def getGroups(GroupFilterFields groupPagination) {
         def clientId = session.clientId
         if (request.isXhr()) {
             def resp = groupService.showGroupsList(session.token, clientId, groupPagination)
@@ -22,7 +22,7 @@ class GroupsController extends BaseController {
         }
     }
 
-    def getStaffGroups(GroupPagination groupPagination) {
+    def getStaffGroups(GroupFilterFields groupPagination) {
         def resp, clientId = session.clientId
         def treatmentId = params?.treatmentId
 
@@ -67,5 +67,29 @@ class GroupsController extends BaseController {
         def resp = groupService.deleteGroup(session.token, session.clientId, params.groupId)
         def result = [resp: resp]
         render result as JSON
+    }
+
+    def getPatientGroups() {
+        String token = request.session.token
+        def patientId = params?.patientId
+        def clientId = request.session.clientId
+
+        def resp = groupService.getGroupsPatientBelongsTo(token, clientId, patientId)
+        render resp.items as JSON
+    }
+
+    def addGroupsToPatient() {
+        def patientId = params?.patientId
+        def groupIds = params?.groups
+
+        def resp = groupService.addGroupToPatient(session.token, session.clientId, patientId, groupIds)
+        render resp
+    }
+
+    def deletePatientGroup() {
+        def patientId = params?.patientId
+        def groupId = params?.groupId
+        def resp = groupService.deleteGroupOfPatient(session.token, session.clientId, patientId, groupId)
+        render resp
     }
 }

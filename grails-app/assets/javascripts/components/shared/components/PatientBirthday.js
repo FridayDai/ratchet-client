@@ -1,7 +1,6 @@
-require('momentTZ');
+require('jquery-mask');
 
 var flight = require('flight');
-var WithDatepicker = require('../../common/WithDatepicker');
 
 function PatientBirthday() {
     this.onReset = function () {
@@ -13,17 +12,8 @@ function PatientBirthday() {
     };
 
     this.after('initialize', function () {
-        var now = new Date();
-
-        this.$node.datepicker('option', {
-            changeYear: true,
-            changeMonth: true,
-            dateFormat: 'M d, yy',
-            maxDate: '0',
-            defaultDate: new Date(1970, 0, 1),
-            yearRange: "1900:" + now.getFullYear()
-        });
+        this.$node.mask('00/00/0000');
     });
 }
 
-module.exports = flight.component(WithDatepicker, PatientBirthday);
+module.exports = flight.component(PatientBirthday);

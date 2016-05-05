@@ -39,7 +39,7 @@ class TreatmentService extends RatchetAPIService {
         String assignTreatmentUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(assignTreatmentUrl, clientId)
 
-        log.info("Call backend service to assign treatment to exist patient with treatmentId, surgeonId, surgeryTime and emergency contact info, token: ${token}.")
+        log.info("Call backend service to assign treatment to exist patient, token: ${token}.")
         withPost(token, url) { req ->
             def resp = req
                     .field("id", patient?.patientId)
@@ -124,48 +124,6 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Archive medical record success, token: ${token}")
                 return true
-            } else {
-                handleError(resp)
-            }
-        }
-    }
-
-    def generateTreatmentCode(String token, clientId, patientId, medicalRecordId) {
-        String generateCodeUrl = grailsApplication.config.ratchetv2.server.url.generateCode
-        def url = String.format(generateCodeUrl, clientId, patientId, medicalRecordId)
-
-        log.info("Call backend service to generate treatment code, token: ${token}.")
-        withGet(token, url) { req ->
-            def resp = req
-                    .asString()
-
-            if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
-                log.info("Archive medical record success, token: ${token}")
-                return result
-            } else {
-                handleError(resp)
-            }
-        }
-    }
-
-    def sendTreatmentTasksEmail(String token, clientId, patientId, medicalRecordId) {
-        String TreatmentTasksUrl = grailsApplication.config.ratchetv2.server.url.notifyTreatmentTasks
-        def url = String.format(TreatmentTasksUrl, clientId, patientId, medicalRecordId)
-
-        log.info("Call backend service to notify treatment tasks, token: ${token}.")
-        withGet(token, url) { req ->
-            def resp = req
-                    .asString()
-
-            if (resp.status == 200) {
-                log.info("Notify treatment tasks success, token: ${token}")
-
-                [success: true]
-            } else if (resp.status == 406) {
-                log.info("Notify treatment tasks failed within 30 seconds, token: ${token}")
-
-                [success: true]
             } else {
                 handleError(resp)
             }

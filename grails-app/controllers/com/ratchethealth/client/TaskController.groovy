@@ -8,68 +8,6 @@ class TaskController extends BaseController {
 
     def taskService
 
-    def getTasks() {
-        String token = session.token
-        def accountId = session.accountId
-        def clientId = session.clientId
-        def patientId = params?.patientId
-        def medicalRecordId = params?.medicalRecordId
-        def archived = (params?.archived) ?: false
-        def PatientEmailStatus = params?.PatientEmailStatus
-
-        def tasks = taskService.getTasks(token, clientId, medicalRecordId)
-        def activeTasks = [], closedTasks = [], scheduleTasks = []
-        def activeTaskTypeArray = [], closedTaskTypeArray = [], scheduleTaskTypeArray = []
-        def taskType
-
-        for (task in tasks) {
-            switch (task?.status) {
-                case StatusCodeConstants.TASK_STATUS_SCHEDULE:
-                    unionTaskType(task, scheduleTaskTypeArray)
-                    scheduleTasks.add(task)
-                    continue
-                case StatusCodeConstants.TASK_STATUS_PENDING:
-                case StatusCodeConstants.TASK_STATUS_OVERDUE:
-                    unionTaskType(task, activeTaskTypeArray)
-                    activeTasks.add(task)
-                    continue
-                default:
-                    unionTaskType(task, closedTaskTypeArray)
-                    //Todo: after api update, need to use taskType
-                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
-                        def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
-                        task = task << viewResult
-                    }
-                    closedTasks.add(task)
-
-            }
-        }
-
-        scheduleTasks = scheduleTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] })
-        activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
-        closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
-
-        taskType = [
-                activeType  : activeTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
-                closedType  : closedTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
-                scheduleType: scheduleTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() }
-        ]
-
-        render view: '/singlePatient/task',
-                model: [
-                        activeTasks       : activeTasks,
-                        closedTasks       : closedTasks,
-                        scheduleTasks     : scheduleTasks,
-                        taskType          : taskType,
-                        clientId          : clientId,
-                        patientId         : patientId,
-                        medicalRecordId   : medicalRecordId,
-                        archived          : archived,
-                        PatientEmailStatus: PatientEmailStatus,
-                        accountId         : accountId
-                ]
-    }
-
     def sendTaskEmail() {
         def token = request.session.token
         def clientId = request.session.clientId
@@ -192,27 +130,5 @@ class TaskController extends BaseController {
         def taskId = params?.taskId
         def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
         render resp
-    }
-
-    private static unionTaskType(task, typeArray) {
-        //Todo: we need defined taskType in api!
-        if(RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "VOICE") {
-            task.taskFilterType = RatchetConstants.TOOL_NAME_VOICE_CALL
-        } else if (RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "BASIC") {
-            task.taskFilterType = task.title
-        } else {
-            task.taskFilterType = RatchetConstants.TOOL_TYPE[task.testId]
-        }
-
-        if (!typeArray.contains(task.taskFilterType)) {
-            typeArray.add(task.taskFilterType)
-        }
-    }
-
-    private getVoiceResult(patientId, medicalRecordId, taskId) {
-        def token = request.session.token
-        def clientId = request.session.clientId
-        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
-        return resp
     }
 }

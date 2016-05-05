@@ -9,7 +9,7 @@ module.exports = {
     context: contextUrl,
     entry: {
         patientList: "./flightPages/patientList.js",
-        patientDetail: "./flightPages/patientDetail.js",
+        patientDashboard: "./flightPages/patientDashboard.js",
         accounts: "./flightPages/accounts.js",
         groups: './flightPages/groups.js',
         accountDetail: "./flightPages/accountDetail.js",
@@ -39,6 +39,7 @@ module.exports = {
             "jquery.ui.widget": "bower_components/jquery-ui/ui/widget.js",
             "jquery-file-upload": "bower_components/jquery-file-upload/js/jquery.fileupload.js",
             "jquery-ui-menu": "bower_components/jquery-ui/ui/menu.js",
+            "jquery-mask": "bower_components/jquery-mask-plugin/dist/jquery.mask.js",
             "velocity": "bower_components/velocity/velocity.js",
             "velocity-ui": "bower_components/velocity/velocity.ui.js",
             flight: "libs/flight/index.js",

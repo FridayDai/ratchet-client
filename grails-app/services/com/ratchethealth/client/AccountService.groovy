@@ -6,7 +6,7 @@ class AccountService extends RatchetAPIService {
 
     def grailsApplication
 
-    def getAccounts(String token, clientId, AccountPagination accountPagination) {
+    def getAccounts(String token, clientId, AccountFilterFields accountPagination) {
         def start = accountPagination?.start
         def length = accountPagination?.length
         def name = accountPagination?.name

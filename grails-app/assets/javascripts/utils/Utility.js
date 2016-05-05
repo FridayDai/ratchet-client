@@ -36,7 +36,7 @@ module.exports = {
 
     parseBirthday: function (dataStr) {
         if (dataStr) {
-            return moment(dataStr, 'YYYY-MM-DD').format('MMM D, YYYY');
+            return moment(dataStr, 'YYYY-MM-DD').format('MM/DD/YYYY');
         } else {
             return '';
         }

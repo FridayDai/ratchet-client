@@ -109,7 +109,7 @@ log4j.main = {
 
     if (System.getProperty("ELK_TCP_ADDR")) {
         appenders {
-            console name: 'stdout', layout: pattern(conversionPattern: '%d %level %c{2} %m%n')
+            console name: 'stdout', layout: pattern(conversionPattern: '%d [%t] %p %C - %m%n')
             appender new biz.paluch.logging.gelf.log4j.GelfLogAppender(name: 'central',
                     host: System.getProperty("ELK_TCP_ADDR"), port: 12201, additionalFields: "app_type=client")
         }
@@ -250,6 +250,9 @@ ratchetv2 {
             savePatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/save"
             lookup = "${ratchetv2.server.url.base}/api/v1/clients/%s/bulk/lookup"
             checkPatientEmail = "${ratchetv2.server.url.base}/api/v1/patients/check_email"
+            notify = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/notify-now"
+            generateInClinicCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/generate/in-clinic/code"
+            hasActiveTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/has-active-tasks"
 
             //Report URL
             taskConversion = "${ratchetv2.server.url.base}/api/v1/clients/conversion"
@@ -276,7 +279,9 @@ ratchetv2 {
             showGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups"
             getStaffGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/myGroups"
             updateTreatmentsOnGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments"
-            checkTreatmentUsed = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments/%s/used"
+            checkTreatmentUsed = "${ratchetv2.server.url.base}/api/v1/clients/%s/groups/%s/treatments/%s/used" //deprecated
+            patientGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups"
+            deletePatientGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups/%s"
 
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments"
@@ -285,8 +290,6 @@ ratchetv2 {
             getTreatmentInfo = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments/%s"
             updateSurgeryTime = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/archived"
-            generateCode = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/generate/treatment/code"
-            notifyTreatmentTasks = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/sendMail"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
             getTreatmentAvailabelYears = "${ratchetv2.server.url.base}/api/v1/report/availableYears"
             adhocTasksToTreatment = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/ad-hoc"
@@ -307,12 +310,10 @@ ratchetv2 {
             //activity
             getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/activities"
 
-            //careGiver and careTeam
-            showMedicalCares = "${ratchetv2.server.url.base}/api/v1/medicalCares"
-            deleteCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s"
-            deleteCareGiver = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/%s"
-            updateCareTeam = "${ratchetv2.server.url.base}/api/v1/records/%s/careteam/%s/groups/%s"
-            checkCareGiverEmail = "${ratchetv2.server.url.base}/api/v1/records/%s/caregiver/check_email"
+            //caregiver and careTeam
+            caregivers = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers"
+            caregiver = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/%s"
+            checkCaregiverEmail = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/email"
 
             //for toolService
             tools {
@@ -339,7 +340,7 @@ ratchetv2 {
         clientPlatform = "ancient"
         clientType = "client"
 
-        careGiverType = 1
+        caregiverType = 1
         careTeamType = 2
 
         patientTreatmentLimit = 3

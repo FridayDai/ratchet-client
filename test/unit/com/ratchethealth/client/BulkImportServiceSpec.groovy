@@ -97,7 +97,7 @@ class BulkImportServiceSpec extends Specification {
             items 1, 2
         }
 
-        def bulkPagination = new BulkPagination()
+        def bulkPagination = new BulkFilterFields()
 
         MultipartBody.metaClass.asString = { ->
             return [
@@ -117,7 +117,7 @@ class BulkImportServiceSpec extends Specification {
 
     def "test lookup without successful result"() {
         given:
-        def bulkPagination = new BulkPagination()
+        def bulkPagination = new BulkFilterFields()
         MultipartBody.metaClass.asString = { ->
             return [
                     status: 400,
