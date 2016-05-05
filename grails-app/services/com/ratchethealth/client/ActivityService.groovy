@@ -4,21 +4,19 @@ import grails.converters.JSON
 
 class ActivityService extends RatchetAPIService {
 
-    /** dependency injection for grailsApplication */
     def grailsApplication
 
-    def getActivities(String token, activityPagination) {
+    def getActivities(String token, clientId, activityPagination) {
 
         def patientId = activityPagination?.patientId
         def start = activityPagination?.start
         def length = activityPagination?.length
+        def sort = activityPagination?.sortField
         def order = activityPagination?.sortDir
-        def medicalRecordId = activityPagination?.medicalRecordId
-        def clientId = activityPagination?.clientId
         def senderId = activityPagination?.senderId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
-        def url = String.format(getActivityUrl, clientId, patientId, medicalRecordId)
+        def url = String.format(getActivityUrl, clientId, patientId)
         log.info("Call backend service to get activities with max, offset and senderId, token: ${token}.")
 
         withGet(token, url) { req ->
@@ -26,6 +24,7 @@ class ActivityService extends RatchetAPIService {
                     .queryString("max", length)
                     .queryString("offset", start)
                     .queryString("senderId", senderId)
+                    .queryString("sorted", sort)
                     .queryString("order", order)
                     .asString()
 

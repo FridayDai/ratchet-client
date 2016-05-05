@@ -52,7 +52,7 @@ module.exports = {
     GET_INDIVIDUAL_REPORT: '/patients/{0}/treatments/{1}/tools/{2}/report',
 
     //Activity
-    GET_ACTIVITIES: '/patients/{0}/activities?clientId={1}&medicalRecordId={2}',
+    GET_ACTIVITIES: '/patients/{0}/activities',
 
     //Accounts
     PAGE_ACCOUNTS: '/accounts',

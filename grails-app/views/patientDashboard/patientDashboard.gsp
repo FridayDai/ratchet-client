@@ -120,7 +120,12 @@
                     </g:link>
                 </li>
                 <li data-type="Activities">
-                    <g:link controller="patientDashboard" action="getActivitiesTab">
+                    <g:link controller="patientDashboard"
+                            action="getActivitiesTab"
+                            params="[
+                                    patientId: patientInfo.id
+                            ]"
+                    >
                         ACTIVITIES
                     </g:link>
                 </li>

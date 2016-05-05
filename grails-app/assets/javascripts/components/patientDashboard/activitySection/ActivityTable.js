@@ -32,8 +32,7 @@ function ActivityTable() {
 
     this.getUrl = function () {
         var data = this.$node.data();
-
-        return URLs.GET_ACTIVITIES.format(data.patientId, data.clientId, data.medicalRecordId);
+        return URLs.GET_ACTIVITIES.format(data.patientId);
     };
 }
 

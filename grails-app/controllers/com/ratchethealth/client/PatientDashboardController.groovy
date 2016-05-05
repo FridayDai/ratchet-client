@@ -9,6 +9,7 @@ class PatientDashboardController extends BaseController {
     def invitationService
     def caregiverService
     def groupService
+    def activityService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -194,7 +195,19 @@ class PatientDashboardController extends BaseController {
         ])
     }
 
-    def getActivitiesTab() {
-        render(view: '/patientDashboard/activities')
+    def getActivitiesTab(ActivityFilterFields activityPagination) {
+        activityPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+        activityPagination.length = RatchetConstants.DEFAULT_SUB_PAGE_SIZE
+
+        def clientId = session.clientId
+        def activities = activityService.getActivities(session.token, clientId, activityPagination)
+
+        render(view: '/patientDashboard/activities', model: [patientId: patientId, activities: activities])
+    }
+
+    def getPatientActivities(ActivityFilterFields activityPagination) {
+        def clientId = session.clientId
+        def data = activityService.getActivities(session.token, clientId, activityPagination)
+        render data as JSON
     }
 }
