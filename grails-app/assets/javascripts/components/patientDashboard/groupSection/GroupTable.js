@@ -1,4 +1,3 @@
-
 var flight = require('flight');
 var WithDataTable = require('../../common/WithDataTable');
 var URLs = require('../../../constants/Urls');
@@ -11,7 +10,7 @@ function GroupTable() {
 
     this.attributes({
         patientId: null,
-        url: URLs.GET_GROUPS
+        url: null
     });
 
     this.options({
@@ -37,26 +36,10 @@ function GroupTable() {
         rowCallback: this.rowCallback
     });
 
-
     this.rowCallback = function (rawRow) {
         var $row = $(rawRow);
 
         $row.find('a.btn-remove-group').click(_.bind(this.showDeleteGroupNotification, this));
-    };
-
-    this.showEditGroupDialog = function (e) {
-        e.preventDefault();
-
-        var $target = $(e.target);
-        var $row = $target.parents('tr');
-        var rowData = this.getRowData($row);
-        //var groupId = $target.data("groupId");
-        //var groupName = $row.find('td:eq(1)').text().trim();
-
-
-        this.trigger('showGroupFormDialog', {
-            update: rowData
-        });
     };
 
     this.showDeleteGroupNotification = function (e) {

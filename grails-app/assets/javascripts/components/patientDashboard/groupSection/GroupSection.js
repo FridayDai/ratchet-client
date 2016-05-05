@@ -2,6 +2,7 @@ var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 var ClearTabCache = require('../../shared/functional/ClearTabCache');
 var GroupTable = require('./GroupTable');
+var URLs = require('../../../constants/Urls');
 
 function GroupSection() {
 
@@ -15,8 +16,10 @@ function GroupSection() {
     });
 
     this.getBasicIds = function () {
+        var patientId = this.select('addGroupButtonSelector').data('patientId');
         return {
-            patientId: this.select('addGroupButtonSelector').data('patientId')
+            patientId: patientId,
+            url: URLs.GET_PATIENT_GROUP.format(patientId)
         };
     };
 

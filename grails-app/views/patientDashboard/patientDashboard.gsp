@@ -100,7 +100,7 @@
                     </g:link>
                 </li>
                 <li data-type="Group">
-                    <g:link controller="singlePatient"
+                    <g:link controller="patientDashboard"
                             action="getGroupTab"
                             params="[
                                     patientId: patientInfo.id

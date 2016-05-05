@@ -160,7 +160,13 @@ class GroupService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Get groups success, token: ${token}")
-                return JSON.parse(resp.body)
+                def result = JSON.parse(resp.body)
+                def map = [:]
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                log.info("Get patient groups success, token: ${token}.")
+                return map
             } else {
                 handleError(resp)
             }

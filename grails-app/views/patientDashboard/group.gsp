@@ -10,7 +10,7 @@
 
         <div class="table-group">
             <div class="inner-body" id="groupBody">
-                <table id="group-table" class="ec-table team-table display cursorAuto" data-total="${groupList.items.size()}">
+                <table id="group-table" class="ec-table team-table display cursorAuto" data-total="${groupList.recordsTotal}">
                     <thead>
                     <tr>
                         <th>Group</th>
@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each var="group" in="${groupList.items}" status="i">
+                    <g:each var="group" in="${groupList.data}" status="i">
                         <tr data-is-dom-data="true">
                             <td>${group.name}</td>
                             <td>${group.id}</td>
