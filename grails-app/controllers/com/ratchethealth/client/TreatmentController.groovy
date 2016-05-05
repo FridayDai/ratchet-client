@@ -29,6 +29,8 @@ class TreatmentController extends BaseController {
 
         if (surgeryTime != "null" || !surgeryTime) {
             surgeryTime = Long.valueOf(surgeryTime)
+        } else {
+            surgeryTime = null
         }
 
         for (task in tasks) {
