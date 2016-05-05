@@ -113,7 +113,7 @@ function PatientLevelTabToolbar() {
     };
 
     this.onPatientInfoServed = function (e, data) {
-        this.updateNotifyStatus(this.hasActiveTasks, (data.email && data.emailStatus == '3'));
+        this.updateNotifyStatus(this.hasActiveTasks, (data.email && data.emailStatus === '3'));
     };
 
     this.onPatientInfoUpdateSuccess = function (e, data) {
