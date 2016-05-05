@@ -1,3 +1,3 @@
 module.exports = {
-    CLEAR_PATIENT_DASHBOARD_TOP_TAB: 'clearPatientDashboardTopTab'
+    PATIENT_DASHBOARD_CLEAR_TOP_TAB: 'clearPatientDashboardTopTab'
 };

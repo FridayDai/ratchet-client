@@ -170,7 +170,7 @@ function PatientDetailPage() {
         TYPE_SECTION_MAPPING[type].attachTo(panel, {
             'TabElement': tab[0],
             'type': type,
-            'clearTabEvent': Events.CLEAR_PATIENT_DASHBOARD_TOP_TAB
+            'clearTabEvent': Events.PATIENT_DASHBOARD_CLEAR_TOP_TAB
         });
     };
 
