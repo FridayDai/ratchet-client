@@ -59,7 +59,7 @@ class PatientDashboardService extends RatchetAPIService {
             if (resp.status == 200) {
                 def result = JSON.parse(resp.body)
                 log.info("Get active tasks flag success, token: ${token}")
-                return result.hasActivtyTasks
+                return result.hasActiveTasks
             }
             else {
                 handleError(resp)

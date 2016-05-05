@@ -131,7 +131,7 @@
                 </li>
             </ul>
             <div class="patient-tab-tool" data-patient-id="${patientInfo.id}">
-                <span class="notify-button icon-button <g:if test="${!hasActiveTasks}">not-available</g:if>">
+                <span class="notify-button icon-button <g:if test="${!hasActiveTasks || !patientInfo.email || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] != "VERIFIED"}">not-available</g:if>">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </span>
                 <div class="notify-button-tip icon-button-tip begin-tip">

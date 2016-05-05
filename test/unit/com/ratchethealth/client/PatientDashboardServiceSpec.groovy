@@ -285,7 +285,7 @@ class PatientDashboardServiceSpec extends Specification {
 		given:
 		def jBuilder = new JsonBuilder()
 		jBuilder {
-			hasActivtyTasks false
+			hasActiveTasks false
 		}
 
 		GetRequest.metaClass.asString = { ->

@@ -49,10 +49,6 @@ function TaskSection() {
         filterButtonSelector: '.quick-filter-button'
     });
 
-    this.getActiveItemCount = function () {
-        return this.select('activeItemBoxSelector').size();
-    };
-
     this.setBasicIds = function () {
         var $taskInfoHidden = this.select('taskInfoHiddenSelector');
 
@@ -333,7 +329,9 @@ function TaskSection() {
     };
 
     this.initTreatmentToolbar = function () {
-        TreatmentToolbar.attachTo(this.select('treatmentToolbarSelector'));
+        if (this.$node.children('.archived').length === 0) {
+            TreatmentToolbar.attachTo(this.select('treatmentToolbarSelector'));
+        }
     };
 
     this.disableTaskLink = function () {
