@@ -74,10 +74,10 @@ module.exports = {
 
     TASK_STATUS_FILTER: [
         {label: "Overdue", value: 2},
-        {label: "Scheduled", value: 3},
         {label: "Pending", value: 4},
-        {label: "Completed", value: 5},
-        {label: "Expired", value: 6}
+        {label: "Scheduled", value: 3},
+        {label: "Expired", value: 6},
+        {label: "Completed", value: 5}
     ],
 
     ACCOUNT_TYPE: {
