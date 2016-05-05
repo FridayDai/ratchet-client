@@ -12,4 +12,5 @@ class PatientPagination extends Pagination{
     Boolean activeTreatmentOnly = true
     int attentionStatus
     int treatmentStatus
+    int taskStatus
 }

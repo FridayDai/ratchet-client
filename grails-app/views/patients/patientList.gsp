@@ -53,6 +53,12 @@
                     <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
+
+                <div class="filler-content">
+                    <label for="taskStatusFilter" class="select-tip">TASK STATUS</label>
+                    <input type="text" name="taskStatusFilter" id="taskStatusFilter"
+                           class="input-group input-auto-search"/>
+                </div>
             </div>
         </div>
 

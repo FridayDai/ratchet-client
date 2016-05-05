@@ -225,7 +225,7 @@ ratchet.api.anonymous.token = System.getProperty("ANONYMOUS_API_TOKEN") ?: "FkvV
 ratchetv2 {
     server {
         url {
-            base = System.getProperty("SERVER_URL") ?: "http://localhost:8099/api/v1"
+            base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com"
 
             // Authentication
             login = "${ratchetv2.server.url.base}/api/v1/login"

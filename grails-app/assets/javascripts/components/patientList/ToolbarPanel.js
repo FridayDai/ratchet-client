@@ -7,6 +7,8 @@ var ProviderCombobox = require('./ToolbarProviderCombobox');
 var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 var attentionStatusCombobox = require('./ToolbarAttentionStatusCombobox');
 var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
+var taskStatusCombobox = require('./ToolbarTaskStatusCombobox');
+
 
 function ToolbarPanel() {
     this.attributes({
@@ -16,7 +18,8 @@ function ToolbarPanel() {
         providerFieldSelector: '#selectSurgeon',
         emailStatusFieldSelector: '#emailStatusFilter',
         attentionStatusFieldSelector: '#attentionStatusFilter',
-        treatmentStatusFieldSelector: '#treatmentStatusFilter'
+        treatmentStatusFieldSelector: '#treatmentStatusFilter',
+        taskStatusFieldSelector: '#taskStatusFilter'
     });
 
     this.children({
@@ -24,7 +27,8 @@ function ToolbarPanel() {
         providerFieldSelector: ProviderCombobox,
         emailStatusFieldSelector: emailStatusCombobox,
         attentionStatusFieldSelector: attentionStatusCombobox,
-        treatmentStatusFieldSelector: treatmentStatusCombobox
+        treatmentStatusFieldSelector: treatmentStatusCombobox,
+        taskStatusFieldSelector: taskStatusCombobox
     });
 
     this.getCurrentState = function () {
@@ -34,7 +38,8 @@ function ToolbarPanel() {
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
             attention: this.child.attentionStatusFieldSelector.getDisplayItem(),
             patientIdOrName: this._patientIdOrNamePreviousVal,
-            treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem()
+            treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem(),
+            taskStatus: this.child.taskStatusFieldSelector.getDisplayItem()
         };
     };
 
@@ -69,6 +74,7 @@ function ToolbarPanel() {
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);
         this.child.attentionStatusFieldSelector.setDisplayItem(toolbarData.attention);
         this.child.treatmentStatusFieldSelector.setDisplayItem(toolbarData.treatmentStatus);
+        this.child.taskStatusFieldSelector.setDisplayItem(toolbarData.taskStatus);
     };
 
     this.after('initialize', function () {
