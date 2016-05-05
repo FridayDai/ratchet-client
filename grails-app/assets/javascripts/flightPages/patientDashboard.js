@@ -6,6 +6,7 @@ var WithPage = require('../components/common/WithPage');
 var STRINGs = require('../constants/Strings');
 var PAGEs = require('../constants/Pages');
 var Utility = require('../utils/Utility');
+var Events = require('../constants/Events');
 
 var PatientInfoSection = require('../components/patientDashboard/patientInfoSection/PatientInfoSection');
 var TreatmentList = require('../components/patientDashboard/treatmentSection/TreatmentList');
@@ -160,7 +161,6 @@ function PatientDetailPage() {
 
     this.attachToTabs = function (panel, tab) {
         var type = tab.data('type');
-        var clearTabEvent = 'clearTopTabsCache';
 
         if (!(type in TYPE_SECTION_MAPPING)) {
             throw 'Tab type is invalid in TYPE_SECTION_MAPPING';
@@ -170,7 +170,7 @@ function PatientDetailPage() {
         TYPE_SECTION_MAPPING[type].attachTo(panel, {
             'TabElement': tab[0],
             'type': type,
-            'clearTabEvent': clearTabEvent
+            'clearTabEvent': Events.CLEAR_PATIENT_DASHBOARD_TOP_TAB
         });
     };
 
