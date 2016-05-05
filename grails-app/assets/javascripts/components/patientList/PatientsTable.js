@@ -31,6 +31,8 @@ var TABLE_SEARCH_EVENTS = [
     'clearAttentionStatusForPatientTable',
     'selectTreatmentStatusForPatientTable',
     'clearTreatmentStatusForPatientTable',
+    'selectTaskStatusForPatientTable',
+    'clearTaskStatusForPatientTable',
     'selectPatientIDNameForPatientTable'
 ];
 
@@ -170,6 +172,7 @@ function PatientsTable() {
         patientIdOrName: null,
         attentionStatus: null,
         treatmentStatus: null,
+        taskStatus: null,
         activeTreatmentOnly: true
     };
 

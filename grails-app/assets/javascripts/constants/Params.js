@@ -72,6 +72,14 @@ module.exports = {
         {label: "Post-Op 90 days +", value: 4}
     ],
 
+    TASK_STATUS_FILTER: [
+        {label: "Overdue", value: 2},
+        {label: "Scheduled", value: 3},
+        {label: "Pending", value: 4},
+        {label: "Completed", value: 5},
+        {label: "Expired", value: 6}
+    ],
+
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10

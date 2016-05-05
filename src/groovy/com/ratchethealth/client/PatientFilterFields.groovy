@@ -12,4 +12,5 @@ class PatientFilterFields extends FilterFields {
     Boolean activeTreatmentOnly = true
     int attentionStatus
     int treatmentStatus
+    int taskStatus
 }

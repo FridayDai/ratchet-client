@@ -178,7 +178,6 @@ class PatientDashboardController extends BaseController {
                 clientId : clientId,
                 groupList: groupList
         ])
-
     }
 
     def getCaregiverTab() {

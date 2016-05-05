@@ -74,6 +74,7 @@ class PatientService extends RatchetAPIService {
         def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
         def attentionStatus = patientPagination?.attentionStatus
         def treatmentStatus = patientPagination?.treatmentStatus
+        def taskStatus = patientPagination?.taskStatus
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
@@ -90,11 +91,16 @@ class PatientService extends RatchetAPIService {
             "order": sortDir,
             "sorted": sortFiled,
             "treatmentStatus": treatmentStatus,
-            "activeTreatmentOnly": activeTreatmentOnly
+            "activeTreatmentOnly": activeTreatmentOnly,
+            "taskStatus": taskStatus
         ];
 
         if (attentionStatus) {
             queryStrings['isAttentionNeeded'] = attentionStatus == 1
+        }
+
+        if(queryStrings.taskStatus == 0){
+            queryStrings.taskStatus = null;
         }
 
         queryStrings = queryStrings.findAll { key, value -> value != null }
