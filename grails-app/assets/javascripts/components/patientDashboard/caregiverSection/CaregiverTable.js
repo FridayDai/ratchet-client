@@ -29,14 +29,7 @@ function CaregiverTable() {
                 },
                 className: "firstName",
                 width: "20%"
-            },
-            // {
-            //     data: "lastName",
-            //     className: "lastName",
-            //     orderable: false,
-            //     width: "15%"
-            // },
-            {
+            }, {
                 data: 'relationShip',
                 render: function (data) {
                     return PARAMs.CAREGIVER_RELATIONSHIP_MAP[data];

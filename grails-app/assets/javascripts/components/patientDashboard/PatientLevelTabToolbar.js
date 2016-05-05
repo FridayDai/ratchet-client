@@ -25,22 +25,37 @@ function PatientLevelTabToolbar() {
         };
     };
 
+    this.hasActiveTasks = null;
+    this.initActiveTaskFlag = function () {
+        var $generate = this.select('generateCodeButtonSelector');
+
+        this.hasActiveTasks = !$generate.hasClass('not-available');
+    };
+
     this.onNotifyButtonClicked = function() {
-        $.ajax({
-            url: URLs.NOTIFY_REQUEST.format(this.ids.patientId)
-        }).done(function () {
-            Notifications.showFadeOutMsg(
-                STRINGs.SEND_NOTIFY_TASKS_SUCCESS
-            );
-        });
+        var $notify = this.select('notifyButtonSelector');
+
+        if (!$notify.hasClass('not-available')) {
+            $.ajax({
+                url: URLs.NOTIFY_REQUEST.format(this.ids.patientId)
+            }).done(function () {
+                Notifications.showFadeOutMsg(
+                    STRINGs.SEND_NOTIFY_TASKS_SUCCESS
+                );
+            });
+        }
     };
 
     this.onGenerateCodeButtonClicked = function (e) {
         e.preventDefault();
 
-        this.trigger('showGenerateCodeDialog', {
-            patientId: this.ids.patientId
-        });
+        var $generate = this.select('generateCodeButtonSelector');
+
+        if (!$generate.hasClass('not-available')) {
+            this.trigger('showGenerateCodeDialog', {
+                patientId: this.ids.patientId
+            });
+        }
     };
 
     this.onActiveTasksStatusUpdate = function () {
@@ -54,17 +69,30 @@ function PatientLevelTabToolbar() {
     };
 
     this.updateButtonsStatus = function (hasActiveTasks) {
-        var $notify = this.select('notifyButtonSelector');
-        var $generateCode = this.select('generateCodeButtonSelector');
+        this.hasActiveTasks = hasActiveTasks;
 
-        if (hasActiveTasks) {
+        this.updateGenerateCodeStatus(hasActiveTasks);
+        this.trigger('patientInfoRequest');
+    };
+
+    this.updateNotifyStatus = function (hasActiveTasks, hasVerifiedEmail) {
+        var $notify = this.select('notifyButtonSelector');
+
+        if (hasActiveTasks && hasVerifiedEmail) {
             $notify.removeClass('not-available');
-            $generateCode.removeClass('not-available');
         } else {
             if (!$notify.hasClass('not-available')) {
                 $notify.addClass('not-available');
             }
+        }
+    };
 
+    this.updateGenerateCodeStatus = function (hasActiveTasks) {
+        var $generateCode = this.select('generateCodeButtonSelector');
+
+        if (hasActiveTasks) {
+            $generateCode.removeClass('not-available');
+        } else {
             if (!$generateCode.hasClass('not-available')) {
                 $generateCode.addClass('not-available');
             }
@@ -84,10 +112,19 @@ function PatientLevelTabToolbar() {
         }
     };
 
+    this.onPatientInfoServed = function (e, data) {
+        this.updateNotifyStatus(this.hasActiveTasks, (data.email && data.emailStatus == '3'));
+    };
+
+    this.onPatientInfoUpdateSuccess = function (e, data) {
+        this.updateNotifyStatus(this.hasActiveTasks, data.email);
+    };
+
     this.after('initialize', function () {
         var me = this;
 
         this.initIds();
+        this.initActiveTaskFlag();
 
         this.on('click', {
             notifyButtonSelector: this.onNotifyButtonClicked,
@@ -99,6 +136,8 @@ function PatientLevelTabToolbar() {
         });
 
         this.on(document, 'patientLevelTabBeforeLoad', this.onPatientLevelTabBeforeLoad);
+        this.on(document, 'patientInfoServed', this.onPatientInfoServed);
+        this.on(document, 'updatePatientSuccess', this.onPatientInfoUpdateSuccess);
     });
 }
 

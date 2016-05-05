@@ -22,7 +22,7 @@
             <div class="archived-treatment-title">ARCHIVED TREATMENT</div>
         </g:if>
         <div class="pull-right right-part">
-            <button id="addTasks"
+            <div id="addTasks"
                 <g:if test="${archived == 'true'}">
                     class="btn btn-treatment-level btn-add-task disabled" disabled="disabled"
                 </g:if>
@@ -30,9 +30,9 @@
                     class="btn btn-treatment-level btn-add-task"
                 </g:else>>
                 <span class="text-span">Add Task</span>
-            </button>
+            </div>
             <div class="more-button">
-                <button
+                <div
                     <g:if test="${archived == 'true'}">
                         class="drop-down-toggle disabled btn-disabled" disabled="disabled"
                     </g:if>
@@ -46,7 +46,7 @@
                         <g:else>
                             class="more-btn"
                         </g:else>>More</span>
-                </button>
+                </div>
                 <div class="drop-down-lists hidden">
                     <g:if test="${surgeryTime}">
                         <span <g:if test="${archived == 'true'}">
