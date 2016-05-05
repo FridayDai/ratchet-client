@@ -156,6 +156,7 @@ function PatientDetailPage() {
 
     this.attachToTabs = function (panel, tab) {
         var type = tab.data('type');
+        var clearTabEvent = 'clearTopTabsCache';
 
         if (!(type in TYPE_SECTION_MAPPING)) {
             throw 'Tab type is invalid in TYPE_SECTION_MAPPING';
@@ -164,7 +165,8 @@ function PatientDetailPage() {
         this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
         TYPE_SECTION_MAPPING[type].attachTo(panel, {
             'TabElement': tab[0],
-            'type': type
+            'type': type,
+            'clearTabEvent': clearTabEvent
         });
     };
 

@@ -11,20 +11,20 @@ function ClearTabCache() {
 
      */
 
+    this.attributes({
+        TabElement: null,
+        type: null,
+        clearTabEvent: null
+    });
+
     this.clearCache = function(e, option) {
-        if(_.isEmpty(option) || _.includes(option.type, this.type)) {
-            this.$TabElement.data('loaded', false);
+        if(_.isEmpty(option) || _.includes(option.type, this.attr.type)) {
+            $(this.attr.TabElement).data('loaded', false);
         }
     };
 
-    this.initUiTab = function (tab, type) {
-        this.$TabElement = $(tab);
-        this.type = type;
-    };
-
     this.after('initialize', function () {
-        this.initUiTab(this.attr.TabElement, this.attr.type);
-        this.on('clearTopTabsCache', this.clearCache);
+        this.on(document, this.attr.clearTabEvent, this.clearCache);
     });
 }
 
