@@ -1,4 +1,4 @@
 package com.ratchethealth.client
 
-class CareGiverFilterFields extends FilterFields {
+class CaregiverFilterFields extends FilterFields {
 }

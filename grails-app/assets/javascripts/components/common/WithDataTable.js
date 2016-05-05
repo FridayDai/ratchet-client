@@ -133,7 +133,10 @@ function withDataTable() {
                     if (me._ajaxConf.cacheLower !== drawStart) {
                         json.data.splice(0, drawStart - me._ajaxConf.cacheLower);
                     }
-                    json.data.splice(requestLength, json.data.length);
+
+                    if (me._optionsDef.paging) {
+                        json.data.splice(requestLength, json.data.length);
+                    }
 
                     drawCallback(json);
                 }
@@ -251,7 +254,7 @@ function withDataTable() {
     };
 
     this.reload = function (cb) {
-        if (cb) {
+        if (_.isFunction(cb)) {
             this.tableEl.ajax.reload(function () {
                 cb.call(this);
             });
