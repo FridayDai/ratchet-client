@@ -19,7 +19,9 @@ class PatientsController extends BaseController {
 
         if (request.isXhr()) {
             def resp = patientService.loadPatients(token, clientId, filterFields)
+
             render resp as JSON
+
         } else {
             filterFields.start = RatchetConstants.DEFAULT_PAGE_OFFSET
             filterFields.length = RatchetConstants.DEFAULT_PAGE_SIZE

@@ -114,6 +114,13 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def patientId = params?.patientId
         def surgeryTime = params?.surgeryTime
+
+
+//        Date date = new Date(surgeryTime);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(date);
+//        long calendarMillis = calendar.getTimeInMillis();
+
         def resp = treatmentService.updateSurgeryTime(token, clientId, medicalRecordId, patientId, surgeryTime)
         def result = [resp: resp]
         render result as JSON
