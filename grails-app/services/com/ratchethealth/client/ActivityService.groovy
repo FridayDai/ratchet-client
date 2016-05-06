@@ -11,8 +11,7 @@ class ActivityService extends RatchetAPIService {
         def patientId = activityPagination?.patientId
         def start = activityPagination?.start
         def length = activityPagination?.length
-        def sort = activityPagination?.sortField
-        def order = activityPagination?.sortDir
+        def order = activityPagination?.sortDir ?: "desc"
         def senderId = activityPagination?.senderId
 
         String getActivityUrl = grailsApplication.config.ratchetv2.server.url.getActivity
@@ -23,9 +22,8 @@ class ActivityService extends RatchetAPIService {
             def resp = req
                     .queryString("max", length)
                     .queryString("offset", start)
-                    .queryString("senderId", senderId)
-                    .queryString("sorted", sort)
                     .queryString("order", order)
+                    .queryString("senderId", senderId)
                     .asString()
 
             if (resp.status == 200) {

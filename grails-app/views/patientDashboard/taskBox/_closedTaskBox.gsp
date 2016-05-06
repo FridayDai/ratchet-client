@@ -66,7 +66,7 @@
 
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
                             <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
-                                <span class="sub-item">
+                                <span class="sub-item multiple-item">
                                     <div class="score-number">${score[1]}</div>
 
                                     <div class="score-label">${score[0]}</div>

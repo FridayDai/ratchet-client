@@ -6,6 +6,7 @@ var Utility = require('../../../utils/Utility');
 function ActivityTable() {
     this.options({
         order: [[2, 'desc']],
+        paging: true,
         columnDefs: [
             {
                 targets: 0,

@@ -7,8 +7,7 @@ function ActivitySection() {
 
     this.attributes({
         contentSelector: '.content',
-
-        activityTableSelector: '.activityTable'
+        activityTableSelector: '#activity-table'
     });
 
     this.children({
