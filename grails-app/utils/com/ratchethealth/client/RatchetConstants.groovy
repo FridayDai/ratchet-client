@@ -3,6 +3,7 @@ package com.ratchethealth.client
 class RatchetConstants {
     // Table
     public static final DEFAULT_PAGE_SIZE = 20
+    public static final DEFAULT_SUB_PAGE_SIZE = 10
     public static final DEFAULT_PAGE_OFFSET = 0
 
     // Task

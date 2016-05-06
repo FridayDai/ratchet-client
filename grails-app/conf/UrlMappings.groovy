@@ -97,7 +97,7 @@ class UrlMappings {
         "/patients/$patientId?/treatments/$medicalRecordId/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
 
         //Patient activity
-        "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")
+        "/patients/$patientId?/activities"(controller: "patientDashboard", action: "getPatientActivities")
 
         //Accounts
         "/accounts"(controller: "accounts") {

@@ -710,17 +710,17 @@
 
     .drop-down-toggle {
         position: relative;
-        padding-top: 13px;
+        display: inline;
+        padding: 13px 0 0 45px;
         background: none;
         border: none;
         color: $base-surgery-date-bgcolor;
         font-size: 17px;
-        margin-left: 40px;
 
         &:before {
             position: absolute;
-            top: 12px;
-            left: -17px;
+            top: 0;
+            left: 23px;
             font-family: 'Ionicons';
             display: inline-block;
             content: '\f394';

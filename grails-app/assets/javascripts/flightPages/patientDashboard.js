@@ -36,6 +36,14 @@ var TYPE_SECTION_MAPPING = {
     'Activities': ActivitySection
 };
 
+var TYPE_SECTION_INDEX_MAPPING = {
+    'Treatment': 0,
+    'Report': 1,
+    'Group': 2,
+    'Caregiver': 3,
+    'Activities': 4
+};
+
 var NODE_NAME_TEMP = '{0}Node';
 
 function PatientDetailPage() {
@@ -44,7 +52,7 @@ function PatientDetailPage() {
     this.attributes({
         patientInfoSectionSelector: '.patient-detail',
         tabsContainerSelector: '#top-tabs',
-        tabTitleSelector: '#top-tabs .tab-treatment li',
+        tabTitleSelector: '#top-tabs .tab-list li',
         tabToolbarSelector: '#top-tabs .patient-tab-tool',
 
         editPatientDialogSelector: '#patient-form',
@@ -174,8 +182,33 @@ function PatientDetailPage() {
         });
     };
 
+    this.onAddTreatmentSuccess = function () {
+        var me = this;
+
+        _.each(['Group', 'Caregiver'], function (type) {
+            me.reloadTab(type);
+        });
+    };
+
+    this.reloadTab = function (type) {
+        var tabIndex = TYPE_SECTION_INDEX_MAPPING[type];
+        var tabPanelDOM = this[NODE_NAME_TEMP.format(type.toLowerCase())];
+
+        if (tabPanelDOM) {
+            var $tab = $(this.select('tabTitleSelector').get(tabIndex));
+
+            $tab.data("loaded", false);
+
+            flight.registry.findInstanceInfoByNode(tabPanelDOM)[0].instance.teardown();
+
+            this.select('tabsContainerSelector').tabs('load', tabIndex);
+        }
+    };
+
     this.after('initialize', function () {
         this.initTabs();
+
+        this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);
     });
 
     this.before('teardown', function () {
