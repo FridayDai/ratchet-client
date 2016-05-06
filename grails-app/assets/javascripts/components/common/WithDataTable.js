@@ -216,7 +216,7 @@ function withDataTable() {
 
         _.assign(this._ajaxConf, {
            url: url,
-            pages: 1
+            pages: 2
         });
     };
 
