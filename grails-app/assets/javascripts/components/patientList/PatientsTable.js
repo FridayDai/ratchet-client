@@ -42,6 +42,7 @@ function PatientsTable() {
     });
 
     this.options({
+        paging: true,
         columnDefs: [
             {
                 targets: 0,
