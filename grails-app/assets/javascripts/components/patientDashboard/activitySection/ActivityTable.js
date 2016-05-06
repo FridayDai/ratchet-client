@@ -22,7 +22,7 @@ function ActivityTable() {
                 targets: 2,
                 data: 'lastUpdated',
                 render: function (data, type, full) {
-                    var dateCreated = data === undefined ? full.dateCreated : data;
+                    var dateCreated = data === undefined ? full.dateCreated : +data;
 
                     return Utility.toVancouverTimeHour(dateCreated);
                 },
