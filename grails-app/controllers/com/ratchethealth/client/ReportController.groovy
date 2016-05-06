@@ -52,10 +52,9 @@ class ReportController extends BaseController {
         String token = request.session.token
         def clientId = request.session.clientId
         def patientId = params?.patientId as long
-        def medicalRecordId = params?.medicalRecordId as long
         def baseToolId = params?.baseToolId as long
 
-        def resp = reportService.getIndividualReport(token, clientId, patientId, medicalRecordId, baseToolId)
+        def resp = reportService.getIndividualReport(token, clientId, patientId, baseToolId)
 
         updateReportResp(resp)
 
@@ -73,5 +72,15 @@ class ReportController extends BaseController {
                 resp.remove('dataSet')
             }
         }
+    }
+
+    def getPatientTools() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params?.patientId as long
+
+        def resp = reportService.getPatientTools(token, clientId, patientId)
+
+        render resp as JSON
     }
 }

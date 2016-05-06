@@ -49,7 +49,8 @@ module.exports = {
     CHECK_CAREGIVER_EMAIL: '/patients/{0}/caregivers/check-email',
 
     //Report
-    GET_INDIVIDUAL_REPORT: '/patients/{0}/treatments/{1}/tools/{2}/report',
+    GET_INDIVIDUAL_REPORT: '/patients/{0}/tools/{1}/report',
+    GET_PATIENT_TOOLS: '/patients/{0}/tools/',
 
     //Activity
     GET_ACTIVITIES: '/patients/{0}/activities',

@@ -325,33 +325,33 @@ function ScoreChart() {
         markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
     };
 
-    this.drawSurgeryDate = function(surgeryDate) {
-        var surgeryDateX = this.chartObject
+    this.drawAbsoluteEvents = function(eventDate) {
+        var absoluteEventX = this.chartObject
             .append('g')
-            .classed('surgery-date-x', true)
-            .attr('transform', 'translate({0}, {1})'.format(this.scales.x(surgeryDate), this.chartSize.chartHeight));
+            .classed('absolute-event-x', true)
+            .attr('transform', 'translate({0}, {1})'.format(this.scales.x(eventDate), this.chartSize.chartHeight));
 
         var vPadding = 4;
         var hPadding = 10;
         var color = '#305e6e';
 
-        var textGroup = surgeryDateX.append('g')
+        var textGroup = absoluteEventX.append('g')
             .classed('text-group', true)
             .attr('transform', 'translate({0}, {1})'.format(0, 45));
 
-        var surgeryDateText = textGroup.append('text')
-            .text('Surgery Date');
+        var eventDateText = textGroup.append('text')
+            .text('Surgery');
 
-        var surgeryDateBBox = surgeryDateText.node().getBBox();
+        var eventDateBBox = eventDateText.node().getBBox();
 
         textGroup.append('text')
-            .text(Utility.toVancouverTimeHour(surgeryDate, DATE_FORMAT))
-            .attr('y', surgeryDateBBox.height + 3)
+            .text(Utility.toVancouverTimeHour(eventDate, DATE_FORMAT))
+            .attr('y', eventDateBBox.height + 3)
             .attr('x', 0);
 
         var textGroupBBox = textGroup.node().getBBox();
 
-        surgeryDateX.insert('rect', 'g')
+        absoluteEventX.insert('rect', 'g')
             .attr('x', textGroupBBox.x - hPadding)
             .attr('y', textGroupBBox.y - vPadding)
             .attr('width', textGroupBBox.width + hPadding * 2)
@@ -359,44 +359,44 @@ function ScoreChart() {
             .attr('transform', 'translate({0}, {1})'.format(0, 45))
             .style('fill', color);
 
-        surgeryDateX.append('line')
+        absoluteEventX.append('line')
             .attr('x1', 0)
             .attr('y1', -this.chartSize.chartHeight)
             .attr('x2', 0)
             .attr('y2', 20);
 
-        surgeryDateX.append('path')
+        absoluteEventX.append('path')
             .classed('triangle', true)
             .attr('transform', 'translate(0, 20)')
             .attr('d', d3.svg.symbol()
                 .size(24)
                 .type('triangle-up'));
 
-        var beforeSurgerySpace = this.scales.x(surgeryDate) - textGroupBBox.width / 2 - hPadding;
-
-        if (beforeSurgerySpace >= 130) {
-            this.chartObject
-                .append('text')
-                .text('BEFORE SURGERY')
-                .classed('surgery-text before', true)
-                .attr('x', beforeSurgerySpace / 2)
-                .attr('y', this.chartSize.chartHeight + 65)
-                .attr('dx', -55);
-        }
-
-        var afterSurgerySpace = this.chartSize.chartWidth -
-                                    this.scales.x(surgeryDate) -
-                                    textGroupBBox.width / 2 -
-                                    hPadding;
-
-        if (afterSurgerySpace >= 130) {
-            this.chartObject
-                .append('text')
-                .text('AFTER SURGERY')
-                .classed('surgery-text after', true)
-                .attr('x', this.scales.x(surgeryDate) + afterSurgerySpace / 2)
-                .attr('y', this.chartSize.chartHeight + 65);
-        }
+        // var beforeSpace = this.scales.x(eventDate) - textGroupBBox.width / 2 - hPadding;
+        //
+        // if (beforeSpace >= 130) {
+        //     this.chartObject
+        //         .append('text')
+        //         .text('BEFORE SURGERY')
+        //         .classed('surgery-text before', true)
+        //         .attr('x', beforeSurgerySpace / 2)
+        //         .attr('y', this.chartSize.chartHeight + 65)
+        //         .attr('dx', -55);
+        // }
+        //
+        // var afterSpace = this.chartSize.chartWidth -
+        //                             this.scales.x(eventDate) -
+        //                             textGroupBBox.width / 2 -
+        //                             hPadding;
+        //
+        // if (afterSpace >= 130) {
+        //     this.chartObject
+        //         .append('text')
+        //         .text('AFTER SURGERY')
+        //         .classed('surgery-text after', true)
+        //         .attr('x', this.scales.x(eventDate) + afterSurgerySpace / 2)
+        //         .attr('y', this.chartSize.chartHeight + 65);
+        // }
     };
 
     this.onLineMouseover = function (d, i, elem) {
@@ -508,10 +508,14 @@ function ScoreChart() {
         this.$node.find('svg').remove();
     };
 
+    this.getReportSetting = function (data) {
+        return PARAMs.REPORT_CHART_SETTING[data.testType];
+    };
+
     this.organizeData = function(data) {
         var meta = this.scales.meta;
         var hasScoreType = false;
-        var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+        var reportSetting = this.getReportSetting(data);
         var availableTypes = reportSetting.type;
         var scoreAtType = reportSetting.scoreAt;
 
@@ -541,9 +545,11 @@ function ScoreChart() {
             }
         });
 
-        if (data.surgeryDate && !_.contains(meta.xRange, data.surgeryDate)) {
-            meta.xRange.push(data.surgeryDate);
-        }
+        _.each(data.absoluteEvents, function (event) {
+            if (event.date && !_.contains(meta.xRange, event.date)) {
+                meta.xRange.push(event.date);
+            }
+        });
 
         meta.xRange = _.sortBy(meta.xRange);
 
@@ -553,10 +559,12 @@ function ScoreChart() {
     };
 
     this.onRender = function (e, data) {
+        var me = this;
+
         if (this.$node.is(':visible')) {
             this.select('defaultPanelSelector').hide();
 
-            var reportSetting = PARAMs.REPORT_CHART_SETTING[data.toolType];
+            var reportSetting = this.getReportSetting(data);
             if (!data || !reportSetting) {
                 this.select('noAvailableSelector').show();
             } else {
@@ -584,9 +592,11 @@ function ScoreChart() {
                     }
                 }
 
-                if (data.surgeryDate) {
-                    this.drawSurgeryDate(data.surgeryDate);
-                }
+                _.each(data.absoluteEvents, function (event) {
+                    if (event.date) {
+                        me.drawAbsoluteEvents(event.date);
+                    }
+                });
             }
         }
     };

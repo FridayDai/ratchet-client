@@ -94,28 +94,6 @@ class PatientDashboardController extends BaseController {
         render status: 200
     }
 
-    def getPatientReportTab() {
-        def medicalRecordId = params?.medicalRecordId
-        def treatmentId = params?.treatmentId
-        def clientId = params?.clientId
-        def patientId = params?.patientId
-        def archived = params?.archived
-        if (archived == null || archived == '') {
-            archived = false
-        }
-
-        render(
-            view: "/patientDashboard/report",
-            model: [
-                treatmentId: treatmentId,
-                medicalRecordId: medicalRecordId,
-                clientId: clientId,
-                patientId: patientId,
-                archived: archived
-            ]
-        )
-    }
-
     def getTreatmentListTab() {
         String token = request.session.token
 
@@ -164,7 +142,16 @@ class PatientDashboardController extends BaseController {
     }
 
     def getReportTab() {
-        render(view: '/patientDashboard/report')
+        def clientId = request.session.clientId
+        def patientId = params?.patientId
+
+        render(
+            view: "/patientDashboard/report",
+            model: [
+                clientId: clientId,
+                patientId: patientId
+            ]
+        )
     }
 
     def getGroupTab() {

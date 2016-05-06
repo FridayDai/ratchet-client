@@ -46,6 +46,20 @@ var TYPE_SECTION_INDEX_MAPPING = {
 
 var NODE_NAME_TEMP = '{0}Node';
 
+var REPORT_TAB_EFFECT_EVENTS = [
+    'addTreatmentSuccess',
+    'deleteTreatmentSuccess',
+    'editSurgeryDateSuccess',
+    'archiveTreatmentSuccess'
+];
+
+var ACTIVITIES_TAB_EFFECT_EVENTS = [
+    'addTreatmentSuccess',
+    'deleteTreatmentSuccess',
+    'editSurgeryDateSuccess',
+    'archiveTreatmentSuccess'
+];
+
 function PatientDetailPage() {
     this.setPath(PAGEs.PATIENT_DETAIL);
 
@@ -205,10 +219,28 @@ function PatientDetailPage() {
         }
     };
 
+    this.onReportSectionEffectEvents = function () {
+        this.reloadTab('Report');
+    };
+
+    this.onActivitiesSectionEffectEvents = function () {
+        this.reloadTab('Activities');
+    };
+
     this.after('initialize', function () {
+        var me = this;
+
         this.initTabs();
 
         this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);
+
+        _.each(REPORT_TAB_EFFECT_EVENTS, function(event) {
+            me.on(document, event, me.onReportSectionEffectEvents);
+        });
+
+        _.each(ACTIVITIES_TAB_EFFECT_EVENTS, function(event) {
+            me.on(document, event, me.onActivitiesSectionEffectEvents);
+        });
     });
 
     this.before('teardown', function () {

@@ -53,13 +53,13 @@ class ReportService extends RatchetAPIService {
         }
     }
 
-    def getIndividualReport(String token, clientId, patientId, medicalRecordId, baseToolId) {
+    def getIndividualReport(String token, clientId, patientId, baseToolId) {
 
         def tempUrl = grailsApplication.config.ratchetv2.server.url.individualReport
-        String url = String.format(tempUrl, clientId, medicalRecordId, baseToolId, patientId)
+        String url = String.format(tempUrl, clientId, patientId, baseToolId)
 
         log.info("Call backend service to get report for individual patient, token: ${token}.")
-        withPost(token, url) { req ->
+        withGet(token, url) { req ->
             def resp = req.asString()
 
             if (resp.status == 200) {
@@ -68,6 +68,25 @@ class ReportService extends RatchetAPIService {
                 JSON.parse(resp.body)
             }
             else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getPatientTools(String token, clientId, patientId) {
+        log.info("Call backend service to get patient tools, token: ${token}.")
+
+        String getPatientToolsUrl = grailsApplication.config.ratchetv2.server.url.getPatientTools
+        String url = String.format(getPatientToolsUrl, clientId, patientId)
+
+        withGet(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 200) {
+                log.info("Get patient tools success, token: ${token}")
+
+                JSON.parse(resp.body)
+            } else {
                 handleError(resp)
             }
         }
