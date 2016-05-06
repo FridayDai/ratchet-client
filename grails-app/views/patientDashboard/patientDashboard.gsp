@@ -397,7 +397,7 @@
             code on a device that the patient has access to.
         </div>
         <div class="msg-center code"></div>
-        <div class="msg-center">The code will expire in 24 hours!</div>
+        <div class="msg-center">The code will expire in 48 hours!</div>
     </div>
     </body>
     </html>
