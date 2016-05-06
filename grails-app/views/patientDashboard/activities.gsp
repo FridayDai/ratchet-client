@@ -14,10 +14,7 @@
                 <tr data-is-dom-data="true">
                     <td>${activity.description}</td>
                     <td>${activity.createdBy}</td>
-                    <td>
-                        <g:formatDate date="${activity.dateCreated}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                       format='MMM d, yyyy h:mm:ss aaa'/>
-                    </td>
+                    <td>${activity.dateCreated}</td>
                 </tr>
             </g:each>
             </tbody>
