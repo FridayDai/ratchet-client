@@ -1,30 +1,27 @@
 function ClearTabCache() {
-
-    /*
-    example:
-
-    1.this.trigger('clearTopTabsCache');
-
-    2.this.trigger('clearTopTabsCache', {type: 'Group'});
-
-    3.this.trigger('clearTopTabsCache', {type: ['Group', 'Report']});
-
-     */
-
     this.attributes({
         TabElement: null,
-        type: null,
-        clearTabEvent: null
+        clearCacheEvents: null
     });
 
-    this.clearCache = function(e, option) {
-        if(_.isEmpty(option) || _.includes(option.type, this.attr.type)) {
-            $(this.attr.TabElement).data('loaded', false);
-        }
+    this._clearCache = function() {
+        $(this.attr.TabElement).data('loaded', false);
     };
 
     this.after('initialize', function () {
-        this.on(document, this.attr.clearTabEvent, this.clearCache);
+        var me = this;
+
+        if (_.isString(this.attr.clearCacheEvents)) {
+            this.attr.clearCacheEvents = [this.attr.clearCacheEvents];
+        }
+
+        if (!_.isArray(this.attr.clearCacheEvents)) {
+            throw 'clearCacheEvents should be one array.';
+        }
+
+        _.each(this.attr.clearCacheEvents, function (event) {
+            me.on(document, event, me._clearCache);
+        });
     });
 }
 

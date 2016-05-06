@@ -191,7 +191,7 @@
 
 .box-item-header {
     height: 75px;
-    padding: 6px 12px;
+    padding: 10px 12px 6px;
     color: $base-font-grey-dark;
     font-size: 16px;
     box-shadow: 0 0 0.5em $base-font-color;
@@ -199,17 +199,20 @@
 
     .item-title {
         padding: 6px 0;
+        color: #333333;
+        font-size: 17px;
     }
 
     .number-id {
         display: inline-block;
         float: right;
         padding-left: 14px;
-        font-size: 15px;
         color: $base-light-grey-color;
+        font-size: 13px;
     }
 
     .task-date {
+        font-size: 15px;
         font-weight: 600;
         color: $base-color-medium-black;
     }
@@ -220,6 +223,7 @@
 
     .item-provider {
         color: $base-light-grey-color;
+        font-size: 13px;
     }
 }
 

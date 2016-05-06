@@ -132,6 +132,8 @@ function CaregiverTable() {
             type: 'DELETE',
             success: function () {
                 me.deleteRow($row);
+                
+                me.trigger('deletePatientCaregiverSuccess');
             }
         });
     };

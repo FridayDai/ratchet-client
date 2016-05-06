@@ -1,4 +1,4 @@
-<div class="treatment-report clear">
+<div class="treatment-report clear patient-report-section">
     <div class="inner-search tool-bar"
          data-patient-id="${patientId}"
     >

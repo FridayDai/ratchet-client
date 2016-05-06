@@ -81,6 +81,8 @@ function PatientInfoSection() {
                 }
             }
         });
+
+        this.trigger('patientEmailInvited');
     };
 
     this.onPatientUpdatedSuccess = function (e, data) {

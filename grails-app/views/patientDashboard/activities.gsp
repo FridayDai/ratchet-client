@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content patient-activities-section">
     <div class="table-group">
         <table id="activity-table" class="activityTable cursorAuto"
                data-patient-id="${patientId}" data-total="${activities.recordsTotal}" data-pagesize="${pagesize}">

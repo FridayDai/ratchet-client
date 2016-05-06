@@ -43,6 +43,8 @@ function PatientLevelTabToolbar() {
                     STRINGs.SEND_NOTIFY_TASKS_SUCCESS
                 );
             });
+            
+            this.trigger('patientTasksNotified');
         }
     };
 

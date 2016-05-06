@@ -180,7 +180,12 @@ function TreatmentList() {
         this.updateAddTreatmentButtonStatus();
     };
 
+    this.showTabSection = function () {
+        this.$node.children(':first').css('visibility', 'visible');
+    };
+
     this.after('initialize', function () {
+        this.showTabSection();
         this.initTreatmentsTab();
 
         this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);

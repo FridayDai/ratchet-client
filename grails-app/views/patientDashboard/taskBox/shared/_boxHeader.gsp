@@ -37,11 +37,7 @@
         </span>
 
         <div class="number-id">
-            <label>ID:</label>
-            <span class="id number-font">${task?.id}</span>
+            ID: <span class="id">${task?.id}</span>
         </div>
     </div>
-
-
-
 </div>
