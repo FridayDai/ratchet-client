@@ -259,8 +259,11 @@
         display: inline-block;
 //        padding-right: 22px;
         text-align: center;
-        flex-basis: 33%;
-        -ms-flex-preferred-size: 33%;
+
+        &.multiple-item {
+            flex-basis: 33%;
+            -ms-flex-preferred-size: 33%;
+        }
     }
 
     .score-number {

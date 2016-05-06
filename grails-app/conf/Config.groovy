@@ -308,7 +308,7 @@ ratchetv2 {
 
 
             //activity
-            getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/activities"
+            getActivity = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/activities"
 
             //caregiver and careTeam
             caregivers = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers"

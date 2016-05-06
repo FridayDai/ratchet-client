@@ -6,6 +6,7 @@ var Utility = require('../../../utils/Utility');
 function ActivityTable() {
     this.options({
         order: [[2, 'desc']],
+        paging: true,
         columnDefs: [
             {
                 targets: 0,
@@ -32,8 +33,7 @@ function ActivityTable() {
 
     this.getUrl = function () {
         var data = this.$node.data();
-
-        return URLs.GET_ACTIVITIES.format(data.patientId, data.clientId, data.medicalRecordId);
+        return URLs.GET_ACTIVITIES.format(data.patientId);
     };
 }
 

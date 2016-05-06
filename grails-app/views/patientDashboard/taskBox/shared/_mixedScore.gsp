@@ -19,7 +19,7 @@
 
 <div class="item-column">
     <g:each in="${level}" var="single">
-        <span class="sub-item">
+        <span class="sub-item multiple-item">
             <div class="score-number">
                 ${mixedResult[single]}
             </div>
@@ -29,7 +29,7 @@
 
 <div class="item-column">
     <g:each in="${percent}" var="single">
-        <span class="sub-item">
+        <span class="sub-item multiple-item">
             <div class="score-number">
                 <g:if test="${mixedResult[painToggle]}">- -</g:if>
                 <g:else>${mixedResult[single] ?: '0'}%</g:else>
@@ -40,7 +40,7 @@
 
 <div class="item-column">
     <g:each in="${frequency}" var="single">
-        <span class="sub-item">
+        <span class="sub-item multiple-item">
             <div class="score-number">
                 ${mixedResult[single] ? RatchetConstants.PAIN_FREQUENCY[mixedResult[single]?.toInteger()] : ''}
             </div>
@@ -50,7 +50,7 @@
 
 <div class="item-column column-bottom">
     <g:each in="${areaName}" var="single">
-        <span class="sub-item">
+        <span class="sub-item multiple-item">
             <div class="score-label">
                 ${single} Pain
             </div>
