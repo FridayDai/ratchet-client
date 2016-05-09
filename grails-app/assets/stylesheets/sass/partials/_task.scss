@@ -206,13 +206,13 @@
     .number-id {
         display: inline-block;
         float: right;
-        padding-left: 14px;
+        padding-top: 4px;
         color: $base-light-grey-color;
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .task-date {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         color: $base-color-medium-black;
     }
@@ -222,8 +222,10 @@
     }
 
     .item-provider {
+        display: inline-block;
+        width: 78%;
         color: $base-light-grey-color;
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
