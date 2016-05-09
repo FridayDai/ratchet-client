@@ -12,7 +12,7 @@ var BulkImportResultTable = require('./BulkImportResultTable');
 
 function BulkImportDialog() {
     this.attributes({
-        toolbarSelector: '#bulk-import-form .search-content',
+        toolbarSelector: '.search-content',
         titleTableSelector: '#helpTable',
         searchTipSelector: '.search-tip',
         importFilePanelSelector: '.import-file-panel',
