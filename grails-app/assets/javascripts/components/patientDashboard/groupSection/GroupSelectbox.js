@@ -9,7 +9,7 @@ function GroupSelectbox() {
             transport: function (params) {
                 return $.ajax(_.assign(params, {dropProcess: true}));
             },
-            url: URLs.GET_GROUPS,
+            url: URLs.GET_MY_GROUPS,
             data: function (name) {
                 return {
                     name: name,
@@ -18,7 +18,7 @@ function GroupSelectbox() {
             },
             results: function (data) {
                 var myResults = [];
-                $.each(data.data, function (index, item) {
+                $.each(data, function (index, item) {
                     myResults.push({
                         id: item.id,
                         text: item.name

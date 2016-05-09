@@ -3,7 +3,14 @@ require('../../../libs/jquery-validation/jquery.validate.js');
 var moment = require('moment');
 var STRINGs = require('../../../constants/Strings');
 
-$.validator.addMethod("birthdayValueCheck", function(value, elem){
+$.validator.addMethod("DateValidCheck", function (value, elem) {
+    var $form = $(elem).closest('form');
+    var birthday = $form.find('[name=birthday]').val();
+    var formatBirthday = moment(birthday, 'MM/DD/YYYY');
+    return formatBirthday.isValid();
+}, STRINGs.INVALID_DATE);
+
+$.validator.addMethod("BirthdayRangeCheck", function (value, elem) {
     var $form = $(elem).closest('form');
     var birthday = $form.find('[name=birthday]').val();
     var formatBirthday = moment(birthday, 'MM/DD/YYYY');
@@ -15,7 +22,8 @@ module.exports = {
         return {
             rules: {
                 birthday: {
-                    birthdayValueCheck: true
+                    DateValidCheck: true,
+                    BirthdayRangeCheck: true
                 }
             }
         };
