@@ -12,13 +12,13 @@
                         <% Long timeOffset = Long.valueOf((task?.sendTimeOffset) ?: 0) %>
                         <% Long sentTimeDays = timeOffset / (24 * 60 * 60 * 1000) %>
                         <g:if test="${sentTimeDays == 0}">
-                            <label class="numeral">on surgery day</label>
+                            <label class="numeral">On Surgery Day</label>
                         </g:if>
                         <g:else>
                             <span class="label-space">${sentTimeDays.abs()}</span>
-                            <label class="label-space">${sentTimeDays.abs() == 1 ? 'day' : 'days'}</label>
-                            <span class="label-space">${sentTimeDays > 0 ? 'after' : 'before'}</span>
-                            <label>surgery</label>
+                            <label class="label-space">${sentTimeDays.abs() == 1 ? 'Day' : 'Days'}</label>
+                            <span class="label-space">${sentTimeDays > 0 ? 'After' : 'Before'}</span>
+                            <label>Surgery</label>
                         </g:else>
                     </g:if>
                 </span>
@@ -33,7 +33,7 @@
 
     <div>
         <span class="item-provider">
-            Requested by ${task?.providerName}
+            Requested by <strong>${task?.providerName}</strong>
         </span>
 
         <div class="number-id">
