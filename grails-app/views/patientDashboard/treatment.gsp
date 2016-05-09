@@ -32,20 +32,8 @@
                 <span class="text-span">Add Task</span>
             </div>
             <div class="more-button">
-                <div
-                    <g:if test="${archived == 'true'}">
-                        class="drop-down-toggle disabled btn-disabled" disabled="disabled"
-                    </g:if>
-                    <g:else>
-                        class="drop-down-toggle"
-                    </g:else>>
-                    <span
-                        <g:if test="${archived == 'true'}">
-                            class="more-btn more-btn-disabled"
-                        </g:if>
-                        <g:else>
-                            class="more-btn"
-                        </g:else>>More</span>
+                <div class="drop-down-toggle">
+                    <span class="more-btn">More</span>
                 </div>
                 <div class="drop-down-lists hidden">
                     <g:if test="${surgeryTime}">

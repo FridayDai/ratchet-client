@@ -5,6 +5,8 @@ var URLs = require('../../../constants/Urls');
 
 function TreatmentToolbar() {
     this.attributes({
+        archived: null,
+
         addTaskButtonSelector: '#addTasks',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
@@ -132,12 +134,24 @@ function TreatmentToolbar() {
         });
     };
 
+    this.hideNotAvailableButtons = function () {
+        this.select('editSurgeryButtonSelector').hide();
+        this.select('archiveButtonSelector').hide();
+    };
+
     this.after('initialize', function () {
+        if (!this.attr.archived) {
+            this.on('click', {
+                addTaskButtonSelector: this.onAddTaskButtonClicked,
+                editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
+                archiveButtonSelector: this.onArchiveButtonClicked
+            });
+        } else {
+            this.hideNotAvailableButtons();
+        }
+
         this.on('click', {
-            addTaskButtonSelector: this.onAddTaskButtonClicked,
             moreDropdownButtonSelector: this.onMoreButtonClicked,
-            editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
-            archiveButtonSelector: this.onArchiveButtonClicked,
             deleteButtonSelector: this.onDeleteButtonClicked
         });
 

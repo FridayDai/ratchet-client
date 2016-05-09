@@ -329,14 +329,8 @@ function TaskSection() {
     };
 
     this.initTreatmentToolbar = function () {
-        if (this.$node.children('.archived').length === 0) {
-            TreatmentToolbar.attachTo(this.select('treatmentToolbarSelector'));
-        }
-    };
-
-    this.disableTaskLink = function () {
-        this.$node.find('.begin-task').click(function (e) {
-            e.preventDefault();
+        TreatmentToolbar.attachTo(this.select('treatmentToolbarSelector'), {
+            archived: this.$node.children('.archived').length !== 0
         });
     };
 
@@ -353,18 +347,10 @@ function TaskSection() {
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
 
-
-        if (this.$node.children('.archived').length === 0) {
-            this.on('click', {
-                deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
-                beginTaskButtonSelector: this.onTaskBeginButtonClicked,
-                callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
-            });
-        } else {
-            this.disableTaskLink();
-        }
-
         this.on('click', {
+            deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
+            beginTaskButtonSelector: this.onTaskBeginButtonClicked,
+            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
             filterButtonSelector: this.onFilterButtonClicked
         });
 
