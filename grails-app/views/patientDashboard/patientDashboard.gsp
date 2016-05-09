@@ -95,7 +95,12 @@
                     </g:link>
                 </li>
                 <li data-type="Report">
-                    <g:link controller="patientDashboard" action="getReportTab">
+                    <g:link controller="patientDashboard"
+                            action="getReportTab"
+                            params="[
+                                    patientId: patientInfo.id,
+                            ]"
+                    >
                         REPORT
                     </g:link>
                 </li>

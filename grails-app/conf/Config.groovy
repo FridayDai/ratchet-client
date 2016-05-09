@@ -283,6 +283,10 @@ ratchetv2 {
             patientGroups = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups"
             deletePatientGroup = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/groups/%s"
 
+            //Patient report section
+            individualReport = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/tools/%s/report"
+            getPatientTools = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/tools"
+
             // Treatment URL
             getTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments"
             assignTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/assign/record"
@@ -315,11 +319,6 @@ ratchetv2 {
             caregiver = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/%s"
             checkCaregiverEmail = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/caregivers/email"
 
-            //for toolService
-            tools {
-                loadToolByTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
-            }
-
             //for medicalRecord
             showMedicalRecords = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/records/%s"
             medicalRecord {
@@ -334,7 +333,6 @@ ratchetv2 {
 
             //Report
             providerAverage = "${ratchetv2.server.url.base}/api/v1/report/outcome"
-            individualReport = "${ratchetv2.server.url.base}/api/v1/client/%s/record/%s/tool/%s/patient/%s/report"
         }
 
         clientPlatform = "ancient"

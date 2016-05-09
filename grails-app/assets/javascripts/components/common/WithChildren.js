@@ -23,7 +23,11 @@ function WithChildren() {
                     _.defaults( obj.attributes, this._childrenAttrs)
                 );
             } else {
-                this.child[selector] = child.attachTo(this.attr[selector], this._childrenAttrs);
+                this.child[selector] = child.attachTo(
+                    this.$node.find(this.attr[selector]),
+                    this._childrenAttrs,
+                    this.$node
+                );
             }
         }, this);
     };

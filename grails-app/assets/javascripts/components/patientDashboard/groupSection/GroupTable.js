@@ -82,6 +82,8 @@ function GroupTable() {
             type: 'POST',
             success: function () {
                 me.deleteRow($row);
+
+                me.trigger('deletePatientGroupSuccess');
             },
             error: function (jqXHR) {
                 if (jqXHR.status === 400 && jqXHR.responseText.indexOf('cannot be deleted')) {

@@ -543,6 +543,8 @@
             padding-left: 5px;
 
             &.not-available {
+                color: #b3b3b3;
+
                 &:hover {
                     color: #b3b3b3;
                     background-color: transparent;
@@ -835,4 +837,11 @@
         }
 
     }
+}
+
+.patient-report-section,
+.patient-group-section,
+.patient-caregiver-section,
+.patient-activities-section {
+    visibility: hidden;
 }

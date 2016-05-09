@@ -91,7 +91,7 @@ $line-color-4: #885AAD;
                 display: none;
             }
 
-            .surgery-date-x {
+            .absolute-event-x {
                 line {
                     display: block;
                     stroke: $main-color;
@@ -256,25 +256,35 @@ $line-color-4: #885AAD;
             color: #CCCCCC;
         }
 
-        .title,
-        .desc {
+        .title {
             font-weight: 700;
             color: #225f6f;
-        }
-
-        .title {
             margin-top: 10px;
             font-size: 24px;
         }
 
         .desc {
-            margin-top: 20px;
-            font-size: 15px;
+            color: #225f6f;
+            font-weight: 400;
+            margin-top: 16px;
+            font-size: 16px;
+            font-style: italic;
         }
     }
 
     .not-available {
         display: none;
+
+        .icon {
+            font-size: 100px;
+            opacity: 0.7;
+        }
+
+        .desc {
+            font-weight: 700;
+            color: black;
+            font-style: normal;
+        }
     }
 
     .no-data {

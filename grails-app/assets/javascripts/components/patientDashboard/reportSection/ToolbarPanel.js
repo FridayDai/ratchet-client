@@ -17,7 +17,6 @@ function ToolbarPanel() {
         var nodeData = this.$node.data();
 
         this.patientId = nodeData.patientId;
-        this.medicalRecordId = nodeData.medicalRecordId;
     };
 
     this.onToolSelect = function (e, data) {
@@ -42,7 +41,7 @@ function ToolbarPanel() {
         this.trigger('clearTreatmentScoreChart');
 
         $.ajax({
-            url: URLs.GET_INDIVIDUAL_REPORT.format(this.patientId, this.medicalRecordId, toolId),
+            url: URLs.GET_INDIVIDUAL_REPORT.format(this.patientId, toolId),
             success: function (data) {
                 me.trigger('renderTreatmentScoreChart', data);
             }

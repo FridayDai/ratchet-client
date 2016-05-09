@@ -4,6 +4,10 @@ var ClearTabCache = require('../../shared/functional/ClearTabCache');
 var GroupTable = require('./GroupTable');
 var URLs = require('../../../constants/Urls');
 
+var GROUP_TAB_EFFECT_EVENTS = [
+    'addTreatmentSuccess'
+];
+
 function GroupSection() {
 
     flight.compose.mixin(this, [
@@ -11,6 +15,8 @@ function GroupSection() {
     ]);
 
     this.attributes({
+        clearCacheEvents: GROUP_TAB_EFFECT_EVENTS,
+
         addGroupButtonSelector: '#add-group',
         GroupTableSelector: '#group-table'
     });
@@ -32,7 +38,13 @@ function GroupSection() {
         this.trigger('showAddGroupDialog');
     };
 
+    this.showTabSection = function () {
+        this.$node.children(':first').css('visibility', 'visible');
+    };
+
     this.after('initialize', function () {
+        this.showTabSection();
+        
         this.on('click', {
             addGroupButtonSelector: this.onAddButtonClicked
         });

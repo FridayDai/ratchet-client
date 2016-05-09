@@ -6,7 +6,6 @@ var WithPage = require('../components/common/WithPage');
 var STRINGs = require('../constants/Strings');
 var PAGEs = require('../constants/Pages');
 var Utility = require('../utils/Utility');
-var Events = require('../constants/Events');
 
 var PatientInfoSection = require('../components/patientDashboard/patientInfoSection/PatientInfoSection');
 var TreatmentList = require('../components/patientDashboard/treatmentSection/TreatmentList');
@@ -34,14 +33,6 @@ var TYPE_SECTION_MAPPING = {
     'Group': GroupSection,
     'Caregiver': TeamSection,
     'Activities': ActivitySection
-};
-
-var TYPE_SECTION_INDEX_MAPPING = {
-    'Treatment': 0,
-    'Report': 1,
-    'Group': 2,
-    'Caregiver': 3,
-    'Activities': 4
 };
 
 var NODE_NAME_TEMP = '{0}Node';
@@ -138,8 +129,10 @@ function PatientDetailPage() {
             cache: true,
             ajaxOptions: {cache: true},
             beforeLoad: function (event, ui) {
+                var tabType = ui.tab.data('type');
+
                 me.trigger('patientLevelTabBeforeLoad', {
-                    type: ui.tab.data('type')
+                    type: tabType
                 });
 
                 if (ui.tab.data("loaded")) {
@@ -154,6 +147,13 @@ function PatientDetailPage() {
                 ui.jqXHR.error(function () {
                     ui.panel.html(STRINGs.TAB_LOAD_ERROR);
                 });
+
+                var panelDOM = me[NODE_NAME_TEMP.format(tabType.toLowerCase())];
+
+                if (panelDOM) {
+                    $(panelDOM).children(':first').css('visibility', 'hidden');
+                    flight.registry.findInstanceInfoByNode(panelDOM)[0].instance.teardown();
+                }
 
                 Utility.progress(true);
             },
@@ -176,39 +176,12 @@ function PatientDetailPage() {
 
         this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
         TYPE_SECTION_MAPPING[type].attachTo(panel, {
-            'TabElement': tab[0],
-            'type': type,
-            'clearTabEvent': Events.PATIENT_DASHBOARD_CLEAR_TOP_TAB
+            'TabElement': tab[0]
         });
-    };
-
-    this.onAddTreatmentSuccess = function () {
-        var me = this;
-
-        _.each(['Group', 'Caregiver'], function (type) {
-            me.reloadTab(type);
-        });
-    };
-
-    this.reloadTab = function (type) {
-        var tabIndex = TYPE_SECTION_INDEX_MAPPING[type];
-        var tabPanelDOM = this[NODE_NAME_TEMP.format(type.toLowerCase())];
-
-        if (tabPanelDOM) {
-            var $tab = $(this.select('tabTitleSelector').get(tabIndex));
-
-            $tab.data("loaded", false);
-
-            flight.registry.findInstanceInfoByNode(tabPanelDOM)[0].instance.teardown();
-
-            this.select('tabsContainerSelector').tabs('load', tabIndex);
-        }
     };
 
     this.after('initialize', function () {
         this.initTabs();
-
-        this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);
     });
 
     this.before('teardown', function () {

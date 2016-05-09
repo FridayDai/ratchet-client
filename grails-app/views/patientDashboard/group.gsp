@@ -1,6 +1,6 @@
 <%@ page import="com.ratchethealth.client.StatusCodeConstants" %>
 
-<div class="content">
+<div class="content patient-group-section">
     <div class="top-tabs-content group-content">
         <div class="toolbar">
             <button class="btn btn-add btn-add-group" id="add-group" data-patient-id="${patientId}">

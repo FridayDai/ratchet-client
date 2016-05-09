@@ -7,7 +7,7 @@ function ToolbarToolCombobox() {
         source: function (request, response) {
             $.ajax({
                 dropProcess: true,
-                url: URLs.GET_AVAILABLE_TASKS.format(this.$node.data('treatmentId'))
+                url: URLs.GET_PATIENT_TOOLS.format(this.$node.data('patientId'))
             }).done(function (data) {
                 response($.map(data, function (item) {
                     return {

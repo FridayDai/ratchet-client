@@ -94,7 +94,8 @@ class UrlMappings {
         "/patients/$patientId/groups/$groupId"(controller: "groups", action: "deletePatientGroup")
 
         //Patient report
-        "/patients/$patientId?/treatments/$medicalRecordId/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
+        "/patients/$patientId?/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
+        "/patients/$patientId?/tools"(controller: "report", action: "getPatientTools")
 
         //Patient activity
         "/patients/$patientId?/activities"(controller: "patientDashboard", action: "getPatientActivities")
