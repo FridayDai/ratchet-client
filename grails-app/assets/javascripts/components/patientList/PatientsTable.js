@@ -126,7 +126,7 @@ function PatientsTable() {
                 data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
-                    if (taskStatus.indexOf("0 active item") !== -1) {
+                    if (taskStatus.indexOf("0 Active") !== -1) {
                         return '<span class="task-status all-complete-status">' + taskStatus + '</span>';
                     } else if (taskStatus.indexOf("Overdue") !== -1 && taskStatus.indexOf("Pending") !== -1) {
                         return '<span class="task-status overdue-status">' + taskStatus + '</span>';
