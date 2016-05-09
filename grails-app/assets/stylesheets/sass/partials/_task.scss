@@ -176,6 +176,10 @@
 
         .box-item-content {
             color: $base-color-grey-expired;
+
+            .to-be-completed {
+                color: #666666;
+            }
         }
 
         .box-item-footer {
@@ -462,20 +466,6 @@
     .box-item-content,
     .task-date {
         color: #808080 !important;
-    }
-
-    .icon-button {
-        color: #cccccc;
-        border-left-color: #cacaca;
-        cursor: default;
-
-        &:hover {
-            color: #cccccc;
-        }
-
-        &:hover + .icon-button-tip {
-            display: none;
-        }
     }
 
     .quick-filter-button {

@@ -94,7 +94,7 @@
         </g:if>
 
         <g:else>
-            <div class="sub-item">
+            <div class="sub-item to-be-completed">
                 To be completed
             </div>
         </g:else>
