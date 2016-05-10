@@ -227,9 +227,13 @@
 
     .item-provider {
         display: inline-block;
-        width: 78%;
+        width: 76%;
         color: $base-light-grey-color;
         font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+        white-space: nowrap;
     }
 }
 

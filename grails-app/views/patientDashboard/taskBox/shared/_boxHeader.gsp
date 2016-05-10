@@ -5,12 +5,12 @@
         <div class="task-date">
             <g:formatDate date="${taskTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                           format="MMM dd, yyyy"/>
-            &mdash;
             <g:if test="${task?.sendTimeOffset && task.sendTimeOffset != 'null'}">
                 <span class="item-datetime">
                     <g:if test="${!(task?.immediate && !task?.surgeryTime)}">
                         <% Long timeOffset = Long.valueOf((task?.sendTimeOffset) ?: 0) %>
                         <% Long sentTimeDays = timeOffset / (24 * 60 * 60 * 1000) %>
+                        &mdash;
                         <g:if test="${sentTimeDays == 0}">
                             <label class="numeral">On Surgery Day</label>
                         </g:if>
