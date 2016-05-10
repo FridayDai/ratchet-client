@@ -44,11 +44,11 @@
                         <div class="title">Outcome</div>
                     </a>
                 </li>
-                <li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'renderTaskCompletionReport'}">active</g:if>">
-                    <a href="/reports/task-completion">
-                        <div class="title">Task Completion</div>
-                    </a>
-                </li>
+                %{--<li class="sub-nav-li <g:if test="${controllerName == 'report' && actionName == 'renderTaskCompletionReport'}">active</g:if>">--}%
+                    %{--<a href="/reports/task-completion">--}%
+                        %{--<div class="title">Task Completion</div>--}%
+                    %{--</a>--}%
+                %{--</li>--}%
             </ul>
         </li>
         </g:if>
