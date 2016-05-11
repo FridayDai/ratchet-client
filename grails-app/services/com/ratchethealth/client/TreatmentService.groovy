@@ -151,7 +151,7 @@ class TreatmentService extends RatchetAPIService {
         }
     }
 
-    def addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime) {
+    def addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime, providerId) {
         log.info("Call backend service to add ad-hoc tasks to treatment, token: ${token}.")
 
         String getAvailableTaskUrl = grailsApplication.config.ratchetv2.server.url.adhocTasksToTreatment
@@ -161,6 +161,7 @@ class TreatmentService extends RatchetAPIService {
             def resp = req
                     .field("toolIds", toolIds)
                     .field("scheduleTime", scheduleTime)
+                    .field("providerId", providerId)
                     .asString()
 
             if (resp.status == 201) {

@@ -258,7 +258,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.addAdhocTasks('token', 1, 2, 3, '1,2,3', 123)
+		def result = service.addAdhocTasks('token', 1, 2, 3, '1,2,3', 123, 2)
 
 		then:
 		result['hello'] == 'world'
@@ -274,7 +274,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.addAdhocTasks('token', 1, 2, 3, '1,2,3', 123)
+		service.addAdhocTasks('token', 1, 2, 3, '1,2,3', 123, 2)
 
 		then:
 		ApiReturnException e = thrown()

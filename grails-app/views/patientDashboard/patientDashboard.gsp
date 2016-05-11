@@ -277,6 +277,11 @@
                 <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date" required>
                 <div class="surgery-date-relative-indicator"></div>
             </div>
+            <div class="form-group form-provider">
+                <label class="lbl-group">PROVIDER<span>*</span></label>
+                <input id="selectAddTaskProvider" name="staffVal" type="text" class="required"
+                       placeholder="Select provider"/>
+            </div>
         </div>
     </form>
 

@@ -156,8 +156,9 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def toolIds = params?.toolIds
         def scheduleTime = params?.scheduleTime
+        def providerId = params?.providerId
 
-        def resp = treatmentService.addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime)
+        def resp = treatmentService.addAdhocTasks(token, clientId, patientId, medicalRecordId, toolIds, scheduleTime, providerId)
         render resp as JSON
     }
 

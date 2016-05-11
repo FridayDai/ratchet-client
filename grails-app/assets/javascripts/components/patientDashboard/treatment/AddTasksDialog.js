@@ -3,6 +3,7 @@ var WithDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
 
 var ScheduleTaskDatePicker = require('./ScheduleTasksDatePicker');
+var AddTasksProviderCombobox = require('./AddTasksProviderCombobox');
 
 var URLs = require('../../../constants/Urls');
 var Utility = require('../../../utils/Utility');
@@ -41,12 +42,19 @@ function AddTasksDialog() {
         selectAllButtonSelector: '.select-all',
 
         scheduleTaskFieldSelector: '[name=scheduleTaskDate]',
-        scheduleDateHelpLabelSelector: '.surgery-date-relative-indicator'
+        scheduleDateHelpLabelSelector: '.surgery-date-relative-indicator',
+        providerFieldSelector: '#selectAddTaskProvider'
     });
 
     this.children({
         scheduleTaskFieldSelector: {
             child: ScheduleTaskDatePicker,
+            attributes: {
+                resetEvent: 'addTasksReset'
+            }
+        },
+        providerFieldSelector: {
+            child: AddTasksProviderCombobox,
             attributes: {
                 resetEvent: 'addTasksReset'
             }
@@ -149,10 +157,11 @@ function AddTasksDialog() {
             });
 
         var dateValid = this.select('scheduleTaskFieldSelector').val();
+        var providerId = this.select('providerFieldSelector').data('id');
 
         var $addButton = this.$node.closest('.ui-dialog').find('.add-button');
 
-        if (checkboxesValid && dateValid) {
+        if (checkboxesValid && dateValid && providerId) {
             $addButton.removeClass('disabled');
         } else {
             if (!$addButton.hasClass('disabled')) {
@@ -189,13 +198,15 @@ function AddTasksDialog() {
             );
 
             var scheduleTime = Utility.toVancouverTime(this.select('scheduleTaskFieldSelector').val());
+            var providerId = this.select('providerFieldSelector').data('id');
 
             $.ajax({
                 url: URLs.ADD_AD_HOC_TASKS.format(this.patientId, this.medicalRecordId),
                 method: "POST",
                 data: {
                     toolIds: toolIds.join(','),
-                    scheduleTime: scheduleTime
+                    scheduleTime: scheduleTime,
+                    providerId: providerId
                 }
             }).done(function () {
                 me.addTaskSuccessful(toolIds.length);
@@ -259,6 +270,13 @@ function AddTasksDialog() {
         return result;
     };
 
+    this.onProviderSelected = function () {
+        var me = this;
+
+        setTimeout(function () {
+            me.validate();
+        }, 10);
+    };
 
     this.options({
         title: 'ADD TASKS',
@@ -275,6 +293,7 @@ function AddTasksDialog() {
 
     this.after('initialize', function () {
         this.on(document, 'scheduleTasksDatePickerSelected', this.onScheduleTasksDateSelected);
+        this.on(document, 'addTasksProviderSelected', this.onProviderSelected);
 
         this.on('click', {
             taskItemSelector: this.clickTaskItemBody,
@@ -282,6 +301,7 @@ function AddTasksDialog() {
         });
 
         this.$node.find('[name=scheduleTaskDate]').blur(_.bind(this.onScheduleTasksDateSelected, this));
+        this.$node.find('#selectAddTaskProvider').blur(_.bind(this.onProviderSelected, this));
 
         this.on('dialogclose', this.onClose);
     });
