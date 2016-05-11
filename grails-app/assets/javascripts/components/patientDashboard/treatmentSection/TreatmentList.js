@@ -43,7 +43,10 @@ function TreatmentList() {
 
                 Utility.progress(false);
             }
-        });
+        }).addClass("ui-tabs-vertical ui-helper-clearfix");
+
+        this.select('treatmentTabsContainerSelector').find("li")
+            .removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 
         if (!this.select('tabSelector').length) {
             this.initTreatmentTabToolbar();

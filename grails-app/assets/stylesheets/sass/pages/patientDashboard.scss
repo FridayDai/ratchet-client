@@ -495,7 +495,7 @@
 
     .tab-list {
         position: relative;
-        height: 60px;
+//        height: 60px;
         padding: 0;
         border: 0;
         border-bottom: 4px solid $base-color-white-grey;
@@ -582,30 +582,30 @@
     position: relative;
     border: 0;
 
-    &>.add-treatment {
-        position: absolute;
-        top: 16px;
-        right: 30px;
+    .treatment-manage-container {
+        height: 56px;
+        text-align: center;
 
-        &:hover,
-        &:focus {
-            border: 1px solid $base-color-tab-font-hover;
-            color: $base-color-tab-font-hover;
-            background-color: $base-color-white;
+        &:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
 
-            span,
-            &:before {
-                color: $base-color-tab-font-hover;
-            }
+        .btn-add-treatment {
+            float: none;
+            margin-top: 0;
+            vertical-align: middle;
         }
     }
 
     .tab-list {
-        min-width: 1060px;
-        height: 60px;
+//        min-width: 1060px;
+//        height: 60px;
         padding: 0;
         border: 0;
-        background: $base-color-mid-grey;
+//        background: $base-color-mid-grey;
         overflow: hidden;
 
         .ui-state-default {
