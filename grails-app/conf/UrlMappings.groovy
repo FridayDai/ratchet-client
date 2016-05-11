@@ -144,10 +144,10 @@ class UrlMappings {
         "/reports/outcome/provider-average"(controller: "report") {
             action = [POST: "getProviderAverageOverview"]
         }
-//        "/reports/task-completion"(controller: "report") {
-//            action = [GET: "renderTaskCompletionReport"]
-//        }
-//        "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
+        "/reports/task-completion"(controller: "report") {
+            action = [GET: "renderTaskCompletionReport"]
+        }
+        "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
 
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")
