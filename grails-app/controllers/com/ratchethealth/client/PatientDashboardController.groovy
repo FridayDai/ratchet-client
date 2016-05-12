@@ -158,13 +158,14 @@ class PatientDashboardController extends BaseController {
         String token = request.session.token
         def patientId = params?.patientId
         def clientId = request.session.clientId
-
+        def accountManagement = session.accountManagement
         def groupList = groupService.getGroupsPatientBelongsTo(token, clientId, patientId)
 
         render(view: '/patientDashboard/group', model: [
                 patientId: patientId,
                 clientId : clientId,
-                groupList: groupList
+                groupList: groupList,
+                accountManagement: accountManagement
         ])
     }
 

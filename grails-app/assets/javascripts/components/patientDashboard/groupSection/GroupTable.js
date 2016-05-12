@@ -25,7 +25,10 @@ function GroupTable() {
             },
              {
                 render: function (data, type, full) {
-                    return DELETE_BUTTON_FORMAT.format(data === undefined ? full.id : data);
+                    if(this.$node.data('accountManagement')) {
+                        return DELETE_BUTTON_FORMAT.format(data === undefined ? full.id : data);
+                    }
+                    return '';
                 },
                 orderable: false,
                 width: "15%"
