@@ -409,9 +409,13 @@
 }
 
 .no-treatment-container {
+    float: left;
+    width: calc(100% - 220px);
+    box-sizing: border-box;
     text-align: center;
     letter-spacing: 0;
     color: $base-color-medium-black;
+    border-left: 1px solid $base-color-white-grey;
 
     .icon {
         margin-top: 100px;
@@ -581,10 +585,16 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
+    height: calc(100vh - 350px);
+
+    .ui-tabs-panel {
+        border-left: 1px solid $base-color-white-grey;
+    }
 
     .treatment-manage-container {
-        height: 56px;
+        height: 70px;
         text-align: center;
+        border-bottom: 1px solid $base-color-white-grey;
 
         &:before {
             content: '';
@@ -601,11 +611,8 @@
     }
 
     .tab-list {
-//        min-width: 1060px;
-//        height: 60px;
         padding: 0;
         border: 0;
-//        background: $base-color-mid-grey;
         overflow: hidden;
 
         .ui-state-default {
@@ -616,8 +623,6 @@
         }
 
         .ui-tabs-anchor {
-            padding: 0 55px;
-            border-right: 2px solid $base-color-mid-grey;
             border-bottom: 0;
             min-width: 150px;
             text-align: center;

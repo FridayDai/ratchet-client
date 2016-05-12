@@ -2,7 +2,7 @@ var flight = require('flight');
 
 function TreatmentListPanel() {
     this.attributes({
-        addTreatmentButtonSelector: '.add-treatment'
+        addTreatmentButtonSelector: '.btn-add-treatment'
     });
 
     this.onAddTreatmentButtonClicked = function (e) {

@@ -41,6 +41,6 @@
         <div class="title">This patient has no treatment</div>
 
         <div class="description">Assign this patient a treatment using the<br/>button below</div>
-        <button class="btn add-treatment">Add Treatment</button>
+        <button class="btn add-treatment btn-add-treatment">Add Treatment</button>
     </div>
 </div>
