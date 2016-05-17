@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import com.mashape.unirest.http.Unirest
+
 class ExceptionEmailService extends RatchetAPIService {
     def grailsApplication
 
@@ -8,7 +10,9 @@ class ExceptionEmailService extends RatchetAPIService {
         def url = grailsApplication.config.ratchetv2.server.url.email
         log.info("call backend service to send Uncaught Exception Email")
 
-        withPost(grailsApplication.config.ratchet.api.anonymous.token, url){ req->
+        def token = Unirest.setDefaultHeader("X-Anonymous-Token", grailsApplication.config.ratchet.api.anonymous.token)
+
+        withPost(token, url){ req->
             def resp = req
                     .field("stackTrace", stackTrace)
                     .field("email",email)
