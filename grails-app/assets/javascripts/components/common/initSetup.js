@@ -37,14 +37,14 @@ $.ajaxSetup({
             });
         } else if (jqXHR.status === 400) {
             Notifications.error({
-                title: Strings.ERROR_TITLE,
+                title: Strings.ERROR_TITLE_COMMON,
                 message: Strings.ERROR_MESSAGE_COMMON,
                 errorMessage: jqXHR.responseText
             });
         } else if (jqXHR.status === 403 || jqXHR.status >= 404) {
             Notifications.error({
-                title: Strings.ERROR_TITLE_404,
-                message: Strings.ERROR_MESSAGE_404
+                title: Strings.ERROR_TITLE_COMMON,
+                message: Strings.ERROR_MESSAGE_COMMON
             });
         }
     }

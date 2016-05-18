@@ -62,14 +62,13 @@ class BaseController {
     def handleException(Exception e) {
         log.error("Uncaught_Exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
 
+        def email = session.email
         def sw = new StringWriter()
         def pw = new PrintWriter(sw)
         e.printStackTrace(pw)
-        def stackTrace = sw.toString()
 
-        def email = session.email
 
-        def sendEmail = exceptionEmailService.sendExceptionEmail(stackTrace, email)
+        exceptionEmailService.sendExceptionEmail(sw.toString(), email)
 
     }
 }

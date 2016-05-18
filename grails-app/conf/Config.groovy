@@ -236,7 +236,7 @@ ratchetv2 {
             validateSessionId = "${ratchetv2.server.url.base}/api/v1/check_token"
 
             //send Exception Email
-            email = "${ratchetv2.server.url.base}/api/v1/send/stacktrace/email"
+            stackTraceEmail = "${ratchetv2.server.url.base}/api/v1/send/stacktrace/email"
 
             //forgotPassword
             password {
