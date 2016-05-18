@@ -91,10 +91,7 @@ grails.plugin.wkhtmltox.binary = System.getProperty("WKHTMLTOPDF_DIR")?:"/usr/lo
 
 environments {
     development {
-        grails.logging.jul.usebridge = true
-        if (Boolean.valueOf(System.getProperty("IS_ROOT_CONTEXT_EXTRA_PATH"))) {
-            grails.app.context = "/client"        
-        }        
+        grails.logging.jul.usebridge = true     
     }
     production {
         grails.logging.jul.usebridge = false
