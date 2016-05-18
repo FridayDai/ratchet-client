@@ -50,7 +50,8 @@ module.exports = {
         2: 'unverified',
         3: '',
         4: 'Not Available',
-        5: 'undelivered'
+        5: 'undelivered',
+        6: 'unsubscribed'
     },
 
     EMAIL_STATUS_FILTER: [

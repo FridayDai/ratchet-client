@@ -60,5 +60,5 @@ class StatusCodeConstants {
     //common status
     // BE status is UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5)
     public static final String[] EMAIL_STATUS =
-            ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED"]
+            ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED", "UNSUBSCRIBED"]
 }
