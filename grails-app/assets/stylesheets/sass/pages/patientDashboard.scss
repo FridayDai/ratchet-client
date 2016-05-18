@@ -416,6 +416,7 @@
     letter-spacing: 0;
     color: $base-color-medium-black;
     border-left: 1px solid $base-color-white-grey;
+    min-height: 100%;
 
     .icon {
         margin-top: 100px;
@@ -441,7 +442,6 @@
     .add-treatment {
         margin-top: 40px;
         background-color: $base-color-dark-grey;
-        width: 160px;
         height: 38px;
         font-size: 15px;
 
@@ -585,14 +585,18 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
-    height: calc(100vh - 350px);
+    height: calc(100vh - 278px);
 
     .ui-tabs-panel {
+        min-height: 100%;
         border-left: 1px solid $base-color-white-grey;
     }
 
     .treatment-manage-container {
+        display: inline-block;
+        position: absolute;
         height: 70px;
+        width: 220px;
         text-align: center;
         border-bottom: 1px solid $base-color-white-grey;
 
@@ -610,33 +614,55 @@
         }
     }
 
+    .sub-treatment-tool {
+        padding-left: 36px;
+        color: $base-light-grey-color;
+        font-size: 15px;
+
+        li {
+            margin: 6px 0;
+            &:hover,
+            &:focus {
+                color: $base-color-dark-grey;
+            }
+        }
+    }
+
     .tab-list {
-        padding: 0;
+        padding-top: 71px;
         border: 0;
         overflow: hidden;
+        z-index: 10;
 
         .ui-state-default {
-            max-height: 65px;
+            transition: 0.5s height;
+            height: 65px;
             margin: 0;
             padding: 0;
-            background-color: $base-color-tab-default;
+            background-color: $base-color-bg-head;
+        }
+
+        .treatment-indicate {
+            position: absolute;
+            top: 20px;
+            left: 12px;
         }
 
         .ui-tabs-anchor {
             border-bottom: 0;
             min-width: 150px;
             text-align: center;
-            color: $base-color-white;
             font-size: 15px;
             line-height: 60px;
             text-transform: uppercase;
         }
 
         .ui-state-active {
-            background-color: $base-color-white;
+            height: 194px;
+            background-color: $base-color-bg-head;
+            border-bottom: 1px solid $base-color-white-grey;
 
             a {
-                height: 65px;
                 color: $base-color-dark-grey;
                 font-weight: 400;
                 font-size: 15px;

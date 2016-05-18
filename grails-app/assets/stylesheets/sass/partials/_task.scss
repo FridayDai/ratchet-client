@@ -96,102 +96,102 @@
 }
 
 // box item for task
-.box-item {
-    display: inline-block;
-    position: relative;
-    width: 314px;
-    margin-right: 40px;
-    margin-bottom: 40px;
-    border-top: 5px $base-color-mid-grey solid;
-    box-shadow: 0 0 0.5em $base-font-color;
-
-    h5 {
-        color: $base-color-light-black;
-    }
-
-    .small-font {
-        font-size: 10pt;
-    }
-
-    .middle-font {
-        font-size: 11pt;
-    }
-
-    .number-font {
-        font-size: 14px;
-    }
-
-    // change background and color according to status
-    &.pending {
-        border-color: $base-color-orange;
-
-        .box-item-content {
-            color: $base-color-orange;
-        }
-
-        .box-item-footer {
-            background-color: $base-color-orange;
-
-            &:before {
-                content: 'PENDING';
-            }
-        }
-    }
-
-    &.overdue {
-        border-color: $base-color-task-overdue;
-
-        .box-item-content {
-            color: $base-color-task-overdue;
-        }
-
-        .box-item-footer {
-            background-color: $base-color-task-overdue;
-
-            &:before {
-                content: 'OVERDUE';
-            }
-        }
-    }
-
-    &.complete {
-        border-color: $base-color-green;
-
-        .box-item-content {
-            color: $base-color-green;
-        }
-
-        .box-item-footer {
-            background-color: $base-color-green;
-
-            &:before {
-                content: 'COMPLETED';
-            }
-        }
-    }
-
-    &.expired {
-        border-color: $base-color-grey-expired;
-        background-color: $base-color-archived-bg;
-
-        .box-item-content {
-            color: $base-color-grey-expired;
-
-            .to-be-completed {
-                color: #666666;
-            }
-        }
-
-        .box-item-footer {
-            background-color: $base-color-grey-expired;
-
-            &:before {
-                content: 'EXPIRED';
-            }
-        }
-    }
-
-}
+//.box-item {
+//    display: inline-block;
+//    position: relative;
+////    width: 314px;
+////    margin-right: 40px;
+//    margin-bottom: 40px;
+////    border-top: 5px $base-color-mid-grey solid;
+//    box-shadow: 0 0 0.5em $base-font-color;
+//
+//    h5 {
+//        color: $base-color-light-black;
+//    }
+//
+//    .small-font {
+//        font-size: 10pt;
+//    }
+//
+//    .middle-font {
+//        font-size: 11pt;
+//    }
+//
+//    .number-font {
+//        font-size: 14px;
+//    }
+//
+//    // change background and color according to status
+//    &.pending {
+//        border-color: $base-color-orange;
+//
+//        .box-item-content {
+//            color: $base-color-orange;
+//        }
+//
+//        .box-item-footer {
+//            background-color: $base-color-orange;
+//
+//            &:before {
+//                content: 'PENDING';
+//            }
+//        }
+//    }
+//
+//    &.overdue {
+//        border-color: $base-color-task-overdue;
+//
+//        .box-item-content {
+//            color: $base-color-task-overdue;
+//        }
+//
+//        .box-item-footer {
+//            background-color: $base-color-task-overdue;
+//
+//            &:before {
+//                content: 'OVERDUE';
+//            }
+//        }
+//    }
+//
+//    &.complete {
+//        border-color: $base-color-green;
+//
+//        .box-item-content {
+//            color: $base-color-green;
+//        }
+//
+//        .box-item-footer {
+//            background-color: $base-color-green;
+//
+//            &:before {
+//                content: 'COMPLETED';
+//            }
+//        }
+//    }
+//
+//    &.expired {
+//        border-color: $base-color-grey-expired;
+//        background-color: $base-color-archived-bg;
+//
+//        .box-item-content {
+//            color: $base-color-grey-expired;
+//
+//            .to-be-completed {
+//                color: #666666;
+//            }
+//        }
+//
+//        .box-item-footer {
+//            background-color: $base-color-grey-expired;
+//
+//            &:before {
+//                content: 'EXPIRED';
+//            }
+//        }
+//    }
+//
+//}
 
 .box-item-header {
     height: 75px;
@@ -237,63 +237,63 @@
     }
 }
 
-.box-item-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    display: -ms-flexbox;
-    -ms-flex-align: center;
-    -ms-flex-pack: center;
-    -ms-flex-wrap: wrap;
-
-    height: 190px;
-    background-color: $base-color-archived-bg;
-    box-shadow: 0 -2px 10px $base-font-color;
-
-    .item-column {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-
-        display: -ms-flexbox;
-        -ms-flex-align: center;
-        //only in IE10
-        -ms-flex-pack: distribute;
-
-        width: 100%;
-    }
-
-    .column-bottom {
-        padding-bottom: 10px;
-    }
-
-    .sub-item {
-        display: inline-block;
-//        padding-right: 22px;
-        text-align: center;
-
-        &.multiple-item {
-            flex-basis: 33%;
-            -ms-flex-preferred-size: 33%;
-        }
-    }
-
-    .score-number {
-        display: inline-block;
-        padding-bottom: 2px;
-        font-size: 19px;
-        color: $base-color-green;
-    }
-
-    .score-label {
-        text-transform: capitalize;
-        color: $base-color-medium-black;
-        font-size: 14px;
-        font-weight: 600;
-    }
-}
+//.box-item-content {
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    flex-wrap: wrap;
+//
+//    display: -ms-flexbox;
+//    -ms-flex-align: center;
+//    -ms-flex-pack: center;
+//    -ms-flex-wrap: wrap;
+//
+//    height: 190px;
+//    background-color: $base-color-archived-bg;
+//    box-shadow: 0 -2px 10px $base-font-color;
+//
+//    .item-column {
+//        display: flex;
+//        align-items: center;
+//        justify-content: space-around;
+//
+//        display: -ms-flexbox;
+//        -ms-flex-align: center;
+//        //only in IE10
+//        -ms-flex-pack: distribute;
+//
+//        width: 100%;
+//    }
+//
+//    .column-bottom {
+//        padding-bottom: 10px;
+//    }
+//
+//    .sub-item {
+//        display: inline-block;
+////        padding-right: 22px;
+//        text-align: center;
+//
+//        &.multiple-item {
+//            flex-basis: 33%;
+//            -ms-flex-preferred-size: 33%;
+//        }
+//    }
+//
+//    .score-number {
+//        display: inline-block;
+//        padding-bottom: 2px;
+//        font-size: 19px;
+//        color: $base-color-green;
+//    }
+//
+//    .score-label {
+//        text-transform: capitalize;
+//        color: $base-color-medium-black;
+//        font-size: 14px;
+//        font-weight: 600;
+//    }
+//}
 
 .box-item-footer {
     padding: 7px 12px;
@@ -631,4 +631,205 @@
     border-radius: 3px 3px 3px 3px;
     color: #777777;
     line-height: 1;
+}
+
+//new taskBox
+.box-item {
+    position: relative;
+    border: 1px solid $base-color-mid-grey;
+    font-size: 14px;
+    margin-bottom: 4px;
+
+    display: flex;
+    display: -ms-flexbox;
+}
+
+.box-item-content {
+    display: block;
+    height: 52px;
+    margin: 5px;
+
+    .inline-info {
+        display: inline-block;
+        width: 280px;
+    }
+
+    .item-title {
+        font-size: 21px;
+    }
+
+    .task-flag {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .flag-status {
+        font-size: 14px;
+
+        &:before {
+            content: '\f141';
+            font-family: FontAwesome;
+        }
+
+        &:after {
+            content: 'SCHEDULED';
+        }
+    }
+
+    .meter {
+        height: 5px;
+        position: relative;
+        background: #555;
+        border-radius: 10px;
+
+        span {
+            display: block;
+            height: 100%;
+            width: 25%;
+            background-color: $base-color-complete;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+    }
+
+    .info-collapse {
+        display: inline-block;
+
+        &:before {
+            font-family: FontAwesome;
+            content: "\f138";
+        }
+
+        &:hover {
+            &:before {
+                content: "\f137";
+            }
+
+            .info-detail {
+                display: inline-block;
+            }
+        }
+    }
+
+    .info-detail {
+        display: none;
+    }
+
+    .content-middle {
+        display: inline-block;
+    }
+}
+
+.box-item-left {
+    padding: 4px 0;
+    background-color: $base-color-grey-expired;
+    width: 64px;
+    text-align: center;
+
+    .task-date {
+        display: inline-block;
+        width: 54px;
+        color: $base-color-white;
+        font-size: 12px;
+    }
+
+    .date-month {
+        text-transform: uppercase;
+    }
+
+    .date-day {
+        margin: 0 6px;
+        font-size: 20px;
+        border-bottom: 1px solid $base-color-white;
+    }
+}
+
+.box-item-tool {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .icon-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 42px;
+        height: 100%;
+        border-left: 1px solid $base-color-white;
+        font-size: 0;
+        color: $base-color-white-grey-dark;
+        cursor: pointer;
+        text-align: center;
+        z-index: 10;
+
+        &:before {
+            position: relative;
+            top: 7px;
+            content: '';
+            font-family: ionicons;
+            font-size: 18px;
+        }
+
+        &:hover {
+            color: $base-color-white;
+        }
+
+        &.not-available {
+            color: #cccccc;
+
+            &:hover + .icon-button-tip {
+                display: none;
+            }
+        }
+    }
+
+    .view-results {
+        width: 104px;
+
+        &:before {
+            content: '\f425';
+            left: -5px;
+        }
+
+        span {
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        &:hover span {
+            text-decoration: underline;
+        }
+    }
+
+    .begin-task {
+        right: 42px;
+        text-decoration: none;
+
+        &:before {
+            content: '\f12c';
+        }
+    }
+
+    .call-task {
+        right: 42px;
+
+        &:before {
+            content: '\f4b8';
+        }
+
+        &.not-available {
+            opacity: 0.5;
+            cursor: default;
+        }
+    }
+
+    .delete {
+        &:before {
+            content: '\f4c4';
+        }
+    }
+
+    .begin-tip, .call-tip {
+        right: 49px;
+    }
 }

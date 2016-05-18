@@ -101,7 +101,7 @@ class PatientDashboardController extends BaseController {
         def PatientEmailStatus = params?.PatientEmailStatus
         def clientId = request.session.clientId
 
-        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
+//        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
 
         medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
@@ -111,7 +111,7 @@ class PatientDashboardController extends BaseController {
             clientId: clientId,
             PatientEmailStatus: PatientEmailStatus,
             medicalRecords: medicalRecords,
-            treatmentLimit: treatmentLimit
+//            treatmentLimit: treatmentLimit
         ])
     }
 

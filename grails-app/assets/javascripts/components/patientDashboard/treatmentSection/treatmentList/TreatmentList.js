@@ -1,10 +1,11 @@
 var flight = require('flight');
 
 var TreatmentLevelTabToolbar = require('./TreatmentListLevelTabToolbar');
-var Treatment = require('../treatment/Treatment');
+var TreatmentTabToolbar = require('./TreatmentTabToolbar');
+var Treatment = require('../../treatment/Treatment');
 
-var Utility = require('../../../utils/Utility');
-var URLs = require('../../../constants/Urls');
+var Utility = require('../../../../utils/Utility');
+var URLs = require('../../../../constants/Urls');
 
 var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
 
@@ -18,8 +19,10 @@ function TreatmentList() {
         tabSelector: '.tab-list li'
     });
 
-    this.initTreatmentsTab = function() {
+    this.initTreatmentsTab = function () {
         var me = this;
+
+        this.initTreatmentIndicator();
 
         this.select('treatmentTabsContainerSelector').tabs({
             cache: true,
@@ -38,6 +41,9 @@ function TreatmentList() {
             },
             load: function (event, ui) {
                 Treatment.attachTo(ui.panel);
+                TreatmentTabToolbar.attachTo(ui.tab, {
+                    archived: ui.tab.hasClass('archived-treatment')
+                });
 
                 me.initTreatmentTabToolbar();
 
@@ -46,19 +52,30 @@ function TreatmentList() {
         }).addClass("ui-tabs-vertical ui-helper-clearfix");
 
         this.select('treatmentTabsContainerSelector').find("li")
-            .removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+            .removeClass("ui-corner-top").addClass("ui-corner-left");
 
         if (!this.select('tabSelector').length) {
             this.initTreatmentTabToolbar();
         }
     };
 
-    this.initTreatmentTabToolbar = function() {
+    this.initTreatmentIndicator = function () {
+        var treatmentList = this.select('tabSelector');
+        var newMap = {};
+        treatmentList.each(function () {
+            var id = $(this).data('id');
+            var mapValue = $(this).text();
+            newMap.id = mapValue;
+        });
+        this.initTreatmentIndicatorMap = newMap;
+    };
+
+    this.initTreatmentTabToolbar = function () {
         var $container = this.select('treatmentTabsContainerSelector');
 
         $container.show();
 
-        _.once(function() {
+        _.once(function () {
             TreatmentLevelTabToolbar.attachTo($container);
         })();
     };

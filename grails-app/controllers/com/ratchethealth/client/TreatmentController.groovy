@@ -84,6 +84,10 @@ class TreatmentController extends BaseController {
             ]
     }
 
+    def getAllTreatmentTasks() {
+        render view: '/error/error404'
+    }
+
     def assignTreatment(Patient patient) {
         String token = request.session.token
         def clientId = request.session.clientId

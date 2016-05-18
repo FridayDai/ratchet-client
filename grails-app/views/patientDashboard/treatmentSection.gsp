@@ -9,14 +9,9 @@
     </div>
 
     <ul class="tab-list">
-
-        <li class="hide">
-            <g:link controller="treatment" action="getAllTreatmentTasks"/>
-        </li>
-
         <g:each in="${medicalRecords.items}" var="medicalRecord" status="i">
             <li class="treatment-li <g:if test="${medicalRecord?.archived}">archived-treatment</g:if>"
-                >
+            >
                 <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
                                data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                data-treatment-id="${medicalRecord?.treatmentId}"/>
