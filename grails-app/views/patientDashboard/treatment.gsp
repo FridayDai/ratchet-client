@@ -1,13 +1,13 @@
-<%@ page import="com.ratchethealth.client.RatchetConstants" %>
-<g:if test="${archived == 'true'}">
-    <g:set var="archivedStatus" value="archived"/>
-</g:if>
+%{--<%@ page import="com.ratchethealth.client.RatchetConstants" %>--}%
+%{--<g:if test="${archived == 'true'}">--}%
+    %{--<g:set var="archivedStatus" value="archived"/>--}%
+%{--</g:if>--}%
 
-<div class="content ${archivedStatus}">
+%{--<div class="content ${archivedStatus}">--}%
     %{--<div class="treatment-tool-bar">--}%
-        <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
-                       data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}"
-                       data-treatment-id="${treatmentId}"/>
+        %{--<g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"--}%
+                       %{--data-patient-id="${patientId}" data-medical-record-id="${medicalRecordId}"--}%
+                       %{--data-treatment-id="${treatmentId}"/>--}%
         %{--<div class="treatment-date">--}%
             %{--<g:if test="${surgeryTime}">--}%
                 %{--<span>Treatment Date:</span>--}%
@@ -76,8 +76,8 @@
         %{--<h4 class="active-items">ACTIVE ITEMS</h4>--}%
     %{--</div>--}%
 
-    <div class="tasks-list">
-        <div class="task-row ${archivedStatus}" id="task-row-active">
+    %{--<div class="tasks-list">--}%
+        %{--<div class="task-row ${archivedStatus}" id="task-row-active">--}%
             %{--<g:if test="${activeTasks == [] || activeTasks == null}">--}%
                 %{--<div class="no-item center no-item-sent no-active-item" id="no-active-item"><p>There are no active items</p></div>--}%
             %{--</g:if>--}%
@@ -93,22 +93,22 @@
                     %{--</div>--}%
                 %{--</g:if>--}%
 
-                <g:each in="${activeTasks}" var="task">
-                    <g:render template="/patientDashboard/taskBox/activeTaskBox" model="[
-                            'task'     : task,
-                            'accountId': accountId
-                    ]" />
-                </g:each>
+                %{--<g:each in="${activeTasks}" var="task">--}%
+                    %{--<g:render template="/patientDashboard/taskBox/activeTaskBox" model="[--}%
+                            %{--'task'     : task,--}%
+                            %{--'accountId': accountId--}%
+                    %{--]" />--}%
+                %{--</g:each>--}%
             %{--</g:else>--}%
-        </div>
-    </div>
+        %{--</div>--}%
+    %{--</div>--}%
 
     %{--<div class="items-title list-top">--}%
         %{--<h4 class="closed-items">CLOSED ITEMS</h4>--}%
     %{--</div>--}%
 
-    <div class="tasks-list">
-        <div class="task-row ${archivedStatus}" id="task-row-closed">
+    %{--<div class="tasks-list">--}%
+        %{--<div class="task-row ${archivedStatus}" id="task-row-closed">--}%
             %{--<g:if test="${closedTasks == [] || closedTasks == null}">--}%
                 %{--<div class="no-item center no-item-sent"><p>There are no closed items</p></div>--}%
             %{--</g:if>--}%
@@ -124,19 +124,19 @@
                     %{--</div>--}%
                 %{--</g:if>--}%
 
-                <g:each in="${closedTasks}" var="task">
-                    <g:render template="/patientDashboard/taskBox/taskItem" model="[
-                            'task': task,
-                            'patientId': patientId,
-                            'clientId': clientId,
-                            'accountId': accountId,
-                            'medicalRecordId': medicalRecordId,
-                            'taskId': task.id
-                    ]" />
-                </g:each>
+                %{--<g:each in="${closedTasks}" var="task">--}%
+                    %{--<g:render template="/patientDashboard/taskBox/taskItem" model="[--}%
+                            %{--'task': task,--}%
+                            %{--'patientId': patientId,--}%
+                            %{--'clientId': clientId,--}%
+                            %{--'accountId': accountId,--}%
+                            %{--'medicalRecordId': medicalRecordId,--}%
+                            %{--'taskId': task.id--}%
+                    %{--]" />--}%
+                %{--</g:each>--}%
             %{--</g:else>--}%
-        </div>
-    </div>
+        %{--</div>--}%
+    %{--</div>--}%
 
     %{--<div class="items-title list-top">--}%
         %{--<h4 class="scheduled_items">SCHEDULED ITEMS</h4>--}%
@@ -165,4 +165,4 @@
             %{--</g:else>--}%
         %{--</div>--}%
     %{--</div>--}%
-</div>
+%{--</div>--}%

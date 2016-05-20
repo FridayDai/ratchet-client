@@ -1,6 +1,6 @@
 <%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]}"
-     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}">
+     data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}" medical-record-id = "${medicalRecordId}">
 
     <g:render template="/patientDashboard/taskBox/shared/boxLeft"/>
 
@@ -58,7 +58,7 @@
                         <g:render template="/patientDashboard/taskBox/shared/mixedScore" model="['task': task]"/>
                     </g:if>
 
-                    <g:elseif test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId)}">
+                    <g:elseif test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score || task.otherScore)}">
 
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
                             <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
@@ -89,7 +89,7 @@
         <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
 
             <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
-                <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${taskId}/result" target="_blank"
+                <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${task?.id}/result" target="_blank"
                    class="icon-button view-results"><span>View Results</span></a>
             </g:if>
 
@@ -121,6 +121,8 @@
             </div>
 
         </g:else>
+
+        <span>${task.treatmentProperty?.indicator}</span>
     </div>
 
 </div>

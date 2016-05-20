@@ -2,12 +2,13 @@ var flight = require('flight');
 
 var Notifications = require('../../../common/Notification');
 var URLs = require('../../../../constants/Urls');
+var Utility = require('../../../../utils/Utility');
 
 function TreatmentToolbar() {
     this.attributes({
         archived: null,
 
-        addTaskButtonSelector: '#addTasks',
+        addTaskButtonSelector: '.addTasks',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
         editSurgeryButtonSelector: '.surgeryTime-edit',
@@ -26,22 +27,20 @@ function TreatmentToolbar() {
             this.patientId = $hidden.data('patientId');
             this.treatmentId = $hidden.data('treatmentId');
             this.clientId = $hidden.data('clientId');
+            this.surgeryDate = $hidden.data('surgeryDate');
         }
 
         return {
             medicalRecordId: this.medicalRecordId,
             patientId: this.patientId,
             clientId: this.clientId,
-            treatmentId: this.treatmentId
+            treatmentId: this.treatmentId,
+            currentSurgeryDate: Utility.toVancouverDate(this.surgeryDate)
         };
     };
 
-    this.onAddTaskButtonClicked = function (e) {
-        e.preventDefault();
-
-        this.trigger('showAddTasksDialog', _.extend(this.getBasicIds(), {
-            currentSurgeryDate: this.select('treatmentDateSelector').text().trim()
-        }));
+    this.onAddTaskButtonClicked = function () {
+        this.trigger('showAddTasksDialog', this.getBasicIds());
     };
 
     this.onMoreButtonClicked = function (e) {
@@ -70,13 +69,11 @@ function TreatmentToolbar() {
         }
     };
 
-    this.onEditSurgeryButtonClicked = function (e) {
-        e.preventDefault();
-
-        this.select('moreDropdownListSelector').hide();
-        this.trigger('showEditSurgeryDialog', _.assign(this.getBasicIds(), {
-            currentSurgeryDate: this.select('treatmentDateSelector').text().trim()
-        }));
+    this.onEditSurgeryButtonClicked = function () {
+        var ids = this.getBasicIds();
+        if(ids.currentSurgeryDate) {
+            this.trigger('showEditSurgeryDialog', this.getBasicIds());
+        }
     };
 
     this.onArchiveButtonClicked = function (e) {
@@ -111,9 +108,7 @@ function TreatmentToolbar() {
         });
     };
 
-    this.onDeleteButtonClicked = function (e) {
-        e.preventDefault();
-
+    this.onDeleteButtonClicked = function () {
         this.trigger('showDeleteTreatmentDialog', {
             ids: this.getBasicIds()
         });
@@ -139,7 +134,23 @@ function TreatmentToolbar() {
         this.select('archiveButtonSelector').hide();
     };
 
+    this.initTreatmentList = function () {
+        this.on('click', function () {
+            var $ele = this.$node;
+            if (!$ele.hasClass('ui-state-active')) {
+                this.$node.siblings().removeClass('ui-state-active');
+                this.$node.addClass('ui-state-active');
+            }
+
+            this.trigger('medicalRecordListSelected', {
+                medicalRecordId: $ele.data('id')
+            });
+        })
+    };
+
     this.after('initialize', function () {
+        this.initTreatmentList();
+
         if (!this.attr.archived) {
             this.on('click', {
                 addTaskButtonSelector: this.onAddTaskButtonClicked,
@@ -151,11 +162,11 @@ function TreatmentToolbar() {
         }
 
         this.on('click', {
-            moreDropdownButtonSelector: this.onMoreButtonClicked,
+            //moreDropdownButtonSelector: this.onMoreButtonClicked,
             deleteButtonSelector: this.onDeleteButtonClicked
         });
 
-        this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);
+        //this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);
     });
 }
 

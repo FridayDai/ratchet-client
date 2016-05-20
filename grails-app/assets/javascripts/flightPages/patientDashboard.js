@@ -18,12 +18,12 @@ var EditPatientFormDialog = require('../components/patientDashboard/patientInfoS
 var AddEmailFormDialog = require('../components/patientDashboard/patientInfoSection/AddEmailFormDialog');
 var AddPhoneNumberFormDialog = require('../components/patientDashboard/patientInfoSection/AddPhoneNumberFormDialog');
 var DeletePatientFormDialog = require('../components/patientDashboard/patientInfoSection/DeletePatientFormDialog');
-var FillQuestionnaireDialog = require('../components/patientDashboard/treatment/FillQuestionnaireDialog');
+var FillQuestionnaireDialog = require('../components/patientDashboard/treatmentSection/FillQuestionnaireDialog');
 var AddTreatmentFormDialog = require('../components/patientDashboard/treatmentSection/treatmentList/AddTreatmentFormDialog');
-var DeleteTreatmentFormDialog = require('../components/patientDashboard/treatment/DeleteTreatmentFormDialog');
+var DeleteTreatmentFormDialog = require('../components/patientDashboard/treatmentSection/DeleteTreatmentFormDialog');
 var AddTasksDialog = require('../components/patientDashboard/treatmentSection/AddTasksDialog');
 var InClinicCodeDialog = require('../components/patientDashboard/InClinicCodeDialog');
-var EditSurgeryDateFormDialog = require('../components/patientDashboard/treatment/EditSurgeryDateFormDialog');
+var EditSurgeryDateFormDialog = require('../components/patientDashboard/treatmentSection/EditSurgeryDateFormDialog');
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
 var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
 
@@ -180,8 +180,14 @@ function PatientDetailPage() {
         });
     };
 
+    this.refreshTab = function (event, data) {
+        var index = data.index;
+        this.select('tabsContainerSelector').tabs('load', index);
+    };
+
     this.after('initialize', function () {
         this.initTabs();
+        this.on('refreshTopTab', this.refreshTab);
     });
 
     this.before('teardown', function () {

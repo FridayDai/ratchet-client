@@ -599,6 +599,7 @@
         width: 220px;
         text-align: center;
         border-bottom: 1px solid $base-color-white-grey;
+        z-index: 10;
 
         &:before {
             content: '';
@@ -632,14 +633,18 @@
         padding-top: 71px;
         border: 0;
         overflow: hidden;
-        z-index: 10;
+        float: left;
+        width: 220px;
 
         .ui-state-default {
+            position: relative;
+            overflow: hidden;
             transition: 0.5s height;
             height: 65px;
             margin: 0;
             padding: 0;
             background-color: $base-color-bg-head;
+            cursor: pointer;
         }
 
         .treatment-indicate {
@@ -661,6 +666,7 @@
             height: 194px;
             background-color: $base-color-bg-head;
             border-bottom: 1px solid $base-color-white-grey;
+            cursor: text;
 
             a {
                 color: $base-color-dark-grey;
@@ -698,6 +704,14 @@
                 }
             }
         }
+    }
+
+    .treatment-panel-container {
+        float: left;
+        width: calc(100% - 220px);
+        box-sizing: border-box;
+        border-left: 1px solid #e6e8e8;
+        min-height: 100%;
     }
 
     .treatment-tool-bar {
