@@ -227,7 +227,7 @@ function TaskSection() {
         }
 
         if (!tasks[type]) {
-            $taskRow.find('.btn[data-type=' + type + ']').remove();
+            $taskRow.find('.btn[data-type="' + type + '"]').remove();
         }
     };
 
