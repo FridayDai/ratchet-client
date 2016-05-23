@@ -1,6 +1,10 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
+import org.joda.time.DateTimeZone
+import org.joda.time.DateTime
+import org.joda.time.Days
+
 
 class PatientDashboardController extends BaseController {
 
@@ -10,6 +14,7 @@ class PatientDashboardController extends BaseController {
     def caregiverService
     def groupService
     def activityService
+    def taskService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -53,8 +58,8 @@ class PatientDashboardController extends BaseController {
         }
 
         render(view: '/patientDashboard/patientDashboard', model: [
-                patientInfo: patientInfo,
-                phoneNumber: phoneNumber,
+                patientInfo   : patientInfo,
+                phoneNumber   : phoneNumber,
                 AccountIsAdmin: request.session.accountManagement,
                 hasActiveTasks: hasActiveTasks
         ])
@@ -101,17 +106,19 @@ class PatientDashboardController extends BaseController {
         def PatientEmailStatus = params?.PatientEmailStatus
         def clientId = request.session.clientId
 
-        def treatmentLimit = grailsApplication.config.ratchetv2.server.patientTreatmentLimit
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
 
-        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
+//        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
-        render(view: '/patientDashboard/treatmentList',  model: [
-            patientId: patientId,
-            clientId: clientId,
-            PatientEmailStatus: PatientEmailStatus,
-            medicalRecords: medicalRecords,
-            treatmentLimit: treatmentLimit
+        def combinedList = combinedAllTreatmentToTasks(patientId, medicalRecords.items)
+
+        render(view: '/patientDashboard/treatmentSection', model: [
+                patientId         : patientId,
+                clientId          : clientId,
+                PatientEmailStatus: PatientEmailStatus,
+                medicalRecords    : combinedList.medicalRecords,
+                combinedTasks     : combinedList.combinedTasks,
+                totalCount        : medicalRecords.totalCount
         ])
     }
 
@@ -138,7 +145,7 @@ class PatientDashboardController extends BaseController {
 
         def resp = patientDashboardService.hasActiveTasks(token, clientId, patientId)
 
-        render (['hasActiveTasks': resp] as JSON)
+        render(['hasActiveTasks': resp] as JSON)
     }
 
     def getReportTab() {
@@ -146,11 +153,11 @@ class PatientDashboardController extends BaseController {
         def patientId = params?.patientId
 
         render(
-            view: "/patientDashboard/report",
-            model: [
-                clientId: clientId,
-                patientId: patientId
-            ]
+                view: "/patientDashboard/report",
+                model: [
+                        clientId : clientId,
+                        patientId: patientId
+                ]
         )
     }
 
@@ -176,9 +183,9 @@ class PatientDashboardController extends BaseController {
         def caregiverList = caregiverService.getCaregiver(token, clientId, patientId, null)
 
         render(view: '/patientDashboard/caregiver', model: [
-            patientId: patientId,
-            clientId: clientId,
-            caregiverList: caregiverList
+                patientId    : patientId,
+                clientId     : clientId,
+                caregiverList: caregiverList
         ])
     }
 
@@ -196,5 +203,74 @@ class PatientDashboardController extends BaseController {
         def clientId = session.clientId
         def data = activityService.getActivities(session.token, clientId, activityPagination)
         render data as JSON
+    }
+
+    def combinedAllTreatmentToTasks(patientId, treatments) {
+        def combinedTasks = []
+        def medicalRecords = []
+        def today = new Date().time
+        def numberMap = ('A'..'Z').collect();
+        def i = 0;
+
+        for (treatment in treatments) {
+
+            def surgeryTime = treatment.absoluteEventTimestamp
+
+            def treatmentProperty = [
+                    archived   : treatment.archived,
+                    id         : treatment.id,
+                    treatmentId: treatment.treatmentId,
+                    title      : treatment.title,
+                    tmpTitle   : treatment.tmpTitle,
+                    surgeryTime: surgeryTime,
+                    indicator  : i < 26 ? numberMap[i++] : '*'
+            ]
+
+            medicalRecords << treatmentProperty
+
+            if (surgeryTime) {
+                DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver');
+                DateTime start = new DateTime(surgeryTime, vancouver)
+                DateTime end = new DateTime(today, vancouver)
+                def days = Days.daysBetween(start, end).getDays()
+
+                def status = days == 0 ? StatusCodeConstants.TASK_STATUS_PENDING :
+                        days > 0 ? StatusCodeConstants.TASK_STATUS_COMPLETE : StatusCodeConstants.TASK_STATUS_SCHEDULE
+
+                combinedTasks << [
+                        itemType         : 'surgery',
+                        sentTime         : surgeryTime,
+                        title            : 'Surgery',
+                        status           : status,
+                        treatmentProperty: treatmentProperty
+                ]
+            }
+
+            for (task in treatment.tasks) {
+                task.treatmentProperty = treatmentProperty
+
+                if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
+                    def viewResult = getVoiceResult(patientId, treatment.id, task.id)
+                    task << viewResult
+                }
+
+                combinedTasks << task
+            }
+        }
+
+        combinedTasks << [
+                itemType: 'today',
+                sendTime: today
+        ]
+
+        return [combinedTasks : combinedTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] }),
+                medicalRecords: medicalRecords]
+    }
+
+    private getVoiceResult(patientId, medicalRecordId, taskId) {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
+        return resp
     }
 }

@@ -82,6 +82,16 @@ module.exports = {
         }
     },
 
+    toVancouverDate: function (time, format) {
+        format = format || 'MMM D, YYYY';
+
+        if (time) {
+            return moment(time).tz('America/Vancouver').format(format);
+        } else {
+            return null;
+        }
+    },
+
     progress: function (hide) {
         var elementStr = [
                 '<div id="msg-process">',

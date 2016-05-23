@@ -100,7 +100,7 @@ class TreatmentService extends RatchetAPIService {
         log.info("Call backend service to update surgery date, token: ${token}.")
         withPost(token, url) { req ->
             def resp = req
-                    .field("surgeryTime", surgeryTime)
+                    .field("absoluteEventTimestamp", surgeryTime)
                     .asString()
 
             if (resp.status == 200) {
