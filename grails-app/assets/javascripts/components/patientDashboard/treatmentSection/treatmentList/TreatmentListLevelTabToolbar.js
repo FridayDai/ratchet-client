@@ -12,7 +12,7 @@ function TreatmentListPanel() {
     };
 
     this.after('initialize', function () {
-        this.on('click', {
+        this.on(document, 'click', {
             addTreatmentButtonSelector: this.onAddTreatmentButtonClicked
         });
     });

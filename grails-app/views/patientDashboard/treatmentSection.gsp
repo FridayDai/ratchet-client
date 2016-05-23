@@ -18,13 +18,17 @@
                                data-treatment-id="${medicalRecord?.treatmentId}"
                                data-surgery-date="${medicalRecord?.surgeryTime}"/>
 
-                <label class="treatment-indicate">${medicalRecord?.indicator}</label>
+                <label class="treatment-indicate">
+                    <span>${medicalRecord?.indicator}</span>
+                </label>
 
                 <a class="ui-tabs-anchor" data-id="sub${i}">
+                    ${medicalRecord.title} ${medicalRecord.tmpTitle}
                     <g:if test="${medicalRecord?.archived}">
-                        <i class="icon-archived"></i>
+                        <span class="archived-indicator">
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                        </span>
                     </g:if>
-                    <span>${medicalRecord.title} ${medicalRecord.tmpTitle}</span>
                 </a>
 
                 <ul class="sub-treatment-tool">
@@ -33,7 +37,8 @@
 
                         <span class="text-span">Task</span>
                     </li>
-                    <li class="surgeryTime-edit ${medicalRecord?.surgeryTime ? '' : 'disabled'}">
+                    <li class="surgeryTime-edit">
+                    %{--${medicalRecord?.surgeryTime ? '' : 'disabled'}">--}%
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                         <span>Edit</span>
                     </li>
@@ -51,41 +56,45 @@
     </ul>
 
     <div class="treatment-panel-container">
-        <g:if test="${archived == 'true'}">
-            <g:set var="archivedStatus" value="archived"/>
+
+        <g:if test="${totalCount == 0}">
+            <div class="no-treatment-container">
+                <div class="icon"></div>
+
+                <div class="title">This patient has no tasks</div>
+
+                <div class="description">Assign this patient a treatment using the<br/>button below</div>
+                <button class="btn add-treatment btn-add-treatment">Treatment</button>
+            </div>
         </g:if>
 
-        <div class="content ${archivedStatus}">
+        <g:else>
+            <div class="content">
 
-            <div class="tasks-list">
-                <g:each in="${combinedTasks}" var="task">
-                    <g:if test="${task.itemType == 'today'}">
-                        <div>Today:
-                        <g:formatDate date="${task?.sendTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMM dd, yyyy"/>
-                        </div>
-                    </g:if>
-                    <g:else>
-                        <g:render template="/patientDashboard/taskBox/taskItem" model="[
-                                'task'           : task,
-                                'patientId'      : patientId,
-//                                'clientId'       : clientId,
-//                                'accountId'      : accountId,
-                                'medicalRecordId': task.treatmentProperty?.id
-                        ]"/>
-                    </g:else>
-                </g:each>
+                <div class="tasks-list">
+                    <g:each in="${combinedTasks}" var="task">
+                        <g:if test="${task.itemType == 'today'}">
+                            <div class="today-item">
+                                <span>
+                                    Today:
+                                    <g:formatDate date="${task?.sendTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                  format="MMM dd, yyyy"/>
+                                </span>
+                            </div>
+                        </g:if>
+                        <g:else>
+                            <g:render template="/patientDashboard/taskBox/taskItem" model="[
+                                    'task'           : task,
+                                    'patientId'      : patientId,
+                                    'medicalRecordId': task.treatmentProperty?.id,
+                                    'archived' : task.treatmentProperty?.archived ? 'archived' : null,
+                                    'itemType' : task?.itemType
+                            ]"/>
+                        </g:else>
+                    </g:each>
+                </div>
             </div>
-        </div>
 
-    </div>
-
-    <div class="no-treatment-container <g:if test="${medicalRecords.totalCount != 0}">hide</g:if>">
-        <div class="icon"></div>
-
-        <div class="title">This patient has no treatment</div>
-
-        <div class="description">Assign this patient a treatment using the<br/>button below</div>
-        <button class="btn add-treatment btn-add-treatment">Treatment</button>
+        </g:else>
     </div>
 </div>

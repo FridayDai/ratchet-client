@@ -14,6 +14,7 @@ class PatientDashboardController extends BaseController {
     def caregiverService
     def groupService
     def activityService
+    def taskService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -109,14 +110,15 @@ class PatientDashboardController extends BaseController {
 
 //        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
-        def combinedList = combinedAllTreatmentToTasks(medicalRecords.items)
+        def combinedList = combinedAllTreatmentToTasks(patientId, medicalRecords.items)
 
         render(view: '/patientDashboard/treatmentSection', model: [
                 patientId         : patientId,
                 clientId          : clientId,
                 PatientEmailStatus: PatientEmailStatus,
                 medicalRecords    : combinedList.medicalRecords,
-                combinedTasks     : combinedList.combinedTasks
+                combinedTasks     : combinedList.combinedTasks,
+                totalCount        : medicalRecords.totalCount
         ])
     }
 
@@ -203,7 +205,7 @@ class PatientDashboardController extends BaseController {
         render data as JSON
     }
 
-    def combinedAllTreatmentToTasks(treatments) {
+    def combinedAllTreatmentToTasks(patientId, treatments) {
         def combinedTasks = []
         def medicalRecords = []
         def today = new Date().time
@@ -246,6 +248,12 @@ class PatientDashboardController extends BaseController {
 
             for (task in treatment.tasks) {
                 task.treatmentProperty = treatmentProperty
+
+                if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
+                    def viewResult = getVoiceResult(patientId, treatment.id, task.id)
+                    task << viewResult
+                }
+
                 combinedTasks << task
             }
         }
@@ -257,5 +265,12 @@ class PatientDashboardController extends BaseController {
 
         return [combinedTasks : combinedTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] }),
                 medicalRecords: medicalRecords]
+    }
+
+    private getVoiceResult(patientId, medicalRecordId, taskId) {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = taskService.viewVoiceResult(token, clientId, patientId, medicalRecordId, taskId)
+        return resp
     }
 }

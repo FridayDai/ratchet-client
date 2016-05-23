@@ -7,9 +7,9 @@ var Task = require('../Task');
 var Utility = require('../../../../utils/Utility');
 var URLs = require('../../../../constants/Urls');
 
-var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
-
-var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
+//var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
+//
+//var ARCHIVED_ICON_TEMPLATE = '<i class="icon-archived"></i>';
 
 var GROUP_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',

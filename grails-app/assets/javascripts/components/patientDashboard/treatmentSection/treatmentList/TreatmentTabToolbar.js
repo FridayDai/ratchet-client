@@ -129,10 +129,10 @@ function TreatmentToolbar() {
         });
     };
 
-    this.hideNotAvailableButtons = function () {
-        this.select('editSurgeryButtonSelector').hide();
-        this.select('archiveButtonSelector').hide();
-    };
+    //this.hideNotAvailableButtons = function () {
+    //    this.select('editSurgeryButtonSelector').hide();
+    //    this.select('archiveButtonSelector').hide();
+    //};
 
     this.initTreatmentList = function () {
         this.on('click', function () {
@@ -157,9 +157,10 @@ function TreatmentToolbar() {
                 editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
                 archiveButtonSelector: this.onArchiveButtonClicked
             });
-        } else {
-            this.hideNotAvailableButtons();
         }
+        // else {
+        //    this.hideNotAvailableButtons();
+        //}
 
         this.on('click', {
             //moreDropdownButtonSelector: this.onMoreButtonClicked,

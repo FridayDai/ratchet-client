@@ -409,20 +409,13 @@
 }
 
 .no-treatment-container {
-    float: left;
-    width: calc(100% - 220px);
-    box-sizing: border-box;
     text-align: center;
-    letter-spacing: 0;
-    color: $base-color-medium-black;
-    border-left: 1px solid $base-color-white-grey;
-    min-height: 100%;
 
     .icon {
         margin-top: 100px;
         &:before {
-            content: '\f2a2';
-            font-family: "Ionicons";
+            content: '\f185';
+            font-family: FontAwesome;
             font-size: 90px;
             color: #e2e2e2;
         }
@@ -437,6 +430,7 @@
     .description {
         margin-top: 20px;
         font-size: 18px;
+        color: $base-font-grey;
     }
 
     .add-treatment {
@@ -585,7 +579,9 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
-    height: calc(100vh - 278px);
+    min-height: calc(100vh - 278px);
+    display: flex;
+    display: -ms-flexbox;
 
     .ui-tabs-panel {
         min-height: 100%;
@@ -598,7 +594,7 @@
         height: 70px;
         width: 220px;
         text-align: center;
-        border-bottom: 1px solid $base-color-white-grey;
+        border-bottom: 1px solid $base-font-color;
         z-index: 10;
 
         &:before {
@@ -624,7 +620,7 @@
             margin: 6px 0;
             &:hover,
             &:focus {
-                color: $base-color-dark-grey;
+                color: $base-logo-color;
             }
         }
     }
@@ -633,51 +629,86 @@
         padding-top: 71px;
         border: 0;
         overflow: hidden;
-        float: left;
+//        float: left;
         width: 220px;
+
+        .treatment-li {
+            &:hover,
+            &:focus {
+                .treatment-indicate {
+                    background: $base-logo-color;
+                    color: $base-color-white;
+                }
+                .ui-tabs-anchor {
+                    color: $base-logo-color;
+                }
+            }
+        }
 
         .ui-state-default {
             position: relative;
             overflow: hidden;
-            transition: 0.5s height;
+            transition: 0.4s height;
             height: 65px;
             margin: 0;
             padding: 0;
             background-color: $base-color-bg-head;
             cursor: pointer;
+            color: $base-font-grey;
         }
 
         .treatment-indicate {
             position: absolute;
-            top: 20px;
-            left: 12px;
+            top: 23px;
+            left: 11px;
+            display: inline-block;
+            width: 20px;
+            background: $base-color-grey;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 8px;
+            color: $base-color-medium-black;
         }
 
         .ui-tabs-anchor {
+            display: block;
+            padding: 0 36px;
             border-bottom: 0;
             min-width: 150px;
-            text-align: center;
             font-size: 15px;
             line-height: 60px;
-            text-transform: uppercase;
+            text-transform: capitalize;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: $base-font-grey;
         }
 
         .ui-state-active {
             height: 194px;
             background-color: $base-color-bg-head;
-            border-bottom: 1px solid $base-color-white-grey;
+            border-bottom: 1px solid $base-font-color;
             cursor: text;
+            color: $base-color-dark-grey;
 
             a {
                 color: $base-color-dark-grey;
                 font-weight: 400;
                 font-size: 15px;
                 border-color: $base-color-mid-grey;
+                line-height: 20px;
+                white-space: normal;
+                min-height: 40px;
+                padding-top: 20px;
+            }
+
+            .treatment-indicate {
+                background: $base-logo-color;
+                color: $base-color-white;
             }
         }
 
         .archived-treatment {
-            background-color: $base-font-color;
 
             span {
                 opacity: 0.6;
@@ -686,31 +717,28 @@
             &.ui-state-active {
                 background-color: #f4f4f4;
 
-                span {
-                    opacity: 1;
-                    color: #808080;
+                .treatment-indicate {
+                    background: $base-color-grey;
+                    color: $base-color-medium-black;
+                }
+
+                .ui-tabs-anchor {
+                    color: $base-font-grey;
                 }
             }
 
-            .icon-archived {
-                color: $base-font-grey;
-                margin-right: 10px;
-
-                &:before {
-                    padding-left: 0;
-                    color: inherit;
-                    content: '\f2c9';
-                    font-family: ionicons;
-                }
+            .archived-indicator {
+                position: absolute;
+                right: 18px;
             }
         }
     }
 
     .treatment-panel-container {
-        float: left;
+//        float: left;
         width: calc(100% - 220px);
         box-sizing: border-box;
-        border-left: 1px solid #e6e8e8;
+        border-left: 1px solid $base-font-color;
         min-height: 100%;
     }
 
