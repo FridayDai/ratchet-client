@@ -10,7 +10,7 @@
 
         <div class="table-group">
             <div class="inner-body" id="groupBody">
-                <table id="group-table" class="ec-table team-table display cursorAuto" data-total="${groupList.recordsTotal}">
+                <table id="group-table" class="ec-table team-table display cursorAuto" data-total="${groupList.recordsTotal}" data-account-management="${accountManagement}">
                     <thead>
                     <tr>
                         <th>Group</th>
@@ -21,7 +21,9 @@
                     <g:each var="group" in="${groupList.data}" status="i">
                         <tr data-is-dom-data="true">
                             <td>${group.name}</td>
-                            <td>${group.id}</td>
+                            <td>
+                                <g:if test="${accountManagement}">${group.id}</g:if>
+                            </td>
                         </tr>
                     </g:each>
                     </tbody>

@@ -89,7 +89,12 @@ class GroupsController extends BaseController {
     def deletePatientGroup() {
         def patientId = params?.patientId
         def groupId = params?.groupId
-        def resp = groupService.deleteGroupOfPatient(session.token, session.clientId, patientId, groupId)
-        render resp
+        def accountManagement = session.accountManagement
+        if(accountManagement) {
+            def resp = groupService.deleteGroupOfPatient(session.token, session.clientId, patientId, groupId)
+            render resp
+        } else {
+            render false
+        }
     }
 }
