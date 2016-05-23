@@ -190,7 +190,7 @@ function TreatmentScoreChart() {
         // Setup Surgery Date
         var surgeryDateX = gx.selectAll('g')
             .filter(function (d) { return d === 0;})
-            .classed('surgery-date-x', true);
+            .classed('absolute-event-x', true);
 
         surgeryDateX.insert('rect', ':first-child')
             .attr('width', 10)

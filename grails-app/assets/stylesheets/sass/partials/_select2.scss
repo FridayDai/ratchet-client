@@ -794,11 +794,11 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 
     .select2-container.select2-container-multi {
         width: 550px;
-        height: 29px;
+        height: auto;
         border: 0;
 
         .select2-choices {
-            height: 29px !important;
+            height: auto;
             border: 1px solid $base-font-color;
             background: #fbfbfb image-url('dataTable/sort_both.png', false, false) no-repeat 100%;
             overflow-y: scroll;

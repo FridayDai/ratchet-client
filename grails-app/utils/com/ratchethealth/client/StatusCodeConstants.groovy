@@ -7,7 +7,7 @@ class StatusCodeConstants {
     public static final String[] STAFF_TYPE_LIST =
             ["ANESTHESIOLOGIST", "MEDICAL ASSISTANT", "MANAGEMENT", "NURSE", "PHYSICAL THERAPISTS", "PRIMARY PHYSICIAN", "SCHEDULER", "SURGEON"]
 
-    //CareGiver relation type
+    //Caregiver relation type
     public static final String[] CAREGIVER_RELATION =
             ["OFFSPRING", "SPOUSE"]
 

@@ -62,6 +62,7 @@ function WithCombobox() {
     this.clear = function () {
         $(this.$node)
             .val('')
+            .data('saved', null)
             .data("id", '');
         this.__previousVal = null;
         this.$node.autocomplete( "widget").empty();

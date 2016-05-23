@@ -67,6 +67,7 @@ function BulkImportTitleTable() {
             this.initDataTable();
         } else {
             this.toggleTable(true);
+
         }
 
         this.search(data);

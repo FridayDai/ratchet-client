@@ -105,7 +105,7 @@
     width: 95%;
 }
 
-.emergency-required {
+.caregiver-required {
     display: none;
 }
 
@@ -442,6 +442,7 @@
 
 .email-status {
     &.abnormal {
+        display: inline-block;
         margin-left: 15px;
         font-size: 12px;
         color: #335d70;

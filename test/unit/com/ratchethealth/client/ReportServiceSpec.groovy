@@ -1,5 +1,6 @@
 package com.ratchethealth.client
 
+import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.HttpRequestWithBody
 import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
@@ -97,10 +98,10 @@ class ReportServiceSpec extends Specification {
         given:
         def jBuilder = new JsonBuilder()
         jBuilder {
-            id 1
+            items 1, 2
         }
 
-        HttpRequestWithBody.metaClass.asString = { ->
+        GetRequest.metaClass.asString = { ->
             return [
                 status: 200,
                 body  : jBuilder.toString()
@@ -108,15 +109,15 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getIndividualReport('token', 1, 1, 1, 1)
+        def result = service.getIndividualReport('token', 1, 1, 1)
 
         then:
-        result.id == 1
+        result.items == [1, 2]
     }
 
     def "test getIndividualReport without successful result"() {
         given:
-        HttpRequestWithBody.metaClass.asString = { ->
+        GetRequest.metaClass.asString = { ->
             return [
                 status: 400,
                 body  : "body"
@@ -124,7 +125,45 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        service.getIndividualReport('token', 1, 1, 1, 1)
+        service.getIndividualReport('token', 1, 1, 1)
+
+        then:
+        ApiReturnException e = thrown()
+        e.getMessage() == "body"
+    }
+
+    def "test getPatientTools with success result"() {
+        given:
+        def jBuilder = new JsonBuilder()
+        jBuilder {
+            items 1, 2
+        }
+
+        GetRequest.metaClass.asString = { ->
+            return [
+                status: 200,
+                body  : jBuilder.toString()
+            ]
+        }
+
+        when:
+        def result = service.getPatientTools('token', 1, 1)
+
+        then:
+        result.items == [1, 2]
+    }
+
+    def "test getPatientTools without successful result"() {
+        given:
+        GetRequest.metaClass.asString = { ->
+            return [
+                status: 400,
+                body  : "body"
+            ]
+        }
+
+        when:
+        service.getPatientTools('token', 1, 1)
 
         then:
         ApiReturnException e = thrown()

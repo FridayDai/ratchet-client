@@ -13,21 +13,23 @@ class PatientsController extends BaseController {
 
     static allowedMethods = [getPatients: ['GET'], addPatient: ['POST']]
 
-    def getPatients(PatientPagination patientPagination) {
+    def getPatients(PatientFilterFields filterFields) {
         String token = request.session.token
         def clientId = request.session.clientId
 
         if (request.isXhr()) {
-            def resp = patientService.loadPatients(token, clientId, patientPagination)
-            render resp as JSON
-        } else {
-            patientPagination.start = RatchetConstants.DEFAULT_PAGE_OFFSET
-            patientPagination.length = RatchetConstants.DEFAULT_PAGE_SIZE
-            patientPagination.sortField = 'patientId'
-            patientPagination.sortDir = 'desc'
+            def resp = patientService.loadPatients(token, clientId, filterFields)
 
-            def patientList = patientService.loadPatients(token, clientId, patientPagination)
-            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: patientPagination.length])
+            render resp as JSON
+
+        } else {
+            filterFields.start = RatchetConstants.DEFAULT_PAGE_OFFSET
+            filterFields.length = RatchetConstants.DEFAULT_PAGE_SIZE
+            filterFields.sortField = 'patientId'
+            filterFields.sortDir = 'desc'
+
+            def patientList = patientService.loadPatients(token, clientId, filterFields)
+            render(view: '/patients/patientList', model: [patientList: patientList, pagesize: filterFields.length])
         }
     }
 
@@ -38,7 +40,7 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
-    def lookup(BulkPagination bulkPagination) {
+    def lookup(BulkFilterFields bulkPagination) {
         String token = request.session.token
         def clientId = request.session.clientId
         def resp = bulkImportService.lookup(token, clientId, bulkPagination)

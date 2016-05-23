@@ -31,7 +31,7 @@ class ActivityServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getActivities('token', new ActivityPagination())
+        def result = service.getActivities('token', 1 ,new ActivityFilterFields())
 
         then:
         result.recordsTotal == 2
@@ -49,7 +49,7 @@ class ActivityServiceSpec extends Specification {
         }
 
         when:
-        service.getActivities('token', new ActivityPagination())
+        service.getActivities('token', 1,  new ActivityFilterFields())
 
         then:
         ApiReturnException e = thrown()

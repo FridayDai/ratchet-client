@@ -17,7 +17,7 @@ class Utils {
 
         cal.setTime(sd1.parse(dateStr))
 
-        SimpleDateFormat sd = new SimpleDateFormat("MMM d, yyyy")
+        SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy")
 
         return sd.format(cal.time)
     }

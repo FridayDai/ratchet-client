@@ -138,7 +138,7 @@ a {
 }
 
 .btn.btn-add {
-    padding-left: 32px;
+    padding: 4px 20px 4px 34px;
     display: inline-block;
     float: right;
     margin-top: 10px;
@@ -152,7 +152,7 @@ a {
         content: '\f2c7';
         position: absolute;
         left: 15px;
-        top: 7px;
+        top: 5px;
     }
 
     span {
@@ -432,7 +432,7 @@ a {
     .search-content {
         margin: 20px 40px;
         padding: 20px;
-        background-color: $base-color-search;
+        background-color: #f2f2f2;
     }
 
     input {
@@ -657,5 +657,51 @@ a {
         font-family: 'Ionicons';
         font-size: 14px;
         color: $base-color-white;
+    }
+}
+
+.icon-button {
+    cursor: pointer;
+
+    &:hover + .icon-button-tip {
+        display: block;
+    }
+
+    &.not-available {
+        opacity: 0.5;
+
+        &:hover + .icon-button-tip {
+            display: none;
+        }
+    }
+}
+
+.icon-button-tip {
+    display: none;
+    position: absolute;
+    right: 1px;
+    top: -23px;
+    height: 20px;
+    line-height: 20px;
+    background: $base-color-black;
+    color: white;
+    text-align: center;
+    font-size: 0;
+
+    &:after {
+        content: '\f104';
+        font-family: ionicons;
+        font-size: 12px;
+        position: absolute;
+        left: 42%;
+        top: 12px;
+        color: $base-color-black;
+    }
+
+    span {
+        display: inline-block;
+        min-width: 25px;
+        font-size: 12px;
+        padding: 0 4px;
     }
 }

@@ -1,5 +1,5 @@
 module.exports = {
-     EMERGENCY_CONTACT_RELATIONSHIP: [
+     CAREGIVER_RELATIONSHIP: [
         {label: "Parent", value: 1},
         {label: "Spouse", value: 2},
         {label: "Child",  value: 3},
@@ -22,7 +22,7 @@ module.exports = {
         {label: "Dec", value: 11}
     ],
 
-    EMERGENCY_CONTACT_RELATIONSHIP_MAP : {
+    CAREGIVER_RELATIONSHIP_MAP : {
         1: 'Parent',
         2: 'Spouse',
         3: 'Child',
@@ -30,7 +30,7 @@ module.exports = {
         5: 'Other'
     },
 
-    EMERGENCY_CONTACT_RELATIONSHIP_REVERSE_MAP : {
+    CAREGIVER_RELATIONSHIP_REVERSE_MAP : {
         'parent': 1,
         'spouse': 2,
         'child': 3,
@@ -70,6 +70,14 @@ module.exports = {
         {label: "Post-Op 0-3 days", value: 2},
         {label: "Post-Op 0-90 days", value: 3},
         {label: "Post-Op 90 days +", value: 4}
+    ],
+
+    TASK_STATUS_FILTER: [
+        {label: "Overdue", value: 2},
+        {label: "Pending", value: 4},
+        {label: "Scheduled", value: 3},
+        {label: "Expired", value: 6},
+        {label: "Completed", value: 5}
     ],
 
     ACCOUNT_TYPE: {

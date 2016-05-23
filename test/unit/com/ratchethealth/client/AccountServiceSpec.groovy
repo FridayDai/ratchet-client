@@ -34,7 +34,7 @@ class AccountServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getAccounts('token', 1, new AccountPagination())
+        def result = service.getAccounts('token', 1, new AccountFilterFields())
 
         then:
         result.recordsTotal == 2
@@ -52,7 +52,7 @@ class AccountServiceSpec extends Specification {
         }
 
         when:
-        service.getAccounts('token', 1, new AccountPagination())
+        service.getAccounts('token', 1, new AccountFilterFields())
 
         then:
         ApiReturnException e = thrown()

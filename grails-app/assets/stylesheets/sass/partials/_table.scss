@@ -48,7 +48,7 @@
 
             &:before {
                 content: '\f417';
-                color: $base-color-medium-black;
+                color: #999999;
                 font-weight: lighter;
                 font-size: 22px;
                 font-family: ionicons;
@@ -61,10 +61,16 @@
             &:after {
                 margin-left: 10px;
                 content: '\f252';
-                color: $base-color-medium-black;
+                color: #999999;
                 font-weight: lighter;
                 font-size: 22px;
                 font-family: ionicons;
+            }
+
+            &:hover, &:focus {
+                &:after {
+                    color: $base-color-dark-grey;
+                }
             }
         }
 

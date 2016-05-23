@@ -147,6 +147,66 @@ class GroupService extends RatchetAPIService {
                 handleError(resp)
             }
         }
+    }
 
+    def getGroupsPatientBelongsTo(String token, clientId, patientId) {
+        String patientGroupsUrl = grailsApplication.config.ratchetv2.server.url.patientGroups
+
+        def url = String.format(patientGroupsUrl, clientId, patientId)
+        log.info("Call backend service to get groups Which patient belongs to, token: ${token}.")
+
+        withGet(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 200) {
+                log.info("Get groups success, token: ${token}")
+                def result = JSON.parse(resp.body)
+                def map = [:]
+                map.put("recordsTotal", result.totalCount)
+                map.put("recordsFiltered", result.totalCount)
+                map.put("data", result.items)
+                log.info("Get patient groups success, token: ${token}.")
+                return map
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def addGroupToPatient(String token, clientId, patientId, groupIds) {
+        String patientGroupsUrl = grailsApplication.config.ratchetv2.server.url.patientGroups
+
+        def url = String.format(patientGroupsUrl, clientId, patientId)
+        log.info("Call backend service to add group to patient, token: ${token}.")
+
+        withPost(token, url) { req ->
+            def resp = req.body(JsonOutput.toJson([
+                    groupIds: groupIds?.split(',')
+            ])).asJson()
+
+            if (resp.status == 201) {
+                log.info("add groups to patient success, token: ${token}.")
+                return true
+            } else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def deleteGroupOfPatient(String token, clientId, patientId, groupId) {
+        String deleteGroupUrl = grailsApplication.config.ratchetv2.server.url.deletePatientGroup
+        def url = String.format(deleteGroupUrl, clientId, patientId, groupId)
+        log.info("Call backend service to delete a group the pateint belongs to , token: ${token}.")
+
+        withDelete(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 204) {
+                log.info("delete a group the patient belongs to success, token: ${token}.")
+                return true
+            } else {
+                handleError(resp)
+            }
+        }
     }
 }

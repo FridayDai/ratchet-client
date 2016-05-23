@@ -53,12 +53,18 @@
                     <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
+
+                <div class="filler-content">
+                    <label for="taskStatusFilter" class="select-tip">TASK STATUS</label>
+                    <input type="text" name="taskStatusFilter" id="taskStatusFilter"
+                           class="input-group input-auto-search"/>
+                </div>
             </div>
         </div>
 
         <div class="table-group">
             <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
-                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered} ">
+                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -148,38 +154,38 @@
 
             <div class="form-group inline">
                 <label class="lbl-group">BIRTHDAY<span>*</span></label>
-                <input id="birthday" name="birthday" type="text" class="input-group date-picker birthday re-position"
-                       placeholder="Jan 1, 1990" required />
+                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                       placeholder="MM/DD/YYYY" required />
                 <div class='replace-input-div' id="birthday-static"></div>
                 <a class='icon-edit form-group-edit'></a>
             </div>
 
-            <h4>EMERGENCY CONTACT</h4>
+            <h4>CAREGIVER</h4>
 
-            <div class="emergency-contact-info">
+            <div class="caregiver-info">
                 <div class="form-group inline">
-                    <label class="lbl-group">FIRST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-firstName" name="ecFirstName" type="text"
-                           class="input-group emergency-field"
+                    <label class="lbl-group">FIRST NAME<span class="caregiver-required">*</span></label>
+                    <input id="caregiver-firstName" name="ecFirstName" type="text"
+                           class="input-group caregiver-field"
                            placeholder="Grace (Optional)"/>
                 </div>
 
                 <div class="form-group inline">
-                    <label class="lbl-group">LAST NAME<span class="emergency-required">*</span></label>
-                    <input id="emergency-lastName" name="ecLastName" type="text"
-                           class="input-group emergency-field"
+                    <label class="lbl-group">LAST NAME<span class="caregiver-required">*</span></label>
+                    <input id="caregiver-lastName" name="ecLastName" type="text"
+                           class="input-group caregiver-field"
                            placeholder="Smith (Optional)"/>
                 </div>
 
                 <div class="form-group inline">
-                    <label class="lbl-group">RELATIONSHIP<span class="emergency-required">*</span></label>
-                    <input type="text" id="relationship" name="relationshipVal" class="input-group emergency-field"
+                    <label class="lbl-group">RELATIONSHIP<span class="caregiver-required">*</span></label>
+                    <input type="text" id="relationship" name="relationshipVal" class="input-group caregiver-field"
                            placeholder="Spouse (Optional)">
                 </div>
 
                 <div class="form-group inline emr-email">
-                    <label class="lbl-group">EMAIL ADDRESS<span class="emergency-required">*</span></label>
-                    <input id="emergency-email" name="ecEmail" type="email" class="input-group emergency-field"
+                    <label class="lbl-group">EMAIL ADDRESS<span class="caregiver-required">*</span></label>
+                    <input id="caregiver-email" name="ecEmail" type="email" class="input-group caregiver-field"
                            placeholder="grace@email.com (Optional)"/>
                 </div>
 
@@ -301,9 +307,9 @@
                         <th>Provider</th>
                         <th>Treatment</th>
                         <th>Surgery Date</th>
-                        <th>Emergency Contact Name</th>
+                        <th>Caregiver Name</th>
                         <th>Relationship</th>
-                        <th>Emergency Contact E-mail Address</th>
+                        <th>Caregiver E-mail Address</th>
                     </tr>
                     </thead>
                 </table>

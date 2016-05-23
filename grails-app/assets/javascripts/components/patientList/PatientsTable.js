@@ -31,6 +31,8 @@ var TABLE_SEARCH_EVENTS = [
     'clearAttentionStatusForPatientTable',
     'selectTreatmentStatusForPatientTable',
     'clearTreatmentStatusForPatientTable',
+    'selectTaskStatusForPatientTable',
+    'clearTaskStatusForPatientTable',
     'selectPatientIDNameForPatientTable'
 ];
 
@@ -40,6 +42,7 @@ function PatientsTable() {
     });
 
     this.options({
+        paging: true,
         columnDefs: [
             {
                 targets: 0,
@@ -123,7 +126,7 @@ function PatientsTable() {
                 data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
-                    if (taskStatus.indexOf("All complete") !== -1) {
+                    if (taskStatus.indexOf("0 Active") !== -1) {
                         return '<span class="task-status all-complete-status">' + taskStatus + '</span>';
                     } else if (taskStatus.indexOf("Overdue") !== -1 && taskStatus.indexOf("Pending") !== -1) {
                         return '<span class="task-status overdue-status">' + taskStatus + '</span>';
@@ -170,6 +173,7 @@ function PatientsTable() {
         patientIdOrName: null,
         attentionStatus: null,
         treatmentStatus: null,
+        taskStatus: null,
         activeTreatmentOnly: true
     };
 

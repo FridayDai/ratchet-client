@@ -5,7 +5,7 @@ var PARAMs = require('../../../constants/Params');
 function PatientRelationshipCombobox() {
     this.options({
         appendTo: ".container",
-        source: PARAMs.EMERGENCY_CONTACT_RELATIONSHIP
+        source: PARAMs.CAREGIVER_RELATIONSHIP
     });
 }
 

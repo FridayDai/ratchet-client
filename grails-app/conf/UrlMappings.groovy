@@ -33,9 +33,15 @@ class UrlMappings {
             action = [GET: "getPatients", POST: "addPatient"]
         }
 
-        "/patients/$patientId?"(controller: "singlePatient") {
+        "/patients/$patientId?"(controller: "patientDashboard") {
             action = [GET: "getSinglePatient", POST: "updateSinglePatient"]
         }
+
+        "/patients/$patientId/treatmentListTab"(controller: "patientDashboard", action: "getTreatmentListTab")
+        "/patients/$patientId/reportTab"(controller: "patientDashboard", action: "getReportTab")
+        "/patients/$patientId/groupTab"(controller: "patientDashboard", action: "getGroupTab")
+        "/patients/$patientId/caregiverTab"(controller: "patientDashboard", action: "getCaregiverTab")
+        "/patients/$patientId/activitiesTab"(controller: "patientDashboard", action: "getActivitiesTab")
 
         "/patients/bulk-import/sample-download"(controller: "patients", action: "downloadFile")
         "/patients/bulk-import/upload"(controller: "patients", action: "uploadFile")
@@ -43,51 +49,56 @@ class UrlMappings {
         "/patients/bulk-import/save"(controller: "patients", action: "savePatients")
         "/patients/bulk-import/download-errors"(controller: "patients", action: "downloadErrors")
 
-        "/patients/$id?/invite"(controller: "singlePatient", action: "invitePatient")
-        "/patients/check-id"(controller: "singlePatient", action: "checkPatientExist")
-        "/patients/check-email"(controller: "singlePatient", action: "checkPatientEmailExist")
-        "/patients/$id?/delete"(controller: "singlePatient", action: "deletePatient")
+        "/patients/$patientId?/has-active-tasks"(controller: "patientDashboard", action: "hasActiveTasks")
+        "/patients/$id?/invite"(controller: "patientDashboard", action: "invitePatient")
+        "/patients/check-id"(controller: "patientDashboard", action: "checkPatientExist")
+        "/patients/check-email"(controller: "patientDashboard", action: "checkPatientEmailExist")
+        "/patients/$id?/delete"(controller: "patientDashboard", action: "deletePatient")
+        "/patients/$patientId/notify"(controller: "patientDashboard", action: "notifyTasks")
+        "/patients/$patientId/in-clinic/code"(controller: "patientDashboard", action: "getInClinicCode")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
         //Patient treatment
-        "/patients/$patientId?/treatment"(controller: "treatment", action: "index")
+        "/patients/$patientId?/getTreatmentTab"(controller: "treatment", action: "getTreatmentTab")
         "/treatments"(controller: "treatment", action: "getTreatments")
         "/treatments/$treatmentId?"(controller: "treatment", action: "getTreatmentInfo")
-        "/treatments/$treatmentId?/generateCode"(controller: "treatment", action: "generateTreatmentCode")
         "/treatments/$treatmentId?/available-tasks"(controller: "treatment") {
             action = [GET: "getTasksInTreatment"]
         }
         "/treatments/$treatmentId?/available-years"(controller: "treatment", action: "getTreatmentAvailableYears")
-        "/patients/$patientId/treatments/$medicalRecordId/notify"(controller: "treatment", action: "notifyTreatmentTasks")
+
         "/patients/$patientId/treatments/$medicalRecordId/add-ad-hoc-tasks"(controller: "treatment", action: "addAdhocTasks")
         "/patients/$patientId/treatments/$medicalRecordId/delete"(controller: "treatment", action: "deleteTreatment")
 
         //Patient task
-        "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")
+//        "/patients/$patientId/treatments/$medicalRecordId/tasks"(controller: "task", action: "getTasks")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/send-mail"(controller: "task", action: "sendTaskEmail")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/result"(controller: "task", action: "getTaskResult")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/delete"(controller: "task", action: "deleteTask")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/voice-call"(controller: "task", action: "callVoiceTask")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/attention/resolve"(controller: "task", action: "resolveVoiceTask")
 
-        //Patient team
-        "/patients/$patientId?/emergency-contact"(controller: "team") {
-            action = [GET: "getCareGiver", POST: "addCareGiver"]
+        //Patient caregiver
+        "/patients/$patientId?/caregivers"(controller: "caregiver") {
+            action = [GET: "getCaregivers", POST: "addCaregiver"]
         }
+        "/patients/$patientId?/caregivers/$caregiverId?/update"(controller: "caregiver", action: "updateCaregiver")
+        "/patients/$patientId?/caregivers/$caregiverId?/delete"(controller: "caregiver", action: "deleteCaregiver")
+        "/patients/$patientId?/caregivers/check-email"(controller: "caregiver", action: "checkCaregiverEmail")
+
+        //patient group
+        "/patients/$patientId/groups"(controller: "groups", action: "getPatientGroups")
+        "/patients/$patientId/groups/$groupId"(controller: "groups", action: "deletePatientGroup")
 
         //Patient report
-        "/patients/$patientId?/treatments/$medicalRecordId/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
-
-        "/patients/$patientId?/$medicalRecordId?/emergency-contact/$emergencyContactId?"(controller: "team", action: "deleteCareGiver")
-        "/patients/$patientId?/emergency-contact/update"(controller: "team", action: "updateCareGiver")
-        "/patients/$patientId?/group-and-provider/update"(controller: "team", action: "updateCareTeamSurgeon")
-        "/patients/$medicalRecordId?/emergency-contact/check-email"(controller: "team", action: "checkCareGiverEmail")
+        "/patients/$patientId?/tools/$baseToolId/report"(controller: "report", action: "getIndividualReport")
+        "/patients/$patientId?/tools"(controller: "report", action: "getPatientTools")
 
         //Patient activity
-        "/patients/$patientId?/activities"(controller: "activity", action: "getActivities")
+        "/patients/$patientId?/activities"(controller: "patientDashboard", action: "getPatientActivities")
 
         //Accounts
         "/accounts"(controller: "accounts") {
