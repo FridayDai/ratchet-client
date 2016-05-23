@@ -295,7 +295,7 @@ ratchetv2 {
             assignTreatments = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/assign/record"
             assignTreatmentToExistPatient = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/assign/record"
             getTreatmentInfo = "${ratchetv2.server.url.base}/api/v1/clients/%s/treatments/%s"
-            updateSurgeryTime = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
+            updateEventTime = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s"
             archived = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/archived"
             getToolsOfTreatment = "${ratchetv2.server.url.base}/api/v1/treatments/%s/tools/loadToolByTreatment"
             getTreatmentAvailabelYears = "${ratchetv2.server.url.base}/api/v1/report/availableYears"

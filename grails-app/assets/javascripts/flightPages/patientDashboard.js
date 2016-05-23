@@ -23,7 +23,7 @@ var AddTreatmentFormDialog = require('../components/patientDashboard/treatmentSe
 var DeleteTreatmentFormDialog = require('../components/patientDashboard/treatmentSection/DeleteTreatmentFormDialog');
 var AddTasksDialog = require('../components/patientDashboard/treatmentSection/AddTasksDialog');
 var InClinicCodeDialog = require('../components/patientDashboard/InClinicCodeDialog');
-var EditSurgeryDateFormDialog = require('../components/patientDashboard/treatmentSection/EditSurgeryDateFormDialog');
+var EditEventDateFormDialog = require('../components/patientDashboard/treatmentSection/EditEventDateFormDialog');
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
 var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
 
@@ -104,7 +104,7 @@ function PatientDetailPage() {
         }, {
             selector: 'editSurgeryDateDialogSelector',
             event: 'showEditSurgeryDialog',
-            dialog: EditSurgeryDateFormDialog
+            dialog: EditEventDateFormDialog
         }, {
             selector: 'addCaregiverDialogSelector',
             event: 'showCaregiverDialog',

@@ -34,7 +34,7 @@
     }
 }
 
-.surgery-time-picker {
+.event-time-picker {
     display: block;
     color: $base-color-mid-grey;
     font-size: 9pt;
@@ -491,9 +491,13 @@
         }
     }
 
-    .tab-list {
+    .top-tab-list {
+        height: 60px;
+    }
+
+    .tab-list,
+    .top-tab-list {
         position: relative;
-//        height: 60px;
         padding: 0;
         border: 0;
         border-bottom: 4px solid $base-color-white-grey;

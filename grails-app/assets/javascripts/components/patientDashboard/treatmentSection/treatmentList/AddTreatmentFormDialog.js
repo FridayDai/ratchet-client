@@ -17,8 +17,8 @@ function AddTreatmentFormDialog() {
         groupFieldSelector: '#selectGroup',
         providerFieldSelector: '#selectSurgeons',
         treatmentFieldSelector: '#selectTreatment',
-        surgeryTimeFieldSelector: '#surgeryTime',
-        surgeryDateFieldGroupSelector: '#surgery-date-group',
+        eventTimeFieldSelector: '#eventTime',
+        surgeryDateFieldGroupSelector: '#treatment-date-group',
 
         relationshipSelectEvent: 'addTreatmentRelationshipSelected',
         relationshipClearEvent: 'addTreatmentRelationshipCleared',
@@ -69,7 +69,7 @@ function AddTreatmentFormDialog() {
                 resetEvent: 'addTreatmentReset'
             }
         },
-        surgeryTimeFieldSelector: {
+        eventTimeFieldSelector: {
             child: PatientSurgeryDate,
             attributes: {
                 groupSelectEvent: 'addTreatmentGroupSelected',
@@ -111,7 +111,7 @@ function AddTreatmentFormDialog() {
         var providerId = $provider.data('id');
         var $treatment = this.select('treatmentFieldSelector');
         var treatmentId = $treatment.data('id');
-        var $surgeryTime = this.select('surgeryTimeFieldSelector');
+        var $eventTime = this.select('eventTimeFieldSelector');
 
         var result = {
             clientId: this.patientInfo.clientId,
@@ -130,22 +130,22 @@ function AddTreatmentFormDialog() {
             profilePhoto: ''
         };
 
-        if ($surgeryTime.is(':visible')) {
-            result.surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+        if ($eventTime.is(':visible')) {
+            result.absoluteEventTimestamp = Utility.toVancouverTime($eventTime.val());
         }
 
         return result;
     };
 
     this.onAddTreatmentSuccess = function (e, data) {
-        var $surgeryTime = this.select('surgeryTimeFieldSelector');
-        var surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+        var $eventTime = this.select('eventTimeFieldSelector');
+        var eventTime = Utility.toVancouverTime($eventTime.val());
 
         this.trigger('addTreatmentSuccess', _.assign(data, {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             emailStatus: this.patientInfo.emailStatus,
-            treatmentDate: surgeryTime
+            treatmentDate: eventTime
         }));
     };
 

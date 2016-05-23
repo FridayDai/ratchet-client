@@ -120,7 +120,7 @@ class PatientDashboardServiceSpec extends Specification {
 		patient.profilePhoto = 'profilePhoto'
 		patient.treatmentId = 111111
 		patient.staffId = 222222
-		patient.surgeryTime = 123456789
+		patient.absoluteEventTimestamp = 123456789
 		patient.ecFirstName = 'ecFirstName'
 		patient.ecLastName = 'ecLastName'
 		patient.relationship = 'relationship'
@@ -154,7 +154,7 @@ class PatientDashboardServiceSpec extends Specification {
 		patient.profilePhoto = 'profilePhoto'
 		patient.treatmentId = 111111
 		patient.staffId = 222222
-		patient.surgeryTime = 123456789
+		patient.absoluteEventTimestamp = 123456789
 		patient.ecFirstName = 'ecFirstName'
 		patient.ecLastName = 'ecLastName'
 		patient.relationship = 'relationship'

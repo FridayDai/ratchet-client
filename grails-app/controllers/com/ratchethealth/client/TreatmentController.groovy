@@ -7,82 +7,6 @@ class TreatmentController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
 
     def treatmentService
-    def taskService
-
-//    def getTreatmentTab() {
-//        String token = session.token
-//        def accountId = session.accountId
-//        def clientId = session.clientId
-//        def patientId = params?.patientId
-//        def medicalRecordId = params?.medicalRecordId
-//        def treatmentId = params?.treatmentId
-//        def archived = (params?.archived) ?: false
-//        def PatientEmailStatus = params?.PatientEmailStatus
-//        def isAdmin = request.session.accountManagement
-//
-//        def tasks = taskService.getTasks(token, clientId, medicalRecordId)
-//        def activeTasks = [], closedTasks = [], scheduleTasks = []
-//        def activeTaskTypeArray = [], closedTaskTypeArray = [], scheduleTaskTypeArray = []
-//        def taskType
-//
-//        def surgeryTime = params?.surgeryTime
-//
-//        if (surgeryTime != "null" || !surgeryTime) {
-//            surgeryTime = Long.valueOf(surgeryTime)
-//        } else {
-//            surgeryTime = null
-//        }
-//
-//        for (task in tasks) {
-//            switch (task?.status) {
-//                case StatusCodeConstants.TASK_STATUS_SCHEDULE:
-//                    unionTaskType(task, scheduleTaskTypeArray)
-//                    scheduleTasks.add(task)
-//                    continue
-//                case StatusCodeConstants.TASK_STATUS_PENDING:
-//                case StatusCodeConstants.TASK_STATUS_OVERDUE:
-//                    unionTaskType(task, activeTaskTypeArray)
-//                    activeTasks.add(task)
-//                    continue
-//                default:
-//                    unionTaskType(task, closedTaskTypeArray)
-//                    //Todo: after api update, need to use taskType
-//                    if (RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "VOICE" && StatusCodeConstants.TASK_STATUS[task.status] == "complete") {
-//                        def viewResult = getVoiceResult(patientId, medicalRecordId, task.id)
-//                        task = task << viewResult
-//                    }
-//                    closedTasks.add(task)
-//
-//            }
-//        }
-//
-//        scheduleTasks = scheduleTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] })
-//        activeTasks = activeTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
-//        closedTasks = closedTasks.sort({ a, b -> b["sendTime"] <=> a["sendTime"] })
-//
-//        taskType = [
-//            activeType  : activeTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
-//            closedType  : closedTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() },
-//            scheduleType: scheduleTaskTypeArray.sort { a, b -> a.toLowerCase() <=> b.toLowerCase() }
-//        ]
-//
-//        render view: '/patientDashboard/treatment',
-//            model: [
-//                activeTasks       : activeTasks,
-//                closedTasks       : closedTasks,
-//                scheduleTasks     : scheduleTasks,
-//                taskType          : taskType,
-//                clientId          : clientId,
-//                patientId         : patientId,
-//                medicalRecordId   : medicalRecordId,
-//                treatmentId       : treatmentId,
-//                archived          : archived,
-//                PatientEmailStatus: PatientEmailStatus,
-//                accountId         : accountId,
-//                surgeryTime       : surgeryTime,
-//                isAdmin           : isAdmin
-//            ]
-//    }
 
     def getAllTreatmentTasks() {
         render view: '/error/error404'
@@ -114,14 +38,14 @@ class TreatmentController extends BaseController {
         render resp as JSON
     }
 
-    def updateSurgeryTime() {
+    def updateEventTime() {
         String token = request.session.token
         def clientId = request.session.clientId
         def medicalRecordId = params?.medicalRecordId
         def patientId = params?.patientId
-        def surgeryTime = params?.surgeryTime
+        def absoluteEventTimestamp = params?.absoluteEventTimestamp
 
-        def resp = treatmentService.updateSurgeryTime(token, clientId, medicalRecordId, patientId, surgeryTime)
+        def resp = treatmentService.updateEventTime(token, clientId, medicalRecordId, patientId, absoluteEventTimestamp)
         def result = [resp: resp]
         render result as JSON
     }

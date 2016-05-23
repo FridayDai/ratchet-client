@@ -18,7 +18,7 @@ function PatientTreatmentCombobox() {
             return {
                 label: data.title + ' ' + data.tmpTitle,
                 value: data.id,
-                surgeryDateRequired: data.surgeryTimeRequired,
+                isAbsoluteEventBased: data.isAbsoluteEventBased,
                 timeStamp: data.sendTimeOffset,
                 surgeryDate: data.surgeryDate
             };
@@ -30,7 +30,7 @@ function PatientTreatmentCombobox() {
         groupSelectEvent: 'groupSelectEvent',
         groupClearEvent: 'groupClearEvent',
         resetEvent: 'resetEvent',
-        surgeryDateRequired: 'surgeryDateRequired'
+        isAbsoluteEventBased: 'isAbsoluteEventBased'
     });
 
     this._previousGroupId = null;
@@ -73,7 +73,7 @@ function PatientTreatmentCombobox() {
             var data = {};
 
             data[this.attr.selectDataKey] = item.value;
-            data[this.attr.surgeryDateRequired] =  item.surgeryDateRequired;
+            data[this.attr.isAbsoluteEventBased] =  item.isAbsoluteEventBased;
 
             if (this.beforeSelect) {
                 this.beforeSelect.call(this, data);

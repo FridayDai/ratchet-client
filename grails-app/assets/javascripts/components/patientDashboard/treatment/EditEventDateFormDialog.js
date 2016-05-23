@@ -5,7 +5,7 @@ var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
 
-function EditSurgeryDateFormDialog() {
+function EditEventDateFormDialog() {
     this.options({
         title: 'EDIT SURGERY DATE',
         width: 430,
@@ -13,11 +13,11 @@ function EditSurgeryDateFormDialog() {
     });
 
     this.attributes({
-        surgeryTimeFieldSelector: '#treatment-surgeryTime'
+        eventTimeFieldSelector: '#treatment-eventTime'
     });
 
     this.children({
-        surgeryTimeFieldSelector: PatientSurgeryDate
+        eventTimeFieldSelector: PatientSurgeryDate
     });
 
     this.onShow = function (e, data) {
@@ -33,11 +33,11 @@ function EditSurgeryDateFormDialog() {
     this.setCurrentSurgeryDate = function (current) {
         this.currentSurgeryDate = current;
 
-        this.select('surgeryTimeFieldSelector').val(current);
+        this.select('eventTimeFieldSelector').val(current);
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
-        var newDate = Utility.toVancouverTime(this.select('surgeryTimeFieldSelector').val());
+        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
 
         this.formEl.attr('action',
             URLs.UPDATE_SURGERY_DATE.format(patientId, medicalRecordId, newDate)
@@ -79,11 +79,11 @@ function EditSurgeryDateFormDialog() {
     };
 
     this.isDateChanged = function () {
-        return this.currentSurgeryDate !== this.select('surgeryTimeFieldSelector').val();
+        return this.currentSurgeryDate !== this.select('eventTimeFieldSelector').val();
     };
 
     this.onEditSurgeryDateSuccess = function () {
-        var newDate = Utility.toVancouverTime(this.select('surgeryTimeFieldSelector').val());
+        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
 
         this.trigger('editSurgeryDateSuccess', {
             newDate: newDate
@@ -95,4 +95,4 @@ function EditSurgeryDateFormDialog() {
     });
 }
 
-module.exports = flight.component(WithFormDialog, EditSurgeryDateFormDialog);
+module.exports = flight.component(WithFormDialog, EditEventDateFormDialog);
