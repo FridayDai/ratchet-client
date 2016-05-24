@@ -90,7 +90,7 @@
                 %{--</div>--}%
 
 
-                <div class="tasks-list">
+                <div id="tasks-list" class="tasks-list">
                     <g:each in="${combinedTasks}" var="task">
                         <g:if test="${task.itemType == 'today'}">
                             <div class="today-item">
@@ -112,6 +112,12 @@
                             ]"/>
                         </g:else>
                     </g:each>
+                </div>
+
+                <div id="no-tasks" class="no-treatment-container no-tasks hide">
+                    <div class="icon"></div>
+
+                    <div class="title">0 tasks</div>
                 </div>
             </div>
 

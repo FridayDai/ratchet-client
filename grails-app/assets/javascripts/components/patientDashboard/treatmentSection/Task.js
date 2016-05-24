@@ -14,6 +14,8 @@ function TaskSection() {
         contentSelector: '.content',
         treatmentToolbarSelector: '.treatment-tool-bar',
         taskStatusFilterFieldSelector: '#task-status',
+        noTaskFiledSelector: '#no-tasks',
+        taskListFiledSelector: '#tasks-list',
 
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
@@ -120,6 +122,7 @@ function TaskSection() {
                 if (data === 'true') {
 
                     $taskBox.remove();
+                    me.checkNoTasks(urlParams.medicalRecordId);
                     //me.updateTaskBoxAndFilter($taskBox, $taskRow);
                     //me.countActiveTasks();
                     //me.checkIfHasTasks($taskRow);
@@ -147,14 +150,26 @@ function TaskSection() {
 
     this.onMedicalRecordListClick = function (event, data) {
         var id = data.medicalRecordId;
+        this.checkNoTasks(id);
+
         $('.box-item[medical-record-id =' + id + ']').show();
         $('.box-item[medical-record-id !=' + id + ']').hide();
+    };
+
+    this.checkNoTasks = function(id) {
+        if($('.box-item[medical-record-id =' + id + ']').length === 0) {
+            this.select('taskListFiledSelector').hide();
+            this.select('noTaskFiledSelector').show();
+        } else {
+            this.select('noTaskFiledSelector').hide();
+            this.select('taskListFiledSelector').show();
+
+        }
     };
 
     this.initDefaultTasks = function () {
         this.filterTask = [];
         this.filterTask.total = this.select('boxItemsSelector').length;
-
         this.select('archivedItemSelector').hide();
     };
 
@@ -167,8 +182,8 @@ function TaskSection() {
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
             beginTaskButtonSelector: this.onTaskBeginButtonClicked,
-            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
-            filterButtonSelector: this.onFilterButtonClicked
+            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
+            //filterButtonSelector: this.onFilterButtonClicked
         });
         this.checkPhoneNumberStatus();
     });
