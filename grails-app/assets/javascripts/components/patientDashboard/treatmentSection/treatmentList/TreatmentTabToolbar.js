@@ -145,7 +145,7 @@ function TreatmentToolbar() {
             this.trigger('medicalRecordListSelected', {
                 medicalRecordId: $ele.data('id')
             });
-        })
+        });
     };
 
     this.after('initialize', function () {

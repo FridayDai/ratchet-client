@@ -216,27 +216,45 @@
 }
 
 //filter
-.quick-filter {
-    margin-bottom: 30px;
+.filter-area {
+    padding: 30px 30px 10px;
 }
 
-.quick-filter-label {
-    display: inline-block;
-    padding-right: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    line-height: 1.6;
+.immutableWidth {
+    width: 170px !important;
 }
 
-.quick-filter-button {
-    display: inline-block;
-    margin: 0 5px 5px 0;
-    padding: 5px 8px;
-    border: 1px #777777 solid;
-    border-radius: 3px 3px 3px 3px;
-    color: #777777;
-    line-height: 1;
+.select2-container {
+    min-width: 100px;
 }
+
+.select2-results {
+    li.select2-selected {
+        display: list-item;
+    }
+}
+
+//.quick-filter {
+//    margin-bottom: 30px;
+//}
+//
+//.quick-filter-label {
+//    display: inline-block;
+//    padding-right: 10px;
+//    font-size: 15px;
+//    font-weight: bold;
+//    line-height: 1.6;
+//}
+//
+//.quick-filter-button {
+//    display: inline-block;
+//    margin: 0 5px 5px 0;
+//    padding: 5px 8px;
+//    border: 1px #777777 solid;
+//    border-radius: 3px 3px 3px 3px;
+//    color: #777777;
+//    line-height: 1;
+//}
 
 //new taskBox
 .box-item {
@@ -403,7 +421,6 @@
         position: relative;
         background: $base-color-grey;
         border-radius: 10px;
-        padding-top: 1px;
 
         span {
             display: block;
@@ -648,6 +665,7 @@
 .today-item {
     text-align: center;
     background-color: $base-color-grey-white;
+    margin-bottom: 4px;
     color: $base-font-grey;
 
     span {

@@ -3,6 +3,7 @@ var WithDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
 
 var ScheduleTaskDatePicker = require('./ScheduleTasksDatePicker');
+var AddTasksProviderCombobox = require('./AddTasksProviderCombobox');
 
 var URLs = require('../../../constants/Urls');
 var Utility = require('../../../utils/Utility');
@@ -41,12 +42,19 @@ function AddTasksDialog() {
         selectAllButtonSelector: '.select-all',
 
         scheduleTaskFieldSelector: '[name=scheduleTaskDate]',
-        scheduleDateHelpLabelSelector: '.surgery-date-relative-indicator'
+        scheduleDateHelpLabelSelector: '.surgery-date-relative-indicator',
+        providerFieldSelector: '#selectAddTaskProvider'
     });
 
     this.children({
         scheduleTaskFieldSelector: {
             child: ScheduleTaskDatePicker,
+            attributes: {
+                resetEvent: 'addTasksReset'
+            }
+        },
+        providerFieldSelector: {
+            child: AddTasksProviderCombobox,
             attributes: {
                 resetEvent: 'addTasksReset'
             }

@@ -4,8 +4,8 @@ var TreatmentLevelTabToolbar = require('./TreatmentListLevelTabToolbar');
 var TreatmentTabToolbar = require('./TreatmentTabToolbar');
 var Task = require('../Task');
 
-var Utility = require('../../../../utils/Utility');
-var URLs = require('../../../../constants/Urls');
+//var Utility = require('../../../../utils/Utility');
+//var URLs = require('../../../../constants/Urls');
 
 //var TAB_TEMPLATE = '<li><a href="{0}">{1}</a></li>';
 //
@@ -43,51 +43,9 @@ function TreatmentList() {
         }
 
         Task.attachTo(this.attr.treatmentPanelContainerSelector);
-
-
-        //this.select('treatmentTabsContainerSelector').tabs({
-        //    cache: true,
-        //    ajaxOptions: {cache: true},
-        //    beforeLoad: function (event, ui) {
-        //        if (ui.tab.data('loaded')) {
-        //            event.preventDefault();
-        //            return;
-        //        }
-        //
-        //        ui.jqXHR.success(function () {
-        //            ui.tab.data('loaded', true);
-        //        });
-        //
-        //        Utility.progress(true);
-        //    },
-        //    load: function (event, ui) {
-        //        Treatment.attachTo(ui.panel);
-        //        TreatmentTabToolbar.attachTo(ui.tab, {
-        //            archived: ui.tab.hasClass('archived-treatment')
-        //        });
-        //
-        //        me.initTreatmentTabToolbar();
-        //
-        //        Utility.progress(false);
-        //    }
-        //}).addClass("ui-tabs-vertical ui-helper-clearfix");
-
-        //this.select('treatmentTabsContainerSelector').find("li")
-        //    .removeClass("ui-corner-top").addClass("ui-corner-left");
-
     };
 
-    //this.initTreatmentTabToolbar = function () {
-    //    var $container = this.select('treatmentTabsContainerSelector');
-    //
-    //    $container.show();
-    //
-    //    _.once(function () {
-    //        TreatmentLevelTabToolbar.attachTo($container);
-    //    })();
-    //};
-
-    this.onAddTreatmentSuccess = function (e, data) {
+    this.onAddTreatmentSuccess = function () {
         this.loadSelf();
 
         //this.addTab(data);
@@ -101,43 +59,9 @@ function TreatmentList() {
         //}
     };
 
-    //this.addTab = function (options) {
-    //
-    //    var title = options.treatmentInfo.title + " " + options.treatmentInfo.tmpTitle;
-    //
-    //    var url = URLs.SECTION_TREATMENT_TAB.format(
-    //        options.patientId,
-    //        options.clientId,
-    //        options.medicalRecordId,
-    //        options.treatmentInfo.id,
-    //        options.treatmentDate,
-    //        options.emailStatus,
-    //        false,
-    //        Date.now()
-    //    );
-    //
-    //    this.select('tabListSelector')
-    //        .prepend(TAB_TEMPLATE.format(url, title));
-    //
-    //    this.select('treatmentTabsContainerSelector')
-    //        .tabs('refresh')
-    //        .tabs('option', 'active', 0);
-    //};
-
-    //this.updateAddTreatmentButtonStatus = function () {
-    //    this.trigger('updateAddTreatmentButton', {
-    //        show: this.select('tabSelector').length < 3
-    //    });
-    //};
-
     this.showNoTreatmentContainer = function () {
         this.select('noTreatmentContainerSelector').show();
     };
-
-    //this.getCurrentActiveTab = function () {
-    //    var activeIndex = this.select('treatmentTabsContainerSelector').tabs('option', 'active');
-    //    return $(this.select('tabSelector').get(activeIndex));
-    //};
 
     this.onArchiveTreatmentSuccess = function () {
         this.loadSelf();
@@ -168,32 +92,12 @@ function TreatmentList() {
         //this.select('treatmentTabsContainerSelector').tabs('load', activeIndex);
     };
 
-    this.teardownTreatment = function ($activeTab) {
-        var tabPanelId = $activeTab.attr('aria-controls');
-
-        flight.registry.findInstanceInfoByNode($('#' + tabPanelId).get(0))[0].instance.teardown();
-    };
-
-    //this.updateTreatmentUrl = function ($activeTab, param) {
-    //    var oldUrl = $activeTab.find('a').attr('href');
-    //
-    //    if (param) {
-    //        var regexp = new RegExp('&{0}=[^&]*'.format(param.key), 'g');
-    //
-    //        $activeTab.find('a').attr('href', oldUrl.replace(regexp, '&{0}={1}'.format(param.key, param.value)));
-    //    }
-    //};
-
     this.onAddTasksSuccess = function () {
         this.updateTreatment();
     };
 
     this.onEditSurgeryDateSuccess = function () {
         this.loadSelf();
-        //this.updateTreatment({
-        //    key: 'surgeryTime',
-        //    value: data.newDate
-        //});
     };
 
     this.onDeleteTreatmentSuccess = function () {
@@ -232,10 +136,6 @@ function TreatmentList() {
         this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
         this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
     });
-
-    //this.before('teardown', function () {
-    //    this.select('treatmentTabsContainerSelector').tabs('destroy');
-    //});
 }
 
 module.exports = flight.component(ClearTabCache, TreatmentList);

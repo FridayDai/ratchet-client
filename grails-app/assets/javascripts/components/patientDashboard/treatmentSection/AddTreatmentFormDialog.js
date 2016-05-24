@@ -1,16 +1,16 @@
 var flight = require('flight');
-var WithFormDialog = require('../../../common/WithFormDialog');
+var WithFormDialog = require('../../common/WithFormDialog');
 
-var WithCaregiverFieldRequired = require('../../../shared/functional/WithCaregiverFieldRequired');
-var PatientGroupCombobox = require('../../../shared/components/PatientGroupCombobox');
-var PatientRelationshipCombobox = require('../../../shared/components/PatientRelationshipCombobox');
-var PatientProviderCombobox = require('../../../shared/components/PatientProviderCombobox');
-var PatientTreatmentCombobox = require('../../../shared/components/PatientTreatmentCombobox');
-var PatientSurgeryDate = require('../../../shared/components/PatientSurgeryDate');
-var ComboboxInputValidation = require('../../../shared/validation/ComboboxInputValidation');
-var Notifications = require('../../../common/Notification');
-var Utility = require('../../../../utils/Utility');
-var Strings = require('../../../../constants/Strings');
+var WithCaregiverFieldRequired = require('../../shared/functional/WithCaregiverFieldRequired');
+var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox');
+var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
+var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
+var PatientTreatmentCombobox = require('../../shared/components/PatientTreatmentCombobox');
+var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
+var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
+var Notifications = require('../../common/Notification');
+var Utility = require('../../../utils/Utility');
+var Strings = require('../../../constants/Strings');
 
 function AddTreatmentFormDialog() {
     this.attributes({

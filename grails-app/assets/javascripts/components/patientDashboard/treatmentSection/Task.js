@@ -3,6 +3,8 @@ var flight = require('flight');
 var Notifications = require('../../common/Notification');
 var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
+var WithChildren = require('../../common/WithChildren');
+var FilterTaskStatusSelectbox = require('./FilterTaskStatusSelectbox');
 
 var DELETE_TASK_TITLE = '<strong>{0}</strong>';
 
@@ -10,22 +12,23 @@ function TaskSection() {
 
     this.attributes({
         contentSelector: '.content',
-
         treatmentToolbarSelector: '.treatment-tool-bar',
-
-        //activeItemsContainerSelector: '#task-row-active',
-        //activeItemBoxSelector: '#task-row-active .box-item',
-        //activeRowSelector: '#task-row-active',
-        //closedRowSelector: '#task-row-closed',
-        //scheduleItemsContainerSelector: '#task-row-schedule',
+        taskStatusFilterFieldSelector: '#task-status',
 
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
+        boxItemsSelector: '.box-item',
         archivedItemSelector: '.box-item.archived',
         deleteTaskButtonSelector: '.box-item .delete',
         beginTaskButtonSelector: '.box-item .begin-task',
         callTaskButtonSelector: '.box-item .call-task',
         filterButtonSelector: '.quick-filter-button'
+    });
+
+    this.children({
+        taskStatusFilterFieldSelector: {
+            child: FilterTaskStatusSelectbox
+        }
     });
 
     this.onTaskDeleteButtonClicked = function (e) {
@@ -37,6 +40,12 @@ function TaskSection() {
 
         var patientId = deleteButton.data("patientId");
         var medicalRecordId = deleteButton.data("medicalRecordId");
+
+        var urlParams = {
+            patientId: patientId,
+            medicalRecordId: medicalRecordId,
+            taskId: taskId
+        };
 
         Notifications.confirm({
             title: 'DELETE TASK',
@@ -53,7 +62,7 @@ function TaskSection() {
                         // Warning dialog close
                         $(this).dialog("close");
 
-                        me.deleteTask(patientId, medicalRecordId, taskId, taskTitle, $taskBox);
+                        me.deleteTask(urlParams, taskTitle, $taskBox);
                     }
                 }, {
                     text: 'Cancel',
@@ -101,15 +110,14 @@ function TaskSection() {
         });
     };
 
-    this.deleteTask = function (patientId, medicalRecordId, taskId, taskTitle, $taskBox) {
+    this.deleteTask = function (urlParams, taskTitle, $taskBox) {
         var me = this;
 
         $.ajax({
-            url: URLs.DELETE_TASK.format(patientId, medicalRecordId, taskId),
+            url: URLs.DELETE_TASK.format(urlParams.patientId, urlParams.medicalRecordId, urlParams.taskId),
             type: "POST",
             success: function (data) {
                 if (data === 'true') {
-                    var $taskRow = $taskBox.closest('.task-row');
 
                     $taskBox.remove();
                     //me.updateTaskBoxAndFilter($taskBox, $taskRow);
@@ -144,6 +152,9 @@ function TaskSection() {
     };
 
     this.initDefaultTasks = function () {
+        this.filterTask = [];
+        this.filterTask.total = this.select('boxItemsSelector').length;
+
         this.select('archivedItemSelector').hide();
     };
 
@@ -163,4 +174,4 @@ function TaskSection() {
     });
 }
 
-module.exports = flight.component(TaskSection);
+module.exports = flight.component(WithChildren, TaskSection);

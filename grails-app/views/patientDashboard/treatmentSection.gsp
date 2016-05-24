@@ -38,7 +38,7 @@
                         <span class="text-span">Task</span>
                     </li>
                     <li class="surgeryTime-edit">
-                    %{--${medicalRecord?.surgeryTime ? '' : 'disabled'}">--}%
+                        %{--${medicalRecord?.surgeryTime ? '' : 'disabled'}">--}%
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                         <span>Edit</span>
                     </li>
@@ -71,13 +71,34 @@
         <g:else>
             <div class="content">
 
+                %{--<div class="filter-area">--}%
+
+                    %{--<select id="task-status" class="quick-filter" multiple="multiple">--}%
+                        %{--<option value="0">ALL</option>--}%
+                        %{--<option value="overdue">OVERDUE</option>--}%
+                        %{--<option value="pending">PENDING</option>--}%
+                        %{--<option value="expired">EXPIRED</option>--}%
+                        %{--<option value="schedule">SCHEDULED</option>--}%
+                        %{--<option value="complete">COMPLETED</option>--}%
+                    %{--</select>--}%
+
+                    %{--<span>--}%
+                        %{--<label>0</label> of--}%
+                        %{--<label>0</label> tasks visible--}%
+                    %{--</span>--}%
+
+                    %{--<a href="#">clear filters</a>--}%
+                %{--</div>--}%
+
+
                 <div class="tasks-list">
                     <g:each in="${combinedTasks}" var="task">
                         <g:if test="${task.itemType == 'today'}">
                             <div class="today-item">
                                 <span>
                                     Today:
-                                    <g:formatDate date="${task?.sendTime}" timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                    <g:formatDate date="${task?.sendTime}"
+                                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                                   format="MMM dd, yyyy"/>
                                 </span>
                             </div>
@@ -87,8 +108,8 @@
                                     'task'           : task,
                                     'patientId'      : patientId,
                                     'medicalRecordId': task.treatmentProperty?.id,
-                                    'archived' : task.treatmentProperty?.archived ? 'archived' : null,
-                                    'itemType' : task?.itemType
+                                    'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
+                                    'itemType'       : task?.itemType
                             ]"/>
                         </g:else>
                     </g:each>
