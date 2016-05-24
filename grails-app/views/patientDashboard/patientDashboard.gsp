@@ -85,7 +85,7 @@
         </div>
 
         <div id="top-tabs" class="top-tabs-container hide">
-            <ul class="tab-list">
+            <ul class="top-tab-list">
                 <li data-type="Treatment">
                     <g:link controller="patientDashboard"
                             action="getTreatmentListTab"
@@ -215,9 +215,9 @@
                    placeholder="Select treatment" disabled/>
         </div>
 
-        <div class="form-group inline" id="surgery-date-group">
+        <div class="form-group inline" id="treatment-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time required"
+            <input id="eventTime" name="eventTimeStr" type="text" class="input-group date-picker event-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -291,8 +291,8 @@
     <form action="" method="post" class="treatment-time-form ui-hidden" id="treatment-time-form">
         <div class="form-group inline ">
             <label class="lbl-group">SURGERY DATE</label>
-            <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
-                   class="input-group date-picker surgery-time"
+            <input id="treatment-eventTime" name="treatment-eventTime" type="text"
+                   class="input-group date-picker event-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>

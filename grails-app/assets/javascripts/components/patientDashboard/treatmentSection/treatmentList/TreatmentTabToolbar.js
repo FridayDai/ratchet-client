@@ -11,7 +11,7 @@ function TreatmentToolbar() {
         addTaskButtonSelector: '.addTasks',
         moreDropdownButtonSelector: '.drop-down-toggle',
         moreDropdownListSelector: '.drop-down-lists',
-        editSurgeryButtonSelector: '.surgeryTime-edit',
+        editButtonSelector: '.event-time-edit',
         archiveButtonSelector: '.archived-active',
         deleteButtonSelector: '.treatment-delete',
         taskInfoHiddenSelector: '.task-info-hidden',
@@ -130,7 +130,7 @@ function TreatmentToolbar() {
     };
 
     //this.hideNotAvailableButtons = function () {
-    //    this.select('editSurgeryButtonSelector').hide();
+    //    this.select('editButtonSelector').hide();
     //    this.select('archiveButtonSelector').hide();
     //};
 
@@ -154,7 +154,7 @@ function TreatmentToolbar() {
         if (!this.attr.archived) {
             this.on('click', {
                 addTaskButtonSelector: this.onAddTaskButtonClicked,
-                editSurgeryButtonSelector: this.onEditSurgeryButtonClicked,
+                editButtonSelector: this.onEditSurgeryButtonClicked,
                 archiveButtonSelector: this.onArchiveButtonClicked
             });
         }

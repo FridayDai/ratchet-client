@@ -214,23 +214,23 @@ class PatientDashboardController extends BaseController {
 
         for (treatment in treatments) {
 
-            def surgeryTime = treatment.absoluteEventTimestamp
+            def absoluteEventTimestamp = treatment.absoluteEventTimestamp
 
             def treatmentProperty = [
-                    archived   : treatment.archived,
-                    id         : treatment.id,
+                    archived: treatment.archived,
+                    id: treatment.id,
                     treatmentId: treatment.treatmentId,
-                    title      : treatment.title,
-                    tmpTitle   : treatment.tmpTitle,
-                    surgeryTime: surgeryTime,
-                    indicator  : i < 26 ? numberMap[i++] : '*'
+                    title: treatment.title,
+                    tmpTitle: treatment.tmpTitle,
+                    absoluteEventTimestamp: absoluteEventTimestamp,
+                    indicator: i < 26 ? numberMap[i++] : '*'
             ]
 
             medicalRecords << treatmentProperty
 
-            if (surgeryTime) {
+            if (absoluteEventTimestamp) {
                 DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver');
-                DateTime start = new DateTime(surgeryTime, vancouver)
+                DateTime start = new DateTime(absoluteEventTimestamp, vancouver)
                 DateTime end = new DateTime(today, vancouver)
                 def days = Days.daysBetween(start, end).getDays()
 
@@ -239,7 +239,7 @@ class PatientDashboardController extends BaseController {
 
                 combinedTasks << [
                         itemType         : 'surgery',
-                        sentTime         : surgeryTime,
+                        sentTime         : absoluteEventTimestamp,
                         title            : 'Surgery',
                         status           : status,
                         treatmentProperty: treatmentProperty

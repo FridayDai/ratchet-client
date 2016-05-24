@@ -325,7 +325,7 @@ function ScoreChart() {
         markTip.attr('transform', 'translate({0}, {1})'.format(x, opts.cy + markTextBBox.height / 2));
     };
 
-    this.drawAbsoluteEvents = function(eventDate) {
+    this.drawAbsoluteEvents = function(eventDate, type) {
         var absoluteEventX = this.chartObject
             .append('g')
             .classed('absolute-event-x', true)
@@ -340,7 +340,7 @@ function ScoreChart() {
             .attr('transform', 'translate({0}, {1})'.format(0, 45));
 
         var eventDateText = textGroup.append('text')
-            .text('Surgery');
+            .text(type);
 
         var eventDateBBox = eventDateText.node().getBBox();
 
@@ -371,32 +371,6 @@ function ScoreChart() {
             .attr('d', d3.svg.symbol()
                 .size(24)
                 .type('triangle-up'));
-
-        // var beforeSpace = this.scales.x(eventDate) - textGroupBBox.width / 2 - hPadding;
-        //
-        // if (beforeSpace >= 130) {
-        //     this.chartObject
-        //         .append('text')
-        //         .text('BEFORE SURGERY')
-        //         .classed('surgery-text before', true)
-        //         .attr('x', beforeSurgerySpace / 2)
-        //         .attr('y', this.chartSize.chartHeight + 65)
-        //         .attr('dx', -55);
-        // }
-        //
-        // var afterSpace = this.chartSize.chartWidth -
-        //                             this.scales.x(eventDate) -
-        //                             textGroupBBox.width / 2 -
-        //                             hPadding;
-        //
-        // if (afterSpace >= 130) {
-        //     this.chartObject
-        //         .append('text')
-        //         .text('AFTER SURGERY')
-        //         .classed('surgery-text after', true)
-        //         .attr('x', this.scales.x(eventDate) + afterSurgerySpace / 2)
-        //         .attr('y', this.chartSize.chartHeight + 65);
-        // }
     };
 
     this.onLineMouseover = function (d, i, elem) {
@@ -594,7 +568,7 @@ function ScoreChart() {
 
                 _.each(data.absoluteEvents, function (event) {
                     if (event.date) {
-                        me.drawAbsoluteEvents(event.date);
+                        me.drawAbsoluteEvents(event.date, event.type);
                     }
                 });
             }

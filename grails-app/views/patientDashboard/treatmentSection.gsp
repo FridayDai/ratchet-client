@@ -16,7 +16,7 @@
                 <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
                                data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                data-treatment-id="${medicalRecord?.treatmentId}"
-                               data-surgery-date="${medicalRecord?.surgeryTime}"/>
+                               data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
 
                 <label class="treatment-indicate">
                     <span>${medicalRecord?.indicator}</span>
@@ -37,8 +37,7 @@
 
                         <span class="text-span">Task</span>
                     </li>
-                    <li class="surgeryTime-edit">
-                        %{--${medicalRecord?.surgeryTime ? '' : 'disabled'}">--}%
+                    <li class="event-time-edit">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                         <span>Edit</span>
                     </li>
