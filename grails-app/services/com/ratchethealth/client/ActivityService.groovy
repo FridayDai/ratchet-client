@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class ActivityService extends RatchetAPIService {
 
     def grailsApplication
@@ -27,7 +25,7 @@ class ActivityService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
 
                 log.info("Get activities success, token: ${token}.")
 

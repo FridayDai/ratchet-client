@@ -18,7 +18,13 @@ class AnnouncementService {
 				.asString()
 
 		if (resp.status == 200) {
-            def result = JSON.parse(resp.body)
+			def result
+			try {
+				result = JSON.parse(resp.body)
+			} catch (e) {
+				result = [:]
+			}
+
 			log.info("Get announcement success")
 			return result?.items[0];
 		}

@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class TaskService extends RatchetAPIService{
 
     def grailsApplication
@@ -19,9 +17,9 @@ class TaskService extends RatchetAPIService{
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Get tasks success by medical record, token: ${token}")
-                return result
+
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)
@@ -61,7 +59,7 @@ class TaskService extends RatchetAPIService{
             if (resp.status == 200) {
                 log.info("Get task result success, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)
@@ -115,7 +113,7 @@ class TaskService extends RatchetAPIService{
             if (resp.status == 200) {
                 log.info("Get task result success, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)

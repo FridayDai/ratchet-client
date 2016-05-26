@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class AccountService extends RatchetAPIService {
 
     def grailsApplication
@@ -27,7 +25,7 @@ class AccountService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 log.info("Get accounts success, token: ${token}.")
 
                 [
@@ -44,7 +42,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def getSingleAccount(token, accountId) {
-
         String getSingleAccountUrl = grailsApplication.config.ratchetv2.server.url.getAccount
         def url = String.format(getSingleAccountUrl, accountId)
         log.info("Call backend service to get sinle account, token: ${token}.")
@@ -54,9 +51,9 @@ class AccountService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Get single account success, token: ${token}.")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -92,9 +89,9 @@ class AccountService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 201) {
-                def result = JSON.parse(resp.body)
                 log.info("Create account success, token: ${token}.")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -102,7 +99,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def updateAccount(String token, clientId, Account account) {
-
         def firstName = account?.firstName
         def lastName = account?.lastName
         def email = account?.email
@@ -131,9 +127,9 @@ class AccountService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Update account success, token: ${token}.")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -141,7 +137,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def updatePassword(String token, oldPassword, password, confirmPassword) {
-
         def url = grailsApplication.config.ratchetv2.server.url.updatePassword
         log.info("Call backend service to update password with old and new password, token: ${token}.")
 
@@ -162,7 +157,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def activateStaff(String token, code, hasProfile, password, confirmPassword) {
-
         def url = grailsApplication.config.ratchetv2.server.url.activeStaff
         log.info("Call backend service to get accounts with code and password, token: ${token}.")
 
@@ -185,7 +179,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def deactivateAccount(String token, accountId) {
-
         String deactivateStaff = grailsApplication.config.ratchetv2.server.url.deactivateStaff
 
         def url = String.format(deactivateStaff, accountId)
@@ -205,7 +198,6 @@ class AccountService extends RatchetAPIService {
     }
 
     def activateAccount(String token, accountId) {
-
         String activateStaff = grailsApplication.config.ratchetv2.server.url.activateStaff
 
         def url = String.format(activateStaff, accountId)
@@ -228,7 +220,6 @@ class AccountService extends RatchetAPIService {
 
 
     def confirmCode(String token, code) {
-
         String confirmCodeUrl = grailsApplication.config.ratchetv2.server.url.confirmCode
         def url = String.format(confirmCodeUrl, code)
         log.info("Call backend service to confirm code, token: ${token}.")
@@ -239,11 +230,11 @@ class AccountService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Confirm code success, token: ${token}.")
-                return JSON.parse(resp.body)
+                return parseRespBody(resp)
             }
             if (resp.status == 412) {
                 log.info("Invitation link is expired,token:${token}.")
-                return JSON.parse(resp.body)
+                return parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -302,9 +293,9 @@ class AccountService extends RatchetAPIService {
                 log.info("Valid password code success, token: ${token}.")
                 return resp.status
             } else if (resp.status == 412) {
-                def result = JSON.parse(resp.body)
                 log.info("Reset password link is expired,token:${token}.")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }

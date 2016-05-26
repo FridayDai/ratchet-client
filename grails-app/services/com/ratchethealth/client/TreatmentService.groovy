@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class TreatmentService extends RatchetAPIService {
 
     def grailsApplication
@@ -23,7 +21,7 @@ class TreatmentService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 log.info("Get treatments success, token: ${token}")
                 def items = result.items
                 return items
@@ -60,11 +58,10 @@ class TreatmentService extends RatchetAPIService {
                     .field("groupId", patient?.groupId)
                     .asString()
 
-            def result = JSON.parse(resp.body)
-
             if (resp.status == 201) {
                 log.info("Assign treatment to exist patient success, token: ${token}")
-                return result
+
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)
@@ -83,9 +80,9 @@ class TreatmentService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Get treatment info success, token:${token}")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -144,7 +141,7 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get tasks in treatment success, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -167,7 +164,7 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 201) {
                 log.info("Get tasks add ad-hoc tasks to treatment, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -206,7 +203,7 @@ class TreatmentService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get treatment available years success, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
