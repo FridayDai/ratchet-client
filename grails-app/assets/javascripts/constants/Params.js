@@ -58,7 +58,8 @@ module.exports = {
         {label: "Verified", value: 3},
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
-        {label: "Undelivered", value: 5}
+        {label: "Undelivered", value: 5},
+        {label: "Unsubscribed", value: 6}
     ],
 
     ATTENTION_STATUS_FILTER: [
