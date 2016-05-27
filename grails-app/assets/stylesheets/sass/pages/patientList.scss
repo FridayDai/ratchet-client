@@ -455,11 +455,11 @@
         }
     }
 
-    &.unverified:before {
+    &.Unverified:before {
         color: $base-color-pending;
     }
 
-    &.undelivered:before {
+    &.Undelivered:before {
         color: $base-color-overdue;
     }
 }
