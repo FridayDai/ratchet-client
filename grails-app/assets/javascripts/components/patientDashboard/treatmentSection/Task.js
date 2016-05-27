@@ -215,8 +215,8 @@ function TaskSection() {
 
         if (medicalRecordId) {
             this.select('boxItemsSelector').hide().filter(function (index, ele) {
-                return _.indexOf(status, $(ele).data('status')) > -1
-                    && +$(ele).attr('medical-record-id') === +medicalRecordId;
+                return _.indexOf(status, $(ele).data('status')) > -1 &&
+                     +$(ele).attr('medical-record-id') === +medicalRecordId;
             }).show();
         } else {
             this.select('boxItemsSelector').hide().filter(function (index, ele) {
