@@ -67,6 +67,19 @@ class RatchetAPIService {
         }
     }
 
+    def parseRespBody(resp) {
+        def result
+
+        try {
+            result = JSON.parse(resp?.body)
+        } catch (e) {
+            log.error("JSON parse failed: " + e)
+            throw new ApiReturnException(e.message, e);
+        }
+
+        result
+    }
+
     def withReq(req, String token, Closure reqHandler) {
         try {
             def reqObj

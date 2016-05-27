@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class PatientDashboardService extends RatchetAPIService {
 
     def grailsApplication
@@ -15,11 +13,11 @@ class PatientDashboardService extends RatchetAPIService {
         withGet(token, url) { req ->
             def resp = req
                     .asString()
-            def result = JSON.parse(resp.body)
 
             if (resp.status == 200) {
                 log.info("Show single patient success, token: ${token}")
-                return result
+
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)
@@ -37,9 +35,9 @@ class PatientDashboardService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Show medical records success, token: ${token}")
-                return result
+
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)
@@ -57,7 +55,7 @@ class PatientDashboardService extends RatchetAPIService {
                 .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 log.info("Get active tasks flag success, token: ${token}")
                 return result.hasActiveTasks
             }
@@ -105,8 +103,8 @@ class PatientDashboardService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("get patient info success, token: ${token}")
-                def result = JSON.parse(resp.body)
-                return result
+
+                parseRespBody(resp)
             } else if (resp.status == 404) {
                 log.info("get patient info failed, haven't this patientId, token: ${token}")
                 def check = [check: "false", identify: identify]
@@ -190,9 +188,9 @@ class PatientDashboardService extends RatchetAPIService {
                 .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Call backend service to generate in-clinic code success, token: ${token}")
-                return result
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }

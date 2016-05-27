@@ -1,6 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
 import groovy.json.JsonOutput
 
 class GroupService extends RatchetAPIService {
@@ -28,7 +27,7 @@ class GroupService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 def map = [:]
                 map.put(start, start)
                 map.put(length, length)
@@ -57,9 +56,8 @@ class GroupService extends RatchetAPIService {
 
             if (resp.status == 201) {
                 log.info("create groups success, token: ${token}.")
-                def result = JSON.parse(resp.body)
 
-                return result
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -142,7 +140,8 @@ class GroupService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Get groups success, token: ${token}")
-                return JSON.parse(resp.body)
+
+                parseRespBody(resp)
             } else {
                 handleError(resp)
             }
@@ -160,7 +159,7 @@ class GroupService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Get groups success, token: ${token}")
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 def map = [:]
                 map.put("recordsTotal", result.totalCount)
                 map.put("recordsFiltered", result.totalCount)

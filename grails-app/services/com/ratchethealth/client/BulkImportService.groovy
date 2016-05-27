@@ -1,7 +1,6 @@
 package com.ratchethealth.client
 
 import com.ratchethealth.client.exceptions.ApiReturnException
-import grails.converters.JSON
 
 
 class BulkImportService extends RatchetAPIService {
@@ -24,7 +23,7 @@ class BulkImportService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
 
                 log.info("Bulk import patient success, token: ${token}")
 
@@ -61,7 +60,7 @@ class BulkImportService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
 
                 log.info("Lookup success, token: ${token}")
 
@@ -89,7 +88,7 @@ class BulkImportService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
+                def result = parseRespBody(resp)
                 log.info("Get bulk import patient error file link success, token: ${token}")
                 def errorPath = result?.errorFilePath
                 return  errorPath
