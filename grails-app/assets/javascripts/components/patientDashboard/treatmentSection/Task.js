@@ -19,12 +19,18 @@ function TaskSection() {
 
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
-        boxItemsSelector: '.box-item',
+        allBoxItemsSelector: '.box-item',
+        boxItemsSelector: '.box-item:not(.archived)',
         archivedItemSelector: '.box-item.archived',
         deleteTaskButtonSelector: '.box-item .delete',
         beginTaskButtonSelector: '.box-item .begin-task',
         callTaskButtonSelector: '.box-item .call-task',
-        filterButtonSelector: '.quick-filter-button'
+        taskIndicatorSelector: '.box-item .task-treatment-indicate',
+
+        filterCountFiledSelector: '#filter-count',
+        clearFilterButtonSelector: '#clear-filter',
+        visibleTaskCountSelector: '#visible-number',
+        totalTaskCountSelector: '#total-number'
     });
 
     this.children({
@@ -32,6 +38,8 @@ function TaskSection() {
             child: FilterTaskStatusSelectbox
         }
     });
+
+    //task item function
 
     this.onTaskDeleteButtonClicked = function (e) {
         var me = this;
@@ -122,10 +130,9 @@ function TaskSection() {
                 if (data === 'true') {
 
                     $taskBox.remove();
-                    me.checkNoTasks(urlParams.medicalRecordId);
-                    //me.updateTaskBoxAndFilter($taskBox, $taskRow);
-                    //me.countActiveTasks();
-                    //me.checkIfHasTasks($taskRow);
+                    me.checkNoTask();
+                    me.countTotalTasks();
+
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
 
                     me.trigger('deleteTaskSuccessful');
@@ -148,29 +155,94 @@ function TaskSection() {
         }
     };
 
-    this.onMedicalRecordListClick = function (event, data) {
-        var id = data.medicalRecordId;
-        this.checkNoTasks(id);
-
-        $('.box-item[medical-record-id =' + id + ']').show();
-        $('.box-item[medical-record-id !=' + id + ']').hide();
+    this.onTaskIndicatorClicked = function (e) {
+        var medicalRecordId = $(e.target).closest('.box-item').attr('medical-record-id');
+        this.trigger('taskIndicatorSelected', {medicalRecordId: medicalRecordId});
     };
 
-    this.checkNoTasks = function(id) {
-        if($('.box-item[medical-record-id =' + id + ']').length === 0) {
-            this.select('taskListFiledSelector').hide();
-            this.select('noTaskFiledSelector').show();
-        } else {
-            this.select('noTaskFiledSelector').hide();
-            this.select('taskListFiledSelector').show();
+    //task panel function
+    this.onMedicalRecordListClick = function (event, data) {
 
+        if (data && data.medicalRecordId) {
+            var id = data.medicalRecordId;
+            var medicalTasks = $('.box-item[medical-record-id =' + id + ']');
+            this.currentMedicalRcordId = id;
+
+            if (medicalTasks.length) {
+                this.select('noTaskFiledSelector').hide();
+                this.select('taskListFiledSelector').show();
+
+                medicalTasks.show();
+                $('.box-item[medical-record-id !=' + id + ']').hide();
+            } else {
+                this.select('taskListFiledSelector').hide();
+                this.select('noTaskFiledSelector').show();
+            }
+
+            this.select('filterCountFiledSelector').show();
+            this.countVisibleTasks();
+
+        } else {
+
+            this.onClearTaskFilter();
         }
     };
 
-    this.initDefaultTasks = function () {
-        this.filterTask = [];
-        this.filterTask.total = this.select('boxItemsSelector').length;
+    this.checkNoTask = function () {
+        if ($('.box-item:visible').length === 0) {
+            this.select('taskListFiledSelector').hide();
+            this.select('noTaskFiledSelector').show();
+        }
+    };
+
+    this.countVisibleTasks = function () {
+        var visible = $('.box-item:visible').length;
+        this.select('visibleTaskCountSelector').text(visible);
+    };
+
+    this.countTotalTasks = function () {
+        var total = this.select('boxItemsSelector').length;
+        this.select('totalTaskCountSelector').text(total);
+    };
+
+    this.filterTaskByStatus = function (e, data) {
+        var status = data.status;
+        var medicalRecordId = this.currentMedicalRcordId;
+
+        this.select('noTaskFiledSelector').hide();
+        this.select('taskListFiledSelector').show();
+        this.select('filterCountFiledSelector').show();
+
+        if (medicalRecordId) {
+            this.select('boxItemsSelector').hide().filter(function (index, ele) {
+                return _.indexOf(status, $(ele).data('status')) > -1
+                    && +$(ele).attr('medical-record-id') === +medicalRecordId;
+            }).show();
+        } else {
+            this.select('boxItemsSelector').hide().filter(function (index, ele) {
+                return _.indexOf(status, $(ele).data('status')) > -1;
+            }).show();
+        }
+
+        this.checkNoTask();
+        this.countVisibleTasks();
+    };
+
+    this.onClearTaskFilter = function () {
+        this.select('noTaskFiledSelector').hide();
+        this.select('taskListFiledSelector').show();
+
+        this.select('boxItemsSelector').show();
         this.select('archivedItemSelector').hide();
+
+        this.currentMedicalRcordId = null;
+
+        this.trigger('taskStatusClearFilter');
+    };
+
+    this.initDefaultTasks = function () {
+        this.select('archivedItemSelector').hide();
+        this.countTotalTasks();
     };
 
     this.after('initialize', function () {
@@ -178,13 +250,16 @@ function TaskSection() {
         this.on(document, 'medicalRecordListSelected', this.onMedicalRecordListClick);
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
+        this.on('taskStatusFilterSelected', this.filterTaskByStatus);
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
             beginTaskButtonSelector: this.onTaskBeginButtonClicked,
-            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked
-            //filterButtonSelector: this.onFilterButtonClicked
+            callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
+            clearFilterButtonSelector: this.onClearTaskFilter,
+            taskIndicatorSelector: this.onTaskIndicatorClicked
         });
+
         this.checkPhoneNumberStatus();
     });
 }

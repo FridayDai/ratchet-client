@@ -7,7 +7,7 @@ var Utility = require('../../../utils/Utility');
 
 function EditEventDateFormDialog() {
     this.options({
-        title: 'EDIT SURGERY DATE',
+        title: 'EDIT TREATMENT',
         width: 430,
         buttons: ['Save']
     });

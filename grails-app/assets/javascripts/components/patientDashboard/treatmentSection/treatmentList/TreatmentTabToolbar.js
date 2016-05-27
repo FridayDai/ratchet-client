@@ -8,9 +8,8 @@ function TreatmentToolbar() {
     this.attributes({
         archived: null,
 
+        treatmentListAnchorSelector: '.ui-tabs-anchor',
         addTaskButtonSelector: '.addTasks',
-        moreDropdownButtonSelector: '.drop-down-toggle',
-        moreDropdownListSelector: '.drop-down-lists',
         editButtonSelector: '.event-time-edit',
         archiveButtonSelector: '.archived-active',
         deleteButtonSelector: '.treatment-delete',
@@ -43,35 +42,10 @@ function TreatmentToolbar() {
         this.trigger('showAddTasksDialog', this.getBasicIds());
     };
 
-    this.onMoreButtonClicked = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        var $dropdownList = this.select('moreDropdownListSelector');
-
-        if ($dropdownList.is(':visible')) {
-            $dropdownList.hide();
-            $('body').off('click', this.hideMoreDropdownListBind);
-
-        } else {
-            $dropdownList.show();
-
-            $('body').click(this.hideMoreDropdownListBind);
-        }
-    };
-
-    this.hideMoreDropdownList = function () {
-        var $dropdownList = this.select('moreDropdownListSelector');
-
-        if ($dropdownList.is(':visible')) {
-            $dropdownList.hide();
-            $('body').off('click', this.hideMoreDropdownListBind);
-        }
-    };
-
     this.onEditSurgeryButtonClicked = function () {
+
         var ids = this.getBasicIds();
-        if(ids.currentSurgeryDate) {
+        if (ids.currentSurgeryDate) {
             this.trigger('showEditSurgeryDialog', this.getBasicIds());
         }
     };
@@ -80,7 +54,6 @@ function TreatmentToolbar() {
         e.preventDefault();
 
         var me = this;
-
         this.select('moreDropdownListSelector').hide();
 
         Notifications.confirm({
@@ -129,27 +102,40 @@ function TreatmentToolbar() {
         });
     };
 
-    //this.hideNotAvailableButtons = function () {
-    //    this.select('editButtonSelector').hide();
-    //    this.select('archiveButtonSelector').hide();
-    //};
+    this.OnTreatmentAnchorClicked = function () {
 
-    this.initTreatmentList = function () {
-        this.on('click', function () {
-            var $ele = this.$node;
-            if (!$ele.hasClass('ui-state-active')) {
-                this.$node.siblings().removeClass('ui-state-active');
-                this.$node.addClass('ui-state-active');
-            }
+        var $ele = this.$node;
 
+        if ($ele.hasClass('ui-state-active')) {
+            this.$node.removeClass('ui-state-active');
+            this.trigger('medicalRecordListSelected');
+        } else {
+            this.$node.siblings().removeClass('ui-state-active');
+            this.$node.addClass('ui-state-active');
             this.trigger('medicalRecordListSelected', {
                 medicalRecordId: $ele.data('id')
             });
-        });
+        }
+
+    };
+
+    this.OnTreatmentAnchorSelected = function (e, data) {
+        var $ele = this.$node;
+
+        if($ele.data('id') === +data.medicalRecordId) {
+            this.OnTreatmentAnchorClicked();
+        }
+    };
+
+    this.unactiveTreatmentList = function () {
+        this.$node.removeClass('ui-state-active');
     };
 
     this.after('initialize', function () {
-        this.initTreatmentList();
+
+        this.on('click', {
+            treatmentListAnchorSelector: this.OnTreatmentAnchorClicked
+        });
 
         if (!this.attr.archived) {
             this.on('click', {
@@ -158,16 +144,13 @@ function TreatmentToolbar() {
                 archiveButtonSelector: this.onArchiveButtonClicked
             });
         }
-        // else {
-        //    this.hideNotAvailableButtons();
-        //}
 
         this.on('click', {
-            //moreDropdownButtonSelector: this.onMoreButtonClicked,
             deleteButtonSelector: this.onDeleteButtonClicked
         });
 
-        //this.hideMoreDropdownListBind = _.bind(this.hideMoreDropdownList, this);
+        this.on(document, 'taskIndicatorSelected', this.OnTreatmentAnchorSelected);
+        this.on(document, 'taskStatusClearFilter', this.unactiveTreatmentList);
     });
 }
 

@@ -34,20 +34,19 @@
                 <ul class="sub-treatment-tool">
                     <li class="addTasks">
                         <i class="fa fa-plus" aria-hidden="true"></i>
-
                         <span class="text-span">Task</span>
                     </li>
                     <li class="event-time-edit">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
-                        <span>Edit</span>
+                        <span class="text-span">Edit</span>
                     </li>
                     <li class="archived-active">
                         <i class="fa fa-archive" aria-hidden="true"></i>
-                        <span>Archive</span>
+                        <span class="text-span">Archive</span>
                     </li>
                     <li class="treatment-delete">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        <span>Delete</span>
+                        <span class="text-span">Delete</span>
                     </li>
                 </ul>
             </li>
@@ -70,24 +69,26 @@
         <g:else>
             <div class="content">
 
-                %{--<div class="filter-area">--}%
+                <div class="filter-area">
 
-                    %{--<select id="task-status" class="quick-filter" multiple="multiple">--}%
-                        %{--<option value="0">ALL</option>--}%
-                        %{--<option value="overdue">OVERDUE</option>--}%
-                        %{--<option value="pending">PENDING</option>--}%
-                        %{--<option value="expired">EXPIRED</option>--}%
-                        %{--<option value="schedule">SCHEDULED</option>--}%
-                        %{--<option value="complete">COMPLETED</option>--}%
-                    %{--</select>--}%
+                    <select id="task-status" class="quick-filter" multiple="multiple">
+                        <option class="overdue" value="overdue">overdue</option>
+                        <option class="pending" value="pending">pending</option>
+                        <option class="expired" value="expired">expired</option>
+                        <option class="schedule" value="schedule">schedule</option>
+                        <option class="complete" value="complete">complete</option>
+                    </select>
 
-                    %{--<span>--}%
-                        %{--<label>0</label> of--}%
-                        %{--<label>0</label> tasks visible--}%
-                    %{--</span>--}%
+                    <div id="filter-count" class="filter-count hide">
+                        <span class="visible-count">
+                            <label id="visible-number">0</label> of
+                            <label id="total-number">0</label> tasks visible
+                        </span>
 
-                    %{--<a href="#">clear filters</a>--}%
-                %{--</div>--}%
+                        <a href="#" id="clear-filter" class="clear-filter">clear filters</a>
+                    </div>
+
+                </div>
 
 
                 <div id="tasks-list" class="tasks-list">

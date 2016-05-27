@@ -20,15 +20,15 @@
                     </span>
                 </g:if>
                 <g:else>
-                    <span class="task-flag">
-                        <div class="flag-status"></div>
-
-                        <div class="meter">
-                            <span></span>
-                        </div>
-                    </span>
-
                     <g:if test="${itemType != 'surgery'}">
+                        <span class="task-flag">
+                            <div class="flag-status"></div>
+
+                            <div class="meter">
+                                <span></span>
+                            </div>
+                        </span>
+
                         <span class="info-collapse">
                             <div class="info-detail">
                                 ID: <span class="id">${task?.id}</span>

@@ -18,7 +18,7 @@
 
 <g:each in="${areaName}" var="single" status="i">
     <span class="sub-item">
-        <span class="score-label">${single}</span>
+        <span class="score-label">${single}:</span>
 
         <span class="score-number">${mixedResult[level[i]]}</span>
         <span class="score-number">

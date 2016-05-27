@@ -94,7 +94,7 @@
                                     PatientEmailStatus: patientInfo.status
                             ]"
                     >
-                        TREATMENT
+                        TIMELINE
                     </g:link>
                 </li>
                 <li data-type="Report">

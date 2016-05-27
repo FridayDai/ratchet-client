@@ -239,7 +239,7 @@ class PatientDashboardController extends BaseController {
 
                 combinedTasks << [
                         itemType         : 'surgery',
-                        sentTime         : absoluteEventTimestamp,
+                        sendTime         : absoluteEventTimestamp,
                         title            : 'Surgery',
                         status           : status,
                         treatmentProperty: treatmentProperty

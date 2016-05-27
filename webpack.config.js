@@ -52,6 +52,7 @@ module.exports = {
             "ZeroClipboard": "bower_components/zeroclipboard/dist/ZeroClipboard.js",
             "libphonenumber": "bower_components/google-libphonenumber/dist/browser/libphonenumber.js",
             select2: "bower_components/select2/select2.js",
+            "multiple-select": "bower_components/multiple-select/multiple-select",
             "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
             d3: "node_modules/d3/d3.js",
             tooltipster: "bower_components/tooltipster/js/jquery.tooltipster.js"

@@ -1,3 +1,5 @@
+@import './multipleSelect';
+
 .center {
     text-align: center;
 }
@@ -51,45 +53,16 @@
             }
         }
 
-
-//        .disabled {
-//            background-color: transparent;
-//            &:hover,
-//            &:focus {
-//                border: 1px $base-color-bg-head solid;
-//                background-color: transparent;
-//                color: $base-color-bg-head;
-//            }
-//        }
+        //        .disabled {
+        //            background-color: transparent;
+        //            &:hover,
+        //            &:focus {
+        //                border: 1px $base-color-bg-head solid;
+        //                background-color: transparent;
+        //                color: $base-color-bg-head;
+        //            }
+        //        }
     }
-
-//    .box-item-content {
-//        .item-context {
-//            color: $base-font-color;
-//        }
-//
-//        .complete-score {
-//            background: $base-font-grey-dark;
-//        }
-//    }
-//
-//    .box-item-header,
-//    .box-item-content,
-//    .task-date {
-//        color: #808080 !important;
-//    }
-//
-//    .quick-filter-button {
-//        &.active {
-//            background-color: #777777;
-//            color: #fdfdfd;
-//        }
-//
-//        &:hover {
-//            background-color: #b3b3b3;
-//            color: #fdfdfd;
-//        }
-//    }
 }
 
 .new-flag-ribbon-wrapper {
@@ -222,47 +195,84 @@
 //filter
 .filter-area {
     padding: 30px 30px 10px;
+    color: $base-font-grey;
 }
 
-.immutableWidth {
-    width: 170px !important;
-}
+.filter-count {
+    display: inline-block;
+    padding-left: 14px;
 
-.select2-container {
-    min-width: 100px;
-}
-
-.select2-results {
-    li.select2-selected {
-        display: list-item;
+    .clear-filter {
+        padding-left: 18px;
+        text-decoration: underline;
     }
 }
 
-//.quick-filter {
-//    margin-bottom: 30px;
-//}
-//
-//.quick-filter-label {
-//    display: inline-block;
-//    padding-right: 10px;
-//    font-size: 15px;
-//    font-weight: bold;
-//    line-height: 1.6;
-//}
-//
-//.quick-filter-button {
-//    display: inline-block;
-//    margin: 0 5px 5px 0;
-//    padding: 5px 8px;
-//    border: 1px #777777 solid;
-//    border-radius: 3px 3px 3px 3px;
-//    color: #777777;
-//    line-height: 1;
-//}
+.quick-filter {
+    width: auto;
+    min-width: 94px;
+
+    li {
+        text-transform: uppercase;
+
+        span {
+            vertical-align: middle;
+            text-align: center;
+
+            &:before {
+                font-family: FontAwesome;
+                padding-right: 5px;
+                display: inline-block;
+                width: 20px;
+            }
+
+            &.pending {
+                color: $base-color-orange;
+
+                &:before {
+                    content: '\f141';
+                }
+            }
+
+            &.overdue {
+                color: $base-color-task-overdue;
+                &:before {
+                    content: '\f12a';
+                }
+            }
+
+            &.complete {
+
+                color: $base-color-green;
+                &:before {
+                    content: '\f00c';
+                }
+            }
+
+            &.expired {
+                color: $base-font-grey-dark;
+
+                &:before {
+                    content: '\f00d';
+                }
+            }
+
+            &.schedule {
+                color: $base-a-default-color;
+
+                &:before {
+                    content: '\f017';
+                }
+            }
+        }
+    }
+
+}
 
 //new taskBox
 .box-item {
     position: relative;
+    height: 66px;
     border: 1px solid $base-font-color;
     font-size: 14px;
     margin-bottom: 4px;
@@ -380,14 +390,12 @@
 .box-item-content {
     display: flex;
     display: -ms-flexbox;
-    height: 53px;
     margin: 5px;
 
     .inline-info {
         display: inline-block;
         width: 280px;
         padding-left: 14px;
-        overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
@@ -401,7 +409,7 @@
     .task-flag {
         display: inline-block;
         width: 100px;
-        padding-top: 6px;
+        padding-top: 8px;
         padding-right: 4px;
         font-size: 12px;
     }
@@ -415,7 +423,7 @@
         }
 
         &:after {
-            padding-left: 8px;
+            padding-left: 6px;
             content: 'SCHEDULED';
         }
     }
@@ -439,25 +447,28 @@
     .info-collapse {
         display: inline-block;
         color: $base-font-color;
+        overflow: hidden;
+        max-width: 12px;
+        transition: 0.4s max-width ease-in;
 
         &:before {
             font-family: FontAwesome;
             content: "\f138";
+            cursor: pointer;
         }
 
         &:hover {
+            max-width: 250px;
             &:before {
                 content: "\f137";
-            }
-
-            .info-detail {
-                display: inline-block;
             }
         }
     }
 
     .info-detail {
-        display: none;
+        position: relative;
+        display: inline-block;
+        background-color: $base-color-bg-head;
         padding-left: 4px;
 
         .id {
@@ -474,20 +485,17 @@
     .sub-item {
         display: inline-block;
         padding: 2px 4px;
-        margin-right: 4px;
-        margin-bottom: 4px;
+        margin-right: 8px;
+        margin-bottom: 5px;
         color: $base-light-grey-color;
         border: 1px solid $base-color-grey;
 
         .score-number {
             background-color: $base-color-complete;
-            border-radius: 4px;
-            padding: 0 4px;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin-left: 3px;
             color: $base-color-white;
-
-            &+.score-number {
-                margin-left: 4px;
-            }
         }
     }
 
@@ -502,13 +510,12 @@
 .box-item-left {
     padding: 4px 0;
     background-color: $base-a-default-color;
-    width: 64px;
     text-align: center;
 
     .task-date {
         display: inline-block;
         padding: 0 5px;
-        width: 54px;
+        width: 56px;
         color: $base-color-white;
         font-size: 12px;
     }
@@ -570,7 +577,7 @@
         font-size: 13px;
         border: 1px solid $base-color-complete;
         border-radius: 4px;
-        background-color: transparent;
+        background-color: $base-color-bg-head;
         color: $base-color-complete;
 
         &:before {
@@ -644,6 +651,9 @@
         color: $base-color-white;
         text-transform: capitalize;
         font-size: 12px;
+        cursor: pointer;
+        max-width: 20px;
+        transition: 0.8s max-width ease;
 
         .indicator {
             display: inline-block;
@@ -656,6 +666,7 @@
 
         &:hover {
             width: auto;
+            max-width: 300px;
             background: $base-logo-color;
 
             .indicator {
