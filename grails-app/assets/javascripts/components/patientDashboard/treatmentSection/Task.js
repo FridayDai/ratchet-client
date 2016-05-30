@@ -132,6 +132,7 @@ function TaskSection() {
                     $taskBox.remove();
                     me.checkNoTask();
                     me.countTotalTasks();
+                    me.countVisibleTasks();
 
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
 
