@@ -58,7 +58,7 @@ class UrlMappings {
         "/patients/$patientId/in-clinic/code"(controller: "patientDashboard", action: "getInClinicCode")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-        "/patients/$patientId?/surgery-time/$medicalRecordId?/$surgeryTime?"(controller: "treatment", action: "updateSurgeryTime")
+        "/patients/$patientId?/absolute-event-time/$medicalRecordId?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
         //Patient treatment

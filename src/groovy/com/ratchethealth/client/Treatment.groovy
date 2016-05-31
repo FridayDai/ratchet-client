@@ -5,7 +5,7 @@ class Treatment {
     Long patientId
     Long treatmentId
     Long staffIds
-    Long surgeryTime
+    Long absoluteEventTimestamp
     Long groupId
     String ecFirstName
     String ecLastName

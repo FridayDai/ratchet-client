@@ -90,7 +90,7 @@
         }
     }
 
-    .surgery-time, .date-picker {
+    .event-time, .date-picker {
         border: 1px solid $base-font-color;
         background-color: $base-mid-grey-color;
         background-image: image-url('patients/calender.png', false, false);
@@ -98,7 +98,7 @@
         background-position: right top;
     }
 
-    .surgery-time:disabled {
+    .event-time:disabled {
         background-color: $base-color-white-grey-dark;
     }
 

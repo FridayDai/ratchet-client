@@ -50,7 +50,7 @@ class TreatmentService extends RatchetAPIService {
                     .field("profilePhoto", patient?.profilePhoto)
                     .field("treatmentId", patient?.treatmentId)
                     .field("surgeonId", patient?.staffId)
-                    .field("surgeryTime", patient?.surgeryTime)
+                    .field("absoluteEventTimestamp", patient?.absoluteEventTimestamp)
                     .field("ecFirstName", patient?.ecFirstName)
                     .field("ecLastName", patient?.ecLastName)
                     .field("relationship", patient?.relationship)
@@ -89,15 +89,15 @@ class TreatmentService extends RatchetAPIService {
         }
     }
 
-    def updateSurgeryTime(String token, clientId, medicalRecordId, patientId, surgeryTime) {
+    def updateEventTime(String token, clientId, medicalRecordId, patientId, absoluteEventTimestamp) {
 
-        String updateSurgeryTimeUrl = grailsApplication.config.ratchetv2.server.url.updateSurgeryTime
-        def url = String.format(updateSurgeryTimeUrl, clientId, patientId, medicalRecordId)
+        String updateEventTimeUrl = grailsApplication.config.ratchetv2.server.url.updateEventTime
+        def url = String.format(updateEventTimeUrl, clientId, patientId, medicalRecordId)
 
         log.info("Call backend service to update surgery date, token: ${token}.")
         withPost(token, url) { req ->
             def resp = req
-                    .field("surgeryTime", surgeryTime)
+                    .field("absoluteEventTimestamp", absoluteEventTimestamp)
                     .asString()
 
             if (resp.status == 200) {
