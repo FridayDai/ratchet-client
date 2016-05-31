@@ -220,9 +220,9 @@
                        placeholder="Select treatment" required disabled/>
             </div>
 
-            <div class="form-group inline" id="div-surgery-time">
+            <div class="form-group inline" id="div-event-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="surgeryTime" name="surgeryTimeStr" type="text" class="input-group date-picker surgery-time re-position"
+                <input id="eventTime" name="eventTimeStr" type="text" class="input-group date-picker event-time re-position"
                        placeholder="Select surgery date" required disabled/>
             </div>
 

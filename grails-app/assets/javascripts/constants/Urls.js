@@ -22,13 +22,10 @@ module.exports = {
     //Patient detail
     PAGE_PATIENT_DETAIL: '/patients/{0}',
 
-    SECTION_TREATMENT_TAB: '/patients/{0}/getTreatmentTab?clientId={1}' +
-    '&medicalRecordId={2}&treatmentId={3}&surgeryTime={4}&PatientEmailStatus={5}&archived={6}&_={7}',
-
     INVITE_PATIENT: '/patients/{0}/invite',
 
     //Treatment
-    UPDATE_SURGERY_DATE: '/patients/{0}/surgery-time/{1}/{2}',
+    UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/{2}',
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',

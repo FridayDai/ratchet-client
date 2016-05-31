@@ -31,6 +31,6 @@ class ExceptionEmailServiceSpec extends Specification {
         def result = service.sendExceptionEmail(stackTrace, email)
 
         then:
-        result == true
+        result == false
     }
 }

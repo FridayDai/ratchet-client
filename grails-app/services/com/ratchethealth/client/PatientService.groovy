@@ -14,7 +14,7 @@ class PatientService extends RatchetAPIService {
         def profilePhoto = patient?.profilePhoto
         def treatmentId = patient?.treatmentId
         def surgeonId = patient?.staffId
-        def surgeryTime = patient?.surgeryTime
+        def absoluteEventTimestamp = patient?.absoluteEventTimestamp
         def ecFirstName = patient?.ecFirstName
         def ecLastName = patient?.ecLastName
         def relationship = patient?.relationship
@@ -38,7 +38,7 @@ class PatientService extends RatchetAPIService {
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)
-                    .field("surgeryTime", surgeryTime)
+                    .field("absoluteEventTimestamp", absoluteEventTimestamp)
                     .field("ecFirstName", ecFirstName)
                     .field("ecLastName", ecLastName)
                     .field("relationship", relationship)

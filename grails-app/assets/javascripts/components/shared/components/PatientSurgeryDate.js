@@ -7,7 +7,7 @@ function PatientSurgeryDate() {
         this.clear();
         this.$node.prop("disabled", false);
 
-        if (data.surgeryDateRequired) {
+        if (data.isAbsoluteEventBased) {
             this.showElementGroup();
         } else {
             this.hideElementGroup();

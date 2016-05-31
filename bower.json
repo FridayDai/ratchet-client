@@ -26,6 +26,7 @@
     "google-libphonenumber": "~1.0.4",
     "Snap.svg": "snap.svg#~0.4.1",
     "tooltipster": "^3.3.0",
-    "jquery-mask-plugin": "~1.14.0"
+    "jquery-mask-plugin": "~1.14.0",
+    "multiple-select": "~1.2.1"
   }
 }
