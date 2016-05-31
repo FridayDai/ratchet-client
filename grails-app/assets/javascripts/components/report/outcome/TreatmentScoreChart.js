@@ -511,7 +511,7 @@ function TreatmentScoreChart() {
             this.select('defaultPanelSelector').hide();
 
             if (data.xRange === UNSUPPORTED && data.yRange === UNSUPPORTED) {
-                if (data.calculable == false) {
+                if (data.calculable === false) {
                     this.select('noAvailableSelector').show();
                 } else {
                     this.select('chartGroupSelector').show();
