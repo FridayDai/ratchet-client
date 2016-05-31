@@ -511,15 +511,13 @@ function TreatmentScoreChart() {
             this.select('defaultPanelSelector').hide();
 
             if (data.xRange === UNSUPPORTED && data.yRange === UNSUPPORTED) {
-
-                if(!data.toolType){
+                if (data.calculable == false) {
                     this.select('noAvailableSelector').show();
-                }else{
+                } else {
                     this.select('chartGroupSelector').show();
-                    this.drawFrame([-45,0], 100);
+                    this.drawFrame([-45, 0], 100);
                     this.select('noDataSelector').show();
                 }
-
             } else {
                 this.select('chartGroupSelector').show();
 
