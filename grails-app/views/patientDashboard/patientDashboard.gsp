@@ -289,13 +289,21 @@
     </form>
 
     <form action="" method="post" class="treatment-time-form ui-hidden" id="treatment-time-form">
-        <div class="form-group inline ">
-            <label class="lbl-group">SURGERY DATE</label>
+        <div class="form-group inline">
+            <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="treatment-surgeryTime" name="treatment-surgeryTime" type="text"
                    class="input-group date-picker surgery-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
+        </div>
+        <div class="form-group inline">
+            <label class="lbl-group">PROVIDER<span>*</span></label>
+            <input id="treatment-provider" name="staffVal" type="text"
+                   class="input-group"
+                   placeholder="Select provider"
+                   tabindex="-1"
+                   required/>
         </div>
     </form>
 

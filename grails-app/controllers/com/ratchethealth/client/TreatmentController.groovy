@@ -116,8 +116,9 @@ class TreatmentController extends BaseController {
         def medicalRecordId = params?.medicalRecordId
         def patientId = params?.patientId
         def surgeryTime = params?.surgeryTime
+        def providerId = params?.providerId
 
-        def resp = treatmentService.updateSurgeryTime(token, clientId, medicalRecordId, patientId, surgeryTime)
+        def resp = treatmentService.updateSurgeryTime(token, clientId, medicalRecordId, patientId, providerId, surgeryTime)
         def result = [resp: resp]
         render result as JSON
     }

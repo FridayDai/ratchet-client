@@ -3,7 +3,7 @@ var WithDialog = require('../../common/WithFormDialog');
 var WithChildren = require('../../common/WithChildren');
 
 var ScheduleTaskDatePicker = require('./ScheduleTasksDatePicker');
-var AddTasksProviderCombobox = require('./AddTasksProviderCombobox');
+var AddTasksProviderCombobox = require('./ProviderCombobox');
 
 var URLs = require('../../../constants/Urls');
 var Utility = require('../../../utils/Utility');
@@ -56,7 +56,8 @@ function AddTasksDialog() {
         providerFieldSelector: {
             child: AddTasksProviderCombobox,
             attributes: {
-                resetEvent: 'addTasksReset'
+                resetEvent: 'addTasksReset',
+                selectEvent: 'addTasksProviderSelected'
             }
         }
     });
