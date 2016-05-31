@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.mashape.unirest.request.GetRequest
+import com.mashape.unirest.request.body.MultipartBody
 import grails.test.mixin.TestFor
 import org.codehaus.groovy.grails.web.util.WebUtils
 import spock.lang.Specification
@@ -18,10 +19,10 @@ class ExceptionEmailServiceSpec extends Specification {
 
     void "test Send Uncaught Exception Email"() {
         given:
-        GetRequest.metaClass.asString = { ->
+        MultipartBody.metaClass.asString = { ->
             return [
-                    status: 400,
-                    body  : "body"
+                status: 400,
+                body  : "body"
             ]
         }
 

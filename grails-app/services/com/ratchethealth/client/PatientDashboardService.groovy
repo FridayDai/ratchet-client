@@ -15,7 +15,6 @@ class PatientDashboardService extends RatchetAPIService {
                     .asString()
 
             if (resp.status == 200) {
-                def result = JSON.parse(resp.body)
                 log.info("Show single patient success, token: ${token}")
 
                 parseRespBody(resp)
