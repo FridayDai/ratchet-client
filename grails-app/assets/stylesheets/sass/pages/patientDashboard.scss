@@ -592,9 +592,13 @@
         border-left: 1px solid $base-color-white-grey;
     }
 
+    .treatment-nav {
+        width: 220px;
+        height: 100%;
+    }
+
     .treatment-manage-container {
         display: inline-block;
-        position: absolute;
         height: 70px;
         width: 220px;
         text-align: center;
@@ -634,11 +638,11 @@
     }
 
     .tab-list {
-        padding-top: 71px;
         border: 0;
-        overflow: scroll;
-        //        float: left;
+        overflow-x: hidden;
+        overflow-y: scroll;
         width: 220px;
+        height: calc(100% - 71px);
 
         .treatment-li {
             &:hover,
