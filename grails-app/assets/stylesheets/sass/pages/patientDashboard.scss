@@ -583,7 +583,7 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
-    min-height: calc(100vh - 278px);
+    height: calc(100vh - 274px);
     display: flex;
     display: -ms-flexbox;
 
@@ -636,7 +636,7 @@
     .tab-list {
         padding-top: 71px;
         border: 0;
-        overflow: hidden;
+        overflow: scroll;
         //        float: left;
         width: 220px;
 
@@ -755,7 +755,7 @@
         width: calc(100% - 220px);
         box-sizing: border-box;
         border-left: 1px solid $base-font-color;
-        min-height: 100%;
+        height: 100%;
     }
 
     .treatment-tool-bar {
