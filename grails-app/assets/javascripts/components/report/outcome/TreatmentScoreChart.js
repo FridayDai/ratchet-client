@@ -510,8 +510,14 @@ function TreatmentScoreChart() {
         if (this.$node.is(':visible')) {
             this.select('defaultPanelSelector').hide();
 
-            if (data.xRange === UNSUPPORTED) {
-                this.select('noAvailableSelector').show();
+            if (data.xRange === UNSUPPORTED && data.yRange === UNSUPPORTED) {
+                if (data.calculable === false) {
+                    this.select('noAvailableSelector').show();
+                } else {
+                    this.select('chartGroupSelector').show();
+                    this.drawFrame([-45, 0], 100);
+                    this.select('noDataSelector').show();
+                }
             } else {
                 this.select('chartGroupSelector').show();
 
