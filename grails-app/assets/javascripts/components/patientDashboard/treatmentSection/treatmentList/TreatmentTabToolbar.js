@@ -7,6 +7,7 @@ var Utility = require('../../../../utils/Utility');
 function TreatmentToolbar() {
     this.attributes({
         archived: null,
+        currentMedicalRecordId: null,
 
         treatmentListAnchorSelector: '.ui-tabs-anchor',
         addTaskButtonSelector: '.addTasks',
@@ -126,7 +127,7 @@ function TreatmentToolbar() {
     this.OnTreatmentAnchorSelected = function (e, data) {
         var $ele = this.$node;
 
-        if($ele.data('id') === +data.medicalRecordId) {
+        if ($ele.data('id') === +data.medicalRecordId) {
 
             var archived = $ele.hasClass('archived-treatment');
 
@@ -141,11 +142,25 @@ function TreatmentToolbar() {
         }
     };
 
+    this.initTreatmentTabTool = function () {
+        var $ele = this.$node;
+
+        if (+this.attr.currentMedicalRecordId === +$ele.data('id')) {
+            this.$node.addClass('ui-state-active');
+            this.trigger('medicalRecordListSelected', {
+                medicalRecordId: $ele.data('id'),
+                archived: $ele.hasClass('archived-treatment')
+            });
+        }
+    };
+
     this.unactiveTreatmentList = function () {
         this.$node.removeClass('ui-state-active');
     };
 
     this.after('initialize', function () {
+
+        this.initTreatmentTabTool();
 
         this.on('click', {
             treatmentListAnchorSelector: this.OnTreatmentAnchorClicked

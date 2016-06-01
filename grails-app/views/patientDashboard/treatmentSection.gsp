@@ -2,56 +2,59 @@
 
 <div class="treatment-tabs-container clear">
 
-    <div class="treatment-manage-container">
-        <button id="addTab" class="btn btn-add btn-add-treatment">
-            <span>Treatment</span>
-        </button>
+    <div class="treatment-nav">
+        <div class="treatment-manage-container">
+            <button id="addTab" class="btn btn-add btn-add-treatment">
+                <span>Treatment</span>
+            </button>
+        </div>
+
+        <ul class="tab-list">
+            <g:each in="${medicalRecords}" var="medicalRecord" status="i">
+                <li class="treatment-li ui-state-default <g:if test="${medicalRecord?.archived}">archived-treatment</g:if>"
+                    data-id="${medicalRecord?.id}">
+
+                    <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
+                                   data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
+                                   data-treatment-id="${medicalRecord?.treatmentId}"
+                                   data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
+
+                    <label class="treatment-indicate">
+                        <span>${medicalRecord?.indicator}</span>
+                    </label>
+
+                    <a class="ui-tabs-anchor" data-id="sub${i}">
+                        ${medicalRecord.title} ${medicalRecord.tmpTitle}
+                        <g:if test="${medicalRecord?.archived}">
+                            <span class="archived-indicator">
+                                <i class="fa fa-archive" aria-hidden="true"></i>
+                            </span>
+                        </g:if>
+                    </a>
+
+                    <ul class="sub-treatment-tool">
+                        <li class="addTasks">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span class="text-span">Task</span>
+                        </li>
+                        <li class="event-time-edit ${medicalRecord?.absoluteEventTimestamp ? '' : 'not-available'}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            <span class="text-span">Edit</span>
+                        </li>
+                        <li class="archived-active">
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                            <span class="text-span">Archive</span>
+                        </li>
+                        <li class="treatment-delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <span class="text-span">Delete</span>
+                        </li>
+                    </ul>
+                </li>
+            </g:each>
+        </ul>
     </div>
 
-    <ul class="tab-list">
-        <g:each in="${medicalRecords}" var="medicalRecord" status="i">
-            <li class="treatment-li ui-state-default <g:if test="${medicalRecord?.archived}">archived-treatment</g:if>"
-                data-id="${medicalRecord?.id}">
-
-                <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
-                               data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
-                               data-treatment-id="${medicalRecord?.treatmentId}"
-                               data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
-
-                <label class="treatment-indicate">
-                    <span>${medicalRecord?.indicator}</span>
-                </label>
-
-                <a class="ui-tabs-anchor" data-id="sub${i}">
-                    ${medicalRecord.title} ${medicalRecord.tmpTitle}
-                    <g:if test="${medicalRecord?.archived}">
-                        <span class="archived-indicator">
-                            <i class="fa fa-archive" aria-hidden="true"></i>
-                        </span>
-                    </g:if>
-                </a>
-
-                <ul class="sub-treatment-tool">
-                    <li class="addTasks">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        <span class="text-span">Task</span>
-                    </li>
-                    <li class="event-time-edit">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                        <span class="text-span">Edit</span>
-                    </li>
-                    <li class="archived-active">
-                        <i class="fa fa-archive" aria-hidden="true"></i>
-                        <span class="text-span">Archive</span>
-                    </li>
-                    <li class="treatment-delete">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        <span class="text-span">Delete</span>
-                    </li>
-                </ul>
-            </li>
-        </g:each>
-    </ul>
 
     <div class="treatment-panel-container">
 
