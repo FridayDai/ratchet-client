@@ -41,6 +41,12 @@ class StatusCodeConstants {
         "antibiotics": "Antibiotics"
     ]
 
+    public static final Map TASK_RISK_ASSESSMENT_QUESTIONNAIRE = [
+            "Score": "Score",
+            "Care Partner": "Care Partner",
+            "Prefer SNF": "Prefer SNF"
+    ]
+
     public static final Map TASK_OOS_JR_SCORE_LABEL = [
             "STIFFNESS": "Stiffness",
             "PAIN": "Pain",

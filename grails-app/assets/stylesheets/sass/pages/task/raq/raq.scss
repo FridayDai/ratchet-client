@@ -1,0 +1,105 @@
+@import '../taskResult';
+
+body {
+    margin-bottom: 0;
+}
+
+.question-list {
+    margin: 0 0 30px 35px;
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+    color: $result-main-color;
+}
+
+.answer {
+    position: relative;
+    margin-top: 10px;
+
+    .text {
+        font-size: 16px;
+    }
+}
+
+.result-circle-radio {
+    position: absolute;
+    top: 0;
+    left: -35px;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+}
+
+.result-circle-radio-checked {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $result-main-color;
+}
+
+.task-list-wrapper:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 30px;
+    }
+
+    &.part-1 {
+        padding-left: 30px;
+        border-left: 1px solid #8e8e8e;
+    }
+}
+
+.download {
+    display: inline-block;
+    position: absolute;
+    top: -40px;
+    right: 0;
+    a {
+        color: #7b8994;
+    }
+}
+
+.task-prediction-wrapper {
+    font-size: 16px;
+    margin: 20px 0 20px;
+    padding-top: 50px;
+    border-top: 1px solid #8e8e8e;
+    font-weight: bold;
+
+    .scoreArea {
+        font-size: 14px;
+
+        .scoreLevel{
+            margin: 15px;
+            font-weight: bold;
+        }
+        .riskLevel{
+            display: inline-block;
+            margin: 5px;
+            width: 88px;
+            text-align: center;
+            color: #ffffff;
+            background-color: black;
+            font-weight: bold;
+        }
+    }
+
+}
