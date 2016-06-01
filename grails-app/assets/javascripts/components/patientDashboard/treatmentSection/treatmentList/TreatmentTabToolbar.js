@@ -105,15 +105,19 @@ function TreatmentToolbar() {
     this.OnTreatmentAnchorClicked = function () {
 
         var $ele = this.$node;
+        var archived = $ele.hasClass('archived-treatment');
 
         if ($ele.hasClass('ui-state-active')) {
             this.$node.removeClass('ui-state-active');
-            this.trigger('medicalRecordListSelected');
+            this.trigger('medicalRecordListSelected', {
+                archived: archived
+            });
         } else {
             this.$node.siblings().removeClass('ui-state-active');
             this.$node.addClass('ui-state-active');
             this.trigger('medicalRecordListSelected', {
-                medicalRecordId: $ele.data('id')
+                medicalRecordId: $ele.data('id'),
+                archived: archived
             });
         }
 
@@ -123,7 +127,17 @@ function TreatmentToolbar() {
         var $ele = this.$node;
 
         if($ele.data('id') === +data.medicalRecordId) {
-            this.OnTreatmentAnchorClicked();
+
+            var archived = $ele.hasClass('archived-treatment');
+
+            if (!$ele.hasClass('ui-state-active')) {
+                this.$node.siblings().removeClass('ui-state-active');
+                this.$node.addClass('ui-state-active');
+                this.trigger('medicalRecordListSelected', {
+                    medicalRecordId: $ele.data('id'),
+                    archived: archived
+                });
+            }
         }
     };
 

@@ -67,59 +67,57 @@
         </g:if>
 
         <g:else>
-            <div class="content">
+            <div class="filter-area">
 
-                <div class="filter-area">
+                <select id="task-status" class="quick-filter" multiple="multiple">
+                    <option class="overdue" value="overdue">overdue</option>
+                    <option class="pending" value="pending">pending</option>
+                    <option class="expired" value="expired">expired</option>
+                    <option class="schedule" value="schedule">schedule</option>
+                    <option class="complete" value="complete">complete</option>
+                </select>
 
-                    <select id="task-status" class="quick-filter" multiple="multiple">
-                        <option class="overdue" value="overdue">overdue</option>
-                        <option class="pending" value="pending">pending</option>
-                        <option class="expired" value="expired">expired</option>
-                        <option class="schedule" value="schedule">schedule</option>
-                        <option class="complete" value="complete">complete</option>
-                    </select>
+                <div id="filter-count" class="filter-count hide">
+                    <span class="visible-count">
+                        <label id="visible-number">0</label> of
+                        <label id="total-number">0</label> tasks visible
+                    </span>
 
-                    <div id="filter-count" class="filter-count hide">
-                        <span class="visible-count">
-                            <label id="visible-number">0</label> of
-                            <label id="total-number">0</label> tasks visible
-                        </span>
-
-                        <a href="#" id="clear-filter" class="clear-filter">clear filters</a>
-                    </div>
-
+                    <a href="#" id="clear-filter" class="clear-filter">clear filters</a>
                 </div>
 
+            </div>
 
-                <div id="tasks-list" class="tasks-list">
-                    <g:each in="${combinedTasks}" var="task">
-                        <g:if test="${task.itemType == 'today'}">
-                            <div class="today-item">
-                                <span>
-                                    Today:
-                                    <g:formatDate date="${task?.sendTime}"
-                                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                                  format="MMM dd, yyyy"/>
-                                </span>
-                            </div>
-                        </g:if>
-                        <g:else>
-                            <g:render template="/patientDashboard/taskBox/taskItem" model="[
-                                    'task'           : task,
-                                    'patientId'      : patientId,
-                                    'medicalRecordId': task.treatmentProperty?.id,
-                                    'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
-                                    'itemType'       : task?.itemType
-                            ]"/>
-                        </g:else>
-                    </g:each>
-                </div>
+            <div class="curtain-top"></div>
 
-                <div id="no-tasks" class="no-treatment-container no-tasks hide">
-                    <div class="icon"></div>
+            <div id="tasks-list" class="tasks-list">
+                <g:each in="${combinedTasks}" var="task">
+                    <g:if test="${task.itemType == 'today'}">
+                        <div class="today-item">
+                            <span>
+                                Today:
+                                <g:formatDate date="${task?.sendTime}"
+                                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                              format="MMM dd, yyyy"/>
+                            </span>
+                        </div>
+                    </g:if>
+                    <g:else>
+                        <g:render template="/patientDashboard/taskBox/taskItem" model="[
+                                'task'           : task,
+                                'patientId'      : patientId,
+                                'medicalRecordId': task.treatmentProperty?.id,
+                                'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
+                                'itemType'       : task?.itemType
+                        ]"/>
+                    </g:else>
+                </g:each>
+            </div>
 
-                    <div class="title">0 tasks</div>
-                </div>
+            <div id="no-tasks" class="no-treatment-container no-tasks hide">
+                <div class="icon"></div>
+
+                <div class="title">0 tasks</div>
             </div>
 
         </g:else>
