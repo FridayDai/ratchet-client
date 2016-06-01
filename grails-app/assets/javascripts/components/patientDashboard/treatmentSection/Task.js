@@ -187,7 +187,7 @@ function TaskSection() {
             }
 
             this.select('filterCountFiledSelector').show();
-            this.trigger('taskStatusMixedFilter');
+            this.trigger('taskStatusToDefault');
             this.countVisibleTasks();
 
         } else {

@@ -456,6 +456,7 @@
         color: $base-font-color;
         overflow: hidden;
         max-width: 12px;
+        padding-left: 1px;
         transition: 0.4s max-width ease-in;
 
         &:before {

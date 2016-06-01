@@ -10,7 +10,7 @@ function FilterTaskStatusSelectbox() {
 
         function onCheckOption() {
             var status = me.$node.multipleSelect("getSelects");
-            me.trigger("taskStatusFilterSelected",{status: status});
+            me.trigger("taskStatusFilterSelected", {status: status});
         }
 
         this.$node.multipleSelect({
@@ -25,16 +25,16 @@ function FilterTaskStatusSelectbox() {
             },
             onClick: onCheckOption,
             onCheckAll: onCheckOption,
-            onUncheckAll:onCheckOption
+            onUncheckAll: onCheckOption
         });
 
         this.$node.multipleSelect('checkAll');
         $('#filter-count').hide();
     };
 
-    this.onCheckOption = function () {
-        var status = this.$node.multipleSelect("getSelects");
-        this.trigger("taskStatusFilterSelected",{status: status});
+    this.taskStatusToDefault = function () {
+        this.$node.multipleSelect('refresh');
+        this.$node.multipleSelect('checkAll');
     };
 
     this.clearAllFilter = function () {
@@ -46,7 +46,7 @@ function FilterTaskStatusSelectbox() {
     this.after('initialize', function () {
         this.init();
         this.on(document, 'taskStatusClearFilter', this.clearAllFilter);
-        this.on(document, 'taskStatusMixedFilter', this.onCheckOption);
+        this.on(document, 'taskStatusToDefault', this.taskStatusToDefault);
     });
 }
 

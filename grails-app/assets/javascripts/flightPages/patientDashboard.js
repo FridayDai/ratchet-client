@@ -176,12 +176,14 @@ function PatientDetailPage() {
 
         this[NODE_NAME_TEMP.format(type.toLowerCase())] = panel.get(0);
         TYPE_SECTION_MAPPING[type].attachTo(panel, {
-            'TabElement': tab[0]
+            'TabElement': tab[0],
+            'currentMedicalRecordId': this.currentMedicalRecordId ? this.currentMedicalRecordId : null
         });
     };
 
     this.refreshTab = function (event, data) {
         var index = data.index;
+        this.currentMedicalRecordId = data.medicalRecordId;
         this.select('tabsContainerSelector').tabs('load', index);
     };
 

@@ -37,7 +37,7 @@
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span class="text-span">Task</span>
                         </li>
-                        <li class="event-time-edit">
+                        <li class="event-time-edit ${medicalRecord?.absoluteEventTimestamp ? '' : 'not-available'}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             <span class="text-span">Edit</span>
                         </li>

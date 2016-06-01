@@ -721,6 +721,17 @@
             }
         }
 
+        .addTasks, .event-time-edit, .archived-active {
+            &.not-available {
+                color: #cccccc;
+
+                &:hover {
+                    color: #cccccc;
+                    cursor: text;
+                }
+            }
+        }
+
         .archived-treatment {
 
             .sub-treatment-tool {
