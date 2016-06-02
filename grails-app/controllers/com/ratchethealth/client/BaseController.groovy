@@ -53,7 +53,7 @@ class BaseController {
         } else if (e.statusId == 401) {
             render view: '/login/login'
         } else {
-            render view: '/error/error404'
+            render view: '/error/error500'
         }
     }
 
@@ -67,8 +67,14 @@ class BaseController {
         def pw = new PrintWriter(sw)
         e.printStackTrace(pw)
 
-
         exceptionEmailService.sendExceptionEmail(sw.toString(), email)
 
+        def message = g.message(code: 'default.error.500.message')
+
+        if (request.isXhr()) {
+            render status: 500, text: message
+        } else {
+            render view: '/error/error500'
+        }
     }
 }

@@ -35,15 +35,20 @@ $.ajaxSetup({
                     }
                 }
             });
+        } else if (jqXHR.status === 500) {
+            Notifications.error({
+                title: Strings.ERROR_TITLE_500,
+                message: Strings.ERROR_MESSAGE_500
+            });
         } else if (jqXHR.status === 400) {
             Notifications.error({
-                title: Strings.ERROR_TITLE_COMMON,
-                message: Strings.ERROR_MESSAGE_COMMON,
+                title: Strings.ERROR_TITLE,
+                message: Strings.ERROR_MESSAGE_CHECK_BELOW,
                 errorMessage: jqXHR.responseText
             });
-        } else if (jqXHR.status === 403 || jqXHR.status >= 404) {
+        } else if (jqXHR.status >= 403) {
             Notifications.error({
-                title: Strings.ERROR_TITLE_COMMON,
+                title: Strings.ERROR_TITLE,
                 message: Strings.ERROR_MESSAGE_COMMON
             });
         }
