@@ -59,11 +59,12 @@ body {
 
     &.part-0 {
         padding-right: 30px;
+        border-right: 1px solid #8e8e8e;
     }
 
     &.part-1 {
         padding-left: 30px;
-        border-left: 1px solid #8e8e8e;
+
     }
 }
 
@@ -76,7 +77,6 @@ body {
         color: #7b8994;
     }
 }
-
 
 .task-prediction-wrapper {
     font-size: 16px;
@@ -104,4 +104,3 @@ body {
     }
 
 }
-

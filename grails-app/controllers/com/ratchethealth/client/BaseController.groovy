@@ -67,7 +67,6 @@ class BaseController {
         def pw = new PrintWriter(sw)
         e.printStackTrace(pw)
 
-
         exceptionEmailService.sendExceptionEmail(sw.toString(), email)
 
     }

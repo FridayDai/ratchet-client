@@ -56,12 +56,12 @@ class TaskTagLib {
                 renderTemplate(scores, StatusCodeConstants.TASK_OOS_JR_SCORE_LABEL)
                 break
             case RatchetConstants.TOOL_NAME_FAIRLEY_NASAL_SYMPTOM:
-
                 renderTemplate(scores, StatusCodeConstants.TASK_FAIRLEY_NASAL_SCORE_LABEL)
                 break
 
             case RatchetConstants.TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE:
                 renderTemplate(scores, StatusCodeConstants.TASK_RISK_ASSESSMENT_QUESTIONNAIRE)
+                break
 
             default:
                 renderTemplate(scores)
