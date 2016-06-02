@@ -7,6 +7,7 @@ var Utility = require('../../../../utils/Utility');
 function TreatmentToolbar() {
     this.attributes({
         archived: null,
+        currentMedicalRecordId: null,
 
         treatmentListAnchorSelector: '.ui-tabs-anchor',
         addTaskButtonSelector: '.addTasks',
@@ -105,15 +106,19 @@ function TreatmentToolbar() {
     this.OnTreatmentAnchorClicked = function () {
 
         var $ele = this.$node;
+        var archived = $ele.hasClass('archived-treatment');
 
         if ($ele.hasClass('ui-state-active')) {
             this.$node.removeClass('ui-state-active');
-            this.trigger('medicalRecordListSelected');
+            this.trigger('medicalRecordListSelected', {
+                archived: archived
+            });
         } else {
             this.$node.siblings().removeClass('ui-state-active');
             this.$node.addClass('ui-state-active');
             this.trigger('medicalRecordListSelected', {
-                medicalRecordId: $ele.data('id')
+                medicalRecordId: $ele.data('id'),
+                archived: archived
             });
         }
 
@@ -122,8 +127,30 @@ function TreatmentToolbar() {
     this.OnTreatmentAnchorSelected = function (e, data) {
         var $ele = this.$node;
 
-        if($ele.data('id') === +data.medicalRecordId) {
-            this.OnTreatmentAnchorClicked();
+        if ($ele.data('id') === +data.medicalRecordId) {
+
+            var archived = $ele.hasClass('archived-treatment');
+
+            if (!$ele.hasClass('ui-state-active')) {
+                this.$node.siblings().removeClass('ui-state-active');
+                this.$node.addClass('ui-state-active');
+                this.trigger('medicalRecordListSelected', {
+                    medicalRecordId: $ele.data('id'),
+                    archived: archived
+                });
+            }
+        }
+    };
+
+    this.initTreatmentTabTool = function () {
+        var $ele = this.$node;
+
+        if (+this.attr.currentMedicalRecordId === +$ele.data('id')) {
+            this.$node.addClass('ui-state-active');
+            this.trigger('medicalRecordListSelected', {
+                medicalRecordId: $ele.data('id'),
+                archived: $ele.hasClass('archived-treatment')
+            });
         }
     };
 
@@ -132,6 +159,8 @@ function TreatmentToolbar() {
     };
 
     this.after('initialize', function () {
+
+        this.initTreatmentTabTool();
 
         this.on('click', {
             treatmentListAnchorSelector: this.OnTreatmentAnchorClicked

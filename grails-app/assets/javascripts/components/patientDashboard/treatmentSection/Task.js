@@ -19,7 +19,7 @@ function TaskSection() {
 
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
-        allBoxItemsSelector: '.box-item',
+        todayItemSelector: '.today-item',
         boxItemsSelector: '.box-item:not(.archived)',
         archivedItemSelector: '.box-item.archived',
         deleteTaskButtonSelector: '.box-item .delete',
@@ -180,11 +180,17 @@ function TaskSection() {
                 this.select('noTaskFiledSelector').show();
             }
 
+            if (data.archived) {
+                this.attr.boxItemsSelector = '.box-item';
+            } else {
+                this.attr.boxItemsSelector = '.box-item:not(.archived)';
+            }
+
             this.select('filterCountFiledSelector').show();
+            this.trigger('taskStatusToDefault');
             this.countVisibleTasks();
 
         } else {
-
             this.onClearTaskFilter();
         }
     };
@@ -217,7 +223,7 @@ function TaskSection() {
         if (medicalRecordId) {
             this.select('boxItemsSelector').hide().filter(function (index, ele) {
                 return _.indexOf(status, $(ele).data('status')) > -1 &&
-                     +$(ele).attr('medical-record-id') === +medicalRecordId;
+                    +$(ele).attr('medical-record-id') === +medicalRecordId;
             }).show();
         } else {
             this.select('boxItemsSelector').hide().filter(function (index, ele) {
@@ -232,18 +238,27 @@ function TaskSection() {
     this.onClearTaskFilter = function () {
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
-
-        this.select('boxItemsSelector').show();
         this.select('archivedItemSelector').hide();
 
+        this.attr.boxItemsSelector = '.box-item:not(.archived)';
         this.currentMedicalRcordId = null;
+        this.archived = false;
 
         this.trigger('taskStatusClearFilter');
+    };
+
+    this.scrollToday = function () {
+        var position = this.select('todayItemSelector').position();
+
+        if (position.top > 210) {
+            this.select('taskListFiledSelector').scrollTop(position.top - 210);
+        }
     };
 
     this.initDefaultTasks = function () {
         this.select('archivedItemSelector').hide();
         this.countTotalTasks();
+        this.scrollToday();
     };
 
     this.after('initialize', function () {
