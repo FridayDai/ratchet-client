@@ -135,7 +135,7 @@ class UrlMappings {
         "/groups/delete"(controller: "groups", action: "deleteGroup")
 
         // announcement
-        "/announcement/close"(controller: "announcement", action: "close")
+        "/announcement/close"(controller: "home", action: "closeAnnouncement")
 
         // report
         "/reports/outcome"(controller: "report") {
@@ -148,6 +148,9 @@ class UrlMappings {
             action = [GET: "renderTaskCompletionReport"]
         }
         "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
+
+        // Alert
+        "/alert-notification"(controller: 'home', action: 'getAlertNotification')
 
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")

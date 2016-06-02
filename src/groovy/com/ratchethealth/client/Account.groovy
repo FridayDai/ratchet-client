@@ -10,6 +10,7 @@ class Account {
     String doctor
     String groupId
     String npi
+    Boolean enableAlert = false
 }
 
 

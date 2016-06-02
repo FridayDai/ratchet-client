@@ -16,6 +16,7 @@ function EditAccountFormDialog() {
         emailFieldSelector: '#email',
         providerCheckboxSelector: '#accountProvider',
         adminCheckboxSelector: '#accountManagement',
+        enableAlertCheckboxSelector: '#alert',
         npiFieldSelector: '#npi',
         groupFieldSelector: '#groupSelect',
         groupRequireMarkSelector: '.group-require-mark'
@@ -57,6 +58,7 @@ function EditAccountFormDialog() {
         this.select('emailFieldSelector').val(data.email);
         this.select('providerCheckboxSelector').prop('checked', data.isProvider);
         this.select('adminCheckboxSelector').prop('checked', data.isAdmin);
+        this.select('enableAlertCheckboxSelector').prop('checked', data.enableAlert);
 
         if (data.isProvider) {
             this.select('npiFieldSelector')
@@ -102,11 +104,13 @@ function EditAccountFormDialog() {
         var isDoctor = this.select('doctorCheckboxSelector').prop('checked') === true;
         var isAccountManagement = this.select('adminCheckboxSelector').prop('checked') === true;
         var isProvider = this.select('providerCheckboxSelector').prop("checked") === true;
+        var enableAlert = this.select('enableAlertCheckboxSelector').prop("checked") === true;
 
         return {
             doctor: isDoctor,
             accountManagement: isAccountManagement,
-            type: isProvider ? PARAMs.ACCOUNT_TYPE.PROVIDER : PARAMs.ACCOUNT_TYPE.NON_PROVIDER
+            type: isProvider ? PARAMs.ACCOUNT_TYPE.PROVIDER : PARAMs.ACCOUNT_TYPE.NON_PROVIDER,
+            enableAlert: enableAlert
         };
     };
 
@@ -118,7 +122,8 @@ function EditAccountFormDialog() {
             lastName: this.select('lastNameFieldSelector').val().trim(),
             email: this.select('emailFieldSelector').val().trim(),
             isProvider: isProvider,
-            isAdmin: this.select('adminCheckboxSelector').prop('checked') === true
+            isAdmin: this.select('adminCheckboxSelector').prop('checked') === true,
+            enableAlert: this.select('enableAlertCheckboxSelector').prop('checked') === true
         };
 
         var groups = [];

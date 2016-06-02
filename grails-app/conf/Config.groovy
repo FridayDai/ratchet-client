@@ -336,6 +336,9 @@ ratchetv2 {
 
             //Report
             providerAverage = "${ratchetv2.server.url.base}/api/v1/report/outcome"
+
+            // Alert
+            alerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
         }
 
         clientPlatform = "ancient"

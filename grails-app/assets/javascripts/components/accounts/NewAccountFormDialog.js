@@ -12,6 +12,7 @@ function NewAccountFormDialog() {
         doctorCheckboxSelector: '#doctor',
         groupFieldSelector: '#selectGroup',
         providerCheckboxSelector: '#provider',
+        enableAlertCheckboxSelector: '#alert',
         npiFieldSelector: '#npi',
         administratorCheckboxSelector: '#accountManagement',
         groupRequireMarkSelector: '.group-require-mark'
@@ -62,11 +63,13 @@ function NewAccountFormDialog() {
         var isDoctor = this.select('doctorCheckboxSelector').prop('checked') === true;
         var isAccountManagement = this.select('administratorCheckboxSelector').prop('checked') === true;
         var isProvider = this.select('providerCheckboxSelector').prop("checked") === true;
+        var enableAlert = this.select('enableAlertCheckboxSelector').prop('checked') === true;
 
         return {
             doctor: isDoctor,
             accountManagement: isAccountManagement,
-            type: isProvider ? PARAMs.ACCOUNT_TYPE.PROVIDER : PARAMs.ACCOUNT_TYPE.NON_PROVIDER
+            type: isProvider ? PARAMs.ACCOUNT_TYPE.PROVIDER : PARAMs.ACCOUNT_TYPE.NON_PROVIDER,
+            enableAlert: enableAlert
         };
     };
 
