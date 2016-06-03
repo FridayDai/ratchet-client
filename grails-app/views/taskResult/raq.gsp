@@ -6,7 +6,7 @@
 <g:applyLayout name="taskResult">
     <html>
     <head>
-        <title>${Task.title} Results</title>
+        <title>${Task.title}</title>
     </head>
 
     <body>
@@ -17,7 +17,7 @@
                     <div class="task-list-part part-${i % 6}">
                 </g:if>
                 <div class="question-list">
-                    <div class="question">Section ${i + 1}: ${question.title}</div>
+                    <div class="question">${i + 1}: ${question.title}</div>
 
                     <div class="answer-list">
                         <ul class="list">

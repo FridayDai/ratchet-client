@@ -12,7 +12,7 @@
     </div>
 
     <div class="info-container">
-        <div class="title">${Task.title} Results</div>
+        <div class="title">${Task.title}</div>
 
         <div class="sub-info-panel">
             <g:if test="${!download}">
