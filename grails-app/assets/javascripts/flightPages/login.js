@@ -58,8 +58,24 @@ function LoginPage() {
         }
     };
 
+    this.onClickCloseButton = function(){
+        var $node = $('.optimize-prompt');
+        var $close = $node.find('.btn-close');
+
+        $close.on('click', function(){
+            $node.hide();
+        });
+
+        //if(document.body.clientWidth < 1024){
+        //    $node.show();
+        //}
+    };
+
+
     this.after('initialize', function() {
         this.initRateLimitError();
+
+        this.onClickCloseButton();
 
         this.$node.find('input').focus(function () {
             $('#error-login').hide();

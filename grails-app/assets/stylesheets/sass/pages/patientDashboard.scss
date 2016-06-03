@@ -583,7 +583,7 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
-    min-height: calc(100vh - 278px);
+    height: calc(100vh - 274px);
     display: flex;
     display: -ms-flexbox;
 
@@ -592,9 +592,13 @@
         border-left: 1px solid $base-color-white-grey;
     }
 
+    .treatment-nav {
+        width: 220px;
+        height: 100%;
+    }
+
     .treatment-manage-container {
         display: inline-block;
-        position: absolute;
         height: 70px;
         width: 220px;
         text-align: center;
@@ -634,11 +638,11 @@
     }
 
     .tab-list {
-        padding-top: 71px;
         border: 0;
-        overflow: hidden;
-        //        float: left;
+        overflow-x: hidden;
+        overflow-y: scroll;
         width: 220px;
+        height: calc(100% - 71px);
 
         .treatment-li {
             &:hover,
@@ -717,6 +721,17 @@
             }
         }
 
+        .addTasks, .event-time-edit, .archived-active {
+            &.not-available {
+                color: #cccccc;
+
+                &:hover {
+                    color: #cccccc;
+                    cursor: text;
+                }
+            }
+        }
+
         .archived-treatment {
 
             .sub-treatment-tool {
@@ -755,7 +770,7 @@
         width: calc(100% - 220px);
         box-sizing: border-box;
         border-left: 1px solid $base-font-color;
-        min-height: 100%;
+        height: 100%;
     }
 
     .treatment-tool-bar {

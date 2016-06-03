@@ -86,7 +86,8 @@ function EditEventDateFormDialog() {
         var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
 
         this.trigger('editSurgeryDateSuccess', {
-            newDate: newDate
+            newDate: newDate,
+            medicalRecordId: this.medicalRecordId
         });
     };
 
