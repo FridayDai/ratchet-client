@@ -45,13 +45,21 @@
 
     .questionnaire-info {
         top: -8px;
-        right: 20px;
+        right: -10px;
 
         .status,
         .score-num,
         .score-des {
             font-size: 14px;
             font-weight: 400;
+        }
+
+        .status {
+            padding-right: 15px;
+        }
+
+        .score {
+            padding-left: 15px;
         }
 
         .divider {
