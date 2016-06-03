@@ -9,7 +9,7 @@ body {
 }
 
 .question {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: $result-main-color;
 }
@@ -19,7 +19,7 @@ body {
     margin-top: 10px;
 
     .text {
-        font-size: 16px;
+        font-size: 15px;
     }
 }
 
@@ -71,7 +71,7 @@ body {
 .download {
     display: inline-block;
     position: absolute;
-    top: -40px;
+    top: 0px;
     right: 0;
     a {
         color: #7b8994;
@@ -79,23 +79,25 @@ body {
 }
 
 .task-prediction-wrapper {
-    font-size: 16px;
+    font-size: 17px;
     margin: 20px 0 20px;
     padding-top: 50px;
     border-top: 1px solid #8e8e8e;
     font-weight: bold;
 
     .scoreArea {
-        font-size: 14px;
+        font-size: 17px;
 
         .scoreLevel{
+            font-size: 17px;
             margin: 15px;
             font-weight: bold;
         }
         .riskLevel{
+            font-size: 17px;
             display: inline-block;
             margin: 5px;
-            width: 88px;
+            width: 115px;
             text-align: center;
             color: #ffffff;
             background-color: black;
@@ -104,3 +106,27 @@ body {
     }
 
 }
+#main {
+    padding: 0 40px;
+    width: 100%;
+}
+
+.sticky-header {
+    .questionnaire-info {
+        top: -20px;
+        right: -10px;
+        font-size: 12px;
+
+        .status {
+            padding-right: 0;
+        }
+    }
+}
+
+.status {
+            padding-right: 15px;
+        }
+
+.score {
+            padding-left: 15px;
+        }
