@@ -7,6 +7,7 @@ var Notifications = require('../common/Notification');
 var STRINGs = require('../../constants/Strings');
 var PARAMs = require('../../constants/Params');
 var Utility = require('../../utils/Utility');
+var moment = require('moment');
 
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
@@ -68,7 +69,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
-                width: "18%"
+                width: "15%"
             }, {
                 targets: 2,
                 data: 'email',
@@ -83,7 +84,7 @@ function PatientsTable() {
                         return full.email;
                     }
                 },
-                width: "25%"
+                width: "20%"
             }, {
                 targets: 3,
                 data: 'phoneNumber',
@@ -107,7 +108,7 @@ function PatientsTable() {
                         return NOT_AVAILABLE_TEMP;
                     }
                 },
-                width: "12%"
+                width: "13%"
             }, {
                 targets: 4,
                 data: 'birthday',
@@ -120,9 +121,20 @@ function PatientsTable() {
                     }
                 },
                 width: "10%"
-            },
-            {
+            }, {
                 targets: 5,
+                data: 'nearestAbsoluteEventDate',
+                render: function (data, type, full) {
+                    var date = data === undefined ? full.nearestAbsoluteEventDate : data;
+                    if (date) {
+                        return moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY');
+                    } else {
+                        return NOT_AVAILABLE_TEMP;
+                    }
+                },
+                width: "10%"
+            }, {
+                targets: 6,
                 data: 'taskStatus',
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
@@ -136,23 +148,23 @@ function PatientsTable() {
                         return '<span class="task-status overdue-status">' + taskStatus + '</span>';
                     }
                 },
-                width: "15%",
+                width: "13%",
                 orderable: false
             }, {
-                targets: 6,
+                targets: 7,
                 data: 'id',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
                 },
-                width: "8%",
+                width: "7%",
                 orderable: false
             }, {
-                targets: 7,
+                targets: 8,
                 data: 'status',
                 "visible": false
             }, {
-                targets: 8,
+                targets: 9,
                 data: 'isAttentionNeeded',
                 "visible": false
             }
