@@ -89,7 +89,7 @@ class TreatmentService extends RatchetAPIService {
         }
     }
 
-    def updateEventTime(String token, clientId, medicalRecordId, patientId, absoluteEventTimestamp) {
+    def updateEventTime(String token, clientId, medicalRecordId, patientId, providerId, absoluteEventTimestamp) {
 
         String updateEventTimeUrl = grailsApplication.config.ratchetv2.server.url.updateEventTime
         def url = String.format(updateEventTimeUrl, clientId, patientId, medicalRecordId)
@@ -98,6 +98,7 @@ class TreatmentService extends RatchetAPIService {
         withPost(token, url) { req ->
             def resp = req
                     .field("absoluteEventTimestamp", absoluteEventTimestamp)
+                    .field("providerId", providerId)
                     .asString()
 
             if (resp.status == 200) {

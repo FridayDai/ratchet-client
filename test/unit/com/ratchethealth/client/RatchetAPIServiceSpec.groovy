@@ -52,8 +52,8 @@ class RatchetAPIServiceSpec extends Specification {
         when: "Call handleError with resp"
         service.handleError(resp)
 
-        then: "ApiAccessException caught"
-        ApiAccessException e = thrown()
+        then: "ApiReturnException caught"
+        ApiReturnException e = thrown()
         e.getMessage() == ""
     }
 

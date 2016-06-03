@@ -312,6 +312,16 @@ input[type="checkbox"] {
     width: 15px;
 }
 
+.alert-group {
+    margin-top: 20px;
+
+    .alert {
+        .checkbox {
+            margin-top: 0;
+        }
+    }
+}
+
 .provider.group,
 .permission.group {
     .checkbox {
