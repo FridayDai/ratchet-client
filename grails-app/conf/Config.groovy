@@ -91,7 +91,7 @@ grails.plugin.wkhtmltox.binary = System.getProperty("WKHTMLTOPDF_DIR")?:"/usr/lo
 
 environments {
     development {
-        grails.logging.jul.usebridge = true
+        grails.logging.jul.usebridge = true     
     }
     production {
         grails.logging.jul.usebridge = false
@@ -231,6 +231,9 @@ ratchetv2 {
             login = "${ratchetv2.server.url.base}/api/v1/login"
             logout = "${ratchetv2.server.url.base}/api/v1/logout"
             validateSessionId = "${ratchetv2.server.url.base}/api/v1/check_token"
+
+            //send Exception Email
+            stackTraceEmail = "${ratchetv2.server.url.base}/api/v1/send/stacktrace/email"
 
             //forgotPassword
             password {

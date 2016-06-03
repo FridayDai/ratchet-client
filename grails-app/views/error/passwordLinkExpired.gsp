@@ -8,7 +8,7 @@
   <body>
   <div class="error-body expire-body">
 
-    <div class="middle-content invite-expire-top">Link Expired</div>
+    <div class="middle-content invite-expire-top">Password has been reset</div>
 
     <div class="text-font invite-expire-middle">Please request to reset the password again.</div>
 

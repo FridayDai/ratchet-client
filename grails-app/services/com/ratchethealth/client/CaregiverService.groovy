@@ -1,7 +1,5 @@
 package com.ratchethealth.client
 
-import grails.converters.JSON
-
 class CaregiverService extends RatchetAPIService {
 
     def grailsApplication
@@ -25,7 +23,7 @@ class CaregiverService extends RatchetAPIService {
             if (resp.status == 200) {
                 log.info("Get care giver success, token: ${token}")
 
-                JSON.parse(resp.body)
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)

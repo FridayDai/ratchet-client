@@ -53,11 +53,28 @@ class BaseController {
         } else if (e.statusId == 401) {
             render view: '/login/login'
         } else {
-            render view: '/error/error404'
+            render view: '/error/error500'
         }
     }
 
+    def exceptionEmailService
+
     def handleException(Exception e) {
-        log.error("Exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
+        log.error("Uncaught_Exception: ${e.message},stack trace: ${e.getStackTrace()}, token: ${session.token}.")
+
+        def email = session.email
+        def sw = new StringWriter()
+        def pw = new PrintWriter(sw)
+        e.printStackTrace(pw)
+
+        exceptionEmailService.sendExceptionEmail(sw.toString(), email)
+
+        def message = g.message(code: 'default.error.500.message')
+
+        if (request.isXhr()) {
+            render status: 500, text: message
+        } else {
+            render view: '/error/error500'
+        }
     }
 }

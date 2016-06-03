@@ -58,13 +58,26 @@ class RatchetAPIService {
 
         if (resp.status == 506) {
             throw new ApiIpBlockException()
-        } else if (resp.status >= 500) {
+        } else if (resp.status > 500) {
             String errorMessage = body?.errors?.message
             throw new ApiAccessException(errorMessage?:resp.body)
-        } else if (resp.status >= 400 && resp.status < 500) {
+        } else if (resp.status >= 400 && resp.status <= 500) {
             String errorMessage = body?.error?.errorMessage
             throw new ApiReturnException(resp.status, errorMessage?:resp.body)
         }
+    }
+
+    def parseRespBody(resp) {
+        def result
+
+        try {
+            result = JSON.parse(resp?.body)
+        } catch (e) {
+            log.error("JSON parse failed: " + e)
+            throw new ApiReturnException(e.message, e);
+        }
+
+        result
     }
 
     def withReq(req, String token, Closure reqHandler) {

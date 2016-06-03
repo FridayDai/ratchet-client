@@ -21,10 +21,11 @@ module.exports = {
 
     //ERROR
     ERROR_TITLE: "ERROR",
-    ERROR_TITLE_404: "ERROR : 404",
-    ERROR_MESSAGE_COMMON: "Something wrong, Please check messages below.",
+    ERROR_MESSAGE_CHECK_BELOW: "Something wrong, Please check messages below.",
+    ERROR_MESSAGE_COMMON: "Something wrong. Please try again!",
     ERROR_MESSAGE_506: "The application is not accessible from your current location.",
-    ERROR_MESSAGE_404: "Something has gone wrong. Please try again!",
+    ERROR_TITLE_500: 'OOPS!',
+    ERROR_MESSAGE_500: "Sorry, Ratchet has experienced an internal error. Try again later.",
 
     PHONE_NUMBER_INVALID: "Please enter a valid phone number",
     NPI_INVALID: "Please enter a valid NPI",
