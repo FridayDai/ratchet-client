@@ -27,7 +27,7 @@
     height: 30px;
     position: absolute;
     width: 100%;
-    background: linear-gradient(to bottom, $base-color-bg-head, rgba(255,255,255,0));
+    background: linear-gradient(to bottom, $base-color-bg-head, rgba(255, 255, 255, 0));
     z-index: 100;
 }
 
@@ -203,6 +203,22 @@
 .filter-area {
     padding: 30px 30px 10px;
     color: $base-font-grey;
+
+    .btn-filter-alert {
+        padding: 5px 8px 4px 8px;
+        margin-left: 12px;
+    }
+
+    .btn-alert-number {
+        display: inline-block;
+        padding: 0 3px;
+        color: $base-color-white;
+        background: $base-color-alert;
+        font-size: 10px;
+        vertical-align: top;
+        margin-top: 3px;
+        margin-left: 2px;
+    }
 }
 
 .filter-count {
@@ -278,14 +294,8 @@
 
 //new taskBox
 .box-item {
-    position: relative;
-    height: 64px;
-    border: 1px solid $base-font-color;
     font-size: 14px;
     margin-bottom: 4px;
-
-    display: flex;
-    display: -ms-flexbox;
 
     &.pending {
 
@@ -392,6 +402,14 @@
             }
         }
     }
+}
+
+.box-item-container {
+    display: flex;
+    display: -ms-flexbox;
+    position: relative;
+    height: 64px;
+    border: 1px solid $base-font-color;
 }
 
 .box-item-content {
@@ -685,10 +703,66 @@
     }
 }
 
+.box-item-attention {
+    padding: 2px 12px;
+    background-color: $base-color-attention-yellow;
+    color: $base-color-black;
+
+    .fa-exclamation-circle {
+        padding-right: 4px;
+    }
+
+    .alert-datetime {
+        color: $base-font-grey-dark;
+    }
+
+    .resolve-link {
+        float: right;
+        text-decoration: underline;
+        color: $base-color-grey-link;
+        cursor: pointer;
+
+        &:hover, &:focus {
+            color: $base-color-green-link;
+        }
+    }
+
+    .undo-link {
+        display: none;
+
+        float: right;
+        text-decoration: underline;
+        color: $base-color-grey-link;
+        cursor: pointer;
+
+        &:hover, &:focus {
+            color: $base-color-green-link;
+        }
+    }
+
+    .fa-fw {
+        font-size: 14px;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+
+    &.undo {
+        background-color: $base-color-tab-bg;
+
+        .resolve-link {
+            display: none;
+        }
+
+        .undo-link {
+            display: inline-block;
+        }
+    }
+}
+
 .today-item {
     text-align: center;
     background-color: $base-color-grey-white;
-    margin-bottom: 4px;
+    margin: 6px 0;
     color: $base-font-grey;
 
     span {

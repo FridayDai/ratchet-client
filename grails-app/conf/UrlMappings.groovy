@@ -151,6 +151,7 @@ class UrlMappings {
 
         // Alert
         "/alert-notification"(controller: 'home', action: 'getAlertNotification')
+        "/alerts/$alertId"(controller: 'task', action: 'updateAlertInTask')
 
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")

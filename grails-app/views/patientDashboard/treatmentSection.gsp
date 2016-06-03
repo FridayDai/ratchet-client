@@ -80,6 +80,14 @@
                     <option class="complete" value="complete">complete</option>
                 </select>
 
+                <button id="btn-filter-alert" class="btn btn-filter-alert">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    Alerts
+                    <g:if test="${alertNumber}">
+                        <span class="btn-alert-number">${alertNumber}</span>
+                    </g:if>
+                </button>
+
                 <div id="filter-count" class="filter-count hide">
                     <span class="visible-count">
                         <label id="visible-number">0</label> of
@@ -111,7 +119,8 @@
                                 'patientId'      : patientId,
                                 'medicalRecordId': task.treatmentProperty?.id,
                                 'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
-                                'itemType'       : task?.itemType
+                                'itemType'       : task?.itemType,
+                                'accountId'      : accountId,
                         ]"/>
                     </g:else>
                 </g:each>
