@@ -62,8 +62,10 @@ function HeaderPanel() {
 
         this.select('alertIconSelector').removeClass('hidden');
 
-        if (count > 0) {
+        if (count > 0 && count <= 99) {
             $badge.text(count).show();
+        } else if (count > 99) {
+            $badge.text('99+').show();
         } else {
             $badge.hide();
         }
@@ -191,6 +193,9 @@ function HeaderPanel() {
 
         $.ajax({
             url:URLs.GET_ALERTS,
+            data: {
+                max: 99
+            },
             method: 'GET',
             dropProcess: true
         })
