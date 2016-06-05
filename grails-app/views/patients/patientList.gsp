@@ -72,6 +72,7 @@
                     <th>Email Address</th>
                     <th>Phone Number</th>
                     <th>Birthday</th>
+                    <th>Surgery</th>
                     <th>Task Status</th>
                     <th></th>
                 </tr>
@@ -84,6 +85,7 @@
                         <td>${patient.email ?: ''}</td>
                         <td>${patient.phoneNumber ?: ''}</td>
                         <td>${patient.birthday ?: ''}</td>
+                        <td>${patient.nearestAbsoluteEventDate ?: ''}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>

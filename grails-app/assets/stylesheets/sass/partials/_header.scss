@@ -125,6 +125,7 @@
     .alert-popup-body {
         position: relative;
         height: 380px;
+        overflow-y: scroll;
 
         .alert-popup-load-mask {
             position: absolute;

@@ -50,7 +50,8 @@ class TaskController extends BaseController {
 
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName.replaceAll(" ", "_")}_${taskId}.pdf",
+        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName}_${taskId}"
+            .replaceAll(/[\s+\.,]/, "_").replaceAll(/_+/, '_') + '.pdf',
                 view: view,
                 model: [Task: result, mixedResult: mixedResult, 'download': true],
                 marginLeft: 2,

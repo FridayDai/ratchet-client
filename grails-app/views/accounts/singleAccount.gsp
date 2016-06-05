@@ -186,9 +186,8 @@
                    placeholder="Select group"/>
         </div>
 
-        <div class="form-group inline">
+        <div class="form-group alert-group">
             <label class="lbl-group">ENABLE ALERTS</label>
-
             <div class="alert group">
                 <label class="checkbox">
                     <input id="alert" name="alertRaw" type="checkbox">Yes

@@ -28,7 +28,7 @@ module.exports = {
     INVITE_PATIENT: '/patients/{0}/invite',
 
     //Treatment
-    UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/{2}',
+    UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/provider/{2}/{3}',
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',
