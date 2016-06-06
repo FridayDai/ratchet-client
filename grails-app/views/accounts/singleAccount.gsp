@@ -107,6 +107,13 @@
                         </span></td>
                     </tr>
 
+                    <tr class="tr-border">
+                        <td class="td-width">Enable Alert</td>
+                        <td><span class="enable-alerts" id="enableAlertField">
+                            ${accountInfo.enableAlert == true ? 'Yes' : 'No'}
+                        </span></td>
+                    </tr>
+
                     <tr>
                         <td class="bg-color" colspan="2">
                             Last Login:
@@ -177,6 +184,15 @@
             <label class="lbl-group">GROUP<span class="hidden group-require-mark">*</span></label>
             <input id="groupSelect" name="groupId" type="text" class="input-group plugin-select-box patient-group clear"
                    placeholder="Select group"/>
+        </div>
+
+        <div class="form-group alert-group">
+            <label class="lbl-group">ENABLE ALERTS</label>
+            <div class="alert group">
+                <label class="checkbox">
+                    <input id="alert" name="alertRaw" type="checkbox">Yes
+                </label>
+            </div>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

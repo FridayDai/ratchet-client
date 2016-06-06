@@ -105,6 +105,7 @@ class PatientDashboardController extends BaseController {
         def patientId = params?.patientId
         def PatientEmailStatus = params?.PatientEmailStatus
         def clientId = request.session.clientId
+        def accountId = request.session.accountId
 
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
 
@@ -115,9 +116,11 @@ class PatientDashboardController extends BaseController {
         render(view: '/patientDashboard/treatmentSection', model: [
                 patientId         : patientId,
                 clientId          : clientId,
+                accountId         : accountId,
                 PatientEmailStatus: PatientEmailStatus,
                 medicalRecords    : combinedList.medicalRecords,
                 combinedTasks     : combinedList.combinedTasks,
+                alertNumber       : combinedList.alertNumber,
                 totalCount        : medicalRecords.totalCount
         ])
     }
@@ -169,9 +172,9 @@ class PatientDashboardController extends BaseController {
         def groupList = groupService.getGroupsPatientBelongsTo(token, clientId, patientId)
 
         render(view: '/patientDashboard/group', model: [
-                patientId: patientId,
-                clientId : clientId,
-                groupList: groupList,
+                patientId        : patientId,
+                clientId         : clientId,
+                groupList        : groupList,
                 accountManagement: accountManagement
         ])
     }
@@ -211,6 +214,7 @@ class PatientDashboardController extends BaseController {
         def medicalRecords = []
         def today = new Date().time
         def numberMap = ('A'..'Z').collect();
+        def alertNumber = 0;
         def i = 0;
 
         for (treatment in treatments) {
@@ -218,13 +222,13 @@ class PatientDashboardController extends BaseController {
             def absoluteEventTimestamp = treatment.absoluteEventTimestamp
 
             def treatmentProperty = [
-                    archived: treatment.archived,
-                    id: treatment.id,
-                    treatmentId: treatment.treatmentId,
-                    title: treatment.title,
-                    tmpTitle: treatment.tmpTitle,
+                    archived              : treatment.archived,
+                    id                    : treatment.id,
+                    treatmentId           : treatment.treatmentId,
+                    title                 : treatment.title,
+                    tmpTitle              : treatment.tmpTitle,
                     absoluteEventTimestamp: absoluteEventTimestamp,
-                    indicator: i < 26 ? numberMap[i++] : '*'
+                    indicator             : i < 26 ? numberMap[i++] : '*'
             ]
 
             medicalRecords << treatmentProperty
@@ -255,6 +259,10 @@ class PatientDashboardController extends BaseController {
                     task << viewResult
                 }
 
+                if (task.alerts.length()) {
+                    alertNumber++;
+                }
+
                 combinedTasks << task
             }
         }
@@ -265,7 +273,8 @@ class PatientDashboardController extends BaseController {
         ]
 
         return [combinedTasks : combinedTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] }),
-                medicalRecords: medicalRecords]
+                medicalRecords: medicalRecords,
+                alertNumber   : alertNumber]
     }
 
     private getVoiceResult(patientId, medicalRecordId, taskId) {

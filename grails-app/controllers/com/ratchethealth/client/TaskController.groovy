@@ -7,6 +7,7 @@ class TaskController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
 
     def taskService
+    def alertService
 
     def sendTaskEmail() {
         def token = request.session.token
@@ -49,7 +50,8 @@ class TaskController extends BaseController {
 
         def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName.replaceAll(" ", "_")}_${taskId}.pdf",
+        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName}_${taskId}"
+            .replaceAll(/[\s+\.,]/, "_").replaceAll(/_+/, '_') + '.pdf',
                 view: view,
                 model: [Task: result, mixedResult: mixedResult, 'download': true],
                 marginLeft: 2,
@@ -122,13 +124,23 @@ class TaskController extends BaseController {
         render resp
     }
 
-    def resolveVoiceTask() {
+//    def resolveVoiceTask() {
+//        def token = request.session.token
+//        def clientId = request.session.clientId
+//        def patientId = params?.patientId
+//        def medicalRecordId = params?.medicalRecordId
+//        def taskId = params?.taskId
+//        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+//        render resp
+//    }
+
+    def updateAlertInTask() {
         def token = request.session.token
         def clientId = request.session.clientId
-        def patientId = params?.patientId
-        def medicalRecordId = params?.medicalRecordId
-        def taskId = params?.taskId
-        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+        def staffId = session?.accountId
+        def alertId = params?.alertId
+        def status = params?.status?.toInteger() > 0
+        def resp = alertService.updateAlertStatus(token, clientId, staffId, alertId, status)
         render resp
     }
 }

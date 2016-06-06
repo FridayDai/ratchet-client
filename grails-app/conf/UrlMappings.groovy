@@ -58,7 +58,7 @@ class UrlMappings {
         "/patients/$patientId/in-clinic/code"(controller: "patientDashboard", action: "getInClinicCode")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-        "/patients/$patientId?/absolute-event-time/$medicalRecordId?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
+        "/patients/$patientId?/absolute-event-time/$medicalRecordId?/provider/$providerId?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
         //Patient treatment
@@ -135,7 +135,7 @@ class UrlMappings {
         "/groups/delete"(controller: "groups", action: "deleteGroup")
 
         // announcement
-        "/announcement/close"(controller: "announcement", action: "close")
+        "/announcement/close"(controller: "home", action: "closeAnnouncement")
 
         // report
         "/reports/outcome"(controller: "report") {
@@ -148,6 +148,10 @@ class UrlMappings {
             action = [GET: "renderTaskCompletionReport"]
         }
         "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
+
+        // Alert
+        "/alert-notification"(controller: 'home', action: 'getAlertNotification')
+        "/alerts/$alertId"(controller: 'task', action: 'updateAlertInTask')
 
         // Help
         "/assist-me"(controller: "assist", action: "addAssist")

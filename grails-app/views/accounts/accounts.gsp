@@ -115,6 +115,16 @@
                        placeholder="Select group"/>
             </div>
 
+            <div class="form-group inline">
+                <label class="lbl-group">ENABLE ALERTS</label>
+
+                <div class="alert group">
+                    <label class="checkbox">
+                        <input id="alert" name="alertRaw" type="checkbox">Yes
+                    </label>
+                </div>
+            </div>
+
             <label class="form-group required pull-right"><span>*</span>Required field</label>
         </form>
 

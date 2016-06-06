@@ -22,7 +22,6 @@ function AddTasksProviderCombobox() {
     });
 
     this.attributes({
-        selectEvent: 'addTasksProviderSelected',
         selectDataKey: 'providerId'
     });
 

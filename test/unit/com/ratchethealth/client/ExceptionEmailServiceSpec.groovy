@@ -1,6 +1,5 @@
 package com.ratchethealth.client
 
-import com.mashape.unirest.request.GetRequest
 import com.mashape.unirest.request.body.MultipartBody
 import grails.test.mixin.TestFor
 import org.codehaus.groovy.grails.web.util.WebUtils
@@ -22,7 +21,7 @@ class ExceptionEmailServiceSpec extends Specification {
         MultipartBody.metaClass.asString = { ->
             return [
                 status: 400,
-                body  : "body"
+                body: "body"
             ]
         }
 

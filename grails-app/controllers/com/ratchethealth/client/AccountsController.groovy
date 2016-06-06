@@ -109,7 +109,7 @@ class AccountsController extends BaseController {
         def confirmPassword = params?.confirmPassword
         def resp = accountService.resetPassword(session.token, code, newPassword, confirmPassword)
         if (resp) {
-            render view: '/login/login'
+            redirect(url: '/login')
         }
     }
 
