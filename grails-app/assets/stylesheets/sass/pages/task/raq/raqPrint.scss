@@ -4,14 +4,20 @@ body {
     margin-bottom: 0;
 }
 
+
+
 .question-list {
-    margin: 0 0 30px 35px;
+    margin: 0 0 10px 20px;
 }
 
 .question {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     color: $result-main-color;
+}
+.answer-list {
+    font-size: 14px;
+    font-weight: 300;
 }
 
 .answer {
@@ -19,18 +25,19 @@ body {
     margin-top: 10px;
 
     .text {
-        font-size: 15px;
+        margin-left: 35px;
+        font-size: 8pt;
     }
 }
 
 .result-circle-radio {
     position: absolute;
     top: 0;
-    left: -35px;
+    left: 0;
     display: inline-block;
     box-sizing: content-box;
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     border: 1px solid gray;
     border-radius: 50%;
 }
@@ -40,8 +47,8 @@ body {
     top: 2px;
     left: 2px;
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background-color: $result-main-color;
 }
@@ -58,12 +65,12 @@ body {
     box-sizing: border-box;
 
     &.part-0 {
-        padding-right: 30px;
+        padding-right: 15px;
         border-right: 1px solid #8e8e8e;
     }
 
     &.part-1 {
-        padding-left: 30px;
+        padding-left: 15px;
 
     }
 }
@@ -79,25 +86,25 @@ body {
 }
 
 .task-prediction-wrapper {
-    font-size: 17px;
-    margin: 20px 0 20px;
-    padding-top: 50px;
+    font-size: 12px;
+    margin: 0px 20px 20px;
+    padding-top: 5px;
     border-top: 1px solid #8e8e8e;
     font-weight: bold;
 
     .scoreArea {
-        font-size: 17px;
+        font-size: 12px;
 
         .scoreLevel{
-            font-size: 17px;
+            font-size: 12px;
             margin: 15px;
             font-weight: bold;
         }
         .riskLevel{
-            font-size: 17px;
+            font-size: 12px;
             display: inline-block;
             margin: 5px;
-            width: 115px;
+            width: 100px;
             text-align: center;
             color: #ffffff;
             background-color: black;
@@ -113,20 +120,36 @@ body {
 
 .sticky-header {
     .questionnaire-info {
-        top: -20px;
-        right: -10px;
+        top: -25px;
+        right: -450px;
         font-size: 12px;
+        width: 800px;
+        height: 150px;
+
+        .score {
+            padding-left: 0;
+        }
 
         .status {
             padding-right: 0;
+            font-size: 12px;
+            width: 160px;
         }
+        .score-num, .score-des {
+            font-size: 12px;
+        }
+
+        .title {
+            font-size: 18px;
+        }
+
+        .patient-info {
+            font-size: 14px;
+        }
+
     }
 }
 
-.status {
-            padding-right: 15px;
-        }
-
-.score {
-            padding-left: 15px;
-        }
+.task-result-content {
+    margin-top: 130px;
+}
