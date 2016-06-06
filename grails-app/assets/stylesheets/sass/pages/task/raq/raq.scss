@@ -59,7 +59,8 @@ body {
     box-sizing: border-box;
 
     &.part-0 {
-        padding-right: 30px;
+        margin-left: -25px;
+        padding-right: 40px;
         border-right: 1px solid #8e8e8e;
     }
 
@@ -71,7 +72,7 @@ body {
 
 .task-prediction-wrapper {
     font-size: 17px;
-    margin: 0 30px 20px;
+    margin: 0 10px 20px;
     padding-top: 50px;
     border-top: 1px solid #8e8e8e;
     font-weight: bold;
