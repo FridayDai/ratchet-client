@@ -123,11 +123,9 @@ function TaskItem() {
         var $attention = $button.closest('.box-item-attention');
         var $taskBox = $button.closest('.box-item');
         var alertId = $taskBox.data('alert');
+        var me = this;
 
-        this.dfd = function() {
-            return $.Deferred();
-        }();
-        var dfd = this.dfd;
+        var dfd = this.dfd = $.Deferred();
 
         dfd.done(function() {
             $attention.hide();
@@ -142,7 +140,8 @@ function TaskItem() {
 
                 setTimeout(function () {
                    dfd.resolve();
-                }, 30000)
+                    me.trigger('alertHasBeenResolved');
+                }, 30000);
             });
         }
     };

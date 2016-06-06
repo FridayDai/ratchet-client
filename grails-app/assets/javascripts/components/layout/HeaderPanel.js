@@ -232,6 +232,8 @@ function HeaderPanel() {
         this.on('click', {
             alertIconSelector: this.onAlertIconClicked
         });
+
+        this.on(document, 'alertHasBeenResolved', this.getAlertCount);
     });
 }
 

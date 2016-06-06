@@ -583,7 +583,7 @@
 .treatment-tabs-container {
     position: relative;
     border: 0;
-    height: calc(100vh - 274px);
+    height: calc(100vh - 285px);
     display: flex;
     display: -ms-flexbox;
 
@@ -680,6 +680,9 @@
             font-size: 12px;
             border-radius: 8px;
             color: $base-color-medium-black;
+            line-height: 18px;
+            height: 17px;
+            cursor: pointer;
         }
 
         .ui-tabs-anchor {

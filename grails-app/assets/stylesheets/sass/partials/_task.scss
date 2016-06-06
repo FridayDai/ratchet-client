@@ -207,6 +207,11 @@
     .btn-filter-alert {
         padding: 5px 8px 4px 8px;
         margin-left: 12px;
+
+        &.active {
+            color: $base-color-white;
+            background-color: $base-color-dark-grey;
+        }
     }
 
     .btn-alert-number {
@@ -704,6 +709,7 @@
 }
 
 .box-item-attention {
+    position: relative;
     padding: 2px 12px;
     background-color: $base-color-attention-yellow;
     color: $base-color-black;
@@ -717,7 +723,8 @@
     }
 
     .resolve-link {
-        float: right;
+        position: absolute;
+        right: 12px;
         text-decoration: underline;
         color: $base-color-grey-link;
         cursor: pointer;
@@ -729,8 +736,8 @@
 
     .undo-link {
         display: none;
-
-        float: right;
+        position: absolute;
+        right: 12px;
         text-decoration: underline;
         color: $base-color-grey-link;
         cursor: pointer;
