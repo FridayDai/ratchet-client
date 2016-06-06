@@ -129,6 +129,7 @@ function TaskItem() {
 
         dfd.done(function() {
             $attention.hide();
+            me.trigger('alertHasBeenResolved');
         });
 
         if (!$button.hasClass('checked')) {
@@ -140,7 +141,6 @@ function TaskItem() {
 
                 setTimeout(function () {
                    dfd.resolve();
-                    me.trigger('alertHasBeenResolved');
                 }, 30000);
             });
         }

@@ -223,6 +223,10 @@
         vertical-align: top;
         margin-top: 3px;
         margin-left: 2px;
+
+        &.hide {
+            display: none;
+        }
     }
 }
 
@@ -738,13 +742,21 @@
         display: none;
         position: absolute;
         right: 12px;
-        text-decoration: underline;
+
         color: $base-color-grey-link;
         cursor: pointer;
 
         &:hover, &:focus {
             color: $base-color-green-link;
         }
+
+        .undo-text {
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 4px;
+            text-decoration: underline;
+        }
+
     }
 
     .fa-fw {
