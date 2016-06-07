@@ -98,3 +98,19 @@ body {
     }
 
 }
+
+
+.questionnaire-info{
+    .score-wrap {
+        margin-left: 35px;
+
+        div.score-des {
+            font-size: 15px;
+        }
+
+        div.score-num {
+            text-transform : capitalize;
+        }
+    }
+}
+

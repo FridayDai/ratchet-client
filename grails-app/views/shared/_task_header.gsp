@@ -40,9 +40,9 @@
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
                             <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
                                 <span class="score-wrap">
-                                    <div class="score-num">${score[0]}</div>
+                                    <div class="score-num">${score[1].toLowerCase()}</div>
 
-                                    <div class="score-des">${score[1]}</div>
+                                    <div class="score-des">${score[0]}</div>
                                 </span>
                             </g:multipleScore>
                         </g:if>

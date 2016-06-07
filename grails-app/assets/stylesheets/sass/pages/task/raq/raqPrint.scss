@@ -119,11 +119,29 @@ body {
 }
 
 .sticky-header {
+    .info-container{
+        div.title {
+            font-size: 18px;
+        }
+
+        .patient-info {
+            span.name {
+                font-size: 14px;
+            }
+            span.id {
+                font-size: 14px;
+            }
+            span.birthday {
+                font-size: 14px;
+            }
+        }
+    }
+
     .questionnaire-info {
-        top: -25px;
-        right: -450px;
+        top: 0px;
+        right: -525px;
         font-size: 12px;
-        width: 800px;
+        width: 900px;
         height: 150px;
 
         .score {
@@ -135,8 +153,19 @@ body {
             font-size: 12px;
             width: 160px;
         }
-        .score-num, .score-des {
+
+        div.divider{
+            left: -12px;
+            top: -2px;
+        }
+
+        div.score-num{
             font-size: 12px;
+            text-transform : capitalize;
+        }
+        div.score-des {
+            width: 75px;
+            font-size: 10px;
         }
 
         .title {
@@ -153,3 +182,6 @@ body {
 .task-result-content {
     margin-top: 130px;
 }
+
+
+
