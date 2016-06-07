@@ -42,6 +42,9 @@
         span.task-flag {
             color: $base-font-color;
         }
+        div.meter span {
+            background-color: $base-font-color;
+        }
 
         .view-results {
             border: 1px solid $base-font-color;
@@ -60,15 +63,14 @@
             }
         }
 
-        //        .disabled {
-        //            background-color: transparent;
-        //            &:hover,
-        //            &:focus {
-        //                border: 1px $base-color-bg-head solid;
-        //                background-color: transparent;
-        //                color: $base-color-bg-head;
-        //            }
-        //        }
+        .sub-item-line {
+            color: $base-font-color;
+        }
+
+        .box-item-attention {
+            background-color: $base-color-grey-white;
+        }
+
     }
 }
 

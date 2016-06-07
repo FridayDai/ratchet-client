@@ -160,7 +160,7 @@ function TaskSection() {
     this.scrollToday = function () {
         var position = this.select('todayItemSelector').position();
 
-        if (position.top > 210) {
+        if (position && position.top > 210) {
             this.select('taskListFiledSelector').scrollTop(position.top - 210);
         }
     };
