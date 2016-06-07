@@ -243,9 +243,9 @@ class PatientDashboardController extends BaseController {
                         days > 0 ? StatusCodeConstants.TASK_STATUS_COMPLETE : StatusCodeConstants.TASK_STATUS_SCHEDULE
 
                 combinedTasks << [
-                        itemType         : 'surgery',
+                        itemType         : 'absoluteEvent',
                         sendTime         : absoluteEventTimestamp,
-                        title            : 'Surgery',
+                        title            : treatment.absoluteEventType.toLowerCase().capitalize(),
                         status           : status,
                         treatmentProperty: treatmentProperty
                 ]
