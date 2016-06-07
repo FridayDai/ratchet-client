@@ -104,15 +104,11 @@ function TaskItem() {
             type: "POST",
             success: function (data) {
                 if (data === 'true') {
-
+                    $taskBox.hide();
+                    me.trigger('deleteTaskSuccessful');
                     $taskBox.remove();
-                    me.checkNoTask();
-                    me.countTotalTasks();
-                    me.countVisibleTasks();
 
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
-
-                    me.trigger('deleteTaskSuccessful');
                 }
             }
         });

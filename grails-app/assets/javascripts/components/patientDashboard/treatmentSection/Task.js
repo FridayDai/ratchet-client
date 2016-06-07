@@ -139,6 +139,12 @@ function TaskSection() {
         this.filterTasks();
     };
 
+    this.updateFilterCount = function () {
+        this.checkNoTask();
+        this.countTotalTasks();
+        this.countVisibleTasks();
+    };
+
     this.onClearTaskFilter = function () {
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
@@ -177,6 +183,8 @@ function TaskSection() {
         this.on('alertHasBeenResolved', this.updateAlertTaskNumber);
 
         this.on('taskStatusFilterSelected', this.filterTaskByStatus);
+        this.on('deleteTaskSuccessful', this.updateFilterCount);
+
         this.on('click', {
             clearFilterButtonSelector: this.onClearTaskFilter,
             alertFilterButtonSelector: this.alertButtonClick

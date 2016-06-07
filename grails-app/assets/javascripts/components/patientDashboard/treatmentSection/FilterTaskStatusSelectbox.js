@@ -33,7 +33,6 @@ function FilterTaskStatusSelectbox() {
     };
 
     this.clearAllFilter = function () {
-        this.$node.multipleSelect('refresh');
         this.$node.multipleSelect('checkAll');
         $('#filter-count').hide();
     };
