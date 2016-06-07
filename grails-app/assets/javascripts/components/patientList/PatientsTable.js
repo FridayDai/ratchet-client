@@ -78,7 +78,7 @@ function PatientsTable() {
                         return '<span class="email-status not-available">{0}</span>'
                             .format(PARAMs.EMAIL_STATUS[full.status]);
                     } else if (PARAMs.EMAIL_STATUS[full.status]) {
-                        return '{0}<span class="email-status abnormal {1}">{1}</span>'
+                        return '{0}&nbsp;&nbsp;<span class="email-status abnormal {1}">{1}</span>'
                             .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
                     } else {
                         return full.email;
