@@ -339,6 +339,7 @@ ratchetv2 {
 
             // Alert
             alerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
+            updateAlertStatus = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts/%s"
         }
 
         clientPlatform = "ancient"

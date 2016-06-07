@@ -32,13 +32,7 @@ function FilterTaskStatusSelectbox() {
         $('#filter-count').hide();
     };
 
-    this.taskStatusToDefault = function () {
-        this.$node.multipleSelect('refresh');
-        this.$node.multipleSelect('checkAll');
-    };
-
     this.clearAllFilter = function () {
-        this.$node.multipleSelect('refresh');
         this.$node.multipleSelect('checkAll');
         $('#filter-count').hide();
     };
@@ -46,7 +40,6 @@ function FilterTaskStatusSelectbox() {
     this.after('initialize', function () {
         this.init();
         this.on(document, 'taskStatusClearFilter', this.clearAllFilter);
-        this.on(document, 'taskStatusToDefault', this.taskStatusToDefault);
     });
 }
 

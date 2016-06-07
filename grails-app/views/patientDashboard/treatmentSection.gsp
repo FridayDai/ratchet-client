@@ -19,12 +19,12 @@
                                    data-treatment-id="${medicalRecord?.treatmentId}"
                                    data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
 
-                    <label class="treatment-indicate">
-                        <span>${medicalRecord?.indicator}</span>
-                    </label>
-
                     <a class="ui-tabs-anchor" data-id="sub${i}">
-                        ${medicalRecord.title} ${medicalRecord.tmpTitle}
+                        <label class="treatment-indicate">
+                            <span>${medicalRecord?.indicator}</span>
+                        </label>
+
+                    ${medicalRecord.title} ${medicalRecord.tmpTitle}
                         <g:if test="${medicalRecord?.archived}">
                             <span class="archived-indicator">
                                 <i class="fa fa-archive" aria-hidden="true"></i>
@@ -80,6 +80,19 @@
                     <option class="complete" value="complete">complete</option>
                 </select>
 
+                <button id="btn-filter-alert" class="btn btn-filter-alert">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+
+                    <span id="filter-alert-text">${alertNumber.toInteger() == 1 ? 'Alert' : 'Alerts'}</span>
+
+                    <g:if test="${alertNumber}">
+                        <span id="btn-alert-number" class="btn-alert-number">${alertNumber}</span>
+                    </g:if>
+                    <g:else>
+                        <span id="btn-alert-number" class="btn-alert-number hide"></span>
+                    </g:else>
+                </button>
+
                 <div id="filter-count" class="filter-count hide">
                     <span class="visible-count">
                         <label id="visible-number">0</label> of
@@ -111,7 +124,8 @@
                                 'patientId'      : patientId,
                                 'medicalRecordId': task.treatmentProperty?.id,
                                 'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
-                                'itemType'       : task?.itemType
+                                'itemType'       : task?.itemType,
+                                'accountId'      : accountId,
                         ]"/>
                     </g:else>
                 </g:each>

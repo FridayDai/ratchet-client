@@ -25,9 +25,11 @@ function FillQuestionnaireDialog() {
 
             this.close();
 
+            document.domain = "ratchethealth.com";
+
             window.open(
                 this.addCompleteDate(this.taskUrl, this.completeDate),
-                '_blank'
+                'patientPortalWindow'
             );
         }
     };

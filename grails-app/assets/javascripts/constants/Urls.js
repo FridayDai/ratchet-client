@@ -2,6 +2,7 @@ module.exports = {
     UPDATE_MAINTENANCE: '/announcement/close?announcementLastUpdated={0}',
     GET_ALERT_COUNT: '/alert-notification?isCount=true',
     GET_ALERTS: '/alert-notification',
+    UPDATE_ALERTS: '/alerts/{0}',
 
     //Patients
     PAGE_PATIENTS: '/patients',
