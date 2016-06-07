@@ -430,7 +430,7 @@
 
     .inline-info {
         display: inline-block;
-        width: 280px;
+        width: 300px;
         padding-left: 14px;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -528,6 +528,7 @@
         border: 1px solid $base-color-grey;
 
         .score-number {
+            word-spacing: 5px;
             background-color: $base-color-complete;
             border-radius: 3px;
             padding: 0 5px;

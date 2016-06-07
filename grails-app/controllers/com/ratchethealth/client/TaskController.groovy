@@ -96,6 +96,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/promis'
                 break
 
+            case RatchetConstants.TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE:
+                view = '/taskResult/raq'
+                break
+
             default:
                 render status: 404
                 return
