@@ -96,6 +96,7 @@ function TaskSection() {
 
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
+        this.select('filterCountFiledSelector').show();
 
         this.select('boxItemsSelector').hide().filter(function (index, ele) {
             return taskAlert(ele) && medicalRecord(ele) && taskStatus(ele);
@@ -118,7 +119,6 @@ function TaskSection() {
                 this.select('archivedItemSelector').hide();
             }
 
-            this.select('filterCountFiledSelector').show();
             this.filterTasks();
 
         } else {
