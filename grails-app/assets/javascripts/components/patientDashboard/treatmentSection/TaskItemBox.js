@@ -183,7 +183,7 @@ function TaskItem() {
     this.onPhoneNumberFeedback = function (event, data) {
         var callButtons = this.select('callTaskButtonSelector');
 
-        if (data.blank) {
+        if (data.blank || this.$node.hasClass('archived')) {
             callButtons.addClass('not-available');
         } else {
             callButtons.removeClass('not-available');
