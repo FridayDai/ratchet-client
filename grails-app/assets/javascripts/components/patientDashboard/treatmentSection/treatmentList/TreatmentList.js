@@ -2,10 +2,8 @@ var flight = require('flight');
 var ClearTabCache = require('../../../shared/functional/ClearTabCache');
 var TreatmentLevelTabToolbar = require('./TreatmentListLevelTabToolbar');
 var TreatmentTabToolbar = require('./TreatmentTabToolbar');
+var WithChildren = require('../../../common/WithChildren');
 var Task = require('../Task');
-
-//var Utility = require('../../../../utils/Utility');
-//var URLs = require('../../../../constants/Urls');
 
 var GROUP_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',
@@ -27,10 +25,17 @@ function TreatmentList() {
         currentMedicalRecordId: null
     });
 
+    this.children({
+        treatmentPanelContainerSelector: {
+            child: Task
+        },
+        treatmentManagerContainerSelector: {
+            child: TreatmentLevelTabToolbar
+        }
+    });
+
     this.initTreatmentsTab = function () {
         var currentMedicalRecordId = this.attr.currentMedicalRecordId;
-
-        TreatmentLevelTabToolbar.attachTo(this.attr.treatmentManagerContainerSelector);
 
         if (this.select('tabSelector').length > 0) {
             _.forEach(this.select('tabSelector'), function (element) {
@@ -40,8 +45,6 @@ function TreatmentList() {
                 });
             });
         }
-
-        Task.attachTo(this.attr.treatmentPanelContainerSelector);
     };
 
     this.onAddTreatmentSuccess = function () {
@@ -88,4 +91,4 @@ function TreatmentList() {
     });
 }
 
-module.exports = flight.component(ClearTabCache, TreatmentList);
+module.exports = flight.component(ClearTabCache, WithChildren, TreatmentList);
