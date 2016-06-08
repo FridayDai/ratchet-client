@@ -48,11 +48,14 @@
     top: 0;
     right: 0;
     width: 25px;
-    height: 25px;
+    height: 27px;
     text-align: center;
 //    background: url('multiple-select.png') left top no-repeat;
 
     &:before {
+        position: absolute;
+        top: 12px;
+        right: 10px;
         display: inline-block;
         content: ' ';
         width: 0;

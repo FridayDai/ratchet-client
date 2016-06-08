@@ -2,6 +2,7 @@
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
+     data-is-absolute="${itemType == 'absoluteEvent' ? true: false}"
      medical-record-id="${medicalRecordId}">
 
     <div class="box-item-container">

@@ -947,3 +947,18 @@
 .patient-activities-section {
     visibility: hidden;
 }
+
+.patient-group-section {
+    .toolbar {
+        min-height: 40px;
+        margin: 0;
+        padding: 30px 30px 0;
+    }
+
+    .btn-add-group {
+        position: relative;
+        top: 18px;
+        right: 10px;
+        margin-top: 0;
+    }
+}

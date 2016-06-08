@@ -91,12 +91,15 @@ function TaskSection() {
         }
 
         function taskStatus (ele) {
-            return _.indexOf(status, $(ele).data('status')) > -1;
+            if (status === 'ALL') {
+                return true
+            } else {
+                return _.indexOf(status, $(ele).data('status')) > -1 && !$(ele).data('isAbsolute');
+            }
         }
 
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
-        this.select('filterCountFiledSelector').show();
 
         this.select('boxItemsSelector').hide().filter(function (index, ele) {
             return taskAlert(ele) && medicalRecord(ele) && taskStatus(ele);
@@ -104,6 +107,12 @@ function TaskSection() {
 
         this.checkNoTask();
         this.countVisibleTasks();
+
+        if (status === 'ALL') {
+            this.select('filterCountFiledSelector').hide();
+        } else {
+            this.select('filterCountFiledSelector').show();
+        }
     };
 
     this.onMedicalRecordListClick = function (event, data) {
@@ -145,7 +154,9 @@ function TaskSection() {
         this.countVisibleTasks();
     };
 
-    this.onClearTaskFilter = function () {
+    this.onClearTaskFilter = function (e) {
+        e.preventDefault();
+
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
         this.select('archivedItemSelector').hide();
@@ -168,11 +179,12 @@ function TaskSection() {
     this.initDefaultTasks = function () {
         this.filter = {
             currentMedicalRecordId: null,
-            taskStatus: ["overdue", "pending", "expired", "schedule", "complete"],
+            taskStatus: "ALL",
             alert: null
         };
 
         this.select('archivedItemSelector').hide();
+        this.select('filterCountFiledSelector').hide();
         this.countTotalTasks();
         this.scrollToday();
     };

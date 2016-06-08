@@ -13,10 +13,14 @@ function FilterTaskStatusSelectbox() {
             me.trigger("taskStatusFilterSelected", {status: status});
         }
 
+        function onCheckAll() {
+            me.trigger("taskStatusFilterSelected", {status: 'ALL'});
+        }
+
         this.$node.multipleSelect({
             width: "auto",
             dropWidth: '180px',
-            selectAllText: "ALL",
+            selectAllText: "<span>ALL</span>",
             allSelected: "Task: ALL",
             selectAllDelimiter: ['', ''],
             minimumCountSelected: 5,
@@ -24,17 +28,15 @@ function FilterTaskStatusSelectbox() {
                 return '<span class={0}>{1}</span>'.format($elm.attr('class'), $elm.text());
             },
             onClick: onCheckOption,
-            onCheckAll: onCheckOption,
+            onCheckAll: onCheckAll,
             onUncheckAll: onCheckOption
         });
 
         this.$node.multipleSelect('checkAll');
-        $('#filter-count').hide();
     };
 
     this.clearAllFilter = function () {
         this.$node.multipleSelect('checkAll');
-        $('#filter-count').hide();
     };
 
     this.after('initialize', function () {

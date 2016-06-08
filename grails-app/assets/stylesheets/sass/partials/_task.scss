@@ -218,6 +218,7 @@
 
     .btn-alert-number {
         display: inline-block;
+        border-radius: 2px;
         padding: 0 3px;
         color: $base-color-white;
         background: $base-color-alert;
@@ -233,11 +234,13 @@
 }
 
 .filter-count {
+    position: relative;
+    top: 3px;
     display: inline-block;
-    padding-left: 14px;
+    padding-left: 20px;
 
     .clear-filter {
-        padding-left: 18px;
+        padding-left: 10px;
         text-decoration: underline;
     }
 }
