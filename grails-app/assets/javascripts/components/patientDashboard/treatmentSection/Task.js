@@ -92,7 +92,7 @@ function TaskSection() {
 
         function taskStatus (ele) {
             if (status === 'ALL') {
-                return true
+                return true;
             } else {
                 return _.indexOf(status, $(ele).data('status')) > -1 && !$(ele).data('isAbsolute');
             }
