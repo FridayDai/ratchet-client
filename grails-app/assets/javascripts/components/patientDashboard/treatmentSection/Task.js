@@ -155,7 +155,9 @@ function TaskSection() {
     };
 
     this.onClearTaskFilter = function (e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
 
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
