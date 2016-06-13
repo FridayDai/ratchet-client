@@ -17,6 +17,7 @@ function TaskSection() {
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
         todayItemSelector: '.today-item',
+        allBoxItemSelector: '.box-item',
         boxItemsSelector: '.box-item:not(.archived)',
         archivedItemSelector: '.box-item.archived',
         filterCountFiledSelector: '#filter-count',
@@ -50,7 +51,7 @@ function TaskSection() {
     };
 
     this.countTotalTasks = function () {
-        var total = this.select('boxItemsSelector').length;
+        var total = this.select('allBoxItemSelector').length;
         this.select('totalTaskCountSelector').text(total);
     };
 
