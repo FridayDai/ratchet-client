@@ -21,10 +21,7 @@
         <span class="score-label">${single}:</span>
 
         <span class="score-number">${mixedResult[level[i]]}</span>
-        <span class="score-number">
-            <g:if test="${mixedResult[painToggle]}">- -</g:if>
-            <g:else>${mixedResult[percent[i]] ?: '0'}%</g:else>
-        </span>
+        <span class="score-number"><g:if test="${mixedResult[painToggle]}">- -</g:if><g:else>${mixedResult[percent[i]] ?: '0'}%</g:else></span>
         <span class="score-number">${mixedResult[frequency[i]] ? RatchetConstants.PAIN_FREQUENCY[mixedResult[frequency[i]]?.toInteger()] : ''}</span>
     </span>
 </g:each>

@@ -2,6 +2,7 @@
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
+     data-is-absolute="${itemType == 'absoluteEvent' ? true: false}"
      medical-record-id="${medicalRecordId}">
 
     <div class="box-item-container">
@@ -16,7 +17,7 @@
                 </div>
 
                 <div class="item-info">
-                    <g:if test="${itemType != 'surgery'}">
+                    <g:if test="${itemType != 'absoluteEvent'}">
                         <span class="task-flag">
                             <div class="flag-status"></div>
 
@@ -97,7 +98,7 @@
 
         <div class="box-item-tool">
 
-            <g:if test="${itemType != 'surgery'}">
+            <g:if test="${itemType != 'absoluteEvent'}">
                 <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
 
                     <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">

@@ -629,6 +629,7 @@
             &:hover,
             &:focus {
                 color: $base-logo-color;
+                cursor: pointer;
             }
         }
 
@@ -665,13 +666,13 @@
             margin: 0;
             padding: 0;
             background-color: $base-color-bg-head;
-            cursor: pointer;
+            cursor: default;
             color: $base-font-grey;
         }
 
         .treatment-indicate {
             position: absolute;
-            top: 23px;
+            top: 22px;
             left: 11px;
             display: inline-block;
             width: 20px;
@@ -697,6 +698,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             color: $base-font-grey;
+            cursor: pointer;
         }
 
         .ui-state-active {
@@ -745,6 +747,14 @@
                 &:hover, &:focus {
                     color: inherit;
                     cursor: text;
+                }
+            }
+
+            .treatment-delete {
+                color: black;
+
+                &:hover, &:focus {
+                    color: #05415d;
                 }
             }
 
@@ -946,4 +956,19 @@
 .patient-caregiver-section,
 .patient-activities-section {
     visibility: hidden;
+}
+
+.patient-group-section {
+    .toolbar {
+        min-height: 40px;
+        margin: 0;
+        padding: 30px 30px 0;
+    }
+
+    .btn-add-group {
+        position: relative;
+        top: 18px;
+        right: 10px;
+        margin-top: 0;
+    }
 }
