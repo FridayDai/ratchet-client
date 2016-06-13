@@ -42,7 +42,7 @@ var ALERT_LIST_ITEM_TEMPLATE = [
 
 var ALERT_TYPE_MESSAGE_MAPPING = {
     'VOICE_CALL_FOLLOW_UP': 'has a phone call request',
-    'RAPT': 'is indicated high risk by the risk assessment tool',
+    'RISK_ASSESSMENT_AND_PREDICTION_TOOL': 'is indicated high risk by the risk assessment tool',
     'PATIENT_FOLLOW_UP_TOOL': 'requires post-op assistance'
 };
 
