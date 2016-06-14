@@ -155,10 +155,16 @@
 
         <div class="box-item-attention">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            Follow up requested by the patient. Contact patient to follow up. -
 
+            <g:if test="${task?.alerts?.first()?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
+                Patient is indicated high risk by the risk assessment tool.
+            </g:if>
+            <g:else>
+                Follow up requested by the patient. Contact patient to follow up.
+            </g:else>
+            -
             <span class="alert-datetime">
-                <g:formatDate date="${task?.alerts ? task?.alerts?.first()?.dateCreated : null}"
+                <g:formatDate date="${task?.alerts?.first()?.dateCreated}"
                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                               format="MMM dd 'at' hh:mm a"/>
             </span>

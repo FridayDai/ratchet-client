@@ -17,6 +17,7 @@ function TaskSection() {
         taskInfoHiddenSelector: '.task-info-hidden',
         noActiveItemLabelSelector: '.no-active-item',
         todayItemSelector: '.today-item',
+        allBoxItemSelector: '.box-item',
         boxItemsSelector: '.box-item:not(.archived)',
         archivedItemSelector: '.box-item.archived',
         filterCountFiledSelector: '#filter-count',
@@ -50,15 +51,15 @@ function TaskSection() {
     };
 
     this.countTotalTasks = function () {
-        var total = this.select('boxItemsSelector').length;
+        var total = this.select('allBoxItemSelector').length;
         this.select('totalTaskCountSelector').text(total);
     };
 
     this.updateAlertTaskNumber = function () {
         var number = this.select('alertButtonNumberSelector').text();
 
-        if(--number > 0 ) {
-            if(number === 1) {
+        if (--number > 0) {
+            if (number === 1) {
                 this.select('alertButtonTextSelector').text('Alert');
             } else {
                 this.select('alertButtonTextSelector').text('Alerts');
@@ -75,7 +76,7 @@ function TaskSection() {
         var alert = this.filter.alert;
 
         function taskAlert(ele) {
-            if(!alert) {
+            if (!alert) {
                 return true;
             } else {
                 return $(ele).data('alert');
@@ -83,14 +84,14 @@ function TaskSection() {
         }
 
         function medicalRecord(ele) {
-            if(!medicalRecordId) {
+            if (!medicalRecordId) {
                 return true;
             } else {
                 return +$(ele).attr('medical-record-id') === +medicalRecordId;
             }
         }
 
-        function taskStatus (ele) {
+        function taskStatus(ele) {
             if (status === 'ALL') {
                 return true;
             } else {
@@ -100,18 +101,17 @@ function TaskSection() {
 
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
+        this.select('filterCountFiledSelector').show();
 
-        this.select('boxItemsSelector').hide().filter(function (index, ele) {
-            return taskAlert(ele) && medicalRecord(ele) && taskStatus(ele);
-        }).show();
-
-        this.checkNoTask();
-        this.countVisibleTasks();
-
-        if (status === 'ALL') {
-            this.select('filterCountFiledSelector').hide();
+        if (taskAlert() && medicalRecord() && taskStatus()) {
+            this.clearTaskFilter();
         } else {
-            this.select('filterCountFiledSelector').show();
+            this.select('boxItemsSelector').hide().filter(function (index, ele) {
+                return taskAlert(ele) && medicalRecord(ele) && taskStatus(ele);
+            }).show();
+
+            this.checkNoTask();
+            this.countVisibleTasks();
         }
     };
 
@@ -127,18 +127,18 @@ function TaskSection() {
                 this.attr.boxItemsSelector = '.box-item:not(.archived)';
                 this.select('archivedItemSelector').hide();
             }
-
-            this.filterTasks();
-
         } else {
-            this.onClearTaskFilter();
+            this.filter.currentMedicalRecordId = null;
         }
+
+        this.filterTasks();
     };
 
     this.filterTaskByStatus = function (e, data) {
-        this.filter.taskStatus = data.status;
-
-        this.filterTasks();
+        if(this.filter.taskStatus !== data.status) {
+            this.filter.taskStatus = data.status;
+            this.filterTasks();
+        }
     };
 
     this.alertButtonClick = function () {
@@ -148,25 +148,31 @@ function TaskSection() {
         this.filterTasks();
     };
 
+    this.inactiveAlert = function () {
+        this.select('alertFilterButtonSelector').removeClass('active');
+    };
+
     this.updateFilterCount = function () {
         this.checkNoTask();
         this.countTotalTasks();
         this.countVisibleTasks();
     };
 
-    this.onClearTaskFilter = function (e) {
+    this.clearTaskFilter = function (e) {
         if (e) {
             e.preventDefault();
         }
 
-        this.select('noTaskFiledSelector').hide();
-        this.select('taskListFiledSelector').show();
-        this.select('archivedItemSelector').hide();
-
         this.attr.boxItemsSelector = '.box-item:not(.archived)';
-        this.filter.currentMedicalRecordId = null;
         this.archived = false;
 
+        this.select('noTaskFiledSelector').hide();
+        this.select('taskListFiledSelector').show();
+        this.select('boxItemsSelector').show();
+        this.select('archivedItemSelector').hide();
+
+        this.initFilter();
+        this.inactiveAlert();
         this.trigger('taskStatusClearFilter');
     };
 
@@ -178,15 +184,20 @@ function TaskSection() {
         }
     };
 
-    this.initDefaultTasks = function () {
+    this.initFilter = function () {
         this.filter = {
             currentMedicalRecordId: null,
             taskStatus: "ALL",
             alert: null
         };
 
-        this.select('archivedItemSelector').hide();
         this.select('filterCountFiledSelector').hide();
+    };
+
+    this.initDefaultTasks = function () {
+        this.select('archivedItemSelector').hide();
+
+        this.initFilter();
         this.countTotalTasks();
         this.scrollToday();
     };
@@ -200,7 +211,7 @@ function TaskSection() {
         this.on('deleteTaskSuccessful', this.updateFilterCount);
 
         this.on('click', {
-            clearFilterButtonSelector: this.onClearTaskFilter,
+            clearFilterButtonSelector: this.clearTaskFilter,
             alertFilterButtonSelector: this.alertButtonClick
         });
     });
