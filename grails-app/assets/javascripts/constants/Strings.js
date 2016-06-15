@@ -54,5 +54,6 @@ module.exports = {
     BIRTHDAY_IS_REQUIRED_ADD_EMAIL: "Please add birthday to patient's profile before adding email.",
 
     ABSOLUTE_EVENT_DATE_LABEL: "{0} DATE<span>*</span>",
-    ABSOLUTE_EVENT_DATE_PLACEHOLDER: "Select {0} date"
+    ABSOLUTE_EVENT_DATE_PLACEHOLDER: "Select {0} date",
+    SESSION_ACCOUNT_INFO: 'RH_ACCOUNT_INFO'
 };
