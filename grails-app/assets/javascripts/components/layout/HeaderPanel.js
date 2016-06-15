@@ -179,12 +179,12 @@ function HeaderPanel() {
         return moment(timestamp)
             .tz('America/Vancouver')
             .calendar(moment().tz('America/Vancouver'), {
-                sameDay: '[Today at] h:m a',
-                nextDay: 'MMM D [at] h:m a',
-                nextWeek: 'MMM D [at] h:m a',
-                lastDay: '[Yesterday at] h:m a',
-                lastWeek: 'MMM D [at] h:m a',
-                sameElse: 'MMM D [at] h:m a'
+                sameDay: '[Today at] h:mm a',
+                nextDay: 'MMM D [at] h:mm a',
+                nextWeek: 'MMM D [at] h:mm a',
+                lastDay: '[Yesterday at] h:mm a',
+                lastWeek: 'MMM D [at] h:mm a',
+                sameElse: 'MMM D [at] h:mm a'
             });
     };
 
