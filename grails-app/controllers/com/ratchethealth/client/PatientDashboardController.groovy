@@ -119,9 +119,9 @@ class PatientDashboardController extends BaseController {
                 accountId         : accountId,
                 AccountIsAdmin    : request.session.accountManagement,
                 PatientEmailStatus: PatientEmailStatus,
-                medicalRecords    : combinedList.medicalRecords,
-                combinedTasks     : combinedList.combinedTasks,
-                alertNumber       : combinedList.alertNumber,
+                medicalRecords    : combinedList?.medicalRecords,
+                combinedTasks     : combinedList?.combinedTasks,
+                alertNumber       : combinedList?.alertNumber,
                 totalCount        : medicalRecords.totalCount
         ])
     }
