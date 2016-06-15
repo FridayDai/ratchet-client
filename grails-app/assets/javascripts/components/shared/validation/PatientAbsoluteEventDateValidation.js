@@ -4,7 +4,7 @@ var STRINGs = require('../../../constants/Strings');
 var moment = require('moment');
 var Utility = require('../../../utils/Utility');
 
-$.validator.addMethod('SurgeryDateMinCheck', function (value) {
+$.validator.addMethod('AbsoluteEventDateMinCheck', function (value) {
     var guessFormat = Utility.guessDateFormat(value);
 
     if (guessFormat) {
@@ -12,9 +12,9 @@ $.validator.addMethod('SurgeryDateMinCheck', function (value) {
     }
 
     return false;
-}, STRINGs.MINIMUM_SURGERY_DATE);
+}, STRINGs.MINIMUM_ABSOLUTE_EVENT_DATE);
 
-$.validator.addMethod('SurgeryDateMaxCheck', function (value) {
+$.validator.addMethod('AbsoluteEventDateMaxCheck', function (value) {
     var guessFormat = Utility.guessDateFormat(value);
 
     if (guessFormat) {
@@ -23,11 +23,11 @@ $.validator.addMethod('SurgeryDateMaxCheck', function (value) {
     }
 
     return false;
-}, STRINGs.MAX_SURGERY_DATE);
+}, STRINGs.MAX_ABSOLUTE_EVENT_DATE);
 
 module.exports = {
     rules: {
-        SurgeryDateMinCheck: true,
-        SurgeryDateMaxCheck: true
+        AbsoluteEventDateMinCheck: true,
+        AbsoluteEventDateMaxCheck: true
     }
 };

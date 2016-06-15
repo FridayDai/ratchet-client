@@ -20,7 +20,8 @@ function PatientTreatmentCombobox() {
                 value: data.id,
                 isAbsoluteEventBased: data.isAbsoluteEventBased,
                 timeStamp: data.sendTimeOffset,
-                surgeryDate: data.surgeryDate
+                surgeryDate: data.surgeryDate,
+                absoluteEventType: data.absoluteEventType
             };
         },
         appendTo: ".container"
@@ -30,7 +31,8 @@ function PatientTreatmentCombobox() {
         groupSelectEvent: 'groupSelectEvent',
         groupClearEvent: 'groupClearEvent',
         resetEvent: 'resetEvent',
-        isAbsoluteEventBased: 'isAbsoluteEventBased'
+        isAbsoluteEventBased: 'isAbsoluteEventBased',
+        absoluteEventType: 'absoluteEventType'
     });
 
     this._previousGroupId = null;
@@ -74,6 +76,7 @@ function PatientTreatmentCombobox() {
 
             data[this.attr.selectDataKey] = item.value;
             data[this.attr.isAbsoluteEventBased] =  item.isAbsoluteEventBased;
+            data[this.attr.absoluteEventType] =  item.absoluteEventType;
 
             if (this.beforeSelect) {
                 this.beforeSelect.call(this, data);

@@ -1,20 +1,29 @@
 var flight = require('flight');
 var WithDatepicker = require('../../common/WithDatepicker');
-var PatientSurgeryDateValidation = require('../validation/PatientSurgeryDateValidation');
+var PatientAbsoluteEventDateValidation = require('../validation/PatientAbsoluteEventDateValidation');
+var STRINGs = require('../../../constants/Strings');
 
-function PatientSurgeryDate() {
+function PatientAbsoluteEventDate() {
     this.onTreatmentSelected = function (e, data) {
         this.clear();
         this.$node.prop("disabled", false);
 
         if (data.isAbsoluteEventBased) {
-            this.showElementGroup();
+            this.showElementGroup(data.absoluteEventType);
         } else {
             this.hideElementGroup();
         }
     };
 
-    this.showElementGroup = function () {
+    this.showElementGroup = function (eventType) {
+        if (eventType) {
+            var $label = this.$node.prev();
+
+            $label.html(STRINGs.ABSOLUTE_EVENT_DATE_LABEL.format(eventType.toUpperCase()));
+            this.$node.attr('placeholder',
+                STRINGs.ABSOLUTE_EVENT_DATE_PLACEHOLDER.format(eventType.toLowerCase()));
+        }
+
         if (!this.$node.is(':visible')) {
             this.$node.parent()
                 .show();
@@ -47,7 +56,7 @@ function PatientSurgeryDate() {
             maxDate: "+1y"
         });
 
-        this.setElementValidation(this.$node, PatientSurgeryDateValidation.rules);
+        this.setElementValidation(this.$node, PatientAbsoluteEventDateValidation.rules);
     };
 
     this.after('initialize', function () {
@@ -60,4 +69,4 @@ function PatientSurgeryDate() {
     });
 }
 
-module.exports = flight.component(WithDatepicker, PatientSurgeryDate);
+module.exports = flight.component(WithDatepicker, PatientAbsoluteEventDate);
