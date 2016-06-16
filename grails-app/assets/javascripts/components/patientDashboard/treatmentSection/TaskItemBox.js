@@ -82,6 +82,15 @@ function TaskItem() {
         }
     };
 
+    this.onUserTaskCompleteSuccess = function (e, data) {
+        if(this.node.id === data.taskId) {
+            this.$node.removeClass().addClass('box-item complete')
+                .data('status', 'complete')
+                .find('.box-item-tool').children().not(':last').remove();
+
+        }
+    };
+
     this.onTaskVoiceCallButtonClicked = function (e) {
         e.preventDefault();
         var $target = $(e.target);
@@ -210,6 +219,7 @@ function TaskItem() {
     this.after('initialize', function () {
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
+        this.on(document, 'userTaskCompleteSuccess', this.onUserTaskCompleteSuccess);
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,

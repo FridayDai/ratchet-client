@@ -132,9 +132,9 @@ class TaskService extends RatchetAPIService{
 
 
         withPost(token, url) { req ->
-            def resp = req.body(answer).asString()
+            def resp = req.body(answer).asJson()
 
-            if (resp.status == 200) {
+            if (resp.status == 201) {
                 log.info("Answer user task success, token: ${token}.")
                 return true
             } else {

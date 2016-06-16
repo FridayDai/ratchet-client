@@ -451,7 +451,7 @@
         <ul class="list">
             <li class="answer">
                 <label class="choice">
-                    <input type="radio" class="rc-choice-hidden required" name="choices.question1" value="1">
+                    <input type="radio" class="rc-choice-hidden " name="choice.question1" value="1">
                     <span class="rc-radio primary-radio-color"></span>
                 </label>
 
@@ -459,7 +459,7 @@
             </li>
             <li class="answer">
                 <label class="choice">
-                    <input type="radio" class="rc-choice-hidden" name="choices.question1" value="2">
+                    <input type="radio" class="rc-choice-hidden" name="choice.question1" value="2">
                     <span class="rc-radio primary-radio-color"></span>
                 </label>
 
@@ -467,7 +467,7 @@
             </li>
             <li class="answer">
                 <label class="choice">
-                    <input type="radio" class="rc-choice-hidden" name="choices.question1" value="3">
+                    <input type="radio" class="rc-choice-hidden" name="choice.question1" value="3">
                     <span class="rc-radio primary-radio-color"></span>
                 </label>
 
