@@ -79,8 +79,8 @@
                     <option class="overdue" value="overdue">overdue</option>
                     <option class="pending" value="pending">pending</option>
                     <option class="expired" value="expired">expired</option>
-                    <option class="schedule" value="schedule">schedule</option>
-                    <option class="complete" value="complete">complete</option>
+                    <option class="schedule" value="schedule">scheduled</option>
+                    <option class="complete" value="complete">completed</option>
                 </select>
 
                 <button id="btn-filter-alert" class="btn btn-filter-alert">
