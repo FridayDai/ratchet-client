@@ -128,16 +128,6 @@ class TaskController extends BaseController {
         render resp
     }
 
-//    def resolveVoiceTask() {
-//        def token = request.session.token
-//        def clientId = request.session.clientId
-//        def patientId = params?.patientId
-//        def medicalRecordId = params?.medicalRecordId
-//        def taskId = params?.taskId
-//        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
-//        render resp
-//    }
-
     def updateAlertInTask() {
         def token = request.session.token
         def clientId = request.session.clientId
@@ -147,4 +137,15 @@ class TaskController extends BaseController {
         def resp = alertService.updateAlertStatus(token, clientId, staffId, alertId, status)
         render resp
     }
+
+    def completeUserToolTask() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params.patientId
+        def taskId = params.taskId
+        def choice = params.choice
+        def resp = taskService.answerUserTask(token, clientId, patientId, taskId, choice)
+        render resp
+    }
+
 }

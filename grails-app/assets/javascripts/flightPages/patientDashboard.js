@@ -26,6 +26,7 @@ var InClinicCodeDialog = require('../components/patientDashboard/InClinicCodeDia
 var EditEventDateFormDialog = require('../components/patientDashboard/treatmentSection/EditEventDateFormDialog');
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
 var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
+var FillDischargeTaskDialog = require('../components/patientDashboard/treatmentSection/task/FillDischargeTaskDialog');
 
 var TYPE_SECTION_MAPPING = {
     'Treatment': TreatmentList,
@@ -57,7 +58,8 @@ function PatientDetailPage() {
         inClinicCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
         addCaregiverDialogSelector: '#invite-caregiver-form',
-        addGroupDialogSelector: '#add-group-form'
+        addGroupDialogSelector: '#add-group-form',
+        fillDischargeTaskSelector: '#answer-discharge-task'
     });
 
     this.children({
@@ -113,6 +115,10 @@ function PatientDetailPage() {
             selector: 'addGroupDialogSelector',
             event: 'showAddGroupDialog',
             dialog: GroupFormDialog
+        }, {
+            selector: 'fillDischargeTaskSelector',
+            event: 'showFillDischargeTaskDialog',
+            dialog: FillDischargeTaskDialog
         }
     ]);
 

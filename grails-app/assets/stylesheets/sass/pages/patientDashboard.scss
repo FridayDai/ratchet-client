@@ -972,3 +972,36 @@
         margin-top: 0;
     }
 }
+
+
+.list {
+    padding-left: 20px;
+    padding-top: 1px;
+
+    .error-container {
+        top: -17px;
+    }
+
+    &.error-help-block {
+        .rc-radio {
+            border: 2px solid $base-color-red;
+        }
+    }
+}
+
+.answer {
+    margin: 16px 0 16px 26px;
+    font-size: 17px;
+
+    .choice {
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .text {
+        display: inline-block;
+        margin-left: 13px;
+        vertical-align: middle;
+    }
+}

@@ -14,7 +14,8 @@ class RatchetConstants {
             1: "BASIC",
             2: "OUTCOME",
             4: "VOICE",
-            6: "RAPT"
+            6: "RAPT",
+            5: "USER"
     ]
 
     public static final String TOOL_NAME_DASH = 'DASH';

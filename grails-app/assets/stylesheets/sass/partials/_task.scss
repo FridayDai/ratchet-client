@@ -680,6 +680,44 @@
         right: 89px;
     }
 
+    .text-link {
+        position: relative;
+        top: 21px;
+        right: 45px;
+        width: 42px;
+        height: 100%;
+        color: $base-a-default-color;
+        cursor: pointer;
+        text-align: center;
+        z-index: 10;
+
+        &:hover {
+            color: $base-color-green-link;
+            text-decoration: underline;
+        }
+    }
+
+    .start-task {
+        &:before {
+            position: relative;
+            right: 4px;
+            top: -5px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid $base-a-default-color;
+            font-size: 0;
+        }
+
+        &:hover {
+            &:before {
+                border-left: 5px solid $base-color-green-link;
+            }
+        }
+    }
+
     .task-treatment-indicate {
         position: absolute;
         right: 11px;
