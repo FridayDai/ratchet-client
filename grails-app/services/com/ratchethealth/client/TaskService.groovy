@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import groovy.json.JsonBuilder
+
 class TaskService extends RatchetAPIService{
 
     def grailsApplication
@@ -121,20 +123,21 @@ class TaskService extends RatchetAPIService{
         }
     }
 
-    def resolveAttention(String token, clientId, patientId, medicalRecordId, taskId) {
-        String resolveVoiceUrl = grailsApplication.config.ratchetv2.server.url.task.resolveVoice
-        def url = String.format(resolveVoiceUrl, clientId, patientId, medicalRecordId, taskId)
+    def answerUserTask(String token, clientId, patientId, taskId, answer) {
+        String userTaskUrl = grailsApplication.config.ratchetv2.server.url.task.answerUserTask
+        def url = String.format(userTaskUrl, clientId, patientId, taskId)
 
-        log.info("Call backend service to get task result, token: ${token}.")
-        withGet(token, url) { req ->
-            def resp = req
-                    .asString()
+        log.info("Call backend service to answer user task, token: ${token}.")
+        answer = new JsonBuilder(answer).toString()
+
+
+        withPost(token, url) { req ->
+            def resp = req.body(answer).asString()
 
             if (resp.status == 200) {
-                log.info("Get task result success, token: ${token}")
+                log.info("Answer user task success, token: ${token}.")
                 return true
-            }
-            else {
+            } else {
                 handleError(resp)
             }
         }

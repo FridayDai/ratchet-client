@@ -12,9 +12,11 @@ function TaskItem() {
         deleteTaskButtonSelector: '.delete',
         beginTaskButtonSelector: '.begin-task',
         callTaskButtonSelector: '.call-task',
+        startTaskButtonSelector: '.start-task',
         taskIndicatorSelector: '.task-treatment-indicate',
         resolveLinkSelector: '.resolve-link',
-        undoLinkSelector: '.undo-link'
+        undoLinkSelector: '.undo-link',
+        taskTitleSelector: '.item-title'
     });
 
     this.onTaskDeleteButtonClicked = function (e) {
@@ -70,6 +72,16 @@ function TaskItem() {
         });
     };
 
+    this.onTaskStartButtonClicked = function () {
+        var taskId = this.node.id;
+        var title = this.select('taskTitleSelector').text().trim();
+        if (title === 'Discharge Plan') {
+            this.trigger('showFillDischargeTaskDialog', {
+                taskId: taskId
+            });
+        }
+    };
+
     this.onTaskVoiceCallButtonClicked = function (e) {
         e.preventDefault();
         var $target = $(e.target);
@@ -123,7 +135,7 @@ function TaskItem() {
 
         var dfd = this.dfd = $.Deferred();
 
-        dfd.done(function() {
+        dfd.done(function () {
             $attention.hide();
             me.trigger('alertHasBeenResolved');
         });
@@ -136,7 +148,7 @@ function TaskItem() {
                 $attention.addClass('undo');
 
                 setTimeout(function () {
-                   dfd.resolve();
+                    dfd.resolve();
                 }, 30000);
             });
         }
@@ -203,6 +215,7 @@ function TaskItem() {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
             beginTaskButtonSelector: this.onTaskBeginButtonClicked,
             callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
+            startTaskButtonSelector: this.onTaskStartButtonClicked,
             taskIndicatorSelector: this.onTaskIndicatorClicked,
             resolveLinkSelector: this.onResolveButtonClicked,
             undoLinkSelector: this.onUndoButtonClicked

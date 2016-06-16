@@ -120,6 +120,9 @@
                                 <span>Call</span>
                             </div>
                         </g:if>
+                        <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "USER"}">
+                            <div class="text-link start-task">START</div>
+                        </g:elseif>
                         <g:else>
                             <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
                                class="icon-button begin-task" target="_blank"></a>
@@ -151,7 +154,7 @@
 
     </div>
 
-    <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.alerts?.length()}">
+    <g:if test="${task?.alerts?.length()}">
 
         <div class="box-item-attention">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -159,6 +162,9 @@
             <g:if test="${task?.alerts?.first()?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
                 Patient is indicated high risk by the risk assessment tool.
             </g:if>
+            <g:elseif test="${task?.alerts?.first()?.type == 'DISCHARGE_PLAN'}">
+                Confirm the discharge plan.
+            </g:elseif>
             <g:else>
                 Follow up requested by the patient. Contact patient to follow up.
             </g:else>

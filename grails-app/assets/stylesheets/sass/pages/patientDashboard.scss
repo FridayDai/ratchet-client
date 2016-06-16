@@ -972,3 +972,26 @@
         margin-top: 0;
     }
 }
+
+
+.list {
+    padding-left: 20px;
+    padding-top: 1px;
+}
+
+.answer {
+    margin: 16px 0;
+    font-size: 17px;
+
+    .choice {
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .text {
+        display: inline-block;
+        margin-left: 13px;
+        vertical-align: middle;
+    }
+}
