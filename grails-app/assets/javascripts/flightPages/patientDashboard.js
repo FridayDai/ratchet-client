@@ -103,7 +103,7 @@ function PatientDetailPage() {
             dialog: InClinicCodeDialog
         }, {
             selector: 'editSurgeryDateDialogSelector',
-            event: 'showEditSurgeryDialog',
+            event: 'showEditTreatmentDialog',
             dialog: EditEventDateFormDialog
         }, {
             selector: 'addCaregiverDialogSelector',

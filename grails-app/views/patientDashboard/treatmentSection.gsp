@@ -17,7 +17,8 @@
                     <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
                                    data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                    data-treatment-id="${medicalRecord?.treatmentId}"
-                                   data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
+                                   data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"
+                                   data-absolute-event-type="${medicalRecord?.absoluteEventType}"/>
 
                     <a class="ui-tabs-anchor" data-id="sub${i}">
                         <label class="treatment-indicate">

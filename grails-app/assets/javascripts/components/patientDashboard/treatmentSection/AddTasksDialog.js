@@ -20,11 +20,11 @@ var TASK_ELEMENT_TEMPLATE = [
     '</li>'
 ].join('');
 
-var ON_SURGERY_DAY = 'ON SURGERY DAY';
-var BEFORE_SURGERY_DAYS = '{0} DAYS BEFORE SURGERY';
-var ONE_DAY_BEFORE_SURGERY_DAY = '1 DAY BEFORE SURGERY';
-var AFTER_SURGERY_DAYS = '{0} DAYS AFTER SURGERY';
-var ONE_DAY_AFTER_SURGERY_DAY = '1 DAY AFTER SURGERY';
+var ON_ABSOLUTE_EVENT_DAY = 'ON {0} DAY';
+var BEFORE_ABSOLUTE_EVENT_DAYS = '{0} DAYS BEFORE {1}';
+var ONE_DAY_BEFORE_ABSOLUTE_EVENT_DAY = '1 DAY BEFORE {0}';
+var AFTER_ABSOLUTE_EVENT_DAYS = '{0} DAYS AFTER {1}';
+var ONE_DAY_AFTER_ABSOLUTE_EVENT_DAY = '1 DAY AFTER {0}';
 var SELECT_ALL = 'Select all';
 var DESELECT_ALL = 'Deselect all';
 var TASKS_ADDED = '{0} tasks have been added';
@@ -94,7 +94,8 @@ function AddTasksDialog() {
     this.setupCurrentParams = function (params) {
         this.patientId = params.patientId;
         this.medicalRecordId = params.medicalRecordId;
-        this.surgeryDateStr = params.currentSurgeryDate;
+        this.absoluteEventDateStr = params.currentAbsoluteEventDate;
+        this.absoluteEventType = params.absoluteEventType;
     };
 
     this.getAvailableTasksSuccess = function (data) {
@@ -236,7 +237,7 @@ function AddTasksDialog() {
     };
 
     this.onScheduleTasksDateSelected = function () {
-        this.select('scheduleDateHelpLabelSelector').text(this.getSurgeryDateRelativeIndicator());
+        this.select('scheduleDateHelpLabelSelector').text(this.getAbsoluteEventDateRelativeIndicator());
 
         this.validate();
     };
@@ -245,27 +246,30 @@ function AddTasksDialog() {
         var result = '';
 
         if (days === 0) {
-            result = ON_SURGERY_DAY;
+            result = ON_ABSOLUTE_EVENT_DAY.format(this.absoluteEventType);
         } else if (days === -1) {
-            result = ONE_DAY_BEFORE_SURGERY_DAY;
+            result = ONE_DAY_BEFORE_ABSOLUTE_EVENT_DAY.format(this.absoluteEventType);
         } else if (days === 1) {
-            result = ONE_DAY_AFTER_SURGERY_DAY;
+            result = ONE_DAY_AFTER_ABSOLUTE_EVENT_DAY.format(this.absoluteEventType);
         } else if (days > 1) {
-            result = AFTER_SURGERY_DAYS.format(days);
+            result = AFTER_ABSOLUTE_EVENT_DAYS.format(days, this.absoluteEventType);
         } else if (days < -1) {
-            result = BEFORE_SURGERY_DAYS.format(-days);
+            result = BEFORE_ABSOLUTE_EVENT_DAYS.format(-days, this.absoluteEventType);
         }
 
         return result;
     }
 
-    this.getSurgeryDateRelativeIndicator = function () {
+    this.getAbsoluteEventDateRelativeIndicator = function () {
         var result = '', days;
 
-        if (this.surgeryDateStr) {
-            days = Utility.durationInDays(this.surgeryDateStr, this.select('scheduleTaskFieldSelector').val());
+        if (this.absoluteEventDateStr) {
+            days = Utility.durationInDays(
+                this.absoluteEventDateStr,
+                this.select('scheduleTaskFieldSelector').val()
+            );
 
-            result = getIndicatorStr(days);
+            result = getIndicatorStr.call(this, days);
         }
 
         return result;

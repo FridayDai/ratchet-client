@@ -10,7 +10,7 @@
             <li class="client-name">${request.session.clientName}</li>
         </g:else>
         <li <g:if test="${controllerName == 'profile'}">class="login-info nav-li active"</g:if>
-            <g:else>class="login-info nav-li"</g:else>>
+            <g:else>class="login-info nav-li"</g:else> data-email="${request.session.email}">
             <a href="/profile/${request.session.accountId}">
                 <div class="user-photo">
                     <img src="${assetPath(src: 'user.png')}">
