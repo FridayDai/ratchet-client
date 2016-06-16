@@ -13,7 +13,8 @@ class RatchetConstants {
     public static final Map BASE_TOOL_TYPE = [
             1: "BASIC",
             2: "OUTCOME",
-            4: "VOICE"
+            4: "VOICE",
+            6: "RAPT"
     ]
 
     public static final String TOOL_NAME_DASH = 'DASH';
@@ -30,6 +31,7 @@ class RatchetConstants {
     public static final String TOOL_NAME_PAIN_CHART_REFERENCE_BACK = 'Pain Chart Reference - Back';
     public static final String TOOL_NAME_NEW_PATIENT_QUESTIONNAIRE = 'New Patient Questionnaire';
     public static final String TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE = 'Return Patient Questionnaire';
+    public static final String TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE = 'Risk Assessment Questionnaire';
     public static final String TOOL_NAME_KOOS_JR = 'KOOS, JR.';
     public static final String TOOL_NAME_HOOS_JR = 'HOOS, JR.';
     public static final String TOOL_NAME_PROMIS = 'PROMIS Global Health';
@@ -54,6 +56,7 @@ class RatchetConstants {
             17: TOOL_NAME_RETURN_PATIENT_QUESTIONNAIRE,
             15: TOOL_NAME_KOOS_JR,
             1000: TOOL_NAME_HOOS_JR,
+            20: TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE,
 
             // These are not real exist
             101: TOOL_NAME_VOICE_CALL,
@@ -64,10 +67,10 @@ class RatchetConstants {
     public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 17]
 
     //Task type which has multiple task score
-    public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 1000]
+    public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 20, 1000]
 
     //Task type that has view result.
-    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 1000]
+    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 20, 1000]
 
     //Task type mixedResult(score and view result).
     public static Integer[] TOOL_TYPE_MiXED_RESULT = [11, 12]

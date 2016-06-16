@@ -57,6 +57,7 @@ grails.project.dependency.resolution = {
         compile "com.mashape.unirest:unirest-java:1.3.27"
         runtime 'biz.paluch.logging:logstash-gelf:1.5.4'
 //        compile 'org.jruby:jruby-complete:1.7.11'
+        compile 'joda-time:joda-time:2.9.3'
     }
 
     plugins {
@@ -76,7 +77,6 @@ grails.project.dependency.resolution = {
         compile ":cache-ehcache:1.0.5"
 //        runtime ':resources:1.2.13'
         compile ":cookie-session:2.0.17"
-        compile ":joda-time:1.5"
         runtime ":cors:1.1.6"
         compile ":codenarc:0.23"
         //runtime ":jquery:1.11.1"

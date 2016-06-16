@@ -82,6 +82,13 @@
                     </span></td>
                 </tr>
 
+                <tr class="tr-border">
+                    <td class="td-width">Enable Alert</td>
+                    <td><span class="enable-alerts" id="enableAlertField">
+                        ${accountInfo.enableAlert == true ? 'Yes' : 'No'}
+                    </span></td>
+                </tr>
+
                 <tr>
                     <td class="bg-color" colspan="4">
                         Last Login:

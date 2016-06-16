@@ -7,6 +7,7 @@ class TaskController extends BaseController {
     def beforeInterceptor = [action: this.&auth]
 
     def taskService
+    def alertService
 
     def sendTaskEmail() {
         def token = request.session.token
@@ -95,6 +96,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/promis'
                 break
 
+            case RatchetConstants.TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE:
+                view = '/taskResult/raq'
+                break
+
             default:
                 render status: 404
                 return
@@ -123,13 +128,23 @@ class TaskController extends BaseController {
         render resp
     }
 
-    def resolveVoiceTask() {
+//    def resolveVoiceTask() {
+//        def token = request.session.token
+//        def clientId = request.session.clientId
+//        def patientId = params?.patientId
+//        def medicalRecordId = params?.medicalRecordId
+//        def taskId = params?.taskId
+//        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+//        render resp
+//    }
+
+    def updateAlertInTask() {
         def token = request.session.token
         def clientId = request.session.clientId
-        def patientId = params?.patientId
-        def medicalRecordId = params?.medicalRecordId
-        def taskId = params?.taskId
-        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
+        def staffId = session?.accountId
+        def alertId = params?.alertId
+        def status = params?.status?.toInteger() > 0
+        def resp = alertService.updateAlertStatus(token, clientId, staffId, alertId, status)
         render resp
     }
 }

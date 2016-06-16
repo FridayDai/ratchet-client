@@ -32,7 +32,7 @@ function NewPatientFormDialog() {
         groupFieldSelector: '#selectGroup',
         providerFieldSelector: '#selectStaffs',
         treatmentFieldSelector: '#selectTreatment',
-        surgeryTimeFieldSelector: '#surgeryTime',
+        eventTimeFieldSelector: '#eventTime',
         birthdayFieldSelector: '#birthday',
 
         basicEditButtonSelector: 'a.form-group-edit',
@@ -47,7 +47,7 @@ function NewPatientFormDialog() {
         emailStaticSelector: '#email-static',
         birthdayStaticSelector: '#birthday-static',
 
-        surgeryDateFormGroupSelector: '#div-surgery-time',
+        eventDateFormGroupSelector: '#div-event-time',
 
         relationshipSelectEvent: 'newPatientRelationshipSelected',
         relationshipClearEvent: 'newPatientRelationshipCleared'
@@ -96,7 +96,7 @@ function NewPatientFormDialog() {
                 resetEvent: 'newPatientReset'
             }
         },
-        surgeryTimeFieldSelector: {
+        eventTimeFieldSelector: {
             child: NewPatientSurgeryDate,
             attributes: {
                 groupSelectEvent: 'patientGroupSelected',
@@ -132,7 +132,7 @@ function NewPatientFormDialog() {
             this.select('patientIdStaticSelector').text(data.identify);
         }
 
-        this.select('surgeryDateFormGroupSelector').hide();
+        this.select('eventDateFormGroupSelector').hide();
     };
 
     this.setPatientExisting = function (data) {
@@ -300,7 +300,7 @@ function NewPatientFormDialog() {
             providerId = $provider.data('id'),
             $treatment = this.select('treatmentFieldSelector'),
             treatmentId = $treatment.data('id'),
-            $surgeryTime = this.select('surgeryTimeFieldSelector'),
+            $eventTime = this.select('eventTimeFieldSelector'),
             $birthday = this.select('birthdayFieldSelector');
 
         var result = {
@@ -330,8 +330,8 @@ function NewPatientFormDialog() {
             result.birthdayValue = Utility.toBirthday($birthdayStatic.text());
         }
 
-        if ($surgeryTime.is(':visible')) {
-            result.surgeryTime = Utility.toVancouverTime($surgeryTime.val());
+        if ($eventTime.is(':visible')) {
+            result.absoluteEventTimestamp = Utility.toVancouverTime($eventTime.val());
         }
 
         return result;

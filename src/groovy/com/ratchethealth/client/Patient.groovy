@@ -10,7 +10,7 @@ class Patient {
     String profilePhoto
     Long treatmentId
     Long staffId
-    Long surgeryTime
+    Long absoluteEventTimestamp
     String birthdayValue
     String ecFirstName
     String ecLastName

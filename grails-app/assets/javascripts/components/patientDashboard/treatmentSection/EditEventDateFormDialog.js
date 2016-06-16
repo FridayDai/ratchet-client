@@ -6,20 +6,20 @@ var ProviderCombobox = require('./ProviderCombobox');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
 
-function EditSurgeryDateFormDialog() {
+function EditEventDateFormDialog() {
     this.options({
-        title: 'EDIT SURGERY DATE',
+        title: 'EDIT TREATMENT',
         width: 430,
         buttons: ['Save']
     });
 
     this.attributes({
-        surgeryTimeFieldSelector: '#treatment-surgeryTime',
+        eventTimeFieldSelector: '#treatment-eventTime',
         providerFieldSelector: '#treatment-provider'
     });
 
     this.children({
-        surgeryTimeFieldSelector: PatientSurgeryDate,
+        eventTimeFieldSelector: PatientSurgeryDate,
         providerFieldSelector: ProviderCombobox
     });
 
@@ -36,11 +36,11 @@ function EditSurgeryDateFormDialog() {
     this.setCurrentSurgeryDate = function (current) {
         this.currentSurgeryDate = current;
 
-        this.select('surgeryTimeFieldSelector').val(current);
+        this.select('eventTimeFieldSelector').val(current);
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
-        var newDate = Utility.toVancouverTime(this.select('surgeryTimeFieldSelector').val());
+        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
         var providerId = this.select('providerFieldSelector').data('id');
 
         this.formEl.attr('action',
@@ -81,10 +81,11 @@ function EditSurgeryDateFormDialog() {
     };
 
     this.onEditSurgeryDateSuccess = function () {
-        var newDate = Utility.toVancouverTime(this.select('surgeryTimeFieldSelector').val());
+        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
 
         this.trigger('editSurgeryDateSuccess', {
-            newDate: newDate
+            newDate: newDate,
+            medicalRecordId: this.medicalRecordId
         });
     };
 
@@ -93,4 +94,4 @@ function EditSurgeryDateFormDialog() {
     });
 }
 
-module.exports = flight.component(WithFormDialog, EditSurgeryDateFormDialog);
+module.exports = flight.component(WithFormDialog, EditEventDateFormDialog);

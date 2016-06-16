@@ -12,7 +12,7 @@
     </div>
 
     <div class="info-container">
-        <div class="title">${Task.title} Results</div>
+        <div class="title">${Task.title}</div>
 
         <div class="sub-info-panel">
             <g:if test="${!download}">
@@ -40,7 +40,7 @@
                         <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
                             <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
                                 <span class="score-wrap">
-                                    <div class="score-num">${score[1]}</div>
+                                    <div class="score-num">${score[1].toLowerCase()}</div>
 
                                     <div class="score-des">${score[0]}</div>
                                 </span>

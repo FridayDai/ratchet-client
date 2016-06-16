@@ -20,6 +20,7 @@ function InfoTitlePanel() {
         providerLabelSelector: '#accountRole',
         permissionLabelSelector: '#isAccountManage',
         groupLabelSelector: '#groups',
+        enableAlertFieldSelector: '#enableAlertField',
 
         inviteAgainButtonSelector: '#invite-account',
         statusButtonSelector: '.activate-action'
@@ -36,7 +37,8 @@ function InfoTitlePanel() {
             email: this.select('emailLabelSelector').text().trim(),
             isProvider: isProvider,
             isAdmin: this.select('permissionLabelSelector').text().trim() === 'Administrator',
-            groups: this.select('groupLabelSelector').data('ids')
+            groups: this.select('groupLabelSelector').data('ids'),
+            enableAlert: this.select('enableAlertFieldSelector').text().trim() === 'Yes'
         };
 
         if (isProvider) {
@@ -64,6 +66,7 @@ function InfoTitlePanel() {
         this.select('emailLabelSelector').text(data.email);
         this.select('providerLabelSelector').text(data.isProvider ? 'Yes' : 'No');
         this.select('permissionLabelSelector').text(data.isAdmin ? 'Administrator' : '');
+        this.select('enableAlertFieldSelector').text(data.enableAlert ? 'Yes' : 'No');
 
         var $group = this.select('groupLabelSelector');
 

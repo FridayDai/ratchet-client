@@ -79,7 +79,7 @@ class TreatmentServiceSpec extends Specification {
 		patient.profilePhoto = 'profilePhoto'
 		patient.treatmentId = 111111
 		patient.staffId = 222222
-		patient.surgeryTime = 123456789
+		patient.absoluteEventTimestamp = 123456789
 		patient.ecFirstName = 'ecFirstName'
 		patient.ecLastName = 'ecLastName'
 		patient.relationship = 'relationship'
@@ -113,7 +113,7 @@ class TreatmentServiceSpec extends Specification {
 		patient.profilePhoto = 'profilePhoto'
 		patient.treatmentId = 111111
 		patient.staffId = 222222
-		patient.surgeryTime = 123456789
+		patient.absoluteEventTimestamp = 123456789
 		patient.ecFirstName = 'ecFirstName'
 		patient.ecLastName = 'ecLastName'
 		patient.relationship = 'relationship'
@@ -167,7 +167,7 @@ class TreatmentServiceSpec extends Specification {
 		e.getMessage() == "body"
 	}
 
-	def "test updateSurgeryTime with successful result"() {
+	def "test updateEventTime with successful result"() {
 		given:
 		def jBuilder = new JsonBuilder()
 		jBuilder {
@@ -182,13 +182,13 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.updateSurgeryTime('token', 1, 2, 3, 3213, 123456789)
+		def result = service.updateEventTime('token', 1, 2, 3, 3213, 123456789)
 
 		then:
 		result == true
 	}
 
-	def "test updateSurgeryTime without successful result"() {
+	def "test updateEventTime without successful result"() {
 		given:
 		MultipartBody.metaClass.asString = { ->
 			return [
@@ -198,7 +198,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.updateSurgeryTime('token', 1, 2, 3, 3123, 123456789)
+		service.updateEventTime('token', 1, 2, 3, 3213, 123456789)
 
 		then:
 		ApiReturnException e = thrown()

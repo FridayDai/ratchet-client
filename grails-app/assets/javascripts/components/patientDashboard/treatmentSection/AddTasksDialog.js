@@ -11,12 +11,12 @@ var Notifications = require('../../common/Notification');
 
 var TASK_ELEMENT_TEMPLATE = [
     '<li class="task-item" data-tool-id="{0}">',
-        '<label>',
-            '<input type="checkbox" />',
-            '<span></span>',
-        '</label>',
-        '<div class="title">{1}</div>',
-        '<div class="description">{2}</div>',
+    '<label>',
+    '<input type="checkbox" />',
+    '<span></span>',
+    '</label>',
+    '<div class="title">{1}</div>',
+    '<div class="description">{2}</div>',
     '</li>'
 ].join('');
 
@@ -218,7 +218,7 @@ function AddTasksDialog() {
     this.addTaskSuccessful = function (taskSize) {
         Notifications.showFadeOutMsg(taskSize > 1 ? TASKS_ADDED.format(taskSize) : ONE_TASK_ADDED);
 
-        this.trigger('addTasksSuccess');
+        this.trigger('addTasksSuccess', {medicalRecordId:  this.medicalRecordId});
 
         this.close();
     };

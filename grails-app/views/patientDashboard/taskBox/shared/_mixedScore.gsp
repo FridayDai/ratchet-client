@@ -16,47 +16,12 @@
     <g:set var="areaName" value="['Back', 'Buttock', 'Leg']"/>
 </g:elseif>
 
+<g:each in="${areaName}" var="single" status="i">
+    <span class="sub-item">
+        <span class="score-label">${single}:</span>
 
-<div class="item-column">
-    <g:each in="${level}" var="single">
-        <span class="sub-item multiple-item">
-            <div class="score-number">
-                ${mixedResult[single]}
-            </div>
-        </span>
-    </g:each>
-</div>
-
-<div class="item-column">
-    <g:each in="${percent}" var="single">
-        <span class="sub-item multiple-item">
-            <div class="score-number">
-                <g:if test="${mixedResult[painToggle]}">- -</g:if>
-                <g:else>${mixedResult[single] ?: '0'}%</g:else>
-            </div>
-        </span>
-    </g:each>
-</div>
-
-<div class="item-column">
-    <g:each in="${frequency}" var="single">
-        <span class="sub-item multiple-item">
-            <div class="score-number">
-                ${mixedResult[single] ? RatchetConstants.PAIN_FREQUENCY[mixedResult[single]?.toInteger()] : ''}
-            </div>
-        </span>
-    </g:each>
-</div>
-
-<div class="item-column column-bottom">
-    <g:each in="${areaName}" var="single">
-        <span class="sub-item multiple-item">
-            <div class="score-label">
-                ${single} Pain
-            </div>
-        </span>
-    </g:each>
-</div>
-
-
-
+        <span class="score-number">${mixedResult[level[i]]}</span>
+        <span class="score-number"><g:if test="${mixedResult[painToggle]}">- -</g:if><g:else>${mixedResult[percent[i]] ?: '0'}%</g:else></span>
+        <span class="score-number">${mixedResult[frequency[i]] ? RatchetConstants.PAIN_FREQUENCY[mixedResult[frequency[i]]?.toInteger()] : ''}</span>
+    </span>
+</g:each>
