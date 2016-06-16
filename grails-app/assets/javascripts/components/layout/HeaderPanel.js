@@ -109,7 +109,10 @@ function HeaderPanel() {
         $.ajax({
             url:URLs.GET_ALERT_COUNT,
             method: 'GET',
-            dropProcess: true
+            dropProcess: true,
+            data: {
+                timestamp: (new Date()).getTime()
+            }
         })
             .done(function (data) {
                 if (data.enableAlert) {
@@ -196,7 +199,8 @@ function HeaderPanel() {
         $.ajax({
             url:URLs.GET_ALERTS,
             data: {
-                max: 99
+                max: 99,
+                timestamp: (new Date()).getTime()
             },
             method: 'GET',
             dropProcess: true
