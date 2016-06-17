@@ -30,7 +30,7 @@ class HomeController extends BaseController {
         def clientId = session?.clientId
         def staffId = session?.accountId
 
-        def result = alertService.getAlert(token, clientId, staffId, filterFields)
+        def result = alertService.getStaffAlert(token, clientId, staffId, filterFields)
 
         render result as JSON
     }

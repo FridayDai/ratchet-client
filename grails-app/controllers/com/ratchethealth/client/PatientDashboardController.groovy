@@ -15,6 +15,7 @@ class PatientDashboardController extends BaseController {
     def groupService
     def activityService
     def taskService
+    def alertService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -108,6 +109,7 @@ class PatientDashboardController extends BaseController {
         def accountId = request.session.accountId
 
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
+        def patientAlerts = alertService.getPatientAlerts(token, clientId, patientId)
 
 //        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
@@ -121,8 +123,9 @@ class PatientDashboardController extends BaseController {
                 PatientEmailStatus: PatientEmailStatus,
                 medicalRecords    : combinedList?.medicalRecords,
                 combinedTasks     : combinedList?.combinedTasks,
-                alertNumber       : combinedList?.alertNumber,
-                totalCount        : medicalRecords.totalCount
+                alertNumber       : patientAlerts?.totalCount,
+                totalCount        : medicalRecords.totalCount,
+                patientAlerts     : patientAlerts?.items
         ])
     }
 

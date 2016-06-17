@@ -160,7 +160,7 @@
 
     <g:if test="${task?.alerts?.length()}">
 
-        <div class="box-item-attention">
+        <div class="alert-bar box-item-attention" data-alert-id="${task?.alerts?.first()?.id}">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
 
             <g:if test="${task?.alerts?.first()?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
@@ -182,9 +182,9 @@
                               format="MMM dd 'at' hh:mm a"/>
             </span>
 
-            <span class="resolve-link">Click to resolve</span>
+            <span class="alert-link resolve-link">Click to resolve</span>
 
-            <span class="undo-link">
+            <span class="alert-link undo-link">
                 <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px"
                      viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
