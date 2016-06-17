@@ -232,6 +232,7 @@ function HeaderPanel() {
 
         this.initAlertPopup();
 
+        // 2 minutes
         setInterval(_.bind(this.getAlertCount, this), 120000);
 
         this.hideAlertPopupBind = _.bind(this.hideAlertPopup, this);
@@ -240,7 +241,7 @@ function HeaderPanel() {
             alertIconSelector: this.onAlertIconClicked
         });
 
-        this.on(document, 'alertHasBeenResolved', this.getAlertCount);
+        this.on(document, 'alertHasBeenUpdated', this.getAlertCount);
     });
 }
 

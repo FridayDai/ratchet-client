@@ -171,7 +171,6 @@ function TaskItem() {
 
         dfd.done(function () {
             $attention.hide();
-            me.trigger('alertHasBeenResolved');
         });
 
         if (!$button.hasClass('checked')) {
@@ -180,6 +179,9 @@ function TaskItem() {
             this.updateAlertTask(alertId, 1, function () {
                 $button.removeClass('checked');
                 $attention.addClass('undo');
+                me.trigger('alertHasBeenUpdated', {
+                    isResolved: true
+                });
 
                 setTimeout(function () {
                     dfd.resolve();
@@ -194,6 +196,7 @@ function TaskItem() {
         var $taskBox = $button.closest('.box-item');
         var alertId = $taskBox.data('alert');
         var dfd = this.dfd;
+        var me = this;
 
         if (!$button.hasClass('checked')) {
             $button.addClass('checked');
@@ -202,9 +205,12 @@ function TaskItem() {
                 $button.removeClass('checked');
                 $attention.removeClass('undo');
                 dfd.reject();
+
+                me.trigger('alertHasBeenUpdated', {
+                    isResolved: false
+                });
             });
         }
-
     };
 
     this.updateAlertTask = function (alertId, status, callback) {

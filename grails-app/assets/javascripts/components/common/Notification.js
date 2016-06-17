@@ -109,14 +109,23 @@ var WARNING_DEFAULT_OPTIONS = {
     }]
 };
 
+var sufferInError = false;
+
 module.exports = {
     error: function (contentOps, dialogOps) {
-        var $content = getErrorContent(contentOps);
+        if (!sufferInError) {
+            sufferInError = true;
 
-        setNotificationDefaultEvents($content);
-        setAnimation($content);
+            var $content = getErrorContent(contentOps);
 
-        createDialog($content, _.assign(ERROR_DEFAULT_OPTIONS, dialogOps));
+            setNotificationDefaultEvents($content);
+            setAnimation($content);
+
+            createDialog($content, _.assign(ERROR_DEFAULT_OPTIONS, dialogOps))
+                .on('dialogclose', function () {
+                    sufferInError = false;
+                });
+        }
     },
 
     confirm: function (contentOps, dialogOps) {

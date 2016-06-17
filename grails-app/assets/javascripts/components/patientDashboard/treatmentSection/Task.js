@@ -55,18 +55,24 @@ function TaskSection() {
         this.select('totalTaskCountSelector').text(total);
     };
 
-    this.updateAlertTaskNumber = function () {
+    this.updateAlertTaskNumber = function (e, data) {
         var number = this.select('alertButtonNumberSelector').text();
 
-        if (--number > 0) {
+        if (data.isResolved) {
+            --number;
+        } else {
+            ++number;
+        }
+
+        if (number > 0) {
             if (number === 1) {
                 this.select('alertButtonTextSelector').text('Alert');
             } else {
                 this.select('alertButtonTextSelector').text('Alerts');
             }
-            this.select('alertButtonNumberSelector').text(number);
+            this.select('alertButtonNumberSelector').text(number).show();
         } else {
-            this.select('alertButtonNumberSelector').hide();
+            this.select('alertButtonNumberSelector').text(0).hide();
         }
     };
 
@@ -205,7 +211,7 @@ function TaskSection() {
     this.after('initialize', function () {
         this.initDefaultTasks();
         this.on(document, 'medicalRecordListSelected', this.onMedicalRecordListClick);
-        this.on('alertHasBeenResolved', this.updateAlertTaskNumber);
+        this.on('alertHasBeenUpdated', this.updateAlertTaskNumber);
 
         this.on('taskStatusFilterSelected', this.filterTaskByStatus);
         this.on('deleteTaskSuccessful', this.updateFilterCount);
