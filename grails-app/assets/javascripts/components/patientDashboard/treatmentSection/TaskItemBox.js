@@ -6,9 +6,18 @@ var STRINGs = require('../../../constants/Strings');
 
 var DELETE_TASK_TITLE = '<strong>{0}</strong>';
 
+var USER_TASK_WRAP = '<div class="content-middle"></div>';
+var USER_TASK_SCORE = [
+    '<span class="sub-item">',
+        '<span class="score-label">{0}</span>',
+        '<span class="score-number">{1}</span>',
+    '</span>'
+].join('');
+
 function TaskItem() {
 
     this.attributes({
+        boxItemContentSelector: '.box-item-content',
         deleteTaskButtonSelector: '.delete',
         beginTaskButtonSelector: '.begin-task',
         callTaskButtonSelector: '.call-task',
@@ -79,15 +88,31 @@ function TaskItem() {
             this.trigger('showFillDischargeTaskDialog', {
                 taskId: taskId
             });
+        } else if (title === 'SNF') {
+            this.trigger('showFillSNFTaskDialog', {
+                taskId: taskId
+            });
         }
     };
 
     this.onUserTaskCompleteSuccess = function (e, data) {
-        if(this.node.id === data.taskId) {
+        if (this.node.id === data.taskId) {
             this.$node.removeClass().addClass('box-item complete')
                 .data('status', 'complete')
                 .find('.box-item-tool').children().not(':last').remove();
 
+            var title = this.select('taskTitleSelector').text().trim();
+            var scoreContent, report;
+            if (title === 'Discharge Plan') {
+                report = ['', 'Home', 'Home with support', 'SNF'];
+                scoreContent = USER_TASK_SCORE.format('Discharge plan:', report[data.choice.question1]);
+            } else if (title === 'SNF') {
+                report = ['', 'Yes', 'No'];
+                scoreContent = USER_TASK_SCORE.format('Report received:', report[data.choice.question1]);
+                scoreContent = scoreContent + USER_TASK_SCORE.format('LOS:', data.choice.question2);
+            }
+
+            $(scoreContent).appendTo($(USER_TASK_WRAP).appendTo(this.select('boxItemContentSelector')));
         }
     };
 

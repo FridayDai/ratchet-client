@@ -1,10 +1,10 @@
 var flight = require('flight');
 var WithFormDialog = require('../../../common/WithFormDialog');
 
-function FillDischargeTaskDialog() {
+function FillSNFTaskDialog() {
     this.options({
-        title: 'DISCHARGE PLAN',
-        width: 430,
+        title: 'SNF Follow Up',
+        width: 454,
         buttons: ['Save']
     });
 
@@ -30,10 +30,19 @@ function FillDischargeTaskDialog() {
         return {
             ignore: ".ignore",
             rules: {
-                'choice.question1': {required: true}
+                'choice.question1': {required: true},
+                'choice.question2': {
+                    required: true,
+                    number: true,
+                    rangelength: [1, 2]
+                }
             },
             messages: {
-                'choice.question1': {required: 'This question is required'}
+                'choice.question1': {required: 'This question is required'},
+                'choice.question2': {
+                    required: 'This question is required',
+                    rangelength: "Please enter no more than 2 digits."
+                }
             },
             errorPlacement: function(error, element) {
                 var errorContainer = element.closest('.list');
@@ -53,7 +62,7 @@ function FillDischargeTaskDialog() {
     this.onRadioTextClick = function (e) {
         var choice = $(e.target).siblings('.choice');
         choice.trigger('click');
-        this.$node.valid();
+        this.$node.find("input:radio").valid();
     };
 
     this.completeTaskSuccess = function (e, data) {
@@ -71,5 +80,6 @@ function FillDischargeTaskDialog() {
     });
 }
 
-module.exports = flight.component(WithFormDialog, FillDischargeTaskDialog);
+module.exports = flight.component(WithFormDialog, FillSNFTaskDialog);
+
 

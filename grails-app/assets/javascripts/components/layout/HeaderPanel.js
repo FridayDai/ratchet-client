@@ -45,6 +45,7 @@ var ALERT_TYPE_MESSAGE_MAPPING = {
     'RISK_ASSESSMENT_AND_PREDICTION_TOOL': 'is indicated high risk by the risk assessment tool',
     'PATIENT_FOLLOW_UP_TOOL': 'requires post-op assistance',
     'DISCHARGE_PLAN': 'needs discharge plan confirmed',
+    'SNF': 'SNF stay needs follow up',
     'EMAIL_BOUNCED': 'has undelivered email'
 };
 

@@ -144,8 +144,8 @@ class TaskController extends BaseController {
         def patientId = params.patientId
         def taskId = params.taskId
         def choice = params.choice
-        def resp = taskService.answerUserTask(token, clientId, patientId, taskId, choice)
-        render resp
+        taskService.answerUserTask(token, clientId, patientId, taskId, choice)
+        render choice as JSON
     }
 
 }

@@ -63,6 +63,10 @@
 
                     </g:elseif>
 
+                    <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "USER"}">
+                        <g:render template="/patientDashboard/taskBox/shared/userScore" model="['task': task]"/>
+                    </g:elseif>
+
                     <g:else>
                         <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">
                             <g:render template="/patientDashboard/taskBox/shared/mixedScore" model="['task': task]"/>
@@ -164,6 +168,9 @@
             </g:if>
             <g:elseif test="${task?.alerts?.first()?.type == 'DISCHARGE_PLAN'}">
                 Confirm the discharge plan.
+            </g:elseif>
+            <g:elseif test="${task?.alerts?.first()?.type ==  'SNF'}">
+                SNF stay needs follow up.
             </g:elseif>
             <g:else>
                 Follow up requested by the patient. Contact patient to follow up.

@@ -441,7 +441,7 @@
         <input type="hidden" name="patientId" value="${patientInfo.id}">
     </g:form>
 
-    <g:form controller="task" action="completeUserToolTask" method="POST" class="form add-group-form ui-hidden"
+    <g:form controller="task" action="completeUserToolTask" method="POST" class="form add-group-form answer-discharge-form ui-hidden"
             id="answer-discharge-task" name="answer-discharge-task">
 
         <div class="title">
@@ -474,6 +474,46 @@
                 <div class="text">SNF</div>
             </li>
         </ul>
+
+        <input type="hidden" name="patientId" value="${patientInfo.id}">
+    </g:form>
+
+    <g:form controller="task" action="completeUserToolTask" method="POST" class="form add-group-form answer-snf-form ui-hidden"
+            id="answer-snf-task" name="answer-snf-task">
+
+        <div class="title">
+            Q1. Have you received patient’s report from SNF?
+        </div>
+
+        <ul class="list">
+            <li class="answer">
+                <label class="choice">
+                    <input type="radio" class="rc-choice-hidden " name="choice.question1" value="1">
+                    <span class="rc-radio primary-radio-color"></span>
+                </label>
+
+                <div class="text">YES</div>
+            </li>
+            <li class="answer">
+                <label class="choice">
+                    <input type="radio" class="rc-choice-hidden" name="choice.question1" value="2">
+                    <span class="rc-radio primary-radio-color"></span>
+                </label>
+
+                <div class="text">No</div>
+            </li>
+        </ul>
+
+        <div class="title">
+            Q2. What’s the patient’s expected LOS at a SNF?
+        </div>
+
+        <div class="list">
+            <label class="expected-label">
+                <input type="text" class="input-text" name="choice.question2"/>
+                <span>Days</span>
+            </label>
+        </div>
 
         <input type="hidden" name="patientId" value="${patientInfo.id}">
     </g:form>

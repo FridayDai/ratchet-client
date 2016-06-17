@@ -27,6 +27,7 @@ var EditEventDateFormDialog = require('../components/patientDashboard/treatmentS
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
 var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
 var FillDischargeTaskDialog = require('../components/patientDashboard/treatmentSection/task/FillDischargeTaskDialog');
+var FillSNFTaskDialog = require('../components/patientDashboard/treatmentSection/task/FillSNFTaskDialog');
 
 var TYPE_SECTION_MAPPING = {
     'Treatment': TreatmentList,
@@ -59,7 +60,8 @@ function PatientDetailPage() {
         editSurgeryDateDialogSelector: '#treatment-time-form',
         addCaregiverDialogSelector: '#invite-caregiver-form',
         addGroupDialogSelector: '#add-group-form',
-        fillDischargeTaskSelector: '#answer-discharge-task'
+        fillDischargeTaskSelector: '#answer-discharge-task',
+        fillSNFTaskSelector: '#answer-snf-task'
     });
 
     this.children({
@@ -119,6 +121,10 @@ function PatientDetailPage() {
             selector: 'fillDischargeTaskSelector',
             event: 'showFillDischargeTaskDialog',
             dialog: FillDischargeTaskDialog
+        }, {
+            selector: 'fillSNFTaskSelector',
+            event: 'showFillSNFTaskDialog',
+            dialog: FillSNFTaskDialog
         }
     ]);
 
