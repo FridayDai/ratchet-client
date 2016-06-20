@@ -189,12 +189,15 @@ function TaskSection() {
 
     this.scrollToday = function () {
         var $taskList = this.select('taskListFiledSelector');
-        var taskListHeight = $taskList.height();
-        var taskListElement = $taskList.get(0);
-        var todayOffsetTop = this.select('todayItemSelector').get(0).offsetTop;
-        var externalTop = 60;
 
-        taskListElement.scrollTop = todayOffsetTop - taskListHeight + externalTop;
+        if ($taskList.length) {
+            var taskListHeight = $taskList.height();
+            var taskListElement = $taskList.get(0);
+            var todayOffsetTop = this.select('todayItemSelector').get(0).offsetTop;
+            var externalTop = 60;
+
+            taskListElement.scrollTop = todayOffsetTop - taskListHeight + externalTop;
+        }
     };
 
     this.onAlertEditEmailButtonClick = function () {
@@ -221,11 +224,14 @@ function TaskSection() {
 
     this.initTaskListHeight = function () {
         var $taskList = this.select('taskListFiledSelector');
-        var containerTop = this.$node.offset().top;
-        var containerHeight = this.$node.height();
-        var taskListTop = $taskList.offset().top;
 
-        $taskList.outerHeight(containerHeight - taskListTop + containerTop);
+        if ($taskList.length) {
+            var containerTop = this.$node.offset().top;
+            var containerHeight = this.$node.height();
+            var taskListTop = $taskList.offset().top;
+
+            $taskList.outerHeight(containerHeight - taskListTop + containerTop);
+        }
     };
 
     this.after('initialize', function () {
