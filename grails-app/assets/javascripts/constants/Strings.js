@@ -59,5 +59,6 @@ module.exports = {
 
     //Decline Message
     DECLINE_TITLE: 'EMAIL DECLINED',
-    DECLINE_MESSAGE: 'Patient will not receive any further communication via email. This cannot be undone. Do you want to proceed.'
+    DECLINE_MESSAGE: 'Patient will not receive any further communication via email.' +
+                     ' This cannot be undone. Do you want to proceed.'
 };
