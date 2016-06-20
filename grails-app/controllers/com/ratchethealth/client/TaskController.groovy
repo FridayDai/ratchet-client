@@ -100,6 +100,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/raq'
                 break
 
+            case RatchetConstants.TOOL_NAME_FOLLOW_UP:
+                view = '/taskResult/surgeryFollowUp'
+                break
+
             default:
                 render status: 404
                 return
@@ -134,7 +138,7 @@ class TaskController extends BaseController {
         def staffId = session?.accountId
         def alertId = params?.alertId
         def status = params?.status?.toInteger() > 0
-        def resp = alertService.updateAlertStatus(token, clientId, staffId, alertId, status)
+        def resp = alertService.updateStaffAlertStatus(token, clientId, staffId, alertId, status)
         render resp
     }
 

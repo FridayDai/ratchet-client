@@ -339,8 +339,9 @@ ratchetv2 {
             providerAverage = "${ratchetv2.server.url.base}/api/v1/report/outcome"
 
             // Alert
-            alerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
-            updateAlertStatus = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts/%s"
+            staffAlerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
+            patientAlerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/alerts"
+            updateStaffAlertStatus = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts/%s"
         }
 
         clientPlatform = "ancient"

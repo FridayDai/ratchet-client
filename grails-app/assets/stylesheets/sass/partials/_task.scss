@@ -17,14 +17,14 @@
 }
 
 .tasks-list {
-    padding: 30px;
-    height: calc(100% - 130px);
+    position: relative;
+    padding: 20px 30px 10px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .curtain-top {
-    height: 30px;
+    height: 20px;
     position: absolute;
     width: 100%;
     background: linear-gradient(to bottom, $base-color-bg-head, rgba(255, 255, 255, 0));
@@ -756,7 +756,7 @@
     }
 }
 
-.box-item-attention {
+.alert-bar {
     position: relative;
     padding: 2px 12px;
     background-color: $base-color-attention-yellow;
@@ -770,9 +770,7 @@
         color: $base-font-grey-dark;
     }
 
-    .resolve-link {
-        position: absolute;
-        right: 12px;
+    .alert-link {
         text-decoration: underline;
         color: $base-color-grey-link;
         cursor: pointer;
@@ -782,17 +780,16 @@
         }
     }
 
+    .resolve-link {
+        position: absolute;
+        right: 12px;
+    }
+
     .undo-link {
         display: none;
         position: absolute;
         right: 12px;
-
-        color: $base-color-grey-link;
-        cursor: pointer;
-
-        &:hover, &:focus {
-            color: $base-color-green-link;
-        }
+        text-decoration: none;
 
         .undo-text {
             display: inline-block;
@@ -819,6 +816,31 @@
         .undo-link {
             display: inline-block;
         }
+    }
+}
+
+.patient-level-attention {
+    margin: 20px 30px 15px;
+    font-size: 15px;
+    padding: 18px;
+
+    .content {
+        display: inline-block;
+        margin-right: 110px;
+    }
+
+    .email {
+        font-weight: 700;
+    }
+
+    .edit-email-link {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .resolve-link, .undo-link {
+        top: 50%;
+        margin-top: -9px;
     }
 }
 

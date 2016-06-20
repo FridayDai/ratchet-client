@@ -3,6 +3,7 @@ var flight = require('flight');
 var Notifications = require('../../common/Notification');
 var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
+var ResolveUndoAlerts = require('../../shared/functional/ResolveUndoAlerts');
 
 var DELETE_TASK_TITLE = '<strong>{0}</strong>';
 
@@ -160,68 +161,6 @@ function TaskItem() {
         });
     };
 
-    this.onResolveButtonClicked = function (e) {
-        var $button = $(e.target).closest('.resolve-link');
-        var $attention = $button.closest('.box-item-attention');
-        var $taskBox = $button.closest('.box-item');
-        var alertId = $taskBox.data('alert');
-        var me = this;
-
-        var dfd = this.dfd = $.Deferred();
-
-        dfd.done(function () {
-            $attention.hide();
-            me.trigger('alertHasBeenResolved');
-        });
-
-        if (!$button.hasClass('checked')) {
-            $button.addClass('checked');
-
-            this.updateAlertTask(alertId, 1, function () {
-                $button.removeClass('checked');
-                $attention.addClass('undo');
-
-                setTimeout(function () {
-                    dfd.resolve();
-                }, 30000);
-            });
-        }
-    };
-
-    this.onUndoButtonClicked = function (e) {
-        var $button = $(e.target).closest('.undo-link');
-        var $attention = $button.closest('.box-item-attention');
-        var $taskBox = $button.closest('.box-item');
-        var alertId = $taskBox.data('alert');
-        var dfd = this.dfd;
-
-        if (!$button.hasClass('checked')) {
-            $button.addClass('checked');
-
-            this.updateAlertTask(alertId, 0, function () {
-                $button.removeClass('checked');
-                $attention.removeClass('undo');
-                dfd.reject();
-            });
-        }
-
-    };
-
-    this.updateAlertTask = function (alertId, status, callback) {
-        $.ajax({
-            url: URLs.UPDATE_ALERTS.format(alertId),
-            type: "POST",
-            data: {
-                status: status
-            },
-            success: function () {
-                if (_.isFunction(callback)) {
-                    callback();
-                }
-            }
-        });
-    };
-
     this.checkPhoneNumberStatus = function () {
         this.trigger('getPhoneNumberStatusFromPatientInfo');
     };
@@ -239,6 +178,11 @@ function TaskItem() {
     this.onTaskIndicatorClicked = function (e) {
         var medicalRecordId = $(e.target).closest('.box-item').attr('medical-record-id');
         this.trigger('taskIndicatorSelected', {medicalRecordId: medicalRecordId});
+    };
+
+    this.resolveSuccessCallback = function ($taskBox) {
+        $($taskBox).data('alert', false);
+        this.trigger('updateTaskFilterStatus');
     };
 
     this.after('initialize', function () {
@@ -260,4 +204,7 @@ function TaskItem() {
     });
 }
 
-module.exports = flight.component(TaskItem);
+module.exports = flight.component(
+    ResolveUndoAlerts,
+    TaskItem
+);

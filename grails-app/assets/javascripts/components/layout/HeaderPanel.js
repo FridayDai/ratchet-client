@@ -24,7 +24,7 @@ var LOADING_MASK_TEMPLATE = [
 var NO_NEW_ALERT_TEMPLATE = [
     '<div class="no-new-alert">',
         '<i class="fa fa-bell-slash-o fa-2x no-new-alert-icon"></i>',
-        'No New Alert.',
+        'No active alerts',
     '</div>'
 ].join('');
 
@@ -232,6 +232,7 @@ function HeaderPanel() {
 
         this.initAlertPopup();
 
+        // 2 minutes
         setInterval(_.bind(this.getAlertCount, this), 120000);
 
         this.hideAlertPopupBind = _.bind(this.hideAlertPopup, this);
@@ -240,7 +241,7 @@ function HeaderPanel() {
             alertIconSelector: this.onAlertIconClicked
         });
 
-        this.on(document, 'alertHasBeenResolved', this.getAlertCount);
+        this.on(document, 'alertHasBeenUpdated', this.getAlertCount);
     });
 }
 

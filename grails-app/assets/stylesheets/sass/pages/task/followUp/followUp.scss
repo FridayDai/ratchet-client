@@ -1,0 +1,88 @@
+@import '../taskResult';
+
+html,body {
+    height: 100%;
+}
+
+#main {
+    height: 100%;
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    padding-top: 143px;
+}
+
+.task-result-content {
+    height: 100%;
+    border: 20px solid #e6e8e8;
+    padding: 30px;
+}
+
+body {
+    margin-bottom: 0;
+}
+
+.sticky-header {
+    .questionnaire-info {
+        .status {
+            padding-right: 0;
+        }
+    }
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 15px;
+    }
+
+    &.part-1 {
+        height: 100%;
+        padding-left: 15px;
+        border-left: 1px solid #8e8e8e;
+    }
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+//answer
+.answer-container {
+    width: 100%;
+    border-top: 1px solid $base-color-darker-grey;
+}
+
+.answer-title {
+    padding-bottom: 10px;
+    color: $result-main-color;
+    font-size: 18px;
+}
+
+.answer-list {
+    display: inline-block;
+    padding: 20px 0;
+    vertical-align: top;
+    font-size: 16px;
+
+    .rc-checkbox {
+        position: relative;
+        display: inline-block;
+        box-sizing: content-box;
+        width: 16px;
+        height: 16px;
+        border: 2px solid $base-font-color;
+        cursor: default;
+    }
+
+    .answer-line {
+        label {
+            float: left;
+            padding-right: 12px;
+        }
+    }
+}

@@ -19,9 +19,11 @@ function PatientAbsoluteEventDate() {
         if (eventType) {
             var $label = this.$node.prev();
 
+            var placeholder = STRINGs.ABSOLUTE_EVENT_DATE_PLACEHOLDER.format(eventType.toLowerCase());
+
             $label.html(STRINGs.ABSOLUTE_EVENT_DATE_LABEL.format(eventType.toUpperCase()));
-            this.$node.attr('placeholder',
-                STRINGs.ABSOLUTE_EVENT_DATE_PLACEHOLDER.format(eventType.toLowerCase()));
+            this.$node.attr('placeholder', placeholder);
+            this.$node.data('placeholder', placeholder);
         }
 
         if (!this.$node.is(':visible')) {
