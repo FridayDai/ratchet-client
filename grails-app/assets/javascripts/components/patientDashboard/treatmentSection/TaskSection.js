@@ -188,11 +188,13 @@ function TaskSection() {
     };
 
     this.scrollToday = function () {
-        var taskListElement = this.select('taskListFiledSelector').get(0);
+        var $taskList = this.select('taskListFiledSelector');
+        var taskListHeight = $taskList.height();
+        var taskListElement = $taskList.get(0);
+        var todayOffsetTop = this.select('todayItemSelector').get(0).offsetTop;
+        var externalTop = 60;
 
-        this.select('todayItemSelector').get(0).scrollIntoView(false);
-
-        taskListElement.scrollTop += 10;
+        taskListElement.scrollTop = todayOffsetTop - taskListHeight + externalTop;
     };
 
     this.onAlertEditEmailButtonClick = function () {
