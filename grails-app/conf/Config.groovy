@@ -242,6 +242,11 @@ ratchetv2 {
                 confirm = "${ratchetv2.server.url.base}/api/v1/password/confirm"
             }
 
+            //email
+            email {
+                unsubscribeEmail = "${ratchetv2.server.url.base}/api/v1/patients/%s/subscribe"
+            }
+
             // Patients URL
             patients = "${ratchetv2.server.url.base}/api/v1/patients"
             patient = "${ratchetv2.server.url.base}/api/v1/patients/%s"

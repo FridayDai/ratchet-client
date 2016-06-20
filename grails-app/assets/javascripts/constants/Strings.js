@@ -51,5 +51,9 @@ module.exports = {
     TAB_LOAD_ERROR: "Couldn't load this tab. We'll try to fix this as soon as possible.",
     RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
     BIRTHDAY_IS_REQUIRED: "Please add birthday to patient's profile before adding a treatment.",
-    BIRTHDAY_IS_REQUIRED_ADD_EMAIL: "Please add birthday to patient's profile before adding email."
+    BIRTHDAY_IS_REQUIRED_ADD_EMAIL: "Please add birthday to patient's profile before adding email.",
+
+    //Decline Message
+    DECLINE_TITLE: 'EMAIL DECLINED',
+    DECLINE_MESSAGE: 'Patient will not receive any further communication via email. This cannot be undone. Do you want to proceed.'
 };

@@ -51,7 +51,7 @@ module.exports = {
         3: '',
         4: 'Not Available',
         5: 'Undelivered',
-        6: 'Unsubscribed'
+        6: 'Declined'
     },
 
     EMAIL_STATUS_FILTER: [
@@ -59,7 +59,7 @@ module.exports = {
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
         {label: "Undelivered", value: 5},
-        {label: "Unsubscribed", value: 6}
+        {label: "Declined", value: 6}
     ],
 
     ATTENTION_STATUS_FILTER: [
