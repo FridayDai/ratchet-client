@@ -6,7 +6,7 @@ var PatientGroupCombobox = require('../../shared/components/PatientGroupCombobox
 var PatientRelationshipCombobox = require('../../shared/components/PatientRelationshipCombobox');
 var PatientProviderCombobox = require('../../shared/components/PatientProviderCombobox');
 var PatientTreatmentCombobox = require('../../shared/components/PatientTreatmentCombobox');
-var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
+var PatientAbsoluteEventDate = require('../../shared/components/PatientAbsoluteEventDate');
 var ComboboxInputValidation = require('../../shared/validation/ComboboxInputValidation');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
@@ -70,7 +70,7 @@ function AddTreatmentFormDialog() {
             }
         },
         eventTimeFieldSelector: {
-            child: PatientSurgeryDate,
+            child: PatientAbsoluteEventDate,
             attributes: {
                 groupSelectEvent: 'addTreatmentGroupSelected',
                 groupClearEvent: 'addTreatmentGroupClear',

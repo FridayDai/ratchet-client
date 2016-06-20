@@ -41,8 +41,8 @@ module.exports = {
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
     MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
     MAX_DATE_RANGE: "Please input date before {0} year.",
-    MINIMUM_SURGERY_DATE: "That surgery date is too far in the past.",
-    MAX_SURGERY_DATE: "That surgery date is too far in the future.",
+    MINIMUM_ABSOLUTE_EVENT_DATE: "That date is too far in the past.",
+    MAX_ABSOLUTE_EVENT_DATE: "That date is too far in the future.",
 
     BULK_IMPORT_DATA_ERROR: "We are not able to process this file due to a data problem. " +
                             "Please download and fix the error file and try again.",
@@ -52,6 +52,10 @@ module.exports = {
     RATE_LIMIT_LOGIN: "You will be able to try again in {0}.",
     BIRTHDAY_IS_REQUIRED: "Please add birthday to patient's profile before adding a treatment.",
     BIRTHDAY_IS_REQUIRED_ADD_EMAIL: "Please add birthday to patient's profile before adding email.",
+
+    ABSOLUTE_EVENT_DATE_LABEL: "{0} DATE<span>*</span>",
+    ABSOLUTE_EVENT_DATE_PLACEHOLDER: "Select {0} date",
+    SESSION_ACCOUNT_INFO: 'RH_ACCOUNT_INFO',
 
     //Decline Message
     DECLINE_TITLE: 'EMAIL DECLINED',

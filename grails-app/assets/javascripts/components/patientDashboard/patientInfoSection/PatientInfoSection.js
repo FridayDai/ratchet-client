@@ -27,6 +27,10 @@ function PatientInfoSection() {
     this.showEditPatientDialog = function (e) {
         e.preventDefault();
 
+        this.triggerEditPatientDialog();
+    };
+
+    this.triggerEditPatientDialog = function () {
         this.trigger('showEditPatientFormDialog', this.getBasicInfo());
     };
 
@@ -186,6 +190,7 @@ function PatientInfoSection() {
         this.on(document, 'patientInfoRequest', this.onPatientInfoRequest);
         this.on(document, 'deletePatientSuccess', this.onPatientDeleteSuccess);
         this.on(document, 'getPhoneNumberStatusFromPatientInfo', this.onPhoneNumberStatusFeedback);
+        this.on(document, 'triggerEditPatientFormDialog', this.triggerEditPatientDialog);
 
         this.on('click', {
             editPatientButtonSelector: this.showEditPatientDialog,

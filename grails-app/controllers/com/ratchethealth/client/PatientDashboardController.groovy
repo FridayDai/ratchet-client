@@ -16,6 +16,7 @@ class PatientDashboardController extends BaseController {
     def activityService
     def taskService
     def emailService
+    def alertService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
 
@@ -116,6 +117,7 @@ class PatientDashboardController extends BaseController {
         def accountId = request.session.accountId
 
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
+        def patientAlerts = alertService.getPatientAlerts(token, clientId, patientId)
 
 //        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
@@ -127,10 +129,11 @@ class PatientDashboardController extends BaseController {
                 accountId         : accountId,
                 AccountIsAdmin    : request.session.accountManagement,
                 PatientEmailStatus: PatientEmailStatus,
-                medicalRecords    : combinedList.medicalRecords,
-                combinedTasks     : combinedList.combinedTasks,
-                alertNumber       : combinedList.alertNumber,
-                totalCount        : medicalRecords.totalCount
+                medicalRecords    : combinedList?.medicalRecords,
+                combinedTasks     : combinedList?.combinedTasks,
+                alertNumber       : patientAlerts?.totalCount,
+                totalCount        : medicalRecords.totalCount,
+                patientAlerts     : patientAlerts?.items
         ])
     }
 
@@ -237,6 +240,7 @@ class PatientDashboardController extends BaseController {
                     title                 : treatment.title,
                     tmpTitle              : treatment.tmpTitle,
                     absoluteEventTimestamp: absoluteEventTimestamp,
+                    absoluteEventType     : treatment.absoluteEventType,
                     indicator             : i < 26 ? numberMap[i++] : '*'
             ]
 
@@ -245,7 +249,7 @@ class PatientDashboardController extends BaseController {
             if (absoluteEventTimestamp) {
                 DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver');
                 DateTime start = new DateTime(absoluteEventTimestamp, vancouver)
-                DateTime end = new DateTime(today, vancouver)
+                DateTime end = new DateTime(today, vancouver).withTimeAtStartOfDay()
                 def days = Days.daysBetween(start, end).getDays()
 
                 def status = days == 0 ? StatusCodeConstants.TASK_STATUS_PENDING :

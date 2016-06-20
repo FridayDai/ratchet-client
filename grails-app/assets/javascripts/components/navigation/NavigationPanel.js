@@ -1,9 +1,12 @@
 var flight = require('flight');
+var STRINGs = require('../../constants/Strings');
 
 function NavigationPanel() {
     this.attributes({
         assistMeButton: '#assist-me',
-        expendableNavSelector: '.expendable-nav'
+        expendableNavSelector: '.expendable-nav',
+        accountInfoNavSelector: '.login-info',
+        logoutLinkSelector: '.log-out'
     });
 
     this.onAssistMeButtonClicked = function (e) {
@@ -38,10 +41,32 @@ function NavigationPanel() {
         }
     };
 
+    this.onLogoutClicked = function (e) {
+        e.preventDefault();
+        this.removeAccountInfo();
+
+        var $logout = this.select('logoutLinkSelector');
+
+        window.location = $logout.attr('href');
+    };
+
+    this.saveAccountInfo = function () {
+        sessionStorage.setItem(STRINGs.SESSION_ACCOUNT_INFO, JSON.stringify({
+            email: this.select('accountInfoNavSelector').data('email')
+        }));
+    };
+
+    this.removeAccountInfo = function () {
+        sessionStorage.removeItem(STRINGs.SESSION_ACCOUNT_INFO);
+    };
+
     this.after('initialize', function () {
+        this.saveAccountInfo();
+
         this.on('click', {
             assistMeButton: this.onAssistMeButtonClicked,
-            expendableNavSelector: this.toggleNav
+            expendableNavSelector: this.toggleNav,
+            logoutLinkSelector: this.onLogoutClicked
         });
     });
 }

@@ -3,7 +3,7 @@ var ClearTabCache = require('../../../shared/functional/ClearTabCache');
 var TreatmentLevelTabToolbar = require('./TreatmentListLevelTabToolbar');
 var TreatmentTabToolbar = require('./TreatmentTabToolbar');
 var WithChildren = require('../../../common/WithChildren');
-var Task = require('../Task');
+var TaskSection = require('../TaskSection');
 
 var GROUP_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',
@@ -27,7 +27,7 @@ function TreatmentList() {
 
     this.children({
         treatmentPanelContainerSelector: {
-            child: Task
+            child: TaskSection
         },
         treatmentManagerContainerSelector: {
             child: TreatmentLevelTabToolbar

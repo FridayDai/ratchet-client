@@ -17,7 +17,8 @@
                     <g:hiddenField name="task-info-hidden" class="task-info-hidden" data-client-id="${clientId}"
                                    data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                    data-treatment-id="${medicalRecord?.treatmentId}"
-                                   data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"/>
+                                   data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"
+                                   data-absolute-event-type="${medicalRecord?.absoluteEventType}"/>
 
                     <a class="ui-tabs-anchor" data-id="sub${i}">
                         <label class="treatment-indicate">
@@ -78,8 +79,8 @@
                     <option class="overdue" value="overdue">overdue</option>
                     <option class="pending" value="pending">pending</option>
                     <option class="expired" value="expired">expired</option>
-                    <option class="schedule" value="schedule">schedule</option>
-                    <option class="complete" value="complete">complete</option>
+                    <option class="schedule" value="schedule">scheduled</option>
+                    <option class="complete" value="complete">completed</option>
                 </select>
 
                 <button id="btn-filter-alert" class="btn btn-filter-alert">
@@ -105,6 +106,31 @@
                 </div>
 
             </div>
+
+            <g:each in="${patientAlerts}" var="alert">
+                <g:if test="${alert?.type == 'EMAIL_BOUNCED'}">
+                <div class="alert-bar patient-level-attention" data-alert-id="${alert?.id}">
+                    <span class="content">
+                        <i class="fa fa-exclamation-circle"></i>
+                        Email cannot be delivered to <span class="email">${alert.bouncedEmail}</span>. Make sure the email is correct.
+                        <span class="alert-link edit-email-link">Edit email</span>
+                        -
+                        <span class="alert-datetime">
+                            <g:formatDate date="${alert?.dateCreated}"
+                                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                          format="MMM dd 'at' hh:mm a"/>
+                        </span>
+                    </span>
+                    <span class="alert-link resolve-link">Click to resolve</span>
+
+                    <span class="alert-link undo-link">
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+
+                        <span class="undo-text">Undo</span>
+                    </span>
+                </div>
+                </g:if>
+            </g:each>
 
             <div class="curtain-top"></div>
 

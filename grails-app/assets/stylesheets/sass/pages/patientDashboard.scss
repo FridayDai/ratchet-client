@@ -973,6 +973,70 @@
     }
 }
 
+
+.list {
+    padding-left: 20px;
+
+    .error-container {
+        top: -19px;
+    }
+
+    &.error-help-block {
+        .rc-radio {
+            border: 2px solid $base-color-red;
+        }
+
+        .input-text {
+            border: 1px solid $base-color-error-border;
+        }
+    }
+}
+
+.answer-discharge-form {
+    .list {
+        padding-top: 1px;
+    }
+}
+
+.answer-snf-form {
+    .answer {
+        margin: 16px 0;
+    }
+
+    .input-text {
+        height: 30px;
+        width: 50px;
+        border: 1px solid $base-color-boder;
+        text-align: center;
+    }
+
+    .expected-label {
+        margin-top: 8px;
+        display: inline-block;
+
+        span {
+            padding-left: 10px;
+        }
+    }
+}
+
+.answer {
+    margin: 16px 0 16px 26px;
+    font-size: 17px;
+
+    .choice {
+        height: 26px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .text {
+        display: inline-block;
+        margin-left: 13px;
+        vertical-align: middle;
+    }
+}
+
 .decline {
     position: relative;
     height: 25px;

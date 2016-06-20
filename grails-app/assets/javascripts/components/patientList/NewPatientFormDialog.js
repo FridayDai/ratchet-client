@@ -15,7 +15,7 @@ var NewPatientRelationshipCombobox = require('../shared/components/PatientRelati
 var NewPatientGroupCombobox = require('../shared/components/PatientGroupCombobox');
 var NewPatientProviderCombobox = require('../shared/components/PatientProviderCombobox');
 var NewPatientTreatmentCombobox = require('../shared/components/PatientTreatmentCombobox');
-var NewPatientSurgeryDate = require('../shared/components/PatientSurgeryDate');
+var NewPatientAbsoluteEventDate = require('../shared/components/PatientAbsoluteEventDate');
 var NewPatientBirthday = require('../shared/components/PatientBirthday');
 
 function NewPatientFormDialog() {
@@ -99,7 +99,7 @@ function NewPatientFormDialog() {
             }
         },
         eventTimeFieldSelector: {
-            child: NewPatientSurgeryDate,
+            child: NewPatientAbsoluteEventDate,
             attributes: {
                 groupSelectEvent: 'patientGroupSelected',
                 groupClearEvent: 'patientGroupClear',

@@ -1,10 +1,11 @@
 var flight = require('flight');
 var WithFormDialog = require('../../common/WithFormDialog');
 var URLs = require('../../../constants/Urls');
-var PatientSurgeryDate = require('../../shared/components/PatientSurgeryDate');
+var PatientAbsoluteEventDate = require('../../shared/components/PatientAbsoluteEventDate');
 var ProviderCombobox = require('./ProviderCombobox');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
+var STRINGs = require('../../../constants/Strings');
 
 function EditEventDateFormDialog() {
     this.options({
@@ -19,12 +20,13 @@ function EditEventDateFormDialog() {
     });
 
     this.children({
-        eventTimeFieldSelector: PatientSurgeryDate,
+        eventTimeFieldSelector: PatientAbsoluteEventDate,
         providerFieldSelector: ProviderCombobox
     });
 
     this.onShow = function (e, data) {
-        this.setCurrentSurgeryDate(data.currentSurgeryDate);
+        this.changeLabelPlaceholderWithType(data);
+        this.setCurrentAbsoluteEventDate(data.currentAbsoluteEventDate);
 
         this.patientId = data.patientId;
         this.medicalRecordId = data.medicalRecordId;
@@ -33,8 +35,21 @@ function EditEventDateFormDialog() {
         this.show();
     };
 
-    this.setCurrentSurgeryDate = function (current) {
-        this.currentSurgeryDate = current;
+    this.changeLabelPlaceholderWithType = function (data) {
+        var $input = this.select('eventTimeFieldSelector');
+        var placeholder = STRINGs.ABSOLUTE_EVENT_DATE_PLACEHOLDER
+            .format(data.absoluteEventType.toLowerCase());
+
+        $input.attr('placeholder', placeholder)
+            .data('placeholder', placeholder);
+
+        $input.prev().html(
+            STRINGs.ABSOLUTE_EVENT_DATE_LABEL
+                .format(data.absoluteEventType.toUpperCase()));
+    };
+
+    this.setCurrentAbsoluteEventDate = function (current) {
+        this.currentAbsoluteEventDate = current;
 
         this.select('eventTimeFieldSelector').val(current);
     };
