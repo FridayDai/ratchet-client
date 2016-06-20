@@ -13,6 +13,10 @@ function ResolveUndoAlerts() {
 
         dfd.done(function () {
             $alertBar.hide();
+
+            if (me.resolveSuccessCallback) {
+                me.resolveSuccessCallback($alertBar.parent());
+            }
         });
 
         if (!$button.hasClass('checked')) {
@@ -68,10 +72,6 @@ function ResolveUndoAlerts() {
             }
         });
     };
-
-    this.after('initialize', function () {
-
-    });
 }
 
 module.exports = ResolveUndoAlerts;

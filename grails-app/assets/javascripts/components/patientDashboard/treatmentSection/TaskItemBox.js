@@ -180,6 +180,11 @@ function TaskItem() {
         this.trigger('taskIndicatorSelected', {medicalRecordId: medicalRecordId});
     };
 
+    this.resolveSuccessCallback = function ($taskBox) {
+        $($taskBox).data('alert', false);
+        this.trigger('updateTaskFilterStatus');
+    };
+
     this.after('initialize', function () {
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);

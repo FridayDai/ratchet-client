@@ -235,6 +235,7 @@ function TaskSection() {
 
         this.on('taskStatusFilterSelected', this.filterTaskByStatus);
         this.on('deleteTaskSuccessful', this.updateFilterCount);
+        this.on('updateTaskFilterStatus', this.filterTasks);
 
         this.on('click', {
             clearFilterButtonSelector: this.clearTaskFilter,
