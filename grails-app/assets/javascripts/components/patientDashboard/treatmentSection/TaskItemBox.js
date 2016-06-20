@@ -15,6 +15,11 @@ var USER_TASK_SCORE = [
     '</span>'
 ].join('');
 
+var USER_TOOL_TITLE = {
+    discharge: 'Discharge Plan',
+    snf: 'SNF Follow Up'
+};
+
 function TaskItem() {
 
     this.attributes({
@@ -85,11 +90,11 @@ function TaskItem() {
     this.onTaskStartButtonClicked = function () {
         var taskId = this.node.id;
         var title = this.select('taskTitleSelector').text().trim();
-        if (title === 'Discharge Plan') {
+        if (title === USER_TOOL_TITLE.discharge) {
             this.trigger('showFillDischargeTaskDialog', {
                 taskId: taskId
             });
-        } else if (title === 'SNF') {
+        } else if (title === USER_TOOL_TITLE.snf) {
             this.trigger('showFillSNFTaskDialog', {
                 taskId: taskId
             });
@@ -98,16 +103,17 @@ function TaskItem() {
 
     this.onUserTaskCompleteSuccess = function (e, data) {
         if (this.node.id === data.taskId) {
-            this.$node.removeClass().addClass('box-item complete')
+
+            this.$node.removeClass('pending overdue expired').addClass('box-item complete')
                 .data('status', 'complete')
                 .find('.box-item-tool').children().not(':last').remove();
 
             var title = this.select('taskTitleSelector').text().trim();
             var scoreContent, report;
-            if (title === 'Discharge Plan') {
+            if (title === USER_TOOL_TITLE.discharge) {
                 report = ['', 'Home', 'Home with support', 'SNF'];
                 scoreContent = USER_TASK_SCORE.format('Discharge plan:', report[data.choice.question1]);
-            } else if (title === 'SNF') {
+            } else if (title === USER_TOOL_TITLE.snf) {
                 report = ['', 'Yes', 'No'];
                 scoreContent = USER_TASK_SCORE.format('Report received:', report[data.choice.question1]);
                 scoreContent = scoreContent + USER_TASK_SCORE.format('LOS:', data.choice.question2);
