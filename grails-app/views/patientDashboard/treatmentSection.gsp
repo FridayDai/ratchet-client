@@ -110,16 +110,17 @@
             <g:each in="${patientAlerts}" var="alert">
                 <g:if test="${alert?.type == 'EMAIL_BOUNCED'}">
                 <div class="alert-bar patient-level-attention" data-alert-id="${alert?.id}">
-                    <i class="fa fa-exclamation-circle"></i>
-                    Email cannot be delivered to <span class="email">${alert.bouncedEmail}</span>. Make sure the email is correct.
-                    <span class="alert-link edit-email-link">Edit email</span>
-                    -
-                    <span class="alert-datetime">
-                        <g:formatDate date="${alert?.dateCreated}"
-                                      timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                      format="MMM dd 'at' hh:mm a"/>
+                    <span class="content">
+                        <i class="fa fa-exclamation-circle"></i>
+                        Email cannot be delivered to <span class="email">${alert.bouncedEmail}</span>. Make sure the email is correct.
+                        <span class="alert-link edit-email-link">Edit email</span>
+                        -
+                        <span class="alert-datetime">
+                            <g:formatDate date="${alert?.dateCreated}"
+                                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                          format="MMM dd 'at' hh:mm a"/>
+                        </span>
                     </span>
-
                     <span class="alert-link resolve-link">Click to resolve</span>
 
                     <span class="alert-link undo-link">

@@ -824,6 +824,11 @@
     font-size: 15px;
     padding: 18px;
 
+    .content {
+        display: inline-block;
+        margin-right: 110px;
+    }
+
     .email {
         font-weight: 700;
     }
@@ -831,6 +836,11 @@
     .edit-email-link {
         margin-left: 5px;
         margin-right: 5px;
+    }
+
+    .resolve-link, .undo-link {
+        top: 50%;
+        margin-top: -9px;
     }
 }
 
