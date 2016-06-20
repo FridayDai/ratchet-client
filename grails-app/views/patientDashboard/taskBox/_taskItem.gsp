@@ -1,4 +1,4 @@
-<%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
+<%@ page import="grails.converters.JSON; com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
@@ -65,6 +65,26 @@
 
                     <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "USER"}">
                         <g:render template="/patientDashboard/taskBox/shared/userScore" model="['task': task]"/>
+                    </g:elseif>
+
+                    <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "RAPT" && RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FOLLOW_UP}">
+                        <g:set var="mixedResult" value="${task?.mixedResult ? JSON.parse(task?.mixedResult) : [:]}"/>
+                        <g:if test="${mixedResult?.assistance == 'true'}">
+                            <span class="sub-item-line">
+                                <span>Post-op assistance requested on</span>
+
+                                <span class="bold">
+                                    <g:formatDate date="${task?.completeTime}"
+                                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                  format="MMM dd, yyyy"/>
+                                </span>
+                            </span>
+                        </g:if>
+                        <g:else>
+                            <span class="sub-item-line">
+                                <span>No immediate assistance required</span>
+                            </span>
+                        </g:else>
                     </g:elseif>
 
                     <g:else>
@@ -171,6 +191,9 @@
             </g:elseif>
             <g:elseif test="${task?.alerts?.first()?.type ==  'SNF'}">
                 SNF stay needs follow up.
+            </g:elseif>
+            <g:elseif test="${task?.alerts?.first()?.type ==  'PATIENT_FOLLOW_UP_TOOL'}">
+                Patient requires post-op assistance.
             </g:elseif>
             <g:else>
                 Follow up requested by the patient. Contact patient to follow up.

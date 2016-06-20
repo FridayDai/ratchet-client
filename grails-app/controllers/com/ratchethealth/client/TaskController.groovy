@@ -100,6 +100,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/raq'
                 break
 
+            case RatchetConstants.TOOL_NAME_FOLLOW_UP:
+                view = '/taskResult/surgeryFollowUp'
+                break
+
             default:
                 render status: 404
                 return
