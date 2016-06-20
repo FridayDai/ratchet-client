@@ -11,7 +11,7 @@
     </span>
 </g:if>
 
-<g:elseif test="${task?.title == 'SNF'}">
+<g:elseif test="${task?.title == 'SNF Follow Up'}">
     <g:set var="report" value="['', 'Yes', 'No']"/>
     <span class="sub-item">
         <span class="score-label">Report received:</span>
