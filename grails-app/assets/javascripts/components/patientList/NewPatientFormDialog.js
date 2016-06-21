@@ -234,7 +234,7 @@ function NewPatientFormDialog() {
         this.select('firstNameStaticSelector').text(data.firstName);
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email === null ? '' : data.email);
-        if (PARAMs.EMAIL_STATUS[data.status] === 'Declined') {
+        if (PARAMs.EMAIL_STATUS[data.status] === 'DECLINED') {
             this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
         } else {
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});

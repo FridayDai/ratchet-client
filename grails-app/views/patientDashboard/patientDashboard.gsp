@@ -190,7 +190,7 @@
             <label class="lbl-group">EMAIL ADDRESS</label>
             <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
             <div class="decline">
-                <input id="emailStatus" name="emailStatus" type="checkbox" value="decline" class="input-group input-convert">
+                <input id="emailStatus" name="emailStatus" type="checkbox" value="decline">
                 <label for="emailStatus" class="decline-msg">
                     Patient declined to communicate via email.</label>
             </div>

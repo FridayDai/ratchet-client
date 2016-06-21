@@ -153,7 +153,7 @@
                 <div class='replace-input-div' id="email-static"></div>
                 <a class='icon-edit form-group-edit'></a>
                 <div class="decline">
-                    <input id="emailStatus" name="emailStatus" type="checkbox" value="decline" class="input-group input-convert">
+                    <input id="emailStatus" name="emailStatus" type="checkbox" value="decline">
                     <label for="emailStatus" class="decline-msg">
                         Patient declined to communicate via email.</label>
                 </div>
