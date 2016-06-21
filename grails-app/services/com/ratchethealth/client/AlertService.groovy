@@ -55,7 +55,7 @@ class AlertService extends RatchetAPIService {
 
         withGet(token, url) { req ->
             def resp = req
-                    .queryString("type", type)
+                    .queryString("alertTypes", type)
                     .asString()
 
             if (resp.status == 200) {
