@@ -68,9 +68,9 @@
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
                         <i class="fa fa-ban declined" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">DECLINED</span>
                     </g:elseif>
-                    <g:else>
-                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i><span class="email-state div-hidden" value="${patientInfo.status}"></span>
-                    </g:else>
+                    %{--<g:else>--}%
+                        %{--<i class="fa fa-exclamation-circle" aria-hidden="true"></i><span class="email-state div-hidden" value="${patientInfo.status}"></span>--}%
+                    %{--</g:else>--}%
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                         <div class="inline div-invite">

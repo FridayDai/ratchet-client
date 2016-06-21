@@ -457,7 +457,7 @@
     display: inline-block;
 }
 
-.Unverified {
+.UNVERIFIED {
     margin: 0 5px 0 0;
     color: $base-color-pending;
 }
@@ -467,12 +467,12 @@
     color: $base-color-complete;
 }
 
-.Undelievered {
+.UNDELIVERED {
     margin: 0 5px 0 0;
     color: $base-color-overdue;
 }
 
-.Declined {
+.DECLINED {
     margin: 0 5px 0 0;
     color: $base-color-decline;
 }
