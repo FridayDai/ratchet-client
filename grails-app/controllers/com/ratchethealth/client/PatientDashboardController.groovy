@@ -15,6 +15,7 @@ class PatientDashboardController extends BaseController {
     def groupService
     def activityService
     def taskService
+    def emailService
     def alertService
 
     static allowedMethods = [getSinglePatient: ['GET'], updateSinglePatient: ['POST']]
@@ -68,7 +69,13 @@ class PatientDashboardController extends BaseController {
 
     def updateSinglePatient(Patient patient) {
         String token = request.session.token
+
         def resp = patientDashboardService.updateSinglePatient(token, patient)
+
+        if (patient.emailStatus == "decline") {
+            emailService.unsubscribeEmail(token, resp.subscribeCode, patient.patientId)
+        }
+
         def status = [resp: resp]
         render status as JSON
     }
@@ -78,6 +85,7 @@ class PatientDashboardController extends BaseController {
         String token = request.session.token
         def identify = params?.identify
         def data = patientDashboardService.checkPatientId(token, identify)
+
         render data as JSON
     }
 
@@ -109,7 +117,7 @@ class PatientDashboardController extends BaseController {
         def accountId = request.session.accountId
 
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
-        def patientAlerts = alertService.getPatientAlerts(token, clientId, patientId)
+        def emailAlerts = alertService.getPatientAlerts(token, clientId, patientId, StatusCodeConstants.ALERT_TYPE.emailBounced)
 
 //        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
@@ -123,9 +131,9 @@ class PatientDashboardController extends BaseController {
                 PatientEmailStatus: PatientEmailStatus,
                 medicalRecords    : combinedList?.medicalRecords,
                 combinedTasks     : combinedList?.combinedTasks,
-                alertNumber       : patientAlerts?.totalCount,
+                alertNumber       : emailAlerts?.totalCount + combinedList?.alertNumber,
                 totalCount        : medicalRecords.totalCount,
-                patientAlerts     : patientAlerts?.items
+                patientEmailAlerts     : emailAlerts?.items
         ])
     }
 

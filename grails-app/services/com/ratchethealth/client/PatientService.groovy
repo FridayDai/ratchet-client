@@ -21,6 +21,13 @@ class PatientService extends RatchetAPIService {
         def ecEmail = patient?.ecEmail
         def groupId = patient?.groupId
         def birthday = patient?.birthdayValue
+        def isUnSubscribed = patient?.emailStatus
+
+        if(isUnSubscribed == "decline"){
+            isUnSubscribed = true;
+        } else {
+            isUnSubscribed = false;
+        }
 
         String addPatientsUrl = grailsApplication.config.ratchetv2.server.url.assignTreatments
         def url = String.format(addPatientsUrl, clientId)
@@ -44,6 +51,7 @@ class PatientService extends RatchetAPIService {
                     .field("relationship", relationship)
                     .field("ecEmail", ecEmail)
                     .field("groupId", groupId)
+                    .field("isUnSubscribed", isUnSubscribed)
                     .asString()
 
             if (resp.status == 201) {
@@ -51,7 +59,7 @@ class PatientService extends RatchetAPIService {
 
                 log.info("Add patient success, token: ${token}")
 
-                ["id": result.id]
+                return ["id": result.id]
             } else {
                 handleError(resp)
             }

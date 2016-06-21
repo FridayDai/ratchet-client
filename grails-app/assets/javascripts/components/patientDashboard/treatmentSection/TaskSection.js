@@ -139,6 +139,8 @@ function TaskSection() {
                 this.select('archivedItemSelector').hide();
             }
         } else {
+            this.attr.boxItemsSelector = '.box-item:not(.archived)';
+            this.select('archivedItemSelector').hide();
             this.filter.currentMedicalRecordId = null;
         }
 
@@ -232,6 +234,10 @@ function TaskSection() {
 
             $taskList.outerHeight(containerHeight - taskListTop + containerTop);
         }
+    };
+
+    this.resolveSuccessCallback = function () {
+        this.initTaskListHeight();
     };
 
     this.after('initialize', function () {

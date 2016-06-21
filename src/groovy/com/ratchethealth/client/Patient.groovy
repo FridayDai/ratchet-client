@@ -7,6 +7,7 @@ class Patient {
     String lastName
     String phoneNumber
     String email
+    String emailStatus
     String profilePhoto
     Long treatmentId
     Long staffId

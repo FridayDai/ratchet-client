@@ -100,7 +100,7 @@ class PatientDashboardServiceSpec extends Specification {
 		given:
 		def jBuilder = new JsonBuilder()
 		jBuilder {
-			id 1
+			code "code"
 		}
 
 		MultipartBody.metaClass.asString = { ->
@@ -132,7 +132,7 @@ class PatientDashboardServiceSpec extends Specification {
 		def result = service.updateSinglePatient('token', patient)
 
 		then:
-		result == 200
+		result.code == "code"
 	}
 
 	def "test updateSinglePatient without successful result"() {

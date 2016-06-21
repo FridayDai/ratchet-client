@@ -9,7 +9,7 @@ var ACTIVE_BUTTONS = '<a href="#" class="btn-edit" data-caregiver-id="{0}"></a>'
 
 var ACTIVE_STATUS = '<span class="status-active">ACTIVE</span>';
 var INACTIVE_STATUS = '<span class="status-inactive">INACTIVE</span>';
-var UNSUBSCRIBE_STATUS = '<span class="status-unsubscribe">UNSBUSCRIBE</span>';
+var UNSUBSCRIBE_STATUS = '<span class="status-unsubscribe">DECLINED</span>';
 
 
 function CaregiverTable() {

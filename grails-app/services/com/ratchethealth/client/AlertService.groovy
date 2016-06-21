@@ -11,13 +11,13 @@ class AlertService extends RatchetAPIService {
 
         withGet(token, url) { req ->
             def resp = req
-                .queryString("max", filterFields.max)
-                .queryString("offset", filterFields.offset)
-                .queryString("order", filterFields.order)
-                .queryString("sorted", filterFields.sorted)
-                .queryString("isResolved", filterFields.isResolved)
-                .queryString("isCount", filterFields.isCount)
-                .asString()
+                    .queryString("max", filterFields.max)
+                    .queryString("offset", filterFields.offset)
+                    .queryString("order", filterFields.order)
+                    .queryString("sorted", filterFields.sorted)
+                    .queryString("isResolved", filterFields.isResolved)
+                    .queryString("isCount", filterFields.isCount)
+                    .asString()
 
             if (resp.status == 200) {
                 log.info("Get staff alerts success, token: ${token}.")
@@ -36,8 +36,8 @@ class AlertService extends RatchetAPIService {
 
         withPost(token, url) { req ->
             def resp = req
-                .field("status", status)
-                .asString()
+                    .field("status", status)
+                    .asString()
 
             if (resp.status == 200) {
                 log.info("resolve/undo staff alert success, token: ${token}.")
@@ -48,13 +48,15 @@ class AlertService extends RatchetAPIService {
         }
     }
 
-    def getPatientAlerts(token, clientId, patientId) {
+    def getPatientAlerts(token, clientId, patientId, type = null) {
         String getPatientAlertUrl = grailsApplication.config.ratchetv2.server.url.patientAlerts
         def url = String.format(getPatientAlertUrl, clientId, patientId)
         log.info("Call backend service to get patient alert, token: ${token}.")
 
         withGet(token, url) { req ->
-            def resp = req.asString()
+            def resp = req
+                    .queryString("alertTypes", type)
+                    .asString()
 
             if (resp.status == 200) {
                 log.info("Get patient alerts success, token: ${token}.")
