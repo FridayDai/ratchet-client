@@ -33,15 +33,14 @@ function FillSNFTaskDialog() {
                 'choice.question1': {required: true},
                 'choice.question2': {
                     required: true,
-                    number: true,
-                    rangelength: [1, 2]
+                    range: [0, 99]
                 }
             },
             messages: {
                 'choice.question1': {required: 'This question is required'},
                 'choice.question2': {
                     required: 'This question is required',
-                    rangelength: "Please enter no more than 2 digits."
+                    range: "Invalid Input. The number of day(s) should be between 0 - 99."
                 }
             },
             errorPlacement: function(error, element) {

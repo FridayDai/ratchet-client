@@ -512,8 +512,8 @@
 
         <div class="list">
             <label class="expected-label">
-                <input type="text" class="input-text" name="choice.question2"/>
-                <span>Days</span>
+                <input type="text" class="input-text" name="choice.question2" placeholder="0" maxlength="2"/>
+                <span>Day(s)</span>
             </label>
         </div>
 
