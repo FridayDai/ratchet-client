@@ -110,7 +110,7 @@ class AlertServiceSpec extends Specification {
         }
 
         when:
-        def result = service.getPatientAlerts('token', 1 , 2)
+        def result = service.getPatientAlerts('token', 1 , 2, 'email')
 
         then:
         result.totalCount == 2
@@ -127,7 +127,7 @@ class AlertServiceSpec extends Specification {
         }
 
         when:
-        service.getPatientAlerts('token', 1 , 2)
+        service.getPatientAlerts('token', 1 , 2, 'email')
 
         then:
         ApiReturnException e = thrown()

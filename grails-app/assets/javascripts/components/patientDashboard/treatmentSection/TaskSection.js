@@ -139,6 +139,8 @@ function TaskSection() {
                 this.select('archivedItemSelector').hide();
             }
         } else {
+            this.attr.boxItemsSelector = '.box-item:not(.archived)';
+            this.select('archivedItemSelector').hide();
             this.filter.currentMedicalRecordId = null;
         }
 
