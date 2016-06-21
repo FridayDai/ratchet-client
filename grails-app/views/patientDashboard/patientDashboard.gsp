@@ -22,7 +22,7 @@
 
                     <div class="edit inline">
                         <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-                           data-client-id="${patientInfo.client.id}">
+                           data-client-id="${patientInfo.client.id}" data-email-status="${patientInfo.status}">
                         </a>
                         <a href="#" class="btn-close">Close</a>
                     </div>
@@ -57,19 +57,19 @@
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                        <span class="email-status unverified" value="${patientInfo.status}">UNVERIFIED</span>
+                        <i class="fa fa-exclamation-circle unverified" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">UNVERIFIED</span>
                     </g:if>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
-                        <span class="email-status verified" value="${patientInfo.status}">VERIFIED</span>
+                        <i class="fa fa-check-circle verified" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">VERIFIED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <span class="email-status nonexistent" value="${patientInfo.status}">UNDELIVERED</span>
+                        <i class="fa fa-times-circle nonexistent" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">UNDELIVERED</span>
                     </g:elseif>
-                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNSUBSCRIBED"}">
-                        <span class="email-status unsubscribed" value="${patientInfo.status}">UNSUBSCRIBED</span>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
+                        <i class="fa fa-ban declined" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">DECLINED</span>
                     </g:elseif>
                     <g:else>
-                        <span class="email-status div-hidden" value="${patientInfo.status}"></span>
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i><span class="email-state div-hidden" value="${patientInfo.status}"></span>
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
@@ -180,7 +180,7 @@
             <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
         </div>
 
-        <div class="form-group inline">
+        <div class="form-group inline phone-block">
             <label class="lbl-group">PHONE NUMBER</label>
             <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
                    placeholder="777-777-7777 (Optional)"/>
@@ -188,11 +188,15 @@
 
         <div class="form-group inline">
             <label class="lbl-group">EMAIL ADDRESS</label>
-            <input id="email" name="email" type="email" class="input-group"
-                   placeholder="john.smith@email.com (Optional)"/>
+            <input id="email" name="email" type="email" class="input-group" placeholder="john.smith@email.com (Optional)"/>
+            <div class="decline">
+                <input id="emailStatus" name="emailStatus" type="checkbox" value="decline" class="input-group input-convert">
+                <label for="emailStatus" class="decline-msg">
+                    Patient declined to communicate via email.</label>
+            </div>
         </div>
 
-        <div class="form-group inline">
+        <div class="form-group inline birthday-block">
             <label class="lbl-group">BIRTHDAY<span>*</span></label>
             <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
                    placeholder="MM/DD/YYYY" required/>
@@ -281,9 +285,7 @@
 
         <div class="no-tasks">
             <div class="icon"></div>
-
             <div class="title">No tools available</div>
-
             <div class="description">There are no tools available for this<br/>treatment yet</div>
         </div>
 

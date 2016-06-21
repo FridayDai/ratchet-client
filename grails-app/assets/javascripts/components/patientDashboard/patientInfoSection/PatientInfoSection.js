@@ -39,6 +39,7 @@ function PatientInfoSection() {
 
         this.clientId = $editButton.data('clientId');
         this.patientId = $editButton.data('patientId');
+        this.status = $editButton.data('emailStatus');
         this.originalEmail = this.select('emailStaticSelector').text().trim();
         this.originalPhoneNumber = this.select('phoneNumberStaticSelector').text().trim();
 
@@ -49,7 +50,7 @@ function PatientInfoSection() {
             firstName: this.select('firstNameStaticSelector').text().trim(),
             lastName: this.select('lastNameStaticSelector').text().trim(),
             email: this.originalEmail,
-            emailStatus: this.select('emailStatusSelector').attr("value"),
+            emailStatus: this.status,
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
             accountIsAdmin: this.$node.data('accountIsAdmin'),
             birthday: this.select('birthdayTextSelector').text().trim()

@@ -440,33 +440,47 @@
     }
 }
 
+.state {
+    display: inline-block;
+}
+
 .email-status {
-    &.abnormal {
-        display: inline-block;
-        margin-left: 0;
-        font-size: 12px;
-        color: #335d70;
+    display: inline-block;
+    margin-left: 0;
+    font-size: 12px;
+    color: #3d3d3d;
+    font-weight: bold;
+}
 
-        &:before {
-            font-family: 'Ionicons';
-            padding-right: 5px;
-            font-size: 8px;
-            content: '\f21b';
-        }
-    }
+.email-block {
+    margin-right: 7px;
+    display: inline-block;
+}
 
-    &.Unverified:before {
-        color: $base-color-pending;
-    }
+.Unverified {
+    margin: 0 5px 0 0;
+    color: $base-color-pending;
+}
 
-    &.Undelivered:before {
-        color: $base-color-overdue;
-    }
+.fa-check-circle {
+    margin: 0 5px 0 0;
+    color: $base-color-complete;
+}
+
+.Undelievered {
+    margin: 0 5px 0 0;
+    color: $base-color-overdue;
+}
+
+.Declined {
+    margin: 0 5px 0 0;
+    color: $base-color-decline;
 }
 
 .not-available {
     font-weight: 400;
     color: $base-font-color;
+    font-size: 14px;
 }
 
 
@@ -553,4 +567,27 @@
 
 .form-group {
     vertical-align: top;
+}
+
+.decline {
+    position: relative;
+    height: 25px;
+    line-height: 15px;
+
+    .decline-msg {
+        position: absolute;
+        top: 8px;
+        left: 24px;
+        display: inline-block;
+        font-size: 12px;
+        color: #333;
+    }
+}
+
+#emailStatus {
+    margin-left: -2px;
+}
+
+.birthday-block {
+    margin-top: -15px;
 }

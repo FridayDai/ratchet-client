@@ -55,5 +55,10 @@ module.exports = {
 
     ABSOLUTE_EVENT_DATE_LABEL: "{0} DATE<span>*</span>",
     ABSOLUTE_EVENT_DATE_PLACEHOLDER: "Select {0} date",
-    SESSION_ACCOUNT_INFO: 'RH_ACCOUNT_INFO'
+    SESSION_ACCOUNT_INFO: 'RH_ACCOUNT_INFO',
+
+    //Decline Message
+    DECLINE_TITLE: 'EMAIL DECLINED',
+    DECLINE_MESSAGE: 'Patient will not receive any further communication via email.' +
+                     ' This cannot be undone. Do you want to proceed.'
 };

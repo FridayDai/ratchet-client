@@ -137,30 +137,33 @@
         }
     }
 
-    .email-status {
-        margin-left: 15px;
+    .email-state {
+        margin-left: 5px;
         font-size: 13px;
-        color: $base-color-dark-grey;
-
-        &:before {
-            font-family: 'Ionicons';
-            padding-right: 5px;
-            font-size: 10px;
-            content: '\f21b';
-        }
-
-        &.unverified:before {
-            color: $base-color-pending;
-        }
-
-        &.nonexistent:before {
-            color: $base-color-overdue;
-        }
-
-        &.verified:before {
-            color: $base-color-complete;
-        }
+        font-weight: bold;
+        color: $base-color-decline;
     }
+
+    .unverified {
+        margin-left: 15px;
+        color: $base-color-pending;
+    }
+
+    .verified {
+        margin-left: 15px;
+        color: $base-color-complete;
+    }
+
+    .nonexistent {
+        margin-left: 15px;
+        color: $base-color-overdue;
+    }
+
+    .declined {
+        margin-left: 15px;
+        color: $base-color-decline;
+    }
+
 
     .invite-patient {
         padding: 5px 10px;
