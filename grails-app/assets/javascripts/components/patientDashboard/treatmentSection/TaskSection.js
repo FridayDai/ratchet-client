@@ -234,6 +234,10 @@ function TaskSection() {
         }
     };
 
+    this.resolveSuccessCallback = function () {
+        this.initTaskListHeight();
+    };
+
     this.after('initialize', function () {
         this.initTaskListHeight();
         this.initDefaultTasks();
