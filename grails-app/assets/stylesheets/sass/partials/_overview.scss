@@ -144,24 +144,40 @@
         color: $base-color-decline;
     }
 
-    .unverified {
+    .email-state-icon {
         margin-left: 15px;
+    }
+
+    .email-state-icon-unverified {
         color: $base-color-pending;
+
+        &:before {
+            content: "\f06a";
+        }
     }
 
-    .verified {
-        margin-left: 15px;
+    .email-state-icon-verified {
         color: $base-color-complete;
+
+        &:before {
+            content: "\f058";
+        }
     }
 
-    .nonexistent {
-        margin-left: 15px;
+    .email-state-icon-nonexistent {
         color: $base-color-overdue;
+
+        &:before {
+            content: "\f057";
+        }
     }
 
-    .declined {
-        margin-left: 15px;
+    .email-state-icon-declined {
         color: $base-color-decline;
+
+        &:before {
+            content: "\f05e";
+        }
     }
 
 
