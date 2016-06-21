@@ -1039,7 +1039,6 @@
 }
 
 .decline {
-    height: 25px;
 
     .decline-msg {
         margin-left: 2px;
@@ -1050,8 +1049,10 @@
 }
 
 #emailStatus {
+    vertical-align: middle;
     min-width: 12px;
-    margin-left: 0px;
+    margin: 0;
+    padding: 0;
     width: 12px;
 }
 

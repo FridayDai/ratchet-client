@@ -9,7 +9,7 @@ class EmailService extends RatchetAPIService {
         def url = String.format(unsubscribeUrl, patientId)
 
         log.info("Call backend service to unsubscribe patient's email, token: ${token}.")
-        withPost(url) { req ->
+        withPost(token, url) { req ->
             def resp = req
                     .field("subscribe", false)
                     .field("code", code)
