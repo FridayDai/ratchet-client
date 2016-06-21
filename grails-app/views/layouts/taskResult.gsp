@@ -30,7 +30,6 @@
 
 <body>
 <g:render template="/shared/task_header" />
-<g:render template="/shared/raq_task_header"></g:render>
 <div class="container" id="main">
     <g:layoutBody/>
 </div>

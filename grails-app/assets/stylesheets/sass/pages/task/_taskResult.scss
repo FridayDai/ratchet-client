@@ -119,3 +119,63 @@ html, body, div, span {
 .score-wrap {
     display: inline-block;
 }
+
+.raq-info-container {
+    position: relative;
+    height: 119px;
+    padding: 20px 32px;
+    border-bottom: 1px solid black;
+
+    .raq-title {
+        font-size: 27px;
+        font-weight: 400;
+        color: #335d70;
+        display: inline-block;
+        margin-top: 15px;
+        margin-right: 15px;
+    }
+
+    .raq-sub-info-panel {
+        display: inline-block;
+
+        .raq-patient-info{
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .raq-status {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .raq-complete-time {
+            font-weight: bold;
+        }
+
+        .raq-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .raq-id {
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .raq-birthday {
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .rap-download {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            margin-right: 32px;
+            a {
+                font-size: 18px;
+                color: #7b8994;
+            }
+        }
+    }
+}

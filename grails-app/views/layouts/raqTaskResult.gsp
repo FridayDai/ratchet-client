@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<g:render template="/shared/raq_task_header"></g:render>
+<g:render template="/shared/raqtask_header"></g:render>
 <div class="container" id="main">
     <g:layoutBody/>
 </div>
