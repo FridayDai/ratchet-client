@@ -107,8 +107,7 @@
 
             </div>
 
-            <g:each in="${patientAlerts}" var="alert">
-                <g:if test="${alert?.type == 'EMAIL_BOUNCED'}">
+            <g:each in="${patientEmailAlerts}" var="alert">
                 <div class="alert-bar patient-level-attention" data-alert-id="${alert?.id}">
                     <span class="content">
                         <i class="fa fa-exclamation-circle"></i>
@@ -129,7 +128,6 @@
                         <span class="undo-text">Undo</span>
                     </span>
                 </div>
-                </g:if>
             </g:each>
 
             <div class="curtain-top"></div>

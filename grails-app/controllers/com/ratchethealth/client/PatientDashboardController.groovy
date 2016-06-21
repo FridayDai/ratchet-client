@@ -117,7 +117,7 @@ class PatientDashboardController extends BaseController {
         def accountId = request.session.accountId
 
         def medicalRecords = patientDashboardService.showMedialRecords(token, clientId, patientId)
-        def patientAlerts = alertService.getPatientAlerts(token, clientId, patientId)
+        def emailAlerts = alertService.getPatientAlerts(token, clientId, patientId, StatusCodeConstants.ALERT_TYPE.emailBounced)
 
 //        medicalRecords.items.sort { a, b -> a.archived <=> b.archived }
 
@@ -131,9 +131,9 @@ class PatientDashboardController extends BaseController {
                 PatientEmailStatus: PatientEmailStatus,
                 medicalRecords    : combinedList?.medicalRecords,
                 combinedTasks     : combinedList?.combinedTasks,
-                alertNumber       : patientAlerts?.totalCount,
+                alertNumber       : emailAlerts?.totalCount + combinedList?.alertNumber,
                 totalCount        : medicalRecords.totalCount,
-                patientAlerts     : patientAlerts?.items
+                patientEmailAlerts     : emailAlerts?.items
         ])
     }
 
