@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="${createLinkTo(dir: 'images', file: 'favicon.png', absolute: true)}" type="image/x-icon"/>
     <link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png', absolute: true)}">
     <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png', absolute: true)}">
-    <!--[if lte IE 8]><asset:stylesheet src="css/ie.css"/><![endif]-->
+<!--[if lte IE 8]><asset:stylesheet src="css/ie.css"/><![endif]-->
     <g:if test="${!download}">
         <g:if test="${cssPath}">
             <link rel="stylesheet" href="${assetPath(src: "css/pages/${cssPath}", absolute: true)}" media="screen" />
@@ -29,7 +29,6 @@
 </head>
 
 <body>
-<g:render template="/shared/task_header" />
 <g:render template="/shared/raq_task_header"></g:render>
 <div class="container" id="main">
     <g:layoutBody/>
