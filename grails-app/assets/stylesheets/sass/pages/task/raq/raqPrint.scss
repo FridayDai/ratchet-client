@@ -184,4 +184,89 @@ body {
 }
 
 
+.raq-info-container {
+    position: relative;
+    height: 70px;
+    padding: 20px 32px;
+
+    .raq-title {
+        font-size: 20px;
+        font-weight: 300;
+        color: #335d70;
+        display: inline-block;
+        margin-top: 5px;
+        margin-right: 15px;
+    }
+
+    .raq-sub-info-panel {
+        display: inline-block;
+
+        .raq-patient-info{
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-status {
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-complete-time {
+            font-weight: bold;
+        }
+
+        .raq-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .raq-id {
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-birthday {
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-download {
+            position: absolute;
+            top: 35px;
+            right: 32px;
+            a {
+                font-size: 14px;
+                color: #7b8994;
+            }
+
+        }
+    }
+}
+
+
+
+.raq-result-info {
+    height: 42px;
+    background-color: #335d70;
+    color: white;
+    padding-top: 15px;
+
+    .raq-score-wrap:first-child {
+        margin: 0 16px 0 32px;
+    }
+
+    .raq-score-wrap {
+        margin-right: 16px;
+    }
+    .raq-score-des {
+        font-size: 14px;
+        display: inline-block;
+    }
+    .raq-score-num {
+        font-size: 14px;
+        display: inline-block;
+    }
+
+}
 
