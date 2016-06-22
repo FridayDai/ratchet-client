@@ -91,18 +91,18 @@ function PatientsTable() {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
                     if (!full.email) {
-                        return '<span class="email-status not-available">{0}</span>'
-                            .format(emailStatus);
-                    }
+                        return '<span class="email-status not-available">Not Available</span>';
 
-                    if (emailStatus && emailStatus !== 'Not Available') {
-                        return STATUS_TEMPLATE.format(
-                            full.email,
-                            emailStatus,
-                            STATUS_ICON_MAPPING[emailStatus.toUpperCase()]
-                        );
-                    } else {
-                        return full.email;
+                    }else {
+                        if (emailStatus && emailStatus !== 'Not Available') {
+                            return STATUS_TEMPLATE.format(
+                                full.email,
+                                emailStatus,
+                                STATUS_ICON_MAPPING[emailStatus.toUpperCase()]
+                            );
+                        } else {
+                            return full.email;
+                        }
                     }
                 },
                 width: "20%"
