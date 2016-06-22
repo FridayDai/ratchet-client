@@ -17,10 +17,6 @@ html,body {
 .sticky-header {
     .questionnaire-info {
         top: 1px;
-
-        .status {
-            padding-right: 0;
-        }
     }
 }
 
@@ -34,7 +30,7 @@ html,body {
     }
 
     &.part-1 {
-        height: 100%;
+        height: 835px;
         padding-left: 15px;
         border-left: 1px solid #8e8e8e;
     }
