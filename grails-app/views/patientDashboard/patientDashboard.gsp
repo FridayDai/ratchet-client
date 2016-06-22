@@ -57,20 +57,20 @@
                     </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
-                        <i class="fa fa-exclamation-circle unverified" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">UNVERIFIED</span>
+                        <i class="email-state-icon fa email-state-icon-unverified" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNVERIFIED</span>
                     </g:if>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "VERIFIED"}">
-                        <i class="fa fa-check-circle verified" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">VERIFIED</span>
+                        <i class="email-state-icon fa email-state-icon-verified" aria-hidden="true"></i><span class="email-state " deat-email-status="${patientInfo.status}">VERIFIED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <i class="fa fa-times-circle nonexistent" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">UNDELIVERED</span>
+                        <i class="email-state-icon fa email-state-icon-nonexistent" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNDELIVERED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
-                        <i class="fa fa-ban declined" aria-hidden="true"></i><span class="email-state " value="${patientInfo.status}">DECLINED</span>
+                        <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">DECLINED</span>
                     </g:elseif>
-                    %{--<g:else>--}%
-                        %{--<i class="fa fa-exclamation-circle" aria-hidden="true"></i><span class="email-state div-hidden" value="${patientInfo.status}"></span>--}%
-                    %{--</g:else>--}%
+                    <g:else>
+                        <i class="email-state-icon fa email-state-icon-unverified div-hidden" aria-hidden="true"></i><span class="email-state div-hidden" data-email-status="${patientInfo.status}"></span>
+                    </g:else>
 
                     <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "UNINVITED" || StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "INVITED"}">
                         <div class="inline div-invite">

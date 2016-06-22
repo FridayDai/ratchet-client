@@ -3,6 +3,12 @@ var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
+var PARAMs = require('../../../constants/Params');
+
+var STATUS_MAPPING = {
+    'UNVERIFIED': ['email-state-icon-unverified', 'UNVERIFIED'],
+    'DECLINED': ['email-state-icon-declined', 'DECLINED']
+};
 
 function PatientInfoSection() {
     this.attributes({
@@ -12,13 +18,13 @@ function PatientInfoSection() {
         inviteAgainContainerSelector: '.div-invite',
         addEmailButtonSelector: '.add-email',
         addPhoneNumberButtonSelector: '.add-phone-number',
-        emailStatusLabelSelector: '.email-status',
+        emailStatusLabelSelector: '.email-state',
+        emailStatusLabelIconSelector: '.email-state-icon',
 
         patientIdStaticSelector: '.identify',
         firstNameStaticSelector: '.first-name',
         lastNameStaticSelector: '.last-name',
         emailStaticSelector: '#patientEmail',
-        emailStatusSelector: '.info .email-status',
         phoneNumberStaticSelector: '.phone',
         birthdayStaticSelector: '.birthday',
         birthdayTextSelector: '.birthday span'
@@ -97,7 +103,7 @@ function PatientInfoSection() {
         this.select('emailStaticSelector').text(data.email ? data.email.toLowerCase() : '');
 
         this.updatePhoneNumber(data.number);
-        this.updateEmailStatus(data.email);
+        this.updateEmailStatus(data.email, data.isDeclined);
         this.updateBirthday(Utility.toBirthday(data.birthday, 'MM/DD/YYYY'));
     };
 
@@ -137,34 +143,64 @@ function PatientInfoSection() {
         }
     };
 
-    this.updateEmailStatus = function (currentEmail) {
+    this.updateEmailStatus = function (currentEmail, isDeclined) {
         var $addEmail = this.select('addEmailButtonSelector');
         var $emailStatus = this.select('emailStatusLabelSelector');
+        var $emailStatusIcon = this.select('emailStatusLabelIconSelector');
         var $inviteContainer = this.select('inviteAgainContainerSelector');
 
-        if (this.originalEmail !== currentEmail) {
-            if (currentEmail === '') {
+        var status = $emailStatus.data('emailStatus');
+
+        if (PARAMs.EMAIL_STATUS[status] !== 'DECLINED') {
+            if (isDeclined) {
+                $emailStatus.data('emailStatus', 6);
+
+                $emailStatusIcon.removeClass(function (index, css) {
+                    return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                }).addClass(STATUS_MAPPING.DECLINED[0]).show();
+
+                $emailStatus.text(STATUS_MAPPING.DECLINED[1]).show();
                 $inviteContainer.css('display', 'none');
-                $addEmail.show();
+            } else if (this.originalEmail !== currentEmail) {
+                if (currentEmail === '') {
+                    $inviteContainer.css('display', 'none');
+                    $addEmail.show();
 
-                this.trigger('emailStatusUpdated', {
-                    blank: true
-                });
+                    this.trigger('emailStatusUpdated', {
+                        blank: true
+                    });
 
-                $emailStatus.hide();
-            } else {
-                $inviteContainer.css('display', 'inline-block');
-                $addEmail.hide();
+                    $emailStatusIcon.hide();
+                    $emailStatus.hide();
+                } else {
+                    $inviteContainer.css('display', 'inline-block');
+                    $addEmail.hide();
 
-                this.trigger('emailStatusUpdated', {
-                    blank: false
-                });
+                    this.trigger('emailStatusUpdated', {
+                        blank: false
+                    });
 
-                $emailStatus
-                    .attr('class', '')
-                    .addClass('email-status unverified')
-                    .text('Unverified')
-                    .show();
+                    $emailStatusIcon.removeClass(function (index, css) {
+                        return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                    }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
+                    $emailStatus.text(STATUS_MAPPING.UNVERIFIED[1]).show();
+                }
+            }
+        } else {
+            if (this.originalEmail !== currentEmail) {
+                if (currentEmail === '') {
+                    $addEmail.show();
+
+                    this.trigger('emailStatusUpdated', {
+                        blank: true
+                    });
+                } else {
+                    $addEmail.hide();
+
+                    this.trigger('emailStatusUpdated', {
+                        blank: false
+                    });
+                }
             }
         }
     };
