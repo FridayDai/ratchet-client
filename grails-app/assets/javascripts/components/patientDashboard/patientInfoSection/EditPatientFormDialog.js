@@ -167,6 +167,7 @@ function EditPatientFormDialog() {
             firstName: this.select('firstNameFieldSelector').val(),
             lastName: this.select('lastNameFieldSelector').val(),
             email: this.select('emailFieldSelector').val(),
+            isDeclined: this.select('declineFieldSelector').prop('checked'),
             number: rawNumber,
             phoneNumber: phoneNumber,
             clientId: this.clientId,
