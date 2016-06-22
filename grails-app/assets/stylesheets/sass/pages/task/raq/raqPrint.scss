@@ -75,16 +75,6 @@ body {
     }
 }
 
-.download {
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    right: 0;
-    a {
-        color: #7b8994;
-    }
-}
-
 .task-prediction-wrapper {
     font-size: 12px;
     margin: 0px 20px 20px;
@@ -118,70 +108,85 @@ body {
     width: 100%;
 }
 
-.sticky-header {
-    .info-container{
-        div.title {
-            font-size: 18px;
-        }
-
-        .patient-info {
-            span.name {
-                font-size: 14px;
-            }
-            span.id {
-                font-size: 14px;
-            }
-            span.birthday {
-                font-size: 14px;
-            }
-        }
-    }
-
-    .questionnaire-info {
-        top: 0px;
-        right: -525px;
-        font-size: 12px;
-        width: 900px;
-        height: 150px;
-
-        .score {
-            padding-left: 0;
-        }
-
-        .status {
-            padding-right: 0;
-            font-size: 12px;
-            width: 160px;
-        }
-
-        div.divider{
-            left: -12px;
-            top: -2px;
-        }
-
-        div.score-num{
-            font-size: 12px;
-            text-transform : capitalize;
-        }
-        div.score-des {
-            width: 75px;
-            font-size: 10px;
-        }
-
-        .title {
-            font-size: 18px;
-        }
-
-        .patient-info {
-            font-size: 14px;
-        }
-
-    }
-}
-
 .task-result-content {
     margin-top: 130px;
 }
 
+.raq-info-container {
+    height: 60px;
+    padding: 10px 32px;
 
+    .raq-title {
+        font-size: 18px;
+        font-weight: 400;
+        color: #335d70;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .raq-sub-info-panel {
+        display: inline-block;
+
+        .raq-patient-info{
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-status {
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-complete-time {
+            font-weight: bold;
+        }
+
+        .raq-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .raq-id {
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-birthday {
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .raq-download {
+            display: none;
+
+        }
+    }
+}
+
+
+
+.raq-result-info {
+    height: 32px;
+    background-color: #335d70;
+    color: white;
+    padding-top: 8px;
+
+    .raq-score-wrap:first-child {
+        margin: 0 16px 0 32px;
+    }
+
+    .raq-score-wrap {
+        margin-right: 16px;
+    }
+    .raq-score-des {
+        font-size: 14px;
+        display: inline-block;
+    }
+    .raq-score-num {
+        font-size: 14px;
+        display: inline-block;
+    }
+
+}
 

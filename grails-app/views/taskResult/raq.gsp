@@ -3,7 +3,7 @@
 <g:set var="printSheetPath" value="task/raq/raqPrint.css"/>
 
 
-<g:applyLayout name="taskResult">
+<g:applyLayout name="raqTaskResult">
     <html>
     <head>
         <title>${Task.title}</title>
