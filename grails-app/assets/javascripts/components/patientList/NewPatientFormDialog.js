@@ -33,6 +33,7 @@ function NewPatientFormDialog() {
         phoneNumberFieldSelector: '#phoneNumber',
         emailFieldSelector: '#email',
         declineFieldSelector: '#emailStatus',
+        declineBlockSelector: '.decline',
         groupFieldSelector: '#selectGroup',
         providerFieldSelector: '#selectStaffs',
         treatmentFieldSelector: '#selectTreatment',
@@ -237,7 +238,9 @@ function NewPatientFormDialog() {
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email === null ? '' : data.email);
         if (PARAMs.EMAIL_STATUS[data.status] === 'DECLINED') {
-            this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
+            //this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
+            this.select('declineBlockSelector').html('<span class="fa fa-ban DECLINED"></span>' +
+                '<label for="emailStatus" class="decline-msg">Patient declined to communicate via email.</label>');
         } else {
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});
         }
