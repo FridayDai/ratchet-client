@@ -3,6 +3,8 @@ var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
 var PARAMs = require('../../constants/Params');
 var Utility = require('../../utils/Utility');
+var Notifications = require('../common/Notification');
+var STRINGs = require('../../constants/Strings');
 var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
 var WithCaregiverFieldRequired = require('../shared/functional/WithCaregiverFieldRequired');
 var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
@@ -346,6 +348,36 @@ function NewPatientFormDialog() {
         return result;
     };
 
+    this.onDeclineEmailClicked = function (e) {
+        var declineButton = $(e.target);
+
+        if (declineButton.prop("checked") === true ){
+            Notifications.confirm({
+                title: STRINGs.DECLINE_TITLE,
+                message: STRINGs.DECLINE_MESSAGE
+            }, {
+                buttons: [
+                    {
+                        text: 'Yes',
+                        'class': 'btn-agree',
+                        click: function () {
+                            $(this).dialog("close");
+
+                            declineButton.prop("checked", true);
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            declineButton.prop("checked", false);
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+    };
+
+
     this.onAddPatientSuccess = function (e, data) {
         this.trigger('refreshPatientsTable', {
             callback: function () {
@@ -365,6 +397,9 @@ function NewPatientFormDialog() {
 
         this.on('click', {
             'basicEditButtonSelector': this.showBasicField
+        });
+        this.on('click', {
+            declineFieldSelector: this.onDeclineEmailClicked
         });
 
         this.on('input', {
