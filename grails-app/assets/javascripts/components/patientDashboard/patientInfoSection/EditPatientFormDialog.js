@@ -64,7 +64,7 @@ function EditPatientFormDialog() {
         this.select('emailFieldSelector').val(data.email);
         this.select('birthdayFieldSelector').val(data.birthday);
 
-        if(PARAMs.EMAIL_STATUS[data.emailStatus] === 'DECLINED') {
+        if(PARAMs.EMAIL_STATUS[data.emailStatus] === 'DECLINED' || data.emailState === "DECLINED") {
             this.select('declineBlockSelector').html(
                 '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
                 '<label for="emailStatus" class="decline-msg">Patient declined to communicate via email.</label>'
