@@ -1,0 +1,33 @@
+.countdown {
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    box-shadow: 0 0 1px #6d6e71;
+    border-radius: 100%;
+}
+
+.countdown-svg {
+
+    circle {
+        stroke-dashoffset: 0;
+        stroke: #bcbec0;
+        stroke-width: 2px;
+    }
+
+    .circle-bar {
+        stroke: #6d6e71;
+//        animation: load 30s linear;
+    }
+
+//    @keyframes load {
+//        0% {
+//            stroke-dashoffset: 50.26px;
+//        }
+//        100% {
+//            stroke-dashoffset: 0
+//        }
+//    }
+
+}
+
+
