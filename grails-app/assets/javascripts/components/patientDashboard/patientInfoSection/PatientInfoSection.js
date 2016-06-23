@@ -25,6 +25,8 @@ function PatientInfoSection() {
         firstNameStaticSelector: '.first-name',
         lastNameStaticSelector: '.last-name',
         emailStaticSelector: '#patientEmail',
+        declineBlockFieldSelector: '.decline',
+        declineFieldSelector: '#emailStatus',
         phoneNumberStaticSelector: '.phone',
         birthdayStaticSelector: '.birthday',
         birthdayTextSelector: '.birthday span'
@@ -57,6 +59,7 @@ function PatientInfoSection() {
             lastName: this.select('lastNameStaticSelector').text().trim(),
             email: this.originalEmail,
             emailStatus: this.status,
+            emailState: this.select('emailStatusLabelSelector').text().trim(),
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
             accountIsAdmin: this.$node.data('accountIsAdmin'),
             birthday: this.select('birthdayTextSelector').text().trim()
