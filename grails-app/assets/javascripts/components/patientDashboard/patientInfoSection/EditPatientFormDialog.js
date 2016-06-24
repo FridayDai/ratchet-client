@@ -42,7 +42,7 @@ function EditPatientFormDialog() {
 
     this.options({
         title: 'EDIT PATIENT',
-        width: 620,
+        width: 630,
         buttons: ['Save']
     });
 
@@ -67,7 +67,10 @@ function EditPatientFormDialog() {
         if(PARAMs.EMAIL_STATUS[data.emailStatus] === 'DECLINED' || data.emailState === "DECLINED") {
             this.select('declineBlockSelector').html(
                 '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
-                '<label for="emailStatus" class="decline-msg">Patient declined to communicate via email.</label>'
+                '<label for="emailStatus" class="decline-msg">' +
+                    '<span>Patient declined to communicate via email.&nbsp;</span>' +
+                    '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+                '</label>'
             );
         }
 

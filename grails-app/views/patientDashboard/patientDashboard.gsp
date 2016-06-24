@@ -192,7 +192,9 @@
             <div class="decline">
                 <input id="emailStatus" name="emailStatus" type="checkbox" value="decline">
                 <label for="emailStatus" class="decline-msg">
-                    Patient declined to communicate via email.</label>
+                    <span>Patient declined to communicate via email.</span>
+                    <span class="warn-msg">(Warning: This cannot be undone.)</span>
+                </label>
             </div>
         </div>
 

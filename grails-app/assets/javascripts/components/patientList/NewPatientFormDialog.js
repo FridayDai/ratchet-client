@@ -21,10 +21,6 @@ var NewPatientAbsoluteEventDate = require('../shared/components/PatientAbsoluteE
 var NewPatientBirthday = require('../shared/components/PatientBirthday');
 
 function NewPatientFormDialog() {
-    flight.compose.mixin(this, [
-        EmptyEmailConfirmation
-    ]);
-
     this.attributes({
         hiddenIdSelector: '#hidden-id',
 
@@ -60,7 +56,7 @@ function NewPatientFormDialog() {
 
     this.options({
         title: 'NEW PATIENT',
-        width: 620,
+        width: 630,
         buttons: ['Save']
     });
 
@@ -239,8 +235,13 @@ function NewPatientFormDialog() {
         this.select('emailStaticSelector').text(data.email === null ? '' : data.email);
         if (PARAMs.EMAIL_STATUS[data.status] === 'DECLINED') {
             //this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
-            this.select('declineBlockSelector').html('<span class="fa fa-ban DECLINED"></span>' +
-                '<label for="emailStatus" class="decline-msg">Patient declined to communicate via email.</label>');
+            this.select('declineBlockSelector').html(
+                '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
+                '<label for="emailStatus" class="decline-msg">' +
+                    '<span>Patient declined to communicate via email.&nbsp;</span>' +
+                    '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+                '</label>'
+            );
         } else {
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});
         }
@@ -271,6 +272,16 @@ function NewPatientFormDialog() {
         this.select('caregiverPermissionFirstNameSelector').empty();
 
         this.trigger('newPatientReset');
+    };
+
+    this.isEmailFieldBlank = function () {
+        var $email = this.select('emailFieldSelector');
+
+        return $email.is(':visible') && $email.val() === '';
+    };
+
+    this.isDeclined = function () {
+        return this.select('declineFieldSelector').prop('checked');
     };
 
     this.beforeSubmitForm = function () {
@@ -380,7 +391,6 @@ function NewPatientFormDialog() {
         }
     };
 
-
     this.onAddPatientSuccess = function (e, data) {
         this.trigger('refreshPatientsTable', {
             callback: function () {
@@ -409,6 +419,10 @@ function NewPatientFormDialog() {
             caregiverFirstNameFieldSelector: this.onCaregiverFirstNameInput
         });
     });
+
+    flight.compose.mixin(this, [
+        EmptyEmailConfirmation
+    ]);
 }
 
 module.exports = flight.component(
