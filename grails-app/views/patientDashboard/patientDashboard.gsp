@@ -449,7 +449,7 @@
             id="answer-discharge-task" name="answer-discharge-task">
 
         <div class="title">
-            Please pick the discharge plan:
+            Please pick the discharge location:
         </div>
 
         <ul class="list">
@@ -486,7 +486,7 @@
             id="answer-snf-task" name="answer-snf-task">
 
         <div class="title">
-            Q1. Have you received patient’s report from SNF?
+            Q1. Have you received the patient’s report from the SNF?
         </div>
 
         <ul class="list">
@@ -509,7 +509,7 @@
         </ul>
 
         <div class="title">
-            Q2. What’s the patient’s expected LOS at a SNF?
+            Q2. What is the patient’s expected LOS at the SNF?
         </div>
 
         <div class="list">
