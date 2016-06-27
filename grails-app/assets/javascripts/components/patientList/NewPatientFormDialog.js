@@ -238,7 +238,7 @@ function NewPatientFormDialog() {
             this.select('declineBlockSelector').html(
                 '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
                 '<label for="emailStatus" class="decline-msg">' +
-                    '<span>Patient declined to communicate via email.&nbsp;</span>' +
+                    '<span>Patient declined to communicate via email.</span>' +
                     '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
                 '</label>'
             );
