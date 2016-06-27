@@ -19,7 +19,18 @@
                     <label for="selectSurgeon" class="select-tip">PROVIDER</label>
                     <input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>
                 </div>
+
+                <div class="filler-content">
+                    <label for="toolFilter" class="select-tip">TOOL</label>
+                    <input type="text" name="toolFilter" id="toolFilter" class="input-group input-auto-search" />
+                </div>
+
+                <div class="filler-content">
+                    <label for="yearFilter" class="select-tip">SURGERY IN</label>
+                    <input type="text" name="yearFilter" id="yearFilter" class="input-group input-auto-search" />
+                </div>
             </div>
+
         </div>
 
         <div class="reports" id="charts-panel">

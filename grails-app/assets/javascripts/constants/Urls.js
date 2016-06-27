@@ -80,5 +80,6 @@ module.exports = {
 
     //Report
     PROVIDER_AVERAGE_OVERVIEW: '/reports/outcome/provider-average',
-    GET_TASK_COMPLETION:'/reports/conversion'
+    GET_TASK_COMPLETION:'/reports/conversion',
+    GET_CLIENT_TOOLS: '/reports/conversion/tools'
 };
