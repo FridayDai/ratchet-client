@@ -63,7 +63,7 @@
                         <i class="email-state-icon fa email-state-icon-verified" aria-hidden="true"></i><span class="email-state " deat-email-status="${patientInfo.status}">VERIFIED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <i class="email-state-icon fa email-state-icon-nonexistent" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNDELIVERED</span>
+                        <i class="email-state-icon fa email-state-icon-nonexistent" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNDELIVERABLE</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
                         <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">DECLINED</span>

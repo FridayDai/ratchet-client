@@ -50,7 +50,7 @@ module.exports = {
         2: 'UNVERIFIED',
         3: '',
         4: 'Not Available',
-        5: 'UNDELIVERED',
+        5: 'UNDELIVERABLE',
         6: 'DECLINED'
     },
 
@@ -58,7 +58,7 @@ module.exports = {
         {label: "Verified", value: 3},
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
-        {label: "Undelivered", value: 5},
+        {label: "Undeliverable", value: 5},
         {label: "Declined", value: 6}
     ],
 

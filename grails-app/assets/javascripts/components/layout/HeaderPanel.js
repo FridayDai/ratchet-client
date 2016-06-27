@@ -46,7 +46,7 @@ var ALERT_TYPE_MESSAGE_MAPPING = {
     'PATIENT_FOLLOW_UP_TOOL': 'requires post-op assistance',
     'DISCHARGE_PLAN': 'needs discharge plan confirmed',
     'SNF': 'SNF stay needs follow up',
-    'EMAIL_BOUNCED': 'has undelivered email'
+    'EMAIL_BOUNCED': 'has undeliverable email'
 };
 
 

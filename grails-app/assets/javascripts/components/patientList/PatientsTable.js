@@ -23,7 +23,7 @@ var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
 
 var STATUS_ICON_MAPPING = {
     'UNVERIFIED': 'fa-exclamation-circle',
-    'UNDELIVERED': 'fa-times-circle',
+    'UNDELIVERABLE': 'fa-times-circle',
     'DECLINED': 'fa-ban'
 };
 
