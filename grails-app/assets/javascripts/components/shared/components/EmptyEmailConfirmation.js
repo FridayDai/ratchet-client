@@ -42,7 +42,7 @@ function EmptyEmailConfirmation() {
             Notifications.confirm({
                 title: 'ARE YOU SURE?',
                 message: [
-                    'Patient declined to received any email communication.' +
+                    'The patient has declined to received any email communication.' +
                     ' This cannot be undone once saved. Are you sure?'
                 ]
             }, {
@@ -71,7 +71,7 @@ function EmptyEmailConfirmation() {
             Notifications.confirm({
                 title: 'ARE YOU SURE?',
                 message: [
-                    'Patient declined to received any email communication.' +
+                    'The patient has declined to received any email communication.' +
                     ' This cannot be undone once saved. Are you sure?'
                 ]
             }, {
