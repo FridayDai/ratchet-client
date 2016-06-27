@@ -70,7 +70,7 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        def result = service.taskCompletionConversion('token', 1, 1)
+        def result = service.taskCompletionConversion('token', 1, 1, 1, 1)
 
         then:
         result.total == 10
@@ -87,7 +87,7 @@ class ReportServiceSpec extends Specification {
         }
 
         when:
-        service.taskCompletionConversion('token', 1, 1)
+        service.taskCompletionConversion('token', 1, 1, 1, 1)
 
         then:
         ApiReturnException e = thrown()

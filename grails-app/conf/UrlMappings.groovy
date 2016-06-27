@@ -148,6 +148,7 @@ class UrlMappings {
             action = [GET: "renderTaskCompletionReport"]
         }
         "/reports/conversion"(controller: 'report', action: "updateTaskCompletionReport")
+        "/reports/conversion/tools"(controller: 'report', action: "getClientTools")
 
         // Alert
         "/alert-notification"(controller: 'home', action: 'getAlertNotification')

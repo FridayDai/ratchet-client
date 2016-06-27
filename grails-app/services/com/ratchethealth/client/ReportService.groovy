@@ -30,7 +30,7 @@ class ReportService extends RatchetAPIService {
         }
     }
 
-    def taskCompletionConversion(String token, clientId, providerId) {
+    def taskCompletionConversion(String token, clientId, providerId, baseToolId, year) {
         def url = grailsApplication.config.ratchetv2.server.url.taskConversion
 
         log.info("Call backend service to get task completion conversion report, token: ${token}.")
@@ -38,6 +38,8 @@ class ReportService extends RatchetAPIService {
             def resp = req
                 .field("clientId", clientId)
                 .field("providerId", providerId)
+                .field("baseToolId", baseToolId)
+                .field("surgeryDate", year)
                 .asString()
 
             if (resp.status == 200) {
@@ -66,6 +68,24 @@ class ReportService extends RatchetAPIService {
                 parseRespBody(resp)
             }
             else {
+                handleError(resp)
+            }
+        }
+    }
+
+    def getClientTools(String token, clientId) {
+        log.info("Call backend service to get client tools, token: ${token}.")
+
+        String url = String.format(grailsApplication.config.ratchetv2.server.url.getClientTools, clientId)
+
+        withGet(token, url) { req ->
+            def resp = req.asString()
+
+            if (resp.status == 200) {
+                log.info("Get client tools success, token: ${token}")
+
+                parseRespBody(resp)
+            } else {
                 handleError(resp)
             }
         }

@@ -264,6 +264,7 @@ ratchetv2 {
 
             //Report URL
             taskConversion = "${ratchetv2.server.url.base}/api/v1/clients/conversion"
+            getClientTools = "${ratchetv2.server.url.base}/api/v1/clients/%s/conversion/tools"
 
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/api/v1/staffs"
