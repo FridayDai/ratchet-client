@@ -152,9 +152,16 @@
 
                 <div class='replace-input-div' id="email-static"></div>
                 <a class='icon-edit form-group-edit'></a>
+                <div class="decline">
+                    <input id="emailStatus" name="emailStatus" type="checkbox" value="decline">
+                    <label for="emailStatus" class="decline-msg">
+                        <span>Patient declined to communicate via email.</span>
+                        <span class="warn-msg">(Warning: This cannot be undone.)</span>
+                    </label>
+                </div>
             </div>
 
-            <div class="form-group inline">
+            <div class="form-group inline birthday-block">
                 <label class="lbl-group">BIRTHDAY<span>*</span></label>
                 <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
                        placeholder="MM/DD/YYYY" required />

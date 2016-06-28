@@ -1,0 +1,79 @@
+@import '../taskResultPrint';
+
+html,body {
+    height: 100%;
+}
+
+#main {
+    padding: 0 40px;
+    height: 82%;
+    width: 100%;
+}
+
+.task-result-content {
+    height: 100%;
+}
+
+.sticky-header {
+    .questionnaire-info {
+        top: 1px;
+    }
+}
+
+.task-list-part {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &.part-0 {
+        padding-right: 15px;
+    }
+
+    &.part-1 {
+        height: 835px;
+        padding-left: 15px;
+        border-left: 1px solid #8e8e8e;
+    }
+}
+
+.question {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+//answer
+.answer-container {
+    width: 100%;
+    border-top: 1px solid $base-color-darker-grey;
+}
+
+.answer-title {
+    padding-bottom: 10px;
+    color: $result-main-color;
+    font-size: 14px;
+}
+
+.answer-list {
+    display: inline-block;
+    padding: 20px 0;
+    vertical-align: top;
+    font-size: 16px;
+
+    .rc-checkbox {
+        position: relative;
+        display: inline-block;
+        box-sizing: content-box;
+        width: 16px;
+        height: 16px;
+        border: 2px solid $base-font-color;
+        cursor: default;
+    }
+
+    .answer-line {
+        label {
+            float: left;
+            padding-right: 12px;
+        }
+    }
+}
+

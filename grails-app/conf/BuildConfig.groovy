@@ -67,13 +67,13 @@ grails.project.dependency.resolution = {
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
-        compile ':asset-pipeline:2.1.5'
+        compile ':asset-pipeline:2.9.1'
 //        compile ":sass-asset-pipeline:1.9.2"
 //        compile ":rest-client-builder:1.0.3"
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.6.1", { // or ":hibernate:3.6.10.18"
-            excludes 'ehcache-core'
-        }
+//        runtime ":hibernate4:4.3.6.1", { // or ":hibernate:3.6.10.18"
+//            excludes 'ehcache-core'
+//        }
         compile ":cache-ehcache:1.0.5"
 //        runtime ':resources:1.2.13'
         compile ":cookie-session:2.0.17"
@@ -81,7 +81,7 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.23"
         //runtime ":jquery:1.11.1"
         test ':code-coverage:2.0.3-3'
-        compile ":wkhtmltopdf:0.1.10"
+        compile ":wkhtmltopdf:0.1.11"
         compile ":aws-sdk:1.9.14"
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

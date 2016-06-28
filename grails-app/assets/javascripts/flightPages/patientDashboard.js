@@ -26,6 +26,8 @@ var InClinicCodeDialog = require('../components/patientDashboard/InClinicCodeDia
 var EditEventDateFormDialog = require('../components/patientDashboard/treatmentSection/EditEventDateFormDialog');
 var CaregiverFormDialog = require('../components/patientDashboard/caregiverSection/CaregiverFormDialog');
 var GroupFormDialog = require('../components/patientDashboard/groupSection/GroupFormDialog');
+var FillDischargeTaskDialog = require('../components/patientDashboard/treatmentSection/task/FillDischargeTaskDialog');
+var FillSNFTaskDialog = require('../components/patientDashboard/treatmentSection/task/FillSNFTaskDialog');
 
 var TYPE_SECTION_MAPPING = {
     'Treatment': TreatmentList,
@@ -57,7 +59,9 @@ function PatientDetailPage() {
         inClinicCodeDialogSelector: '#generate-code-dialog',
         editSurgeryDateDialogSelector: '#treatment-time-form',
         addCaregiverDialogSelector: '#invite-caregiver-form',
-        addGroupDialogSelector: '#add-group-form'
+        addGroupDialogSelector: '#add-group-form',
+        fillDischargeTaskSelector: '#answer-discharge-task',
+        fillSNFTaskSelector: '#answer-snf-task'
     });
 
     this.children({
@@ -103,7 +107,7 @@ function PatientDetailPage() {
             dialog: InClinicCodeDialog
         }, {
             selector: 'editSurgeryDateDialogSelector',
-            event: 'showEditSurgeryDialog',
+            event: 'showEditTreatmentDialog',
             dialog: EditEventDateFormDialog
         }, {
             selector: 'addCaregiverDialogSelector',
@@ -113,6 +117,14 @@ function PatientDetailPage() {
             selector: 'addGroupDialogSelector',
             event: 'showAddGroupDialog',
             dialog: GroupFormDialog
+        }, {
+            selector: 'fillDischargeTaskSelector',
+            event: 'showFillDischargeTaskDialog',
+            dialog: FillDischargeTaskDialog
+        }, {
+            selector: 'fillSNFTaskSelector',
+            event: 'showFillSNFTaskDialog',
+            dialog: FillSNFTaskDialog
         }
     ]);
 

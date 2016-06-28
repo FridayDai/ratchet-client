@@ -4,6 +4,8 @@ var WithChildren = require('../../common/WithChildren');
 var FilterTaskStatusSelectbox = require('./FilterTaskStatusSelectbox');
 var taskItemBox = require('./TaskItemBox');
 
+var ResolveUndoAlerts = require('../../shared/functional/ResolveUndoAlerts');
+
 function TaskSection() {
 
     this.attributes({
@@ -26,7 +28,10 @@ function TaskSection() {
         alertButtonNumberSelector: '#btn-alert-number',
         alertButtonTextSelector: '#filter-alert-text',
         visibleTaskCountSelector: '#visible-number',
-        totalTaskCountSelector: '#total-number'
+        totalTaskCountSelector: '#total-number',
+        alertEditEmailButtonSelector: '.patient-level-attention .edit-email-link',
+        alertResolveLinkSelector: '.patient-level-attention .resolve-link',
+        alertUndoLinkSelector: '.patient-level-attention .undo-link'
     });
 
     this.children({
@@ -55,18 +60,24 @@ function TaskSection() {
         this.select('totalTaskCountSelector').text(total);
     };
 
-    this.updateAlertTaskNumber = function () {
+    this.updateAlertTaskNumber = function (e, data) {
         var number = this.select('alertButtonNumberSelector').text();
 
-        if (--number > 0) {
+        if (data.isResolved) {
+            --number;
+        } else {
+            ++number;
+        }
+
+        if (number > 0) {
             if (number === 1) {
                 this.select('alertButtonTextSelector').text('Alert');
             } else {
                 this.select('alertButtonTextSelector').text('Alerts');
             }
-            this.select('alertButtonNumberSelector').text(number);
+            this.select('alertButtonNumberSelector').text(number).show();
         } else {
-            this.select('alertButtonNumberSelector').hide();
+            this.select('alertButtonNumberSelector').text(0).hide();
         }
     };
 
@@ -128,6 +139,8 @@ function TaskSection() {
                 this.select('archivedItemSelector').hide();
             }
         } else {
+            this.attr.boxItemsSelector = '.box-item:not(.archived)';
+            this.select('archivedItemSelector').hide();
             this.filter.currentMedicalRecordId = null;
         }
 
@@ -177,11 +190,20 @@ function TaskSection() {
     };
 
     this.scrollToday = function () {
-        var position = this.select('todayItemSelector').position();
+        var $taskList = this.select('taskListFiledSelector');
 
-        if (position && position.top > 210) {
-            this.select('taskListFiledSelector').scrollTop(position.top - 210);
+        if ($taskList.length) {
+            var taskListHeight = $taskList.height();
+            var taskListElement = $taskList.get(0);
+            var todayOffsetTop = this.select('todayItemSelector').get(0).offsetTop;
+            var externalTop = 60;
+
+            taskListElement.scrollTop = todayOffsetTop - taskListHeight + externalTop;
         }
+    };
+
+    this.onAlertEditEmailButtonClick = function () {
+        this.trigger('triggerEditPatientFormDialog');
     };
 
     this.initFilter = function () {
@@ -202,19 +224,45 @@ function TaskSection() {
         this.scrollToday();
     };
 
+    this.initTaskListHeight = function () {
+        var $taskList = this.select('taskListFiledSelector');
+
+        if ($taskList.length) {
+            var containerTop = this.$node.offset().top;
+            var containerHeight = this.$node.height();
+            var taskListTop = $taskList.offset().top;
+
+            $taskList.outerHeight(containerHeight - taskListTop + containerTop);
+        }
+    };
+
+    this.resolveSuccessCallback = function () {
+        this.initTaskListHeight();
+    };
+
     this.after('initialize', function () {
+        this.initTaskListHeight();
         this.initDefaultTasks();
+
         this.on(document, 'medicalRecordListSelected', this.onMedicalRecordListClick);
-        this.on('alertHasBeenResolved', this.updateAlertTaskNumber);
+        this.on('alertHasBeenUpdated', this.updateAlertTaskNumber);
 
         this.on('taskStatusFilterSelected', this.filterTaskByStatus);
         this.on('deleteTaskSuccessful', this.updateFilterCount);
+        this.on('updateTaskFilterStatus', this.filterTasks);
 
         this.on('click', {
             clearFilterButtonSelector: this.clearTaskFilter,
-            alertFilterButtonSelector: this.alertButtonClick
+            alertFilterButtonSelector: this.alertButtonClick,
+            alertEditEmailButtonSelector: this.onAlertEditEmailButtonClick,
+            alertResolveLinkSelector: this.onResolveButtonClicked,
+            alertUndoLinkSelector: this.onUndoButtonClicked
         });
     });
 }
 
-module.exports = flight.component(WithChildren, TaskSection);
+module.exports = flight.component(
+    ResolveUndoAlerts,
+    WithChildren,
+    TaskSection
+);

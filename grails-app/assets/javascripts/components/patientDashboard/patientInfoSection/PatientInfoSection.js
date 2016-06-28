@@ -3,6 +3,12 @@ var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
 var Notifications = require('../../common/Notification');
 var Utility = require('../../../utils/Utility');
+var PARAMs = require('../../../constants/Params');
+
+var STATUS_MAPPING = {
+    'UNVERIFIED': ['email-state-icon-unverified', 'UNVERIFIED'],
+    'DECLINED': ['email-state-icon-declined', 'DECLINED']
+};
 
 function PatientInfoSection() {
     this.attributes({
@@ -12,13 +18,15 @@ function PatientInfoSection() {
         inviteAgainContainerSelector: '.div-invite',
         addEmailButtonSelector: '.add-email',
         addPhoneNumberButtonSelector: '.add-phone-number',
-        emailStatusLabelSelector: '.email-status',
+        emailStatusLabelSelector: '.email-state',
+        emailStatusLabelIconSelector: '.email-state-icon',
 
         patientIdStaticSelector: '.identify',
         firstNameStaticSelector: '.first-name',
         lastNameStaticSelector: '.last-name',
         emailStaticSelector: '#patientEmail',
-        emailStatusSelector: '.info .email-status',
+        declineBlockFieldSelector: '.decline',
+        declineFieldSelector: '#emailStatus',
         phoneNumberStaticSelector: '.phone',
         birthdayStaticSelector: '.birthday',
         birthdayTextSelector: '.birthday span'
@@ -27,6 +35,10 @@ function PatientInfoSection() {
     this.showEditPatientDialog = function (e) {
         e.preventDefault();
 
+        this.triggerEditPatientDialog();
+    };
+
+    this.triggerEditPatientDialog = function () {
         this.trigger('showEditPatientFormDialog', this.getBasicInfo());
     };
 
@@ -35,6 +47,7 @@ function PatientInfoSection() {
 
         this.clientId = $editButton.data('clientId');
         this.patientId = $editButton.data('patientId');
+        this.status = $editButton.data('emailStatus');
         this.originalEmail = this.select('emailStaticSelector').text().trim();
         this.originalPhoneNumber = this.select('phoneNumberStaticSelector').text().trim();
 
@@ -45,7 +58,8 @@ function PatientInfoSection() {
             firstName: this.select('firstNameStaticSelector').text().trim(),
             lastName: this.select('lastNameStaticSelector').text().trim(),
             email: this.originalEmail,
-            emailStatus: this.select('emailStatusSelector').attr("value"),
+            emailStatus: this.status,
+            emailState: this.select('emailStatusLabelSelector').text().trim(),
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
             accountIsAdmin: this.$node.data('accountIsAdmin'),
             birthday: this.select('birthdayTextSelector').text().trim()
@@ -92,7 +106,7 @@ function PatientInfoSection() {
         this.select('emailStaticSelector').text(data.email ? data.email.toLowerCase() : '');
 
         this.updatePhoneNumber(data.number);
-        this.updateEmailStatus(data.email);
+        this.updateEmailStatus(data.email, data.isDeclined);
         this.updateBirthday(Utility.toBirthday(data.birthday, 'MM/DD/YYYY'));
     };
 
@@ -132,34 +146,64 @@ function PatientInfoSection() {
         }
     };
 
-    this.updateEmailStatus = function (currentEmail) {
+    this.updateEmailStatus = function (currentEmail, isDeclined) {
         var $addEmail = this.select('addEmailButtonSelector');
         var $emailStatus = this.select('emailStatusLabelSelector');
+        var $emailStatusIcon = this.select('emailStatusLabelIconSelector');
         var $inviteContainer = this.select('inviteAgainContainerSelector');
 
-        if (this.originalEmail !== currentEmail) {
-            if (currentEmail === '') {
+        var status = $emailStatus.data('emailStatus');
+
+        if (PARAMs.EMAIL_STATUS[status] !== 'DECLINED') {
+            if (isDeclined) {
+                $emailStatus.data('emailStatus', 6);
+
+                $emailStatusIcon.removeClass(function (index, css) {
+                    return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                }).addClass(STATUS_MAPPING.DECLINED[0]).show();
+
+                $emailStatus.text(STATUS_MAPPING.DECLINED[1]).show();
                 $inviteContainer.css('display', 'none');
-                $addEmail.show();
+            } else if (this.originalEmail !== currentEmail) {
+                if (currentEmail === '') {
+                    $inviteContainer.css('display', 'none');
+                    $addEmail.show();
 
-                this.trigger('emailStatusUpdated', {
-                    blank: true
-                });
+                    this.trigger('emailStatusUpdated', {
+                        blank: true
+                    });
 
-                $emailStatus.hide();
-            } else {
-                $inviteContainer.css('display', 'inline-block');
-                $addEmail.hide();
+                    $emailStatusIcon.hide();
+                    $emailStatus.hide();
+                } else {
+                    $inviteContainer.css('display', 'inline-block');
+                    $addEmail.hide();
 
-                this.trigger('emailStatusUpdated', {
-                    blank: false
-                });
+                    this.trigger('emailStatusUpdated', {
+                        blank: false
+                    });
 
-                $emailStatus
-                    .attr('class', '')
-                    .addClass('email-status unverified')
-                    .text('Unverified')
-                    .show();
+                    $emailStatusIcon.removeClass(function (index, css) {
+                        return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                    }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
+                    $emailStatus.text(STATUS_MAPPING.UNVERIFIED[1]).show();
+                }
+            }
+        } else {
+            if (this.originalEmail !== currentEmail) {
+                if (currentEmail === '') {
+                    $addEmail.show();
+
+                    this.trigger('emailStatusUpdated', {
+                        blank: true
+                    });
+                } else {
+                    $addEmail.hide();
+
+                    this.trigger('emailStatusUpdated', {
+                        blank: false
+                    });
+                }
             }
         }
     };
@@ -185,6 +229,7 @@ function PatientInfoSection() {
         this.on(document, 'patientInfoRequest', this.onPatientInfoRequest);
         this.on(document, 'deletePatientSuccess', this.onPatientDeleteSuccess);
         this.on(document, 'getPhoneNumberStatusFromPatientInfo', this.onPhoneNumberStatusFeedback);
+        this.on(document, 'triggerEditPatientFormDialog', this.triggerEditPatientDialog);
 
         this.on('click', {
             editPatientButtonSelector: this.showEditPatientDialog,

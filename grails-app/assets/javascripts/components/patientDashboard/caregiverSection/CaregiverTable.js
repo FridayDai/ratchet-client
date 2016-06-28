@@ -9,6 +9,8 @@ var ACTIVE_BUTTONS = '<a href="#" class="btn-edit" data-caregiver-id="{0}"></a>'
 
 var ACTIVE_STATUS = '<span class="status-active">ACTIVE</span>';
 var INACTIVE_STATUS = '<span class="status-inactive">INACTIVE</span>';
+var UNSUBSCRIBE_STATUS = '<span class="status-unsubscribe">DECLINED</span>';
+
 
 function CaregiverTable() {
     this.attributes({
@@ -41,14 +43,19 @@ function CaregiverTable() {
                 className: "email",
                 width: "30%"
             }, {
-                // BE status: UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5)
+                // BE status: UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5), UNSUBSCRIBE(6)
                 data: 'status',
                 name: 'emailStatus',
                 render: function (data) {
-                    if (data === 3 || data === '3') {
-                        return ACTIVE_STATUS;
-                    } else {
-                        return INACTIVE_STATUS;
+                    switch(data){
+                        case '3':
+                        case  3 :
+                            return ACTIVE_STATUS;
+                        case  6 :
+                        case '6':
+                            return UNSUBSCRIBE_STATUS;
+                        default:
+                            return INACTIVE_STATUS;
                     }
                 },
                 width: "15%"
@@ -132,7 +139,7 @@ function CaregiverTable() {
             type: 'DELETE',
             success: function () {
                 me.deleteRow($row);
-                
+
                 me.trigger('deletePatientCaregiverSuccess');
             }
         });

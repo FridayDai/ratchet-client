@@ -5,17 +5,13 @@ var URLs = require('../../../constants/Urls');
 
 
 
+/* jshint ignore:start */
 $.validator.addMethod("emailCheck", function(value){
-    var regex = /(cmo){1}$|(ocm){1}$|(omc){1}$|(mco){1}$|(moc){1}$/;
+    var regex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@?([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))?(:[0-9]{1,5})?$/i;
 
-    if (regex.test(value) === true) {
-        return false;
-    } else {
-        return true;
-    }
-
+    return regex.test(value) || !value;
 }, STRINGs.EMAIL_INVALID);
-
+/* jshint ignore:end */
 
 module.exports = {
     get: function (originalCheck, scope) {

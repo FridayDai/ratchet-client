@@ -1,4 +1,4 @@
-<%@ page import="com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
+<%@ page import="grails.converters.JSON; com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
@@ -63,6 +63,30 @@
 
                     </g:elseif>
 
+                    <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "USER"}">
+                        <g:render template="/patientDashboard/taskBox/shared/userScore" model="['task': task]"/>
+                    </g:elseif>
+
+                    <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "RAPT" && RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FOLLOW_UP}">
+                        <g:set var="mixedResult" value="${task?.mixedResult ? JSON.parse(task?.mixedResult) : [:]}"/>
+                        <g:if test="${mixedResult?.assistance == 'true'}">
+                            <span class="sub-item-line">
+                                <span>Post-op assistance requested on</span>
+
+                                <span class="bold">
+                                    <g:formatDate date="${task?.completeTime}"
+                                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                  format="MMM dd, yyyy"/>
+                                </span>
+                            </span>
+                        </g:if>
+                        <g:else>
+                            <span class="sub-item-line">
+                                <span>No immediate assistance required</span>
+                            </span>
+                        </g:else>
+                    </g:elseif>
+
                     <g:else>
                         <g:if test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(task?.testId)}">
                             <g:render template="/patientDashboard/taskBox/shared/mixedScore" model="['task': task]"/>
@@ -120,6 +144,9 @@
                                 <span>Call</span>
                             </div>
                         </g:if>
+                        <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task?.toolType] == "USER"}">
+                            <div class="text-link start-task">START</div>
+                        </g:elseif>
                         <g:else>
                             <a href="${task?.patientPortalLink}/${accountId}/tasks/${task?.title}/${task?.invitationCode}"
                                class="icon-button begin-task" target="_blank"></a>
@@ -151,14 +178,23 @@
 
     </div>
 
-    <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete" && task?.alerts?.length()}">
+    <g:if test="${task?.alerts?.length()}">
 
-        <div class="box-item-attention">
+        <div class="alert-bar box-item-attention" data-alert-id="${task?.alerts?.first()?.id}">
             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
 
             <g:if test="${task?.alerts?.first()?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
                 Patient is indicated high risk by the risk assessment tool.
             </g:if>
+            <g:elseif test="${task?.alerts?.first()?.type == 'DISCHARGE_PLAN'}">
+                Confirm the discharge plan.
+            </g:elseif>
+            <g:elseif test="${task?.alerts?.first()?.type ==  'SNF'}">
+                SNF stay needs follow up.
+            </g:elseif>
+            <g:elseif test="${task?.alerts?.first()?.type ==  'PATIENT_FOLLOW_UP_TOOL'}">
+                Patient requires post-op assistance.
+            </g:elseif>
             <g:else>
                 Follow up requested by the patient. Contact patient to follow up.
             </g:else>
@@ -169,20 +205,10 @@
                               format="MMM dd 'at' hh:mm a"/>
             </span>
 
-            <span class="resolve-link">Click to resolve</span>
+            <span class="alert-link resolve-link">Click to resolve</span>
 
-            <span class="undo-link">
-                <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
-                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px"
-                     viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                    <path fill="#6D6E71"
-                          d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"
-                          transform="rotate(279.77 25 25)">
-                        <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25"
-                                          to="360 25 25" dur="0.8s" repeatCount="indefinite"></animateTransform>
-                    </path>
-                </svg>
-
+            <span class="alert-link undo-link">
+                <g:render template="taskBox/shared/countdown"/>
                 <span class="undo-text">Undo</span>
             </span>
         </div>

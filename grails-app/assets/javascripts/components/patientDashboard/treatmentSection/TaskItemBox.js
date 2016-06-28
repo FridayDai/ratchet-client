@@ -3,18 +3,35 @@ var flight = require('flight');
 var Notifications = require('../../common/Notification');
 var URLs = require('../../../constants/Urls');
 var STRINGs = require('../../../constants/Strings');
+var ResolveUndoAlerts = require('../../shared/functional/ResolveUndoAlerts');
 
 var DELETE_TASK_TITLE = '<strong>{0}</strong>';
+
+var USER_TASK_WRAP = '<div class="content-middle"></div>';
+var USER_TASK_SCORE = [
+    '<span class="sub-item">',
+        '<span class="score-label">{0}</span>',
+        '<span class="score-number">{1}</span>',
+    '</span>'
+].join('');
+
+var USER_TOOL_TITLE = {
+    discharge: 'Discharge Plan',
+    snf: 'SNF Follow Up'
+};
 
 function TaskItem() {
 
     this.attributes({
+        boxItemContentSelector: '.box-item-content',
         deleteTaskButtonSelector: '.delete',
         beginTaskButtonSelector: '.begin-task',
         callTaskButtonSelector: '.call-task',
+        startTaskButtonSelector: '.start-task',
         taskIndicatorSelector: '.task-treatment-indicate',
         resolveLinkSelector: '.resolve-link',
-        undoLinkSelector: '.undo-link'
+        undoLinkSelector: '.undo-link',
+        taskTitleSelector: '.item-title'
     });
 
     this.onTaskDeleteButtonClicked = function (e) {
@@ -70,6 +87,42 @@ function TaskItem() {
         });
     };
 
+    this.onTaskStartButtonClicked = function () {
+        var taskId = this.node.id;
+        var title = this.select('taskTitleSelector').text().trim();
+        if (title === USER_TOOL_TITLE.discharge) {
+            this.trigger('showFillDischargeTaskDialog', {
+                taskId: taskId
+            });
+        } else if (title === USER_TOOL_TITLE.snf) {
+            this.trigger('showFillSNFTaskDialog', {
+                taskId: taskId
+            });
+        }
+    };
+
+    this.onUserTaskCompleteSuccess = function (e, data) {
+        if (this.node.id === data.taskId) {
+
+            this.$node.removeClass('pending overdue expired').addClass('box-item complete')
+                .data('status', 'complete')
+                .find('.box-item-tool').children().not(':last').remove();
+
+            var title = this.select('taskTitleSelector').text().trim();
+            var scoreContent, report;
+            if (title === USER_TOOL_TITLE.discharge) {
+                report = ['', 'Home', 'Home with support', 'SNF'];
+                scoreContent = USER_TASK_SCORE.format('Discharge plan:', report[data.choice.question1]);
+            } else if (title === USER_TOOL_TITLE.snf) {
+                report = ['', 'Yes', 'No'];
+                scoreContent = USER_TASK_SCORE.format('Report received:', report[data.choice.question1]);
+                scoreContent = scoreContent + USER_TASK_SCORE.format('LOS:', data.choice.question2);
+            }
+
+            $(scoreContent).appendTo($(USER_TASK_WRAP).appendTo(this.select('boxItemContentSelector')));
+        }
+    };
+
     this.onTaskVoiceCallButtonClicked = function (e) {
         e.preventDefault();
         var $target = $(e.target);
@@ -114,68 +167,6 @@ function TaskItem() {
         });
     };
 
-    this.onResolveButtonClicked = function (e) {
-        var $button = $(e.target).closest('.resolve-link');
-        var $attention = $button.closest('.box-item-attention');
-        var $taskBox = $button.closest('.box-item');
-        var alertId = $taskBox.data('alert');
-        var me = this;
-
-        var dfd = this.dfd = $.Deferred();
-
-        dfd.done(function() {
-            $attention.hide();
-            me.trigger('alertHasBeenResolved');
-        });
-
-        if (!$button.hasClass('checked')) {
-            $button.addClass('checked');
-
-            this.updateAlertTask(alertId, 1, function () {
-                $button.removeClass('checked');
-                $attention.addClass('undo');
-
-                setTimeout(function () {
-                   dfd.resolve();
-                }, 30000);
-            });
-        }
-    };
-
-    this.onUndoButtonClicked = function (e) {
-        var $button = $(e.target).closest('.undo-link');
-        var $attention = $button.closest('.box-item-attention');
-        var $taskBox = $button.closest('.box-item');
-        var alertId = $taskBox.data('alert');
-        var dfd = this.dfd;
-
-        if (!$button.hasClass('checked')) {
-            $button.addClass('checked');
-
-            this.updateAlertTask(alertId, 0, function () {
-                $button.removeClass('checked');
-                $attention.removeClass('undo');
-                dfd.reject();
-            });
-        }
-
-    };
-
-    this.updateAlertTask = function (alertId, status, callback) {
-        $.ajax({
-            url: URLs.UPDATE_ALERTS.format(alertId),
-            type: "POST",
-            data: {
-                status: status
-            },
-            success: function () {
-                if (_.isFunction(callback)) {
-                    callback();
-                }
-            }
-        });
-    };
-
     this.checkPhoneNumberStatus = function () {
         this.trigger('getPhoneNumberStatusFromPatientInfo');
     };
@@ -195,14 +186,21 @@ function TaskItem() {
         this.trigger('taskIndicatorSelected', {medicalRecordId: medicalRecordId});
     };
 
+    this.resolveSuccessCallback = function ($taskBox) {
+        $($taskBox).data('alert', false);
+        this.trigger('updateTaskFilterStatus');
+    };
+
     this.after('initialize', function () {
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
+        this.on(document, 'userTaskCompleteSuccess', this.onUserTaskCompleteSuccess);
 
         this.on('click', {
             deleteTaskButtonSelector: this.onTaskDeleteButtonClicked,
             beginTaskButtonSelector: this.onTaskBeginButtonClicked,
             callTaskButtonSelector: this.onTaskVoiceCallButtonClicked,
+            startTaskButtonSelector: this.onTaskStartButtonClicked,
             taskIndicatorSelector: this.onTaskIndicatorClicked,
             resolveLinkSelector: this.onResolveButtonClicked,
             undoLinkSelector: this.onUndoButtonClicked
@@ -212,4 +210,7 @@ function TaskItem() {
     });
 }
 
-module.exports = flight.component(TaskItem);
+module.exports = flight.component(
+    ResolveUndoAlerts,
+    TaskItem
+);

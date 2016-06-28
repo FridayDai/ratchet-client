@@ -342,6 +342,8 @@ a {
     background: image-url('loading.gif', false, false) no-repeat 0 0;
     background-size: cover;
     font-size: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 //start filler content
@@ -658,6 +660,30 @@ a {
         font-size: 14px;
         color: $base-color-white;
     }
+}
+
+.rc-radio {
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 22px;
+    height: 22px;
+    border: 2px solid $base-color-green-link;
+    cursor: pointer;
+    border-radius: 50%;
+
+}
+
+.rc-choice-hidden:checked + .rc-radio:before {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    content: '';
+    background-color: $base-color-green-link;
 }
 
 .icon-button {

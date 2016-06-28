@@ -242,6 +242,11 @@ ratchetv2 {
                 confirm = "${ratchetv2.server.url.base}/api/v1/password/confirm"
             }
 
+            //email
+            email {
+                unsubscribeEmail = "${ratchetv2.server.url.base}/api/v1/patients/%s/subscribe"
+            }
+
             // Patients URL
             patients = "${ratchetv2.server.url.base}/api/v1/patients"
             patient = "${ratchetv2.server.url.base}/api/v1/patients/%s"
@@ -310,6 +315,7 @@ ratchetv2 {
                 delete = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s"
                 callVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/call"
                 resolveVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/attention/resolve"
+                answerUserTask = "${ratchetv2.server.url.base}/api/v1/client/%s/patient/%s/userevent/%s/answer"
             }
             getOverdueTask = "${ratchetv2.server.url.base}/api/v1/patients/%s/records/%s/overdue"
 
@@ -338,8 +344,9 @@ ratchetv2 {
             providerAverage = "${ratchetv2.server.url.base}/api/v1/report/outcome"
 
             // Alert
-            alerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
-            updateAlertStatus = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts/%s"
+            staffAlerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts"
+            patientAlerts = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/alerts"
+            updateStaffAlertStatus = "${ratchetv2.server.url.base}/api/v1/clients/%s/staffs/%s/alerts/%s"
         }
 
         clientPlatform = "ancient"

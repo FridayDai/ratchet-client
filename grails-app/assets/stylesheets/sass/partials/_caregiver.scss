@@ -234,6 +234,14 @@
         color: $base-color-white;
         background: $base-light-grey-color;
     }
+
+    .status-unsubscribe {
+        font-size: 13px;
+        padding: 1px 3px;
+        color: $base-color-white;
+        background: $base-color-dark-grey;
+    }
+
 }
 
 .edit-surgeon {

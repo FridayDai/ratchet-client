@@ -13,7 +13,8 @@ function LoginPage() {
 
     this.attributes({
         nativeForm: true,
-        loginButtonSelector: '#btnLogin'
+        loginButtonSelector: '#btnLogin',
+        emailFieldSelector: 'input[name=email]'
     });
 
     this.initRateLimitError = function () {
@@ -71,8 +72,18 @@ function LoginPage() {
         //}
     };
 
+    this.loadRememberEmail = function () {
+        var accountInfo = sessionStorage.getItem(STRINGs.SESSION_ACCOUNT_INFO);
+        if (accountInfo) {
+            accountInfo = JSON.parse(accountInfo);
+
+            this.select('emailFieldSelector').val(accountInfo.email);
+        }
+    };
 
     this.after('initialize', function() {
+        this.loadRememberEmail();
+
         this.initRateLimitError();
 
         this.onClickCloseButton();

@@ -46,12 +46,12 @@ module.exports = {
 
     // BE status: UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5)
     EMAIL_STATUS: {
-        1: 'Unverified',
-        2: 'Unverified',
+        1: 'UNVERIFIED',
+        2: 'UNVERIFIED',
         3: '',
         4: 'Not Available',
-        5: 'Undelivered',
-        6: 'Unsubscribed'
+        5: 'UNDELIVERED',
+        6: 'DECLINED'
     },
 
     EMAIL_STATUS_FILTER: [
@@ -59,7 +59,7 @@ module.exports = {
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
         {label: "Undelivered", value: 5},
-        {label: "Unsubscribed", value: 6}
+        {label: "Declined", value: 6}
     ],
 
     ATTENTION_STATUS_FILTER: [

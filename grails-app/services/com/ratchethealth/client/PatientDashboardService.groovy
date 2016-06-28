@@ -83,8 +83,7 @@ class PatientDashboardService extends RatchetAPIService {
 
             if (resp.status == 200) {
                 log.info("Update single patient success, token: ${token}")
-                def status = resp.status
-                return status
+                parseRespBody(resp)
             }
             else {
                 handleError(resp)

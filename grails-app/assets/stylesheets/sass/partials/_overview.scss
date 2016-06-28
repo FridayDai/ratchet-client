@@ -137,30 +137,49 @@
         }
     }
 
-    .email-status {
-        margin-left: 15px;
+    .email-state {
+        margin-left: 5px;
         font-size: 13px;
-        color: $base-color-dark-grey;
+        font-weight: bold;
+        color: $base-color-decline;
+    }
+
+    .email-state-icon {
+        margin-left: 15px;
+    }
+
+    .email-state-icon-unverified {
+        color: $base-color-pending;
 
         &:before {
-            font-family: 'Ionicons';
-            padding-right: 5px;
-            font-size: 10px;
-            content: '\f21b';
-        }
-
-        &.unverified:before {
-            color: $base-color-pending;
-        }
-
-        &.nonexistent:before {
-            color: $base-color-overdue;
-        }
-
-        &.verified:before {
-            color: $base-color-complete;
+            content: "\f06a";
         }
     }
+
+    .email-state-icon-verified {
+        color: $base-color-complete;
+
+        &:before {
+            content: "\f058";
+        }
+    }
+
+    .email-state-icon-nonexistent {
+        color: $base-color-overdue;
+
+        &:before {
+            content: "\f057";
+        }
+    }
+
+    .email-state-icon-declined {
+        color: $base-color-decline;
+
+        &:before {
+            content: "\f05e";
+        }
+    }
+
 
     .invite-patient {
         padding: 5px 10px;

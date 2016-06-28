@@ -24,7 +24,7 @@ var LOADING_MASK_TEMPLATE = [
 var NO_NEW_ALERT_TEMPLATE = [
     '<div class="no-new-alert">',
         '<i class="fa fa-bell-slash-o fa-2x no-new-alert-icon"></i>',
-        'No New Alert.',
+        'No active alerts',
     '</div>'
 ].join('');
 
@@ -43,7 +43,10 @@ var ALERT_LIST_ITEM_TEMPLATE = [
 var ALERT_TYPE_MESSAGE_MAPPING = {
     'VOICE_CALL_FOLLOW_UP': 'has a phone call request',
     'RISK_ASSESSMENT_AND_PREDICTION_TOOL': 'is indicated high risk by the risk assessment tool',
-    'PATIENT_FOLLOW_UP_TOOL': 'requires post-op assistance'
+    'PATIENT_FOLLOW_UP_TOOL': 'requires post-op assistance',
+    'DISCHARGE_PLAN': 'needs discharge plan confirmed',
+    'SNF': 'SNF stay needs follow up',
+    'EMAIL_BOUNCED': 'has undelivered email'
 };
 
 
@@ -107,7 +110,11 @@ function HeaderPanel() {
         $.ajax({
             url:URLs.GET_ALERT_COUNT,
             method: 'GET',
-            dropProcess: true
+            dropProcess: true,
+            ignoreError: true,
+            data: {
+                timestamp: (new Date()).getTime()
+            }
         })
             .done(function (data) {
                 if (data.enableAlert) {
@@ -194,7 +201,8 @@ function HeaderPanel() {
         $.ajax({
             url:URLs.GET_ALERTS,
             data: {
-                max: 99
+                max: 99,
+                timestamp: (new Date()).getTime()
             },
             method: 'GET',
             dropProcess: true
@@ -225,6 +233,7 @@ function HeaderPanel() {
 
         this.initAlertPopup();
 
+        // 2 minutes
         setInterval(_.bind(this.getAlertCount, this), 120000);
 
         this.hideAlertPopupBind = _.bind(this.hideAlertPopup, this);
@@ -233,7 +242,8 @@ function HeaderPanel() {
             alertIconSelector: this.onAlertIconClicked
         });
 
-        this.on(document, 'alertHasBeenResolved', this.getAlertCount);
+        this.on(document, 'alertHasBeenUpdated', this.getAlertCount);
+        this.on(document, 'archiveTreatmentSuccess', this.getAlertCount);
     });
 }
 

@@ -21,6 +21,20 @@ var ALL_ACTIVE_PATIENT_FILTER = [
 
 var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
 
+var STATUS_ICON_MAPPING = {
+    'UNVERIFIED': 'fa-exclamation-circle',
+    'UNDELIVERED': 'fa-times-circle',
+    'DECLINED': 'fa-ban'
+};
+
+var STATUS_TEMPLATE = [
+    '<div class="email-block">{0}</div>',
+    '<span class="state">',
+        '<i class="fa {2} {1}" aria-hidden="true"></i>',
+        '<span class="email-status">{1}</span>',
+    '</span>'
+].join('');
+
 var TABLE_SEARCH_EVENTS = [
     'selectTreatmentForPatientTable',
     'clearTreatmentForPatientTable',
@@ -74,14 +88,21 @@ function PatientsTable() {
                 targets: 2,
                 data: 'email',
                 render: function (data, type, full) {
+                    var emailStatus = PARAMs.EMAIL_STATUS[full.status];
+
                     if (!full.email) {
-                        return '<span class="email-status not-available">{0}</span>'
-                            .format(PARAMs.EMAIL_STATUS[full.status]);
-                    } else if (PARAMs.EMAIL_STATUS[full.status]) {
-                        return '{0}&nbsp;&nbsp;<span class="email-status abnormal {1}">{1}</span>'
-                            .format(full.email, PARAMs.EMAIL_STATUS[full.status]);
-                    } else {
-                        return full.email;
+                        return '<span class="email-status not-available">Not Available</span>';
+
+                    }else {
+                        if (emailStatus && emailStatus !== 'Not Available') {
+                            return STATUS_TEMPLATE.format(
+                                full.email,
+                                emailStatus,
+                                STATUS_ICON_MAPPING[emailStatus.toUpperCase()]
+                            );
+                        } else {
+                            return full.email;
+                        }
                     }
                 },
                 width: "20%"

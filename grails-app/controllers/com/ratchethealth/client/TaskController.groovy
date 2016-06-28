@@ -100,6 +100,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/raq'
                 break
 
+            case RatchetConstants.TOOL_NAME_FOLLOW_UP:
+                view = '/taskResult/surgeryFollowUp'
+                break
+
             default:
                 render status: 404
                 return
@@ -128,23 +132,24 @@ class TaskController extends BaseController {
         render resp
     }
 
-//    def resolveVoiceTask() {
-//        def token = request.session.token
-//        def clientId = request.session.clientId
-//        def patientId = params?.patientId
-//        def medicalRecordId = params?.medicalRecordId
-//        def taskId = params?.taskId
-//        def resp = taskService.resolveAttention(token, clientId, patientId, medicalRecordId, taskId)
-//        render resp
-//    }
-
     def updateAlertInTask() {
         def token = request.session.token
         def clientId = request.session.clientId
         def staffId = session?.accountId
         def alertId = params?.alertId
         def status = params?.status?.toInteger() > 0
-        def resp = alertService.updateAlertStatus(token, clientId, staffId, alertId, status)
+        def resp = alertService.updateStaffAlertStatus(token, clientId, staffId, alertId, status)
         render resp
     }
+
+    def completeUserToolTask() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def patientId = params.patientId
+        def taskId = params.taskId
+        def choice = params.choice
+        taskService.answerUserTask(token, clientId, patientId, taskId, choice)
+        render choice as JSON
+    }
+
 }

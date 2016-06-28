@@ -27,7 +27,8 @@ function TreatmentToolbar() {
             this.patientId = $hidden.data('patientId');
             this.treatmentId = $hidden.data('treatmentId');
             this.clientId = $hidden.data('clientId');
-            this.surgeryDate = $hidden.data('surgeryDate');
+            this.absoluteEventDate = $hidden.data('surgeryDate');
+            this.absoluteEventType = $hidden.data('absoluteEventType');
         }
 
         return {
@@ -35,7 +36,8 @@ function TreatmentToolbar() {
             patientId: this.patientId,
             clientId: this.clientId,
             treatmentId: this.treatmentId,
-            currentSurgeryDate: Utility.toVancouverDate(this.surgeryDate)
+            currentAbsoluteEventDate: Utility.toVancouverDate(this.absoluteEventDate),
+            absoluteEventType: this.absoluteEventType
         };
     };
 
@@ -46,8 +48,8 @@ function TreatmentToolbar() {
     this.onEditSurgeryButtonClicked = function () {
 
         var ids = this.getBasicIds();
-        if (ids.currentSurgeryDate) {
-            this.trigger('showEditSurgeryDialog', this.getBasicIds());
+        if (ids.currentAbsoluteEventDate) {
+            this.trigger('showEditTreatmentDialog', this.getBasicIds());
         }
     };
 

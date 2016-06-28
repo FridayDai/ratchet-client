@@ -4,10 +4,12 @@ var PhoneNumberValidation = require('../../shared/validation/PhoneNumberValidati
 var PatientEmailValidation = require('../../shared/validation/PatientEmailValidation');
 var PatientIdentifyValidation = require('../../shared/validation/PatientIdentifyValidation');
 var PatientBirthdayValidation = require('../../shared/validation/PatientBirthdayValidation');
-
+var PARAMs = require('../../../constants/Params');
 var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
 var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
 var PatientBirthday = require('../../shared/components/PatientBirthday');
+var Notifications = require('../../common/Notification');
+var STRINGs = require('../../../constants/Strings');
 
 var Utility = require('../../../utils/Utility');
 
@@ -28,6 +30,8 @@ function EditPatientFormDialog() {
         lastNameFieldSelector: '#lastName',
         phoneNumberFieldSelector: '#phone',
         emailFieldSelector: '#email',
+        declineBlockSelector: '.decline',
+        declineFieldSelector: '#emailStatus',
         birthdayFieldSelector: '#birthday'
     });
 
@@ -38,7 +42,7 @@ function EditPatientFormDialog() {
 
     this.options({
         title: 'EDIT PATIENT',
-        width: 620,
+        width: 630,
         buttons: ['Save']
     });
 
@@ -59,6 +63,17 @@ function EditPatientFormDialog() {
         this.select('phoneNumberFieldSelector').intlTelInput('setNumber', data.phoneNumber);
         this.select('emailFieldSelector').val(data.email);
         this.select('birthdayFieldSelector').val(data.birthday);
+
+        if(PARAMs.EMAIL_STATUS[data.emailStatus] === 'DECLINED' || data.emailState === "DECLINED") {
+            this.select('declineBlockSelector').html(
+                '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
+                '<label for="emailStatus" class="decline-msg">' +
+                    '<span>Patient declined to communicate via email.</span>' +
+                    '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+                '</label>'
+            );
+        }
+
 
         this._originalEmail = data.email;
         this._originalIdentify = data.identify;
@@ -83,6 +98,35 @@ function EditPatientFormDialog() {
         this.trigger('showDeletePatientDialog');
 
         this.close();
+    };
+
+    this.onDeclineEmailClicked = function (e) {
+        var declineButton = $(e.target);
+
+        if (declineButton.prop("checked") === true ){
+            Notifications.confirm({
+                title: STRINGs.DECLINE_TITLE,
+                message: STRINGs.DECLINE_MESSAGE
+            }, {
+                buttons: [
+                    {
+                        text: 'Yes',
+                        'class': 'btn-agree',
+                        click: function () {
+                            $(this).dialog("close");
+
+                            declineButton.prop("checked", true);
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            declineButton.prop("checked", false);
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
     };
 
     this.originalEmailCheck = function () {
@@ -126,6 +170,7 @@ function EditPatientFormDialog() {
             firstName: this.select('firstNameFieldSelector').val(),
             lastName: this.select('lastNameFieldSelector').val(),
             email: this.select('emailFieldSelector').val(),
+            isDeclined: this.select('declineFieldSelector').prop('checked'),
             number: rawNumber,
             phoneNumber: phoneNumber,
             clientId: this.clientId,
@@ -135,6 +180,9 @@ function EditPatientFormDialog() {
 
     this.after('initialize', function () {
         this.on('formSuccess', this.onEditPatientSuccess);
+        this.on('click', {
+            declineFieldSelector: this.onDeclineEmailClicked
+        });
     });
 
     this.before('teardown', function () {
