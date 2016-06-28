@@ -2,13 +2,14 @@ var Notifications = require('../../common/Notification');
 
 function EmptyEmailConfirmation() {
     this.attributes({
-        emailFieldSelector: '#email'
+        emailFieldSelector: '#email',
+        declineFieldSelector: '#emailStatus'
     });
 
     this.beforeSubmitForm = function () {
         var me = this;
 
-        if (this.isEmailFieldBlank()) {
+        if (this.isEmailFieldBlank() && !this.isDeclined()) {
             Notifications.confirm({
                 title: 'NO EMAIL ADDRESS',
                 message: [
@@ -37,6 +38,64 @@ function EmptyEmailConfirmation() {
             });
 
             return false;
+        } else if (this.isEmailFieldBlank() && this.isDeclined()) {
+            Notifications.confirm({
+                title: 'ARE YOU SURE?',
+                message: [
+                    'Patient declined to received any email communication.' +
+                    ' This cannot be undone once saved. Are you sure?'
+                ]
+            }, {
+                buttons: [
+                    {
+                        text: "Yes, I'm sure",
+                        'class': 'btn-agree',
+                        click: function () {
+                            // Warning dialog close
+                            $(this).dialog("close");
+
+                            // Bulk import dialog close
+                            me.submitForm();
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+
+            return false;
+        } else if ( !this.isEmailFieldBlank() && this.isDeclined()){
+            Notifications.confirm({
+                title: 'ARE YOU SURE?',
+                message: [
+                    'Patient declined to received any email communication.' +
+                    ' This cannot be undone once saved. Are you sure?'
+                ]
+            }, {
+                buttons: [
+                    {
+                        text: "Yes, I'm sure",
+                        'class': 'btn-agree',
+                        click: function () {
+                            // Warning dialog close
+                            $(this).dialog("close");
+
+                            // Bulk import dialog close
+                            me.submitForm();
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+
+            return false;
         }
     };
 
@@ -44,6 +103,10 @@ function EmptyEmailConfirmation() {
         var $email = this.select('emailFieldSelector');
 
         return $email.is(':visible') && $email.val() === '';
+    };
+
+    this.isDeclined = function () {
+        return this.select('declineFieldSelector').prop('checked');
     };
 }
 

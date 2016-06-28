@@ -111,6 +111,7 @@ function HeaderPanel() {
             url:URLs.GET_ALERT_COUNT,
             method: 'GET',
             dropProcess: true,
+            ignoreError: true,
             data: {
                 timestamp: (new Date()).getTime()
             }
@@ -242,6 +243,7 @@ function HeaderPanel() {
         });
 
         this.on(document, 'alertHasBeenUpdated', this.getAlertCount);
+        this.on(document, 'archiveTreatmentSuccess', this.getAlertCount);
     });
 }
 

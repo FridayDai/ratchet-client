@@ -3,6 +3,8 @@ var WithFormDialog = require('../common/WithFormDialog');
 var URLs = require('../../constants/Urls');
 var PARAMs = require('../../constants/Params');
 var Utility = require('../../utils/Utility');
+var Notifications = require('../common/Notification');
+var STRINGs = require('../../constants/Strings');
 var EmptyEmailConfirmation = require('../shared/components/EmptyEmailConfirmation');
 var WithCaregiverFieldRequired = require('../shared/functional/WithCaregiverFieldRequired');
 var PhoneNumberValidation = require('../shared/validation/PhoneNumberValidation');
@@ -19,10 +21,6 @@ var NewPatientAbsoluteEventDate = require('../shared/components/PatientAbsoluteE
 var NewPatientBirthday = require('../shared/components/PatientBirthday');
 
 function NewPatientFormDialog() {
-    flight.compose.mixin(this, [
-        EmptyEmailConfirmation
-    ]);
-
     this.attributes({
         hiddenIdSelector: '#hidden-id',
 
@@ -31,6 +29,7 @@ function NewPatientFormDialog() {
         phoneNumberFieldSelector: '#phoneNumber',
         emailFieldSelector: '#email',
         declineFieldSelector: '#emailStatus',
+        declineBlockSelector: '.decline',
         groupFieldSelector: '#selectGroup',
         providerFieldSelector: '#selectStaffs',
         treatmentFieldSelector: '#selectTreatment',
@@ -57,7 +56,7 @@ function NewPatientFormDialog() {
 
     this.options({
         title: 'NEW PATIENT',
-        width: 620,
+        width: 630,
         buttons: ['Save']
     });
 
@@ -235,7 +234,14 @@ function NewPatientFormDialog() {
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email === null ? '' : data.email);
         if (PARAMs.EMAIL_STATUS[data.status] === 'DECLINED') {
-            this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
+            //this.select('declineFieldSelector').prop({'checked': true, 'disabled': true});
+            this.select('declineBlockSelector').html(
+                '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
+                '<label for="emailStatus" class="decline-msg">' +
+                    '<span>Patient declined to communicate via email.</span>' +
+                    '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+                '</label>'
+            );
         } else {
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});
         }
@@ -266,6 +272,16 @@ function NewPatientFormDialog() {
         this.select('caregiverPermissionFirstNameSelector').empty();
 
         this.trigger('newPatientReset');
+    };
+
+    this.isEmailFieldBlank = function () {
+        var $email = this.select('emailFieldSelector');
+
+        return $email.is(':visible') && $email.val() === '';
+    };
+
+    this.isDeclined = function () {
+        return this.select('declineFieldSelector').prop('checked');
     };
 
     this.beforeSubmitForm = function () {
@@ -346,6 +362,35 @@ function NewPatientFormDialog() {
         return result;
     };
 
+    this.onDeclineEmailClicked = function (e) {
+        var declineButton = $(e.target);
+
+        if (declineButton.prop("checked") === true ){
+            Notifications.confirm({
+                title: STRINGs.DECLINE_TITLE,
+                message: STRINGs.DECLINE_MESSAGE
+            }, {
+                buttons: [
+                    {
+                        text: 'Yes',
+                        'class': 'btn-agree',
+                        click: function () {
+                            $(this).dialog("close");
+
+                            declineButton.prop("checked", true);
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            declineButton.prop("checked", false);
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+    };
+
     this.onAddPatientSuccess = function (e, data) {
         this.trigger('refreshPatientsTable', {
             callback: function () {
@@ -366,11 +411,18 @@ function NewPatientFormDialog() {
         this.on('click', {
             'basicEditButtonSelector': this.showBasicField
         });
+        this.on('click', {
+            declineFieldSelector: this.onDeclineEmailClicked
+        });
 
         this.on('input', {
             caregiverFirstNameFieldSelector: this.onCaregiverFirstNameInput
         });
     });
+
+    flight.compose.mixin(this, [
+        EmptyEmailConfirmation
+    ]);
 }
 
 module.exports = flight.component(
