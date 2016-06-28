@@ -43,12 +43,6 @@
                 </div>
 
                 <div class="filler-content">
-                    <label for="attentionStatusFilter" class="select-tip">ATTENTION</label>
-                    <input type="text" name="attentionStatusFilter" id="attentionStatusFilter"
-                           class="input-group input-auto-search"/>
-                </div>
-
-                <div class="filler-content">
                     <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
                     <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
                            class="input-group input-auto-search"/>
@@ -89,7 +83,6 @@
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
-                        <td>${patient.isAttentionNeeded}</td>
                     </tr>
                 </g:each>
                 </tbody>

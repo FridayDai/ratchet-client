@@ -10,7 +10,6 @@ class PatientFilterFields extends FilterFields {
     int emailStatus
     String patientIdOrName
     Boolean activeTreatmentOnly = true
-    int attentionStatus
     int treatmentStatus
     int taskStatus
 }

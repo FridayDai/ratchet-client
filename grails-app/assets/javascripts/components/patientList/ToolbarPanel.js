@@ -5,7 +5,6 @@ var KEYs = require('../../constants/Keys');
 var TreatmentCombobox = require('./ToolbarTreatmentCombobox');
 var ProviderCombobox = require('./ToolbarProviderCombobox');
 var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
-var attentionStatusCombobox = require('./ToolbarAttentionStatusCombobox');
 var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
 var taskStatusCombobox = require('./ToolbarTaskStatusCombobox');
 
@@ -17,7 +16,6 @@ function ToolbarPanel() {
         treatmentFieldSelector: '#treatmentForSearchPatient',
         providerFieldSelector: '#selectSurgeon',
         emailStatusFieldSelector: '#emailStatusFilter',
-        attentionStatusFieldSelector: '#attentionStatusFilter',
         treatmentStatusFieldSelector: '#treatmentStatusFilter',
         taskStatusFieldSelector: '#taskStatusFilter'
     });
@@ -26,7 +24,6 @@ function ToolbarPanel() {
         treatmentFieldSelector: TreatmentCombobox,
         providerFieldSelector: ProviderCombobox,
         emailStatusFieldSelector: emailStatusCombobox,
-        attentionStatusFieldSelector: attentionStatusCombobox,
         treatmentStatusFieldSelector: treatmentStatusCombobox,
         taskStatusFieldSelector: taskStatusCombobox
     });
@@ -36,7 +33,6 @@ function ToolbarPanel() {
             treatment: this.child.treatmentFieldSelector.getDisplayItem(),
             provider: this.child.providerFieldSelector.getDisplayItem(),
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
-            attention: this.child.attentionStatusFieldSelector.getDisplayItem(),
             patientIdOrName: this._patientIdOrNamePreviousVal,
             treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem(),
             taskStatus: this.child.taskStatusFieldSelector.getDisplayItem()
@@ -72,7 +68,6 @@ function ToolbarPanel() {
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
         this.child.providerFieldSelector.setDisplayItem(toolbarData.provider);
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);
-        this.child.attentionStatusFieldSelector.setDisplayItem(toolbarData.attention);
         this.child.treatmentStatusFieldSelector.setDisplayItem(toolbarData.treatmentStatus);
         this.child.taskStatusFieldSelector.setDisplayItem(toolbarData.taskStatus);
     };

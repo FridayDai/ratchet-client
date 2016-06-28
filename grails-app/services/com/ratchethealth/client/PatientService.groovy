@@ -77,7 +77,6 @@ class PatientService extends RatchetAPIService {
         def sortFiled = patientPagination?.sortField
         def emailStatus = patientPagination?.emailStatus
         def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
-        def attentionStatus = patientPagination?.attentionStatus
         def treatmentStatus = patientPagination?.treatmentStatus
         def taskStatus = patientPagination?.taskStatus
 
@@ -99,10 +98,6 @@ class PatientService extends RatchetAPIService {
             "activeTreatmentOnly": activeTreatmentOnly,
             "taskStatus": taskStatus
         ];
-
-        if (attentionStatus) {
-            queryStrings['isAttentionNeeded'] = attentionStatus == 1
-        }
 
         if(queryStrings.taskStatus == 0){
             queryStrings.taskStatus = null;
