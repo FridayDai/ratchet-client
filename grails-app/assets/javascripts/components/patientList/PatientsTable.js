@@ -42,8 +42,6 @@ var TABLE_SEARCH_EVENTS = [
     'clearProviderForPatientTable',
     'selectEmailStatusForPatientTable',
     'clearEmailStatusForPatientTable',
-    'selectAttentionStatusForPatientTable',
-    'clearAttentionStatusForPatientTable',
     'selectTreatmentStatusForPatientTable',
     'clearTreatmentStatusForPatientTable',
     'selectTaskStatusForPatientTable',
@@ -64,16 +62,6 @@ function PatientsTable() {
                 data: 'patientId',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
-
-                    if (full.isAttentionNeeded === "true" || full.isAttentionNeeded === true) {
-                        return [
-                            '<div class="source-id">',
-                            id,
-                            '<div class="attention-icon"></div>',
-                            '</div>'
-                        ].join('');
-
-                    }
                     return '<p class="source-id">' + id + '</p>';
                 },
                 width: "10%"
@@ -184,10 +172,6 @@ function PatientsTable() {
                 targets: 8,
                 data: 'status',
                 "visible": false
-            }, {
-                targets: 9,
-                data: 'isAttentionNeeded',
-                "visible": false
             }
         ],
         createdRow: function (row, data) {
@@ -204,7 +188,6 @@ function PatientsTable() {
         surgeonId: null,
         emailStatus: null,
         patientIdOrName: null,
-        attentionStatus: null,
         treatmentStatus: null,
         taskStatus: null,
         activeTreatmentOnly: true

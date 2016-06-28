@@ -315,7 +315,6 @@ ratchetv2 {
                 getResult = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/result"
                 delete = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s"
                 callVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/call"
-                resolveVoice = "${ratchetv2.server.url.base}/api/v1/clients/%s/patients/%s/records/%s/tasks/%s/attention/resolve"
                 answerUserTask = "${ratchetv2.server.url.base}/api/v1/client/%s/patient/%s/userevent/%s/answer"
             }
             getOverdueTask = "${ratchetv2.server.url.base}/api/v1/patients/%s/records/%s/overdue"

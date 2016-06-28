@@ -79,7 +79,6 @@ class UrlMappings {
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/result"(controller: "task", action: "getTaskResult")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/delete"(controller: "task", action: "deleteTask")
         "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/voice-call"(controller: "task", action: "callVoiceTask")
-        "/patients/$patientId/treatments/$medicalRecordId/task/$taskId/attention/resolve"(controller: "task", action: "resolveVoiceTask")
 
         //Patient caregiver
         "/patients/$patientId?/caregivers"(controller: "caregiver") {
