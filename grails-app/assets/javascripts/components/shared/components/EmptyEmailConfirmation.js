@@ -1,4 +1,6 @@
 var Notifications = require('../../common/Notification');
+var STRINGs = require('../../../constants/Strings.js');
+
 
 function EmptyEmailConfirmation() {
     this.attributes({
@@ -11,11 +13,8 @@ function EmptyEmailConfirmation() {
 
         if (this.isEmailFieldBlank() && !this.isDeclined()) {
             Notifications.confirm({
-                title: 'NO EMAIL ADDRESS',
-                message: [
-                    'Patient without email address will not receive any automated task reminder.',
-                    'Do you want to proceed?'
-                ]
+                title: STRINGs.NO_EMAIL_TITLE,
+                message: STRINGs.NO_EMAIL_MESSAGE
             }, {
                 buttons: [
                     {
@@ -40,11 +39,8 @@ function EmptyEmailConfirmation() {
             return false;
         } else if (this.isEmailFieldBlank() && this.isDeclined()) {
             Notifications.confirm({
-                title: 'ARE YOU SURE?',
-                message: [
-                    'Patient declined to received any email communication.' +
-                    ' This cannot be undone once saved. Are you sure?'
-                ]
+                title: STRINGs.CONFIRM_TITLE,
+                message: STRINGs.CONFIRM_MESSAGE
             }, {
                 buttons: [
                     {
@@ -69,11 +65,8 @@ function EmptyEmailConfirmation() {
             return false;
         } else if ( !this.isEmailFieldBlank() && this.isDeclined()){
             Notifications.confirm({
-                title: 'ARE YOU SURE?',
-                message: [
-                    'Patient declined to received any email communication.' +
-                    ' This cannot be undone once saved. Are you sure?'
-                ]
+                title: STRINGs.CONFIRM_TITLE,
+                message: STRINGs.CONFIRM_MESSAGE
             }, {
                 buttons: [
                     {

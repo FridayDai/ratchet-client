@@ -59,6 +59,16 @@ module.exports = {
 
     //Decline Message
     DECLINE_TITLE: 'EMAIL DECLINED',
-    DECLINE_MESSAGE: 'Patient will not receive any further communication via email.' +
-                     ' This cannot be undone when it is saved. Do you want to proceed?'
+    DECLINE_MESSAGE: 'The patient will not receive any further communication via email.' +
+                     ' This cannot be undone when it is saved. Do you want to proceed?',
+
+    NO_EMAIL_TITLE: 'NO EMAIL ADDRESS',
+    NO_EMAIL_MESSAGE: 'The patient without email address will not receive any automated task reminder.' +
+                      ' Do you want to proceed?',
+
+    CONFIRM_TITLE: 'ARE YOU SURE?',
+    CONFIRM_MESSAGE: 'The patient has declined to receive any email communication.' +
+                     ' This cannot be undone once saved. Are you sure?'
+
+
 };
