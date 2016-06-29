@@ -243,6 +243,13 @@ function NewPatientFormDialog() {
                 '</label>'
             );
         } else {
+            this.select('declineBlockSelector').html(
+            '<input id="emailStatus" name="emailStatus" type="checkbox" value="decline">' +
+            '<label for="emailStatus" class="decline-msg">' +
+                '<span>Patient declined to communicate via email.</span>' +
+                '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+            '</label>'
+            );
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});
         }
 
