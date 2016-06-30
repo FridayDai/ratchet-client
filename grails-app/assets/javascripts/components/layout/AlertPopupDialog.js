@@ -32,8 +32,10 @@ var ALERT_LIST_TEMPLATE = [
 
 var ALERT_LIST_ITEM_TEMPLATE = [
     '<div class="alert-list-item">',
-        '<span class="alert-message"><a href="/patients/{2}">{0} {1}</a> {3}</span>',
-        '<span class="alert-time">{4}</span>',
+        '<a href="/patients/{2}">',
+            '<span class="alert-message"><span class="patient-name">{0} {1}</span> {3}</span>',
+            '<span class="alert-time">{4}</span>',
+        '</a>',
     '</div>'
 ].join('');
 
