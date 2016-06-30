@@ -285,7 +285,7 @@ class PatientDashboardController extends BaseController {
                 sendTime: today
         ]
 
-        return [combinedTasks : combinedTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] }),
+        return [combinedTasks : combinedTasks.sort({ a, b -> a["sendTime"] <=> b["sendTime"] ?: a["title"] <=> b["title"] }),
                 medicalRecords: medicalRecords,
                 alertNumber   : alertNumber]
     }

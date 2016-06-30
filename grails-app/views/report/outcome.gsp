@@ -9,7 +9,9 @@
     <body>
     <div class="content">
         <div class="inner-header" id="header-panel">
-            <label class="title report-icon">REPORTS - OUTCOME</label>
+            <label class="title report-icon">
+                <i class="fa fa-bar-chart icon"></i> REPORTS - OUTCOME
+            </label>
         </div>
 
         <div class="inner-search tool-bar">

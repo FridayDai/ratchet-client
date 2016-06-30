@@ -1,4 +1,5 @@
 @import '../partials/common';
+@import '../partials/header';
 @import '../partials/table';
 @import '../partials/form';
 @import '../partials/theme';
@@ -6,9 +7,26 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 
+.patients-inner-header {
+    height: 27px;
+    padding: 20px 30px;
+
+    .title, .btn {
+        margin-top: 0;
+    }
+
+    .title {
+        line-height: 27px;
+    }
+
+    .patient-title {
+        //.icon
+    }
+}
+
 .inner-search {
     .search-content {
-        padding: 5px 20px 27px;
+        padding: 5px 15px 27px;
     }
     .filler-content {
         margin-top: 15px;
@@ -390,18 +408,6 @@
     background-color: #000000;
     margin-left: 40px;
 
-}
-
-.patient-icon {
-    &:before {
-        position: absolute;
-        display: inline-block;
-        top: -3px;
-        left: -35px;
-        width: 10px;
-        height: 25px;
-        content: image-url('patients/patients_icon_active.png', false, false);
-    }
 }
 
 #patient-list_wrapper {

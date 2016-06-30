@@ -211,6 +211,10 @@
                 color: $base-color-white;
                 background-color: $base-color-mid-grey;
             }
+
+            &.next {
+                margin-right: 0;
+            }
         }
 
         span {

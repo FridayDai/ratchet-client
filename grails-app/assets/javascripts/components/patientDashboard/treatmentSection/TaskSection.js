@@ -5,6 +5,7 @@ var FilterTaskStatusSelectbox = require('./FilterTaskStatusSelectbox');
 var taskItemBox = require('./TaskItemBox');
 
 var ResolveUndoAlerts = require('../../shared/functional/ResolveUndoAlerts');
+var TaskTimeLine = require('./TaskTimeLine');
 
 function TaskSection() {
 
@@ -17,11 +18,12 @@ function TaskSection() {
         taskItemBoxSelector: '.box-item',
 
         taskInfoHiddenSelector: '.task-info-hidden',
-        noActiveItemLabelSelector: '.no-active-item',
+
         todayItemSelector: '.today-item',
         allBoxItemSelector: '.box-item',
         boxItemsSelector: '.box-item:not(.archived)',
         archivedItemSelector: '.box-item.archived',
+
         filterCountFiledSelector: '#filter-count',
         clearFilterButtonSelector: '#clear-filter',
         alertFilterButtonSelector: '#btn-filter-alert',
@@ -29,6 +31,7 @@ function TaskSection() {
         alertButtonTextSelector: '#filter-alert-text',
         visibleTaskCountSelector: '#visible-number',
         totalTaskCountSelector: '#total-number',
+
         alertEditEmailButtonSelector: '.patient-level-attention .edit-email-link',
         alertResolveLinkSelector: '.patient-level-attention .resolve-link',
         alertUndoLinkSelector: '.patient-level-attention .undo-link'
@@ -123,6 +126,8 @@ function TaskSection() {
 
             this.checkNoTask();
             this.countVisibleTasks();
+
+            this.checkTimeLine();
         }
     };
 
@@ -187,6 +192,8 @@ function TaskSection() {
         this.initFilter();
         this.inactiveAlert();
         this.trigger('taskStatusClearFilter');
+
+        this.checkTimeLine();
     };
 
     this.scrollToday = function () {
@@ -262,6 +269,7 @@ function TaskSection() {
 }
 
 module.exports = flight.component(
+    TaskTimeLine,
     ResolveUndoAlerts,
     WithChildren,
     TaskSection

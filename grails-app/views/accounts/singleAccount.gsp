@@ -13,7 +13,9 @@
     <div class="content">
 
         <div class="inner-header" id="header-panel">
-            <label class="title account">ACCOUNT</label>
+            <label class="title account">
+                <i class="fa fa-user icon"></i> ACCOUNT
+            </label>
             <a href="#" class="btn-close">Close</a>
         </div>
 
