@@ -100,7 +100,7 @@
 
     .alert-icon-tip {
         top: 48px;
-        right: 31px;
+        right: 21px;
 
         &:after {
             content: '';
@@ -180,22 +180,34 @@
 
         .alert-list-item {
             position: relative;
-            padding: 15px;
             border-bottom: 1px solid #ccc;
+            cursor: pointer;
+
+            a {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+            }
+
+            &:hover {
+                background-color: #f2f2f2;
+
+                .alert-message {
+                    text-decoration: underline;
+                }
+            }
         }
 
         .alert-message {
             display: inline-block;
             width: 260px;
             font-size: 15px;
+            color: #4d4d4d;
 
-            a {
+            .patient-name {
+                color: #225f6f;
                 font-size: 15px;
                 font-weight: 700;
-
-                &:hover {
-                    text-decoration: underline;
-                }
             }
         }
 

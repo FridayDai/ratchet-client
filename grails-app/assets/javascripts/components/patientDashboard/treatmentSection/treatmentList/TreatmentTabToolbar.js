@@ -12,7 +12,6 @@ function TreatmentToolbar() {
         treatmentListAnchorSelector: '.ui-tabs-anchor',
         addTaskButtonSelector: '.addTasks',
         editButtonSelector: '.event-time-edit',
-        archiveButtonSelector: '.archived-active',
         deleteButtonSelector: '.treatment-delete',
         taskInfoHiddenSelector: '.task-info-hidden',
 
@@ -51,37 +50,6 @@ function TreatmentToolbar() {
         if (ids.currentAbsoluteEventDate) {
             this.trigger('showEditTreatmentDialog', this.getBasicIds());
         }
-    };
-
-    this.onArchiveButtonClicked = function (e) {
-        e.preventDefault();
-
-        var me = this;
-        this.select('moreDropdownListSelector').hide();
-
-        Notifications.confirm({
-            title: 'ARCHIVE TREATMENT',
-            message: 'Warning: This action cannot be undone.'
-        }, {
-            buttons: [
-                {
-                    text: 'Archive',
-                    'class': 'btn-agree',
-                    click: function () {
-                        // Warning dialog close
-                        $(this).dialog('close');
-
-                        // Bulk import dialog close
-                        me.archiveTreatment();
-                    }
-                }, {
-                    text: 'Cancel',
-                    click: function () {
-                        $(this).dialog('close');
-                    }
-                }
-            ]
-        });
     };
 
     this.onDeleteButtonClicked = function () {
@@ -171,8 +139,7 @@ function TreatmentToolbar() {
         if (!this.attr.archived) {
             this.on('click', {
                 addTaskButtonSelector: this.onAddTaskButtonClicked,
-                editButtonSelector: this.onEditSurgeryButtonClicked,
-                archiveButtonSelector: this.onArchiveButtonClicked
+                editButtonSelector: this.onEditSurgeryButtonClicked
             });
         }
 

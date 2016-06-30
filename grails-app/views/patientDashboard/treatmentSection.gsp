@@ -42,10 +42,6 @@
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             <span class="text-span">Edit</span>
                         </li>
-                        <li class="archived-active">
-                            <i class="fa fa-archive" aria-hidden="true"></i>
-                            <span class="text-span">Archive</span>
-                        </li>
                         <g:if test="${AccountIsAdmin.toString() == 'true'}">
                         <li class="treatment-delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
