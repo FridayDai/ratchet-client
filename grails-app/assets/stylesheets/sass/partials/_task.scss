@@ -18,9 +18,27 @@
 
 .tasks-list {
     position: relative;
-    padding: 20px 30px 10px;
+    padding: 20px 30px 10px 62px;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    .tasks-wrap {
+        position: relative;
+    }
+
+    .tasks-time-line {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30px;
+            height: 100%;
+            width: 1px;
+            background: $base-light-grey-color;
+            border-top: 45px solid $base-color-bg-head;
+            border-bottom: 45px solid $base-color-bg-head;
+        }
+    }
 }
 
 .curtain-top {
@@ -308,6 +326,7 @@
 
 //new taskBox
 .box-item {
+    position: relative;
     font-size: 14px;
     margin-bottom: 4px;
 
@@ -415,6 +434,65 @@
                 background-color: $base-font-grey-dark;
             }
         }
+    }
+}
+
+.item-absolute-date {
+    display: inline-block;
+    width: 55px;
+    position: absolute;
+    top: 16px;
+    left: -60px;
+    padding: 6px 2px;
+    text-align: center;
+    background-color: $base-color-bg-head;
+    font-size: 14px;
+    line-height: 12px;
+    color: $base-font-color;
+
+    &.hidden {
+        display: none;
+    }
+
+    .short-event-title {
+        padding: 3px 2px;
+        background-color: $base-logo-color ;
+        color: $base-color-white;
+        border-radius: 2px;
+        margin: 4px 0;
+        display: inline-block;
+    }
+
+    &.item-absolute-short-event {
+        top: 6px;
+    }
+}
+
+.short-title-wrap-before {
+    &:before {
+        display: block;
+        content: ' ';
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-bottom: 7px solid $base-logo-color;
+        vertical-align: top;
+        margin: 0 auto;
+    }
+}
+
+.short-title-wrap-after {
+    &:after {
+        display: block;
+        content: ' ';
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 7px solid $base-logo-color;
+        vertical-align: bottom;
+        margin: 0 auto;
     }
 }
 
@@ -820,7 +898,7 @@
 }
 
 .patient-level-attention {
-    margin: 20px 30px 15px;
+    margin: 20px 30px 15px 60px;
     font-size: 15px;
     padding: 18px;
 
