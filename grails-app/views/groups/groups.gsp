@@ -10,7 +10,9 @@
     <body>
     <div>
         <div class="inner-header" id="header-panel">
-            <label class="title group-icon">GROUPS</label>
+            <label class="title group-icon">
+                <i class="fa fa-th-large icon"></i> GROUPS
+            </label>
             <a href="#" id="add-group" class="btn btn-add add-group"><span>New Group</span></a>
         </div>
 

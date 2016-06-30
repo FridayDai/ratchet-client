@@ -9,18 +9,6 @@
     display: none;
 }
 
-.group-icon {
-    &:before {
-        position: absolute;
-        display: inline-block;
-        top: 0;
-        left: -35px;
-        width: 10px;
-        height: 25px;
-        content: image-url('groups/groups_icon_active.png', false, false);
-    }
-}
-
 .inner-search {
     .right-search {
         margin-top: 0;

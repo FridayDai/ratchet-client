@@ -9,8 +9,10 @@
 
     <body>
     <div>
-        <div id="header-panel" class="inner-header">
-            <label class="title patient-icon">PATIENTS</label>
+        <div id="header-panel" class="inner-header patients-inner-header">
+            <label class="title patient-title">
+                <i class="fa fa-bed icon"></i> PATIENTS
+            </label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
