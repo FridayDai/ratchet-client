@@ -1,20 +1,20 @@
 var Notifications = require('../../common/Notification');
+var STRINGs = require('../../../constants/Strings.js');
+
 
 function EmptyEmailConfirmation() {
     this.attributes({
-        emailFieldSelector: '#email'
+        emailFieldSelector: '#email',
+        declineFieldSelector: '#emailStatus'
     });
 
     this.beforeSubmitForm = function () {
         var me = this;
 
-        if (this.isEmailFieldBlank()) {
+        if (this.isEmailFieldBlank() && !this.isDeclined()) {
             Notifications.confirm({
-                title: 'NO EMAIL ADDRESS',
-                message: [
-                    'Patient without email address will not receive any automated task reminder.',
-                    'Do you want to proceed?'
-                ]
+                title: STRINGs.NO_EMAIL_TITLE,
+                message: STRINGs.NO_EMAIL_MESSAGE
             }, {
                 buttons: [
                     {
@@ -37,6 +37,58 @@ function EmptyEmailConfirmation() {
             });
 
             return false;
+        } else if (this.isEmailFieldBlank() && this.isDeclined()) {
+            Notifications.confirm({
+                title: STRINGs.CONFIRM_TITLE,
+                message: STRINGs.CONFIRM_MESSAGE
+            }, {
+                buttons: [
+                    {
+                        text: "Yes, I'm sure",
+                        'class': 'btn-agree',
+                        click: function () {
+                            // Warning dialog close
+                            $(this).dialog("close");
+
+                            // Bulk import dialog close
+                            me.submitForm();
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+
+            return false;
+        } else if ( !this.isEmailFieldBlank() && this.isDeclined()){
+            Notifications.confirm({
+                title: STRINGs.CONFIRM_TITLE,
+                message: STRINGs.CONFIRM_MESSAGE
+            }, {
+                buttons: [
+                    {
+                        text: "Yes, I'm sure",
+                        'class': 'btn-agree',
+                        click: function () {
+                            // Warning dialog close
+                            $(this).dialog("close");
+
+                            // Bulk import dialog close
+                            me.submitForm();
+                        }
+                    }, {
+                        text: 'Cancel',
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+
+            return false;
         }
     };
 
@@ -44,6 +96,10 @@ function EmptyEmailConfirmation() {
         var $email = this.select('emailFieldSelector');
 
         return $email.is(':visible') && $email.val() === '';
+    };
+
+    this.isDeclined = function () {
+        return this.select('declineFieldSelector').prop('checked');
     };
 }
 

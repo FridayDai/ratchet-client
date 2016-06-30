@@ -29,6 +29,9 @@ function ResolveUndoAlerts() {
                     isResolved: true
                 });
 
+                $alertBar.find('.countdown-svg .circle-bar').velocity({strokeDashoffset: 50.26},
+                        {duration: 30000, easing: "linear"});
+
                 setTimeout(function () {
                     dfd.resolve();
                 }, 30000);
@@ -50,6 +53,10 @@ function ResolveUndoAlerts() {
                 $button.removeClass('checked');
                 $alertBar.removeClass('undo');
                 dfd.reject();
+
+                $alertBar.find('.countdown-svg .circle-bar')
+                    .velocity("finish")
+                    .velocity('reverse',{duration: 1});
 
                 me.trigger('alertHasBeenUpdated', {
                     isResolved: false

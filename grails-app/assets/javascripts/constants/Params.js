@@ -62,11 +62,6 @@ module.exports = {
         {label: "Declined", value: 6}
     ],
 
-    ATTENTION_STATUS_FILTER: [
-        {label: "Required", value: 1},
-        {label: "Not Required", value: 2}
-    ],
-
     TREATMENT_STATUS_FILTER: [
         {label: "Pre-Op", value: 1},
         {label: "Post-Op 0-3 days", value: 2},

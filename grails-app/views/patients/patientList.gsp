@@ -43,12 +43,6 @@
                 </div>
 
                 <div class="filler-content">
-                    <label for="attentionStatusFilter" class="select-tip">ATTENTION</label>
-                    <input type="text" name="attentionStatusFilter" id="attentionStatusFilter"
-                           class="input-group input-auto-search"/>
-                </div>
-
-                <div class="filler-content">
                     <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
                     <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
                            class="input-group input-auto-search"/>
@@ -89,7 +83,6 @@
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
-                        <td>${patient.isAttentionNeeded}</td>
                     </tr>
                 </g:each>
                 </tbody>
@@ -155,7 +148,9 @@
                 <div class="decline">
                     <input id="emailStatus" name="emailStatus" type="checkbox" value="decline">
                     <label for="emailStatus" class="decline-msg">
-                        Patient declined to communicate via email.</label>
+                        <span>Patient declined to communicate via email.</span>
+                        <span class="warn-msg">(Warning: This cannot be undone.)</span>
+                    </label>
                 </div>
             </div>
 

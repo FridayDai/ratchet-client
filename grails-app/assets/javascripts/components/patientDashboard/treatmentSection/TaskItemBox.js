@@ -20,6 +20,15 @@ var USER_TOOL_TITLE = {
     snf: 'SNF Follow Up'
 };
 
+var NOT_AVAILABLE_FUNCTIONS = [
+    'onTaskDeleteButtonClicked',
+    'onTaskBeginButtonClicked',
+    'onTaskVoiceCallButtonClicked',
+    'onTaskStartButtonClicked',
+    'onResolveButtonClicked',
+    'onUndoButtonClicked'
+];
+
 function TaskItem() {
 
     this.attributes({
@@ -191,7 +200,26 @@ function TaskItem() {
         this.trigger('updateTaskFilterStatus');
     };
 
+    this.checkNotAvailableWrapper = function (fnNames) {
+        var me = this;
+        var itemArchived = this.$node.hasClass('archived');
+
+        _.each(fnNames, function(fnName) {
+            me['__{0}'.format(fnName)] = me[fnName];
+
+            me[fnName] = function (e) {
+                e.preventDefault();
+
+                if (!itemArchived) {
+                    me['__{0}'.format(fnName)].call(me, e);
+                }
+            };
+        });
+    };
+
     this.after('initialize', function () {
+        this.checkNotAvailableWrapper(NOT_AVAILABLE_FUNCTIONS);
+
         this.on(document, 'feedbackPhoneNumberStatus', this.onPhoneNumberFeedback);
         this.on(document, 'phoneNumberUpdated', this.onPhoneNumberFeedback);
         this.on(document, 'userTaskCompleteSuccess', this.onUserTaskCompleteSuccess);

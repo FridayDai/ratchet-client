@@ -123,8 +123,7 @@
                     <span class="alert-link resolve-link">Click to resolve</span>
 
                     <span class="alert-link undo-link">
-                        <i class="fa fa-circle-o-notch fa-spin"></i>
-
+                        <g:render template="taskBox/shared/countdown"/>
                         <span class="undo-text">Undo</span>
                     </span>
                 </div>

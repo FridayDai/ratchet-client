@@ -1,4 +1,5 @@
 @import './multipleSelect';
+@import "countdown";
 
 .center {
     text-align: center;
@@ -89,6 +90,35 @@
             background-color: $base-color-grey-white;
         }
 
+        .start-task,
+        .delete,
+        .begin-task,
+        .resolve-link {
+            color: #b3b3b3;
+            cursor: default;
+            text-decoration: none;
+
+            &:hover, &:focus, &:before {
+                color: #b3b3b3;
+                text-decoration: none;
+            }
+
+            &:hover + .icon-button-tip {
+                display: none;
+            }
+        }
+
+        .start-task {
+            &:before {
+                border-left: 5px solid #b3b3b3;
+            }
+
+            &:hover {
+                &:before {
+                    border-left: 5px solid #b3b3b3;
+                }
+            }
+        }
     }
 }
 
@@ -614,6 +644,14 @@
             border-radius: 3px;
             padding: 0 5px;
             margin-left: 3px;
+            color: $base-color-white;
+        }
+        .score-rank {
+            word-spacing: 5px;
+            background-color: $base-color-complete;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin-left: 10px;
             color: $base-color-white;
         }
     }
