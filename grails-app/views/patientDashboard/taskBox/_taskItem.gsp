@@ -15,7 +15,7 @@
         </span>
     </g:if>
     <g:else>
-        <g:dateUnit millisecond="${task?.sendTimeOffset - task?.treatmentProperty?.absoluteEventTimestamp}" var="date">
+        <g:dateUnit millisecond="${task?.sendTime - task?.treatmentProperty?.absoluteEventTimestamp}" var="date">
             <span class="item-absolute-date hidden">
                 <span class="item-absolute-date-wrap">
                     <div>${date?.digit}</div>
