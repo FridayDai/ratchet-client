@@ -19,6 +19,7 @@ var NewPatientProviderCombobox = require('../shared/components/PatientProviderCo
 var NewPatientTreatmentCombobox = require('../shared/components/PatientTreatmentCombobox');
 var NewPatientAbsoluteEventDate = require('../shared/components/PatientAbsoluteEventDate');
 var NewPatientBirthday = require('../shared/components/PatientBirthday');
+var NewPatientGenderCombobox = require('../shared/components/PatientGenderCombobox');
 
 function NewPatientFormDialog() {
     this.attributes({
@@ -35,6 +36,7 @@ function NewPatientFormDialog() {
         treatmentFieldSelector: '#selectTreatment',
         eventTimeFieldSelector: '#eventTime',
         birthdayFieldSelector: '#birthday',
+        genderFieldSelector: '#gender',
 
         basicEditButtonSelector: 'a.form-group-edit',
         caregiverRelationshipFieldSelector: '#relationship',
@@ -47,6 +49,7 @@ function NewPatientFormDialog() {
         phoneNumberStaticSelector: '#phoneNumber-static',
         emailStaticSelector: '#email-static',
         birthdayStaticSelector: '#birthday-static',
+        genderStaticSelector: '#gender-static',
 
         eventDateFormGroupSelector: '#div-event-time',
 
@@ -63,6 +66,7 @@ function NewPatientFormDialog() {
     this.children({
         phoneNumberFieldSelector: NewPatientPhoneInputField,
         birthdayFieldSelector: NewPatientBirthday,
+        genderFieldSelector: NewPatientGenderCombobox,
         caregiverRelationshipFieldSelector: {
             child: NewPatientRelationshipCombobox,
             attributes: {
@@ -168,7 +172,8 @@ function NewPatientFormDialog() {
         }, this);
 
         var complexFields = [
-            'phoneNumberFieldSelector'
+            'phoneNumberFieldSelector',
+            'genderFieldSelector'
         ];
 
         _.each(complexFields, function (selector) {
@@ -191,7 +196,8 @@ function NewPatientFormDialog() {
             'lastNameStaticSelector',
             'phoneNumberStaticSelector',
             'emailStaticSelector',
-            'birthdayStaticSelector'
+            'birthdayStaticSelector',
+            'genderStaticSelector'
         ];
 
         _.each(baseStatics, function (selector) {

@@ -130,6 +130,22 @@
             </div>
 
             <div class="form-group inline">
+                <label class="lbl-group">BIRTHDAY<span>*</span></label>
+                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                       placeholder="MM/DD/YYYY" required />
+                <div class='replace-input-div' id="birthday-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">GENDER<span>*</span></label>
+                <input id="gender" name="gender" type="text" class="input-group input-convert" required/>
+
+                <div class='replace-input-div' id="gender-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER</label>
                 <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert"
                        maxlength="14" minlength="14" placeholder="777-777-7777 (Optional)"/>
@@ -154,13 +170,7 @@
                 </div>
             </div>
 
-            <div class="form-group inline birthday-block">
-                <label class="lbl-group">BIRTHDAY<span>*</span></label>
-                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
-                       placeholder="MM/DD/YYYY" required />
-                <div class='replace-input-div' id="birthday-static"></div>
-                <a class='icon-edit form-group-edit'></a>
-            </div>
+
 
             <h4>CAREGIVER</h4>
 
