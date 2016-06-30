@@ -1,6 +1,6 @@
 package com.ratchethealth.client
 
-import org.apache.commons.lang.math.NumberUtils
+//import org.apache.commons.lang.math.NumberUtils
 
 class DateUnitTagLib {
 
@@ -39,7 +39,7 @@ class DateUnitTagLib {
     def dateUnit = { attrs, body ->
 
         def date = attrs.var ?: "date"
-        def offset = NumberUtils.toLong(attrs.millisecond)
+        def offset = attrs.millisecond
         if (offset == 0) {
             out << body((date): [digit: 0, unit: 'days'])
             return
