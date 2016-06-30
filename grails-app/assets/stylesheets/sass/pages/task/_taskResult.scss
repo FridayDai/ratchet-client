@@ -127,7 +127,7 @@ html, body, div, span {
 
     .raq-title {
         font-size: 27px;
-        font-weight: 300;
+        font-weight: 500;
         color: #335d70;
         display: inline-block;
         margin-top: 5px;
@@ -135,36 +135,39 @@ html, body, div, span {
     }
 
     .raq-sub-info-panel {
+        color: #4d4d4d;
         display: inline-block;
 
         .raq-patient-info{
+            color: #4d4d4d;
             font-size: 17px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .raq-status {
+            color: #4d4d4d;
             font-size: 17px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .raq-complete-time {
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .raq-name {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: 700;
         }
 
         .raq-id {
             margin-right: 10px;
             font-size: 17px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .raq-birthday {
             font-size: 17px;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .raq-download {
@@ -173,9 +176,15 @@ html, body, div, span {
             right: 32px;
             a {
                 font-size: 18px;
-                color: #7b8994;
+                color: #808080;
             }
 
+        }
+
+        .raq-download {
+            a:hover {
+                color: #4d4d4d;
+            }
         }
     }
 }

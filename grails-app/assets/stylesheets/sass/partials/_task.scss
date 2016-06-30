@@ -568,6 +568,14 @@
             margin-left: 3px;
             color: $base-color-white;
         }
+        .score-rank {
+            word-spacing: 5px;
+            background-color: $base-color-complete;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin-left: 10px;
+            color: $base-color-white;
+        }
     }
 
     .sub-item-line {

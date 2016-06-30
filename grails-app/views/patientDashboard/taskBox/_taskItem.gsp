@@ -96,13 +96,34 @@
                                 test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score || task.otherScore)}">
 
                             <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                                <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
-                                    <span class="sub-item multiple-item">
-                                        <span class="score-label">${score[0]}:</span>
+                                <g:if test="${task?.testId == 20}">
+                                    <g:RAPTScore score="${task?.otherScore}">
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Score:</span>
 
-                                        <span class="score-number">${score[1]}</span>
-                                    </span>
-                                </g:multipleScore>
+                                            <span class="score-number">${score["Score"]}</span><span class="score-rank">${score["Risk"]}</span>
+                                        </span>
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Care Partner:</span>
+
+                                            <span class="score-number">${score["Care Partner"]}</span>
+                                        </span>
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Prefer SNF:</span>
+
+                                            <span class="score-number">${score["Prefer SNF"]}</span>
+                                        </span>
+                                    </g:RAPTScore>
+                                </g:if>
+                                <g:else>
+                                    <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">${score[0]}:</span>
+
+                                            <span class="score-number">${score[1]}</span>
+                                        </span>
+                                    </g:multipleScore>
+                                </g:else>
                             </g:if>
                             <g:else>
                                 <span class="sub-item">

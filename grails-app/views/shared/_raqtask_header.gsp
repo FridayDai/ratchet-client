@@ -25,7 +25,7 @@
 
                 (<span class="raq-id">ID: ${Task.patientId}</span>
                 <g:if test="${Task?.birthday}">
-                    <span class="raq-birthday"><i class="fa fa-birthday-cake"></i>${Utils.formatBirthday(Task?.birthday)}</span>)&nbsp;
+                    <span class="raq-birthday"><i class="fa fa-birthday-cake"></i>&nbsp;&nbsp;${Utils.formatBirthday(Task?.birthday)}</span>)
                 </g:if>
 
 
