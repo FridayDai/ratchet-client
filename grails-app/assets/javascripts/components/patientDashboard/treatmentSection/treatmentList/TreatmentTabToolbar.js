@@ -1,6 +1,5 @@
 var flight = require('flight');
 
-var Notifications = require('../../../common/Notification');
 var URLs = require('../../../../constants/Urls');
 var Utility = require('../../../../utils/Utility');
 
