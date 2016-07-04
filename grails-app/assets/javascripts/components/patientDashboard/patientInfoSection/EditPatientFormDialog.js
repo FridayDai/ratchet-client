@@ -21,10 +21,6 @@ var FOOTER_PANEL = [
 ].join('');
 
 function EditPatientFormDialog() {
-    flight.compose.mixin(this, [
-        EmptyEmailConfirmation
-    ]);
-
     this.attributes({
         identifyFieldSelector: '#identify',
         firstNameFieldSelector: '#firstName',
@@ -223,4 +219,8 @@ function EditPatientFormDialog() {
     });
 }
 
-module.exports = flight.component(WithFormDialog, EditPatientFormDialog);
+module.exports = flight.component(
+    WithFormDialog,
+    EmptyEmailConfirmation,
+    EditPatientFormDialog
+);

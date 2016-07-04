@@ -458,14 +458,11 @@ function NewPatientFormDialog() {
             caregiverFirstNameFieldSelector: this.onCaregiverFirstNameInput
         });
     });
-
-    flight.compose.mixin(this, [
-        EmptyEmailConfirmation
-    ]);
 }
 
 module.exports = flight.component(
-    WithCaregiverFieldRequired,
     WithFormDialog,
+    EmptyEmailConfirmation,
+    WithCaregiverFieldRequired,
     NewPatientFormDialog
 );
