@@ -178,7 +178,7 @@ function AddTreatmentFormDialog() {
 }
 
 module.exports = flight.component(
-    WithCaregiverFieldRequired,
     WithFormDialog,
+    WithCaregiverFieldRequired,
     AddTreatmentFormDialog
 );

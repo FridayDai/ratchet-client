@@ -68,7 +68,7 @@ function changePasswordFormDialog() {
 }
 
 module.exports = flight.component(
-    WithElementValidation,
     WithFormDialog,
+    WithElementValidation,
     changePasswordFormDialog
 );

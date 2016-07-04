@@ -20,7 +20,7 @@ function MenuPanel() {
 
                 $nav
                     .height(40)
-                    .velocity({height: $subList.outerHeight() + 41});
+                    .velocity({height: $subList.outerHeight() + 40});
             } else {
                 $nav
                     .removeClass('expended')

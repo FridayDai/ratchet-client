@@ -8,6 +8,13 @@ function WithForm() {
         formSelector: '.'
     });
 
+    this.__beforeSubmitForm = [];
+    Object.defineProperty(this, 'beforeSubmitForm', {
+        set: function (fnVal) {
+            this.__beforeSubmitForm.push(fnVal);
+        }
+    });
+
     this._initForm = function () {
         var me = this;
 
@@ -83,9 +90,11 @@ function WithForm() {
     };
 
     this._prepareSubmitForm = function () {
-        if (_.isFunction(this.beforeSubmitForm)) {
-            if (this.beforeSubmitForm() === false) {
-                return;
+        if (this.__beforeSubmitForm) {
+            for (var i = 0; i < this.__beforeSubmitForm.length; i++) {
+                if (this.__beforeSubmitForm[i].call(this) === false) {
+                    return;
+                }
             }
         }
 
