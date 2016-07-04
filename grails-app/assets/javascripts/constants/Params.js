@@ -78,8 +78,8 @@ module.exports = {
     ],
 
     HUMAN_GENDER: [
-        {label: "Male", value: 'MALE'},
-        {label: "Female", value: 'FEMALE'}
+        {label: "Male", value: 'MALE', iconClass: 'gender-male'},
+        {label: "Female", value: 'FEMALE', iconClass: 'gender-female'}
     ],
 
     ACCOUNT_TYPE: {

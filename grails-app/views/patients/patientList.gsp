@@ -138,8 +138,9 @@
             </div>
 
             <div class="form-group inline">
-                <label class="lbl-group">GENDER<span>*</span></label>
-                <input id="gender" name="gender" type="text" class="input-group input-convert" required/>
+                <label class="lbl-group">GENDER</label>
+                <input id="gender" name="gender" type="text" class="input-group input-convert"
+                       placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Male (Optional)"/>
 
                 <div class='replace-input-div' id="gender-static"></div>
                 <a class='icon-edit form-group-edit'></a>

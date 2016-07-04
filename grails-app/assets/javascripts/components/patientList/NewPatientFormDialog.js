@@ -66,7 +66,14 @@ function NewPatientFormDialog() {
     this.children({
         phoneNumberFieldSelector: NewPatientPhoneInputField,
         birthdayFieldSelector: NewPatientBirthday,
-        genderFieldSelector: NewPatientGenderCombobox,
+        genderFieldSelector: {
+            child: NewPatientGenderCombobox,
+            attributes: {
+                selectEvent: 'patientGenderSelected',
+                clearEvent: 'patientGenderClear',
+                resetEvent: 'newPatientReset'
+            }
+        },
         caregiverRelationshipFieldSelector: {
             child: NewPatientRelationshipCombobox,
             attributes: {
@@ -83,7 +90,7 @@ function NewPatientFormDialog() {
                 resetEvent: 'newPatientReset'
             }
         },
-        providerFieldSelector:{
+        providerFieldSelector: {
             child: NewPatientProviderCombobox,
             attributes: {
                 groupSelectEvent: 'patientGroupSelected',
@@ -232,7 +239,22 @@ function NewPatientFormDialog() {
             $inputField = $inputField.find('input');
         }
 
-        $inputField.removeAttr('disabled').val($static.text());
+        if($inputField.get(0).id === 'gender') {
+            var gender = $static.text().toLowerCase();
+
+            $inputField.removeAttr('disabled')
+                .val($static.text())
+                .data('ui-autocomplete')
+                ._trigger('select', 'autocompleteselect', {
+                    item: {
+                        label: _.capitalize(gender),
+                        value: gender.toUpperCase(),
+                        iconClass: 'gender-{0}'.format(gender)
+                    }
+                });
+        }  else {
+            $inputField.removeAttr('disabled').val();
+        }
     };
 
     this.setBasicInfo = function (data) {
@@ -244,17 +266,17 @@ function NewPatientFormDialog() {
             this.select('declineBlockSelector').html(
                 '<i class="fa fa-ban edit-decline" aria-hidden="true"></i>' +
                 '<label for="emailStatus" class="decline-msg">' +
-                    '<span>Patient declined to communicate via email.</span>' +
-                    '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
+                '<span>Patient declined to communicate via email.</span>' +
+                '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
                 '</label>'
             );
         } else {
             this.select('declineBlockSelector').html(
-            '<input id="emailStatus" name="emailStatus" type="checkbox" value="decline">' +
-            '<label for="emailStatus" class="decline-msg">' +
+                '<input id="emailStatus" name="emailStatus" type="checkbox" value="decline">' +
+                '<label for="emailStatus" class="decline-msg">' +
                 '<span>Patient declined to communicate via email.</span>' +
                 '<span class="warn-msg">(Warning: This cannot be undone.)</span>' +
-            '</label>'
+                '</label>'
             );
             this.select('declineFieldSelector').prop({'checked': false, 'disabled': false});
         }
@@ -263,7 +285,9 @@ function NewPatientFormDialog() {
 
         var subNumber,
             phoneNumber,
-            num = data.phoneNumber;
+            num = data.phoneNumber,
+            gender = data.gender.toLowerCase();
+
         if (num) {
             if (num.charAt(0) === '1') {
                 subNumber = num.slice(1, num.length);
@@ -279,6 +303,8 @@ function NewPatientFormDialog() {
         this.select('phoneNumberStaticSelector').text(phoneNumber);
 
         this.select('birthdayStaticSelector').text(Utility.parseBirthday(data.birthday));
+
+        this.select('genderStaticSelector').text(gender).addClass(gender);
     };
 
     this.onClose = function () {
@@ -378,7 +404,7 @@ function NewPatientFormDialog() {
     this.onDeclineEmailClicked = function (e) {
         var declineButton = $(e.target);
 
-        if (declineButton.prop("checked") === true ){
+        if (declineButton.prop("checked") === true) {
             Notifications.confirm({
                 title: STRINGs.DECLINE_TITLE,
                 message: STRINGs.DECLINE_MESSAGE

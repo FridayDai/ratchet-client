@@ -16,13 +16,24 @@
             <div class="info-container">
                 <div class="info first-line clear">
                     <div class="pull-left name">
+                        <g:if test="${patientInfo.gender == "MALE"}">
+                            <span id="header-portrait" class="portrait-male"></span>
+                        </g:if>
+                        <g:elseif test="${patientInfo.gender == "FEMALE"}">
+                            <span id="header-portrait" class="portrait-female"></span>
+                        </g:elseif>
+                        <g:else>
+                            <span id="header-portrait"></span>
+                        </g:else>
+
                         <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                         <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                     </div>
 
                     <div class="edit inline">
                         <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-                           data-client-id="${patientInfo.client.id}" data-email-status="${patientInfo.status}">
+                           data-client-id="${patientInfo.client.id}" data-email-status="${patientInfo.status}"
+                        data-gender="${patientInfo.gender}">
                         </a>
                         <a href="#" class="btn-close">Close</a>
                     </div>
@@ -180,6 +191,18 @@
             <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
         </div>
 
+        <div class="form-group inline">
+            <label class="lbl-group">BIRTHDAY<span>*</span></label>
+            <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                   placeholder="MM/DD/YYYY" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">GENDER</label>
+            <input id="gender" name="gender" type="text" class="input-group input-convert"
+                   placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Male (Optional)"/>
+        </div>
+
         <div class="form-group inline phone-block">
             <label class="lbl-group">PHONE NUMBER</label>
             <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
@@ -196,12 +219,6 @@
                     <span class="warn-msg">(Warning: This cannot be undone.)</span>
                 </label>
             </div>
-        </div>
-
-        <div class="form-group inline birthday-block">
-            <label class="lbl-group">BIRTHDAY<span>*</span></label>
-            <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
-                   placeholder="MM/DD/YYYY" required/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>

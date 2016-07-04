@@ -5,6 +5,7 @@
 @import '../partials/dialog';
 @import '../partials/timepicker';
 @import "../partials/combobox";
+@import "../partials/genderCombobox";
 
 .inner-search {
     .search-content {
@@ -599,6 +600,34 @@
     width: 12px;
 }
 
-.birthday-block {
-    margin-top: -20px;
+
+#gender-static {
+    text-transform: capitalize;
+
+    &.male {
+        &:before {
+            display: inline-block;
+            width: 20px;
+            height: 16px;
+            content: "" ;
+            background: image-url('patients/Male-states.png', false, false) no-repeat 60% 60%;
+            background-size: 52px;
+            vertical-align: bottom;
+        }
+
+    }
+
+    &.female {
+        &:before {
+            display: inline-block;
+            width: 20px;
+            height: 16px;
+            content: "" ;
+            background: image-url('patients/Female-states.png', false, false) no-repeat  -2% 60%;
+            background-size: 33px;
+            vertical-align: bottom;
+        }
+    }
 }
+
+

@@ -50,7 +50,6 @@
         }
 
         .last-name {
-            padding-right: 15px;
             font-size: 21px;
             vertical-align: middle;
             text-transform: uppercase;
@@ -404,4 +403,23 @@
     box-sizing: border-box;
     height: 30px;
 }
+
+.portrait-male {
+    display: inline-block;
+    width: 33px;
+    height: 22px;
+    background: image-url('patients/Male.png', false, false) no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+.portrait-female {
+    display: inline-block;
+    width: 33px;
+    height: 22px;
+    background: image-url('patients/Female.png', false, false) no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
 
