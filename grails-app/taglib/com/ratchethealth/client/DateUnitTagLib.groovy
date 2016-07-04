@@ -27,7 +27,7 @@ class DateUnitTagLib {
 
         //remove 's' of unit, when only count is 1;
         def mixed = count + remainder
-        if (mixed < 2) {
+        if (mixed <= 1) {
             unit = unit.replaceAll(/(\w+)s$/, '$1')
         }
 
@@ -48,11 +48,11 @@ class DateUnitTagLib {
         int days = offset / (24 * 60 * 60 * 1000)
         def result
 
-        if (days / 7 < 1) {
+        if ((days / 7).abs() < 1) {
             result = convertDays(days, 1, 'days')
-        } else if (days / 30 < 1) {
+        } else if ((days / 30).abs() < 1) {
             result = convertDays(days, 7, 'weeks')
-        } else if (days / 365 < 1) {
+        } else if ((days / 365).abs() < 1) {
             result = convertDays(days, 30, 'months')
         } else {
             result = convertDays(days, 365, 'years')
