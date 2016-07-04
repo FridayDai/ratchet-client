@@ -1,11 +1,5 @@
 var flight = require('flight');
-require('../../../../libs/jquery-validation/jquery.validate.js');
 var WithFormDialog = require('../../../common/WithFormDialog');
-
-$.validator.addMethod('dayNumber', function (value, element) {
-    var tel = /^[0-9\-\(\)\s]+$/;
-    return this.optional(element) || (tel.test(value));
-}, "Invalid Input. The number of day(s) should be between 0 - 99.");
 
 function FillSNFTaskDialog() {
     this.options({
@@ -17,15 +11,37 @@ function FillSNFTaskDialog() {
     this.attributes({
         listSelector: '.list',
         radioTextSelector: '.text',
-        questionOneSelector: '#questionOne'
+        inputTextSelector : '.input-text'
     });
+
+    this.filterNumber = function () {
+        var val = this.select('inputTextSelector').val();
+        var reg = /^[0-9]+$/;
+        var num = val.match(reg);
+        this.select('inputTextSelector').val(num);
+
+        this.checkNum(num);
+    };
+
+    this.checkNum = function(n) {
+        var val = this.select('inputTextSelector').val();
+        var reg = /^(0[0-9]$)/;
+        var num = val.match(reg);
+
+        if(num) {
+            num = num[0].substring(1,2);
+            this.select('inputTextSelector').val(num);
+        }else {
+            this.select('inputTextSelector').val(n);
+        }
+
+    };
 
     this.onShow = function (e, data) {
         this.taskId = data.taskId;
         this.select('listSelector').removeClass('error-help-block');
         this.$node.removeClass('ui-hidden');
         this.show();
-        this.select('questionOneSelector').focus();
     };
 
     this.setExtraData = function () {
@@ -41,8 +57,7 @@ function FillSNFTaskDialog() {
                 'choice.question1': {required: true},
                 'choice.question2': {
                     required: true,
-                    range: [0, 99],
-                    dayNumber: true
+                    range: [0, 99]
                 }
             },
             messages: {
@@ -82,6 +97,7 @@ function FillSNFTaskDialog() {
 
     this.after('initialize', function () {
         this.on('formSuccess', this.completeTaskSuccess);
+        this.on('input', {inputTextSelector: this.filterNumber});
         this.on('click', {
             radioTextSelector: this.onRadioTextClick
         });
