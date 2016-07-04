@@ -14,7 +14,7 @@
             </span>
         </span>
     </g:if>
-    <g:else>
+    <g:elseif test="${task?.treatmentProperty?.absoluteEventTimestamp}">
         <g:dateUnit millisecond="${task?.sendTime - task?.treatmentProperty?.absoluteEventTimestamp}" var="date">
             <span class="item-absolute-date hidden">
                 <span class="item-absolute-date-wrap">
@@ -23,7 +23,7 @@
                 </span>
             </span>
         </g:dateUnit>
-    </g:else>
+    </g:elseif>
 
     <div class="box-item-container">
 
@@ -166,13 +166,11 @@
 
             <g:if test="${itemType != 'absoluteEvent'}">
                 <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-
                     <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
                         <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${task?.id}/result"
                            target="_blank"
-                           class="icon-button view-results"><span>View Results</span></a>
+                           class="view-results">Results</a>
                     </g:if>
-
                 </g:if>
                 <g:else>
 

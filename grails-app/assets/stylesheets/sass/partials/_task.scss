@@ -549,7 +549,7 @@
 
     .item-title {
         padding-top: 2px;
-        font-size: 21px;
+        font-size: 16px;
         color: $base-color-medium-black;
     }
 
@@ -625,9 +625,11 @@
     }
 
     .content-middle {
+        position: absolute;
+        left: 385px;
+        right: 130px;
         display: inline-block;
         padding-top: 3px;
-        width: 440px;
     }
 
     .sub-item {
@@ -637,6 +639,7 @@
         margin-bottom: 5px;
         color: $base-light-grey-color;
         border: 1px solid $base-color-grey;
+        font-size: 12px;
 
         .score-number {
             word-spacing: 5px;
@@ -730,20 +733,15 @@
 
     .view-results {
         display: inline-block;
-        width: 104px;
+        position: relative;
+        top: 8px;
+        right: 35px;
+        padding: 3px 10px;
         font-size: 13px;
         border: 1px solid $base-color-complete;
         border-radius: 4px;
         background-color: $base-color-bg-head;
         color: $base-color-complete;
-
-        &:before {
-            content: '\f425';
-            left: -4px;
-            top: 0;
-            height: 100%;
-            vertical-align: middle;
-        }
 
         span {
             vertical-align: middle;

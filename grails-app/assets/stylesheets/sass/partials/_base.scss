@@ -5,6 +5,26 @@
 @import 'compass/reset';
 @import 'compass/css3';
 
+@mixin breakpoint($device) {
+    @if $device == 'mobile' {
+        @media only screen and (max-width: 767px) {
+            @content;
+        }
+    } @else if $device == 'tablet' {
+        @media only screen and (min-width: 768px) {
+            @content;
+        }
+    } @else if $device == 'desktop' {
+        @media only screen and (min-width: 960px) {
+            @content;
+        }
+    } @else if $device == 'lg-desktop' {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    }
+}
+
 //~= ionicons v2.0.0, source: http://ionicons.com/cheatsheet.html
 @font-face {
     font-family: 'Ionicons';

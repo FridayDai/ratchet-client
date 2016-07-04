@@ -674,7 +674,7 @@
         .treatment-indicate {
             position: absolute;
             top: 22px;
-            left: 11px;
+            left: 20px;
             display: inline-block;
             width: 20px;
             background: $base-color-grey;
@@ -689,10 +689,10 @@
 
         .ui-tabs-anchor {
             display: block;
-            padding: 0 36px;
+            padding: 0 20px 0 45px;
             border-bottom: 0;
             min-width: 150px;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 60px;
             text-transform: capitalize;
             overflow: hidden;

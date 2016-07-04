@@ -10,8 +10,32 @@ function FillSNFTaskDialog() {
 
     this.attributes({
         listSelector: '.list',
-        radioTextSelector: '.text'
+        radioTextSelector: '.text',
+        inputTextSelector : '.input-text'
     });
+
+    this.filterNumber = function () {
+        var val = this.select('inputTextSelector').val();
+        var reg = /^[0-9]+$/;
+        var num = val.match(reg);
+        this.select('inputTextSelector').val(num);
+
+        this.checkNum(num);
+    };
+
+    this.checkNum = function(n) {
+        var val = this.select('inputTextSelector').val();
+        var reg = /^(0[0-9]$)/;
+        var num = val.match(reg);
+
+        if(num) {
+            num = num[0].substring(1,2);
+            this.select('inputTextSelector').val(num);
+        }else {
+            this.select('inputTextSelector').val(n);
+        }
+
+    };
 
     this.onShow = function (e, data) {
         this.taskId = data.taskId;
@@ -73,6 +97,7 @@ function FillSNFTaskDialog() {
 
     this.after('initialize', function () {
         this.on('formSuccess', this.completeTaskSuccess);
+        this.on('input', {inputTextSelector: this.filterNumber});
         this.on('click', {
             radioTextSelector: this.onRadioTextClick
         });
