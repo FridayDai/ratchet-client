@@ -1,7 +1,6 @@
 @import '../../partials/variable';
 @import '../../partials/base';
 @import '../../partials/header';
-@import '../../partials/base';
 
 $result-main-color: #335d70;
 
@@ -151,16 +150,17 @@ html, body, div, span {
         .raq-patient-info{
             color: #333;
             font-size: 17px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .raq-status {
             color: #333;
             font-size: 17px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .raq-complete-time {
+            font-size: 17px;
             font-weight: 700;
         }
 
@@ -173,12 +173,12 @@ html, body, div, span {
         .raq-id {
             margin-right: 10px;
             font-size: 17px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .raq-birthday {
             font-size: 17px;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .raq-download {
