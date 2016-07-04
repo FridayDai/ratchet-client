@@ -13,6 +13,7 @@
 @import '../partials/theme';
 @import "../partials/combobox";
 @import '../partials/select2';
+@import "../partials/genderCombobox";
 @import '../partials/task';
 
 .icon-edit,
@@ -1072,7 +1073,6 @@
     margin-top: 8px;
     color: #3d3d3d;
 }
-
 
 .phone-block {
     vertical-align: top;

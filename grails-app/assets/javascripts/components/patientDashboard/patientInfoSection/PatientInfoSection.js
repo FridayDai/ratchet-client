@@ -29,7 +29,8 @@ function PatientInfoSection() {
         declineFieldSelector: '#emailStatus',
         phoneNumberStaticSelector: '.phone',
         birthdayStaticSelector: '.birthday',
-        birthdayTextSelector: '.birthday span'
+        birthdayTextSelector: '.birthday span',
+        genderHeaderSelector: '#header-portrait'
     });
 
     this.showEditPatientDialog = function (e) {
@@ -48,6 +49,7 @@ function PatientInfoSection() {
         this.clientId = $editButton.data('clientId');
         this.patientId = $editButton.data('patientId');
         this.status = $editButton.data('emailStatus');
+        this.gender = $editButton.data('gender');
         this.originalEmail = this.select('emailStaticSelector').text().trim();
         this.originalPhoneNumber = this.select('phoneNumberStaticSelector').text().trim();
 
@@ -62,7 +64,8 @@ function PatientInfoSection() {
             emailState: this.select('emailStatusLabelSelector').text().trim(),
             phoneNumber: this.select('phoneNumberStaticSelector').text().trim(),
             accountIsAdmin: this.$node.data('accountIsAdmin'),
-            birthday: this.select('birthdayTextSelector').text().trim()
+            birthday: this.select('birthdayTextSelector').text().trim(),
+            gender: this.gender
         };
     };
 
@@ -105,9 +108,18 @@ function PatientInfoSection() {
         this.select('lastNameStaticSelector').text(data.lastName);
         this.select('emailStaticSelector').text(data.email ? data.email.toLowerCase() : '');
 
+        this.updateGender(data.gender);
         this.updatePhoneNumber(data.number);
         this.updateEmailStatus(data.email, data.isDeclined);
         this.updateBirthday(Utility.toBirthday(data.birthday, 'MM/DD/YYYY'));
+    };
+
+    this.updateGender = function(gender) {
+        this.select('genderHeaderSelector')
+            .removeClass()
+            .addClass('portrait-{0}'.format(gender? gender.toLowerCase() :''));
+
+        this.select('editPatientButtonSelector').data('gender', gender);
     };
 
     this.updatePhoneNumber = function (number) {

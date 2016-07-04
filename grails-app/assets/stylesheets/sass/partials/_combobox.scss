@@ -38,3 +38,17 @@
         font-weight: normal;
     }
 }
+
+.form-group {
+    .ui-combobox-input-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        & + .complex-combobox {
+            min-width: 211px;
+            padding-left: 30px;
+        }
+    }
+}
+

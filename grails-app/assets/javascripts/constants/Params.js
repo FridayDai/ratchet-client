@@ -77,6 +77,11 @@ module.exports = {
         {label: "Completed", value: 5}
     ],
 
+    HUMAN_GENDER: [
+        {label: "Male", value: 'MALE', iconClass: 'gender-male'},
+        {label: "Female", value: 'FEMALE', iconClass: 'gender-female'}
+    ],
+
     ACCOUNT_TYPE: {
         PROVIDER: 9,
         NON_PROVIDER: 10

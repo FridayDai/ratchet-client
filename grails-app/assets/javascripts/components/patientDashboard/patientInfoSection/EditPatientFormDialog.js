@@ -8,6 +8,7 @@ var PARAMs = require('../../../constants/Params');
 var EmptyEmailConfirmation = require('../../shared/components/EmptyEmailConfirmation');
 var PatientPhoneInputField = require('../../shared/components/PatientPhoneInputField');
 var PatientBirthday = require('../../shared/components/PatientBirthday');
+var NewPatientGenderCombobox = require('../../shared/components/PatientGenderCombobox');
 var Notifications = require('../../common/Notification');
 var STRINGs = require('../../../constants/Strings');
 
@@ -32,12 +33,21 @@ function EditPatientFormDialog() {
         emailFieldSelector: '#email',
         declineBlockSelector: '.decline',
         declineFieldSelector: '#emailStatus',
-        birthdayFieldSelector: '#birthday'
+        birthdayFieldSelector: '#birthday',
+        genderFieldSelector: '#gender'
     });
 
     this.children({
         phoneNumberFieldSelector: PatientPhoneInputField,
-        birthdayFieldSelector: PatientBirthday
+        birthdayFieldSelector: PatientBirthday,
+        genderFieldSelector: {
+            child: NewPatientGenderCombobox,
+            attributes: {
+                selectEvent: 'patientGenderSelected',
+                clearEvent: 'patientGenderClear',
+                resetEvent: 'editPatientReset'
+            }
+        }
     });
 
     this.options({
@@ -63,6 +73,21 @@ function EditPatientFormDialog() {
         this.select('phoneNumberFieldSelector').intlTelInput('setNumber', data.phoneNumber);
         this.select('emailFieldSelector').val(data.email);
         this.select('birthdayFieldSelector').val(data.birthday);
+
+        if(data.gender) {
+            var gender = data.gender.toLowerCase();
+
+            this.select('genderFieldSelector')
+                .val(gender)
+                .data('ui-autocomplete')
+                ._trigger('select', 'autocompleteselect', {
+                    item: {
+                        label: _.capitalize(gender),
+                        value: gender.toUpperCase(),
+                        iconClass: 'gender-{0}'.format(gender)
+                    }
+                });
+        }
 
         if(PARAMs.EMAIL_STATUS[data.emailStatus] === 'DECLINED' || data.emailState === "DECLINED") {
             this.select('declineBlockSelector').html(
@@ -146,6 +171,10 @@ function EditPatientFormDialog() {
         ];
     };
 
+    this.onClose = function () {
+        this.trigger('patientGenderClear');
+    };
+
     this.setExtraData = function () {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
@@ -174,11 +203,13 @@ function EditPatientFormDialog() {
             number: rawNumber,
             phoneNumber: phoneNumber,
             clientId: this.clientId,
-            birthday: this.select('birthdayFieldSelector').val()
+            birthday: this.select('birthdayFieldSelector').val(),
+            gender: this.select('genderFieldSelector').val().toUpperCase()
         });
     };
 
     this.after('initialize', function () {
+        this.on('dialogclose', this.onClose);
         this.on('formSuccess', this.onEditPatientSuccess);
         this.on('click', {
             declineFieldSelector: this.onDeclineEmailClicked
