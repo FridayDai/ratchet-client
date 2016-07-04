@@ -48,7 +48,7 @@
 #gender::-webkit-input-placeholder {
     background: image-url('patients/male-placeholder.png', false, false) no-repeat 3% 46%;
     background-size: 52px;
-    text-indent: 6px;
+    padding-left: 6px;
 }
 
 #gender:-moz-placeholder {
