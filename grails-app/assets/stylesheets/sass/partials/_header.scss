@@ -295,8 +295,10 @@
 
         &:hover,
         &.active {
+            background-color: #335d70;
+
             &>a {
-                color: $base-color-dark-grey;
+                color: white;
             }
         }
     }
@@ -324,7 +326,11 @@
             margin-top: -7px;
 
             &:before {
-                font-family: ionicons;
+                width: 0;
+                height: 0;
+                content: '';
+                border: 5px solid transparent;
+                position: relative;
             }
         }
 
@@ -332,21 +338,28 @@
             height: 40px;
 
             .expend-icon:before {
-                content: '\f123';
-                font-size: 12px;
+                border-top-color: #b3b3b3;
+                top: 11px;
+            }
+
+            &:hover {
+                .expend-icon:before {
+                    border-top-color: white;
+                }
             }
         }
 
         &.expended {
             height: 154px;
+            background-color: #335d70;
 
             .nav-button {
-                color: #225f6f;
+                color: white;
             }
 
             .expend-icon:before {
-                content: '\f126';
-                font-size: 12px;
+                border-bottom-color: white;
+                top: -11px;
             }
         }
 
@@ -362,8 +375,12 @@
 
             &:hover,
             &.active {
+                a {
+                    background-color: #335d70;
+                }
+
                 .title {
-                    color: #225f6f;
+                    color: white;
                 }
             }
 
