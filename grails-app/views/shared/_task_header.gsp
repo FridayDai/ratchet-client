@@ -22,7 +22,7 @@
             <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
             (<span class="id">ID: ${Task.patientId}</span>
                 <g:if test="${Task?.birthday}">
-                    <span class="birthday"><i class="fa fa-birthday-cake" aria-hidden="true"></i>${Utils.formatBirthday(Task?.birthday)}</span>)
+                    <span class="birthday"><i class="fa fa-birthday-cake icon" aria-hidden="true"></i>${Utils.formatBirthday(Task?.birthday)}</span>)
                 </g:if>
 
 
