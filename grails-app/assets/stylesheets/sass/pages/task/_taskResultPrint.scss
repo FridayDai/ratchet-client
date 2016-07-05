@@ -4,37 +4,48 @@
     margin: 0cm;
 }
 
+.sticky-header {
+    .header {
+        height: 40px;
+    }
+
+}
+
+.task-result-content {
+    margin-top: 140px;
+}
+
 .info-container {
     height: 55px;
 
     .title {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .sub-info-panel {
         .patient-info {
-            font-size: 12px;
+            font-size: 11px;
         }
     }
 
     .status {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .complete-time {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .name {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .id {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .birthday {
-        font-size: 12px;
+        font-size: 11px;
     }
 }
 
@@ -43,17 +54,17 @@
 }
 
 .result-info {
-    height: 40px;
+    height: 35px;
     -webkit-print-color-adjust: exact;
     background-color: #335d70 !important;
     color: white !important;
-    padding-top: 13px;
+    padding-top: 12px;
 
     .score-des {
-        font-size: 13px;
+        font-size: 12px;
     }
     .score-num {
-        font-size: 13px;
+        font-size: 12px;
     }
 }
 
