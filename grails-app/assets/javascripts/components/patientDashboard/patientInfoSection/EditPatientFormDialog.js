@@ -95,10 +95,6 @@ function EditPatientFormDialog() {
             );
         }
 
-
-        this._originalEmail = data.email;
-        this._originalIdentify = data.identify;
-
         this.patientId = data.patientId;
         this.clientId = data.clientId;
 
@@ -150,19 +146,11 @@ function EditPatientFormDialog() {
         }
     };
 
-    this.originalEmailCheck = function () {
-        return this._originalEmail === this.select('emailFieldSelector').val().trim();
-    };
-
-    this.originalIdentifyCheck = function () {
-        return this._originalIdentify === this.select('identifyFieldSelector').val().trim();
-    };
-
     this.initValidation = function () {
         return [
-            PatientIdentifyValidation.get(this.originalIdentifyCheck, this),
+            PatientIdentifyValidation.get(),
             PhoneNumberValidation.get(),
-            PatientEmailValidation.get(this.originalEmailCheck, this),
+            PatientEmailValidation.get(),
             PatientBirthdayValidation.get()
         ];
     };

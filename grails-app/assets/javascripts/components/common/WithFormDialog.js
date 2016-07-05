@@ -62,8 +62,14 @@ function WithFormDialog() {
 
     this.onInputFieldFocus = function (e) {
         var $element = $(e.target);
+        var previousValue = $element.data("previousValue") || {
+                valid: true,
+                origin: $element.val(),
+                old: $element.val()
+            };
 
-        $element.attr('placeholder', '');
+        $element.attr('placeholder', '')
+            .data('previousValue', previousValue);
     };
 
     this.onInputFieldBlur = function (e) {
