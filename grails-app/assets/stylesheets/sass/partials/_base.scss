@@ -15,7 +15,7 @@
             @content;
         }
     } @else if $device == 'desktop' {
-        @media only screen and (min-width: 960px) {
+        @media only screen and (min-width: 950px) {
             @content;
         }
     } @else if $device == 'lg-desktop' {

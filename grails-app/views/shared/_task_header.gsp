@@ -12,48 +12,39 @@
     </div>
 
     <div class="info-container">
-        <div class="title">${Task.title}</div>
+        <span class="title">${Task.title}</span>
 
         <div class="sub-info-panel">
-            <g:if test="${!download}">
-                <div class="download"><g:link uri="/task/downloadPDF.pdf"
-                                              params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></div>
-            </g:if>
             <div class="patient-info">
-                <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
-                |
-                <span class="id">ID: ${Task.patientId}</span>
+
+                <span class="status">Completed on <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
+                                                                                            timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                                                            format="MM/dd/yyyy"/></span></span>&nbsp;by
+
+                <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>&nbsp;
+
+            (<span class="id">ID: ${Task.patientId}</span>
                 <g:if test="${Task?.birthday}">
-                    <span class="birthday"><i class="fa fa-birthday-cake"></i>${Utils.formatBirthday(Task?.birthday)}</span>
+                    <span class="birthday"><i class="fa fa-birthday-cake"></i>&nbsp;&nbsp;${Utils.formatBirthday(Task?.birthday)}</span>)
                 </g:if>
-            </div>
 
-            <div class="questionnaire-info">
-                <span class="status">Completed - <g:formatDate date="${new java.util.Date(Task.completeTime)}"
-                                                               timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                                               format="MMM d, yyyy"/></span>
 
-                <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(Task.type)}">
-                    <span class="score">
-                        <div class="divider"></div>
-
-                        <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
-                            <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
-                                <span class="score-wrap">
-                                    <div class="score-num">${score[1].toLowerCase()}</div>
-
-                                    <div class="score-des">${score[0]}</div>
-                                </span>
-                            </g:multipleScore>
-                        </g:if>
-                        <g:else>
-                            <div class="score-num">${Task.score}</div>
-
-                            <div class="score-des">Total Result</div>
-                        </g:else>
-                    </span>
+                <g:if test="${!download}">
+                    <span class="download"><g:link uri="/task/downloadPDF.pdf"
+                                                   params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></span>
                 </g:if>
             </div>
         </div>
+    </div>
+
+    <div class="result-info">
+        <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
+            <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+                <span class="score-wrap">
+                    <div class="score-des">${score[0]}:&nbsp;</div>
+                    <div class="score-num">${score[1].toLowerCase()}</div>
+                </span>
+            </g:multipleScore>
+        </g:if>
     </div>
 </div>

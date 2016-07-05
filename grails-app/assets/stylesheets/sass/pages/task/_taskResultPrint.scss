@@ -4,93 +4,57 @@
     margin: 0cm;
 }
 
-.sticky-header {
-    position: static;
-    border-bottom: 1px solid #335d70;
+.info-container {
+    height: 55px;
 
-    .header {
-        height: 50px;
-        border-bottom: 4px solid $result-main-color;
+    .title {
+        font-size: 17px;
+    }
 
-        .toolbar {
-            visibility: hidden;
-        }
-
-        .logo {
-            margin: 29px 0 0 25px;
-        }
-
-        img {
-            width: 113px;
-            height: 13px;
+    .sub-info-panel {
+        .patient-info {
+            font-size: 12px;
         }
     }
 
-    .info-container {
-        padding: 15px 30px;
-
-        .title {
-            font-size: 16px;
-        }
-
-        .sub-info-panel {
-            margin-top: 10px;
-        }
-
-        .patient-info, .name, .id, .birthday {
-            font-size: 14px;
-            font-weight: 400;
-        }
+    .status {
+        font-size: 12px;
     }
 
-    .questionnaire-info {
-        top: -8px;
-        right: -10px;
-
-        .status,
-        .score-num,
-        .score-des {
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        .status {
-            padding-right: 15px;
-        }
-
-        .score {
-            padding-left: 15px;
-        }
-
-        .divider {
-            height: 25px;
-        }
+    .complete-time {
+        font-size: 12px;
     }
-}
 
-#main {
-    display: block;
-    margin-top: 20px;
-    padding: 0 15px;
-    border: 0;
-    float: none;
-}
+    .name {
+        font-size: 12px;
+    }
 
-body {
-    margin-bottom: 0;
-    -webkit-print-color-adjust: exact;
+    .id {
+        font-size: 12px;
+    }
+
+    .birthday {
+        font-size: 12px;
+    }
 }
 
 .download {
     display: none;
 }
 
-.page-break {
-    display: block;
-    break-after: always;
-    page-break-after: always;
+.result-info {
+    height: 40px;
+    -webkit-print-color-adjust: exact;
+    background-color: #335d70 !important;
+    color: white !important;
+    padding-top: 13px;
+
+    .score-des {
+        font-size: 13px;
+    }
+    .score-num {
+        font-size: 13px;
+    }
 }
 
-.page-footer {
-    display: none;
-}
+
