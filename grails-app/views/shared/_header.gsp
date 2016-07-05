@@ -96,7 +96,7 @@
                     </span>
                 </div>
                 <ul class="menu-list profile-menu-list">
-                    <li class="nav-li profile-item">
+                    <li class="nav-li profile-item <g:if test="${controllerName == 'profile'}">active</g:if>">
                         <a href="/profile/${request.session.accountId}">
                             <i class="fa fa-user icon"></i>
                             <span class="title">Profile</span>

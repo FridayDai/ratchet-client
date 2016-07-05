@@ -239,7 +239,7 @@ function NewPatientFormDialog() {
             $inputField = $inputField.find('input');
         }
 
-        if($inputField.get(0).id === 'gender') {
+        if($inputField.get(0).id === 'gender' && $static.text()) {
             var gender = $static.text().toLowerCase();
 
             $inputField.removeAttr('disabled')
@@ -286,7 +286,7 @@ function NewPatientFormDialog() {
         var subNumber,
             phoneNumber,
             num = data.phoneNumber,
-            gender = data.gender.toLowerCase();
+            gender = data.gender ? data.gender.toLowerCase() : '';
 
         if (num) {
             if (num.charAt(0) === '1') {
@@ -304,7 +304,15 @@ function NewPatientFormDialog() {
 
         this.select('birthdayStaticSelector').text(Utility.parseBirthday(data.birthday));
 
-        this.select('genderStaticSelector').text(gender).addClass(gender);
+        if(gender) {
+            this.select('genderStaticSelector').text(gender).addClass(gender);
+        } else {
+            this.select('genderStaticSelector')
+                .text(gender)
+                .removeClass(function (index, name) {
+                    return (name.match(/\s+.*male/) || []).join('');
+                });
+        }
     };
 
     this.onClose = function () {

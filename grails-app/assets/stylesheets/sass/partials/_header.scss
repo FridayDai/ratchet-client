@@ -291,9 +291,12 @@
                 margin-left: 5px;
                 font-size: 15px;
             }
+
+            &:hover {
+                color: #335d70;
+            }
         }
 
-        &:hover,
         &.active {
             background-color: #335d70;
 
@@ -342,24 +345,25 @@
                 top: 11px;
             }
 
-            &:hover {
+            .nav-button:hover {
                 .expend-icon:before {
-                    border-top-color: white;
+                    border-top-color: #335d70;
                 }
             }
         }
 
         &.expended {
             height: 120px;
-            background-color: #335d70;
-
-            .nav-button {
-                color: white;
-            }
 
             .expend-icon:before {
-                border-bottom-color: white;
+                border-bottom-color: #b3b3b3;
                 top: -11px;
+            }
+
+            .nav-button:hover {
+                .expend-icon:before {
+                    border-bottom-color: #335d70;
+                }
             }
         }
 
@@ -373,7 +377,12 @@
             position: relative;
             height: 40px;
 
-            &:hover,
+            &:hover {
+                .title {
+                    color: #335d70;
+                }
+            }
+
             &.active {
                 a {
                     background-color: #335d70;

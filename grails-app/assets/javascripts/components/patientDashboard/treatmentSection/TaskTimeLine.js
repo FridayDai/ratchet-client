@@ -42,7 +42,11 @@ function TaskTimeLineT() {
         var status = this.filter.taskStatus;
         var alert = this.filter.alert;
 
-        if(medicalRecordId && status === 'ALL' && !alert) {
+        var absoluteEvent = _.find($('.box-item:visible'), function (item) {
+            return $(item).data('isAbsolute');
+        });
+
+        if(medicalRecordId && status === 'ALL' && !alert && absoluteEvent) {
             this.showTimeLine();
         } else {
             this.hideTimeLine();

@@ -662,8 +662,8 @@
         .ui-state-default {
             position: relative;
             overflow: hidden;
-            transition: 0.4s height;
-            height: 65px;
+            transition: 0.5s max-height;
+            max-height: 65px;
             margin: 0;
             padding: 0;
             background-color: $base-color-bg-head;
@@ -703,7 +703,8 @@
         }
 
         .ui-state-active {
-            height: 222px;
+            max-height: 222px;
+            height: auto;
             background-color: $base-color-bg-head;
             border-bottom: 1px solid $base-font-color;
             //            cursor: text;
