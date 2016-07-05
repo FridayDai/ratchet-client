@@ -15,17 +15,14 @@
         <span class="title">${Task.title}</span>
 
         <div class="sub-info-panel">
-            <div class="patient-info">
-
-                <span class="status">Completed on <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
+            <span class="status">Completed on <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
                                                                                             timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                                                                             format="MM/dd/yyyy"/></span></span>&nbsp;by
 
-                <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>&nbsp;
-
+            <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
             (<span class="id">ID: ${Task.patientId}</span>
                 <g:if test="${Task?.birthday}">
-                    <span class="birthday"><i class="fa fa-birthday-cake"></i>&nbsp;&nbsp;${Utils.formatBirthday(Task?.birthday)}</span>)
+                    <span class="birthday"><i class="fa fa-birthday-cake" aria-hidden="true"></i>${Utils.formatBirthday(Task?.birthday)}</span>)
                 </g:if>
 
 
@@ -33,7 +30,6 @@
                     <span class="download"><g:link uri="/task/downloadPDF.pdf"
                                                    params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></span>
                 </g:if>
-            </div>
         </div>
     </div>
 

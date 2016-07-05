@@ -1,10 +1,9 @@
-@import '../taskResult';
+@import '../taskResultPrint';
+
 
 body {
     margin-bottom: 0;
 }
-
-
 
 .question-list {
     margin: 0 0 10px 20px;
@@ -110,83 +109,5 @@ body {
 
 .task-result-content {
     margin-top: 130px;
-}
-
-.raq-info-container {
-    height: 60px;
-    padding: 10px 32px;
-
-    .raq-title {
-        font-size: 18px;
-        font-weight: 400;
-        color: #335d70;
-        display: inline-block;
-        margin-right: 10px;
-    }
-
-    .raq-sub-info-panel {
-        display: inline-block;
-
-        .raq-patient-info{
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        .raq-status {
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        .raq-complete-time {
-            font-weight: bold;
-        }
-
-        .raq-name {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .raq-id {
-            margin-right: 10px;
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        .raq-birthday {
-            font-size: 14px;
-            font-weight: 300;
-        }
-
-        .raq-download {
-            display: none;
-
-        }
-    }
-}
-
-
-
-.raq-result-info {
-    height: 32px;
-    background-color: #335d70;
-    color: white;
-    padding-top: 8px;
-
-    .raq-score-wrap:first-child {
-        margin: 0 16px 0 32px;
-    }
-
-    .raq-score-wrap {
-        margin-right: 16px;
-    }
-    .raq-score-des {
-        font-size: 14px;
-        display: inline-block;
-    }
-    .raq-score-num {
-        font-size: 14px;
-        display: inline-block;
-    }
-
 }
 
