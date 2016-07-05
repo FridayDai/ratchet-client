@@ -253,7 +253,7 @@ function NewPatientFormDialog() {
                     }
                 });
         }  else {
-            $inputField.removeAttr('disabled').val();
+            $inputField.removeAttr('disabled').val($static.text());
         }
     };
 
