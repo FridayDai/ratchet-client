@@ -311,7 +311,7 @@ function NewPatientFormDialog() {
                 .text(gender)
                 .removeClass(function (index, name) {
                     return (name.match(/\s+.*male/) || []).join('');
-                })
+                });
         }
     };
 
