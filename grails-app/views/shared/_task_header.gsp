@@ -42,5 +42,11 @@
                 </span>
             </g:multipleScore>
         </g:if>
+        <g:else>
+            <span class="score-wrap">
+                <div class="score-des">Total Result:&nbsp;</div>
+                <div class="score-num">${Task.score}</div>
+            </span>
+        </g:else>
     </div>
 </div>
