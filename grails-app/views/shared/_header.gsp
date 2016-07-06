@@ -5,7 +5,7 @@
                 <i class="fa fa-bars menu-icon"></i>
                 <ul class="menu-list main-menu-list">
                     <g:if test="${!(request.session.accountManagement == false && request.session.groupSize == 0)}">
-                        <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient'}">class="nav-li active"</g:if>
+                        <li <g:if test="${controllerName == 'patients' || controllerName == 'treatment' || controllerName == 'singlePatient' || controllerName == 'patientDashboard'}">class="nav-li active"</g:if>
                             <g:else>class="nav-li"</g:else>>
                             <g:link controller="patients" class="icon-patient">
                                 <i class="fa fa-bed icon patients-icon"></i>
