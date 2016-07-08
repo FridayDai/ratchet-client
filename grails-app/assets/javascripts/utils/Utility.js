@@ -157,12 +157,12 @@ module.exports = {
     toGender: function (gender) {
         if(gender) {
             if(gender.trim().toUpperCase() === 'UNSPECIFIED') {
-                gender = null
+                gender = null;
             } else {
-                gender = gender.toUpperCase()
+                gender = gender.toUpperCase();
             }
         }
 
-        return gender
+        return gender;
     }
 };
