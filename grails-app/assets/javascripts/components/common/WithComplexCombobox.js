@@ -56,7 +56,7 @@ function WithComplexCombobox() {
                         event.preventDefault();
 
                         $(this)
-                            .val(ui.item.value)
+                            .val(ui.item.label)
                             .data("id", ui.item.value)
                             .data("saved", ui.item);
 

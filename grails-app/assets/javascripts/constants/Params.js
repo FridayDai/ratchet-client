@@ -78,7 +78,7 @@ module.exports = {
     ],
 
     HUMAN_GENDER: [
-        {label: "Unspecified", value: ' '},
+        {label: "Unspecified", value: 'Unspecified'},
         {label: "Male", value: 'Male', iconClass: 'gender-male'},
         {label: "Female", value: 'Female', iconClass: 'gender-female'}
     ],

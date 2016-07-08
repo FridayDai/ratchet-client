@@ -70,7 +70,7 @@ function EditPatientFormDialog() {
         this.select('emailFieldSelector').val(data.email);
         this.select('birthdayFieldSelector').val(data.birthday);
 
-        if(data.gender && data.gender.trim()) {
+        if(data.gender && Utility.toGender(data.gender)) {
             var gender = data.gender.toLowerCase();
 
             this.select('genderFieldSelector')
@@ -163,13 +163,16 @@ function EditPatientFormDialog() {
         var rawNumber = this.select('phoneNumberFieldSelector').val();
         var phoneNumber = rawNumber.replace(/[\s\(\)-]/g, '');
         var birthday = this.select('birthdayFieldSelector').val();
+        var $gender = this.select('genderFieldSelector').val();
+
 
         return {
             patientId: this.patientId,
             id: this.select('identifyFieldSelector').val(),
             phoneNumber: phoneNumber,
             clientId: this.clientId,
-            birthdayValue: Utility.toBirthday(birthday)
+            birthdayValue: Utility.toBirthday(birthday),
+            genderValue: Utility.toGender($gender)
         };
     };
 
