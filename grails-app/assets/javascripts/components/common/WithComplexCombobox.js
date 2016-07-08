@@ -56,7 +56,7 @@ function WithComplexCombobox() {
                         event.preventDefault();
 
                         $(this)
-                            .val(ui.item.label)
+                            .val(ui.item.value)
                             .data("id", ui.item.value)
                             .data("saved", ui.item);
 
@@ -72,8 +72,11 @@ function WithComplexCombobox() {
                                 .addClass('ui-combobox-input-icon')
                                 .addClass(ui.item.iconClass));
                         }
+
                         if(ui.item.iconClass) {
                             $(this).addClass('complex-combobox');
+                        } else {
+                            $(this).removeClass('complex-combobox');
                         }
                     },
                     change: function (event, ui) {
@@ -147,8 +150,31 @@ function WithComplexCombobox() {
         }
     };
 
+    var DEFAULT_CLEAR_EVENT = 'clear';
+
+    this.clearInput = function () {
+        $(this.$node)
+            .val('')
+            .data('saved', null)
+            .data("id", '');
+        this.__previousVal = null;
+        this.$node.autocomplete( "widget").empty();
+    };
+
+    this.__onClear = function () {
+        this.clearInput();
+
+        if (this.attr.clearEvent !== DEFAULT_CLEAR_EVENT) {
+            var data = {};
+            data[this.attr.selectDataKey] = null;
+
+            this.trigger(this.attr.clearEvent, data);
+        }
+    };
+
     this.after('initialize', function () {
         this.on('change input', this.onChange);
+        this.on('autocompleteclear', this.__onClear);
     });
 }
 

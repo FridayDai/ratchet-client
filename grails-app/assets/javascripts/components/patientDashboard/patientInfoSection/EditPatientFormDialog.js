@@ -70,7 +70,7 @@ function EditPatientFormDialog() {
         this.select('emailFieldSelector').val(data.email);
         this.select('birthdayFieldSelector').val(data.birthday);
 
-        if(data.gender) {
+        if(data.gender && data.gender.trim()) {
             var gender = data.gender.toLowerCase();
 
             this.select('genderFieldSelector')
