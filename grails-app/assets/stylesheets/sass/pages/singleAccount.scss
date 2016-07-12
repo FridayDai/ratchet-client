@@ -13,7 +13,7 @@
 }
 
 .account-info {
-    padding: 30px 40px;
+    padding: 30px;
     color: $base-color-dark-grey;
 
     .account-table {
@@ -112,18 +112,6 @@
         font-weight: 400;
     }
 
-    .account {
-        &:before {
-            position: absolute;
-            top: 0;
-            left: -35px;
-            display: inline-block;
-            content: '\f47d';
-            font-size: 30px;
-            font-family: ionicons;
-        }
-    }
-
     .btn-close {
         position: absolute;
         top: 27px;
@@ -148,7 +136,7 @@
 
 .middle-content {
     position: relative;
-    padding: 28px 40px;
+    padding: 28px 30px;
     border-bottom: 2px solid #ccc;
 
     .name-info {
@@ -197,7 +185,7 @@
     .btn-edit {
         position: absolute;
         top: 28px;
-        right: 40px;
+        right: 30px;
 
         &:before {
             display: inline-block;

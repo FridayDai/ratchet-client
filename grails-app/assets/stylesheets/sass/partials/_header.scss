@@ -13,9 +13,34 @@
         border-bottom: 6px solid $base-color-white-grey;
         background-color: $base-color-bg-head;
     }
+
+    .menu-block {
+        display: inline-block;
+        position: relative;
+        float: left;
+        margin-left: 16px;
+
+        .menu-icon {
+            color: #aaa;
+            font-size: 17px;
+            padding: 15px 16px 20px 14px;
+
+            &:hover, &.activate {
+                color: #335d70;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .logo-block {
+        float: left;
+        display: inline-block;
+        margin-top: 14px;
+    }
 }
 
 .toolbar {
+    padding-right: 42px;
     min-width: 480px;
     min-height: 50px;
 
@@ -23,7 +48,6 @@
         position: relative;
         float: left;
         height: 35px;
-        padding: 14px 0 0 20px;
 
         .name {
             position: absolute;
@@ -48,7 +72,7 @@
     .alert-icon {
         position: relative;
         font-size: 20px;
-        margin: 18px 40px 0 0;
+        margin-top: 18px;
         color: #718993;
         cursor: pointer;
 
@@ -76,7 +100,7 @@
 
     .alert-icon-tip {
         top: 48px;
-        right: 31px;
+        right: 21px;
 
         &:after {
             content: '';
@@ -156,22 +180,34 @@
 
         .alert-list-item {
             position: relative;
-            padding: 15px;
             border-bottom: 1px solid #ccc;
+            cursor: pointer;
+
+            a {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 15px;
+            }
+
+            &:hover {
+                background-color: #f2f2f2;
+
+                .alert-message {
+                    text-decoration: underline;
+                }
+            }
         }
 
         .alert-message {
             display: inline-block;
             width: 260px;
             font-size: 15px;
+            color: #4d4d4d;
 
-            a {
+            .patient-name {
+                color: #225f6f;
                 font-size: 15px;
                 font-weight: 700;
-
-                &:hover {
-                    text-decoration: underline;
-                }
             }
         }
 
@@ -199,5 +235,216 @@
             position: relative;
             top: 1px;
         }
+    }
+
+    .menu-icon:hover + .menu-list,
+    .username:hover + .menu-list {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu-list:hover {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .menu-list {
+        position: absolute;
+        background: white;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        width: 135px;
+        opacity: 0;
+        visibility: hidden;
+        box-shadow: 1px 4px 10px #bbb;
+        transition: 200ms ease;
+    }
+
+    .main-menu-list {
+        top: 46px;
+        left: 9px;
+    }
+
+    .profile-menu-list {
+        top: 46px;
+        right: -15px;
+    }
+
+    .nav-li {
+        position: relative;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        height: 40px;
+
+        a {
+            width: 100%;
+            height: 100%;
+            color: $base-font-color;
+            text-align: left;
+
+            .icon {
+                margin-left: 15px;
+            }
+
+            .title {
+                line-height: 40px;
+                margin-left: 5px;
+                font-size: 15px;
+            }
+
+            &:hover {
+                color: #335d70;
+            }
+        }
+
+        &.active {
+            background-color: #335d70;
+
+            &>a {
+                color: white;
+            }
+        }
+    }
+
+    .more-info-item {
+        border-top: 1px solid #ccc;
+    }
+
+    .expendable-nav {
+        border: none;
+        overflow: hidden;
+
+        .nav-button {
+            height: 40px;
+            position: relative;
+            border-right: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .expend-icon {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            margin-top: -7px;
+
+            &:before {
+                width: 0;
+                height: 0;
+                content: '';
+                border: 5px solid transparent;
+                position: relative;
+            }
+        }
+
+        &.collapsed {
+            height: 40px;
+
+            .expend-icon:before {
+                border-top-color: #b3b3b3;
+                top: 11px;
+            }
+
+            .nav-button:hover {
+                .expend-icon:before {
+                    border-top-color: #335d70;
+                }
+            }
+        }
+
+        &.expended {
+            height: 120px;
+
+            .expend-icon:before {
+                border-bottom-color: #b3b3b3;
+                top: -11px;
+            }
+
+            .nav-button:hover {
+                .expend-icon:before {
+                    border-bottom-color: #335d70;
+                }
+            }
+        }
+
+        .sub-nav-list {
+            background-color: #f6f6f6;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sub-nav-li {
+            position: relative;
+            height: 40px;
+
+            &:hover {
+                .title {
+                    color: #335d70;
+                }
+            }
+
+            &.active {
+                a {
+                    background-color: #335d70;
+                }
+
+                .title {
+                    color: white;
+                }
+            }
+
+            .title {
+                margin-left: 15px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .profile-block {
+        position: relative;
+        float: right;
+        text-align: right;
+        padding-top: 7px;
+
+        .test-flag {
+            background: #f27171;
+            color: white;
+            border-radius: 4px;
+            padding: 0 4px;
+        }
+
+        .client-name {
+            font-size: 12px;
+            color: #335d70;
+        }
+
+        .username {
+            position: relative;
+            padding-bottom: 10px;
+
+            .username-text {
+                font-size: 14px;
+                font-weight: 700;
+                color: #335d70;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 7px;
+                right: -12px;
+                width: 0;
+                height: 0;
+                border-width: 6px 3px;
+                border-color: transparent;
+                border-style: solid;
+                border-top-color: #335d70;
+            }
+        }
+    }
+
+    .alert-block {
+        float: right;
+        margin-left: 30px;
     }
 }

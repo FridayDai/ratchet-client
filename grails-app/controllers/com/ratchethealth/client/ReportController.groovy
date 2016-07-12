@@ -43,8 +43,10 @@ class ReportController extends BaseController {
         String token = request.session.token
         def clientId = request.session.clientId
         def providerId  = params.providerId
+        def baseToolId = params.toolId
+        def year = params.year
 
-        def conversion = reportService.taskCompletionConversion(token, clientId, providerId)
+        def conversion = reportService.taskCompletionConversion(token, clientId, providerId, baseToolId, year)
         render conversion as JSON
     }
 
@@ -72,6 +74,14 @@ class ReportController extends BaseController {
                 resp.remove('dataSet')
             }
         }
+    }
+
+    def getClientTools() {
+        def token = request.session.token
+        def clientId = request.session.clientId
+        def resp = reportService.getClientTools(token, clientId)
+
+        render resp as JSON
     }
 
     def getPatientTools() {

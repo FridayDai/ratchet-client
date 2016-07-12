@@ -9,8 +9,10 @@
 
     <body>
     <div>
-        <div id="header-panel" class="inner-header">
-            <label class="title patient-icon">PATIENTS</label>
+        <div id="header-panel" class="inner-header patients-inner-header">
+            <label class="title patient-title">
+                <i class="fa fa-bed icon"></i> PATIENTS
+            </label>
             <a href="#" id="add-patient" class="btn btn-add add-patient"
                data-account-id="${request.session.accountId}"><span>New Patient</span></a>
             <g:if test="${request.session.accountManagement == true}">
@@ -39,12 +41,6 @@
                 <div class="filler-content">
                     <label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>
                     <input type="text" name="emailStatusFilter" id="emailStatusFilter"
-                           class="input-group input-auto-search"/>
-                </div>
-
-                <div class="filler-content">
-                    <label for="attentionStatusFilter" class="select-tip">ATTENTION</label>
-                    <input type="text" name="attentionStatusFilter" id="attentionStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
 
@@ -89,7 +85,6 @@
                         <td>${patient.taskStatus}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
-                        <td>${patient.isAttentionNeeded}</td>
                     </tr>
                 </g:each>
                 </tbody>
@@ -137,6 +132,23 @@
             </div>
 
             <div class="form-group inline">
+                <label class="lbl-group">BIRTHDAY<span>*</span></label>
+                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                       placeholder="MM/DD/YYYY" required />
+                <div class='replace-input-div' id="birthday-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
+                <label class="lbl-group">GENDER</label>
+                <input id="gender" name="gender" type="text" class="input-group input-convert"
+                       placeholder="Unspecified (Optional)"/>
+
+                <div class='replace-input-div' id="gender-static"></div>
+                <a class='icon-edit form-group-edit'></a>
+            </div>
+
+            <div class="form-group inline">
                 <label class="lbl-group">PHONE NUMBER</label>
                 <input id="phoneNumber" name="phoneNumberVal" type="tel" class="input-group input-convert"
                        maxlength="14" minlength="14" placeholder="777-777-7777 (Optional)"/>
@@ -161,13 +173,7 @@
                 </div>
             </div>
 
-            <div class="form-group inline birthday-block">
-                <label class="lbl-group">BIRTHDAY<span>*</span></label>
-                <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
-                       placeholder="MM/DD/YYYY" required />
-                <div class='replace-input-div' id="birthday-static"></div>
-                <a class='icon-edit form-group-edit'></a>
-            </div>
+
 
             <h4>CAREGIVER</h4>
 

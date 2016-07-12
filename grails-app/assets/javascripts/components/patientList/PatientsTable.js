@@ -23,7 +23,7 @@ var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
 
 var STATUS_ICON_MAPPING = {
     'UNVERIFIED': 'fa-exclamation-circle',
-    'UNDELIVERED': 'fa-times-circle',
+    'UNDELIVERABLE': 'fa-times-circle',
     'DECLINED': 'fa-ban'
 };
 
@@ -42,8 +42,6 @@ var TABLE_SEARCH_EVENTS = [
     'clearProviderForPatientTable',
     'selectEmailStatusForPatientTable',
     'clearEmailStatusForPatientTable',
-    'selectAttentionStatusForPatientTable',
-    'clearAttentionStatusForPatientTable',
     'selectTreatmentStatusForPatientTable',
     'clearTreatmentStatusForPatientTable',
     'selectTaskStatusForPatientTable',
@@ -64,19 +62,9 @@ function PatientsTable() {
                 data: 'patientId',
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
-
-                    if (full.isAttentionNeeded === "true" || full.isAttentionNeeded === true) {
-                        return [
-                            '<div class="source-id">',
-                            id,
-                            '<div class="attention-icon"></div>',
-                            '</div>'
-                        ].join('');
-
-                    }
                     return '<p class="source-id">' + id + '</p>';
                 },
-                width: "10%"
+                width: "8%"
             }, {
                 targets: 1,
                 data: 'firstName',
@@ -105,7 +93,7 @@ function PatientsTable() {
                         }
                     }
                 },
-                width: "20%"
+                width: "25%"
             }, {
                 targets: 3,
                 data: 'phoneNumber',
@@ -129,7 +117,7 @@ function PatientsTable() {
                         return NOT_AVAILABLE_TEMP;
                     }
                 },
-                width: "13%"
+                width: "12%"
             }, {
                 targets: 4,
                 data: 'birthday',
@@ -141,7 +129,7 @@ function PatientsTable() {
                         return NOT_AVAILABLE_TEMP;
                     }
                 },
-                width: "10%"
+                width: "9%"
             }, {
                 targets: 5,
                 data: 'nearestAbsoluteEventDate',
@@ -153,7 +141,7 @@ function PatientsTable() {
                         return NOT_AVAILABLE_TEMP;
                     }
                 },
-                width: "10%"
+                width: "9%"
             }, {
                 targets: 6,
                 data: 'taskStatus',
@@ -169,7 +157,7 @@ function PatientsTable() {
                         return '<span class="task-status overdue-status">' + taskStatus + '</span>';
                     }
                 },
-                width: "13%",
+                width: "14%",
                 orderable: false
             }, {
                 targets: 7,
@@ -178,15 +166,11 @@ function PatientsTable() {
                     var id = data === undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
                 },
-                width: "7%",
+                width: "6%",
                 orderable: false
             }, {
                 targets: 8,
                 data: 'status',
-                "visible": false
-            }, {
-                targets: 9,
-                data: 'isAttentionNeeded',
                 "visible": false
             }
         ],
@@ -204,7 +188,6 @@ function PatientsTable() {
         surgeonId: null,
         emailStatus: null,
         patientIdOrName: null,
-        attentionStatus: null,
         treatmentStatus: null,
         taskStatus: null,
         activeTreatmentOnly: true

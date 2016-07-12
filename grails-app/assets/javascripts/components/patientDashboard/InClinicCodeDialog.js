@@ -41,7 +41,7 @@ function TreatmentCodeDialog() {
         this.select('codeLabelSelector').text(data.inClinicCode);
         this.select('linkSelector')
             .attr('href', data.patientPortalLink)
-            .text(host[1]);
+            .text(host[1] + '/in-clinic');
     };
 }
 

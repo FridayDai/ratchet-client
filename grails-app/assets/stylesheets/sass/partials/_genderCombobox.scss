@@ -1,0 +1,70 @@
+.gender-male {
+    &:before {
+        display: inline-block;
+        width: 20px;
+        height: 16px;
+        content: "" ;
+        background: image-url('patients/Male-states.png', false, false) no-repeat -18px 1px;
+        background-size: 52px;
+        vertical-align: bottom;
+    }
+}
+
+.gender-female {
+    &:before {
+        display: inline-block;
+        width: 20px;
+        height: 16px;
+        content: "" ;
+        background: image-url('patients/Female-states.png', false, false) no-repeat  2px 2px;
+        background-size: 33px;
+        vertical-align: bottom;
+    }
+}
+
+.rt-ui-state-active {
+    .gender-male {
+        &:before {
+            background-position: -37px 1px;
+        }
+    }
+
+    .gender-female {
+        &:before {
+            background-position: -17px 2px;
+        }
+    }
+}
+
+.form-group {
+    .ui-combobox-input-icon {
+        top: 8px;
+        left: 10px;
+    }
+}
+
+//#gender::-webkit-input-placeholder {
+//    background: image-url('patients/male-placeholder.png', false, false) no-repeat -2px 46%;
+//    background-size: 52px;
+//}
+//
+//#gender:-moz-placeholder {
+//    background: image-url('patients/male-placeholder.png', false, false) no-repeat 3% 46%;
+//    background-size: 52px;
+//    margin-left: 100px;
+//}
+//
+//#gender::-moz-placeholder {
+//    background: image-url('patients/male-placeholder.png', false, false) no-repeat 3% 46%;
+//    background-size: 52px;
+//    margin-left: 100px;
+//}
+//
+//#gender:-ms-input-placeholder {
+//    background: image-url('patients/male-placeholder.png', false, false) no-repeat 3% 46%;
+//    background-size: 52px;
+//}
+
+
+
+

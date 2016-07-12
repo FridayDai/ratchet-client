@@ -10,13 +10,10 @@ function ChartPanel() {
         emailPanelSelector: '#email-panel'
     });
 
-    this.drawWithData = function (providerId, imple) {
+    this.drawWithData = function (imple) {
         $.ajax({
             url: URLs.GET_TASK_COMPLETION,
             type: "POST",
-            data: {
-                providerId: providerId
-            },
             success: function (data) {
                 if (_.isFunction(imple)) {
                     imple(data);
@@ -50,7 +47,7 @@ function ChartPanel() {
 
     this.init = function () {
         var self = this;
-        this.drawWithData(null, function (data) {
+        this.drawWithData(function (data) {
 
             var barOption = {
                 chartWidth: 600,
@@ -76,21 +73,18 @@ function ChartPanel() {
         });
     };
 
-    this.updateChart = function (e, provider) {
+    this.updateChart = function (e, data) {
         var self = this;
 
-        this.drawWithData(provider.surgeonId, function (data) {
-            self.allBar.update(self.convertData(data.all));
-            self.emailBar.update(self.convertData(data.byEmail));
-            self.allDonut.update(self.pickToArray(data.all));
-            self.emailDonut.update(self.pickToArray(data.byEmail));
-        });
+        self.allBar.update(self.convertData(data.all));
+        self.emailBar.update(self.convertData(data.byEmail));
+        self.allDonut.update(self.pickToArray(data.all));
+        self.emailDonut.update(self.pickToArray(data.byEmail));
     };
 
     this.after('initialize', function () {
         this.init();
-        this.on(document, 'selectProviderForTaskCompletion', this.updateChart);
-        this.on(document, 'clearProviderForTaskCompletion', this.updateChart);
+        this.on(document, 'renderTaskCompletionChart', this.updateChart);
     });
 }
 

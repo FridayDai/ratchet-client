@@ -13,7 +13,9 @@
     <div class="content">
 
         <div class="inner-header">
-            <label class="title profile-icon">PROFILE</label>
+            <label class="title profile-icon">
+                <i class="fa fa-user icon"></i> PROFILE
+            </label>
         </div>
 
         <div class="middle-content">

@@ -14,7 +14,7 @@ $.validator.addMethod("emailCheck", function(value){
 /* jshint ignore:end */
 
 module.exports = {
-    get: function (originalCheck, scope) {
+    get: function () {
         return {
             rules: {
                 email: {
@@ -24,9 +24,7 @@ module.exports = {
                         url: URLs.CHECK_PATIENT_EMAIL,
                         dropProcess: true,
                         dataFilter: function (responseString) {
-                            if (originalCheck && originalCheck.call(scope) === true) {
-                                return '"true"';
-                            } else if (responseString === "false") {
+                            if (responseString === "false") {
                                 return "\"" + STRINGs.EMAIL_EXISTING_INVALID + "\"";
                             } else {
                                 return '"true"';

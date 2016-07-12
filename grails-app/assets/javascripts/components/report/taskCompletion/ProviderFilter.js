@@ -28,14 +28,15 @@ function ProviderFilter() {
         if (this.__previousVal !== id) {
             this.__previousVal = id;
 
-            this.trigger('selectProviderForTaskCompletion', {
-                surgeonId: id
+            this.trigger('selectedForTaskCompletion', {
+                providerId: id
             });
         }
     };
 
     this.attributes({
-        clearEvent: 'clearProviderForTaskCompletion'
+        clearEvent: 'clearForTaskCompletion',
+        selectDataKey: 'providerId'
     });
 }
 

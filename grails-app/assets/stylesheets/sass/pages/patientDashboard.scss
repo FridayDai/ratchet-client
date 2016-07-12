@@ -13,6 +13,7 @@
 @import '../partials/theme';
 @import "../partials/combobox";
 @import '../partials/select2';
+@import "../partials/genderCombobox";
 @import '../partials/task';
 
 .icon-edit,
@@ -661,8 +662,8 @@
         .ui-state-default {
             position: relative;
             overflow: hidden;
-            transition: 0.4s height;
-            height: 65px;
+            transition: 0.5s max-height;
+            max-height: 65px;
             margin: 0;
             padding: 0;
             background-color: $base-color-bg-head;
@@ -673,7 +674,7 @@
         .treatment-indicate {
             position: absolute;
             top: 22px;
-            left: 11px;
+            left: 20px;
             display: inline-block;
             width: 20px;
             background: $base-color-grey;
@@ -688,10 +689,10 @@
 
         .ui-tabs-anchor {
             display: block;
-            padding: 0 36px;
+            padding: 0 20px 0 45px;
             border-bottom: 0;
             min-width: 150px;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 60px;
             text-transform: capitalize;
             overflow: hidden;
@@ -702,7 +703,8 @@
         }
 
         .ui-state-active {
-            height: 222px;
+            max-height: 222px;
+            height: auto;
             background-color: $base-color-bg-head;
             border-bottom: 1px solid $base-font-color;
             //            cursor: text;
@@ -1072,7 +1074,6 @@
     margin-top: 8px;
     color: #3d3d3d;
 }
-
 
 .phone-block {
     vertical-align: top;

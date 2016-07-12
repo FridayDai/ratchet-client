@@ -1,5 +1,5 @@
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     bottom: 0;
@@ -66,6 +66,18 @@
                     content: '';
                 }
             }
+        }
+    }
+
+    .assist-me {
+        display: inline-block;
+        float: right;
+        margin: 6px 30px 0 0;
+        color: white;
+        font-size: 14px;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 }

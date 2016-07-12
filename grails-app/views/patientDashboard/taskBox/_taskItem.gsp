@@ -2,8 +2,28 @@
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
-     data-is-absolute="${itemType == 'absoluteEvent' ? true: false}"
+     data-is-absolute="${itemType == 'absoluteEvent'}"
      medical-record-id="${medicalRecordId}">
+
+    <g:if test="${itemType == 'absoluteEvent'}">
+        <span class="item-absolute-date hidden item-absolute-short-event">
+            <span class="short-event-title-wrap short-title-wrap-before short-title-wrap-after">
+                <span class="short-event-title">
+                    ${task?.title.take(3)}
+                </span>
+            </span>
+        </span>
+    </g:if>
+    <g:elseif test="${task?.treatmentProperty?.absoluteEventTimestamp}">
+        <g:dateUnit millisecond="${task?.sendTime - task?.treatmentProperty?.absoluteEventTimestamp}" var="date">
+            <span class="item-absolute-date hidden">
+                <span class="item-absolute-date-wrap">
+                    <div>${date?.digit}</div>
+                    <div>${date?.unit}</div>
+                </span>
+            </span>
+        </g:dateUnit>
+    </g:elseif>
 
     <div class="box-item-container">
 
@@ -67,7 +87,8 @@
                         <g:render template="/patientDashboard/taskBox/shared/userScore" model="['task': task]"/>
                     </g:elseif>
 
-                    <g:elseif test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "RAPT" && RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FOLLOW_UP}">
+                    <g:elseif
+                            test="${RatchetConstants.BASE_TOOL_TYPE[task.toolType] == "RAPT" && RatchetConstants.TOOL_TYPE[task?.testId] == RatchetConstants.TOOL_NAME_FOLLOW_UP}">
                         <g:set var="mixedResult" value="${task?.mixedResult ? JSON.parse(task?.mixedResult) : [:]}"/>
                         <g:if test="${mixedResult?.assistance == 'true'}">
                             <span class="sub-item-line">
@@ -96,13 +117,34 @@
                                 test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score || task.otherScore)}">
 
                             <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
-                                <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
-                                    <span class="sub-item multiple-item">
-                                        <span class="score-label">${score[0]}:</span>
+                                <g:if test="${task?.testId == 20}">
+                                    <g:RAPTScore score="${task?.otherScore}">
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Score:</span>
 
-                                        <span class="score-number">${score[1]}</span>
-                                    </span>
-                                </g:multipleScore>
+                                            <span class="score-number">${score["Score"]}</span><span class="score-rank">${score["Risk"]}</span>
+                                        </span>
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Care Partner:</span>
+
+                                            <span class="score-number">${score["Care Partner"]}</span>
+                                        </span>
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">Prefer SNF:</span>
+
+                                            <span class="score-number">${score["Prefer SNF"]}</span>
+                                        </span>
+                                    </g:RAPTScore>
+                                </g:if>
+                                <g:else>
+                                    <g:multipleScore in="${task?.otherScore}" type="${task?.testId}" var="score">
+                                        <span class="sub-item multiple-item">
+                                            <span class="score-label">${score[0]}:</span>
+
+                                            <span class="score-number">${score[1]}</span>
+                                        </span>
+                                    </g:multipleScore>
+                                </g:else>
                             </g:if>
                             <g:else>
                                 <span class="sub-item">
@@ -124,13 +166,11 @@
 
             <g:if test="${itemType != 'absoluteEvent'}">
                 <g:if test="${StatusCodeConstants.TASK_STATUS[task?.status] == "complete"}">
-
                     <g:if test="${RatchetConstants.TOOL_TYPE_HAS_VIEW_RESULT.contains(task?.testId)}">
                         <a href="/patients/${patientId}/treatments/${medicalRecordId}/task/${task?.id}/result"
                            target="_blank"
-                           class="icon-button view-results"><span>View Results</span></a>
+                           class="view-results">Results</a>
                     </g:if>
-
                 </g:if>
                 <g:else>
 
@@ -189,10 +229,10 @@
             <g:elseif test="${task?.alerts?.first()?.type == 'DISCHARGE_PLAN'}">
                 Confirm the discharge plan.
             </g:elseif>
-            <g:elseif test="${task?.alerts?.first()?.type ==  'SNF'}">
+            <g:elseif test="${task?.alerts?.first()?.type == 'SNF'}">
                 SNF stay needs follow up.
             </g:elseif>
-            <g:elseif test="${task?.alerts?.first()?.type ==  'PATIENT_FOLLOW_UP_TOOL'}">
+            <g:elseif test="${task?.alerts?.first()?.type == 'PATIENT_FOLLOW_UP_TOOL'}">
                 Patient requires post-op assistance.
             </g:elseif>
             <g:else>

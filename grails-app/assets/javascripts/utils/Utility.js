@@ -152,5 +152,17 @@ module.exports = {
         }
 
         return result;
+    },
+
+    toGender: function (gender) {
+        if(gender) {
+            if(gender.trim().toUpperCase() === 'UNSPECIFIED') {
+                gender = null;
+            } else {
+                gender = gender.toUpperCase();
+            }
+        }
+
+        return gender;
     }
 };

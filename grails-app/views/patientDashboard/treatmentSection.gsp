@@ -42,10 +42,6 @@
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             <span class="text-span">Edit</span>
                         </li>
-                        <li class="archived-active">
-                            <i class="fa fa-archive" aria-hidden="true"></i>
-                            <span class="text-span">Archive</span>
-                        </li>
                         <g:if test="${AccountIsAdmin.toString() == 'true'}">
                         <li class="treatment-delete">
                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -132,28 +128,30 @@
             <div class="curtain-top"></div>
 
             <div id="tasks-list" class="tasks-list">
-                <g:each in="${combinedTasks}" var="task">
-                    <g:if test="${task.itemType == 'today'}">
-                        <div class="today-item">
-                            <span>
-                                Today:
-                                <g:formatDate date="${task?.sendTime}"
-                                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                              format="MMM dd, yyyy"/>
-                            </span>
-                        </div>
-                    </g:if>
-                    <g:else>
-                        <g:render template="/patientDashboard/taskBox/taskItem" model="[
-                                'task'           : task,
-                                'patientId'      : patientId,
-                                'medicalRecordId': task.treatmentProperty?.id,
-                                'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
-                                'itemType'       : task?.itemType,
-                                'accountId'      : accountId,
-                        ]"/>
-                    </g:else>
-                </g:each>
+                <div id="task-list-wrap" class="tasks-wrap">
+                    <g:each in="${combinedTasks}" var="task">
+                        <g:if test="${task.itemType == 'today'}">
+                            <div class="today-item">
+                                <span>
+                                    Today:
+                                    <g:formatDate date="${task?.sendTime}"
+                                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                  format="MMM dd, yyyy"/>
+                                </span>
+                            </div>
+                        </g:if>
+                        <g:else>
+                            <g:render template="/patientDashboard/taskBox/taskItem" model="[
+                                    'task'           : task,
+                                    'patientId'      : patientId,
+                                    'medicalRecordId': task.treatmentProperty?.id,
+                                    'archived'       : task.treatmentProperty?.archived ? 'archived' : null,
+                                    'itemType'       : task?.itemType,
+                                    'accountId'      : accountId,
+                            ]"/>
+                        </g:else>
+                    </g:each>
+                </div>
             </div>
 
             <div id="no-tasks" class="no-treatment-container no-tasks hide">

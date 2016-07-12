@@ -7,7 +7,7 @@
 
 
 .account-info {
-    padding: 30px 40px;
+    padding: 30px;
     color: $base-color-dark-grey;
 
     .account-table {
@@ -142,7 +142,7 @@
 
 .middle-content {
     position: relative;
-    padding: 28px 40px;
+    padding: 28px 30px;
     border-bottom: 2px solid #ccc;
 
     .name-info {
@@ -248,16 +248,4 @@
 .error-password {
     margin-left: 6px;
     margin-top: -5px;
-}
-
-.profile-icon {
-    &:before {
-        position: absolute;
-        display: inline-block;
-        top: 2px;
-        left: -35px;
-        width: 10px;
-        height: 25px;
-        content: image-url('profile_icon.png', false, false);
-    }
 }

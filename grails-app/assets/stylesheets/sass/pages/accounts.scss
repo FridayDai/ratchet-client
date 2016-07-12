@@ -39,18 +39,6 @@
     color: $base-font-grey;
 }
 
-.account-icon {
-    &:before {
-        position: absolute;
-        top: 0;
-        left: -35px;
-        font-family: 'Ionicons';
-        display: inline-block;
-        content: '\f47b';
-        font-size: 30px;
-    }
-}
-
 .doctor-mark {
     display: inline-block;
     height: 18px;

@@ -1270,6 +1270,10 @@
                     param.url = param.urlFn();
                 }
 
+                if (previous.origin === value) {
+                    return true;
+                }
+
                 if ( previous.old === value ) {
                     return previous.valid;
                 }

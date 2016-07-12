@@ -1,23 +1,23 @@
 var flight = require('flight');
 var WithLayout = require('../common/WithLayout');
 
-var NavigationPanel = require('../navigation/NavigationPanel');
 var HeaderPanel = require('./HeaderPanel');
+var FooterPanel = require('./FooterPanel');
 var AssistMeFormDialog = require('../shared/components/AssistMeFormDialog');
 var MaintenanceTip = require('../shared/components/MaintenanceTip');
 
 function Main() {
     this.attributes({
         maintenanceTipSelector: '#maintenance',
-        navigationPanelSelector: '#menu',
         assistMeDialogSelector: '#assist-form',
-        headerSelector: '#layout-header'
+        headerSelector: '#layout-header',
+        footerSelector: '#footer'
     });
 
     this.children({
         maintenanceTipSelector: MaintenanceTip,
-        navigationPanelSelector: NavigationPanel,
-        headerSelector: HeaderPanel
+        headerSelector: HeaderPanel,
+        footerSelector: FooterPanel
     });
 
     this.dialogs({

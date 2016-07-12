@@ -21,76 +21,9 @@ html, body, div, span {
         border-bottom-color: $result-main-color;
     }
 
-    .info-container {
-        padding: 20px 30px;
-
-        .title {
-            font-size: 22px;
-            font-weight: 700;
-            color: $result-main-color;
-        }
-
-        .sub-info-panel {
-            position: relative;
-            margin-top: 10px;
-        }
-
-        .patient-info, .name, .id, .birthday {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .name {
-            margin-right: 10px;
-        }
-
-        .id {
-            margin-left: 10px;
-            margin-right: 30px;
-        }
-
-        .birthday {
-            i {
-                margin-right: 5px;
-            }
-        }
-    }
-
-    .questionnaire-info {
-        position: absolute;
-        bottom: -13px;
-        right: 0;
-
-        .status,
-        .score-num,
-        .score-des {
-            font-size: 18px;
-            font-weight: 700;
-            color: $result-main-color;
-        }
-
-        .status {
-            position: relative;
-            top: -9px;
-            padding-right: 20px;
-            display: inline-block;
-            line-height: 30px;
-        }
-
-        .score {
-            display: inline-block;
-            position: relative;
-            padding-left: 20px;
-            text-align: center;
-        }
-
-        .divider {
-            height: 33px;
-            position: absolute;
-            left: 0;
-            top: 7px;
-            border-left: 1px solid #ddd;
-        }
+    .toolbar {
+        padding-left: 30px;
+        padding-top: 10px;
     }
 }
 
@@ -100,22 +33,110 @@ html, body, div, span {
     padding: 30px;
 }
 
-.download {
-    display: inline-block;
-    position: absolute;
-    top: -40px;
-    right: 0;
-    a {
-        color: #7b8994;
-    }
-}
-
 .page-footer {
     padding-bottom: 14px;
     text-align: center;
     color: #7b8994;
 }
 
-.score-wrap {
-    display: inline-block;
+.info-container {
+    position: relative;
+    height: 66px;
+    padding: 20px 32px;
+
+    .title {
+        font-size: 21px;
+        font-weight: 500;
+        color: #335d70;
+        margin-right: 15px;
+        display: inline-block;
+        @include breakpoint('mobile') {
+            margin-top: -5px;
+        }
+        @include  breakpoint('desktop') {
+            margin-top: 0;
+        }
+    }
+
+    .sub-info-panel {
+        color: #333;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 500;
+
+        .status {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .complete-time {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .name {
+            color: #333;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .id {
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .birthday {
+            .icon {
+                margin-right: 5px;
+            }
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .download {
+            position: absolute;
+            top: 27px;
+            right: 32px;
+            a {
+                font-size: 14px;
+                color: #808080;
+            }
+
+        }
+
+        .download {
+            a:hover {
+                color: #4d4d4d;
+            }
+        }
+    }
+}
+
+
+
+.result-info {
+    height: 53px;
+    background-color: #335d70;
+    color: white;
+    padding-top: 17px;
+
+    .score-wrap:first-child {
+        margin: 0 16px 0 32px;
+    }
+
+    .score-wrap {
+        margin-right: 16px;
+    }
+    .score-des {
+        font-size: 16px;
+        display: inline-block;
+    }
+    .score-num {
+        text-transform: capitalize;
+        font-size: 16px;
+        display: inline-block;
+    }
+
 }

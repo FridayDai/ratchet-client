@@ -313,7 +313,7 @@ function AddTasksDialog() {
 }
 
 module.exports = flight.component(
-    WithChildren,
     WithDialog,
+    WithChildren,
     AddTasksDialog
 );

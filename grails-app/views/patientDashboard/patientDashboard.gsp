@@ -16,13 +16,24 @@
             <div class="info-container">
                 <div class="info first-line clear">
                     <div class="pull-left name">
+                        <g:if test="${patientInfo.gender == "MALE"}">
+                            <span id="header-portrait" class="portrait-male"></span>
+                        </g:if>
+                        <g:elseif test="${patientInfo.gender == "FEMALE"}">
+                            <span id="header-portrait" class="portrait-female"></span>
+                        </g:elseif>
+                        <g:else>
+                            <span id="header-portrait"></span>
+                        </g:else>
+
                         <span class="first-name" value="${patientInfo.firstName}">${patientInfo.firstName}</span>
                         <span class="last-name" value="${patientInfo.lastName}">${patientInfo.lastName}</span>
                     </div>
 
                     <div class="edit inline">
                         <a href="#" class="btn-edit-patient" data-patient-id="${patientInfo.id}"
-                           data-client-id="${patientInfo.client.id}" data-email-status="${patientInfo.status}">
+                           data-client-id="${patientInfo.client.id}" data-email-status="${patientInfo.status}"
+                        data-gender="${patientInfo.gender}">
                         </a>
                         <a href="#" class="btn-close">Close</a>
                     </div>
@@ -63,7 +74,7 @@
                         <i class="email-state-icon fa email-state-icon-verified" aria-hidden="true"></i><span class="email-state " deat-email-status="${patientInfo.status}">VERIFIED</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "BOUNCED"}">
-                        <i class="email-state-icon fa email-state-icon-nonexistent" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNDELIVERED</span>
+                        <i class="email-state-icon fa email-state-icon-nonexistent" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">UNDELIVERABLE</span>
                     </g:elseif>
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
                         <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">DECLINED</span>
@@ -180,6 +191,18 @@
             <input id="lastName" name="lastName" type="text" class="input-group" placeholder="Smith" required/>
         </div>
 
+        <div class="form-group inline">
+            <label class="lbl-group">BIRTHDAY<span>*</span></label>
+            <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
+                   placeholder="MM/DD/YYYY" required/>
+        </div>
+
+        <div class="form-group inline">
+            <label class="lbl-group">GENDER</label>
+            <input id="gender" name="gender" type="text" class="input-group input-convert"
+                   placeholder="Unspecified (Optional)"/>
+        </div>
+
         <div class="form-group inline phone-block">
             <label class="lbl-group">PHONE NUMBER</label>
             <input id="phone" name="phoneNumberVal" type="text" maxlength="14" class="input-group"
@@ -196,12 +219,6 @@
                     <span class="warn-msg">(Warning: This cannot be undone.)</span>
                 </label>
             </div>
-        </div>
-
-        <div class="form-group inline birthday-block">
-            <label class="lbl-group">BIRTHDAY<span>*</span></label>
-            <input id="birthday" name="birthday" type="text" class="input-group birthday re-position"
-                   placeholder="MM/DD/YYYY" required/>
         </div>
 
         <label class="form-group required pull-right"><span>*</span>Required field</label>
@@ -514,6 +531,7 @@
 
         <div class="list">
             <label class="expected-label">
+                <input type="text" class="hidden" autofocus>
                 <input type="text" class="input-text" name="choice.question2" maxlength="2"/>
                 <span>Day(s)</span>
             </label>

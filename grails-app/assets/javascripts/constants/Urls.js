@@ -39,7 +39,6 @@ module.exports = {
     GET_AVAILABLE_TASKS: '/treatments/{0}/available-tasks',
     DELETE_TASK: '/patients/{0}/treatments/{1}/task/{2}/delete',
     CALL_TASK: '/patients/{0}/treatments/{1}/task/{2}/voice-call',
-    RESOLVE_VOICE_TASK: '/patients/{0}/treatments/{1}/task/{2}/attention/resolve',
 
     //Caregiver
     GET_CARE_GIVER_LIST: '/patients/{0}/caregivers',
@@ -80,5 +79,6 @@ module.exports = {
 
     //Report
     PROVIDER_AVERAGE_OVERVIEW: '/reports/outcome/provider-average',
-    GET_TASK_COMPLETION:'/reports/conversion'
+    GET_TASK_COMPLETION:'/reports/conversion',
+    GET_CLIENT_TOOLS: '/reports/conversion/tools'
 };

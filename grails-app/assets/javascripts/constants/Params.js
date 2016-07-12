@@ -50,7 +50,7 @@ module.exports = {
         2: 'UNVERIFIED',
         3: '',
         4: 'Not Available',
-        5: 'UNDELIVERED',
+        5: 'UNDELIVERABLE',
         6: 'DECLINED'
     },
 
@@ -58,13 +58,8 @@ module.exports = {
         {label: "Verified", value: 3},
         {label: "Unverified", value: 2},
         {label: "Not Available", value: 4},
-        {label: "Undelivered", value: 5},
+        {label: "Undeliverable", value: 5},
         {label: "Declined", value: 6}
-    ],
-
-    ATTENTION_STATUS_FILTER: [
-        {label: "Required", value: 1},
-        {label: "Not Required", value: 2}
     ],
 
     TREATMENT_STATUS_FILTER: [
@@ -80,6 +75,12 @@ module.exports = {
         {label: "Scheduled", value: 3},
         {label: "Expired", value: 6},
         {label: "Completed", value: 5}
+    ],
+
+    HUMAN_GENDER: [
+        {label: "Unspecified", value: 'Unspecified'},
+        {label: "Male", value: 'Male', iconClass: 'gender-male'},
+        {label: "Female", value: 'Female', iconClass: 'gender-female'}
     ],
 
     ACCOUNT_TYPE: {

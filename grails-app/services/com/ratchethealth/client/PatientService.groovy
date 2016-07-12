@@ -11,6 +11,7 @@ class PatientService extends RatchetAPIService {
         def lastName = patient?.lastName
         def phoneNumber = patient?.phoneNumber
         def email = patient?.email
+        def gender = patient?.genderValue?.toUpperCase()
         def profilePhoto = patient?.profilePhoto
         def treatmentId = patient?.treatmentId
         def surgeonId = patient?.staffId
@@ -42,6 +43,7 @@ class PatientService extends RatchetAPIService {
                     .field("phoneNumber", phoneNumber)
                     .field("email", email)
                     .field("birthday", birthday)
+                    .field("gender", gender)
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)
@@ -77,7 +79,6 @@ class PatientService extends RatchetAPIService {
         def sortFiled = patientPagination?.sortField
         def emailStatus = patientPagination?.emailStatus
         def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
-        def attentionStatus = patientPagination?.attentionStatus
         def treatmentStatus = patientPagination?.treatmentStatus
         def taskStatus = patientPagination?.taskStatus
 
@@ -99,10 +100,6 @@ class PatientService extends RatchetAPIService {
             "activeTreatmentOnly": activeTreatmentOnly,
             "taskStatus": taskStatus
         ];
-
-        if (attentionStatus) {
-            queryStrings['isAttentionNeeded'] = attentionStatus == 1
-        }
 
         if(queryStrings.taskStatus == 0){
             queryStrings.taskStatus = null;
