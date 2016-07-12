@@ -77,8 +77,6 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
-                visible: false,
-                searchable: false,
                 render: function (data, type, full) {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
@@ -101,8 +99,6 @@ function PatientsTable() {
             }, {
                 targets: 3,
                 data: 'phoneNumber',
-                visible: false,
-                searchable: false,
                 render: function (data, type, full) {
                     var phoneNumber,
                         subNumber,
@@ -138,8 +134,6 @@ function PatientsTable() {
                 width: "9%"
             }, {
                 targets: 5,
-                visible: false,
-                searchable: false,
                 data: 'nearestAbsoluteEventDate',
                 render: function (data, type, full) {
                     var date = data === undefined ? full.nearestAbsoluteEventDate : data;
@@ -153,8 +147,6 @@ function PatientsTable() {
             }, {
                 targets: 6,
                 data: 'taskStatus',
-                visible: false,
-                searchable: false,
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
                     if (taskStatus.indexOf("0 Active") !== -1) {

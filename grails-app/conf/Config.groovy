@@ -227,6 +227,9 @@ ratchetv2 {
         url {
             base = System.getProperty("SERVER_URL") ?: "http://api.develop.ratchethealth.com"
 
+            //user's config
+            configs = "${ratchetv2.server.url.base}/staff/configs"
+
             // Authentication
             login = "${ratchetv2.server.url.base}/api/v1/login"
             logout = "${ratchetv2.server.url.base}/api/v1/logout"

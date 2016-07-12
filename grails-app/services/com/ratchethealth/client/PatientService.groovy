@@ -24,7 +24,7 @@ class PatientService extends RatchetAPIService {
         def birthday = patient?.birthdayValue
         def isUnSubscribed = patient?.emailStatus
 
-        if(isUnSubscribed == "decline"){
+        if (isUnSubscribed == "decline") {
             isUnSubscribed = true;
         } else {
             isUnSubscribed = false;
@@ -86,22 +86,22 @@ class PatientService extends RatchetAPIService {
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
 
         def queryStrings = [
-            'max': length,
-            'offset': start,
-            "clientId": clientId,
-            "patientType": patientType,
-            "treatmentId": treatmentId,
-            "surgeonId": surgeonId,
-            "patientIdOrName": patientIdOrName,
-            "emailStatus": emailStatus,
-            "order": sortDir,
-            "sorted": sortFiled,
-            "treatmentStatus": treatmentStatus,
-            "activeTreatmentOnly": activeTreatmentOnly,
-            "taskStatus": taskStatus
+                'max'                : length,
+                'offset'             : start,
+                "clientId"           : clientId,
+                "patientType"        : patientType,
+                "treatmentId"        : treatmentId,
+                "surgeonId"          : surgeonId,
+                "patientIdOrName"    : patientIdOrName,
+                "emailStatus"        : emailStatus,
+                "order"              : sortDir,
+                "sorted"             : sortFiled,
+                "treatmentStatus"    : treatmentStatus,
+                "activeTreatmentOnly": activeTreatmentOnly,
+                "taskStatus"         : taskStatus
         ];
 
-        if(queryStrings.taskStatus == 0){
+        if (queryStrings.taskStatus == 0) {
             queryStrings.taskStatus = null;
         }
 
@@ -124,6 +124,21 @@ class PatientService extends RatchetAPIService {
                 ]
             } else {
                 handleError(resp)
+            }
+        }
+    }
+
+    def configs(String token, configKey, configValue) {
+        def url = grailsApplication.config.ratchetv2.server.url.configs
+
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("configKey", configKey)
+                    .field("configValue", configValue)
+                    .asString()
+
+            if(resp == 200) {
+                log.info("update user's configs success, token: ${token}")
             }
         }
     }

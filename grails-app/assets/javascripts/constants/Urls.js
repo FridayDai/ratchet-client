@@ -17,6 +17,9 @@ module.exports = {
     GET_IN_CLINIC_CODE: '/patients/{0}/in-clinic/code',
     PATIENT_HAS_ACTIVE_TASK: '/patients/{0}/has-active-tasks',
 
+    //set user' config
+    SET_CONFIGS: '/staff/configs',
+
     //Bulk import
     GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',
     DOWNLOAD_BULK_IMPORT_ERROR_FILE: '/patients/bulk-import/download-errors',
