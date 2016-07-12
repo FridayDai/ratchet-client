@@ -11,7 +11,7 @@ class PatientService extends RatchetAPIService {
         def lastName = patient?.lastName
         def phoneNumber = patient?.phoneNumber
         def email = patient?.email
-        def gender = patient?.gender?.toUpperCase()
+        def gender = patient?.genderValue?.toUpperCase()
         def profilePhoto = patient?.profilePhoto
         def treatmentId = patient?.treatmentId
         def surgeonId = patient?.staffId

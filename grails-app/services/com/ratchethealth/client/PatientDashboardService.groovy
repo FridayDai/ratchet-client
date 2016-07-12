@@ -79,7 +79,7 @@ class PatientDashboardService extends RatchetAPIService {
                     .field("lastName", patient?.lastName)
                     .field("phoneNumber", patient?.phoneNumber)
                     .field("birthday", patient?.birthdayValue)
-                    .field("gender", patient?.gender?.toUpperCase())
+                    .field("gender", patient?.genderValue?.toUpperCase())
                     .asString()
 
             if (resp.status == 200) {

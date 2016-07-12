@@ -9,7 +9,7 @@ class Patient {
     String email
     String emailStatus
     String profilePhoto
-    String gender
+    String genderValue
     Long treatmentId
     Long staffId
     Long absoluteEventTimestamp
