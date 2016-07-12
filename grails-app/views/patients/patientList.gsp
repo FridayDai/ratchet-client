@@ -55,6 +55,16 @@
                     <input type="text" name="taskStatusFilter" id="taskStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
+
+                <div class="filler-content column-filter">
+                    <select id="column-status" class="quick-filter" multiple="multiple">
+                        <option id="emailAddressColumn" value="emailAddress">Email Address</option>
+                        <option id="phoneNumberColumn" value="phoneNumber">Phone Number</option>
+                        <option id="taskStatusColumn" value="taskStatus">Task Status</option>
+                        <option id="surgeryColumn" value="surgery">Surgery</option>
+                        <option id="appointmentColumn" value="appointment">Appointment</option>
+                    </select>
+                </div>
             </div>
         </div>
 

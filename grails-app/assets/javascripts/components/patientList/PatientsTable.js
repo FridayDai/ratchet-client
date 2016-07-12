@@ -9,6 +9,7 @@ var PARAMs = require('../../constants/Params');
 var Utility = require('../../utils/Utility');
 var moment = require('moment');
 
+
 var ALL_ACTIVE_PATIENT_FILTER = [
     '<div class="all-active-patient-filter">',
         '<div class="inner">',
@@ -49,6 +50,7 @@ var TABLE_SEARCH_EVENTS = [
     'selectPatientIDNameForPatientTable'
 ];
 
+
 function PatientsTable() {
     this.attributes({
         url: URLs.GET_PATIENTS
@@ -75,6 +77,8 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
+                visible: false,
+                searchable: false,
                 render: function (data, type, full) {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
@@ -97,6 +101,8 @@ function PatientsTable() {
             }, {
                 targets: 3,
                 data: 'phoneNumber',
+                visible: false,
+                searchable: false,
                 render: function (data, type, full) {
                     var phoneNumber,
                         subNumber,
@@ -132,6 +138,8 @@ function PatientsTable() {
                 width: "9%"
             }, {
                 targets: 5,
+                visible: false,
+                searchable: false,
                 data: 'nearestAbsoluteEventDate',
                 render: function (data, type, full) {
                     var date = data === undefined ? full.nearestAbsoluteEventDate : data;
@@ -145,6 +153,8 @@ function PatientsTable() {
             }, {
                 targets: 6,
                 data: 'taskStatus',
+                visible: false,
+                searchable: false,
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
                     if (taskStatus.indexOf("0 Active") !== -1) {
@@ -267,8 +277,61 @@ function PatientsTable() {
         this.allActivePatientFilter.insertAfter(this.$node);
     };
 
+    this.hideColumn = function (target, isVisible){
+        this.$node.DataTable().column( target ).visible(isVisible);
+    };
+
+    this.initFilter = function () {
+        this.filter = {
+            columnStatus: "null"
+        };
+    };
+
+    this.onTriggerColumnFilter = function (e, data){
+        if(this.filter.columnStatus !== data.status) {
+            this.filter.columnStatus = data.status;
+            this.filterColumns();
+        }
+    };
+
+    this.filterColumns = function (){
+        var status = this.filter.columnStatus;
+
+        if($.inArray("emailAddress", status) > -1){
+            this.hideColumn(2, true);
+        }else {
+            this.hideColumn(2, false);
+        }
+
+        if($.inArray("phoneNumber", status) > -1){
+            this.hideColumn(3, true);
+        }else {
+            this.hideColumn(3, false);
+        }
+
+        if($.inArray("taskStatus", status) > -1){
+            this.hideColumn(6, true);
+        }else {
+            this.hideColumn(6, false);
+        }
+
+        if($.inArray("surgery", status) > -1){
+            this.hideColumn(5, true);
+        }else {
+            this.hideColumn(5, false);
+        }
+
+        if($.inArray("appointment", status) > -1){
+            this.hideColumn(9, true);
+        }else {
+            this.hideColumn(9, false);
+        }
+
+    };
+
     this.after('initialize', function () {
         this.initAllActivePatientFilter();
+        this.initFilter();
 
         this.on(document, 'refreshPatientsTable', this.onTableRefresh);
         this.on(document, 'bulkImportSavedSuccess', this.onBulkImportSaved);
@@ -277,6 +340,8 @@ function PatientsTable() {
         _.each(TABLE_SEARCH_EVENTS, function(event) {
             this.on(document, event, this.onTriggerSearch);
         }, this);
+
+        this.on(document,'columnFilterSelected', this.onTriggerColumnFilter);
     });
 
     this.before('teardown', function () {

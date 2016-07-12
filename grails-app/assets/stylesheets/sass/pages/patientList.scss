@@ -6,6 +6,12 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 @import "../partials/genderCombobox";
+@import '../partials/multipleSelect';
+
+.table-group {
+    min-width: 960px;
+    margin: 0px 30px;
+}
 
 .patients-inner-header {
     height: 27px;
@@ -26,6 +32,7 @@
 
 .inner-search {
     .search-content {
+        position: relative;
         padding: 5px 15px 27px;
     }
     .filler-content {
@@ -635,4 +642,13 @@
     }
 }
 
+.filter-area {
+    padding: 30px 30px 10px;
+    color: #808080;
+}
 
+.column-filter {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+}
