@@ -39,6 +39,7 @@ module.exports = {
     BIRTHDAY_RANGE_VALUE: "Please enter a date between 1900 and today.",
     INVALID_DATE: "Invalid date.",
     WRONG_DATE_FORMAT: "Please input date as (12/31/2015, 12-31-2015).",
+    WRONG_DATE_TIME_FORMAT: "Please input date as (12/31/2015 01:00am, 12-31-2015 23:30).",
     MINIMUM_DATE_RANGE: "Please input date later than 1900 year.",
     MAX_DATE_RANGE: "Please input date before {0} year.",
     MINIMUM_ABSOLUTE_EVENT_DATE: "That date is too far in the past.",

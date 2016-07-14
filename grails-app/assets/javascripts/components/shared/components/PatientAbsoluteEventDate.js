@@ -1,5 +1,5 @@
 var flight = require('flight');
-var WithDatepicker = require('../../common/WithDatepicker');
+var WithDatetimepicker = require('../../common/WithDatetimepicker');
 var PatientAbsoluteEventDateValidation = require('../validation/PatientAbsoluteEventDateValidation');
 var STRINGs = require('../../../constants/Strings');
 
@@ -53,11 +53,6 @@ function PatientAbsoluteEventDate() {
     };
 
     this.__surgeryDateInit = function () {
-        this.$node.datepicker('option', {
-            minDate: new Date(2015, 0, 1),
-            maxDate: "+1y"
-        });
-
         this.setElementValidation(this.$node, PatientAbsoluteEventDateValidation.rules);
     };
 
@@ -71,4 +66,4 @@ function PatientAbsoluteEventDate() {
     });
 }
 
-module.exports = flight.component(WithDatepicker, PatientAbsoluteEventDate);
+module.exports = flight.component(WithDatetimepicker, PatientAbsoluteEventDate);
