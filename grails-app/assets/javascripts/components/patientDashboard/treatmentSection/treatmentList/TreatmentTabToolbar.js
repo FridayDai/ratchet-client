@@ -34,7 +34,7 @@ function TreatmentToolbar() {
             patientId: this.patientId,
             clientId: this.clientId,
             treatmentId: this.treatmentId,
-            currentAbsoluteEventDate: Utility.toVancouverDate(this.absoluteEventDate),
+            currentAbsoluteEventDate: Utility.formatVancouverDateTime(this.absoluteEventDate),
             absoluteEventType: this.absoluteEventType
         };
     };

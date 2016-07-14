@@ -55,7 +55,8 @@ module.exports = {
             "multiple-select": "libs/multipleSelect/multiple-select.js",
             "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
             d3: "node_modules/d3/d3.js",
-            tooltipster: "bower_components/tooltipster/js/jquery.tooltipster.js"
+            tooltipster: "bower_components/tooltipster/js/jquery.tooltipster.js",
+            bootstrapDatetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
         }
     },
     module: {

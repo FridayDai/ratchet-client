@@ -248,7 +248,7 @@
 
         <div class="form-group inline" id="treatment-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="eventTime" name="eventTimeStr" type="text" class="input-group date-picker event-time required"
+            <input id="eventTime" name="eventTimeStr" type="text" class="date-time-picker event-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -313,7 +313,7 @@
 
             <div class="form-group schedule-date-group">
                 <label class="lbl-group">SCHEDULE TASK(S)</label>
-                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date"
+                <input name="scheduleTaskDate" type="text" class="date-picker" placeholder="Select date"
                        required>
 
                 <div class="surgery-date-relative-indicator"></div>
@@ -331,7 +331,7 @@
         <div class="form-group inline">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="treatment-eventTime" name="treatment-eventTime" type="text"
-                   class="input-group date-picker event-time"
+                   class="date-time-picker event-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
@@ -407,7 +407,7 @@
         <div class="form-group email-group">
             <input type="hidden" autofocus/>
             <label class="lbl-group">DATE</label>
-            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker"
+            <input id="fill-questionnaire-date-field" type="text" class="date-picker"
                    placeholder="Jan 31, 2015" autocomplete="off" required>
         </div>
     </form>
