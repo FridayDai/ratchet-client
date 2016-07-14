@@ -313,7 +313,7 @@
 
             <div class="form-group schedule-date-group">
                 <label class="lbl-group">SCHEDULE TASK(S)</label>
-                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date"
+                <input name="scheduleTaskDate" type="text" class="date-picker" placeholder="Select date"
                        required>
 
                 <div class="surgery-date-relative-indicator"></div>
@@ -407,7 +407,7 @@
         <div class="form-group email-group">
             <input type="hidden" autofocus/>
             <label class="lbl-group">DATE</label>
-            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker"
+            <input id="fill-questionnaire-date-field" type="text" class="date-picker"
                    placeholder="Jan 31, 2015" autocomplete="off" required>
         </div>
     </form>

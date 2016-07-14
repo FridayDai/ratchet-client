@@ -1,4 +1,3 @@
-var moment =  require('moment');
 require('bootstrapDatetimepicker');
 
 var flight = require('flight');
@@ -24,9 +23,7 @@ function WithDatetimepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
-            keepInvalid: true,
-            minDate: '2015-01-01',
-            maxDate: moment().add(1, 'y')
+            keepInvalid: true
         });
 
         //Fix problem with the situation where the datepicker is inside a scrollable element

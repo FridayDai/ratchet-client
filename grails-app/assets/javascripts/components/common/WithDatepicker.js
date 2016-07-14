@@ -1,41 +1,7 @@
-require('jquery-ui-datepicker');
+require('bootstrapDatetimepicker');
 
 var flight = require('flight');
-var Utility = require('../../utils/Utility');
 var WithElementValidation = require('./WithElementValidation');
-
-function validate(dateText, inst) {
-    var $input = inst.input;
-
-    if ($input) {
-        var $form = $input.closest('form');
-        var validator = $form.data('validator');
-
-        if (validator) {
-            validator.element($input);
-        }
-    }
-}
-
-$.datepicker.setDefaults({
-    /* fix buggy IE focus functionality */
-    fixFocusIE: false,
-
-    /* blur needed to correctly handle placeholder text */
-    onClose: function () {
-        this.fixFocusIE = true;
-    },
-
-    onSelect: function (dateText, inst) {
-        validate(dateText, inst);
-    },
-
-    beforeShow: function () {
-        var result = Utility.isOldIE() ? !this.fixFocusIE : true;
-        this.fixFocusIE = false;
-        return result;
-    }
-});
 
 function WithDatepicker() {
     flight.compose.mixin(this, [
@@ -43,16 +9,44 @@ function WithDatepicker() {
     ]);
 
     this._initDatePicker = function () {
-        var me = this;
+        this.$node.datetimepicker({
+            format: 'MMM D, YYYY',
+            icons: {
+                time: 'fa fa-clock-o',
+                date: 'fa fa-calendar',
+                up: 'fa fa-chevron-up',
+                down: 'fa fa-chevron-down',
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            },
+            widgetParent: 'body',
+            keepInvalid: true
+        });
 
-        this.$node.datepicker({
-            dateFormat: 'MM d, yy',
-            onSelect: function (dateText, inst) {
-                this.fixFocusIE = true;
-
-                validate(dateText, inst);
-
-                me.trigger('rc.datePickerSelect');
+        //Fix problem with the situation where the datepicker is inside a scrollable element
+        this.$node.on('dp.show', function() {
+            var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
+            var top, left;
+            if (datepicker.hasClass('bottom')) {
+                top = $(this).offset().top + $(this).outerHeight();
+                left = $(this).offset().left;
+                datepicker.css({
+                    'top': top + 'px',
+                    'bottom': 'auto',
+                    'left': left + 'px'
+                });
+            }
+            else if (datepicker.hasClass('top')) {
+                top = $(this).offset().top - datepicker.outerHeight();
+                left = $(this).offset().left;
+                datepicker.css({
+                    'top': top + 'px',
+                    'bottom': 'auto',
+                    'left': left + 'px'
+                });
             }
         });
     };
@@ -62,8 +56,9 @@ function WithDatepicker() {
     });
 
     this.before('teardown', function () {
-        this.$node.datepicker('destroy');
+        this.$node.destroy();
     });
 }
 
 module.exports = WithDatepicker;
+
