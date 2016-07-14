@@ -67,7 +67,7 @@ class RatchetConstants {
     ]
 
     //Task type which hasn't task score.
-    public static Integer[] TOOL_TYPE_NO_SCORE = [11, 12, 13, 17, 21]
+    public static Integer[] TOOL_TYPE_NO_SCORE = [13, 17, 21]
 
     //Task type which has multiple task score
     public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 20, 1000]
