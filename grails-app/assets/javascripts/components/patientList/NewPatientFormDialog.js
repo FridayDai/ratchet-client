@@ -373,7 +373,8 @@ function NewPatientFormDialog() {
             $treatment = this.select('treatmentFieldSelector'),
             treatmentId = $treatment.data('id'),
             $eventTime = this.select('eventTimeFieldSelector'),
-            $birthday = this.select('birthdayFieldSelector');
+            $birthday = this.select('birthdayFieldSelector'),
+            $gender = this.select('genderFieldSelector').val();
 
         var result = {
             patientId: this.select('patientIdStaticSelector').text(),
@@ -383,7 +384,8 @@ function NewPatientFormDialog() {
             staffId: providerId,
             treatmentId: treatmentId,
             profilePhoto: '',
-            birthdayValue: Utility.toBirthday($birthday.val())
+            birthdayValue: Utility.toBirthday($birthday.val()),
+            genderValue: Utility.toGender($gender)
         };
 
         if ($firstNameStatic.is(':visible')) {

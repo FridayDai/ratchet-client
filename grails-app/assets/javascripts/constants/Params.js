@@ -78,8 +78,9 @@ module.exports = {
     ],
 
     HUMAN_GENDER: [
-        {label: "Male", value: 'MALE', iconClass: 'gender-male'},
-        {label: "Female", value: 'FEMALE', iconClass: 'gender-female'}
+        {label: "Unspecified", value: 'Unspecified'},
+        {label: "Male", value: 'Male', iconClass: 'gender-male'},
+        {label: "Female", value: 'Female', iconClass: 'gender-female'}
     ],
 
     ACCOUNT_TYPE: {

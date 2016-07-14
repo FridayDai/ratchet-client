@@ -200,7 +200,7 @@
         <div class="form-group inline">
             <label class="lbl-group">GENDER</label>
             <input id="gender" name="gender" type="text" class="input-group input-convert"
-                   placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Male (Optional)"/>
+                   placeholder="Unspecified (Optional)"/>
         </div>
 
         <div class="form-group inline phone-block">

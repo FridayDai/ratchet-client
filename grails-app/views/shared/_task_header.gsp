@@ -34,13 +34,21 @@
     </div>
 
     <div class="result-info">
-        <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
-            <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+        <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(Task.type)}">
+            <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
+                <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+                    <span class="score-wrap">
+                        <div class="score-des">${score[0]}:&nbsp;</div>
+                        <div class="score-num">${score[1].toLowerCase()}</div>
+                    </span>
+                </g:multipleScore>
+            </g:if>
+            <g:else>
                 <span class="score-wrap">
-                    <div class="score-des">${score[0]}:&nbsp;</div>
-                    <div class="score-num">${score[1].toLowerCase()}</div>
+                    <div class="score-des">Total Result:&nbsp;</div>
+                    <div class="score-num">${Task.score}</div>
                 </span>
-            </g:multipleScore>
+            </g:else>
         </g:if>
     </div>
 </div>
