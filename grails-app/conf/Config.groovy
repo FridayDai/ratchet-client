@@ -269,6 +269,9 @@ ratchetv2 {
             // Staff URL
             staffs = "${ratchetv2.server.url.base}/api/v1/staffs"
 
+            //user's config
+            configs = "${ratchetv2.server.url.base}/api/v1/staff/configs"
+
             //Account
             getAccount = "${ratchetv2.server.url.base}/api/v1/staffs/%s"
             inviteStaff = "${ratchetv2.server.url.base}/api/v1/staff/invite/%d"
