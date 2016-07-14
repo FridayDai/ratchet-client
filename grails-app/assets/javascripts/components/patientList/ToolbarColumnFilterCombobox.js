@@ -2,7 +2,6 @@ require('multiple-select');
 
 var flight = require('flight');
 var URLs = require('../../constants/Urls');
-var WithCombobox = require('../common/WithCombobox');
 
 function columnFilterCombobox (){
 
@@ -13,23 +12,21 @@ function columnFilterCombobox (){
         function onCheckOption() {
             var status = me.$node.multipleSelect("getSelects");
             me.setColumnPlaceholder();
-
-            var _list = [];
-            for (var i = 0; i < status.length; i++) {
-                _list[i] = status[i];
-            }
+            var configValue = status.toString();
 
             $.ajax({
                 url: URLs.SET_CONFIGS,
-                type: 'post',
+                type: 'POST',
                 dataType: 'json',
                 data: {
-                    configKey: 'columnArray',
-                    configValue: _list
+                    "configKey": "columnArray",
+                    "configValue": configValue
+                },
+                success: function(){
+                    me.trigger("columnFilterSelected", {status: status});
                 }
             });
 
-            me.trigger("columnFilterSelected", {status: status});
         }
 
         this.$node.multipleSelect({
@@ -49,17 +46,44 @@ function columnFilterCombobox (){
         this.$node.multipleSelect('checkAll');
     };
 
-    this.clearAllFilter = function () {
-        this.$node.multipleSelect('checkAll');
-    };
-
     this.setColumnPlaceholder = function (){
         $(".ms-choice").find('span').html('<i class="fa fa-columns" aria-hidden="true"></i>');
     };
 
+    this.setColumnFilterFromConfig = function (){
+        var me = this;
+        var columnArray;
+
+        $.ajax({
+            type: "POST",
+            url: URLs.GET_CONFIGS,
+            dataType: 'json',
+            data : {
+                "configKey": "columnArray"
+            },
+            success: function (data) {
+                var column = data.columnArray;
+
+                function toggleColumns(columnArray){
+                    me.$node.multipleSelect('setSelects', columnArray);
+                    me.setColumnPlaceholder();
+                    me.trigger("columnFilterSelected", {status: columnArray});
+                }
+
+                if(column) {
+                    columnArray = column.split(",");
+                    toggleColumns(columnArray);
+                } else {
+                    columnArray = ['emailAddress', 'phoneNumber', 'surgery', 'taskStatus'];
+                    toggleColumns(columnArray);
+                }
+            }
+        });
+    };
+
     this.after('initialize', function () {
         this.init();
-        this.$node.multipleSelect('setSelects', ['emailAddress', 'phoneNumber', 'surgery', 'taskStatus']);
+        this.setColumnFilterFromConfig();
         this.setColumnPlaceholder();
     });
 }

@@ -40,15 +40,6 @@ class PatientsController extends BaseController {
         render resp as JSON
     }
 
-    def updateConfigs(){
-        String token = request.session.token
-        def clientId = request.session.clientId
-        def configKey = params?.configKey
-        def configValue = params?.configValue
-
-        patientService.configs(token, configKey, configValue)
-    }
-
     def lookup(BulkFilterFields bulkPagination) {
         String token = request.session.token
         def clientId = request.session.clientId

@@ -45,6 +45,11 @@ class AuthenticationController extends BaseController {
                 session.groupSize = result.groupSize
                 session.isTesting = result.isTesting
                 session.enableAlert = result.enableAlert
+                if(result.configs) {
+                    session.columnArrayConfig = result.configs?.columnArray
+                } else {
+                    session.columnArrayConfig = null;
+                }
             }
 
             if (resp?.authenticated) {

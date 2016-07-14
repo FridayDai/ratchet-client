@@ -62,6 +62,7 @@ function PatientsTable() {
             {
                 targets: 0,
                 data: 'patientId',
+                visible: true,
                 render: function (data, type, full) {
                     var id = data === undefined ? full.patientId : data;
                     return '<p class="source-id">' + id + '</p>';
@@ -70,6 +71,7 @@ function PatientsTable() {
             }, {
                 targets: 1,
                 data: 'firstName',
+                visible: true,
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
@@ -77,6 +79,7 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
+                visible: true,
                 render: function (data, type, full) {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
@@ -99,6 +102,7 @@ function PatientsTable() {
             }, {
                 targets: 3,
                 data: 'phoneNumber',
+                visible: true,
                 render: function (data, type, full) {
                     var phoneNumber,
                         subNumber,
@@ -123,6 +127,7 @@ function PatientsTable() {
             }, {
                 targets: 4,
                 data: 'birthday',
+                visible: true,
                 render: function (data, type, full) {
                     var birthday = data === undefined ? full.birthday : data;
                     if (birthday) {
@@ -135,6 +140,7 @@ function PatientsTable() {
             }, {
                 targets: 5,
                 data: 'nearestAbsoluteEventDate',
+                visible: true,
                 render: function (data, type, full) {
                     var date = data === undefined ? full.nearestAbsoluteEventDate : data;
                     if (date) {
@@ -147,6 +153,7 @@ function PatientsTable() {
             }, {
                 targets: 6,
                 data: 'taskStatus',
+                visible: true,
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
                     if (taskStatus.indexOf("0 Active") !== -1) {
@@ -164,6 +171,7 @@ function PatientsTable() {
             }, {
                 targets: 7,
                 data: 'id',
+                visible: true,
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
@@ -286,39 +294,22 @@ function PatientsTable() {
         }
     };
 
+    this.toggleColumns = function (column, target, status) {
+        if($.inArray(column, status) > -1){
+            this.hideColumn(target, true);
+        }else {
+            this.hideColumn(target, false);
+        }
+    };
+
     this.filterColumns = function (){
         var status = this.filter.columnStatus;
 
-        if($.inArray("emailAddress", status) > -1){
-            this.hideColumn(2, true);
-        }else {
-            this.hideColumn(2, false);
-        }
-
-        if($.inArray("phoneNumber", status) > -1){
-            this.hideColumn(3, true);
-        }else {
-            this.hideColumn(3, false);
-        }
-
-        if($.inArray("taskStatus", status) > -1){
-            this.hideColumn(6, true);
-        }else {
-            this.hideColumn(6, false);
-        }
-
-        if($.inArray("surgery", status) > -1){
-            this.hideColumn(5, true);
-        }else {
-            this.hideColumn(5, false);
-        }
-
-        if($.inArray("appointment", status) > -1){
-            this.hideColumn(9, true);
-        }else {
-            this.hideColumn(9, false);
-        }
-
+        this.toggleColumns("emailAddress", 2, status);
+        this.toggleColumns("phoneNumber", 3, status);
+        this.toggleColumns("taskStatus", 6, status);
+        this.toggleColumns("surgery", 5, status);
+        //this.toggleColumns("appointment", 9, status);
     };
 
     this.after('initialize', function () {

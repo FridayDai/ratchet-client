@@ -27,7 +27,8 @@ class UrlMappings {
         "/confirm-reset-password"(controller: "accounts", action: "confirmResetPassword")
 
         //user's configs
-        "/staff/configs"(controller: 'patients', action = [POST: 'updateConfigs'])
+        "/staff/configs"(controller: "staff", action :"updateConfigs")
+        "/getConfigs"(controller:"staff", action: "getConfigs")
 
         // Patients
         "/"(controller: "patients", action: "getPatients")

@@ -127,19 +127,4 @@ class PatientService extends RatchetAPIService {
             }
         }
     }
-
-    def configs(String token, configKey, configValue) {
-        def url = grailsApplication.config.ratchetv2.server.url.configs
-
-        withPost(token, url) { req ->
-            def resp = req
-                    .field("configKey", configKey)
-                    .field("configValue", configValue)
-                    .asString()
-
-            if(resp == 200) {
-                log.info("update user's configs success, token: ${token}")
-            }
-        }
-    }
 }

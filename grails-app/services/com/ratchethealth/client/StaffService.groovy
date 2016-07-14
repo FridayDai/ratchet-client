@@ -1,5 +1,7 @@
 package com.ratchethealth.client
 
+import org.codehaus.groovy.grails.web.json.JSONObject
+
 class StaffService extends RatchetAPIService {
 
     def grailsApplication
@@ -32,6 +34,25 @@ class StaffService extends RatchetAPIService {
             }
             else {
                 handleError(resp)
+            }
+        }
+    }
+
+    def configs(String token, configKey, configValue) {
+        def url = grailsApplication.config.ratchetv2.server.url.configs
+
+        JSONObject obj = new JSONObject();
+        obj.put( configKey, configValue);
+
+        withPost(token, url) { req ->
+            def resp = req
+                    .field("configKey", configKey)
+                    .field("configValue", configValue)
+                    .asString()
+
+            if(resp.status == 200) {
+                log.info("update user's configs success, token: ${token}")
+                return obj
             }
         }
     }
