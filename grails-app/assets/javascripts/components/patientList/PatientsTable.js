@@ -21,6 +21,7 @@ var ALL_ACTIVE_PATIENT_FILTER = [
 ].join('');
 
 var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
+var NO_APPOINTMENT_TIME_TEMP = '<span class="not-available">N/A</span>';
 
 var STATUS_ICON_MAPPING = {
     'UNVERIFIED': 'fa-exclamation-circle',
@@ -32,12 +33,14 @@ var EMAIL_COLUMN = 'emailAddress';
 var PHONE_NUMBER_COLUMN = 'phoneNumber';
 var SURGERY_COLUMN = 'surgery';
 var TASK_STATUS_COLUMN = 'taskStatus';
+var APPOINTMENT_COLUMN = 'appointment';
 
 var COLUMN_TARGET = {
     "emailAddress": 2,
     "phoneNumber": 3,
     "taskStatus": 6,
-    "surgery": 5
+    "surgery": 5,
+    "appointment": 7
 };
 
 var STATUS_TEMPLATE = [
@@ -191,6 +194,19 @@ function PatientsTable() {
                 orderable: false
             }, {
                 targets: 7,
+                data: 'nearestAppoinmentDate',
+                visible: this.isVisible(APPOINTMENT_COLUMN),
+                render: function (data, type, full) {
+                    var date = full.nearestAppoinmentDate;
+                    if (date && date!== 'null') {
+                        return moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY');
+                    } else {
+                        return NO_APPOINTMENT_TIME_TEMP;
+                    }
+                },
+                width: "9%"
+            }, {
+                targets: 8,
                 data: 'id',
                 visible: true,
                 render: function (data, type, full) {
@@ -200,7 +216,7 @@ function PatientsTable() {
                 width: "6%",
                 orderable: false
             }, {
-                targets: 8,
+                targets: 9,
                 data: 'status',
                 "visible": false
             }

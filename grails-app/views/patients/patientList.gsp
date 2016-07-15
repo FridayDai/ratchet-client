@@ -81,6 +81,7 @@
                     <th>Birthday</th>
                     <th>Surgery</th>
                     <th>Task Status</th>
+                    <th>Appointment</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -94,6 +95,7 @@
                         <td>${patient.birthday ?: ''}</td>
                         <td>${patient.nearestAbsoluteEventDate ?: ''}</td>
                         <td>${patient.taskStatus}</td>
+                        <td>${patient.nearestAppoinmentDate}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
                     </tr>
