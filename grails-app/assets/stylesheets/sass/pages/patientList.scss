@@ -31,6 +31,10 @@
     }
 }
 
+.inner-search input {
+    min-width: 0;
+}
+
 .inner-search {
     .search-content {
         padding: 5px 15px 27px;
