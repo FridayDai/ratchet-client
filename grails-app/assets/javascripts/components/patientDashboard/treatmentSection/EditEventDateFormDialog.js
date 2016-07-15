@@ -55,7 +55,7 @@ function EditEventDateFormDialog() {
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
-        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
+        var newDate = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
         var providerId = this.select('providerFieldSelector').data('id');
 
         this.formEl.attr('action',
@@ -96,7 +96,7 @@ function EditEventDateFormDialog() {
     };
 
     this.onEditSurgeryDateSuccess = function () {
-        var newDate = Utility.toVancouverTime(this.select('eventTimeFieldSelector').val());
+        var newDate = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
 
         this.trigger('editSurgeryDateSuccess', {
             newDate: newDate,

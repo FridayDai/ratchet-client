@@ -7,6 +7,7 @@
 @import "../partials/combobox";
 @import "../partials/genderCombobox";
 @import '../partials/multipleSelect';
+@import "../partials/bootstrap-datetimepicker";
 
 .table-group {
     min-width: 960px;
@@ -32,7 +33,6 @@
 
 .inner-search {
     .search-content {
-        position: relative;
         padding: 5px 15px 27px;
     }
     .filler-content {

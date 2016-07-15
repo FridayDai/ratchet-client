@@ -114,6 +114,21 @@ module.exports = {
         'MMM D, YYYY'
     ],
 
+    DATE_TIME_FORMAT: [
+        'MM-DD-YYYY h:mma',
+        'MM-DD-YYYY HH:mm',
+        'MM/DD/YYYY h:mma',
+        'MM/DD/YYYY HH:mm',
+        'M-D-YYYY h:mma',
+        'M-D-YYYY HH:mm',
+        'M/D/YYYY h:mma',
+        'M/D/YYYY HH:mm',
+        'MMMM D, YYYY h:mma',
+        'MMMM D, YYYY HH:mm',
+        'MMM D, YYYY h:mma',
+        'MMM D, YYYY HH:mm'
+    ],
+
     TOOL_TYPE_DASH: 1,
     TOOL_TYPE_ODI: 2,
     TOOL_TYPE_NDI: 3,

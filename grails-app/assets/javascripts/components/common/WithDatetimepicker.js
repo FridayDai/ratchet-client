@@ -3,14 +3,14 @@ require('bootstrapDatetimepicker');
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
 
-function WithDatepicker() {
+function WithDatetimepicker() {
     flight.compose.mixin(this, [
         WithElementValidation
     ]);
 
     this._initDatePicker = function () {
         this.$node.datetimepicker({
-            format: 'MMM D, YYYY',
+            format: 'MMM D, YYYY h:mma',
             icons: {
                 time: 'fa fa-clock-o',
                 date: 'fa fa-calendar',
@@ -31,8 +31,8 @@ function WithDatepicker() {
             var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
             var top, left;
             if (datepicker.hasClass('bottom')) {
-                top = $(this).offset().top + $(this).outerHeight();
-                left = $(this).offset().left;
+                 top = $(this).offset().top + $(this).outerHeight();
+                 left = $(this).offset().left;
                 datepicker.css({
                     'top': top + 'px',
                     'bottom': 'auto',
@@ -60,5 +60,5 @@ function WithDatepicker() {
     });
 }
 
-module.exports = WithDatepicker;
+module.exports = WithDatetimepicker;
 
