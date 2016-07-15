@@ -40,7 +40,6 @@ var COLUMN_TARGET = {
     "surgery": 5
 };
 
-
 var STATUS_TEMPLATE = [
     '<div class="email-block">{0}</div>',
     '<span class="state">',
@@ -328,7 +327,7 @@ function PatientsTable() {
         var status = this.filter.columnStatus;
 
         for(var i in Object.keys(COLUMN_TARGET)) {
-            this.toggleColumns(status[i], COLUMN_TARGET[Object.keys(COLUMN_TARGET)[i]], status);
+            this.toggleColumns(Object.keys(COLUMN_TARGET)[i], COLUMN_TARGET[Object.keys(COLUMN_TARGET)[i]], status);
         }
         //this.toggleColumns("appointment", 9, status);
     };
