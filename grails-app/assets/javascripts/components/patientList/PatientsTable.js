@@ -28,6 +28,19 @@ var STATUS_ICON_MAPPING = {
     'DECLINED': 'fa-ban'
 };
 
+var EMAIL_COLUMN = 'emailAddress';
+var PHONE_NUMBER_COLUMN = 'phoneNumber';
+var SURGERY_COLUMN = 'surgery';
+var TASK_STATUS_COLUMN = 'taskStatus';
+
+var COLUMN_TARGET = {
+    "emailAddress": 2,
+    "phoneNumber": 3,
+    "taskStatus": 6,
+    "surgery": 5
+};
+
+
 var STATUS_TEMPLATE = [
     '<div class="email-block">{0}</div>',
     '<span class="state">',
@@ -56,6 +69,15 @@ function PatientsTable() {
         url: URLs.GET_PATIENTS
     });
 
+    this.isVisible = function(columnName) {
+        var configData = $("#patientsTable").data('config');
+        if(configData) {
+            return (configData.indexOf(columnName) > -1);
+        } else {
+            return true;
+        }
+    };
+
     this.options({
         paging: true,
         columnDefs: [
@@ -79,7 +101,7 @@ function PatientsTable() {
             }, {
                 targets: 2,
                 data: 'email',
-                visible: true,
+                visible: this.isVisible(EMAIL_COLUMN),
                 render: function (data, type, full) {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
@@ -102,7 +124,7 @@ function PatientsTable() {
             }, {
                 targets: 3,
                 data: 'phoneNumber',
-                visible: true,
+                visible: this.isVisible(PHONE_NUMBER_COLUMN),
                 render: function (data, type, full) {
                     var phoneNumber,
                         subNumber,
@@ -140,7 +162,7 @@ function PatientsTable() {
             }, {
                 targets: 5,
                 data: 'nearestAbsoluteEventDate',
-                visible: true,
+                visible: this.isVisible(SURGERY_COLUMN),
                 render: function (data, type, full) {
                     var date = data === undefined ? full.nearestAbsoluteEventDate : data;
                     if (date) {
@@ -153,7 +175,7 @@ function PatientsTable() {
             }, {
                 targets: 6,
                 data: 'taskStatus',
-                visible: true,
+                visible: this.isVisible(TASK_STATUS_COLUMN),
                 render: function (data, type, full) {
                     var taskStatus = data === undefined ? full.taskStatus : data;
                     if (taskStatus.indexOf("0 Active") !== -1) {
@@ -277,7 +299,7 @@ function PatientsTable() {
         this.allActivePatientFilter.insertAfter(this.$node);
     };
 
-    this.hideColumn = function (target, isVisible){
+    this.toggleTargetColumn = function (target, isVisible){
         this.$node.DataTable().column( target ).visible(isVisible);
     };
 
@@ -296,19 +318,18 @@ function PatientsTable() {
 
     this.toggleColumns = function (column, target, status) {
         if($.inArray(column, status) > -1){
-            this.hideColumn(target, true);
+            this.toggleTargetColumn(target, true);
         }else {
-            this.hideColumn(target, false);
+            this.toggleTargetColumn(target, false);
         }
     };
 
     this.filterColumns = function (){
         var status = this.filter.columnStatus;
 
-        this.toggleColumns("emailAddress", 2, status);
-        this.toggleColumns("phoneNumber", 3, status);
-        this.toggleColumns("taskStatus", 6, status);
-        this.toggleColumns("surgery", 5, status);
+        for(var i in Object.keys(COLUMN_TARGET)) {
+            this.toggleColumns(status[i], COLUMN_TARGET[Object.keys(COLUMN_TARGET)[i]], status);
+        }
         //this.toggleColumns("appointment", 9, status);
     };
 

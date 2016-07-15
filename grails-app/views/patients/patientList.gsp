@@ -58,11 +58,11 @@
 
                 <div class="filler-content column-filter">
                     <select id="column-status" class="quick-filter" multiple="multiple">
-                        <option id="emailAddressColumn" value="emailAddress">Email Address</option>
-                        <option id="phoneNumberColumn" value="phoneNumber">Phone Number</option>
-                        <option id="taskStatusColumn" value="taskStatus">Task Status</option>
-                        <option id="surgeryColumn" value="surgery">Surgery</option>
-                        <option id="appointmentColumn" value="appointment">Appointment</option>
+                        <option value="emailAddress">Email Address</option>
+                        <option value="phoneNumber">Phone Number</option>
+                        <option value="taskStatus">Task Status</option>
+                        <option value="surgery">Surgery</option>
+                        <option value="appointment">Appointment</option>
                     </select>
                 </div>
             </div>
@@ -70,7 +70,8 @@
 
         <div class="table-group">
             <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
-                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}">
+                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}"
+                   data-config="${request.session.columnArrayConfig}">
                 <thead>
                 <tr>
                     <th>ID</th>

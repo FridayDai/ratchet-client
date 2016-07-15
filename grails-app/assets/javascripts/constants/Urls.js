@@ -19,7 +19,6 @@ module.exports = {
 
     //set user' config
     SET_CONFIGS: '/staff/configs',
-    GET_CONFIGS: '/getConfigs',
 
     //Bulk import
     GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',

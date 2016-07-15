@@ -25,14 +25,4 @@ class StaffController extends BaseController {
         def resp = staffService.configs(token, configKey, configValue)
         render resp as JSON
     }
-
-    def getConfigs() {
-        def configKey = params?.configKey
-        def columnArray = session.columnArrayConfig
-
-        JSONObject obj = new JSONObject();
-        obj.put(configKey, columnArray);
-
-        render obj as JSON
-    }
 }

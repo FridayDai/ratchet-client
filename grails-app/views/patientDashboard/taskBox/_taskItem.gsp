@@ -114,7 +114,7 @@
                         </g:if>
 
                         <g:elseif
-                                test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score || task.otherScore)}">
+                                test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score > -1 || task.otherScore)}">
 
                             <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
                                 <g:if test="${task?.testId == 20}">

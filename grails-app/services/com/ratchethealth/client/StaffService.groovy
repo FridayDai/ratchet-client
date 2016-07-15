@@ -53,6 +53,8 @@ class StaffService extends RatchetAPIService {
             if(resp.status == 200) {
                 log.info("update user's configs success, token: ${token}")
                 return obj
+            } else {
+                handleError(resp)
             }
         }
     }

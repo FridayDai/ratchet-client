@@ -2,90 +2,79 @@ require('multiple-select');
 
 var flight = require('flight');
 var URLs = require('../../constants/Urls');
+var COLUMN_FILTER_ICON = '<i class="fa fa-columns" aria-hidden="true"></i>';
+var COLUMN_ARRAY = ['emailAddress', 'phoneNumber', 'surgery', 'taskStatus'];
 
-function columnFilterCombobox (){
-
+function ColumnFilterCombobox (){
     this.init = function () {
-
         var me = this;
-
-        function onCheckOption() {
-            var status = me.$node.multipleSelect("getSelects");
+        function sendConfigToServer() {
             me.setColumnPlaceholder();
-            var configValue = status.toString();
 
             $.ajax({
                 url: URLs.SET_CONFIGS,
+                dropProcess: true,
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     "configKey": "columnArray",
-                    "configValue": configValue
-                },
-                success: function(){
-                    me.trigger("columnFilterSelected", {status: status});
+                    "configValue": me.getStatus().toString()
                 }
             });
+        }
 
+        function onCheckOption() {
+            me.setColumnPlaceholder();
+            me.trigger("columnFilterSelected", {status: me.getStatus()});
         }
 
         this.$node.multipleSelect({
             width: "auto",
             dropWidth: '140px',
             selectAll: false,
-            placeholder: '<i class="fa fa-columns" aria-hidden="true"></i>',
+            placeholder: COLUMN_FILTER_ICON,
             position: "left",
             allSelected: false,
             minimumCountSelected: 5,
             textTemplate: function ($elm) {
                 return '<span class={0}>{1}</span>'.format($elm.attr('class'), $elm.text());
             },
-            onClick: onCheckOption
+            onClick: onCheckOption,
+            onClose: sendConfigToServer
         });
 
         this.$node.multipleSelect('checkAll');
     };
 
     this.setColumnPlaceholder = function (){
-        $(".ms-choice").find('span').html('<i class="fa fa-columns" aria-hidden="true"></i>');
+        $(".ms-choice").find('span').html(COLUMN_FILTER_ICON);
     };
 
-    this.setColumnFilterFromConfig = function (){
+    this.getStatus = function () {
+        return this.$node.multipleSelect("getSelects");
+    };
+
+    this.setColumnFilterSelectFromConfig = function (){
         var me = this;
         var columnArray;
+        var configData = $("#patientsTable").data('config');
+        if (configData) {
+            columnArray = configData.split(",");
+        } else {
+            columnArray = COLUMN_ARRAY;
+        }
 
-        $.ajax({
-            type: "POST",
-            url: URLs.GET_CONFIGS,
-            dataType: 'json',
-            data : {
-                "configKey": "columnArray"
-            },
-            success: function (data) {
-                var column = data.columnArray;
-
-                function toggleColumns(columnArray){
-                    me.$node.multipleSelect('setSelects', columnArray);
-                    me.setColumnPlaceholder();
-                    me.trigger("columnFilterSelected", {status: columnArray});
-                }
-
-                if(column) {
-                    columnArray = column.split(",");
-                    toggleColumns(columnArray);
-                } else {
-                    columnArray = ['emailAddress', 'phoneNumber', 'surgery', 'taskStatus'];
-                    toggleColumns(columnArray);
-                }
-            }
-        });
+        setTimeout( function() {
+            me.$node.multipleSelect('setSelects', columnArray);
+            me.setColumnPlaceholder();
+        }, 0);
     };
 
     this.after('initialize', function () {
         this.init();
-        this.setColumnFilterFromConfig();
+         this.setColumnFilterSelectFromConfig();
         this.setColumnPlaceholder();
     });
 }
 
-module.exports = flight.component(columnFilterCombobox);
+module.exports = flight.component(ColumnFilterCombobox);
