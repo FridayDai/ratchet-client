@@ -1,6 +1,5 @@
 require('bootstrapDatetimepicker');
 
-var moment = require('moment');
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
 
@@ -26,7 +25,6 @@ function WithDatepicker() {
             widgetParent: 'body',
             keepInvalid: true,
             stepping: 5,
-            defaultDate: moment().startOf('day').hours(8),
             ignorePicker: true
         });
 

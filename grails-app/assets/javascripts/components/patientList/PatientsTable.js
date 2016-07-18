@@ -63,7 +63,8 @@ var TABLE_SEARCH_EVENTS = [
     'clearTreatmentStatusForPatientTable',
     'selectTaskStatusForPatientTable',
     'clearTaskStatusForPatientTable',
-    'selectPatientIDNameForPatientTable'
+    'selectPatientIDNameForPatientTable',
+    'selectAppointmentDateForPatientTable'
 ];
 
 
@@ -259,7 +260,8 @@ function PatientsTable() {
         patientIdOrName: null,
         treatmentStatus: null,
         taskStatus: null,
-        activeTreatmentOnly: true
+        activeTreatmentOnly: true,
+        appointmentDate: null
     };
 
     this.setRowClickUrl = function (data) {
