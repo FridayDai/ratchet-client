@@ -115,17 +115,17 @@ module.exports = {
     ],
 
     DATE_TIME_FORMAT: [
-        'MM-DD-YYYY h:mma',
+        'MM-DD-YYYY h:mm A',
         'MM-DD-YYYY HH:mm',
-        'MM/DD/YYYY h:mma',
+        'MM/DD/YYYY h:mm A',
         'MM/DD/YYYY HH:mm',
-        'M-D-YYYY h:mma',
+        'M-D-YYYY h:mm A',
         'M-D-YYYY HH:mm',
-        'M/D/YYYY h:mma',
+        'M/D/YYYY h:mm A',
         'M/D/YYYY HH:mm',
-        'MMMM D, YYYY h:mma',
+        'MMMM D, YYYY h:mm A',
         'MMMM D, YYYY HH:mm',
-        'MMM D, YYYY h:mma',
+        'MMM D, YYYY h:mm A',
         'MMM D, YYYY HH:mm'
     ],
 

@@ -22,6 +22,7 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
         margin: 2px 0;
         padding: 4px;
         width: 19em;
+        color: $base-logo-color;
 
         &.timepicker-sbs {
             @include breakpoint('tablet') {
@@ -211,6 +212,12 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
                 cursor: not-allowed;
             }
 
+            &.picker-switch.ignored,
+            &.picker-switch.ignored:hover {
+                background: none;
+                cursor: auto;
+            }
+
             &.prev::after {
                 @extend .sr-only;
                 content: "Previous Month";
@@ -294,6 +301,12 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
                 cursor: not-allowed;
             }
 
+            &.ignored,
+            &.ignored:hover {
+                background: none;
+                cursor: auto;
+            }
+
             span {
                 display: inline-block;
                 width: 54px;
@@ -322,6 +335,12 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
                     background: none;
                     color: $bs-datetimepicker-disabled-color;
                     cursor: not-allowed;
+                }
+
+                &.ignored,
+                &.ignored:hover {
+                    background: none;
+                    cursor: auto;
                 }
             }
         }
@@ -384,6 +403,14 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
         border-radius: 4px;
         -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
         box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    }
+
+    .dow {
+        font-weight: 700;
+    }
+
+    .picker-switch {
+        font-weight: 700;
     }
 
     .list-unstyled {
