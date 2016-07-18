@@ -217,7 +217,7 @@ function PatientsTable() {
                         var providerNames = full.providerNames.split(',');
                         for(var i in providerNames) {
                             var name = providerNames[i];
-                            spans.push('<span class="providerNames">{0}</span>'.format(name))
+                            spans.push('<span class="providerNames">{0}</span>'.format(name));
                         }
                         return spans;
                     } else {
