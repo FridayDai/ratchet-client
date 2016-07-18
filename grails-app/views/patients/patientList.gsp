@@ -63,6 +63,7 @@
                         <option value="taskStatus">Task Status</option>
                         <option value="surgery">Surgery</option>
                         <option value="appointment">Appointment</option>
+                        <option value="provider">Provider</option>
                     </select>
                 </div>
             </div>
@@ -82,6 +83,7 @@
                     <th>Surgery</th>
                     <th>Task Status</th>
                     <th>Appointment</th>
+                    <th>Provider</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -96,6 +98,7 @@
                         <td>${patient.nearestAbsoluteEventDate ?: ''}</td>
                         <td>${patient.taskStatus}</td>
                         <td>${patient.nearestAppoinmentDate}</td>
+                        <td>${patient.providerNames}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
                     </tr>

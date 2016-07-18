@@ -40,7 +40,8 @@ var COLUMN_TARGET = {
     "phoneNumber": 3,
     "taskStatus": 6,
     "surgery": 5,
-    "appointment": 7
+    "appointment": 7,
+    "provider": 8
 };
 
 var STATUS_TEMPLATE = [
@@ -99,7 +100,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
-                width: "15%"
+                width: "13%"
             }, {
                 targets: 2,
                 data: 'email',
@@ -122,7 +123,7 @@ function PatientsTable() {
                         }
                     }
                 },
-                width: "25%"
+                width: "16%"
             }, {
                 targets: 3,
                 data: 'phoneNumber',
@@ -190,7 +191,7 @@ function PatientsTable() {
                         return '<span class="task-status overdue-status">' + taskStatus + '</span>';
                     }
                 },
-                width: "14%",
+                width: "10%",
                 orderable: false
             }, {
                 targets: 7,
@@ -207,6 +208,27 @@ function PatientsTable() {
                 width: "9%"
             }, {
                 targets: 8,
+                data: 'providerNames',
+                visible: true,
+                sortable: false,
+                render: function (data, type, full) {
+                    if(full.providerNames) {
+                        var spans = [];
+                        var providerNames = full.providerNames.split(',');
+                        for(var i in providerNames) {
+                            var name = providerNames[i];
+                            spans.push('<span class="providerNames">{0}</span>'.format(name));
+                        }
+                        return spans;
+                    } else {
+                        return NOT_AVAILABLE_TEMP;
+                    }
+
+
+                },
+                width: "10%"
+            }, {
+                targets: 9,
                 data: 'id',
                 visible: true,
                 render: function (data, type, full) {
@@ -216,7 +238,7 @@ function PatientsTable() {
                 width: "6%",
                 orderable: false
             }, {
-                targets: 9,
+                targets: 10,
                 data: 'status',
                 "visible": false
             }

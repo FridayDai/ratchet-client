@@ -67,6 +67,7 @@ function ColumnFilterCombobox (){
         setTimeout( function() {
             me.$node.multipleSelect('setSelects', columnArray);
             me.setColumnPlaceholder();
+            me.trigger("columnFilterSelected", {status: columnArray});
         }, 0);
     };
 

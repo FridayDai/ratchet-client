@@ -668,3 +668,7 @@
 #patients-toolbar {
     position: relative;
 }
+
+.providerNames:not(:first-child) {
+    margin-left: 5px;
+}
