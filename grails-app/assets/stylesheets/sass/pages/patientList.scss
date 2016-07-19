@@ -678,7 +678,14 @@
 #patients-toolbar {
     position: relative;
 }
+.providerNames {
+    display: inline-block;
+}
 
-.providerNames:not(:first-child) {
-    margin-left: 5px;
+.appointment-time {
+    display: inline-block;
+}
+
+.appointment-time:first-child {
+    margin-right: 3px;
 }
