@@ -201,7 +201,12 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     var date = full.nearestAppoinmentDate;
                     if (date && date!== 'null') {
-                        return moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY h:mm a');
+                        var time = moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY h:mm a');
+                        var appointmentDate = time.substring(0, 10);
+                        var appointmentTime = time.substring(11, time.length);
+
+                        return '<span class="appointment-time">{0}</span><span class="appointment-time">{1}</span>'
+                            .format(appointmentDate, appointmentTime);
                     } else {
                         return NO_APPOINTMENT_TIME_TEMP;
                     }
