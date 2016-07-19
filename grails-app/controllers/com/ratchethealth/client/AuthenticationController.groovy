@@ -14,7 +14,7 @@ class AuthenticationController extends BaseController {
 
     def authenticationService
 
-    def login() {
+    def login(LoginCommand login) {
         if (request.method == "GET") {
             render(view: '/login/login', model: [
                 email: flash?.email,
@@ -22,8 +22,13 @@ class AuthenticationController extends BaseController {
                 rateLimit: flash?.rateLimit
             ])
         } else if (request.method == "POST") {
-            def email = params?.email.toLowerCase()
-            def password = params?.password
+            if(login.hasErrors()) {
+                redirect(uri: "/login")
+                return
+            }
+
+            def email = login?.email?.toLowerCase()
+            def password = login?.password
 
             flash.email = email
 
