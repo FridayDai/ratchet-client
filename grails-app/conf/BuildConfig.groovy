@@ -153,3 +153,8 @@ coverage {
             "**/domain/**"
     ]
 }
+grails.war.resources = { stagingDir,args ->
+    // let wkhtmltopdf automatic installed
+    copy(file:".ebextensions/wkhtmltopdf.config",
+        tofile:"${stagingDir}/.ebextensions/wkhtmltopdf.config")
+}
