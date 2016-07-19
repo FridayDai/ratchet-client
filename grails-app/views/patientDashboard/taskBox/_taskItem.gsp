@@ -17,7 +17,9 @@
     <g:elseif test="${task?.treatmentProperty?.absoluteEventTimestamp}">
         <% DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver')%>
         <% DateTime startOfDay = new DateTime(task?.treatmentProperty?.absoluteEventTimestamp, vancouver).withTimeAtStartOfDay() %>
-        <g:dateUnit millisecond="${task?.sendTime - startOfDay.getMillis()}" var="date">
+        <% DateTime sendDay = new DateTime(task?.sendTime, vancouver).withTimeAtStartOfDay() %>
+
+        <g:dateUnit millisecond="${sendDay.getMillis() - startOfDay.getMillis()}" var="date">
             <span class="item-absolute-date hidden">
                 <span class="item-absolute-date-wrap">
                     <div>${date?.digit}</div>
@@ -39,7 +41,7 @@
                     <g:if test="${itemType == 'absoluteEvent'}">
                             at <g:formatDate date="${task?.sendTime}"
                                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                             format="HH:mm a"/>
+                                             format="h:mm a"/>
                     </g:if>
                 </div>
 
