@@ -104,6 +104,10 @@
         height: 25px;
         margin-top: 3px;
         padding-left: 6px;
+
+        @include input-placeholder {
+            color: #bebebe;
+        }
     }
 
     .event-time:disabled {
