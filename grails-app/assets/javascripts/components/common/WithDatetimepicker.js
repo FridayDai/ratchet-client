@@ -1,4 +1,5 @@
 require('bootstrapDatetimepicker');
+var moment = require('moment');
 
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
@@ -10,7 +11,7 @@ function WithDatetimepicker() {
 
     this._initDatePicker = function () {
         this.$node.datetimepicker({
-            format: 'MMM D, YYYY h:mma',
+            format: 'MMM D, YYYY h:mm A',
             icons: {
                 time: 'fa fa-clock-o',
                 date: 'fa fa-calendar',
@@ -23,7 +24,10 @@ function WithDatetimepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
-            keepInvalid: true
+            keepInvalid: true,
+            stepping: 5,
+            defaultDate: moment().startOf('day').hours(8),
+            ignorePicker: true
         });
 
         //Fix problem with the situation where the datepicker is inside a scrollable element

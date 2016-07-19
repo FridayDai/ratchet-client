@@ -56,6 +56,12 @@
                            class="input-group input-auto-search"/>
                 </div>
 
+                <div class="filler-content form-group">
+                    <label for="appointmentDateFilter" class="select-tip">APPOINTMENT DATE</label>
+                    <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
+                           class="date-picker input-auto-search"/>
+                </div>
+
                 <div class="filler-content column-filter">
                     <select id="column-status" class="quick-filter" multiple="multiple">
                         <option value="emailAddress">Email Address</option>

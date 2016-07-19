@@ -8,6 +8,7 @@ var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
 var taskStatusCombobox = require('./ToolbarTaskStatusCombobox');
 var columnFilterCombobox = require('./ToolbarColumnFilterCombobox');
+var appointmentDateFilter = require('./ToolbarAppointmentDateFilter');
 
 
 function ToolbarPanel() {
@@ -19,7 +20,8 @@ function ToolbarPanel() {
         emailStatusFieldSelector: '#emailStatusFilter',
         treatmentStatusFieldSelector: '#treatmentStatusFilter',
         taskStatusFieldSelector: '#taskStatusFilter',
-        columnFilterFieldSelector: '#column-status'
+        columnFilterFieldSelector: '#column-status',
+        appointmentDateFieldSelector: '#appointmentDateFilter'
     });
 
     this.children({
@@ -28,7 +30,8 @@ function ToolbarPanel() {
         emailStatusFieldSelector: emailStatusCombobox,
         treatmentStatusFieldSelector: treatmentStatusCombobox,
         taskStatusFieldSelector: taskStatusCombobox,
-        columnFilterFieldSelector: columnFilterCombobox
+        columnFilterFieldSelector: columnFilterCombobox,
+        appointmentDateFieldSelector: appointmentDateFilter
     });
 
     this.getCurrentState = function () {
@@ -86,7 +89,7 @@ function ToolbarPanel() {
         this.on('click', {
             patientIDNameSearchButton: this.triggerSearch
         });
-        
+
     });
 }
 

@@ -41,6 +41,10 @@
     }
     .filler-content {
         margin-top: 15px;
+
+        .date-picker {
+            min-width: 150px;
+        }
     }
     .combined-search {
         margin-top: 32px;
@@ -553,6 +557,10 @@
         .birthday-year {
             min-width: 60px;
         }
+    }
+
+    .required {
+        margin-top: 20px;
     }
 }
 

@@ -23,7 +23,9 @@ function WithDatepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
-            keepInvalid: true
+            keepInvalid: true,
+            stepping: 5,
+            ignorePicker: true
         });
 
         //Fix problem with the situation where the datepicker is inside a scrollable element

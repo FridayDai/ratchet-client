@@ -45,7 +45,7 @@ module.exports = {
             flight: "libs/flight/index.js",
             jForm: "bower_components/jquery-form/jquery.form.js",
             dataTable: "bower_components/DataTables/media/js/jquery.dataTables.js",
-            moment: "bower_components/moment/min/moment.min.js",
+            moment: "bower_components/moment/moment.js",
             momentTZ: "bower_components/moment-timezone/builds/moment-timezone-with-data.js",
             intlTelInput: "bower_components/intl-tel-input/build/js/intlTelInput.js",
             "intlTelInput-utils": "bower_components/intl-tel-input/lib/libphonenumber/build/utils.js",
@@ -56,7 +56,7 @@ module.exports = {
             "snapsvg": "bower_components/Snap.svg/dist/snap.svg.js",
             d3: "node_modules/d3/d3.js",
             tooltipster: "bower_components/tooltipster/js/jquery.tooltipster.js",
-            bootstrapDatetimepicker: "bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
+            bootstrapDatetimepicker: "libs/dateTimePicker/bootstrap-datetimepicker.js"
         }
     },
     module: {

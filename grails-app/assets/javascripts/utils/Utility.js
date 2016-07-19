@@ -106,7 +106,7 @@ module.exports = {
     },
 
     formatVancouverDateTime: function (time, format) {
-        format = format || 'MMM D, YYYY h:mma';
+        format = format || 'MMM D, YYYY h:mm A';
 
         if (time) {
             return moment(time).tz('America/Vancouver').format(format);
