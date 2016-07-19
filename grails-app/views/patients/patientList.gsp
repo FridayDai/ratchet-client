@@ -56,10 +56,10 @@
                            class="input-group input-auto-search"/>
                 </div>
 
-                <div class="filler-content form-group">
+                <div class="filler-content">
                     <label for="appointmentDateFilter" class="select-tip">APPOINTMENT DATE</label>
                     <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
-                           class="date-picker input-auto-search"/>
+                           class="date-picker input-auto-search appointment-filter"/>
                 </div>
 
                 <div class="filler-content column-filter">
