@@ -15,6 +15,7 @@
 @import '../partials/select2';
 @import "../partials/genderCombobox";
 @import '../partials/task';
+@import "../partials/bootstrap-datetimepicker";
 
 .icon-edit,
 .icon-archived {
@@ -88,7 +89,9 @@
     text-align: center;
 
     .form-group {
-        width: 71%;
+        width: 73%;
+        margin-bottom: 22px;
+        margin-left: 33px;
     }
 }
 
@@ -1052,7 +1055,7 @@
     }
 
     .warn-msg {
-        color: red;
+        color: #333;
     }
 }
 

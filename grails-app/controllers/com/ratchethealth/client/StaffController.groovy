@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
+import org.codehaus.groovy.grails.web.json.JSONObject
 
 class StaffController extends BaseController {
 
@@ -11,6 +12,17 @@ class StaffController extends BaseController {
         String token = request.session.token
         def clientId = request.session.clientId
         def resp = staffService.getStaffs(token, clientId, staff)
+        render resp as JSON
+    }
+
+    def updateConfigs(){
+        String token = request.session.token
+        def configKey = params?.configKey
+        def configValue = params?.configValue
+
+        session.columnArrayConfig = configValue
+
+        def resp = staffService.configs(token, configKey, configValue)
         render resp as JSON
     }
 }

@@ -131,7 +131,7 @@ function AddTreatmentFormDialog() {
         };
 
         if ($eventTime.is(':visible')) {
-            result.absoluteEventTimestamp = Utility.toVancouverTime($eventTime.val());
+            result.absoluteEventTimestamp = Utility.toVancouverDateTime($eventTime.val());
         }
 
         return result;
@@ -139,7 +139,7 @@ function AddTreatmentFormDialog() {
 
     this.onAddTreatmentSuccess = function (e, data) {
         var $eventTime = this.select('eventTimeFieldSelector');
-        var eventTime = Utility.toVancouverTime($eventTime.val());
+        var eventTime = Utility.toVancouverDateTime($eventTime.val());
 
         this.trigger('addTreatmentSuccess', _.assign(data, {
             clientId: this.patientInfo.clientId,

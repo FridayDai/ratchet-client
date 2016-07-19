@@ -78,8 +78,9 @@ module.exports = {
     ],
 
     HUMAN_GENDER: [
-        {label: "Male", value: 'MALE', iconClass: 'gender-male'},
-        {label: "Female", value: 'FEMALE', iconClass: 'gender-female'}
+        {label: "Unspecified", value: 'Unspecified'},
+        {label: "Male", value: 'Male', iconClass: 'gender-male'},
+        {label: "Female", value: 'Female', iconClass: 'gender-female'}
     ],
 
     ACCOUNT_TYPE: {
@@ -111,6 +112,21 @@ module.exports = {
         'M/D/YYYY',
         'MMMM D, YYYY',
         'MMM D, YYYY'
+    ],
+
+    DATE_TIME_FORMAT: [
+        'MM-DD-YYYY h:mm A',
+        'MM-DD-YYYY HH:mm',
+        'MM/DD/YYYY h:mm A',
+        'MM/DD/YYYY HH:mm',
+        'M-D-YYYY h:mm A',
+        'M-D-YYYY HH:mm',
+        'M/D/YYYY h:mm A',
+        'M/D/YYYY HH:mm',
+        'MMMM D, YYYY h:mm A',
+        'MMMM D, YYYY HH:mm',
+        'MMM D, YYYY h:mm A',
+        'MMM D, YYYY HH:mm'
     ],
 
     TOOL_TYPE_DASH: 1,

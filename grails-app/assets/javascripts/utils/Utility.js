@@ -27,6 +27,19 @@ module.exports = {
         }
     },
 
+    guessDateTimeFormat: function (dateStr) {
+        var validFormat = _.filter(PARAMs.DATE_TIME_FORMAT,
+            function (format) {
+                return moment(dateStr, format, true).isValid();
+            });
+
+        if (validFormat.length > 0) {
+            return validFormat[0];
+        } else {
+            return null;
+        }
+    },
+
     getWindowSize: function () {
         return {
             width: $window.width(),
@@ -92,6 +105,31 @@ module.exports = {
         }
     },
 
+    formatVancouverDateTime: function (time, format) {
+        format = format || 'MMM D, YYYY h:mm A';
+
+        if (time) {
+            return moment(time).tz('America/Vancouver').format(format);
+        } else {
+            return null;
+        }
+    },
+
+    toVancouverDateTime: function (time) {
+        if (time) {
+
+            var validFormat = this.guessDateTimeFormat(time);
+
+            if (validFormat) {
+                return moment.tz(time, validFormat, "America/Vancouver").format('x');
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    },
+
     progress: function (hide) {
         var elementStr = [
                 '<div id="msg-process">',
@@ -152,5 +190,17 @@ module.exports = {
         }
 
         return result;
+    },
+
+    toGender: function (gender) {
+        if(gender) {
+            if(gender.trim().toUpperCase() === 'UNSPECIFIED') {
+                gender = null;
+            } else {
+                gender = gender.toUpperCase();
+            }
+        }
+
+        return gender;
     }
 };

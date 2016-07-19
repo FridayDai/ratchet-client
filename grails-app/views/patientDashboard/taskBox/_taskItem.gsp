@@ -1,4 +1,4 @@
-<%@ page import="grails.converters.JSON; com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
+<%@ page import="org.joda.time.DateTime; org.joda.time.DateTimeZone; grails.converters.JSON; com.ratchethealth.client.RatchetConstants; com.ratchethealth.client.StatusCodeConstants" %>
 <div id="${task?.id}" class="box-item ${StatusCodeConstants.TASK_STATUS[task?.status]} ${archived}"
      data-status="${StatusCodeConstants.TASK_STATUS[task?.status]}"
      data-alert="${task?.alerts ? task?.alerts?.first()?.id : null}"
@@ -15,7 +15,11 @@
         </span>
     </g:if>
     <g:elseif test="${task?.treatmentProperty?.absoluteEventTimestamp}">
-        <g:dateUnit millisecond="${task?.sendTime - task?.treatmentProperty?.absoluteEventTimestamp}" var="date">
+        <% DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver')%>
+        <% DateTime startOfDay = new DateTime(task?.treatmentProperty?.absoluteEventTimestamp, vancouver).withTimeAtStartOfDay() %>
+        <% DateTime sendDay = new DateTime(task?.sendTime, vancouver).withTimeAtStartOfDay() %>
+
+        <g:dateUnit millisecond="${sendDay.getMillis() - startOfDay.getMillis()}" var="date">
             <span class="item-absolute-date hidden">
                 <span class="item-absolute-date-wrap">
                     <div>${date?.digit}</div>
@@ -34,6 +38,11 @@
             <span class="inline-info">
                 <div class="item-title">
                     ${task?.title}
+                    <g:if test="${itemType == 'absoluteEvent'}">
+                            at <g:formatDate date="${task?.sendTime}"
+                                             timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                             format="h:mm a"/>
+                    </g:if>
                 </div>
 
                 <div class="item-info">
@@ -114,7 +123,7 @@
                         </g:if>
 
                         <g:elseif
-                                test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score || task.otherScore)}">
+                                test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(task?.testId) && (task.score > -1 || task.otherScore)}">
 
                             <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(task?.testId)}">
                                 <g:if test="${task?.testId == 20}">

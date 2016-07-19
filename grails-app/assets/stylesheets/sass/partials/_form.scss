@@ -1,4 +1,5 @@
 .form-group {
+    position: relative;
     width: 45%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -67,7 +68,7 @@
     .ui-combobox {
 
         .input-group {
-            min-width: 232px;
+            min-width: 234px;
             height: 29px;
             font-weight: 400;
         }
@@ -96,6 +97,17 @@
         background-image: image-url('patients/calender.png', false, false);
         background-repeat: no-repeat;
         background-position: right top;
+    }
+
+    .date-picker, .date-time-picker {
+        min-width: 250px;
+        height: 25px;
+        margin-top: 3px;
+        padding-left: 6px;
+
+        @include input-placeholder {
+            color: #bebebe;
+        }
     }
 
     .event-time:disabled {

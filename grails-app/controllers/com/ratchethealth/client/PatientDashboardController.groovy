@@ -248,7 +248,7 @@ class PatientDashboardController extends BaseController {
 
             if (absoluteEventTimestamp) {
                 DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver');
-                DateTime start = new DateTime(absoluteEventTimestamp, vancouver)
+                DateTime start = new DateTime(absoluteEventTimestamp, vancouver).withTimeAtStartOfDay()
                 DateTime end = new DateTime(today, vancouver).withTimeAtStartOfDay()
                 def days = Days.daysBetween(start, end).getDays()
 

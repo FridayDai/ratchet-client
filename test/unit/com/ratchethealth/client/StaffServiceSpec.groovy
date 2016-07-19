@@ -1,6 +1,7 @@
 package com.ratchethealth.client
 
 import com.mashape.unirest.request.GetRequest
+import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor
 import groovy.json.JsonBuilder
@@ -67,4 +68,45 @@ class StaffServiceSpec extends Specification {
 		ApiReturnException e = thrown()
 		e.getMessage() == "body"
 	}
+
+	def "test updateConfigs with successful result"() {
+		given:
+		def jBuilder = new JsonBuilder()
+		jBuilder {
+			key 1
+			value 2
+		}
+
+		MultipartBody.metaClass.asString = { ->
+			return [
+					status: 200,
+					body  : jBuilder.toString()
+			]
+		}
+
+		when:
+		def result = service.configs('token', 1, 2)
+
+		then:
+		result == [1:2]
+	}
+
+	def "test updateConfigs without successful result"() {
+		given:
+		MultipartBody.metaClass.asString = { ->
+			return [
+					status: 400,
+					body  : "body"
+			]
+		}
+
+		when:
+		service.configs('token', "key", "value")
+
+		then:
+		ApiReturnException e = thrown()
+		e.getMessage() == "body"
+	}
+
+
 }

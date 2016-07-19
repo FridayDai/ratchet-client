@@ -1,16 +1,17 @@
 require('bootstrapDatetimepicker');
+var moment = require('moment');
 
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
 
-function WithDatepicker() {
+function WithDatetimepicker() {
     flight.compose.mixin(this, [
         WithElementValidation
     ]);
 
     this._initDatePicker = function () {
         this.$node.datetimepicker({
-            format: 'MMM D, YYYY',
+            format: 'MMM D, YYYY h:mm A',
             icons: {
                 time: 'fa fa-clock-o',
                 date: 'fa fa-calendar',
@@ -25,6 +26,7 @@ function WithDatepicker() {
             widgetParent: 'body',
             keepInvalid: true,
             stepping: 5,
+            defaultDate: moment().startOf('day').hours(8),
             ignorePicker: true
         });
 
@@ -33,8 +35,8 @@ function WithDatepicker() {
             var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
             var top, left;
             if (datepicker.hasClass('bottom')) {
-                top = $(this).offset().top + $(this).outerHeight();
-                left = $(this).offset().left;
+                 top = $(this).offset().top + $(this).outerHeight();
+                 left = $(this).offset().left;
                 datepicker.css({
                     'top': top + 'px',
                     'bottom': 'auto',
@@ -62,5 +64,5 @@ function WithDatepicker() {
     });
 }
 
-module.exports = WithDatepicker;
+module.exports = WithDatetimepicker;
 
