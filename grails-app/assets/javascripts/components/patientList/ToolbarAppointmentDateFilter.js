@@ -6,7 +6,6 @@ function ToolBarAppointmentDateFilter() {
 
     this.after('initialize', function () {
         var me = this;
-        this.on(document, this.attr.resetEvent, this.onReset);
 
         this.$node.on('dp.hide', function() {
             var appointmentDate = Utility.toVancouverTime($(this).val());
