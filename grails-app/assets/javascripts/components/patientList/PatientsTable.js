@@ -236,22 +236,22 @@ function PatientsTable() {
                 },
                 width: "10%"
             }, {
-                targets: 11,
+                targets: 10,
                 data: 'status',
                 "visible": false
             }, {
-                targets: 10,
+                targets: 11,
                 data: 'nearestAppoinmentEventTime',
                 "visible": false
             }, {
                 targets: 9,
                 data: 'id',
-                visible: false,
+                visible: true,
                 render: function (data, type, full) {
                     var id = data === undefined ? full.id : data;
                     return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
                 },
-                width: "6%",
+                width: "8%",
                 orderable: false
             }
         ],

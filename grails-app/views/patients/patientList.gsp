@@ -90,6 +90,7 @@
                     <th>Task Status</th>
                     <th>Appointment</th>
                     <th>Providers</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
