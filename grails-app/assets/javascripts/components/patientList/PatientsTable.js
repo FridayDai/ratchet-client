@@ -101,7 +101,7 @@ function PatientsTable() {
                 render: function (data, type, full) {
                     return full.lastName ? (full.firstName + " " + full.lastName) : data;
                 },
-                width: "13%"
+                width: "11%"
             }, {
                 targets: 2,
                 data: 'email',
