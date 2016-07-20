@@ -38,10 +38,8 @@
             <span class="inline-info">
                 <div class="item-title">
                     ${task?.title}
-                    <g:if test="${itemType == 'absoluteEvent'}">
-                            at <g:formatDate date="${task?.sendTime}"
-                                             timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                             format="h:mm a"/>
+                    <g:if test="${itemType == 'absoluteEvent' && task?.eventTime}">
+                        at ${task?.eventTime}
                     </g:if>
                 </div>
 

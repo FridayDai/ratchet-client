@@ -29,7 +29,7 @@
 
                 <g:if test="${!download}">
                     <span class="download"><g:link uri="/task/downloadPDF.pdf"
-                                                   params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></span>
+                                                   params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId, toolName: Task.title, birthday: Task.birthday, medicalRecordId: medicalRecordId, pdfKey:Task.pdfKey]">↓Download PDF</g:link></span>
                 </g:if>
         </div>
     </div>
