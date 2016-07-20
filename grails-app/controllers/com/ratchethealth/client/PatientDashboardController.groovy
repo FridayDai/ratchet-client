@@ -133,7 +133,7 @@ class PatientDashboardController extends BaseController {
                 combinedTasks     : combinedList?.combinedTasks,
                 alertNumber       : emailAlerts?.totalCount + combinedList?.alertNumber,
                 totalCount        : medicalRecords.totalCount,
-                patientEmailAlerts     : emailAlerts?.items
+                patientEmailAlerts: emailAlerts?.items
         ])
     }
 
@@ -258,6 +258,7 @@ class PatientDashboardController extends BaseController {
                 combinedTasks << [
                         itemType         : 'absoluteEvent',
                         sendTime         : absoluteEventTimestamp,
+                        eventTime        : treatment.eventTime,
                         title            : treatment.absoluteEventType.toLowerCase().capitalize(),
                         status           : status,
                         treatmentProperty: treatmentProperty
