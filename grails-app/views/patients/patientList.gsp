@@ -76,7 +76,7 @@
         </div>
 
         <div class="table-group">
-            <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
+            <table id="patientsTable" class="display nowrap" cellspacing="0" width="100%" data-total="${patientList.recordsTotal}"
                    data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}"
                    data-config="${request.session.columnArrayConfig}">
                 <thead>
@@ -89,8 +89,7 @@
                     <th>Surgery</th>
                     <th>Task Status</th>
                     <th>Appointment</th>
-                    <th>Provider</th>
-                    <th></th>
+                    <th>Providers</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -105,8 +104,8 @@
                         <td>${patient.taskStatus}</td>
                         <td>${patient.nearestAppoinmentDate}</td>
                         <td>${patient.providerNames}</td>
-                        <td>${patient.id}</td>
                         <td>${patient.status}</td>
+                        <td>${patient.nearestAppoinmentEventTime}</td>
                     </tr>
                 </g:each>
                 </tbody>

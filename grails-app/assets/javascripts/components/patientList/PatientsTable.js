@@ -20,8 +20,7 @@ var ALL_ACTIVE_PATIENT_FILTER = [
     '</div>'
 ].join('');
 
-var NOT_AVAILABLE_TEMP = '<span class="not-available">Not Available</span>';
-var NO_APPOINTMENT_TIME_TEMP = '<span class="not-available">N/A</span>';
+var NOT_AVAILABLE_TEMP = '<span class="not-available">N/A</span>';
 
 var STATUS_ICON_MAPPING = {
     'UNVERIFIED': 'fa-exclamation-circle',
@@ -110,7 +109,7 @@ function PatientsTable() {
                     var emailStatus = PARAMs.EMAIL_STATUS[full.status];
 
                     if (!full.email) {
-                        return '<span class="email-status not-available">Not Available</span>';
+                        return '<span class="email-status not-available">N/A</span>';
 
                     }else {
                         if (emailStatus && emailStatus !== 'Not Available') {
@@ -200,15 +199,20 @@ function PatientsTable() {
                 visible: this.isVisible(APPOINTMENT_COLUMN),
                 render: function (data, type, full) {
                     var date = full.nearestAppoinmentDate;
+                    var time = full.nearestAppoinmentEventTime;
                     if (date && date!== 'null') {
-                        var time = moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY h:mm a');
-                        var appointmentDate = time.substring(0, 10);
-                        var appointmentTime = time.substring(11, time.length);
+                        var appointmentTime;
+                        var appointmentDate = moment.tz(parseInt(date, 10), 'America/Vancouver').format('MM/DD/YYYY');
 
+                        if(time && time!== 'null') {
+                            appointmentTime = time;
+                        } else {
+                            appointmentTime = '';
+                        }
                         return '<span class="appointment-time">{0}</span><span class="appointment-time">{1}</span>'
                             .format(appointmentDate, appointmentTime);
                     } else {
-                        return NO_APPOINTMENT_TIME_TEMP;
+                        return NOT_AVAILABLE_TEMP;
                     }
                 },
                 width: "9%"
@@ -229,23 +233,15 @@ function PatientsTable() {
                     } else {
                         return NOT_AVAILABLE_TEMP;
                     }
-
-
                 },
                 width: "10%"
             }, {
                 targets: 9,
-                data: 'id',
-                visible: true,
-                render: function (data, type, full) {
-                    var id = data === undefined ? full.id : data;
-                    return '<a href="/patients/' + id + '"class="view" data-id ="' + id + '"><span>View</span></a>';
-                },
-                width: "6%",
-                orderable: false
+                data: 'status',
+                "visible": false
             }, {
                 targets: 10,
-                data: 'status',
+                data: 'nearestAppoinmentEventTime',
                 "visible": false
             }
         ],
