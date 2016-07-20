@@ -105,6 +105,7 @@
                         <td>${patient.nearestAppoinmentDate}</td>
                         <td>${patient.providerNames}</td>
                         <td>${patient.status}</td>
+                        <td>${patient.id}</td>
                         <td>${patient.nearestAppoinmentEventTime}</td>
                     </tr>
                 </g:each>
