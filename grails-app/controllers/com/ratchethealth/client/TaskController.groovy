@@ -1,11 +1,6 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
-import grails.util.Holders
-import org.apache.commons.io.IOUtils
-import org.joda.time.DateTimeConstants
-
-import javax.net.ssl.HttpsURLConnection
 
 class TaskController extends BaseController {
 
@@ -13,7 +8,6 @@ class TaskController extends BaseController {
 
     def taskService
     def alertService
-    def s3UploadService
 
     def sendTaskEmail() {
         def token = request.session.token
@@ -48,22 +42,11 @@ class TaskController extends BaseController {
         def lastName = params.lastName
         def toolName = params.toolName
         def birthday = params.birthday
-        def pdfKey = params.pdfKey
+
         if (birthday == 'null') {
             birthday = null
         }
 
-        if (pdfKey) {
-            def pdfSignedUrl = s3UploadService.getTemporaryS3FileLink(pdfKey, Holders.config.ratchet.pdf.bucket.name, 5 * DateTimeConstants.MILLIS_PER_MINUTE)
-            HttpsURLConnection con = (HttpsURLConnection)pdfSignedUrl.openConnection();
-            def dataStream = con.inputStream
-
-            response.setContentType("application/octet-stream")
-            response.setHeader('Content-disposition', "Attachment; filename=${lastName}_${patientId}_${birthday}_${toolName}_${taskId}.pdf")
-            response.outputStream << dataStream
-            response.outputStream.flush()
-            return
-        }
 
         def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 

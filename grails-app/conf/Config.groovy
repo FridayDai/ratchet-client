@@ -370,8 +370,6 @@ grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY")
 grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY")
 grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 
-ratchet.pdf.bucket.name = System.getProperty("PDF_BUCKET_NAME")
-
 ratchet {
     s3 {
         scanned_pdf_bucket = System.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
