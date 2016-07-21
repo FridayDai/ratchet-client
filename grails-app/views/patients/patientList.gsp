@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <div class="table-group">
+        <div class="table-group hidden">
             <table id="patientsTable" class="display nowrap" cellspacing="0" width="100%" data-total="${patientList.recordsTotal}"
                    data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}"
                    data-config="${request.session.columnArrayConfig}">

@@ -383,7 +383,12 @@ function PatientsTable() {
         //this.toggleColumns("appointment", 9, status);
     };
 
+    this.showTable = function(){
+        $('.table-group').show();
+    };
+
     this.after('initialize', function () {
+        this.showTable();
         this.initAllActivePatientFilter();
         this.initFilter();
 
