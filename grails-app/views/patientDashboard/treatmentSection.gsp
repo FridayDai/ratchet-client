@@ -18,6 +18,7 @@
                                    data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                    data-treatment-id="${medicalRecord?.treatmentId}"
                                    data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"
+                                   data-surgery-time ="${medicalRecord?.eventTime}"
                                    data-absolute-event-type="${medicalRecord?.absoluteEventType}"/>
 
                     <a class="ui-tabs-anchor" data-id="sub${i}">
