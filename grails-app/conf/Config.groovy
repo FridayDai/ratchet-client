@@ -366,14 +366,13 @@ ratchetv2 {
     }
 }
 
-grails.plugin.awssdk.accessKey = System.getProperty("AWS_ACCESS_KEY")
-grails.plugin.awssdk.secretKey = System.getProperty("AWS_SECRET_KEY")
+grails.plugin.awssdk.accessKey = System.getProperty("Q_PDF_LINK_AWS_TOKEN")
+grails.plugin.awssdk.secretKey = System.getProperty("Q_PDF_LINK_AWS_SECRET")
 grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 
 ratchet {
     s3 {
-        scanned_pdf_bucket = System.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
-        pdf.generator.bucket.name = System.getProperty("Q_QUEUE_NAME") ?: 'com-ratchethealth-local-pdf'
+        pdf.generator.bucket.name = System.getProperty("Q_S3_GENERATE_BUCKET") ?: 'com-ratchethealth-local-pdf'
     }
 }
 
