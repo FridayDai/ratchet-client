@@ -37,7 +37,7 @@ class S3UploadService {
     }
 
     def getPDFFileLink(key) {
-        def bucketName = grailsApplication.config.ratchet.s3.scanned_pdf_bucket
+        def bucketName = grailsApplication.config.ratchet.s3.pdf.generator.bucket.name
         getTemporaryS3FileLink(key, bucketName, PDF_LINK_EXPIRE_TIME)
     }
 

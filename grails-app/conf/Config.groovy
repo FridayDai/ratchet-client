@@ -373,6 +373,7 @@ grails.plugin.awssdk.region = System.getProperty("AWS_REGION") ?: "us-east-1"
 ratchet {
     s3 {
         scanned_pdf_bucket = System.getProperty("SCANNED_PDF_BUCKET") ?: 'com-xplusz-ratchet-pdf-dev'
+        pdf.generator.bucket.name = System.getProperty("Q_QUEUE_NAME") ?: 'com-ratchethealth-local-pdf'
     }
 }
 
