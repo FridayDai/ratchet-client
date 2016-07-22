@@ -387,8 +387,13 @@ function PatientsTable() {
         $('.table-group').show();
     };
 
+    this.showColumnFilter = function() {
+      $('.column-filter').show();
+    };
+
     this.after('initialize', function () {
         this.showTable();
+        this.showColumnFilter();
         this.initAllActivePatientFilter();
         this.initFilter();
 

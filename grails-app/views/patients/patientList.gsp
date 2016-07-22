@@ -62,7 +62,7 @@
                            class="date-picker input-auto-search appointment-filter"/>
                 </div>
 
-                <div class="filler-content column-filter">
+                <div class="filler-content column-filter hidden">
                     <select id="column-status" class="quick-filter" multiple="multiple">
                         <option value="emailAddress">Email Address</option>
                         <option value="phoneNumber">Phone Number</option>
