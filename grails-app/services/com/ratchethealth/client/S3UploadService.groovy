@@ -1,16 +1,8 @@
 package com.ratchethealth.client
 
-import com.amazonaws.AmazonClientException
-import com.amazonaws.AmazonServiceException
 import com.amazonaws.HttpMethod
-import com.amazonaws.event.ProgressEvent
-import com.amazonaws.event.ProgressEventType
-import com.amazonaws.event.ProgressListener
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest
-import com.amazonaws.services.s3.model.ObjectMetadata
-import com.amazonaws.services.s3.model.PutObjectRequest
-import com.amazonaws.services.s3.transfer.Upload
 import org.joda.time.DateTimeConstants
 
 class S3UploadService {
