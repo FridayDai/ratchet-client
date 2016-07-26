@@ -49,7 +49,7 @@ class TaskController extends BaseController {
             birthday = null
         }
 
-        if (params.generatedPdfKey) {
+        if (params.generatedPdfKey && params.generatedPdfKey != 'null') {
             s3PDFPath = s3UploadService.getPDFFileLink(params.generatedPdfKey)
         }
 
