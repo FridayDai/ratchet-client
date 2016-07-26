@@ -27,6 +27,7 @@ function WithDatetimepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
+            useCurrent: false,
             keepInvalid: true,
             stepping: 5,
             ignorePicker: true
