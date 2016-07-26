@@ -12,6 +12,7 @@ class Patient {
     String genderValue
     Long treatmentId
     Long staffId
+    Long absoluteEventDatestamp
     Long absoluteEventTimestamp
     String birthdayValue
     String ecFirstName

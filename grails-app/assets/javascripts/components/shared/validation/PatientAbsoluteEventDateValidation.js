@@ -9,7 +9,7 @@ $.validator.addMethod('AbsoluteEventDateMinCheck', function (value) {
     var guessFormat = Utility.guessDateTimeFormat(value);
 
     if (guessFormat) {
-        return !moment(value, guessFormat).isBefore('2015-01-01');
+        return !moment(value.trim(), guessFormat).isBefore('2015-01-01');
     }
 
     return false;
@@ -19,7 +19,7 @@ $.validator.addMethod('AbsoluteEventDateMaxCheck', function (value) {
     var guessFormat = Utility.guessDateTimeFormat(value);
 
     if (guessFormat) {
-        return moment(value, guessFormat)
+        return moment(value.trim(), guessFormat)
             .isBefore(moment().add(1, 'y'));
     }
 
@@ -27,7 +27,9 @@ $.validator.addMethod('AbsoluteEventDateMaxCheck', function (value) {
 }, STRINGs.MAX_ABSOLUTE_EVENT_DATE);
 
 $.validator.addMethod('DateTimeFormatCheck', function (value) {
-    return _.some(PARAMs.DATE_TIME_FORMAT, function (format) { return moment(value, format, true).isValid(); });
+    return _.some(PARAMs.DATE_TIME_FORMAT.concat(PARAMs.DATE_FORMAT), function (format) {
+        return moment(value.trim(), format, true).isValid();
+    });
 }, STRINGs.WRONG_DATE_TIME_FORMAT);
 
 module.exports = {

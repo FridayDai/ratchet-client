@@ -19,7 +19,7 @@ function TreatmentToolbar() {
 
     this.getBasicIds = function () {
         var $hidden = this.select('taskInfoHiddenSelector');
-        var surgeryDateTime;
+        var surgeryDateTime, time;
 
         if (!this.treatmentId) {
             this.medicalRecordId = $hidden.data('medicalRecordId');
@@ -31,7 +31,8 @@ function TreatmentToolbar() {
             this.absoluteEventType = $hidden.data('absoluteEventType');
         }
 
-        surgeryDateTime = "{0} {1}".format(Utility.toVancouverDate(this.absoluteEventDate), this.absoluteEventTime);
+        time = this.absoluteEventTime ? this.absoluteEventTime : '';
+        surgeryDateTime = "{0} {1}".format(Utility.toVancouverDate(this.absoluteEventDate), time);
 
         return {
             medicalRecordId: this.medicalRecordId,

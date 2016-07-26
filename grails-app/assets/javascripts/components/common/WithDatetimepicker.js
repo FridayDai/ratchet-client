@@ -1,5 +1,4 @@
 require('bootstrapDatetimepicker');
-var moment = require('moment');
 
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
@@ -10,8 +9,11 @@ function WithDatetimepicker() {
     ]);
 
     this._initDatePicker = function () {
+        var that = this;
+
         this.$node.datetimepicker({
             format: 'MMM D, YYYY h:mm A',
+            lazyFormat: 'MMM D, YYYY',
             timeZone: 'America/Vancouver',
             icons: {
                 time: 'fa fa-clock-o',
@@ -27,7 +29,6 @@ function WithDatetimepicker() {
             widgetParent: 'body',
             keepInvalid: true,
             stepping: 5,
-            defaultDate: moment().startOf('day').hours(8),
             ignorePicker: true
         });
 
@@ -52,6 +53,14 @@ function WithDatetimepicker() {
                     'bottom': 'auto',
                     'left': left + 'px'
                 });
+            }
+        });
+
+        //change dateFormat to lazyFormat, ignore the time.
+        this.$node.on('blur', function () {
+            var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
+            if(!timeRegex.test($(this).val())) {
+                that.$node.data("DateTimePicker").lazyFormat();
             }
         });
     };
