@@ -46,8 +46,8 @@ function ColumnFilterCombobox (){
         this.$node.multipleSelect('checkAll');
     };
 
-    this.setColumnPlaceholder = function (){
-        $(".ms-choice").find('span').html(COLUMN_FILTER_ICON);
+    this.setColumnPlaceholder = function () {
+        this.$node.next().find(".ms-choice").find('span').html(COLUMN_FILTER_ICON);
     };
 
     this.getStatus = function () {

@@ -1,8 +1,8 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
+var WithMutipleSelect = require('../common/WithMutipleSelect');
 var URLs = require('../../constants/Urls');
 
-function ToolbarProviderCombobox() {
+function ToolbarProviderMutipleSelect() {
     this.options({
         url: URLs.GET_PROVIDER,
         requestData: function (val) {
@@ -14,10 +14,11 @@ function ToolbarProviderCombobox() {
         },
         itemFormat: function (data) {
             return {
-                label: data.firstName + " " + data.lastName,
+                text: data.firstName + " " + data.lastName,
                 value: data.id
             };
-        }
+        },
+        placeholder: "Provider: All"
     });
 
     this.attributes({
@@ -27,4 +28,4 @@ function ToolbarProviderCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, ToolbarProviderCombobox);
+module.exports = flight.component(WithMutipleSelect, ToolbarProviderMutipleSelect);

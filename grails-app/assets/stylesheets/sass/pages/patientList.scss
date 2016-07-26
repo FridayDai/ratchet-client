@@ -39,6 +39,12 @@
     .search-content {
         padding: 5px 15px 27px;
     }
+
+    .quick-filter {
+        width: 100%;
+        max-width: 150px;
+    }
+
     .filler-content {
         margin-top: 15px;
 
@@ -61,7 +67,7 @@
             min-width: 220px;
         }
     }
-    .ui-combobox{
+    .ui-combobox {
         input {
             padding: 1px 1px 1px 10px;
         }
@@ -516,7 +522,6 @@
     font-size: 14px;
 }
 
-
 .email-status-unverified {
     background-color: rgba(253, 193, 91, 0.07);
 }
@@ -630,7 +635,6 @@
     width: 12px;
 }
 
-
 #gender-static {
     text-transform: capitalize;
 
@@ -639,7 +643,7 @@
             display: inline-block;
             width: 20px;
             height: 16px;
-            content: "" ;
+            content: "";
             background: image-url('patients/Male-states.png', false, false) no-repeat 60% 60%;
             background-size: 52px;
             vertical-align: bottom;
@@ -652,7 +656,7 @@
             display: inline-block;
             width: 20px;
             height: 16px;
-            content: "" ;
+            content: "";
             background: image-url('patients/Female-states.png', false, false) no-repeat  -2% 60%;
             background-size: 33px;
             vertical-align: bottom;
@@ -678,6 +682,7 @@
 #patients-toolbar {
     position: relative;
 }
+
 .providerNames {
     display: inline-block;
 }

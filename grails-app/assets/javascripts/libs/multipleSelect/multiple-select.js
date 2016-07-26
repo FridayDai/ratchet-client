@@ -4,7 +4,7 @@
  *
  * http://wenzhixin.net.cn/p/multiple-select/
  *
- * @author colin chen
+ * @author wenzhixin, colin chen
  * change the selectAll and selectItems relationship.
  * update function [getSelects, update, updateSelectAll, checkAll, uncheckAll]
  */
@@ -199,9 +199,13 @@
 
         init: function () {
             var that = this,
-                $ul = $('<ul></ul>');
+                $ul = $('<ul></ul>').addClass('unselected-group'),
+                selectOptions= [];
+
 
             this.$drop.html('');
+
+            this._initSource();
 
             if (this.options.filter) {
                 this.$drop.append([
@@ -224,6 +228,22 @@
                 ].join(''));
             }
 
+            var $selectUl = $('<ul></ul>').addClass('selected-group').hide();
+            var $clearEle = $([
+                sprintf('<li class="%s">', 'selected-group-aciton'),
+                sprintf('<a class="%s"> %s', 'clear-all', 'Clear selected items'),
+                '</a>',
+                '</li>'
+            ].join(''));
+
+            this.$drop.append($selectUl.append($clearEle));
+
+            this.$el.children().text(function(index, ele) {
+                selectOptions.push(ele);
+            });
+            this.selectOptions = selectOptions;
+
+
             $.each(this.$el.children(), function (i, elm) {
                 $ul.append(that.optionToHtml(i, elm));
             });
@@ -240,12 +260,41 @@
             this.$disableItems = this.$drop.find('input[' + this.selectItemName + ']:disabled');
             this.$noResults = this.$drop.find('.ms-no-results');
 
+            this.$selectedUl = $selectUl;
+            this.$clearItem = $clearEle;
+
             this.events();
             this.updateSelectAll(true);
             this.update(true);
 
             if (this.options.isOpen) {
                 this.open();
+            }
+        },
+
+        _initSource: function() {
+            var url,
+                that = this;
+            if ( typeof this.options.source === "string" ) {
+                url = this.options.source;
+                this.source = function( request, response ) {
+                    if ( that.xhr ) {
+                        that.xhr.abort();
+                    }
+                    that.xhr = $.ajax({
+                        url: url,
+                        data: request,
+                        dataType: "json",
+                        success: function( data ) {
+                            response( data );
+                        },
+                        error: function() {
+                            response([]);
+                        }
+                    });
+                };
+            } else {
+                this.source = this.options.source;
             }
         },
 
@@ -327,8 +376,24 @@
                 });
             }
 
-            this.$choice.off('click').on('click', toggleOpen)
-                .off('focus').on('focus', this.options.onFocus)
+            this.$choice.off('click').on('click', function(e) {
+
+                if(that.source && !that.$el.data('loadData')) {
+                    that.source({ term: null}, function (ele) {
+                        var $opt = ele.map(function (single) {
+                            return $("<option />", single);
+                        });
+                        that.$el.empty().append($opt);
+                        that.refresh();
+                        that.$choice.removeClass( "ui-button-icon-loading" );
+                        toggleOpen(e);
+                    });
+                    that.$choice.addClass( "ui-button-icon-loading" );
+                    that.$el.data('loadData', true);
+                } else {
+                    toggleOpen(e);
+                }
+            }).off('focus').on('focus', this.options.onFocus)
                 .off('blur').on('blur', this.options.onBlur);
 
             this.$parent.off('keydown').on('keydown', function (e) {
@@ -356,6 +421,19 @@
                 }
                 that.filter();
             });
+
+            this.$clearItem.off('click').on('click', function () {
+                var $items = that.$selectItems.filter(':checked');
+
+                if($items.length) {
+                    $items.prop('checked', false);
+
+                    that.$clearItem.hide();
+                    that['uncheckAll']();
+                    that.update();
+                }
+            });
+
 
             this.$selectAll.off('click').on('click', function () {
                 var checked = $(this).prop('checked'),
@@ -459,7 +537,34 @@
                     'left': 'auto'
                 });
             }
+            this.groupSelectedItem();
             this.options.onClose();
+        },
+
+        groupSelectedItem: function () {
+            var that = this;
+
+            var selectedList = this.$drop.find('li.selected');
+            var unselectedList = this.$drop.find('li:not(.selected, .selected-group-aciton)');
+
+            var unselectedUl = this.$drop.find('.unselected-group');
+
+            if(selectedList.length) {
+                if(selectedList.length === 1) {
+                    this.$clearItem.hide();
+                } else {
+                    this.$clearItem.show();
+                }
+                this.$selectedUl.append(selectedList).show();
+            } else {
+                this.$selectedUl.hide();
+            }
+
+            unselectedList.sort(function (a, b) {
+                return that.selectOptions.indexOf($(a).text().trim()) - that.selectOptions.indexOf($(b).text().trim());
+            });
+
+            unselectedUl.append(unselectedList);
         },
 
         animateMethod: function (method) {
@@ -737,6 +842,7 @@
         multipleWidth: 80,
         single: false,
         filter: false,
+        source: null,
         width: undefined,
         dropWidth: undefined,
         maxHeight: 250,
