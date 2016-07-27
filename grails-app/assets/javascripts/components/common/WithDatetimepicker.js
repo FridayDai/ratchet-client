@@ -28,7 +28,7 @@ function WithDatetimepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
-            useCurrent: false,
+            // useCurrent: false,
             keepInvalid: true,
             useStrict: true,
             stepping: 5,
@@ -37,6 +37,8 @@ function WithDatetimepicker() {
 
         //Fix problem with the situation where the datepicker is inside a scrollable element
         this.$node.on('dp.show', function() {
+            that.chooseFormat();
+
             var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
             var top, left;
             if (datepicker.hasClass('bottom')) {
@@ -57,8 +59,6 @@ function WithDatetimepicker() {
                     'left': left + 'px'
                 });
             }
-
-            that.chooseFormat();
         });
 
         //choose model between dateFormat and lazyFormat, ignore the time or not.

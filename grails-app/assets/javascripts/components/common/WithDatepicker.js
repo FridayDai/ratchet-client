@@ -11,7 +11,7 @@ function WithDatepicker() {
     this._initDatePicker = function () {
         this.$node.datetimepicker({
             format: 'MMM D, YYYY',
-            timeZone: 'America/Vancouver',
+            // timeZone: 'America/Vancouver',
             icons: {
                 time: 'fa fa-clock-o',
                 date: 'fa fa-calendar',

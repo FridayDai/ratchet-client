@@ -882,7 +882,13 @@
                 if (isValid(targetMoment)) {
                     date = targetMoment;
                     viewDate = date.clone();
+
                     if(lazyFormat) {
+                        var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
+
+                        if(timeRegex.test(input.val())) {
+                            lazyFormat = actualFormat;
+                        }
                         input.val(date.format(lazyFormat));
                     } else {
                         input.val(date.format(actualFormat));
