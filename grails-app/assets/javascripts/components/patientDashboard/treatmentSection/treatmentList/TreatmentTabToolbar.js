@@ -31,8 +31,10 @@ function TreatmentToolbar() {
             this.absoluteEventType = $hidden.data('absoluteEventType');
         }
 
-        time = this.absoluteEventTime ? this.absoluteEventTime : '';
-        surgeryDateTime = "{0} {1}".format(Utility.toVancouverDate(this.absoluteEventDate), time);
+        if(this.absoluteEventDate) {
+            time = this.absoluteEventTime ? this.absoluteEventTime : '';
+            surgeryDateTime = "{0} {1}".format(Utility.toVancouverDate(this.absoluteEventDate), time);
+        }
 
         return {
             medicalRecordId: this.medicalRecordId,
