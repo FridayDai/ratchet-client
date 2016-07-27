@@ -50,6 +50,7 @@ function PatientAbsoluteEventDate() {
 
     this.clear = function () {
         this.$node.val('');
+        this.clearDate();
         this.hideElementGroup();
     };
 

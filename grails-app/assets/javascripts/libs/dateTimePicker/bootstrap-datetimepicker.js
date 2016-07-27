@@ -864,6 +864,11 @@
                     unset = true;
                     input.val('');
                     element.data('date', '');
+
+                    if(lazyFormat) {
+                        lazyFormat = options.lazyFormat;
+                    }
+
                     notifyEvent({
                         type: 'dp.change',
                         date: false,

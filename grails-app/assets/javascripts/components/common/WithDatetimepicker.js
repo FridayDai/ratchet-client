@@ -72,6 +72,10 @@ function WithDatetimepicker() {
         };
     };
 
+    this.clearDate = function () {
+        this.$node.data("DateTimePicker").clear();
+    };
+
     this.after('initialize', function () {
         this._initDatePicker();
     });
