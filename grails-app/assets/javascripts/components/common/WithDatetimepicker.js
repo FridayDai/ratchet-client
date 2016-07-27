@@ -10,10 +10,11 @@ function WithDatetimepicker() {
 
     this._initDatePicker = function () {
         var that = this;
+        var lazyFormat = 'MMM D, YYYY';
 
         this.$node.datetimepicker({
             format: 'MMM D, YYYY h:mm A',
-            lazyFormat: 'MMM D, YYYY',
+            lazyFormat: lazyFormat,
             timeZone: 'America/Vancouver',
             icons: {
                 time: 'fa fa-clock-o',
@@ -29,6 +30,7 @@ function WithDatetimepicker() {
             widgetParent: 'body',
             useCurrent: false,
             keepInvalid: true,
+            useStrict: true,
             stepping: 5,
             ignorePicker: true
         });
@@ -55,15 +57,19 @@ function WithDatetimepicker() {
                     'left': left + 'px'
                 });
             }
+
+            that.chooseFormat();
         });
 
-        //change dateFormat to lazyFormat, ignore the time.
-        this.$node.on('blur', function () {
+        //choose model between dateFormat and lazyFormat, ignore the time or not.
+        this.chooseFormat = function () {
             var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
-            if(!timeRegex.test($(this).val())) {
+            if(!timeRegex.test(that.$node.val())) {
                 that.$node.data("DateTimePicker").lazyFormat();
+            } else {
+                that.$node.data("DateTimePicker").lazyFormat(lazyFormat, 'close');
             }
-        });
+        };
     };
 
     this.after('initialize', function () {

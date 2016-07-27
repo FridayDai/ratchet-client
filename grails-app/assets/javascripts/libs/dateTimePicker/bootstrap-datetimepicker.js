@@ -1574,18 +1574,22 @@
             return picker;
         };
 
-        picker.lazyFormat = function (newFormat) {
+        picker.lazyFormat = function (newFormat, close) {
             if (arguments.length === 0) {
                 lazyFormat =  options.lazyFormat;
                 return lazyFormat;
             }
 
-            if ((typeof newFormat !== 'string') && ((typeof newFormat !== 'boolean') || (newFormat !== false))) {
-                throw new TypeError('lazyFormat() expects a sting or boolean:false parameter ' + newFormat);
-            }
+            if(close === 'close') {
+                closeLazyFormat();
+            } else {
+                if ((typeof newFormat !== 'string') && ((typeof newFormat !== 'boolean') || (newFormat !== false))) {
+                    throw new TypeError('lazyFormat() expects a string or boolean:false parameter ' + newFormat);
+                }
 
-            options.lazyFormat = newFormat;
-            lazyFormat =  options.lazyFormat; // reinit formatting
+                options.lazyFormat = newFormat;
+                lazyFormat =  options.lazyFormat; // reinit formatting
+            }
 
             return picker;
         };
