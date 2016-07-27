@@ -130,7 +130,7 @@ module.exports = {
 
                 return {
                     date: date,
-                    time: _.indexOf(PARAMs.DATE_TIME_FORMAT, validFormat) ? dateTime : null
+                    time: _.indexOf(PARAMs.DATE_TIME_FORMAT, validFormat) >= 0 ? dateTime : null
                 };
             } else {
                 return null;
