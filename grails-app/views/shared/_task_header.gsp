@@ -21,11 +21,14 @@
                                                                                             format="MM/dd/yyyy"/></span></span>&nbsp;by
 
             <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
-            (<span class="id">ID: ${Task.patientId}</span>
+
                 <g:if test="${Task?.birthday}">
+                    (<span class="id">ID: ${Task.patientId}</span>
                     <span class="birthday"><i class="fa fa-birthday-cake icon" aria-hidden="true"></i>${Utils.formatBirthday(Task?.birthday)}</span>)
                 </g:if>
-
+                <g:else>
+                    (<span class="id only-id">ID: ${Task.patientId}</span>)
+                </g:else>
 
                 <g:if test="${!download}">
                     <span class="download"><g:link uri="/task/downloadPDF.pdf"

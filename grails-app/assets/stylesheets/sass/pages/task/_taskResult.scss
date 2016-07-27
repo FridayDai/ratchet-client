@@ -85,6 +85,10 @@ html, body, div, span {
             margin-right: 10px;
             font-size: 14px;
             font-weight: 500;
+
+            &.only-id {
+                margin-right: 0;
+            }
         }
 
         .birthday {
