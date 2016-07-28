@@ -147,8 +147,8 @@ function AddTreatmentFormDialog() {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             emailStatus: this.patientInfo.emailStatus,
-            treatmentDate: eventTime.date,
-            treatmentTime: eventTime.time
+            treatmentDate: eventTime ? eventTime.date : null,
+            treatmentTime: eventTime ? eventTime.time : null
         }));
     };
 
