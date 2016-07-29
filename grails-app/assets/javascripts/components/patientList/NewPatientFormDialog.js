@@ -405,7 +405,9 @@ function NewPatientFormDialog() {
         }
 
         if ($eventTime.is(':visible')) {
-            result.absoluteEventTimestamp = Utility.toVancouverTime($eventTime.val());
+            var dateTime = Utility.toVancouverDateTime($eventTime.val());
+            result.absoluteEventDatestamp = dateTime.date;
+            result.absoluteEventTimestamp = dateTime.time;
         }
 
         return result;

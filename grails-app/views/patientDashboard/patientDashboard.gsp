@@ -248,7 +248,7 @@
 
         <div class="form-group inline" id="treatment-date-group">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
-            <input id="eventTime" name="eventTimeStr" type="text" class="input-group date-picker event-time required"
+            <input id="eventTime" name="eventTimeStr" type="text" class="date-time-picker event-time required"
                    placeholder="Select surgery date" disabled>
         </div>
 
@@ -272,7 +272,6 @@
                 <label class="lbl-group">RELATIONSHIP<span class="caregiver-required">*</span></label>
                 <input id="relationship" name="relationshipVal" class="input-group caregiver-field"
                        placeholder="Spouse (Optional)">
-            </label>
             </div>
 
             <div class="form-group inline emr-email">
@@ -313,7 +312,7 @@
 
             <div class="form-group schedule-date-group">
                 <label class="lbl-group">SCHEDULE TASK(S)</label>
-                <input name="scheduleTaskDate" type="text" class="input-group date-picker" placeholder="Select date"
+                <input name="scheduleTaskDate" type="text" class="date-picker" placeholder="Select date"
                        required>
 
                 <div class="surgery-date-relative-indicator"></div>
@@ -331,7 +330,7 @@
         <div class="form-group inline">
             <label class="lbl-group">SURGERY DATE<span>*</span></label>
             <input id="treatment-eventTime" name="treatment-eventTime" type="text"
-                   class="input-group date-picker event-time"
+                   class="date-time-picker event-time"
                    placeholder="Select surgery date"
                    tabindex="-1"
                    required>
@@ -382,7 +381,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-patient-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 
@@ -395,7 +394,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-treatment-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 
@@ -407,7 +406,7 @@
         <div class="form-group email-group">
             <input type="hidden" autofocus/>
             <label class="lbl-group">DATE</label>
-            <input id="fill-questionnaire-date-field" type="text" class="input-group date-picker"
+            <input id="fill-questionnaire-date-field" type="text" class="date-picker"
                    placeholder="Jan 31, 2015" autocomplete="off" required>
         </div>
     </form>

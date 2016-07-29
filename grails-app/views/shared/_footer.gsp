@@ -44,7 +44,7 @@
             <div class="form-group required required-width"><span>*</span>Required field</div>
 
             <div class="align-center assist-tip">
-            </label>We will respond to you as soon as we can!</label>
+            <label>We will respond to you as soon as we can!</label>
             </div>
         </form>
         </g:if>

@@ -26,6 +26,10 @@ class UrlMappings {
 
         "/confirm-reset-password"(controller: "accounts", action: "confirmResetPassword")
 
+        //user's configs
+        "/staff/configs"(controller: "staff", action :"updateConfigs")
+        "/getConfigs"(controller:"staff", action: "getConfigs")
+
         // Patients
         "/"(controller: "patients", action: "getPatients")
 
@@ -58,7 +62,7 @@ class UrlMappings {
         "/patients/$patientId/in-clinic/code"(controller: "patientDashboard", action: "getInClinicCode")
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
-        "/patients/$patientId?/absolute-event-time/$medicalRecordId?/provider/$providerId?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
+        "/patients/$patientId?/absolute-event-time/$medicalRecordId?/provider/$providerId?/$absoluteEventDatestamp?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
         "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
         //Patient treatment

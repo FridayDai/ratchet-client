@@ -13,4 +13,15 @@ class StaffController extends BaseController {
         def resp = staffService.getStaffs(token, clientId, staff)
         render resp as JSON
     }
+
+    def updateConfigs(){
+        String token = request.session.token
+        def configKey = params?.configKey
+        def configValue = params?.configValue
+
+        session.columnArrayConfig = configValue
+
+        def resp = staffService.configs(token, configKey, configValue)
+        render resp as JSON
+    }
 }

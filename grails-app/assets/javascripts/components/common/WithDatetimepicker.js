@@ -3,14 +3,18 @@ require('bootstrapDatetimepicker');
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
 
-function WithDatepicker() {
+function WithDatetimepicker() {
     flight.compose.mixin(this, [
         WithElementValidation
     ]);
 
     this._initDatePicker = function () {
+        var that = this;
+        var lazyFormat = 'MMM D, YYYY';
+
         this.$node.datetimepicker({
-            format: 'MMM D, YYYY',
+            format: 'MMM D, YYYY h:mm A',
+            lazyFormat: lazyFormat,
             timeZone: 'America/Vancouver',
             icons: {
                 time: 'fa fa-clock-o',
@@ -24,18 +28,22 @@ function WithDatepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
+            // useCurrent: false,
             keepInvalid: true,
+            useStrict: true,
             stepping: 5,
             ignorePicker: true
         });
 
         //Fix problem with the situation where the datepicker is inside a scrollable element
         this.$node.on('dp.show', function() {
+            that.chooseFormat();
+
             var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
             var top, left;
             if (datepicker.hasClass('bottom')) {
-                top = $(this).offset().top + $(this).outerHeight();
-                left = $(this).offset().left;
+                 top = $(this).offset().top + $(this).outerHeight();
+                 left = $(this).offset().left;
                 datepicker.css({
                     'top': top + 'px',
                     'bottom': 'auto',
@@ -52,6 +60,20 @@ function WithDatepicker() {
                 });
             }
         });
+
+        //choose model between dateFormat and lazyFormat, ignore the time or not.
+        this.chooseFormat = function () {
+            var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
+            if(!timeRegex.test(that.$node.val())) {
+                that.$node.data("DateTimePicker").lazyFormat();
+            } else {
+                that.$node.data("DateTimePicker").lazyFormat(lazyFormat, 'close');
+            }
+        };
+    };
+
+    this.clearDate = function () {
+        this.$node.data("DateTimePicker").clear();
     };
 
     this.after('initialize', function () {
@@ -63,5 +85,5 @@ function WithDatepicker() {
     });
 }
 
-module.exports = WithDatepicker;
+module.exports = WithDatetimepicker;
 

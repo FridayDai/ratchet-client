@@ -131,7 +131,9 @@ function AddTreatmentFormDialog() {
         };
 
         if ($eventTime.is(':visible')) {
-            result.absoluteEventTimestamp = Utility.toVancouverTime($eventTime.val());
+            var dateTime = Utility.toVancouverDateTime($eventTime.val());
+            result.absoluteEventDatestamp = dateTime.date;
+            result.absoluteEventTimestamp = dateTime.time;
         }
 
         return result;
@@ -139,13 +141,14 @@ function AddTreatmentFormDialog() {
 
     this.onAddTreatmentSuccess = function (e, data) {
         var $eventTime = this.select('eventTimeFieldSelector');
-        var eventTime = Utility.toVancouverTime($eventTime.val());
+        var eventTime = Utility.toVancouverDateTime($eventTime.val());
 
         this.trigger('addTreatmentSuccess', _.assign(data, {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             emailStatus: this.patientInfo.emailStatus,
-            treatmentDate: eventTime
+            treatmentDate: eventTime ? eventTime.date : null,
+            treatmentTime: eventTime ? eventTime.time : null
         }));
     };
 

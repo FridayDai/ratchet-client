@@ -133,7 +133,7 @@ class PatientDashboardController extends BaseController {
                 combinedTasks     : combinedList?.combinedTasks,
                 alertNumber       : emailAlerts?.totalCount + combinedList?.alertNumber,
                 totalCount        : medicalRecords.totalCount,
-                patientEmailAlerts     : emailAlerts?.items
+                patientEmailAlerts: emailAlerts?.items
         ])
     }
 
@@ -240,6 +240,7 @@ class PatientDashboardController extends BaseController {
                     title                 : treatment.title,
                     tmpTitle              : treatment.tmpTitle,
                     absoluteEventTimestamp: absoluteEventTimestamp,
+                    eventTime             : treatment.eventTime,
                     absoluteEventType     : treatment.absoluteEventType,
                     indicator             : i < 26 ? numberMap[i++] : '*'
             ]
@@ -248,7 +249,7 @@ class PatientDashboardController extends BaseController {
 
             if (absoluteEventTimestamp) {
                 DateTimeZone vancouver = DateTimeZone.forID('America/Vancouver');
-                DateTime start = new DateTime(absoluteEventTimestamp, vancouver)
+                DateTime start = new DateTime(absoluteEventTimestamp, vancouver).withTimeAtStartOfDay()
                 DateTime end = new DateTime(today, vancouver).withTimeAtStartOfDay()
                 def days = Days.daysBetween(start, end).getDays()
 
@@ -258,6 +259,7 @@ class PatientDashboardController extends BaseController {
                 combinedTasks << [
                         itemType         : 'absoluteEvent',
                         sendTime         : absoluteEventTimestamp,
+                        eventTime        : treatment.eventTime,
                         title            : treatment.absoluteEventType.toLowerCase().capitalize(),
                         status           : status,
                         treatmentProperty: treatmentProperty

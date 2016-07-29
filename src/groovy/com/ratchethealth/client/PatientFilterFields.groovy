@@ -7,6 +7,7 @@ class PatientFilterFields extends FilterFields {
     String patientType
     Long treatmentId
     Long surgeonId
+    Long appointmentDate
     int emailStatus
     String patientIdOrName
     Boolean activeTreatmentOnly = true

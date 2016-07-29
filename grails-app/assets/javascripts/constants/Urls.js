@@ -17,6 +17,9 @@ module.exports = {
     GET_IN_CLINIC_CODE: '/patients/{0}/in-clinic/code',
     PATIENT_HAS_ACTIVE_TASK: '/patients/{0}/has-active-tasks',
 
+    //set user' config
+    SET_CONFIGS: '/staff/configs',
+
     //Bulk import
     GET_BULK_IMPORT_LOOKUP: '/patients/bulk-import/lookup',
     DOWNLOAD_BULK_IMPORT_ERROR_FILE: '/patients/bulk-import/download-errors',
@@ -28,7 +31,7 @@ module.exports = {
     INVITE_PATIENT: '/patients/{0}/invite',
 
     //Treatment
-    UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/provider/{2}/{3}',
+    UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/provider/{2}/{3}/{4}',
     ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',

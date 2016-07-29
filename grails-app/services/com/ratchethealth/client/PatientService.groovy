@@ -15,6 +15,7 @@ class PatientService extends RatchetAPIService {
         def profilePhoto = patient?.profilePhoto
         def treatmentId = patient?.treatmentId
         def surgeonId = patient?.staffId
+        def absoluteEventDatestamp = patient?.absoluteEventDatestamp
         def absoluteEventTimestamp = patient?.absoluteEventTimestamp
         def ecFirstName = patient?.ecFirstName
         def ecLastName = patient?.ecLastName
@@ -24,7 +25,7 @@ class PatientService extends RatchetAPIService {
         def birthday = patient?.birthdayValue
         def isUnSubscribed = patient?.emailStatus
 
-        if(isUnSubscribed == "decline"){
+        if (isUnSubscribed == "decline") {
             isUnSubscribed = true;
         } else {
             isUnSubscribed = false;
@@ -47,7 +48,8 @@ class PatientService extends RatchetAPIService {
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)
-                    .field("absoluteEventTimestamp", absoluteEventTimestamp)
+                    .field("absoluteEventTimestamp", absoluteEventDatestamp)
+                    .field("eventTimestamp", absoluteEventTimestamp)
                     .field("ecFirstName", ecFirstName)
                     .field("ecLastName", ecLastName)
                     .field("relationship", relationship)
@@ -81,27 +83,29 @@ class PatientService extends RatchetAPIService {
         def activeTreatmentOnly = patientPagination?.activeTreatmentOnly
         def treatmentStatus = patientPagination?.treatmentStatus
         def taskStatus = patientPagination?.taskStatus
+        def appointmentDate = patientPagination?.appointmentDate
 
         def url = grailsApplication.config.ratchetv2.server.url.patients
         log.info("Call backend service to get patients with max, offset and clientId, token: ${token}.")
 
         def queryStrings = [
-            'max': length,
-            'offset': start,
-            "clientId": clientId,
-            "patientType": patientType,
-            "treatmentId": treatmentId,
-            "surgeonId": surgeonId,
-            "patientIdOrName": patientIdOrName,
-            "emailStatus": emailStatus,
-            "order": sortDir,
-            "sorted": sortFiled,
-            "treatmentStatus": treatmentStatus,
-            "activeTreatmentOnly": activeTreatmentOnly,
-            "taskStatus": taskStatus
+                'max'                : length,
+                'offset'             : start,
+                "clientId"           : clientId,
+                "patientType"        : patientType,
+                "treatmentId"        : treatmentId,
+                "surgeonId"          : surgeonId,
+                "patientIdOrName"    : patientIdOrName,
+                "emailStatus"        : emailStatus,
+                "order"              : sortDir,
+                "sorted"             : sortFiled,
+                "treatmentStatus"    : treatmentStatus,
+                "activeTreatmentOnly": activeTreatmentOnly,
+                "taskStatus"         : taskStatus,
+                "appointmentTimestamp"    : appointmentDate
         ];
 
-        if(queryStrings.taskStatus == 0){
+        if (queryStrings.taskStatus == 0) {
             queryStrings.taskStatus = null;
         }
 

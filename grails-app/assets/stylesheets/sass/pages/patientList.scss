@@ -6,6 +6,13 @@
 @import '../partials/timepicker';
 @import "../partials/combobox";
 @import "../partials/genderCombobox";
+@import '../partials/multipleSelect';
+@import "../partials/bootstrap-datetimepicker";
+
+.table-group {
+    min-width: 1180px;
+    margin: 40px 30px 0;
+}
 
 .patients-inner-header {
     height: 27px;
@@ -24,12 +31,26 @@
     }
 }
 
+.inner-search input {
+    min-width: 0;
+}
+
 .inner-search {
     .search-content {
         padding: 5px 15px 27px;
     }
     .filler-content {
         margin-top: 15px;
+
+        .appointment-filter {
+            border: 1px solid #b3b3b3;
+            background: image-url('patients/calender.png') no-repeat 100%;
+            background-color: white;
+        }
+
+        .date-picker {
+            min-width: 150px;
+        }
     }
     .combined-search {
         margin-top: 32px;
@@ -543,6 +564,10 @@
             min-width: 60px;
         }
     }
+
+    .required {
+        margin-top: 20px;
+    }
 }
 
 .dataTables_wrapper .dataTables_paginate {
@@ -593,7 +618,7 @@
     }
 
     .warn-msg {
-        color: red;
+        color: #333;
     }
 }
 
@@ -635,4 +660,32 @@
     }
 }
 
+.filter-area {
+    padding: 30px 30px 10px;
+    color: #808080;
+}
 
+.column-filter {
+    position: absolute;
+    right: 50px;
+    bottom: -35px;
+}
+
+#patientsTable_wrapper {
+    min-height: 400px;
+}
+
+#patients-toolbar {
+    position: relative;
+}
+.providerNames {
+    display: inline-block;
+}
+
+.appointment-time {
+    display: inline-block;
+}
+
+.appointment-time:first-child {
+    margin-right: 3px;
+}

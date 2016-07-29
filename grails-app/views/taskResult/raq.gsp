@@ -48,10 +48,11 @@
                 </div>
 
                 <div class="scoreArea">
-                    <span class="scoreLevel">Scores > 9:</span> <div class="riskLevel">low risk</div> Prediction: discharge directly home
-                </div>
-                <div class="scoreArea">
                     <span class="scoreLevel">Scores 6-9:</span> <div class="riskLevel" style="margin-left: 3px;">medium risk</div> Prediction: additional intervention to discharge directly home
+                </div>
+
+                <div class="scoreArea">
+                    <span class="scoreLevel">Scores > 9:</span> <div class="riskLevel">low risk</div> Prediction: discharge directly home
                 </div>
             </div>
         </div>

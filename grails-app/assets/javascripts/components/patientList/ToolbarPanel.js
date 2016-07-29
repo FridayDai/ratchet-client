@@ -7,6 +7,8 @@ var ProviderCombobox = require('./ToolbarProviderCombobox');
 var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
 var taskStatusCombobox = require('./ToolbarTaskStatusCombobox');
+var columnFilterCombobox = require('./ToolbarColumnFilterCombobox');
+var appointmentDateFilter = require('./ToolbarAppointmentDateFilter');
 
 
 function ToolbarPanel() {
@@ -17,7 +19,9 @@ function ToolbarPanel() {
         providerFieldSelector: '#selectSurgeon',
         emailStatusFieldSelector: '#emailStatusFilter',
         treatmentStatusFieldSelector: '#treatmentStatusFilter',
-        taskStatusFieldSelector: '#taskStatusFilter'
+        taskStatusFieldSelector: '#taskStatusFilter',
+        columnFilterFieldSelector: '#column-status',
+        appointmentDateFieldSelector: '#appointmentDateFilter'
     });
 
     this.children({
@@ -25,7 +29,9 @@ function ToolbarPanel() {
         providerFieldSelector: ProviderCombobox,
         emailStatusFieldSelector: emailStatusCombobox,
         treatmentStatusFieldSelector: treatmentStatusCombobox,
-        taskStatusFieldSelector: taskStatusCombobox
+        taskStatusFieldSelector: taskStatusCombobox,
+        columnFilterFieldSelector: columnFilterCombobox,
+        appointmentDateFieldSelector: appointmentDateFilter
     });
 
     this.getCurrentState = function () {
@@ -35,7 +41,8 @@ function ToolbarPanel() {
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
             patientIdOrName: this._patientIdOrNamePreviousVal,
             treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem(),
-            taskStatus: this.child.taskStatusFieldSelector.getDisplayItem()
+            taskStatus: this.child.taskStatusFieldSelector.getDisplayItem(),
+            appointmentDate: this.child.appointmentDateFieldSelector.getEventDateTime()
         };
     };
 
@@ -51,6 +58,7 @@ function ToolbarPanel() {
         }
     };
 
+
     this._patientIdOrNamePreviousVal = '';
 
     this.OnSearchPatientIDName = function (e) {
@@ -65,6 +73,7 @@ function ToolbarPanel() {
         this._patientIdOrNamePreviousVal = toolbarData.patientIdOrName;
         this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal);
 
+        this.child.appointmentDateFieldSelector.setEventDateTime(toolbarData.appointmentDate);
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
         this.child.providerFieldSelector.setDisplayItem(toolbarData.provider);
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);
@@ -82,6 +91,7 @@ function ToolbarPanel() {
         this.on('click', {
             patientIDNameSearchButton: this.triggerSearch
         });
+
     });
 }
 

@@ -55,12 +55,30 @@
                     <input type="text" name="taskStatusFilter" id="taskStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
+
+                <div class="filler-content">
+                    <label for="appointmentDateFilter" class="select-tip">APPOINTMENT DATE</label>
+                    <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
+                           class="date-picker input-auto-search appointment-filter"/>
+                </div>
+
+                <div class="filler-content column-filter hidden">
+                    <select id="column-status" class="quick-filter" multiple="multiple">
+                        <option value="emailAddress">Email Address</option>
+                        <option value="phoneNumber">Phone Number</option>
+                        <option value="taskStatus">Task Status</option>
+                        <option value="surgery">Surgery</option>
+                        <option value="appointment">Appointment</option>
+                        <option value="provider">Provider</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div class="table-group">
-            <table id="patientsTable" class="display div-hidden" data-total="${patientList.recordsTotal}"
-                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}">
+        <div class="table-group hidden">
+            <table id="patientsTable" class="display nowrap" cellspacing="0" width="100%" data-total="${patientList.recordsTotal}"
+                   data-pagesize="${pagesize}" data-filtered="${patientList.recordsFiltered}"
+                   data-config="${request.session.columnArrayConfig}">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -70,6 +88,8 @@
                     <th>Birthday</th>
                     <th>Surgery</th>
                     <th>Task Status</th>
+                    <th>Appointment</th>
+                    <th>Providers</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -83,8 +103,11 @@
                         <td>${patient.birthday ?: ''}</td>
                         <td>${patient.nearestAbsoluteEventDate ?: ''}</td>
                         <td>${patient.taskStatus}</td>
+                        <td>${patient.nearestAppoinmentDate}</td>
+                        <td>${patient.providerNames}</td>
                         <td>${patient.id}</td>
                         <td>${patient.status}</td>
+                        <td>${patient.nearestAppoinmentEventTime}</td>
                     </tr>
                 </g:each>
                 </tbody>
@@ -237,7 +260,7 @@
 
             <div class="form-group inline" id="div-event-time">
                 <label class="lbl-group">SURGERY DATE<span>*</span></label>
-                <input id="eventTime" name="eventTimeStr" type="text" class="input-group date-picker event-time re-position"
+                <input id="eventTime" name="eventTimeStr" type="text" class="date-time-picker event-time re-position"
                        placeholder="Select surgery date" required disabled/>
             </div>
 
