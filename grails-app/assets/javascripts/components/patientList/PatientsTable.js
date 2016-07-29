@@ -184,7 +184,10 @@ function PatientsTable() {
                     if (taskStatus.indexOf("0 Active") !== -1) {
                         return '<span class="task-status all-complete-status">' + taskStatus + '</span>';
                     } else if (taskStatus.indexOf("Overdue") !== -1 && taskStatus.indexOf("Pending") !== -1) {
-                        return '<span class="task-status overdue-status">' + taskStatus + '</span>';
+                        var status = taskStatus.split(',');
+                        return '<span class="task-status overdue-status">'+ status[0] +'</span>' +
+                            '<span class="task-status pending-status">' + status[1] + '</span>';
+                        //return '<span class="task-status overdue-status">' + taskStatus + '</span>';
                     } else if (taskStatus.indexOf("Pending") !== -1) {
                         return '<span class="task-status pending-status">' + taskStatus + '</span>';
                     } else {
