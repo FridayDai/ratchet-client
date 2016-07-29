@@ -182,7 +182,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		def result = service.updateEventTime('token', 1, 2, 3, 3213, 123456789)
+		def result = service.updateEventTime('token', 1, 2, 3, 3213, 123456789, 12345)
 
 		then:
 		result == true
@@ -198,7 +198,7 @@ class TreatmentServiceSpec extends Specification {
 		}
 
 		when:
-		service.updateEventTime('token', 1, 2, 3, 3213, 123456789)
+		service.updateEventTime('token', 1, 2, 3, 3213, 123456789, 12345)
 
 		then:
 		ApiReturnException e = thrown()

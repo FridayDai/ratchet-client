@@ -1,7 +1,6 @@
 package com.ratchethealth.client
 
 import com.mashape.unirest.request.GetRequest
-import com.mashape.unirest.request.HttpRequestWithBody
 import com.mashape.unirest.request.body.MultipartBody
 import com.ratchethealth.client.exceptions.ApiReturnException
 import grails.test.mixin.TestFor

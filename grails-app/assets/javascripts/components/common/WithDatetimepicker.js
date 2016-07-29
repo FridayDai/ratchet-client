@@ -1,5 +1,4 @@
 require('bootstrapDatetimepicker');
-var moment = require('moment');
 
 var flight = require('flight');
 var WithElementValidation = require('./WithElementValidation');
@@ -10,8 +9,13 @@ function WithDatetimepicker() {
     ]);
 
     this._initDatePicker = function () {
+        var that = this;
+        var lazyFormat = 'MMM D, YYYY';
+
         this.$node.datetimepicker({
             format: 'MMM D, YYYY h:mm A',
+            lazyFormat: lazyFormat,
+            timeZone: 'America/Vancouver',
             icons: {
                 time: 'fa fa-clock-o',
                 date: 'fa fa-calendar',
@@ -24,14 +28,17 @@ function WithDatetimepicker() {
                 close: 'fa fa-remove'
             },
             widgetParent: 'body',
+            // useCurrent: false,
             keepInvalid: true,
+            useStrict: true,
             stepping: 5,
-            defaultDate: moment().startOf('day').hours(8),
             ignorePicker: true
         });
 
         //Fix problem with the situation where the datepicker is inside a scrollable element
         this.$node.on('dp.show', function() {
+            that.chooseFormat();
+
             var datepicker = $('body').find('.bootstrap-datetimepicker-widget:last');
             var top, left;
             if (datepicker.hasClass('bottom')) {
@@ -53,6 +60,20 @@ function WithDatetimepicker() {
                 });
             }
         });
+
+        //choose model between dateFormat and lazyFormat, ignore the time or not.
+        this.chooseFormat = function () {
+            var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
+            if(!timeRegex.test(that.$node.val())) {
+                that.$node.data("DateTimePicker").lazyFormat();
+            } else {
+                that.$node.data("DateTimePicker").lazyFormat(lazyFormat, 'close');
+            }
+        };
+    };
+
+    this.clearDate = function () {
+        this.$node.data("DateTimePicker").clear();
     };
 
     this.after('initialize', function () {

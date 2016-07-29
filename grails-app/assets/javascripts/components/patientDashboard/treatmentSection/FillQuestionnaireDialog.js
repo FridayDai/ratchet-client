@@ -1,4 +1,5 @@
 var flight = require('flight');
+var moment = require('moment');
 
 var WithFormDialog = require('../../common/WithFormDialog');
 var WithDatepicker = require('../../common/WithDatepicker');
@@ -64,6 +65,10 @@ function FillQuestionnaireDialog() {
             text: 'Cancel',
             click: this.cancelHandler
         }]
+    });
+
+    this.after('initialize', function () {
+        this.select('dateSelector').data("DateTimePicker").maxDate(moment());
     });
 }
 
