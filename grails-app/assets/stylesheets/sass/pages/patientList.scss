@@ -441,6 +441,7 @@
 }
 
 .task-status {
+    display: inline-block;
     &:before {
         font-family: 'Ionicons';
         padding-right: 5px;
