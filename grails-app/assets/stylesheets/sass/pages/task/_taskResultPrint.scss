@@ -4,15 +4,28 @@
     margin: 0cm;
 }
 
+<<<<<<< Updated upstream
+=======
+#main {
+    //border-left: 0;
+    //border-right: 0;
+    //border-bottom: 0;
+    padding: 20px;
+    margin-top: 0;
+    border: 0;
+}
+
+>>>>>>> Stashed changes
 .sticky-header {
+    position: static;
+
     .header {
         height: 40px;
     }
-
 }
 
 .task-result-content {
-    margin-top: 140px;
+    margin-top: 30px;
 }
 
 .info-container {
