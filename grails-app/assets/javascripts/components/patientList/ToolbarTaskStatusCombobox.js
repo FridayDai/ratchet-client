@@ -1,5 +1,5 @@
 var flight = require('flight');
-var WithMutipleSelect = require('../common/WithMutipleSelect');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var PARAMs = require('../../constants/Params');
 
 function ToolbarTaskStatusMultipleSelect() {
@@ -17,5 +17,5 @@ function ToolbarTaskStatusMultipleSelect() {
     });
 }
 
-module.exports = flight.component(WithMutipleSelect, ToolbarTaskStatusMultipleSelect);
+module.exports = flight.component(WithMultipleSelect, ToolbarTaskStatusMultipleSelect);
 

@@ -55,11 +55,11 @@ module.exports = {
     },
 
     EMAIL_STATUS_FILTER: [
-        {label: "Verified", value: 3},
-        {label: "Unverified", value: 2},
-        {label: "Not Available", value: 4},
-        {label: "Undeliverable", value: 5},
-        {label: "Declined", value: 6}
+        {text: "Verified", value: 3},
+        {text: "Unverified", value: 2},
+        {text: "Not Available", value: 4},
+        {text: "Undeliverable", value: 5},
+        {text: "Declined", value: 6}
     ],
 
     TREATMENT_STATUS_FILTER: [

@@ -27,36 +27,41 @@
                     %{--<input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">--}%
                     %{--<span class="search" id="search-btn"></span>--}%
                 %{--</div>--}%
+
                 <div class="filler-content">
-                    <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
-                    %{--<select type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"--}%
-                       %{--id="treatmentForSearchPatient" multiple="multiple"></select>--}%
-                    <input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"
-                           id="treatmentForSearchPatient"/>
+                    %{--<label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>--}%
+                    %{--<input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"--}%
+                           %{--id="treatmentForSearchPatient"/>--}%
+                    <select type="text" class="quick-filter input-auto-search" name="treatmentForSearchPatient"
+                            id="treatmentForSearchPatient" multiple="multiple"></select>
                 </div>
 
                 <div class="filler-content">
-                    <label for="selectSurgeon" class="select-tip">PROVIDER</label>
+                    %{--<label for="selectSurgeon" class="select-tip">PROVIDER</label>--}%
+                    %{--<input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>--}%
                     <select id="selectSurgeon" class="quick-filter input-auto-search" multiple="multiple">
                     </select>
-                    %{--<input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>--}%
                 </div>
 
                 <div class="filler-content">
-                    <label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>
-                    <input type="text" name="emailStatusFilter" id="emailStatusFilter"
-                           class="input-group input-auto-search"/>
+                    %{--<label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>--}%
+                    %{--<input type="text" name="emailStatusFilter" id="emailStatusFilter"--}%
+                           %{--class="input-group input-auto-search"/>--}%
+                    <select type="text" name="emailStatusFilter" id="emailStatusFilter"
+                           class="quick-filter input-auto-search" multiple="multiple"></select>
+                </div>
+
+                <div class="filler-content">
+                    %{--<label for="taskStatusFilter" class="select-tip">TASK STATUS</label>--}%
+                    %{--<input type="text" name="taskStatusFilter" id="taskStatusFilter"--}%
+                           %{--class="input-group input-auto-search"/>--}%
+                    <select type="text" name="taskStatusFilter" id="taskStatusFilter"
+                           class="quick-filter input-auto-search" multiple="multiple"></select>
                 </div>
 
                 <div class="filler-content">
                     <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
                     <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
-                           class="input-group input-auto-search"/>
-                </div>
-
-                <div class="filler-content">
-                    <label for="taskStatusFilter" class="select-tip">TASK STATUS</label>
-                    <input type="text" name="taskStatusFilter" id="taskStatusFilter"
                            class="input-group input-auto-search"/>
                 </div>
 

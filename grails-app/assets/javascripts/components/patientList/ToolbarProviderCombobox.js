@@ -1,5 +1,5 @@
 var flight = require('flight');
-var WithMutipleSelect = require('../common/WithMutipleSelect');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var URLs = require('../../constants/Urls');
 
 function ToolbarProviderMutipleSelect() {
@@ -29,4 +29,4 @@ function ToolbarProviderMutipleSelect() {
     });
 }
 
-module.exports = flight.component(WithMutipleSelect, ToolbarProviderMutipleSelect);
+module.exports = flight.component(WithMultipleSelect, ToolbarProviderMutipleSelect);

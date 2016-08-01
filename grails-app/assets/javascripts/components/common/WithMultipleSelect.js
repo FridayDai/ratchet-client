@@ -35,6 +35,7 @@ function multipleSelect() {
     this.defaultOptions = function () {
         return {
             selectAll: false,
+            minimumCountSelected: 100,
             width: "auto",
             dropWidth: 'auto'
         };
