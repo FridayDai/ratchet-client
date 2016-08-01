@@ -226,39 +226,45 @@
     </div>
 
     <g:if test="${task?.alerts?.length()}">
+        <g:each var="alert" in="${task?.alerts}">
+            <div class="alert-bar box-item-attention" data-alert-id="${alert?.id}">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
 
-        <div class="alert-bar box-item-attention" data-alert-id="${task?.alerts?.first()?.id}">
-            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                <g:if test="${alert?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
+                    Patient is indicated high risk by the risk assessment tool.
+                </g:if>
+                <g:elseif test="${alert?.type == 'DISCHARGE_PLAN'}">
+                    Confirm the discharge plan.
+                </g:elseif>
+                <g:elseif test="${alert?.type == 'SNF'}">
+                    SNF stay needs follow up.
+                </g:elseif>
+                <g:elseif test="${alert?.type == 'PATIENT_FOLLOW_UP_TOOL'}">
+                    Patient requires post-op assistance.
+                </g:elseif>
+                <g:elseif test="${alert?.type == 'EVENT_EXPIRED'}">
+                    Patient didn't respond to ${alert?.eventTitle}
+                </g:elseif>
+                <g:else>
+                    Follow up requested by the patient. Contact patient to follow up.
+                </g:else>
+                -
+                <span class="alert-datetime">
+                    <g:formatDate date="${alert?.dateCreated}"
+                                  timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                  format="MMM dd 'at' hh:mm a"/>
+                </span>
 
-            <g:if test="${task?.alerts?.first()?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
-                Patient is indicated high risk by the risk assessment tool.
-            </g:if>
-            <g:elseif test="${task?.alerts?.first()?.type == 'DISCHARGE_PLAN'}">
-                Confirm the discharge plan.
-            </g:elseif>
-            <g:elseif test="${task?.alerts?.first()?.type == 'SNF'}">
-                SNF stay needs follow up.
-            </g:elseif>
-            <g:elseif test="${task?.alerts?.first()?.type == 'PATIENT_FOLLOW_UP_TOOL'}">
-                Patient requires post-op assistance.
-            </g:elseif>
-            <g:else>
-                Follow up requested by the patient. Contact patient to follow up.
-            </g:else>
-            -
-            <span class="alert-datetime">
-                <g:formatDate date="${task?.alerts?.first()?.dateCreated}"
-                              timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                              format="MMM dd 'at' hh:mm a"/>
-            </span>
+                <span class="alert-link resolve-link">Click to resolve</span>
 
-            <span class="alert-link resolve-link">Click to resolve</span>
+                <span class="alert-link undo-link">
+                    <g:render template="taskBox/shared/countdown"/>
+                    <span class="undo-text">Undo</span>
+                </span>
+            </div>
+        </g:each>
 
-            <span class="alert-link undo-link">
-                <g:render template="taskBox/shared/countdown"/>
-                <span class="undo-text">Undo</span>
-            </span>
-        </div>
+
     </g:if>
 
 </div>
