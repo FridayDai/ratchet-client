@@ -39,10 +39,11 @@ class TreatmentController extends BaseController {
         def clientId = request.session.clientId
         def medicalRecordId = params?.medicalRecordId
         def patientId = params?.patientId
+        def absoluteEventDatestamp = params?.absoluteEventDatestamp
         def absoluteEventTimestamp = params?.absoluteEventTimestamp
         def providerId = params?.providerId
 
-        def resp = treatmentService.updateEventTime(token, clientId, medicalRecordId, patientId, providerId, absoluteEventTimestamp)
+        def resp = treatmentService.updateEventTime(token, clientId, medicalRecordId, patientId, providerId, absoluteEventDatestamp, absoluteEventTimestamp)
         def result = [resp: resp]
         render result as JSON
     }

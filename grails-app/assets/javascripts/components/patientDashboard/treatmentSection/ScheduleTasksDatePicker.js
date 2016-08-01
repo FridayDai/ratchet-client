@@ -19,7 +19,7 @@ function ScheduleTasksDatePicker() {
 
     this.after('initialize', function () {
         this.on(document, this.attr.resetEvent, this.onReset);
-        this.$node.data("DateTimePicker").minDate(moment());
+        this.$node.data("DateTimePicker").minDate(moment().startOf('day'));
         this.on('rc.datePickerSelect', this.onDateSelect);
     });
 }

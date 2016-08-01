@@ -4,6 +4,14 @@ var Utility = require('../../utils/Utility');
 
 function ToolBarAppointmentDateFilter() {
 
+    this.getEventDateTime = function () {
+        return this.$node.val();
+    };
+
+    this.setEventDateTime = function (date) {
+        this.$node.val(date);
+    };
+
     this.after('initialize', function () {
         var me = this;
 

@@ -6,6 +6,7 @@ class TaskController extends BaseController {
 
     def beforeInterceptor = [action: this.&auth]
 
+    def S3UploadService
     def taskService
     def alertService
 
@@ -42,26 +43,34 @@ class TaskController extends BaseController {
         def lastName = params.lastName
         def toolName = params.toolName
         def birthday = params.birthday
+        def s3PDFPath
 
         if (birthday == 'null') {
             birthday = null
         }
 
+        if (params.generatedPdfKey && params.generatedPdfKey != 'null') {
+            s3PDFPath = s3UploadService.getPDFFileLink(params.generatedPdfKey)
+        }
 
-        def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
+        if (s3PDFPath) {
+            redirect url: s3PDFPath
+        } else {
+            def (result, view) = getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId)
 
-        def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
+            def mixedResult = result.mixedResult ? JSON.parse(result.mixedResult) : null
 
-        render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName}_${taskId}"
-            .replaceAll(/[\s+\.,]/, "_").replaceAll(/_+/, '_') + '.pdf',
-                view: view,
-                model: [Task: result, mixedResult: mixedResult, 'download': true],
-                marginLeft: 2,
-                marginTop: 0,
-                marginBottom: 0,
-                marginRight: 2,
-                headerSpacing: 0
-        )
+            render(filename: "${lastName}_${result.patientId.replaceAll("\\s+", "")}_${birthday ? (birthday + '_') : ''}${toolName}_${taskId}"
+                    .replaceAll(/[\s+\.,]/, "_").replaceAll(/_+/, '_') + '.pdf',
+                    view: view,
+                    model: [Task: result, mixedResult: mixedResult, 'download': true],
+                    marginLeft: 2,
+                    marginTop: 0,
+                    marginBottom: 0,
+                    marginRight: 2,
+                    headerSpacing: 0
+            )
+        }
     }
 
     def getTaskResultAndView(token, clientId, patientId, medicalRecordId, taskId) {

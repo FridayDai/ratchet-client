@@ -272,7 +272,6 @@
                 <label class="lbl-group">RELATIONSHIP<span class="caregiver-required">*</span></label>
                 <input id="relationship" name="relationshipVal" class="input-group caregiver-field"
                        placeholder="Spouse (Optional)">
-            </label>
             </div>
 
             <div class="form-group inline emr-email">
@@ -382,7 +381,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-patient-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 
@@ -395,7 +394,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-treatment-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 
