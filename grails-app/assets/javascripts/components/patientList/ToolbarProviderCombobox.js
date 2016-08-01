@@ -18,7 +18,8 @@ function ToolbarProviderMutipleSelect() {
                 value: data.id
             };
         },
-        placeholder: "Provider: All"
+        placeholder: "Provider: All",
+        clearItem: true
     });
 
     this.attributes({

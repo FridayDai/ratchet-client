@@ -273,9 +273,15 @@
         },
 
         _initSource: function() {
-            var url,
+            var array, url,
                 that = this;
-            if ( typeof this.options.source === "string" ) {
+            if ( $.isArray( this.options.source ) ) {
+                array = this.options.source;
+                this.source = function( request, response ) {
+                    response(array, request.term);
+                };
+            }
+            else if ( typeof this.options.source === "string" ) {
                 url = this.options.source;
                 this.source = function( request, response ) {
                     if ( that.xhr ) {
@@ -379,6 +385,9 @@
             this.$choice.off('click').on('click', function(e) {
 
                 if(that.source && !that.$el.data('loadData')) {
+                    that.$choice.addClass( "ui-button-icon-loading" );
+                    that.$el.data('loadData', true);
+
                     that.source({ term: null}, function (ele) {
                         var $opt = ele.map(function (single) {
                             return $("<option />", single);
@@ -388,8 +397,6 @@
                         that.$choice.removeClass( "ui-button-icon-loading" );
                         toggleOpen(e);
                     });
-                    that.$choice.addClass( "ui-button-icon-loading" );
-                    that.$el.data('loadData', true);
                 } else {
                     toggleOpen(e);
                 }
@@ -466,6 +473,7 @@
             });
             this.$selectItems.off('click').on('click', function () {
                 that.updateSelectAll();
+                that.updateClearItem();
                 that.update();
                 that.updateOptGroupSelect();
                 that.options.onClick({
@@ -537,7 +545,9 @@
                     'left': 'auto'
                 });
             }
-            this.groupSelectedItem();
+            if(this.options.clearItem) {
+                this.groupSelectedItem();
+            }
             this.options.onClose();
         },
 
@@ -642,6 +652,14 @@
                 $(val).prop('checked', $children.length &&
                     $children.length === $children.filter(':checked').length);
             });
+        },
+
+        updateClearItem: function () {
+            var $items = this.$selectItems.filter(':checked');
+
+            if($items.length === 0) {
+                this.$clearItem.hide();
+            }
         },
 
         //value or text, default: 'value'
@@ -834,7 +852,7 @@
         name: '',
         isOpen: false,
         placeholder: '',
-        selectAll: true,
+        selectAll: false,
         selectAllDelimiter: ['[', ']'],
         minimumCountSelected: 3,
         ellipsis: false,
@@ -853,6 +871,7 @@
         displayValues: false,
         delimiter: ', ',
         addTitle: false,
+        clearItem: false,
         filterAcceptOnEnter: false,
         hideOptgroupCheckboxes: false,
 

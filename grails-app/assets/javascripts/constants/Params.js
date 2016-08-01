@@ -70,11 +70,11 @@ module.exports = {
     ],
 
     TASK_STATUS_FILTER: [
-        {label: "Overdue", value: 2},
-        {label: "Pending", value: 4},
-        {label: "Scheduled", value: 3},
-        {label: "Expired", value: 6},
-        {label: "Completed", value: 5}
+        {text: "Overdue", value: 2},
+        {text: "Pending", value: 4},
+        {text: "Scheduled", value: 3},
+        {text: "Expired", value: 6},
+        {text: "Completed", value: 5}
     ],
 
     HUMAN_GENDER: [

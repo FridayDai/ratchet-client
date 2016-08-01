@@ -1,4 +1,4 @@
-require('../../libs/multipleSelect/multiple-select');
+require("multiple-select");
 
 var flight = require('flight');
 var WithOptions = require('./WithOptions');
@@ -34,7 +34,9 @@ function multipleSelect() {
 
     this.defaultOptions = function () {
         return {
-            selectAll: false
+            selectAll: false,
+            width: "auto",
+            dropWidth: 'auto'
         };
     };
 

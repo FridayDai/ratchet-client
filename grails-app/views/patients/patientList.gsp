@@ -29,6 +29,8 @@
                 %{--</div>--}%
                 <div class="filler-content">
                     <label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>
+                    %{--<select type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"--}%
+                       %{--id="treatmentForSearchPatient" multiple="multiple"></select>--}%
                     <input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"
                            id="treatmentForSearchPatient"/>
                 </div>
