@@ -26,6 +26,7 @@ function TreatmentToolbar() {
             this.patientId = $hidden.data('patientId');
             this.treatmentId = $hidden.data('treatmentId');
             this.clientId = $hidden.data('clientId');
+            this.providerName = $hidden.data('providerName');
             this.absoluteEventDate = $hidden.data('surgeryDate');
             this.absoluteEventTime = $hidden.data('surgeryTime');
             this.absoluteEventType = $hidden.data('absoluteEventType');
@@ -42,7 +43,8 @@ function TreatmentToolbar() {
             clientId: this.clientId,
             treatmentId: this.treatmentId,
             currentAbsoluteEventDate: surgeryDateTime,
-            absoluteEventType: this.absoluteEventType
+            absoluteEventType: this.absoluteEventType,
+            providerName: this.providerName
         };
     };
 

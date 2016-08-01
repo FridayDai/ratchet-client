@@ -27,6 +27,7 @@ function EditEventDateFormDialog() {
     this.onShow = function (e, data) {
         this.changeLabelPlaceholderWithType(data);
         this.setCurrentAbsoluteEventDate(data.currentAbsoluteEventDate);
+        this.setCurrentProvider(data.providerName);
 
         this.patientId = data.patientId;
         this.medicalRecordId = data.medicalRecordId;
@@ -52,6 +53,12 @@ function EditEventDateFormDialog() {
         this.currentAbsoluteEventDate = current;
 
         this.select('eventTimeFieldSelector').val(current);
+    };
+
+    this.setCurrentProvider = function (currentProvider) {
+        var providerName = currentProvider.substring(1, currentProvider.length-1);
+
+        this.select('providerFieldSelector').val(providerName);
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
