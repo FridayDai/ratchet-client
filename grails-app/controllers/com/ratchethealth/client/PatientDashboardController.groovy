@@ -240,6 +240,7 @@ class PatientDashboardController extends BaseController {
                     title                 : treatment.title,
                     tmpTitle              : treatment.tmpTitle,
                     absoluteEventTimestamp: absoluteEventTimestamp,
+                    eventTime             : treatment.eventTime,
                     absoluteEventType     : treatment.absoluteEventType,
                     indicator             : i < 26 ? numberMap[i++] : '*'
             ]

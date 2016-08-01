@@ -1,7 +1,6 @@
 package com.ratchethealth.client
 
 import grails.converters.JSON
-import org.codehaus.groovy.grails.web.json.JSONObject
 
 class StaffController extends BaseController {
 

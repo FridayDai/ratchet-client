@@ -11,7 +11,7 @@
 
 .table-group {
     min-width: 1180px;
-    margin: 0px 30px;
+    margin: 40px 30px 0;
 }
 
 .patients-inner-header {
@@ -669,11 +669,11 @@
 .column-filter {
     position: absolute;
     right: 50px;
-    bottom: 0;
+    bottom: -35px;
 }
 
 #patientsTable_wrapper {
-    min-height: 200px;
+    min-height: 400px;
 }
 
 #patients-toolbar {

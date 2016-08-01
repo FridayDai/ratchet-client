@@ -66,6 +66,7 @@
             widget = false,
             use24Hours,
             minViewModeNumber = 0,
+            lazyFormat,
             actualFormat,
             parseFormats,
             currentViewMode,
@@ -863,6 +864,11 @@
                     unset = true;
                     input.val('');
                     element.data('date', '');
+
+                    if(lazyFormat) {
+                        lazyFormat = options.lazyFormat;
+                    }
+
                     notifyEvent({
                         type: 'dp.change',
                         date: false,
@@ -881,7 +887,17 @@
                 if (isValid(targetMoment)) {
                     date = targetMoment;
                     viewDate = date.clone();
-                    input.val(date.format(actualFormat));
+
+                    if(lazyFormat) {
+                        var timeRegex = /([01]?\d|2[0-3]):([0-5]\d)/;
+
+                        if(timeRegex.test(input.val())) {
+                            lazyFormat = actualFormat;
+                        }
+                        input.val(date.format(lazyFormat));
+                    } else {
+                        input.val(date.format(actualFormat));
+                    }
                     element.data('date', date.format(actualFormat));
                     unset = false;
                     update();
@@ -1031,6 +1047,7 @@
                 incrementHours: function () {
                     var newDate = date.clone().add(1, 'h');
                     if (isValid(newDate, 'h')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
@@ -1038,6 +1055,7 @@
                 incrementMinutes: function () {
                     var newDate = date.clone().add(options.stepping, 'm');
                     if (isValid(newDate, 'm')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
@@ -1045,6 +1063,7 @@
                 incrementSeconds: function () {
                     var newDate = date.clone().add(1, 's');
                     if (isValid(newDate, 's')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
@@ -1052,6 +1071,7 @@
                 decrementHours: function () {
                     var newDate = date.clone().subtract(1, 'h');
                     if (isValid(newDate, 'h')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
@@ -1059,6 +1079,7 @@
                 decrementMinutes: function () {
                     var newDate = date.clone().subtract(options.stepping, 'm');
                     if (isValid(newDate, 'm')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
@@ -1066,11 +1087,13 @@
                 decrementSeconds: function () {
                     var newDate = date.clone().subtract(1, 's');
                     if (isValid(newDate, 's')) {
+                        closeLazyFormat();
                         setValue(newDate);
                     }
                 },
 
                 togglePeriod: function () {
+                    closeLazyFormat();
                     setValue(date.clone().add((date.hours() >= 12) ? -12 : 12, 'h'));
                 },
 
@@ -1384,8 +1407,23 @@
                 return (Object.keys(givenHoursIndexed).length) ? givenHoursIndexed : false;
             },
 
+            closeLazyFormat = function () {
+                if(lazyFormat) {
+                    lazyFormat = actualFormat;
+                }
+            },
+
             initFormatting = function () {
                 var format = options.format || 'L LT';
+
+                if(options.lazyFormat) {
+                    lazyFormat = options.lazyFormat.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput) {
+                        var newinput = date.localeData().longDateFormat(formatInput) || formatInput;
+                        return newinput.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput2) { //temp fix for #740
+                            return date.localeData().longDateFormat(formatInput2) || formatInput2;
+                        });
+                    });
+                }
 
                 actualFormat = format.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (formatInput) {
                     var newinput = date.localeData().longDateFormat(formatInput) || formatInput;
@@ -1546,6 +1584,27 @@
             }
             return picker;
         };
+
+        picker.lazyFormat = function (newFormat, close) {
+            if (arguments.length === 0) {
+                lazyFormat =  options.lazyFormat;
+                return lazyFormat;
+            }
+
+            if(close === 'close') {
+                closeLazyFormat();
+            } else {
+                if ((typeof newFormat !== 'string') && ((typeof newFormat !== 'boolean') || (newFormat !== false))) {
+                    throw new TypeError('lazyFormat() expects a string or boolean:false parameter ' + newFormat);
+                }
+
+                options.lazyFormat = newFormat;
+                lazyFormat =  options.lazyFormat; // reinit formatting
+            }
+
+            return picker;
+        };
+
 
         picker.timeZone = function (newZone) {
             if (arguments.length === 0) {

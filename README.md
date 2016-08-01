@@ -79,7 +79,8 @@ ratchet-v2-provider-desktop
 - AWS_ACCESS_KEY
 - AWS_SECRET_KEY
 - AWS_REGION
-- SCANNED_PDF_BUCKET
 - NOT_SUPPORT_HTTPS    # true | false | not define
 - RUM_ENABLE    # true | false | not define
-
+- Q_S3_GENERATE_BUCKET
+- Q_PDF_LINK_AWS_SECRET
+- Q_PDF_LINK_AWS_TOKEN
