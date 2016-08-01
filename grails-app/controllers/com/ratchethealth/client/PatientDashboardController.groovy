@@ -275,7 +275,7 @@ class PatientDashboardController extends BaseController {
                 }
 
                 if (task.alerts.length() && !treatment.archived) {
-                    alertNumber++;
+                    alertNumber = alertNumber + task.alerts.length()
                 }
 
                 combinedTasks << task
