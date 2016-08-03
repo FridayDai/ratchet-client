@@ -5,12 +5,12 @@ class PatientFilterFields extends FilterFields {
     String search
     String draw
     String patientType
-    Long treatmentId
-    Long surgeonId
+    String treatmentId
+    String surgeonId
     Long appointmentDate
-    int emailStatus
+    String emailStatus
     String patientIdOrName
     Boolean activeTreatmentOnly = true
-    int treatmentStatus
-    int taskStatus
+    String treatmentStatus
+    String taskStatus
 }
