@@ -57,6 +57,14 @@ module.exports = {
         }
     },
 
+    parseAbsoluteEvent: function (dataStr, dateformat, targetforamt) {
+        if (dataStr) {
+            return moment(dataStr, dateformat || 'YYYY-MM-DD').format(targetforamt || 'MM/DD/YYYY');
+        } else {
+            return '';
+        }
+    },
+
     toBirthday: function (str, toFormat) {
         toFormat = toFormat || 'YYYY-MM-DD';
 

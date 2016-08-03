@@ -23,64 +23,67 @@
         <div id="patients-toolbar" class="inner-search">
 
             <div class="search-content clear">
-                %{--<div class="filler-content combined-search">--}%
-                    %{--<input type="text" placeholder="Patient ID, Name, Email" class="search-input" id="search-input">--}%
-                    %{--<span class="search" id="search-btn"></span>--}%
-                %{--</div>--}%
 
                 <div class="filler-content">
-                    %{--<label for="treatmentForSearchPatient" class="select-tip">TREATMENT</label>--}%
-                    %{--<input type="text" class="input-group input-auto-search" name="treatmentForSearchPatient"--}%
-                           %{--id="treatmentForSearchPatient"/>--}%
                     <select type="text" class="quick-filter input-auto-search" name="treatmentForSearchPatient"
                             id="treatmentForSearchPatient" multiple="multiple"></select>
                 </div>
 
                 <div class="filler-content">
-                    %{--<label for="selectSurgeon" class="select-tip">PROVIDER</label>--}%
-                    %{--<input type="text" name="selectSurgeon" id="selectSurgeon" class="input-group input-auto-search"/>--}%
+                    <select type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
+                    class="quick-filter input-auto-search"></select>
+                </div>
+
+                <div class="filler-content">
                     <select id="selectSurgeon" class="quick-filter input-auto-search" multiple="multiple">
                     </select>
                 </div>
 
                 <div class="filler-content">
-                    %{--<label for="emailStatusFilter" class="select-tip">EMAIL STATUS</label>--}%
-                    %{--<input type="text" name="emailStatusFilter" id="emailStatusFilter"--}%
-                           %{--class="input-group input-auto-search"/>--}%
                     <select type="text" name="emailStatusFilter" id="emailStatusFilter"
                            class="quick-filter input-auto-search" multiple="multiple"></select>
                 </div>
 
                 <div class="filler-content">
-                    %{--<label for="taskStatusFilter" class="select-tip">TASK STATUS</label>--}%
-                    %{--<input type="text" name="taskStatusFilter" id="taskStatusFilter"--}%
-                           %{--class="input-group input-auto-search"/>--}%
                     <select type="text" name="taskStatusFilter" id="taskStatusFilter"
                            class="quick-filter input-auto-search" multiple="multiple"></select>
                 </div>
 
                 <div class="filler-content">
-                    <label for="treatmentStatusFilter" class="select-tip">TREATMENT STATUS</label>
-                    <input type="text" name="treatmentStatusFilter" id="treatmentStatusFilter"
-                           class="input-group input-auto-search"/>
+                    <div class="ms-parent quick-filter input-auto-search">
+                        <button type="button" class="ms-choice" id="appointment-menu">
+                            <span class="placeholder">Appointment: All</span>
+                            <div></div>
+                        </button>
+                        <div class="ms-drop ms-manual bottom hidden ">
+                            <ul>
+                                <li>
+                                    <div id="date-tooltip-content">
+                                        <label for="appointmentDateFilter" class="select-tip">Pick appointment date</label>
+                                        <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
+                                               class="date-picker input-auto-search appointment-filter"/>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="filler-content">
-                    <label for="appointmentDateFilter" class="select-tip">APPOINTMENT DATE</label>
-                    <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
-                           class="date-picker input-auto-search appointment-filter"/>
+                    <input type="text" class="search-input" id="search-input">
+                    <span class="search" id="search-btn"></span>
                 </div>
+            </div>
 
-                <div class="filler-content column-filter hidden">
-                    <select id="column-status" class="quick-filter" multiple="multiple">
-                        <option value="emailAddress">Email Address</option>
-                        <option value="phoneNumber">Phone Number</option>
-                        <option value="taskStatus">Task Status</option>
-                        <option value="surgery">Surgery</option>
-                        <option value="appointment">Appointment</option>
-                        <option value="provider">Provider</option>
-                    </select>
-                </div>
+            <div class="filler-content column-filter hidden">
+                <select id="column-status" class="quick-filter" multiple="multiple">
+                    <option value="emailAddress">Email Address</option>
+                    <option value="phoneNumber">Phone Number</option>
+                    <option value="taskStatus">Task Status</option>
+                    <option value="surgery">Surgery</option>
+                    <option value="appointment">Appointment</option>
+                    <option value="provider">Provider</option>
+                </select>
             </div>
         </div>
 

@@ -37,8 +37,25 @@ function multipleSelect() {
             selectAll: false,
             minimumCountSelected: 100,
             width: "auto",
-            dropWidth: 'auto'
+            dropWidth: 'auto',
+            onClick: this.onCheckOption,
+            onUncheckAll: this.onCheckOption,
+            onOpen: this.onSavedOptions
         };
+    };
+
+    this.onCheckOption = function () {
+        var data = {};
+        var id = this.$node.multipleSelect("getSelects").toString() || null;
+        data[this.attr.selectDataKey] = id;
+        this.trigger(this.attr.selectEvent, data);
+    };
+
+    this.onSavedOptions = function () {
+        var savedOptions = this.$node.data('save');
+        if(savedOptions) {
+            this.$node.multipleSelect("setSelects", savedOptions);
+        }
     };
 
     this._initMultipleSelect = function () {
@@ -46,6 +63,24 @@ function multipleSelect() {
 
         this.$node.multipleSelect(this.initOptions());
     };
+
+    this.getDisplayItem = function () {
+        return {
+            data: this.$node.multipleSelect("getSelects"),
+            text: this.$node.multipleSelect("getSelects", "text")
+        };
+    };
+
+    this.setDisplayItem = function (item) {
+        if(item && item.text) {
+            var text = item.text.toString();
+            this.$node.data('save', item.data);
+            if(text) {
+                this.$node.next().find('.ms-choice .placeholder').text(text);
+            }
+        }
+    };
+
 
     this.after('initialize', function () {
         this._initMultipleSelect();

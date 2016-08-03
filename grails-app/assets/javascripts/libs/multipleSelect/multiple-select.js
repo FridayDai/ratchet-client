@@ -474,14 +474,7 @@
             this.$selectItems.off('click').on('click', function () {
                 that.updateSelectAll();
                 that.updateClearItem();
-                that.update();
                 that.updateOptGroupSelect();
-                that.options.onClick({
-                    label: $(this).parent().text(),
-                    value: $(this).val(),
-                    checked: $(this).prop('checked'),
-                    instance: that
-                });
 
                 if (that.options.single && that.options.isOpen && !that.options.keepOpen) {
                     that.close();
@@ -496,6 +489,14 @@
                     });
                     that.update();
                 }
+
+                that.options.onClick({
+                    label: $(this).parent().text(),
+                    value: $(this).val(),
+                    checked: $(this).prop('checked'),
+                    instance: that
+                });
+                that.update();
             });
         },
 
@@ -504,6 +505,7 @@
                 return;
             }
             this.options.isOpen = true;
+            this.$choice.addClass('active');
             this.$choice.find('>div').addClass('open');
             this.$drop[this.animateMethod('show')]();
 
@@ -536,6 +538,7 @@
 
         close: function () {
             this.options.isOpen = false;
+            this.$choice.removeClass('active');
             this.$choice.find('>div').removeClass('open');
             this.$drop[this.animateMethod('hide')]();
             if (this.options.container) {
