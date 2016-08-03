@@ -79,6 +79,9 @@
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
                         <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">DECLINED</span>
                     </g:elseif>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "NOT INVITED"}">
+                        <span class="email-state " data-email-status="${patientInfo.status}">NOT INVITED</span>
+                    </g:elseif>
                     <g:else>
                         <i class="email-state-icon fa email-state-icon-unverified div-hidden" aria-hidden="true"></i><span class="email-state div-hidden" data-email-status="${patientInfo.status}"></span>
                     </g:else>
