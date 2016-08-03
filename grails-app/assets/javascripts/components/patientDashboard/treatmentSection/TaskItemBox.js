@@ -191,7 +191,7 @@ function TaskItem() {
 
         var result = $("#task-list-wrap").find("[data-is-absolute='false']");
 
-        if(status == '1' || status == '2' || status == '7') {
+        if(status === 1 || status === 2 || status === 7) {
             if(result.length > 0) {
                 $emailStatusIcon.removeClass(function (index, css) {
                     return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
