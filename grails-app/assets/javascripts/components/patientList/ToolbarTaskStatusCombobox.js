@@ -1,11 +1,13 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var PARAMs = require('../../constants/Params');
 
-function ToolbarTaskStatusCombobox() {
+function ToolbarTaskStatusMultipleSelect() {
     this.options({
         appendTo: ".container",
-        source: PARAMs.TASK_STATUS_FILTER
+        source: PARAMs.TASK_STATUS_FILTER,
+        placeholder: "Task Status: All",
+        clearItem: true
     });
 
     this.attributes({
@@ -15,5 +17,5 @@ function ToolbarTaskStatusCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, ToolbarTaskStatusCombobox);
+module.exports = flight.component(WithMultipleSelect, ToolbarTaskStatusMultipleSelect);
 

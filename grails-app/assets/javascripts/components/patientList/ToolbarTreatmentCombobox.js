@@ -1,8 +1,8 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var URLs = require('../../constants/Urls');
 
-function ToolbarTreatmentCombobox() {
+function ToolbarTreatmentMultipleSelect() {
     this.options({
         url: URLs.GET_TREATMENTS,
         requestData: function (val) {
@@ -14,10 +14,12 @@ function ToolbarTreatmentCombobox() {
         },
         itemFormat: function (data) {
             return {
-                label: data.title + ' ' + data.tmpTitle,
+                text: data.title + ' ' + data.tmpTitle,
                 value: data.id
             };
-        }
+        },
+        placeholder: "Treatment: All",
+        clearItem: true
     });
 
     this.attributes({
@@ -27,4 +29,4 @@ function ToolbarTreatmentCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, ToolbarTreatmentCombobox);
+module.exports = flight.component(WithMultipleSelect, ToolbarTreatmentMultipleSelect);

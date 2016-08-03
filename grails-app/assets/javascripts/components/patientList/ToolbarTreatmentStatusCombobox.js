@@ -1,11 +1,13 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var PARAMs = require('../../constants/Params');
 
-function ToolbarTreatmentStatusCombobox() {
+function ToolbarTreatmentStatusMultipleSelect() {
     this.options({
         appendTo: ".container",
-        source: PARAMs.TREATMENT_STATUS_FILTER
+        source: PARAMs.TREATMENT_STATUS_FILTER,
+        placeholder: "Treatment Status: All",
+        single: true
     });
 
     this.attributes({
@@ -15,4 +17,4 @@ function ToolbarTreatmentStatusCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, ToolbarTreatmentStatusCombobox);
+module.exports = flight.component(WithMultipleSelect, ToolbarTreatmentStatusMultipleSelect);
