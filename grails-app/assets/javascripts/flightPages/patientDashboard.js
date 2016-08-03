@@ -197,6 +197,8 @@ function PatientDetailPage() {
 
         if(status == '1' || status == '2' || status == '7') {
             if(result.length > 0) {
+                $emailStatusIcon
+
                 $emailStatusIcon.removeClass(function (index, css) {
                     return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
                 }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
