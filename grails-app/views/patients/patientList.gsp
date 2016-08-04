@@ -57,7 +57,7 @@
                         </button>
                         <div class="ms-drop ms-manual bottom hidden ">
                             <ul>
-                                <li>
+                                <li class="only-one-list">
                                     <div id="date-tooltip-content">
                                         <label for="appointmentDateFilter" class="select-tip">Pick appointment date</label>
                                         <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"

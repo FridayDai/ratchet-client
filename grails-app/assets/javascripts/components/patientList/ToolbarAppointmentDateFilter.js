@@ -19,6 +19,7 @@ function ToolBarAppointmentDateFilter() {
 
         this.$choice.on('click', function () {
             that.$drop.show();
+            that.$choice.addClass('active');
         });
 
         $(document).click(function (e) {
@@ -29,6 +30,7 @@ function ToolBarAppointmentDateFilter() {
             if (($(e.target)[0] === that.$drop[0] ||
                 $(e.target).parents('.ms-drop')[0] !== that.$drop[0])) {
                 that.$drop.hide();
+                that.$choice.removeClass('active');
             }
         });
     };
