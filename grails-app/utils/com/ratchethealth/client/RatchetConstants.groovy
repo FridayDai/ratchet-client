@@ -75,7 +75,7 @@ class RatchetConstants {
     public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 20, 1000]
 
     //Task type that has view result.
-    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 20, 21, 22,1000]
+    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 20, 21, 22, 1000]
 
     //Task type mixedResult(score and view result).
     public static Integer[] TOOL_TYPE_MiXED_RESULT = [11, 12]

@@ -5,7 +5,7 @@
 <g:applyLayout name="taskResult">
     <html>
         <head>
-            <title>${Task.title}</title>
+            <title>${Task.title} Results</title>
         </head>
         <body>
             <div class="nrs-general container">
