@@ -23,6 +23,7 @@ class RatchetConstants {
     public static final String TOOL_NAME_NDI = 'NDI';
     public static final String TOOL_NAME_NRS_BACK = 'NRS-BACK';
     public static final String TOOL_NAME_NRS_NECK = 'NRS-NECK';
+    public static final String TOOL_NAME_NRS_GENERAL = 'NRS-GENERAL';
     public static final String TOOL_NAME_QUICK_DASH = 'QuickDASH';
     public static final String TOOL_NAME_KOOS = 'KOOS';
     public static final String TOOL_NAME_HOOS = 'HOOS';
@@ -60,6 +61,7 @@ class RatchetConstants {
             1000: TOOL_NAME_HOOS_JR,
             20: TOOL_NAME_RISK_ASSESSMENT_QUESTIONNAIRE,
             21: TOOL_NAME_FOLLOW_UP,
+            22 : TOOL_NAME_NRS_GENERAL,
 
             // These are not real exist
             101: TOOL_NAME_VOICE_CALL,
@@ -73,7 +75,7 @@ class RatchetConstants {
     public static Integer[] TOOL_TYPE_MULTIPLE_SCORE = [4, 5, 7, 8, 10, 14, 15, 20, 1000]
 
     //Task type that has view result.
-    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 20, 21, 1000]
+    public static Integer[] TOOL_TYPE_HAS_VIEW_RESULT = [2, 3, 11, 12, 13, 14, 15, 17, 20, 21, 22, 1000]
 
     //Task type mixedResult(score and view result).
     public static Integer[] TOOL_TYPE_MiXED_RESULT = [11, 12]

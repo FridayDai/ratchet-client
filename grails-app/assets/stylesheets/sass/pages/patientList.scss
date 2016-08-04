@@ -63,7 +63,7 @@
             min-width: 25px;
             width: 25px;
 
-            &:focus {
+            &.expand-width {
                 width: 150px;
             }
         }
@@ -84,6 +84,20 @@
 
         .ui-combobox-toggle {
             height: 27px;
+        }
+    }
+
+    input[type="checkbox"] {
+        height: 20px;
+    }
+
+    li.only-one-list {
+        &:hover {
+            background-color: transparent;
+        }
+
+        .select-tip {
+            font-size: 14px;
         }
     }
 }

@@ -29,6 +29,11 @@ var NOT_AVAILABLE_FUNCTIONS = [
     'onUndoButtonClicked'
 ];
 
+var STATUS_MAPPING = {
+    'UNVERIFIED': ['email-state-icon-unverified', 'UNVERIFIED'],
+    'DECLINED': ['email-state-icon-declined', 'DECLINED']
+};
+
 function TaskItem() {
 
     this.attributes({
@@ -171,9 +176,35 @@ function TaskItem() {
                     $taskBox.remove();
 
                     Notifications.showFadeOutMsg(STRINGs.TASK_DELETE.format(taskTitle));
+                    me.checkEmailStatus();
                 }
             }
         });
+    };
+
+    this.checkEmailStatus = function() {
+        var $emailStatus = $('.email-state');
+        var $emailStatusIcon = $('.email-state-icon');
+        var $inviteContainer = $('.div-invite');
+
+        var status = $emailStatus.data('emailStatus');
+
+        var result = $("#task-list-wrap").find("[data-is-absolute='false']");
+
+        if(status === 1 || status === 2 || status === 7) {
+            if(result.length > 0) {
+                $emailStatusIcon.removeClass(function (index, css) {
+                    return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
+
+                $emailStatus.text(STATUS_MAPPING.UNVERIFIED[1]).show();
+                $inviteContainer.css('display', 'inline-block');
+            } else {
+                $emailStatusIcon.hide();
+                $emailStatus.text('NOT INVITED').show();
+                $inviteContainer.css('display', 'none');
+            }
+        }
     };
 
     this.checkPhoneNumberStatus = function () {

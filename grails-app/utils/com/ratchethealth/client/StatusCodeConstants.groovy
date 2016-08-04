@@ -64,9 +64,9 @@ class StatusCodeConstants {
     public static final String[] STAFF_STATUS = ["ACTIVE", "INACTIVE"]
 
     //common status
-    // BE status is UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5) DECLINED(6)
+    // BE status is UNINVITED (1), INVITED (2), VERIFIED(3), NO_EMAIL(4), BOUNCED(5) DECLINED(6) NOT INVITED(7)
     public static final String[] EMAIL_STATUS =
-            ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED", "DECLINED"]
+            ["UNINVITED", "INVITED", "VERIFIED", "NO_EMAIL", "BOUNCED", "DECLINED", "NOT INVITED"]
     
     public static final Map ALERT_TYPE = [
             "emailBounced": "EMAIL_BOUNCED"

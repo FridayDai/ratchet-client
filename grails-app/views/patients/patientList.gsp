@@ -20,7 +20,7 @@
             </g:if>
         </div>
 
-        <div id="patients-toolbar" class="inner-search">
+        <div id="patients-toolbar" class="inner-search hidden">
 
             <div class="search-content clear">
 
@@ -57,7 +57,7 @@
                         </button>
                         <div class="ms-drop ms-manual bottom hidden ">
                             <ul>
-                                <li>
+                                <li class="only-one-list">
                                     <div id="date-tooltip-content">
                                         <label for="appointmentDateFilter" class="select-tip">Pick appointment date</label>
                                         <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"

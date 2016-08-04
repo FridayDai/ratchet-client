@@ -73,8 +73,9 @@
 
 .ms-drop {
     width: 100%;
-    min-width: 150px;
-    overflow: hidden;
+    min-width: 160px;
+    max-height: 300px;
+    overflow: auto;
     display: none;
     margin-top: -1px;
     padding: 0;
@@ -149,7 +150,6 @@
 }
 
 .ms-drop ul {
-    overflow: auto;
     margin: 0;
 }
 
@@ -159,6 +159,14 @@
     background-image: none;
     position: static;
     padding: 5px 8px;
+
+    &:hover {
+        background-color: $base-color-grey-white;
+    }
+
+    &.selected-group-aciton {
+        background-color: transparent;
+    }
 }
 
 .ms-drop ul > li .disabled {
@@ -189,7 +197,7 @@
     white-space: nowrap;
     max-width: 250px;
     text-overflow: ellipsis;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .ms-drop ul > li label.optgroup {
@@ -209,7 +217,10 @@
     .selected-group {
         border-bottom: 1px solid #aaa;
     }
+
     .clear-all {
+        cursor: pointer;
+
         &:hover {
             text-decoration: underline;
         }

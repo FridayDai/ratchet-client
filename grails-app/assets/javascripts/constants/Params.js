@@ -51,7 +51,8 @@ module.exports = {
         3: '',
         4: 'Not Available',
         5: 'UNDELIVERABLE',
-        6: 'DECLINED'
+        6: 'DECLINED',
+        7: 'NOT INVITED'
     },
 
     EMAIL_STATUS_FILTER: [

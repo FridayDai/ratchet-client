@@ -71,7 +71,9 @@ function ToolbarPanel() {
         var toolbarData = data.toolbar;
 
         this._patientIdOrNamePreviousVal = toolbarData.patientIdOrName;
-        this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal);
+        if(this._patientIdOrNamePreviousVal) {
+            this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal).addClass('expand-width');
+        }
 
         this.child.appointmentDateFieldSelector.setEventDateTime(toolbarData.appointmentDate);
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
@@ -81,9 +83,7 @@ function ToolbarPanel() {
         this.child.taskStatusFieldSelector.setDisplayItem(toolbarData.taskStatus);
     };
 
-    this.after('initialize', function () {
-        this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
-
+    this.initSeachField = function () {
         this.on('keydown', {
             patientIDNameSearchField: this.OnSearchPatientIDName
         });
@@ -92,6 +92,23 @@ function ToolbarPanel() {
             patientIDNameSearchButton: this.triggerSearch
         });
 
+        $(this.attr.patientIDNameSearchField).on('focus', function () {
+            $(this).addClass('expand-width');
+        });
+
+        $(this.attr.patientIDNameSearchField).on('blur', function () {
+            if($(this).val().trim() === '') {
+                $(this).removeClass('expand-width');
+            }
+        });
+    };
+
+    this.after('initialize', function () {
+        this.$node.removeClass('hidden');
+
+        this.on(document, 'loadDataFromSessionRouter', this.onLoadDataFromSessionRouter);
+
+        this.initSeachField();
     });
 }
 
