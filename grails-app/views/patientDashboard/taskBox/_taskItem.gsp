@@ -231,7 +231,7 @@
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
 
                 <g:if test="${alert?.type == 'RISK_ASSESSMENT_AND_PREDICTION_TOOL'}">
-                    Patient is indicated high risk by the risk assessment tool.
+                    The patient has indicated that they are high risk in the Risk Assessment Questionnaire.
                 </g:if>
                 <g:elseif test="${alert?.type == 'DISCHARGE_PLAN'}">
                     Confirm the discharge plan.
