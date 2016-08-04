@@ -71,7 +71,9 @@ function ToolbarPanel() {
         var toolbarData = data.toolbar;
 
         this._patientIdOrNamePreviousVal = toolbarData.patientIdOrName;
-        this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal);
+        if(this._patientIdOrNamePreviousVal) {
+            this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal).addClass('expand-width');
+        }
 
         this.child.appointmentDateFieldSelector.setEventDateTime(toolbarData.appointmentDate);
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
