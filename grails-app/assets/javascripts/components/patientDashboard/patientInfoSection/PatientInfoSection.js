@@ -166,6 +166,27 @@ function PatientInfoSection() {
 
         var status = $emailStatus.data('emailStatus');
 
+        function updateEmailAddress() {
+            if($emailStatus.text() === 'NOT INVITED') {
+                $emailStatusIcon.hide();
+                $emailStatus.text('NOT INVITED').show();
+                $inviteContainer.css('display', 'none');
+                $addEmail.hide();
+            } else {
+                $inviteContainer.css('display', 'inline-block');
+                $addEmail.hide();
+
+                this.trigger('emailStatusUpdated', {
+                    blank: false
+                });
+
+                $emailStatusIcon.removeClass(function (index, css) {
+                    return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
+                }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
+                $emailStatus.text(STATUS_MAPPING.UNVERIFIED[1]).show();
+            }
+        }
+
         if (PARAMs.EMAIL_STATUS[status] !== 'DECLINED') {
             if (isDeclined) {
                 $emailStatus.data('emailStatus', 6);
@@ -188,17 +209,7 @@ function PatientInfoSection() {
                     $emailStatusIcon.hide();
                     $emailStatus.hide();
                 } else {
-                    $inviteContainer.css('display', 'inline-block');
-                    $addEmail.hide();
-
-                    this.trigger('emailStatusUpdated', {
-                        blank: false
-                    });
-
-                    $emailStatusIcon.removeClass(function (index, css) {
-                        return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
-                    }).addClass(STATUS_MAPPING.UNVERIFIED[0]).show();
-                    $emailStatus.text(STATUS_MAPPING.UNVERIFIED[1]).show();
+                    updateEmailAddress();
                 }
             }
         } else {
