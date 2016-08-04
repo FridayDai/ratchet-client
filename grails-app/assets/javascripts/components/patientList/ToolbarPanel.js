@@ -41,7 +41,8 @@ function ToolbarPanel() {
             email: this.child.emailStatusFieldSelector.getDisplayItem(),
             patientIdOrName: this._patientIdOrNamePreviousVal,
             treatmentStatus: this.child.treatmentStatusFieldSelector.getDisplayItem(),
-            taskStatus: this.child.taskStatusFieldSelector.getDisplayItem()
+            taskStatus: this.child.taskStatusFieldSelector.getDisplayItem(),
+            appointmentDate: this.child.appointmentDateFieldSelector.getEventDateTime()
         };
     };
 
@@ -72,6 +73,7 @@ function ToolbarPanel() {
         this._patientIdOrNamePreviousVal = toolbarData.patientIdOrName;
         this.select('patientIDNameSearchField').val(this._patientIdOrNamePreviousVal);
 
+        this.child.appointmentDateFieldSelector.setEventDateTime(toolbarData.appointmentDate);
         this.child.treatmentFieldSelector.setDisplayItem(toolbarData.treatment);
         this.child.providerFieldSelector.setDisplayItem(toolbarData.provider);
         this.child.emailStatusFieldSelector.setDisplayItem(toolbarData.email);

@@ -15,6 +15,7 @@ class PatientService extends RatchetAPIService {
         def profilePhoto = patient?.profilePhoto
         def treatmentId = patient?.treatmentId
         def surgeonId = patient?.staffId
+        def absoluteEventDatestamp = patient?.absoluteEventDatestamp
         def absoluteEventTimestamp = patient?.absoluteEventTimestamp
         def ecFirstName = patient?.ecFirstName
         def ecLastName = patient?.ecLastName
@@ -47,7 +48,8 @@ class PatientService extends RatchetAPIService {
                     .field("profilePhoto", profilePhoto)
                     .field("treatmentId", treatmentId)
                     .field("surgeonId", surgeonId)
-                    .field("absoluteEventTimestamp", absoluteEventTimestamp)
+                    .field("absoluteEventTimestamp", absoluteEventDatestamp)
+                    .field("eventTimestamp", absoluteEventTimestamp)
                     .field("ecFirstName", ecFirstName)
                     .field("ecLastName", ecLastName)
                     .field("relationship", relationship)
@@ -91,8 +93,8 @@ class PatientService extends RatchetAPIService {
                 'offset'             : start,
                 "clientId"           : clientId,
                 "patientType"        : patientType,
-                "treatmentId"        : treatmentId,
-                "surgeonId"          : surgeonId,
+                "treatmentIds"        : treatmentId,
+                "surgeonIds"          : surgeonId,
                 "patientIdOrName"    : patientIdOrName,
                 "emailStatus"        : emailStatus,
                 "order"              : sortDir,
@@ -102,6 +104,10 @@ class PatientService extends RatchetAPIService {
                 "taskStatus"         : taskStatus,
                 "appointmentTimestamp"    : appointmentDate
         ];
+
+        if(queryStrings.treatmentStatus == 0) {
+            queryStrings.treatmentStatus = null;
+        }
 
         if (queryStrings.taskStatus == 0) {
             queryStrings.taskStatus = null;

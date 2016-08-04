@@ -27,6 +27,7 @@ function EditEventDateFormDialog() {
     this.onShow = function (e, data) {
         this.changeLabelPlaceholderWithType(data);
         this.setCurrentAbsoluteEventDate(data.currentAbsoluteEventDate);
+        this.setCurrentProvider(data.providerName);
 
         this.patientId = data.patientId;
         this.medicalRecordId = data.medicalRecordId;
@@ -54,12 +55,18 @@ function EditEventDateFormDialog() {
         this.select('eventTimeFieldSelector').val(current);
     };
 
+    this.setCurrentProvider = function (currentProvider) {
+        var providerName = currentProvider.substring(1, currentProvider.length-1);
+
+        this.select('providerFieldSelector').val(providerName);
+    };
+
     this.setFormAction = function (patientId, medicalRecordId) {
-        var newDate = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
+        var dateTime = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
         var providerId = this.select('providerFieldSelector').data('id');
 
         this.formEl.attr('action',
-            URLs.UPDATE_SURGERY_DATE.format(patientId, medicalRecordId, providerId, newDate)
+            URLs.UPDATE_SURGERY_DATE.format(patientId, medicalRecordId, providerId, dateTime.date, dateTime.time)
         );
     };
 
@@ -96,10 +103,11 @@ function EditEventDateFormDialog() {
     };
 
     this.onEditSurgeryDateSuccess = function () {
-        var newDate = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
+        var dateTime = Utility.toVancouverDateTime(this.select('eventTimeFieldSelector').val());
 
         this.trigger('editSurgeryDateSuccess', {
-            newDate: newDate,
+            newDate: dateTime? dateTime.date : null,
+            newTime: dateTime? dateTime.time : null,
             medicalRecordId: this.medicalRecordId
         });
     };

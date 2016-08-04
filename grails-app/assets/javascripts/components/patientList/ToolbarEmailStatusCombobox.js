@@ -1,11 +1,13 @@
 var flight = require('flight');
-var WithCombobox = require('../common/WithCombobox');
+var WithMultipleSelect = require('../common/WithMultipleSelect');
 var PARAMs = require('../../constants/Params');
 
-function ToolbarEmailStatusCombobox() {
+function ToolbarEmailStatusMutipleSelect() {
     this.options({
         appendTo: ".container",
-        source: PARAMs.EMAIL_STATUS_FILTER
+        source: PARAMs.EMAIL_STATUS_FILTER,
+        placeholder: "Email status: All",
+        clearItem: true
     });
 
     this.attributes({
@@ -15,4 +17,4 @@ function ToolbarEmailStatusCombobox() {
     });
 }
 
-module.exports = flight.component(WithCombobox, ToolbarEmailStatusCombobox);
+module.exports = flight.component(WithMultipleSelect, ToolbarEmailStatusMutipleSelect);

@@ -131,7 +131,9 @@ function AddTreatmentFormDialog() {
         };
 
         if ($eventTime.is(':visible')) {
-            result.absoluteEventTimestamp = Utility.toVancouverDateTime($eventTime.val());
+            var dateTime = Utility.toVancouverDateTime($eventTime.val());
+            result.absoluteEventDatestamp = dateTime.date;
+            result.absoluteEventTimestamp = dateTime.time;
         }
 
         return result;
@@ -145,7 +147,8 @@ function AddTreatmentFormDialog() {
             clientId: this.patientInfo.clientId,
             patientId: this.patientInfo.patientId,
             emailStatus: this.patientInfo.emailStatus,
-            treatmentDate: eventTime
+            treatmentDate: eventTime ? eventTime.date : null,
+            treatmentTime: eventTime ? eventTime.time : null
         }));
     };
 

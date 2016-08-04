@@ -79,6 +79,9 @@
                     <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
                         <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">DECLINED</span>
                     </g:elseif>
+                    <g:elseif test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "NOT INVITED"}">
+                        <i class="email-state-icon fa email-state-icon-unverified hidden" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">NOT INVITED</span>
+                    </g:elseif>
                     <g:else>
                         <i class="email-state-icon fa email-state-icon-unverified div-hidden" aria-hidden="true"></i><span class="email-state div-hidden" data-email-status="${patientInfo.status}"></span>
                     </g:else>
@@ -272,7 +275,6 @@
                 <label class="lbl-group">RELATIONSHIP<span class="caregiver-required">*</span></label>
                 <input id="relationship" name="relationshipVal" class="input-group caregiver-field"
                        placeholder="Spouse (Optional)">
-            </label>
             </div>
 
             <div class="form-group inline emr-email">
@@ -382,7 +384,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-patient-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 
@@ -395,7 +397,7 @@
         <div class="form-group email-group">
             <label class="lbl-group">TYPE DELETE</label>
             <input id="delete-treatment-field" name="deleteField" type="text"
-                   class="input-group" required>
+                   class="input-group" required/>
         </div>
     </form>
 

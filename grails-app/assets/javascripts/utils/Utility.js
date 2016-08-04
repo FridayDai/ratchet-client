@@ -28,7 +28,9 @@ module.exports = {
     },
 
     guessDateTimeFormat: function (dateStr) {
-        var validFormat = _.filter(PARAMs.DATE_TIME_FORMAT,
+        dateStr = dateStr.trim();
+
+        var validFormat = _.filter(PARAMs.DATE_TIME_FORMAT.concat(PARAMs.DATE_FORMAT),
             function (format) {
                 return moment(dateStr, format, true).isValid();
             });
@@ -50,6 +52,14 @@ module.exports = {
     parseBirthday: function (dataStr) {
         if (dataStr) {
             return moment(dataStr, 'YYYY-MM-DD').format('MM/DD/YYYY');
+        } else {
+            return '';
+        }
+    },
+
+    parseAbsoluteEvent: function (dataStr, dateformat, targetforamt) {
+        if (dataStr) {
+            return moment(dataStr, dateformat || 'YYYY-MM-DD').format(targetforamt || 'MM/DD/YYYY');
         } else {
             return '';
         }
@@ -117,11 +127,19 @@ module.exports = {
 
     toVancouverDateTime: function (time) {
         if (time) {
+            time = time.trim();
 
             var validFormat = this.guessDateTimeFormat(time);
 
             if (validFormat) {
-                return moment.tz(time, validFormat, "America/Vancouver").format('x');
+
+                var dateTime = moment.tz(time, validFormat, "America/Vancouver").format('x');
+                var date = moment.tz(time, validFormat, "America/Vancouver").startOf('day').format('x');
+
+                return {
+                    date: date,
+                    time: _.indexOf(PARAMs.DATE_TIME_FORMAT, validFormat) >= 0 ? dateTime : null
+                };
             } else {
                 return null;
             }

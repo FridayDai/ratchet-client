@@ -18,7 +18,9 @@
                                    data-patient-id="${patientId}" data-medical-record-id="${medicalRecord?.id}"
                                    data-treatment-id="${medicalRecord?.treatmentId}"
                                    data-surgery-date="${medicalRecord?.absoluteEventTimestamp}"
-                                   data-absolute-event-type="${medicalRecord?.absoluteEventType}"/>
+                                   data-surgery-time ="${medicalRecord?.eventTime}"
+                                   data-absolute-event-type="${medicalRecord?.absoluteEventType}"
+                                   data-provider-name="${medicalRecord?.providerName}" />
 
                     <a class="ui-tabs-anchor" data-id="sub${i}">
                         <label class="treatment-indicate">

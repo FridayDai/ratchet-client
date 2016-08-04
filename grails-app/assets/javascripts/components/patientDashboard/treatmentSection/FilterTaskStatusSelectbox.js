@@ -20,6 +20,7 @@ function FilterTaskStatusSelectbox() {
         this.$node.multipleSelect({
             width: "auto",
             dropWidth: '180px',
+            selectAll: true,
             selectAllText: "<span>ALL</span>",
             allSelected: "Task: ALL",
             selectAllDelimiter: ['', ''],

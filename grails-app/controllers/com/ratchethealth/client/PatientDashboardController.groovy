@@ -240,8 +240,10 @@ class PatientDashboardController extends BaseController {
                     title                 : treatment.title,
                     tmpTitle              : treatment.tmpTitle,
                     absoluteEventTimestamp: absoluteEventTimestamp,
+                    eventTime             : treatment.eventTime,
                     absoluteEventType     : treatment.absoluteEventType,
-                    indicator             : i < 26 ? numberMap[i++] : '*'
+                    indicator             : i < 26 ? numberMap[i++] : '*',
+                    providerName          : treatment.tasks.providerName
             ]
 
             medicalRecords << treatmentProperty
@@ -274,7 +276,7 @@ class PatientDashboardController extends BaseController {
                 }
 
                 if (task.alerts.length() && !treatment.archived) {
-                    alertNumber++;
+                    alertNumber = alertNumber + task.alerts.length()
                 }
 
                 combinedTasks << task
