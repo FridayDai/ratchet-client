@@ -56,9 +56,11 @@ function EditEventDateFormDialog() {
     };
 
     this.setCurrentProvider = function (currentProvider) {
-        var providerName = currentProvider.substring(1, currentProvider.length-1);
+        if(currentProvider.length > 0) {
+            var providerName = currentProvider.substring(1, currentProvider.length-1);
 
-        this.select('providerFieldSelector').val(providerName);
+            this.select('providerFieldSelector').val(providerName);
+        }
     };
 
     this.setFormAction = function (patientId, medicalRecordId) {
