@@ -10,6 +10,8 @@ function ToolBarAppointmentDateFilter() {
 
     this.setEventDateTime = function (date) {
         this.$node.val(date);
+        this.$choice.find('.placeholder').text(Utility.parseAbsoluteEvent(date, 'MMM D, YYYY') || 'Appointment: All');
+
     };
 
     this.initAppointment = function () {

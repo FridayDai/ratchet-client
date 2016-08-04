@@ -115,6 +115,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/surgeryFollowUp'
                 break
 
+            case RatchetConstants.TOOL_NAME_NRS_GENERAL:
+                view = '/taskResult/nrsGeneral'
+                break
+
             default:
                 render status: 404
                 return
