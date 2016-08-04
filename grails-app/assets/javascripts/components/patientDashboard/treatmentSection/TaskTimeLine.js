@@ -27,6 +27,16 @@ function TaskTimeLineT() {
         }
     };
 
+    this.checkLastAbsoluteEvent = function () {
+        var visible = $('.box-item:visible');
+        var last = visible.last();
+        var spareHeight = last.height() - last.find('.box-item-container').height() - 2;
+
+        if(spareHeight > 0) {
+            last.find('.item-absolute-date').css('padding-bottom', spareHeight);
+        }
+    };
+
     this.showTimeLine = function () {
         var timeLine = this.select('taskTimeLineSelector');
         if(!timeLine.hasClass('tasks-time-line')){
@@ -35,6 +45,7 @@ function TaskTimeLineT() {
 
         this.select('absoluteDateSelector').removeClass('hidden');
         this.checkAbsoluteEventArrow();
+        this.checkLastAbsoluteEvent();
     };
 
     this.checkTimeLine = function () {
