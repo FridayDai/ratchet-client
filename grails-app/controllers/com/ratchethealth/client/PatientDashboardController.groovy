@@ -215,6 +215,10 @@ class PatientDashboardController extends BaseController {
         render(view: '/patientDashboard/activities', model: [patientId: activityPagination.patientId, activities: activities, pagesize: activityPagination.length])
     }
 
+    def getProfileTab() {
+        render(view: '/patientDashboard/profile')
+    }
+
     def getPatientActivities(ActivityFilterFields activityPagination) {
         def clientId = session.clientId
         def data = activityService.getActivities(session.token, clientId, activityPagination)
