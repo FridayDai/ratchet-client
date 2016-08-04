@@ -20,7 +20,7 @@
             </g:if>
         </div>
 
-        <div id="patients-toolbar" class="inner-search">
+        <div id="patients-toolbar" class="inner-search hidden">
 
             <div class="search-content clear">
 
