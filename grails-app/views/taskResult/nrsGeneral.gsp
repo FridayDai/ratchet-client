@@ -8,34 +8,32 @@
             <title>${Task.title}</title>
         </head>
         <body>
-            <div class="nrs-general task-result-content">
-                <div class="container">
-                    <g:each var="question" in="${Task.questions}" status="i">
-                        <div class="question-list">
-                            <div class="question">
-                                ${raw(question.title)}
-                            </div>
-                            <div class="answer-list">
-                                <ul class="list">
-                                    <g:each var="j" in="${(0..<11)}">
-                                        <li class="answer">
-                                            <label class="choice choice-number choice-number-${j}">
-                                                <input type="radio" class="rc-choice-hidden"
-                                                    <g:if test="${Task.type == RatchetConstants.ToolEnum.NRS_GENERAL.value}">
-                                                        <g:if test="${i == 0}"> name="choices.general"</g:if>
-                                                        <g:if test="${i == 0 && choices?.general == j.toString()}"> checked</g:if>
-                                                    </g:if>
-                                                    <g:if test="${Draft && Draft[i.toString()] == j.toString()}"> checked</g:if>
-                                                       value="${j}"/>
-                                                <span class="rc-radio"></span>
-                                            </label>
-                                        </li>
-                                    </g:each>
-                                </ul>
-                            </div>
+            <div class="nrs-general container">
+                <g:each var="question" in="${Task.questions}" status="i">
+                    <div class="question-list">
+                        <div class="question primary-color">
+                            ${raw(question.title)}
                         </div>
-                    </g:each>
-                </div>
+                    </div>
+                    <div class="answer-list">
+                        <ul class="list">
+                            <g:each var="choice" in="${question.choices}">
+                                <li class="answer">
+                                    <div class="text primary-color">${choice.content}</div>
+                                    <label class="choice choice-number">
+                                        <span class="result-circle-radio">
+                                            <g:if test="${choice.id == question.answerChoiceId}">
+                                                <span class="result-circle-radio-checked"></span>
+                                            </g:if>
+                                        </span>
+                                        <span class="rc-radio"></span>
+                                    </label>
+                                </li>
+                            </g:each>
+
+                        </ul>
+                    </div>
+                </g:each>
             </div>
         </body>
     </html>
