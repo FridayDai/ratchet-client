@@ -216,7 +216,11 @@ class PatientDashboardController extends BaseController {
     }
 
     def getProfileTab() {
-        render(view: '/patientDashboard/profile')
+        String token = request.session.token
+        def patientId = params?.patientId
+
+        def patientInfo = patientDashboardService.showSinglePatient(token, patientId)
+        render(view: '/patientDashboard/profile', model: [patientInfo: patientInfo])
     }
 
     def getPatientActivities(ActivityFilterFields activityPagination) {
