@@ -1,0 +1,33 @@
+.profile-content {
+    margin: 30px;
+
+    .panel {
+        padding: 20px;
+        margin-bottom: 10px;
+        background-color: $base-color-grey-white-similar;
+    }
+
+    .panel-title {
+        margin-bottom: 10px;
+        font-size: 17px;
+    }
+
+    .required-field {
+        margin: 10px 0;
+        font-size: 15px;
+        text-align: left;
+    }
+
+    .info-field {
+        margin: 15px 0;
+    }
+
+    .info-name {
+        font-size: 12px;
+        color: $base-color-darker-font-grey;
+    }
+
+    .info-value {
+        color: $base-color-medium-black;
+    }
+}

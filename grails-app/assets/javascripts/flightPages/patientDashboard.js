@@ -13,6 +13,7 @@ var PatientLevelTabToolbar = require('../components/patientDashboard/PatientLeve
 var GroupSection = require('../components/patientDashboard/groupSection/GroupSection');
 var TeamSection = require('../components/patientDashboard/caregiverSection/CaregiverSection');
 var ReportSection = require('../components/patientDashboard/reportSection/ReportSection');
+var ProfileSection = require('../components/patientDashboard/profileSection/ProfileSection');
 var ActivitySection = require('../components/patientDashboard/activitySection/ActivitySection');
 var EditPatientFormDialog = require('../components/patientDashboard/patientInfoSection/EditPatientFormDialog');
 var AddEmailFormDialog = require('../components/patientDashboard/patientInfoSection/AddEmailFormDialog');
@@ -34,7 +35,8 @@ var TYPE_SECTION_MAPPING = {
     'Report': ReportSection,
     'Group': GroupSection,
     'Caregiver': TeamSection,
-    'Activities': ActivitySection
+    'Activities': ActivitySection,
+    'Profile': ProfileSection
 };
 
 var NODE_NAME_TEMP = '{0}Node';

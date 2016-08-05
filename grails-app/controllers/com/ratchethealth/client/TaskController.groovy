@@ -68,7 +68,8 @@ class TaskController extends BaseController {
                     marginTop: 0,
                     marginBottom: 0,
                     marginRight: 2,
-                    headerSpacing: 0
+                    headerSpacing: 0,
+                    pageSize: 'Letter'
             )
         }
     }
