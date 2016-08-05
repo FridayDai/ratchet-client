@@ -159,6 +159,7 @@ function PatientInfoSection() {
     };
 
     this.updateEmailStatus = function (currentEmail, isDeclined) {
+        var me = this;
         var $addEmail = this.select('addEmailButtonSelector');
         var $emailStatus = this.select('emailStatusLabelSelector');
         var $emailStatusIcon = this.select('emailStatusLabelIconSelector');
@@ -176,7 +177,7 @@ function PatientInfoSection() {
                 $inviteContainer.css('display', 'inline-block');
                 $addEmail.hide();
 
-                this.trigger('emailStatusUpdated', {
+                me.trigger('emailStatusUpdated', {
                     blank: false
                 });
 

@@ -191,11 +191,11 @@ function PatientDetailPage() {
         var $emailStatusIcon = $('.email-state-icon');
         var $inviteContainer = $('.div-invite');
 
-        var status = $emailStatus.data('emailStatus');
+        //var status = $emailStatus.data('emailStatus');
 
         var result = $("#task-list-wrap").find("[data-is-absolute='false']");
 
-        if(status === 1 || status === 2 || status === 7) {
+        if($emailStatus.text() === 'NOT INVITED') {
             if(result.length > 0) {
                 $emailStatusIcon.removeClass(function (index, css) {
                     return (css.match(/\bemail-state-icon-\S+/g) || []).join(' ');
