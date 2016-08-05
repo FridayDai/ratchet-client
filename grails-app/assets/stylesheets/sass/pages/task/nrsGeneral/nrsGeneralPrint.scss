@@ -14,7 +14,6 @@ html, body {
 
 .question {
     font-size: 16px;
-    text-align: center;
     font-weight: bold;
 }
 
@@ -23,7 +22,7 @@ html, body {
 }
 
 .question-list {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .answer-list {
@@ -38,7 +37,7 @@ html, body {
 .answer {
     display: inline-block;
     box-sizing: border-box;
-    width: 8.0909090909%;
+    width: 7.5%;
     min-height: 1px;
     margin-right: -.35em;
     padding-left: 20px;
@@ -79,6 +78,7 @@ html, body {
 
 .rc-radio {
     cursor: default;
+    border: 2px solid #ccc;
 }
 
 .sub-info-panel {
