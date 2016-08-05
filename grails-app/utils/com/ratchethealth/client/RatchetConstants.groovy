@@ -89,4 +89,25 @@ class RatchetConstants {
             "Hourly",
             "Constant"
     ]
+
+    //For patient profile
+    public static final String[] PROFILE_RACE = [
+            "0 - White",
+            "1 - Black or African-American",
+            "2 - Asian",
+            "3 - American Indian/ Alaska Native",
+            "4 - Native Hawaiian/ Other Pacific Islander",
+            "5 - Multi-Racial",
+            "6 - Other",
+            "7 - Declined",
+            "8 - Unknown or Not Reported"
+    ]
+
+    public static final String[] PROFILE_ETHNICITY = [
+            "0 - Non-Hispanic / Non-Latino",
+            "1 - Hispanic / Latino",
+            "2 - Declined",
+            "3 - Unknow or Not Reported"
+    ]
+
 }

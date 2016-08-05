@@ -152,6 +152,15 @@
                         ACTIVITIES
                     </g:link>
                 </li>
+                <li data-type="Profile">
+                    <g:link controller="patientDashboard"
+                            action="getProfileTab"
+                            params="[
+                                    patientId: patientInfo.id
+                            ]">
+                        PROFILE
+                    </g:link>
+                </li>
             </ul>
 
             <div class="patient-tab-tool" data-patient-id="${patientInfo.id}">
