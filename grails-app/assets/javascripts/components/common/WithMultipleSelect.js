@@ -49,6 +49,10 @@ function multipleSelect() {
         var id = this.$node.multipleSelect("getSelects").toString() || null;
         data[this.attr.selectDataKey] = id;
         this.trigger(this.attr.selectEvent, data);
+
+        if(_.isFunction(this.supperClick)) {
+            this.supperClick();
+        }
     };
 
     this.onSavedOptions = function () {
