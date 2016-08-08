@@ -22,7 +22,7 @@ function TaskSection() {
         todayItemSelector: '.today-item',
         allBoxItemSelector: '.box-item',
         boxItemsSelector: '.box-item:not(.archived)',
-        archivedItemSelector: '.box-item.archived',
+        //archivedItemSelector: '.box-item.archived',
 
         filterCountFiledSelector: '#filter-count',
         clearFilterButtonSelector: '#clear-filter',
@@ -137,15 +137,15 @@ function TaskSection() {
 
             this.filter.currentMedicalRecordId = data.medicalRecordId;
 
-            if (data.archived) {
-                this.attr.boxItemsSelector = '.box-item';
-            } else {
-                this.attr.boxItemsSelector = '.box-item:not(.archived)';
-                this.select('archivedItemSelector').hide();
-            }
+            // if (data.archived) {
+            //     this.attr.boxItemsSelector = '.box-item';
+            // } else {
+            //     this.attr.boxItemsSelector = '.box-item:not(.archived)';
+            //     this.select('archivedItemSelector').hide();
+            // }
         } else {
             this.attr.boxItemsSelector = '.box-item:not(.archived)';
-            this.select('archivedItemSelector').hide();
+            // this.select('archivedItemSelector').hide();
             this.filter.currentMedicalRecordId = null;
         }
 
@@ -182,12 +182,12 @@ function TaskSection() {
         }
 
         this.attr.boxItemsSelector = '.box-item:not(.archived)';
-        this.archived = false;
+        //this.archived = false;
 
         this.select('noTaskFiledSelector').hide();
         this.select('taskListFiledSelector').show();
         this.select('boxItemsSelector').show();
-        this.select('archivedItemSelector').hide();
+        //this.select('archivedItemSelector').hide();
 
         this.initFilter();
         this.inactiveAlert();
@@ -224,8 +224,7 @@ function TaskSection() {
     };
 
     this.initDefaultTasks = function () {
-        this.select('archivedItemSelector').hide();
-
+        //this.select('archivedItemSelector').hide();
         this.initFilter();
         this.countTotalTasks();
         this.scrollToday();

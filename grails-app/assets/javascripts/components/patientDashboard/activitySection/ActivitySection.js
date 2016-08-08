@@ -13,7 +13,7 @@ var ACTIVITIES_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',
     'deleteTreatmentSuccess',
     'editSurgeryDateSuccess',
-    'archiveTreatmentSuccess',
+    //'archiveTreatmentSuccess',
     'deleteTaskSuccessful',
     'addTasksSuccess',
     'addPatientGroupSuccess',

@@ -1,11 +1,11 @@
 var flight = require('flight');
 
-var URLs = require('../../../../constants/Urls');
+//var URLs = require('../../../../constants/Urls');
 var Utility = require('../../../../utils/Utility');
 
 function TreatmentToolbar() {
     this.attributes({
-        archived: null,
+        //archived: null,
         currentMedicalRecordId: null,
 
         treatmentListAnchorSelector: '.ui-tabs-anchor',
@@ -66,20 +66,20 @@ function TreatmentToolbar() {
         });
     };
 
-    this.archiveTreatment = function () {
-        var basicIds = this.getBasicIds();
-        var me = this;
-
-        $.ajax({
-            url: URLs.ARCHIVE_TREATMENT.format(basicIds.patientId, basicIds.medicalRecordId),
-            type: 'POST',
-            success: function (data) {
-                if (data.resp === true) {
-                    me.trigger('archiveTreatmentSuccess');
-                }
-            }
-        });
-    };
+    // this.archiveTreatment = function () {
+    //     var basicIds = this.getBasicIds();
+    //     var me = this;
+    //
+    //     $.ajax({
+    //         url: URLs.ARCHIVE_TREATMENT.format(basicIds.patientId, basicIds.medicalRecordId),
+    //         type: 'POST',
+    //         success: function (data) {
+    //             if (data.resp === true) {
+    //                 me.trigger('archiveTreatmentSuccess');
+    //             }
+    //         }
+    //     });
+    // };
 
     this.OnTreatmentAnchorClicked = function () {
 

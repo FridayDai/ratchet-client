@@ -63,7 +63,7 @@ class UrlMappings {
 
         "/patients/$patientId?/treatments"(controller: "treatment", action: "assignTreatment")
         "/patients/$patientId?/absolute-event-time/$medicalRecordId?/provider/$providerId?/$absoluteEventDatestamp?/$absoluteEventTimestamp?"(controller: "treatment", action: "updateEventTime")
-        "/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
+        //"/patients/$patientId?/records/$medicalRecordId?/archived"(controller: "treatment", action: "archived")
 
         //Patient treatment
         "/patients/$patientId?/getTreatmentTab"(controller: "treatment", action: "getTreatmentTab")

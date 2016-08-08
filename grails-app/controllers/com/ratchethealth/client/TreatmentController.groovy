@@ -48,15 +48,15 @@ class TreatmentController extends BaseController {
         render result as JSON
     }
 
-    def archived() {
-        String token = request.session.token
-        def clientId = request.session.clientId
-        def medicalRecordId = params?.medicalRecordId
-        def patientId = params?.patientId
-        def resp = treatmentService.archiveTreatment(token, clientId, medicalRecordId, patientId)
-        def result = [resp: resp]
-        render result as JSON
-    }
+//    def archived() {
+//        String token = request.session.token
+//        def clientId = request.session.clientId
+//        def medicalRecordId = params?.medicalRecordId
+//        def patientId = params?.patientId
+//        def resp = treatmentService.archiveTreatment(token, clientId, medicalRecordId, patientId)
+//        def result = [resp: resp]
+//        render result as JSON
+//    }
 
     def getTreatmentInfo() {
         String token = request.session.token
