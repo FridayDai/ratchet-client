@@ -30,4 +30,14 @@
     .info-value {
         color: $base-color-medium-black;
     }
+
+    .company-table {
+        width: 60%;
+        min-width: 600px;
+        background-color: $base-color-white;
+    }
+
+    .company-inner-body {
+        padding-top: 20px;
+    }
 }
