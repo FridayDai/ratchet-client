@@ -32,7 +32,7 @@ module.exports = {
 
     //Treatment
     UPDATE_SURGERY_DATE: '/patients/{0}/absolute-event-time/{1}/provider/{2}/{3}/{4}',
-    ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
+    //ARCHIVE_TREATMENT: '/patients/{0}/records/{1}/archived',
     ADD_AD_HOC_TASKS: '/patients/{0}/treatments/{1}/add-ad-hoc-tasks',
     DELETE_TREATMENT: '/patients/{0}/treatments/{1}/delete',
     GET_TREATMENT_AVAILABLE_YEARS: '/treatments/{0}/available-years',

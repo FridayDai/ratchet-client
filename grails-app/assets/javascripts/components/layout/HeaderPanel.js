@@ -94,7 +94,7 @@ function HeaderPanel() {
         });
 
         this.on(document, 'alertHasBeenUpdated', this.getAlertCount);
-        this.on(document, 'archiveTreatmentSuccess', this.getAlertCount);
+        //this.on(document, 'archiveTreatmentSuccess', this.getAlertCount);
     });
 }
 

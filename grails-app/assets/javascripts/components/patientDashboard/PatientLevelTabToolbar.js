@@ -8,7 +8,7 @@ var ACTIVE_TASKS_STATUS_EVENTS = [
     'addTreatmentSuccess',
     'deleteTreatmentSuccess',
     'editSurgeryDateSuccess',
-    'archiveTreatmentSuccess',
+    //'archiveTreatmentSuccess',
     'deleteTaskSuccessful',
     'addTasksSuccess'
 ];

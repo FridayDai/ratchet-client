@@ -9,7 +9,7 @@ var GROUP_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',
     'addTasksSuccess',
     'editSurgeryDateSuccess',
-    'archiveTreatmentSuccess',
+    //'archiveTreatmentSuccess',
     'deleteTreatmentSuccess'
 ];
 
@@ -40,7 +40,7 @@ function TreatmentList() {
         if (this.select('tabSelector').length > 0) {
             _.forEach(this.select('tabSelector'), function (element) {
                 TreatmentTabToolbar.attachTo( $(element),  {
-                    archived:  $(element).hasClass('archived-treatment'),
+                    //archived:  $(element).hasClass('archived-treatment'),
                     currentMedicalRecordId: currentMedicalRecordId
                 });
             });
@@ -55,9 +55,9 @@ function TreatmentList() {
         this.select('noTreatmentContainerSelector').show();
     };
 
-    this.onArchiveTreatmentSuccess = function () {
-        this.loadSelf();
-    };
+    // this.onArchiveTreatmentSuccess = function () {
+    //     this.loadSelf();
+    // };
 
     this.onAddTasksSuccess = function (e, data) {
         this.loadSelf(data ? data.medicalRecordId : null);
@@ -86,7 +86,7 @@ function TreatmentList() {
         this.on(document, 'addTreatmentSuccess', this.onAddTreatmentSuccess);
         this.on(document, 'addTasksSuccess', this.onAddTasksSuccess);
         this.on(document, 'editSurgeryDateSuccess', this.onEditSurgeryDateSuccess);
-        this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
+        //this.on(document, 'archiveTreatmentSuccess', this.onArchiveTreatmentSuccess);
         this.on(document, 'deleteTreatmentSuccess', this.onDeleteTreatmentSuccess);
     });
 }

@@ -8,8 +8,8 @@ var ChartPanel = require('./ScoreChart');
 var REPORT_TAB_EFFECT_EVENTS = [
     'addTreatmentSuccess',
     'deleteTreatmentSuccess',
-    'editSurgeryDateSuccess',
-    'archiveTreatmentSuccess'
+    'editSurgeryDateSuccess'
+    //'archiveTreatmentSuccess'
 ];
 
 function ReportSection() {
