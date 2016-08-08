@@ -15,7 +15,7 @@
     <div class="info-container">
         <span class="title">${Task.title}</span>
 
-        <div class="sub-info-panel">
+        <span class="sub-info-panel">
             <span class="status">Completed on <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
                                                                                             timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
                                                                                             format="MM/dd/yyyy"/></span></span>&nbsp;by
@@ -36,7 +36,7 @@
                                                             toolName: Task.title, birthday: Task.birthday,
                                                             generatedPdfKey:Task.pdfKey, medicalRecordId: medicalRecordId]">↓Download PDF</g:link></span>
                 </g:if>
-        </div>
+        </span>
     </div>
 
     <div class="result-info">
