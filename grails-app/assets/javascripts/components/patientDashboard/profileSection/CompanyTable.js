@@ -1,6 +1,5 @@
 var flight = require('flight');
 var WithDataTable = require('../../common/WithDataTable');
-var Utility = require('../../../utils/Utility');
 
 function CompanyTable() {
     this.options({
