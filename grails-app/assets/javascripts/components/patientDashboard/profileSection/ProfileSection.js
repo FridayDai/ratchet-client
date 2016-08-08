@@ -1,6 +1,7 @@
 var flight = require('flight');
 var WithChildren = require('../../common/WithChildren');
 var ClearTabCache = require('../../shared/functional/ClearTabCache');
+var CompanyTable = require('./CompanyTable');
 
 var PROFILE_TAB_EFFECT_EVENTS = [
     'updatePatientSuccess',
@@ -18,12 +19,12 @@ function ProfileSection() {
         clearCacheEvents: PROFILE_TAB_EFFECT_EVENTS,
 
         contentSelector: '.content',
-        activityTableSelector: '#activity-table'
+        companyTableSelector: '.ec-table'
     });
 
-    // this.children({
-    //     activityTableSelector: ActivityTable
-    // });
+    this.children({
+        companyTableSelector: CompanyTable
+    });
 
     this.showTabSection = function () {
         this.$node.children(':first').css('visibility', 'visible');

@@ -103,5 +103,27 @@
             </div>
         </div>
 
+        <div class="panel company-panel">
+            <div class="panel-title">Insurance Company</div>
+            <div class="company-inner-body" id="insurance-company">
+                <table class="ec-table company-table display cursorAuto" data-total="${patientInfo?.insuranceCompanys?.size()}">
+                    <thead>
+                    <tr>
+                        <th class="info-name">INSURANCE COMPANY</th>
+                        <th class="info-name">POLICY NUMBER</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <g:each var="company" in="${patientInfo?.insuranceCompanys}" status="i">
+                        <tr data-is-dom-data="true">
+                            <td>${company.name}</td>
+                            <td>${company.policyNumber}</td>
+                        </tr>
+                    </g:each>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </div>
