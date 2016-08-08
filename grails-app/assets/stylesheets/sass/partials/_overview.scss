@@ -147,39 +147,6 @@
         margin-left: 15px;
     }
 
-    .email-state-icon-unverified {
-        color: $base-color-pending;
-
-        &:before {
-            content: "\f06a";
-        }
-    }
-
-    .email-state-icon-verified {
-        color: $base-color-complete;
-
-        &:before {
-            content: "\f058";
-        }
-    }
-
-    .email-state-icon-nonexistent {
-        color: $base-color-overdue;
-
-        &:before {
-            content: "\f057";
-        }
-    }
-
-    .email-state-icon-declined {
-        color: $base-color-decline;
-
-        &:before {
-            content: "\f05e";
-        }
-    }
-
-
     .invite-patient {
         padding: 5px 10px;
         font-size: 13px;
@@ -420,6 +387,38 @@
     background: image-url('patients/Female.png', false, false) no-repeat;
     background-size: contain;
     vertical-align: middle;
+}
+
+.email-state-icon-unverified {
+    color: $base-color-pending;
+
+    &:before {
+        content: "\f06a";
+    }
+}
+
+.email-state-icon-verified {
+    color: $base-color-complete;
+
+    &:before {
+        content: "\f058";
+    }
+}
+
+.email-state-icon-nonexistent {
+    color: $base-color-overdue;
+
+    &:before {
+        content: "\f057";
+    }
+}
+
+.email-state-icon-declined {
+    color: $base-color-decline;
+
+    &:before {
+        content: "\f05e";
+    }
 }
 
 

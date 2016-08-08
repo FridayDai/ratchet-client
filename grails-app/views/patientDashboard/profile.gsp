@@ -75,6 +75,12 @@
             <div class="info-field">
                 <label class="info-name">EMAIL ADDRESS</label>
                 <div class="info-value">${patientInfo.email ?: 'N/A'}</div>
+                <g:if test="${StatusCodeConstants.EMAIL_STATUS[patientInfo.status - 1] == "DECLINED"}">
+                    <div class="email-state-field">
+                        <i class="email-state-icon fa email-state-icon-declined" aria-hidden="true"></i><span class="email-state " data-email-status="${patientInfo.status}">
+                        Patient declined to communicate via email. (Warning: This cannot be undone.)</span>
+                    </div>
+                </g:if>
             </div>
 
             <div class="info-field">

@@ -496,7 +496,10 @@
                     checked: $(this).prop('checked'),
                     instance: that
                 });
-                that.update();
+
+                if (!that.options.single) {
+                    that.update();
+                }
             });
         },
 
