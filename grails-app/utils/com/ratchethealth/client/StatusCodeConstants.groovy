@@ -47,6 +47,13 @@ class StatusCodeConstants {
             "Prefer SNF": "Prefer SNF"
     ]
 
+    public static final Map TASK_CAROLINAS_COMFORT_SCALE = [
+            "sensation": "Sensation",
+            "pain": "Pain",
+            "movement": "Movement",
+            "total": "Total"
+    ]
+
     public static final Map TASK_OOS_JR_SCORE_LABEL = [
             "STIFFNESS": "Stiffness",
             "PAIN": "Pain",

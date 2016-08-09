@@ -112,6 +112,10 @@ class TaskTagLib {
                 renderTemplate(scores, StatusCodeConstants.TASK_RISK_ASSESSMENT_QUESTIONNAIRE)
                 break
 
+            case RatchetConstants.TOOL_NAME_CAROLINAS_COMFORT_SCALE:
+                renderTemplate(scores, StatusCodeConstants.TASK_CAROLINAS_COMFORT_SCALE)
+                break
+
             default:
                 renderTemplate(scores)
         }

@@ -120,6 +120,10 @@ class TaskController extends BaseController {
                 view = '/taskResult/nrsGeneral'
                 break
 
+            case RatchetConstants.TOOL_NAME_CAROLINAS_COMFORT_SCALE:
+                view = '/taskResult/ccsLike'
+                break
+
             default:
                 render status: 404
                 return
