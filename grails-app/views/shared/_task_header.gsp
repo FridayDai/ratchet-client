@@ -16,9 +16,12 @@
         <span class="title">${Task.title}</span>
 
         <span class="sub-info-panel">
-            <span class="status">Completed on <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
-                                                                                            timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
-                                                                                            format="MM/dd/yyyy"/></span></span>&nbsp;by
+            <span class="status">Completed on
+                <span class="complete-time"><g:formatDate date="${new java.util.Date(Task.completeTime)}"
+                                                          timeZone="${TimeZone.getTimeZone('America/Vancouver')}"
+                                                          format="MM/dd/yyyy"/>
+                </span>
+            by
 
             <span class="name">${Task.patientFirstName} ${Task.patientLastName}</span>
 
@@ -29,7 +32,7 @@
                 <g:else>
                     (<span class="id only-id">ID: ${Task.patientId}</span>)
                 </g:else>
-
+            </span>
                 <g:if test="${!download}">
                     <span class="download"><g:link uri="/task/downloadPDF.pdf"
                                                    params="[patientId: patientId, lastName: Task.patientLastName, taskId: Task.taskId,
