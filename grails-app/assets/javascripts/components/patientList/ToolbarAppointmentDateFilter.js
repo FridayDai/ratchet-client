@@ -44,7 +44,7 @@ function ToolBarAppointmentDateFilter() {
         this.$node.on('dp.hide', function() {
             var date = $(this).val();
             var appointmentDate = Utility.toVancouverTime(date);
-            me.$choice.find('.placeholder').text(Utility.parseAbsoluteEvent(date, 'MMM D, YYYY') || 'Appointment: All');
+            me.$choice.find('.placeholder').text(Utility.parseAbsoluteEvent(date) || 'Appointment: All');
             me.trigger('selectAppointmentDateForPatientTable', {appointmentDate: appointmentDate});
         });
     });

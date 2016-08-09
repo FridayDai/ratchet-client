@@ -61,7 +61,7 @@
                                     <div id="date-tooltip-content">
                                         <label for="appointmentDateFilter" class="select-tip">Pick appointment date</label>
                                         <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
-                                               class="date-picker input-auto-search appointment-filter"/>
+                                               class="date-picker input-auto-search appointment-filter" placeholder="Select date"/>
                                     </div>
                                 </li>
                             </ul>
