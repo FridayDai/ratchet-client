@@ -251,7 +251,7 @@ class PatientDashboardController extends BaseController {
                     eventTime             : treatment.eventTime,
                     absoluteEventType     : treatment.absoluteEventType,
                     indicator             : i < 26 ? numberMap[i++] : '*',
-                    providerName          : treatment.tasks.providerName
+                    absoluteEventProvider : treatment.absoluteEventProvider
             ]
 
             medicalRecords << treatmentProperty
