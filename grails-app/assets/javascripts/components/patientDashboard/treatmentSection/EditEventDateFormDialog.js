@@ -56,10 +56,10 @@ function EditEventDateFormDialog() {
     };
 
     this.setCurrentProvider = function (currentProvider) {
-        if(currentProvider.length > 0) {
-            var providerName = currentProvider.substring(1, currentProvider.length-1);
+        if(currentProvider) {
+            //var providerName = currentProvider.substring(1, currentProvider.length-1);
 
-            this.select('providerFieldSelector').val(providerName);
+            this.select('providerFieldSelector').val(currentProvider);
         }
     };
 
