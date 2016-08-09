@@ -10,11 +10,11 @@ html,body {
 }
 
 #main {
-    padding: 0 40px;
+    padding: 0 35px;
 }
 
 .question-list {
-    margin: 0 0 10px 12px;
+    margin: 0 0 15px 12px;
 }
 
 .question {
@@ -25,7 +25,7 @@ html,body {
 
 .answer {
     position: relative;
-    margin-top: 2px;
+    margin-top: 0;
 
     .text {
         font-size: 8pt;
@@ -72,7 +72,8 @@ html,body {
     }
 
     &.part-1 {
-        padding-left: 15px;
+        padding-left: 22px;
         border-left: 1px solid #8e8e8e;
     }
 }
+

@@ -16,10 +16,6 @@ html,body {
     padding-top: 40px;
 }
 
-.question-list {
-    margin: 0 0 10px 12px;
-}
-
 .question {
     color: $result-main-color;
 
@@ -39,7 +35,7 @@ html,body {
 }
 
 .sub-question {
-    margin: 2px 0;
+    margin: 4px 0;
 
     .sub-question-title {
         padding: 2px 0;

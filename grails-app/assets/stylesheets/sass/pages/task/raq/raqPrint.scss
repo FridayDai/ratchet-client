@@ -1,12 +1,11 @@
 @import '../taskResultPrint';
 
-
 body {
     margin-bottom: 0;
 }
 
 .question-list {
-    margin: 0 0 10px 20px;
+    margin: 0 0 15px 20px;
 }
 
 .question {
@@ -14,6 +13,7 @@ body {
     font-weight: 700;
     color: $result-main-color;
 }
+
 .answer-list {
     font-size: 14px;
     font-weight: 300;
@@ -21,17 +21,17 @@ body {
 
 .answer {
     position: relative;
-    margin-top: 10px;
+    margin-top: 2px;
 
     .text {
-        margin-left: 35px;
+        margin-left: 22px;
         font-size: 8pt;
     }
 }
 
 .result-circle-radio {
     position: absolute;
-    top: 0;
+    top: 3px;
     left: 0;
     display: inline-block;
     box-sizing: content-box;
@@ -52,10 +52,14 @@ body {
     background-color: $result-main-color;
 }
 
-.task-list-wrapper:after {
-    content: '';
-    display: table;
-    clear: both;
+.task-list-wrapper {
+    margin-bottom: 20px;
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
 }
 
 .task-list-part {
@@ -75,21 +79,19 @@ body {
 }
 
 .task-prediction-wrapper {
+    padding: 20px 20px 0;
     font-size: 12px;
-    margin: 0px 20px 20px;
-    padding-top: 5px;
     border-top: 1px solid #8e8e8e;
     font-weight: bold;
 
     .scoreArea {
         font-size: 12px;
 
-        .scoreLevel{
+        .scoreLevel {
             font-size: 12px;
-            margin: 15px;
             font-weight: bold;
         }
-        .riskLevel{
+        .riskLevel {
             font-size: 12px;
             display: inline-block;
             margin: 5px;
@@ -102,12 +104,9 @@ body {
     }
 
 }
+
 #main {
     padding: 0 40px;
     width: 100%;
-}
-
-.task-result-content {
-    margin-top: 130px;
 }
 
