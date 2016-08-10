@@ -1,6 +1,9 @@
 var flight = require('flight');
 var WithDatepicker = require('../common/WithDatepicker');
 var Utility = require('../../utils/Utility');
+var STRINGs = require('../../constants/Strings');
+var PARAMs = require('../../constants/Params');
+var moment = require('moment');
 
 function ToolBarAppointmentDateFilter() {
 
@@ -35,6 +38,24 @@ function ToolBarAppointmentDateFilter() {
                 that.$choice.removeClass('active');
             }
         });
+
+        this.addValidation();
+    };
+
+    this.addValidation = function () {
+        $.validator.addMethod('DateFormatNotStrictCheck', function (value) {
+            if(!value) {
+                return true;
+            }
+
+            return _.some(PARAMs.DATE_FORMAT, function (format) { return moment(value, format, true).isValid(); });
+        }, STRINGs.WRONG_DATE_FORMAT);
+
+        this.$node.rules('remove', 'DateFormatCheck DateMinCheck DateMaxCheck');
+        this.$node.rules('add', {
+            DateFormatNotStrictCheck: true,
+            required: false
+        });
     };
 
     this.after('initialize', function () {
@@ -43,10 +64,14 @@ function ToolBarAppointmentDateFilter() {
 
         this.$node.on('dp.hide', function() {
             var date = $(this).val();
-            var appointmentDate = Utility.toVancouverTime(date);
-            me.$choice.find('.placeholder').text(Utility.parseAbsoluteEvent(date, 'MMM D, YYYY') || 'Appointment: All');
-            me.trigger('selectAppointmentDateForPatientTable', {appointmentDate: appointmentDate});
+
+            if($(this).closest('form').valid()) {
+                var appointmentDate = Utility.toVancouverTime(date);
+                me.$choice.find('.placeholder').text(Utility.parseAbsoluteEvent(date) || 'Appointment: All');
+                me.trigger('selectAppointmentDateForPatientTable', {appointmentDate: appointmentDate});
+            }
         });
+
     });
 }
 

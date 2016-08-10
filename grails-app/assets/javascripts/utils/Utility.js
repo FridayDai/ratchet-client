@@ -59,7 +59,9 @@ module.exports = {
 
     parseAbsoluteEvent: function (dataStr, dateformat, targetforamt) {
         if (dataStr) {
-            return moment(dataStr, dateformat || 'YYYY-MM-DD').format(targetforamt || 'MM/DD/YYYY');
+            var validFormat = this.guessDateFormat(dataStr);
+
+            return moment(dataStr, dateformat || validFormat).format(targetforamt || 'MM/DD/YYYY');
         } else {
             return '';
         }

@@ -723,6 +723,15 @@
     display: inline-block;
 }
 
+.appointment-date-form {
+    .error-container {
+        .error-help-block {
+            position: static;
+            white-space: normal;
+        }
+    }
+}
+
 .appointment-time {
     display: inline-block;
 }
