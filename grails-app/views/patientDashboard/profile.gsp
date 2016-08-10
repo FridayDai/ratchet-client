@@ -43,7 +43,7 @@
             <div class="info-field">
                 <label class="info-name">RACE</label>
                 <div class="info-value">
-                    <g:if test="${patientInfo?.races}">
+                    <g:if test="${patientInfo?.races?.size()}">
                         <g:each in="${patientInfo?.races}" var="race" status="i">
                             <g:if test="${i > 0}">,</g:if>
                             ${RatchetConstants.PROFILE_RACE[race]}
@@ -58,7 +58,7 @@
             <div class="info-field">
                 <label class="info-name">ETHNICITY</label>
                 <div class="info-value">
-                    <g:if test="${patientInfo?.ethnicity}">
+                    <g:if test="${!patientInfo?.ethnicity?.equals(null)}">
                         ${RatchetConstants.PROFILE_ETHNICITY[patientInfo?.ethnicity]}
                     </g:if>
                     <g:else>
@@ -105,7 +105,7 @@
 
             <div class="info-field">
                 <label class="info-name">ZIPCODE</label>
-                <div class="info-value">${patientInfo.zipcode ?: 'N/A'}</div>
+                <div class="info-value">${patientInfo.zipCode ?: 'N/A'}</div>
             </div>
         </div>
 
