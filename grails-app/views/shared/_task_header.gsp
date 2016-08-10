@@ -45,12 +45,22 @@
     <div class="result-info">
         <g:if test="${!RatchetConstants.TOOL_TYPE_NO_SCORE.contains(Task.type)}">
             <g:if test="${RatchetConstants.TOOL_TYPE_MULTIPLE_SCORE.contains(Task.type)}">
-                <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
-                    <span class="score-wrap">
-                        <div class="score-des">${score[0]}:&nbsp;</div>
-                        <div class="score-num">${score[1].toLowerCase()}</div>
-                    </span>
-                </g:multipleScore>
+                <g:if test="${Task?.title == RatchetConstants.TOOL_NAME_CAROLINAS_COMFORT_SCALE}">
+                    <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+                        <span class="score-wrap">
+                            <div class="score-des">${score[0]}:&nbsp;</div>
+                            <div class="score-na">${score[1].toUpperCase()}</div>
+                        </span>
+                    </g:multipleScore>
+                </g:if>
+                <g:else>
+                    <g:multipleScore in="${Task?.nrsScore}" type="${Task.type}" var="score">
+                        <span class="score-wrap">
+                            <div class="score-des">${score[0]}:&nbsp;</div>
+                            <div class="score-num">${score[1].toLowerCase()}</div>
+                        </span>
+                    </g:multipleScore>
+                </g:else>
             </g:if>
             <g:elseif test="${RatchetConstants.TOOL_TYPE_MiXED_RESULT.contains(Task.type)}">
                 <g:set var="mixedResult" value="${Task?.mixedResult ? JSON.parse(Task?.mixedResult) : [:]}"/>
