@@ -58,11 +58,15 @@
                         <div class="ms-drop ms-manual bottom hidden ">
                             <ul>
                                 <li class="only-one-list">
-                                    <div id="date-tooltip-content">
-                                        <label for="appointmentDateFilter" class="select-tip">Pick appointment date</label>
-                                        <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
-                                               class="date-picker input-auto-search appointment-filter"/>
-                                    </div>
+                                    <form id="appointment-form" class="appointment-date-form">
+                                        <input type="hidden" autofocus/>
+
+                                        <div id="date-tooltip-content">
+                                            <label class="select-tip">Pick appointment date</label>
+                                            <input type="text" name="appointmentDateFilter" id="appointmentDateFilter"
+                                                   class="date-picker input-auto-search appointment-filter" placeholder="Select date" required="false"/>
+                                        </div>
+                                    </form>
                                 </li>
                             </ul>
                         </div>

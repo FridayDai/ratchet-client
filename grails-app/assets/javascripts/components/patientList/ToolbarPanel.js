@@ -8,7 +8,7 @@ var emailStatusCombobox = require('./ToolbarEmailStatusCombobox');
 var treatmentStatusCombobox = require('./ToolbarTreatmentStatusCombobox');
 var taskStatusCombobox = require('./ToolbarTaskStatusCombobox');
 var columnFilterCombobox = require('./ToolbarColumnFilterCombobox');
-var appointmentDateFilter = require('./ToolbarAppointmentDateFilter');
+var appointmentDateForm = require('./ToolbarAppointmentForm');
 
 
 function ToolbarPanel() {
@@ -21,7 +21,7 @@ function ToolbarPanel() {
         treatmentStatusFieldSelector: '#treatmentStatusFilter',
         taskStatusFieldSelector: '#taskStatusFilter',
         columnFilterFieldSelector: '#column-status',
-        appointmentDateFieldSelector: '#appointmentDateFilter'
+        appointmentDateFormFieldSelector: '#appointment-form'
     });
 
     this.children({
@@ -31,7 +31,7 @@ function ToolbarPanel() {
         treatmentStatusFieldSelector: treatmentStatusCombobox,
         taskStatusFieldSelector: taskStatusCombobox,
         columnFilterFieldSelector: columnFilterCombobox,
-        appointmentDateFieldSelector: appointmentDateFilter
+        appointmentDateFormFieldSelector: appointmentDateForm
     });
 
     this.getCurrentState = function () {
